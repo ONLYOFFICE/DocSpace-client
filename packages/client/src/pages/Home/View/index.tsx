@@ -33,6 +33,7 @@ import { Consumer } from "@docspace/shared/utils";
 import { Nullable } from "@docspace/shared/types";
 
 import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
+import { clearTextSelection } from "@docspace/shared/utils/copy";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
 import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 
@@ -334,6 +335,8 @@ const View = ({
 
         setIsChangePageRequestRunning(false);
         setIsLoading(false);
+
+        clearTextSelection();
       } catch (error) {
         console.log(error);
         if ((error as Error).message === "canceled") {
@@ -347,6 +350,8 @@ const View = ({
 
     getView();
   }, [location, isContactsPage, isProfilePage]);
+
+  console.log("currentView", currentView);
 
   return (
     <LoaderWrapper isLoading={isLoading ? !showHeaderLoader : false}>

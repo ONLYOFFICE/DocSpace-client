@@ -32,6 +32,7 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import PluginStore from "SRC_DIR/store/PluginStore";
+import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 
 import Dropzone from "./sub-components/Dropzone";
 import PluginItem from "./sub-components/PluginItem";
@@ -56,32 +57,29 @@ const PluginPage = ({
   updatePlugin,
   addPlugin,
 
-  updatePlugins,
-
   theme,
-  isLoading,
   isEmptyList,
   currentColorScheme,
   apiPluginSDKLink,
+
+  showPortalSettingsLoader,
 }: PluginsProps) => {
-  const { t } = useTranslation(["WebPlugins", "Common"]);
+  const { t, ready } = useTranslation(["WebPlugins", "Common"]);
 
   const onDrop = (files: File[]) => {
     const formData = new FormData();
 
     formData.append("file", files[0]);
-    addPlugin(formData);
+    addPlugin(formData, t);
   };
 
   React.useEffect(() => {
     setDocumentTitle(t("Common:Plugins"));
   }, [t]);
 
-  React.useEffect(() => {
-    updatePlugins(true);
-  }, [updatePlugins]);
-
-  return isLoading || (!isEmptyList && pluginList.length === 0) ? (
+  return showPortalSettingsLoader ||
+    (!isEmptyList && pluginList.length === 0) ||
+    !ready ? (
     <StyledContainer>
       <ListLoader withUpload={withUpload} />
     </StyledContainer>
@@ -125,6 +123,7 @@ const PluginPage = ({
             key={`plugin-${plugin.name}-${plugin.version}`}
             openSettingsDialog={openSettingsDialog}
             updatePlugin={updatePlugin}
+            theme={theme}
             dataTestId={`plugin_${plugin.name}`}
             {...plugin}
           />
@@ -138,12 +137,16 @@ export default inject(
   ({
     settingsStore,
     pluginStore,
+    clientLoadingStore,
   }: {
     settingsStore: SettingsStore;
     pluginStore: PluginStore;
+    clientLoadingStore: ClientLoadingStore;
   }) => {
     const { pluginOptions, currentColorScheme, theme, apiPluginSDKLink } =
       settingsStore;
+
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     const withUpload = pluginOptions.upload;
 
@@ -156,7 +159,6 @@ export default inject(
 
       addPlugin,
 
-      isLoading,
       isEmptyList,
     } = pluginStore;
 
@@ -179,9 +181,10 @@ export default inject(
 
       currentColorScheme,
       theme,
-      isLoading,
       isEmptyList,
       apiPluginSDKLink,
+
+      showPortalSettingsLoader,
     };
   },
 )(observer(PluginPage));

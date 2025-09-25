@@ -3,7 +3,7 @@
   "content": "License activated",
   "content_en_sha1_hash": "576ed3bc179267c56642a371e93bad575e13aa61",
   "created_at": "2025-05-19T21:30:53.572Z",
-  "updated_at": "2025-09-07T07:53:15.398Z",
+  "updated_at": "2025-09-19T15:39:23.296Z",
   "comment": {
     "text": "The translation key \"ActivateLicenseActivated\" represents the localized text \"License activated\", used to display a success message when a license is successfully activated in the payment process. This text appears as part of a toast notification when the user's license has been activated, providing confirmation of the action taken.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 914,
+      "line_number": 993,
       "context": "if (message) {\n toastr.error(message);\n return;\n }\n \n toastr.success(t(\"ActivateLicenseActivated\"));\n localStorage.removeItem(\"enterpriseAlertClose\");\n \n await getPaymentInfo();\n await this.settingsStore?.getSettings();\n } catch (e) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/management/src/app/payments/page.client.tsx",
-      "line_number": 91,
+      "line_number": 109,
       "context": "if (message) {\n toastr.error(message);\n return;\n }\n \n toastr.success(t(\"ActivateLicenseActivated\"));\n localStorage.removeItem(\"enterpriseAlertClose\");\n \n router.refresh();\n } catch (error) {\n toastr.error(error!);",
       "module": "/packages/management"
     }

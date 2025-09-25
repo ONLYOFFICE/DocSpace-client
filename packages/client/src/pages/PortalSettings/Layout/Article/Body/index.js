@@ -319,6 +319,7 @@ const ArticleBodyContent = (props) => {
           folderId={item.id}
           style={style}
           $currentColorScheme={currentColorScheme}
+          withAnimation
         />,
       );
     });
@@ -347,7 +348,7 @@ export default inject(
 
     const { isNotPaidPeriod, isCommunity } = currentTariffStatusStore;
     const { user } = userStore;
-    const { isOwner } = user;
+    const { isOwner } = user || {};
     const {
       standalone,
       showText,

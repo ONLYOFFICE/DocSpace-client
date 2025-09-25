@@ -112,4 +112,6 @@ export type DropDownItemProps = {
   minWidth?: string;
 
   testId?: string;
+
+  tooltip?: string;
 };

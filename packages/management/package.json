@@ -18,7 +18,7 @@
     "@aws-sdk/client-cloudwatch-logs": "3.816.0",
     "@babel/runtime": "7.28.3",
     "@docspace/shared": "workspace:*",
-    "axios": "1.11.0",
+    "axios": "1.12.2",
     "classnames": "2.5.1",
     "csvjson-json_beautifier": "5.0.4",
     "date-and-time": "3.6.0",

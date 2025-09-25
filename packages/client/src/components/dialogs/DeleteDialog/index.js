@@ -24,14 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { withTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+import styled from "styled-components";
+
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 
-import { withTranslation, Trans } from "react-i18next";
+import { getDialogContent } from "./DeleteDialog.helper";
 
-import { inject, observer } from "mobx-react";
+const StyledModalWrapper = styled(ModalDialog)`
+  strong {
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+  }
+`;
 
 const DeleteDialogComponent = (props) => {
   const {
@@ -55,6 +69,7 @@ const DeleteDialogComponent = (props) => {
     isTemplatesFolder,
     selection: selectionProps,
   } = props;
+  const [isChecked, setIsChecked] = useState(false);
 
   const selection = [];
   let i = 0;
@@ -135,8 +150,9 @@ const DeleteDialogComponent = (props) => {
     await deleteRoomsAction(itemsIdDeleteHaveRights, translations);
   };
 
-  const onDeleteAction = () => {
+  const onDeleteAction = useCallback(() => {
     if (isRoomDelete || isTemplate) {
+      if (!isChecked) return;
       onDeleteRoom();
       return;
     }
@@ -147,12 +163,23 @@ const DeleteDialogComponent = (props) => {
     }
 
     onDelete();
-  };
+  }, [
+    isRoomDelete,
+    isTemplate,
+    isChecked,
+    onDeleteRoom,
+    unsubscribe,
+    onUnsubscribe,
+    onDelete,
+  ]);
 
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onDeleteAction();
-  };
+  const onKeyUp = useCallback(
+    (e) => {
+      if (e.keyCode === 27) onClose();
+      if (e.keyCode === 13 || e.which === 13) onDeleteAction();
+    },
+    [onClose, onDeleteAction],
+  );
 
   useEffect(() => {
     document.addEventListener("keyup", onKeyUp, false);
@@ -160,7 +187,7 @@ const DeleteDialogComponent = (props) => {
     return () => {
       document.removeEventListener("keyup", onKeyUp, false);
     };
-  }, []);
+  }, [onKeyUp]);
 
   const moveToTrashTitle = () => {
     if (unsubscribe) return t("UnsubscribeTitle");
@@ -169,130 +196,61 @@ const DeleteDialogComponent = (props) => {
     });
   };
 
-  const moveToTrashNoteText = () => {
-    const isFolder = selection[0]?.isFolder || !!selection[0]?.parentId;
-    const isSingle = selection.length === 1;
-    const isThirdParty = selection[0]?.providerKey;
-
-    if (isTemplate) {
-      return isSingle ? (
-        <Trans
-          i18nKey="DeleteTemplate"
-          ns="DeleteDialog"
-          t={t}
-          values={{ templateName: selection[0].title }}
-          components={{ 1: <Text fontWeight={600} as="span" /> }}
-        />
-      ) : (
-        t("DeleteTemplates")
-      );
-    }
-
-    if (isRoomDelete) {
-      return isSingle
-        ? `${t("DeleteRoom")} ${t("Common:WantToContinue")}`
-        : `${t("DeleteRooms")} ${t("Common:WantToContinue")}`;
-    }
-
-    if (isRecycleBinFolder) {
-      return isSingle ? (
-        isFolder ? (
-          t("DeleteFolder")
-        ) : (
-          <>
-            <>{t("Common:DeleteFile")} </>
-            <>{t("Common:FilePermanentlyDeleted")} </>
-            <>{t("Common:WantToContinue")}</>
-          </>
-        )
-      ) : (
-        <>
-          <>{t("DeleteItems")} </>
-          <>{t("ItemsPermanentlyDeleted")} </>
-          <>{t("Common:WantToContinue")}</>
-        </>
-      );
-    }
-
-    if (isPersonalRoom) {
-      return isSingle ? (
-        isFolder ? (
-          <>
-            <>{t("DeleteFolder")} </>
-            <>{t("FolderPermanentlyDeleted")} </>
-            <>{t("Common:WantToContinue")}</>
-          </>
-        ) : (
-          <>
-            <>{t("Common:DeleteFile")} </>
-            <>{t("Common:FilePermanentlyDeleted")} </>
-            <>{t("Common:WantToContinue")}</>
-          </>
-        )
-      ) : (
-        <>
-          <>{t("DeleteItems")} </>
-          <>{t("ItemsPermanentlyDeleted")} </>
-          <>{t("Common:WantToContinue")}</>
-        </>
-      );
-    }
-
-    if (isRoom || isTemplatesFolder) {
-      return isSingle ? (
-        isFolder ? (
-          <>
-            <>{t("DeleteFolder")} </>
-            <>{t("DeleteSharedNote")} </>
-            {!isThirdParty ? <>{t("FolderPermanentlyDeleted")} </> : null}
-            <>{t("Common:WantToContinue")}</>
-          </>
-        ) : (
-          <>
-            <>{t("Common:DeleteFile")} </>
-            <>{t("DeleteSharedNote")} </>
-            {!isThirdParty ? <>{t("Common:FilePermanentlyDeleted")} </> : null}
-            <>{t("Common:WantToContinue")}</>
-          </>
-        )
-      ) : (
-        <>
-          <>{t("DeleteItems")} </>
-          <>{t("DeleteItemsSharedNote")} </>
-          {!isThirdParty ? <>{t("ItemsPermanentlyDeleted")} </> : null}
-          <>{t("Common:WantToContinue")}</>
-        </>
-      );
-    }
-  };
-
   const title = isTemplate
-    ? t("Files:DeleteTemplate")
-    : isRoomDelete || isRecycleBinFolder
-      ? t("EmptyTrashDialog:DeleteForeverTitle")
-      : isPrivacyFolder || selection[0]?.providerKey
-        ? t("Common:Confirmation")
-        : moveToTrashTitle();
+    ? `${t("Files:DeleteTemplate")}?`
+    : isRoomDelete
+      ? t("DeleteRoomTitle")
+      : isRecycleBinFolder
+        ? t("EmptyTrashDialog:DeleteForeverTitle")
+        : isPrivacyFolder || selection[0]?.providerKey
+          ? t("Common:Confirmation")
+          : moveToTrashTitle();
 
-  const noteText = unsubscribe ? t("UnsubscribeNote") : moveToTrashNoteText();
+  const noteText = unsubscribe
+    ? t("UnsubscribeNote")
+    : getDialogContent(
+        t,
+        selection,
+        isTemplate,
+        isRoomDelete,
+        isRecycleBinFolder,
+        isPersonalRoom,
+        isRoom,
+        isTemplatesFolder,
+      );
 
   const accessButtonLabel = isTemplate
     ? t("Common:Delete")
-    : isRoomDelete || isRecycleBinFolder
-      ? t("EmptyTrashDialog:DeleteForeverButton")
-      : isPrivacyFolder || selection[0]?.providerKey
-        ? t("Common:OKButton")
-        : unsubscribe
-          ? t("UnsubscribeButton")
-          : t("Common:MoveToSection", {
-              sectionName: t("Common:TrashSection"),
-            });
+    : isRoomDelete
+      ? t("Common:DeletePermanently")
+      : isRecycleBinFolder
+        ? t("EmptyTrashDialog:DeleteForeverButton")
+        : isPrivacyFolder || selection[0]?.providerKey
+          ? t("Common:OKButton")
+          : unsubscribe
+            ? t("UnsubscribeButton")
+            : t("Common:MoveToSection", {
+                sectionName: t("Common:TrashSection"),
+              });
+
+  const isDisabledAccessButton =
+    isRoomDelete || isTemplate ? !isChecked : !selection.length;
 
   return (
-    <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
+    <StyledModalWrapper isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{noteText}</Text>
+        {isRoomDelete || isTemplate ? (
+          <Checkbox
+            style={{ marginTop: "16px" }}
+            label={
+              isTemplate ? t("DeleteTemplateWarning") : t("DeleteRoomWarning")
+            }
+            isChecked={isChecked}
+            onChange={() => setIsChecked(!isChecked)}
+          />
+        ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -304,7 +262,7 @@ const DeleteDialogComponent = (props) => {
           scale
           onClick={onDeleteAction}
           isLoading={isLoading}
-          isDisabled={!selection.length}
+          isDisabled={isDisabledAccessButton}
           testId="delete_dialog_modal_submit"
         />
         <Button
@@ -318,7 +276,7 @@ const DeleteDialogComponent = (props) => {
           testId="delete_dialog_modal_cancel"
         />
       </ModalDialog.Footer>
-    </ModalDialog>
+    </StyledModalWrapper>
   );
 };
 

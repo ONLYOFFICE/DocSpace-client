@@ -73,7 +73,7 @@ const getPaymentError = (
   const onClickWalletUrl = () => {
     const walletPageUrl = combineUrl(
       "/portal-settings",
-      `/payments/wallet?open=true&price=${backupPrice.toString()}`,
+      `/payments/wallet?open=true&price=${Math.ceil(backupPrice).toString()}`,
     );
 
     window.DocSpace.navigate(walletPageUrl);
@@ -125,8 +125,8 @@ const ManualBackup = ({
   currentColorScheme,
   downloadingProgress,
   isBackupProgressVisible,
-  isEmptyContentBeforeLoader,
   basePath,
+  isEmptyContentBeforeLoader,
   isErrorPath,
   newPath,
   providers,
@@ -199,6 +199,11 @@ const ManualBackup = ({
     const saveStorageType = getFromLocalStorage<TStorageType>(
       BackupStorageLocalKey.StorageType,
     );
+
+    if (pageIsDisabled) {
+      clearLocalStorage();
+      return;
+    }
 
     if (saveStorageType) setStorageType(saveStorageType);
   });

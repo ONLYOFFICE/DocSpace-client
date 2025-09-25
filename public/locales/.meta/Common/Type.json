@@ -3,7 +3,7 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2025-05-19T21:30:49.370Z",
-  "updated_at": "2025-08-29T14:33:38.111Z",
+  "updated_at": "2025-09-17T13:43:01.682Z",
   "comment": {
     "text": "This translation key is used to display a label indicating the type of an item or entity. It appears in various UI elements, such as titles, labels, and field headers, where it provides a brief description of the item's classification (e.g., \"Type\" for a data entry field).",
     "is_auto": true,
@@ -144,13 +144,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 529,
+      "line_number": 538,
       "context": "noSelect={false}\n />\n {isBetaLanguage ? <BetaBadge place=\"bottom-end\" /> : null}\n </div>\n \n <StyledLabel as=\"div\">{t(\"Common:Type\")}</StyledLabel>\n <div className=\"user-type-container\">\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {getUserTypeName(\n isOwner,\n isAdmin,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 529,
+      "line_number": 538,
       "context": "noSelect={false}\n />\n {isBetaLanguage ? <BetaBadge place=\"bottom-end\" /> : null}\n </div>\n \n <StyledLabel as=\"div\">{t(\"Common:Type\")}</StyledLabel>\n <div className=\"user-type-container\">\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {getUserTypeName(\n isOwner,\n isAdmin,",
       "module": "/packages/client"
     }

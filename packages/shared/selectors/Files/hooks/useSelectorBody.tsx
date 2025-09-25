@@ -26,10 +26,10 @@
 import { use } from "react";
 import { useTranslation } from "react-i18next";
 
-import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt.svg?url";
-import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt_dark.svg?url";
-import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
-import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.svg?url";
+import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.light.svg?url";
+import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.dark.svg?url";
+import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.light.svg?url";
+import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.dark.svg?url";
 
 import { Selector } from "../../../components/selector";
 import {
@@ -70,7 +70,7 @@ type PickedBreadCrumbsProps = Pick<
 type PickedSelectorBodyProps = Pick<
   SelectorProps,
   "items" | "onSelect" | "hasNextPage" | "totalItems" | "loadNextPage"
-> & { isRoot: boolean };
+> & { isRoot: boolean; selectedItemType?: string };
 
 const useSelectorBody = ({
   // header props
@@ -125,6 +125,8 @@ const useSelectorBody = ({
   withInit,
 
   isMultiSelect,
+
+  selectedItemType,
 }: Omit<FilesSelectorProps, "withSearch" | "onSubmit"> &
   PickedSearchProps &
   PickedSubmitButtonProps &
@@ -202,6 +204,14 @@ const useSelectorBody = ({
       }
     : {};
 
+  const isEmptyFilesRootScreen = selectedItemType === "files";
+  const emptyScreenHeader = isEmptyFilesRootScreen
+    ? t("Common:SelectorEmptyScreenHeader")
+    : t("Common:EmptyRoomsHeader");
+  const emptyScreenDescription = isEmptyFilesRootScreen
+    ? ""
+    : t("Common:EmptyRoomsDescription");
+
   const SelectorBody = (
     <Selector
       {...headerSelectorProps}
@@ -217,8 +227,8 @@ const useSelectorBody = ({
       emptyScreenImage={
         isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
       }
-      emptyScreenHeader={t("Common:SelectorEmptyScreenHeader")}
-      emptyScreenDescription=""
+      emptyScreenHeader={emptyScreenHeader}
+      emptyScreenDescription={emptyScreenDescription}
       searchEmptyScreenImage={
         isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl
       }

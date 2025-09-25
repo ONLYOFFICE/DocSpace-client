@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2025-09-10T09:59:20.800Z",
+  "updated_at": "2025-09-24T13:10:16.926Z",
   "comment": {
     "text": "This translation key is used to display the text \"Delete\" on a button in a file editor component, specifically within an avatar cropper. It appears as a button's text and title, allowing users to confirm deletion of an image.",
     "is_auto": true,
@@ -36,8 +36,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 203,
-      "context": "return isSingle ? (\n isFolder ? (\n t(\"DeleteFolder\")\n ) : (\n <>\n <>{t(\"Common:DeleteFile\")} </>\n <>{t(\"Common:FilePermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n )\n ) : (",
+      "line_number": 211,
+      "context": "isRoom,\n isTemplatesFolder,\n );\n \n const accessButtonLabel = isTemplate\n ? t(\"Common:Delete\")\n : isRoomDelete\n ? t(\"Common:DeletePermanently\")\n : isRecycleBinFolder\n ? t(\"EmptyTrashDialog:DeleteForeverButton\")\n : isPrivacyFolder || selection[0]?.providerKey",
       "module": "/packages/client"
     },
     {
@@ -84,7 +84,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeletion.js",
-      "line_number": 104,
+      "line_number": 93,
       "context": "</Text>\n <Text className=\"helper\">{t(\"PortalDeletionHelper\")}</Text>\n <ButtonWrapper>\n <Button\n className=\"delete-button button\"\n label={t(\"Common:Delete\")}\n primary\n size={isDesktopView ? \"small\" : \"normal\"}\n onClick={onDeleteClick}\n isDisabled={notActivatedEmail}\n testId=\"delete_portal_button\"",
       "module": "/packages/client"
     },
@@ -114,20 +114,20 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2270,
-      "context": "key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },\n {",
+      "line_number": 2271,
+      "context": "label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon: item.isRoom ? RemoveOutlineSvgUrl : TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2270,
-      "context": "key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },\n {",
+      "line_number": 2271,
+      "context": "label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon: item.isRoom ? RemoveOutlineSvgUrl : TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2270,
-      "context": "key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },\n {",
+      "line_number": 2271,
+      "context": "label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon: item.isRoom ? RemoveOutlineSvgUrl : TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },",
       "module": "/packages/client"
     },
     {
@@ -150,19 +150,19 @@
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 786,
+      "line_number": 817,
       "context": "};\n \n const contextOptions: ContextMenuModel[] = [\n {\n key: \"delete\",\n label: t(\"Common:Delete\"),\n icon: DeleteIconUrl,\n onClick: () => this.onDelete(clientId),\n dataTestId: \"oauth_delete_option\",\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 786,
+      "line_number": 817,
       "context": "};\n \n const contextOptions: ContextMenuModel[] = [\n {\n key: \"delete\",\n label: t(\"Common:Delete\"),\n icon: DeleteIconUrl,\n onClick: () => this.onDelete(clientId),\n dataTestId: \"oauth_delete_option\",\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 490,
+      "line_number": 487,
       "context": "onClick: () => onChangeStatus(EmployeeStatus.Disabled),\n icon: DisableReactSvgUrl,\n },\n {\n key: \"cm-delete\",\n label: t(\"Common:Delete\"),\n disabled: !hasOnlyOneUserToRemove || (isRoomAdmin && isGuests),\n onClick: () => setDeleteProfileDialogVisible(true),\n icon: DeleteReactSvgUrl,\n },\n {",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "OK",
   "content_en_sha1_hash": "9ce3bd4224c8c1780db56b4125ecf3f24bf748b7",
   "created_at": "2025-06-05T23:02:58.880Z",
-  "updated_at": "2025-08-12T19:46:25.793Z",
+  "updated_at": "2025-09-24T13:10:16.926Z",
   "comment": {
     "text": "The \"OKButton\" translation key is used to display the label for an OK button in various modal dialogs, such as archive, backup, and pricing plan change dialogs. This label serves as a confirmation action when users want to proceed or accept changes. It appears on buttons with \"primary\" and \"scale\" styles.",
     "is_auto": true,
@@ -36,14 +36,14 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Footer/index.js",
-      "line_number": 55,
+      "line_number": 54,
       "context": "<Button\n label={\n isAbortTransfer && percent !== 100\n ? t(\"DataReassignmentDialog:StartTransferAgain\")\n : percent === 100\n ? t(\"Common:OKButton\")\n : t(\"DataReassignmentDialog:AbortTransfer\")\n }\n size=\"normal\"\n scale\n onClick={",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 284,
-      "context": "const accessButtonLabel = isTemplate\n ? t(\"Common:Delete\")\n : isRoomDelete || isRecycleBinFolder\n ? t(\"EmptyTrashDialog:DeleteForeverButton\")\n : isPrivacyFolder || selection[0]?.providerKey\n ? t(\"Common:OKButton\")\n : unsubscribe\n ? t(\"UnsubscribeButton\")\n : t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n });",
+      "line_number": 217,
+      "context": ": isRoomDelete\n ? t(\"Common:DeletePermanently\")\n : isRecycleBinFolder\n ? t(\"EmptyTrashDialog:DeleteForeverButton\")\n : isPrivacyFolder || selection[0]?.providerKey\n ? t(\"Common:OKButton\")\n : unsubscribe\n ? t(\"UnsubscribeButton\")\n : t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n });",
       "module": "/packages/client"
     },
     {
@@ -150,7 +150,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/delete-third-party/DeleteThirdPartyDialog.tsx",
-      "line_number": 133,
+      "line_number": 136,
       "context": "<Button\n scale\n primary\n isLoading={isLoading}\n size={ButtonSize.normal}\n label={t(\"Common:OKButton\")}\n onClick={onDeleteThirdParty}\n testId=\"delete_third_party_button\"\n />\n <Button\n scale",
       "module": "/packages/shared"
     },

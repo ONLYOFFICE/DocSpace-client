@@ -36,14 +36,15 @@ const withLoading = (WrappedComponent) => {
       isLoadedSubmenu,
       isLoadedLngTZSettings,
       isLoadedDNSSettings,
-      isLoadedPortalRenaming,
-      isLoadedCustomization,
+      isLoadedConfigureDeepLink,
+      isLoadedAdManagement,
       isLoadedCustomizationNavbar,
       isLoadedWelcomePageSettings,
       isBurgerLoading,
       setIsBurgerLoading,
       enablePortalRename,
       deviceType,
+      showPortalSettingsLoader,
     } = props;
 
     const viewMobile = deviceType === DeviceType.mobile;
@@ -69,64 +70,86 @@ const withLoading = (WrappedComponent) => {
       }
     }, [isLoadedArticleBody, setIsBurgerLoading]);
 
-    const loadedPortalRenaming = enablePortalRename
-      ? isLoadedPortalRenaming
-      : true;
+    const loadedPortalRenaming = !!enablePortalRename;
 
     const isLoadedCustomizationSettings =
-      isLoadedCustomization &&
-      isLoadedLngTZSettings &&
-      isLoadedWelcomePageSettings &&
-      isLoadedDNSSettings &&
-      loadedPortalRenaming &&
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedSubmenu;
+      !showPortalSettingsLoader;
 
     const isLoadedCustomizationNavbarSettings =
       isLoadedCustomizationNavbar &&
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedSubmenu;
+      isLoadedSubmenu &&
+      !showPortalSettingsLoader;
 
     const isLoadedCustomizationSettingLngTZSettings =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedLngTZSettings;
+      isLoadedLngTZSettings &&
+      !showPortalSettingsLoader;
 
     const isLoadedCustomizationSettingWelcomePageSettings =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedWelcomePageSettings;
+      isLoadedWelcomePageSettings &&
+      !showPortalSettingsLoader;
 
     const isLoadedCustomizationSettingPortalRenaming =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      loadedPortalRenaming;
+      loadedPortalRenaming &&
+      !showPortalSettingsLoader;
 
     const isLoadedCustomizationSettingDNSSettings =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedDNSSettings;
+      isLoadedDNSSettings &&
+      !showPortalSettingsLoader;
 
-    const isLoadedPage =
-      setting === "language-and-time-zone"
-        ? isLoadedCustomizationSettingLngTZSettings
-        : setting === "welcome-page-settings"
-          ? isLoadedCustomizationSettingWelcomePageSettings
-          : setting === "dns-settings"
-            ? isLoadedCustomizationSettingDNSSettings
-            : setting === "portal-renaming"
-              ? isLoadedCustomizationSettingPortalRenaming
-              : viewMobile
-                ? isLoadedCustomizationNavbarSettings
-                : isLoadedCustomizationSettings;
+    const isLoadedCustomizationConfigureDeepLink =
+      isLoadedArticleBody &&
+      !isBurgerLoading &&
+      isLoadedSectionHeader &&
+      isLoadedConfigureDeepLink &&
+      !showPortalSettingsLoader;
+
+    const isLoadedCustomizationAdManagement =
+      isLoadedArticleBody &&
+      !isBurgerLoading &&
+      isLoadedSectionHeader &&
+      isLoadedAdManagement &&
+      !showPortalSettingsLoader;
+
+    const getIsLoadedPage = () => {
+      switch (setting) {
+        case "language-and-time-zone":
+          return isLoadedCustomizationSettingLngTZSettings;
+        case "welcome-page-settings":
+          return isLoadedCustomizationSettingWelcomePageSettings;
+        case "dns-settings":
+          return isLoadedCustomizationSettingDNSSettings;
+        case "portal-renaming":
+          return isLoadedCustomizationSettingPortalRenaming;
+        case "ad-management":
+          return isLoadedCustomizationAdManagement;
+        case "configure-deep-link":
+          return isLoadedCustomizationConfigureDeepLink;
+        default:
+          return viewMobile
+            ? isLoadedCustomizationNavbarSettings
+            : isLoadedCustomizationSettings;
+      }
+    };
+
+    const isLoadedPage = getIsLoadedPage();
 
     return (
       <WrappedComponent
@@ -137,15 +160,15 @@ const withLoading = (WrappedComponent) => {
     );
   };
 
-  return inject(({ common, settingsStore }) => {
+  return inject(({ common, settingsStore, clientLoadingStore }) => {
     const {
       isLoadedArticleBody,
       isLoadedSectionHeader,
       isLoadedSubmenu,
       isLoadedLngTZSettings,
       isLoadedDNSSettings,
-      isLoadedPortalRenaming,
-      isLoadedCustomization,
+      isLoadedConfigureDeepLink,
+      isLoadedAdManagement,
       isLoadedCustomizationNavbar,
       isLoadedWelcomePageSettings,
     } = common;
@@ -157,20 +180,23 @@ const withLoading = (WrappedComponent) => {
       deviceType,
     } = settingsStore;
 
+    const { showPortalSettingsLoader } = clientLoadingStore;
+
     return {
       isLoadedArticleBody,
       isLoadedSectionHeader,
       isLoadedSubmenu,
       isLoadedLngTZSettings,
       isLoadedDNSSettings,
-      isLoadedPortalRenaming,
-      isLoadedCustomization,
+      isLoadedConfigureDeepLink,
+      isLoadedAdManagement,
       isLoadedCustomizationNavbar,
       isLoadedWelcomePageSettings,
       isBurgerLoading,
       setIsBurgerLoading,
       enablePortalRename,
       deviceType,
+      showPortalSettingsLoader,
     };
   })(observer(LoaderWrapper));
 };

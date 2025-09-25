@@ -45,6 +45,8 @@ const ContextButton = ({
   contextButtonAnimation,
   guidAnimationVisible,
   setGuidAnimationVisible,
+  ignoreChangeView,
+  contextMenuHeader,
   ...rest
 }: TContextButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -149,6 +151,10 @@ const ContextButton = ({
         scaled={false}
         withBackdrop
         leftOffset={isTrashFolder ? 188 : isMobile ? 150 : 0}
+        ignoreChangeView={ignoreChangeView}
+        headerOnlyMobile={!!contextMenuHeader}
+        header={contextMenuHeader}
+        badgeUrl={contextMenuHeader?.badgeUrl}
       />
     </div>
   );

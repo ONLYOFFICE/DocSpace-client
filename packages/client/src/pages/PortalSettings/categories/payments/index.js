@@ -37,24 +37,50 @@ import config from "../../../../../package.json";
 import PaymentsEnterprise from "./Standalone";
 import PaymentsSaaS from "./SaaS";
 import Wallet from "./Wallet";
+import usePayments from "./usePayments";
 
-const PaymentsPage = ({ currentDeviceType, standalone }) => {
+import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
+
+const PaymentsPage = (props) => {
+  const {
+    currentDeviceType,
+    standalone,
+    paymentStore,
+    settingsStore,
+    clearAbortControllerArr,
+  } = props;
   const [currentTabId, setCurrentTabId] = useState();
   const location = useLocation();
   const navigate = useNavigate();
-  const [isLoaded, setIsLoaded] = useState(false);
   const { t } = useTranslation(["Payments"]);
+
+  const defaultProps = createDefaultHookSettingsProps({
+    paymentStore,
+    settingsStore,
+  });
+
+  const { getWalletData, getPortalPaymentsData } = usePayments(
+    defaultProps.payment,
+  );
 
   const data = [
     {
       id: "portal-payments",
       name: t("TariffPlan"),
       content: <PaymentsSaaS />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getPortalPaymentsData();
+      },
     },
     {
       id: "wallet",
       name: t("Wallet"),
       content: <Wallet />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getWalletData();
+      },
     },
   ];
 
@@ -66,21 +92,15 @@ const PaymentsPage = ({ currentDeviceType, standalone }) => {
     navigate(
       combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
     );
-
-    setIsLoaded(false);
   };
 
   useEffect(() => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
     if (currentTab && data.length) setCurrentTabId(currentTab.id);
-
-    setIsLoaded(true);
   }, [location.pathname]);
 
   if (standalone) return <PaymentsEnterprise />;
-
-  if (!isLoaded) return null;
 
   return (
     <Tabs
@@ -88,15 +108,20 @@ const PaymentsPage = ({ currentDeviceType, standalone }) => {
       selectedItemId={currentTabId}
       onSelect={(e) => onSelect(e)}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      withAnimation
     />
   );
 };
 
-export const Component = inject(({ settingsStore }) => {
-  const { standalone, currentDeviceType } = settingsStore;
+export const Component = inject(({ settingsStore, paymentStore }) => {
+  const { standalone, currentDeviceType, clearAbortControllerArr } =
+    settingsStore;
 
   return {
     standalone,
     currentDeviceType,
+    paymentStore,
+    settingsStore,
+    clearAbortControllerArr,
   };
 })(observer(PaymentsPage));

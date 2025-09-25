@@ -1,19 +1,12 @@
 {
   "DeleteAllGroupDescription": "De geselecteerde groepen worden verwijderd. Gebruikers in de groepen worden niet verwijderd uit {{productName}}. Weet u zeker dat u door wilt gaan?",
   "DeleteAllGroupsTitle": "Groepen verwijderen",
-  "DeleteFolder": "U staat op het punt deze map te verwijderen. ",
   "DeleteGroupDescription": "Groep {{groupName}} wordt verwijderd. Gebruikers in de groep worden niet verwijderd uit {{productName}}. Weet u zeker dat u door wilt gaan?",
   "DeleteGroupTitle": "Groep verwijderen",
-  "DeleteItems": "U staat op het punt deze items te verwijderen. ",
-  "DeleteItemsSharedNote": "Als u ze met iemand heeft gedeeld, zijn ze niet meer beschikbaar.",
-  "DeleteRoom": "U staat op het punt deze kamer te verwijderen. U kunt dit niet meer herstellen.",
-  "DeleteRooms": "U staat op het punt deze kamers te verwijderen. U kunt ze niet meer herstellen.",
-  "DeleteSharedNote": "Houd er rekening mee dat als u deze met iemand hebt gedeeld, deze niet meer beschikbaar zal zijn.",
   "DeleteTemplate": "Wilt u sjabloon kamer <1>“{{templateName}}”</1> echt verwijderen? Het sjabloon kan niet hersteld worden.",
   "DeleteTemplates": "Wilt u echt geselecteerde kamer sjablonen verwijderen? Ze kunnen niet hersteld worden.",
-  "FolderPermanentlyDeleted": "De map wordt na 30 dagen definitief verwijderd.",
-  "ItemsPermanentlyDeleted": "Items worden na 30 dagen definitief verwijderd.",
   "UnsubscribeButton": "Uitschrijven",
   "UnsubscribeNote": "Weet u zeker dat u zich wilt uitschrijven voor de gekozen items van de lijst?",
-  "UnsubscribeTitle": "Uitschrijven bevestiging"
+  "UnsubscribeTitle": "Uitschrijven bevestiging",
+  "FileDeletedAfter": "Het bestand wordt na 30 dagen definitief verwijderd."
 }

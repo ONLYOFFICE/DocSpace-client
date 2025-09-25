@@ -3,7 +3,7 @@
   "content": "Settings",
   "content_en_sha1_hash": "c7f73bb54d928922c3838bb789ee9fb8a5b1eb37",
   "created_at": "2025-05-19T21:30:48.587Z",
-  "updated_at": "2025-08-21T11:22:39.823Z",
+  "updated_at": "2025-09-24T13:10:16.963Z",
   "comment": {
     "text": "This translation key is used as a title for the settings page. It appears on the header of a dialog when accessing settings in the application, and it will be displayed if the user navigates to the settings page. The exact text (\"Common:Settings\") will be translated by the translator based on the defined context.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Header.js",
-      "line_number": 43,
-      "context": "`;\n \n const Header = ({ t, name }) => {\n return (\n <StyledHeader>\n {t(\"Common:Settings\")}&nbsp;\n <div>({name})</div>\n </StyledHeader>\n );\n };",
+      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Header.tsx",
+      "line_number": 33,
+      "context": "import styles from \"../SettingsPluginDialog.module.scss\";\n \n const Header = ({ t, name }: HeaderProps) => {\n return (\n <div className={styles.header}>\n {t(\"Common:Settings\")}&nbsp;\n <div>({name})</div>\n </div>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 523,
-      "context": "}\n \n const currentTitle = isProfile\n ? t(\"Profile:MyProfile\")\n : isSettingsPage\n ? t(\"Common:Settings\")\n : isContactsPage\n ? isContactsInsideGroupPage\n ? getInsideGroupTitle()\n : t(\"Common:Contacts\")\n : title;",
+      "line_number": 540,
+      "context": "};\n \n const currentTitle = isProfile\n ? t(\"Profile:MyProfile\")\n : isSettingsPage\n ? t(\"Common:Settings\")\n : isContactsPage\n ? getAccountsTitle()\n : title;\n \n const titleIcon = getTitleIcon();",
       "module": "/packages/client"
     },
     {
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 285,
+      "line_number": 318,
       "context": "const settings = isAdmin\n ? {\n key: \"user-menu-settings\",\n icon: CatalogSettingsReactSvgUrl,\n label: t(\"Common:Settings\"),\n onClick: (obj) => this.onSettingsClick(\"/portal-settings\", obj),\n url: SETTINGS_URL,\n preventNewTab: true,\n }\n : null;",
       "module": "/packages/client"
     },

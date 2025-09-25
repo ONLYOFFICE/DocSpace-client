@@ -629,6 +629,8 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     totalItems: total,
 
     isRoot,
+
+    selectedItemType,
   });
 
   const selectorComponent = embedded ? (

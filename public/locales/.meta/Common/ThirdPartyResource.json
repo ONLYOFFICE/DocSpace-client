@@ -3,7 +3,7 @@
   "content": "Third-party resource",
   "content_en_sha1_hash": "001907b089c0c5b90b1c10187b7bc68cca254fae",
   "created_at": "2025-05-26T07:15:48.793Z",
-  "updated_at": "2025-09-07T07:53:15.203Z",
+  "updated_at": "2025-09-24T13:10:16.992Z",
   "comment": {
     "text": "This translation key is used as a label for a radio button in a UI component, typically displayed on buttons or dialogs. It represents the term \"Third-party resource\" and appears to be associated with backup options, specifically in contexts related to third-party resources, auto-backup, and manual-backup pages.",
     "is_auto": true,
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 535,
+      "line_number": 536,
       "context": "<div className={styles.modules}>\n <RadioButton\n {...commonRadioButtonProps}\n id=\"third-party-resource\"\n label={t(\"Common:ThirdPartyResource\")}\n name={`${BackupStorageType.ResourcesModuleType}`}\n isChecked={isCheckedThirdParty}\n isDisabled={isLoadingData}\n testId=\"auto_backup_resource_radio_button\"\n />",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 524,
+      "line_number": 529,
       "context": "[styles.isDisabled]: additionalDisabled,\n })}\n >\n <RadioButton\n id=\"third-party-resource\"\n label={t(\"Common:ThirdPartyResource\")}\n name={THIRD_PARTY_RESOURCE}\n key={2}\n isChecked={isCheckedThirdParty}\n isDisabled={additionalDisabled}\n {...commonRadioButtonProps}",
       "module": "/packages/shared"
     },

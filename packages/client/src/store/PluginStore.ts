@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable, runInAction } from "mobx";
+import axios from "axios";
 import cloneDeep from "lodash/cloneDeep";
 
 import api from "@docspace/shared/api";
@@ -111,8 +112,6 @@ class PluginStore {
 
   deletePluginDialogProps: null | { pluginName: string } = null;
 
-  isLoading = true;
-
   isEmptyList = false;
 
   needPageReload = false;
@@ -131,10 +130,6 @@ class PluginStore {
 
   setNeedPageReload = (value: boolean) => {
     this.needPageReload = value;
-  };
-
-  setIsLoading = (value: boolean) => {
-    this.isLoading = value;
   };
 
   setIsEmptyList = (value: boolean) => {
@@ -168,7 +163,7 @@ class PluginStore {
   updatePluginStatus = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
-    const newStatus = plugin?.getStatus();
+    const newStatus = plugin?.getStatus?.();
 
     const pluginIdx = this.plugins.findIndex((p) => p.name === name);
 
@@ -244,29 +239,67 @@ class PluginStore {
 
     const { isAdmin, isOwner } = this.userStore.user;
 
-    this.setIsLoading(true);
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
 
     try {
       this.plugins = [];
 
       const plugins = await api.plugins.getPlugins(
         !isAdmin && !isOwner ? true : null,
+        abortController.signal,
       );
 
       this.setIsEmptyList(plugins.length === 0);
-      plugins.forEach((plugin) => this.initPlugin(plugin, undefined, fromList));
-
-      setTimeout(() => {
-        this.setIsLoading(false);
-      }, 500);
+      await Promise.allSettled(
+        plugins.map((plugin) => this.initPlugin(plugin, undefined, fromList)),
+      );
     } catch (e) {
+      if (axios.isCancel(e)) {
+        return;
+      }
       console.log(e);
     }
   };
 
-  addPlugin = async (data: FormData) => {
+  checkPluginCompatibility = (minDocSpaceVersion?: string): boolean => {
+    if (!minDocSpaceVersion) return false;
+
+    const currentDocspaceVersion = this.settingsStore.buildVersionInfo.docspace;
+
+    const parts1 = minDocSpaceVersion.split(".").map(Number);
+    const parts2 = currentDocspaceVersion.split(".").map(Number);
+
+    const len = Math.max(parts1.length, parts2.length);
+
+    for (let i = 0; i < len; i++) {
+      const num1 = parts1[i] ?? 0;
+      const num2 = parts2[i] ?? 0;
+
+      if (num1 < num2) return true;
+      if (num1 > num2) return false;
+    }
+
+    return true;
+  };
+
+  addPlugin = async (data: FormData, t: TTranslation) => {
     try {
       const plugin = await api.plugins.addPlugin(data);
+
+      const isPluginCompatible = this.checkPluginCompatibility(
+        plugin.minDocSpaceVersion,
+      );
+
+      if (!isPluginCompatible) {
+        toastr.error(
+          t("PluginIsNotCompatible", {
+            productName: t("Common:ProductName"),
+          }),
+        );
+      } else {
+        toastr.success(t("PluginLoadedSuccessfully"));
+      }
 
       this.setNeedPageReload(true);
 
@@ -304,48 +337,63 @@ class PluginStore {
     fromList?: boolean,
   ) => {
     if (!plugin.enabled && !fromList) return;
-    const onLoad = async () => {
-      const iWindow = this.pluginFrame?.contentWindow as IframeWindow;
 
-      const newPlugin = cloneDeep({
-        ...plugin,
-        ...iWindow?.Plugins?.[plugin.pluginName],
-      });
+    return new Promise((resolve, reject) => {
+      const onLoad = async () => {
+        try {
+          const iWindow = this.pluginFrame?.contentWindow as IframeWindow;
 
-      newPlugin.scopes =
-        typeof newPlugin.scopes === "string"
-          ? (newPlugin.scopes.split(",") as PluginScopes[])
-          : newPlugin.scopes;
+          const newPlugin = cloneDeep({
+            ...plugin,
+            ...iWindow?.Plugins?.[plugin.pluginName],
+          });
 
-      newPlugin.iconUrl = getPluginUrl(newPlugin.url, "");
+          newPlugin.scopes =
+            typeof newPlugin.scopes === "string"
+              ? (newPlugin.scopes.split(",") as PluginScopes[])
+              : newPlugin.scopes;
 
-      this.installPlugin(newPlugin);
+          newPlugin.iconUrl = getPluginUrl(newPlugin.url, "");
 
-      if (newPlugin.scopes.includes(PluginScopes.Settings)) {
-        newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
+          const isPluginCompatible = this.checkPluginCompatibility(
+            plugin.minDocSpaceVersion,
+          );
+
+          newPlugin.compatible = isPluginCompatible;
+
+          this.installPlugin(newPlugin);
+
+          if (newPlugin.scopes.includes(PluginScopes.Settings)) {
+            newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
+          }
+
+          callback?.(newPlugin);
+          resolve(newPlugin);
+        } catch (error) {
+          reject(error);
+        }
+      };
+
+      const onError = () => {};
+
+      const frameDoc = this.pluginFrame?.contentDocument;
+      const script = frameDoc?.createElement("script");
+
+      if (script) {
+        script.setAttribute("type", "text/javascript");
+        script.setAttribute("id", `${plugin.name}`);
+
+        script.onload = onLoad.bind(this);
+        script.onerror = onError.bind(this);
+
+        script.src = plugin.url;
+        script.async = true;
+
+        frameDoc?.body.appendChild(script);
+      } else {
+        reject(new Error("Failed to create script element"));
       }
-
-      callback?.(newPlugin);
-    };
-
-    const onError = () => {};
-
-    const frameDoc = this.pluginFrame?.contentDocument;
-
-    const script = frameDoc?.createElement("script");
-
-    if (script) {
-      script.setAttribute("type", "text/javascript");
-      script.setAttribute("id", `${plugin.name}`);
-
-      if (onLoad) script.onload = onLoad.bind(this);
-      if (onError) script.onerror = onError.bind(this);
-
-      script.src = plugin.url;
-      script.async = true;
-
-      frameDoc?.body.appendChild(script);
-    }
+    });
   };
 
   installPlugin = async (plugin: TPlugin, addToList = true) => {

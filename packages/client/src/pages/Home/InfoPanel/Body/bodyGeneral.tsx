@@ -77,6 +77,9 @@ const InfoPanelBodyGeneral = ({
   const isGroups = contactsTab === "groups";
   const isGuests = contactsTab === "guests";
   const isUsers = contactsTab === "inside_group" || contactsTab === "people";
+  const isTemplatesRoom =
+    !Array.isArray(selection) &&
+    selection?.rootFolderType === FolderType.RoomTemplates;
 
   const isRoom = isRoomUtil(selection);
   const isFolder = selection && "isFolder" in selection && !!selection.isFolder;
@@ -125,6 +128,7 @@ const InfoPanelBodyGeneral = ({
         <NoItem
           isRooms={isRooms}
           isFiles={isFiles}
+          isTemplatesRoom={isTemplatesRoom}
           {...lockedSharedRoomProps}
         />
       );

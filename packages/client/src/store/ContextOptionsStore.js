@@ -2057,7 +2057,7 @@ class ContextOptionsStore {
       {
         id: "option_manage-links",
         key: "manage-links",
-        label: t("Common:ManageLinks"),
+        label: t("Common:ManageShare"),
         icon: SettingsReactSvgUrl,
         onClick: () => this.onClickShare(item),
         disabled: !item.canShare,

@@ -666,14 +666,10 @@ class ContextOptionsStore {
       { folderIds: [], fileIds: [] },
     );
 
-    const { endLoader, startLoader } = createLoader();
-
     try {
-      startLoader(() => {
-        runInAction(() => {
-          setGroupMenuBlocked(true);
-          addActiveItems(fileIds, folderIds);
-        });
+      runInAction(() => {
+        setGroupMenuBlocked(true);
+        addActiveItems(fileIds, folderIds);
       });
 
       await removeSharedFolderOrFile(folderIds, fileIds);
@@ -681,12 +677,9 @@ class ContextOptionsStore {
       console.error(error);
       toastr.error(error);
     } finally {
-      endLoader(() =>
-        runInAction(() => {
-          setGroupMenuBlocked(false);
-          // clearActiveOperations(fileIds, folderIds);
-        }),
-      );
+      runInAction(() => {
+        setGroupMenuBlocked(false);
+      });
     }
   };
 

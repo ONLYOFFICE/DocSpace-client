@@ -292,7 +292,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
       window.location.origin,
       window.ClientConfig?.proxy?.url,
       pkg.homepage,
-      "/portal-settings/developer-tools",
+      "/portal-settings/developer-tools/javascript-sdk",
     );
 
     window.open(url, "_blank");

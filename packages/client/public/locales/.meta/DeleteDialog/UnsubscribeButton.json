@@ -3,7 +3,7 @@
   "content": "Unsubscribe",
   "content_en_sha1_hash": "834cc0ee6089e541b395509ba562516bcafa78e2",
   "created_at": "2025-05-19T21:30:56.720Z",
-  "updated_at": "2025-09-22T13:39:52.380Z",
+  "updated_at": "2025-09-24T13:10:16.951Z",
   "comment": {
     "text": "This translation key is used for a \"Unsubscribe\" button that appears when a user attempts to unsubscribe from something. It is part of a modal dialog and is displayed as an alternative option when specific conditions are met, such as in a privacy folder or when deleting data. The text should be translated to indicate the action of unsubscribing.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 299,
-      "context": ": isRecycleBinFolder\n ? t(\"EmptyTrashDialog:DeleteForeverButton\")\n : isPrivacyFolder || selection[0]?.providerKey\n ? t(\"Common:OKButton\")\n : unsubscribe\n ? t(\"UnsubscribeButton\")\n : t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n \n const isDisabledAccessButton = isRoomDelete ? !isChecked : !selection.length;",
+      "line_number": 219,
+      "context": ": isRecycleBinFolder\n ? t(\"EmptyTrashDialog:DeleteForeverButton\")\n : isPrivacyFolder || selection[0]?.providerKey\n ? t(\"Common:OKButton\")\n : unsubscribe\n ? t(\"UnsubscribeButton\")\n : t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n \n const isDisabledAccessButton =",
       "module": "/packages/client"
     }
   ],

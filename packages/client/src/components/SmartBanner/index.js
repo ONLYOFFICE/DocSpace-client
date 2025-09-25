@@ -91,7 +91,7 @@ const ReactSmartBanner = (props) => {
     navigator.msMaxTouchPoints > 0;
 
   return isMobile && isBannerVisible && ready && isTouchDevice ? (
-    <Wrapper>
+    <Wrapper id="smart-banner">
       <SmartBanner
         title={t("SmartBanner:AppName", {
           organizationName: logoText,

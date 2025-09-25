@@ -49,6 +49,7 @@ export const LOADER_STYLE = Object.freeze({
   animate: true,
 });
 
+export const TOAST_FOLDER_PUBLIC_KEY = "toast_folder_public_key";
 export const MANAGER = "manager";
 export const TOTAL_SIZE = "total_size";
 export const FILE_SIZE = "file_size";

@@ -707,3 +707,43 @@ export const getShareAccessRightOptions = (
     .flat()
     .filter((item): item is TShareToUserAccessRightOption => Boolean(item));
 };
+
+export const getAccessLabel = (t: TFunction, item: TFolder | TFile) => {
+  if (isFolder(item)) {
+    switch (item.access) {
+      case ShareAccessRights.FullAccess:
+        return t("Common:FullAccess");
+      case ShareAccessRights.Editing:
+        return t("Common:Editor");
+      case ShareAccessRights.Review:
+        return t("Common:Review");
+      case ShareAccessRights.Comment:
+        return t("Common:Comment");
+      case ShareAccessRights.ReadOnly:
+        return t("Common:RoleViewer");
+      case ShareAccessRights.DenyAccess:
+        return t("Common:DenyAccess");
+      default:
+        return "";
+    }
+  }
+
+  switch (item.access) {
+    case ShareAccessRights.Editing:
+      return t("Common:Editor");
+    case ShareAccessRights.CustomFilter:
+      return t("Common:CustomFilter");
+    case ShareAccessRights.Review:
+      return t("Common:Review");
+    case ShareAccessRights.Comment:
+      return t("Common:Comment");
+    case ShareAccessRights.FormFilling:
+      return t("Common:Filling");
+    case ShareAccessRights.ReadOnly:
+      return t("Common:ReadOnly");
+    case ShareAccessRights.DenyAccess:
+      return t("Common:DenyAccess");
+    default:
+      return "";
+  }
+};

@@ -24,14 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useMemo } from "react";
 import type { TFunction } from "i18next";
 
-import { ShareAccessRights } from "@docspace/shared/enums";
-import { isFolder } from "@docspace/shared/utils/typeGuards";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import { StyledText } from "./CellStyles";
+import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
 
 export type AccessLevelCellProps = {
   t: TFunction;
@@ -39,52 +38,16 @@ export type AccessLevelCellProps = {
   sideColor: string;
 };
 
-const getAccessLabel = (t: TFunction, item: TFolder | TFile) => {
-  if (isFolder(item)) {
-    switch (item.access) {
-      case ShareAccessRights.FullAccess:
-        return t("Common:FullAccess");
-      case ShareAccessRights.Editing:
-        return t("Common:Editor");
-      case ShareAccessRights.Review:
-        return t("Common:Review");
-      case ShareAccessRights.Comment:
-        return t("Common:Comment");
-      case ShareAccessRights.ReadOnly:
-        return t("Common:RoleViewer");
-      default:
-        return "";
-    }
-  }
-
-  switch (item.access) {
-    case ShareAccessRights.Editing:
-      return t("Common:Editor");
-    case ShareAccessRights.CustomFilter:
-      return t("Common:CustomFilter");
-    case ShareAccessRights.Review:
-      return t("Common:Review");
-    case ShareAccessRights.Comment:
-      return t("Common:Comment");
-    case ShareAccessRights.FormFilling:
-      return t("Common:Filling");
-    case ShareAccessRights.ReadOnly:
-      return t("Common:ReadOnly");
-    default:
-      return "";
-  }
-};
-
 const AccessLevelCell = ({ t, item, sideColor }: AccessLevelCellProps) => {
-  const accessLabel = getAccessLabel(t, item);
+  const accessLabel = useMemo(() => getAccessLabel(t, item), [t, item]);
 
   return (
     <StyledText
-      title={accessLabel}
+      truncate
       fontSize="12px"
       fontWeight={600}
       color={sideColor}
-      truncate
+      title={accessLabel}
     >
       {accessLabel}
     </StyledText>

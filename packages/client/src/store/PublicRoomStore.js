@@ -36,7 +36,11 @@ import { LinkType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 import { ValidationStatus } from "@docspace/shared/enums";
-import { PUBLIC_STORAGE_KEY, CategoryType } from "@docspace/shared/constants";
+import {
+  PUBLIC_STORAGE_KEY,
+  CategoryType,
+  TOAST_FOLDER_PUBLIC_KEY,
+} from "@docspace/shared/constants";
 
 class PublicRoomStore {
   externalLinks = [];
@@ -242,6 +246,10 @@ class PublicRoomStore {
       res.isRoom || res.isRoomMember
         ? CategoryType.Shared
         : CategoryType.SharedWithMe;
+
+    if (categoryType === CategoryType.SharedWithMe) {
+      sessionStorage.setItem(TOAST_FOLDER_PUBLIC_KEY, res.entityId.toString());
+    }
 
     const filter = FilesFilter.getDefault();
 

@@ -185,6 +185,8 @@ const ArticleMainButtonContent = (props) => {
     contactsCanCreate,
     setRefMap,
     defaultOformLocale,
+
+    allowInvitingMembers,
   } = props;
 
   const navigate = useNavigate();
@@ -704,7 +706,11 @@ const ArticleMainButtonContent = (props) => {
       );
     }
 
-    if (isProfile || (isAccountsPage && !contactsCanCreate)) {
+    if (
+      isProfile ||
+      (isAccountsPage && !contactsCanCreate) ||
+      (isAccountsPage && !isContactsGroupsPage && !allowInvitingMembers)
+    ) {
       visibilityValue = false;
     }
 
@@ -866,8 +872,12 @@ export default inject(
       setSelectFileFormRoomDialogVisible,
     } = dialogsStore;
 
-    const { enablePlugins, currentColorScheme, currentDeviceType } =
-      settingsStore;
+    const {
+      enablePlugins,
+      currentColorScheme,
+      currentDeviceType,
+      allowInvitingMembers,
+    } = settingsStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
 
     const { security } = selectedFolderStore;
@@ -953,6 +963,8 @@ export default inject(
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
       setRefMap,
       defaultOformLocale,
+
+      allowInvitingMembers,
     };
   },
 )(

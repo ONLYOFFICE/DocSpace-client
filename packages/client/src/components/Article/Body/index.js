@@ -153,6 +153,8 @@ const ArticleBodyContent = (props) => {
             categoryType: CategoryType.SharedWithMe,
           });
 
+          shareFilter.folder = folderId;
+
           if (userId) {
             const filterObj = getUserFilter(`${FILTER_SHARE}=${userId}`);
 

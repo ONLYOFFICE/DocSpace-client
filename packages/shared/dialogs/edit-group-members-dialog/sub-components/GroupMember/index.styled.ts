@@ -26,7 +26,9 @@
 
 import styled from "styled-components";
 
-import { injectDefaultTheme } from "@docspace/shared/utils";
+import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
+
+import { injectDefaultTheme, commonIconsStyles } from "../../../../utils";
 
 export const GroupMember = styled.div.attrs(injectDefaultTheme)<{
   isExpect: boolean;
@@ -110,5 +112,14 @@ export const GroupMember = styled.div.attrs(injectDefaultTheme)<{
     .combo-button {
       padding: 0 8px;
     }
+  }
+`;
+
+export const StyledSendClockIcon = styled(SendClockIcon)`
+  min-width: 12px;
+
+  ${commonIconsStyles}
+  path {
+    fill: ${(props) => props.theme.accountsBadges.pendingColor};
   }
 `;

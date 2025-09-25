@@ -23,3 +23,18 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { inject, observer } from "mobx-react";
+
+import { EditGroupMembers } from "@docspace/shared/dialogs/edit-group-members-dialog";
+
+export default inject<TStore>(
+  ({ infoPanelStore, userStore, dialogsStore, settingsStore }) => ({
+    infoPanelSelection: infoPanelStore.infoPanelSelection,
+    selfId: userStore.user?.id,
+    group: dialogsStore.editMembersGroup,
+    visible: dialogsStore.editGroupMembersDialogVisible,
+    setVisible: dialogsStore.setEditGroupMembersDialogVisible,
+    standalone: settingsStore.standalone,
+  }),
+)(observer(EditGroupMembers));

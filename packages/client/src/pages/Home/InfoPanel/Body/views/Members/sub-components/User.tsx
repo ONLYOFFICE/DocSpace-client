@@ -35,7 +35,7 @@ import { User as ShareUser } from "@docspace/shared/components/share/sub-compone
 import type { TOption } from "@docspace/shared/components/combobox";
 import type { TGroup } from "@docspace/shared/api/groups/types";
 
-import { filterPaidRoleOptions } from "SRC_DIR/helpers";
+import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 
 import MembersHelper from "../Members.utils";
 import type { UserProps } from "../Members.types";

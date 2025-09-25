@@ -24,19 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { memo, useCallback } from "react";
 import { useTheme } from "styled-components";
-import { areEqual, FixedSizeList as List } from "react-window";
+import React, { memo, useCallback } from "react";
 import AutoSizer from "react-virtualized-auto-sizer";
 import InfiniteLoader from "react-window-infinite-loader";
+import { areEqual, FixedSizeList as List } from "react-window";
 
-import {
-  Scrollbar,
-  ScrollbarProps,
-} from "@docspace/shared/components/scrollbar";
-import { RowLoader } from "@docspace/shared/skeletons/selector";
-import { TGroupMemberInvitedInRoom } from "@docspace/shared/api/groups/types";
-import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
+import { RowLoader } from "../../../../skeletons/selector";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../../constants";
+import { TGroupMemberInvitedInRoom } from "../../../../api/groups/types";
+import { Scrollbar, ScrollbarProps } from "../../../../components/scrollbar";
 
 import GroupMember from "../GroupMember";
 

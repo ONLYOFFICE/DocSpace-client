@@ -30,7 +30,7 @@ import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/emptyFilter/empty.fil
 import { useTranslation } from "react-i18next";
 import styled, { useTheme } from "styled-components";
 
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+import { EmptyScreenContainer } from "../../components/empty-screen-container";
 
 const StyledEmptyScreen = styled(EmptyScreenContainer)`
   box-sizing: border-box;

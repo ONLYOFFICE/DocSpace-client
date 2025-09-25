@@ -24,42 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import {
-  ModalDialog,
-  ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { getGroupMembersInRoom } from "@docspace/shared/api/groups";
-import { InputSize } from "@docspace/shared/components/text-input";
-import { SearchInput } from "@docspace/shared/components/search-input";
-import {
-  TGroup,
-  TGroupMemberInvitedInRoom,
-} from "@docspace/shared/api/groups/types";
-import { MIN_LOADER_TIMER } from "@docspace/shared/selectors/utils/constants";
+import { InputSize } from "../../components/text-input";
+import { getGroupMembersInRoom } from "../../api/groups";
+import { SearchInput } from "../../components/search-input";
+import { MIN_LOADER_TIMER } from "../../selectors/utils/constants";
+import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+
+import type { TGroupMemberInvitedInRoom } from "../../api/groups/types";
+import { isRoom } from "../../utils/typeGuards";
 
 import EmptyContainer from "./EmptyContainer";
-import GroupMembersList from "./sub-components/GroupMembersList/GroupMembersList";
 import {
   StyledBodyContent,
   StyledHeaderText,
 } from "./EditGroupMembersDialog.styled";
+
+import GroupMembersList from "./sub-components/GroupMembersList/GroupMembersList";
 import { ModalBodyLoader } from "./sub-components/ModalBodyLoader/ModalBodyLoader";
+import EditGroupMembersDialogProvider from "./EditGroupMembersDialog.provider";
+import type { EditGroupMembersProps } from "./EditGroupMembersDialog.types";
 
-interface EditGroupMembersProps {
-  visible: boolean;
-  setVisible: (visible: boolean) => void;
-  group: TGroup;
-  infoPanelSelection: any;
-}
-
-const EditGroupMembers = ({
+export const EditGroupMembers = ({
   infoPanelSelection,
   group,
   visible,
+  standalone,
   setVisible,
 }: EditGroupMembersProps) => {
   const { t } = useTranslation(["Common"]);
@@ -82,6 +74,10 @@ const EditGroupMembers = ({
   const onClose = () => setVisible(false);
 
   const loadNextPage = async (startIndex: number) => {
+    if (!infoPanelSelection) {
+      return;
+    }
+
     const startLoadingTime = new Date();
 
     try {
@@ -122,7 +118,7 @@ const EditGroupMembers = ({
     loadNextPage(0);
   }, [searchValue]);
 
-  if (!infoPanelSelection?.isRoom) {
+  if (!isRoom(infoPanelSelection)) {
     onClose();
     return;
   }
@@ -145,7 +141,10 @@ const EditGroupMembers = ({
           {!groupMembers ? (
             <ModalBodyLoader withSearch />
           ) : (
-            <>
+            <EditGroupMembersDialogProvider
+              infoPanelSelection={infoPanelSelection}
+              standalone={standalone}
+            >
               <SearchInput
                 className="search-input"
                 placeholder={t("PeopleTranslations:SearchByGroupMembers")}
@@ -168,18 +167,10 @@ const EditGroupMembers = ({
                   isNextPageLoading={isNextPageLoading}
                 />
               )}
-            </>
+            </EditGroupMembersDialogProvider>
           )}
         </StyledBodyContent>
       </ModalDialog.Body>
     </ModalDialog>
   );
 };
-
-export default inject(({ infoPanelStore, userStore, dialogsStore }: any) => ({
-  infoPanelSelection: infoPanelStore.infoPanelSelection,
-  selfId: userStore.user.id,
-  group: dialogsStore.editMembersGroup,
-  visible: dialogsStore.editGroupMembersDialogVisible,
-  setVisible: dialogsStore.setEditGroupMembersDialogVisible,
-}))(observer(EditGroupMembers));

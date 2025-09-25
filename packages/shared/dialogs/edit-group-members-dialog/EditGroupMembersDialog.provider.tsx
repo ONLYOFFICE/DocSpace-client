@@ -24,22 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { createContext, FC, PropsWithChildren, useMemo } from "react";
+import { EditGroupMembersDialogProviderProps } from "./EditGroupMembersDialog.types";
 
-import { SearchLoader } from "../../../../skeletons/selector";
-import { MemberLoader } from "../../../../skeletons/info-panel/body/views/MembersLoader";
+export const EditGroupMembersDialogContext = createContext<
+  Partial<EditGroupMembersDialogProviderProps>
+>({});
 
-interface ModalBodyLoaderProps {
-  withSearch: boolean;
-}
+const EditGroupMembersDialogProvider: FC<
+  PropsWithChildren<EditGroupMembersDialogProviderProps>
+> = ({ infoPanelSelection, standalone, children }) => {
+  const value = useMemo(
+    () => ({ infoPanelSelection, standalone }),
+    [infoPanelSelection, standalone],
+  );
 
-export const ModalBodyLoader = ({ withSearch }: ModalBodyLoaderProps) => {
   return (
-    <div style={{ paddingTop: withSearch ? "16px" : "0" }}>
-      {withSearch ? <SearchLoader /> : null}
-      <div style={{ paddingInline: "16px" }}>
-        <MemberLoader count={25} />
-      </div>
-    </div>
+    <EditGroupMembersDialogContext.Provider value={value}>
+      {children}
+    </EditGroupMembersDialogContext.Provider>
   );
 };
+
+export default EditGroupMembersDialogProvider;

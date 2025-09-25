@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "../../components/text";
 
 export const StyledHeaderText = styled(Text)`
   margin-inline-end: 16px;

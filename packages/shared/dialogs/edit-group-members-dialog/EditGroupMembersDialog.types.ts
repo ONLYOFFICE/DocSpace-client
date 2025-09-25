@@ -24,22 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import type { TFolder } from "../../api/files/types";
+import type { TRoom } from "../../api/rooms/types";
+import type { TFile } from "../../api/files/types";
+import type { TGroup } from "../../api/groups/types";
+import type { Nullable } from "../../types";
 
-import { SearchLoader } from "../../../../skeletons/selector";
-import { MemberLoader } from "../../../../skeletons/info-panel/body/views/MembersLoader";
-
-interface ModalBodyLoaderProps {
-  withSearch: boolean;
+export interface EditGroupMembersDialogProviderProps {
+  infoPanelSelection: TFolder | TRoom | TFile;
+  standalone: boolean;
 }
 
-export const ModalBodyLoader = ({ withSearch }: ModalBodyLoaderProps) => {
-  return (
-    <div style={{ paddingTop: withSearch ? "16px" : "0" }}>
-      {withSearch ? <SearchLoader /> : null}
-      <div style={{ paddingInline: "16px" }}>
-        <MemberLoader count={25} />
-      </div>
-    </div>
-  );
-};
+export interface EditGroupMembersProps {
+  visible: boolean;
+  setVisible: (visible: boolean) => void;
+  group: TGroup;
+  infoPanelSelection: Nullable<TRoom | TFile | TFolder>;
+  standalone: boolean;
+}

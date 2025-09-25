@@ -24,61 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
-import { inject, observer } from "mobx-react";
+import { decode } from "he";
+import { use, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { isMobile, isMobileOnly } from "react-device-detect";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
+
+import { Avatar, AvatarSize } from "../../../../components/avatar";
 import {
   ComboBox,
   ComboBoxSize,
   type TOption,
-} from "@docspace/shared/components/combobox";
+} from "../../../../components/combobox";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import { decode } from "he";
-import { Text } from "@docspace/shared/components/text";
-import { updateRoomMemberRole } from "@docspace/shared/api/rooms";
-import { toastr } from "@docspace/shared/components/toast";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { EmployeeStatus, ShareAccessRights } from "@docspace/shared/enums";
+import { Text } from "../../../../components/text";
+import { updateRoomMemberRole } from "../../../../api/rooms";
+import { toastr } from "../../../../components/toast";
+import { HelpButton } from "../../../../components/help-button";
+import { EmployeeStatus, ShareAccessRights } from "../../../../enums";
+import { isRoom } from "../../../../utils/typeGuards";
 import {
   getUserAvatarRoleByType,
   getUserType,
   getUserTypeTranslation,
-} from "@docspace/shared/utils/common";
-import { TGroupMemberInvitedInRoom } from "@docspace/shared/api/groups/types";
-import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { getUserRoleOptions } from "@docspace/shared/utils/room-members/getUserRoleOptions";
-import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
+} from "../../../../utils/common";
+import { TGroupMemberInvitedInRoom } from "../../../../api/groups/types";
 
-import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
-import { filterPaidRoleOptions } from "SRC_DIR/helpers";
+import { getAccessOptions } from "../../../../utils/getAccessOptions";
+import { getUserRoleOptions } from "../../../../utils/room-members/getUserRoleOptions";
+import { filterPaidRoleOptions } from "../../../../utils/filterPaidRoleOptions";
+
+import { EditGroupMembersDialogContext } from "../../EditGroupMembersDialog.provider";
 
 import * as Styled from "./index.styled";
 
 interface GroupMemberProps {
   member: TGroupMemberInvitedInRoom;
-  infoPanelSelection?: TRoom; // Todo: Change to InfoPanelStore["infoPanelSelection"] when store has types
-  standalone?: SettingsStore["standalone"];
 }
 
-const GroupMember = ({
-  member,
-  infoPanelSelection,
-  standalone,
-}: GroupMemberProps) => {
+const GroupMember = ({ member }: GroupMemberProps) => {
   const { user } = member;
   const isExpect = user.status === EmployeeStatus.Pending;
 
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation("Common");
 
+  const { infoPanelSelection, standalone } = use(EditGroupMembersDialogContext);
+
+  const roomType = isRoom(infoPanelSelection)
+    ? infoPanelSelection.roomType
+    : undefined;
+
   const fullRoomRoleOptions = getAccessOptions(
     t,
-    infoPanelSelection?.roomType,
+    roomType,
     false,
     false,
     member.owner,
@@ -157,7 +157,7 @@ const GroupMember = ({
             >
               {decode(user.displayName)}
             </Text>
-            {isExpect ? <StyledSendClockIcon /> : null}
+            {isExpect ? <Styled.StyledSendClockIcon /> : null}
           </div>
           <Text className="email" noSelect>
             <span dir="auto">{typeLabel}</span> |{" "}
@@ -216,12 +216,14 @@ const GroupMember = ({
   );
 };
 
-export default inject(({ infoPanelStore, settingsStore }: TStore) => {
-  const { infoPanelSelection } = infoPanelStore;
-  const { standalone } = settingsStore;
+export default GroupMember;
 
-  return {
-    infoPanelSelection,
-    standalone,
-  };
-})(observer(GroupMember));
+// export default inject(({ infoPanelStore, settingsStore }: TStore) => {
+//   const { infoPanelSelection } = infoPanelStore;
+//   const { standalone } = settingsStore;
+
+//   return {
+//     infoPanelSelection,
+//     standalone,
+//   };
+// })(observer(GroupMember));

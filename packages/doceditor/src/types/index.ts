@@ -335,7 +335,6 @@ export interface SelectFolderDialogProps {
   fileInfo: TFile;
   filesSettings: TFilesSettings;
   fileSaveAsExtension?: string;
-  organizationName: string;
   selectedFolderId?: string | number;
 }
 

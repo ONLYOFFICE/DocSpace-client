@@ -145,7 +145,6 @@ const FilesSelectorWrapper = ({
   withCreate,
   folderIsShared,
   checkCreating,
-  logoText,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -212,7 +211,7 @@ const FilesSelectorWrapper = ({
       // for backup
       if (!selection.length) return t("Common:BackupNotAllowedInFormRoom");
 
-      const option = { organizationName: logoText };
+      const option = { organizationName: t("Common:OrganizationName") };
 
       if (isCopy)
         return several
@@ -523,7 +522,7 @@ export default inject(
 
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
 
-    const { currentDeviceType, logoText } = settingsStore;
+    const { currentDeviceType } = settingsStore;
 
     const {
       selection,
@@ -647,7 +646,6 @@ export default inject(
           : folderId || currentFolderIdProp,
       filesSettings,
       folderIsShared: shared,
-      logoText,
       openRoot,
     };
   },

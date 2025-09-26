@@ -83,6 +83,7 @@ import { toastr } from "../components/toast";
 import { TData } from "../components/toast/Toast.type";
 import { version } from "../package.json";
 import { Nullable } from "../types";
+import { TApiKey } from "../api/api-keys/types";
 
 const themes = {
   Dark,
@@ -333,6 +334,12 @@ class SettingsStore {
 
   displayBanners: boolean = false;
 
+  apiKeys: TApiKey[] = [];
+
+  permissions: string[] = [];
+
+  errorKeys: Error | null = null;
+
   abortControllerArr: Nullable<AbortController>[] = [];
 
   constructor() {
@@ -360,6 +367,18 @@ class SettingsStore {
 
   setTenantStatus = (tenantStatus: TenantStatus) => {
     this.tenantStatus = tenantStatus;
+  };
+
+  setApiKeys = (apiKeys: TApiKey[]) => {
+    this.apiKeys = apiKeys;
+  };
+
+  setPermissions = (permissions: string[]) => {
+    this.permissions = permissions;
+  };
+
+  setErrorKeys = (error: Error | null) => {
+    this.errorKeys = error;
   };
 
   get wizardCompleted() {

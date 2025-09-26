@@ -41,9 +41,9 @@ export type ApiKeysProps = {
   apiKeysLink: string;
   isUser: boolean;
   error: Error | null;
-  listItems: TApiKey[];
+  apiKeys: TApiKey[];
   permissions: string[];
-  setListItems: React.Dispatch<React.SetStateAction<TApiKey[]>>;
+  setApiKeys: React.Dispatch<React.SetStateAction<TApiKey[]>>;
 };
 
 export type ApiKeyViewProps = {

@@ -439,9 +439,9 @@ const Shell = ({ page = "home", ...rest }) => {
     }
   }, []);
 
-  useEffect(() => {
-    console.log("Current page ", page);
-  }, [page]);
+  // useEffect(() => {
+  //   console.log("Current page ", page);
+  // }, [page]);
 
   useEffect(() => {
     if (userTheme) setTheme(userTheme);

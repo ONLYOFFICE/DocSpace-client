@@ -379,7 +379,7 @@ const View = ({
     getView();
   }, [location, isContactsPage, isProfilePage, showToastAccess]);
 
-  console.log("currentView", currentView);
+  // console.log("currentView", currentView);
 
   return (
     <LoaderWrapper isLoading={isLoading ? !showHeaderLoader : false}>

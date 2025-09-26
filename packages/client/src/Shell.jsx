@@ -64,7 +64,8 @@ import useCreateFileError from "./Hooks/useCreateFileError";
 
 import ReactSmartBanner from "./components/SmartBanner";
 
-const Shell = ({ props }) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Shell = ({ page = "home", ...rest }) => {
   const {
     isLoaded,
     loadBaseInfo,
@@ -95,7 +96,7 @@ const Shell = ({ props }) => {
     standalone,
     isGuest,
     setSocialAuthWelcomeDialogVisible,
-  } = props;
+  } = rest;
 
   const theme = useTheme();
 

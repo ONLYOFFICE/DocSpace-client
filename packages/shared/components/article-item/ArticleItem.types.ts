@@ -108,4 +108,5 @@ export type ArticleItemProps = PickedDivProps & {
   iconNode?: React.ReactNode;
   withAnimation?: boolean;
   dataTooltipId?: string;
+  isDisabledLink?: boolean;
 };

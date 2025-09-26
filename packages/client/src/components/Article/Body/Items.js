@@ -212,6 +212,7 @@ const Item = ({
         labelBadge={labelBadge}
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
+        isDisabledLink={item.rootFolderType === FolderType.AIAgents}
         withAnimation
         badgeTitle={
           labelBadge

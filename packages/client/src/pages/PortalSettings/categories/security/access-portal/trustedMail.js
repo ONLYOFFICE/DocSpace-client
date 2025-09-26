@@ -155,8 +155,11 @@ const TrustedMail = (props) => {
   }, [type, domains]);
 
   const onSelectDomainType = (e) => {
-    if (type !== e.target.value) {
-      setType(e.target.value);
+    if (type === e.target.value) return;
+    setType(e.target.value);
+    if (e.target.value === "1" && domains.length === 0) {
+      setDomains([...domains]);
+      setShowReminder(true);
     }
   };
 
@@ -288,6 +291,7 @@ const TrustedMail = (props) => {
           inputDataTestId="trusted_mail_domain_input"
           deleteIconDataTestId="trusted_mail_delete_domain_icon"
           addButtonDataTestId="trusted_mail_add_domain_button"
+          hideDeleteIcon={domains.length === 1}
         />
       ) : null}
 

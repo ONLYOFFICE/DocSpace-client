@@ -28,7 +28,7 @@ import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { ReactSVG } from "react-svg";
 import File32ReactSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
-import ImageReactSvgUrl from "PUBLIC_DIR/images/empty_screen_done.svg?url";
+import ImageReactSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.light.svg?url";
 import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 import { Link } from "../../link";
 import { Badge } from "../../badge";

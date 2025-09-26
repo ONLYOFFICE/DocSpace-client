@@ -83,13 +83,21 @@ const UsersTableRow = (props: UsersTableRowProps) => {
   const { t, displayName, email, isDuplicate, isChecked, toggleAccount } =
     props;
 
+  const handleRowClick = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement).closest(".user-select")) {
+      return;
+    }
+    toggleAccount(e);
+  };
+
   return (
-    <StyledTableRow onClick={toggleAccount}>
+    <StyledTableRow onClick={handleRowClick}>
       <TableCell className="checkboxWrapper">
         <Checkbox
           isChecked={isChecked}
-          onChange={toggleAccount}
           label={displayName}
+          onChange={toggleAccount}
+          className="user-select"
         />
       </TableCell>
 

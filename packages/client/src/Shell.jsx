@@ -64,7 +64,7 @@ import useCreateFileError from "./Hooks/useCreateFileError";
 
 import ReactSmartBanner from "./components/SmartBanner";
 
-const Shell = ({ page = "home", ...rest }) => {
+const Shell = ({ props }) => {
   const {
     isLoaded,
     loadBaseInfo,
@@ -95,7 +95,7 @@ const Shell = ({ page = "home", ...rest }) => {
     standalone,
     isGuest,
     setSocialAuthWelcomeDialogVisible,
-  } = rest;
+  } = props;
 
   const theme = useTheme();
 
@@ -438,10 +438,6 @@ const Shell = ({ page = "home", ...rest }) => {
       });
     }
   }, []);
-
-  // useEffect(() => {
-  //   console.log("Current page ", page);
-  // }, [page]);
 
   useEffect(() => {
     if (userTheme) setTheme(userTheme);

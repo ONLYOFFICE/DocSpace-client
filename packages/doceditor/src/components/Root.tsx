@@ -371,7 +371,6 @@ const Root = ({
           getIsDisabled={getIsDisabledSelectFolderDialog}
           filesSettings={filesSettings}
           fileSaveAsExtension={extensionSelectorFolderDialog}
-          organizationName={organizationName}
           selectedFolderId={selectedFolderId}
         />
       ) : null}

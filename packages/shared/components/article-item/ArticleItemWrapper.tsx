@@ -29,15 +29,14 @@ import { ArticleItem as ArticleItemComponent } from "./index";
 import { ArticleItemProps } from "./ArticleItem.types";
 
 export const ArticleItem = (props: ArticleItemProps) => {
-  const { linkData, isDisabledLink } = props;
+  const { linkData, isDisabled } = props;
 
-  return isDisabledLink ? (
+  return isDisabled ? (
     <ArticleItemComponent {...props} />
   ) : (
     <Link
       style={{
         textDecoration: "none",
-        pointerEvents: isDisabledLink ? "none" : "auto",
       }}
       to={linkData?.path}
       state={linkData?.state}

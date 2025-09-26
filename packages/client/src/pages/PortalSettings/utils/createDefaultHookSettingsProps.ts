@@ -169,6 +169,9 @@ export const createDefaultHookSettingsProps = ({
     setErrorOAuth: oauthStore?.setErrorOAuth,
     errorOAuth: oauthStore?.errorOAuth,
     addAbortControllers: settingsStore?.addAbortControllers,
+    setApiKeys: settingsStore?.setApiKeys,
+    setPermissions: settingsStore?.setPermissions,
+    setErrorKeys: settingsStore?.setErrorKeys,
   },
   deleteData: {
     getPortalOwner: settingsStore?.getPortalOwner,

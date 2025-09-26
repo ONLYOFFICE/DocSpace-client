@@ -307,7 +307,7 @@ const MainProfile = (props: MainProfileProps) => {
     try {
       TopLoadingIndicator.start();
       await updateProfileCulture?.(profile!.id, newLanguage.key as string);
-      i18n.changeLanguage(newLanguage.key?.toString());
+      await i18n.changeLanguage(newLanguage.key?.toString());
       await fetchTreeFolders?.();
     } catch (error: unknown) {
       toastr.error(

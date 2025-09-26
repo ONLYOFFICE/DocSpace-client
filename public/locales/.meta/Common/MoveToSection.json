@@ -3,7 +3,7 @@
   "content": "Move to {{sectionName}}",
   "content_en_sha1_hash": "5d6defb8d637574434a5dbe9189fed399ce413e6",
   "created_at": "2025-06-02T10:19:17.346Z",
-  "updated_at": "2025-09-23T07:24:24.087Z",
+  "updated_at": "2025-09-26T15:21:06.126Z",
   "comment": {
     "text": "This translation key is used to display a button label that allows users to move files to a specified section or category. The section name can be customized through this translation key, typically displayed as \"Move to {{sectionName}}\" in UI elements such as buttons or dialog boxes.",
     "is_auto": true,
@@ -18,21 +18,9 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 312,
+      "line_number": 230,
       "context": "? t(\"EmptyTrashDialog:DeleteForeverButton\")\n : isPrivacyFolder || selection[0]?.providerKey\n ? t(\"Common:OKButton\")\n : unsubscribe\n ? t(\"UnsubscribeButton\")\n : t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n \n const isDisabledAccessButton =\n isRoomDelete || isTemplate ? !isChecked : !selection.length;",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
-      "line_number": 60,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-button_submit\"\n key=\"OkButton\"\n label={t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n size={ButtonSize.normal}\n primary\n scale",
-      "module": "/packages/doceditor"
-    },
-    {
-      "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
-      "line_number": 60,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-button_submit\"\n key=\"OkButton\"\n label={t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n size={ButtonSize.normal}\n primary\n scale",
-      "module": "/packages/doceditor"
     }
   ],
   "languages": {

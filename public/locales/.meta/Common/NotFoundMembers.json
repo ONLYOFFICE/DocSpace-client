@@ -3,19 +3,13 @@
   "content": "No members found",
   "content_en_sha1_hash": "2f9524453596c315ea26d2daec2af8d6792b16f1",
   "created_at": "2025-05-19T21:30:46.909Z",
-  "updated_at": "2025-09-23T07:24:24.108Z",
+  "updated_at": "2025-09-26T15:21:06.187Z",
   "comment": {
     "text": "This translation key is used for the text \"No members found\", which appears on an empty screen in various components when a group of members does not exist. It is typically displayed above or below an image, and its purpose is to inform users that they are looking at an empty list or container.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:35:17.165Z"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/dialogs/EditGroupMembersDialog/EmptyContainer.tsx",
-      "line_number": 53,
-      "context": "return (\n <StyledEmptyScreen\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n />\n );\n };",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
       "line_number": 145,
@@ -39,6 +33,12 @@
       "line_number": 483,
       "context": "filter={filter}\n withInfo\n infoText={t(\"OnlyPortalAdminsShown\", {\n productName: t(\"Common:ProductName\"),\n })}\n emptyScreenHeader={t(\"Common:NotFoundMembers\")}\n emptyScreenDescription={t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n })}\n />\n ) : null;",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/edit-group-members-dialog/EmptyContainer.tsx",
+      "line_number": 53,
+      "context": "return (\n <StyledEmptyScreen\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n />\n );\n };",
+      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",

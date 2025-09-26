@@ -3,7 +3,7 @@
   "content": "From device",
   "content_en_sha1_hash": "f831ef2d6cdd62d96cf8dc302c9a04f09962e594",
   "created_at": "2025-05-19T21:30:45.577Z",
-  "updated_at": "2025-09-23T07:24:23.984Z",
+  "updated_at": "2025-09-26T15:21:06.030Z",
   "comment": {
     "text": "This translation key is used to display the text \"From device\" in various places within the application's UI, typically in dropdown menus or buttons related to file uploads. The exact placement may vary depending on the specific use case, but it is commonly associated with user actions such as uploading files from a device.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 388,
+      "line_number": 393,
       "context": "const uploadFormDevice = {\n id: \"actions_upload-from-device\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:FromDevice\"),\n key: \"actions_upload-from-device\",\n onClick: onUploadPDFFilesClick,\n disabled: false,\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2968,
+      "line_number": 2972,
       "context": "},\n {\n id: \"personal_upload-from-device\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:FromDevice\"),\n key: \"personal_upload-from-device\",\n onClick: () => this.onUploadAction(\"pdf\"),\n },\n ],\n };",
       "module": "/packages/client"
     }

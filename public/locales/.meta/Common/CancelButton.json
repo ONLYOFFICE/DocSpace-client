@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2025-09-23T07:24:24.027Z",
+  "updated_at": "2025-09-26T15:21:06.056Z",
   "comment": {
     "text": "This translation key is used for the \"Cancel\" button in various UI elements such as dialogs and form buttons. It provides the text to be displayed when a user clicks the cancel action, allowing them to terminate an operation or return to their previous state. This key appears in files such as Dialog.js, QuotaForm, and ShareCollectSelector.",
     "is_auto": true,
@@ -144,7 +144,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 351,
+      "line_number": 269,
       "context": "testId=\"delete_dialog_modal_submit\"\n />\n <Button\n id=\"delete-file-modal_cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n onClick={onClose}\n isLoading={isLoading}\n testId=\"delete_dialog_modal_cancel\"",
       "module": "/packages/client"
     },
@@ -198,7 +198,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DisconnectAccountDialog/index.tsx",
-      "line_number": 89,
+      "line_number": 95,
       "context": "scale\n primary\n onClick={onClickDisconnect}\n />\n <Button\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
@@ -329,9 +329,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Footer.js",
-      "line_number": 78,
-      "context": "/>\n <Button\n scale\n size=\"normal\"\n onClick={onCloseAction}\n label={t(\"Common:CancelButton\")}\n testId=\"settings_plugin_cancel_button\"\n />\n </StyledContainer>\n );\n };",
+      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Footer.tsx",
+      "line_number": 69,
+      "context": "/>\n <Button\n scale\n size={ButtonSize.normal}\n onClick={onCloseAction}\n label={t(\"Common:CancelButton\")}\n testId=\"settings_plugin_cancel_button\"\n />\n </div>\n );\n };",
       "module": "/packages/client"
     },
     {
@@ -360,7 +360,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 582,
+      "line_number": 584,
       "context": "<Button\n className=\"cancel-button\"\n scale\n size={ButtonSize.normal}\n onClick={onClose}\n label={t(\"Common:CancelButton\")}\n isLoading={isLoading}\n testId=\"embedding_panel_cancel_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>",
       "module": "/packages/client"
     },
@@ -402,13 +402,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
-      "line_number": 169,
+      "line_number": 209,
       "context": "onSaveClick={onSave}\n onCancelClick={onCancel}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n saveButtonDataTestId=\"ad_management_save_button\"\n cancelButtonDataTestId=\"ad_management_cancel_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
-      "line_number": 218,
+      "line_number": 235,
       "context": "onSaveClick={onSave}\n onCancelClick={onCancel}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n saveButtonDataTestId=\"configure_deep_link_save_button\"\n cancelButtonDataTestId=\"configure_deep_link_cancel_button\"",
       "module": "/packages/client"
     },
@@ -570,7 +570,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/consumerModalDialog.js",
-      "line_number": 353,
+      "line_number": 349,
       "context": "/>\n <Button\n size=\"normal\"\n scale\n id=\"cancel-button\"\n label={t(\"Common:CancelButton\")}\n isLoading={isLoading}\n isDisabled={isLoading}\n onClick={onModalClose}\n testId=\"consumer_dialog_cancel_button\"\n />",
       "module": "/packages/client"
     },
@@ -594,13 +594,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
-      "line_number": 220,
+      "line_number": 223,
       "context": "onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"admin-message-save\"\n additionalClassCancelButton=\"admin-message-cancel\"\n saveButtonDataTestId=\"administrator_message_save_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
-      "line_number": 253,
+      "line_number": 255,
       "context": "onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"dev-tools-access-save\"\n additionalClassCancelButton=\"dev-tools-access-cancel\"",
       "module": "/packages/client"
     },
@@ -612,31 +612,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 335,
+      "line_number": 336,
       "context": "onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"ip-security-save\"\n additionalClassCancelButton=\"ip-security-cancel\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/passwordStrength.js",
-      "line_number": 339,
+      "line_number": 340,
       "context": "onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"password-strength-save\"\n additionalClassCancelButton=\"password-strength-cancel\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
-      "line_number": 329,
+      "line_number": 330,
       "context": "onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"session-lifetime-save\"\n additionalClassCancelButton=\"session-lifetime-cancel\"\n saveButtonDataTestId=\"session_lifetime_save_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 302,
+      "line_number": 307,
       "context": "onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"two-factor-auth-save\"\n additionalClassCancelButton=\"two-factor-auth-cancel\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 300,
+      "line_number": 305,
       "context": "onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"trusted-mail-save\"\n additionalClassCancelButton=\"trusted-mail-cancel\"",
       "module": "/packages/client"
     },
@@ -695,18 +695,6 @@
       "module": "/packages/doceditor"
     },
     {
-      "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
-      "line_number": 74,
-      "context": "})}\n />\n <Button\n id=\"delete-file-button_cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n aria-label={t(\"Common:CancelButton\")}\n />",
-      "module": "/packages/doceditor"
-    },
-    {
-      "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
-      "line_number": 74,
-      "context": "})}\n />\n <Button\n id=\"delete-file-button_cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n aria-label={t(\"Common:CancelButton\")}\n />",
-      "module": "/packages/doceditor"
-    },
-    {
       "file_path": "/packages/doceditor/src/components/SelectFileDialog.tsx",
       "line_number": 104,
       "context": "withFooterCheckbox={false}\n footerCheckboxLabel=\"\"\n footerInputHeader=\"\"\n currentFooterInputValue=\"\"\n submitButtonLabel={t?.(\"Common:SelectAction\") ?? \"\"}\n cancelButtonLabel={t?.(\"Common:CancelButton\") ?? \"\"}\n withCancelButton\n descriptionText={listTitle}\n currentDeviceType={DeviceType.desktop}\n getFilesArchiveError={() => \"\"}\n parentId={0}",
@@ -714,7 +702,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/SelectFolderDialog.tsx",
-      "line_number": 57,
+      "line_number": 56,
       "context": "// const sessionPath = sessionStorage.getItem(\"filesSelectorPath\");\n \n const cancelButtonProps: TSelectorCancelButton = {\n withCancelButton: true,\n onCancel: onClose,\n cancelButtonLabel: t(\"Common:CancelButton\"),\n cancelButtonId: \"select-file-modal-cancel\",\n };\n \n const withFooterCheckbox =\n fileSaveAsExtension !== \"zip\" && fileInfo.fileExst !== \"fb2\";",
       "module": "/packages/doceditor"
     },
@@ -876,7 +864,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 172,
+      "line_number": 174,
       "context": "};\n \n const cancelButtonProps: TSelectorCancelButton = withCancelButton\n ? {\n withCancelButton,\n cancelButtonLabel: cancelButtonLabel || t(\"Common:CancelButton\"),\n cancelButtonId,\n onCancel,\n }\n : {};",
       "module": "/packages/shared"
     },

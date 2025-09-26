@@ -3,7 +3,7 @@
   "content": "JavaScript SDK allows you to embed the whole {{productName}} or its part into your web interface. Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually. To learn more about SDK, refer to the ",
   "content_en_sha1_hash": "a1157dfcd63f4800fb7fd52598f037f5ecf88505",
   "created_at": "2025-05-19T21:30:54.647Z",
-  "updated_at": "2025-09-17T13:43:01.785Z",
+  "updated_at": "2025-09-26T15:21:06.306Z",
   "comment": {
     "text": "This translation key is used to describe the JavaScript SDK, explaining its functionality and purpose in embedding {{productName}} into a web interface. It appears on the Portal Settings page under developer tools, likely within a button or link that guides users to learn more about the SDK.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 169,
+      "line_number": 160,
       "context": "return (\n <SDKContainer>\n <CategoryDescription theme={theme}>\n <Text className=\"sdk-description\">\n {t(\"SDKDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Link\n color={currentColorScheme?.main?.accent}\n fontSize=\"13px\"\n fontWeight=\"400\"",
       "module": "/packages/client"
     }

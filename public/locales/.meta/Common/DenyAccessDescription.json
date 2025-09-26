@@ -3,7 +3,7 @@
   "content": "No access to view, edit, or manage files or folders.",
   "content_en_sha1_hash": "ee305f19919eb7024191f766db1eea827b2d84da",
   "created_at": "2025-09-23T07:24:08.399Z",
-  "updated_at": "2025-09-23T07:26:24.609Z",
+  "updated_at": "2025-09-26T15:21:06.528Z",
   "comment": {
     "text": "This text explains that the user has no permissions to view, edit, or manage files or folders. It's used to describe a \"Deny Access\" permission setting, likely appearing in a sharing or access control interface. Translators should ensure the description accurately conveys the restriction of access.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 618,
+      "line_number": 617,
       "context": "},\n [ShareRights.Restrict]: {\n access: ShareAccessRights.DenyAccess,\n key: \"deny-access\",\n label: t(\"Common:DenyAccess\"),\n description: t(\"Common:DenyAccessDescription\"),\n },\n [ShareRights.None]: withRemove\n ? [\n {\n key: \"separator\",",
       "module": "/packages/shared"
     }

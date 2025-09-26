@@ -3,7 +3,7 @@
   "content": "Open in web only",
   "content_en_sha1_hash": "caf9fca0de7a5b1f6294fbe7075e3be24b469aa3",
   "created_at": "2025-05-19T21:30:52.127Z",
-  "updated_at": "2025-09-17T13:43:01.725Z",
+  "updated_at": "2025-09-26T15:21:06.262Z",
   "comment": {
     "text": "This translation key is used to display a label on a settings page that determines whether an app link opens in the web browser or within the app. It appears as a radio button option in the Portal Settings configuration dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
-      "line_number": 197,
+      "line_number": 214,
       "context": "value: 0,\n dataTestId: \"deep_link_provide-a-choice\",\n },\n {\n id: \"by-web\",\n label: t(\"OpenInWebOnly\"),\n value: 1,\n dataTestId: \"deep_link_by-web\",\n },\n {\n id: \"by-app\",",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Enterprise",
   "content_en_sha1_hash": "b4afff317fb189b9020c5c4b47338ed3d2b0662a",
   "created_at": "2025-05-19T21:30:45.018Z",
-  "updated_at": "2025-09-19T15:39:23.126Z",
+  "updated_at": "2025-09-26T15:21:06.258Z",
   "comment": {
     "text": "The \"EnterpriseLicense\" translation key is used to display the text \"Enterprise License\" in a UI component, likely as part of a licensing or upgrade process. It appears on-screen when users need to enter their Enterprise license information, and its purpose is to clearly identify the type of license being used for activation or upgrading.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 340,
+      "line_number": 341,
       "context": "organizationName: logoText,\n })\n : t(\"DataImport\")\n : t(header, {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n productName: t(\"Common:ProductName\"),\n });\n \n // console.log(translatedHeader, header);",
       "module": "/packages/client"
     },

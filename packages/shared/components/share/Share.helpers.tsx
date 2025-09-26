@@ -589,7 +589,7 @@ export const getShareAccessRightOptions = (
       [ShareRights.Editing]: {
         access: ShareAccessRights.Editing,
         key: "editor",
-        label: t("Common:Editor"),
+        label: t("Common:Editing"),
         description: t("Common:EditorDescription"),
       },
       [ShareRights.Review]: {
@@ -607,7 +607,7 @@ export const getShareAccessRightOptions = (
       [ShareRights.Read]: {
         access: ShareAccessRights.ReadOnly,
         key: "viewing",
-        label: t("Common:RoleViewer"),
+        label: t("Common:ReadOnly"),
         description: t("Common:RoleViewerDescription"),
       },
       [ShareRights.Restrict]: {
@@ -722,13 +722,13 @@ export const getAccessLabel = (t: TFunction, item: TFolder | TFile) => {
       case ShareAccessRights.FullAccess:
         return t("Common:FullAccess");
       case ShareAccessRights.Editing:
-        return t("Common:Editor");
+        return t("Common:Editing");
       case ShareAccessRights.Review:
         return t("Common:Review");
       case ShareAccessRights.Comment:
         return t("Common:Comment");
       case ShareAccessRights.ReadOnly:
-        return t("Common:RoleViewer");
+        return t("Common:ReadOnly");
       case ShareAccessRights.DenyAccess:
         return t("Common:DenyAccess");
       default:
@@ -738,7 +738,7 @@ export const getAccessLabel = (t: TFunction, item: TFolder | TFile) => {
 
   switch (item.access) {
     case ShareAccessRights.Editing:
-      return t("Common:Editor");
+      return t("Common:Editing");
     case ShareAccessRights.CustomFilter:
       return t("Common:CustomFilter");
     case ShareAccessRights.Review:

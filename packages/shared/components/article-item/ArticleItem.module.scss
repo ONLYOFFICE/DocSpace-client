@@ -367,6 +367,12 @@
     }
   }
 
+  &:global(.ai-agents):not(.showText) {
+    @include mixins.tablet {
+      justify-content: center;
+    }
+  }
+
   &.endOfBlock {
     margin-bottom: 16px;
   }

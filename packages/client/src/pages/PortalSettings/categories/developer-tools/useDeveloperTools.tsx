@@ -49,6 +49,10 @@ export type UseDeveloperToolsProps = {
   setErrorOAuth?: OAuthStore["setErrorOAuth"];
   errorOAuth?: OAuthStore["errorOAuth"];
 
+  setApiKeys?: SettingsStore["setApiKeys"];
+  setPermissions?: SettingsStore["setPermissions"];
+  setErrorKeys?: SettingsStore["setErrorKeys"];
+
   addAbortControllers?: SettingsStore["addAbortControllers"];
 };
 
@@ -61,12 +65,11 @@ const useDeveloperTools = ({
   setIsInit,
   setErrorOAuth,
   errorOAuth,
+  setApiKeys,
+  setPermissions,
+  setErrorKeys,
   addAbortControllers,
 }: UseDeveloperToolsProps) => {
-  const [listItems, setListItems] = useState<TApiKey[]>([]);
-  const [permissions, setPermissions] = useState<string[]>([]);
-  const [errorKeys, setErrorKeys] = useState<Error | null>(null);
-
   const { ready: translationsReady } = useTranslation([
     "JavascriptSdk",
     "Webhooks",
@@ -115,8 +118,8 @@ const useDeveloperTools = ({
         getApiKeyPermissions(ApiKeyPermissionsAbortController.signal),
       ]);
 
-      setListItems(keys);
-      setPermissions(permissionsData);
+      setApiKeys?.(keys);
+      setPermissions?.(permissionsData);
     } catch (err) {
       if (
         err instanceof Error &&
@@ -126,7 +129,7 @@ const useDeveloperTools = ({
       }
 
       toastr.error(err as Error);
-      setErrorKeys(err as Error);
+      setErrorKeys?.(err as Error);
     }
   }, [getApiKeys, getApiKeyPermissions, addAbortControllers]);
 
@@ -185,10 +188,6 @@ const useDeveloperTools = ({
     getOAuthData,
     errorOAuth,
     getKeysData,
-    errorKeys,
-    listItems,
-    setListItems,
-    permissions,
   };
 };
 

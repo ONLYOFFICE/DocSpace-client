@@ -977,5 +977,9 @@
   "CommentDescriptionFile": "Viewing, commenting.",
   "ReadOnlyDescriptionFile": "Viewing only.",
   "DenyAccessDescriptionFile": "No access to view, edit, or manage this file.",
-  "FillingDescriptionFile": "Viewing, filling."
+  "FillingDescriptionFile": "Viewing, filling.",
+  "AIAgents": "AI agents",
+  "Soon": "Soon",
+  "AIAgentsComingSoon": "AI Agents - Coming soon!",
+  "AIAgentsDescription": "Set up a personal assistant for your team: add a knowledge base, choose the right model, and connect an MCP server. Invite colleagues so they can use the agent’s chats with you."
 }

@@ -3,19 +3,13 @@
   "content": "No users match your search. Please adjust your search parameters or clear the search field to view the full list of users.",
   "content_en_sha1_hash": "e38c6445c5ffaacd4c043f8ec2d9a0484e70bae4",
   "created_at": "2025-05-19T21:30:46.936Z",
-  "updated_at": "2025-09-23T07:24:24.110Z",
+  "updated_at": "2025-09-26T15:21:06.236Z",
   "comment": {
     "text": "\"No users are found based on your search criteria. This message is displayed when a user cannot be retrieved due to an empty or invalid search result.\"",
     "is_auto": true,
     "updated_at": "2025-05-20T09:35:16.104Z"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/dialogs/EditGroupMembersDialog/EmptyContainer.tsx",
-      "line_number": 54,
-      "context": "return (\n <StyledEmptyScreen\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n />\n );\n };\n \n export default EmptyContainer;",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/EmptyContainer.tsx",
       "line_number": 50,
@@ -63,6 +57,12 @@
       "line_number": 206,
       "context": "imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/edit-group-members-dialog/EmptyContainer.tsx",
+      "line_number": 54,
+      "context": "return (\n <StyledEmptyScreen\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n />\n );\n };\n \n export default EmptyContainer;",
+      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",

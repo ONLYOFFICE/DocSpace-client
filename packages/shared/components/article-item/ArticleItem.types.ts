@@ -107,4 +107,6 @@ export type ArticleItemProps = PickedDivProps & {
   /** Catalog item icon for SSR */
   iconNode?: React.ReactNode;
   withAnimation?: boolean;
+  dataTooltipId?: string;
+  isDisabled?: boolean;
 };

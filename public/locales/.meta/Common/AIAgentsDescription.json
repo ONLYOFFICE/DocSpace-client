@@ -1,0 +1,28 @@
+{
+  "key_path": "AIAgentsDescription",
+  "content": "Set up a personal assistant for your team: add a knowledge base, choose the right model, and connect an MCP server. Invite colleagues so they can use the agent’s chats with you.",
+  "content_en_sha1_hash": "9f512686a99e65352ea7915f8ef859b2c81ddcb1",
+  "created_at": "2025-09-26T15:20:53.975Z",
+  "updated_at": "2025-09-26T15:54:26.936Z",
+  "comment": {
+    "text": "This text explains how to set up and use AI agents for a team. It appears below a \"Coming Soon\" message, providing a brief overview of the feature's functionality and inviting users to create a personal assistant. Translators should focus on conveying the process of knowledge base setup, model selection, and team collaboration.",
+    "is_auto": true,
+    "updated_at": "2025-09-26T15:54:26.936Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/Article/Body/Items.js",
+      "line_number": 168,
+      "context": "<>\n <Text fontSize=\"12px\" fontWeight={600} noSelect>\n {t(\"Common:AIAgentsComingSoon\")}\n </Text>\n <Text fontSize=\"12px\" fontWeight={400} noSelect>\n {t(\"Common:AIAgentsDescription\")}\n </Text>\n </>\n );\n \n const linkData = getLinkData(",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

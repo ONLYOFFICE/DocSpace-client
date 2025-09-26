@@ -3,7 +3,7 @@
   "content": "Header",
   "content_en_sha1_hash": "31341c6f0c7af677ffb8fadcb92038e8ac2b6193",
   "created_at": "2025-05-19T21:30:54.517Z",
-  "updated_at": "2025-08-26T11:15:14.115Z",
+  "updated_at": "2025-09-26T15:21:06.189Z",
   "comment": {
     "text": "The translation key \"Header\" is used to display the title of a panel or section in the UI. It appears as a label in a checkbox element and is accompanied by an image to represent the header of the embedding panel.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
       "line_number": 522,
-      "context": "<CheckboxElement\n label={t(\"Common:Title\")}\n onChange={onHeaderChange}\n isChecked={embeddingConfig.showTitle}\n img={theme.isBase ? HeaderUrl : HeaderDarkUrl}\n title={t(\"JavascriptSdk:Header\")}\n description={t(\"JavascriptSdk:HeaderDescription\")}\n dataTestId=\"show_title\"\n />\n <CheckboxElement\n label={t(\"JavascriptSdk:SearchFilterAndSort\")}",
+      "context": "<CheckboxElement\n label={t(\"Common:Title\")}\n onChange={onHeaderChange}\n isChecked={embeddingConfig.showTitle}\n img={theme.isBase ? HeaderUrl : HeaderDarkUrl}\n title={t(\"JavascriptSdk:Header\")}\n description={t(\"JavascriptSdk:HeaderDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n dataTestId=\"show_title\"\n />",
       "module": "/packages/client"
     },
     {

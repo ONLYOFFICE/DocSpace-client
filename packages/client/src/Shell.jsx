@@ -64,6 +64,7 @@ import useCreateFileError from "./Hooks/useCreateFileError";
 
 import ReactSmartBanner from "./components/SmartBanner";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Shell = ({ page = "home", ...rest }) => {
   const {
     isLoaded,
@@ -438,10 +439,6 @@ const Shell = ({ page = "home", ...rest }) => {
       });
     }
   }, []);
-
-  useEffect(() => {
-    console.log("Current page ", page);
-  }, [page]);
 
   useEffect(() => {
     if (userTheme) setTheme(userTheme);

@@ -88,7 +88,7 @@ const CustomizationNavbar = ({
       />
       {enablePortalRename ? (
         <MobileCategoryWrapper
-          title={t("PortalRenaming")}
+          title={t("PortalRenaming", { productName: t("Common:ProductName") })}
           subtitle={t("PortalRenamingNavDescription")}
           url="/portal-settings/customization/general/portal-renaming"
           onClickLink={onClickLink}

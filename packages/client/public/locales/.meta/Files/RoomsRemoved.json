@@ -3,7 +3,7 @@
   "content": "Rooms removed",
   "content_en_sha1_hash": "b7f6fbe672117d78dda530804dc9a74efcd4e510",
   "created_at": "2025-05-19T21:30:56.133Z",
-  "updated_at": "2025-09-24T13:10:16.949Z",
+  "updated_at": "2025-09-26T15:21:06.147Z",
   "comment": {
     "text": "The \"Rooms removed\" translation key is used to display a success message when rooms are successfully deleted from a selected folder. This message appears in dialogs after deletion and is translated to fit various languages. It indicates that room removal has been completed successfully.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 124,
+      "line_number": 134,
       "context": "};\n \n const onDeleteRoom = async () => {\n const translations = {\n successRemoveRoom: t(\"Files:RoomRemoved\"),\n successRemoveRooms: t(\"Files:RoomsRemoved\"),\n };\n \n if (isTemplate) {\n translations.successRemoveTemplate = t(\"Files:TemplateRemoved\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 770,
+      "line_number": 813,
       "context": "let translations;\n \n if (isRoom) {\n translations = {\n successRemoveRoom: t(\"Files:RoomRemoved\"),\n successRemoveRooms: t(\"Files:RoomsRemoved\"),\n };\n \n deleteRoomsAction([selectedFolderId], translations).catch((err) =>\n toastr.error(err),\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2079,
+      "line_number": 2084,
       "context": "items.push(item.id);\n });\n \n const translations = {\n successRemoveRoom: t(\"Files:RoomRemoved\"),\n successRemoveRooms: t(\"Files:RoomsRemoved\"),\n };\n \n this.deleteItemAction(items, \"\", translations, null, null, true);\n };",
       "module": "/packages/client"
     }

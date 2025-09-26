@@ -3,7 +3,7 @@
   "content": "Sign up with WeChat",
   "content_en_sha1_hash": "eaa5ec6158c53c45e60af3d05f3b76814061ccc5",
   "created_at": "2025-09-09T10:39:43.575Z",
-  "updated_at": "2025-09-09T10:40:19.593Z",
+  "updated_at": "2025-09-23T07:24:24.461Z",
   "comment": {
     "text": "This key displays the text for a button or link allowing users to sign up or sign in using their WeChat account. It's used within a social login flow, likely on a registration or login screen. Translators should ensure the wording accurately reflects the action of using WeChat for account creation or access.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 445,
+      "line_number": 446,
       "context": "return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n case \"weixin\":\n return signUp\n ? t(\"Common:SignUpWithWechat\")\n : t(\"Common:SignInWithWechat\");\n default:\n return \"\";\n }\n }",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "Search, Filter and Sort",
   "content_en_sha1_hash": "91f61a6bce664dc75ef905edbe12e85f759196d9",
   "created_at": "2025-05-19T21:30:54.658Z",
-  "updated_at": "2025-08-26T11:15:14.115Z",
+  "updated_at": "2025-09-26T15:21:06.192Z",
   "comment": {
     "text": "SearchFilterAndSort is used to display a toggle button that enables or disables filtering and sorting functionality. It appears as a label in UI components where users can customize their data viewing experience. The translation of this key affects the user interface's accessibility and visibility.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 527,
-      "context": "title={t(\"JavascriptSdk:Header\")}\n description={t(\"JavascriptSdk:HeaderDescription\")}\n dataTestId=\"show_title\"\n />\n <CheckboxElement\n label={t(\"JavascriptSdk:SearchFilterAndSort\")}\n onChange={onTitleChange}\n isChecked={embeddingConfig.showFilter}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n title={t(\"JavascriptSdk:SearchBlock\")}\n dataTestId=\"show_filter\"",
+      "line_number": 529,
+      "context": "productName: t(\"Common:ProductName\"),\n })}\n dataTestId=\"show_title\"\n />\n <CheckboxElement\n label={t(\"JavascriptSdk:SearchFilterAndSort\")}\n onChange={onTitleChange}\n isChecked={embeddingConfig.showFilter}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n title={t(\"JavascriptSdk:SearchBlock\")}\n dataTestId=\"show_filter\"",
       "module": "/packages/client"
     },
     {

@@ -892,6 +892,7 @@
   "LogoForEditors": "{{editorName}}编辑器 logo",
   "LogoForViewer": "{{diagramViewer}} logo",
   "LogoDocsEditor": "编辑器标头Logo",
+  "RoomCreateUser": "用户已添加。",
   "PortalRestoring": "{{productName}}正在恢复",
   "PreparationPortalDescription": "恢复过程结束后，您将自动重定向到您的{{productName}}。"
 }

@@ -93,6 +93,7 @@ import FillingStatusPanel from "../panels/FillingStatusPanel";
 import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
 import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialog";
 import AssignRoles from "../dialogs/AssignRoles";
+import ShareSelector from "../ShareSelector";
 
 const Panels = (props) => {
   const {
@@ -278,7 +279,7 @@ const Panels = (props) => {
       <VersionHistoryPanel key="version-history-panel" />
     ),
     deleteDialogVisible && <DeleteDialog key="delete-dialog" />,
-    lifetimeDialogVisible && <LifetimeDialog key="delete-dialog" />,
+    lifetimeDialogVisible && <LifetimeDialog key="lifetime-dialog" />,
     emptyTrashDialogVisible && <EmptyTrashDialog key="empty-trash-dialog" />,
     downloadDialogVisible && <DownloadDialog key="download-dialog" />,
 
@@ -420,6 +421,7 @@ const Panels = (props) => {
     socialAuthWelcomeDialogVisible && (
       <SocialAuthWelcomeDialog key="joining-space-dialog" />
     ),
+    <ShareSelector key="share-selector" />,
   ];
 };
 

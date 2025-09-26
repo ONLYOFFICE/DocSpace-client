@@ -39,6 +39,7 @@ const TABLE_RECENT_COLUMNS = `recentTableColumns_ver-${TableVersions.Recent}`;
 const TABLE_FAVORITES_COLUMNS = `favoritesTableColumns_ver-${TableVersions.Favorites}`;
 const TABLE_VDR_INDEXING_COLUMNS = `vdrIndexingColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TEMPLATES_ROOM_COLUMNS = `templatesRoomsTableColumns_ver-${TableVersions.Rooms}`;
+const TABLE_SHARED_WITH_ME_COLUMNS = `sharedWithMeTableColumns_ver-${TableVersions.SharedWithMe}`;
 
 const COLUMNS_SIZE = `filesColumnsSize_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE = `roomsColumnsSize_ver-${TableVersions.Rooms}`;
@@ -51,6 +52,7 @@ const COLUMNS_GUESTS_SIZE = `guestsColumnsSize_ver-${TableVersions.Guests}`;
 const COLUMNS_GROUPS_SIZE = `groupsColumnsSize_ver-${TableVersions.Groups}`;
 const COLUMNS_INSIDE_GROUPS_SIZE = `insideGroupColumnsSize_ver-${TableVersions.InsideGroup}`;
 const COLUMNS_TEMPLATES_ROOM_SIZE = `templatesRoomsColumnsSize_ver-${TableVersions.Rooms}`;
+const COLUMNS_SHARED_WITH_ME_SIZE = `sharedWithMeColumnsSize_ver-${TableVersions.SharedWithMe}`;
 
 const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE_INFO_PANEL = `roomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
@@ -63,6 +65,7 @@ const COLUMNS_GUESTS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVe
 const COLUMNS_GROUPS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVersions.Groups}`;
 const COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE = `infoPanelInsideGroupPeopleColumnsSize_ver-${TableVersions.InsideGroup}`;
 const COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL = `templatesRoomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
+const COLUMNS_SHARED_WITH_ME_INFO_PANEL_SIZE = `infoPanelSharedWithMeColumnsSize_ver-${TableVersions.SharedWithMe}`;
 
 class TableStore {
   authStore;
@@ -114,6 +117,16 @@ class TableStore {
   typeRecentColumnIsEnabled = false;
 
   lastOpenedRecentColumnIsEnabled = true;
+
+  authorShareWithMeColumnIsEnabled = true;
+
+  accessLevelShareWithMeColumnIsEnabled = true;
+
+  modifiedShareWithMeColumnIsEnabled = true;
+
+  sizeShareWithMeColumnIsEnabled = false;
+
+  typeShareWithMeColumnIsEnabled = false;
 
   locationFavoritesColumnIsEnabled = true;
 
@@ -334,6 +347,22 @@ class TableStore {
 
   setTypeTrashColumn = (enable) => (this.typeTrashColumnIsEnabled = enable);
 
+  setAuthorShareWithMeColumn = (enable) =>
+    (this.authorShareWithMeColumnIsEnabled = enable);
+
+  setAccessLevelShareWithMeColumn = (enable) => {
+    this.accessLevelShareWithMeColumnIsEnabled = enable;
+  };
+
+  setModifiedShareWithMeColumn = (enable) =>
+    (this.modifiedShareWithMeColumnIsEnabled = enable);
+
+  setSizeShareWithMeColumn = (enable) =>
+    (this.sizeShareWithMeColumnIsEnabled = enable);
+
+  setTypeShareWithMeColumn = (enable) =>
+    (this.typeShareWithMeColumnIsEnabled = enable);
+
   setLastOpenedRecentColumn = (enable) =>
     (this.lastOpenedRecentColumnIsEnabled = enable);
 
@@ -390,6 +419,7 @@ class TableStore {
         isPersonalReadOnly,
         isRecentFolder,
         isFavoritesFolder,
+        isSharedWithMeFolder,
       } = this.treeFoldersStore;
 
       const contactsView = getContactsView();
@@ -419,6 +449,22 @@ class TableStore {
         this.setTemplateRoomColumnQuota(
           splitColumns.includes("StorageTemplates"),
         );
+
+        return;
+      }
+
+      if (isSharedWithMeFolder) {
+        this.setAuthorShareWithMeColumn(
+          splitColumns.includes("AuthorShareWithMe"),
+        );
+        this.setAccessLevelShareWithMeColumn(
+          splitColumns.includes("AccessLevelShareWithMe"),
+        );
+        this.setModifiedShareWithMeColumn(
+          splitColumns.includes("ModifiedShareWithMe"),
+        );
+        this.setSizeShareWithMeColumn(splitColumns.includes("SizeShareWithMe"));
+        this.setTypeShareWithMeColumn(splitColumns.includes("TypeShareWithMe"));
 
         return;
       }
@@ -653,6 +699,30 @@ class TableStore {
         this.setRoomColumnActivity(!this.roomColumnActivityIsEnabled);
         return;
 
+      case "AuthorShareWithMe":
+        this.setAuthorShareWithMeColumn(!this.authorShareWithMeColumnIsEnabled);
+        return;
+
+      case "AccessLevelShareWithMe":
+        this.setAccessLevelShareWithMeColumn(
+          !this.accessLevelShareWithMeColumnIsEnabled,
+        );
+        return;
+
+      case "ModifiedShareWithMe":
+        this.setModifiedShareWithMeColumn(
+          !this.modifiedShareWithMeColumnIsEnabled,
+        );
+        return;
+
+      case "SizeShareWithMe":
+        this.setSizeShareWithMeColumn(!this.sizeShareWithMeColumnIsEnabled);
+        return;
+
+      case "TypeShareWithMe":
+        this.setTypeShareWithMeColumn(!this.typeShareWithMeColumnIsEnabled);
+        return;
+
       case "ActivityTemplates":
         this.setTemplateRoomColumnActivity(
           !this.templateRoomColumnActivityIsEnabled,
@@ -745,6 +815,7 @@ class TableStore {
       isRecentFolder,
       isTemplatesFolder,
       isFavoritesFolder,
+      isSharedWithMeFolder,
     } = this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
@@ -789,6 +860,8 @@ class TableStore {
       tableStorageName = `${TABLE_RECENT_COLUMNS}=${userId}`;
     else if (isFavoritesFolder)
       tableStorageName = `${TABLE_FAVORITES_COLUMNS}=${userId}`;
+    else if (isSharedWithMeFolder)
+      tableStorageName = `${TABLE_SHARED_WITH_ME_COLUMNS}=${userId}`;
     else if (isIndexedFolder)
       tableStorageName = `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`;
     else if (isDocumentsFolder) tableStorageName = `${TABLE_COLUMNS}=${userId}`;
@@ -808,6 +881,7 @@ class TableStore {
       isRecentFolder,
       isTemplatesFolder,
       isFavoritesFolder,
+      isSharedWithMeFolder,
     } = this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
@@ -854,6 +928,8 @@ class TableStore {
       columnStorageName = `${COLUMNS_INSIDE_GROUPS_SIZE}=${userId}`;
     else if (isContactsGroups)
       columnStorageName = `${COLUMNS_GROUPS_SIZE}=${userId}`;
+    else if (isSharedWithMeFolder)
+      columnStorageName = `${COLUMNS_SHARED_WITH_ME_SIZE}=${userId}`;
     else if (isDocumentsFolder) columnStorageName = `${COLUMNS_SIZE}=${userId}`;
     else columnStorageName = "";
 
@@ -871,6 +947,7 @@ class TableStore {
       isRecentFolder,
       isTemplatesFolder,
       isFavoritesFolder,
+      isSharedWithMeFolder,
     } = this.treeFoldersStore;
 
     const { isIndexedFolder } = this.selectedFolderStore;
@@ -918,6 +995,8 @@ class TableStore {
       columnInfoPanelStorageName = `${COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE}=${userId}`;
     else if (isContactsGroups)
       columnInfoPanelStorageName = `${COLUMNS_GROUPS_INFO_PANEL_SIZE}=${userId}`;
+    else if (isSharedWithMeFolder)
+      columnInfoPanelStorageName = `${COLUMNS_SHARED_WITH_ME_INFO_PANEL_SIZE}=${userId}`;
     else if (isDocumentsFolder)
       columnInfoPanelStorageName = `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
     else columnInfoPanelStorageName = "";

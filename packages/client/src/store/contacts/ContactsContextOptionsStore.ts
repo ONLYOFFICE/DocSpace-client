@@ -42,6 +42,7 @@ import { UserStore } from "@docspace/shared/store/UserStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
+import { CategoryType } from "@docspace/shared/constants";
 
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import ChangeMailReactSvgUrl from "PUBLIC_DIR/images/email.react.svg?url";
@@ -67,11 +68,9 @@ import PersonShareReactSvgUrl from "PUBLIC_DIR/images/person.share.react.svg?url
 import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 import {
   onDeletePersonalDataClick,
   onInviteAgainClick,
-  onInviteMultipleAgain,
   shareGuest,
 } from "SRC_DIR/helpers/contacts";
 
@@ -463,7 +462,7 @@ class ContactsConextOptionsStore {
       },
       {
         key: "cm-invite",
-        label: t("Common:Invite"),
+        label: t("LblInviteAgain"),
         disabled: !hasUsersToInvite,
         onClick: () => setSendInviteDialogVisible(true),
         icon: InviteAgainReactSvgUrl,
@@ -691,19 +690,6 @@ class ContactsConextOptionsStore {
         "data-type": EmployeeType.User,
         action: EmployeeType.User,
         key: "collaborator",
-      },
-      {
-        key: "separator",
-        isSeparator: true,
-      },
-      {
-        id: "accounts-add_invite-again",
-        className: "main-button_drop-down",
-        icon: InviteAgainReactSvgUrl,
-        label: t("People:LblInviteAgain"),
-        onClick: () => onInviteMultipleAgain(t),
-        "data-action": "invite-again",
-        key: "invite-again",
       },
     ];
 

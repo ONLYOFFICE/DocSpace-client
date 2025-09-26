@@ -892,6 +892,7 @@
   "LogoForEditors": "{{editorName}} խմբագրի լոգո",
   "LogoForViewer": "{{diagramViewer}}-ի լոգո",
   "LogoDocsEditor": "Էջագլխի խմբագրիչների լոգո",
+  "RoomCreateUser": "Օգտատերերն ավելացվել են։",
   "PortalRestoring": "{{productName}}-ի վերականգնում",
   "PreparationPortalDescription": "Վերականգնման գործընթացն ավարտվելուն պես դուք ավտոմատ կերպով կուղղորդվեք ձեր {{productName}}:"
 }

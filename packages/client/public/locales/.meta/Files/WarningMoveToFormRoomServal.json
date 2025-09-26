@@ -3,7 +3,7 @@
   "content": "Moving several files to the Form Filling room is not supported. Move one {{ organizationName }} PDF form at a time.",
   "content_en_sha1_hash": "5d1a343d603e24511ebf4ad531954a1b50dacf6d",
   "created_at": "2025-05-19T21:30:56.345Z",
-  "updated_at": "2025-09-01T11:05:24.104Z",
+  "updated_at": "2025-09-26T15:21:06.047Z",
   "comment": {
     "text": "This translation key is used to display a warning message when moving multiple files to a specific room. The message informs users that this action is not supported and suggests moving one PDF form at a time instead. This message appears in the FilesSelector component when the user attempts to move several files.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
-      "line_number": 224,
+      "line_number": 223,
       "context": "? t(\"Files:WarningCopyToFormRoomServal\", option)\n : t(\"Common:WarningCopyToFormRoom\", option);\n \n if (isMove)\n return several\n ? t(\"Files:WarningMoveToFormRoomServal\", option)\n : t(\"Files:WarningMoveToFormRoom\", option);\n \n return \"\";\n };",
       "module": "/packages/client"
     }

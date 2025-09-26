@@ -3,7 +3,7 @@
   "content": "Show version history",
   "content_en_sha1_hash": "55f3b72517c6594dba1e3a6ce9d3fdee0a590f36",
   "created_at": "2025-05-19T21:30:48.734Z",
-  "updated_at": "2025-09-19T15:39:23.282Z",
+  "updated_at": "2025-09-26T15:21:06.472Z",
   "comment": {
     "text": "This translation key is used to display the label \"Show version history\" on a badge component. It will be shown when the user clicks on a button that shows or hides version history information in the UI.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1620,
+      "line_number": 1663,
       "context": "const versionActions = onlyShowVersionHistory\n ? [\n {\n id: \"option_show-version-history\",\n key: \"show-version-history\",\n label: t(\"Common:ShowVersionHistory\"),\n icon: HistoryReactSvgUrl,\n onClick: () =>\n this.showVersionHistory(\n item.id,\n item.security,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1620,
+      "line_number": 1663,
       "context": "const versionActions = onlyShowVersionHistory\n ? [\n {\n id: \"option_show-version-history\",\n key: \"show-version-history\",\n label: t(\"Common:ShowVersionHistory\"),\n icon: HistoryReactSvgUrl,\n onClick: () =>\n this.showVersionHistory(\n item.id,\n item.security,",
       "module": "/packages/client"
     },

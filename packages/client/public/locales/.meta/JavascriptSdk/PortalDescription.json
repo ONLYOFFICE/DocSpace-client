@@ -3,7 +3,7 @@
   "content": "Embed the whole {{productName}} to allow users to interact with all rooms, files, and settings.",
   "content_en_sha1_hash": "bb2ba090ea6b7d4f2d0a63738da632aa07737985",
   "created_at": "2025-05-19T21:30:54.616Z",
-  "updated_at": "2025-09-17T13:43:01.778Z",
+  "updated_at": "2025-09-26T15:21:06.302Z",
   "comment": {
     "text": "This translation key is used for a portal settings page that instructs users to embed the entire product to interact with all rooms, files, and settings. It appears in the \"PresetWrapper\" component, which is likely part of a dropdown or options menu.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 96,
+      "line_number": 89,
       "context": "const navigateToViewer = () => navigate(\"viewer\");\n \n const presetsData = [\n {\n title: t(\"Common:ProductName\"),\n description: t(\"PortalDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n image: theme.isBase ? PortalImg : PortalImgDark,\n handleOnClick: navigateToPortal,\n },",
       "module": "/packages/client"
     },

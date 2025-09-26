@@ -1,10 +1,8 @@
 {
-  "ActionsWithFilesDescription": "Значке ће вас обавештавати о радњама попут отпремања, креирања и промена у датотекама.",
   "Badges": "Значке",
   "DailyFeed": "Дневни садржај {{productName}}-а",
   "DailyFeedDescription": "Читајте вести и догађаје из вашег {{productName}}-а у дневном прегледу.",
   "Notifications": "Обавештења",
-  "RoomsActivityDescription": "Обавештења по сату. Будите у току са свим активностима у својим собама.",
   "UsefulTips": "Корисни {{productName}} савети",
   "UsefulTipsDescription": "Добиј корисне водиче о {{productName}}-у"
 }

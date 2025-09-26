@@ -261,7 +261,7 @@ const withHotkeys = (Component) => {
 
     // Select all files and folders
     useHotkeys(
-      "shift+a, ctrl+a",
+      "shift+a, ctrl+a, command+a",
       (e) => {
         e.preventDefault();
         selectAll();

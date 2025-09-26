@@ -590,6 +590,48 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
+  get configureDeepLinkUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.configureDeepLink
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.configureDeepLink}`
+      : this.helpCenterDomain;
+  }
+
+  get invitationSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.invitationSettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.invitationSettings}`
+      : this.helpCenterDomain;
+  }
+
+  get singleSignOnUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.singleSignOn
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.singleSignOn}`
+      : this.helpCenterDomain;
+  }
+
+  get pluginsSdkUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.pluginsSdk
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.pluginsSdk}`
+      : this.helpCenterDomain;
+  }
+
+  get smtpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.smtp
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.smtp}`
+      : this.helpCenterDomain;
+  }
+
+  get dataImportUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.dataImport
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.dataImport}`
+      : this.helpCenterDomain;
+  }
+
+  get apiKeysUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.apikeys
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.apikeys}`
+      : this.helpCenterDomain;
+  }
+
   get renamingSettingsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.renaming
       ? `${this.helpCenterDomain}${this.helpCenterEntries.renaming}`
@@ -702,12 +744,6 @@ class SettingsStore {
   get apiPluginSDKLink() {
     return this.apiDomain && this.apiEntries?.["plugins-sdk"]
       ? `${this.apiDomain}${this.apiEntries["plugins-sdk"]}`
-      : this.apiDomain;
-  }
-
-  get apiKeysLink() {
-    return this.apiDomain && this.apiEntries?.apikeys
-      ? `${this.apiDomain}${this.apiEntries.apikeys}`
       : this.apiDomain;
   }
 

@@ -418,7 +418,9 @@ const Items = ({
 
       items.splice(1, 0, <CatalogDivider key="ai-agents-divider" />);
 
-      items.splice(4, 0, <CatalogDivider key="doc-other-header" />);
+      items.splice(5, 0, <CatalogDivider key="doc-other-header" />);
+
+      items.splice(8, 0, <CatalogDivider key="trash-divider" />);
 
       if (isCommunity && isPaymentPageAvailable)
         items.push(<BonusItem key="bonus-item" />);

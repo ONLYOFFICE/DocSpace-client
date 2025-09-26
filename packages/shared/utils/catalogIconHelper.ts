@@ -29,7 +29,7 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 import CatalogDocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
 import CatalogArchiveReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.archive.react.svg?url";
-import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url";
+import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.outline.svg?url";
 import CatalogPortfolioReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.portfolio.react.svg?url";
 import CatalogFavoritesReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.favorites.react.svg?url";
 import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg?url";
@@ -55,7 +55,7 @@ import CatalogFolder20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.folde
 import CatalogDocuments20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.documents.react.svg?url";
 import CatalogRooms20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.rooms.react.svg?url";
 import CatalogArchive20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.archive.react.svg?url";
-import CatalogShared20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.shared.react.svg?url";
+import CatalogShared20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.shared.outline.svg?url";
 import CatalogPortfolio20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.portfolio.react.svg?url";
 import CatalogFavorites20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.favorites.react.svg?url";
 import CatalogPrivate20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.private.react.svg?url";

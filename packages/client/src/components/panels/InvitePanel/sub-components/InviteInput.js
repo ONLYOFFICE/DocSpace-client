@@ -49,8 +49,8 @@ import {
   EmployeeType,
   RoomsType,
 } from "@docspace/shared/enums";
+import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
-import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";

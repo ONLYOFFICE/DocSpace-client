@@ -3,7 +3,7 @@
   "content": "Collect the completed form copies and data from them into XLSX for analyzing responses in Form Filling rooms.",
   "content_en_sha1_hash": "3b43aef8ad1149a97c567527e3f169f5362b0735",
   "created_at": "2025-05-19T21:30:45.493Z",
-  "updated_at": "2025-06-30T12:20:31.243Z",
+  "updated_at": "2025-09-23T07:24:24.113Z",
   "comment": {
     "text": "Collect completed form copies and data into XLSX for analysis in Form Filling rooms. This description is used in buttons to initiate file sharing in various UI components such as dialogs, share panels, and share form dialogs.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 164,
-      "context": "disabled: !file.canShare,\n },\n {\n id: \"form-room\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },\n {",
+      "line_number": 194,
+      "context": "disabled: !file.canShare || file.rootFolderType === FolderType.Rooms,\n },\n {\n id: \"form-room\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },\n {",
       "module": "/packages/doceditor"
     }
   ],

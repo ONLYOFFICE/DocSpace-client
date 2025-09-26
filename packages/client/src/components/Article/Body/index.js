@@ -37,13 +37,13 @@ import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import AccountsFilter from "@docspace/shared/api/people/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
-import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { MEDIA_VIEW_URL, CategoryType } from "@docspace/shared/constants";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
   FILTER_DOCUMENTS,
   FILTER_RECENT,
+  FILTER_SHARE,
   FILTER_FAVORITES,
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
@@ -84,9 +84,8 @@ const ArticleBodyContent = (props) => {
     displayBanners,
     startDrag,
     setDropTargetPreview,
-
+    sharedWithMeFolderId,
     isRoomAdmin,
-
     isAccountsArticle,
   } = props;
 
@@ -112,7 +111,9 @@ const ArticleBodyContent = (props) => {
 
       switch (folderId) {
         case recentFolderId: {
-          const recentFilter = FilesFilter.getDefault({ isRecentFolder: true });
+          const recentFilter = FilesFilter.getDefault({
+            categoryType: CategoryType.Recent,
+          });
           recentFilter.folder = folderId;
 
           if (userId) {
@@ -147,6 +148,27 @@ const ArticleBodyContent = (props) => {
 
           break;
         }
+        case sharedWithMeFolderId: {
+          const shareFilter = FilesFilter.getDefault({
+            categoryType: CategoryType.SharedWithMe,
+          });
+
+          shareFilter.folder = folderId;
+
+          if (userId) {
+            const filterObj = getUserFilter(`${FILTER_SHARE}=${userId}`);
+
+            if (filterObj?.sortBy) shareFilter.sortBy = filterObj.sortBy;
+            if (filterObj?.sortOrder)
+              shareFilter.sortOrder = filterObj.sortOrder;
+          }
+
+          params = shareFilter.toUrlParams();
+          path = getCategoryUrl(CategoryType.SharedWithMe);
+
+          break;
+        }
+
         case favoritesFolderId: {
           const favFilter = FilesFilter.getDefault();
           favFilter.folder = folderId;
@@ -246,6 +268,7 @@ const ArticleBodyContent = (props) => {
       hashDate,
       roomsFilter,
       recentFolderId,
+      sharedWithMeFolderId,
     ],
   );
 
@@ -321,6 +344,12 @@ const ArticleBodyContent = (props) => {
       activeItemId !== favoritesFolderId
     )
       return setActiveItemId(favoritesFolderId);
+
+    if (
+      location.pathname.includes("/shared-with-me") &&
+      activeItemId !== sharedWithMeFolderId
+    )
+      return setActiveItemId(sharedWithMeFolderId);
 
     if (location.pathname.includes("/groups") && activeItemId !== "groups")
       return setActiveItemId("groups");
@@ -443,13 +472,11 @@ export default inject(
       myFolderId,
       recycleBinFolderId,
       recentFolderId,
+      sharedWithMeFolderId,
       favoritesFolderId,
     } = treeFoldersStore;
-
     const selectedFolderId = selectedFolderStore.id;
-
     const rootFolderId = selectedFolderStore.rootFolderId;
-
     const {
       showText,
 
@@ -487,6 +514,7 @@ export default inject(
       recycleBinFolderId,
       rootFolderId,
       recentFolderId,
+      sharedWithMeFolderId,
 
       setIsLoading,
 

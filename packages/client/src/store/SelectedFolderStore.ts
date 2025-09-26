@@ -37,12 +37,12 @@ import type {
   NonFunctionProperties,
   NonFunctionPropertyNames,
   Nullable,
+  TAvailableShareRights,
   TCreatedBy,
   TPathParts,
   // TTranslation,
 } from "@docspace/shared/types";
 import {
-  TAvailableExternalRights,
   TFolder,
   TFolderSecurity,
   TShareSettings,
@@ -178,7 +178,7 @@ class SelectedFolderStore {
 
   shareSettings: TShareSettings | null = null;
 
-  availableExternalRights: TAvailableExternalRights | null = null;
+  availableShareRights: Nullable<TAvailableShareRights> = null;
 
   parentShared: boolean = false;
 
@@ -239,7 +239,7 @@ class SelectedFolderStore {
       changeDocumentsTabs: this.changeDocumentsTabs,
       isIndexedFolder: this.isIndexedFolder,
       shareSettings: this.shareSettings,
-      availableExternalRights: this.availableExternalRights,
+      availableShareRights: this.availableShareRights,
       parentShared: this.parentShared,
     };
   };
@@ -295,7 +295,7 @@ class SelectedFolderStore {
     this.passwordProtected = false;
     this.external = false;
     this.shareSettings = null;
-    this.availableExternalRights = null;
+    this.availableShareRights = null;
     this.parentShared = false;
   };
 

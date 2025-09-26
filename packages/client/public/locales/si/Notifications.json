@@ -1,10 +1,8 @@
 {
-  "ActionsWithFilesDescription": "උඩුගත කිරීම්, සෑදීම් සහ ගොනු වෙනස් කිරීම් වැනි ක්‍රියාමාර්ග පිළිබඳව දැනුම් දෙනු ඇත.",
   "Badges": "චිහ්න",
   "DailyFeed": "දෛනික {{productName}} සංග්‍රහය",
   "DailyFeedDescription": "ඔබගේ {{productName}} වෙතින් පුවත් සහ සිදුවීම් දිනපතා සඟරාවකින් කියවන්න.",
   "Notifications": "දැනුම්දීම්",
-  "RoomsActivityDescription": "පැයින් පැය දැනුම්දීම්. ඔබගේ කාමරවල සියළුම ක්‍රියාකාරකම් ගැන යාවත්කාලීනව සිටින්න.",
   "UsefulTips": "ප්‍රයෝජනවත් {{productName}} ඉඟි",
   "UsefulTipsDescription": "{{productName}} ගැන ප්‍රයෝජනවත් මාර්ගෝපදේශ ලබා ගන්න"
 }

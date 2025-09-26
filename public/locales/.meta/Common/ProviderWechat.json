@@ -3,7 +3,7 @@
   "content": "WeChat",
   "content_en_sha1_hash": "4c153fce630f4712ecf9f40d6d5b8c3bfb8c40a2",
   "created_at": "2025-09-09T10:39:41.532Z",
-  "updated_at": "2025-09-09T10:40:37.241Z",
+  "updated_at": "2025-09-23T07:24:24.450Z",
   "comment": {
     "text": "This key displays the name of the WeChat provider. It's used to identify WeChat as a login option, likely in a list of available providers or a similar UI element. Translators should ensure the translation accurately reflects the WeChat platform.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 396,
+      "line_number": 397,
       "context": "case \"sso\":\n return t(\"Common:SSO\");\n case \"zoom\":\n return t(\"Common:ProviderZoom\");\n case \"weixin\":\n return t(\"Common:ProviderWechat\");\n case \"sso-full\":\n return t(\"Common:ProviderSsoSetting\");\n default:\n return \"\";\n }",
       "module": "/packages/shared"
     }

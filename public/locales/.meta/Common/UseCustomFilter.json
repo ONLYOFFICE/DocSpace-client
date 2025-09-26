@@ -3,7 +3,7 @@
   "content": "use custom filter",
   "content_en_sha1_hash": "b37de48bcfb125d7817951f1376561bed347cc4c",
   "created_at": "2025-08-26T11:14:54.775Z",
-  "updated_at": "2025-08-26T11:16:05.329Z",
+  "updated_at": "2025-09-23T07:24:24.394Z",
   "comment": {
     "text": "This text appears on a button or control related to sharing functionality. It indicates the option to apply a custom filter when sharing content. Translators should ensure the meaning conveys the ability to use a personalized filter setting.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 281,
+      "line_number": 293,
       "context": "export const getNameAccess = (access: ShareAccessRights, t: TTranslation) => {\n switch (access) {\n case ShareAccessRights.Editing:\n return t(\"Common:EditButton\");\n case ShareAccessRights.CustomFilter:\n return t(\"Common:UseCustomFilter\");\n case ShareAccessRights.Review:\n return t(\"Common:Review\");\n case ShareAccessRights.Comment:\n return t(\"Common:Comment\");\n case ShareAccessRights.ReadOnly:",
       "module": "/packages/shared"
     }

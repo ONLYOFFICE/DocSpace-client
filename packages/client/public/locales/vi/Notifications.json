@@ -1,10 +1,8 @@
 {
-  "ActionsWithFilesDescription": "Huy hiệu sẽ thông báo cho bạn về các hành động như tải lên, tạo và thay đổi trong tập tin.",
   "Badges": "Danh hiệu",
   "DailyFeed": "Nguồn cấp dữ liệu {{productName}} hàng ngày",
   "DailyFeedDescription": "Đọc tin và sự kiện từ {{productName}} của bạn trong một bản tóm tắt hàng ngày.",
   "Notifications": "Thông báo",
-  "RoomsActivityDescription": "Thông báo hàng giờ. Luôn cập nhật về tất cả các hoạt động trong phòng của bạn.",
   "UsefulTips": "Các mẹo hữu ích sử dụng {{productName}}",
   "UsefulTipsDescription": "Nhận hướng dẫn hữu ích về {{productName}}"
 }

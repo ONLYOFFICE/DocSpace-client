@@ -1,10 +1,8 @@
 {
-  "ActionsWithFilesDescription": "Значките ще Ви уведомяват за действия като качване, създаване и промени на файлове.",
   "Badges": "Баджове",
   "DailyFeed": "Ежедневен {{productName}} фийд",
   "DailyFeedDescription": "Четете новини и събития от вашия {{productName}} в ежедневен бюлетин.",
   "Notifications": "Известия",
-  "RoomsActivityDescription": "Ежечасни известия. Бъдете в течение за всички дейности във вашите стаи.",
   "UsefulTips": "Полезни съвети за {{productName}}",
   "UsefulTipsDescription": "Поучавайте полезни напътствия за {{productName}}"
 }

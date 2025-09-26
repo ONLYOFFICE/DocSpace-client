@@ -47,7 +47,7 @@ import { Backdrop } from "../backdrop";
 import { Text } from "../text";
 import PreviewButton from "./PreviewButton";
 
-type ValueOf<T> = T[keyof T];
+import type { ValueOf } from "../../types";
 
 type OperationName = keyof typeof OPERATIONS_NAME;
 

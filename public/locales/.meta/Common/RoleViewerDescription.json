@@ -3,7 +3,7 @@
   "content": "File viewing",
   "content_en_sha1_hash": "959903daecf1599e5d6cf7634ea77484419513db",
   "created_at": "2025-05-19T21:30:48.151Z",
-  "updated_at": "2025-09-17T13:43:02.004Z",
+  "updated_at": "2025-09-23T07:24:24.393Z",
   "comment": {
     "text": "This translation key is used to describe a read-only access option for viewing files, appearing on share settings pages. The text helps provide clarity and context for users, allowing them to understand their role when accessing shared content.",
     "is_auto": true,
@@ -12,8 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 174,
-      "context": "label: t(\"Commentator\"),\n icon: AccessCommentReactSvgUrl,\n },\n available.Read && {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n available.FillForms && {",
+      "line_number": 186,
+      "context": "label: t(\"Commentator\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n [ShareRights.FillForms]: {",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 186,
+      "context": "label: t(\"Commentator\"),\n icon: AccessCommentReactSvgUrl,\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n [ShareRights.FillForms]: {",
       "module": "/packages/shared"
     },
     {

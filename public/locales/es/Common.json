@@ -892,6 +892,7 @@
   "LogoForEditors": "Logotipo para el editor {{editorName}}",
   "LogoForViewer": "Logotipo para {{diagramViewer}}",
   "LogoDocsEditor": "Logo para los encabezados de los editores",
+  "RoomCreateUser": "Usuarios añadidos.",
   "PortalRestoring": "Restauración de {{productName}}",
   "PreparationPortalDescription": "Una vez terminado el proceso de restauración, usted será redirigido a su {{productName}}."
 }

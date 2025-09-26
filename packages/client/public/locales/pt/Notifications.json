@@ -1,10 +1,8 @@
 {
-  "ActionsWithFilesDescription": "Os crachás irão notificá-lo sobre ações tais como carregamentos, criações, e alterações aos ficheiros.",
   "Badges": "Distintivos",
   "DailyFeed": "Feed diário do {{productName}} ",
   "DailyFeedDescription": "Leia notícias e eventos do seu {{productName}} no resumo diário.",
   "Notifications": "Notificações",
-  "RoomsActivityDescription": "Notificações de hora em hora. Esteja sempre a par de todas as atividades nos seus quartos.",
   "UsefulTips": "Dicas úteis para o {{productName}}",
   "UsefulTipsDescription": "Obtenha guias úteis sobre o {{productName}}"
 }

@@ -57,7 +57,6 @@
   "MembersEmptyScreenText": " شاهد تفاصيل الأعضاء هنا",
   "NoRecordsFound": "لا توجد سجلات",
   "Properties": "الخصائص",
-  "RoomCreateUser": "تمت إضافة المستخدمين.",
   "RoomCreateUserCount": "تمت إضافة المستخدمين ({{count}}).",
   "RoomDenyDownloadDisabled": "التحميل والنسخ مسموحان",
   "RoomDenyDownloadEnabled": "التحميل والنسخ محظوران",

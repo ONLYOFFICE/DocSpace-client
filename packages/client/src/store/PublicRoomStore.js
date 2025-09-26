@@ -32,11 +32,15 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isPublicRoom as isPublicRoomUtil } from "@docspace/shared/utils/common";
 
-import { CategoryType, LinkType } from "SRC_DIR/helpers/constants";
+import { LinkType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 import { ValidationStatus } from "@docspace/shared/enums";
-import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
+import {
+  PUBLIC_STORAGE_KEY,
+  CategoryType,
+  TOAST_FOLDER_PUBLIC_KEY,
+} from "@docspace/shared/constants";
 
 class PublicRoomStore {
   externalLinks = [];
@@ -238,11 +242,20 @@ class PublicRoomStore {
   };
 
   gotoFolder = (res, key) => {
+    const categoryType =
+      res.isRoom || res.isRoomMember
+        ? CategoryType.Shared
+        : CategoryType.SharedWithMe;
+
+    if (categoryType === CategoryType.SharedWithMe) {
+      sessionStorage.setItem(TOAST_FOLDER_PUBLIC_KEY, res.entityId.toString());
+    }
+
     const filter = FilesFilter.getDefault();
 
     const subFolder = new URLSearchParams(window.location.search).get("folder");
 
-    const url = getCategoryUrl(CategoryType.Shared);
+    const url = getCategoryUrl(categoryType);
 
     filter.folder = subFolder || res.id;
     filter.key = key;
@@ -274,11 +287,12 @@ class PublicRoomStore {
 
         const currentUrl = window.location.href;
 
+        const isNotRoomsSection = !currentUrl.includes("/rooms/shared");
+
         if (
           !needPassword &&
-          (res?.shared || res?.isAuthenticated) &&
-          !currentUrl.includes("/rooms/shared") &&
-          (res.isRoom || res.isRoomMember)
+          isNotRoomsSection &&
+          (res?.shared || res?.isAuthenticated)
         ) {
           return this.gotoFolder(res, key);
         }

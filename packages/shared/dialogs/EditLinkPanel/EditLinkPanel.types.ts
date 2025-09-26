@@ -32,7 +32,7 @@ import type { LinkParamsType, Nullable, TTranslation } from "../../types";
 import type { TPasswordSettings } from "../../api/settings/types";
 import type { TFile, TFileLink, TFolder } from "../../api/files/types";
 import type {
-  getAccessRightOptions,
+  getLinkAccessRightOptions,
   getAccessTypeOptions,
 } from "../../components/share/Share.helpers";
 
@@ -124,5 +124,7 @@ export interface LimitTimeBlockProps {
   setExpirationDate: (value: string | null) => void;
 }
 
-export type AccessOptionType = ReturnType<typeof getAccessRightOptions>[number];
+export type AccessOptionType = ReturnType<
+  typeof getLinkAccessRightOptions
+>[number];
 export type ShareOptionType = ReturnType<typeof getAccessTypeOptions>[number];

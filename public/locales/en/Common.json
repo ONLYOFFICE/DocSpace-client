@@ -958,5 +958,9 @@
   "LogoForViewer": "Logo for {{diagramViewer}}",
   "LogoDocsEditor": "Logo for the editors header",
   "PortalRestoring": "{{productName}} restoring",
-  "PreparationPortalDescription": "Once the restoring process is over, you'll be automatically redirected to your {{productName}}."
+  "PreparationPortalDescription": "Once the restoring process is over, you'll be automatically redirected to your {{productName}}.",
+  "AIAgents": "AI agents",
+  "Soon": "Soon",
+  "AIAgentsComingSoon": "AI Agents - Coming soon!",
+  "AIAgentsDescription": "Set up a personal assistant for your team: add a knowledge base, choose the right model, and connect an MCP server. Invite colleagues so they can use the agent’s chats with you."
 }

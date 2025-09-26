@@ -3,7 +3,7 @@
   "content": "Public room",
   "content_en_sha1_hash": "02f21f2d4127882b2b2ef75e41181154716ce237",
   "created_at": "2025-05-19T21:30:47.651Z",
-  "updated_at": "2025-09-23T07:24:24.146Z",
+  "updated_at": "2025-09-26T15:21:06.211Z",
   "comment": {
     "text": "This translation key is used to display the label \"Public room\" in various UI elements, such as a filter option and a button. It appears in different contexts within the application, including file browsing and portal settings, and its purpose is to provide a clear indication of the selected room type.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 863,
+      "line_number": 923,
       "context": "case RoomsType.PublicRoom:\n return {\n id: \"filter_type-public\",\n key: RoomsType.PublicRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:PublicRoom\"),\n };\n case RoomsType.VirtualDataRoom:\n return {\n id: \"filter_type-virtual-data\",\n key: RoomsType.VirtualDataRoom,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 103,
+      "line_number": 96,
       "context": "}),\n image: theme.isBase ? PortalImg : PortalImgDark,\n handleOnClick: navigateToPortal,\n },\n {\n title: t(\"Common:PublicRoom\"),\n description: t(\"JavascriptSdk:PublicRoomPresetInfo\"),\n image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,\n handleOnClick: navigateToPublicRoom,\n },\n {",
       "module": "/packages/client"
     },

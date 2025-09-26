@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2025-09-23T07:24:24.039Z",
+  "updated_at": "2025-09-26T15:21:06.073Z",
   "comment": {
     "text": "The translation key \"Contacts\" is used to display a title for a list or directory of contacts, appearing as a header in various UI elements such as articles, template access selectors, and invite panels. This text provides context and helps distinguish this section from others, guiding the user's understanding of what they are viewing.",
     "is_auto": true,
@@ -72,7 +72,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
-      "line_number": 95,
+      "line_number": 96,
       "context": "t={t}\n i18nKey=\"LdapIntegrationDescription\"\n ns=\"Ldap\"\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n link,\n }}\n components={{\n 1: (\n <Link",
       "module": "/packages/client"
     },
@@ -108,7 +108,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/selector/index.tsx",
-      "line_number": 140,
+      "line_number": 144,
       "context": "targetEntityType={targetEntityType}\n data-test-id=\"share_to_people_selector\"\n disabledInvitedText={t(\"Common:Shared\")}\n {...accessRightsProps}\n headerProps={{\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick,\n onCloseClick,",
       "module": "/packages/shared"
     },

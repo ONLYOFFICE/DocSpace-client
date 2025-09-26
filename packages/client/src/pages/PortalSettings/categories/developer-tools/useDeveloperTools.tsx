@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
@@ -37,7 +37,6 @@ import {
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import WebhooksStore from "SRC_DIR/store/WebhooksStore";
 import OAuthStore from "SRC_DIR/store/OAuthStore";
-import { TApiKey } from "@docspace/shared/api/api-keys/types";
 
 export type UseDeveloperToolsProps = {
   getCSPSettings?: SettingsStore["getCSPSettings"];

@@ -891,6 +891,7 @@
   "LogoForEditors": "Logoja për redaktorin {{editorName}}",
   "LogoForViewer": "Logo për {{diagramViewer}}",
   "LogoDocsEditor": "Logo për menunë kompakte të majtë",
+  "RoomCreateUser": "Përdoruesit u shtuan.",
   "PortalRestoring": "{{productName}} po restaurohet",
   "PreparationPortalDescription": "Pasi të përfundojë procesi i rivendosjes, do të ridrejtoheni automatikisht te {{productName}}."
 }

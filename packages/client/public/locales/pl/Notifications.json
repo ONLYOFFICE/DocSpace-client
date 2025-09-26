@@ -1,10 +1,8 @@
 {
-  "ActionsWithFilesDescription": "Etykiety informują o działaniach, takich jak wgrywanie, tworzenie i zmiany w plikach.",
   "Badges": "Etykiety",
   "DailyFeed": "Codzienne aktualności {{productName}}",
   "DailyFeedDescription": "Czytaj wiadomości i wydarzenia z {{productName}} w codziennym przeglądzie.",
   "Notifications": "Powiadomienia",
-  "RoomsActivityDescription": "Cogodzinne powiadomienia. Bądź na bieżąco ze wszystkimi działaniami w Twoich pokojach.",
   "UsefulTips": "Przydatne wskazówki {{productName}}",
   "UsefulTipsDescription": "Uzyskaj przydatne przewodniki na temat {{productName}}"
 }

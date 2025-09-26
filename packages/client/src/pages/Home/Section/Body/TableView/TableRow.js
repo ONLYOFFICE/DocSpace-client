@@ -40,6 +40,7 @@ import RecentRowDataComponent from "./sub-components/RecentRowData";
 import IndexRowDataComponent from "./sub-components/IndexRowData";
 import TemplatesRowData from "./sub-components/TemplatesRowData";
 import RowDataComponent from "./sub-components/RowData";
+import SharedWithMeRowDataComponent from "./sub-components/SharedWithMeRowData";
 import FavoritesRowDataComponent from "./sub-components/FavoritesRowData";
 import { StyledTableRow, StyledDragAndDrop } from "./StyledTable";
 
@@ -80,6 +81,7 @@ const FilesTableRow = (props) => {
     badgeUrl,
     isRecentFolder,
     isFavoritesFolder,
+    isSharedWithMeFolder,
     canDrag,
     onEditIndex,
     isIndexUpdated,
@@ -294,6 +296,12 @@ const FilesTableRow = (props) => {
           />
         ) : isTrashFolder ? (
           <TrashRowDataComponent
+            element={element}
+            dragStyles={dragStyles}
+            {...props}
+          />
+        ) : isSharedWithMeFolder ? (
+          <SharedWithMeRowDataComponent
             element={element}
             dragStyles={dragStyles}
             {...props}

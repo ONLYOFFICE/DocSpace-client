@@ -28,7 +28,7 @@ import { ShareAccessRights, EmployeeType } from "@docspace/shared/enums";
 
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
-import { checkIfAccessPaid } from "SRC_DIR/helpers";
+import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 
 export const getTopFreeRole = (t, roomType) => {
   const accesses = getAccessOptions(t, roomType);

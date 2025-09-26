@@ -3,7 +3,7 @@
   "content": "This link will be valid until",
   "content_en_sha1_hash": "529ee7a00442d6f484c8d84c00051941ecc9d956",
   "created_at": "2025-08-26T11:15:03.492Z",
-  "updated_at": "2025-08-26T11:22:30.341Z",
+  "updated_at": "2025-09-23T07:24:24.405Z",
   "comment": {
     "text": "This key displays the text \"This link will be valid until\" to indicate the expiration date of a link within a dialog. It's used to inform the user how long a link remains active. Translators should ensure the phrasing accurately conveys the link's expiration timeframe.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 411,
+      "line_number": 420,
       "context": "if (isExpired) {\n return t(\"Common:LinkHasExpiredAndHasBeenDisabled\");\n }\n \n return expirationDate\n ? `${t(\"Common:LinkValidUntil\")}:`\n : t(\"Common:ChooseExpirationDate\");\n };\n \n const getDisableDownloadText = () => {\n if (isRoom(item)) {",
       "module": "/packages/shared"
     }

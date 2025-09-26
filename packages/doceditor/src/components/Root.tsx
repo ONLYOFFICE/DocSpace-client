@@ -393,6 +393,7 @@ const Root = ({
           fileInfo={fileInfo}
           selfId={user?.id}
           onCancel={onCloseSharingDialog}
+          filesSettings={filesSettings}
           onOpenPanel={openShareFormDialog}
         />
       ) : null}

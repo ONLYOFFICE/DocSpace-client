@@ -49,7 +49,7 @@ import {
 import { toastr } from "@docspace/shared/components/toast";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
-import { filterPaidRoleOptions } from "SRC_DIR/helpers";
+import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import Filter from "@docspace/shared/api/people/filter";

@@ -892,6 +892,7 @@
   "LogoForEditors": "{{editorName}} redaktoru üçün loqo",
   "LogoForViewer": "{{diagramViewer}} üçün loqo",
   "LogoDocsEditor": "Redaktorlar başlığı üçün loqo",
+  "RoomCreateUser": "İstifadəçilər əlavə edildi.",
   "PortalRestoring": "{{productName}} bərpa edilir",
   "PreparationPortalDescription": "Bərpa prosesi başa çatdıqdan sonra siz avtomatik olaraq {{productName}}-ə yönləndiriləcəksiniz."
 }

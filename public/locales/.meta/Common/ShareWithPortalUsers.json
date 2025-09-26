@@ -1,0 +1,28 @@
+{
+  "key_path": "ShareWithPortalUsers",
+  "content": "Sharing with {{productName}} users",
+  "content_en_sha1_hash": "fa06dae4b65dd82f0df19959cee1423e63f3cf26",
+  "created_at": "2025-09-23T07:24:16.874Z",
+  "updated_at": "2025-09-23T07:25:14.180Z",
+  "comment": {
+    "text": "This key displays text for a sharing option, indicating that the file will be shared with users of the {{productName}} product. It appears as part of a sharing dialog or form, likely as a button or option label. Translators should ensure the wording accurately conveys sharing access to the product's user base.",
+    "is_auto": true,
+    "updated_at": "2025-09-23T07:25:14.180Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
+      "line_number": 179,
+      "context": "icon: <ShareSvg />,\n disabled: !file.canShare,\n },\n {\n id: \"share-with-users\",\n title: t(\"Common:ShareWithPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n description: t(\"Common:ShareWithPortalUsersDescription\", {\n productName: t(\"Common:ProductName\"),\n }),",
+      "module": "/packages/doceditor"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

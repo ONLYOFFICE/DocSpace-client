@@ -45,14 +45,16 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isMobile } from "react-device-detect";
 
 import { zendeskAPI } from "@docspace/shared/components/zendesk/Zendesk.utils";
-import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/shared/constants";
+import {
+  LIVE_CHAT_LOCAL_STORAGE_KEY,
+  CategoryType,
+} from "@docspace/shared/constants";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import AccountsFilter from "@docspace/shared/api/people/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { PEOPLE_ROUTE_WITH_FILTER } from "SRC_DIR/helpers/contacts";
 

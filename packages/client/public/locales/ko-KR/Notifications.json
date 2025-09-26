@@ -1,10 +1,8 @@
 {
-  "ActionsWithFilesDescription": "뱃지는 파일 업로드, 생성 및 변경과 같은 작업에 대해 알려줍니다.",
   "Badges": "뱃지",
   "DailyFeed": "{{productName}} 일일 피드",
   "DailyFeedDescription": "일일 다이제스트에서 {{productName}}의 뉴스 및 이벤트 읽기.",
   "Notifications": "알림",
-  "RoomsActivityDescription": "시간별 알림. 방의 모든 활동에 대한 최신 정보를 받아보세요.",
   "UsefulTips": "유용한 {{productName}} 팁",
   "UsefulTipsDescription": "{{productName}}에 대한 유용한 가이드 얻기"
 }

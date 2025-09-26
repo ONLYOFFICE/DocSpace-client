@@ -892,6 +892,7 @@
   "LogoForEditors": "Лого за {{editorName}} уредник",
   "LogoForViewer": "Лого за {{diagramViewer}}",
   "LogoDocsEditor": "Логотип за заглавље уређивача",
+  "RoomCreateUser": "Корисници додати.",
   "PortalRestoring": "Обнављање {{productName}}-а",
   "PreparationPortalDescription": "Када је процес обнављања завршен, бићете аутоматски преусмерени на ваш {{productName}}."
 }

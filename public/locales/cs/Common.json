@@ -892,6 +892,7 @@
   "LogoForEditors": "Logo pro editor {{editorName}}",
   "LogoForViewer": "Logo pro {{diagramViewer}}",
   "LogoDocsEditor": "Logo pro záhlaví editorů",
+  "RoomCreateUser": "Přidáno uživatelů.",
   "PortalRestoring": "Obnovení {{productName}}",
   "PreparationPortalDescription": "Po ukončení procesu obnovy, budete automaticky přesměrováni na Váš {{productName}}."
 }

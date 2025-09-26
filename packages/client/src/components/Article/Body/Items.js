@@ -381,7 +381,7 @@ const Items = ({
 
       // items.splice(1, 0, <CatalogDivider key="recent-divider" />);
 
-      items.splice(3, 0, <CatalogDivider key="other-header" />);
+      items.splice(4, 0, <CatalogDivider key="doc-other-header" />);
 
       if (isCommunity && isPaymentPageAvailable)
         items.push(<BonusItem key="bonus-item" />);

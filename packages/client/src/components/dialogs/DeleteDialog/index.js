@@ -68,6 +68,8 @@ const DeleteDialogComponent = (props) => {
     isRoom,
     isTemplatesFolder,
     selection: selectionProps,
+    onRemoveSharedFilesOrFolder,
+    setUnsubscribe,
   } = props;
   const [isChecked, setIsChecked] = useState(false);
 
@@ -99,6 +101,7 @@ const DeleteDialogComponent = (props) => {
     setRemoveMediaItem(null);
     setIsRoomDelete(false);
     setDeleteDialogVisible(false);
+    setUnsubscribe(false);
   };
 
   const onDelete = () => {
@@ -122,12 +125,7 @@ const DeleteDialogComponent = (props) => {
 
     if (!selection.length) return;
 
-    const filesId = [];
-    const foldersId = [];
-
-    selection.forEach((item) => {
-      item.fileExst ? filesId.push(item.id) : foldersId.push(item.id);
-    });
+    onRemoveSharedFilesOrFolder(selection);
   };
 
   const onDeleteRoom = async () => {
@@ -289,7 +287,13 @@ const DeleteDialog = withTranslation([
 ])(DeleteDialogComponent);
 
 export default inject(
-  ({ filesStore, dialogsStore, filesActionsStore, treeFoldersStore }) => {
+  ({
+    filesStore,
+    dialogsStore,
+    filesActionsStore,
+    treeFoldersStore,
+    contextOptionsStore,
+  }) => {
     const {
       selection,
       isLoading,
@@ -314,7 +318,10 @@ export default inject(
       unsubscribe,
       isRoomDelete,
       setIsRoomDelete,
+      setUnsubscribe,
     } = dialogsStore;
+
+    const { onRemoveSharedFilesOrFolder } = contextOptionsStore;
 
     return {
       selection: removeMediaItem
@@ -341,6 +348,8 @@ export default inject(
       isPersonalRoom,
       isRoom,
       isTemplatesFolder: isTemplatesFolderRoot,
+      onRemoveSharedFilesOrFolder,
+      setUnsubscribe,
     };
   },
 )(observer(DeleteDialog));

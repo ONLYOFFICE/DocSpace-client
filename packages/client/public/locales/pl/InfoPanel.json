@@ -57,7 +57,6 @@
   "MembersEmptyScreenText": "Zobacz dane członków tutaj",
   "NoRecordsFound": "Nie znaleziono rekordów",
   "Properties": "Właściwości",
-  "RoomCreateUser": "Użytkownicy zostali dodani.",
   "RoomCreateUserCount": "Użytkownicy dodani ({{count}}).",
   "RoomDenyDownloadDisabled": "Pobieranie i kopiowanie nie są ograniczone",
   "RoomDenyDownloadEnabled": "Pobieranie i kopiowanie są ograniczone",

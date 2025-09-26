@@ -3,7 +3,7 @@
   "content": "Custom filter",
   "content_en_sha1_hash": "389c48e9de9a170c1fc6fcbbcade4710c271dddb",
   "created_at": "2025-05-19T21:30:44.271Z",
-  "updated_at": "2025-08-26T11:15:14.265Z",
+  "updated_at": "2025-09-23T07:24:24.177Z",
   "comment": {
     "text": "This translation key is used to display the label \"Custom filter\" on a custom filter icon, likely in a settings or configuration area of the application. It appears in a UI component that allows users to customize file permissions, specifically when selecting a share access right. The translated text will replace \"Common:CustomFilter\".",
     "is_auto": true,
@@ -11,9 +11,21 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/AccessLevelCell.tsx",
+      "line_number": 64,
+      "context": "switch (item.access) {\n case ShareAccessRights.Editing:\n return t(\"Common:Editor\");\n case ShareAccessRights.CustomFilter:\n return t(\"Common:CustomFilter\");\n case ShareAccessRights.Review:\n return t(\"Common:Review\");\n case ShareAccessRights.Comment:\n return t(\"Common:Comment\");\n case ShareAccessRights.FormFilling:",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 95,
-      "context": "icon: AccessEditReactSvgUrl,\n },\n available.CustomFilter && {\n access: ShareAccessRights.CustomFilter,\n key: \"custom-filter\",\n label: t(\"Common:CustomFilter\"),\n icon: CustomFilterReactSvgUrl,\n },\n available.Review && {\n access: ShareAccessRights.Review,\n key: \"review\",",
+      "line_number": 116,
+      "context": "icon: AccessEditReactSvgUrl,\n },\n [ShareRights.CustomFilter]: {\n access: ShareAccessRights.CustomFilter,\n key: \"custom-filter\",\n label: t(\"Common:CustomFilter\"),\n icon: CustomFilterReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n key: \"review\",",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 116,
+      "context": "icon: AccessEditReactSvgUrl,\n },\n [ShareRights.CustomFilter]: {\n access: ShareAccessRights.CustomFilter,\n key: \"custom-filter\",\n label: t(\"Common:CustomFilter\"),\n icon: CustomFilterReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n key: \"review\",",
       "module": "/packages/shared"
     }
   ],

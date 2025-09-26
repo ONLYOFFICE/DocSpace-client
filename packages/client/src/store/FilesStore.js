@@ -2388,6 +2388,8 @@ class FilesStore {
           "separator2",
           "remove-from-recent",
           "copy-general-link",
+          "mark-as-favorite",
+          "remove-from-favorites",
         ]);
       }
 
@@ -2899,6 +2901,8 @@ class FilesStore {
         "create-room-separator",
         "separator1",
         "create-room",
+        "mark-as-favorite",
+        "remove-from-favorites",
       ]);
     }
 

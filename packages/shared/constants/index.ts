@@ -107,6 +107,7 @@ export const FOLDER_NAMES = Object.freeze({
   13: "privacy",
   14: "shared",
   20: "archive",
+  31: "ai-agents",
 });
 
 export const PROVIDERS_DATA = Object.freeze({

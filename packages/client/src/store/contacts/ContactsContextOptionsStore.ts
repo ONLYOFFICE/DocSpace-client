@@ -71,7 +71,6 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import {
   onDeletePersonalDataClick,
   onInviteAgainClick,
-  onInviteMultipleAgain,
   shareGuest,
 } from "SRC_DIR/helpers/contacts";
 
@@ -463,7 +462,7 @@ class ContactsConextOptionsStore {
       },
       {
         key: "cm-invite",
-        label: t("Common:Invite"),
+        label: t("LblInviteAgain"),
         disabled: !hasUsersToInvite,
         onClick: () => setSendInviteDialogVisible(true),
         icon: InviteAgainReactSvgUrl,
@@ -691,19 +690,6 @@ class ContactsConextOptionsStore {
         "data-type": EmployeeType.User,
         action: EmployeeType.User,
         key: "collaborator",
-      },
-      {
-        key: "separator",
-        isSeparator: true,
-      },
-      {
-        id: "accounts-add_invite-again",
-        className: "main-button_drop-down",
-        icon: InviteAgainReactSvgUrl,
-        label: t("People:LblInviteAgain"),
-        onClick: () => onInviteMultipleAgain(t),
-        "data-action": "invite-again",
-        key: "invite-again",
       },
     ];
 

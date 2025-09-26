@@ -234,7 +234,7 @@ const Item = ({
         $currentColorScheme={currentColorScheme}
         dataTooltipId={`aiAgentsTooltip${item.id}`}
       />
-      {item.rootFolderType === FolderType.AIAgents && (
+      {item.rootFolderType === FolderType.AIAgents ? (
         <Tooltip
           id={`aiAgentsTooltip${item.id}`}
           place="bottom-start"
@@ -242,7 +242,7 @@ const Item = ({
           maxWidth="296px"
           openOnClick
         />
-      )}
+      ) : null}
     </StyledDragAndDrop>
   );
 };

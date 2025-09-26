@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
 import { IndexIconButtons } from "@docspace/shared/components/index-icon-buttons";
@@ -63,34 +62,14 @@ const RowDataComponent = (props) => {
     quickButtonsComponent,
 
     tableStorageName,
-    columnStorageName,
     isIndexEditingMode,
     changeIndex,
-    isIndexedFolder,
     erasureColumnIsEnabled,
     index,
     isPersonalReadOnly,
   } = props;
 
-  const [lastColumn, setLastColumn] = useState(
-    getLastColumn(
-      tableStorageName,
-      localStorage.getItem(columnStorageName),
-      isIndexedFolder,
-    ),
-  );
-
-  useEffect(() => {
-    const newLastColumn = getLastColumn(
-      tableStorageName,
-      localStorage.getItem(columnStorageName),
-      isIndexedFolder,
-    );
-
-    if (newLastColumn && newLastColumn !== lastColumn) {
-      setLastColumn(newLastColumn);
-    }
-  });
+  const lastColumn = getLastColumn(tableStorageName);
 
   const quickButtonsComponentNode = (
     <StyledQuickButtonsContainer>
@@ -299,34 +278,28 @@ const RowDataComponent = (props) => {
   );
 };
 
-export default inject(
-  ({ tableStore, selectedFolderStore, treeFoldersStore }) => {
-    const {
-      authorColumnIsEnabled,
-      createdColumnIsEnabled,
-      modifiedColumnIsEnabled,
-      sizeColumnIsEnabled,
-      typeColumnIsEnabled,
-      tableStorageName,
-      columnStorageName,
-      erasureColumnIsEnabled,
-    } = tableStore;
+export default inject(({ tableStore, treeFoldersStore }) => {
+  const {
+    authorColumnIsEnabled,
+    createdColumnIsEnabled,
+    modifiedColumnIsEnabled,
+    sizeColumnIsEnabled,
+    typeColumnIsEnabled,
+    tableStorageName,
+    erasureColumnIsEnabled,
+  } = tableStore;
 
-    const { isIndexedFolder } = selectedFolderStore;
-    const { isPersonalReadOnly } = treeFoldersStore;
+  const { isPersonalReadOnly } = treeFoldersStore;
 
-    return {
-      authorColumnIsEnabled,
-      createdColumnIsEnabled,
-      modifiedColumnIsEnabled,
-      sizeColumnIsEnabled,
-      typeColumnIsEnabled,
-      tableStorageName,
-      columnStorageName,
+  return {
+    authorColumnIsEnabled,
+    createdColumnIsEnabled,
+    modifiedColumnIsEnabled,
+    sizeColumnIsEnabled,
+    typeColumnIsEnabled,
+    tableStorageName,
 
-      isIndexedFolder,
-      erasureColumnIsEnabled,
-      isPersonalReadOnly,
-    };
-  },
-)(observer(RowDataComponent));
+    erasureColumnIsEnabled,
+    isPersonalReadOnly,
+  };
+})(observer(RowDataComponent));

@@ -359,6 +359,14 @@
     padding: 0 12px;
   }
 
+  &:global(.ai-agents) {
+    justify-content: flex-start;
+
+    .articleItemText {
+      width: auto !important;
+    }
+  }
+
   &.endOfBlock {
     margin-bottom: 16px;
   }

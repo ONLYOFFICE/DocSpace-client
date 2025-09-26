@@ -86,6 +86,16 @@ class TreeFoldersStore {
       }
     });
 
+    treeFolders.unshift({
+      id: "aiAgents",
+      title: i18n.t("Common:AIAgents"),
+      rootFolderType: FolderType.AIAgents,
+      folderClassName: "ai-agents",
+      security: {
+        Create: false,
+      },
+    });
+
     this.setRootFoldersTitles(treeFolders);
     this.setTreeFolders(treeFolders);
     this.listenTreeFolders(treeFolders);

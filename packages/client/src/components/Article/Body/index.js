@@ -253,6 +253,10 @@ const ArticleBodyContent = (props) => {
     (e, folderId) => {
       if (e?.ctrlKey || e?.metaKey || e?.shiftKey || e?.button) return;
 
+      if (folderId === "aiAgents") {
+        return;
+      }
+
       const isAccountsClick = folderId === "accounts";
 
       const withTimer = isAccountsClick

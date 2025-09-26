@@ -43,6 +43,10 @@ import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import { toastr } from "@docspace/shared/components/toast";
+import { Badge } from "@docspace/shared/components/badge";
+import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Text } from "@docspace/shared/components/text";
+
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import BonusItem from "./BonusItem";
 
@@ -155,11 +159,22 @@ const Item = ({
     [onClick, item.title, item.rootFolderType],
   );
 
+  const getTooltipAIAgentContent = () => (
+    <>
+      <Text fontSize="12px" fontWeight={600} noSelect>
+        {t("Common:AIAgentsComingSoon")}
+      </Text>
+      <Text fontSize="12px" fontWeight={400} noSelect>
+        {t("Common:AIAgentsDescription")}
+      </Text>
+    </>
+  );
+
   const linkData = getLinkData(
     item.id,
     item.title,
     item.rootFolderType,
-    item.security.Create,
+    item.security?.Create,
   );
 
   const droppableClassName = isDragging ? "droppable" : "";
@@ -204,16 +219,30 @@ const Item = ({
             : t("EmptySection", { sectionName: t("Common:TrashSection") })
         }
         badgeComponent={
-          <NewFilesBadge
-            newFilesCount={labelBadge}
-            folderId={item.id === roomsFolderId ? "rooms" : item.id}
-            parentDOMId={folderId}
-            onBadgeClick={onBadgeClick}
-          />
+          item.rootFolderType === FolderType.AIAgents ? (
+            <Badge label={t("Soon")} className={item.folderClassName} />
+          ) : (
+            <NewFilesBadge
+              newFilesCount={labelBadge}
+              folderId={item.id === roomsFolderId ? "rooms" : item.id}
+              parentDOMId={folderId}
+              onBadgeClick={onBadgeClick}
+            />
+          )
         }
         linkData={linkData}
         $currentColorScheme={currentColorScheme}
+        dataTooltipId={`aiAgentsTooltip${item.id}`}
       />
+      {item.rootFolderType === FolderType.AIAgents && (
+        <Tooltip
+          id={`aiAgentsTooltip${item.id}`}
+          place="bottom-start"
+          getContent={getTooltipAIAgentContent}
+          maxWidth="296px"
+          openOnClick
+        />
+      )}
     </StyledDragAndDrop>
   );
 };
@@ -339,12 +368,19 @@ const Items = ({
     (elm) => {
       const items = elm.map((item) => {
         const isTrash = item.rootFolderType === FolderType.TRASH;
+        const isAiAgents = item.rootFolderType === FolderType.AIAgents;
         const showBadge = emptyTrashInProgress
           ? false
           : item.newItems
             ? item.newItems > 0 && true
-            : isTrash && !trashIsEmpty;
-        const labelBadge = showBadge ? item.newItems : null;
+            : (isTrash && !trashIsEmpty) || isAiAgents;
+
+        let labelBadge;
+        if (isAiAgents) {
+          labelBadge = t("Soon");
+        } else {
+          labelBadge = showBadge ? item.newItems : null;
+        }
         const iconBadge = isTrash ? ClearTrashReactSvgUrl : null;
 
         return (
@@ -379,7 +415,7 @@ const Items = ({
         );
       });
 
-      // items.splice(1, 0, <CatalogDivider key="recent-divider" />);
+      items.splice(1, 0, <CatalogDivider key="ai-agents-divider" />);
 
       items.splice(3, 0, <CatalogDivider key="other-header" />);
 

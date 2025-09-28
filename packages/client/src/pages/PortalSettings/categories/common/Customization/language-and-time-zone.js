@@ -501,7 +501,7 @@ const LanguageAndTimeZoneComponent = (props) => {
           tabIndex={2}
           id="comboBoxTimezone"
           options={timezones}
-          directionY="bottom"
+          directionY="both"
           selectedOption={state.timezone}
           onSelect={onSelectTimezone}
           isDisabled={isLoading || !state.timezone}

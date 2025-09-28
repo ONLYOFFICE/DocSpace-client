@@ -483,6 +483,7 @@ const LanguageAndTimeZoneComponent = (props) => {
             noBorder={false}
             scaled
             scaledOptions
+            isDefaultMode={false}
             dropDownMaxHeight={300}
             className="dropdown-item-width combo-box-settings"
             showDisabledItems
@@ -500,13 +501,14 @@ const LanguageAndTimeZoneComponent = (props) => {
           tabIndex={2}
           id="comboBoxTimezone"
           options={timezones}
-          directionY="both"
+          directionY="bottom"
           selectedOption={state.timezone}
           onSelect={onSelectTimezone}
           isDisabled={isLoading || !state.timezone}
           noBorder={false}
           scaled
           scaledOptions
+          isDefaultMode={false}
           dropDownMaxHeight={300}
           className="dropdown-item-width combo-box-settings"
           showDisabledItems

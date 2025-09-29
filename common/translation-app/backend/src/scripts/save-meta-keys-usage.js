@@ -79,9 +79,7 @@ const getAllFiles = (dir) => {
 };
 
 const convertPathToOS = (filePath) => {
-  return path.sep == "/"
-    ? filePath.replace("\\", "/")
-    : filePath.replace("/", "\\");
+  return path.normalize(filePath);
 };
 
 let workspaces = [];

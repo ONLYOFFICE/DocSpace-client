@@ -36,28 +36,19 @@ export const getCountTilesInRow = (
   isShowOneTile?: boolean,
 ) => {
   if (isTemplateGallery) {
-    if (isShowOneTile) {
-      return 1;
-    }
+    if (isShowOneTile) return 1;
 
-    if (window.innerWidth > 600 && window.innerWidth <= 839) {
-      return 3;
-    }
+    if (window.innerWidth > 600 && window.innerWidth <= 839) return 3;
 
-    if (window.innerWidth >= 840 && window.innerWidth <= 1199) {
-      return 4;
-    }
+    if (window.innerWidth >= 840 && window.innerWidth <= 1199) return 4;
 
-    if (window.innerWidth >= 1200 && window.innerWidth <= 1439) {
-      return 5;
-    }
+    if (window.innerWidth >= 1200 && window.innerWidth <= 1439) return 5;
 
-    if (window.innerWidth >= 1440) {
-      return 6;
-    }
+    if (window.innerWidth >= 1440) return 6;
 
     return 2;
   }
+
   const isDesktopView = isDesktop();
   const isMobileView = isMobile();
   const tileGap = 16;

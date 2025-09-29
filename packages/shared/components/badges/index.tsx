@@ -41,6 +41,7 @@ import CustomFilter12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/custom-filter.
 import CustomFilter16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 import LockedIconReactSvg from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
 import LockedIconReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
+import FavoriteFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
 
 import { isMobile as isMobileDevice } from "react-device-detect";
 
@@ -126,6 +127,9 @@ const Badges = ({
   isExtsCustomFilter,
   customFilterExternalLink,
   onClickLock,
+  onClickFavorite,
+  isRecentFolder,
+  isPublicRoom,
 }: BadgesProps) => {
   const {
     id,
@@ -142,6 +146,7 @@ const Badges = ({
     security,
     lockedBy,
     locked,
+    isFavorite,
     // startFilling,
   } = item;
 
@@ -538,6 +543,22 @@ const Badges = ({
         <div className={styles.badgeWrapperNewBadge}>{newFilesBadge}</div>
       ) : null}
       {showNew && isTile && !isRoom ? newFilesBadge : null}
+
+      {isFolder &&
+      isTile &&
+      isFavorite &&
+      !isRecentFolder &&
+      !isPublicRoom &&
+      !isTrashFolder ? (
+        <IconButton
+          iconName={FavoriteFillReactSvgUrl}
+          className={classNames("badge icons-group")}
+          size={IconSizeType.medium}
+          onClick={onClickFavorite}
+          color="accent"
+          title={t("Common:Favorites")}
+        />
+      ) : null}
     </div>
   );
 };

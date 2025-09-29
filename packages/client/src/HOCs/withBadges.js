@@ -171,6 +171,21 @@ export default function withBadges(WrappedComponent) {
         .finally(() => this.setState({ isLoading: false }));
     };
 
+    onClickFavorite = () => {
+      const { t, item, setFavoriteAction } = this.props;
+
+      if (item?.isFavorite) {
+        setFavoriteAction("remove", [item])
+          .then(() => toastr.success(t("RemovedFromFavorites")))
+          .catch((err) => toastr.error(err));
+        return;
+      }
+
+      setFavoriteAction("mark", [item])
+        .then(() => toastr.success(t("MarkedAsFavorite")))
+        .catch((err) => toastr.error(err));
+    };
+
     render() {
       const {
         t,
@@ -190,6 +205,7 @@ export default function withBadges(WrappedComponent) {
         isTemplatesFolder,
         isExtsCustomFilter,
         docspaceManagingRoomsHelpUrl,
+        isRecentFolder,
       } = this.props;
       const { fileStatus, access, mute } = item;
 
@@ -241,6 +257,9 @@ export default function withBadges(WrappedComponent) {
               isRoom={item.isRoom}
             />
           }
+          isRecentFolder={isRecentFolder}
+          isPublicRoom={isPublicRoom}
+          onClickFavorite={this.onClickFavorite}
         />
       );
 
@@ -272,6 +291,7 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolderRoot,
         isArchiveFolder,
         isTemplatesFolder,
+        isRecentFolder,
       } = treeFoldersStore;
       const {
         markAsRead,
@@ -279,6 +299,7 @@ export default function withBadges(WrappedComponent) {
         setMuteAction,
         checkAndOpenLocationAction,
         onCreateRoomFromTemplate,
+        setFavoriteAction,
       } = filesActionsStore;
       const {
         isTabletView,
@@ -326,6 +347,8 @@ export default function withBadges(WrappedComponent) {
         onCreateRoomFromTemplate,
         isExtsCustomFilter,
         docspaceManagingRoomsHelpUrl,
+        setFavoriteAction,
+        isRecentFolder,
       };
     },
   )(observer(WithBadges));

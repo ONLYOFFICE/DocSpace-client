@@ -3,7 +3,7 @@
   "content": "Change type",
   "content_en_sha1_hash": "6e6f60c8b6ac90dba84303fb48273c30945c6d3f",
   "created_at": "2025-05-19T21:30:56.926Z",
-  "updated_at": "2025-09-22T10:04:13.913Z",
+  "updated_at": "2025-09-29T11:28:56.125Z",
   "comment": {
     "text": "This translation key is used for the \"Change type\" button in a user settings dialog. It appears as a label on a dropdown menu or a button, allowing users to select a new user type. The text should be translated to fit different languages and cultures.",
     "is_auto": true,
@@ -36,13 +36,13 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 301,
+      "line_number": 300,
       "context": "case \"change-type\":\n return {\n id: \"option_change-type\",\n key: option,\n icon: ChangeToEmployeeReactSvgUrl,\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n onClick:\n isGuests && isRoomAdmin\n ? () =>\n this.usersStore.changeType(\n EmployeeType.User,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 301,
+      "line_number": 300,
       "context": "case \"change-type\":\n return {\n id: \"option_change-type\",\n key: option,\n icon: ChangeToEmployeeReactSvgUrl,\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n onClick:\n isGuests && isRoomAdmin\n ? () =>\n this.usersStore.changeType(\n EmployeeType.User,",
       "module": "/packages/client"
     },

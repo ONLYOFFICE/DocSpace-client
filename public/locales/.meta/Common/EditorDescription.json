@@ -3,7 +3,7 @@
   "content": "Operations with existing files: viewing, editing, reviewing, commenting.",
   "content_en_sha1_hash": "d807d26f4ad8fddbb60ec38ee75f1527ce00f6bc",
   "created_at": "2025-09-23T07:24:16.839Z",
-  "updated_at": "2025-09-26T15:21:06.528Z",
+  "updated_at": "2025-09-29T11:28:56.418Z",
   "comment": {
     "text": "This text describes the actions available for files, including viewing, editing, reviewing, and commenting. It appears as a description associated with editing and review permissions, likely on a UI element like a button or permission settings panel. Translators should ensure the description accurately reflects these file operations.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
       "line_number": 593,
-      "context": "},\n [ShareRights.Editing]: {\n access: ShareAccessRights.Editing,\n key: \"editor\",\n label: t(\"Common:Editor\"),\n description: t(\"Common:EditorDescription\"),\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n key: \"review\",\n label: t(\"Common:Review\"),",
+      "context": "},\n [ShareRights.Editing]: {\n access: ShareAccessRights.Editing,\n key: \"editor\",\n label: t(\"Common:Editing\"),\n description: t(\"Common:EditorDescription\"),\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n key: \"review\",\n label: t(\"Common:Review\"),",
       "module": "/packages/shared"
     }
   ],

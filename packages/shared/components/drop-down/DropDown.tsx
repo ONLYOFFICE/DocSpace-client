@@ -207,7 +207,7 @@ const DropDown = ({
       ? {
           toTopCorner: parentRects.top,
           parentHeight: parentRects.height,
-          containerHeight: parentRects.top,
+          containerHeight: container.height,
         }
       : {
           toTopCorner: rects.top,

@@ -961,7 +961,7 @@
   "ShareForUsers": "Share for users",
   "AddUsersOrGroups": "Add users or groups",
   "FullAccess": "Full access",
-  "FullAccessDescription": "Operations with files and folders: creating, uploading, editing, reviewing, moving, and deleting.",
+  "FullAccessDescription": "Operations with files and folders: sharing, creating, uploading, editing, reviewing, moving, and deleting.",
   "EditorDescription": "Operations with existing files: viewing, editing, reviewing, commenting.",
   "AddUsers": "Add users",
   "RoomCreateUser": "Users added.",

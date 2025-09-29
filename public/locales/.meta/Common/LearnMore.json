@@ -3,7 +3,7 @@
   "content": "Learn more",
   "content_en_sha1_hash": "824d76b124e6289f372e2ff6bcba91e8939343bd",
   "created_at": "2025-05-19T21:30:46.111Z",
-  "updated_at": "2025-09-29T11:30:44.123Z",
+  "updated_at": "2025-09-29T11:51:46.645Z",
   "comment": {
     "text": "The translation key \"LearnMore\" is used to display a link or button that encourages users to access more information about a particular topic, in this case, privacy limitations warnings, DNS settings, or language and time zone settings. This text appears as a clickable link or button, prompting users to learn additional details.",
     "is_auto": true,
@@ -14,6 +14,12 @@
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/IsPrivateParam/PrivacyLimitationsWarning.js",
       "line_number": 109,
       "context": "<div className=\"warning-description\">\n {t(\"MakeRoomPrivateLimitationsWarningDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n <div className=\"warning-link\">{t(\"Common:LearnMore\")}</div>\n </StyledPrivacyLimitationsWarning>\n );\n };\n \n export default PrivacyLimitationsWarning;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
+      "line_number": 805,
+      "context": "type=\"page\"\n href={appearanceBlockHelpUrl}\n target=\"_blank\"\n dataTestId=\"appearance_preview_help_button_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n </div>\n }\n />\n </div>",
       "module": "/packages/client"
     },
     {
@@ -44,12 +50,6 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
       "line_number": 389,
       "context": "target=\"_blank\"\n isHovered\n href={welcomePageSettingsUrl}\n dataTestId=\"customization_welcome_page_learn_more\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n {settingsBlock}\n <SaveCancelButtons",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 805,
-      "context": "type=\"page\"\n href={appearanceBlockHelpUrl}\n target=\"_blank\"\n dataTestId=\"appearance_preview_help_button_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n </div>\n }\n />\n </div>",
       "module": "/packages/client"
     },
     {
@@ -95,15 +95,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/index.js",
-      "line_number": 73,
-      "context": "isHovered\n target=\"_blank\"\n href={smtpUrl}\n dataTestId=\"integration_settings_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <CustomSettings t={t} />",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/index.js",
       "line_number": 87,
       "context": "target=\"_blank\"\n isHovered\n href={singleSignOnUrl}\n fontWeight={600}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n \n {isMobileView ? (\n <MobileView isSSOAvailable={isSSOAvailable} logoText={logoText} />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/index.js",
+      "line_number": 73,
+      "context": "isHovered\n target=\"_blank\"\n href={smtpUrl}\n dataTestId=\"integration_settings_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <CustomSettings t={t} />",
       "module": "/packages/client"
     },
     {
@@ -228,7 +228,7 @@
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 261,
+      "line_number": 266,
       "context": "fontSize=\"13px\"\n fontWeight={600}\n href={customFilterExternalLink}\n isHovered\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </>\n );",
       "module": "/packages/shared"
     },

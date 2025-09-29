@@ -3,7 +3,7 @@
   "content": "Reassign data",
   "content_en_sha1_hash": "22c68a0740223ff4ac25287bac3de5829dc35cf3",
   "created_at": "2025-05-19T21:30:56.751Z",
-  "updated_at": "2025-09-17T13:43:01.953Z",
+  "updated_at": "2025-09-29T11:28:56.355Z",
   "comment": {
     "text": "The translation key \"ReassignData\" is used to display a label for a data reassignment action in a UI dialog. It will appear as \"Reassign Data\" and is typically clicked to initiate the process of transferring or redistributing data. Translators should provide a clear and concise version of this phrase that accurately reflects its purpose and context in the user interface.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 238,
+      "line_number": 237,
       "context": "case \"reassign-data\":\n return {\n id: \"option_reassign-data\",\n key: option,\n icon: ReassignDataReactSvgUrl,\n label: t(\"DataReassignmentDialog:ReassignData\"),\n onClick: () => this.toggleDataReassignmentDialog(item),\n };\n case \"delete-personal-data\":\n return {\n id: \"option_delete-personal-data\",",
       "module": "/packages/client"
     }

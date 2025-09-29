@@ -3,7 +3,7 @@
   "content": "Edit",
   "content_en_sha1_hash": "5301648dcf6b53cefc9ed52999aaa92d4603cae0",
   "created_at": "2025-05-19T21:30:44.738Z",
-  "updated_at": "2025-09-26T15:21:06.205Z",
+  "updated_at": "2025-09-29T11:30:44.207Z",
   "comment": {
     "text": "The translation key \"EditButton\" is used to display the label \"Edit\" in various UI elements such as buttons and toggle switches. It is intended to be used in situations where users need to make changes or edits, typically in contexts related to commenting, theme editing, or API key management.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 508,
+      "line_number": 514,
       "context": "const createFooter = (\n <>\n <Button\n key=\"OKButton\"\n label={isEdit ? t(\"Common:EditButton\") : t(\"Webhooks:Generate\")}\n size={ButtonSize.normal}\n primary\n onClick={onGenerate}\n scale\n isDisabled={isRequestRunning || editIsDisabled || generateIsDisabled}",
       "module": "/packages/client"
     },

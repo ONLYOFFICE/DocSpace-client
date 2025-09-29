@@ -1156,7 +1156,7 @@ class ContextOptionsStore {
   };
 
   onCreateTemplate = async () => {
-    this.oformsStore.setTemplatesGalleryVisible(false);
+    this.oformsStore.setTemplateGalleryVisible(false);
     this.oformsStore.setIsVisibleInfoPanelTemplateGallery(false);
 
     const event = new Event(Events.CREATE);
@@ -1836,7 +1836,7 @@ class ContextOptionsStore {
       {
         id: "option_submit-to-gallery",
         key: "submit-to-gallery",
-        label: "Submit to Template Gallery",
+        label: t("Common:SubmitToTemplateGallery"),
         icon: FormFileReactSvgUrl,
         onClick: () => this.onClickSubmitToFormGallery(item),
         isOutsideLink: true,
@@ -2844,8 +2844,8 @@ class ContextOptionsStore {
     );
   };
 
-  onShowTemplatesGallery = () => {
-    this.oformsStore.setTemplatesGalleryVisible(true);
+  onShowTemplateGallery = () => {
+    this.oformsStore.setTemplateGalleryVisible(true);
     this.oformsStore.setOformFromFolderId(this.selectedFolderStore.id);
   };
 
@@ -3072,8 +3072,8 @@ class ContextOptionsStore {
 
     const templateGallery = {
       key: "template-gallery",
-      label: "Template Gallery",
-      onClick: () => this.onShowTemplatesGallery(),
+      label: t("Common:TemplateGallery"),
+      onClick: () => this.onShowTemplateGallery(),
       icon: TemplateGalleryReactSvgUrl,
     };
 

@@ -123,7 +123,7 @@ const SubmitToGalleryTile = ({
       <Button
         onClick={onSubmitToGallery}
         size="small"
-        label={t("Common:SubmitToFormGallery")}
+        label={t("Common:SubmitToTemplateGallery")}
         scale
         testId="submit_to_gallery_tile"
       />

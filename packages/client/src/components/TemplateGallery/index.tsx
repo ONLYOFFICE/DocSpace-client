@@ -38,11 +38,11 @@ import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import { TTranslation } from "@docspace/shared/types";
 import TilesContainer from "./TilesContainer";
 import ErrorView from "./ErrorView";
-import styles from "./TemplatesGallery.module.scss";
+import styles from "./TemplateGallery.module.scss";
 
 const TemplateGallery = (props: {
-  templatesGalleryVisible: boolean;
-  setTemplatesGalleryVisible: (isVisible: boolean) => void;
+  templateGalleryVisible: boolean;
+  setTemplateGalleryVisible: (isVisible: boolean) => void;
   setCurrentExtensionGallery: (extension: string) => void;
   resetFilters: (ext: string) => Promise<void>;
   initTemplateGallery: () => Promise<void>;
@@ -54,8 +54,8 @@ const TemplateGallery = (props: {
   languageFilterLoaded: boolean;
 }) => {
   const {
-    templatesGalleryVisible,
-    setTemplatesGalleryVisible,
+    templateGalleryVisible,
+    setTemplateGalleryVisible,
     setCurrentExtensionGallery,
     resetFilters,
     initTemplateGallery,
@@ -145,15 +145,15 @@ const TemplateGallery = (props: {
     setCurrentExtensionGallery(fileExtension);
   };
 
-  const onCloseClick = () => setTemplatesGalleryVisible(false);
+  const onCloseClick = () => setTemplateGalleryVisible(false);
   const onOpenSubmitToGalleryDialog = () =>
     setSubmitToGalleryDialogVisible(true);
 
-  const nodeTemplatesGallery = (
+  const nodeTemplateGallery = (
     <>
       <Backdrop visible withBackground zIndex={309} />
       <div className={styles.container}>
-        <div className={styles.templatesGallery}>
+        <div className={styles.templateGallery}>
           <div className={styles.header}>
             <div className={styles.headerContent}>
               <div className={styles.headerText}>
@@ -163,7 +163,7 @@ const TemplateGallery = (props: {
                 <Button
                   className={styles.headerButton}
                   onClick={onOpenSubmitToGalleryDialog}
-                  label={t("Common:SubmitToFormGallery")}
+                  label={t("Common:SubmitToTemplateGallery")}
                 />
               )}
             </div>
@@ -181,7 +181,7 @@ const TemplateGallery = (props: {
           {oformsLoadError ? (
             <ErrorView onCloseClick={onCloseClick} />
           ) : (
-            <div className={styles.templatesGalleryWrapper}>
+            <div className={styles.templateGalleryWrapper}>
               <Tabs
                 items={tabs}
                 selectedItemId={currentTabId}
@@ -195,11 +195,11 @@ const TemplateGallery = (props: {
     </>
   );
 
-  const nodeTemplatesGalleryMobile = (
+  const nodeTemplateGalleryMobile = (
     <>
       <Backdrop visible withBackground />
       <div className={styles.containerMobile}>
-        <div className={styles.templatesGalleryMobile}>
+        <div className={styles.templateGalleryMobile}>
           <div className={styles.header}>
             <div className={styles.headerText}>
               {t("Common:TemplateGallery")}
@@ -217,7 +217,7 @@ const TemplateGallery = (props: {
           {oformsLoadError ? (
             <ErrorView onCloseClick={onCloseClick} />
           ) : (
-            <div className={styles.templatesGalleryWrapper}>
+            <div className={styles.templateGalleryWrapper}>
               <Tabs
                 items={tabs}
                 selectedItemId={currentTabId}
@@ -233,16 +233,16 @@ const TemplateGallery = (props: {
 
   return (
     <Portal
-      visible={templatesGalleryVisible}
-      element={viewMobile ? nodeTemplatesGalleryMobile : nodeTemplatesGallery}
+      visible={templateGalleryVisible}
+      element={viewMobile ? nodeTemplateGalleryMobile : nodeTemplateGallery}
     />
   );
 };
 
 export default inject<TStore>(({ oformsStore, dialogsStore }) => {
   const {
-    templatesGalleryVisible,
-    setTemplatesGalleryVisible,
+    templateGalleryVisible,
+    setTemplateGalleryVisible,
     setCurrentExtensionGallery,
     resetFilters,
     initTemplateGallery,
@@ -255,8 +255,8 @@ export default inject<TStore>(({ oformsStore, dialogsStore }) => {
   const { setSubmitToGalleryDialogVisible } = dialogsStore;
 
   return {
-    templatesGalleryVisible,
-    setTemplatesGalleryVisible,
+    templateGalleryVisible,
+    setTemplateGalleryVisible,
     setCurrentExtensionGallery,
     resetFilters,
     initTemplateGallery,

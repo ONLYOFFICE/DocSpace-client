@@ -150,7 +150,9 @@ const SubmitToFormGallery = ({
 
   return (
     <ModalDialog visible={visible} onClose={onClose} autoMaxHeight>
-      <ModalDialog.Header>Submit to Template Gallery</ModalDialog.Header>
+      <ModalDialog.Header>
+        {t("Common:SubmitToTemplateGallery")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <div>{t("FormGallery:SubmitToGalleryDialogMainInfo")}</div>
         <div>

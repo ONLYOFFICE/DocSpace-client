@@ -32,10 +32,10 @@ import { isDesktop, isMobile } from "./device";
 export const getCountTilesInRow = (
   isRooms?: boolean,
   isTemplates?: boolean,
-  isTemplatesGallery?: boolean,
+  isTemplateGallery?: boolean,
   isShowOneTile?: boolean,
 ) => {
-  if (isTemplatesGallery) {
+  if (isTemplateGallery) {
     if (isShowOneTile) {
       return 1;
     }

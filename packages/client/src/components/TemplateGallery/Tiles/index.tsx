@@ -50,7 +50,7 @@ const Tiles: FC<TilesProps> = ({
   setIsVisibleInfoPanelTemplateGallery,
   viewMobile,
   onCreateTemplate,
-  setTemplatesGalleryVisible,
+  setTemplateGalleryVisible,
   isShowInitSkeleton,
 }) => {
   useEffect(() => {
@@ -66,7 +66,7 @@ const Tiles: FC<TilesProps> = ({
   const onClick = (item: { id: Key | null | undefined }) => {
     setGallerySelected(item);
     onCreateTemplate();
-    setTemplatesGalleryVisible(false);
+    setTemplateGalleryVisible(false);
   };
 
   const submitToGalleryTileNode =
@@ -126,7 +126,7 @@ export default inject<TStore>(
     languageFilterLoaded: oformsStore.languageFilterLoaded,
     oformFilesLoaded: oformsStore.oformFilesLoaded,
     onCreateTemplate: contextOptionsStore.onCreateTemplate,
-    setTemplatesGalleryVisible: oformsStore.setTemplatesGalleryVisible,
+    setTemplateGalleryVisible: oformsStore.setTemplateGalleryVisible,
     setIsVisibleInfoPanelTemplateGallery:
       oformsStore.setIsVisibleInfoPanelTemplateGallery,
   }),

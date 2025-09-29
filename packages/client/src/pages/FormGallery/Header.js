@@ -123,7 +123,7 @@ const SectionHeaderContent = ({
           primary
           size="small"
           onClick={onOpenSubmitToGalleryDialog}
-          label={t("Common:SubmitToFormGallery")}
+          label={t("Common:SubmitToTemplateGallery")}
           testId="form_gallery_header_submit_to_gallery"
         />
       ) : null}

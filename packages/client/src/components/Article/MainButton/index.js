@@ -186,7 +186,7 @@ const ArticleMainButtonContent = (props) => {
     setRefMap,
     defaultOformLocale,
 
-    setTemplatesGalleryVisible,
+    setTemplateGalleryVisible,
     templateGalleryAvailable,
   } = props;
 
@@ -297,8 +297,8 @@ const ArticleMainButtonContent = (props) => {
 
   const onInputClick = React.useCallback((e) => (e.target.value = null), []);
 
-  const onShowTemplatesGallery = () => {
-    setTemplatesGalleryVisible(true);
+  const onShowTemplateGallery = () => {
+    setTemplateGalleryVisible(true);
     setOformFromFolderId(currentFolderId);
   };
 
@@ -659,8 +659,8 @@ const ArticleMainButtonContent = (props) => {
         id: "actions_open-template-gallery",
         className: "main-button_drop-down",
         icon: TemplateGalleryReactSvgUrl,
-        label: "Template Gallery",
-        onClick: onShowTemplatesGallery,
+        label: t("Common:TemplateGallery"),
+        onClick: onShowTemplateGallery,
         key: "template-gallery",
       });
     }
@@ -901,7 +901,7 @@ export default inject(
       setOformFromFolderId,
       oformsFilter,
       defaultOformLocale,
-      setTemplatesGalleryVisible,
+      setTemplateGalleryVisible,
     } = oformsStore;
     const { mainButtonItemsList } = pluginStore;
 
@@ -971,7 +971,7 @@ export default inject(
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
       setRefMap,
       defaultOformLocale,
-      setTemplatesGalleryVisible,
+      setTemplateGalleryVisible,
       templateGalleryAvailable,
     };
   },

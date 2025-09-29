@@ -77,7 +77,7 @@ class OformsStore {
 
   oformFilesLoaded = false;
 
-  templatesGalleryVisible = false;
+  templateGalleryVisible = false;
 
   isVisibleInfoPanelTemplateGallery = false;
 
@@ -405,9 +405,8 @@ class OformsStore {
     this.submitToGalleryTileIsVisible = false;
   };
 
-  setTemplatesGalleryVisible = (templatesGalleryVisible) => {
-    console.log("setTemplatesGalleryVisible", templatesGalleryVisible);
-    this.templatesGalleryVisible = templatesGalleryVisible;
+  setTemplateGalleryVisible = (templateGalleryVisible) => {
+    this.templateGalleryVisible = templateGalleryVisible;
   };
 
   setCurrentExtensionGallery = (extension) => {

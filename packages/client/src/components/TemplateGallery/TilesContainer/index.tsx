@@ -43,7 +43,7 @@ import { Link, LinkType } from "@docspace/shared/components/link";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
 
-import styles from "../TemplatesGallery.module.scss";
+import styles from "../TemplateGallery.module.scss";
 import FilterContent from "../Filter";
 import Tiles from "../Tiles";
 

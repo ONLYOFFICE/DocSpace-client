@@ -94,8 +94,8 @@ import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
 import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialog";
 import AssignRoles from "../dialogs/AssignRoles";
 
-import TemplatesGallery from "../TemplatesGallery";
-import InfoPanelTemplateGallery from "../TemplatesGallery/InfoPanel";
+import TemplateGallery from "../TemplateGallery";
+import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
 
 const Panels = (props) => {
   const {
@@ -171,7 +171,7 @@ const Panels = (props) => {
     removeUserConfirmation,
     assignRolesDialogVisible,
     socialAuthWelcomeDialogVisible,
-    templatesGalleryVisible,
+    templateGalleryVisible,
     isVisibleInfoPanelTemplateGallery,
   } = props;
 
@@ -425,9 +425,9 @@ const Panels = (props) => {
     socialAuthWelcomeDialogVisible && (
       <SocialAuthWelcomeDialog key="joining-space-dialog" />
     ),
-    templatesGalleryVisible && <TemplatesGallery key="templates-gallery" />,
+    templateGalleryVisible && <TemplateGallery key="template-gallery" />,
     isVisibleInfoPanelTemplateGallery && (
-      <InfoPanelTemplateGallery key="templates-gallery-info-panel" />
+      <InfoPanelTemplateGallery key="template-gallery-info-panel" />
     ),
   ];
 };
@@ -537,7 +537,7 @@ export default inject(
 
     const { getRefElement, config } = guidanceStore;
 
-    const { templatesGalleryVisible, isVisibleInfoPanelTemplateGallery } =
+    const { templateGalleryVisible, isVisibleInfoPanelTemplateGallery } =
       oformsStore;
 
     const isAccounts = window.location.href.indexOf("accounts/people") !== -1;
@@ -630,7 +630,7 @@ export default inject(
       removeUserConfirmation: removeUserConfirmation.visible,
       assignRolesDialogVisible: assignRolesDialogData.visible,
       socialAuthWelcomeDialogVisible,
-      templatesGalleryVisible,
+      templateGalleryVisible,
       isVisibleInfoPanelTemplateGallery,
     };
   },

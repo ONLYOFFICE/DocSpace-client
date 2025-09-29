@@ -38,7 +38,7 @@
   width: 100%;
 }
 
-.templatesGallery {
+.templateGallery {
   background-color: var(--background-color);
   border-radius: 6px;
 
@@ -48,7 +48,7 @@
   height: 100%;
 }
 
-.templatesGalleryWrapper {
+.templateGalleryWrapper {
   padding: 8px 16px 0 16px;
 
   :global {
@@ -103,7 +103,7 @@
   height: 100%;
 }
 
-.templatesGalleryMobile {
+.templateGalleryMobile {
   background-color: var(--background-color);
   height: 100%;
 }

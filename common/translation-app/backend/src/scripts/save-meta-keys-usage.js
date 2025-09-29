@@ -82,6 +82,22 @@ const convertPathToOS = (filePath) => {
   return path.normalize(filePath);
 };
 
+const sortUsageEntries = (usages = []) => {
+  return [...usages].sort((a, b) => {
+    const filePathCompare = a.file_path.localeCompare(b.file_path);
+    if (filePathCompare !== 0) return filePathCompare;
+
+    const moduleCompare = a.module.localeCompare(b.module);
+    if (moduleCompare !== 0) return moduleCompare;
+
+    if (a.line_number !== b.line_number) {
+      return a.line_number - b.line_number;
+    }
+
+    return a.context.localeCompare(b.context);
+  });
+};
+
 let workspaces = [];
 let translationFiles = [];
 let javascriptFiles = [];
@@ -321,12 +337,17 @@ Object.entries(usagesData).forEach(([metaPath, usages]) => {
 
     const meta = JSON.parse(metaData);
 
+    const sortedUsages = sortUsageEntries(usages);
+    const existingSortedUsages = Array.isArray(meta.usage)
+      ? sortUsageEntries(meta.usage)
+      : [];
+
     //todo: compare usages with meta.usage skip update if no changes
-    if (JSON.stringify(meta.usage) === JSON.stringify(usages)) {
+    if (JSON.stringify(existingSortedUsages) === JSON.stringify(sortedUsages)) {
       return;
     }
 
-    meta.usage = usages;
+    meta.usage = sortedUsages;
     meta.updated_at = new Date().toISOString();
 
     writeJsonWithConsistentEolSync(metaPath, meta, { spaces: 2 });

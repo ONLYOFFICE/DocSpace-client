@@ -3,7 +3,7 @@
   "content": "Operations with files and folders: creating, uploading, editing, reviewing, moving, and deleting.",
   "content_en_sha1_hash": "e14ebd3afd463a9be986937812d8452a31d30416",
   "created_at": "2025-09-23T07:24:16.828Z",
-  "updated_at": "2025-09-26T15:21:06.528Z",
+  "updated_at": "2025-09-29T11:28:56.417Z",
   "comment": {
     "text": "This text describes full access permissions, allowing users to create, upload, edit, review, move, and delete files and folders. It's used to explain the scope of \"Full Access\" permissions, likely displayed in a sharing dialog or permissions settings.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
       "line_number": 587,
-      "context": "> = {\n [ShareRights.ReadWrite]: {\n access: ShareAccessRights.FullAccess,\n key: \"full-access\",\n label: t(\"Common:FullAccess\"),\n description: t(\"Common:FullAccessDescription\"),\n },\n [ShareRights.Editing]: {\n access: ShareAccessRights.Editing,\n key: \"editor\",\n label: t(\"Common:Editor\"),",
+      "context": "> = {\n [ShareRights.ReadWrite]: {\n access: ShareAccessRights.FullAccess,\n key: \"full-access\",\n label: t(\"Common:FullAccess\"),\n description: t(\"Common:FullAccessDescription\"),\n },\n [ShareRights.Editing]: {\n access: ShareAccessRights.Editing,\n key: \"editor\",\n label: t(\"Common:Editing\"),",
       "module": "/packages/shared"
     }
   ],

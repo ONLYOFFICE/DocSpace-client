@@ -3,7 +3,7 @@
   "content": "File unlocked",
   "content_en_sha1_hash": "c60e9fe76b848fe79d0d3970f5c0c61d094278c2",
   "created_at": "2025-05-19T21:30:49.968Z",
-  "updated_at": "2025-09-26T15:21:06.015Z",
+  "updated_at": "2025-09-29T11:51:46.542Z",
   "comment": {
     "text": "The \"FileUnlocked\" translation key is used to display a success message when a file is unlocked. It appears in various UI elements, including buttons and tooltips, such as on a button that unlocks a file or in an info panel displaying file history. The text should indicate that the file has been successfully unlocked, providing feedback to users about the outcome of the action.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/HOCs/withBadges.js",
       "line_number": 169,
-      "context": "if (!security?.Lock || isLoading) return;\n \n this.setState({ isLoading: true });\n return lockFileAction(id, !locked)\n .then(() => toastr.success(t(\"Translations:FileUnlocked\")))\n .catch((err) => toastr.error(err))\n .finally(() => this.setState({ isLoading: false }));\n };\n \n render() {",
+      "context": "if (!security?.Lock || isLoading) return;\n \n this.setState({ isLoading: true });\n return lockFileAction(id, !locked)\n .then(() => toastr.success(t(\"Translations:FileUnlocked\")))\n .catch((err) => toastr.error(err))\n .finally(() => this.setState({ isLoading: false }));\n };\n \n onClickFavorite = () => {",
       "module": "/packages/client"
     },
     {

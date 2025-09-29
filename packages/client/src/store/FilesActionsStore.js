@@ -1991,7 +1991,8 @@ class FilesActionStore {
         return canUnArchive;
       }
       case "delete-room": {
-        const canRemove = selection.some((s) => s.security?.Delete);
+        const canRemove =
+          selection.length === 1 && selection[0]?.security?.Delete;
 
         return canRemove;
       }
@@ -2384,13 +2385,16 @@ class FilesActionStore {
     const changeQuota = this.getOption("change-quota", t);
     const disableQuota = this.getOption("disable-quota", t);
     const defaultQuota = this.getOption("default-quota", t);
+    const deleteOption = this.getOption("delete-room", t);
 
     itemsCollection
       .set(pinName, pin)
       .set("archive", archive)
       .set("change-quota", changeQuota)
       .set("default-quota", defaultQuota)
-      .set("disable-quota", disableQuota);
+      .set("disable-quota", disableQuota)
+      .set("delete", deleteOption);
+
     return this.convertToArray(itemsCollection);
   };
 

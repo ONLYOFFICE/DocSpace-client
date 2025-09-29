@@ -92,8 +92,8 @@ const DeleteDialogComponent = (props) => {
   const onClose = () => {
     if (
       selection.length === 1 &&
-      selection[0].isArchive &&
-      selection[0].isRootFolder === false
+      selection[0]?.isArchive &&
+      selection[0]?.isRootFolder === false
     ) {
       setSelected("none");
     }

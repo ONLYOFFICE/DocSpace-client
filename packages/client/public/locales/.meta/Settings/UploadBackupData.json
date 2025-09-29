@@ -3,7 +3,7 @@
   "content": "Upload a backup copy from a desired service below to start migration.",
   "content_en_sha1_hash": "8db98a36a6994c02a48c58e7e37ba3d33924915f",
   "created_at": "2025-05-19T21:30:53.069Z",
-  "updated_at": "2025-09-17T13:43:01.756Z",
+  "updated_at": "2025-09-29T11:28:56.122Z",
   "comment": {
     "text": "The \"UploadBackupData\" translation key is used to display a button label or prompt that instructs users to upload a backup copy from a desired service. This text appears in a UI component where users can select and configure data import options, likely as part of a portal settings page.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/Providers.tsx",
-      "line_number": 85,
-      "context": "{t(\"DataImportDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n </Text>\n <Text className=\"data-import-subtitle\">{t(\"UploadBackupData\")}</Text>\n \n <div className=\"workspace-list\">\n {workspaces.map((workspace) => (\n <div\n key={workspace.title}",
+      "line_number": 106,
+      "context": "{t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </Text>\n \n <Text className=\"data-import-subtitle\">{t(\"UploadBackupData\")}</Text>\n \n <div className=\"workspace-list\">\n {workspaces.map((workspace) => (\n <div\n key={workspace.title}",
       "module": "/packages/client"
     }
   ],

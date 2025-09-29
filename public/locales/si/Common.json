@@ -881,6 +881,7 @@
   "LogoForEditors": "සංස්කාරක {{editorName}} සඳහා ලාංඡනය",
   "LogoForViewer": "{{diagramViewer}} සඳහා ලාංඡනය",
   "LogoDocsEditor": "සංස්කරකවල ශ්‍රීර්ෂයට ලාංඡනය",
+  "RoomCreateUser": "පරිශීලකයින් එකතු කරන ලදි.",
   "PortalRestoring": "{{productName}} ප්‍රත්‍යර්පණය",
   "PreparationPortalDescription": "ප්‍රත්‍යර්පණ ක්‍රියාවලිය නිමා වූ විට, ඔබව ස්වයංක්‍රීයව ඔබගේ {{productName}} වෙත හරවා යවනු ඇත."
 }

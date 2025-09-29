@@ -249,7 +249,7 @@ export const useFeedTranslation = (
       case FeedActionKeys.RoomCreateUser:
         if (hasRelatedItems)
           return t("InfoPanel:RoomCreateUserCount", { count });
-        return t("InfoPanel:RoomCreateUser");
+        return t("Common:RoomCreateUser");
       case FeedActionKeys.RoomUpdateAccessForUser:
         return t("InfoPanel:RoomUpdateAccess");
       case FeedActionKeys.RoomRemoveUser:

@@ -1,0 +1,28 @@
+{
+  "key_path": "CommentDescriptionFile",
+  "content": "Viewing, commenting.",
+  "content_en_sha1_hash": "ab9aa20a7e063b2cbc480a49ae304dcd35fda871",
+  "created_at": "2025-09-26T15:20:53.894Z",
+  "updated_at": "2025-09-26T15:54:16.519Z",
+  "comment": {
+    "text": "This text provides a brief explanation of the commenting functionality. It's used as a description associated with the \"commenting\" permission in a share options section, likely appearing near a button or dialog related to commenting on a file. It helps users understand what the commenting right allows them to do.",
+    "is_auto": true,
+    "updated_at": "2025-09-26T15:54:16.519Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 676,
+      "context": "},\n [ShareRights.Comment]: {\n access: ShareAccessRights.Comment,\n key: \"commenting\",\n label: t(\"Common:Comment\"),\n description: t(\"Common:CommentDescriptionFile\"),\n },\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n key: \"viewing\",\n label: t(\"Common:ReadOnly\"),",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

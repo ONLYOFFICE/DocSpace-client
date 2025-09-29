@@ -32,7 +32,7 @@ import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
 import { RoomSearchArea } from "@docspace/shared/enums";
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { CategoryType } from "@docspace/shared/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 const RoomTemplatesTabs = ({

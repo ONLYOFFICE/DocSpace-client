@@ -882,6 +882,7 @@
   "RevokeLink": "Opozovi link",
   "LogoForEditors": "Logo za {{editorName}} uređivač",
   "LogoForViewer": "Logo za {{diagramViewer}}",
+  "RoomCreateUser": "Korisnici dodati.",
   "PortalRestoring": "Obnavljanje {{productName}}-a",
   "PreparationPortalDescription": "Kada je proces obnavljanja završen, bićete automatski preusmereni na vaš {{productName}}."
 }

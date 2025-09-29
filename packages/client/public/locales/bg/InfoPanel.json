@@ -57,7 +57,6 @@
   "MembersEmptyScreenText": "Вижте детайли за членовете тук",
   "NoRecordsFound": "Няма намерени записи",
   "Properties": "Свойства",
-  "RoomCreateUser": "Добавени потребители.",
   "RoomCreateUserCount": "Потребители добавени ({{count}}).",
   "RoomDenyDownloadDisabled": "Неограничено изтегляне и копиране",
   "RoomDenyDownloadEnabled": "Ограничено изтегляне и копиране",

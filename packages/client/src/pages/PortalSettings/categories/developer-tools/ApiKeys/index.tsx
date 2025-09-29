@@ -53,7 +53,7 @@ const ApiKeys = (props: ApiKeysProps) => {
   const {
     viewAs,
     currentColorScheme,
-    apiKeysLink,
+    apiKeysUrl,
     isUser,
     apiKeys,
     setApiKeys,
@@ -164,16 +164,18 @@ const ApiKeys = (props: ApiKeysProps) => {
         <Text className="api-keys_text api-keys_usage-text">
           {t("Settings:ApiKeyViewUsage")}
         </Text>
-        <Link
-          isHovered
-          color={currentColorScheme?.main?.accent}
-          fontSize="13px"
-          fontWeight={600}
-          onClick={() => window.open(apiKeysLink, "_blank")}
-          dataTestId="api_guide_link"
-        >
-          {t("Settings:APIGuide")}
-        </Link>
+        {apiKeysUrl ? (
+          <Link
+            isHovered
+            color={currentColorScheme?.main?.accent}
+            fontSize="13px"
+            fontWeight={600}
+            onClick={() => window.open(apiKeysUrl, "_blank")}
+            dataTestId="api_guide_link"
+          >
+            {t("Settings:APIGuide")}
+          </Link>
+        ) : null}
       </div>
       <div>
         {error ? (
@@ -248,7 +250,7 @@ export default inject(({ setup, settingsStore, userStore }: TStore) => {
   const { viewAs } = setup;
   const {
     currentColorScheme,
-    apiKeysLink,
+    apiKeysUrl,
     apiKeys,
     permissions,
     errorKeys: error,
@@ -259,7 +261,7 @@ export default inject(({ setup, settingsStore, userStore }: TStore) => {
   return {
     viewAs,
     currentColorScheme,
-    apiKeysLink,
+    apiKeysUrl,
     isUser: user?.isCollaborator,
     apiKeys,
     permissions,

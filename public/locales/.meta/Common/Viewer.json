@@ -3,7 +3,7 @@
   "content": "Viewer",
   "content_en_sha1_hash": "dbad9f126b33570e09839a2d60720898de1a512d",
   "created_at": "2025-08-26T11:15:03.444Z",
-  "updated_at": "2025-08-26T11:15:57.014Z",
+  "updated_at": "2025-09-23T07:24:24.230Z",
   "comment": {
     "text": "This key refers to a user role with viewing permissions. It's used as a label for a share access right, likely displayed in a sharing dialog or settings panel. Translators should consider the meaning of \"viewer\" in the context of accessing and seeing content.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 176,
-      "context": "},\n available.Read && {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n available.FillForms && {\n access: ShareAccessRights.FormFilling,\n description: \"\",",
+      "line_number": 188,
+      "context": "},\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n [ShareRights.FillForms]: {\n access: ShareAccessRights.FormFilling,\n description: \"\",",
       "module": "/packages/shared"
     }
   ],

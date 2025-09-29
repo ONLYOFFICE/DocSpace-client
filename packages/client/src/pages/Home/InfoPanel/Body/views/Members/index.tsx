@@ -47,6 +47,7 @@ import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { createExternalLink } from "@docspace/shared/api/rooms";
+import MembersList from "@docspace/shared/components/share/sub-components/List";
 
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
@@ -54,7 +55,6 @@ import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?
 import { useLoader } from "../../helpers/useLoader";
 
 import User from "./sub-components/User";
-import MembersList from "./sub-components/MembersList";
 import EmptyContainer from "./sub-components/EmptyContainer";
 import LinkRow from "./sub-components/LinkRow";
 

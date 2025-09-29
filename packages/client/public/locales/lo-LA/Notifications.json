@@ -1,10 +1,8 @@
 {
-  "ActionsWithFilesDescription": "ປ້າຍຈະແຈ້ງໃຫ້ທ່ານຊາບກ່ຽວກັບການດໍາເນີນການເຊັ່ນການອັບໂຫລດ, ການສ້າງ, ແລະການປ່ຽນແປງໃນໄຟລ໌.",
   "Badges": "ປ້າຍ",
   "DailyFeed": "ຟີດ {{productName}} ປະຈໍາວັນ",
   "DailyFeedDescription": "ອ່ານຂ່າວ ແລະເຫດການຈາກ {{productName}} ຂອງທ່ານ ໃນບົດສະຫຼຸບປະຈໍາວັນ.",
   "Notifications": "ການແຈ້ງເຕືອນ",
-  "RoomsActivityDescription": "ການແຈ້ງເຕືອນທຸກຊົ່ວໂມງ. ຕິດຕາມການເຄື່ອນໄຫວທັງໝົດໃນຫ້ອງຂອງເຈົ້າ.",
   "UsefulTips": "ຄໍາແນະນໍາ {{productName}} ທີ່ເປັນປະໂຫຍດ",
   "UsefulTipsDescription": "ຂໍຄຳແນະນຳທີ່ເປັນປະໂຫຍດກ່ຽວກັບ {{productName}}"
 }

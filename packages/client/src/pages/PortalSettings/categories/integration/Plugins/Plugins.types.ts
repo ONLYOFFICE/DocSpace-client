@@ -42,7 +42,7 @@ export interface PluginsEmptyScreen {
   t: TTranslation;
   theme: TTheme;
   withUpload: boolean;
-  apiPluginSDKLink: string | undefined;
+  pluginsSdkUrl: string | undefined;
   currentColorScheme: TColorScheme;
   onDrop: <T extends File>(acceptedFiles: T[]) => void;
 }
@@ -96,13 +96,13 @@ export interface PluginsProps {
   isLoading: boolean;
   isEmptyList: boolean;
 
-  apiPluginSDKLink: string | undefined;
+  pluginsSdkUrl: string | undefined;
 
   showPortalSettingsLoader: boolean;
 }
 
 export interface UploadDecsriptionProps {
-  apiPluginSDKLink: string | undefined;
+  pluginsSdkUrl: string | undefined;
   currentColorScheme: TColorScheme;
   t: TTranslation;
 }

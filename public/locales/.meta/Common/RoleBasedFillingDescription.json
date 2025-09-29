@@ -3,7 +3,7 @@
   "content": "Fill out the original form by roles with other participants in VDR.",
   "content_en_sha1_hash": "f73c05d6e0b2e2295ced208487a13043d1dc0322",
   "created_at": "2025-05-19T21:30:47.975Z",
-  "updated_at": "2025-06-30T12:20:31.244Z",
+  "updated_at": "2025-09-23T07:24:24.114Z",
   "comment": {
     "text": "Fill out the original form by roles with other participants in a virtual data room. This description is used to provide context for users when selecting an option related to role-based filling and share in the room actions. It appears in various UI elements such as dialogs and panels.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 172,
+      "line_number": 202,
       "context": "icon: <FormDataCollectionIcon />,\n },\n {\n id: \"virtual-data-room\",\n title: t(\"Common:RoleBasedFilling\"),\n description: t(\"Common:RoleBasedFillingDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickVirtualDataRoom,\n icon: <RoleBasedFillingIcon />,\n },\n ];",
       "module": "/packages/doceditor"
     }

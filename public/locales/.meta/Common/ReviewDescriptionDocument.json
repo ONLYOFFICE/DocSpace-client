@@ -1,0 +1,28 @@
+{
+  "key_path": "ReviewDescriptionDocument",
+  "content": "Viewing, reviewing, commenting.",
+  "content_en_sha1_hash": "b4d8b6b8ce37549c9885b62e2e1334d954aff902",
+  "created_at": "2025-09-29T18:22:08.487Z",
+  "updated_at": "2025-09-29T18:23:25.603Z",
+  "comment": {
+    "text": "This text describes the actions available for a document, indicating that the user can view, review, and/or comment on it. It appears as a description related to access rights (editing or review) within a sharing context.",
+    "is_auto": true,
+    "updated_at": "2025-09-29T18:23:25.603Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 587,
+      "context": "{ fileType: FileType.Document, access: ShareAccessRights.Editing },\n () => t(\"Common:EditingDescriptionDocument\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.Review },\n () => t(\"Common:ReviewDescriptionDocument\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.Comment },\n () => t(\"Common:CommentDescriptionDocument\"),\n )",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

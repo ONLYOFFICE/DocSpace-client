@@ -3,7 +3,7 @@
   "content": "The folder will be permanently removed from the Trash.",
   "content_en_sha1_hash": "766c4fdfc148ed0ae053d5e5dc0ea17bdfbdc3a4",
   "created_at": "2025-09-26T15:21:04.465Z",
-  "updated_at": "2025-09-26T15:55:15.121Z",
+  "updated_at": "2025-09-29T18:22:19.461Z",
   "comment": {
     "text": "This text explains the permanent deletion of a folder. It appears in a confirmation dialog, informing the user that the selected folder will be permanently removed from the Trash. Translators should ensure the wording accurately conveys the irreversible nature of the action.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 88,
-      "context": "You are about to move{\" \"}\n <strong>{{ name: selection[0].title }}</strong>\n to Trash.\n </Trans>{\" \"}\n {isFolder\n ? t(\"FolderPermanentlyDeleted\")\n : t(\"FilePermanentlyDeleted\")}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }",
+      "line_number": 90,
+      "context": "You are about to move{\" \"}\n <strong>{{ name: selection[0]?.title }}</strong>\n to Trash.\n </Trans>{\" \"}\n {isFolder\n ? t(\"FolderPermanentlyDeleted\")\n : t(\"FilePermanentlyDeleted\")}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }",
       "module": "/packages/client"
     }
   ],

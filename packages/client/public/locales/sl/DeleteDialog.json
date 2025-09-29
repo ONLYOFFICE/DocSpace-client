@@ -5,8 +5,8 @@
   "DeleteGroupTitle": "Izbriši skupino",
   "DeleteTemplate": "Ali res želite izbrisati predlogo sobe <1>«{{templateName}}»</1>? Predloge ne bo mogoče obnoviti.",
   "DeleteTemplates": "Ali res želite izbrisati izbrane predloge sob? Ne bo jih mogoče obnoviti.",
+  "FileDeletedAfter": "Datoteka bo v 30 dneh trajno izbrisana.",
   "UnsubscribeButton": "Odjavi se",
   "UnsubscribeNote": "Ali ste prepričani, da se želite odjaviti od izbranih elementov iz seznama?",
-  "UnsubscribeTitle": "Potrditev odjave",
-  "FileDeletedAfter": "Datoteka bo v 30 dneh trajno izbrisana."
+  "UnsubscribeTitle": "Potrditev odjave"
 }

@@ -1,12 +1,12 @@
 {
   "AutomaticBackupDescription": "Set up scheduled backups for continuous data protection without manual actions.",
   "BackupRoomDescription": "Save a backup to a selected room or the {{sectionName}} section. Use existing rooms or create a new one.",
+  "BackupServiceEnabled": "Backup service successfully enabled.",
   "ConnectService": "Connect the service <1>here</1> to enable backup features",
   "ContactToPayer": "Contact the Payer (<1>{{email}}</1>) to connect the backup service.",
   "EnableBackupConfirm": "Enabling the Backup service will allow all {{productName}} administrators to create backups anytime, as long as the wallet balance is sufficient. Are you sure you want to continue?",
   "FreeBackupsPerMonth": "Free backups: {{value}}/{{maxValue}} per current month.",
   "TemporaryDescription": "Create a backup stored in the \"Backup\" section. Available for download within 24 hours after creation.",
   "ThirdPartyResourceDescription": "Connect and save backups to cloud accounts like Dropbox, Box, OneDrive, or Google Drive.",
-  "ThirdPartyStorageDescription": "Use third-party services to store your backups. Ideal for connecting external cloud storage platforms.",
-  "BackupServiceEnabled": "Backup service successfully enabled."
+  "ThirdPartyStorageDescription": "Use third-party services to store your backups. Ideal for connecting external cloud storage platforms."
 }

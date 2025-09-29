@@ -250,6 +250,9 @@ export default class MessageStore {
   handleToolCall = (jsonData: string) => {
     const { name, arguments: args, callId, ...rest } = JSON.parse(jsonData);
 
+    const shouldCreateNewMessage =
+      this.messages[0].role !== RoleType.AssistantMessage;
+
     const content = {
       type: ContentType.Tool,
       name,
@@ -258,12 +261,24 @@ export default class MessageStore {
       ...rest,
     };
 
-    const newMsg: TMessage = {
-      ...this.messages[0],
-      contents: [...this.messages[0].contents, content],
-    };
+    if (shouldCreateNewMessage) {
+      const newMsg: TMessage = {
+        role: RoleType.AssistantMessage,
+        createdOn: new Date().toString(),
+        contents: [content],
+      };
 
-    this.setMessages([newMsg, ...this.messages.slice(1)]);
+      this.setMessages([newMsg, ...this.messages]);
+      this.setTotalMessages(this.totalMessages + 1);
+      this.setStartIndex(this.startIndex + 1);
+    } else {
+      const newMsg: TMessage = {
+        ...this.messages[0],
+        contents: [...this.messages[0].contents, content],
+      };
+
+      this.setMessages([newMsg, ...this.messages.slice(1)]);
+    }
   };
 
   handleToolResult = (jsonData: string) => {

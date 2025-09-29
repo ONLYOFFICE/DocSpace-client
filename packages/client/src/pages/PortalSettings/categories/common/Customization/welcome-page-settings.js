@@ -94,6 +94,8 @@ const WelcomePageSettingsComponent = (props) => {
     showReminder: false,
     hasScroll: false,
     isCustomizationView: false,
+    isValidTitle: true,
+    saveButtonDisabled: false,
   });
 
   const prevState = React.useRef({
@@ -277,6 +279,24 @@ const WelcomePageSettingsComponent = (props) => {
   }, [state.isLoadingGreetingSave, state.isLoadingGreetingRestore]);
 
   const onChangeGreetingTitle = (e) => {
+    if (e.target.value.trim() === "") {
+      setState((val) => ({
+        ...val,
+        greetingTitle: e.target.value,
+        showReminder: true,
+        saveButtonDisabled: true,
+        isValidTitle: false,
+      }));
+
+      return;
+    } else if (!state.isValidTitle) {
+      setState((val) => ({
+        ...val,
+        isValidTitle: true,
+        saveButtonDisabled: false,
+      }));
+    }
+
     setState((val) => ({ ...val, greetingTitle: e.target.value }));
     getGreetingSettingsIsDefault();
 
@@ -322,6 +342,7 @@ const WelcomePageSettingsComponent = (props) => {
           ...val,
           greetingTitle: defaultTitle,
           showReminder: false,
+          isValidTitle: true,
         }));
 
         saveToSessionStorage("greetingTitle", "none");
@@ -343,6 +364,7 @@ const WelcomePageSettingsComponent = (props) => {
         className="field-container-width"
         labelText={`${t("Common:Title")}`}
         isVertical
+        hasError={!state.isValidTitle}
       >
         <TextInput
           tabIndex={5}
@@ -355,6 +377,7 @@ const WelcomePageSettingsComponent = (props) => {
             state.isLoadingGreetingSave || state.isLoadingGreetingRestore
           }
           placeholder={t("EnterTitle")}
+          hasError={!state.isValidTitle}
         />
       </FieldContainer>
     </div>
@@ -404,6 +427,7 @@ const WelcomePageSettingsComponent = (props) => {
         displaySettings
         hasScroll={state.hasScroll}
         disableRestoreToDefault={greetingSettingsIsDefault}
+        saveButtonDisabled={state.saveButtonDisabled}
         additionalClassSaveButton="welcome-page-save"
         additionalClassCancelButton="welcome-page-cancel"
         saveButtonDataTestId="customization_welcome_page_save_buttons"

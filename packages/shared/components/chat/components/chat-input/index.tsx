@@ -195,6 +195,7 @@ const ChatInput = ({
               })}
               placeholder={t("Common:AIChatInput")}
               isChatMode
+              fontSize={15}
             />
 
             <FilesList

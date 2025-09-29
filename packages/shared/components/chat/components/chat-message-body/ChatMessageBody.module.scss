@@ -353,7 +353,7 @@
     flex-direction: column;
     gap: 12px;
 
-    .toolCallBodyItem {
+    .toolCallCodeViewItem {
       display: flex;
       flex-direction: column;
 
@@ -370,6 +370,36 @@
 
     .codeContainer {
       max-height: 210px;
+    }
+
+    .sourceViewHeading {
+      margin-bottom: 12px;
+    }
+
+    .sourceItem {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+
+      cursor: pointer;
+
+      border-radius: 6px;
+
+      padding: 4px 8px;
+
+      &:hover {
+        background-color: var(--chat-message-source-bg-hover-color);
+      }
+
+      &:active {
+        background-color: var(--chat-message-source-bg-pressed-color);
+      }
+    }
+
+    .sourceUrl {
+      flex-shrink: 0;
+
+      color: var(--chat-message-source-url-color);
     }
   }
 }

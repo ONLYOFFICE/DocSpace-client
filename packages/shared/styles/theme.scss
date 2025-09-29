@@ -2219,6 +2219,9 @@
   --chat-message-table-row-border-color: #{$gray-light-mid};
   --chat-message-blockquote-bg-color: var(--accent-main);
   --chat-message-blockquote-color: #{$gray-text};
+  --chat-message-source-url-color: #{$light-gray-dark};
+  --chat-message-source-bg-hover-color: #{$gray-light-mid};
+  --chat-message-source-bg-pressed-color: #{$gray-strong};
 }
 
 .dark {
@@ -2261,6 +2264,9 @@
   --chat-message-table-row-border-color: #{$gray-dark-strong};
   --chat-message-blockquote-bg-color: #{$white};
   --chat-message-blockquote-color: #{$dark-gray-dark};
+  --chat-message-source-url-color: #{$dark-gray-dark};
+  --chat-message-source-bg-hover-color: #{$light-dark-gray-hover};
+  --chat-message-source-bg-pressed-color: #{$black};
 }
 
 .light {

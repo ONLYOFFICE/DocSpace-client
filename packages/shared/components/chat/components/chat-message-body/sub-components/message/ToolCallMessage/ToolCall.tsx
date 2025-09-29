@@ -62,7 +62,11 @@ export const ToolCall = ({ content, status, placement }: ToolCallProps) => {
       content.result &&
       "data" in content.result
     ) {
-      setSources(content.result?.data as TToolCallResultSourceData[]);
+      if (content.name === webCrawlingToolName) {
+        setSources([content.result.data as TToolCallResultSourceData]);
+      } else {
+        setSources(content.result?.data as TToolCallResultSourceData[]);
+      }
     }
   }, [
     content.name,

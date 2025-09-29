@@ -39,6 +39,80 @@ import { formatJsonWithMarkdown } from "../../../../../utils";
 
 import MarkdownField from "../Markdown";
 import type { ToolCallPlacement } from "./ToolCall.enum";
+import { Heading, HeadingLevel } from "../../../../../../heading";
+import { Link, LinkTarget } from "../../../../../../link";
+
+const getRootDomain = (url: string) => {
+  try {
+    const hostname = new URL(url).hostname;
+
+    return hostname.split(".").slice(-2).join(".");
+  } catch {
+    return "";
+  }
+};
+
+const SourceView = ({
+  query,
+  sources,
+}: {
+  query: string;
+  sources: TToolCallResultSourceData[];
+}) => {
+  return (
+    <div className={styles.sourceView}>
+      <Heading
+        className={styles.sourceViewHeading}
+        level={HeadingLevel.h4}
+        fontSize="15px"
+        fontWeight={600}
+        truncate
+      >
+        Search for {query}
+      </Heading>
+
+      <div className={styles.sourceViewList}>
+        {sources.map((s, index) => {
+          const hostName = getRootDomain(s.url || "");
+          const faviconUrl = s.faviconUrl; // TODO: CSP error. Maybe need to change to google favicon api
+
+          return (
+            <Link
+              key={s.fileId || `${s.title}_${index * 2}`}
+              className={styles.sourceItem}
+              href={s.url || ""}
+              target={LinkTarget.blank}
+              textDecoration="none"
+            >
+              <img src={faviconUrl} alt="source icon" width={16} height={16} />
+              <Text
+                fontSize="14px"
+                fontWeight={600}
+                lineHeight="16px"
+                truncate
+                title={s.title}
+              >
+                {s.title}
+              </Text>
+              {hostName ? (
+                <Text
+                  className={styles.sourceUrl}
+                  fontSize="13px"
+                  fontWeight={600}
+                  lineHeight="20px"
+                  truncate
+                  title={hostName}
+                >
+                  {hostName}
+                </Text>
+              ) : null}
+            </Link>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
 type ToolCallBodyProps = {
   content: TToolCallContent;
@@ -85,26 +159,39 @@ export const ToolCallBody = ({
 
   return (
     <div className={styles.toolCallBody}>
-      <div className={styles.toolCallBodyItem}>
-        <Text fontSize="15px" lineHeight="16px" fontWeight={600}>
-          {t("Common:ToolCallArg")}
-        </Text>
-        <MarkdownField
-          chatMessage={formatJsonWithMarkdown(content.arguments)}
+      {withSource ? (
+        <SourceView
+          query={content.arguments.query as string}
+          sources={
+            Array.isArray(content.result?.data)
+              ? content.result?.data
+              : [content.result?.data]
+          }
         />
-      </div>
-      {showResult ? (
-        <div className={styles.toolCallBodyItem}>
-          <Text fontSize="15px" lineHeight="16px" fontWeight={600}>
-            {t("Common:ToolCallResult")}
-          </Text>
-          <MarkdownField
-            chatMessage={formatJsonWithMarkdown(
-              isJson ? JSON.parse(result) : result,
-            )}
-          />
-        </div>
-      ) : null}
+      ) : (
+        <>
+          <div className={styles.toolCallCodeViewItem}>
+            <Text fontSize="15px" lineHeight="16px" fontWeight={600}>
+              {t("Common:ToolCallArg")}
+            </Text>
+            <MarkdownField
+              chatMessage={formatJsonWithMarkdown(content.arguments)}
+            />
+          </div>
+          {showResult ? (
+            <div className={styles.toolCallCodeViewItem}>
+              <Text fontSize="15px" lineHeight="16px" fontWeight={600}>
+                {t("Common:ToolCallResult")}
+              </Text>
+              <MarkdownField
+                chatMessage={formatJsonWithMarkdown(
+                  isJson ? JSON.parse(result) : result,
+                )}
+              />
+            </div>
+          ) : null}
+        </>
+      )}
     </div>
   );
 };

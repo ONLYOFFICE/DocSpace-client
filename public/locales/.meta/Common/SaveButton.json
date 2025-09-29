@@ -3,31 +3,13 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2025-09-29T11:30:44.061Z",
+  "updated_at": "2025-09-29T18:22:19.412Z",
   "comment": {
     "text": "The translation key \"SaveButton\" is used to display the label for a save button on a UI component. In a file editor and dialog contexts, it appears as a button that triggers saving changes made to a document or form.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:34:27.353Z"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 68,
-      "context": "if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");\n \n return t(\"Common:SaveButton\");\n };\n \n export const getAcceptButtonLabel = (\n t: TTranslation,\n isEditorDialog: boolean,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 68,
-      "context": "if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");\n \n return t(\"Common:SaveButton\");\n };\n \n export const getAcceptButtonLabel = (\n t: TTranslation,\n isEditorDialog: boolean,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/GlobalEvents/sub-components/Dialog.js",
-      "line_number": 242,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"submit\"\n key=\"GlobalSendBtn\"\n label={isCreateDialog ? t(\"Common:Create\") : t(\"Common:SaveButton\")}\n size=\"normal\"\n type=\"submit\"\n scale\n primary\n isLoading={isDisabled}",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/client/src/components/dialogs/AvatarEditorDialog/index.js",
       "line_number": 234,
@@ -71,6 +53,24 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
+      "line_number": 68,
+      "context": "if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");\n \n return t(\"Common:SaveButton\");\n };\n \n export const getAcceptButtonLabel = (\n t: TTranslation,\n isEditorDialog: boolean,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
+      "line_number": 68,
+      "context": "if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");\n \n return t(\"Common:SaveButton\");\n };\n \n export const getAcceptButtonLabel = (\n t: TTranslation,\n isEditorDialog: boolean,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/GlobalEvents/sub-components/Dialog.js",
+      "line_number": 242,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"submit\"\n key=\"GlobalSendBtn\"\n label={isCreateDialog ? t(\"Common:Create\") : t(\"Common:SaveButton\")}\n size=\"normal\"\n type=\"submit\"\n scale\n primary\n isLoading={isDisabled}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
       "line_number": 393,
       "context": "className=\"send-invitation\"\n scale\n size={ButtonSize.normal}\n isDisabled={!hasInvitedUsers || isLoading}\n primary\n label={t(\"Common:SaveButton\")}\n onClick={onSubmit}\n testId=\"template_access_settings_save_button\"\n />\n <Button\n className=\"cancel-button\"",
@@ -92,6 +92,12 @@
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/CommentEditor.tsx",
       "line_number": 160,
       "context": "dataTestId=\"info_panel_details_comment_textarea\"\n />\n <div className=\"property-comment_editor-editor-buttons\">\n <Button\n isLoading={isLoading}\n label={t(\"Common:SaveButton\")}\n onClick={onSave}\n size={ButtonSize.extraSmall}\n primary\n testId=\"info_panel_details_comment_save_button\"\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
+      "line_number": 823,
+      "context": "/>\n \n <div className=\"buttons-container\">\n <Button\n className=\"save button\"\n label={t(\"Common:SaveButton\")}\n onClick={onSave}\n primary\n size={buttonSize}\n isDisabled={isDisabledSaveButton}\n testId=\"appearance_save_button\"",
       "module": "/packages/client"
     },
     {
@@ -126,14 +132,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 402,
-      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveGreetingSettings}\n onCancelClick={onRestoreGreetingSettings}\n showReminder={state.showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll={state.hasScroll}\n disableRestoreToDefault={greetingSettingsIsDefault}\n additionalClassSaveButton=\"welcome-page-save\"",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 823,
-      "context": "/>\n \n <div className=\"buttons-container\">\n <Button\n className=\"save button\"\n label={t(\"Common:SaveButton\")}\n onClick={onSave}\n primary\n size={buttonSize}\n isDisabled={isDisabledSaveButton}\n testId=\"appearance_save_button\"",
+      "line_number": 425,
+      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveGreetingSettings}\n onCancelClick={onRestoreGreetingSettings}\n showReminder={state.showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll={state.hasScroll}\n disableRestoreToDefault={greetingSettingsIsDefault}\n saveButtonDisabled={state.saveButtonDisabled}",
       "module": "/packages/client"
     },
     {
@@ -173,15 +173,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/ButtonContainer.js",
-      "line_number": 216,
-      "context": "currentDeviceType === DeviceType.desktop ? \"small\" : \"normal\";\n \n return (\n <ButtonStyledComponent>\n <Button\n label={t(\"Common:SaveButton\")}\n size={buttonSize}\n primary\n onClick={onClick}\n isDisabled={isLoading || !isValidForm() || isSMTPInitialSettings}\n isLoading={buttonOperation.save}",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/SubmitButton.js",
       "line_number": 58,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={() => saveSsoSettings(t)}\n onCancelClick={isSsoEnabled ? openResetModal : resetForm}\n showReminder\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Settings:DefaultSettings\")}\n displaySettings\n hasScroll\n isSaving={isSubmitLoading}\n saveButtonDisabled={isDisabledSaveButton}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/ButtonContainer.js",
+      "line_number": 216,
+      "context": "currentDeviceType === DeviceType.desktop ? \"small\" : \"normal\";\n \n return (\n <ButtonStyledComponent>\n <Button\n label={t(\"Common:SaveButton\")}\n size={buttonSize}\n primary\n onClick={onClick}\n isDisabled={isLoading || !isValidForm() || isSMTPInitialSettings}\n isLoading={buttonOperation.save}",
       "module": "/packages/client"
     },
     {
@@ -293,12 +293,6 @@
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 582,
-      "context": "<Button\n scale\n primary\n onClick={onSave}\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n isDisabled={isDisabledSaveButton}\n testId=\"edit_link_panel_save_button\"\n />\n <Button\n scale",
-      "module": "/packages/shared"
-    },
-    {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
       "line_number": 405,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"save\"\n tabIndex={5}\n label={t(\"Common:SaveButton\")}\n size={ButtonSize.normal}\n primary\n scale={isAccount}\n onClick={onSave}\n isDisabled={isLoading}",
@@ -308,6 +302,18 @@
       "file_path": "/packages/shared/dialogs/download-dialog/sub-components/PasswordRow.tsx",
       "line_number": 197,
       "context": "<Button\n id=\"conversion-button\"\n size={ButtonSize.small}\n scale\n primary\n label={t(\"Common:SaveButton\")}\n onClick={onButtonClick}\n isDisabled={!password}\n />\n </div>\n ) : null}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
+      "line_number": 582,
+      "context": "<Button\n scale\n primary\n onClick={onSave}\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n isDisabled={isDisabledSaveButton}\n testId=\"edit_link_panel_save_button\"\n />\n <Button\n scale",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
+      "line_number": 654,
+      "context": "</div>\n ) : null}\n \n {isChanged || isThirdStorageChanged ? (\n <SaveCancelButtons\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onSaveClick={onSaveModuleSettings}\n onCancelClick={onCancelModuleSettings}\n saveButtonDisabled={isSaveCancelDisabled}\n disableRestoreToDefault={isSaveCancelDisabled}",
       "module": "/packages/shared"
     },
     {
@@ -332,12 +338,6 @@
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
       "line_number": 627,
       "context": "/>\n <SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveAction}\n onCancelClick={onRestoreDefault}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll\n hideBorder\n showReminder={!isEqualLogo}",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 654,
-      "context": "</div>\n ) : null}\n \n {isChanged || isThirdStorageChanged ? (\n <SaveCancelButtons\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onSaveClick={onSaveModuleSettings}\n onCancelClick={onCancelModuleSettings}\n saveButtonDisabled={isSaveCancelDisabled}\n disableRestoreToDefault={isSaveCancelDisabled}",
       "module": "/packages/shared"
     }
   ],

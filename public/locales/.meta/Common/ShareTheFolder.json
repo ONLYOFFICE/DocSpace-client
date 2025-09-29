@@ -3,7 +3,7 @@
   "content": "the folder",
   "content_en_sha1_hash": "ca12b97760213db27444f3b12f55a266efb770fa",
   "created_at": "2025-08-26T11:15:00.744Z",
-  "updated_at": "2025-09-23T07:24:24.396Z",
+  "updated_at": "2025-09-29T18:22:19.737Z",
   "comment": {
     "text": "This key displays the text \"the folder\" when sharing a file or room. It appears as part of a sharing option, indicating what is being shared (a folder). Translators should ensure the wording accurately reflects the item being shared.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 414,
+      "line_number": 416,
       "context": "? t(\"Common:ShareForm\")\n : t(\"Common:ShareContents\");\n \n const shareParent = isRoom(item)\n ? t(\"Common:ShareTheRoom\")\n : t(\"Common:ShareTheFolder\");\n \n return (\n <Trans\n t={t}\n ns=\"Common\"",
       "module": "/packages/shared"
     }

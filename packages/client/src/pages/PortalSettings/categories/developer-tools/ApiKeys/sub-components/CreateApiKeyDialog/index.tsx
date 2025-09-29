@@ -319,7 +319,13 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   useEffect(() => {
     window.addEventListener("keydown", onKeyPress);
     return () => window.removeEventListener("keydown", onKeyPress);
-  }, [inputValue, secretKey, isValidLifeTime, lifetimeIsChecked]);
+  }, [
+    inputValue,
+    secretKey,
+    isValidLifeTime,
+    lifetimeIsChecked,
+    isRequestRunning,
+  ]);
 
   useEffect(() => {
     if (secretKey && inputRef) inputRef.current?.select();

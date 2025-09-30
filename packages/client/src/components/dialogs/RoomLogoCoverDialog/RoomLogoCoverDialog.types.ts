@@ -53,7 +53,7 @@ export interface RoomLogoCoverProps {
   title?: string;
   covers?: ICover[] | undefined;
   setCover: (color: string, icon: string | ICover) => void;
-  cover: ILogo;
+  cover: { color: string; cover: string };
   setRoomCoverDialogProps: (params: IRoomCoverDialogProps) => void;
   roomCoverDialogProps: IRoomCoverDialogProps;
   forwardedRef?: React.ForwardedRef<HTMLDivElement>;

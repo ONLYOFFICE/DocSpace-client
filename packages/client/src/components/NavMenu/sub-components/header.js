@@ -28,7 +28,7 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Link as LinkWithoutRedirect, useLocation } from "react-router";
+import { Link as LinkWithoutRedirect } from "react-router";
 import {
   isDesktop,
   NoUserSelect,
@@ -93,8 +93,6 @@ const HeaderComponent = ({
   toggleArticleOpen,
   customHeader,
 }) => {
-  const location = useLocation();
-
   // const isNavAvailable = mainModules.length > 0;
 
   // const onLogoClick = () => {

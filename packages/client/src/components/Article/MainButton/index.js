@@ -28,7 +28,6 @@ import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg
 import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import FormBlankReactSvgUrl from "PUBLIC_DIR/images/form.blank.react.svg?url";
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
-import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
 import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
@@ -153,7 +152,6 @@ const ArticleMainButtonContent = (props) => {
     isArchiveFolder,
 
     setOformFromFolderId,
-    oformsFilter,
 
     enablePlugins,
     mainButtonItemsList,
@@ -184,13 +182,11 @@ const ArticleMainButtonContent = (props) => {
     getContactsModel,
     contactsCanCreate,
     setRefMap,
-    defaultOformLocale,
 
     setTemplateGalleryVisible,
     templateGalleryAvailable,
   } = props;
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   const isAccountsPage = location.pathname.includes("/accounts");
@@ -567,7 +563,7 @@ const ArticleMainButtonContent = (props) => {
         icon: FormReactSvgUrl,
         label: t("Translations:NewForm"),
         key: "new-form",
-        items: [createTemplateBlankDocxf, showSelectorDocx],
+        items: [createTemplateBlankDocxf],
       },
     ];
 

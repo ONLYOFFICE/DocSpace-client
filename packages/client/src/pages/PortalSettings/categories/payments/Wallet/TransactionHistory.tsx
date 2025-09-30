@@ -262,6 +262,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   const onSubmitContactSelector = async (contacts: TSelectorItem[]) => {
     setIsSelectorVisible(false);
     setSelectedContact(contacts[0] as unknown as TUser);
+    setHasAppliedDateFilter(true);
 
     if (isFilterDialogVisible) {
       setIsChanged(true);

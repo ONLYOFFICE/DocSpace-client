@@ -5,8 +5,5 @@
   "DeleteGroupTitle": "Gruppe löschen",
   "DeleteTemplate": "Möchten Sie den Vorlagenraum <1>«{{templateName}}»</1> wirklich löschen? Die Vorlage kann nicht wiederhergestellt werden.",
   "DeleteTemplates": "Möchten Sie die ausgewählten Raumvorlagen wirklich löschen? Sie können nicht wiederhergestellt werden.",
-  "FileDeletedAfter": "Die Datei wird nach 30 Tagen endgültig gelöscht.",
-  "UnsubscribeButton": "Abbestellen",
-  "UnsubscribeNote": "Sind Sie sicher, dass Sie die ausgewählten Elemente aus der Liste abbestellen möchten?",
-  "UnsubscribeTitle": "Abbestellungsbestätigung"
+  "FileDeletedAfter": "Die Datei wird nach 30 Tagen endgültig gelöscht."
 }

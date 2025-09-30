@@ -67,7 +67,7 @@ export type SectionBodyProps = {
   children: React.ReactNode;
   viewAs?: TViewAs;
   settingsStudio: boolean;
-  isFormGallery?: boolean;
+
   isDesktop?: boolean;
   currentDeviceType?: DeviceType;
   getContextModel?: () => ContextMenuModel[];
@@ -99,7 +99,6 @@ export type SectionFooterProps = {
 
 export type SectionHeaderProps = {
   className: string;
-  isFormGallery?: boolean;
   children: React.ReactNode;
 };
 

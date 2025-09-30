@@ -302,22 +302,6 @@ const ArticleMainButtonContent = (props) => {
     setOformFromFolderId(currentFolderId);
   };
 
-  const onShowGallery = () => {
-    if (isMobile) {
-      toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
-      return;
-    }
-
-    const initOformFilter = oformsFilter || oformsFilter.getDefault();
-    if (!initOformFilter.locale) initOformFilter.locale = defaultOformLocale;
-
-    setOformFromFolderId(currentFolderId);
-
-    navigate(
-      `/form-gallery/${currentFolderId}/filter?${initOformFilter.toUrlParams()}`,
-    );
-  };
-
   React.useEffect(() => {
     const isFolderHiddenDropdown =
       isArchiveFolder ||
@@ -339,139 +323,114 @@ const ArticleMainButtonContent = (props) => {
     isSettingsPage,
   ]);
 
-  const createActionsForFormRoom = React.useCallback(
-    (actionList) => {
-      const {
-        formGallery,
-        // uploadActions,
-        // createNewFolder,
-        // showSelectorFormRoomDocx,
-        // createNewDocumentDocx,
-        // createTemplateBlankDocxf,
-        // createNewPresentationPptx,
-        // createNewSpreadsheetXlsx,
-      } = actionList;
+  const createActionsForFormRoom = React.useCallback(() => {
+    const createNewFolder = {
+      id: "actions_new-folder",
+      className: "main-button_drop-down",
+      icon: CatalogFolderReactSvgUrl,
+      label: t("Files:CreateNewFolder"),
+      onClick: onCreate,
+      key: "new-folder",
+    };
 
-      const createNewFolder = {
-        id: "actions_new-folder",
-        className: "main-button_drop-down",
-        icon: CatalogFolderReactSvgUrl,
-        label: t("Files:CreateNewFolder"),
-        onClick: onCreate,
-        key: "new-folder",
-      };
+    // const templatePDFForm = {
+    //   id: "actions_template-PDF-form",
+    //   className: "main-button_drop-down",
+    //   icon: FormReactSvgUrl,
+    //   label: t("Common:CreatePDFForm"),
+    //   key: "new-form",
+    //   items: [createTemplateBlankDocxf],
+    // };
 
-      const showSelectorFormRoomDocx = {
-        id: "actions_form-room_template_from-file",
-        className: "main-button_drop-down_sub",
-        icon: FormGalleryReactSvgUrl,
-        label: t("Common:ChooseFromTemplates"),
-        onClick: formGallery.onClick,
-        disabled: isPrivacy,
-        key: "form-file",
-      };
+    const uploadFromDocSpace = {
+      id: "actions_upload-from-docspace",
+      className: "main-button_drop-down",
+      icon: ActionsUploadReactSvgUrl,
+      label: t("Common:FromPortal", { productName: t("Common:ProductName") }),
+      key: "actions_upload-from-docspace",
+      disabled: false,
+      onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),
+    };
 
-      // const templatePDFForm = {
-      //   id: "actions_template-PDF-form",
-      //   className: "main-button_drop-down",
-      //   icon: FormReactSvgUrl,
-      //   label: t("Common:CreatePDFForm"),
-      //   key: "new-form",
-      //   items: [createTemplateBlankDocxf, showSelectorFormRoomDocx],
-      // };
+    const uploadFormDevice = {
+      id: "actions_upload-from-device",
+      className: "main-button_drop-down",
+      icon: ActionsUploadReactSvgUrl,
+      label: t("Common:FromDevice"),
+      key: "actions_upload-from-device",
+      onClick: onUploadPDFFilesClick,
+      disabled: false,
+    };
 
-      const uploadFromDocSpace = {
-        id: "actions_upload-from-docspace",
-        className: "main-button_drop-down",
-        icon: ActionsUploadReactSvgUrl,
-        label: t("Common:FromPortal", { productName: t("Common:ProductName") }),
-        key: "actions_upload-from-docspace",
-        disabled: false,
-        onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),
-      };
+    const uploadPDFFrom = {
+      id: "actions_upload-ready-Pdf-from",
+      className: "main-button_drop-down_sub",
+      icon: ActionsUploadReactSvgUrl,
+      label: t("Common:UploadPDFForm"),
+      key: "actions_upload-ready-Pdf-from",
+      items: [uploadFromDocSpace, uploadFormDevice],
+    };
 
-      const uploadFormDevice = {
-        id: "actions_upload-from-device",
-        className: "main-button_drop-down",
-        icon: ActionsUploadReactSvgUrl,
-        label: t("Common:FromDevice"),
-        key: "actions_upload-from-device",
-        onClick: onUploadPDFFilesClick,
-        disabled: false,
-      };
+    // const moreActions = {
+    //   id: "actions_more-form",
+    //   className: "main-button_drop-down",
+    //   icon: PluginMoreReactSvgUrl,
+    //   label: t("Common:More"),
+    //   disabled: false,
+    //   key: "more-form",
+    //   items: [
+    //     createNewFolder,
+    //     {
+    //       isSeparator: true,
+    //       key: "actions_more-form__separator-1",
+    //     },
+    //     createNewDocumentDocx,
+    //     createNewPresentationPptx,
+    //     createNewSpreadsheetXlsx,
+    //     {
+    //       isSeparator: true,
+    //       key: "actions_more-form__separator-2",
+    //     },
+    //     ...uploadActions,
+    //   ],
+    // };
 
-      const uploadPDFFrom = {
-        id: "actions_upload-ready-Pdf-from",
-        className: "main-button_drop-down_sub",
-        icon: ActionsUploadReactSvgUrl,
-        label: t("Common:UploadPDFForm"),
-        key: "actions_upload-ready-Pdf-from",
-        items: [uploadFromDocSpace, uploadFormDevice],
-      };
+    // const mobileMoreActions = {
+    //   ...moreActions,
+    //   items: moreActions.items.filter((item) => !item.isSeparator),
+    // };
 
-      // const moreActions = {
-      //   id: "actions_more-form",
-      //   className: "main-button_drop-down",
-      //   icon: PluginMoreReactSvgUrl,
-      //   label: t("Common:More"),
-      //   disabled: false,
-      //   key: "more-form",
-      //   items: [
-      //     createNewFolder,
-      //     {
-      //       isSeparator: true,
-      //       key: "actions_more-form__separator-1",
-      //     },
-      //     createNewDocumentDocx,
-      //     createNewPresentationPptx,
-      //     createNewSpreadsheetXlsx,
-      //     {
-      //       isSeparator: true,
-      //       key: "actions_more-form__separator-2",
-      //     },
-      //     ...uploadActions,
-      //   ],
-      // };
+    const mobileMoreActions = null;
+    const formRoomActions = [
+      // templatePDFForm,
+      // formGallery,
+      uploadPDFFrom,
 
-      // const mobileMoreActions = {
-      //   ...moreActions,
-      //   items: moreActions.items.filter((item) => !item.isSeparator),
-      // };
+      {
+        isSeparator: true,
+        key: "separator",
+      },
+      createNewFolder,
+      // {
+      //   isSeparator: true,
+      //   key: "separator-1",
+      // },
+      // moreActions,
+    ];
 
-      const mobileMoreActions = null;
-      const formRoomActions = [
-        // templatePDFForm,
-        // formGallery,
-        uploadPDFFrom,
-        showSelectorFormRoomDocx,
-        {
-          isSeparator: true,
-          key: "separator",
-        },
-        createNewFolder,
-        // {
-        //   isSeparator: true,
-        //   key: "separator-1",
-        // },
-        // moreActions,
-      ];
+    const mobileFormRoomActions = [
+      // templatePDFForm,
+      // formGallery,
+      uploadPDFFrom,
+      createNewFolder,
+    ];
 
-      const mobileFormRoomActions = [
-        // templatePDFForm,
-        // formGallery,
-        uploadPDFFrom,
-        showSelectorFormRoomDocx,
-        createNewFolder,
-      ];
-
-      return {
-        formRoomActions,
-        mobileFormRoomActions,
-        mobileMoreActions,
-      };
-    },
-    [onShowFormRoomSelectFileDialog, onUploadPDFFilesClick],
-  );
+    return {
+      formRoomActions,
+      mobileFormRoomActions,
+      mobileMoreActions,
+    };
+  }, [onShowFormRoomSelectFileDialog, onUploadPDFFilesClick]);
 
   React.useEffect(() => {
     if (isRoomsFolder || isSettingsPage) return;
@@ -514,16 +473,6 @@ const ArticleMainButtonContent = (props) => {
       onClick: onShowSelectFileDialog,
       disabled: isPrivacy,
       key: "form-file",
-    };
-
-    const formGallery = {
-      id: "actions_template_oforms-gallery",
-      className: "main-button_drop-down_sub",
-      icon: FormGalleryReactSvgUrl,
-      label: t("Common:OFORMsGallery"),
-      onClick: onShowGallery,
-      disabled: isPrivacy,
-      key: "form-gallery",
     };
 
     const createNewDocumentDocx = {
@@ -594,10 +543,8 @@ const ArticleMainButtonContent = (props) => {
     ) {
       const { formRoomActions, mobileFormRoomActions, mobileMoreActions } =
         createActionsForFormRoom({
-          formGallery,
           newUploadActions,
           // createNewFolder,
-          // showSelectorFormRoomDocx,
           // createNewDocumentDocx,
           // createTemplateBlankDocxf,
           // createNewPresentationPptx,
@@ -620,7 +567,7 @@ const ArticleMainButtonContent = (props) => {
         icon: FormReactSvgUrl,
         label: t("Translations:NewForm"),
         key: "new-form",
-        items: [createTemplateBlankDocxf, showSelectorDocx, formGallery],
+        items: [createTemplateBlankDocxf, showSelectorDocx],
       },
     ];
 

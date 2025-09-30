@@ -102,7 +102,6 @@ const ClientContent = (props) => {
   const location = useLocation();
 
   const isEditor = location.pathname.indexOf("doceditor") !== -1;
-  const isFormGallery = location.pathname.split("/").includes("form-gallery");
 
   React.useEffect(() => {
     loadClientInfo()
@@ -161,19 +160,8 @@ const ClientContent = (props) => {
     <>
       <FilesPanels />
       <GlobalEvents />
-      {!isFormGallery ? (
-        isFrame ? (
-          showMenu && (
-            <ClientArticle
-              isInfoPanelVisible={isInfoPanelVisible}
-              withMainButton={withMainButton}
-              setIsHeaderLoading={setIsHeaderLoading}
-              setIsFilterLoading={setIsFilterLoading}
-              showArticleLoader={showArticleLoader}
-              isAccountsArticle={isAccountsArticle}
-            />
-          )
-        ) : (
+      {isFrame ? (
+        showMenu && (
           <ClientArticle
             isInfoPanelVisible={isInfoPanelVisible}
             withMainButton={withMainButton}
@@ -183,7 +171,16 @@ const ClientContent = (props) => {
             isAccountsArticle={isAccountsArticle}
           />
         )
-      ) : null}
+      ) : (
+        <ClientArticle
+          isInfoPanelVisible={isInfoPanelVisible}
+          withMainButton={withMainButton}
+          setIsHeaderLoading={setIsHeaderLoading}
+          setIsFilterLoading={setIsFilterLoading}
+          showArticleLoader={showArticleLoader}
+          isAccountsArticle={isAccountsArticle}
+        />
+      )}
       <Outlet />
     </>
   );

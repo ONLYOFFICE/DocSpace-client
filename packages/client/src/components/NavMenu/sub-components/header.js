@@ -95,8 +95,6 @@ const HeaderComponent = ({
 }) => {
   const location = useLocation();
 
-  const isFormGallery = location.pathname.includes("/form-gallery");
-
   // const isNavAvailable = mainModules.length > 0;
 
   // const onLogoClick = () => {
@@ -175,7 +173,7 @@ const HeaderComponent = ({
         needNavMenu={false}
         isDesktopView={isDesktopView}
       >
-        {currentProductId !== "home" && !isFormGallery ? (
+        {currentProductId !== "home" ? (
           <HeaderCatalogBurger onClick={toggleArticleOpen} />
         ) : null}
         {customHeader || (

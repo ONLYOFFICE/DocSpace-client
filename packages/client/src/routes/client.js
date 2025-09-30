@@ -293,60 +293,6 @@ const ClientRoutes = [
     element: <Navigate to="/rooms/shared/filter" replace />,
   },
   {
-    path: "/form-gallery",
-    async lazy() {
-      const { WrappedComponent } = await componentLoader(
-        () => import("SRC_DIR/pages/FormGallery"),
-      );
-
-      const Component = () => (
-        <PrivateRoute>
-          <ErrorBoundary>
-            <WrappedComponent />
-          </ErrorBoundary>
-        </PrivateRoute>
-      );
-
-      return { Component };
-    },
-  },
-  {
-    path: "/form-gallery/:fromFolderId",
-    async lazy() {
-      const { WrappedComponent } = await componentLoader(
-        () => import("SRC_DIR/pages/FormGallery"),
-      );
-
-      const Component = () => (
-        <PrivateRoute>
-          <ErrorBoundary>
-            <WrappedComponent />
-          </ErrorBoundary>
-        </PrivateRoute>
-      );
-
-      return { Component };
-    },
-  },
-  {
-    path: "/form-gallery/:fromFolderId/filter",
-    async lazy() {
-      const { WrappedComponent } = await componentLoader(
-        () => import("SRC_DIR/pages/FormGallery"),
-      );
-
-      const Component = () => (
-        <PrivateRoute>
-          <ErrorBoundary>
-            <WrappedComponent />
-          </ErrorBoundary>
-        </PrivateRoute>
-      );
-
-      return { Component };
-    },
-  },
-  {
     path: "/share/preview/:id",
     async lazy() {
       const { PublicPreview } = await componentLoader(

@@ -96,7 +96,6 @@ const Section = (props: SectionProps) => {
     isInfoPanelAvailable = true,
     settingsStudio = false,
     isInfoPanelScrollLocked,
-    isFormGallery,
     currentDeviceType,
 
     isInfoPanelVisible,
@@ -248,10 +247,7 @@ const Section = (props: SectionProps) => {
           {currentDeviceType !== DeviceType.mobile ? (
             <div className="section-sticky-container">
               {isSectionHeaderAvailable ? (
-                <SubSectionHeader
-                  className="section-header_header"
-                  isFormGallery={isFormGallery}
-                >
+                <SubSectionHeader className="section-header_header">
                   {sectionHeaderContent}
                 </SubSectionHeader>
               ) : null}
@@ -279,7 +275,6 @@ const Section = (props: SectionProps) => {
               autoFocus={currentDeviceType === DeviceType.desktop}
               viewAs={viewAs}
               settingsStudio={settingsStudio}
-              isFormGallery={isFormGallery}
               currentDeviceType={currentDeviceType}
               getContextModel={getContextModel}
               isIndexEditingMode={isIndexEditingMode}
@@ -287,10 +282,7 @@ const Section = (props: SectionProps) => {
             >
               {isSectionHeaderAvailable &&
               currentDeviceType === DeviceType.mobile ? (
-                <SubSectionHeader
-                  className="section-body_header"
-                  isFormGallery={isFormGallery}
-                >
+                <SubSectionHeader className="section-body_header">
                   {sectionHeaderContent}
                 </SubSectionHeader>
               ) : null}

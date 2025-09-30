@@ -2828,22 +2828,6 @@ class ContextOptionsStore {
     this.dialogsStore.setSelectFileDialogVisible(true);
   };
 
-  onShowGallery = (t) => {
-    if (isMobile) {
-      toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
-      return;
-    }
-
-    const { oformsFilter, defaultOformLocale } = this.oformsStore;
-    const initOformFilter = oformsFilter || oformsFilter.getDefault();
-
-    if (!initOformFilter.locale) initOformFilter.locale = defaultOformLocale;
-
-    window.DocSpace.navigate(
-      `/form-gallery/${this.selectedFolderStore.id}/filter?${initOformFilter.toUrlParams()}`,
-    );
-  };
-
   onShowTemplateGallery = () => {
     this.oformsStore.setTemplateGalleryVisible(true);
     this.oformsStore.setOformFromFolderId(this.selectedFolderStore.id);
@@ -2866,15 +2850,6 @@ class ContextOptionsStore {
   };
 
   getContextOptionsPlusFormRoom = (t) => {
-    const showSelectorFormRoomDocx = {
-      id: "actions_form-room_template_from-file",
-      className: "main-button_drop-down_sub",
-      icon: FormGalleryReactSvgUrl,
-      label: t("Common:ChooseFromTemplates"),
-      onClick: () => this.onShowGallery(t),
-      key: "form-file",
-    };
-
     const uploadReadyPDFFrom = {
       id: "personal_upload-ready-Pdf-from",
       className: "main-button_drop-down_sub",
@@ -2942,8 +2917,6 @@ class ContextOptionsStore {
 
     return [
       uploadReadyPDFFrom,
-      showSelectorFormRoomDocx,
-      // templateOformsGallery,
       // templatePDFForm,
       // {
       //   isSeparator: true,
@@ -3039,15 +3012,6 @@ class ContextOptionsStore {
       disabled: isPrivacyFolder,
     };
 
-    const templateOformsGallery = {
-      id: "personal_template_oforms-gallery",
-      key: "oforms-gallery",
-      label: t("Common:OFORMsGallery"),
-      icon: FormGalleryReactSvgUrl,
-      onClick: () => this.onShowGallery(t),
-      disabled: isPrivacyFolder,
-    };
-
     const createNewFolder = {
       id: "personal_new-folder",
       key: "new-folder",
@@ -3081,7 +3045,6 @@ class ContextOptionsStore {
       return this.getContextOptionsPlusFormRoom(t, {
         createTemplateForm,
         createTemplateSelectFormFile,
-        templateOformsGallery,
         createNewFolder,
         createNewDoc,
         createNewPresentation,
@@ -3097,11 +3060,7 @@ class ContextOptionsStore {
         icon: FormReactSvgUrl,
         label: t("Translations:NewForm"),
         key: "new-form-base",
-        items: [
-          createTemplateForm,
-          createTemplateNewFormFile,
-          templateOformsGallery,
-        ],
+        items: [createTemplateForm, createTemplateNewFormFile],
       },
     ];
 

@@ -317,9 +317,8 @@ class InfoPanelStore {
     const isAccounts =
       this.peopleStore.usersStore.contactsTab !== false ||
       getContactsView(window.location) !== false;
-    const isGallery = window.location.pathname.includes("form-gallery");
 
-    return isRooms || isFiles || isGallery || isAccounts;
+    return isRooms || isFiles || isAccounts;
   };
 
   getIsFiles = () => {

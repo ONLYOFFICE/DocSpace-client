@@ -224,7 +224,6 @@
   "Deactivate": "Dezaktywuj",
   "DefaultQuota": "Domyślny limit",
   "Delete": "Usuń",
-  "DeleteFile": "Zamierzasz usunąć ten plik. ",
   "DeletePermanently": "Usuń trwale",
   "Deny": "Odrzuć",
   "DenyAccess": "Odmów dostępu",
@@ -318,7 +317,6 @@
   "FeedbackAndSupport": "Opinie i wsparcie",
   "FileActionRequired": "Lokalizacja docelowa zawiera już plik o nazwie «<1>{{fileName}}</1>».",
   "FileName": "Nazwa pliku",
-  "FilePermanentlyDeleted": "Plik zostanie trwale usunięty za 30 dni.",
   "FileProtectionMessage": "Pliki te są chronione. Spróbuj wpisać hasło dla wszystkich plików. Jeśli nie pamiętasz hasła, ale potrzebujesz tych plików, możesz je pobrać w oryginalnym formacie lub po prostu usunąć z listy. Następnie będziesz w stanie pobrać resztę plików.",
   "Files": "Pliki",
   "FilesAlreadyContains": "Lokalizacja docelowa zawiera już pliki o tej samej nazwie.",
@@ -894,6 +892,7 @@
   "LogoForEditors": "Logo dla edytora {{editorName}}",
   "LogoForViewer": "Logo dla {{diagramViewer}}",
   "LogoDocsEditor": "Logo dla nagłówka edytorów",
+  "RoomCreateUser": "Użytkownicy zostali dodani.",
   "PortalRestoring": "Odzyskiwanie {{productName}}",
   "PreparationPortalDescription": "Po zakończeniu procesu przywracania zostanie automatycznie przekierowany do {{productName}}."
 }

@@ -224,7 +224,6 @@
   "Deactivate": "Desactivar",
   "DefaultQuota": "Cuota predeterminada",
   "Delete": "Eliminar",
-  "DeleteFile": "Está a punto de eliminar este archivo.",
   "DeletePermanently": "Eliminar permanentemente",
   "Deny": "Denegar",
   "DenyAccess": "Denegar acceso",
@@ -318,7 +317,6 @@
   "FeedbackAndSupport": "Sugerencias y ayuda",
   "FileActionRequired": "La ubicación de destino ya contiene un archivo llamado «<1>{{fileName}}</1>».",
   "FileName": "Nombre de archivo",
-  "FilePermanentlyDeleted": "El archivo se eliminará definitivamente dentro de 30 días.",
   "FileProtectionMessage": "Estos archivos están protegidos. Por favor, intente introducir la contraseña para todos los archivos. Si no recuerda la contraseña pero necesita estos archivos, puede descargarlos en su formato original o simplemente eliminarlos de la lista. Luego podrá descargar el resto de los archivos. ",
   "Files": "Archivos",
   "FilesAlreadyContains": "La ubicación de destino ya contiene archivos con el mismo nombre.",
@@ -894,6 +892,7 @@
   "LogoForEditors": "Logotipo para el editor {{editorName}}",
   "LogoForViewer": "Logotipo para {{diagramViewer}}",
   "LogoDocsEditor": "Logo para los encabezados de los editores",
+  "RoomCreateUser": "Usuarios añadidos.",
   "PortalRestoring": "Restauración de {{productName}}",
   "PreparationPortalDescription": "Una vez terminado el proceso de restauración, usted será redirigido a su {{productName}}."
 }

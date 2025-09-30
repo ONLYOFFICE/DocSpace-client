@@ -224,7 +224,6 @@
   "Deactivate": "Vô hiệu hóa",
   "DefaultQuota": "Hạn mức mặc định",
   "Delete": "Xóa bỏ",
-  "DeleteFile": "Bạn sắp xóa tập tin này. ",
   "DeletePermanently": "Xóa vĩnh viễn",
   "Deny": "Từ chối",
   "DenyAccess": "Từ chối quyền truy cập",
@@ -318,7 +317,6 @@
   "FeedbackAndSupport": "Phản hồi & Hỗ trợ",
   "FileActionRequired": "Đích đến đã chứa một tập tin có tên «<1>{{fileName}}</1>».",
   "FileName": "Tên file",
-  "FilePermanentlyDeleted": "Tập tin sẽ bị xóa vĩnh viễn trong 30 ngày. ",
   "FileProtectionMessage": "Các tập tin này được bảo vệ. Vui lòng thử nhập mật khẩu cho tất cả các tập tin. Nếu bạn không nhớ mật khẩu nhưng cần những tập tin này, bạn có thể tải chúng xuống ở định dạng gốc hoặc chỉ cần xóa chúng khỏi danh sách. Sau đó, bạn có thể tải các tập tin còn lại xuống.",
   "Files": "Tệp",
   "FilesAlreadyContains": "Đích đến đã chứa các tập tin có cùng tên.",
@@ -894,6 +892,7 @@
   "LogoForEditors": "Logo cho trình soạn thảo {{editorName}}",
   "LogoForViewer": "Logo cho {{diagramViewer}}",
   "LogoDocsEditor": "Logo cho tiêu đề trình chỉnh sửa",
+  "RoomCreateUser": "Người dùng đã được thêm vào.",
   "PortalRestoring": "Đang khôi phục {{productName}}",
   "PreparationPortalDescription": "Khi quá trình khôi phục kết thúc, bạn sẽ tự động được chuyển hướng đến {{productName}} của mình."
 }

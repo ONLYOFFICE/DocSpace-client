@@ -51,6 +51,7 @@ type PropsFromCombobox = Pick<
   | "shouldShowBackdrop"
   | "dataTestId"
   | "noSelect"
+  | "isLoading"
   | "showDisabledItems"
 >;
 

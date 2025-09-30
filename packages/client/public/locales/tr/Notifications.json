@@ -1,10 +1,8 @@
 {
-  "ActionsWithFilesDescription": "Rozetler, dosya yükleme, oluşturma ve değişiklikler gibi işlemler ile ilgili sizi bilgilendirir.",
   "Badges": "Rozetler",
   "DailyFeed": "Günlük {{productName}} akışı",
   "DailyFeedDescription": "{{productName}}'inizdeki haberleri ve etkinlikleri günlük bir özet halinde okuyun.",
   "Notifications": "Bildirimler",
-  "RoomsActivityDescription": "Saatlik bildirimler. Odalarınızdaki tüm etkinliklerden haberdar olun.",
   "UsefulTips": "Faydalı {{productName}} ipuçları",
   "UsefulTipsDescription": "{{productName}} hakkında faydalı kılavuzlar edinin"
 }

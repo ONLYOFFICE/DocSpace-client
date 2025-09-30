@@ -30,7 +30,11 @@ import { useNavigate, useLocation, useParams } from "react-router";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { CREATED_FORM_KEY, MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import {
+  CREATED_FORM_KEY,
+  MEDIA_VIEW_URL,
+  CategoryType,
+} from "@docspace/shared/constants";
 import { toastr } from "@docspace/shared/components/toast";
 import {
   Events,
@@ -38,10 +42,13 @@ import {
   RoomSearchArea,
   RoomsType,
 } from "@docspace/shared/enums";
-import { getObjectByLocation } from "@docspace/shared/utils/common";
+import {
+  getObjectByLocation,
+  getCategoryType,
+} from "@docspace/shared/utils/common";
+import type { ValueOf } from "@docspace/shared/types";
 
-import { getCategoryType, getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
 import OformsStore from "SRC_DIR/store/OformsStore";
@@ -87,14 +94,12 @@ const useFiles = ({
   const location = useLocation();
   const { id } = useParams();
 
-  const fetchDefaultFiles = (isRecentFolder = false) => {
+  const fetchDefaultFiles = (categoryType: ValueOf<typeof CategoryType>) => {
     const filter = FilesFilter.getDefault({
-      isRecentFolder,
+      categoryType,
     });
 
-    const url = getCategoryUrl(
-      isRecentFolder ? CategoryType.Recent : CategoryType.Personal,
-    );
+    const url = getCategoryUrl(categoryType);
 
     navigate(`${url}?${filter.toUrlParams()}`);
   };
@@ -128,7 +133,7 @@ const useFiles = ({
   };
 
   const getFiles = React.useCallback(async () => {
-    const categoryType = getCategoryType(location) as number; // TODO: Remove "as number" when getCategoryType is rewritten to TS
+    const categoryType = getCategoryType(location);
 
     let filterObj = null;
     let isRooms = false;
@@ -149,13 +154,12 @@ const useFiles = ({
           })
           .catch((err) => {
             toastr.error(err);
-            fetchDefaultFiles();
+            fetchDefaultFiles(categoryType);
           });
       }, 1);
     }
 
     const isRoomFolder = getObjectByLocation(location)?.folder;
-    const isRecentFolder = categoryType === CategoryType.Recent;
 
     if (
       (categoryType == CategoryType.Shared ||
@@ -176,7 +180,7 @@ const useFiles = ({
       filterObj = FilesFilter.getFilter(window.location);
 
       if (!filterObj) {
-        fetchDefaultFiles(isRecentFolder);
+        fetchDefaultFiles(categoryType);
 
         return;
       }
@@ -235,7 +239,7 @@ const useFiles = ({
       ? filter.clone()
       : isRooms
         ? RoomsFilter.getDefault(userId, filterObj.searchArea?.toString())
-        : FilesFilter.getDefault({ isRecentFolder });
+        : FilesFilter.getDefault({ categoryType });
     const requests = [Promise.resolve(newFilter)];
 
     await axios

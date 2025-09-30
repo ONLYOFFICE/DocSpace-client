@@ -62,7 +62,8 @@ const useCommon = ({
         | "language-and-time-zone"
         | "dns-settings"
         | "configure-deep-link"
-        | "welcome-page-settings",
+        | "welcome-page-settings"
+        | "ad-management",
     ) => {
       if (isLoaded) return;
 
@@ -107,6 +108,9 @@ const useCommon = ({
 
     if (window.location.pathname.includes("configure-deep-link"))
       actions.push(getCustomizationData("configure-deep-link"));
+
+    if (window.location.pathname.includes("ad-management"))
+      actions.push(getCustomizationData("ad-management"));
 
     if (window.location.pathname.includes("dns-settings"))
       actions.push(getCustomizationData("dns-settings"));

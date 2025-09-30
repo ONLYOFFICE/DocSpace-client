@@ -224,7 +224,6 @@
   "Deactivate": "Deaktivieren",
   "DefaultQuota": "Standard-Quota",
   "Delete": "Löschen",
-  "DeleteFile": "Sie möchten diese Datei löschen.",
   "DeletePermanently": "Dauerhaft löschen",
   "Deny": "Ablehnen",
   "DenyAccess": "Zugriff verweigern",
@@ -318,7 +317,6 @@
   "FeedbackAndSupport": "Feedback und Support",
   "FileActionRequired": "Zielbereich enthält bereits eine Datei mit dem Namen «<1>{{fileName}}</1>».",
   "FileName": "Dateiname",
-  "FilePermanentlyDeleted": "Die Datei wird nach 30 Tagen endgültig gelöscht.",
   "FileProtectionMessage": "Diese Dateien sind geschützt. Bitte versuchen Sie, das Passwort für alle Dateien einzugeben. Sollten Sie das Passwort vergessen haben, diese Dateien aber benötigen, können Sie sie im Originalformat herunterladen oder einfach aus der Liste entfernen. Anschließend können Sie die restlichen Dateien herunterladen.",
   "Files": "Dateien",
   "FilesAlreadyContains": "Zielbereich enthält bereits Dateien mit demselben Namen.",
@@ -894,6 +892,7 @@
   "LogoForEditors": "Logo für den {{editorName}}-Editor",
   "LogoForViewer": "Logo für {{diagramViewer}}",
   "LogoDocsEditor": "Logo für Kopfzeile der Editoren",
+  "RoomCreateUser": "Benutzer hinzugefügt.",
   "PortalRestoring": "Wiederherstellung von {{productName}}",
   "PreparationPortalDescription": "Nach Abschluss des Wiederherstellungsprozesses werden Sie automatisch an Ihr {{productName}} umgeleitet."
 }

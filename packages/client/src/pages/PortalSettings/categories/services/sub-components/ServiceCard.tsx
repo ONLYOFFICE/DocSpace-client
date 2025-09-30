@@ -39,18 +39,18 @@ interface ServiceCardProps {
   serviceTitle: string;
   priceDescription: string;
   children?: React.ReactNode;
-  eventDisabled?: boolean;
-  isDisabled?: boolean;
+  toggleDisabled?: boolean;
+  cardDisabled?: boolean;
   isEnabled?: boolean;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
-  isDisabled,
+  cardDisabled,
   onClick,
   onToggle,
   priceTitle,
   children,
-  eventDisabled,
+  toggleDisabled,
   isEnabled,
   id,
   image,
@@ -61,9 +61,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
     <div
       key={id}
       className={classNames(styles.serviceContainer, {
-        [styles.disabled]: isDisabled,
+        [styles.disabled]: cardDisabled,
       })}
-      {...(!isDisabled ? { onClick } : {})}
+      {...(!cardDisabled ? { onClick } : {})}
       data-testid={`storage_service_${id}`}
       data-id={id}
     >
@@ -80,12 +80,12 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           className={styles.toggleWrapper}
           data-id={id}
           data-enabled={isEnabled}
-          data-disabled={eventDisabled}
+          data-disabled={toggleDisabled}
         >
           <ToggleButton
             isChecked={isEnabled}
             className={styles.serviceToggle}
-            isDisabled={eventDisabled}
+            isDisabled={toggleDisabled}
             dataTestId={`storage_service_${id}_toggle`}
           />
         </div>

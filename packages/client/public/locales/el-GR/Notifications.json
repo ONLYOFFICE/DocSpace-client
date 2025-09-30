@@ -1,10 +1,8 @@
 {
-  "ActionsWithFilesDescription": "Τα εμβλήματα θα σας ειδοποιούν για ενέργειες όπως η μεταφόρτωση, η δημιουργία και οι αλλαγές σε αρχεία.",
   "Badges": "Εμβλήματα",
   "DailyFeed": "Καθημερινή τροφοδοσία {{productName}}",
   "DailyFeedDescription": "Διαβάστε ειδήσεις και γεγονότα από το {{productName}} σας σε μια καθημερινή σύνοψη.",
   "Notifications": "Ειδοποιήσεις",
-  "RoomsActivityDescription": "Ωριαίες ειδοποιήσεις. Μείνετε ενημερωμένοι για όλες τις δραστηριότητες στα δωμάτιά σας.",
   "UsefulTips": "Χρήσιμες συμβουλές {{productName}}",
   "UsefulTipsDescription": "Αποκτήστε χρήσιμους οδηγούς σχετικά με το {{productName}}"
 }

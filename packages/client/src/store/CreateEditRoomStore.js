@@ -30,8 +30,9 @@ import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { CategoryType } from "@docspace/shared/constants";
+
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
 import {

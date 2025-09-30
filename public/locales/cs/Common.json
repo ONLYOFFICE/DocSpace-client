@@ -224,7 +224,6 @@
   "Deactivate": "Deaktivace",
   "DefaultQuota": "Výchozí kvóta",
   "Delete": "Smazat",
-  "DeleteFile": "Chystáte se odstranit tento soubor.",
   "DeletePermanently": "Trvale odstranit",
   "Deny": "Odmítnout",
   "DenyAccess": "Zamítnout přístup",
@@ -318,7 +317,6 @@
   "FeedbackAndSupport": "Zpětná vazba a technická podpora",
   "FileActionRequired": "V cílovém umístění se již nachází soubor s názvem «<1>{{fileName}}</1>».",
   "FileName": "Název souboru",
-  "FilePermanentlyDeleted": "Soubor bude za 30 dní trvale smazán.",
   "FileProtectionMessage": "Tyto soubory jsou chráněny. Zkuste prosím zadat heslo pro všechny soubory. Pokud si heslo nepamatujete, ale tyto soubory potřebujete, můžete si je stáhnout v původním formátu nebo je jednoduše odstranit ze seznamu. Poté si můžete stáhnout ostatní soubory.",
   "Files": "Soubory",
   "FilesAlreadyContains": "Cílová destinace již obsahuje soubory se stejným názvem.",
@@ -894,6 +892,7 @@
   "LogoForEditors": "Logo pro editor {{editorName}}",
   "LogoForViewer": "Logo pro {{diagramViewer}}",
   "LogoDocsEditor": "Logo pro záhlaví editorů",
+  "RoomCreateUser": "Přidáno uživatelů.",
   "PortalRestoring": "Obnovení {{productName}}",
   "PreparationPortalDescription": "Po ukončení procesu obnovy, budete automaticky přesměrováni na Váš {{productName}}."
 }

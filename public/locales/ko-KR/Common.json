@@ -224,7 +224,6 @@
   "Deactivate": "비활성화",
   "DefaultQuota": "기본 할당량",
   "Delete": "삭제",
-  "DeleteFile": "이 파일을 삭제하려고 합니다. ",
   "DeletePermanently": "영구 삭제",
   "Deny": "거부",
   "DenyAccess": "액세스 거부",
@@ -318,7 +317,6 @@
   "FeedbackAndSupport": "피드백 및 지원",
   "FileActionRequired": "목표에 이미 «<1>{{fileName}}</1>» 이름의 파일이 있습니다.",
   "FileName": "파일명",
-  "FilePermanentlyDeleted": "파일은 30일 후에 영구적으로 삭제됩니다.",
   "FileProtectionMessage": "이 파일은 보호되어 있습니다. 모든 파일 비밀번호를 입력해 보세요. 파일이 필요하지만 비밀번호가 기억나지 않는 경우 원본 형식으로 다운로드하거나 목록에서 해당 파일을 제거한 뒤 나머지 파일을 다운로드할 수 있습니다.",
   "Files": "파일",
   "FilesAlreadyContains": "목표에 이미 같은 이름의 파일이 있습니다.",
@@ -894,6 +892,7 @@
   "LogoForEditors": "{{editorName}} 편집기 로고",
   "LogoForViewer": "{{diagramViewer}} 로고",
   "LogoDocsEditor": "편집기 헤더 로고",
+  "RoomCreateUser": "사용자가 추가되었습니다.",
   "PortalRestoring": "{{productName}} 복원 중",
   "PreparationPortalDescription": "복원 과정이 끝나면 포털로 자동으로 {{productName}}로 리디렉션됩니다."
 }

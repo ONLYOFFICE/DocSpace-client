@@ -1,10 +1,8 @@
 {
-  "ActionsWithFilesDescription": "Badges informieren Sie über Aktionen wie das Hochladen, Erstellen und Ändern von Dateien.",
   "Badges": "Abzeichen",
   "DailyFeed": "Täglicher {{productName}}-Feed",
   "DailyFeedDescription": "Lesen Sie Nachrichten und Ereignisse aus Ihrem {{productName}} in einer täglichen Zusammenfassung.",
   "Notifications": "Benachrichtigungen",
-  "RoomsActivityDescription": "Stündliche Benachrichtigungen. Bleiben Sie über alle Aktivitäten in Ihren Räumen informiert.",
   "UsefulTips": "Nützliche {{productName}}-Tipps",
   "UsefulTipsDescription": "Erhalten Sie nützliche Anleitungen zu {{productName}}"
 }

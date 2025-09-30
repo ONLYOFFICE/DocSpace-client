@@ -50,6 +50,11 @@ export const WorkspacesContainer = styled.div`
     max-width: 675px;
   }
 
+  .link-learn-more {
+    display: block;
+    margin-top: 8px;
+  }
+
   .data-import-subtitle {
     margin-bottom: 21px;
     font-weight: 600;

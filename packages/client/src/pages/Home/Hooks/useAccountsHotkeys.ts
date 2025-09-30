@@ -133,7 +133,7 @@ const useAccountsHotkeys = ({
 
   // Select all accounts
   useHotkeys(
-    "shift+a, ctrl+a",
+    "shift+a, ctrl+a, command+a",
     (e) => {
       e.preventDefault();
       selectAll();

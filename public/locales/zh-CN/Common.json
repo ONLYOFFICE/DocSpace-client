@@ -224,7 +224,6 @@
   "Deactivate": "停用",
   "DefaultQuota": "默认配额",
   "Delete": "删除",
-  "DeleteFile": "您即将删除此文件。",
   "DeletePermanently": "永久删除",
   "Deny": "拒绝",
   "DenyAccess": "拒绝访问",
@@ -318,7 +317,6 @@
   "FeedbackAndSupport": "反馈和支持",
   "FileActionRequired": "目标位置中已存在名«<1>{{fileName}}</1>»的文件。",
   "FileName": "文件名称",
-  "FilePermanentlyDeleted": "30 天后，文件会被永久删除。",
   "FileProtectionMessage": "这些文件受到保护，请尝试输入所有文件的密码。如果忘记密码但需要这些文件，可下载原始格式的文件，或直接将其从列表中移除，然后下载其余文件。",
   "Files": "文件",
   "FilesAlreadyContains": "目标位置中已存在同名文件。",
@@ -894,6 +892,7 @@
   "LogoForEditors": "{{editorName}}编辑器 logo",
   "LogoForViewer": "{{diagramViewer}} logo",
   "LogoDocsEditor": "编辑器标头Logo",
+  "RoomCreateUser": "用户已添加。",
   "PortalRestoring": "{{productName}}正在恢复",
   "PreparationPortalDescription": "恢复过程结束后，您将自动重定向到您的{{productName}}。"
 }

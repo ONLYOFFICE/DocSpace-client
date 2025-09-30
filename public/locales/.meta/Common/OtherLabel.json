@@ -3,7 +3,7 @@
   "content": "Other",
   "content_en_sha1_hash": "6e6a6f2086bb5fe5dbfd17d8d5f502d48759834b",
   "created_at": "2025-05-19T21:30:47.177Z",
-  "updated_at": "2025-08-27T10:14:35.264Z",
+  "updated_at": "2025-09-26T15:21:06.245Z",
   "comment": {
     "text": "This translation key is used to display \"Other\" when the filter includes a user who is not the current user (\"Me\"). It appears in the UI as a label on a filter component.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 643,
+      "line_number": 647,
       "context": "if (filter.authorType) {\n const isMe = userId === filter.authorType.replace(\"user_\", \"\");\n \n let label = isMe\n ? filter.excludeSubject\n ? t(\"Common:OtherLabel\")\n : t(\"Common:MeLabel\")\n : null;\n \n if (!isMe) {\n const user = await getUser(filter.authorType.replace(\"user_\", \"\"));",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 643,
+      "line_number": 647,
       "context": "if (filter.authorType) {\n const isMe = userId === filter.authorType.replace(\"user_\", \"\");\n \n let label = isMe\n ? filter.excludeSubject\n ? t(\"Common:OtherLabel\")\n : t(\"Common:MeLabel\")\n : null;\n \n if (!isMe) {\n const user = await getUser(filter.authorType.replace(\"user_\", \"\"));",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 643,
+      "line_number": 647,
       "context": "if (filter.authorType) {\n const isMe = userId === filter.authorType.replace(\"user_\", \"\");\n \n let label = isMe\n ? filter.excludeSubject\n ? t(\"Common:OtherLabel\")\n : t(\"Common:MeLabel\")\n : null;\n \n if (!isMe) {\n const user = await getUser(filter.authorType.replace(\"user_\", \"\"));",
       "module": "/packages/client"
     },

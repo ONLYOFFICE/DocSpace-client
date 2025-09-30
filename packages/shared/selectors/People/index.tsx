@@ -72,6 +72,7 @@ const toListItem = (
   disableInvitedUsers?: string[],
   isRoom?: boolean,
   checkIfUserInvited?: (user: TUser) => void,
+  disabledInvitedText?: string,
 ): TSelectorItem => {
   if ("displayName" in item) {
     const {
@@ -107,7 +108,7 @@ const toListItem = (
       disableDisabledUsers && status === EmployeeStatus.Disabled;
 
     const disabledText = isInvited
-      ? t("Common:Invited")
+      ? (disabledInvitedText ?? t("Common:Invited"))
       : isDisabled
         ? t("Common:Disabled")
         : "";
@@ -147,7 +148,9 @@ const toListItem = (
   } = item;
 
   const isInvited = disableInvitedUsers?.includes(id) || (isRoom && shared);
-  const disabledText = isInvited ? t("Common:Invited") : "";
+  const disabledText = isInvited
+    ? (disabledInvitedText ?? t("Common:Invited"))
+    : "";
 
   return {
     id,
@@ -228,6 +231,8 @@ const PeopleSelector = ({
   injectedElement,
   alwaysShowFooter = false,
   onlyRoomMembers,
+  targetEntityType = "room",
+  disabledInvitedText,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -349,6 +354,7 @@ const PeopleSelector = ({
               roomId,
               currentFilter,
               abortControllerRef.current?.signal,
+              targetEntityType,
             );
 
         let totalDifferent = startIndex ? response.total - totalRef.current : 0;
@@ -369,6 +375,7 @@ const PeopleSelector = ({
               disableInvitedUsers,
               !!roomId,
               checkIfUserInvited,
+              disabledInvitedText,
             ),
           );
 
@@ -430,6 +437,7 @@ const PeopleSelector = ({
       withGuests,
       withOutCurrentAuthorizedUser,
       onlyRoomMembers,
+      targetEntityType,
     ],
   );
 

@@ -224,7 +224,6 @@
   "Deactivate": "Dezactivare",
   "DefaultQuota": "Cotă implicită",
   "Delete": "Ștergere",
-  "DeleteFile": "Sunteţi pe cale să ştergeţi acest fişier. ",
   "DeletePermanently": "Ștergere definitivă",
   "Deny": "Interzicere",
   "DenyAccess": "Acces refuzat",
@@ -318,7 +317,6 @@
   "FeedbackAndSupport": "Feedback și asistența",
   "FileActionRequired": "Fișierul «<1>{{fileName}}</1>» există deja la destinație.",
   "FileName": "Numele fișierului",
-  "FilePermanentlyDeleted": "Fișierul va fi șters definitiv după 30 de zile.",
   "FileProtectionMessage": "Aceste fișiere sunt protejate. Încercați să introduceți parola pentru toate fișierele. Dacă nu vă amintiți parola, dar aveți nevoie de aceste fișiere, le puteți descărca în formatul lor original sau pur și simplu le puteți elimina din lista. Apoi puteți descărca celelalte fișiere.",
   "Files": "Fișiere",
   "FilesAlreadyContains": "Fișiere cu acelaşi nume există deja la destinație.",
@@ -894,6 +892,7 @@
   "LogoForEditors": "Logo pentru editorul {{editorName}}",
   "LogoForViewer": "Logo pentru {{diagramViewer}}",
   "LogoDocsEditor": "Logo-ul pentru antetul aplicațiilor de editare",
+  "RoomCreateUser": "Utilizatorul a fost adăugat.",
   "PortalRestoring": "Restaurarea spațiului {{productName}}",
   "PreparationPortalDescription": "După finalizarea procesului de restaurare, veți fi redirecționat automat către {{productName}}."
 }

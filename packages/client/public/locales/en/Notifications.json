@@ -1,12 +1,12 @@
 {
-  "ActionsWithFilesDescription": "Badges will notify you about actions such as upload, creation, and changes in files.",
+  "ActionsWithFilesDescription": "Badges will highlight file activity — uploads, edits, or shares — across the {{rooms}}, {{shared}}, and {{documents}} sections.",
   "Badges": "Badges",
   "DailyFeed": "Daily {{productName}} feed",
   "DailyFeedDescription": "Read news and events from your {{productName}} in a daily digest.",
-  "FileActivityNotify": "Actions with files in {{sectionName}}",
+  "FileActivityNotify": "File activity notifications",
   "Notifications": "Notifications",
-  "RoomsActivityDescription": "Hourly notifications. Stay updated about all activity in your rooms.",
-  "RoomUpdateNotify": "{{sectionName}} activity",
+  "RoomsActivityDescription": "Get instant email notifications about new shared files/folders and activity inside your {{sectionName}}.",
+  "RoomUpdateNotify": "Shared content and {{sectionName}} activity",
   "UsefulTips": "Useful {{productName}} tips",
   "UsefulTipsDescription": "Get useful guides about {{productName}}",
   "SettingUpNotifications": "Setting up notifications",
@@ -14,5 +14,7 @@
   "AdminSetupRequired": "Admin setup required",
   "GoToSettings": "Go to Settings",
   "NotConfigured": "Not configured",
-  "IsNotValid": "Is not valid"
+  "IsNotValid": "Is not valid",
+  "SuccessConnected": "{{serviceName}} has been successfully connected as a notification channel. You will now receive updates there.",
+  "SuccessDisconnected": "{{serviceName}} has been successfully disconnected as a notification channel. Notifications will no longer be sent there."
 }

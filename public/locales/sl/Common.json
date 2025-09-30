@@ -224,7 +224,6 @@
   "Deactivate": "Deaktiviraj",
   "DefaultQuota": "Privzeta kvota",
   "Delete": "Izbriši",
-  "DeleteFile": "Izbrisali boste to datoteko. ",
   "DeletePermanently": "Trajno izbriši",
   "Deny": "Zavrni",
   "DenyAccess": "Zavrni dostop",
@@ -318,7 +317,6 @@
   "FeedbackAndSupport": "Povratne informacije & Pomoč",
   "FileActionRequired": "Destinacija že vsebuje datoteko z imenom «<1>{{fileName}}</1>».",
   "FileName": "Ime datoteke",
-  "FilePermanentlyDeleted": "Datoteka bo v 30 dneh trajno izbrisana.",
   "FileProtectionMessage": "Te datoteke so zaščitene. Poskusite vnesti geslo za vse datoteke. Če se ne spomnite gesla, te datoteke pa potrebujete, jih lahko prenesete v izvirni obliki ali preprosto odstranite iz seznama. Nato lahko prenesete preostale datoteke.",
   "Files": "Datoteke",
   "FilesAlreadyContains": "Destinacija že vsebuje datoteke z istim imenom.",
@@ -894,6 +892,7 @@
   "LogoForEditors": "Logotip za urejevalnik {{editorName}}",
   "LogoForViewer": "Logotip za {{diagramViewer}}",
   "LogoDocsEditor": "Logotip za glavo urednika",
+  "RoomCreateUser": "Uporabniki dodani.",
   "PortalRestoring": "Obnavljanje {{productName}}",
   "PreparationPortalDescription": "Ko bo postopek obnavljanja končan, boste samodejno preusmerjeni na {{productName}}."
 }

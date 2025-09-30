@@ -24,12 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type {
-  TAvailableExternalRights,
-  TFile,
-  TFolder,
-  TShareSettings,
-} from "../files/types";
+import type { TFile, TFolder, TShareSettings } from "../files/types";
 import {
   ExportRoomIndexTaskStatus,
   FolderType,
@@ -38,7 +33,11 @@ import {
   ShareAccessRights,
   ValidationStatus,
 } from "../../enums";
-import { TCreatedBy, TPathParts } from "../../types";
+import type {
+  TAvailableShareRights,
+  TCreatedBy,
+  TPathParts,
+} from "../../types";
 import { TUser } from "../people/types";
 import { TGroup } from "../groups/types";
 
@@ -135,7 +134,7 @@ export type TRoom = {
   isAvailable?: boolean;
   isRoom?: boolean;
   shareSettings?: TShareSettings;
-  availableExternalRights?: TAvailableExternalRights;
+  availableShareRights?: TAvailableShareRights;
 };
 
 export type TGetRooms = {

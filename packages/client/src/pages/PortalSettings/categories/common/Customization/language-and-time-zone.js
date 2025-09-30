@@ -483,6 +483,7 @@ const LanguageAndTimeZoneComponent = (props) => {
             noBorder={false}
             scaled
             scaledOptions
+            isDefaultMode={false}
             dropDownMaxHeight={300}
             className="dropdown-item-width combo-box-settings"
             showDisabledItems
@@ -507,6 +508,7 @@ const LanguageAndTimeZoneComponent = (props) => {
           noBorder={false}
           scaled
           scaledOptions
+          isDefaultMode={false}
           dropDownMaxHeight={300}
           className="dropdown-item-width combo-box-settings"
           showDisabledItems

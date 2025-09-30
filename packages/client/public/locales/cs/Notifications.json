@@ -1,10 +1,8 @@
 {
-  "ActionsWithFilesDescription": "Odznaky vás budou upozorňovat na akce, jako je nahrávání, vytváření a změny v souborech.",
   "Badges": "Odznaky",
   "DailyFeed": "Denní kanál {{productName}}",
   "DailyFeedDescription": "Přečtěte si novinky a události z vašeho {{productName}} v denním přehledu.",
   "Notifications": "Oznámení",
-  "RoomsActivityDescription": "Hodinová oznámení. Dostávejte informace o všech aktivitách ve svých místnostech.",
   "UsefulTips": "Užitečné tipy pro {{productName}}",
   "UsefulTipsDescription": "Získejte užitečné příručky o {{productName}}"
 }

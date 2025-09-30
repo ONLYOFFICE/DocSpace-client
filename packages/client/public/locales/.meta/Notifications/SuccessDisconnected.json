@@ -1,0 +1,28 @@
+{
+  "key_path": "SuccessDisconnected",
+  "content": "{{serviceName}} has been successfully disconnected as a notification channel. Notifications will no longer be sent there.",
+  "content_en_sha1_hash": "1d103c93db9414c670f7576b65a7899670880314",
+  "created_at": "2025-09-26T15:21:00.485Z",
+  "updated_at": "2025-09-26T15:55:43.762Z",
+  "comment": {
+    "text": "This key displays a success message in a disconnect account dialog, confirming that a notification channel (specifically Telegram) has been successfully disconnected. It informs the user that notifications will no longer be sent to that channel. Translators should ensure the message clearly conveys successful disconnection and the cessation of notifications.",
+    "is_auto": true,
+    "updated_at": "2025-09-26T15:55:43.762Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DisconnectAccountDialog/index.tsx",
+      "line_number": 59,
+      "context": "const onClickDisconnect = () => {\n deleteTgLink?.();\n setDisconnectAccountDialogVisible?.(false);\n toastr.success(\n t(\"Notifications:SuccessDisconnected\", {\n serviceName: t(\"Common:ProviderTelegram\"),\n }),\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

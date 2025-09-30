@@ -1,10 +1,8 @@
 {
-  "ActionsWithFilesDescription": "Nişanlar sizə fayl yükləmələri, yeni yaradılanlar və dəyişikliklər haqqında məlumat verir.",
   "Badges": "Beyclər",
   "DailyFeed": "Gündəlik {{productName}} axını",
   "DailyFeedDescription": "{{productName}}-dəki xəbərləri və hadisələri gündəlik xülasədə oxuyun.",
   "Notifications": "Bildirişlər",
-  "RoomsActivityDescription": "Saatlıq bildirişlər. Otaqlarınızdakı bütün hərəkətlərdən xəbərdar olun",
   "UsefulTips": "Faydalı {{productName}} məsləhətləri",
   "UsefulTipsDescription": "{{productName}}-də faydalı təlimatlar əldə edin"
 }

@@ -223,7 +223,6 @@
   "Deactivate": "Deaktiviraj",
   "DefaultQuota": "Podrazumevana kvota",
   "Delete": "Obriši",
-  "DeleteFile": "Spremate se da obrišete ovu datoteku.",
   "DeletePermanently": "Obriši trajno",
   "Deny": "Odbij",
   "DenyAccess": "Odbij pristup",
@@ -316,7 +315,6 @@
   "FeedbackAndSupport": "Povratne informacije i podrška",
   "FileActionRequired": "Odredište već sadrži datoteku sa nazivom «<1>{{fileName}}</1>».",
   "FileName": "Ime datoteke",
-  "FilePermanentlyDeleted": "Datoteka će biti trajno obrisana za 30 dana.",
   "FileProtectionMessage": "Ovi fajlovi su zaštićeni. Molimo pokušajte da unesete lozinku za sve fajlove. Ako se ne sećate lozinke, ali su vam ovi fajlovi potrebni, možete ih preuzeti u originalnom formatu ili jednostavno ukloniti sa liste. Zatim možete preuzeti ostatak fajlova.",
   "Files": "Datoteke",
   "FilesAlreadyContains": "Odredište već sadrži datoteke sa istim imenom.",
@@ -884,6 +882,7 @@
   "RevokeLink": "Opozovi link",
   "LogoForEditors": "Logo za {{editorName}} uređivač",
   "LogoForViewer": "Logo za {{diagramViewer}}",
+  "RoomCreateUser": "Korisnici dodati.",
   "PortalRestoring": "Obnavljanje {{productName}}-a",
   "PreparationPortalDescription": "Kada je proces obnavljanja završen, bićete automatski preusmereni na vaš {{productName}}."
 }

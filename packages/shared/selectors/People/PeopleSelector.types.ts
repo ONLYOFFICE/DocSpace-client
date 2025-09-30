@@ -64,6 +64,8 @@ export type PeopleSelectorProps = TSelectorHeader &
   TSelectorAccessRights &
   TSelectorWithAside &
   TSelectorSubmitButton & {
+    targetEntityType?: "file" | "folder" | "room";
+    disabledInvitedText?: string;
     id?: string;
     className?: string;
     style?: React.CSSProperties;

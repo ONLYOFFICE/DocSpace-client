@@ -135,15 +135,6 @@ export type UserProps = {
   setRemoveUserConfirmation?: DialogsStore["setRemoveUserConfirmation"];
 };
 
-export type MembersListProps = {
-  hasNextPage: boolean;
-  itemCount: number;
-  loadNextPage: () => Promise<void>;
-  linksBlockLength: number;
-  withoutTitlesAndLinks: boolean;
-  children: React.ReactNode;
-};
-
 export type LinkRowProps = {
   item: TRoom;
   link: TFileLink;

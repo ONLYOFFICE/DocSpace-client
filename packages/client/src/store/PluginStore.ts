@@ -164,7 +164,7 @@ class PluginStore {
   updatePluginStatus = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
-    const newStatus = plugin?.getStatus();
+    const newStatus = plugin?.getStatus?.();
 
     const pluginIdx = this.plugins.findIndex((p) => p.name === name);
 
@@ -252,7 +252,9 @@ class PluginStore {
       );
 
       this.setIsEmptyList(plugins.length === 0);
-      plugins.forEach((plugin) => this.initPlugin(plugin, undefined, fromList));
+      await Promise.allSettled(
+        plugins.map((plugin) => this.initPlugin(plugin, undefined, fromList)),
+      );
     } catch (e) {
       if (axios.isCancel(e)) {
         return;
@@ -336,54 +338,63 @@ class PluginStore {
     fromList?: boolean,
   ) => {
     if (!plugin.enabled && !fromList) return;
-    const onLoad = async () => {
-      const iWindow = this.pluginFrame?.contentWindow as IframeWindow;
 
-      const newPlugin = cloneDeep({
-        ...plugin,
-        ...iWindow?.Plugins?.[plugin.pluginName],
-      });
+    return new Promise((resolve, reject) => {
+      const onLoad = async () => {
+        try {
+          const iWindow = this.pluginFrame?.contentWindow as IframeWindow;
 
-      newPlugin.scopes =
-        typeof newPlugin.scopes === "string"
-          ? (newPlugin.scopes.split(",") as PluginScopes[])
-          : newPlugin.scopes;
+          const newPlugin = cloneDeep({
+            ...plugin,
+            ...iWindow?.Plugins?.[plugin.pluginName],
+          });
 
-      newPlugin.iconUrl = getPluginUrl(newPlugin.url, "");
+          newPlugin.scopes =
+            typeof newPlugin.scopes === "string"
+              ? (newPlugin.scopes.split(",") as PluginScopes[])
+              : newPlugin.scopes;
 
-      const isPluginCompatible = this.checkPluginCompatibility(
-        plugin.minDocSpaceVersion,
-      );
+          newPlugin.iconUrl = getPluginUrl(newPlugin.url, "");
 
-      newPlugin.compatible = isPluginCompatible;
+          const isPluginCompatible = this.checkPluginCompatibility(
+            plugin.minDocSpaceVersion,
+          );
 
-      this.installPlugin(newPlugin);
+          newPlugin.compatible = isPluginCompatible;
 
-      if (newPlugin.scopes.includes(PluginScopes.Settings)) {
-        newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
+          this.installPlugin(newPlugin);
+
+          if (newPlugin.scopes.includes(PluginScopes.Settings)) {
+            newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
+          }
+
+          callback?.(newPlugin);
+          resolve(newPlugin);
+        } catch (error) {
+          reject(error);
+        }
+      };
+
+      const onError = () => {};
+
+      const frameDoc = this.pluginFrame?.contentDocument;
+      const script = frameDoc?.createElement("script");
+
+      if (script) {
+        script.setAttribute("type", "text/javascript");
+        script.setAttribute("id", `${plugin.name}`);
+
+        script.onload = onLoad.bind(this);
+        script.onerror = onError.bind(this);
+
+        script.src = plugin.url;
+        script.async = true;
+
+        frameDoc?.body.appendChild(script);
+      } else {
+        reject(new Error("Failed to create script element"));
       }
-
-      callback?.(newPlugin);
-    };
-
-    const onError = () => {};
-
-    const frameDoc = this.pluginFrame?.contentDocument;
-
-    const script = frameDoc?.createElement("script");
-
-    if (script) {
-      script.setAttribute("type", "text/javascript");
-      script.setAttribute("id", `${plugin.name}`);
-
-      if (onLoad) script.onload = onLoad.bind(this);
-      if (onError) script.onerror = onError.bind(this);
-
-      script.src = plugin.url;
-      script.async = true;
-
-      frameDoc?.body.appendChild(script);
-    }
+    });
   };
 
   installPlugin = async (plugin: TPlugin, addToList = true) => {

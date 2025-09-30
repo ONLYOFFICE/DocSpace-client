@@ -27,17 +27,16 @@
 import React from "react";
 import moment from "moment";
 import type { TFunction } from "i18next";
+import type { IndexRange } from "react-virtualized";
 
-import type {
-  TAvailableExternalRights,
-  TFile,
-  TFileLink,
-  TFolder,
-} from "../../api/files/types";
-import type { LinkParamsType } from "../../types";
+import type { TFile, TFileLink, TFolder } from "../../api/files/types";
+import type { LinkParamsType, TAvailableShareRights } from "../../types";
 import type { ShareAccessRights } from "../../enums";
 
 import type { TOption } from "../combobox";
+import type { TUser } from "../../api/people/types";
+import type { TGroup } from "../../api/groups/types";
+import type { RoomMember } from "../../api/rooms/types";
 
 export type ShareCalendarProps = {
   onDateSet: (formattedDate: moment.Moment) => void;
@@ -55,7 +54,7 @@ export type DefaultCreatePropsType = {
 
 export type AccessItem = { access?: ShareAccessRights };
 
-export type TLink = TFileLink | { isLoaded: boolean };
+export type TLink = TFileLink | { key: string; isLoaded: boolean };
 
 export type LinkRowProps = {
   onAddClick?: () => Promise<void>;
@@ -71,7 +70,7 @@ export type LinkRowProps = {
 
   removedExpiredLink: (link: TFileLink) => void;
 
-  availableExternalRights?: TAvailableExternalRights;
+  availableShareRights?: TAvailableShareRights;
 
   loadingLinks: (string | number)[];
 
@@ -82,6 +81,8 @@ export type LinkRowProps = {
   getData: (link: TFileLink) => ContextMenuModel[];
   onOpenContextMenu: (e: React.MouseEvent) => void;
   onCloseContextMenu: () => void;
+
+  isShareLink?: boolean;
 } & (
   | {
       isRoomsLink?: undefined | false;
@@ -130,6 +131,11 @@ export type ShareProps = {
   setEditLinkPanelIsVisible: (value: boolean) => void;
   setLinkParams: (linkParams: LinkParamsType) => void;
   fileLinkProps?: TFileLink[];
+  members?: RoomMember[];
+  shareMembersTotal?: number;
+  isEditor?: boolean;
+  onAddUser?: (item: TFolder | TFile) => void;
+  disabledSharedUser?: boolean;
 };
 
 export interface LinkTitleProps {
@@ -146,4 +152,101 @@ export interface LinkTitleProps {
 export type TCopyShareLinkOptions = {
   canShowLink: boolean;
   onClickLink: VoidFunction;
+};
+
+export type TShareBarProps = {
+  t: TFunction;
+  isFolder?: boolean;
+  parentShared?: boolean;
+  selfId?: string;
+  isEditor?: boolean;
+};
+
+export interface UseMembersProps {
+  members: RoomMember[] | undefined;
+  selfId: string | undefined;
+  shareMembersTotal: number;
+  infoPanelSelection: TFile | TFolder;
+
+  linksCount: number;
+  onAddUser?: (item: TFolder | TFile) => void;
+  disabledSharedUser?: boolean;
+}
+
+export interface UseShareProps {
+  infoPanelSelection: TFile | TFolder;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setEditLinkPanelIsVisible: (value: boolean) => void;
+  setLinkParams: (linkParams: LinkParamsType) => void;
+
+  onlyOneLink?: boolean;
+  shareChanged?: boolean;
+  setShareChanged?: (value: boolean) => void;
+
+  fileLinkProps?: TLink[];
+  setView?: (view: string) => void;
+  setIsScrollLocked?: (isScrollLocked: boolean) => void;
+  onOpenPanel?: (options: {
+    visible: boolean;
+    updateAccessLink: () => Promise<void>;
+    fileId: string | number;
+  }) => void;
+  setEmbeddingPanelData?: (value: {
+    visible: boolean;
+    item?: TFile | TFolder;
+  }) => void;
+}
+
+export type TTitleID =
+  | "groups"
+  | "users"
+  | "guests"
+  | "expected"
+  | "administrators";
+
+export type TTitleShare = {
+  id: TTitleID;
+  displayName: string;
+  isTitle: true;
+  isExpect?: boolean;
+};
+
+export type TShareMember = {
+  access: number;
+  canEditAccess: boolean;
+  isExpect?: boolean;
+} & (TUser | TGroup);
+
+export type TShare = TTitleShare | TShareMember;
+export type TShareMembers = Record<TTitleID, TShare[]>;
+
+export interface UserProps {
+  user: TShare;
+  currentUser: TShareMember;
+
+  options?: TOption[];
+  hideCombobox?: boolean;
+  selectedOption?: TOption;
+  onSelectOption?: (option: TOption) => Promise<void>;
+
+  showInviteIcon?: boolean;
+  onRepeatInvitation?: () => Promise<void>;
+
+  onClickGroup?: (group: TGroup) => void;
+
+  index?: number;
+}
+
+export type ListProps = {
+  hasNextPage: boolean;
+  itemCount: number;
+  loadNextPage: (params: IndexRange) => Promise<void>;
+  linksBlockLength: number;
+  withoutTitlesAndLinks: boolean;
+  children: React.ReactNode;
+};
+
+export type Filter = {
+  startIndex: number;
+  count: number;
 };

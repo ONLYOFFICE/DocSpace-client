@@ -3,7 +3,7 @@
   "content": "Select .PDF file",
   "content_en_sha1_hash": "82630c35ad39df40c3e767ac55912619244898d8",
   "created_at": "2025-05-19T21:30:48.505Z",
-  "updated_at": "2025-09-15T13:14:37.232Z",
+  "updated_at": "2025-09-23T07:24:24.018Z",
   "comment": {
     "text": "This translation key is used to display the text \"Select .PDF file\" in a file selection dialog. It appears on a specific button when selecting a PDF file, and it's intended for users who need assistance understanding the purpose of the action.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesPanels/index.js",
-      "line_number": 197,
+      "line_number": 198,
       "context": "const descriptionTextFileFormRoomDialog = useMemo(() => {\n const text = {\n [FilesSelectorFilterTypes.DOCX]: t(\"Common:SelectDOCXFormat\"),\n // [FilesSelectorFilterTypes.DOCXF]: t(\"Common:SelectDOCXFFormat\"),\n [FilesSelectorFilterTypes.PDF]: t(\"Common:SelectPDFFormat\"),\n [FilterType.PDFForm]: t(\"Common:SelectPDFFormat\"),\n };\n \n return text[selectFileFormRoomFilterParam];\n }, [selectFileFormRoomFilterParam, t]);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FilesPanels/index.js",
-      "line_number": 197,
+      "line_number": 198,
       "context": "const descriptionTextFileFormRoomDialog = useMemo(() => {\n const text = {\n [FilesSelectorFilterTypes.DOCX]: t(\"Common:SelectDOCXFormat\"),\n // [FilesSelectorFilterTypes.DOCXF]: t(\"Common:SelectDOCXFFormat\"),\n [FilesSelectorFilterTypes.PDF]: t(\"Common:SelectPDFFormat\"),\n [FilterType.PDFForm]: t(\"Common:SelectPDFFormat\"),\n };\n \n return text[selectFileFormRoomFilterParam];\n }, [selectFileFormRoomFilterParam, t]);",
       "module": "/packages/client"
     },

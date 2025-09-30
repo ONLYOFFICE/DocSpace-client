@@ -50,7 +50,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
 
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router";
+import { useLocation } from "react-router";
 import {
   Events,
   DeviceType,
@@ -459,16 +459,6 @@ const ArticleMainButtonContent = (props) => {
       onClick: onCreate,
       action: "pdf",
       key: "pdf",
-    };
-
-    const showSelectorDocx = {
-      id: "actions_template_from-file",
-      className: "main-button_drop-down_sub",
-      icon: FormFileReactSvgUrl,
-      label: t("Translations:SubNewFormFile"),
-      onClick: onShowSelectFileDialog,
-      disabled: isPrivacy,
-      key: "form-file",
     };
 
     const createNewDocumentDocx = {

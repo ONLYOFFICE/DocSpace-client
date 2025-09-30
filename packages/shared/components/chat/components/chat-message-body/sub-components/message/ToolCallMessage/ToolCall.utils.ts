@@ -26,6 +26,12 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import WordIcon from "PUBLIC_DIR/images/icons/16/word.svg?url";
+import CellIcon from "PUBLIC_DIR/images/icons/16/cell.svg?url";
+import CellCommonIcon from "PUBLIC_DIR/images/icons/16/cellCommon.svg?url";
+import TextIcon from "PUBLIC_DIR/images/icons/16/text.svg?url";
+import PdfIcon from "PUBLIC_DIR/images/icons/16/pdf.svg?url";
+
 export const getRootDomain = (url: string) => {
   try {
     const hostname = new URL(url).hostname;
@@ -34,4 +40,23 @@ export const getRootDomain = (url: string) => {
   } catch {
     return "";
   }
+};
+
+const knowledgeIcons: Record<string, string> = {
+  ".docx": WordIcon,
+  ".xlsx": CellIcon,
+  ".csv": CellCommonIcon,
+  ".txt": TextIcon,
+  ".pdf": PdfIcon,
+};
+
+const getExtension = (fileName: string) => {
+  const idx = fileName.lastIndexOf(".");
+  return idx !== -1 ? fileName.slice(idx) : "";
+};
+
+export const getKnowledgeDocumentIconURLByFileName = (fileName: string) => {
+  const extension = getExtension(fileName);
+
+  return knowledgeIcons[extension] || "";
 };

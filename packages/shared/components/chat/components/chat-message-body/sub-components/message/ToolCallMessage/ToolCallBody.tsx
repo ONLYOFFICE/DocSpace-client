@@ -41,7 +41,10 @@ import MarkdownField from "../Markdown";
 import type { ToolCallPlacement } from "./ToolCall.enum";
 import { Heading, HeadingLevel } from "../../../../../../heading";
 import { Link, LinkTarget } from "../../../../../../link";
-import { getRootDomain } from "./ToolCall.utils";
+import {
+  getKnowledgeDocumentIconURLByFileName,
+  getRootDomain,
+} from "./ToolCall.utils";
 import { useMessageStore } from "../../../../../store/messageStore";
 
 const SourceView = ({ content }: { content: TToolCallContent }) => {
@@ -74,7 +77,10 @@ const SourceView = ({ content }: { content: TToolCallContent }) => {
       <div className={styles.sourceViewList}>
         {sources.map((s, index) => {
           const hostName = getRootDomain(s.url || "");
-          const faviconUrl = s.faviconUrl; // TODO: CSP error. Maybe need to change to google favicon api
+          const isFile = "fileId" in s;
+          const iconUrl = isFile
+            ? getKnowledgeDocumentIconURLByFileName(s.title)
+            : s.faviconUrl; // TODO: CSP error. Maybe need to change to google favicon api
 
           return (
             <Link
@@ -84,7 +90,7 @@ const SourceView = ({ content }: { content: TToolCallContent }) => {
               target={LinkTarget.blank}
               textDecoration="none"
             >
-              <img src={faviconUrl} alt="source icon" width={16} height={16} />
+              <img src={iconUrl} alt="source icon" width={16} height={16} />
               <Text
                 fontSize="14px"
                 fontWeight={600}

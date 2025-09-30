@@ -704,6 +704,9 @@ class PluginStore {
 
     if (!items) return;
 
+    const maxDepth = 2;
+    let currentDepth = 1;
+
     // Helper function to recursively process context menu items
     const processContextMenuItem = (value: IContextMenuItem) => {
       const onClick = async (fileId: number) => {
@@ -732,19 +735,22 @@ class PluginStore {
         });
       };
 
+      const { items, ...rest } = value;
+
       // Create processed result object
       const processedItem: IContextMenuItem = {
-        ...value,
+        ...rest,
         onClick,
         pluginName: plugin.name,
         icon: `${plugin.iconUrl}/assets/${value.icon}`,
       };
 
       // Recursively process nested items if they exist
-      if (value.items && value.items.length > 0) {
-        processedItem.items = value.items.map((nestedItem) => {
+      if (items && items.length > 0 && currentDepth < maxDepth) {
+        processedItem.items = items.map((nestedItem) => {
           return processContextMenuItem(nestedItem);
         });
+        currentDepth += 1;
       }
 
       return processedItem;
@@ -754,6 +760,7 @@ class PluginStore {
     Array.from(items).forEach(([key, value]: [string, IContextMenuItem]) => {
       const contextMenuItem = processContextMenuItem(value);
       this.contextMenuItems.set(key, contextMenuItem);
+      currentDepth = 1;
     });
   };
 
@@ -1217,6 +1224,7 @@ class PluginStore {
   }
 
   get contextMenuItemsList() {
+    console.log(this.contextMenuItems);
     const items: { key: string; value: IContextMenuItem }[] = Array.from(
       this.contextMenuItems,
       ([key, value]) => {

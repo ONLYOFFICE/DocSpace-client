@@ -419,7 +419,7 @@ class TableStore {
         isPersonalReadOnly,
         isRecentFolder,
         isFavoritesFolder,
-        isSharedWithMeFolder,
+        isSharedWithMeFolderRoot,
       } = this.treeFoldersStore;
 
       const contactsView = getContactsView();
@@ -453,7 +453,7 @@ class TableStore {
         return;
       }
 
-      if (isSharedWithMeFolder) {
+      if (isSharedWithMeFolderRoot) {
         this.setAuthorShareWithMeColumn(
           splitColumns.includes("AuthorShareWithMe"),
         );
@@ -815,7 +815,7 @@ class TableStore {
       isRecentFolder,
       isTemplatesFolder,
       isFavoritesFolder,
-      isSharedWithMeFolder,
+      isSharedWithMeFolderRoot,
     } = this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
@@ -860,7 +860,7 @@ class TableStore {
       tableStorageName = `${TABLE_RECENT_COLUMNS}=${userId}`;
     else if (isFavoritesFolder)
       tableStorageName = `${TABLE_FAVORITES_COLUMNS}=${userId}`;
-    else if (isSharedWithMeFolder)
+    else if (isSharedWithMeFolderRoot)
       tableStorageName = `${TABLE_SHARED_WITH_ME_COLUMNS}=${userId}`;
     else if (isIndexedFolder)
       tableStorageName = `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`;
@@ -881,7 +881,7 @@ class TableStore {
       isRecentFolder,
       isTemplatesFolder,
       isFavoritesFolder,
-      isSharedWithMeFolder,
+      isSharedWithMeFolderRoot,
     } = this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
@@ -928,7 +928,7 @@ class TableStore {
       columnStorageName = `${COLUMNS_INSIDE_GROUPS_SIZE}=${userId}`;
     else if (isContactsGroups)
       columnStorageName = `${COLUMNS_GROUPS_SIZE}=${userId}`;
-    else if (isSharedWithMeFolder)
+    else if (isSharedWithMeFolderRoot)
       columnStorageName = `${COLUMNS_SHARED_WITH_ME_SIZE}=${userId}`;
     else if (isDocumentsFolder) columnStorageName = `${COLUMNS_SIZE}=${userId}`;
     else columnStorageName = "";
@@ -947,7 +947,7 @@ class TableStore {
       isRecentFolder,
       isTemplatesFolder,
       isFavoritesFolder,
-      isSharedWithMeFolder,
+      isSharedWithMeFolderRoot,
     } = this.treeFoldersStore;
 
     const { isIndexedFolder } = this.selectedFolderStore;
@@ -995,7 +995,7 @@ class TableStore {
       columnInfoPanelStorageName = `${COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE}=${userId}`;
     else if (isContactsGroups)
       columnInfoPanelStorageName = `${COLUMNS_GROUPS_INFO_PANEL_SIZE}=${userId}`;
-    else if (isSharedWithMeFolder)
+    else if (isSharedWithMeFolderRoot)
       columnInfoPanelStorageName = `${COLUMNS_SHARED_WITH_ME_INFO_PANEL_SIZE}=${userId}`;
     else if (isDocumentsFolder)
       columnInfoPanelStorageName = `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;

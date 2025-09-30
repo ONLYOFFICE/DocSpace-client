@@ -44,6 +44,7 @@ export const getDialogContent = (
   isPersonalRoom,
   isRoom,
   isTemplatesFolder,
+  isSharedWithMeFolderRoot,
 ) => {
   if (!selection) return null;
 
@@ -135,7 +136,12 @@ export const getDialogContent = (
     }
   }
 
-  if (isPersonalRoom || isRoom || isTemplatesFolder) {
+  if (
+    isPersonalRoom ||
+    isRoom ||
+    isTemplatesFolder ||
+    isSharedWithMeFolderRoot
+  ) {
     if (isSingle) {
       return (
         <>

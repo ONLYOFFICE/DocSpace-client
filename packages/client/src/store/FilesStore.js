@@ -72,6 +72,7 @@ import {
   ROOMS_PROVIDER_TYPE_NAME,
   thumbnailStatuses,
   CategoryType,
+  SHARED_WITH_ME_PATH,
 } from "@docspace/shared/constants";
 
 import {
@@ -2304,6 +2305,11 @@ class FilesStore {
         this.filesSettingsStore?.extsWebCustomFilterEditing || [];
       const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
 
+      const isSharedWithMeFolderSection =
+        this.treeFoldersStore.sharedWithMeFolderId === item.rootFolderId &&
+        item.rootFolderType === FolderType.SHARE &&
+        window.location.pathname.includes(SHARED_WITH_ME_PATH);
+
       let fileOptions = [
         // "open",
         "select",
@@ -2370,7 +2376,7 @@ class FilesStore {
         fileOptions = removeOptions(fileOptions, optionsToRemove);
       }
 
-      if (item.rootFolderType !== FolderType.SHARE) {
+      if (!isSharedWithMeFolderSection) {
         fileOptions = removeOptions(fileOptions, [
           "remove-shared-folder-or-file",
         ]);
@@ -2849,6 +2855,12 @@ class FilesStore {
 
       return roomOptions;
     }
+
+    const isSharedWithMeFolderSection =
+      this.treeFoldersStore.sharedWithMeFolderId === item.rootFolderId &&
+      item.rootFolderType === FolderType.SHARE &&
+      window.location.pathname.includes(SHARED_WITH_ME_PATH);
+
     let folderOptions = [
       "select",
       "open",
@@ -2882,7 +2894,7 @@ class FilesStore {
       "delete",
     ];
 
-    if (item.rootFolderType !== FolderType.SHARE) {
+    if (!isSharedWithMeFolderSection) {
       folderOptions = removeOptions(folderOptions, [
         "remove-shared-folder-or-file",
       ]);

@@ -5,8 +5,8 @@
   "DeleteGroupTitle": "Elimina gruppo",
   "DeleteTemplate": "Sei sicuro di voler eliminare il modello di stanza <1>«{{templateName}}»</1>? Il modello non potrà essere ripristinato.",
   "DeleteTemplates": "Sei sicuro di voler eliminare i modelli di stanza selezionati? Non potranno essere ripristinati.",
+  "FileDeletedAfter": "Il file verrà eliminato definitivamente entro 30 giorni.",
   "UnsubscribeButton": "Annullare l'iscrizione",
   "UnsubscribeNote": "Sei sicuro di voler cancellarti dagli elementi selezionati nell'elenco?",
-  "UnsubscribeTitle": "Conferma di annullamento dell'iscrizione",
-  "FileDeletedAfter": "Il file verrà eliminato definitivamente entro 30 giorni."
+  "UnsubscribeTitle": "Conferma di annullamento dell'iscrizione"
 }

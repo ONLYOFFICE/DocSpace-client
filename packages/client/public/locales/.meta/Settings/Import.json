@@ -3,7 +3,7 @@
   "content": "Import",
   "content_en_sha1_hash": "d6fbc9d2bdd580e18ed0bc5805dc26db323d6f5f",
   "created_at": "2025-05-19T21:30:51.611Z",
-  "updated_at": "2025-09-17T13:43:01.757Z",
+  "updated_at": "2025-09-29T11:28:56.123Z",
   "comment": {
     "text": "This translation key is used for the text \"Import\" displayed on a button or link that initiates data import functionality in a portal settings page. It is intended to be translated into various languages to support global accessibility.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/Providers.tsx",
       "line_number": 44,
-      "context": "import WorkspaceDarkSvgUrl from \"PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url\";\n \n import { LinkType } from \"@docspace/shared/components/link/Link.enums\";\n import { Link } from \"@docspace/shared/components/link\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import { WorkspacesContainer } from \"../StyledDataImport\";\n import DataImportLoader from \"../sub-components/DataImportLoader\";\n import { ProvidersProps, InjectedProvidersProps } from \"../types\";\n \n const Providers = (props: ProvidersProps) => {\n const { theme, services, setWorkspace, logoText, showPortalSettingsLoader } =",
+      "context": "import WorkspaceDarkSvgUrl from \"PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url\";\n \n import { LinkType } from \"@docspace/shared/components/link/Link.enums\";\n import { Link, LinkTarget } from \"@docspace/shared/components/link\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import { WorkspacesContainer } from \"../StyledDataImport\";\n import DataImportLoader from \"../sub-components/DataImportLoader\";\n import { ProvidersProps, InjectedProvidersProps } from \"../types\";\n \n const Providers = (props: ProvidersProps) => {\n const {",
       "module": "/packages/client"
     }
   ],

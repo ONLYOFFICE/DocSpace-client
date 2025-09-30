@@ -3,7 +3,7 @@
   "content": "You are about to move <strong>files ({{filesCount}})</strong> to Trash.",
   "content_en_sha1_hash": "5d6027a0114ae90bf513e0dff4acd69a235899cb",
   "created_at": "2025-09-24T13:10:15.388Z",
-  "updated_at": "2025-09-24T13:15:37.960Z",
+  "updated_at": "2025-09-29T18:22:19.462Z",
   "comment": {
     "text": "This key displays a confirmation message within a dialog, informing the user that they are about to move a specific number of files (indicated by `filesCount`) to the trash. The message appears when both files and folders are being deleted.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 101,
+      "line_number": 103,
       "context": "const foldersCount = items.folders.length;\n \n if (filesCount && foldersCount) {\n return (\n <>\n <Trans t={t} i18nKey=\"DeleteFilesAndFolders\" ns=\"DeleteDialog\">\n You are about to delete the{\" \"}\n <strong>files ({{ filesCount }})</strong> and{\" \"}\n <strong>folders ({{ foldersCount }})</strong> to Trash.\n </Trans>{\" \"}\n {t(\"ItemsPermanentlyDeleted\")} {t(\"Common:WantToContinue\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 101,
+      "line_number": 103,
       "context": "const foldersCount = items.folders.length;\n \n if (filesCount && foldersCount) {\n return (\n <>\n <Trans t={t} i18nKey=\"DeleteFilesAndFolders\" ns=\"DeleteDialog\">\n You are about to delete the{\" \"}\n <strong>files ({{ filesCount }})</strong> and{\" \"}\n <strong>folders ({{ foldersCount }})</strong> to Trash.\n </Trans>{\" \"}\n {t(\"ItemsPermanentlyDeleted\")} {t(\"Common:WantToContinue\")}",
       "module": "/packages/client"
     }

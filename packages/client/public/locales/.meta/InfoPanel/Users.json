@@ -3,7 +3,7 @@
   "content": "Users",
   "content_en_sha1_hash": "57f2b181d0a5e79a147ea1cdf41457f58dbbb3c9",
   "created_at": "2025-05-19T21:30:54.976Z",
-  "updated_at": "2025-09-26T15:21:06.227Z",
+  "updated_at": "2025-09-29T18:22:19.511Z",
   "comment": {
     "text": "This translation key is used to display the label \"Users\" in the InfoPanelStore.js file. It appears as a title when users are displayed and needs to be translated into different languages, providing a user-friendly interface for various contexts.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 546,
+      "line_number": 548,
       "context": "guests.push(member);\n } else {\n if (users.length === 0) {\n users.push({\n id: \"users\",\n displayName: t(\"InfoPanel:Users\"),\n isTitle: true,\n } satisfies TTitleShare);\n }\n \n users.push(member);",
       "module": "/packages/shared"
     }

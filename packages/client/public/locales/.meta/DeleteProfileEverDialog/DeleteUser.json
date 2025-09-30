@@ -3,7 +3,7 @@
   "content": "Delete user",
   "content_en_sha1_hash": "9afe6c7b95fe53a75b43a157827c9ff2fec371b0",
   "created_at": "2025-05-19T21:30:56.667Z",
-  "updated_at": "2025-09-17T13:43:01.625Z",
+  "updated_at": "2025-09-29T11:28:55.960Z",
   "comment": {
     "text": "This translation key is used to display the text \"Delete user\" in a delete profile ever dialog, likely as the label for a button that initiates the deletion process. It appears on a file line (118) in /packages/client/src/components/dialogs/DeleteProfileEverDialog/index.tsx, suggesting its use in a UI component related to deleting user data.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 256,
+      "line_number": 255,
       "context": "id: \"option_delete-user\",\n key: option,\n icon: TrashReactSvgUrl,\n label: item.isVisitor\n ? t(\"DeleteProfileEverDialog:DeleteGuest\")\n : t(\"DeleteProfileEverDialog:DeleteUser\"),\n onClick: () => this.toggleDeleteProfileEverDialog([item]),\n };\n \n case \"details\":\n return {",
       "module": "/packages/client"
     }

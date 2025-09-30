@@ -5,8 +5,8 @@
   "DeleteGroupTitle": "Groep verwijderen",
   "DeleteTemplate": "Wilt u sjabloon kamer <1>“{{templateName}}”</1> echt verwijderen? Het sjabloon kan niet hersteld worden.",
   "DeleteTemplates": "Wilt u echt geselecteerde kamer sjablonen verwijderen? Ze kunnen niet hersteld worden.",
+  "FileDeletedAfter": "Het bestand wordt na 30 dagen definitief verwijderd.",
   "UnsubscribeButton": "Uitschrijven",
   "UnsubscribeNote": "Weet u zeker dat u zich wilt uitschrijven voor de gekozen items van de lijst?",
-  "UnsubscribeTitle": "Uitschrijven bevestiging",
-  "FileDeletedAfter": "Het bestand wordt na 30 dagen definitief verwijderd."
+  "UnsubscribeTitle": "Uitschrijven bevestiging"
 }

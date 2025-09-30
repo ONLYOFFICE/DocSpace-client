@@ -1,4 +1,5 @@
 {
+  "AccessLevel": "Access level",
   "AccessSettings": "Access settings",
   "AccessToTemplate": "Access to template",
   "ActionCannotUndone": "This action cannot be undone. Are you sure you want to continue?",
@@ -123,6 +124,7 @@
   "NoExternalLinks": "No external links",
   "Open": "Open",
   "OpenCreatedTemplate": "Open created template",
+  "OpenedViaLink": "Opened via link: access <strong>\"{{access}}\"</strong>.",
   "OpenLocation": "Open location",
   "OtherProcesses": "Other processes",
   "PersonalContentRemovalNotice": "Your personal files and folders in the {{sectionName}} section will be <1>deleted</1> since Guests don't have access to this section. Files remain available for viewing and downloading <1>for 30 days</1>.",
@@ -199,7 +201,5 @@
   "WarningMoveToFormRoomServal": "Moving several files to the Form Filling room is not supported. Move one {{ organizationName }} PDF form at a time.",
   "WillBeDeletedPermanently": "{{date}} will be deleted permanently",
   "YouLeftTheRoom": "You have left the room",
-  "YourUserTypeHasChanged": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>.",
-  "AccessLevel": "Access level",
-  "OpenedViaLink": "Opened via link: access <strong>\"{{access}}\"</strong>."
+  "YourUserTypeHasChanged": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>."
 }

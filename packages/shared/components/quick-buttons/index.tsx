@@ -66,6 +66,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     onClickLock,
     onClickFavorite,
     isRecentFolder,
+    isTrashFolder,
   } = props;
 
   const { id, shared, security } = item;
@@ -234,7 +235,8 @@ export const QuickButtons = (props: QuickButtonsProps) => {
           {!isRoom(item) &&
           item?.isFavorite &&
           !isRecentFolder &&
-          !isPublicRoom ? (
+          !isPublicRoom &&
+          !isTrashFolder ? (
             <IconButton
               iconName={
                 item?.isFavorite ? FavoriteFillReactSvgUrl : FavoriteReactSvgUrl

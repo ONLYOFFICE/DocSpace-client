@@ -23,7 +23,7 @@
     "@use-gesture/react": "10.3.1",
     "@xyflow/react": "^12.5.1",
     "attr-accept": "2.2.4",
-    "axios": "0.22.0",
+    "axios": "0.30.2",
     "cnbuilder": "3.1.0",
     "cross-fetch": "3.1.8",
     "csvjson-json_beautifier": "5.0.4",

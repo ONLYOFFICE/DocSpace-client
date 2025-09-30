@@ -26,47 +26,12 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React from "react";
+export const getRootDomain = (url: string) => {
+  try {
+    const hostname = new URL(url).hostname;
 
-import type { TToolCallContent } from "../../../../../../../api/ai/types";
-
-import styles from "../../../ChatMessageBody.module.scss";
-
-import { ToolCallHeader } from "./ToolCallHeader";
-import { ToolCallBody } from "./ToolCallBody";
-import { ToolCallPlacement, ToolCallStatus } from "./ToolCall.enum";
-import classNames from "classnames";
-type ToolCallProps = {
-  content: TToolCallContent;
-  placement: ToolCallPlacement;
-  status: ToolCallStatus;
-};
-
-export const ToolCall = ({ content, status, placement }: ToolCallProps) => {
-  const [collapsed, setCollapsed] = React.useState(true);
-
-  const expandable =
-    placement === ToolCallPlacement.ConfirmDialog ||
-    status === ToolCallStatus.Finished;
-
-  return (
-    <div
-      className={classNames(styles.toolCall, {
-        [styles.inDialog]: placement === ToolCallPlacement.ConfirmDialog,
-      })}
-    >
-      <ToolCallHeader
-        content={content}
-        collapsed={collapsed}
-        setCollapsed={setCollapsed}
-        status={status}
-        placement={placement}
-        expandable={expandable}
-      />
-
-      {!expandable || collapsed ? null : (
-        <ToolCallBody content={content} placement={placement} />
-      )}
-    </div>
-  );
+    return hostname.split(".").slice(-2).join(".");
+  } catch {
+    return "";
+  }
 };

@@ -30,9 +30,12 @@ import React from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
+import { observer } from "mobx-react";
 
 import ToolFinish from "PUBLIC_DIR/images/tool.finish.svg?url";
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg?url";
+import DocumentsIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
+import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 
 import { Text } from "../../../../../../text";
 import { Loader, LoaderTypes } from "../../../../../../loader";
@@ -43,6 +46,7 @@ import type { TToolCallContent } from "../../../../../../../api/ai/types";
 
 import styles from "../../../ChatMessageBody.module.scss";
 import { ToolCallPlacement, ToolCallStatus } from "./ToolCall.enum";
+import { useMessageStore } from "../../../../../store/messageStore";
 
 type ToolCallHeaderProps = {
   content: TToolCallContent;
@@ -53,33 +57,39 @@ type ToolCallHeaderProps = {
   expandable?: boolean;
 };
 
-export const ToolCallHeader = ({
-  content,
-  collapsed,
-  setCollapsed,
-  status,
-  placement,
-  expandable,
-}: ToolCallHeaderProps) => {
+const SearchToolContent = ({ content }: { content: TToolCallContent }) => {
+  const { t } = useTranslation(["Common"]);
+  const { knowledgeSearchToolName, webSearchToolName, webCrawlingToolName } =
+    useMessageStore();
+
+  const searchToolsTitles: Record<string, string> = {
+    [knowledgeSearchToolName]: t("Common:KnowledgeSearch"),
+    [webSearchToolName]: t("Common:WebSearch"),
+    [webCrawlingToolName]: t("Common:WebCrawling"),
+  };
+
+  const searchToolIcons: Record<string, string> = {
+    [knowledgeSearchToolName]: DocumentsIcon,
+    [webSearchToolName]: UniverseIcon,
+    [webCrawlingToolName]: UniverseIcon,
+  };
+
+  const toolName = searchToolsTitles[content.name] || content.name;
+  const searchToolIcon = searchToolIcons[content.name];
+
+  return (
+    <>
+      <ReactSVG className={styles.searchToolIcon} src={searchToolIcon} />
+      <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
+        {toolName}
+      </Text>
+    </>
+  );
+};
+
+const MCPToolContent = ({ content }: { content: TToolCallContent }) => {
   const { t } = useTranslation(["Common"]);
   const { isBase } = useTheme();
-
-  const statusIcons: Record<ToolCallStatus, React.ReactNode> = {
-    [ToolCallStatus.Loading]: <Loader type={LoaderTypes.track} size="12px" />,
-    [ToolCallStatus.Confirmation]: (
-      <Loader type={LoaderTypes.track} size="12px" />
-    ),
-    [ToolCallStatus.Finished]: (
-      <ReactSVG src={ToolFinish} className={styles.toolFinishIcon} />
-    ),
-  };
-
-  const statusIcon =
-    placement === ToolCallPlacement.ConfirmDialog ? null : statusIcons[status];
-
-  const onClick = () => {
-    setCollapsed(!collapsed);
-  };
 
   const serverIcon = getServerIcon(
     content.mcpServerInfo?.serverType || ServerType.Custom,
@@ -87,14 +97,7 @@ export const ToolCallHeader = ({
   );
 
   return (
-    <div
-      className={classNames(styles.toolCallHeader, {
-        [styles.hide]: collapsed,
-        [styles.noClick]: !expandable,
-      })}
-      onClick={onClick}
-    >
-      {statusIcon}
+    <>
       <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
         {t("Common:ToolCallExecuted")}:
       </Text>
@@ -114,9 +117,67 @@ export const ToolCallHeader = ({
       >
         {content.name}
       </Text>
-      {expandable ? (
-        <ReactSVG src={ArrowRightIcon} className={styles.arrowRightIcon} />
-      ) : null}
-    </div>
+    </>
   );
 };
+
+export const ToolCallHeader = observer(
+  ({
+    content,
+    collapsed,
+    setCollapsed,
+    status,
+    placement,
+    expandable,
+  }: ToolCallHeaderProps) => {
+    const { knowledgeSearchToolName, webSearchToolName, webCrawlingToolName } =
+      useMessageStore();
+
+    const statusIcons: Record<ToolCallStatus, React.ReactNode> = {
+      [ToolCallStatus.Loading]: <Loader type={LoaderTypes.track} size="12px" />,
+      [ToolCallStatus.Confirmation]: (
+        <Loader type={LoaderTypes.track} size="12px" />
+      ),
+      [ToolCallStatus.Finished]: (
+        <ReactSVG src={ToolFinish} className={styles.toolFinishIcon} />
+      ),
+    };
+
+    const isSearchTool = [
+      knowledgeSearchToolName,
+      webSearchToolName,
+      webCrawlingToolName,
+    ].includes(content.name);
+
+    const statusIcon =
+      placement === ToolCallPlacement.ConfirmDialog
+        ? null
+        : statusIcons[status];
+
+    const onClick = () => {
+      setCollapsed(!collapsed);
+    };
+
+    return (
+      <div
+        className={classNames(styles.toolCallHeader, {
+          [styles.hide]: collapsed,
+          [styles.noClick]: !expandable,
+        })}
+        onClick={onClick}
+      >
+        {statusIcon}
+
+        {isSearchTool ? (
+          <SearchToolContent content={content} />
+        ) : (
+          <MCPToolContent content={content} />
+        )}
+
+        {expandable ? (
+          <ReactSVG src={ArrowRightIcon} className={styles.arrowRightIcon} />
+        ) : null}
+      </div>
+    );
+  },
+);

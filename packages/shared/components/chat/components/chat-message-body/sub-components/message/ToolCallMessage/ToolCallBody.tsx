@@ -41,35 +41,35 @@ import MarkdownField from "../Markdown";
 import type { ToolCallPlacement } from "./ToolCall.enum";
 import { Heading, HeadingLevel } from "../../../../../../heading";
 import { Link, LinkTarget } from "../../../../../../link";
+import { getRootDomain } from "./ToolCall.utils";
+import { useMessageStore } from "../../../../../store/messageStore";
 
-const getRootDomain = (url: string) => {
-  try {
-    const hostname = new URL(url).hostname;
+const SourceView = ({ content }: { content: TToolCallContent }) => {
+  const { t } = useTranslation("Common");
 
-    return hostname.split(".").slice(-2).join(".");
-  } catch {
-    return "";
-  }
-};
+  if (!content.result) return null;
 
-const SourceView = ({
-  query,
-  sources,
-}: {
-  query: string;
-  sources: TToolCallResultSourceData[];
-}) => {
+  const sources: TToolCallResultSourceData[] = Array.isArray(
+    content.result?.data,
+  )
+    ? content.result?.data
+    : [content.result?.data];
+
+  const searchTopic = content.arguments.query;
+
   return (
     <div className={styles.sourceView}>
-      <Heading
-        className={styles.sourceViewHeading}
-        level={HeadingLevel.h4}
-        fontSize="15px"
-        fontWeight={600}
-        truncate
-      >
-        Search for {query}
-      </Heading>
+      {searchTopic ? (
+        <Heading
+          className={styles.sourceViewHeading}
+          level={HeadingLevel.h4}
+          fontSize="15px"
+          fontWeight={600}
+          truncate
+        >
+          {`${t("Common:SearchFor")} ${searchTopic}`}
+        </Heading>
+      ) : null}
 
       <div className={styles.sourceViewList}>
         {sources.map((s, index) => {
@@ -114,28 +114,16 @@ const SourceView = ({
   );
 };
 
-type ToolCallBodyProps = {
-  content: TToolCallContent;
-  placement: ToolCallPlacement;
-  withSource?: boolean;
-};
-
-export const ToolCallBody = ({
+const CodeView = ({
   content,
   placement,
-  withSource,
-}: ToolCallBodyProps) => {
+}: {
+  content: TToolCallContent;
+  placement: ToolCallPlacement;
+}) => {
   const { t } = useTranslation(["Common"]);
 
   const getResult = () => {
-    if (withSource) {
-      return JSON.stringify(
-        content.result?.data as TToolCallResultSourceData[],
-        null,
-        2,
-      );
-    }
-
     if (content.result && "content" in content.result) {
       return (content.result?.content as Record<string, unknown>[])?.[0]
         .text as string;
@@ -158,39 +146,52 @@ export const ToolCallBody = ({
   const showResult = placement === "message" && content.result;
 
   return (
-    <div className={styles.toolCallBody}>
-      {withSource ? (
-        <SourceView
-          query={content.arguments.query as string}
-          sources={
-            Array.isArray(content.result?.data)
-              ? content.result?.data
-              : [content.result?.data]
-          }
+    <>
+      <div className={styles.toolCallCodeViewItem}>
+        <Text fontSize="15px" lineHeight="16px" fontWeight={600}>
+          {t("Common:ToolCallArg")}
+        </Text>
+        <MarkdownField
+          chatMessage={formatJsonWithMarkdown(content.arguments)}
         />
+      </div>
+      {showResult ? (
+        <div className={styles.toolCallCodeViewItem}>
+          <Text fontSize="15px" lineHeight="16px" fontWeight={600}>
+            {t("Common:ToolCallResult")}
+          </Text>
+          <MarkdownField
+            chatMessage={formatJsonWithMarkdown(
+              isJson ? JSON.parse(result) : result,
+            )}
+          />
+        </div>
+      ) : null}
+    </>
+  );
+};
+
+type ToolCallBodyProps = {
+  content: TToolCallContent;
+  placement: ToolCallPlacement;
+};
+
+export const ToolCallBody = ({ content, placement }: ToolCallBodyProps) => {
+  const { knowledgeSearchToolName, webSearchToolName, webCrawlingToolName } =
+    useMessageStore();
+
+  const isSourceView = [
+    knowledgeSearchToolName,
+    webSearchToolName,
+    webCrawlingToolName,
+  ].includes(content.name);
+
+  return (
+    <div className={styles.toolCallBody}>
+      {isSourceView ? (
+        <SourceView content={content} />
       ) : (
-        <>
-          <div className={styles.toolCallCodeViewItem}>
-            <Text fontSize="15px" lineHeight="16px" fontWeight={600}>
-              {t("Common:ToolCallArg")}
-            </Text>
-            <MarkdownField
-              chatMessage={formatJsonWithMarkdown(content.arguments)}
-            />
-          </div>
-          {showResult ? (
-            <div className={styles.toolCallCodeViewItem}>
-              <Text fontSize="15px" lineHeight="16px" fontWeight={600}>
-                {t("Common:ToolCallResult")}
-              </Text>
-              <MarkdownField
-                chatMessage={formatJsonWithMarkdown(
-                  isJson ? JSON.parse(result) : result,
-                )}
-              />
-            </div>
-          ) : null}
-        </>
+        <CodeView content={content} placement={placement} />
       )}
     </div>
   );

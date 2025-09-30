@@ -65,6 +65,7 @@ const DeleteDialogComponent = (props) => {
     setIsRoomDelete,
     deleteRoomsAction,
     isPersonalRoom,
+    isSharedWithMeFolderRoot,
     isRoom,
     isTemplatesFolder,
     selection: selectionProps,
@@ -215,6 +216,7 @@ const DeleteDialogComponent = (props) => {
         isPersonalRoom,
         isRoom,
         isTemplatesFolder,
+        isSharedWithMeFolderRoot,
       );
 
   const accessButtonLabel = isTemplate
@@ -308,6 +310,7 @@ export default inject(
       isPersonalRoom,
       isRoom,
       isTemplatesFolderRoot,
+      isSharedWithMeFolderRoot,
     } = treeFoldersStore;
 
     const {
@@ -333,6 +336,7 @@ export default inject(
       visible,
       isPrivacyFolder,
       isRecycleBinFolder,
+      isSharedWithMeFolderRoot,
 
       setDeleteDialogVisible,
       deleteAction,

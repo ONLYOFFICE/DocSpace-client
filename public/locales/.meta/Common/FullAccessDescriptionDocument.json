@@ -1,0 +1,28 @@
+{
+  "key_path": "FullAccessDescriptionDocument",
+  "content": "Sharing, editing, reviewing, commenting and renaming.",
+  "content_en_sha1_hash": "38e4053ab906f6b6c53d689acf8bc104efcafcd7",
+  "created_at": "2025-09-29T18:22:04.714Z",
+  "updated_at": "2025-09-29T18:24:07.383Z",
+  "comment": {
+    "text": "This key provides a description of full access permissions, encompassing actions like sharing, editing, reviewing, commenting, and renaming. It's used to explain the extent of access granted to a document, likely in a sharing or permissions dialog. Translators should ensure the description accurately conveys the scope of \"full access\" in the application.",
+    "is_auto": true,
+    "updated_at": "2025-09-29T18:24:07.383Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 579,
+      "context": "return (\n match({ fileType: file.fileType, access, isForm: file.isForm })\n // Document\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.FullAccess },\n () => t(\"Common:FullAccessDescriptionDocument\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.Editing },\n () => t(\"Common:EditingDescriptionDocument\"),\n )",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

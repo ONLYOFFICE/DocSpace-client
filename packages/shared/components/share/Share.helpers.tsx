@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import moment from "moment";
+import { match, P } from "ts-pattern";
 import { Trans } from "react-i18next";
 import type { TFunction } from "i18next";
 
@@ -42,6 +43,7 @@ import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 import { globalColors } from "../../themes";
 import {
   EmployeeActivationStatus,
+  FileType,
   MembersSubjectType,
   ShareAccessRights,
   ShareRights,
@@ -562,6 +564,172 @@ export const convertMembers = (
   };
 };
 
+export const getAccessDescription = (
+  file: TFile,
+  access: ShareAccessRights,
+  t: TFunction,
+) => {
+  console.log({ file, access });
+
+  return (
+    match({ fileType: file.fileType, access, isForm: file.isForm })
+      // Document
+      .with(
+        { fileType: FileType.Document, access: ShareAccessRights.FullAccess },
+        () => t("Common:FullAccessDescriptionDocument"),
+      )
+      .with(
+        { fileType: FileType.Document, access: ShareAccessRights.Editing },
+        () => t("Common:EditingDescriptionDocument"),
+      )
+      .with(
+        { fileType: FileType.Document, access: ShareAccessRights.Review },
+        () => t("Common:ReviewDescriptionDocument"),
+      )
+      .with(
+        { fileType: FileType.Document, access: ShareAccessRights.Comment },
+        () => t("Common:CommentDescriptionDocument"),
+      )
+      .with(
+        { fileType: FileType.Document, access: ShareAccessRights.ReadOnly },
+        () => t("Common:RoleViewerDescription"),
+      )
+      .with(
+        { fileType: FileType.Document, access: ShareAccessRights.DenyAccess },
+        () => t("Common:DenyAccessDescriptionDocument"),
+      )
+      // Spreadsheet | Presentation | PDF Document
+      .with(
+        {
+          fileType: P.union(
+            FileType.Spreadsheet,
+            FileType.Presentation,
+            FileType.PDF,
+          ),
+          access: ShareAccessRights.FullAccess,
+          isForm: P.not(true),
+        },
+        () => t("Common:FullAccessDescriptionSpreadsheet"),
+      )
+      .with(
+        {
+          fileType: P.union(
+            FileType.Spreadsheet,
+            FileType.Presentation,
+            FileType.PDF,
+          ),
+          access: ShareAccessRights.Editing,
+          isForm: P.not(true),
+        },
+        () => {
+          const x = t("Common:EditingDescriptionSpreadsheet");
+          console.log(x);
+          return x;
+        },
+      )
+      .with(
+        {
+          fileType: FileType.Spreadsheet,
+          access: ShareAccessRights.CustomFilter,
+        },
+        () => t("Common:CustomFilterDescriptionSpreadsheet"),
+      )
+      .with(
+        {
+          fileType: P.union(
+            FileType.Spreadsheet,
+            FileType.Presentation,
+            FileType.PDF,
+          ),
+          access: ShareAccessRights.Comment,
+          isForm: P.not(true),
+        },
+        () => t("Common:CommentDescriptionSpreadsheet"),
+      )
+      .with(
+        {
+          fileType: P.union(
+            FileType.Spreadsheet,
+            FileType.Presentation,
+            FileType.PDF,
+          ),
+          access: ShareAccessRights.ReadOnly,
+          isForm: P.not(true),
+        },
+        () => t("Common:RoleViewerDescription"),
+      )
+      .with(
+        {
+          fileType: P.union(
+            FileType.Spreadsheet,
+            FileType.Presentation,
+            FileType.PDF,
+          ),
+          access: ShareAccessRights.DenyAccess,
+          isForm: P.not(true),
+        },
+        () => t("Common:DenyAccessDescriptionDocument"),
+      )
+      // PDF Form
+      .with(
+        {
+          fileType: FileType.PDF,
+          access: ShareAccessRights.FullAccess,
+          isForm: true,
+        },
+        () => t("Common:FullAccessDescriptionPDFForm"),
+      )
+      .with(
+        {
+          fileType: FileType.PDF,
+          access: ShareAccessRights.Editing,
+          isForm: true,
+        },
+        () => t("Common:EditingDescriptionPDFForm"),
+      )
+      .with(
+        {
+          fileType: FileType.PDF,
+          access: ShareAccessRights.FormFilling,
+          isForm: true,
+        },
+        () => t("Common:FillingDescriptionPDFForm"),
+      )
+      .with(
+        {
+          fileType: FileType.PDF,
+          access: ShareAccessRights.DenyAccess,
+          isForm: true,
+        },
+        () => t("Common:DenyAccessDescriptionDocument"),
+      )
+
+      // Other
+      .with(
+        {
+          fileType: P.any,
+          access: ShareAccessRights.FullAccess,
+        },
+        () => t("Common:FullAccessDescriptionOther"),
+      )
+      .with(
+        {
+          fileType: P.any,
+          access: ShareAccessRights.ReadOnly,
+        },
+        () => t("Common:RoleViewerDescription"),
+      )
+      .with(
+        {
+          fileType: P.any,
+          access: ShareAccessRights.DenyAccess,
+        },
+        () => t("Common:DenyAccessDescriptionDocument"),
+      )
+      .otherwise(() => "")
+  );
+};
+
 export const getShareAccessRightOptions = (
   t: TFunction,
   infoPanelSelection: TFile | TFolder,
@@ -649,49 +817,81 @@ export const getShareAccessRightOptions = (
       access: ShareAccessRights.FullAccess,
       key: "full-access",
       label: t("Common:FullAccess"),
-      description: t("Common:FullAccessDescriptionFile"),
+      description: getAccessDescription(
+        infoPanelSelection,
+        ShareAccessRights.FullAccess,
+        t,
+      ),
     },
     [ShareRights.Editing]: {
       access: ShareAccessRights.Editing,
       key: "editing",
       label: t("Common:Editing"),
-      description: t("Common:EditingDescriptionFile"),
+      description: getAccessDescription(
+        infoPanelSelection,
+        ShareAccessRights.Editing,
+        t,
+      ),
     },
     [ShareRights.CustomFilter]: {
       access: ShareAccessRights.CustomFilter,
       key: "custom-filter",
       label: t("Common:CustomFilter"),
-      description: t("Common:CustomFilterDescriptionFile"),
+      description: getAccessDescription(
+        infoPanelSelection,
+        ShareAccessRights.CustomFilter,
+        t,
+      ),
     },
     [ShareRights.Review]: {
       access: ShareAccessRights.Review,
       key: "review",
       label: t("Common:Review"),
-      description: t("Common:ReviewDescriptionFile"),
+      description: getAccessDescription(
+        infoPanelSelection,
+        ShareAccessRights.Review,
+        t,
+      ),
     },
     [ShareRights.Comment]: {
       access: ShareAccessRights.Comment,
       key: "commenting",
       label: t("Common:Comment"),
-      description: t("Common:CommentDescriptionFile"),
+      description: getAccessDescription(
+        infoPanelSelection,
+        ShareAccessRights.Comment,
+        t,
+      ),
     },
     [ShareRights.Read]: {
       access: ShareAccessRights.ReadOnly,
       key: "viewing",
       label: t("Common:ReadOnly"),
-      description: t("Common:ReadOnlyDescriptionFile"),
+      description: getAccessDescription(
+        infoPanelSelection,
+        ShareAccessRights.ReadOnly,
+        t,
+      ),
     },
     [ShareRights.FillForms]: {
       access: ShareAccessRights.FormFilling,
       key: "filling",
       label: t("Common:Filling"),
-      description: t("Common:FillingDescriptionFile"),
+      description: getAccessDescription(
+        infoPanelSelection,
+        ShareAccessRights.FormFilling,
+        t,
+      ),
     },
     [ShareRights.Restrict]: {
       access: ShareAccessRights.DenyAccess,
       key: "deny-access",
       label: t("Common:DenyAccess"),
-      description: t("Common:DenyAccessDescriptionFile"),
+      description: getAccessDescription(
+        infoPanelSelection,
+        ShareAccessRights.DenyAccess,
+        t,
+      ),
     },
     [ShareRights.None]: withRemove
       ? [
@@ -717,26 +917,9 @@ export const getShareAccessRightOptions = (
 };
 
 export const getAccessLabel = (t: TFunction, item: TFolder | TFile) => {
-  if (isFolder(item)) {
-    switch (item.access) {
-      case ShareAccessRights.FullAccess:
-        return t("Common:FullAccess");
-      case ShareAccessRights.Editing:
-        return t("Common:Editing");
-      case ShareAccessRights.Review:
-        return t("Common:Review");
-      case ShareAccessRights.Comment:
-        return t("Common:Comment");
-      case ShareAccessRights.ReadOnly:
-        return t("Common:ReadOnly");
-      case ShareAccessRights.DenyAccess:
-        return t("Common:DenyAccess");
-      default:
-        return "";
-    }
-  }
-
   switch (item.access) {
+    case ShareAccessRights.FullAccess:
+      return t("Common:FullAccess");
     case ShareAccessRights.Editing:
       return t("Common:Editing");
     case ShareAccessRights.CustomFilter:

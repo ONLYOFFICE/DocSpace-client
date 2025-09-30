@@ -1,0 +1,28 @@
+{
+  "key_path": "FillingDescriptionPDFForm",
+  "content": "Viewing, filling.",
+  "content_en_sha1_hash": "4c0c1fb84d1dd5019ebf978003edb0a20e04ce98",
+  "created_at": "2025-09-29T18:22:04.277Z",
+  "updated_at": "2025-09-29T18:25:11.836Z",
+  "comment": {
+    "text": "This text describes a PDF document that can be viewed and filled out. It's likely used as a label or tooltip to indicate that a PDF form is accessible for editing. Translators should consider wording appropriate for a button or link prompting form access.",
+    "is_auto": true,
+    "updated_at": "2025-09-29T18:25:11.836Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 696,
+      "context": "{\n fileType: FileType.PDF,\n access: ShareAccessRights.FormFilling,\n isForm: true,\n },\n () => t(\"Common:FillingDescriptionPDFForm\"),\n )\n .with(\n {\n fileType: FileType.PDF,\n access: ShareAccessRights.DenyAccess,",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

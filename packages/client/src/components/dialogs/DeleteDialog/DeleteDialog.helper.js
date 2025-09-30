@@ -44,7 +44,10 @@ export const getDialogContent = (
   isPersonalRoom,
   isRoom,
   isTemplatesFolder,
+  isSharedWithMeFolderRoot,
 ) => {
+  if (!selection) return null;
+
   const isFolder = selection[0]?.isFolder || !!selection[0]?.parentId;
   const isSingle = selection.length === 1;
   const isThirdParty = selection[0]?.providerKey;
@@ -55,7 +58,7 @@ export const getDialogContent = (
         i18nKey="DeleteTemplate"
         ns="DeleteDialog"
         t={t}
-        values={{ templateName: selection[0].title }}
+        values={{ templateName: selection[0]?.title }}
         components={{ 1: <Text fontWeight={600} as="span" /> }}
       />
     ) : (
@@ -67,7 +70,7 @@ export const getDialogContent = (
     return (
       <>
         <Trans t={t} i18nKey="DeleteRoom" ns="DeleteDialog">
-          The room <strong>\"{{ roomName: selection[0].title }}\"</strong>
+          The room <strong>\"{{ roomName: selection[0]?.title }}\"</strong>
           will be permanently deleted. All data and user accesses will be lost.
         </Trans>{" "}
         {t("Common:WantToContinue")}
@@ -81,7 +84,7 @@ export const getDialogContent = (
         <>
           <Trans t={t} i18nKey="DeleteItem" ns="DeleteDialog">
             You are about to move{" "}
-            <strong>{{ name: selection[0].title }}</strong>
+            <strong>{{ name: selection[0]?.title }}</strong>
             to Trash.
           </Trans>{" "}
           {isFolder
@@ -133,13 +136,18 @@ export const getDialogContent = (
     }
   }
 
-  if (isPersonalRoom || isRoom || isTemplatesFolder) {
+  if (
+    isPersonalRoom ||
+    isRoom ||
+    isTemplatesFolder ||
+    isSharedWithMeFolderRoot
+  ) {
     if (isSingle) {
       return (
         <>
           <Trans t={t} i18nKey="DeleteItem" ns="DeleteDialog">
             You are about to move{" "}
-            <strong>{{ name: selection[0].title }}</strong>
+            <strong>{{ name: selection[0]?.title }}</strong>
             to Trash.
           </Trans>{" "}
           {!isThirdParty

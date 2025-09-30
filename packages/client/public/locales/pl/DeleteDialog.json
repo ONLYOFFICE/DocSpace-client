@@ -5,8 +5,8 @@
   "DeleteGroupTitle": "Usuń grupę",
   "DeleteTemplate": "Czy na pewno chcesz usunąć szablon pokoju <1>„{{templateName}}”</1>? Szablon nie może zostać przywrócony.",
   "DeleteTemplates": "Czy na pewno chcesz usunąć wybrane szablony pokojów? Nie można ich przywrócić.",
+  "FileDeletedAfter": "Plik zostanie trwale usunięty za 30 dni.",
   "UnsubscribeButton": "Zrezygnuj z subskrypcji",
   "UnsubscribeNote": "Czy na pewno chcesz zrezygnować z subskrypcji dla wybranych elementów z listy?",
-  "UnsubscribeTitle": "Potwierdź rezygnację",
-  "FileDeletedAfter": "Plik zostanie trwale usunięty za 30 dni."
+  "UnsubscribeTitle": "Potwierdź rezygnację"
 }

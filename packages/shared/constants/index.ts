@@ -292,3 +292,4 @@ export const ROOM_ACTION_KEYS = {
 } as const;
 
 export const SHARED_MEMBERS_COUNT = 100;
+export const SHARED_WITH_ME_PATH = "shared-with-me";

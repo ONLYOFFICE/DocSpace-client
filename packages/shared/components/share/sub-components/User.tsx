@@ -245,7 +245,7 @@ export const User = ({
               withBlur={isMobile}
               isLoading={isLoading}
               isMobileView={isMobileOnly}
-              fixedDirection={isMobile}
+              // fixedDirection={isMobile}
               shouldShowBackdrop={isMobile}
               dataTestId="info_panel_members_user_role_combobox"
             />

@@ -338,6 +338,10 @@ class TreeFoldersStore {
     );
   }
 
+  get isSharedWithMeFolderRoot() {
+    return this.selectedFolderStore.rootFolderType === FolderType.SHARE;
+  }
+
   get isFavoritesFolder() {
     return (
       this.favoritesFolder &&

@@ -917,26 +917,9 @@ export const getShareAccessRightOptions = (
 };
 
 export const getAccessLabel = (t: TFunction, item: TFolder | TFile) => {
-  if (isFolder(item)) {
-    switch (item.access) {
-      case ShareAccessRights.FullAccess:
-        return t("Common:FullAccess");
-      case ShareAccessRights.Editing:
-        return t("Common:Editing");
-      case ShareAccessRights.Review:
-        return t("Common:Review");
-      case ShareAccessRights.Comment:
-        return t("Common:Comment");
-      case ShareAccessRights.ReadOnly:
-        return t("Common:ReadOnly");
-      case ShareAccessRights.DenyAccess:
-        return t("Common:DenyAccess");
-      default:
-        return "";
-    }
-  }
-
   switch (item.access) {
+    case ShareAccessRights.FullAccess:
+      return t("Common:FullAccess");
     case ShareAccessRights.Editing:
       return t("Common:Editing");
     case ShareAccessRights.CustomFilter:

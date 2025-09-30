@@ -133,6 +133,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
         data-testid="article-item"
         title={tooltipTitle}
         ref={parentElementRef}
+        data-tooltip-id={dataTooltipId}
       >
         <div
           className={classNames(styles.articleItemSibling, {
@@ -151,7 +152,6 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
           onMouseUp={onMouseUpAction}
           onMouseDown={onMouseDown}
           data-testid="article-item-sibling"
-          data-tooltip-id={dataTooltipId}
           ref={animationElementRef}
         />
         <div

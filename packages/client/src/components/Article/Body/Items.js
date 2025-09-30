@@ -26,7 +26,7 @@
 
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -83,8 +83,13 @@ const Item = ({
   onBadgeClick,
   roomsFolderId,
   setDropTargetPreview,
+  currentDeviceType,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+
+  const isAiAgents = item.rootFolderType === FolderType.AIAgents;
+  const isDesktop = currentDeviceType === DeviceType.desktop;
 
   const isDragging =
     dragging && !isIndexEditingMode ? showDragItems(item) : false;
@@ -146,6 +151,18 @@ const Item = ({
 
   const onClickAction = React.useCallback(
     (e, selectedFolderId) => {
+      if (e?.ctrlKey || e?.metaKey || e?.shiftKey || e?.button) return;
+
+      if (!isDesktop && isTooltipOpen) {
+        setIsTooltipOpen(false);
+        return;
+      }
+
+      if (!isDesktop && isAiAgents) {
+        setIsTooltipOpen(true);
+        return;
+      }
+
       setBufferSelection(null);
 
       onClick?.(
@@ -156,7 +173,15 @@ const Item = ({
         item.security.Create,
       );
     },
-    [onClick, item.title, item.rootFolderType],
+    [
+      onClick,
+      item.title,
+      item.rootFolderType,
+      isTooltipOpen,
+      setIsTooltipOpen,
+      isDesktop,
+      isAiAgents,
+    ],
   );
 
   const getTooltipAIAgentContent = () => (
@@ -169,6 +194,38 @@ const Item = ({
       </Text>
     </>
   );
+
+  useEffect(() => {
+    if (isDesktop) return;
+
+    const handleClickOutside = (event) => {
+      if (isTooltipOpen) {
+        const aiAgentElement = event.target.closest(
+          `[data-tooltip-id="aiAgentsTooltip${item.id}"]`,
+        );
+
+        if (!aiAgentElement) {
+          event.stopPropagation();
+          event.preventDefault();
+          setIsTooltipOpen(false);
+        }
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside, true);
+    document.addEventListener("touchend", handleClickOutside, true);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+      document.removeEventListener("touchend", handleClickOutside, true);
+    };
+  }, [isTooltipOpen, item.id, isDesktop]);
+
+  const onClickAiAgentsBadge = () => {
+    if (!isDesktop) {
+      setIsTooltipOpen(!isTooltipOpen);
+    }
+  };
 
   const linkData = getLinkData(
     item.id,
@@ -210,9 +267,9 @@ const Item = ({
         value={value}
         showBadge={showBadge}
         labelBadge={labelBadge}
-        onClickBadge={onBadgeClick}
+        onClickBadge={isAiAgents ? onClickAiAgentsBadge : onBadgeClick}
         iconBadge={iconBadge}
-        isDisabled={item.rootFolderType === FolderType.AIAgents}
+        isDisabled={isAiAgents}
         withAnimation
         badgeTitle={
           labelBadge
@@ -220,7 +277,7 @@ const Item = ({
             : t("EmptySection", { sectionName: t("Common:TrashSection") })
         }
         badgeComponent={
-          item.rootFolderType === FolderType.AIAgents ? (
+          isAiAgents ? (
             <Badge
               label={t("Soon")}
               className={item.folderClassName}
@@ -239,13 +296,14 @@ const Item = ({
         $currentColorScheme={currentColorScheme}
         dataTooltipId={`aiAgentsTooltip${item.id}`}
       />
-      {item.rootFolderType === FolderType.AIAgents ? (
+      {isAiAgents ? (
         <Tooltip
           id={`aiAgentsTooltip${item.id}`}
           place="bottom-start"
           getContent={getTooltipAIAgentContent}
-          maxWidth="296px"
-          openOnClick
+          maxWidth="320px"
+          float={isDesktop}
+          isOpen={!isDesktop ? isTooltipOpen : undefined}
         />
       ) : null}
     </StyledDragAndDrop>
@@ -416,6 +474,7 @@ const Items = ({
             isIndexEditingMode={isIndexEditingMode}
             setDropTargetPreview={setDropTargetPreview}
             isLastItem={isTrash}
+            currentDeviceType={currentDeviceType}
           />
         );
       });

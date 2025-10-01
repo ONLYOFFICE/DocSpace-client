@@ -26,6 +26,7 @@
   "LdapGroupNameAttribute": "Thuộc Tính Tên nhóm",
   "LdapGroupNameAttributeTooltip": "Xin hãy chỉ định thuộc tính đối tượng tương ứng với tên nhóm.",
   "LdapGroupUserAttributeTooltip": "Nhập thuộc tính đối tượng người dùng được sử dụng để xác định xem người dùng này có phải là thành viên của nhóm hay không.",
+  "LdapIntegrationDescription": "Nhập người dùng và nhóm thông qua LDAP, và cho phép xác thực người dùng thông qua đăng nhập/mật khẩu được lưu trữ trên máy chủ LDAP. Người dùng sẽ được nhập ngay sau khi các cài đặt được lưu. Người dùng được thêm sau sẽ được nhập trong lần xác thực đầu tiên. Nếu bạn muốn cung cấp quyền truy cập chỉ thông qua LDAP, hãy tắt tùy chọn mời thành viên {{productName}} mới thông qua {{sectionName}}: <1>{{link}}</1>",
   "LdapLoginAttribute": "Thuộc Tính Đăng nhập",
   "LdapLoginAttributeTooltip": "Nhập thuộc tính đối tượng tương ứng với thông tin đăng nhập của người dùng.",
   "LdapLoginTooltip": "Xin hãy chỉ định người dùng Đăng nhập có quyền truy cập đọc máy chủ LDAP.",
@@ -70,6 +71,5 @@
   "LdapUserFilterTooltip": "Sử dụng bộ lọc tìm kiếm LDAP để chọn người dùng phải được nhập.",
   "LdapUserQuotaTooltip": "Để đặt hạn mức lưu trữ cho người dùng, hãy thêm một thuộc tính vào thư mục LDAP (ví dụ: UsersQuotaLimit) và nhập một giá trị số nguyên cho thuộc tính này. Nó sẽ hiển thị giá trị hạn mức theo byte. Ở đây, chỉ cần chỉ ra tên thuộc tính. Thuộc tính này sẽ chỉ được áp dụng trong lần thiết lập đầu tiên và có thể được thay đổi thủ công sau đó trong phần {{contactsName}}.",
   "LdapUsersType": "Loại người dùng",
-  "LdapUserTypeTooltip": "Tất cả người dùng sẽ được thêm vào {{productName}} với loại đã chọn.",
-  "LdapIntegrationDescription": "Nhập người dùng và nhóm thông qua LDAP, và cho phép xác thực người dùng thông qua đăng nhập/mật khẩu được lưu trữ trên máy chủ LDAP. Người dùng sẽ được nhập ngay sau khi các cài đặt được lưu. Người dùng được thêm sau sẽ được nhập trong lần xác thực đầu tiên. Nếu bạn muốn cung cấp quyền truy cập chỉ thông qua LDAP, hãy tắt tùy chọn mời thành viên {{productName}} mới thông qua {{sectionName}}: <1>{{link}}</1>"
+  "LdapUserTypeTooltip": "Tất cả người dùng sẽ được thêm vào {{productName}} với loại đã chọn."
 }

@@ -6,6 +6,7 @@
   "HotkeysClearAll": "Alle selecties wissen",
   "HotkeysClose": "Actie sluiten/ongedaan maken",
   "HotkeysCopySelected": "Kopieer geselecteerde items naar het klembord",
+  "HotkeysCopySelectedItems": "Kopieer de geselecteerde items tekst",
   "HotkeysCreateDocument": "Document aanmaken",
   "HotkeysCreateFolder": "Map maken",
   "HotkeysCreateForm": "Leeg blanco formuliersjabloon maken",
@@ -14,6 +15,7 @@
   "HotkeysCreateSpreadsheet": "Spreadsheet maken",
   "HotkeysCreatingObjects": "Items aanmaken",
   "HotkeysCutSelected": "Knip geselecteerde items naar het klembord",
+  "HotkeysDisablesSelectionArea": "Schakel het selectiegebied uit",
   "HotkeysExtendSelectionDown": "Selectie uitbreiden naar beneden",
   "HotkeysExtendSelectionLeft": "Selectie naar links uitbreiden",
   "HotkeysExtendSelectionRight": "Selectie naar rechts uitbreiden",
@@ -43,7 +45,5 @@
   "HotkeysUploadFile": "Bestand uploaden",
   "HotkeysUploadingObjects": "Items uploaden",
   "HotkeysZoomIn": "Zoom in",
-  "HotkeysZoomOut": "Zoom uit",
-  "HotkeysCopySelectedItems": "Kopieer de geselecteerde items tekst",
-  "HotkeysDisablesSelectionArea": "Schakel het selectiegebied uit"
+  "HotkeysZoomOut": "Zoom uit"
 }

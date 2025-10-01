@@ -7,6 +7,7 @@
   "DesktopTheme": "데스크탑 편집기 설정과 동기화",
   "DesktopThemeDescription": "데스크탑 편집기의 테마에 따라 라이트 테마와 다크 테마 간을 자동으로 전환합니다.",
   "EditPhoto": "사진 편집",
+  "EmailChangeSuccess": "이메일 주소가 성공적으로 변경되었습니다.",
   "EmailNotVerified": "이메일이 확인되지 않았습니다",
   "ErrorAccountAlreadyUse": "연결된 계정은 다른 사용자가 이미 사용 중인 계정입니다",
   "FileManagement": "파일 관리",
@@ -17,6 +18,7 @@
   "LogoutDescription": "참고. 현재 사용 중이므로 이 연결을 제외한 모든 활성 연결이 로그아웃됩니다.",
   "LogoutFrom": "{{platform}} {{browser}}에서 로그아웃하시겠습니까?",
   "MyProfile": "내 프로필",
+  "NotificationsChannels": "알림 채널",
   "ProviderSuccessfullyConnected": "공급자 연결에 성공했습니다",
   "ProviderSuccessfullyDisconnected": "공급자 연결 해제에 성공했습니다",
   "SendAgain": "다시 전송",
@@ -24,12 +26,10 @@
   "SuccessLogout": "활성 연결이 로그아웃되었습니다: {{platform}}, {{browser}}",
   "SystemTheme": "시스템 테마 사용",
   "SystemThemeDescription": "시스템이 전환할 때 라이트 테마와 다크 테마 간이 자동으로 전환됩니다.",
-  "TerminateAllSessions": "현재 세션을 제외한 모든 세션을 종료하세요",
-  "TwoFactorDescription": "관리자에 의해 코드 생성 앱을 통한 이중 인증이 모든 사용자에 대해 활성화됩니다.",
-  "EmailChangeSuccess": "이메일 주소가 성공적으로 변경되었습니다.",
-  "NotificationsChannels": "알림 채널",
   "TelegramAccount": "텔레그램 계정",
   "TelegramAccountDescription": "텔레그램봇을 계정에 연결하려면 비밀 링크를 따라 \"텔레그램 연결\" 버튼을 클릭하세요.",
   "TelegramAccountDisconnect": "텔레그램 연결 해제",
-  "TelegramAccountDisconnectDescription": "귀하의 @{{username}} 계정은 텔레그램 알림을 위해 연결되어 있습니다. 이 계정과의 연결을 해제할 수 있습니다. 이 경우, 알림을 받지 못합니다."
+  "TelegramAccountDisconnectDescription": "귀하의 @{{username}} 계정은 텔레그램 알림을 위해 연결되어 있습니다. 이 계정과의 연결을 해제할 수 있습니다. 이 경우, 알림을 받지 못합니다.",
+  "TerminateAllSessions": "현재 세션을 제외한 모든 세션을 종료하세요",
+  "TwoFactorDescription": "관리자에 의해 코드 생성 앱을 통한 이중 인증이 모든 사용자에 대해 활성화됩니다."
 }

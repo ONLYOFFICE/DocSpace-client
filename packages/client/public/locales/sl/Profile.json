@@ -7,6 +7,7 @@
   "DesktopTheme": "Sinhronizacija z nastavitvami namiznega urejevalnika",
   "DesktopThemeDescription": "Samodejno preklapljajte med svetlimi in temnimi temami glede na trenutno temo namiznih urejevalnikov.",
   "EditPhoto": "Uredi fotografije",
+  "EmailChangeSuccess": "Vaše e-poštno sporočilo je bilo uspešno spremenjeno.",
   "EmailNotVerified": "E-pošta ni preverjena",
   "ErrorAccountAlreadyUse": "Povezani račun že uporablja drug uporabnik",
   "FileManagement": "Upravljanje datotek",
@@ -17,6 +18,7 @@
   "LogoutDescription": "Opomba. Vse aktivne povezave bodo odjavljene, razen te, ki je trenutno v uporabi.",
   "LogoutFrom": "Odjava iz {{platform}} {{browser}}?",
   "MyProfile": "Moj profil",
+  "NotificationsChannels": "Obvestitveni kanali",
   "ProviderSuccessfullyConnected": "Ponudnik je uspešno povezan",
   "ProviderSuccessfullyDisconnected": "Ponudnik je bil uspešno odklopljen",
   "SendAgain": "Pošlji znova",
@@ -24,12 +26,10 @@
   "SuccessLogout": "Aktivna povezava je bila odjavljena: {{platform}}, {{browser}}",
   "SystemTheme": "Uporabi sistemsko temo",
   "SystemThemeDescription": "Samodejno preklapljajte med svetlimi in temnimi temami, ko to počne vaš sistem.",
-  "TerminateAllSessions": "Prekini vse seje, razen trenutne",
-  "TwoFactorDescription": "Administrator je za vse uporabnike omogočil dvofaktorsko avtentikacijo preko aplikacije za ustvarjanje kode.",
-  "EmailChangeSuccess": "Vaše e-poštno sporočilo je bilo uspešno spremenjeno.",
-  "NotificationsChannels": "Obvestitveni kanali",
   "TelegramAccount": "Telegram račun",
   "TelegramAccountDescription": "Da povežete TelegramBot s svojim računom, sledite skrivni povezavi in kliknite gumb \"Poveži Telegram\".",
   "TelegramAccountDisconnect": "Odklop Telegrama",
-  "TelegramAccountDisconnectDescription": "Vaš @{{username}} račun je povezan za obvestila preko telegrama. Lahko se odklopite od tega računa. V tem primeru ne boste prejemali obvestil."
+  "TelegramAccountDisconnectDescription": "Vaš @{{username}} račun je povezan za obvestila preko telegrama. Lahko se odklopite od tega računa. V tem primeru ne boste prejemali obvestil.",
+  "TerminateAllSessions": "Prekini vse seje, razen trenutne",
+  "TwoFactorDescription": "Administrator je za vse uporabnike omogočil dvofaktorsko avtentikacijo preko aplikacije za ustvarjanje kode."
 }

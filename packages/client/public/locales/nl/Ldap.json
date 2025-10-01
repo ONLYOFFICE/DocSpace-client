@@ -26,6 +26,7 @@
   "LdapGroupNameAttribute": "Groepsnaam Attribuut",
   "LdapGroupNameAttributeTooltip": "Geef het objectattribuut op dat overeenkomt met de groepsnaam.",
   "LdapGroupUserAttributeTooltip": "Voer het gebruikersobject attribuut in dat gebruikt wordt om te bepalen of deze gebruiker lid is van de groepen.",
+  "LdapIntegrationDescription": "Importeer gebruikers en groepen via LDAP, en schakel gebruikersauthenticatie in via logins/wachtwoorden die op de LDAP-server zijn opgeslagen. Gebruikers worden direct na het opslaan van de instellingen geïmporteerd. Gebruikers die later worden toegevoegd, worden tijdens hun eerste authenticatie geïmporteerd. Als u alleen toegang via LDAP wilt bieden, schakel dan de optie uit om nieuwe {{productName}} leden uit {{sectionName}}: <1>{{link}}</1> uit te nodigen.",
   "LdapLoginAttribute": "Login Attribuut",
   "LdapLoginAttributeTooltip": "Voer het objectkenmerk in dat overeenkomt met de gebruikerslogin.",
   "LdapLoginTooltip": "Geef een Login gebruiker op die leestoegang heeft tot de LDAP server.",
@@ -70,6 +71,5 @@
   "LdapUserFilterTooltip": "Gebruik Zoek LDAP filter om gebruikers te selecteren die zullen worden geïmporteerd.",
   "LdapUserQuotaTooltip": "Om een opslagquota voor gebruikers in te stellen, voegt u een attribuut toe in de LDAP-directory (bijvoorbeeld UsersQuotaLimit) en voert u een gehele waarde voor dit attribuut in. De quotumwaarde wordt in bytes weergegeven. Geef hier alleen de naam van het attribuut op. Dit attribuut wordt alleen toegepast tijdens de eerste installatie en kan later handmatig worden gewijzigd in de {{contactsName}} sectie.",
   "LdapUsersType": "Type gebruiker",
-  "LdapUserTypeTooltip": "Alle gebruikers worden toegevoegd aan {{productName}} met het geselecteerde type.",
-  "LdapIntegrationDescription": "Importeer gebruikers en groepen via LDAP, en schakel gebruikersauthenticatie in via logins/wachtwoorden die op de LDAP-server zijn opgeslagen. Gebruikers worden direct na het opslaan van de instellingen geïmporteerd. Gebruikers die later worden toegevoegd, worden tijdens hun eerste authenticatie geïmporteerd. Als u alleen toegang via LDAP wilt bieden, schakel dan de optie uit om nieuwe {{productName}} leden uit {{sectionName}}: <1>{{link}}</1> uit te nodigen."
+  "LdapUserTypeTooltip": "Alle gebruikers worden toegevoegd aan {{productName}} met het geselecteerde type."
 }

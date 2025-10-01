@@ -8,11 +8,11 @@
   "NeedSettings": "Precisa inserir configurações",
   "NoPlugins": "Nenhum plug-in adicionado",
   "NotNeedSettings": "Não é necessário inserir configurações",
+  "PluginIsNotCompatible": "A versão do SDK do plugin não corresponde à versão do {{productName}}. Por favor, atualize para uma versão compatível.",
+  "PluginLoadedSuccessfully": "Plugin carregado com sucesso",
   "PluginSamples": "Amostras de plug-ins",
   "PluginSDK": "SDK de plug-in",
   "PluginSDKDescription": "Usando o Plugin SDK você pode estender a funcionalidade do {{productName}}, conectar serviços de terceiros ou aprimorar a experiência do usuário existente. Aqui você pode encontrar os exemplos de plugins com código-fonte disponíveis no GitHub.",
   "PluginSDKInstruction": "Clique no botão para obter instruções detalhadas sobre como criar seus próprios plug-ins.",
-  "UploadDescription": "Você pode adicionar plug-ins para estender a funcionalidade do {{productName}} com recursos extras. Clique em Carregar plugin ou solte o arquivo no arquivo ZIP.",
-  "PluginIsNotCompatible": "A versão do SDK do plugin não corresponde à versão do {{productName}}. Por favor, atualize para uma versão compatível.",
-  "PluginLoadedSuccessfully": "Plugin carregado com sucesso"
+  "UploadDescription": "Você pode adicionar plug-ins para estender a funcionalidade do {{productName}} com recursos extras. Clique em Carregar plugin ou solte o arquivo no arquivo ZIP."
 }

@@ -6,6 +6,7 @@
   "HotkeysClearAll": "Скасувати весь вибір",
   "HotkeysClose": "Закрити/Скасувати дію",
   "HotkeysCopySelected": "Копіювати вибрані елементи до буфера обміну",
+  "HotkeysCopySelectedItems": "Скопіювати вибрані елементи тексту",
   "HotkeysCreateDocument": "Створити документ",
   "HotkeysCreateFolder": "Створити папку",
   "HotkeysCreateForm": "Створити пустий із шаблону",
@@ -14,6 +15,7 @@
   "HotkeysCreateSpreadsheet": "Створити таблицю",
   "HotkeysCreatingObjects": "Створення елементів",
   "HotkeysCutSelected": "Вирізати вибрані елементи до буфера обміну",
+  "HotkeysDisablesSelectionArea": "Вимкнути область виділення",
   "HotkeysExtendSelectionDown": "Розширити виділення вниз",
   "HotkeysExtendSelectionLeft": "Розширити виділення ліворуч",
   "HotkeysExtendSelectionRight": "Розширити виділення праворуч",
@@ -43,7 +45,5 @@
   "HotkeysUploadFile": "Завантажити файл",
   "HotkeysUploadingObjects": "Передавання елементів",
   "HotkeysZoomIn": "Збільшити",
-  "HotkeysZoomOut": "Зменшити",
-  "HotkeysCopySelectedItems": "Скопіювати вибрані елементи тексту",
-  "HotkeysDisablesSelectionArea": "Вимкнути область виділення"
+  "HotkeysZoomOut": "Зменшити"
 }

@@ -6,6 +6,7 @@
   "HotkeysClearAll": "Vymazat všechny výběry",
   "HotkeysClose": "Zavřít/odvolat akci",
   "HotkeysCopySelected": "Kopírování vybraných položek do schránky",
+  "HotkeysCopySelectedItems": "Zkopírovat vybrané položky textu",
   "HotkeysCreateDocument": "Vytvořit dokument",
   "HotkeysCreateFolder": "Vytvořte složku",
   "HotkeysCreateForm": "Vytvořit prázdnou šablonu formuláře",
@@ -14,6 +15,7 @@
   "HotkeysCreateSpreadsheet": "Vytvořit tabulku",
   "HotkeysCreatingObjects": "Vytváření položek",
   "HotkeysCutSelected": "Vyjmutí vybraných položek do schránky",
+  "HotkeysDisablesSelectionArea": "Vypněte výběrovou oblast",
   "HotkeysExtendSelectionDown": "Rozšířit výběr dolů",
   "HotkeysExtendSelectionLeft": "Rozšířit výběr vlevo",
   "HotkeysExtendSelectionRight": "Rozšířit výběr doprava",
@@ -43,7 +45,5 @@
   "HotkeysUploadFile": "Nahrát soubor",
   "HotkeysUploadingObjects": "Nahrávání položek",
   "HotkeysZoomIn": "Přiblížení",
-  "HotkeysZoomOut": "Zvětšení",
-  "HotkeysCopySelectedItems": "Zkopírovat vybrané položky textu",
-  "HotkeysDisablesSelectionArea": "Vypněte výběrovou oblast"
+  "HotkeysZoomOut": "Zvětšení"
 }

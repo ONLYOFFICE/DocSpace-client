@@ -6,6 +6,7 @@
   "HotkeysClearAll": "Εκκαθάριση όλων των επιλογών",
   "HotkeysClose": "Κλείσιμο/Αναίρεση ενέργειας",
   "HotkeysCopySelected": "Αντιγραφή επιλεγμένων στοιχείων στο πρόχειρο",
+  "HotkeysCopySelectedItems": "Αντιγράψτε το επιλεγμένο κείμενο",
   "HotkeysCreateDocument": "Δημιουργία Εγγράφου",
   "HotkeysCreateFolder": "Δημιουργία φακέλου",
   "HotkeysCreateForm": "Δημιουργία προτύπου κενής φόρμας",
@@ -14,6 +15,7 @@
   "HotkeysCreateSpreadsheet": "Δημιουργία υπολογιστικού φύλλου",
   "HotkeysCreatingObjects": "Δημιουργία στοιχείων",
   "HotkeysCutSelected": "Αποκοπή επιλεγμένων στοιχείων στο πρόχειρο",
+  "HotkeysDisablesSelectionArea": "Απενεργοποιήστε την περιοχή επιλογής",
   "HotkeysExtendSelectionDown": "Επέκταση της επιλογής προς τα κάτω",
   "HotkeysExtendSelectionLeft": "Επέκταση της επιλογής αριστερά",
   "HotkeysExtendSelectionRight": "Επέκταση της επιλογής δεξιά",
@@ -43,7 +45,5 @@
   "HotkeysUploadFile": "Μεταφόρτωση αρχείου",
   "HotkeysUploadingObjects": "Μεταφόρτωση στοιχείων",
   "HotkeysZoomIn": "Μεγέθυνση",
-  "HotkeysZoomOut": "Σμίκρυνση",
-  "HotkeysCopySelectedItems": "Αντιγράψτε το επιλεγμένο κείμενο",
-  "HotkeysDisablesSelectionArea": "Απενεργοποιήστε την περιοχή επιλογής"
+  "HotkeysZoomOut": "Σμίκρυνση"
 }

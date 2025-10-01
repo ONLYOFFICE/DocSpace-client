@@ -6,6 +6,7 @@
   "HotkeysClearAll": "Premakni vse izbire",
   "HotkeysClose": "Zapri/Razveljavi akcijo",
   "HotkeysCopySelected": "Kopiraj izbrane elemente v odložišče",
+  "HotkeysCopySelectedItems": "Kopiraj izbrane elemente besedila",
   "HotkeysCreateDocument": "Ustvari dokument",
   "HotkeysCreateFolder": "Ustvari mapo",
   "HotkeysCreateForm": "Ustvari predlogo za prazen obrazec",
@@ -14,6 +15,7 @@
   "HotkeysCreateSpreadsheet": "Ustvari preglednico",
   "HotkeysCreatingObjects": "Ustvarjanje predmetov",
   "HotkeysCutSelected": "Izreži izbrane elemente v odložišče",
+  "HotkeysDisablesSelectionArea": "Onemogoči območje izbire",
   "HotkeysExtendSelectionDown": "Premakni izbiro navzdol",
   "HotkeysExtendSelectionLeft": "Premakni izbiro na levo",
   "HotkeysExtendSelectionRight": "Premakni izbiro na desno",
@@ -43,7 +45,5 @@
   "HotkeysUploadFile": "Naloži datoteko",
   "HotkeysUploadingObjects": "Nalaganje predmetov",
   "HotkeysZoomIn": "Približaj",
-  "HotkeysZoomOut": "Oddalji",
-  "HotkeysCopySelectedItems": "Kopiraj izbrane elemente besedila",
-  "HotkeysDisablesSelectionArea": "Onemogoči območje izbire"
+  "HotkeysZoomOut": "Oddalji"
 }

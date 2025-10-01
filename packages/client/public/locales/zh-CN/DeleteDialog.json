@@ -3,7 +3,15 @@
   "DeleteAllGroupsTitle": "删除群组",
   "DeleteGroupDescription": "组{{groupName}} 将被删除。组中的用户不会从{{productName}}中删除。您确定要继续吗？",
   "DeleteGroupTitle": "删除群组",
+  "DeleteRoom": "房间<strong>“{{roomName}}”</strong>将被永久删除，所有数据及用户访问权限都将丢失。",
+  "DeleteRoomTitle": "确定删除此房间吗？",
+  "DeleteRoomWarning": "我已了解删除的后果，并确认删除此房间。",
   "DeleteTemplate": "您确定要删除模板房间<1>«{{templateName}}»</1>吗？删除后无法恢复。",
   "DeleteTemplates": "您确定要删除选定的房间模板吗？删除后无法恢复。",
-  "FileDeletedAfter": "30 天后，文件会被永久删除。"
+  "DeleteTemplateWarning": "我已了解删除的后果，并确认删除此模板。",
+  "FileDeletedAfter": "30 天后，文件会被永久删除。",
+  "FilesDeletedAfter": "这些文件将在30天后永久删除。",
+  "FolderDeletedAfter": "该文件夹将在30天后永久删除。",
+  "FoldersDeletedAfter": "这些文件夹将在30天后永久删除。",
+  "ItemsDeletedAfter": "这些项目将在30天后永久删除。"
 }

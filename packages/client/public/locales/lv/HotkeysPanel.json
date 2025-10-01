@@ -6,6 +6,7 @@
   "HotkeysClearAll": "Notīrīt visas atlases",
   "HotkeysClose": "Aizvērt/atsaukt darbību",
   "HotkeysCopySelected": "Kopējiet atlasītos vienumus starpliktuvē",
+  "HotkeysCopySelectedItems": "Kopēt atlasīto tekstu",
   "HotkeysCreateDocument": "Izveidot dokumentu",
   "HotkeysCreateFolder": "Izveidot mapi",
   "HotkeysCreateForm": "Izveidot tukšu veidlapas veidni",
@@ -14,6 +15,7 @@
   "HotkeysCreateSpreadsheet": "Izveidot tabulu",
   "HotkeysCreatingObjects": "Izveidot vienumus",
   "HotkeysCutSelected": "Izgrieziet atlasītos vienumus starpliktuvē",
+  "HotkeysDisablesSelectionArea": "Atspējot atlases zonu",
   "HotkeysExtendSelectionDown": "Paplašināt atlasi uz leju",
   "HotkeysExtendSelectionLeft": "Paplašināt atlasi pa kreisi",
   "HotkeysExtendSelectionRight": "Paplašināt atlasi pa labi",
@@ -43,7 +45,5 @@
   "HotkeysUploadFile": "Augšupielādēt failu",
   "HotkeysUploadingObjects": "Notiek vienumu augšupielāde",
   "HotkeysZoomIn": "Pietuvināt",
-  "HotkeysZoomOut": "Attālināt",
-  "HotkeysCopySelectedItems": "Kopēt atlasīto tekstu",
-  "HotkeysDisablesSelectionArea": "Atspējot atlases zonu"
+  "HotkeysZoomOut": "Attālināt"
 }

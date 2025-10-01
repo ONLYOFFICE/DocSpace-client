@@ -26,6 +26,7 @@
   "LdapGroupNameAttribute": "Atribút Názov skupiny",
   "LdapGroupNameAttributeTooltip": "Zadajte atribút objektu, ktorý zodpovedá názvu skupiny.",
   "LdapGroupUserAttributeTooltip": "Zadajte atribút objektu používateľa, ktorý sa používa na určenie, či je tento používateľ členom skupín.",
+  "LdapIntegrationDescription": "Importujte používateľov a skupiny cez LDAP a povoľte autentifikáciu používateľov pomocou prihlásení/hesiel uložených na LDAP serveri. Používatelia budú importovaní okamžite po uložení nastavení. Používatelia pridávaní neskôr budú importovaní pri ich prvotnej autentifikácii. Ak chcete poskytnúť prístup len cez LDAP, deaktivujte možnosť pozývať nových členov {{productName}} cez {{sectionName}}: <1>{{link}}</1>",
   "LdapLoginAttribute": "Atribút Prihlásenie",
   "LdapLoginAttributeTooltip": "Zadajte atribút objektu zodpovedajúci prihlasovaciemu menu používateľa.",
   "LdapLoginTooltip": "Zadajte prihlasovacie meno používateľa, ktorý má prístupové práva na čítanie zo servera LDAP.",
@@ -70,6 +71,5 @@
   "LdapUserFilterTooltip": "Pomocou filtra na vyhľadávanie LDAP vyberte používateľov, ktorí musia byť importovaní.",
   "LdapUserQuotaTooltip": "Ak chcete nastaviť kvótu úložiska pre používateľa, pridajte atribút v priečinku LDAP (napríklad UsersQuotaLimit) a zadajte celočíselnú hodnotu tohto atribútu. Zobrazí sa hodnota kvóty v bajtoch. Tu zadajte iba názov atribútu. Tento atribút sa použije len počas prvého nastavenia a neskôr ho môžete zmeniť ručne v časti {{contactsName}}.",
   "LdapUsersType": "Typ používateľov",
-  "LdapUserTypeTooltip": "Všetci používatelia budú pridaní do {{productName}} so zvoleným typom.",
-  "LdapIntegrationDescription": "Importujte používateľov a skupiny cez LDAP a povoľte autentifikáciu používateľov pomocou prihlásení/hesiel uložených na LDAP serveri. Používatelia budú importovaní okamžite po uložení nastavení. Používatelia pridávaní neskôr budú importovaní pri ich prvotnej autentifikácii. Ak chcete poskytnúť prístup len cez LDAP, deaktivujte možnosť pozývať nových členov {{productName}} cez {{sectionName}}: <1>{{link}}</1>"
+  "LdapUserTypeTooltip": "Všetci používatelia budú pridaní do {{productName}} so zvoleným typom."
 }

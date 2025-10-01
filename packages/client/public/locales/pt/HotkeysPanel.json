@@ -6,6 +6,7 @@
   "HotkeysClearAll": "Limpar todas as seleções",
   "HotkeysClose": "Fechar/Anular ação",
   "HotkeysCopySelected": "Copiar itens selecionados para a área de transferência",
+  "HotkeysCopySelectedItems": "Copiar os itens selecionados",
   "HotkeysCreateDocument": "Criar documento",
   "HotkeysCreateFolder": "Criar pasta",
   "HotkeysCreateForm": "Criar um modelo de formulário em branco",
@@ -14,6 +15,7 @@
   "HotkeysCreateSpreadsheet": "Criar folha de cálculo",
   "HotkeysCreatingObjects": "A criar itens",
   "HotkeysCutSelected": "Cortar itens selecionados para a área de transferência",
+  "HotkeysDisablesSelectionArea": "Desativar a área de seleção",
   "HotkeysExtendSelectionDown": "Expandir a seleção para baixo",
   "HotkeysExtendSelectionLeft": "Expandir a seleção para a esquerda",
   "HotkeysExtendSelectionRight": "Expandir a seleção para a direita",
@@ -43,7 +45,5 @@
   "HotkeysUploadFile": "Carregar ficheiro",
   "HotkeysUploadingObjects": "A carregar itens",
   "HotkeysZoomIn": "Mais Zoom",
-  "HotkeysZoomOut": "Reduzir o zoom",
-  "HotkeysCopySelectedItems": "Copiar os itens selecionados",
-  "HotkeysDisablesSelectionArea": "Desativar a área de seleção"
+  "HotkeysZoomOut": "Reduzir o zoom"
 }

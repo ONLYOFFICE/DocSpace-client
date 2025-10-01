@@ -6,6 +6,7 @@
   "HotkeysClearAll": "Xóa tất cả các lựa chọn",
   "HotkeysClose": "Đóng/Hoàn tác",
   "HotkeysCopySelected": "Sao chép các mục đã chọn vào bộ nhớ tạm",
+  "HotkeysCopySelectedItems": "Sao chép các mục đã chọn văn bản",
   "HotkeysCreateDocument": "Tạo tài liệu",
   "HotkeysCreateFolder": "Tạo thư mục",
   "HotkeysCreateForm": "Tạo mẫu biểu mẫu trống",
@@ -14,6 +15,7 @@
   "HotkeysCreateSpreadsheet": "Tạo bảng tính",
   "HotkeysCreatingObjects": "Tạo mục",
   "HotkeysCutSelected": "Cắt các mục đã chọn vào bộ nhớ tạm",
+  "HotkeysDisablesSelectionArea": "Vô hiệu hóa vùng chọn",
   "HotkeysExtendSelectionDown": "Mở rộng lựa chọn xuống",
   "HotkeysExtendSelectionLeft": "Mở rộng lựa chọn bên trái",
   "HotkeysExtendSelectionRight": "Mở rộng lựa chọn bên phải",
@@ -43,7 +45,5 @@
   "HotkeysUploadFile": "Tải file lên",
   "HotkeysUploadingObjects": "Đang tải lên các mục",
   "HotkeysZoomIn": "Phóng to",
-  "HotkeysZoomOut": "Thu nhỏ",
-  "HotkeysCopySelectedItems": "Sao chép các mục đã chọn văn bản",
-  "HotkeysDisablesSelectionArea": "Vô hiệu hóa vùng chọn"
+  "HotkeysZoomOut": "Thu nhỏ"
 }

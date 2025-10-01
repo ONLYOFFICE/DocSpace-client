@@ -26,6 +26,7 @@
   "LdapGroupNameAttribute": "그룹 이름 속성",
   "LdapGroupNameAttributeTooltip": "그룹 이름에 해당하는 개체 속성을 지정하세요.",
   "LdapGroupUserAttributeTooltip": "이 사용자가 해당 그룹의 멤버인지 여부를 확인하는 데 사용되는 사용자 개체 속성을 입력하세요.",
+  "LdapIntegrationDescription": "LDAP를 통해 사용자 및 그룹을 가져오고, LDAP 서버에 저장된 로그인/비밀번호를 통해 사용자 인증을 활성화합니다. 설정이 저장된 즉시 사용자가 즉시 가져오고, 나중에 추가된 사용자는 첫 번째 인증 시에 가져옵니다. LDAP를 통해서만 접근을 제공하려면 {{sectionName}}을 통해 새로운 {{productName}} 멤버를 초대하는 옵션을 비활성화하세요: <1>{{link}}</1>",
   "LdapLoginAttribute": "로그인 속성",
   "LdapLoginAttributeTooltip": "사용자 로그인에 해당하는 개체 속성을 입력하세요.",
   "LdapLoginTooltip": "LDAP 서버 읽기 액세스 권한을 가진 로그인 사용자를 지정하세요.",
@@ -70,6 +71,5 @@
   "LdapUserFilterTooltip": "검색 LDAP 필터를 사용하여 가져오기 해야 하는 사용자를 선택하세요.",
   "LdapUserQuotaTooltip": "사용자에 대한 스토리지 할당량을 설정하려면 LDAP 디렉토리에 속성을 추가하고(예: UsersQuotaLimit) 이 속성에 대한 정수 값을 입력하세요. 할당량이 바이트 단위로 표시됩니다. 여기에서 속성 이름만 지정하세요. 이 속성은 첫 번째 설정 중에만 적용되며 나중에 {{contactsName}} 섹션에서 수동으로 변경할 수 있습니다. ",
   "LdapUsersType": "사용자 유형",
-  "LdapUserTypeTooltip": "모든 사용자가 선택한 유형으로 {{productName}}에 추가됩니다.",
-  "LdapIntegrationDescription": "LDAP를 통해 사용자 및 그룹을 가져오고, LDAP 서버에 저장된 로그인/비밀번호를 통해 사용자 인증을 활성화합니다. 설정이 저장된 즉시 사용자가 즉시 가져오고, 나중에 추가된 사용자는 첫 번째 인증 시에 가져옵니다. LDAP를 통해서만 접근을 제공하려면 {{sectionName}}을 통해 새로운 {{productName}} 멤버를 초대하는 옵션을 비활성화하세요: <1>{{link}}</1>"
+  "LdapUserTypeTooltip": "모든 사용자가 선택한 유형으로 {{productName}}에 추가됩니다."
 }

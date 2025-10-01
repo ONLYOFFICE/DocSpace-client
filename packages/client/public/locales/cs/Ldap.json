@@ -26,6 +26,7 @@
   "LdapGroupNameAttribute": "Atribut název skupiny",
   "LdapGroupNameAttributeTooltip": "Zadejte atribut objektu, který odpovídá názvu skupiny.",
   "LdapGroupUserAttributeTooltip": "Zadejte atribut objektu uživatele, který se používá k určení, zda je tento uživatel členem skupin.",
+  "LdapIntegrationDescription": "Importujte uživatele a skupiny přes LDAP a povolte ověřování uživatelů pomocí přihlašovacích údajů/hesel uložených na LDAP serveru. Uživatelé budou importováni ihned po uložení nastavení. Uživatelé přidáni později budou importováni při jejich prvním ověření. Pokud chcete poskytnout přístup pouze přes LDAP, deaktivujte možnost pozvat nové členy {{productName}} přes {{sectionName}}: <1>{{link}}</1>",
   "LdapLoginAttribute": "Atribut přihlášení",
   "LdapLoginAttributeTooltip": "Zadejte atribut objektu odpovídající přihlášení uživatele.",
   "LdapLoginTooltip": "Zadejte prosím Přihlášení uživatele, který má práva ke čtení serveru LDAP.",
@@ -70,6 +71,5 @@
   "LdapUserFilterTooltip": "Pomocí vyhledávacího filtru LDAP vyberte uživatele, kteří musí být importováni.",
   "LdapUserQuotaTooltip": "Chcete-li nastavit kvótu úložiště pro uživatele, přidejte atribut v adresáři LDAP (například UsersQuotaLimit) a zadejte pro tento atribut celočíselnou hodnotu. Zobrazí se hodnota kvóty v bytech. Zde zadejte pouze název atributu. Tento atribut bude použit pouze při prvním nastavení a později jej lze ručně změnit v sekci {{contactsName}}.",
   "LdapUsersType": "Typ uživatele",
-  "LdapUserTypeTooltip": "Všichni uživatelé budou přidáni do {{productName}} s vybraným typem.",
-  "LdapIntegrationDescription": "Importujte uživatele a skupiny přes LDAP a povolte ověřování uživatelů pomocí přihlašovacích údajů/hesel uložených na LDAP serveru. Uživatelé budou importováni ihned po uložení nastavení. Uživatelé přidáni později budou importováni při jejich prvním ověření. Pokud chcete poskytnout přístup pouze přes LDAP, deaktivujte možnost pozvat nové členy {{productName}} přes {{sectionName}}: <1>{{link}}</1>"
+  "LdapUserTypeTooltip": "Všichni uživatelé budou přidáni do {{productName}} s vybraným typem."
 }

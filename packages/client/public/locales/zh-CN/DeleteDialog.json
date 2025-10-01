@@ -2,7 +2,7 @@
   "DeleteAllGroupDescription": "所选组将被删除。组中的用户不会从{{productName}}中删除。您确定要继续吗？",
   "DeleteAllGroupsTitle": "删除群组",
   "DeleteFiles": "您将要把<strong>{{filesCount}}个文件</strong>移至回收站。",
-  "DeleteFilesAndFolders": "您即将把<strong>{{filesCount}}个文件和{{foldersCount}}个文件夹</strong>移至回收站。",
+  "DeleteFilesAndFolders": "您即将把<strong>{{filesCount}}个文件</strong>和<strong>{{foldersCount}}个文件夹</strong>移至回收站。",
   "DeleteFolders": "您即将把<strong>{{foldersCount}}个文件夹</strong>移至回收站。",
   "DeleteGroupDescription": "组{{groupName}} 将被删除。组中的用户不会从{{productName}}中删除。您确定要继续吗？",
   "DeleteGroupTitle": "删除群组",

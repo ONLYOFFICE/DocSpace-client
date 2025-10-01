@@ -34,6 +34,7 @@ import { useDidMount } from "../../../../../hooks/useDidMount";
 import styles from "../../AutoBackup.module.scss";
 import { ScheduleComponent } from "../ScheduleComponent";
 import { ThirdPartyModuleProps } from "./ThirdPartyModule.types";
+import NoteComponent from "../../../sub-components/NoteComponent";
 
 const ThirdPartyModule = ({
   isError,
@@ -83,6 +84,7 @@ const ThirdPartyModule = ({
   setWeekday,
   weekdaysLabelArray,
   setDefaultFolderId,
+  isBackupPaid,
 }: ThirdPartyModuleProps) => {
   const isResourcesDefault =
     defaultStorageType === BackupStorageType.ResourcesModuleType.toString();
@@ -166,6 +168,7 @@ const ThirdPartyModule = ({
         hoursArray={hoursArray}
         maxNumberCopiesArray={maxNumberCopiesArray}
       />
+      <NoteComponent isVisible={isBackupPaid} />
     </div>
   );
 };

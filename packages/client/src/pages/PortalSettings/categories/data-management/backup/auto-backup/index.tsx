@@ -53,7 +53,7 @@ const AutoBackupWrapper = ({
   isInitialLoading,
   isEmptyContentBeforeLoader,
   isInitialError,
-
+  isBackupPaid,
   ...props
 }: AutoBackupWrapperProps) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
@@ -79,6 +79,7 @@ const AutoBackupWrapper = ({
       isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
       setErrorInformation={setErrorInformation}
       isInitialError={isInitialError}
+      isBackupPaid={isBackupPaid}
       {...props}
     />
   );
@@ -97,6 +98,7 @@ export default inject<
     filesSelectorInput,
     thirdPartyStore,
     dialogsStore,
+    currentQuotaStore,
   }) => {
     const language = authStore.language;
 
@@ -110,6 +112,7 @@ export default inject<
       deleteThirdParty,
     } = thirdPartyStore;
 
+    const { isBackupPaid } = currentQuotaStore;
     const { automaticBackupUrl, currentColorScheme } = settingsStore;
 
     const {
@@ -311,6 +314,7 @@ export default inject<
       setDeleteThirdPartyDialogVisible,
       setIsInited,
       setDefaultFolderId,
+      isBackupPaid,
     };
   },
 )(observer(AutoBackupWrapper as React.FC<ExternalAutoBackupWrapperProps>));

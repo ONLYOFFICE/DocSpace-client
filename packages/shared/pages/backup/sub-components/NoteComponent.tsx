@@ -24,30 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { DirectThirdPartyConnectionProps } from "../../../../../components/direct-third-party-connection";
-import type { Nullable } from "../../../../../types";
+import React from "react";
 
-import type { ScheduleComponentProps } from "../ScheduleComponent";
+import { useTranslation } from "react-i18next";
 
-export interface ThirdPartyModuleProps
-  extends Omit<
-      DirectThirdPartyConnectionProps,
-      | "onSelectFolder"
-      | "isDisabled"
-      | "id"
-      | "withoutInitPath"
-      | "descriptionText"
-      | "filterParam"
-      | "isMobileScale"
-      | "isSelect"
-      | "isSelectFolder"
-      | "onSelectFile"
-    >,
-    ScheduleComponentProps {
-  isBackupPaid?: boolean;
-  isLoadingData: boolean;
-  setSelectedFolder: (id: string) => void;
-  defaultStorageType: Nullable<string>;
-  defaultFolderId: Nullable<string>;
-  setDefaultFolderId?: (id: string | number | null) => void;
-}
+import { Text } from "../../../components/text";
+import styles from "./Styles.module.scss";
+
+const NoteComponent = ({ isVisible = false }: { isVisible?: boolean }) => {
+  const { t } = useTranslation(["Common"]);
+
+  if (!isVisible) return null;
+
+  return (
+    <div className={styles.noteComponent}>
+      <Text>{t("Common:FeeAppliesToEachBackup")}</Text>
+    </div>
+  );
+};
+
+export default NoteComponent;

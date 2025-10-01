@@ -43,6 +43,7 @@ import {
   RoomsModuleProps,
   BackupToPublicRoomDialogState,
 } from "./RoomsModule.types";
+import NoteComponent from "../../../sub-components/NoteComponent";
 
 const defaultState: BackupToPublicRoomDialogState = {
   visible: false,
@@ -82,6 +83,7 @@ const RoomsModule = ({
   setPeriod,
   setTime,
   setWeekday,
+  isBackupPaid,
 }: RoomsModuleProps) => {
   const { t } = useTranslation("Common");
 
@@ -181,6 +183,7 @@ const RoomsModule = ({
         setMaxCopies={setMaxCopies}
         setMonthNumber={setMonthNumber}
       />
+      <NoteComponent isVisible={isBackupPaid} />
     </div>
   );
 };

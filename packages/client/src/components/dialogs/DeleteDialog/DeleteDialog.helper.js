@@ -103,10 +103,9 @@ export const getDialogContent = (
     if (isSingle) {
       return (
         <>
-          <Trans t={t} i18nKey="DeleteItem" ns="DeleteDialog">
+          <Trans t={t} i18nKey="DeleteItemForever" ns="DeleteDialog">
             You are about to move{" "}
-            <strong>{{ name: selection[0]?.title }}</strong>
-            to Trash.
+            <strong>{{ name: selection[0]?.title }}</strong>.
           </Trans>{" "}
           {isFolder
             ? t("FolderPermanentlyDeleted")
@@ -122,10 +121,10 @@ export const getDialogContent = (
     if (filesCount && foldersCount) {
       return (
         <>
-          <Trans t={t} i18nKey="DeleteFilesAndFolders" ns="DeleteDialog">
+          <Trans t={t} i18nKey="DeleteFilesAndFoldersForever" ns="DeleteDialog">
             You are about to delete the{" "}
             <strong>files ({{ filesCount }})</strong> and{" "}
-            <strong>folders ({{ foldersCount }})</strong> to Trash.
+            <strong>folders ({{ foldersCount }})</strong>.
           </Trans>{" "}
           {t("ItemsPermanentlyDeleted")} {t("Common:WantToContinue")}
         </>
@@ -135,9 +134,8 @@ export const getDialogContent = (
     if (filesCount) {
       return (
         <>
-          <Trans t={t} i18nKey="DeleteFiles" ns="DeleteDialog">
-            You are about to move <strong>files ({{ filesCount }})</strong> to
-            Trash.{" "}
+          <Trans t={t} i18nKey="DeleteFilesForever" ns="DeleteDialog">
+            You are about to move <strong>files ({{ filesCount }})</strong>.
           </Trans>{" "}
           {t("FilesPermanentlyDeleted")} {t("Common:WantToContinue")}
         </>
@@ -147,9 +145,8 @@ export const getDialogContent = (
     if (foldersCount) {
       return (
         <>
-          <Trans t={t} i18nKey="DeleteFolders" ns="DeleteDialog">
-            You are about to move <strong>folders ({{ foldersCount }})</strong>{" "}
-            to Trash.{" "}
+          <Trans t={t} i18nKey="DeleteFoldersForever" ns="DeleteDialog">
+            You are about to move <strong>folders ({{ foldersCount }})</strong>.
           </Trans>{" "}
           {t("FoldersPermanentlyDeleted")} {t("Common:WantToContinue")}
         </>

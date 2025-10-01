@@ -279,5 +279,11 @@
   "WantToCancelUpload": "Bạn có muốn hủy tải lên không?",
   "WantToContinue": "Bạn có muốn tiếp tục hoặc thay đổi hạn mức lưu trữ người dùng không?",
   "WhiteLabelSubtitle": "Nhập tên công ty của bạn, tải logo lên và tùy chỉnh phong cách để phù hợp với thương hiệu của bạn.",
-  "WithoutEmailHint": "Bạn không có người dùng không có email. Vui lòng chuyển sang bước tiếp theo."
+  "WithoutEmailHint": "Bạn không có người dùng không có email. Vui lòng chuyển sang bước tiếp theo.",
+  "ContactsInviteNote": "Bật tùy chọn này để cho phép gửi lời mời đến các thành viên {{productName}} mới thông qua phần {{sectionName}}. Tắt tùy chọn này nếu bạn muốn mời thành viên mới thông qua LDAP.",
+  "FolderToRoomImportNote": "Các thư mục dùng chung sẽ được nhập vào phần {{sectionName}} dưới dạng các phòng với những người dùng đã được cấp quyền truy cập. Xin lưu ý: một số quyền truy cập có thể bị mất trong quá trình nhập.",
+  "InviteViaContacts": "Mời các thành viên {{productName}} qua {{sectionName}}",
+  "LoginHistoryCampaignHeader": "Bảo vệ {{productName}} của bạn",
+  "LoginHistoryCampaignText": "Bảo vệ dữ liệu của bạn và bảo vệ bản thân cũng như nhóm của bạn khỏi các mối đe dọa tấn công mạng tiềm ẩn.",
+  "LoginHistoryCampaignTitle": "Bật xác thực hai yếu tố"
 }

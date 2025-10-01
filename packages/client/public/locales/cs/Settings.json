@@ -279,5 +279,11 @@
   "WantToCancelUpload": "Chcete zrušit nahrávání?",
   "WantToContinue": "Chcete pokračovat nebo změnit kvótu uživatelského úložiště?",
   "WhiteLabelSubtitle": "Zadejte název společnosti, nahrajte logo a přizpůsobte styl tak, aby odpovídal vaší značce.",
-  "WithoutEmailHint": "Bez e-mailů nemáte uživatele. Přejděte k dalšímu kroku."
+  "WithoutEmailHint": "Bez e-mailů nemáte uživatele. Přejděte k dalšímu kroku.",
+  "ContactsInviteNote": "Povolte tuto možnost, abyste umožnili odesílání pozvánek novým členům {{productName}} prostřednictvím sekce {{sectionName}}. Zakázání této možnosti je vhodné, pokud chcete pozývat nové členy pouze přes LDAP.",
+  "FolderToRoomImportNote": "Sdílené složky budou importovány do sekce {{sectionName}} jako místnosti s uživateli, kterým byl udělen přístup. Upozorňujeme, že některé přístupová práva se při importu mohou ztratit.",
+  "InviteViaContacts": "Pozvěte členy {{productName}} přes {{sectionName}}",
+  "LoginHistoryCampaignHeader": "Zabezpečte svůj {{productName}}",
+  "LoginHistoryCampaignText": "Zabezpečte svá data a ochraňte sebe a svůj tým před potenciálními hackingovými hrozbami.",
+  "LoginHistoryCampaignTitle": "Povolit dvoufaktorové ověřování"
 }

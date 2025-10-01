@@ -279,5 +279,11 @@
   "WantToCancelUpload": "Czy chcesz anulować przesyłanie?",
   "WantToContinue": "Chcesz kontynuować czy zmienić limit pamięci użytkownika?",
   "WhiteLabelSubtitle": "Wpisz nazwę swojej firmy, wgraj logo i dostosuj stylizację, aby lepiej pasowała do Twojego brandingu.",
-  "WithoutEmailHint": "Nie masz użytkowników bez adresu e-mail Przejdź do kolejnego kroku."
+  "WithoutEmailHint": "Nie masz użytkowników bez adresu e-mail Przejdź do kolejnego kroku.",
+  "ContactsInviteNote": "Włącz tę opcję, aby zezwolić na wysyłanie zaproszeń do nowych członków {{productName}} przez sekcję {{sectionName}}. Wyłącz tę opcję, jeśli chcesz zapraszać nowych członków wyłącznie przez LDAP.",
+  "FolderToRoomImportNote": "Wspólne foldery zostaną zaimportowane do sekcji {{sectionName}} jako pokoje z użytkownikami, którym przyznano dostęp. Należy pamiętać: niektóre uprawnienia dostępu mogą zostać utracone podczas importu.",
+  "InviteViaContacts": "Zaprosz członków {{productName}} przez {{sectionName}}",
+  "LoginHistoryCampaignHeader": "Zabezpiecz swoje {{productName}}",
+  "LoginHistoryCampaignText": "Zabezpiecz swoje dane i chroń siebie oraz swój zespół przed potencjalnymi zagrożeniami hakerskimi.",
+  "LoginHistoryCampaignTitle": "Włącz uwierzytelnianie dwuskładnikowe"
 }

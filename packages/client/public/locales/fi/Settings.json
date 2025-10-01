@@ -279,5 +279,11 @@
   "WantToCancelUpload": "Haluatko peruuttaa latauksen?",
   "WantToContinue": "Haluatko jatkaa vai muuttaa käyttäjien muistin kiintiötä?",
   "WhiteLabelSubtitle": "Syötä yrityksesi nimi, lataa logo ja muokkaa tyyli brändäykseesi sopivaksi. ",
-  "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen."
+  "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen.",
+  "ContactsInviteNote": "Ota tämä asetus käyttöön, jotta kutsuja voidaan lähettää uusille {{productName}}-jäsenille {{sectionName}}-osiossa. Poista tämä asetus käytöstä, jos haluat kutsua uusia jäseniä vain LDAP:n kautta.",
+  "FolderToRoomImportNote": "Jaetut kansiot tuodaan {{sectionName}}-osioon huoneina käyttäjille, joille on myönnetty käyttöoikeudet. Huomioithan: osa käyttöoikeuksista voi kadota tuonnin yhteydessä.",
+  "InviteViaContacts": "Kutsu {{productName}} -jäseniä {{sectionName}} -osiossa",
+  "LoginHistoryCampaignHeader": "Suojaa {{productName}} -tilisi",
+  "LoginHistoryCampaignText": "Suojaa tietosi ja turvaa itsesi sekä tiimisi mahdollisilta hakkeroinnin uhilta.",
+  "LoginHistoryCampaignTitle": "Ota kaksivaiheinen tunnistautuminen käyttöön"
 }

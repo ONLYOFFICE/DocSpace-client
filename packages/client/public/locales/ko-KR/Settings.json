@@ -279,5 +279,11 @@
   "WantToCancelUpload": "업로드를 취소하시겠습니까?",
   "WantToContinue": "사용자 스토리지 할당량을 계속 유지하거나 변경하시겠습니까?",
   "WhiteLabelSubtitle": "회사 이름을 입력하고 로고를 업로드하고 브랜딩에 맞게 스타일을 사용자 정의하세요.",
-  "WithoutEmailHint": "이메일이 없는 사용자가 없습니다. 다음 단계를 진행하세요."
+  "WithoutEmailHint": "이메일이 없는 사용자가 없습니다. 다음 단계를 진행하세요.",
+  "ContactsInviteNote": "새 {{productName}} 회원을 {{sectionName}} 섹션을 통해 초대할 수 있도록 하려면 이 옵션을 활성화합니다. LDAP를 통해서만 새 회원을 초대하려면 이 옵션을 비활성화합니다.",
+  "FolderToRoomImportNote": "공유 폴더는 {{sectionName}} 섹션으로 가져오며, 접근 권한이 부여된 사용자를 포함한 방으로 생성됩니다. 참고: 일부 접근 권한은 가져오기 과정에서 손실될 수 있습니다.",
+  "InviteViaContacts": "{{productName}} 멤버를 {{sectionName}}을 통해 초대하세요.",
+  "LoginHistoryCampaignHeader": "{{productName}}을 안전하게 보호하세요.",
+  "LoginHistoryCampaignText": "데이터를 보호하고 본인과 팀을 잠재적인 해킹 위협으로부터 보호하십시오.",
+  "LoginHistoryCampaignTitle": "2단계 인증 활성화"
 }

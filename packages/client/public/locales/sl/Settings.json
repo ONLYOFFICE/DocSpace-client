@@ -279,5 +279,11 @@
   "WantToCancelUpload": "Ali želite preklicati nalaganje?",
   "WantToContinue": "Ali želite nadaljevati ali spremeniti uporabniško kvoto prostora za shranjevanje?",
   "WhiteLabelSubtitle": "Vnesite ime svojega podjetja, naložite logotip in prilagodite slog, da bo ustrezal vaši blagovni znamki.",
-  "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom."
+  "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom.",
+  "ContactsInviteNote": "Omogočite to možnost, da dovolite pošiljanje povabil na nove člane {{productName}} preko razdelka {{sectionName}}. Izključite to možnost, če želite povabiti nove člane samo prek LDAP.",
+  "FolderToRoomImportNote": "Deljene mape bodo uvožene v razdelek {{sectionName}} kot sobe z uporabniki, ki so prejeli dostop. Upoštevajte: med uvoženjem lahko izgubite nekatere pravice dostopa.",
+  "InviteViaContacts": "Povabite člane {{productName}} preko {{sectionName}}",
+  "LoginHistoryCampaignHeader": "Zavarujte si {{productName}}",
+  "LoginHistoryCampaignText": "Zaščitite svoje podatke in se sami ter vaš ekipa zaščitite pred morebitnimi grožnjami vdora.",
+  "LoginHistoryCampaignTitle": "Omogoči dvofaktorsko avtentikacijo"
 }

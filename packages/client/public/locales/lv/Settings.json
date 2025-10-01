@@ -279,5 +279,11 @@
   "WantToCancelUpload": "Vai vēlaties atcelt augšupielādi?",
   "WantToContinue": "Vai vēlaties turpināt vai mainīt lietotāja krātuves kvotu?",
   "WhiteLabelSubtitle": "Ievadiet sava uzņēmuma nosaukumu, augšupielādējiet logotipu un pielāgojiet stilu atbilstoši savam zīmolam.",
-  "WithoutEmailHint": "Jums nav lietotāju bez e-pasta ziņojumiem. Turpiniet ar nākamo darbību."
+  "WithoutEmailHint": "Jums nav lietotāju bez e-pasta ziņojumiem. Turpiniet ar nākamo darbību.",
+  "ContactsInviteNote": "Iespējojiet šo opciju, lai atļautu uzaicinājumus jaunajiem {{productName}} dalībniekiem nosūtīt, izmantojot {{sectionName}} sadaļu. Atspējojiet šo opciju, ja vēlaties uzaicināt jaunus dalībniekus tikai, izmantojot LDAP.",
+  "FolderToRoomImportNote": "Kopīgās mapes tiks importētas {{sectionName}} sadaļā kā telpas ar lietotājiem, kuriem tika piešķirtas piekļuves tiesības. Lūdzu, ņemiet vērā: importa laikā daži piekļuves tiesību līmeņi var tikt zaudēti.",
+  "InviteViaContacts": "Aicināt {{productName}} biedrus, izmantojot {{sectionName}}",
+  "LoginHistoryCampaignHeader": "Nodrošiniet savu {{productName}}",
+  "LoginHistoryCampaignText": "Aizsargājiet savus datus un pasargājiet sevi un savu komandu no potenciāliem hakeru draudiem.",
+  "LoginHistoryCampaignTitle": "Iespējot divu faktoru autentifikāciju"
 }

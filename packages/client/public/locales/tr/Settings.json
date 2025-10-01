@@ -279,5 +279,11 @@
   "WantToCancelUpload": "Yüklemeyi iptal etmek istiyor musunuz?",
   "WantToContinue": "Devam etmek mi yoksa kullanıcı kotasını değiştirmek mi istiyorsunuz?",
   "WhiteLabelSubtitle": "Şirketinizin adını girin, logoyu yükleyin ve stili markanıza uyacak şekilde özelleştirin.",
-  "WithoutEmailHint": "E-postası olmayan kullanıcınız yok. Lütfen bir sonraki adıma geçin."
+  "WithoutEmailHint": "E-postası olmayan kullanıcınız yok. Lütfen bir sonraki adıma geçin.",
+  "ContactsInviteNote": "Bu seçeneği etkinleştirerek, yeni {{productName}} üyelerine {{sectionName}} bölümü üzerinden davetiye gönderilmesine izin verebilirsiniz. Sadece LDAP üzerinden yeni üyeleri davet etmek isterseniz bu seçeneği devre dışı bırakın.",
+  "FolderToRoomImportNote": "Paylaşılan klasörler, erişim izni verilen kullanıcılarla birlikte {{sectionName}} bölümüne oda olarak aktarılacaktır. Lütfen dikkat: bazı erişim hakları aktarım sırasında kaybolabilir.",
+  "InviteViaContacts": "{{productName}} üyelerini {{sectionName}} aracılığıyla davet edin",
+  "LoginHistoryCampaignHeader": "{{productName}}'inizi güvence altına alın",
+  "LoginHistoryCampaignText": "Verilerinizi koruyun ve kendinizi ve ekibinizi olası hack tehditlerinden koruyun.",
+  "LoginHistoryCampaignTitle": "İki faktörlü kimlik doğrulamayı etkinleştir"
 }

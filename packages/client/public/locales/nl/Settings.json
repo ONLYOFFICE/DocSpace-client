@@ -279,5 +279,11 @@
   "WantToCancelUpload": "Wilt u het uploaden annuleren?",
   "WantToContinue": "Wilt u doorgaan of de opslagquota voor gebruikers wijzigen?",
   "WhiteLabelSubtitle": "Voer uw bedrijfsnaam in, upload het logo en pas de styling aan aan uw huisstijl.",
-  "WithoutEmailHint": "U heeft geen gebruikers zonder e-mails. Ga door naar de volgende stap."
+  "WithoutEmailHint": "U heeft geen gebruikers zonder e-mails. Ga door naar de volgende stap.",
+  "ContactsInviteNote": "Schakel deze optie in om uitnodigingen te kunnen versturen naar nieuwe {{productName}} leden via de {{sectionName}} sectie. Schakel deze optie uit als u nieuwe leden uitsluitend via LDAP wilt uitnodigen.",
+  "FolderToRoomImportNote": "Gedeelde mappen worden geïmporteerd in de sectie {{sectionName}} als ruimtes met gebruikers die toegang hadden. Let op: sommige toegangsrechten kunnen verloren gaan tijdens de import.",
+  "InviteViaContacts": "Nodig {{productName}} leden uit via {{sectionName}}",
+  "LoginHistoryCampaignHeader": "Beveilig je {{productName}}",
+  "LoginHistoryCampaignText": "Beveilig uw gegevens en bescherm uzelf en uw team tegen mogelijke hackingdreigingen.",
+  "LoginHistoryCampaignTitle": "Tweefactorauthenticatie inschakelen"
 }

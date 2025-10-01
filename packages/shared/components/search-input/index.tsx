@@ -101,7 +101,6 @@ const SearchInput = ({
   }, [onClearSearch]);
 
   // const handleBlur = useCallback(() => {
-  //   // debugger;
   //   // Reset to the external value when focus is lost if they don't match
   //   if (resetOnBlur && inputValue !== value) {
   //     setInputValue(value);

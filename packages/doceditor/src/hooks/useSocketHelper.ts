@@ -90,8 +90,13 @@ const useSocketHelper = ({
   }, []);
 
   React.useEffect(() => {
-    const callback = async (loginEventId: unknown) => {
-      console.log(`[WS] "logout-session"`, loginEventId, user?.loginEventId);
+    const callback = async (loginEventId: unknown, redirectUrl: string) => {
+      console.log(
+        `[WS] "logout-session"`,
+        loginEventId,
+        user?.loginEventId,
+        redirectUrl,
+      );
 
       if (
         Number(loginEventId) === user?.loginEventId ||
@@ -106,9 +111,11 @@ const useSocketHelper = ({
 
         docEditor?.requestClose();
 
-        window.location.replace(
-          combineUrl(window.ClientConfig?.proxy?.url, "/login"),
-        );
+        const loginUrl = redirectUrl
+          ? redirectUrl
+          : window.ClientConfig?.proxy?.url;
+
+        window.location.replace(combineUrl(loginUrl, "/login"));
       }
     };
 

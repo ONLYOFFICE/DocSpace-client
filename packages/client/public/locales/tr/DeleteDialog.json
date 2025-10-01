@@ -11,7 +11,7 @@
   "DeleteGroupTitle": "Grubu sil",
   "DeleteItem": "Şu anda <strong>{{name}}</strong>'ı {{trashSection}}'a taşıyorsunuz.",
   "DeleteItemForever": "Silmek üzere olduğunuz öğe <strong>{{name}}</strong>.",
-  "DeleteRoom": "Oda <strong class=\"{{roomName}}\" >kalıcı olarak silinecektir. Tüm veriler ve kullanıcı erişimleri kaybolacaktır.",
+  "DeleteRoom": "Oda <strong>\"{{roomName}}\"</strong> kalıcı olarak silinecektir. Tüm veriler ve kullanıcı erişimleri kaybolacaktır.",
   "DeleteRoomTitle": "Bu odayı sil?",
   "DeleteRoomWarning": "Sonuçların farkındayım ve odayı silmek istiyorum",
   "DeleteTemplate": "<1>«{{templateName}}»</1> adlı şablon odayı silmek istediğinize emin misiniz? Şablon geri yüklenemez.",

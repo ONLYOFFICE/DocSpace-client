@@ -1,9 +1,9 @@
 {
   "DeleteAllGroupDescription": "Οι επιλεγμένες ομάδες θα διαγραφούν. Οι χρήστες των ομάδων δεν θα διαγραφούν από το {{productName}}. Θέλετε σίγουρα να συνεχίσετε;",
   "DeleteAllGroupsTitle": "Διαγραφή ομάδων",
-  "DeleteFiles": "Ετοιμάζεστε να μετακινήσετε **αρχεία ({{filesCount}})</strong> στο {{trashSection}}.",
-  "DeleteFilesAndFolders": "Ετοιμάζεστε να διαγράψετε τα αρχεία (**{{filesCount}}**) και τους φακέλους (**{{foldersCount}}**) στον/στην {{trashSection}}.",
-  "DeleteFilesAndFoldersForever": "Ετοιμάζεστε να διαγράψετε τα αρχεία ({{filesCount}}) και τους φακέλους ({{foldersCount}}).",
+  "DeleteFiles": "Ετοιμάζεστε να μετακινήσετε <strong>αρχεία ({{filesCount}})</strong> στο {{trashSection}}.",
+  "DeleteFilesAndFolders": "Ετοιμάζεστε να διαγράψετε τα <strong>αρχεία ({{filesCount}})</strong> και τους <strong>φακέλους ({{foldersCount}})</strong> στον/στην {{trashSection}}.",
+  "DeleteFilesAndFoldersForever": "Ετοιμάζεστε να διαγράψετε τα <strong>αρχεία ({{filesCount}})</strong> και τους <strong>φακέλους ({{foldersCount}})</strong>.",
   "DeleteFilesForever": "Ετοιμάζεστε να διαγράψετε <strong>αρχεία ({{filesCount}})</strong>.",
   "DeleteFolders": "Ετοιμάζεστε να μετακινήσετε <strong>φακέλους ({{foldersCount}})</strong> στο {{trashSection}}.",
   "DeleteFoldersForever": "Ετοιμάζεστε να διαγράψετε <strong>φακέλους ({{foldersCount}})</strong>.",

@@ -192,5 +192,14 @@
   "WarningMoveToFormRoomServal": "Переміщення кількох файлів до кімнати заповнення форм не підтримується. Переміщуйте одну PDF-форму {{ organizationName }} за раз.",
   "WillBeDeletedPermanently": "{{date}} буде видалено назавжди",
   "YouLeftTheRoom": "Ви залишили кімнату",
-  "YourUserTypeHasChanged": "Ваш тип користувача змінено на <1>«{{userType}}»</1> адміністратором {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Ваш тип користувача змінено на <1>«{{userType}}»</1> адміністратором {{productName}} <1>{{adminName}}</1>.",
+  "AccessLevel": "Рівень доступу",
+  "FilesMovedToTrashNotice": "Після того, як файли будуть переміщені до {{sectionName}}.",
+  "FormRoomCreationLimit": "Створення на основі кількох файлів і папок не доступне для цього типу кімнати. Щоб створити таку кімнату, перейдіть до розділу {{sectionName}} або скористайтеся однією з форм PDF.",
+  "LastOpened": "Останній відкритий",
+  "OpenedViaLink": "Відкрито за посиланням: доступ <strong>{{access}}</strong>.",
+  "RoomAccessRedirectNote": "Ви будете перенаправлені до {{sectionName}} автоматично за 5 секунд.",
+  "ScheduledTrashMove": "{{date}} буде перенесено до {{sectionName}}",
+  "TrashAutoDeleteWarning": "Елементи в {{sectionName}} автоматично видаляються через 30 днів.",
+  "TrashFunctionalityDescription": "Всі видалені файли переміщуються до '{{sectionName}}'. Відновіть файли, видалені помилково, або видаліть їх назавжди. Файли в '{{sectionName}}' автоматично видаляються через 30 днів. Будь ласка, зверніть увагу, що файли, видалені з '{{sectionName}}', більше неможливо відновити."
 }

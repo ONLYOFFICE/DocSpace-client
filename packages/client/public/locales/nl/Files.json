@@ -192,5 +192,14 @@
   "WarningMoveToFormRoomServal": "Het verplaatsen van meerdere bestanden naar de kamer voor het invullen van formulieren wordt niet ondersteund. Verplaats één {{ organizationName }} PDF formulier tegelijk.",
   "WillBeDeletedPermanently": "{{date}} wordt definitief verwijderd",
   "YouLeftTheRoom": "U heeft de kamer verlaten",
-  "YourUserTypeHasChanged": "Uw gebruikerstype is gewijzigd in <1>“{{userType}}”</1> door de {{productName}} beheerder <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Uw gebruikerstype is gewijzigd in <1>“{{userType}}”</1> door de {{productName}} beheerder <1>{{adminName}}</1>.",
+  "AccessLevel": "Toegangslevel",
+  "FilesMovedToTrashNotice": "Na het verplaatsen van bestanden naar {{sectionName}}.",
+  "FormRoomCreationLimit": "Creatie op basis van meerdere bestanden en mappen is niet beschikbaar voor dit type kamer. Om een dergelijke kamer te maken, ga naar de {{sectionName}} sectie of gebruik een van de PDF-formulieren.",
+  "LastOpened": "Laatst geopend",
+  "OpenedViaLink": "Geopend via link: toegang <strong>\"{{access}}\"</strong>.",
+  "RoomAccessRedirectNote": "U wordt automatisch doorgestuurd naar de {{sectionName}} in 5 seconden.",
+  "ScheduledTrashMove": "{{date}} wordt verplaatst naar {{sectionName}}",
+  "TrashAutoDeleteWarning": "Items in {{sectionName}} worden automatisch verwijderd na 30 dagen.",
+  "TrashFunctionalityDescription": "Alle verwijderde bestanden worden verplaatst naar '{{sectionName}}'. Herstel per ongeluk verwijderde bestanden of verwijder ze permanent. Bestanden in '{{sectionName}}' worden automatisch verwijderd na 30 dagen. Let op, de bestanden die uit '{{sectionName}}' zijn verwijderd, kunnen niet meer worden hersteld."
 }

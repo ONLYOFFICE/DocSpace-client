@@ -192,5 +192,14 @@
   "WarningMoveToFormRoomServal": "Přesunutí několika souborů do místnosti pro vyplňování formulářů není podporováno. Přesunujte PDF formuláře {{ organizationName }} po jednom.",
   "WillBeDeletedPermanently": "{{date}} bude trvale smazáno",
   "YouLeftTheRoom": "Opustili jste místnost",
-  "YourUserTypeHasChanged": "Váš typ uživatele byl změněn na <1>\"{{userType}}\"</1> správcem {{productName}} <1>{{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Váš typ uživatele byl změněn na <1>\"{{userType}}\"</1> správcem {{productName}} <1>{{{adminName}}</1>.",
+  "AccessLevel": "Úroveň přístupu",
+  "FilesMovedToTrashNotice": "Po přesunutí souborů do {{sectionName}}.",
+  "FormRoomCreationLimit": "Vytvoření na základě několika souborů a složek není pro tento typ pokoje dostupné. Pro vytvoření takového pokoje přejděte do sekce {{sectionName}} nebo použijte jeden z PDF formulářů.",
+  "LastOpened": "Poslední otevřený",
+  "OpenedViaLink": "Otevřeno přes odkaz: přístup <strong>{{access}}</strong>.",
+  "RoomAccessRedirectNote": "Budete automaticky přesměrováni do sekce {{sectionName}} za 5 sekund.",
+  "ScheduledTrashMove": "{{date}} bude přesunut do {{sectionName}}",
+  "TrashAutoDeleteWarning": "Položky v {{sectionName}} jsou automaticky smazány po 30 dnech.",
+  "TrashFunctionalityDescription": "Všechny smazané soubory jsou přesunuty do složky '{{sectionName}}'. Obnovte soubory smazané omylem nebo je trvale smažte. Soubory ve složce '{{sectionName}}' jsou automaticky mazány po 30 dnech. Upozorňujeme, že soubory smazané ze složky '{{sectionName}}' nelze obnovit."
 }

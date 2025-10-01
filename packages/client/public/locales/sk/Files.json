@@ -192,5 +192,14 @@
   "WarningMoveToFormRoomServal": "Presunutie viacerých súborov do miestnosti na vyplnenie formulárov nie je podporované. Premiestňujte jeden {{ organizationName }} PDF formulára naraz.",
   "WillBeDeletedPermanently": "{{date}} bude natrvalo odstránený",
   "YouLeftTheRoom": "Opustili ste miestnosť",
-  "YourUserTypeHasChanged": "Váš typ používateľa bol zmenený na <1>“{{userType}}“</1> administrátorom {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Váš typ používateľa bol zmenený na <1>“{{userType}}“</1> administrátorom {{productName}} <1>{{adminName}}</1>.",
+  "AccessLevel": "Úroveň prístupu",
+  "FilesMovedToTrashNotice": "Po presunutí súborov do {{sectionName}}.",
+  "FormRoomCreationLimit": "Vytvorenie na základe niekoľkých súborov a priečinkov nie je dostupné pre tento typ izby. Ak chcete takúto izbu vytvoriť, prejdite do sekcie {{sectionName}} alebo použite jeden z PDF formulárov.",
+  "LastOpened": "Posledný otvorený",
+  "OpenedViaLink": "Otvorené cez odkaz: prístup <strong>{{access}}</strong>.",
+  "RoomAccessRedirectNote": "Budete automaticky presmerovaní do sekcie {{sectionName}} o 5 sekúnd.",
+  "ScheduledTrashMove": "{{date}} bude presunuté do {{sectionName}}",
+  "TrashAutoDeleteWarning": "Položky v {{sectionName}} sú automaticky odstránené po 30 dňoch.",
+  "TrashFunctionalityDescription": "Všetky odstránené súbory sú presunuté do ‘{{sectionName}}’. Obnovte súbory odstránené náhodou alebo ich trvale zmažte. Súbory v ‘{{sectionName}}’ sú automaticky zmazané po 30 dňoch. Upozorňujeme, že súbory odstránené z ‘{{sectionName}}’ už nie je možné obnoviť."
 }

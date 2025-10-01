@@ -192,5 +192,14 @@
   "WarningMoveToFormRoomServal": "Premikanje več datotek v prostor za izpolnjevanje obrazcev ni podprto. Premaknite po en obrazec PDF {{ organizationName }} naenkrat.",
   "WillBeDeletedPermanently": "{{date}} bo trajno izbrisan",
   "YouLeftTheRoom": "Zapustili ste sobo",
-  "YourUserTypeHasChanged": "Vaš tip uporabnika je spremenil v <1>»{{userType}}«</1> skrbnik za {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Vaš tip uporabnika je spremenil v <1>»{{userType}}«</1> skrbnik za {{productName}} <1>{{adminName}}</1>.",
+  "AccessLevel": "Raven dostopa",
+  "FilesMovedToTrashNotice": "Po premiku datotek v {{sectionName}}.",
+  "FormRoomCreationLimit": "Ustvarjanje na podlagi več datotek in map ni na voljo za tovrstno sobo. Za ustvarjanje take sobe pojdite v razdelek {{sectionName}} ali uporabite eno od obrazcev PDF.",
+  "LastOpened": "Zadnjič odprto",
+  "OpenedViaLink": "Odprto preko povezave: dostop <strong>{{access}}</strong>.",
+  "RoomAccessRedirectNote": "Samodejno vas čez 5 sekund preusmerimo na {{sectionName}}.",
+  "ScheduledTrashMove": "{{date}} bo prestavljeno v {{sectionName}}",
+  "TrashAutoDeleteWarning": "Predmeti v {{sectionName}} so samodejno izbrisani po 30 dneh.",
+  "TrashFunctionalityDescription": "Vse izbrisane datoteke so prestavljene v '{{sectionName}}'. Obnovite datoteke, ki ste jih po nesreči izbrisali, ali jih trajno izbrišite. Datoteke v '{{sectionName}}' se samodejno izbrišejo po 30 dneh. Upoštevajte, da datotek, izbrisanih iz '{{sectionName}}', ne moremo več obnoviti."
 }

@@ -192,5 +192,14 @@
   "WarningMoveToFormRoomServal": "Vairāku failu pārvietošana uz veidlapu aizpildīšanas telpu netiek atbalstīta. Vienlaikus pārvietojiet vienu {{ organizationName }} PDF veidlapu.",
   "WillBeDeletedPermanently": "{{date}} tiks neatgriezeniski dzēsts",
   "YouLeftTheRoom": "Jūs atstājāt telpu",
-  "YourUserTypeHasChanged": "{{productName}} administrators <1>{{adminName}}</1> ir mainījis jūsu lietotāja tipu uz <1>“{{userType}}”</1>."
+  "YourUserTypeHasChanged": "{{productName}} administrators <1>{{adminName}}</1> ir mainījis jūsu lietotāja tipu uz <1>“{{userType}}”</1>.",
+  "AccessLevel": "Piekļuves līmenis",
+  "FilesMovedToTrashNotice": "Pēc failu pārvietošanas uz {{sectionName}}.",
+  "FormRoomCreationLimit": "Izveidošana balstoties uz vairākiem failiem un mapēm nav pieejama šāda tipa telpai. Lai izveidotu šādu telpu, dodieties uz {{sectionName}} sadaļu vai izmantojiet vienu no PDF formām.",
+  "LastOpened": "Pēdēji atvērts",
+  "OpenedViaLink": "Atvērts, izmantojot saiti: piekļuve <strong>{{access}}</strong>.",
+  "RoomAccessRedirectNote": "Jūs tiksiet automātiski novirzīts uz {{sectionName}} pēc 5 sekundēm.",
+  "ScheduledTrashMove": "{{date}} tiks pārvietota uz {{sectionName}}",
+  "TrashAutoDeleteWarning": "{{sectionName}} sadaļā esoši vienumi tiek automātiski dzēsti pēc 30 dienām.",
+  "TrashFunctionalityDescription": "Visi dzēstie faili tiek pārvietoti uz '{{sectionName}}'. Atjaunojiet nejauši dzēstos failus vai izdzēsiet tos pavisam. Faili '{{sectionName}}' tiek automātiski dzēsti pēc 30 dienām. Lūdzu, ņemiet vērā, ka faili, kas izdzēsti no '{{sectionName}}', vairs nevar tikt atjaunoti."
 }

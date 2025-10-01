@@ -192,5 +192,14 @@
   "WarningMoveToFormRoomServal": "Przenoszenie kilku plików do Pokoju do wypełniania formularzy nie jest obsługiwane. Przenoś po jednym formularzu PDF {{ organizationName }} na raz.",
   "WillBeDeletedPermanently": "{{date}} nastąpi trwałe usunięcie",
   "YouLeftTheRoom": "Opuszczono pokój",
-  "YourUserTypeHasChanged": "Twój rodzaj użytkownika został zmieniony na <1>“{{userType}}”</1> przez administratora {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Twój rodzaj użytkownika został zmieniony na <1>“{{userType}}”</1> przez administratora {{productName}} <1>{{adminName}}</1>.",
+  "AccessLevel": "Poziom dostępu",
+  "FilesMovedToTrashNotice": "Po przeniesieniu plików do {{sectionName}}.",
+  "FormRoomCreationLimit": "Tworzenie na podstawie kilku plików i folderów nie jest dostępne dla tego typu pokoju. Aby utworzyć taki pokój, przejdź do sekcji {{sectionName}} lub użyj jednego z formularzy PDF.",
+  "LastOpened": "Ostatnio otwarte",
+  "OpenedViaLink": "Otwarto przez link: dostęp <strong>{{access}}</strong>.",
+  "RoomAccessRedirectNote": "Zostaniesz automatycznie przekierowany do sekcji {{sectionName}} za 5 sekund.",
+  "ScheduledTrashMove": "{{date}} zostanie przeniesione do {{sectionName}}",
+  "TrashAutoDeleteWarning": "Elementy w {{sectionName}} są automatycznie usuwane po 30 dniach.",
+  "TrashFunctionalityDescription": "Wszystkie usunięte pliki są przenoszone do '{{sectionName}}'. Przywróć pliki usunięte przez pomyłkę lub usuń je na stałe. Pliki w '{{sectionName}}' są automatycznie usuwane po 30 dniach. Należy pamiętać, że pliki usunięte z '{{sectionName}}' nie mogą być już przywrócone."
 }

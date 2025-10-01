@@ -192,5 +192,14 @@
   "WarningMoveToFormRoomServal": "Birdən çox faylın Forma Doldurma otağına köçürülməsi dəstəklənmir. Eyni anda bir {{organizationName }} PDF formasını köçürün.",
   "WillBeDeletedPermanently": "{{date}} həmişəlik silinəcək",
   "YouLeftTheRoom": "Otağı tərk etdiniz",
-  "YourUserTypeHasChanged": "İstifadəçi tipiniz {{productName}} administratoru <1>{{adminName}}</1> tərəfindən <1>“{{userType}}”</1> olaraq dəyişdirilib."
+  "YourUserTypeHasChanged": "İstifadəçi tipiniz {{productName}} administratoru <1>{{adminName}}</1> tərəfindən <1>“{{userType}}”</1> olaraq dəyişdirilib.",
+  "AccessLevel": "Təqdim olunan səviyyə",
+  "FilesMovedToTrashNotice": "Fayllar {{sectionName}} bölməsinə köçürüləndən sonra.",
+  "FormRoomCreationLimit": "Bir neçə fayl və qovluğa əsaslanan yarpaq bu otaq növü üçün mövcud deyil. Belə bir otaq yaratmaq üçün {{sectionName}} bölməsinə keçin və ya PDF formlarından birini istifadə edin.",
+  "LastOpened": "Sonuncu açılmış",
+  "OpenedViaLink": "Link vasitəsilə açılıb: giriş <strong>{{access}}</strong>.",
+  "RoomAccessRedirectNote": "5 saniyədən sonra siz avtomatik olaraq {{sectionName}} bölməsinə yönləndiriləcəksiniz.",
+  "ScheduledTrashMove": "{{date}} {{sectionName}} bölməsinə köçürüləcəkdir.",
+  "TrashAutoDeleteWarning": "{{sectionName}} bölməsinin əşyaları 30 gün sonra avtomatik olaraq silinir.",
+  "TrashFunctionalityDescription": "Silinmiş bütün fayllar '{{sectionName}}' bölməsinə köçürülür. Yanlış silinmiş faylları bərpa edin və ya onları daimi olaraq silin. '{{sectionName}}' bölməsindəki fayllar 30 gün sonra avtomatik olaraq silinir. Xahiş edirik, '{{sectionName}}' bölməsindən silinən faylları daha sonra bərpa etmək mümkün deyil."
 }

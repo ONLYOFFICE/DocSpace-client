@@ -192,5 +192,14 @@
   "WarningMoveToFormRoomServal": "Birden fazla dosyanın Form Doldurma odasına taşınması desteklenmiyor. Tek seferde bir {{ organizationName }} PDF formu taşıyın.",
   "WillBeDeletedPermanently": "{{date}} kalıcı olarak silinecek",
   "YouLeftTheRoom": "Odadan ayrıldınız",
-  "YourUserTypeHasChanged": "Kullanıcı türünüz, {{productName}} yöneticisi <1>{{adminName}}</1> tarafından <1>“{{userType}}”</1> olarak değiştirildi."
+  "YourUserTypeHasChanged": "Kullanıcı türünüz, {{productName}} yöneticisi <1>{{adminName}}</1> tarafından <1>“{{userType}}”</1> olarak değiştirildi.",
+  "AccessLevel": "Erişim düzeyi",
+  "FilesMovedToTrashNotice": "Dosyalar {{sectionName}}'e taşındıktan sonra.",
+  "FormRoomCreationLimit": "Birkaç dosya ve klasöre dayalı oluşturma, bu oda türü için kullanılamaz. Bu tür bir oda oluşturmak için {{sectionName}} bölümüne gidin veya PDF formlarından birini kullanın.",
+  "LastOpened": "Son açılan",
+  "OpenedViaLink": "Bağlantı yoluyla açıldı: erişim <strong>{{access}}</strong>.",
+  "RoomAccessRedirectNote": "5 saniye içinde {{sectionName}} bölümüne otomatik olarak yönlendirileceksiniz.",
+  "ScheduledTrashMove": "{{date}} {{sectionName}}’a taşınacaktır.",
+  "TrashAutoDeleteWarning": "{{sectionName}}'deki öğeler 30 gün sonra otomatik olarak silinir.",
+  "TrashFunctionalityDescription": "Tüm silinen dosyalar '{{sectionName}}' bölümüne taşınır. Yanlışlıkla silinen dosyaları geri yükleyin veya kalıcı olarak silin. '{{sectionName}}' bölümündeki dosyalar 30 gün sonra otomatik olarak silinir. Lütfen, '{{sectionName}}' bölümünden silinen dosyaların artık geri getirilemeyeceğini unutmayın."
 }

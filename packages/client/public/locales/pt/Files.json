@@ -192,5 +192,14 @@
   "WarningMoveToFormRoomServal": "Não há suporte para mover vários arquivos para a sala de preenchimento de formulários. Mova um formulário PDF {{ organizationName }} de cada vez.",
   "WillBeDeletedPermanently": "{{date}} será eliminado permanentemente",
   "YouLeftTheRoom": "Você saiu da sala",
-  "YourUserTypeHasChanged": "O seu tipo de utilizador foi alterado para <1>“{{userType}}”</1> pelo administrador {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "O seu tipo de utilizador foi alterado para <1>“{{userType}}”</1> pelo administrador {{productName}} <1>{{adminName}}</1>.",
+  "AccessLevel": "Nível de acesso",
+  "FilesMovedToTrashNotice": "Após os arquivos serão movidos para {{sectionName}}.",
+  "FormRoomCreationLimit": "A criação baseada em vários arquivos e pastas não está disponível para este tipo de quarto. Para criar um quarto como este, vá para a seção {{sectionName}} ou use um dos formulários PDF.",
+  "LastOpened": "Último aberto",
+  "OpenedViaLink": "Aberto via link: acesso <strong>\"{{access}}\"</strong>.",
+  "RoomAccessRedirectNote": "Você será redirecionado para a seção {{sectionName}} automaticamente em 5 segundos.",
+  "ScheduledTrashMove": "{{date}} será movida para {{sectionName}}",
+  "TrashAutoDeleteWarning": "Itens em {{sectionName}} são automaticamente excluídos após 30 dias.",
+  "TrashFunctionalityDescription": "Todos os arquivos eliminados são movidos para '{{sectionName}}'. Restaure arquivos eliminados por engano ou exclua-os permanentemente. Os arquivos em '{{sectionName}}' são excluídos automaticamente após 30 dias. Observe que os arquivos eliminados de '{{sectionName}}' não podem ser restaurados novamente."
 }

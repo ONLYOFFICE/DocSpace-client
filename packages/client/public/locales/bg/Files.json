@@ -192,5 +192,14 @@
   "WarningMoveToFormRoomServal": "Преместването на няколко файла в стаята за попълване на формуляри не се поддържа. Премествайте по един {{ organizationName }} PDF формуляр.",
   "WillBeDeletedPermanently": "{{date}} ще бъде изтрита окончателно",
   "YouLeftTheRoom": "Напуснахте стаята",
-  "YourUserTypeHasChanged": "Вашият потребителски тип е променен на <1>“{{userType}}“</1> от администратора на {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Вашият потребителски тип е променен на <1>“{{userType}}“</1> от администратора на {{productName}} <1>{{adminName}}</1>.",
+  "AccessLevel": "Ниво на достъп",
+  "FilesMovedToTrashNotice": "След като файловете бъдат преместени в {{sectionName}}.",
+  "FormRoomCreationLimit": "Създаването на базата на няколко файла и папки не е достъпно за този тип стая. За да създадете такава стая, отидете в секцията {{sectionName}} или използвайте един от PDF формулярите.",
+  "LastOpened": "Последно отворен",
+  "OpenedViaLink": "Отворено чрез линк: достъп <strong>{{access}}</strong>.",
+  "RoomAccessRedirectNote": "Ще бъдете пренасочени автоматично към {{sectionName}} след 5 секунди.",
+  "ScheduledTrashMove": "{{date}} ще бъде преместена в {{sectionName}}",
+  "TrashAutoDeleteWarning": "Елементите в {{sectionName}} се изтриват автоматично след 30 дни.",
+  "TrashFunctionalityDescription": "Всички изтрити файлове са преместени в '{{sectionName}}'. Възстановете файлове, изтрити по погрешка, или ги изтрийте окончателно. Файловете в '{{sectionName}}' се изтриват автоматично след 30 дни. Моля, обърнете внимание, че файловете, изтрити от '{{sectionName}}', не могат да бъдат възстановени повече."
 }

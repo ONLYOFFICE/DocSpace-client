@@ -192,5 +192,14 @@
   "WarningMoveToFormRoomServal": "여러 파일을 양식 작성 룸으로 이동하는 것은 지원되지 않습니다. {{ organizationName }} PDF 양식을 한 번에 하나씩 이동하세요.",
   "WillBeDeletedPermanently": "{{date}}이 영구적으로 삭제됩니다",
   "YouLeftTheRoom": "방을 나왔습니다",
-  "YourUserTypeHasChanged": "사용자 유형이 {{productName}} 관리자 <1>{{adminName}}</1>님에 의해 <1>“{{userType}}”</1>(으)로 변경되었습니다."
+  "YourUserTypeHasChanged": "사용자 유형이 {{productName}} 관리자 <1>{{adminName}}</1>님에 의해 <1>“{{userType}}”</1>(으)로 변경되었습니다.",
+  "AccessLevel": "접근 권한",
+  "FilesMovedToTrashNotice": "파일들이 {{sectionName}}으로 이동될 것입니다.",
+  "FormRoomCreationLimit": "여러 파일 및 폴더를 기반으로 한 생성은 이 유형의 방에서는 사용할 수 없습니다. 이러한 유형의 방을 만들려면 {{sectionName}} 섹션으로 이동하거나 PDF 양식 중 하나를 사용하십시오.",
+  "LastOpened": "최근에 열람한",
+  "OpenedViaLink": "링크를 통해 열음: 접근 <strong>{{access}}</strong>.",
+  "RoomAccessRedirectNote": "5초 후에 {{sectionName}} 섹션으로 자동 이동됩니다.",
+  "ScheduledTrashMove": "{{date}}은(는) {{sectionName}}으로 이동될 예정입니다.",
+  "TrashAutoDeleteWarning": "{{sectionName}}에 있는 항목은 30일 후 자동으로 삭제됩니다.",
+  "TrashFunctionalityDescription": "삭제된 모든 파일은 '{{sectionName}}'으로 이동됩니다. 실수로 삭제된 파일을 복원하거나 영구적으로 삭제할 수 있습니다. '{{sectionName}}'에 있는 파일은 30일 후 자동으로 삭제됩니다. '{{sectionName}}'에서 삭제된 파일은 더 이상 복원할 수 없다는 점을 유념해 주십시오."
 }

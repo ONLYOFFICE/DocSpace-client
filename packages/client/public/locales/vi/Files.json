@@ -192,5 +192,14 @@
   "WarningMoveToFormRoomServal": "Không hỗ trợ di chuyển một số tập tin vào phòng Điền Biểu mẫu. Hãy di chuyển từng biểu mẫu PDF {{ organizationName }} mỗi lần.",
   "WillBeDeletedPermanently": "{{date}} sẽ bị xóa vĩnh viễn",
   "YouLeftTheRoom": "Bạn đã rời khỏi phòng",
-  "YourUserTypeHasChanged": "Loại người dùng của bạn đã được quản trị viên <1>{{adminName}}</1> của {{productName}} thay đổi thành <1>“{{userType}}”</1>."
+  "YourUserTypeHasChanged": "Loại người dùng của bạn đã được quản trị viên <1>{{adminName}}</1> của {{productName}} thay đổi thành <1>“{{userType}}”</1>.",
+  "AccessLevel": "Cấp độ truy cập",
+  "FilesMovedToTrashNotice": "Sau khi các tệp sẽ được chuyển đến {{sectionName}}.",
+  "FormRoomCreationLimit": "Việc tạo dựa trên nhiều tệp và thư mục không khả dụng cho loại phòng này. Để tạo loại phòng như vậy, hãy đến phần {{sectionName}} hoặc sử dụng một trong các biểu mẫu PDF.",
+  "LastOpened": "Lần mở cuối",
+  "OpenedViaLink": "Đã mở qua liên kết: truy cập <strong>{{access}}</strong>.",
+  "RoomAccessRedirectNote": "Bạn sẽ được chuyển đến {{sectionName}} tự động trong 5 giây.",
+  "ScheduledTrashMove": "{{date}} sẽ được chuyển đến {{sectionName}}",
+  "TrashAutoDeleteWarning": "Các mục trong {{sectionName}} sẽ tự động bị xóa sau 30 ngày.",
+  "TrashFunctionalityDescription": "Tất cả các tệp đã xóa được chuyển đến '{{sectionName}}'. Khôi phục các tệp bị xóa nhầm hoặc xóa chúng vĩnh viễn. Các tệp trong '{{sectionName}}' sẽ tự động bị xóa sau 30 ngày. Xin lưu ý, các tệp đã bị xóa khỏi '{{sectionName}}' sẽ không thể khôi phục được nữa."
 }

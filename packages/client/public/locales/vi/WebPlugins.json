@@ -12,5 +12,7 @@
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Sử dụng Plugin SDK, bạn có thể mở rộng chức năng {{productName}}, kết nối các dịch vụ của bên thứ ba hay nâng cao trải nghiệm người dùng hiện có. Tại đây bạn có thể tìm thấy các mẫu plugin với mã nguồn có sẵn trên GitHub.",
   "PluginSDKInstruction": "Nhấp vào nút để xem hướng dẫn chi tiết về cách tạo plugin của riêng bạn.",
-  "UploadDescription": "Bạn có thể thêm các plugin để mở rộng chức năng của {{productName}} với các tính năng bổ sung. Hãy nhấp vào Tải plugin lên hoặc kéo thả tập tin vào kho lưu trữ ZIP."
+  "UploadDescription": "Bạn có thể thêm các plugin để mở rộng chức năng của {{productName}} với các tính năng bổ sung. Hãy nhấp vào Tải plugin lên hoặc kéo thả tập tin vào kho lưu trữ ZIP.",
+  "PluginIsNotCompatible": "Phiên bản SDK plugin không khớp với phiên bản {{productName}}. Vui lòng cập nhật lên phiên bản tương thích.",
+  "PluginLoadedSuccessfully": "Plugin đã được tải thành công"
 }

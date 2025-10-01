@@ -12,5 +12,7 @@
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Pomocou pluginu SDK môžete rozšíriť funkčnosť {{productName}}, pripojiť služby tretích strán alebo vylepšiť skúsenosti existujúcich používateľov. Tu nájdete ukážky pluginov so zdrojovým kódom, ktoré sú k dispozícii na GitHub.",
   "PluginSDKInstruction": "Kliknutím na tlačidlo získate podrobné pokyny na vytvorenie vlastných pluginov.",
-  "UploadDescription": "Môžete pridať pluginy, ktoré rozšíria funkčnosť priestoru {{productName}} o ďalšie možnosti. Kliknite na Nahrať plugin alebo vložte súbor do archívu ZIP."
+  "UploadDescription": "Môžete pridať pluginy, ktoré rozšíria funkčnosť priestoru {{productName}} o ďalšie možnosti. Kliknite na Nahrať plugin alebo vložte súbor do archívu ZIP.",
+  "PluginIsNotCompatible": "Verzia plugin SDK nezodpovedá verzii {{productName}}. Prosím, aktualizujte na kompatibilnú verziu.",
+  "PluginLoadedSuccessfully": "Plugin bol úspešne načítaný."
 }

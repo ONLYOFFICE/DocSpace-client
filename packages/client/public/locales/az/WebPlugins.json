@@ -12,5 +12,7 @@
   "PluginSDK": "Plagin SDK",
   "PluginSDKDescription": "Plugin SDK-dan istifadə edərək, {{productName}} funksionallığınızı genişləndirə, üçüncü tərəf xidmətlərinə qoşula və ya mövcud istifadəçi təcrübəsini təkmilləşdirə bilərsiniz. Burada GitHub-da mövcud kod mənbəyi olan plaginlərin nümunələrini tapa bilərsiniz.",
   "PluginSDKInstruction": "Öz plaginlərinizi necə yaratmaq barədə ətraflı təlimatlar üçün düyməni klikləyin.",
-  "UploadDescription": "{{productName}}-in funksionallığını əlavə funksiyalarla genişləndirmək üçün plaginlər əlavə edə bilərsiniz. Plagini quraşdırın və ya faylı ZIP arxivinə yerləşdirin."
+  "UploadDescription": "{{productName}}-in funksionallığını əlavə funksiyalarla genişləndirmək üçün plaginlər əlavə edə bilərsiniz. Plagini quraşdırın və ya faylı ZIP arxivinə yerləşdirin.",
+  "PluginIsNotCompatible": "Plugin SDK versiyası {{productName}} versiyası ilə üstə düşmür. Xahiş edirik uyğun versiyaya yeniləyin.",
+  "PluginLoadedSuccessfully": "Plugin yüklandı uğurla"
 }

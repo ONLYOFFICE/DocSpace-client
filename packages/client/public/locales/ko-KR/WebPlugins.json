@@ -12,5 +12,7 @@
   "PluginSDK": "플러그인 SDK",
   "PluginSDKDescription": "플러그인 SDK를 사용하면 {{productName}} 기능을 확장하거나 제3자 서비스를 연결하거나 기존 사용자 경험을 향상시킬 수 있습니다. 여기에서 GitHub에서 사용할 수 있는 코드 소스가 포함된 플러그인 샘플을 확인하세요.",
   "PluginSDKInstruction": "버튼을 클릭하여 자체 플러그인 생성 방법에 대한 자세한 지침을 확인하세요.",
-  "UploadDescription": "추가 기능으로 {{productName}}의 기능을 확장하기 위해 플러그인을 추가할 수 있습니다. 플러그인 업로드를 클릭하거나 ZIP 아카이브에 파일을 드롭하세요."
+  "UploadDescription": "추가 기능으로 {{productName}}의 기능을 확장하기 위해 플러그인을 추가할 수 있습니다. 플러그인 업로드를 클릭하거나 ZIP 아카이브에 파일을 드롭하세요.",
+  "PluginIsNotCompatible": "플러그인 SDK 버전이 {{productName}} 버전과 일치하지 않습니다. 호환 가능한 버전으로 업데이트해주세요.",
+  "PluginLoadedSuccessfully": "플러그인이 성공적으로 로드되었습니다."
 }

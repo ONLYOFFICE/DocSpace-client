@@ -12,5 +12,7 @@
   "PluginSDK": "Plugin SDK",
   "PluginSDKDescription": "Met behulp van Plugin SDK kunt u uw {{productName}} functionaliteit uitbreiden, services van derden aansluiten of de bestaande gebruikerservaring verbeteren. Hier vindt u de plug-ins met broncode die beschikbaar is op GitHub.",
   "PluginSDKInstruction": "Klik op de knop voor de gedetailleerde instructies om uw eigen plug-ins te maken.",
-  "UploadDescription": "U kunt plug-ins toevoegen om de functionaliteit van {{productName}} uit te breiden met extra functies. Klik op Plug-in uploaden of plaats een bestand in het ZIP-archief."
+  "UploadDescription": "U kunt plug-ins toevoegen om de functionaliteit van {{productName}} uit te breiden met extra functies. Klik op Plug-in uploaden of plaats een bestand in het ZIP-archief.",
+  "PluginIsNotCompatible": "De plugin SDK-versie komt niet overeen met de versie van {{productName}}. Werk alsjeblieft bij naar een compatibele versie.",
+  "PluginLoadedSuccessfully": "Plugin succesvol geladen"
 }

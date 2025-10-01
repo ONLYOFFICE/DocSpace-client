@@ -23,5 +23,6 @@
   "ThirdPartyInfo": "Zmień dane podmiotu trzeciego",
   "ThirdPartyTitle": "Usługi podmiotów trzecich",
   "TitleShowActions": "Działania na plikach",
-  "TitleShowFolderActions": "Działania na folderach"
+  "TitleShowFolderActions": "Działania na folderach",
+  "TrashItemsDeleteSuccess": "Wybrane elementy zostały pomyślnie usunięte z {{sectionName}}"
 }

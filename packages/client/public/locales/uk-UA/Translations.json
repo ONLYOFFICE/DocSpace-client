@@ -23,5 +23,6 @@
   "ThirdPartyInfo": "Змінити інформацію третьої сторони",
   "ThirdPartyTitle": "Сторонні служби",
   "TitleShowActions": "Показати дії з файлами",
-  "TitleShowFolderActions": "Відобразити дії з папками"
+  "TitleShowFolderActions": "Відобразити дії з папками",
+  "TrashItemsDeleteSuccess": "Вибрані елементи було успішно видалено з {{sectionName}}"
 }

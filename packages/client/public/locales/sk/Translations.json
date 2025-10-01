@@ -23,5 +23,6 @@
   "ThirdPartyInfo": "Zmeniť informácie o tretej strane",
   "ThirdPartyTitle": "Služby tretích strán",
   "TitleShowActions": "Zobraziť akcie pre súbor",
-  "TitleShowFolderActions": "Zobraziť akcie pre priečinky"
+  "TitleShowFolderActions": "Zobraziť akcie pre priečinky",
+  "TrashItemsDeleteSuccess": "Vybraté položky boli úspešne odstránené z {{sectionName}}."
 }

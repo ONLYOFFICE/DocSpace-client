@@ -3,7 +3,7 @@
   "content": "Move to {{sectionName}}",
   "content_en_sha1_hash": "5d6defb8d637574434a5dbe9189fed399ce413e6",
   "created_at": "2025-06-02T10:19:17.346Z",
-  "updated_at": "2025-10-01T08:28:21.772Z",
+  "updated_at": "2025-10-01T15:17:48.085Z",
   "comment": {
     "text": "This translation key is used to display a button label that allows users to move files to a specified section or category. The section name can be customized through this translation key, typically displayed as \"Move to {{sectionName}}\" in UI elements such as buttons or dialog boxes.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 207,
+      "line_number": 201,
       "context": "if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:OKButton\");\n \n if (unsubscribe) return t(\"Common:Remove\");\n \n return t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n };\n \n const getDialogTitle = () => {",
       "module": "/packages/client"
     }

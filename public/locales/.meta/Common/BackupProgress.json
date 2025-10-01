@@ -3,7 +3,7 @@
   "content": "Backup: {{progress}}%",
   "content_en_sha1_hash": "67556deadd1d0bbd475e81e5accc92229e607451",
   "created_at": "2025-05-26T07:15:40.772Z",
-  "updated_at": "2025-09-24T13:10:17.097Z",
+  "updated_at": "2025-10-01T15:17:48.499Z",
   "comment": {
     "text": "This translation key displays the progress percentage and corresponding label (\"Backup\", \"Preparing Backup\" or a dynamic progress value) during an automated backup process. It appears in various UI elements, such as buttons and dialogues, to inform users about the status of the backup operation.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 676,
+      "line_number": 680,
       "context": "{\n label: operationsCompleted\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),\n percent: downloadingProgress,\n operation: OPERATIONS_NAME.backup,\n alert: false,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 626,
+      "line_number": 634,
       "context": "label:\n downloadingProgress === 100\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),\n percent: downloadingProgress,\n operation: OPERATIONS_NAME.backup,\n alert: false,",
       "module": "/packages/shared"
     },

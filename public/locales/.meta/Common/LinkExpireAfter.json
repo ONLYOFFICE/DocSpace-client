@@ -3,7 +3,7 @@
   "content": "The link will expire after <1>{{date}}</1>",
   "content_en_sha1_hash": "f9f44c4a33ec8d0bd302053f5c321d452539b5a3",
   "created_at": "2025-05-19T21:30:46.171Z",
-  "updated_at": "2025-09-29T18:22:19.735Z",
+  "updated_at": "2025-10-01T15:17:48.471Z",
   "comment": {
     "text": "The \"LinkExpireAfter\" translation key is used to display the message \"The link will expire after <1>{{date}}</1>\" in various UI elements, such as buttons and dropdowns. This text provides context for users about how long a shareable link remains active. It appears in components like the Expired ComboBox and Share helpers.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/sub-components/ExpiredComboBox.tsx",
-      "line_number": 123,
+      "line_number": 122,
       "context": "const getExpirationTrans = () => {\n if (expirationDate) {\n const date = getDate(expirationDate);\n \n return (\n <Trans t={t} i18nKey=\"LinkExpireAfter\" ns=\"Common\">\n The link will expire after\n <LinkWithDropdown\n className={styles.expiredOptions}\n color={globalColors.lightBlueMain}\n dropdownType=\"alwaysDashed\"",
       "module": "/packages/shared"
     }

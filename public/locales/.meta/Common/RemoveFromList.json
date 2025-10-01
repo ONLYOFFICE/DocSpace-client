@@ -3,7 +3,7 @@
   "content": "Remove from list",
   "content_en_sha1_hash": "23a97691b4e6c4fdf5bb0cb8f8d5ab31d1af9fd4",
   "created_at": "2025-05-19T21:30:47.827Z",
-  "updated_at": "2025-10-01T08:28:21.804Z",
+  "updated_at": "2025-10-01T15:17:48.109Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Remove from list\" in a user interface, typically on a button or dialog related to managing shared rooms. The text appears when a user has permission to remove items and external data is not expired.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 226,
+      "line_number": 220,
       "context": "if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverTitle\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:Confirmation\");\n \n if (unsubscribe) return t(\"Common:RemoveFromList\");\n \n return t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n };",
       "module": "/packages/client"
     },

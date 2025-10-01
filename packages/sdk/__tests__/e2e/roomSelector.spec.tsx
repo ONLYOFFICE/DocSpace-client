@@ -31,1654 +31,274 @@ import {
 } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test } from "./fixtures/base";
-import { describe } from "node:test";
+import { THEMES, TestHelper } from "./utils/testHelpers";
+import { RoomSelectorPage } from "./page-objects/SelectorPages";
 
-const path = "/sdk/room-selector";
+const BASE_PATH = "/sdk/room-selector";
 
-describe("Render room selector light", () => {
-  test("should open light /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base`;
+function testAllThemes(
+  testName: string,
+  params: Record<string, any>,
+  screenshotName: string,
+  headers: string[] = [HEADER_ROOMS_LIST],
+) {
+  THEMES.forEach((themeConfig) => {
+    test(`${themeConfig.name}: ${testName}`, async ({ page, mockRequest }) => {
+      const helper = new TestHelper(BASE_PATH, "room-selector");
+      const route = helper.buildRoute(themeConfig, params);
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
+      await mockRequest.setHeaders(route, headers);
+      await page.goto(route);
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-room-selector.png",
-    ]);
+      await expect(page).toHaveScreenshot(
+        helper.getScreenshotPath(themeConfig.prefix, screenshotName),
+      );
+    });
   });
+}
 
-  test("should open light with search /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&search=true`;
+test.describe("Room selector single param", () => {
+  test.describe.configure({ mode: "parallel" });
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
+  testAllThemes("default", {}, "room-selector");
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-room-search-selector.png",
-    ]);
-  });
+  testAllThemes("with search", { search: true }, "room-search-selector");
 
-  test("should open light with ru locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&locale=ru`;
+  testAllThemes("with ru locale", { locale: "ru" }, "ru-room-selector");
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+  testAllThemes("with header", { header: true }, "header-room-selector");
 
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-ru-room-selector.png",
-    ]);
-  });
-
-  test("should open light with header /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-header-room-selector.png",
-    ]);
-  });
-
-  test("should open light with cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&cancel=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open light with header and search /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-header-search-room-selector.png",
-    ]);
-  });
-
-  test("should open light with header and ru locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ru`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-header-ru-room-selector.png",
-    ]);
-  });
-
-  test("should open light with header and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true&cancel=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-header-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open light with search and ru locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&locale=ru&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-search-ru-room-selector.png",
-    ]);
-  });
-
-  test("should open light with search and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&cancel=true&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-search-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open light with ru locale and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&locale=ru&cancel=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-ru-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open light with header, search and ru locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ru&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-header-search-ru-room-selector.png",
-    ]);
-  });
-
-  test("should open light with header, search and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true&cancel=true&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-header-search-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open light with search, ru locale and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&locale=ru&cancel=true&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-search-ru-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open light with all features enabled /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ru&cancel=true&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-all-features-room-selector.png",
-    ]);
-  });
+  testAllThemes("with cancel button", { cancel: true }, "cancel-room-selector");
 });
 
-describe("Room selector light empty", () => {
-  test("should open light empty /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base`;
+test.describe("Room selector two params", () => {
+  test.describe.configure({ mode: "parallel" });
 
-    await page.goto(pageRoute);
+  testAllThemes(
+    "header + search",
+    { header: true, search: true },
+    "header-search-room-selector",
+  );
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-room-selector.png",
-    ]);
-  });
+  testAllThemes(
+    "header + ru locale",
+    { header: true, locale: "ru" },
+    "header-ru-room-selector",
+  );
 
-  test("should open light empty with search /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&search=true`;
+  testAllThemes(
+    "header + cancel",
+    { header: true, cancel: true },
+    "header-cancel-room-selector",
+  );
 
-    await page.goto(pageRoute);
+  testAllThemes(
+    "search + ru locale",
+    { locale: "ru", search: true },
+    "search-ru-room-selector",
+  );
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-room-search-selector.png",
-    ]);
-  });
+  testAllThemes(
+    "search + cancel",
+    { cancel: true, search: true },
+    "search-cancel-room-selector",
+  );
 
-  test("should open light empty with ru locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&locale=ru`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-ru-room-selector.png",
-    ]);
-  });
-
-  test("should open light empty with header /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-header-room-selector.png",
-    ]);
-  });
-
-  test("should open light empty with cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&cancel=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open light empty with header and search /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-header-search-room-selector.png",
-    ]);
-  });
-
-  test("should open light empty with header and ru locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ru`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-header-ru-room-selector.png",
-    ]);
-  });
-
-  test("should open light empty with header and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true&cancel=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-header-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open light empty with search and ru locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&locale=ru&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-search-ru-room-selector.png",
-    ]);
-  });
-
-  test("should open light empty with search and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&cancel=true&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-search-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open light empty with ru locale and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&locale=ru&cancel=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-ru-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open light empty with header, search and ru locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ru&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-header-search-ru-room-selector.png",
-    ]);
-  });
-
-  test("should open light empty with header, search and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true&cancel=true&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-header-search-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open light empty with search, ru locale and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&locale=ru&cancel=true&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-search-ru-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open light empty with all features enabled /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ru&cancel=true&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-all-features-room-selector.png",
-    ]);
-  });
+  testAllThemes(
+    "ru locale + cancel",
+    { locale: "ru", cancel: true },
+    "ru-cancel-room-selector",
+  );
 });
 
-describe("Render room rtl selector light", () => {
-  test("should open light with ar-SA locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&locale=ar-SA`;
+test.describe("Room selector three params", () => {
+  test.describe.configure({ mode: "parallel" });
 
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+  testAllThemes(
+    "header + search + ru locale",
+    { header: true, locale: "ru", search: true },
+    "header-search-ru-room-selector",
+  );
 
-    await page.goto(pageRoute);
+  testAllThemes(
+    "header + search + cancel",
+    { header: true, cancel: true, search: true },
+    "header-search-cancel-room-selector",
+  );
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-ar-SA-room-selector.png",
-    ]);
-  });
+  testAllThemes(
+    "header + ru locale + cancel",
+    { header: true, locale: "ru", cancel: true },
+    "header-ru-cancel-room-selector",
+  );
 
-  test("should open light with header and ar-SA  locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ar-SA`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-header-ar-SA-room-selector.png",
-    ]);
-  });
-
-  test("should open light with search and ar-SA locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&locale=ar-SA&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-search-ar-SA-room-selector.png",
-    ]);
-  });
-
-  test("should open light with ar-SA locale and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&locale=ar-SA&cancel=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-ar-SA-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open light with header, search and ar-SA locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ar-SA&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-header-search-ar-SA-room-selector.png",
-    ]);
-  });
-
-  test("should open light with search, ar-SA locale and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&locale=ar-SA&cancel=true&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-search-ar-SA-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open light with all features ar-SA enabled /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ar-SA&cancel=true&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-all-features-ar-SA-room-selector.png",
-    ]);
-  });
+  testAllThemes(
+    "search + ru locale + cancel",
+    { locale: "ru", cancel: true, search: true },
+    "search-ru-cancel-room-selector",
+  );
 });
 
-describe("Room selector rtl light empty", () => {
-  test("should open light empty with ar-SA locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&locale=ar-SA`;
+test.describe("Room selector all params", () => {
+  test.describe.configure({ mode: "parallel" });
 
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-ar-SA-room-selector.png",
-    ]);
-  });
-
-  test("should open light empty with header and ar-SA locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ar-SA`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-header-ar-SA-room-selector.png",
-    ]);
-  });
-
-  test("should open light empty with search and ar-SA locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&locale=ar-SA&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-search-ar-SA-room-selector.png",
-    ]);
-  });
-
-  test("should open light empty with ar-SA locale and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&locale=ar-SA&cancel=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-ar-SA-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open light empty with header, search and ar-SA locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ar-SA&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-header-search-ar-SA-room-selector.png",
-    ]);
-  });
-
-  test("should open light empty with search, ar-SA locale and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&locale=ar-SA&cancel=true&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-search-ar-SA-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open light empty with all features ar-SA enabled /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&header=true&locale=ar-SA&cancel=true&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "light-empty-all-features-ar-SA-room-selector.png",
-    ]);
-  });
+  testAllThemes(
+    "all params",
+    {
+      header: true,
+      locale: "ru",
+      cancel: true,
+      search: true,
+    },
+    "header-search-ru-cancel-room-selector",
+  );
 });
 
-describe("Render room selector dark", () => {
-  test("should open dark /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with search /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-room-search-selector.png",
-    ]);
-  });
-
-  test("should open dark with ru locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ru`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-ru-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with header /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-header-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&cancel=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with header and search /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-header-search-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with header and ru locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ru`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-header-ru-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with header and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&cancel=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-header-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with search and ru locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ru&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-search-ru-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with search and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&cancel=true&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-search-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with ru locale and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ru&cancel=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-ru-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with header, search and ru locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ru&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-header-search-ru-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with header, search and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&cancel=true&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-header-search-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with search, ru locale and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ru&cancel=true&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-search-ru-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with all features enabled /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ru&cancel=true&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-all-features-room-selector.png",
-    ]);
-  });
-});
-
-describe("Room selector dark empty", () => {
-  test("should open dark empty /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with search /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-room-search-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with ru locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ru`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-ru-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with header /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-header-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&cancel=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with header and search /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-header-search-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with header and ru locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ru`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-header-ru-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with header and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&cancel=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-header-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with search and ru locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ru&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-search-ru-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with search and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&cancel=true&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-search-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with ru locale and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ru&cancel=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-ru-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with header, search and ru locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ru&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-header-search-ru-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with header, search and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&cancel=true&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-header-search-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with search, ru locale and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ru&cancel=true&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-search-ru-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with all features enabled /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ru&cancel=true&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-all-features-room-selector.png",
-    ]);
-  });
-});
-
-describe("Render room rtl selector dark", () => {
-  test("should open dark with ar-SA locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ar-SA`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-ar-SA-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with header and ar-SA  locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ar-SA`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-header-ar-SA-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with search and ar-SA locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ar-SA&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-search-ar-SA-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with ar-SA locale and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ar-SA&cancel=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-ar-SA-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with header, search and ar-SA locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ru&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-header-search-ar-SA-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with search, ar-SA locale and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ar-SA&cancel=true&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-search-ar-SA-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open dark with all features ar-SA enabled /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ar-SA&cancel=true&search=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-all-features-ar-SA-room-selector.png",
-    ]);
-  });
-});
-
-describe("Room selector rtl dark empty", () => {
-  test("should open dark empty with ar-SA locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ar-SA`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-ar-SA-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with header and ar-SA locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ar-SA`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-header-ar-SA-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with search and ar-SA locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ar-SA&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-search-ar-SA-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with ar-SA locale and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ar-SA&cancel=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-ar-SA-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with header, search and ar-SA locale /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ar-SA&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-header-search-ar-SA-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with search, ar-SA locale and cancel button /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&locale=ar-SA&cancel=true&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-search-ar-SA-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open dark empty with all features ar-SA enabled /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&header=true&locale=ar-SA&cancel=true&search=true`;
-
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "dark-empty-all-features-ar-SA-room-selector.png",
-    ]);
-  });
-});
-
-describe("Room selector custom labels", () => {
-  test("should open with custom submit label /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&acceptLabel=Custom`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "custom-submit-room-selector.png",
-    ]);
-  });
-
-  test("should open with custom cancel label /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&cancelLabel=Custom&cancel=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "custom-cancel-room-selector.png",
-    ]);
-  });
-
-  test("should open with custom submit and cancel label /sdk/room-selector route", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&acceptLabel=CustomSub&cancelLabel=CustomCan&cancel=true`;
-
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "custom-submit-cancel-room-selector.png",
-    ]);
-  });
-});
-
-describe("Room selector actions", () => {
-  test("should handle accept button click and validate console logs for regular room", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base`;
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-    await page.goto(pageRoute);
-
-    // Add console log listener
-    const logs: string[] = [];
-    page.on("console", (msg) => {
-      if (msg.text().includes("onSelectCallback")) logs.push(msg.text());
+test.describe("Room selector interactions", () => {
+  test.describe.configure({ mode: "parallel" });
+
+  THEMES.forEach((themeConfig) => {
+    test(`${themeConfig.name}: verify header visibility`, async ({
+      page,
+      mockRequest,
+    }) => {
+      const helper = new TestHelper(BASE_PATH, "room-selector");
+      const roomSelectorPage = new RoomSelectorPage(page);
+
+      let route = helper.buildRoute(themeConfig, {});
+      await mockRequest.setHeaders(route, [HEADER_ROOMS_LIST]);
+      await page.goto(route);
+      expect(await roomSelectorPage.hasHeader()).toBe(false);
+
+      route = helper.buildRoute(themeConfig, { header: true });
+      await mockRequest.setHeaders(route, [HEADER_ROOMS_LIST]);
+      await page.goto(route);
+      expect(await roomSelectorPage.hasHeader()).toBe(true);
     });
 
-    const button = page.getByTestId("selector_submit_button");
+    test(`${themeConfig.name}: verify search toggle`, async ({
+      page,
+      mockRequest,
+    }) => {
+      const helper = new TestHelper(BASE_PATH, "room-selector");
+      const roomSelectorPage = new RoomSelectorPage(page);
 
-    expect(button).toBeDisabled();
+      let route = helper.buildRoute(themeConfig, {});
+      await mockRequest.setHeaders(route, [HEADER_ROOMS_LIST]);
+      await page.goto(route);
+      expect(await roomSelectorPage.hasSearch()).toBe(false);
 
-    // Select first room and click accept
-    await page.getByTestId("selector-item-1").click();
-
-    expect(button).toBeEnabled();
-
-    await button.click();
-
-    const hdrs = new Headers();
-    hdrs.set(HEADER_ROOMS_LIST, "1");
-
-    const roomList = await roomListHandler(hdrs).json();
-    const selectedItem = roomList.response.folders[1];
-
-    expect(selectedItem).toBeDefined();
-
-    // Verify console logs
-    expect(logs).toHaveLength(1);
-
-    const submitedItem = JSON.parse(logs[0]).enrichedData;
-
-    expect(submitedItem.id).toBe(selectedItem.id);
-    expect(submitedItem.label).toBe(selectedItem.title);
-    expect(submitedItem.roomType).toBe(selectedItem.roomType);
-  });
-
-  test("should handle cancel button click and validate console log", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Base&cancel=true&cancelLabel=Cancel`;
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
-    await page.goto(pageRoute);
-
-    // Add console log listener
-    const logs: string[] = [];
-    page.on("console", (msg) => {
-      if (msg.text().includes("onCloseCallback")) logs.push(msg.text());
+      route = helper.buildRoute(themeConfig, { search: true });
+      await mockRequest.setHeaders(route, [HEADER_ROOMS_LIST]);
+      await page.goto(route);
+      expect(await roomSelectorPage.hasSearch()).toBe(true);
     });
 
-    const button = page.getByText("Cancel");
+    test(`${themeConfig.name}: verify cancel button toggle`, async ({
+      page,
+      mockRequest,
+    }) => {
+      const helper = new TestHelper(BASE_PATH, "room-selector");
+      const roomSelectorPage = new RoomSelectorPage(page);
 
-    await button.click();
+      let route = helper.buildRoute(themeConfig, {});
+      await mockRequest.setHeaders(route, [HEADER_ROOMS_LIST]);
+      await page.goto(route);
+      expect(await roomSelectorPage.hasCancelButton()).toBe(false);
 
-    // Verify console logs
-    expect(logs).toHaveLength(1);
+      route = helper.buildRoute(themeConfig, { cancel: true });
+      await mockRequest.setHeaders(route, [HEADER_ROOMS_LIST]);
+      await page.goto(route);
+      expect(await roomSelectorPage.hasCancelButton()).toBe(true);
+    });
+
+    test(`${themeConfig.name}: verify room count`, async ({
+      page,
+      mockRequest,
+    }) => {
+      const helper = new TestHelper(BASE_PATH, "room-selector");
+      const roomSelectorPage = new RoomSelectorPage(page);
+
+      const route = helper.buildRoute(themeConfig, {});
+      await mockRequest.setHeaders(route, [HEADER_ROOMS_LIST]);
+      await page.goto(route);
+
+      const count = await roomSelectorPage.getRoomCount();
+      expect(count).toBeGreaterThan(0);
+    });
+
+    test(`${themeConfig.name}: verify breadcrumbs visibility`, async ({
+      page,
+      mockRequest,
+    }) => {
+      const helper = new TestHelper(BASE_PATH, "room-selector");
+      const roomSelectorPage = new RoomSelectorPage(page);
+
+      const route = helper.buildRoute(themeConfig, {});
+      await mockRequest.setHeaders(route, [HEADER_ROOMS_LIST]);
+      await page.goto(route);
+
+      expect(await roomSelectorPage.hasBreadcrumbs()).toBe(true);
+    });
   });
 });
 
-describe("Room selector search actions", () => {
-  test("should handle search input", async ({ page, mockRequest }) => {
-    const pageRoute = `${path}?theme=Base&search=true`;
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
+test.describe("Room selector button text", () => {
+  test.describe.configure({ mode: "parallel" });
 
-    await page.goto(pageRoute);
+  THEMES.forEach((themeConfig) => {
+    test(`${themeConfig.name}: custom accept button text`, async ({
+      page,
+      mockRequest,
+    }) => {
+      const helper = new TestHelper(BASE_PATH, "room-selector");
+      const roomSelectorPage = new RoomSelectorPage(page);
 
-    await mockRequest.router([endpoints.filteredRoomList]);
+      const route = helper.buildRoute(themeConfig, {
+        acceptLabel: "Select Room",
+      });
+      await mockRequest.setHeaders(route, [HEADER_ROOMS_LIST]);
+      await page.goto(route);
 
-    await page.waitForTimeout(1000);
+      const buttonText = await roomSelectorPage.getAcceptButtonText();
+      expect(buttonText).toContain("Select Room");
+    });
 
-    const searchInput = page.getByPlaceholder("Search");
-    await searchInput.fill("test");
+    test(`${themeConfig.name}: custom cancel button text`, async ({
+      page,
+      mockRequest,
+    }) => {
+      const helper = new TestHelper(BASE_PATH, "room-selector");
+      const roomSelectorPage = new RoomSelectorPage(page);
 
-    await page.waitForTimeout(1000);
+      const route = helper.buildRoute(themeConfig, {
+        cancel: true,
+        cancelLabel: "Close",
+      });
+      await mockRequest.setHeaders(route, [HEADER_ROOMS_LIST]);
+      await page.goto(route);
 
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "action-search-room-selector.png",
-    ]);
+      const buttonText = await roomSelectorPage.getCancelButtonText();
+      expect(buttonText).toContain("Close");
+    });
+  });
+});
 
-    await mockRequest.router([endpoints.emptyRoomList]);
+test.describe("Room selector locales", () => {
+  test.describe.configure({ mode: "parallel" });
 
-    await searchInput.fill("Empty filter");
+  const locales = ["en", "ru", "de", "fr", "es"];
 
-    await page.waitForTimeout(1000);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "action-empty-search-room-selector.png",
-    ]);
+  locales.forEach((locale) => {
+    testAllThemes(`locale: ${locale}`, { locale }, `${locale}-room-selector`);
   });
 
-  test("should handle search  input ar-SA", async ({ page, mockRequest }) => {
-    const pageRoute = `${path}?theme=Base&search=true&locale=ar-SA`;
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
-    await page.goto(pageRoute);
-
-    await mockRequest.router([endpoints.filteredRoomList]);
-
-    await page.waitForTimeout(1000);
-
-    const searchInput = page.getByPlaceholder("بحث");
-    await searchInput.fill("test");
-
-    await page.waitForTimeout(1000);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "action-ar-SA-search-room-selector.png",
-    ]);
-
-    await mockRequest.router([endpoints.emptyRoomList]);
-
-    await searchInput.fill("Empty filter");
-
-    await page.waitForTimeout(1000);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "action-ar-SA-empty-search-room-selector.png",
-    ]);
-  });
-
-  test("should handle dark search input", async ({ page, mockRequest }) => {
-    const pageRoute = `${path}?theme=Dark&search=true`;
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
-    await page.goto(pageRoute);
-
-    await mockRequest.router([endpoints.filteredRoomList]);
-
-    await page.waitForTimeout(1000);
-
-    const searchInput = page.getByPlaceholder("Search");
-    await searchInput.fill("test");
-
-    await page.waitForTimeout(1000);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "action-search-dark-room-selector.png",
-    ]);
-
-    await mockRequest.router([endpoints.emptyRoomList]);
-
-    await searchInput.fill("Empty filter");
-
-    await page.waitForTimeout(1000);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "action-empty-dark-search-room-selector.png",
-    ]);
-  });
-
-  test("should handle dark search input ar-SA", async ({
-    page,
-    mockRequest,
-  }) => {
-    const pageRoute = `${path}?theme=Dark&search=true&locale=ar-SA`;
-    await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
-
-    await page.goto(pageRoute);
-
-    await mockRequest.router([endpoints.filteredRoomList]);
-
-    await page.waitForTimeout(1000);
-
-    const searchInput = page.getByPlaceholder("بحث");
-    await searchInput.fill("test");
-
-    await page.waitForTimeout(1000);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "action-ar-SA-dark-search-room-selector.png",
-    ]);
-
-    await mockRequest.router([endpoints.emptyRoomList]);
-
-    await searchInput.fill("Empty filter");
-
-    await page.waitForTimeout(1000);
-
-    await expect(page).toHaveScreenshot([
-      "desktop",
-      "room-selector",
-      "action-ar-SA-dark-empty-search-room-selector.png",
-    ]);
+  // Combined with other params
+  locales.forEach((locale) => {
+    testAllThemes(
+      `locale ${locale} + search`,
+      { locale, search: true },
+      `${locale}-search-room-selector`,
+    );
   });
 });

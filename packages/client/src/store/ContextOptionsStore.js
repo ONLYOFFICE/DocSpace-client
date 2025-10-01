@@ -2330,7 +2330,10 @@ class ContextOptionsStore {
         key: "remove-shared-folder-or-file",
         label: t("Common:RemoveFromList"),
         icon: CircleCrossSvgUrl,
-        onClick: () => this.onRemoveSharedFilesOrFolder([item]),
+        onClick: () => {
+          this.dialogsStore.setUnsubscribe(true);
+          this.dialogsStore.setDeleteDialogVisible(true);
+        },
         disabled: false,
       },
       {

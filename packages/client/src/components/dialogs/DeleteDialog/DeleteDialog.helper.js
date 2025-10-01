@@ -45,12 +45,33 @@ export const getDialogContent = (
   isRoom,
   isTemplatesFolder,
   isSharedWithMeFolderRoot,
+  unsubscribe,
 ) => {
   if (!selection) return null;
 
   const isFolder = selection[0]?.isFolder || !!selection[0]?.parentId;
   const isSingle = selection.length === 1;
   const isThirdParty = selection[0]?.providerKey;
+
+  if (unsubscribe) {
+    return isSingle ? (
+      <Trans
+        i18nKey="removeFromListDescription"
+        ns="DeleteDialog"
+        t={t}
+        values={{ title: selection[0]?.title }}
+        components={{ 1: <Text fontWeight={600} as="span" /> }}
+      />
+    ) : (
+      <Trans
+        i18nKey="removeFromListDescriptionPlural"
+        ns="DeleteDialog"
+        t={t}
+        values={{ count: selection.length }}
+        components={{ 1: <Text fontWeight={600} as="span" /> }}
+      />
+    );
+  }
 
   if (isTemplate) {
     return isSingle ? (

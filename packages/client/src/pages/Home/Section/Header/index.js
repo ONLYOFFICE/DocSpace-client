@@ -190,8 +190,8 @@ const SectionHeaderContent = (props) => {
 
   const contactsView = getContactsView(location);
   const isContactsPage = !!contactsView;
-  const isContactsGroupsPage = contactsView === "groups";
-  const isContactsInsideGroupPage = contactsView === "inside_group";
+  const isContactsGroupsPage = contactsTab === "groups";
+  const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isProfile = currentClientView === "profile";
 
   const addButtonRefCallback = React.useCallback(

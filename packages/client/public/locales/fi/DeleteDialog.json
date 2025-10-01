@@ -5,8 +5,5 @@
   "DeleteGroupTitle": "Poista ryhmä",
   "DeleteTemplate": "Haluatko todella poistaa mallihuoneen <1>«{{templateName}}»</1>? Mallia ei voida palauttaa.",
   "DeleteTemplates": "Haluatko todella poistaa valitun huoneen mallit? Niitä ei voi palauttaa. ",
-  "FileDeletedAfter": "Tiedosto poistetaan pysyvästi 30 päivän päästä.",
-  "UnsubscribeButton": "Lopeta tilaus",
-  "UnsubscribeNote": "Haluatko varmasti peruuttaa luettelosta valittujen kohteiden tilauksen?",
-  "UnsubscribeTitle": "Tilauksen peruuttamisen vahvistus"
+  "FileDeletedAfter": "Tiedosto poistetaan pysyvästi 30 päivän päästä."
 }

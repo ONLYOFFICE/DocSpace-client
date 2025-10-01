@@ -3,7 +3,7 @@
   "content": "Selected elements were successfully deleted from {{sectionName}}",
   "content_en_sha1_hash": "34001013ab8ad0b2c793c6ef5b07cc520c8c155d",
   "created_at": "2025-06-02T10:19:18.540Z",
-  "updated_at": "2025-10-01T08:28:21.720Z",
+  "updated_at": "2025-10-01T15:17:48.033Z",
   "comment": {
     "text": "Selected elements were successfully deleted from the Trash Section. This translation key is used to display a confirmation message when deleting items from the trash. It appears in a delete dialog and should be translated to indicate success in the user's preferred language.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 113,
+      "line_number": 107,
       "context": "const onDelete = () => {\n setSelected(\"none\");\n onClose();\n \n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n if (!selection.length) return;",
       "module": "/packages/client"
     },

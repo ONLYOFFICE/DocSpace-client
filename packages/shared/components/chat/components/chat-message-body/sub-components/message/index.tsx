@@ -140,9 +140,6 @@ const Message = ({
     .map((c) => {
       if (c.type === ContentType.Text) return c.text;
 
-      if (c.type === ContentType.Tool)
-        return `\n\n${JSON.stringify(c.arguments)}\n${JSON.stringify(c.result)}`;
-
       return "";
     })
     .join("");

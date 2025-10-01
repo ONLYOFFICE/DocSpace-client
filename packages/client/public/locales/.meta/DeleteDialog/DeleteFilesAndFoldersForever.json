@@ -1,19 +1,19 @@
 {
-  "key_path": "FilesPermanentlyDeleted",
-  "content": "The files will be permanently removed from the {{trashSection}}.",
-  "content_en_sha1_hash": "9754d3c7756464ae37faa758bbd7b093ec47ff89",
-  "created_at": "2025-10-01T15:20:12.295Z",
-  "updated_at": "2025-10-01T15:20:20.932Z",
+  "key_path": "DeleteFilesAndFoldersForever",
+  "content": "You are about to delete the <strong>files ({{filesCount}})</strong> and <strong>folders ({{foldersCount}})</strong>.",
+  "content_en_sha1_hash": "8835009707c55340cb17b9a28925b9ff148c948d",
+  "created_at": "2025-10-01T15:20:12.156Z",
+  "updated_at": "2025-10-01T15:20:29.212Z",
   "comment": {
-    "text": "This text confirms that deleted files will be permanently removed from the trash section. It appears within a delete confirmation dialog, informing the user about the finality of the file deletion. The `{{trashSection}}` placeholder should be replaced with the localized term for the trash/recycle bin.",
+    "text": "This key displays a confirmation message within a delete dialog, informing the user about the number of files and folders they are about to permanently delete. It uses `filesCount` and `foldersCount` variables to dynamically populate the message with the actual quantities. This text appears as part of a confirmation prompt.",
     "is_auto": true,
-    "updated_at": "2025-10-01T15:20:20.932Z"
+    "updated_at": "2025-10-01T15:20:29.212Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 147,
-      "context": "return (\n <>\n <Trans t={t} i18nKey=\"DeleteFilesForever\" ns=\"DeleteDialog\">\n You are about to delete <strong>files ({{ filesCount }})</strong>.\n </Trans>{\" \"}\n {t(\"FilesPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );",
+      "line_number": 128,
+      "context": "const foldersCount = items.folders.length;\n \n if (filesCount && foldersCount) {\n return (\n <>\n <Trans t={t} i18nKey=\"DeleteFilesAndFoldersForever\" ns=\"DeleteDialog\">\n You are about to delete the{\" \"}\n <strong>files ({{ filesCount }})</strong> and{\" \"}\n <strong>folders ({{ foldersCount }})</strong>.\n </Trans>{\" \"}\n {t(\"ItemsPermanentlyDeleted\", {",
       "module": "/packages/client"
     }
   ],

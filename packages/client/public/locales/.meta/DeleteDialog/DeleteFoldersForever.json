@@ -1,19 +1,19 @@
 {
-  "key_path": "FilesPermanentlyDeleted",
-  "content": "The files will be permanently removed from the {{trashSection}}.",
-  "content_en_sha1_hash": "9754d3c7756464ae37faa758bbd7b093ec47ff89",
-  "created_at": "2025-10-01T15:20:12.295Z",
-  "updated_at": "2025-10-01T15:20:20.932Z",
+  "key_path": "DeleteFoldersForever",
+  "content": "You are about to delete <strong>folders ({{foldersCount}})</strong>.",
+  "content_en_sha1_hash": "29271e8bfcc6505957cc2925f0e39a43b3f8d337",
+  "created_at": "2025-10-01T15:20:12.183Z",
+  "updated_at": "2025-10-01T15:20:25.865Z",
   "comment": {
-    "text": "This text confirms that deleted files will be permanently removed from the trash section. It appears within a delete confirmation dialog, informing the user about the finality of the file deletion. The `{{trashSection}}` placeholder should be replaced with the localized term for the trash/recycle bin.",
+    "text": "This key displays a confirmation message within a dialog, informing the user they are about to delete a specific number of folders. The message includes the count of folders being deleted, providing clarity before a permanent deletion occurs. This is likely part of a confirmation dialog during a folder deletion process.",
     "is_auto": true,
-    "updated_at": "2025-10-01T15:20:20.932Z"
+    "updated_at": "2025-10-01T15:20:25.865Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 147,
-      "context": "return (\n <>\n <Trans t={t} i18nKey=\"DeleteFilesForever\" ns=\"DeleteDialog\">\n You are about to delete <strong>files ({{ filesCount }})</strong>.\n </Trans>{\" \"}\n {t(\"FilesPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );",
+      "line_number": 158,
+      "context": "}\n \n if (foldersCount) {\n return (\n <>\n <Trans t={t} i18nKey=\"DeleteFoldersForever\" ns=\"DeleteDialog\">\n You are about to delete{\" \"}\n <strong>folders ({{ foldersCount }})</strong>.\n </Trans>{\" \"}\n {t(\"FoldersPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),",
       "module": "/packages/client"
     }
   ],

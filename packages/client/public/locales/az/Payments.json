@@ -145,5 +145,13 @@
   "YouHaveNotAddedAnyPayment": "Ödəniş əlavə etməmisiniz.",
   "YourCurrentPayment": "Hazırda olan ödənişiniz",
   "YourCurrentPlan": "<1>Hazırda olan planınız:</1> {{amount}} <2>({{price}}/ay)</2>",
-  "YourPrice": "Qiymətiniz"
+  "YourPrice": "Qiymətiniz",
+  "Contact": "Əlaqə",
+  "ListContacts": "Əlaqətlər siyahısını göstər",
+  "NeedMoreGoToServices": "Çox daha çox? <1>Xidmətlər</1> bölməsinə keçin.",
+  "OnlyPortalAdminsShown": "Yalnız {{productName}} adminləri burada göstərilir.",
+  "PerBackup": "{{currency}} per 1 ehtiyat nüsxə",
+  "PerBackupWithBracket": "({{currency}} per 1 ehtiyat nüsxə))",
+  "SelectContact": "Əlaqəni seç",
+  "UnitCount": "{{unit}}: {{count}}"
 }

@@ -145,5 +145,13 @@
   "YouHaveNotAddedAnyPayment": "결제 정보를 추가하지 않으셨습니다.",
   "YourCurrentPayment": "현재 결제",
   "YourCurrentPlan": "<1>현재 요금제:</1> {{amount}} <2>({{price}}/월)</2>",
-  "YourPrice": "내 요금"
+  "YourPrice": "내 요금",
+  "Contact": "연락",
+  "ListContacts": "연락처 목록",
+  "NeedMoreGoToServices": "더 필요하신가요? <1>서비스</1>로 가세요.",
+  "OnlyPortalAdminsShown": "여기에는 {{productName}} 관리자만 표시됩니다.",
+  "PerBackup": "{{currency}} 1개당",
+  "PerBackupWithBracket": "({{currency}} per 1 백업)",
+  "SelectContact": "연락처 선택",
+  "UnitCount": "{{unit}}: {{count}}"
 }

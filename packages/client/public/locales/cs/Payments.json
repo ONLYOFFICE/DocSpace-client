@@ -145,5 +145,13 @@
   "YouHaveNotAddedAnyPayment": "Nevložili jste žádnou platbu.",
   "YourCurrentPayment": "Vaše aktuální platba",
   "YourCurrentPlan": "<1>Váš aktuální tarif:</1> {{amount}} <2>({{price}}/měsíc)</2>",
-  "YourPrice": "Vaše cena"
+  "YourPrice": "Vaše cena",
+  "Contact": "Kontakt",
+  "ListContacts": "Seznam kontaktů",
+  "NeedMoreGoToServices": "Potřebujete více? Přejděte do <1>Služby</1>",
+  "OnlyPortalAdminsShown": "Pouze administrátoři {{productName}} jsou zde zobrazeni.",
+  "PerBackup": "{{currency}} za 1 zálohu",
+  "PerBackupWithBracket": "({{currency}} za 1 zálohu)",
+  "SelectContact": "Vybrat kontakt",
+  "UnitCount": "{{unit}}: {{count}}"
 }

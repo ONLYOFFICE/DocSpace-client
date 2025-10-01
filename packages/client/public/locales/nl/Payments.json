@@ -145,5 +145,13 @@
   "YouHaveNotAddedAnyPayment": "Je hebt nog geen betaling toegevoegd",
   "YourCurrentPayment": "Uw huidige betaling",
   "YourCurrentPlan": "<1>Uw huidige abonnement:</1> {{amount}} <2>({{price}}/maand)</2>",
-  "YourPrice": "Uw prijs"
+  "YourPrice": "Uw prijs",
+  "Contact": "Contact",
+  "ListContacts": "Lijst contacten",
+  "NeedMoreGoToServices": "Meer nodig? Ga naar de <1>Services</1>",
+  "OnlyPortalAdminsShown": "Alleen {{productName}}-admins worden hier weergegeven",
+  "PerBackup": "{{currency}} per 1 backup",
+  "PerBackupWithBracket": "({{currency}} per 1 backup)",
+  "SelectContact": "Select contact",
+  "UnitCount": "{{unit}}: {{count}}"
 }

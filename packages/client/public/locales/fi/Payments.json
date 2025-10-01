@@ -145,5 +145,13 @@
   "YouHaveNotAddedAnyPayment": "Et ole lisännyt maksua",
   "YourCurrentPayment": "Nykyinen maksusi",
   "YourCurrentPlan": "<1>Nykyinen suunnitelmasi:</1> {{amount}} <2>({{price}}/kk)</2>",
-  "YourPrice": "Hintasi"
+  "YourPrice": "Hintasi",
+  "Contact": "Yhteystiedot",
+  "ListContacts": "Listaa yhteystiedot",
+  "NeedMoreGoToServices": "Tarvitsetko lisää? Siirry <1>Palvelut</1> -osioon.",
+  "OnlyPortalAdminsShown": "Vain {{productName}}-ylläpitäjät näytetään täällä",
+  "PerBackup": "{{currency}} per 1 varmuuskopio",
+  "PerBackupWithBracket": "({{currency}} per 1 varmuuskopio))",
+  "SelectContact": "Valitse yhteys",
+  "UnitCount": "{{unit}}: {{count}}"
 }

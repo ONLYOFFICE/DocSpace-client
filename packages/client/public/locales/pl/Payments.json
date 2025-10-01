@@ -145,5 +145,13 @@
   "YouHaveNotAddedAnyPayment": "Nie dodano jeszcze żadnej płatności.",
   "YourCurrentPayment": "Twoje aktualne płatności",
   "YourCurrentPlan": "<1>Twój aktualny plan:</1> {{amount}} <2>({{price}}/miesiąc)</2>",
-  "YourPrice": "Twoja cena"
+  "YourPrice": "Twoja cena",
+  "Contact": "Kontakt",
+  "ListContacts": "Lista kontaktów",
+  "NeedMoreGoToServices": "Potrzebujesz więcej? Przejdź do <1>Usługi</1>",
+  "OnlyPortalAdminsShown": "Tylko administratorzy {{productName}} są tutaj widoczni.",
+  "PerBackup": "{{currency}} za 1 kopię zapasową",
+  "PerBackupWithBracket": "({{currency}} za 1 kopię zapasową))",
+  "SelectContact": "Wybierz kontakt",
+  "UnitCount": "{{unit}}: {{count}}"
 }

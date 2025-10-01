@@ -145,5 +145,13 @@
   "YouHaveNotAddedAnyPayment": "Нямате добавени плащания.",
   "YourCurrentPayment": "Вашият настоящ платеж",
   "YourCurrentPlan": "<1>Вашият текущ план:</1> {{amount}} <2>({{price}}/месец)</2>",
-  "YourPrice": "Вашата цена"
+  "YourPrice": "Вашата цена",
+  "Contact": "Контакт",
+  "ListContacts": "Списък контакти",
+  "NeedMoreGoToServices": "Нуждаете се от повече? Отидете в <1>Услуги</1>",
+  "OnlyPortalAdminsShown": "Само {{productName}} администратори са показани тук.",
+  "PerBackup": "{{currency}} на 1 резервно копие",
+  "PerBackupWithBracket": "({{currency}} на 1 резервно копие)",
+  "SelectContact": "Изберете контакт",
+  "UnitCount": "{{unit}}: {{count}}"
 }

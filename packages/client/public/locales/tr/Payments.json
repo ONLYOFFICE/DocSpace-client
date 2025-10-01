@@ -145,5 +145,13 @@
   "YouHaveNotAddedAnyPayment": "Ödeme eklemeyi unuttunuz",
   "YourCurrentPayment": "Mevcut ödemeniz",
   "YourCurrentPlan": "<1>Mevcut planınız:</1> {{amount}} <2>({{price}}/ay)</2>",
-  "YourPrice": "Ücret"
+  "YourPrice": "Ücret",
+  "Contact": "İletişim",
+  "ListContacts": "İletişim kişilerini listele",
+  "NeedMoreGoToServices": "Daha fazlası mı lazım? <1>Hizmetler</1> bölümüne gidin.",
+  "OnlyPortalAdminsShown": "Sadece {{productName}} yönetimcileri burada gösterilir",
+  "PerBackup": "{{currency}} başına 1 yedekleme",
+  "PerBackupWithBracket": "({{currency}} başına 1 yedekleme)",
+  "SelectContact": "İletişim kişisini seçin",
+  "UnitCount": "{{unit}}: {{count}}"
 }

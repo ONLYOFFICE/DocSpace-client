@@ -145,5 +145,13 @@
   "YouHaveNotAddedAnyPayment": "Jūs neesat pievienojis(-usi) nevienu maksājumu",
   "YourCurrentPayment": "Jūsu pašreizējais maksājums",
   "YourCurrentPlan": "<1>Jūsu pašreizējais plāns:</1> {{amount}} <2>({{price}}/mēnesī)</2>",
-  "YourPrice": "Jūsu cena"
+  "YourPrice": "Jūsu cena",
+  "Contact": "Kontakts",
+  "ListContacts": "Saraksta kontaktpersonas",
+  "NeedMoreGoToServices": "Need more? Go to the <1>Pakalpojumi</1>",
+  "OnlyPortalAdminsShown": "Šeit tiek parādīti tikai {{productName}} administratori",
+  "PerBackup": "{{currency}} par 1 rezerves kopiju",
+  "PerBackupWithBracket": "({{currency}} par 1 rezerves kopiju)",
+  "SelectContact": "Izvēlēties kontaktu",
+  "UnitCount": "{{unit}}: {{count}}"
 }

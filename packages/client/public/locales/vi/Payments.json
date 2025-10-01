@@ -145,5 +145,13 @@
   "YouHaveNotAddedAnyPayment": "Bạn chưa thêm bất kỳ phương thức thanh toán nào.",
   "YourCurrentPayment": "Thanh toán hiện tại của bạn",
   "YourCurrentPlan": "<1>Gói cước hiện tại của bạn:</1> {{amount}} <2>({{price}}/tháng)</2>",
-  "YourPrice": "Phí thanh toán của bạn"
+  "YourPrice": "Phí thanh toán của bạn",
+  "Contact": "Liên hệ",
+  "ListContacts": "Liệt kê danh bạ",
+  "NeedMoreGoToServices": "Cần thêm gì nữa? Truy cập <1>Dịch vụ</1>",
+  "OnlyPortalAdminsShown": "Chỉ những quản trị viên {{productName}} mới được hiển thị ở đây.",
+  "PerBackup": "{{currency}} mỗi 1 bản sao lưu",
+  "PerBackupWithBracket": "({{currency}} mỗi 1 bản sao lưu)",
+  "SelectContact": "Chọn liên hệ",
+  "UnitCount": "{{unit}}: {{count}}"
 }

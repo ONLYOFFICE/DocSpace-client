@@ -145,5 +145,13 @@
   "YouHaveNotAddedAnyPayment": "Neboli pridané žiadne platby.",
   "YourCurrentPayment": "Vaša aktuálna platba",
   "YourCurrentPlan": "<1>Váš aktuálny plán:</1> {{amount}} <2>({{price}}/mesiac)</2>",
-  "YourPrice": "Vaša cena"
+  "YourPrice": "Vaša cena",
+  "Contact": "Kontakt",
+  "ListContacts": "Zobraziť kontakty",
+  "NeedMoreGoToServices": "Potrebujete viac? Prejdite do <1>Služieb</1>",
+  "OnlyPortalAdminsShown": "Iba administrátori {{productName}} sú tu zobrazení.",
+  "PerBackup": "{{currency}} za 1 zálohu",
+  "PerBackupWithBracket": "({{currency}} za 1 zálohu)",
+  "SelectContact": "Vybrať kontakt",
+  "UnitCount": "{{unit}}: {{count}}"
 }

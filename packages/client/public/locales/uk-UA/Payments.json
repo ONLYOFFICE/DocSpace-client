@@ -145,5 +145,13 @@
   "YouHaveNotAddedAnyPayment": "Ви не додали жодного платежу",
   "YourCurrentPayment": "Ваш поточний платіж",
   "YourCurrentPlan": "<1>Ваш поточний план:</1> {{amount}} <2>({{price}}/місяць)</2>",
-  "YourPrice": "Ваша ціна"
+  "YourPrice": "Ваша ціна",
+  "Contact": "Контакт",
+  "ListContacts": "Список контактів",
+  "NeedMoreGoToServices": "Потрібно більше? Перейдіть до <1>Послуги</1>",
+  "OnlyPortalAdminsShown": "Тут відображаються лише {{productName}} адміністратори.",
+  "PerBackup": "{{currency}} за 1 резервну копію",
+  "PerBackupWithBracket": "({{currency}} за 1 резервну копію)",
+  "SelectContact": "Вибрати контакт",
+  "UnitCount": "{{unit}}: {{count}}"
 }

@@ -145,5 +145,13 @@
   "YouHaveNotAddedAnyPayment": "Δεν έχετε προσθέσει καμία πληρωμή",
   "YourCurrentPayment": "Η τρέχουσα πληρωμή σας",
   "YourCurrentPlan": "<1>Το τρέχον πρόγραμμα σας:</1> {{amount}} <2>({{price}}/μήνα)</2>",
-  "YourPrice": "Η τιμή σας"
+  "YourPrice": "Η τιμή σας",
+  "Contact": "Επικοινωνία",
+  "ListContacts": "Λίστα επαφών",
+  "NeedMoreGoToServices": "Χρειάζεστε περισσότερα; Επισκεφθείτε τις <1>Υπηρεσίες</1>",
+  "OnlyPortalAdminsShown": "Μόνο οι διαχειριστές του {{productName}} εμφανίζονται εδώ",
+  "PerBackup": "{{currency}} ανά αντίγραφο ασφαλείας",
+  "PerBackupWithBracket": "({{currency}} ανά αντίγραφο ασφαλείας)",
+  "SelectContact": "Επιλέξτε επαφή",
+  "UnitCount": "{{unit}}: {{count}}"
 }

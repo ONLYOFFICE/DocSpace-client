@@ -62,7 +62,6 @@ const SearchInput = ({
   isDisabled = false,
   placeholder,
   onFocus,
-  resetOnBlur = false,
   children,
   dataTestId,
 }: SearchInputProps) => {

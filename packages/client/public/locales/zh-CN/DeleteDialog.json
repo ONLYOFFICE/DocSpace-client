@@ -22,8 +22,5 @@
   "FoldersDeletedAfter": "这些文件夹将在30天后永久删除。",
   "FoldersPermanentlyDeleted": "这些文件夹将从回收站中永久删除。",
   "ItemsDeletedAfter": "这些项目将在30天后永久删除。",
-  "ItemsPermanentlyDeleted": "这些项目将从回收站中永久删除。",
-  "UnsubscribeButton": "取消订阅",
-  "UnsubscribeNote": "您确定要取消订阅列表中的选定项目吗？",
-  "UnsubscribeTitle": "取消订阅确认"
+  "ItemsPermanentlyDeleted": "这些项目将从回收站中永久删除。"
 }

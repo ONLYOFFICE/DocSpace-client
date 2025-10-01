@@ -219,16 +219,19 @@ const Shell = ({ page = "home", ...rest }) => {
         redirectUrl,
       );
 
-      if (userLoginEventId === loginEventId || loginEventId === 0) {
-        sessionStorage.setItem("referenceUrl", window.location.href);
-        sessionStorage.setItem("loggedOutUserId", userId);
+      if (userLoginEventId !== loginEventId && loginEventId !== 0) return;
 
-        const loginUrl = redirectUrl
-          ? redirectUrl
-          : window.ClientConfig?.proxy?.url;
+      const { pathname, search, origin } = window.location;
+      const redirectDomain = redirectUrl || origin;
+      const loginUrl = redirectUrl || window.ClientConfig?.proxy?.url;
 
-        window.location.replace(combineUrl(loginUrl, "/login"));
-      }
+      sessionStorage.setItem(
+        "referenceUrl",
+        `${redirectDomain}${pathname}${search}`,
+      );
+      sessionStorage.setItem("loggedOutUserId", userId);
+
+      window.location.replace(combineUrl(loginUrl, "/login"));
     };
 
     SocketHelper?.on(SocketEvents.LogoutSession, callback);
@@ -236,7 +239,7 @@ const Shell = ({ page = "home", ...rest }) => {
     return () => {
       SocketHelper?.off(SocketEvents.LogoutSession, callback);
     };
-  }, [userLoginEventId]);
+  }, [userLoginEventId, userId]);
 
   let snackTimer = null;
   let fbInterval = null;

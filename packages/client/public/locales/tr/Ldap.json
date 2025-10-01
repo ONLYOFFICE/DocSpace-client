@@ -70,5 +70,6 @@
   "LdapUserFilterTooltip": "İçe aktarılması gereken kullanıcıları seçmek için arama LDAP filtresini kullanın.",
   "LdapUserQuotaTooltip": "Kullanıcı için bir depolama kotası ayarlamak için, LDAP dizinine bir özellik ekleyin (örneğin, UsersQuotaLimit) ve bu özellik için bir tamsayı değeri girin. Kota değerini bayt cinsinden gösterecektir. Burada sadece özellik adını belirtin. Bu özellik yalnızca ilk kurulum sırasında uygulanacaktır, daha sonra {{contactsName}} bölümünde manuel olarak değiştirilebilir.",
   "LdapUsersType": "Kullanıcı tipi",
-  "LdapUserTypeTooltip": "Tüm kullanıcılar {{productName}} içerisine seçilen türle eklenecektir."
+  "LdapUserTypeTooltip": "Tüm kullanıcılar {{productName}} içerisine seçilen türle eklenecektir.",
+  "LdapIntegrationDescription": "LDAP üzerinden kullanıcıları ve grupları içe aktarın ve kullanıcı kimlik doğrulamayı LDAP sunucusunda saklanan girişler/parolalar aracılığıyla etkinleştirin. Kullanıcılar, ayarlar kaydedildikten hemen sonra içe aktarılacaktır. Daha sonra eklenen kullanıcılar, ilk kimlik doğrulamaları sırasında içe aktarılacaktır. Sadece LDAP üzerinden erişim sağlamak istiyorsanız, yeni {{productName}} üyelerini şu şekilde davet etme seçeneğini devre dışı bırakın: <1>{{link}}</1>"
 }

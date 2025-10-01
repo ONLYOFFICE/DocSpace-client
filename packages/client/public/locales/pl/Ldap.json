@@ -70,5 +70,6 @@
   "LdapUserFilterTooltip": "Użyj filtru wyszukiwania LDAP, aby wybrać użytkowników, którzy mają zostać zaimportowani.",
   "LdapUserQuotaTooltip": "Aby skonfigurować limit pamięci dla użytkownika, dodaj atrybut w katalogu LDAP (np. UsersQuotaLimit) i wpisz wartość całkowitą dla danego atrybutu. Wartość limitu zostanie wyświetlona w bajtach. Tutaj określ wyłącznie nazwę atrybutu. Dany atrybut zostanie zastosowany tylko podczas pierwszej konfiguracji i może później zostać zmieniony ręcznie w ustawieniach {{contactsName}}.",
   "LdapUsersType": "Typ użytkowników",
-  "LdapUserTypeTooltip": "Wszyscy użytkownicy zostaną dodani do {{productName}} z wybranym typem."
+  "LdapUserTypeTooltip": "Wszyscy użytkownicy zostaną dodani do {{productName}} z wybranym typem.",
+  "LdapIntegrationDescription": "Importuj użytkowników i grupy za pomocą LDAP, i włącz uwierzytelnianie użytkowników poprzez loginy/hasła przechowywane na serwerze LDAP. Użytkownicy zostaną zaimportowani natychmiast po zapisaniu ustawień. Dodawani później użytkownicy zostaną zaimportowani podczas ich pierwszego uwierzytelnienia. Jeśli chcesz zapewnić dostęp tylko za pomocą LDAP, wyłącz opcję zapraszania nowych członków {{productName}} za pomocą {{sectionName}}: <1>{{link}}</1>"
 }

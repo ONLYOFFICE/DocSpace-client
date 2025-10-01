@@ -70,5 +70,6 @@
   "LdapUserFilterTooltip": "İdxal edilməli olan istifadəçiləri seçmək üçün LDAP axtarış filtrindən istifadə edin.",
   "LdapUserQuotaTooltip": "İstifadəçi üçün yaddaş kvotası təyin etmək üçün LDAP qovluğuna atribut əlavə edin (məsələn, UsersQuotaLimit) və bu atribut üçün tam dəyər daxil edin. O, kvota dəyərini baytla göstərəcək. Burada yalnız atribut adını göstərin. Bu funksiya yalnız ilkin quraşdırma zamanı həyata keçiriləcək və daha sonra {{contactsName}} bölməsində əl ilə dəyişdirilə bilər.",
   "LdapUsersType": "İstifadəçi növü",
-  "LdapUserTypeTooltip": "Bütün istifadəçilər seçilmiş növlə {{productName}} –a əlavə olunacaq."
+  "LdapUserTypeTooltip": "Bütün istifadəçilər seçilmiş növlə {{productName}} –a əlavə olunacaq.",
+  "LdapIntegrationDescription": "LDAP vasitəsi ilə istifadəçiləri və qrupları idxal edin və LDAP serverində saxlanılan daxilolmalar/parollar vasitəsi ilə istifadəçi təsdiqini aktiv edin. İstifadəçilər, parametrlər saxlanıldıqdan sonra dərhal idxal ediləcəkdir. Daha sonra əlavə edilən istifadəçilər onların ilk təsdiq edərkən idxal ediləcəkdir. Əgər siz LDAP vasitəsi ilə yalnız giriş təmin etmək istəyirsinizsə, yeni {{productName}} üzvlərini {{sectionName}}: <1>{{link}}</1> vasitəsi ilə dəvət etmək seçiminə imkan verməyi deaktiv edin."
 }

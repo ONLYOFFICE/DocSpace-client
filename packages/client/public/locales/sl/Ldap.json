@@ -70,5 +70,6 @@
   "LdapUserFilterTooltip": "Uporabi iskalni filter LDAP, da izbereš uporabnike, ki jih je potrebno uvoziti.",
   "LdapUserQuotaTooltip": "Če želite nastaviti kvoto prostora za shranjevanje za uporabnika, dodajte atribut v imenik LDAP (na primer UsersQuotaLimit) in vnesite celoštevilčno vrednost za ta atribut. Prikazala bo vrednost kvote v bajtih. Tukaj navedite samo ime atributa. Ta atribut bo uporabljen samo med prvo nastavitvijo in ga je mogoče pozneje spremeniti ročno v razdelku {{contactsName}}.",
   "LdapUsersType": "Uporabniški tip",
-  "LdapUserTypeTooltip": "Vsi uporabniki bodo dodani v {{productName}} z izbranim tipom."
+  "LdapUserTypeTooltip": "Vsi uporabniki bodo dodani v {{productName}} z izbranim tipom.",
+  "LdapIntegrationDescription": "Uvozite uporabnike in skupine prek LDAP-ja in omogočite uporabniško avtentikacijo prek prijav/gesel, shranjenih na LDAP strežniku. Uporabniki bodo uvoženi takoj po shranjevanju nastavitev. Uporabniki, dodani kasneje, bodo uvoženi med njihovo prvo avtentikacijo. Če želite omogočiti dostop samo prek LDAP-ja, onemogočite možnost povabila novih {{productName}} članov prek {{sectionName}}: <1>{{link}}</1>"
 }

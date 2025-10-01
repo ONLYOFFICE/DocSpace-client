@@ -170,6 +170,7 @@ const AutomaticBackup = ({
   backupProgressError,
   setBackupProgressError,
   setDefaultFolderId,
+  isBackupPaid,
 }: AutomaticBackupProps) => {
   const isCheckedDocuments =
     selectedStorageType === `${BackupStorageType.DocumentModuleType}`;
@@ -525,6 +526,7 @@ const AutomaticBackup = ({
                 {...commonProps}
                 isError={isError}
                 setIsError={setIsError}
+                isBackupPaid={isBackupPaid}
               />
             ) : null}
           </div>
@@ -593,6 +595,7 @@ const AutomaticBackup = ({
                 {...commonProps}
                 isError={isError}
                 buttonSize={buttonSize}
+                isBackupPaid={isBackupPaid}
               />
             ) : null}
           </div>
@@ -642,6 +645,7 @@ const AutomaticBackup = ({
                 defaultRegion={defaultRegion}
                 deleteValueFormSetting={deleteValueFormSetting}
                 selectedStorageId={selectedStorageId}
+                isBackupPaid={isBackupPaid}
                 {...commonProps}
               />
             ) : null}

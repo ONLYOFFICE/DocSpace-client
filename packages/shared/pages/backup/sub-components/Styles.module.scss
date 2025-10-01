@@ -24,30 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { DirectThirdPartyConnectionProps } from "../../../../../components/direct-third-party-connection";
-import type { Nullable } from "../../../../../types";
-
-import type { ScheduleComponentProps } from "../ScheduleComponent";
-
-export interface ThirdPartyModuleProps
-  extends Omit<
-      DirectThirdPartyConnectionProps,
-      | "onSelectFolder"
-      | "isDisabled"
-      | "id"
-      | "withoutInitPath"
-      | "descriptionText"
-      | "filterParam"
-      | "isMobileScale"
-      | "isSelect"
-      | "isSelectFolder"
-      | "onSelectFile"
-    >,
-    ScheduleComponentProps {
-  isBackupPaid?: boolean;
-  isLoadingData: boolean;
-  setSelectedFolder: (id: string) => void;
-  defaultStorageType: Nullable<string>;
-  defaultFolderId: Nullable<string>;
-  setDefaultFolderId?: (id: string | number | null) => void;
+.noteComponent {
+  color: var(--settings-backup-note-color);
+  margin-top: 12px;
+  margin-inline-start: 24px;
 }

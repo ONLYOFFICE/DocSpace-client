@@ -100,13 +100,15 @@ const SearchInput = ({
     onClearSearch?.();
   }, [onClearSearch]);
 
-  const handleBlur = useCallback(() => {
-    // Reset to the external value when focus is lost if they don't match
-    if (resetOnBlur && inputValue !== value) {
-      setInputValue(value);
-      prevValueRef.current = value;
-    }
-  }, [inputValue, value, resetOnBlur]);
+  // const handleBlur = useCallback(() => {
+  //   // debugger;
+  //   // Reset to the external value when focus is lost if they don't match
+  //   if (resetOnBlur && inputValue !== value) {
+  //     setInputValue(value);
+  //     console.log("handleBlur", value, inputValue);
+  //     prevValueRef.current = value;
+  //   }
+  // }, [inputValue, value, resetOnBlur]);
 
   useEffect(() => {
     if (prevValueRef.current !== value) {
@@ -153,7 +155,7 @@ const SearchInput = ({
         isDisabled={isDisabled}
         onChange={handleInputChange}
         onFocus={onFocus}
-        onBlur={handleBlur}
+        // onBlur={handleBlur}
         type={InputType.text}
         iconNode={iconNode}
         iconButtonClassName={

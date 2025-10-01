@@ -5,8 +5,5 @@
   "DeleteGroupTitle": "Smazat skupinu",
   "DeleteTemplate": "Opravdu chcete odstranit místnost šablony <1>\"{{templateName}}\"</1>? Šablonu nelze obnovit.",
   "DeleteTemplates": "Opravdu chcete odstranit vybrané šablony místností? Nelze je obnovit.",
-  "FileDeletedAfter": "Soubor bude za 30 dní trvale smazán.",
-  "UnsubscribeButton": "Zrušit odběr",
-  "UnsubscribeNote": "Určitě chcete zrušit odběr vybraných položek ze seznamu?",
-  "UnsubscribeTitle": "Potvrzení o odhlášení"
+  "FileDeletedAfter": "Soubor bude za 30 dní trvale smazán."
 }

@@ -338,6 +338,10 @@
   }
 }
 
+:global(.ai-agents):has(.articleItemBadgeWrapper:hover) .articleItemSibling {
+  background-color: var(--article-item-sibling-hover-bg-color);
+}
+
 .articleItemContainer {
   display: flex;
   justify-content: center;

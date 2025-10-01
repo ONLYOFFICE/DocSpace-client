@@ -5,8 +5,5 @@
   "DeleteGroupTitle": "Xoá nhóm",
   "DeleteTemplate": "Bạn có thực sự muốn xóa phòng mẫu <1>«{{templateName}}»</1> không? Không thể khôi phục mẫu.",
   "DeleteTemplates": "Bạn có thực sự muốn xóa các mẫu phòng đã chọn không? Bạn sẽ không thể khôi phục chúng.",
-  "FileDeletedAfter": "Tập tin sẽ bị xóa vĩnh viễn trong 30 ngày.",
-  "UnsubscribeButton": "Hủy đăng ký",
-  "UnsubscribeNote": "Bạn có chắc muốn hủy đăng ký các mục đã chọn từ danh sách không?",
-  "UnsubscribeTitle": "Xác nhận hủy đăng ký"
+  "FileDeletedAfter": "Tập tin sẽ bị xóa vĩnh viễn trong 30 ngày."
 }

@@ -38,11 +38,14 @@ const EmailChangeHandler = () => {
   const [error, setError] = useState<string>();
 
   const { linkData, confirmLinkResult } = useContext(ConfirmRouteContext);
-  const { uid = "", key = "", encemail = "" } = linkData;
+  const { uid = "", key = "", encemail = "", redirected = "" } = linkData;
   const { email = "" } = confirmLinkResult;
 
   useEffect(() => {
     async function emailChange() {
+      if (!redirected) {
+        return;
+      }
       try {
         await changeEmail(uid, email, encemail, key);
         window.location.replace(`/profile/login?email_change=success`);

@@ -1245,7 +1245,18 @@ export function getLogoUrl(
   def: boolean = false,
   culture?: string,
 ) {
-  return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}${culture ? `&culture=${culture}` : ""}`;
+  let logoTimestamp = "";
+
+  const timestamp = sessionStorage.getItem("logoUpdateTimestamp");
+  if (timestamp) logoTimestamp = `&t=${timestamp}`;
+
+  const url = `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}${culture ? `&culture=${culture}` : ""}${logoTimestamp}`;
+
+  return url;
+}
+
+export function updateLogoTimestamp() {
+  sessionStorage.setItem("logoUpdateTimestamp", Date.now().toString());
 }
 
 export const getUserTypeName = (

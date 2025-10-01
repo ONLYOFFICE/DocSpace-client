@@ -53,6 +53,7 @@ import { SelectelStorage } from "../storages/SelectelStorage";
 import { AmazonStorage } from "../storages/AmazonStorage";
 
 import styles from "../../ManualBackup.module.scss";
+import NoteComponent from "../../../sub-components/NoteComponent";
 
 const DefaultParameters = {
   comboBoxOptions: [],
@@ -66,6 +67,7 @@ interface ThirdPartyStorageModuleProps {
   isNeedFilePath: boolean;
   isMaxProgress: boolean;
   buttonSize?: ButtonSize;
+  isBackupPaid?: boolean;
   thirdPartyStorage: SelectedStorageType[];
   formSettings: Record<string, string>;
   errorsFieldsBeforeSafe: Record<string, boolean>;
@@ -108,6 +110,7 @@ const ThirdPartyStorageModule = ({
   setRequiredFormSettings,
   setIsThirdStorageChanged,
   isThirdPartyAvailable,
+  isBackupPaid,
 }: ThirdPartyStorageModuleProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -293,6 +296,7 @@ const ThirdPartyStorageModule = ({
           />
         ) : null}
       </div>
+      <NoteComponent isVisible={isBackupPaid} />
     </div>
   );
 };

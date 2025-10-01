@@ -3,7 +3,7 @@
   "content": "Soon",
   "content_en_sha1_hash": "32d3b26b9020d4c36e1ab7ea406366ebb159cc3a",
   "created_at": "2025-09-26T15:20:53.952Z",
-  "updated_at": "2025-09-26T15:53:02.028Z",
+  "updated_at": "2025-10-01T08:28:21.719Z",
   "comment": {
     "text": "This text indicates that AI Agents are coming soon, displayed within a tooltip or informational section of an article. It's used to inform users about the upcoming availability of AI Agent features. Translators should maintain the sense of anticipation and future release.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/Body/Items.js",
-      "line_number": 165,
+      "line_number": 190,
       "context": ");\n \n const getTooltipAIAgentContent = () => (\n <>\n <Text fontSize=\"12px\" fontWeight={600} noSelect>\n {t(\"Common:AIAgentsComingSoon\")}\n </Text>\n <Text fontSize=\"12px\" fontWeight={400} noSelect>\n {t(\"Common:AIAgentsDescription\")}\n </Text>\n </>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/Article/Body/Items.js",
-      "line_number": 165,
+      "line_number": 190,
       "context": ");\n \n const getTooltipAIAgentContent = () => (\n <>\n <Text fontSize=\"12px\" fontWeight={600} noSelect>\n {t(\"Common:AIAgentsComingSoon\")}\n </Text>\n <Text fontSize=\"12px\" fontWeight={400} noSelect>\n {t(\"Common:AIAgentsDescription\")}\n </Text>\n </>",
       "module": "/packages/client"
     }

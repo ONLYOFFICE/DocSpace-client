@@ -3,7 +3,7 @@
   "content": "OK",
   "content_en_sha1_hash": "9ce3bd4224c8c1780db56b4125ecf3f24bf748b7",
   "created_at": "2025-06-05T23:02:58.880Z",
-  "updated_at": "2025-09-26T15:21:06.075Z",
+  "updated_at": "2025-10-01T08:28:21.736Z",
   "comment": {
     "text": "The \"OKButton\" translation key is used to display the label for an OK button in various modal dialogs, such as archive, backup, and pricing plan change dialogs. This label serves as a confirmation action when users want to proceed or accept changes. It appears on buttons with \"primary\" and \"scale\" styles.",
     "is_auto": true,
@@ -42,8 +42,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 227,
-      "context": ": isRoomDelete\n ? t(\"Common:DeletePermanently\")\n : isRecycleBinFolder\n ? t(\"EmptyTrashDialog:DeleteForeverButton\")\n : isPrivacyFolder || selection[0]?.providerKey\n ? t(\"Common:OKButton\")\n : unsubscribe\n ? t(\"UnsubscribeButton\")\n : t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n });",
+      "line_number": 203,
+      "context": "}\n \n if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverButton\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:OKButton\");\n \n if (unsubscribe) return t(\"Common:Remove\");\n \n return t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),",
       "module": "/packages/client"
     },
     {
@@ -137,6 +137,12 @@
       "module": "/packages/doceditor"
     },
     {
+      "file_path": "/packages/management/src/app/settings/encrypt-data/EncryptWarningDialog.tsx",
+      "line_number": 88,
+      "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"CreateButton\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onConfirm}\n />",
+      "module": "/packages/management"
+    },
+    {
       "file_path": "/packages/shared/dialogs/backup-to-public-room-dialog/index.tsx",
       "line_number": 88,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-modal_submit\"\n key=\"OKButton\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onBackupTo}\n testId=\"save_backup_to_room_button\"",
@@ -153,12 +159,6 @@
       "line_number": 136,
       "context": "<Button\n scale\n primary\n isLoading={isLoading}\n size={ButtonSize.normal}\n label={t(\"Common:OKButton\")}\n onClick={onDeleteThirdParty}\n testId=\"delete_third_party_button\"\n />\n <Button\n scale",
       "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/management/src/app/settings/encrypt-data/EncryptWarningDialog.tsx",
-      "line_number": 88,
-      "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"CreateButton\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onConfirm}\n />",
-      "module": "/packages/management"
     }
   ],
   "languages": {

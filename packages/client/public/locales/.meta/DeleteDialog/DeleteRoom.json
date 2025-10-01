@@ -3,7 +3,7 @@
   "content": "The room <strong>\"{{roomName}}\"</strong> will be permanently deleted. All data and user accesses will be lost.",
   "content_en_sha1_hash": "1b7cd3772bae9279fc902414a7a7d258013ebfda",
   "created_at": "2025-09-22T13:39:49.180Z",
-  "updated_at": "2025-09-29T18:22:19.461Z",
+  "updated_at": "2025-10-01T08:28:21.789Z",
   "comment": {
     "text": "This translation key displays a confirmation message within a dialog, informing the user that a room (identified by \"{{roomName}}\") will be permanently deleted, including all associated data and user access. It's used to confirm the deletion action before it's executed.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 71,
+      "line_number": 93,
       "context": "}\n \n if (isRoomDelete) {\n return (\n <>\n <Trans t={t} i18nKey=\"DeleteRoom\" ns=\"DeleteDialog\">\n The room <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be lost.\n </Trans>{\" \"}\n {t(\"Common:WantToContinue\")}\n </>",
       "module": "/packages/client"
     }

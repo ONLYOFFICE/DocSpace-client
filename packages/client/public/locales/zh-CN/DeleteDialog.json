@@ -1,12 +1,8 @@
 {
   "DeleteAllGroupDescription": "所选组将被删除。组中的用户不会从{{productName}}中删除。您确定要继续吗？",
   "DeleteAllGroupsTitle": "删除群组",
-  "DeleteFiles": "您将要把<strong>{{filesCount}}个文件</strong>移至回收站。",
-  "DeleteFilesAndFolders": "您即将把<strong>{{filesCount}}个文件</strong>和<strong>{{foldersCount}}个文件夹</strong>移至回收站。",
-  "DeleteFolders": "您即将把<strong>{{foldersCount}}个文件夹</strong>移至回收站。",
   "DeleteGroupDescription": "组{{groupName}} 将被删除。组中的用户不会从{{productName}}中删除。您确定要继续吗？",
   "DeleteGroupTitle": "删除群组",
-  "DeleteItem": "您即将把<strong>{{name}}</strong>移至回收站。",
   "DeleteRoom": "房间<strong>“{{roomName}}”</strong>将被永久删除，所有数据及用户访问权限都将丢失。",
   "DeleteRoomTitle": "确定删除此房间吗？",
   "DeleteRoomWarning": "我已了解删除的后果，并确认删除此房间。",
@@ -14,13 +10,8 @@
   "DeleteTemplates": "您确定要删除选定的房间模板吗？删除后无法恢复。",
   "DeleteTemplateWarning": "我已了解删除的后果，并确认删除此模板。",
   "FileDeletedAfter": "30 天后，文件会被永久删除。",
-  "FilePermanentlyDeleted": "该文件将从回收站中永久删除。",
   "FilesDeletedAfter": "这些文件将在30天后永久删除。",
-  "FilesPermanentlyDeleted": "这些文件将从回收站中永久删除。",
   "FolderDeletedAfter": "该文件夹将在30天后永久删除。",
-  "FolderPermanentlyDeleted": "该文件夹将从回收站中永久删除。",
   "FoldersDeletedAfter": "这些文件夹将在30天后永久删除。",
-  "FoldersPermanentlyDeleted": "这些文件夹将从回收站中永久删除。",
-  "ItemsDeletedAfter": "这些项目将在30天后永久删除。",
-  "ItemsPermanentlyDeleted": "这些项目将从回收站中永久删除。"
+  "ItemsDeletedAfter": "这些项目将在30天后永久删除。"
 }

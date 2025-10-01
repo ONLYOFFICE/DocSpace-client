@@ -19,5 +19,7 @@
   "RememberHelper": "기본 세션 기간은 20분입니다. 1년으로 설정하려면 이 옵션을 확인하세요. 원하시는 값으로 설정하려면 설정으로 이동하세요.",
   "SignInLDAP": "로그인: {{ldap_domain}}",
   "SignInLdapHelper": "기업 도메인에 자격 증명 사용",
-  "UserIsAlreadyRegistered": "<1>{{email}}</1> 사용자는 이미 이 {{productName}}에 등록되어 있습니다. 비밀번호를 입력하거나 돌아가서 다른 이메일로 계속 진행하세요."
+  "UserIsAlreadyRegistered": "<1>{{email}}</1> 사용자는 이미 이 {{productName}}에 등록되어 있습니다. 비밀번호를 입력하거나 돌아가서 다른 이메일로 계속 진행하세요.",
+  "ConfirmEmailChange": "이메일 변경 확인",
+  "ConfirmEmailChangeText": "{{productName}} 계정의 이메일 주소 변경을 요청하셨습니다. 진행하려면 현재 자격 증명으로 로그인하십시오."
 }

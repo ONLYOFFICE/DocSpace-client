@@ -19,5 +19,7 @@
   "RememberHelper": "Noklusējuma sesijas ilgums ir 20 minūtes. Atzīmējiet šo opciju, lai iestatītu to uz vienu gadu. Lai iestatītu savu vērtību, dodieties uz Iestatījumi.",
   "SignInLDAP": "Pierakstieties: {{ldap_domain}}",
   "SignInLdapHelper": "Izmantojiet akreditācijas datus korporatīvajam domēnam",
-  "UserIsAlreadyRegistered": "Lietotājs <1>{{email}}</1> jau ir reģistrēts šajā {{productName}}, ievadiet savu paroli vai dodieties atpakaļ, lai turpinātu ar citu e-pasta adresi."
+  "UserIsAlreadyRegistered": "Lietotājs <1>{{email}}</1> jau ir reģistrēts šajā {{productName}}, ievadiet savu paroli vai dodieties atpakaļ, lai turpinātu ar citu e-pasta adresi.",
+  "ConfirmEmailChange": "Apstipriniet savu e-pasta adresa maiņu",
+  "ConfirmEmailChangeText": "Jūs esat lūdzis/lūdzusi mainīt e-pasta adresi savā {{productName}} kontā. Lai turpinātu, lūdzu, pierakstieties, izmantojot savus esošos datus."
 }

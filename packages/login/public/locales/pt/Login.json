@@ -19,5 +19,7 @@
   "RememberHelper": "A duração da sessão predefinida é de 20 minutos. Clique nesta opção para configurá-la para 1 ano. Para introduzir um período à sua escolha, aceda às definições.",
   "SignInLDAP": "Entre em: {{ldap_domain}}",
   "SignInLdapHelper": "Use credenciais para o domínio corporativo",
-  "UserIsAlreadyRegistered": "O usuário <1>{{email}}</1> já está cadastrado neste {{productName}}, digite sua senha ou volte para continuar com outro e-mail."
+  "UserIsAlreadyRegistered": "O usuário <1>{{email}}</1> já está cadastrado neste {{productName}}, digite sua senha ou volte para continuar com outro e-mail.",
+  "ConfirmEmailChange": "Confirme a alteração do seu e-mail",
+  "ConfirmEmailChangeText": "Você solicitou alterar o endereço de e-mail da sua conta {{productName}}. Para prosseguir, por favor, faça login usando suas credenciais atuais."
 }

@@ -88,5 +88,12 @@
   "SubmenuHistory": "Historie",
   "UserFileUpdated": "Soubor aktualizován.",
   "Users": "Uživatelé",
-  "Versions": "Verze"
+  "Versions": "Verze",
+  "FilesTrashMoveCompleted": "Soubory přesunuty do {{sectionName}}.",
+  "FilesTrashMoveCompletedCount": "Soubory přesunuty do {{sectionName}} ({{count}}).",
+  "FoldersTrashMoveCompleted": "Složky přesunuty do {{sectionName}}.",
+  "FoldersTrashMoveCompletedCount": "Složky přesunuty do {{sectionName}} ({{count}}).",
+  "GroupsEmptyScreenText": "Podívejte se na detaily skupin zde.",
+  "RoomFromArchiveRestore": "Místnost obnovena z {{sectionName}}",
+  "RoomToArchiveMove": "Pokoj přesunut do {{sectionName}}"
 }

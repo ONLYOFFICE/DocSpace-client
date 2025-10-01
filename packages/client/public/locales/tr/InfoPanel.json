@@ -88,5 +88,12 @@
   "SubmenuHistory": "Geçmiş",
   "UserFileUpdated": "Dosya güncellendi.",
   "Users": "Kullanıcılar",
-  "Versions": "Sürümler"
+  "Versions": "Sürümler",
+  "FilesTrashMoveCompleted": "{{sectionName}}'e taşınan dosyalar.",
+  "FilesTrashMoveCompletedCount": "{{sectionName}}'e {{count}} dosya taşındı.",
+  "FoldersTrashMoveCompleted": "Klasörler {{sectionName}}'e taşındı.",
+  "FoldersTrashMoveCompletedCount": "Klasörler {{sectionName}} ({{count}}) konumuna taşındı.",
+  "GroupsEmptyScreenText": "Grupların detaylarını burada görün",
+  "RoomFromArchiveRestore": "{{sectionName}}'den kurtarılan oda",
+  "RoomToArchiveMove": "Oda {{sectionName}} bölümüne taşındı"
 }

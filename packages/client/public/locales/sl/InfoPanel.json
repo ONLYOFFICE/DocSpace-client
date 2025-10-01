@@ -88,5 +88,12 @@
   "SubmenuHistory": "Zgodovina",
   "UserFileUpdated": "Datoteka posodobljena.",
   "Users": "Uporabniki",
-  "Versions": "Verzije"
+  "Versions": "Verzije",
+  "FilesTrashMoveCompleted": "Datoteke prestavljene v {{sectionName}}.",
+  "FilesTrashMoveCompletedCount": "Datoteke prestavljene v {{sectionName}} ({{count}}).",
+  "FoldersTrashMoveCompleted": "Mape so bile prestavljene v {{sectionName}}.",
+  "FoldersTrashMoveCompletedCount": "Mape so bile prestavljene v {{sectionName}} ({{count}}).",
+  "GroupsEmptyScreenText": "Oglejte si podrobnosti skupin tukaj",
+  "RoomFromArchiveRestore": "Soba pridobljena iz {{sectionName}}",
+  "RoomToArchiveMove": "Soba prestavljena v {{sectionName}}"
 }

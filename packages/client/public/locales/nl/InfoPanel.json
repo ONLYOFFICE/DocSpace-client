@@ -88,5 +88,12 @@
   "SubmenuHistory": "Geschiedenis",
   "UserFileUpdated": "Bestand bijgewerkt.",
   "Users": "Gebruikers",
-  "Versions": "Versies"
+  "Versions": "Versies",
+  "FilesTrashMoveCompleted": "Bestanden verplaatst naar {{sectionName}}.",
+  "FilesTrashMoveCompletedCount": "Bestanden verplaatst naar {{sectionName}} ({{count}}).",
+  "FoldersTrashMoveCompleted": "Folders verplaatst naar {{sectionName}}.",
+  "FoldersTrashMoveCompletedCount": "Folders verplaatst naar {{sectionName}} ({{count}}).",
+  "GroupsEmptyScreenText": "Bekijk groepsdetails hier",
+  "RoomFromArchiveRestore": "Ruimte teruggevonden uit {{sectionName}}",
+  "RoomToArchiveMove": "Room verplaatst naar {{sectionName}}"
 }

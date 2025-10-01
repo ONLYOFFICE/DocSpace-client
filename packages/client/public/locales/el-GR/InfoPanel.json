@@ -88,5 +88,12 @@
   "SubmenuHistory": "Ιστορικό",
   "UserFileUpdated": "Το αρχείο ενημερώθηκε.",
   "Users": "Χρήστες",
-  "Versions": "Εκδόσεις"
+  "Versions": "Εκδόσεις",
+  "FilesTrashMoveCompleted": "Μεταφέρθηκαν αρχεία στην {{sectionName}}.",
+  "FilesTrashMoveCompletedCount": "Αρχεία μεταφέρθηκαν στο {{sectionName}} ({{count}}).",
+  "FoldersTrashMoveCompleted": "Μεταφέρθηκαν οι φάκελοι στο {{sectionName}}.",
+  "FoldersTrashMoveCompletedCount": "Φάκελοι μεταφέρθηκαν στο {{sectionName}} ({{count}}).",
+  "GroupsEmptyScreenText": "Δείτε λεπτομέρειες ομάδων εδώ",
+  "RoomFromArchiveRestore": "Χώρος αποκαταστάθηκε από το {{sectionName}}",
+  "RoomToArchiveMove": "Δωμάτιο μεταφέρθηκε στο {{sectionName}}"
 }

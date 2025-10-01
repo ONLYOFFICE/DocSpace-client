@@ -88,5 +88,12 @@
   "SubmenuHistory": "기록",
   "UserFileUpdated": "파일이 업데이트되었습니다. 역할",
   "Users": "사용자",
-  "Versions": "버전"
+  "Versions": "버전",
+  "FilesTrashMoveCompleted": "{{sectionName}}으로 파일이 이동되었습니다.",
+  "FilesTrashMoveCompletedCount": "{{sectionName}}으로 이동된 파일 {{count}}개.",
+  "FoldersTrashMoveCompleted": "폴더가 {{sectionName}}으로 이동되었습니다.",
+  "FoldersTrashMoveCompletedCount": "폴더가 {{sectionName}} ({{count}})으로 이동되었습니다.",
+  "GroupsEmptyScreenText": "여기 그룹 세부 정보 보기",
+  "RoomFromArchiveRestore": "{{sectionName}}에서 복구된 방",
+  "RoomToArchiveMove": "방이 {{sectionName}}으로 이동되었습니다."
 }

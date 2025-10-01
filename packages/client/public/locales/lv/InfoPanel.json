@@ -88,5 +88,12 @@
   "SubmenuHistory": "Vēsture",
   "UserFileUpdated": "Fails ir atjaunināts.",
   "Users": "Lietotāji",
-  "Versions": "Versijas"
+  "Versions": "Versijas",
+  "FilesTrashMoveCompleted": "Faili pārvietoti uz {{sectionName}}.",
+  "FilesTrashMoveCompletedCount": "Faili pārvietoti uz {{sectionName}} ({{count}}).",
+  "FoldersTrashMoveCompleted": "Mapes pārvietotas uz {{sectionName}}.",
+  "FoldersTrashMoveCompletedCount": "Mapes pārvietotas uz {{sectionName}} ({{count}}).",
+  "GroupsEmptyScreenText": "Skatīt grupas detalizācijas šeit",
+  "RoomFromArchiveRestore": "Istaba atgūta no {{sectionName}}",
+  "RoomToArchiveMove": "Istaba pārvietota uz {{sectionName}}"
 }

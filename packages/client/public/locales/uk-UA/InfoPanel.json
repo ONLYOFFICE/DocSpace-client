@@ -88,5 +88,12 @@
   "SubmenuHistory": "Історія",
   "UserFileUpdated": "Файл оновлено.",
   "Users": "Користувачі",
-  "Versions": "Версії"
+  "Versions": "Версії",
+  "FilesTrashMoveCompleted": "Файли переміщено до {{sectionName}}.",
+  "FilesTrashMoveCompletedCount": "Файли переміщено до {{sectionName}} ({{count}}).",
+  "FoldersTrashMoveCompleted": "Папки переміщено до {{sectionName}}.",
+  "FoldersTrashMoveCompletedCount": "Папки переміщено до {{sectionName}} ({{count}}).",
+  "GroupsEmptyScreenText": "Дивіться деталі груп тут",
+  "RoomFromArchiveRestore": "Кімната відновлена з {{sectionName}}",
+  "RoomToArchiveMove": "Кімната перенесена до {{sectionName}}"
 }

@@ -88,5 +88,12 @@
   "SubmenuHistory": "Tarixçə",
   "UserFileUpdated": "Fayl yeniləndi.",
   "Users": "İstifadəçilər",
-  "Versions": "Versiyalar"
+  "Versions": "Versiyalar",
+  "FilesTrashMoveCompleted": "{{sectionName}} bölməsinə fayllar köçürüldü.",
+  "FilesTrashMoveCompletedCount": "{{sectionName}} bölməsinə {{count}} fayl köçürüldü.",
+  "FoldersTrashMoveCompleted": "Papqalar {{sectionName}} bölməsinə köçürüldü.",
+  "FoldersTrashMoveCompletedCount": "Papqalar {{sectionName}} ({{count}}) bölməsinə köçürüldü.",
+  "GroupsEmptyScreenText": "Burada qrupların təfərrüatlarını görün",
+  "RoomFromArchiveRestore": "{{sectionName}} bölməsindən bərpa edilmiş otaq",
+  "RoomToArchiveMove": "Otaq {{sectionName}} bölməsinə köçürüldü"
 }

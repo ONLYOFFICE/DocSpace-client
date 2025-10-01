@@ -88,5 +88,12 @@
   "SubmenuHistory": "История",
   "UserFileUpdated": "Актуализиран файл.",
   "Users": "Потребители",
-  "Versions": "Версии"
+  "Versions": "Версии",
+  "FilesTrashMoveCompleted": "Файловете са преместени в {{sectionName}}.",
+  "FilesTrashMoveCompletedCount": "Файловете са преместени в {{sectionName}} ({{count}}).",
+  "FoldersTrashMoveCompleted": "Папките са преместени в {{sectionName}}.",
+  "FoldersTrashMoveCompletedCount": "Папките преместени в {{sectionName}} ({{count}}).",
+  "GroupsEmptyScreenText": "Вижте подробности за групите тук",
+  "RoomFromArchiveRestore": "Стая възстановена от {{sectionName}}",
+  "RoomToArchiveMove": "Стаята преместена в {{sectionName}}"
 }

@@ -88,5 +88,12 @@
   "SubmenuHistory": "Historia",
   "UserFileUpdated": "Tiedosto päivitetty.",
   "Users": "Käyttäjät",
-  "Versions": "Versiot"
+  "Versions": "Versiot",
+  "FilesTrashMoveCompleted": "Tiedostot siirretty {{sectionName}}.",
+  "FilesTrashMoveCompletedCount": "Tiedostot siirretty {{sectionName}} -kohtaan ({{count}}).",
+  "FoldersTrashMoveCompleted": "Kansiot siirretty {{sectionName}}.",
+  "FoldersTrashMoveCompletedCount": "Kansiot siirretty {{sectionName}} -kohtaan ({{count}}).",
+  "GroupsEmptyScreenText": "Katso ryhmän tiedot tässä",
+  "RoomFromArchiveRestore": "Huone palautettu {{sectionName}} -sta",
+  "RoomToArchiveMove": "Huone siirretty {{sectionName}} -kohtaan"
 }

@@ -88,5 +88,12 @@
   "SubmenuHistory": "Historia",
   "UserFileUpdated": "Plik został zaktualizowany.",
   "Users": "Użytkownicy",
-  "Versions": "Wersje"
+  "Versions": "Wersje",
+  "FilesTrashMoveCompleted": "Przeniesiono pliki do {{sectionName}}.",
+  "FilesTrashMoveCompletedCount": "Pliki przeniesione do {{sectionName}} ({{count}}).",
+  "FoldersTrashMoveCompleted": "Foldery przeniesiono do {{sectionName}}.",
+  "FoldersTrashMoveCompletedCount": "Foldery przeniesione do {{sectionName}} ({{count}}).",
+  "GroupsEmptyScreenText": "Zobacz szczegóły grup tutaj",
+  "RoomFromArchiveRestore": "Pokój odzyskano z {{sectionName}}",
+  "RoomToArchiveMove": "Pokój przeniesiony do {{sectionName}}"
 }

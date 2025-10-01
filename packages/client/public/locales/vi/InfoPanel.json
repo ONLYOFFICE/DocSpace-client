@@ -88,5 +88,12 @@
   "SubmenuHistory": "Lịch sử",
   "UserFileUpdated": "Tập tin đã được cập nhật. vai trò",
   "Users": "Người dùng",
-  "Versions": "Phiên Bản"
+  "Versions": "Phiên Bản",
+  "FilesTrashMoveCompleted": "Các tệp đã được chuyển đến {{sectionName}}.",
+  "FilesTrashMoveCompletedCount": "Các tệp đã được chuyển đến {{sectionName}} ({{count}}).",
+  "FoldersTrashMoveCompleted": "Các thư mục đã được chuyển đến {{sectionName}}.",
+  "FoldersTrashMoveCompletedCount": "Các thư mục đã được chuyển đến {{sectionName}} ({{count}}).",
+  "GroupsEmptyScreenText": "Xem chi tiết nhóm tại đây",
+  "RoomFromArchiveRestore": "Phòng được phục hồi từ {{sectionName}}",
+  "RoomToArchiveMove": "Đã chuyển phòng đến {{sectionName}}"
 }

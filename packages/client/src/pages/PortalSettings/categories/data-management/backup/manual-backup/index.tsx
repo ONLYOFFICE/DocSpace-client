@@ -87,6 +87,7 @@ const ManualBackupWrapper = ({
       isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
       setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
       setDownloadingProgress={updateDownloadingProgress}
+      isBackupPaid={isBackupPaid}
       {...props}
     />
   );

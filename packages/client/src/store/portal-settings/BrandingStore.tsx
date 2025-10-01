@@ -35,7 +35,10 @@ import {
   restoreWhiteLabelLogos,
 } from "@docspace/shared/api/settings";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { isManagement } from "@docspace/shared/utils/common";
+import {
+  isManagement,
+  updateLogoTimestamp,
+} from "@docspace/shared/utils/common";
 
 import { ILogo } from "@docspace/shared/pages/Branding/WhiteLabel/WhiteLabel.types";
 
@@ -165,6 +168,7 @@ class BrandingStore {
     this.getIsDefaultLogos();
     if (logos) {
       this.applyNewLogos(logos);
+      updateLogoTimestamp();
     }
   };
 
@@ -174,6 +178,7 @@ class BrandingStore {
     this.getIsDefaultLogos();
     if (logos) {
       this.applyNewLogos(logos);
+      updateLogoTimestamp();
     }
   };
 

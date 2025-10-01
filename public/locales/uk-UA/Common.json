@@ -986,5 +986,6 @@
   "YouHaveUnsavedChanges": "У вас є незбережені зміни",
   "YourCurrentDomain": "Ваш поточний домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша черга"
+  "YourTurn": "Ваша черга",
+  "FeeAppliesToEachBackup": "Будь ласка, зверніть увагу: за кожне резервне копіювання стягується плата."
 }

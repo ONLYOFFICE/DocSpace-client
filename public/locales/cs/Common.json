@@ -986,5 +986,6 @@
   "YouHaveUnsavedChanges": "Máte neuložené změny",
   "YourCurrentDomain": "Vaše aktuální doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Jste na řadě"
+  "YourTurn": "Jste na řadě",
+  "FeeAppliesToEachBackup": "Upozornění: Za každou zálohu se platí poplatek."
 }

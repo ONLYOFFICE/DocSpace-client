@@ -986,5 +986,6 @@
   "YouHaveUnsavedChanges": "Имате незапазени промени",
   "YourCurrentDomain": "Вашият текущ домейн",
   "YourLogo": "Вашето лого",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "FeeAppliesToEachBackup": "Моля, обърнете внимание: Такса се прилага за всяко архивиране."
 }

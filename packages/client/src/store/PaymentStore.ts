@@ -301,7 +301,6 @@ class PaymentStore {
       fetchPayerInfo,
       isGracePeriod,
       isNotPaidPeriod,
-      walletCustomerStatusNotActive,
     } = this.currentTariffStatusStore;
     const { addedManagersCount } = this.currentQuotaStore;
 
@@ -320,7 +319,10 @@ class PaymentStore {
     if (this.isAlreadyPaid && this.isStripePortalAvailable) {
       requests.push(this.setPaymentAccount());
 
-      if (this.isPayer && walletCustomerStatusNotActive) {
+      if (
+        this.isPayer &&
+        this.currentTariffStatusStore.walletCustomerStatusNotActive
+      ) {
         requests.push(this.fetchCardLinked());
       }
 
@@ -692,8 +694,7 @@ class PaymentStore {
       if (this.isVisibleWalletSettings) this.setVisibleWalletSetting(false);
     }
 
-    const { fetchPortalTariff, walletCustomerStatusNotActive } =
-      this.currentTariffStatusStore;
+    const { fetchPortalTariff } = this.currentTariffStatusStore;
 
     const requests = [];
 
@@ -707,7 +708,10 @@ class PaymentStore {
         if (this.isStripePortalAvailable) {
           requests.push(this.setPaymentAccount());
 
-          if (this.isPayer && walletCustomerStatusNotActive) {
+          if (
+            this.isPayer &&
+            this.currentTariffStatusStore.walletCustomerStatusNotActive
+          ) {
             requests.push(this.fetchCardLinked());
           }
         }
@@ -777,7 +781,6 @@ class PaymentStore {
     const {
       fetchPortalTariff,
       fetchPayerInfo,
-      walletCustomerStatusNotActive,
       isGracePeriod,
       isNotPaidPeriod,
     } = this.currentTariffStatusStore;
@@ -797,7 +800,10 @@ class PaymentStore {
     if (this.isAlreadyPaid && this.isStripePortalAvailable) {
       requests.push(this.setPaymentAccount());
 
-      if (this.isPayer && walletCustomerStatusNotActive) {
+      if (
+        this.isPayer &&
+        this.currentTariffStatusStore.walletCustomerStatusNotActive
+      ) {
         requests.push(this.fetchCardLinked());
       }
     } else {

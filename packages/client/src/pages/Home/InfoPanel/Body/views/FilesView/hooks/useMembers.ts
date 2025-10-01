@@ -298,6 +298,13 @@ export const useMembers = ({
   };
 
   React.useEffect(() => {
+    fetchMembers();
+    scrollToTop();
+
+    setIsMembersPanelUpdating(false);
+  }, [fetchMembers, setIsMembersPanelUpdating, scrollToTop, searchValue]);
+
+  React.useEffect(() => {
     if (isMembersPanelUpdating) {
       fetchMembers();
       scrollToTop();

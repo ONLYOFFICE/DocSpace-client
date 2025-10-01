@@ -4,5 +4,17 @@
   "DailyFeedDescription": "{{productName}}'inizdeki haberleri ve etkinlikleri günlük bir özet halinde okuyun.",
   "Notifications": "Bildirimler",
   "UsefulTips": "Faydalı {{productName}} ipuçları",
-  "UsefulTipsDescription": "{{productName}} hakkında faydalı kılavuzlar edinin"
+  "UsefulTipsDescription": "{{productName}} hakkında faydalı kılavuzlar edinin",
+  "ActionsWithFilesDescription": "Rozetler, {{rooms}}, {{shared}} ve {{documents}} bölümlerinde — yüklemeler, düzenlemeler veya paylaşımlar — dosya etkinliğini vurgulayacaktır.",
+  "AdminSetupRequired": "Yönetici kurulumu gerekiyor",
+  "FileActivityNotify": "Dosya etkinliği bildirimleri",
+  "GoToSettings": "Ayarlara Git",
+  "IsNotValid": "Geçerli değil",
+  "LdapEmailTooltip": "Bu kullanıcı hesabı LDAP'den yüklenmiştir. Kullanıcının e-posta adresi belirtilmedi ve mevcut olan otomatik olarak oluşturuldu, bildirim göndermek için kullanılamaz.",
+  "NotConfigured": "Yapılandırılmadı",
+  "RoomsActivityDescription": "{{sectionName}} içinde paylaşılan yeni dosya/klasörler ve etkinlik hakkında anında e-posta bildirimleri alın.",
+  "RoomUpdateNotify": "Paylaşılan içerik ve {{sectionName}} etkinliği",
+  "SettingUpNotifications": "Bildirimleri ayarlama",
+  "SuccessConnected": "{{serviceName}} başarıyla bir bildirim kanalı olarak bağlandı. Artık oradan güncellemeler alacaksınız.",
+  "SuccessDisconnected": "{{serviceName}} bildirim kanalı olarak başarıyla bağlantısı kesildi. Orada bildirimler artık gönderilmeyecektir."
 }

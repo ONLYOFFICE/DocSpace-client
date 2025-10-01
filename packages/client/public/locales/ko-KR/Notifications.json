@@ -4,5 +4,17 @@
   "DailyFeedDescription": "일일 다이제스트에서 {{productName}}의 뉴스 및 이벤트 읽기.",
   "Notifications": "알림",
   "UsefulTips": "유용한 {{productName}} 팁",
-  "UsefulTipsDescription": "{{productName}}에 대한 유용한 가이드 얻기"
+  "UsefulTipsDescription": "{{productName}}에 대한 유용한 가이드 얻기",
+  "ActionsWithFilesDescription": "뱃지는 {{rooms}}, {{shared}}, {{documents}} 섹션에서 파일 활동 — 업로드, 편집 또는 공유 —을 강조 표시합니다.",
+  "AdminSetupRequired": "관리자 설정 필요",
+  "FileActivityNotify": "파일 활동 알림",
+  "GoToSettings": "설정으로 이동",
+  "IsNotValid": "유효하지 않습니다",
+  "LdapEmailTooltip": "이 사용자 계정은 LDAP에서 로드되었습니다. 사용자 이메일 주소가 지정되지 않았으며, 현재 주소는 자동으로 생성되었으므로 알림을 보내는 데 사용할 수 없습니다.",
+  "NotConfigured": "설정되지 않음",
+  "RoomsActivityDescription": "{{sectionName}} 내 새롭게 공유된 파일/폴더 및 활동에 대한 즉시 이메일 알림을 받으세요.",
+  "RoomUpdateNotify": "공유 콘텐츠 및 {{sectionName}} 활동",
+  "SettingUpNotifications": "알림 설정",
+  "SuccessConnected": "{{serviceName}}이(가) 알림 채널로 성공적으로 연결되었습니다. 이제 그곳으로 업데이트를 받으실 수 있습니다.",
+  "SuccessDisconnected": "{{serviceName}}을 알림 채널에서 성공적으로 연결 해제했습니다. 더 이상 해당 위치로 알림이 전송되지 않습니다."
 }

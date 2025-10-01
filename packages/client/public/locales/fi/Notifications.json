@@ -4,5 +4,17 @@
   "DailyFeedDescription": "Lue uutiset ja tapahtumat {{productName}}-si päivittäisistä uutisista.",
   "Notifications": "Ilmoitukset",
   "UsefulTips": "Hyödylliset {{productName}}-vinkit",
-  "UsefulTipsDescription": "Saa hyödyllisiä oppaita {{productName}}-sta"
+  "UsefulTipsDescription": "Saa hyödyllisiä oppaita {{productName}}-sta",
+  "ActionsWithFilesDescription": "Tunnukset korostavat tiedostoaktiviteettia — latauksia, muokkauksia tai jakoja — {{rooms}}, {{shared}} ja {{documents}} -osioissa.",
+  "AdminSetupRequired": "Adminin asennus vaaditaan",
+  "FileActivityNotify": "Tiedoston toimintailmoitukset",
+  "GoToSettings": "Mene Asetukset -kohtaan",
+  "IsNotValid": "Ei ole kelvollinen",
+  "LdapEmailTooltip": "Tämä käyttäjätili ladataan LDAP:sta. Käyttäjän sähköpostiosoitetta ei ole määritetty, ja nykyinen osoite on luotu automaattisesti eikä sitä voi käyttää ilmoitusten lähettämiseen.",
+  "NotConfigured": "Ei määritetty",
+  "RoomsActivityDescription": "Hanki välittömiä sähköposti-ilmoituksia uusista jaetuista tiedostoista/kansioista ja toiminnasta {{sectionName}}-osiossasi.",
+  "RoomUpdateNotify": "Jaettu sisältö ja {{sectionName}} -toiminta",
+  "SettingUpNotifications": "Ilmoitusten määritys",
+  "SuccessConnected": "{{serviceName}} on yhdistetty onnistuneesti ilmoituskanavana. Saat sieltä nyt päivityksiä.",
+  "SuccessDisconnected": "{{serviceName}} onnistui irrottamaan ilmoituskanavana. Ilmoituksia ei enää lähetetä sinne."
 }

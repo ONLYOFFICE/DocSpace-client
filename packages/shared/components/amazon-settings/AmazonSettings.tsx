@@ -304,7 +304,7 @@ const AmazonSettings = ({
           noBorder={false}
           scaled
           scaledOptions
-          isDefaultMode
+          isDefaultMode={false}
           dropDownMaxHeight={300}
           isDisabled={isDisabled}
           tabIndex={2}

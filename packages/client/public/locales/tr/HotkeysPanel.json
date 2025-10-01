@@ -6,6 +6,7 @@
   "HotkeysClearAll": "Tüm seçimleri temizle",
   "HotkeysClose": "Kapat/Eylemi geri al",
   "HotkeysCopySelected": "Seçilen öğeleri panoya kopyala",
+  "HotkeysCopySelectedItems": "Seçilen öğeleri kopyala",
   "HotkeysCreateDocument": "Belge Oluştur",
   "HotkeysCreateFolder": "Klasör Oluştur",
   "HotkeysCreateForm": "Boş form şablonu oluştur",
@@ -14,6 +15,7 @@
   "HotkeysCreateSpreadsheet": "Elektronik Tablo Oluştur",
   "HotkeysCreatingObjects": "Öğeler oluşturuluyor",
   "HotkeysCutSelected": "Seçilen öğeleri panoya kes",
+  "HotkeysDisablesSelectionArea": "Seçim alanını devre dışı bırak",
   "HotkeysExtendSelectionDown": "Seçimi aşağı genişlet",
   "HotkeysExtendSelectionLeft": "Seçimi sola genişlet",
   "HotkeysExtendSelectionRight": "Seçimi sağa genişlet",
@@ -43,7 +45,5 @@
   "HotkeysUploadFile": "Dosya yükle",
   "HotkeysUploadingObjects": "Öğeler yükleniyor",
   "HotkeysZoomIn": "Yakınlaştır",
-  "HotkeysZoomOut": "Uzaklaştır",
-  "HotkeysCopySelectedItems": "Seçilen öğeleri kopyala",
-  "HotkeysDisablesSelectionArea": "Seçim alanını devre dışı bırak"
+  "HotkeysZoomOut": "Uzaklaştır"
 }

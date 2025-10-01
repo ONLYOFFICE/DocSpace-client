@@ -8,11 +8,11 @@
   "NeedSettings": "Nepieciešams ievadīt iestatījumus",
   "NoPlugins": "Nav pievienoti spraudņi",
   "NotNeedSettings": "Nav jāievada iestatījumus",
+  "PluginIsNotCompatible": "Spraudņa SDK versija nesakrīt ar {{productName}} versiju. Lūdzu, atjauniniet uz saderīgu versiju.",
+  "PluginLoadedSuccessfully": "Papildinājums ielādēts veiksmīgi",
   "PluginSamples": "Spraudņu paraugi",
   "PluginSDK": "Spraudņa SDK",
   "PluginSDKDescription": "Izmantojot spraudņa SDK, varat paplašināt savu {{productName}} funkcionalitāti, savienot trešās puses pakalpojumus vai uzlabot esošo lietotāja pieredzi. Šeit jūs varat atrast spraudņu paraugus ar koda avotu, kas pieejams GitHub. ",
   "PluginSDKInstruction": "Noklikšķiniet uz pogas, lai iegūtu detalizētus norādījumus par to, kā izveidot savus spraudņus.",
-  "UploadDescription": "Varat pievienot spraudņus, lai paplašinātu {{productName}} funkcionalitāti ar papildu funkcijām. ZIP arhīvā noklikšķiniet uz Augšupielādēt spraudni vai nometiet failu.",
-  "PluginIsNotCompatible": "Spraudņa SDK versija nesakrīt ar {{productName}} versiju. Lūdzu, atjauniniet uz saderīgu versiju.",
-  "PluginLoadedSuccessfully": "Papildinājums ielādēts veiksmīgi"
+  "UploadDescription": "Varat pievienot spraudņus, lai paplašinātu {{productName}} funkcionalitāti ar papildu funkcijām. ZIP arhīvā noklikšķiniet uz Augšupielādēt spraudni vai nometiet failu."
 }

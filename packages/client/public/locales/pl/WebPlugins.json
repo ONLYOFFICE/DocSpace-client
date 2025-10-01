@@ -8,11 +8,11 @@
   "NeedSettings": "Należy wprowadzić ustawienia",
   "NoPlugins": "Nie dodano żadnych wtyczek",
   "NotNeedSettings": "Nie trzeba wchodzić w ustawienia",
+  "PluginIsNotCompatible": "Wersja SDK wtyczki nie pasuje do wersji {{productName}}. Proszę zaktualizować do kompatybilnej wersji.",
+  "PluginLoadedSuccessfully": "Wtyczka załadowana pomyślnie",
   "PluginSamples": "Próbki wtyczek",
   "PluginSDK": "Zestaw SDK do tworzenia wtyczek",
   "PluginSDKDescription": "Dzięki zestawowi SDK do tworzenia wtyczek możesz rozszerzyć funkcjonalność swojego obszaru {{productName}}, podłączyć usługi podmiotów trzecich lub poprawić komfort obsługi dla swoich bieżących użytkowników. Tutaj znajdziesz próbki wtyczek z kodem źródłowym dostępnym na GitHub.",
   "PluginSDKInstruction": "Kliknij przycisk, aby uzyskać szczegółowe instrukcje na temat tworzenia własnych wtyczek.",
-  "UploadDescription": "Możesz dodawać wtyczki, aby poszerzyć funkcjonalność {{productName}} o dodatkowe funkcje. Kliknij Prześlij wtyczkę lub upuść plik w archiwum ZIP.",
-  "PluginIsNotCompatible": "Wersja SDK wtyczki nie pasuje do wersji {{productName}}. Proszę zaktualizować do kompatybilnej wersji.",
-  "PluginLoadedSuccessfully": "Wtyczka załadowana pomyślnie"
+  "UploadDescription": "Możesz dodawać wtyczki, aby poszerzyć funkcjonalność {{productName}} o dodatkowe funkcje. Kliknij Prześlij wtyczkę lub upuść plik w archiwum ZIP."
 }

@@ -6,6 +6,7 @@
   "HotkeysClearAll": "Bütün seçimləri təmizləyin",
   "HotkeysClose": "Hərəkəti sonlandırın/Ləğv edin",
   "HotkeysCopySelected": "Seçilmiş elementləri mübadilə buferinə nüsxələyin",
+  "HotkeysCopySelectedItems": "Seçilmiş məqalələrin məzmununu surətini götür",
   "HotkeysCreateDocument": "Sənəd yarat",
   "HotkeysCreateFolder": "Qovluq yaradın",
   "HotkeysCreateForm": "Boş forma şablonu yaradın",
@@ -14,6 +15,7 @@
   "HotkeysCreateSpreadsheet": "Cədvəl yarat",
   "HotkeysCreatingObjects": "Elementlərin yaradılması",
   "HotkeysCutSelected": "Seçilmiş elementləri mübadilə buferinə kopyalayın",
+  "HotkeysDisablesSelectionArea": "Seçim sahəsini deaktiv et",
   "HotkeysExtendSelectionDown": "Seçimi sağa doğru uzadın",
   "HotkeysExtendSelectionLeft": "Seçimi sola doğru uzadın",
   "HotkeysExtendSelectionRight": "Seçimi sağa doğru uzadın",
@@ -43,7 +45,5 @@
   "HotkeysUploadFile": "Fayl yüklə",
   "HotkeysUploadingObjects": "Elementlərin yüklənilməsi",
   "HotkeysZoomIn": "Yaxınlaşdırın",
-  "HotkeysZoomOut": "Uzaqlaşdırın",
-  "HotkeysCopySelectedItems": "Seçilmiş məqalələrin məzmununu surətini götür",
-  "HotkeysDisablesSelectionArea": "Seçim sahəsini deaktiv et"
+  "HotkeysZoomOut": "Uzaqlaşdırın"
 }

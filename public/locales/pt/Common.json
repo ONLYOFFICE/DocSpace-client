@@ -814,7 +814,7 @@
   "ShareForm": "o formulário",
   "ShareForUsers": "Partilhe para utilizadores",
   "ShareInTheRoom": "Partilhe na sala",
-  "SharePermissionsEntityAccessScope": "<1>{{accessType}}</1> poderá <3>{{accessRights}}</3> o conteúdo de {{shareParent}}.",
+  "SharePermissionsEntityAccessScope": "<1>{{accessType}}</1> poderá <3>{{accessRights}}</3> {{shareContents}} de {{shareParent}}.",
   "ShareTheFolder": "a pasta",
   "ShareTheOriginalFormForFillingOut": "Partilhe o formulário original para preenchimento.",
   "ShareTheRoom": "o quarto",

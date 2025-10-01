@@ -6,6 +6,7 @@
   "HotkeysClearAll": "Tyhjennä kaikki valinnat",
   "HotkeysClose": "Sulje/kumoa toiminto",
   "HotkeysCopySelected": "Kopioi valitut kohteet leikepöydälle",
+  "HotkeysCopySelectedItems": "Kopioi valitut kohteet teksti",
   "HotkeysCreateDocument": "Luo asiakirja",
   "HotkeysCreateFolder": "Luo kansio",
   "HotkeysCreateForm": "Luo tyhjä lomakemalli",
@@ -14,6 +15,7 @@
   "HotkeysCreateSpreadsheet": "Luo laskentataulukko",
   "HotkeysCreatingObjects": "Kohteiden luominen",
   "HotkeysCutSelected": "Leikkaa valitut kohteet leikepöydälle",
+  "HotkeysDisablesSelectionArea": "Poista valintausalue",
   "HotkeysExtendSelectionDown": "Laajenna valintaa alaspäin",
   "HotkeysExtendSelectionLeft": "Laajenna valintaa vasemmalle",
   "HotkeysExtendSelectionRight": "Laajenna valintaa oikealle",
@@ -43,7 +45,5 @@
   "HotkeysUploadFile": "Lataa tiedosto",
   "HotkeysUploadingObjects": "Kohteiden lataaminen",
   "HotkeysZoomIn": "Lähennä",
-  "HotkeysZoomOut": "Loitonna",
-  "HotkeysCopySelectedItems": "Kopioi valitut kohteet teksti",
-  "HotkeysDisablesSelectionArea": "Poista valintausalue"
+  "HotkeysZoomOut": "Loitonna"
 }

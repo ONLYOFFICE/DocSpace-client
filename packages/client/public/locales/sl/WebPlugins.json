@@ -8,11 +8,11 @@
   "NeedSettings": "Potreben je vnos nastavitev",
   "NoPlugins": "Ni dodanih vtičnikov",
   "NotNeedSettings": "Ni treba vnesti nastavitev",
+  "PluginIsNotCompatible": "Različica SDK-ja za vtičnike ne ustreza različici {{productName}}. Posodobite na združljivo različico.",
+  "PluginLoadedSuccessfully": "Vtičnik je bil uspešno naložen.",
   "PluginSamples": "Vzorci vtičnika",
   "PluginSDK": "Vtičnik SDK",
   "PluginSDKDescription": "Z uporabo vtičnika SDK lahko razširite svojo funkcionalnost {{productName}}, povežete storitve tretjih oseb ali izboljšate obstoječo uporabniško izkušnjo. Tukaj lahko najdete vzorce vtičnikov z izvorno kodo, ki so na voljo na GitHubu.",
   "PluginSDKInstruction": "Kliknite gumb za podrobna navodila o ustvarjanju lastnih vtičnikov.",
-  "UploadDescription": "Lahko dodate vtičnike, da razširite funkcionalnost {{productName}} z dodatnimi funkcijami. Kliknite Naloži vtičnik ali dodajte datoteko v arhiv ZIP.",
-  "PluginIsNotCompatible": "Različica SDK-ja za vtičnike ne ustreza različici {{productName}}. Posodobite na združljivo različico.",
-  "PluginLoadedSuccessfully": "Vtičnik je bil uspešno naložen."
+  "UploadDescription": "Lahko dodate vtičnike, da razširite funkcionalnost {{productName}} z dodatnimi funkcijami. Kliknite Naloži vtičnik ali dodajte datoteko v arhiv ZIP."
 }

@@ -6,6 +6,7 @@
   "HotkeysClearAll": "모든 선택 삭제",
   "HotkeysClose": "닫기/작업 실행 취소",
   "HotkeysCopySelected": "선택한 항목을 클립보드에 복사",
+  "HotkeysCopySelectedItems": "선택한 항목 텍스트 복사",
   "HotkeysCreateDocument": "문서 만들기",
   "HotkeysCreateFolder": "폴더 만들기",
   "HotkeysCreateForm": "빈 양식 템플릿 만들기",
@@ -14,6 +15,7 @@
   "HotkeysCreateSpreadsheet": "스프레드 시트를 만듭니다",
   "HotkeysCreatingObjects": "항목 생성",
   "HotkeysCutSelected": "선택한 항목을 클립보드로 잘라내기",
+  "HotkeysDisablesSelectionArea": "선택 영역 비활성화",
   "HotkeysExtendSelectionDown": "아래쪽으로 선택 확장",
   "HotkeysExtendSelectionLeft": "왼쪽으로 선택 확장",
   "HotkeysExtendSelectionRight": "오른쪽으로 선택 확장",
@@ -43,7 +45,5 @@
   "HotkeysUploadFile": "파일 업로드",
   "HotkeysUploadingObjects": "항목 업로드",
   "HotkeysZoomIn": "확대",
-  "HotkeysZoomOut": "축소",
-  "HotkeysCopySelectedItems": "선택한 항목 텍스트 복사",
-  "HotkeysDisablesSelectionArea": "선택 영역 비활성화"
+  "HotkeysZoomOut": "축소"
 }

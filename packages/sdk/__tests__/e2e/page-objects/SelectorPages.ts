@@ -30,31 +30,31 @@ export abstract class BaseSelectorPage {
   constructor(protected page: Page) {}
 
   get header(): Locator {
-    return this.page.locator('[data-testid="selector-header"]');
+    return this.page.locator(".aside-header");
   }
 
   get breadcrumbs(): Locator {
-    return this.page.locator('[data-testid="selector-breadcrumbs"]');
+    return this.page.locator(".selector_bread-crumbs");
   }
 
   get searchInput(): Locator {
-    return this.page.locator('[data-testid="selector-search-input"]');
+    return this.page.locator('[data-testid="selector_search_input"]');
   }
 
   get acceptButton(): Locator {
-    return this.page.locator('[data-testid="selector-accept-button"]');
+    return this.page.locator('[data-testid="selector_submit_button"]');
   }
 
   get cancelButton(): Locator {
-    return this.page.locator('[data-testid="selector-cancel-button"]');
+    return this.page.locator('[data-testid="selector_cancel_button"]');
   }
 
   get emptyFolderMessage(): Locator {
-    return this.page.locator('[data-testid="empty-folder-message"]');
+    return this.page.locator(".empty-folder_container-links, .empty-screen");
   }
 
   get loadingSpinner(): Locator {
-    return this.page.locator('[data-testid="loading-spinner"]');
+    return this.page.locator(".selector-loader");
   }
 
   async waitForLoad(): Promise<void> {
@@ -68,38 +68,30 @@ export abstract class BaseSelectorPage {
 
   async hasHeader(): Promise<boolean> {
     await this.ensureSelectorLoaded();
-    try {
-      return await this.header.isVisible();
-    } catch {
-      return false;
-    }
+    const count = await this.header.count();
+    if (count === 0) return false;
+    return await this.header.isVisible();
   }
 
   async hasBreadcrumbs(): Promise<boolean> {
     await this.ensureSelectorLoaded();
-    try {
-      return await this.breadcrumbs.isVisible();
-    } catch {
-      return false;
-    }
+    const count = await this.breadcrumbs.count();
+    if (count === 0) return false;
+    return await this.breadcrumbs.isVisible();
   }
 
   async hasSearch(): Promise<boolean> {
     await this.ensureSelectorLoaded();
-    try {
-      return await this.searchInput.isVisible();
-    } catch {
-      return false;
-    }
+    const count = await this.searchInput.count();
+    if (count === 0) return false;
+    return await this.searchInput.isVisible();
   }
 
   async hasCancelButton(): Promise<boolean> {
     await this.ensureSelectorLoaded();
-    try {
-      return await this.cancelButton.isVisible();
-    } catch {
-      return false;
-    }
+    const count = await this.cancelButton.count();
+    if (count === 0) return false;
+    return await this.cancelButton.isVisible();
   }
 
   async clickAccept(): Promise<void> {
@@ -128,35 +120,42 @@ export abstract class BaseSelectorPage {
   }
 
   async waitForLoadingComplete(): Promise<void> {
-    await this.loadingSpinner.waitFor({ state: "hidden" });
+    const isSpinnerVisible = await this.loadingSpinner
+      .isVisible()
+      .catch(() => false);
+    if (isSpinnerVisible) {
+      await this.loadingSpinner.waitFor({ state: "hidden" });
+    }
   }
 }
 
 export class FileSelectorPage extends BaseSelectorPage {
   get fileList(): Locator {
-    return this.page.locator('[data-testid="file-list"]');
+    return this.page.locator(".selector-items");
   }
 
   get fileItems(): Locator {
-    return this.page.locator('[data-testid="file-item"]');
+    return this.page.locator('[data-testid^="selector-item-"]');
   }
 
   get folderItems(): Locator {
-    return this.page.locator('[data-testid="folder-item"]');
+    return this.page.locator('[data-testid^="selector-item-"]');
   }
 
   get fileItem(): (name: string) => Locator {
     return (name: string) =>
-      this.page.locator(`[data-testid="file-item"][data-name="${name}"]`);
+      this.page.locator(`[data-testid^="selector-item-"]:has-text("${name}")`);
   }
 
   get folderItem(): (name: string) => Locator {
     return (name: string) =>
-      this.page.locator(`[data-testid="folder-item"][data-name="${name}"]`);
+      this.page.locator(`[data-testid^="selector-item-"]:has-text("${name}")`);
   }
 
   get selectedItems(): Locator {
-    return this.page.locator('[data-testid="file-item"][data-selected="true"]');
+    return this.page.locator(
+      '[data-testid^="selector-item-"].selector-item_selected',
+    );
   }
 
   get fileTypeFilter(): Locator {
@@ -225,50 +224,50 @@ export class FileSelectorPage extends BaseSelectorPage {
   }
 
   async isEmptyFolder(): Promise<boolean> {
-    return this.emptyFolderMessage.isVisible();
+    const count = await this.emptyFolderMessage.count();
+    if (count === 0) return false;
+    return await this.emptyFolderMessage.isVisible();
   }
 
   async getAllFileNames(): Promise<string[]> {
     const elements = await this.fileItems.all();
-    const names = await Promise.all(
-      elements.map((el) => el.getAttribute("data-name")),
-    );
+    const names = await Promise.all(elements.map((el) => el.textContent()));
     return names.filter((name): name is string => name !== null);
   }
 
   async getAllFolderNames(): Promise<string[]> {
     const elements = await this.folderItems.all();
-    const names = await Promise.all(
-      elements.map((el) => el.getAttribute("data-name")),
-    );
+    const names = await Promise.all(elements.map((el) => el.textContent()));
     return names.filter((name): name is string => name !== null);
   }
 }
 
 export class RoomSelectorPage extends BaseSelectorPage {
   get roomList(): Locator {
-    return this.page.locator('[data-testid="room-list"]');
+    return this.page.locator(".selector-items");
   }
 
   get roomItems(): Locator {
-    return this.page.locator('[data-testid="room-item"]');
+    return this.page.locator('[data-testid^="selector-item-"]');
   }
 
   get roomItem(): (name: string) => Locator {
     return (name: string) =>
-      this.page.locator(`[data-testid="room-item"][data-name="${name}"]`);
+      this.page.locator(`[data-testid^="selector-item-"]:has-text("${name}")`);
   }
 
   get selectedRoom(): Locator {
-    return this.page.locator('[data-testid="room-item"][data-selected="true"]');
+    return this.page.locator(
+      '[data-testid^="selector-item-"].selector-item_selected',
+    );
   }
 
   get roomTypeFilter(): Locator {
-    return this.page.locator('[data-testid="room-type-filter"]');
+    return this.page.locator(".room-type-filter");
   }
 
   get createRoomButton(): Locator {
-    return this.page.locator('[data-testid="create-room-button"]');
+    return this.page.locator(".empty-folder_container-links");
   }
 
   async getRoomCount(): Promise<number> {
@@ -284,11 +283,12 @@ export class RoomSelectorPage extends BaseSelectorPage {
   }
 
   async getSelectedRoomName(): Promise<string | null> {
-    return this.selectedRoom.getAttribute("data-name");
+    return this.selectedRoom.textContent();
   }
 
   async filterByRoomType(type: string): Promise<void> {
-    await this.roomTypeFilter.selectOption(type);
+    await this.roomTypeFilter.click();
+    await this.page.locator(`.room-type-option:has-text("${type}")`).click();
   }
 
   async clickCreateRoom(): Promise<void> {
@@ -297,9 +297,7 @@ export class RoomSelectorPage extends BaseSelectorPage {
 
   async getAllRoomNames(): Promise<string[]> {
     const elements = await this.roomItems.all();
-    const names = await Promise.all(
-      elements.map((el) => el.getAttribute("data-name")),
-    );
+    const names = await Promise.all(elements.map((el) => el.textContent()));
     return names.filter((name): name is string => name !== null);
   }
 

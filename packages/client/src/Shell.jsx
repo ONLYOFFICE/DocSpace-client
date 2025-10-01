@@ -211,16 +211,23 @@ const Shell = ({ page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
-    const callback = (loginEventId) => {
-      console.log(`[WS] "logout-session"`, loginEventId, userLoginEventId);
+    const callback = (loginEventId, redirectUrl) => {
+      console.log(
+        `[WS] "logout-session"`,
+        loginEventId,
+        userLoginEventId,
+        redirectUrl,
+      );
 
       if (userLoginEventId === loginEventId || loginEventId === 0) {
         sessionStorage.setItem("referenceUrl", window.location.href);
         sessionStorage.setItem("loggedOutUserId", userId);
 
-        window.location.replace(
-          combineUrl(window.ClientConfig?.proxy?.url, "/login"),
-        );
+        const loginUrl = redirectUrl
+          ? redirectUrl
+          : window.ClientConfig?.proxy?.url;
+
+        window.location.replace(combineUrl(loginUrl, "/login"));
       }
     };
 

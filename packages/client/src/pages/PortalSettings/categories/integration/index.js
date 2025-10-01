@@ -49,8 +49,6 @@ const IntegrationWrapper = (props) => {
   const {
     t,
     currentDeviceType,
-    toDefault,
-    isSSOAvailable,
     standalone,
     enablePlugins,
 
@@ -82,14 +80,6 @@ const IntegrationWrapper = (props) => {
     getSMTPSettingsData,
     getDocumentServiceData,
   } = useIntegration(defaultProps.integration);
-
-  useEffect(() => {
-    return () => {
-      isSSOAvailable &&
-        !window.location.pathname.includes("sso") &&
-        toDefault();
-    };
-  }, []);
 
   const data = [
     {
@@ -202,13 +192,8 @@ export const Component = inject(
       currentDeviceType,
       clearAbortControllerArr,
     } = settingsStore;
-    const { load: toDefault } = ssoStore;
-
-    const { isSSOAvailable } = currentQuotaStore;
 
     return {
-      toDefault,
-      isSSOAvailable,
       standalone,
       currentDeviceType,
       enablePlugins,

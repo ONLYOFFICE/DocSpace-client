@@ -400,6 +400,7 @@
   "Free": "Free",
   "FreeAccessToLicensedVersion": "Free access to {{license}} solution",
   "FreeDaysLeft": "{{count}} Free days left",
+  "FeeAppliesToEachBackup": "Please note: A fee applies to each backup",
   "FromDevice": "From device",
   "FromPortal": "From {{productName}}",
   "FromTemplate": "From template",

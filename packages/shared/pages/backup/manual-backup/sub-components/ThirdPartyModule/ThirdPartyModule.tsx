@@ -45,6 +45,7 @@ import type { FilesSelectorSettings } from "../../../../../components/files-sele
 import type { TThirdParties } from "../../../../../api/files/types";
 
 import styles from "../../ManualBackup.module.scss";
+import NoteComponent from "../../../sub-components/NoteComponent";
 
 interface ThirdPartyModuleProps {
   onMakeCopy: (
@@ -56,6 +57,8 @@ interface ThirdPartyModuleProps {
   ) => Promise<void>;
   isMaxProgress: boolean;
   buttonSize?: ButtonSize;
+  isBackupPaid?: boolean;
+
   connectedThirdPartyAccount: Nullable<ConnectedThirdPartyAccountType>;
   isTheSameThirdPartyAccount: boolean;
 
@@ -121,6 +124,7 @@ const ThirdPartyModule = ({
   setBasePath,
   setNewPath,
   toDefault,
+  isBackupPaid,
 }: ThirdPartyModuleProps) => {
   const isMountRef = useRef(false);
   const folderRef = useRef("");
@@ -177,60 +181,63 @@ const ThirdPartyModule = ({
   const checkCreating = selectedThirdPartyAccount?.key === ProvidersType.WebDav;
 
   return (
-    <div
-      data-testid="third-party-module"
-      className={classNames(
-        styles.manualBackupThirdPartyModule,
-        "manual-backup_third-party-module",
-      )}
-    >
-      <DirectThirdPartyConnection
-        checkCreating={checkCreating}
-        openConnectWindow={openConnectWindow}
-        connectDialogVisible={connectDialogVisible}
-        deleteThirdPartyDialogVisible={deleteThirdPartyDialogVisible}
-        connectedThirdPartyAccount={connectedThirdPartyAccount}
-        setConnectDialogVisible={setConnectDialogVisible}
-        setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
-        clearLocalStorage={clearLocalStorage}
-        setSelectedThirdPartyAccount={setSelectedThirdPartyAccount}
-        isTheSameThirdPartyAccount={isTheSameThirdPartyAccount}
-        selectedThirdPartyAccount={selectedThirdPartyAccount}
-        accounts={accounts}
-        setThirdPartyAccountsInfo={setThirdPartyAccountsInfo}
-        deleteThirdParty={deleteThirdParty}
-        setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
-        setThirdPartyProviders={setThirdPartyProviders}
-        providers={providers}
-        removeItem={removeItem}
-        newPath={newPath}
-        basePath={basePath}
-        isErrorPath={isErrorPath}
-        filesSelectorSettings={filesSelectorSettings}
-        setBasePath={setBasePath}
-        toDefault={toDefault}
-        setNewPath={setNewPath}
-        onSelectFolder={onSelectFolder}
-        isDisabled={isModuleDisabled}
-        {...(selectedFolder && { id: selectedFolder })}
-        withoutInitPath={!selectedFolder}
-        isError={isError}
-        buttonSize={buttonSize}
-        isSelectFolder
-        dataTestId="manual_backup"
-      />
-
-      {connectedThirdPartyAccount?.id && isTheSameThirdPartyAccount ? (
-        <Button
-          primary
-          size={buttonSize}
-          onClick={handleMakeCopy}
-          label={t("Common:CreateCopy")}
-          isDisabled={isModuleDisabled || selectedFolder === ""}
-          testId="third_party_create_copy_button"
+    <>
+      <div
+        data-testid="third-party-module"
+        className={classNames(
+          styles.manualBackupThirdPartyModule,
+          "manual-backup_third-party-module",
+        )}
+      >
+        <DirectThirdPartyConnection
+          checkCreating={checkCreating}
+          openConnectWindow={openConnectWindow}
+          connectDialogVisible={connectDialogVisible}
+          deleteThirdPartyDialogVisible={deleteThirdPartyDialogVisible}
+          connectedThirdPartyAccount={connectedThirdPartyAccount}
+          setConnectDialogVisible={setConnectDialogVisible}
+          setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
+          clearLocalStorage={clearLocalStorage}
+          setSelectedThirdPartyAccount={setSelectedThirdPartyAccount}
+          isTheSameThirdPartyAccount={isTheSameThirdPartyAccount}
+          selectedThirdPartyAccount={selectedThirdPartyAccount}
+          accounts={accounts}
+          setThirdPartyAccountsInfo={setThirdPartyAccountsInfo}
+          deleteThirdParty={deleteThirdParty}
+          setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
+          setThirdPartyProviders={setThirdPartyProviders}
+          providers={providers}
+          removeItem={removeItem}
+          newPath={newPath}
+          basePath={basePath}
+          isErrorPath={isErrorPath}
+          filesSelectorSettings={filesSelectorSettings}
+          setBasePath={setBasePath}
+          toDefault={toDefault}
+          setNewPath={setNewPath}
+          onSelectFolder={onSelectFolder}
+          isDisabled={isModuleDisabled}
+          {...(selectedFolder && { id: selectedFolder })}
+          withoutInitPath={!selectedFolder}
+          isError={isError}
+          buttonSize={buttonSize}
+          isSelectFolder
+          dataTestId="manual_backup"
         />
-      ) : null}
-    </div>
+
+        {connectedThirdPartyAccount?.id && isTheSameThirdPartyAccount ? (
+          <Button
+            primary
+            size={buttonSize}
+            onClick={handleMakeCopy}
+            label={t("Common:CreateCopy")}
+            isDisabled={isModuleDisabled || selectedFolder === ""}
+            testId="third_party_create_copy_button"
+          />
+        ) : null}
+      </div>
+      <NoteComponent isVisible={isBackupPaid} />
+    </>
   );
 };
 

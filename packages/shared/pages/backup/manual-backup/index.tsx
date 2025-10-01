@@ -63,6 +63,7 @@ import {
 } from "./ManualBackup.constants";
 import styles from "./ManualBackup.module.scss";
 import { combineUrl } from "../../../utils/combineUrl";
+import NoteComponent from "../sub-components/NoteComponent";
 
 const getPaymentError = (
   t: TFunction,
@@ -180,6 +181,7 @@ const ManualBackup = ({
   walletCustomerEmail,
   isThirdPartyAvailable,
   backupServicePrice,
+  isBackupPaid,
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -438,42 +440,45 @@ const ManualBackup = ({
             {t("Common:TemporaryStorageDescription")}
           </Text>
           {isCheckedTemporaryStorage ? (
-            <div
-              className={classNames(
-                styles.manualBackupButtons,
-                "manual-backup_buttons",
-              )}
-            >
-              <Button
-                id="create-button"
-                label={t("Common:Create")}
-                onClick={onMakeTemporaryBackup}
-                primary
-                isDisabled={mainDisabled}
-                size={buttonSize}
-                testId="create_temporary_backup_button"
-              />
-              {temporaryLink && temporaryLink.length > 0 && isMaxProgress ? (
+            <>
+              <div
+                className={classNames(
+                  styles.manualBackupButtons,
+                  "manual-backup_buttons",
+                )}
+              >
                 <Button
-                  id="download-copy"
-                  label={t("Common:DownloadCopy")}
-                  onClick={onClickDownloadBackup}
-                  isDisabled={pageIsDisabled}
+                  id="create-button"
+                  label={t("Common:Create")}
+                  onClick={onMakeTemporaryBackup}
+                  primary
+                  isDisabled={mainDisabled}
                   size={buttonSize}
-                  style={{ marginInlineStart: "8px" }}
-                  testId="download_temporary_copy_button"
+                  testId="create_temporary_backup_button"
                 />
-              ) : null}
-              {!isMaxProgress ? (
-                <Button
-                  label={`${t("Common:CopyOperation")} ...`}
-                  isDisabled
-                  size={buttonSize}
-                  style={{ marginInlineStart: "8px" }}
-                  testId="copy_temporary_operation_button"
-                />
-              ) : null}
-            </div>
+                {temporaryLink && temporaryLink.length > 0 && isMaxProgress ? (
+                  <Button
+                    id="download-copy"
+                    label={t("Common:DownloadCopy")}
+                    onClick={onClickDownloadBackup}
+                    isDisabled={pageIsDisabled}
+                    size={buttonSize}
+                    style={{ marginInlineStart: "8px" }}
+                    testId="download_temporary_copy_button"
+                  />
+                ) : null}
+                {!isMaxProgress ? (
+                  <Button
+                    label={`${t("Common:CopyOperation")} ...`}
+                    isDisabled
+                    size={buttonSize}
+                    style={{ marginInlineStart: "8px" }}
+                    testId="copy_temporary_operation_button"
+                  />
+                ) : null}
+              </div>
+              <NoteComponent isVisible={isBackupPaid} />
+            </>
           ) : null}
         </div>
       </div>
@@ -515,6 +520,7 @@ const ManualBackup = ({
             {...commonModulesProps}
             currentDeviceType={currentDeviceType}
             maxWidth={maxWidth}
+            isBackupPaid={isBackupPaid}
           />
         ) : null}
       </div>
@@ -565,6 +571,7 @@ const ManualBackup = ({
             setSelectedThirdPartyAccount={setSelectedThirdPartyAccount}
             setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
             setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
+            isBackupPaid={isBackupPaid}
             {...commonModulesProps}
           />
         ) : null}
@@ -608,6 +615,7 @@ const ManualBackup = ({
             onMakeCopy={onMakeCopy}
             buttonSize={buttonSize}
             isThirdPartyAvailable={isThirdPartyAvailable ?? true}
+            isBackupPaid={isBackupPaid}
           />
         ) : null}
       </div>

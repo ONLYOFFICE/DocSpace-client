@@ -3,7 +3,7 @@
   "content": "Remove the unnecessary files or <1>click here</1> to upgrade your tariff plan.",
   "content_en_sha1_hash": "cdeb38f2a17c458e5fc316eb9262594e8c76ff82",
   "created_at": "2025-05-19T21:30:54.117Z",
-  "updated_at": "2025-05-24T08:03:43.213Z",
+  "updated_at": "2025-10-01T08:28:21.891Z",
   "comment": {
     "text": "This translation key is used for a button or link that prompts users to remove unnecessary files or upgrade their tariff plan. The text will appear on a screen where user quotas are being managed, encouraging users to take action to manage their files or change their plan.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 135,
+      "line_number": 136,
       "context": "});\n \n return (\n <Trans\n t={t}\n i18nKey=\"RemoveFilesOrClickToUpgrade\"\n components={{\n 1: (\n <Link\n fontSize=\"12px\"\n fontWeight=\"400\"",
       "module": "/packages/client"
     }

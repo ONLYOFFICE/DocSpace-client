@@ -229,7 +229,10 @@ export type TOptSocket = {
  * Each callback can have specific parameters and a return type, which are defined for each event.
  */
 export type TListenEventCallbackMap = {
-  [SocketEvents.LogoutSession]: (loginEventId: unknown) => void;
+  [SocketEvents.LogoutSession]: (
+    loginEventId: unknown,
+    redirectUrl: string,
+  ) => void;
   [SocketEvents.ModifyFolder]: (data?: TOptSocket) => void;
   [SocketEvents.ModifyRoom]: (data: TOptSocket) => void;
   [SocketEvents.UpdateHistory]: (data: {

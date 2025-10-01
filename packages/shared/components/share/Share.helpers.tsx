@@ -569,8 +569,6 @@ export const getAccessDescription = (
   access: ShareAccessRights,
   t: TFunction,
 ) => {
-  console.log({ file, access });
-
   return (
     match({ fileType: file.fileType, access, isForm: file.isForm })
       // Document

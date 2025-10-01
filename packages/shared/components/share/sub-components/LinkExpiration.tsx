@@ -38,7 +38,6 @@ import ExpiredComboBox from "./ExpiredComboBox";
 export interface LinkExpirationProps {
   link: TFileLink;
   isLoaded: boolean;
-  isRoomsLink: boolean;
   isArchiveFolder: boolean;
 
   t: TTranslation;
@@ -53,7 +52,6 @@ export const LinkExpiration: FC<LinkExpirationProps> = ({
   t,
   link,
   isLoaded,
-  isRoomsLink,
   isArchiveFolder,
   changeExpirationOption,
   removedExpiredLink,
@@ -76,7 +74,6 @@ export const LinkExpiration: FC<LinkExpirationProps> = ({
       link={link}
       changeExpirationOption={changeExpirationOption}
       isDisabled={isLoaded || isArchiveFolder}
-      isRoomsLink={isRoomsLink}
       removedExpiredLink={removedExpiredLink}
     />
   );

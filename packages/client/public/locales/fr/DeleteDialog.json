@@ -5,8 +5,5 @@
   "DeleteGroupTitle": "Supprimer le groupe",
   "DeleteTemplate": "Voulez-vous vraiment supprimer le modèle de salle <1>«{{templateName}}»</1> ? Le modèle ne peut pas être restauré.",
   "DeleteTemplates": "Voulez-vous vraiment supprimer les modèles de salle sélectionnés ? Ils ne peuvent pas être restaurés.",
-  "FileDeletedAfter": "Le fichier sera définitivement supprimé dans les 30 jours.",
-  "UnsubscribeButton": "Se désabonner",
-  "UnsubscribeNote": "Êtes-vous sûr de vouloir vous désabonner des éléments sélectionnés dans la liste ?",
-  "UnsubscribeTitle": "Confirmation de désabonnement"
+  "FileDeletedAfter": "Le fichier sera définitivement supprimé dans les 30 jours."
 }

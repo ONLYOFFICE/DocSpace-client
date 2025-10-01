@@ -5,8 +5,5 @@
   "DeleteGroupTitle": "Grubu sil",
   "DeleteTemplate": "<1>«{{templateName}}»</1> adlı şablon odayı silmek istediğinize emin misiniz? Şablon geri yüklenemez.",
   "DeleteTemplates": "Seçilen oda şablonlarını silmek istediğinize emin misiniz? Bunlar geri yüklenemezler.",
-  "FileDeletedAfter": "Dosya 30 gün içinde kalıcı olarak silinecek.",
-  "UnsubscribeButton": "Abonelikten çık",
-  "UnsubscribeNote": "Listeden seçilen öğelerin aboneliğinden çıkmak istediğinizden emin misiniz?",
-  "UnsubscribeTitle": "Abonelikten çıkma onayı"
+  "FileDeletedAfter": "Dosya 30 gün içinde kalıcı olarak silinecek."
 }

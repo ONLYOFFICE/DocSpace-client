@@ -5,8 +5,5 @@
   "DeleteGroupTitle": "Eliminar grupo",
   "DeleteTemplate": "¿Realmente desea eliminar la sala de plantilla <1>«{{templateName}}»</1>? La plantilla no se podrá restaurar.",
   "DeleteTemplates": "¿Realmente desea eliminar pas plantillas de sala seleccionadas? No se podrán resaturar.",
-  "FileDeletedAfter": "El archivo se eliminará definitivamente dentro de 30 días.",
-  "UnsubscribeButton": "Cancelar suscripción",
-  "UnsubscribeNote": "¿Está seguro de que quiere cancelar la suscripción a los elementos seleccionados de la lista?",
-  "UnsubscribeTitle": "Confirmación de anulación de suscripción"
+  "FileDeletedAfter": "El archivo se eliminará definitivamente dentro de 30 días."
 }

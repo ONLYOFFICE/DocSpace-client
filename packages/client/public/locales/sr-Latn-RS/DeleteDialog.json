@@ -5,8 +5,5 @@
   "DeleteGroupTitle": "Obriši grupu",
   "DeleteTemplate": "Da li zaista želite da obrišete šablon sobe <1>«{{templateName}}»</1>? Šablon se ne može vratiti.",
   "DeleteTemplates": "Da li zaista želite da obrišete izabrane šablone soba? Oni se ne mogu vratiti.",
-  "FileDeletedAfter": "Datoteka će biti trajno obrisana za 30 dana.",
-  "UnsubscribeButton": "Otkaži pretplatu",
-  "UnsubscribeNote": "Da li ste sigurni da želite da otkažete pretplatu odabranih stavki sa liste?",
-  "UnsubscribeTitle": "Konfirmacija za otkazivanje pretplate"
+  "FileDeletedAfter": "Datoteka će biti trajno obrisana za 30 dana."
 }

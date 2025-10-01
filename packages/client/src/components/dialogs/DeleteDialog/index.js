@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
@@ -74,19 +74,13 @@ const DeleteDialogComponent = (props) => {
   } = props;
   const [isChecked, setIsChecked] = useState(false);
 
-  const selection = [];
-  let i = 0;
-
-  while (selectionProps.length !== i) {
-    const item = selectionProps[i];
-
-    if (!item?.isEditing) {
-      // if (item?.access === 0 || item?.access === 1 || unsubscribe) {
-      selection.push(item);
-      // }
-    }
-    i++;
-  }
+  const selection = useMemo(
+    () =>
+      unsubscribe
+        ? selectionProps
+        : selectionProps.filter((item) => !item?.isEditing),
+    [selectionProps, unsubscribe],
+  );
 
   const isTemplate = selection[0]?.isTemplate;
 
@@ -188,50 +182,63 @@ const DeleteDialogComponent = (props) => {
     };
   }, [onKeyUp]);
 
-  const moveToTrashTitle = () => {
-    if (unsubscribe) return t("UnsubscribeTitle");
+  const getAccessButtonLabel = () => {
+    if (isTemplate) {
+      return t("Common:Delete");
+    }
+
+    if (isRoomDelete) {
+      return t("Common:DeletePermanently");
+    }
+
+    if (isRecycleBinFolder) return t("EmptyTrashDialog:DeleteForeverButton");
+
+    if (isPrivacyFolder || selection[0]?.providerKey)
+      return t("Common:OKButton");
+
+    if (unsubscribe) return t("Common:Remove");
+
+    return t("Common:MoveToSection", {
+      sectionName: t("Common:TrashSection"),
+    });
+  };
+
+  const getDialogTitle = () => {
+    if (isTemplate) {
+      return `${t("Files:DeleteTemplate")}?`;
+    }
+
+    if (isRoomDelete) {
+      return t("DeleteRoomTitle");
+    }
+
+    if (isRecycleBinFolder) return t("EmptyTrashDialog:DeleteForeverTitle");
+
+    if (isPrivacyFolder || selection[0]?.providerKey)
+      return t("Common:Confirmation");
+
+    if (unsubscribe) return t("Common:RemoveFromList");
+
     return t("Common:SectionMoveConfirmation", {
       sectionName: t("Common:TrashSection"),
     });
   };
 
-  const title = isTemplate
-    ? `${t("Files:DeleteTemplate")}?`
-    : isRoomDelete
-      ? t("DeleteRoomTitle")
-      : isRecycleBinFolder
-        ? t("EmptyTrashDialog:DeleteForeverTitle")
-        : isPrivacyFolder || selection[0]?.providerKey
-          ? t("Common:Confirmation")
-          : moveToTrashTitle();
+  const noteText = getDialogContent(
+    t,
+    selection,
+    isTemplate,
+    isRoomDelete,
+    isRecycleBinFolder,
+    isPersonalRoom,
+    isRoom,
+    isTemplatesFolder,
+    isSharedWithMeFolderRoot,
+    unsubscribe,
+  );
 
-  const noteText = unsubscribe
-    ? t("UnsubscribeNote")
-    : getDialogContent(
-        t,
-        selection,
-        isTemplate,
-        isRoomDelete,
-        isRecycleBinFolder,
-        isPersonalRoom,
-        isRoom,
-        isTemplatesFolder,
-        isSharedWithMeFolderRoot,
-      );
-
-  const accessButtonLabel = isTemplate
-    ? t("Common:Delete")
-    : isRoomDelete
-      ? t("Common:DeletePermanently")
-      : isRecycleBinFolder
-        ? t("EmptyTrashDialog:DeleteForeverButton")
-        : isPrivacyFolder || selection[0]?.providerKey
-          ? t("Common:OKButton")
-          : unsubscribe
-            ? t("UnsubscribeButton")
-            : t("Common:MoveToSection", {
-                sectionName: t("Common:TrashSection"),
-              });
+  const title = getDialogTitle();
+  const accessButtonLabel = getAccessButtonLabel();
 
   const isDisabledAccessButton =
     isRoomDelete || isTemplate ? !isChecked : !selection.length;

@@ -5,8 +5,5 @@
   "DeleteGroupTitle": "Fshini grupin",
   "DeleteTemplate": "A e dëshironi vërtet të fshani dhomën e modelit <1>«{{templateName}}»</1>? Modeli nuk mund të rivendoset.",
   "DeleteTemplates": "A ju vërtetë doni të fshani qendrueshmëritë e dhoma të zgjedhura? Ato nuk mund të rivendosen.",
-  "FileDeletedAfter": "Skedari do të fshihet përgjithmonë brenda 30 ditësh.",
-  "UnsubscribeButton": "Çregjistrohuni",
-  "UnsubscribeNote": "A jeni të sigurt që dëshironi të çregjistroheni nga artikujt e selektuar nga lista?",
-  "UnsubscribeTitle": "Konfirmimi i çregjistrimit"
+  "FileDeletedAfter": "Skedari do të fshihet përgjithmonë brenda 30 ditësh."
 }

@@ -5,8 +5,5 @@
   "DeleteGroupTitle": "Excluir grupo",
   "DeleteTemplate": "Você realmente deseja excluir a sala modelo <1>«{{templateName}}»</1>? O modelo não pode ser restaurado.",
   "DeleteTemplates": "Você realmente deseja excluir os modelos de sala selecionados? Eles não podem ser restaurados.",
-  "FileDeletedAfter": "O arquivo será excluído permanentemente em 30 dias.",
-  "UnsubscribeButton": "Cancelar assinatura",
-  "UnsubscribeNote": "Você tem certeza de que deseja cancelar a inscrição dos itens selecionados da lista?",
-  "UnsubscribeTitle": "Cancelar a confirmação da inscrição"
+  "FileDeletedAfter": "O arquivo será excluído permanentemente em 30 dias."
 }

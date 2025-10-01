@@ -23,7 +23,6 @@
   "FoldersPermanentlyDeleted": "The folders will be permanently removed from the Trash.",
   "ItemsDeletedAfter": "These items will be permanently deleted in 30 days.",
   "ItemsPermanentlyDeleted": "These items will be permanently removed from the Trash.",
-  "UnsubscribeButton": "Unsubscribe",
-  "UnsubscribeNote": "Are you sure you want to unsubscribe from the selected items from the list?",
-  "UnsubscribeTitle": "Unsubscribe confirmation"
+  "removeFromListDescription": "You are about to remove <1>{{title}}</1> from the list. Are you sure you want to continue?",
+  "removeFromListDescriptionPlural": "You are about to remove <1>items ({{count}})</1> from the list. Are you sure you want to continue? "
 }

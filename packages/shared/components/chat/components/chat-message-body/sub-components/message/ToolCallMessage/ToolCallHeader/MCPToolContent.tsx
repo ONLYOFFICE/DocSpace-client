@@ -26,37 +26,46 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import WordIcon from "PUBLIC_DIR/images/icons/16/word.svg?url";
-import CellIcon from "PUBLIC_DIR/images/icons/16/cell.svg?url";
-import CellCommonIcon from "PUBLIC_DIR/images/icons/16/cellCommon.svg?url";
-import TextIcon from "PUBLIC_DIR/images/icons/16/text.svg?url";
-import PdfIcon from "PUBLIC_DIR/images/icons/16/pdf.svg?url";
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-export const getRootDomain = (url: string) => {
-  try {
-    const hostname = new URL(url).hostname;
+import type { TToolCallContent } from "../../../../../../../../api/ai/types";
+import { useTheme } from "../../../../../../../../hooks/useTheme";
+import { getServerIcon } from "../../../../../../../../utils";
+import { ServerType } from "../../../../../../../../api/ai/enums";
+import { Text } from "../../../../../../../text";
+import styles from "../../../../ChatMessageBody.module.scss";
 
-    return hostname.split(".").slice(-2).join(".");
-  } catch {
-    return "";
-  }
-};
+export const MCPToolContent = ({ content }: { content: TToolCallContent }) => {
+  const { t } = useTranslation(["Common"]);
+  const { isBase } = useTheme();
 
-const knowledgeIcons: Record<string, string> = {
-  ".docx": WordIcon,
-  ".xlsx": CellIcon,
-  ".csv": CellCommonIcon,
-  ".txt": TextIcon,
-  ".pdf": PdfIcon,
-};
+  const serverIcon = getServerIcon(
+    content.mcpServerInfo?.serverType || ServerType.Custom,
+    isBase,
+  );
 
-const getExtension = (fileName: string) => {
-  const idx = fileName.lastIndexOf(".");
-  return idx !== -1 ? fileName.slice(idx) : "";
-};
-
-export const getKnowledgeDocumentIconURLByFileName = (fileName: string) => {
-  const extension = getExtension(fileName);
-
-  return knowledgeIcons[extension] || "";
+  return (
+    <>
+      <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
+        {t("Common:ToolCallExecuted")}:
+      </Text>
+      {serverIcon ? (
+        <img
+          src={serverIcon}
+          width="16px"
+          height="16px"
+          alt="mcp server logo"
+        />
+      ) : null}
+      <Text
+        fontSize="13px"
+        lineHeight="15px"
+        fontWeight={600}
+        className={styles.toolName}
+      >
+        {content.name}
+      </Text>
+    </>
+  );
 };

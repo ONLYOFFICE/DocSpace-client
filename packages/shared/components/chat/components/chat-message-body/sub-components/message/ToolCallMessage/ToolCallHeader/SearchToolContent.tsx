@@ -26,37 +26,48 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import WordIcon from "PUBLIC_DIR/images/icons/16/word.svg?url";
-import CellIcon from "PUBLIC_DIR/images/icons/16/cell.svg?url";
-import CellCommonIcon from "PUBLIC_DIR/images/icons/16/cellCommon.svg?url";
-import TextIcon from "PUBLIC_DIR/images/icons/16/text.svg?url";
-import PdfIcon from "PUBLIC_DIR/images/icons/16/pdf.svg?url";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
 
-export const getRootDomain = (url: string) => {
-  try {
-    const hostname = new URL(url).hostname;
+import DocumentsIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
+import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 
-    return hostname.split(".").slice(-2).join(".");
-  } catch {
-    return "";
-  }
-};
+import type { TToolCallContent } from "../../../../../../../../api/ai/types";
+import { useMessageStore } from "../../../../../../store/messageStore";
+import styles from "../../../../ChatMessageBody.module.scss";
+import { Text } from "../../../../../../../text";
 
-const knowledgeIcons: Record<string, string> = {
-  ".docx": WordIcon,
-  ".xlsx": CellIcon,
-  ".csv": CellCommonIcon,
-  ".txt": TextIcon,
-  ".pdf": PdfIcon,
-};
+export const SearchToolContent = ({
+  content,
+}: {
+  content: TToolCallContent;
+}) => {
+  const { t } = useTranslation(["Common"]);
+  const { knowledgeSearchToolName, webSearchToolName, webCrawlingToolName } =
+    useMessageStore();
 
-const getExtension = (fileName: string) => {
-  const idx = fileName.lastIndexOf(".");
-  return idx !== -1 ? fileName.slice(idx) : "";
-};
+  const searchToolsTitles: Record<string, string> = {
+    [knowledgeSearchToolName]: t("Common:KnowledgeSearch"),
+    [webSearchToolName]: t("Common:WebSearch"),
+    [webCrawlingToolName]: t("Common:WebCrawling"),
+  };
 
-export const getKnowledgeDocumentIconURLByFileName = (fileName: string) => {
-  const extension = getExtension(fileName);
+  const searchToolIcons: Record<string, string> = {
+    [knowledgeSearchToolName]: DocumentsIcon,
+    [webSearchToolName]: UniverseIcon,
+    [webCrawlingToolName]: UniverseIcon,
+  };
 
-  return knowledgeIcons[extension] || "";
+  const toolName = searchToolsTitles[content.name] || content.name;
+  const searchToolIcon = searchToolIcons[content.name];
+
+  return (
+    <>
+      <ReactSVG className={styles.searchToolIcon} src={searchToolIcon} />
+      <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
+        {toolName}
+      </Text>
+    </>
+  );
 };

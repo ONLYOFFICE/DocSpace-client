@@ -79,7 +79,8 @@ export type TToolCallResultSourceData = {
   title: string;
   text: string;
   fileId?: number;
-  url?: string;
+  url?: string; // external page url
+  relativeUrl?: string; // knowledge doc url
   faviconUrl?: string;
 };
 

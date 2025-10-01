@@ -29,25 +29,20 @@
 import React, { useId } from "react";
 import { useTranslation } from "react-i18next";
 
-import styles from "../../../ChatMessageBody.module.scss";
-import { Text } from "../../../../../../text";
 import type {
   TToolCallContent,
   TToolCallResultSourceData,
-} from "../../../../../../../api/ai/types";
-import { formatJsonWithMarkdown } from "../../../../../utils";
+} from "../../../../../../../../api/ai/types";
+import { Heading, HeadingLevel } from "../../../../../../../heading";
+import { Link, LinkTarget } from "../../../../../../../link";
+import { Text } from "../../../../../../../text";
+import { Tooltip } from "../../../../../../../tooltip";
 
-import MarkdownField from "../Markdown";
-import type { ToolCallPlacement } from "./ToolCall.enum";
-import { Heading, HeadingLevel } from "../../../../../../heading";
-import { Link, LinkTarget } from "../../../../../../link";
+import styles from "../../../../ChatMessageBody.module.scss";
 import {
-  getDoceditorUrl,
   getKnowledgeDocumentIconURLByFileName,
   getRootDomain,
-} from "./ToolCall.utils";
-import { useMessageStore } from "../../../../../store/messageStore";
-import { Tooltip } from "../../../../../../tooltip";
+} from "../ToolCall.utils";
 
 const SourceItem = ({ source }: { source: TToolCallResultSourceData }) => {
   const tooltipId = useId();
@@ -55,9 +50,7 @@ const SourceItem = ({ source }: { source: TToolCallResultSourceData }) => {
   const isKnowledgeSource = !!source.fileId;
 
   const linkHref =
-    isKnowledgeSource && source.fileId
-      ? getDoceditorUrl(source.fileId)
-      : source.url;
+    isKnowledgeSource && source.fileId ? source.relativeUrl : source.url;
 
   const iconUrl = isKnowledgeSource
     ? getKnowledgeDocumentIconURLByFileName(source.title)
@@ -116,7 +109,7 @@ const SourceItem = ({ source }: { source: TToolCallResultSourceData }) => {
   );
 };
 
-const SourceView = ({ content }: { content: TToolCallContent }) => {
+export const SourceView = ({ content }: { content: TToolCallContent }) => {
   const { t } = useTranslation("Common");
 
   if (!content.result) return null;
@@ -151,89 +144,6 @@ const SourceView = ({ content }: { content: TToolCallContent }) => {
           />
         ))}
       </div>
-    </div>
-  );
-};
-
-const CodeView = ({
-  content,
-  placement,
-}: {
-  content: TToolCallContent;
-  placement: ToolCallPlacement;
-}) => {
-  const { t } = useTranslation(["Common"]);
-
-  const getResult = () => {
-    if (content.result && "content" in content.result) {
-      return (content.result?.content as Record<string, unknown>[])?.[0]
-        .text as string;
-    }
-
-    return "";
-  };
-
-  const result = getResult();
-
-  let isJson = false;
-
-  try {
-    JSON.parse(result);
-    isJson = true;
-  } catch {
-    isJson = false;
-  }
-
-  const showResult = placement === "message" && content.result;
-
-  return (
-    <>
-      <div className={styles.toolCallCodeViewItem}>
-        <Text fontSize="15px" lineHeight="16px" fontWeight={600}>
-          {t("Common:ToolCallArg")}
-        </Text>
-        <MarkdownField
-          chatMessage={formatJsonWithMarkdown(content.arguments)}
-        />
-      </div>
-      {showResult ? (
-        <div className={styles.toolCallCodeViewItem}>
-          <Text fontSize="15px" lineHeight="16px" fontWeight={600}>
-            {t("Common:ToolCallResult")}
-          </Text>
-          <MarkdownField
-            chatMessage={formatJsonWithMarkdown(
-              isJson ? JSON.parse(result) : result,
-            )}
-          />
-        </div>
-      ) : null}
-    </>
-  );
-};
-
-type ToolCallBodyProps = {
-  content: TToolCallContent;
-  placement: ToolCallPlacement;
-};
-
-export const ToolCallBody = ({ content, placement }: ToolCallBodyProps) => {
-  const { knowledgeSearchToolName, webSearchToolName, webCrawlingToolName } =
-    useMessageStore();
-
-  const isSourceView = [
-    knowledgeSearchToolName,
-    webSearchToolName,
-    webCrawlingToolName,
-  ].includes(content.name);
-
-  return (
-    <div className={styles.toolCallBody}>
-      {isSourceView ? (
-        <SourceView content={content} />
-      ) : (
-        <CodeView content={content} placement={placement} />
-      )}
     </div>
   );
 };

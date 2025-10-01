@@ -28,25 +28,20 @@
 
 import React from "react";
 import classNames from "classnames";
-import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import { observer } from "mobx-react";
 
 import ToolFinish from "PUBLIC_DIR/images/tool.finish.svg?url";
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg?url";
-import DocumentsIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
-import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 
-import { Text } from "../../../../../../text";
-import { Loader, LoaderTypes } from "../../../../../../loader";
-import { useTheme } from "../../../../../../../hooks/useTheme";
-import { getServerIcon } from "../../../../../../../utils";
-import { ServerType } from "../../../../../../../api/ai/enums";
-import type { TToolCallContent } from "../../../../../../../api/ai/types";
+import { Loader, LoaderTypes } from "../../../../../../../loader";
+import type { TToolCallContent } from "../../../../../../../../api/ai/types";
 
-import styles from "../../../ChatMessageBody.module.scss";
-import { ToolCallPlacement, ToolCallStatus } from "./ToolCall.enum";
-import { useMessageStore } from "../../../../../store/messageStore";
+import styles from "../../../../ChatMessageBody.module.scss";
+import { ToolCallPlacement, ToolCallStatus } from "../ToolCall.enum";
+import { useMessageStore } from "../../../../../../store/messageStore";
+import { SearchToolContent } from "./SearchToolContent";
+import { MCPToolContent } from "./MCPToolContent";
 
 type ToolCallHeaderProps = {
   content: TToolCallContent;
@@ -55,70 +50,6 @@ type ToolCallHeaderProps = {
   status: ToolCallStatus;
   placement: ToolCallPlacement;
   expandable?: boolean;
-};
-
-const SearchToolContent = ({ content }: { content: TToolCallContent }) => {
-  const { t } = useTranslation(["Common"]);
-  const { knowledgeSearchToolName, webSearchToolName, webCrawlingToolName } =
-    useMessageStore();
-
-  const searchToolsTitles: Record<string, string> = {
-    [knowledgeSearchToolName]: t("Common:KnowledgeSearch"),
-    [webSearchToolName]: t("Common:WebSearch"),
-    [webCrawlingToolName]: t("Common:WebCrawling"),
-  };
-
-  const searchToolIcons: Record<string, string> = {
-    [knowledgeSearchToolName]: DocumentsIcon,
-    [webSearchToolName]: UniverseIcon,
-    [webCrawlingToolName]: UniverseIcon,
-  };
-
-  const toolName = searchToolsTitles[content.name] || content.name;
-  const searchToolIcon = searchToolIcons[content.name];
-
-  return (
-    <>
-      <ReactSVG className={styles.searchToolIcon} src={searchToolIcon} />
-      <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
-        {toolName}
-      </Text>
-    </>
-  );
-};
-
-const MCPToolContent = ({ content }: { content: TToolCallContent }) => {
-  const { t } = useTranslation(["Common"]);
-  const { isBase } = useTheme();
-
-  const serverIcon = getServerIcon(
-    content.mcpServerInfo?.serverType || ServerType.Custom,
-    isBase,
-  );
-
-  return (
-    <>
-      <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
-        {t("Common:ToolCallExecuted")}:
-      </Text>
-      {serverIcon ? (
-        <img
-          src={serverIcon}
-          width="16px"
-          height="16px"
-          alt="mcp server logo"
-        />
-      ) : null}
-      <Text
-        fontSize="13px"
-        lineHeight="15px"
-        fontWeight={600}
-        className={styles.toolName}
-      >
-        {content.name}
-      </Text>
-    </>
-  );
 };
 
 export const ToolCallHeader = observer(

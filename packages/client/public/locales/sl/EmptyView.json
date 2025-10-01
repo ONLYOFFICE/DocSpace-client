@@ -46,5 +46,11 @@
   "UploadDevicePDFFormOptionTitle": "Naloži iz naprave",
   "UploadFromPortalTitle": "Naloži iz {{productName}}",
   "UploadPDFFormOptionDescription": "Izberi pripravljen PDF obrazec, ki je na voljo v {{productName}} in ga naloži v sobo.",
-  "VirtualDataRoomEmptyTitle": "Dobrodošli v virtualni podatkovni sobi"
+  "VirtualDataRoomEmptyTitle": "Dobrodošli v virtualni podatkovni sobi",
+  "EmptyFavoritesDescription": "Označite datoteke in mape, da jih boste lahko zlahka dostopali in imeli na dosegu roke.",
+  "EmptyFavoritesTitle": "Še ni priljubljenih.",
+  "EmptyRecentDescription": "Vse nedavne datoteke, odprte v portalu, se znajdejo v tem razdelku. Datoteke so shranjene 90 dni.",
+  "EmptyShareDescription": "Tukaj boste našli datoteke in mape, ki jih je z vami delili drugi člani {{productName}}. Vaše datoteke in vsebina sobe tukaj niso prikazane.",
+  "EmptyShareTitle": "Še ni skupnih elementov.",
+  "NoRecentFilesHereYet": "Še ni nobenih nedavnih datotek tukaj."
 }

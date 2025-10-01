@@ -46,5 +46,11 @@
   "UploadDevicePDFFormOptionTitle": "Tải lên từ thiết bị",
   "UploadFromPortalTitle": "Tải lên từ {{productName}}",
   "UploadPDFFormOptionDescription": "Chọn một biểu mẫu PDF sẵn có trong {{productName}} và tải nó lên phòng.",
-  "VirtualDataRoomEmptyTitle": "Chào mừng bạn đến với Phòng Dữ liệu Ảo"
+  "VirtualDataRoomEmptyTitle": "Chào mừng bạn đến với Phòng Dữ liệu Ảo",
+  "EmptyFavoritesDescription": "Đánh dấu sao vào các tệp và thư mục để giữ chúng dễ dàng truy cập và luôn trong tầm tay.",
+  "EmptyFavoritesTitle": "Chưa có mục yêu thích nào cả",
+  "EmptyRecentDescription": "Tất cả các tệp gần đây được mở trong cổng thông tin sẽ xuất hiện ở phần này. Các tệp được lưu trữ trong 90 ngày.",
+  "EmptyShareDescription": "Đây là nơi bạn sẽ tìm thấy các tệp và thư mục mà các thành viên {{productName}} khác đã chia sẻ với bạn. Nội dung tệp và phòng của riêng bạn sẽ không hiển thị ở đây.",
+  "EmptyShareTitle": "Hiện tại chưa có mục nào được chia sẻ.",
+  "NoRecentFilesHereYet": "Chưa có tệp nào gần đây cả."
 }

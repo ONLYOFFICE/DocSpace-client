@@ -46,5 +46,11 @@
   "UploadDevicePDFFormOptionTitle": "Передати з пристрою",
   "UploadFromPortalTitle": "Передати з {{productName}}",
   "UploadPDFFormOptionDescription": "Виберіть готову PDF-форму, доступну в {{productName}}, і передайте її до кімнати.",
-  "VirtualDataRoomEmptyTitle": "Ласкаво просимо до віртуальної кімнати даних"
+  "VirtualDataRoomEmptyTitle": "Ласкаво просимо до віртуальної кімнати даних",
+  "EmptyFavoritesDescription": "Закладайте файли та папки, щоб тримати їх у легкому доступі та під рукою.",
+  "EmptyFavoritesTitle": "Поки що немає улюблених",
+  "EmptyRecentDescription": "Всі останні файли, відкриті в порталі, потрапляють до цього розділу. Файли зберігаються протягом 90 днів.",
+  "EmptyShareDescription": "Тут ви знайдете файли та папки, якими інші члени {{productName}} поділилися з вами. Ваші власні файли та вміст кімнати тут не відображаються.",
+  "EmptyShareTitle": "Поки що немає спільних елементів.",
+  "NoRecentFilesHereYet": "Тут ще немає нещодавніх файлів."
 }

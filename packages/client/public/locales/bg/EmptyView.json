@@ -46,5 +46,11 @@
   "UploadDevicePDFFormOptionTitle": "Качете от устройство",
   "UploadFromPortalTitle": "Качете от {{productName}}",
   "UploadPDFFormOptionDescription": "Изберете готов PDF формуляр, наличен в {{productName}}, и го качете в стаята.",
-  "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни"
+  "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни",
+  "EmptyFavoritesDescription": "Задайте звездички на файлове и папки, за да ги направите лесно достъпни и под ръка.",
+  "EmptyFavoritesTitle": "Още няма любими",
+  "EmptyRecentDescription": "Всички последни файлове, отворени в портала, се озовават в тази секция. Файловете се съхраняват за 90 дни.",
+  "EmptyShareDescription": "Тук ще намерите файлове и папки, които други членове на {{productName}} са споделили с вас. Вашите собствени файлове и съдържание на стаите не се показват тук.",
+  "EmptyShareTitle": "Още няма споделени артикули.",
+  "NoRecentFilesHereYet": "Още няма скорошни файлове тук"
 }

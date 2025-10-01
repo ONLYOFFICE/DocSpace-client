@@ -46,5 +46,11 @@
   "UploadDevicePDFFormOptionTitle": "Augšupielādēt no ierīces",
   "UploadFromPortalTitle": "Augšupielādēt no {{productName}}",
   "UploadPDFFormOptionDescription": "Izvēlieties gatavu PDF veidlapu, kas pieejama šeit: {{productName}}, un augšupielādējiet to telpā.",
-  "VirtualDataRoomEmptyTitle": "Laipni lūdzam virtuālajā datu telpā"
+  "VirtualDataRoomEmptyTitle": "Laipni lūdzam virtuālajā datu telpā",
+  "EmptyFavoritesDescription": "Noņem zvaigznītes failiem un mapēm, lai tie būtu viegli pieejami un rokas stienī.",
+  "EmptyFavoritesTitle": "Vēl nav iecienītāko.",
+  "EmptyRecentDescription": "Visi nesen atvērtie faili portālā nonāk šajā sadaļā. Faili tiek glabāti 90 dienas.",
+  "EmptyShareDescription": "Šeit jūs atradīsiet failus un mapes, kuras citi {{productName}} dalībnieki ar jums dalījušies. Jūsu pašu faili un istabenes saturs šeit neparādās.",
+  "EmptyShareTitle": "Vēl nav kopīgu vienumus.",
+  "NoRecentFilesHereYet": "Šeit vēl nav neseno failu."
 }

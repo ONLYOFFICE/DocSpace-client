@@ -46,5 +46,11 @@
   "UploadDevicePDFFormOptionTitle": "Carregar do dispositivo",
   "UploadFromPortalTitle": "Fazer upload de {{productName}}",
   "UploadPDFFormOptionDescription": "Selecione um formulário PDF pronto disponível em {{productName}} e carregue-o na sala.",
-  "VirtualDataRoomEmptyTitle": "Bem-vindo ao Data Room Virtual"
+  "VirtualDataRoomEmptyTitle": "Bem-vindo ao Data Room Virtual",
+  "EmptyFavoritesDescription": "Arquive arquivos e pastas para mantê-los facilmente acessíveis e ao seu alcance.",
+  "EmptyFavoritesTitle": "Ainda não há favoritos.",
+  "EmptyRecentDescription": "Todos os arquivos recentes abertos no portal acabam nesta seção. Os arquivos são armazenados por 90 dias.",
+  "EmptyShareDescription": "Aqui você encontrará arquivos e pastas que outros membros do {{productName}} compartilharam com você. Seus próprios arquivos e conteúdo da sala não são exibidos aqui.",
+  "EmptyShareTitle": "Ainda não existem itens compartilhados.",
+  "NoRecentFilesHereYet": "Ainda não há arquivos recentes aqui."
 }

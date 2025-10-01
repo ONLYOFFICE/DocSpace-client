@@ -46,5 +46,11 @@
   "UploadDevicePDFFormOptionTitle": "Prześlij z urządzenia",
   "UploadFromPortalTitle": "Prześlij z {{productName}}",
   "UploadPDFFormOptionDescription": "Wybierz gotowy formularz PDF dostępny w {{productName}} i prześlij go do pokoju.",
-  "VirtualDataRoomEmptyTitle": "Witaj w Wirtualnym pokoju danych"
+  "VirtualDataRoomEmptyTitle": "Witaj w Wirtualnym pokoju danych",
+  "EmptyFavoritesDescription": "Oznacz gwiazdką pliki i foldery, aby utrzymać je w łatwo dostępnym miejscu i na wyciągnięcie ręki.",
+  "EmptyFavoritesTitle": "Nie ma jeszcze ulubionych.",
+  "EmptyRecentDescription": "Wszystkie ostatnio otwierane pliki w portalu trafiają do tej sekcji. Pliki są przechowywane przez 90 dni.",
+  "EmptyShareDescription": "Tutaj znajdziesz pliki i foldery, które inni członkowie {{productName}} udostępnili Tobie. Twoje własne pliki i zawartość pokoi nie są tutaj widoczne.",
+  "EmptyShareTitle": "Nie ma jeszcze żadnych współdzielonych elementów.",
+  "NoRecentFilesHereYet": "Brak ostatnich plików tutaj jeszcze"
 }

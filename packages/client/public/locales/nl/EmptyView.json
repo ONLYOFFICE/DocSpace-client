@@ -46,5 +46,11 @@
   "UploadDevicePDFFormOptionTitle": "Uploaden vanaf apparaat",
   "UploadFromPortalTitle": "Uploaden van {{productName}}",
   "UploadPDFFormOptionDescription": "Selecteer een PDF formulier dat beschikbaar is in {{productName}} en upload het naar de kamer.",
-  "VirtualDataRoomEmptyTitle": "Welkom bij de Virtuele Data Kamer"
+  "VirtualDataRoomEmptyTitle": "Welkom bij de Virtuele Data Kamer",
+  "EmptyFavoritesDescription": "Sterren bestanden en mappen om ze gemakkelijk toegankelijk en binnen handbereik te houden.",
+  "EmptyFavoritesTitle": "Nog geen favorieten",
+  "EmptyRecentDescription": "Alle recent geopend bestanden in het portaal komen in dit gedeelte terecht. Bestanden worden 90 dagen bewaard.",
+  "EmptyShareDescription": "Hier vind je bestanden en mappen die andere {{productName}}-leden met je hebben gedeeld. Je eigen bestanden en kamerinhoud worden hier niet weergegeven.",
+  "EmptyShareTitle": "Er zijn nog geen gedeelde items.",
+  "NoRecentFilesHereYet": "Nog geen recente bestanden hier."
 }

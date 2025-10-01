@@ -46,5 +46,11 @@
   "UploadDevicePDFFormOptionTitle": "Nahrávání ze zařízení",
   "UploadFromPortalTitle": "Nahrát z {{productName}}",
   "UploadPDFFormOptionDescription": "Vyberte připravený PDF formulář dostupný v {{productName}} a nahrajte jej do místnosti.",
-  "VirtualDataRoomEmptyTitle": "Vítejte ve virtuální datové místnosti"
+  "VirtualDataRoomEmptyTitle": "Vítejte ve virtuální datové místnosti",
+  "EmptyFavoritesDescription": "Označte soubory a složky, abyste je měli snadno dostupné a na dosah ruky.",
+  "EmptyFavoritesTitle": "Ještě žádné oblíbené položky.",
+  "EmptyRecentDescription": "Všechny nedávno otevřené soubory v portálu se objeví v této sekci. Soubory jsou uloženy po dobu 90 dnů.",
+  "EmptyShareDescription": "Zde naleznete soubory a složky, které s vámi sdíleli další členové {{productName}}. Zde se nezobrazují vaše vlastní soubory a obsah místností.",
+  "EmptyShareTitle": "Zatím zde nejsou sdílené položky.",
+  "NoRecentFilesHereYet": "Zde zatím žádné nedávné soubory."
 }

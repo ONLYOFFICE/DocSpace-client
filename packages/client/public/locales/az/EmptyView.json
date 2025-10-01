@@ -46,5 +46,11 @@
   "UploadDevicePDFFormOptionTitle": "Cihazdan yükləyin",
   "UploadFromPortalTitle": "{{productName}} dan yükləyin",
   "UploadPDFFormOptionDescription": "{{productName}}-də mövcud olan hazır PDF formasını seçin və onu otağa yükləyin.",
-  "VirtualDataRoomEmptyTitle": "Virtual Məlumat Otağına xoş gəlmisiniz"
+  "VirtualDataRoomEmptyTitle": "Virtual Məlumat Otağına xoş gəlmisiniz",
+  "EmptyFavoritesDescription": "Ulduzlaq fayl və qovluqları, onlar asan əldə edilə bilən və çatdırılabilən olsunlar.",
+  "EmptyFavoritesTitle": "Hələ ki sevimli hec nə yoxdur",
+  "EmptyRecentDescription": "Bu bölməyə portalda açılan bütün son tərzələr düşür. Fayllar 90 gün ərzində saxlanılır.",
+  "EmptyShareDescription": "Burada, digər {{productName}} üzvləri ilə sizinlə paylaşdıqları faylları və qovluqları tapacaqsınız. Öz fayllarınız və otaqın məzmunu burada göstərilmir.",
+  "EmptyShareTitle": "Hələlik ortaq hesab olunan məhsul yoxdur",
+  "NoRecentFilesHereYet": "Hələlik burada yeni fayl yoxdur"
 }

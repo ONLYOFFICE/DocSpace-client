@@ -46,5 +46,11 @@
   "UploadDevicePDFFormOptionTitle": "Lataa laitteesta",
   "UploadFromPortalTitle": "Lataa {{productName}}:sta",
   "UploadPDFFormOptionDescription": "Valitse valmis PDF-lomake, joka on {{productName}}:ssa ja lataa se huoneeseen.",
-  "VirtualDataRoomEmptyTitle": "Tervetuloa Virtuaalisen datan huoneeseen."
+  "VirtualDataRoomEmptyTitle": "Tervetuloa Virtuaalisen datan huoneeseen.",
+  "EmptyFavoritesDescription": "Tähdellä voit merkitä tiedostot ja kansiot, jotta ne pysyvät helposti saatavilla ja ulottuvilla.",
+  "EmptyFavoritesTitle": "Ei suosikkeja vielä",
+  "EmptyRecentDescription": "Kaikki hiljattain avatut tiedostot portaalissa päätyvät tähän osioon. Tiedostot säilytetään 90 päivän ajan.",
+  "EmptyShareDescription": "Täältä löydät tiedostot ja kansiot, jotka muut {{productName}}-jäsenet ovat jakaneet sinulle. Omia tiedostojasi ja huoneen sisältöä ei näytetä täällä.",
+  "EmptyShareTitle": "Yhteisiä kohteita ei ole vielä.",
+  "NoRecentFilesHereYet": "Ei viimeaikaisia tiedostoja vielä täällä"
 }

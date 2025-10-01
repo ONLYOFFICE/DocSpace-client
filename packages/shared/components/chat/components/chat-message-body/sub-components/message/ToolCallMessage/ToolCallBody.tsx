@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React from "react";
+import React, { useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import styles from "../../../ChatMessageBody.module.scss";
@@ -42,10 +42,79 @@ import type { ToolCallPlacement } from "./ToolCall.enum";
 import { Heading, HeadingLevel } from "../../../../../../heading";
 import { Link, LinkTarget } from "../../../../../../link";
 import {
+  getDoceditorUrl,
   getKnowledgeDocumentIconURLByFileName,
   getRootDomain,
 } from "./ToolCall.utils";
 import { useMessageStore } from "../../../../../store/messageStore";
+import { Tooltip } from "../../../../../../tooltip";
+
+const SourceItem = ({ source }: { source: TToolCallResultSourceData }) => {
+  const tooltipId = useId();
+
+  const isKnowledgeSource = !!source.fileId;
+
+  const linkHref =
+    isKnowledgeSource && source.fileId
+      ? getDoceditorUrl(source.fileId)
+      : source.url;
+
+  const iconUrl = isKnowledgeSource
+    ? getKnowledgeDocumentIconURLByFileName(source.title)
+    : undefined; // TODO: Add when there will be solution for getting favicons
+
+  const sourceContent = isKnowledgeSource
+    ? source.text
+    : getRootDomain(source.url || "");
+
+  return (
+    <Link
+      className={styles.sourceItem}
+      href={linkHref}
+      target={LinkTarget.blank}
+      textDecoration="none"
+      truncate
+    >
+      {iconUrl ? (
+        <img src={iconUrl} alt="source icon" width={16} height={16} />
+      ) : null}
+      <Text
+        className={styles.sourceTitle}
+        fontSize="14px"
+        fontWeight={600}
+        lineHeight="20px"
+        truncate
+        title={source.title}
+      >
+        {source.title}
+      </Text>
+      {sourceContent ? (
+        <Text
+          data-tooltip-id={tooltipId}
+          className={styles.sourceContent}
+          fontSize="13px"
+          fontWeight={600}
+          lineHeight="20px"
+          truncate
+        >
+          {sourceContent}
+        </Text>
+      ) : null}
+
+      {isKnowledgeSource ? (
+        <Tooltip
+          id={tooltipId}
+          maxWidth="700px"
+          getContent={() => (
+            <Text className={styles.sourceContentTooltipText} fontSize="12px">
+              {sourceContent}
+            </Text>
+          )}
+        />
+      ) : null}
+    </Link>
+  );
+};
 
 const SourceView = ({ content }: { content: TToolCallContent }) => {
   const { t } = useTranslation("Common");
@@ -75,46 +144,12 @@ const SourceView = ({ content }: { content: TToolCallContent }) => {
       ) : null}
 
       <div className={styles.sourceViewList}>
-        {sources.map((s, index) => {
-          const hostName = getRootDomain(s.url || "");
-          const isFile = "fileId" in s;
-          const iconUrl = isFile
-            ? getKnowledgeDocumentIconURLByFileName(s.title)
-            : s.faviconUrl; // TODO: CSP error. Maybe need to change to google favicon api
-
-          return (
-            <Link
-              key={s.fileId || `${s.title}_${index * 2}`}
-              className={styles.sourceItem}
-              href={s.url || ""}
-              target={LinkTarget.blank}
-              textDecoration="none"
-            >
-              <img src={iconUrl} alt="source icon" width={16} height={16} />
-              <Text
-                fontSize="14px"
-                fontWeight={600}
-                lineHeight="16px"
-                truncate
-                title={s.title}
-              >
-                {s.title}
-              </Text>
-              {hostName ? (
-                <Text
-                  className={styles.sourceUrl}
-                  fontSize="13px"
-                  fontWeight={600}
-                  lineHeight="20px"
-                  truncate
-                  title={hostName}
-                >
-                  {hostName}
-                </Text>
-              ) : null}
-            </Link>
-          );
-        })}
+        {sources.map((source, index) => (
+          <SourceItem
+            key={`${source.fileId || source.title}_${index * 2}`}
+            source={source}
+          />
+        ))}
       </div>
     </div>
   );

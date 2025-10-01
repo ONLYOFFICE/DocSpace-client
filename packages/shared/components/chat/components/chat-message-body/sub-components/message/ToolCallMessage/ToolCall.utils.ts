@@ -60,3 +60,7 @@ export const getKnowledgeDocumentIconURLByFileName = (fileName: string) => {
 
   return knowledgeIcons[extension] || "";
 };
+
+export const getDoceditorUrl = (fileId: number) => {
+  return `${window.location.origin}/doceditor?fileId=${fileId}`;
+};

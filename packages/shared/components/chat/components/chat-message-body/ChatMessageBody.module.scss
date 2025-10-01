@@ -382,6 +382,12 @@
       margin-bottom: 12px;
     }
 
+    .sourceViewList {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
     .sourceItem {
       display: flex;
       gap: 8px;
@@ -402,9 +408,9 @@
       }
     }
 
-    .sourceUrl {
-      flex-shrink: 0;
-
+    .sourceContent {
+      flex: 1;
+      min-width: 80px;
       color: var(--chat-message-source-url-color);
     }
   }
@@ -638,4 +644,12 @@
   &:not(:last-child) .td {
     border-bottom: 1px solid var(--chat-message-table-row-border-color);
   }
+}
+
+.sourceContentTooltipText {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  white-space: pre-line;
 }

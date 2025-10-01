@@ -39,7 +39,6 @@ import type { TToolCallContent } from "../../../../../../../../api/ai/types";
 
 import styles from "../../../../ChatMessageBody.module.scss";
 import { ToolCallPlacement, ToolCallStatus } from "../ToolCall.enum";
-import { useMessageStore } from "../../../../../../store/messageStore";
 import { SearchToolContent } from "./SearchToolContent";
 import { MCPToolContent } from "./MCPToolContent";
 
@@ -50,6 +49,7 @@ type ToolCallHeaderProps = {
   status: ToolCallStatus;
   placement: ToolCallPlacement;
   expandable?: boolean;
+  isSearchTool?: boolean;
 };
 
 export const ToolCallHeader = observer(
@@ -60,10 +60,8 @@ export const ToolCallHeader = observer(
     status,
     placement,
     expandable,
+    isSearchTool,
   }: ToolCallHeaderProps) => {
-    const { knowledgeSearchToolName, webSearchToolName, webCrawlingToolName } =
-      useMessageStore();
-
     const statusIcons: Record<ToolCallStatus, React.ReactNode> = {
       [ToolCallStatus.Loading]: <Loader type={LoaderTypes.track} size="12px" />,
       [ToolCallStatus.Confirmation]: (
@@ -73,12 +71,6 @@ export const ToolCallHeader = observer(
         <ReactSVG src={ToolFinish} className={styles.toolFinishIcon} />
       ),
     };
-
-    const isSearchTool = [
-      knowledgeSearchToolName,
-      webSearchToolName,
-      webCrawlingToolName,
-    ].includes(content.name);
 
     const statusIcon =
       placement === ToolCallPlacement.ConfirmDialog

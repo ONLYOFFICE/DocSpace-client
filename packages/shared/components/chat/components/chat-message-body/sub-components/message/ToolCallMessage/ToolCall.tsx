@@ -27,8 +27,12 @@
  */
 
 import React from "react";
+import { observer } from "mobx-react";
 
-import type { TToolCallContent } from "../../../../../../../api/ai/types";
+import type {
+  TToolCallContent,
+  TToolCallResultSourceData,
+} from "../../../../../../../api/ai/types";
 
 import styles from "../../../ChatMessageBody.module.scss";
 
@@ -36,37 +40,56 @@ import { ToolCallHeader } from "./ToolCallHeader";
 import { ToolCallBody } from "./ToolCallBody";
 import { ToolCallPlacement, ToolCallStatus } from "./ToolCall.enum";
 import classNames from "classnames";
+import { useMessageStore } from "../../../../../store/messageStore";
+
 type ToolCallProps = {
   content: TToolCallContent;
   placement: ToolCallPlacement;
   status: ToolCallStatus;
 };
 
-export const ToolCall = ({ content, status, placement }: ToolCallProps) => {
-  const [collapsed, setCollapsed] = React.useState(true);
+export const ToolCall = observer(
+  ({ content, status, placement }: ToolCallProps) => {
+    const [collapsed, setCollapsed] = React.useState(true);
+    const { knowledgeSearchToolName, webSearchToolName, webCrawlingToolName } =
+      useMessageStore();
 
-  const expandable =
-    placement === ToolCallPlacement.ConfirmDialog ||
-    status === ToolCallStatus.Finished;
+    const isSearchTool = [
+      knowledgeSearchToolName,
+      webSearchToolName,
+      webCrawlingToolName,
+    ].includes(content.name);
 
-  return (
-    <div
-      className={classNames(styles.toolCall, {
-        [styles.inDialog]: placement === ToolCallPlacement.ConfirmDialog,
-      })}
-    >
-      <ToolCallHeader
-        content={content}
-        collapsed={collapsed}
-        setCollapsed={setCollapsed}
-        status={status}
-        placement={placement}
-        expandable={expandable}
-      />
+    const hasSources =
+      isSearchTool &&
+      content.result &&
+      "data" in content.result &&
+      (content.result.data as TToolCallResultSourceData[]).length > 0;
 
-      {!expandable || collapsed ? null : (
-        <ToolCallBody content={content} placement={placement} />
-      )}
-    </div>
-  );
-};
+    const expandable =
+      placement === ToolCallPlacement.ConfirmDialog ||
+      (isSearchTool ? hasSources : status === ToolCallStatus.Finished);
+
+    return (
+      <div
+        className={classNames(styles.toolCall, {
+          [styles.inDialog]: placement === ToolCallPlacement.ConfirmDialog,
+        })}
+      >
+        <ToolCallHeader
+          content={content}
+          collapsed={collapsed}
+          setCollapsed={setCollapsed}
+          status={status}
+          placement={placement}
+          expandable={expandable}
+          isSearchTool={isSearchTool}
+        />
+
+        {!expandable || collapsed ? null : (
+          <ToolCallBody content={content} placement={placement} />
+        )}
+      </div>
+    );
+  },
+);

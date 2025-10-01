@@ -25,5 +25,11 @@
   "SystemTheme": "Sistem temasını kullan",
   "SystemThemeDescription": "Sisteminiz geçiş yaptığında açık ve koyu temalar arasında otomatik olarak geçiş yapın.",
   "TerminateAllSessions": "Geçerli oturum dışındaki tüm oturumları sonlandırın",
-  "TwoFactorDescription": "Tüm kullanıcılar için kod üreten bir uygulama aracılığıyla iki faktörlü kimlik doğrulama yönetici tarafından etkinleştirildi."
+  "TwoFactorDescription": "Tüm kullanıcılar için kod üreten bir uygulama aracılığıyla iki faktörlü kimlik doğrulama yönetici tarafından etkinleştirildi.",
+  "EmailChangeSuccess": "E-postanız başarıyla değiştirildi.",
+  "NotificationsChannels": "Bildirim kanalları",
+  "TelegramAccount": "Telegram hesabı",
+  "TelegramAccountDescription": "TelegramBot'u hesabınıza bağlamak için gizli bağlantıya tıklayın ve “Telegram’ı Bağla” butonuna tıklayın.",
+  "TelegramAccountDisconnect": "Telegram'ı bağlantısını kes",
+  "TelegramAccountDisconnectDescription": "@{{username}} hesabınız telegram bildirimleri için bağlıdır. Bu hesaptan bağlantıyı kesebilirsiniz. Bu durumda, bildirimler almayacaksınız."
 }

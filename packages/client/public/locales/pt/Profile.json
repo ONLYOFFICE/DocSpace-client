@@ -25,5 +25,11 @@
   "SystemTheme": "Utilizar o tema do sistema",
   "SystemThemeDescription": "Alterne entre o tema claro e escuro quando o seu sistema o fizer.",
   "TerminateAllSessions": "Encerre todas as sessões, exceto a atual",
-  "TwoFactorDescription": "A autenticação de dois fatores através de uma aplicação geradora de códigos foi ativada para todos os utilizadores pelo administrador."
+  "TwoFactorDescription": "A autenticação de dois fatores através de uma aplicação geradora de códigos foi ativada para todos os utilizadores pelo administrador.",
+  "EmailChangeSuccess": "Seu e-mail foi alterado com sucesso.",
+  "NotificationsChannels": "Canais de notificação",
+  "TelegramAccount": "Conta do Telegram",
+  "TelegramAccountDescription": "Para conectar o TelegramBot à sua conta, siga o link secreto e clique no botão “Conectar Telegram”.",
+  "TelegramAccountDisconnect": "Desconectar Telegram",
+  "TelegramAccountDisconnectDescription": "Sua conta @{{username}} está conectada para notificações do telegram. Você pode desconectar desta conta. Nesse caso, você não receberá notificações."
 }

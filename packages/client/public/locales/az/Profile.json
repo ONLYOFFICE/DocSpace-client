@@ -25,5 +25,11 @@
   "SystemTheme": "Sistem temasından istifadə edin",
   "SystemThemeDescription": "Sisteminiz bunu etdikdə açıq və qaranlıq temalar arasında avtomatik keçid edin.",
   "TerminateAllSessions": "Cari sessiyadan başqa bütün sessiyaları dayandırın",
-  "TwoFactorDescription": "Bütün istifadəçilər üçün ikili autentifikasiya (kod generasiyası ilə) inzibatçı tərəfindən yandırıldı."
+  "TwoFactorDescription": "Bütün istifadəçilər üçün ikili autentifikasiya (kod generasiyası ilə) inzibatçı tərəfindən yandırıldı.",
+  "EmailChangeSuccess": "Email ünvanınız uğurla dəyişdirildi.",
+  "NotificationsChannels": "Xəbər kanalları",
+  "TelegramAccount": "Telegram hesabı",
+  "TelegramAccountDescription": "TelegramBot-u hesabınızla birləşdirmək üçün gizli linkə nəzər salın və “Telegrama qoşul” düyməsinə klikləyin.",
+  "TelegramAccountDisconnect": "Telegramı əlaqədən kəsin",
+  "TelegramAccountDisconnectDescription": "Sizin @{{username}} hesabınız telegram bildirişləri üçün qoşuludur. Siz bu hesabdan ayrılığa çıxa bilərsiniz. Bu halda, siz bildirişlər almayacaqsınız."
 }

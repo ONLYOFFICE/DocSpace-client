@@ -25,5 +25,11 @@
   "SystemTheme": "Izmantot sistēmas dizainu",
   "SystemThemeDescription": "Automātiski pārslēdzieties starp gaišiem un tumšiem dizainiem, kad to dara sistēma.",
   "TerminateAllSessions": "Pārtraukt visas sesijas, izņemot pašreizējo",
-  "TwoFactorDescription": "Administrators visiem lietotājiem ir iespējojis divu faktoru autentifikāciju, izmantojot kodu ģenerējošu lietotni."
+  "TwoFactorDescription": "Administrators visiem lietotājiem ir iespējojis divu faktoru autentifikāciju, izmantojot kodu ģenerējošu lietotni.",
+  "EmailChangeSuccess": "Jūsu e-pasts ir veiksmīgi mainīts.",
+  "NotificationsChannels": "Paziņojumu kanāli",
+  "TelegramAccount": "Telegram konts",
+  "TelegramAccountDescription": "Lai savienotu TelegramBot ar savu kontu, izmantojiet slepeno saiti un noklikšķiniet uz pogas “Connect Telegram”.",
+  "TelegramAccountDisconnect": "Atvienot Telegram",
+  "TelegramAccountDisconnectDescription": "Jūsu @{{username}} konts ir savienots telegramu paziņojumiem. Jūs varat atvienoties no šā konta. Šajā gadījumā jūs nesaņemsiet paziņojumus."
 }

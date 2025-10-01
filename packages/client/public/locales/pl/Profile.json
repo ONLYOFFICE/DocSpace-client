@@ -25,5 +25,11 @@
   "SystemTheme": "Użyj motywu systemowego",
   "SystemThemeDescription": "Automatycznie przełączaj się między jasnym i ciemnym motywem, kiedy robi to Twój system.",
   "TerminateAllSessions": "Zakończ wszystkie sesje z wyjątkiem bieżącej",
-  "TwoFactorDescription": "Weryfikacja dwuetapowa za pośrednictwem aplikacji generującej kody została włączona przez administratora dla wszystkich użytkowników."
+  "TwoFactorDescription": "Weryfikacja dwuetapowa za pośrednictwem aplikacji generującej kody została włączona przez administratora dla wszystkich użytkowników.",
+  "EmailChangeSuccess": "Zaktualizowano pomyślnie Twój adres e-mail.",
+  "NotificationsChannels": "Kanały powiadomień",
+  "TelegramAccount": "Konto Telegram",
+  "TelegramAccountDescription": "Aby połączyć TelegramBot z Twoim kontem, postępuj zgodnie z sekretnym linkiem i kliknij przycisk „Połącz Telegram”.",
+  "TelegramAccountDisconnect": "Odłącz Telegram",
+  "TelegramAccountDisconnectDescription": "Twoje konto @{{username}} jest połączone w celu otrzymywania powiadomień z Telegrama. Możesz rozłączyć to konto. W takim przypadku nie będziesz otrzymywać powiadomień."
 }

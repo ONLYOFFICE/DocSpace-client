@@ -25,5 +25,11 @@
   "SystemTheme": "Käytä järjestelmän teemaa",
   "SystemThemeDescription": "Vaihda automaattisesti vaalean ja tumman teeman välillä, kun systeemisi tekee niin.",
   "TerminateAllSessions": "Päätä kaikki paitsi nykyinen istunto",
-  "TwoFactorDescription": "Järjestelmänvalvoja otti käyttöön kaksivaiheisen todennuksen koodia luovan sovelluksen kautta kaikille käyttäjille."
+  "TwoFactorDescription": "Järjestelmänvalvoja otti käyttöön kaksivaiheisen todennuksen koodia luovan sovelluksen kautta kaikille käyttäjille.",
+  "EmailChangeSuccess": "Sähköpostiosoitteesi on muutettu onnistuneesti.",
+  "NotificationsChannels": "Ilmoituskanavat",
+  "TelegramAccount": "Telegram-tili",
+  "TelegramAccountDescription": "Yhdistääksesi TelegramBot-tilisi, seuraa salattua linkkiä ja klikkaa \"Yhdistä Telegram\" -painiketta.",
+  "TelegramAccountDisconnect": "Katkaise Telegram",
+  "TelegramAccountDisconnectDescription": "Sinun @{{username}}-tilisi on yhdistetty Telegram-ilmoituksia varten. Voit irrottaa tilin. Tässä tapauksessa et saa ilmoituksia."
 }

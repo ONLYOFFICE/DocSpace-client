@@ -25,5 +25,11 @@
   "SystemTheme": "Použít systémový motiv",
   "SystemThemeDescription": "Automatické přepínání mezi světlými a tmavými motivy v souladu s vaším systémem.",
   "TerminateAllSessions": "Ukončení všech relací kromě aktuální",
-  "TwoFactorDescription": "Dvoufázové ověřování prostřednictvím aplikace generující kódy bylo správcem povoleno pro všechny uživatele."
+  "TwoFactorDescription": "Dvoufázové ověřování prostřednictvím aplikace generující kódy bylo správcem povoleno pro všechny uživatele.",
+  "EmailChangeSuccess": "Váš e-mail byl úspěšně změněn.",
+  "NotificationsChannels": "Notifikační kanály",
+  "TelegramAccount": "Telegram účet",
+  "TelegramAccountDescription": "Pro připojení TelegramBotu k vašemu účtu postupujte podle tajného odkazu a klikněte na tlačítko „Připojit Telegram“.",
+  "TelegramAccountDisconnect": "Odpojit Telegram",
+  "TelegramAccountDisconnectDescription": "Váš účet @{{username}} je propojený pro telegramové notifikace. Můžete se od tohoto účtu odpojit. V tomto případě nebudete dostávat notifikace."
 }

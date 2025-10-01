@@ -25,5 +25,11 @@
   "SystemTheme": "Sử dụng chủ đề hệ thống",
   "SystemThemeDescription": "Tự động chuyển đổi giữa các chế độ sáng và tối khi hệ thống của bạn hoạt động.",
   "TerminateAllSessions": "Chấm dứt tất cả các phiên giao dịch ngoại trừ phiên hiện tại",
-  "TwoFactorDescription": " Xác thực hai yếu tố qua ứng dụng tạo mã đã được quản trị viên bật cho tất cả người dùng."
+  "TwoFactorDescription": " Xác thực hai yếu tố qua ứng dụng tạo mã đã được quản trị viên bật cho tất cả người dùng.",
+  "EmailChangeSuccess": "Email của bạn đã được thay đổi thành công.",
+  "NotificationsChannels": "Kênh thông báo",
+  "TelegramAccount": "Tài khoản Telegram",
+  "TelegramAccountDescription": "Để kết nối TelegramBot với tài khoản của bạn, hãy làm theo liên kết bí mật và nhấp vào nút “Kết nối Telegram”.",
+  "TelegramAccountDisconnect": "Ngắt kết nối Telegram",
+  "TelegramAccountDisconnectDescription": "Tài khoản @{{username}} của bạn đang được kết nối để nhận thông báo từ telegram. Bạn có thể ngắt kết nối khỏi tài khoản này. Trong trường hợp đó, bạn sẽ không nhận được thông báo."
 }

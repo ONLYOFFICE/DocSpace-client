@@ -52,6 +52,10 @@ const QUERY_PARAMS = [
     name: "uid",
     value: "123",
   },
+  {
+    name: "redirected",
+    value: "true",
+  },
 ];
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);

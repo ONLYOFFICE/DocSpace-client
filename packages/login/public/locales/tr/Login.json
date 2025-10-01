@@ -1,6 +1,8 @@
 {
   "ChangePasswordSuccess": "Şifre başarıyla değiştirildi",
   "CodeTitle": "Kod tarafınıza e-posta olarak gönderildi",
+  "ConfirmEmailChange": "E-posta adresinizi değiştirmeyi onaylayın",
+  "ConfirmEmailChangeText": "{{productName}} hesabınızdaki e-posta adresini değiştirmek istediğinizi belirttiniz. Devam etmek için, lütfen mevcut kimlik bilgilerinizle giriş yapın.",
   "ErrorInvalidText": "10 saniye içinde <1>{{productName}}</1> yönlendirileceksiniz",
   "ForgotPassword": "Şifrenizi mi unuttunuz?",
   "LDAPUsernamePlaceholder": "{{ldap_domain}} kullanıcı adı",
@@ -19,7 +21,5 @@
   "RememberHelper": "Varsayılan oturum ömrü 20 dakikadır. 1 yıla ayarlamak için bu seçeneği işaretleyin. Kendi sürenizi ayarlamak için Ayarlar'a gidin.",
   "SignInLDAP": "Şurada oturum açın: {{ldap_domain}}",
   "SignInLdapHelper": "Kurumsal alan için kimlik bilgilerini kullanın",
-  "UserIsAlreadyRegistered": "Kullanıcı <1>{{email}}</1> bu {{productName}}'e zaten kayıtlı, şifrenizi girin veya başka bir e-posta ile devam etmek için geri dönün.",
-  "ConfirmEmailChange": "E-posta adresinizi değiştirmeyi onaylayın",
-  "ConfirmEmailChangeText": "{{productName}} hesabınızdaki e-posta adresini değiştirmek istediğinizi belirttiniz. Devam etmek için, lütfen mevcut kimlik bilgilerinizle giriş yapın."
+  "UserIsAlreadyRegistered": "Kullanıcı <1>{{email}}</1> bu {{productName}}'e zaten kayıtlı, şifrenizi girin veya başka bir e-posta ile devam etmek için geri dönün."
 }

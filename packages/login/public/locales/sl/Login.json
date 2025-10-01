@@ -1,6 +1,8 @@
 {
   "ChangePasswordSuccess": "Geslo je bilo uspešno spremenjeno",
   "CodeTitle": "Koda vam je bila poslana po e-pošti",
+  "ConfirmEmailChange": "Potrdite spremembo e-pošte",
+  "ConfirmEmailChangeText": "Zahtevali ste spremembo e-naslova na vašem računu {{productName}}. Za nadaljevanje, se prosim prijavite z vašimi trenutnimi poverilnicami.",
   "ErrorInvalidText": "V 10 sekundah boste preusmerjeni na <1>{{productName}}</1>",
   "ForgotPassword": "Ste pozabili geslo?",
   "LDAPUsernamePlaceholder": "Uporabniško ime za {{ldap_domain}} ",
@@ -19,7 +21,5 @@
   "RememberHelper": "Privzeta življenjska doba seje je 20 minut. Preverite to možnost, če jo želite nastaviti na 1 leto. Če želite nastaviti poljubno vrednost, pojdite v Nastavitve.",
   "SignInLDAP": "Prijavi se v: {{ldap_domain}}",
   "SignInLdapHelper": "Uporabi poverilnice za domeno podjetja",
-  "UserIsAlreadyRegistered": "Uporabnik <1>{{email}}</1> je že registriran v tem prostoru {{productName}}. Vnesite svoje geslo ali se vrnite nazaj in nadaljujte z drugim e-mail naslovom.",
-  "ConfirmEmailChange": "Potrdite spremembo e-pošte",
-  "ConfirmEmailChangeText": "Zahtevali ste spremembo e-naslova na vašem računu {{productName}}. Za nadaljevanje, se prosim prijavite z vašimi trenutnimi poverilnicami."
+  "UserIsAlreadyRegistered": "Uporabnik <1>{{email}}</1> je že registriran v tem prostoru {{productName}}. Vnesite svoje geslo ali se vrnite nazaj in nadaljujte z drugim e-mail naslovom."
 }

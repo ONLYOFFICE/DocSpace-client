@@ -1,6 +1,8 @@
 {
   "ChangePasswordSuccess": "Mật khẩu đã được thay đổi thành công",
   "CodeTitle": "Mã đã được gửi qua email cho bạn",
+  "ConfirmEmailChange": "Xác nhận thay đổi email của bạn",
+  "ConfirmEmailChangeText": "Bạn đã yêu cầu thay đổi địa chỉ email trên tài khoản {{productName}} của bạn. Để tiếp tục, vui lòng đăng nhập bằng thông tin đăng nhập hiện tại của bạn.",
   "ErrorInvalidText": "Trong 10 giây, bạn sẽ được chuyển hướng đến <1>{{productName}}</1>",
   "ForgotPassword": "Bạn quên mật khẩu?",
   "LDAPUsernamePlaceholder": "Tên người dùng của {{ldap_domain}} ",
@@ -19,7 +21,5 @@
   "RememberHelper": "Thời lượng của phiên mặc định là 20 phút. Hãy chọn tùy chọn này để đặt thành 1 năm. Để đặt giá trị của riêng bạn, hãy đi đến Cài đặt.",
   "SignInLDAP": "Đăng nhập vào: {{ldap_domain}}",
   "SignInLdapHelper": "Sử dụng thông tin đăng nhập cho miền công ty",
-  "UserIsAlreadyRegistered": "Người dùng <1>{{email}} </1> đã được đăng ký trong {{productName}} này, hãy nhập mật khẩu của bạn hoặc quay lại để tiếp tục với một email khác.",
-  "ConfirmEmailChange": "Xác nhận thay đổi email của bạn",
-  "ConfirmEmailChangeText": "Bạn đã yêu cầu thay đổi địa chỉ email trên tài khoản {{productName}} của bạn. Để tiếp tục, vui lòng đăng nhập bằng thông tin đăng nhập hiện tại của bạn."
+  "UserIsAlreadyRegistered": "Người dùng <1>{{email}} </1> đã được đăng ký trong {{productName}} này, hãy nhập mật khẩu của bạn hoặc quay lại để tiếp tục với một email khác."
 }

@@ -1,6 +1,8 @@
 {
   "ChangePasswordSuccess": "Heslo bolo úspešne zmenené",
   "CodeTitle": "Kód vám bol zaslaný na e-mail",
+  "ConfirmEmailChange": "Potvrďte zmenu e-mailu",
+  "ConfirmEmailChangeText": "Požiadali ste zmenu e-mailovej adresy na účte {{productName}}. Aby ste mohli pokračovať, prihláste sa pomocou vašich aktuálnych prihlasovacích údajov.",
   "ErrorInvalidText": "O 10 sekúnd budete presmerovaní na <1>{{productName}}</1>",
   "ForgotPassword": "Zabudli ste heslo?",
   "LDAPUsernamePlaceholder": "Používateľské meno {{ldap_domain}} ",
@@ -19,7 +21,5 @@
   "RememberHelper": "Predvolená doba trvania relácie je 20 minút. Začiarknutím tejto možnosti ju nastavíte na 1 rok. Ak chcete nastaviť vlastnú hodnotu, prejdite do časti Nastavenia.",
   "SignInLDAP": "Prihláste sa do: {{ldap_domain}}",
   "SignInLdapHelper": "Použite prihlasovacie údaje pre firemnú doménu",
-  "UserIsAlreadyRegistered": "Používateľ <1>{{email}}</1> je už zaregistrovaný v tomto priestore {{productName}}, zadajte svoje heslo alebo sa vráťte späť a pokračujte s iným e-mailom.",
-  "ConfirmEmailChange": "Potvrďte zmenu e-mailu",
-  "ConfirmEmailChangeText": "Požiadali ste zmenu e-mailovej adresy na účte {{productName}}. Aby ste mohli pokračovať, prihláste sa pomocou vašich aktuálnych prihlasovacích údajov."
+  "UserIsAlreadyRegistered": "Používateľ <1>{{email}}</1> je už zaregistrovaný v tomto priestore {{productName}}, zadajte svoje heslo alebo sa vráťte späť a pokračujte s iným e-mailom."
 }

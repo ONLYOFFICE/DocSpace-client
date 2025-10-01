@@ -1,6 +1,8 @@
 {
   "ChangePasswordSuccess": "Wachtwoord is succesvol gewijzigd",
   "CodeTitle": "De code is naar u gemaild",
+  "ConfirmEmailChange": "Bevestig uw e-mailwijziging",
+  "ConfirmEmailChangeText": "U heeft aangevraagd om het e-mailadres van uw {{productName}} account te wijzigen. Om verder te gaan, log in alstublieft met uw huidige inloggegevens.",
   "ErrorInvalidText": "Over 10 seconden wordt u doorverwezen naar de <1>{{productName}}</1>",
   "ForgotPassword": "Wachtwoord vergeten?",
   "LDAPUsernamePlaceholder": "Gebruikersnaam van {{ldap_domain}} ",
@@ -19,7 +21,5 @@
   "RememberHelper": "De standaard sessieduur is 20 minuten. Vink deze optie aan om deze in te stellen op 1 jaar. Om uw eigen waarde in te stellen, ga naar Instellingen.",
   "SignInLDAP": "Aanmelden bij: {{ldap_domain}}",
   "SignInLdapHelper": "Gebruik aanmeldgegevens voor het bedrijfsdomein",
-  "UserIsAlreadyRegistered": "Gebruiker <1>{{email}}</1> is al geregistreerd in deze {{productName}}, voer uw wachtwoord in of ga terug om verder te gaan met een andere e-mail.",
-  "ConfirmEmailChange": "Bevestig uw e-mailwijziging",
-  "ConfirmEmailChangeText": "U heeft aangevraagd om het e-mailadres van uw {{productName}} account te wijzigen. Om verder te gaan, log in alstublieft met uw huidige inloggegevens."
+  "UserIsAlreadyRegistered": "Gebruiker <1>{{email}}</1> is al geregistreerd in deze {{productName}}, voer uw wachtwoord in of ga terug om verder te gaan met een andere e-mail."
 }

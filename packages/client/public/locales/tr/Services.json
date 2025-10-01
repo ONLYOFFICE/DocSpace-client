@@ -1,1 +1,12 @@
-{}
+{
+  "AutomaticBackupDescription": "Manuel müdahaleler olmadan sürekli veri koruması için planlı yedeklemeler ayarlayın.",
+  "BackupRoomDescription": "Seçili bir odaya veya {{sectionName}} bölümüne bir yedekleme kaydedin. Mevcut odaları kullanın veya yeni bir tane oluşturun.",
+  "BackupServiceEnabled": "Yedekleme hizmeti başarıyla etkinleştirildi.",
+  "ConnectService": "Servisi <1>here</1> bağlayarak yedekleme özelliklerini etkinleştirin",
+  "ContactToPayer": "Ödeme Yapanı (<1>{{email}}</1>) ile yedek hizmeti bağlamak için iletişime geçin.",
+  "EnableBackupConfirm": "Enabling the Backup service will allow all {{productName}} administrators to create backups anytime, as long as the wallet balance is sufficient. Are you sure you want to continue?",
+  "FreeBackupsPerMonth": "Ücretsiz yedeklemeler: {{value}}/{{maxValue}} mevcut ay için.",
+  "TemporaryDescription": "\"Yedek\" bölümünde saklanan bir yedek oluşturun. Oluşturulduktan sonraki 24 saat içinde indirilmeye hazır.",
+  "ThirdPartyResourceDescription": "Dropbox, Box, OneDrive veya Google Drive gibi bulut hesaplarına bağlanın ve yedeklemeleri kaydedin.",
+  "ThirdPartyStorageDescription": "Yedeklemelerinizi üçüncü taraf hizmetlerde saklayın. Harici bulut depolama platformlarını bağlamak için idealdir."
+}

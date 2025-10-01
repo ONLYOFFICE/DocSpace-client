@@ -1,1 +1,12 @@
-{}
+{
+  "AutomaticBackupDescription": "Iestatiet plānotos dublējumus pastāvīgai datu aizsardzībai bez manuālām darbībām.",
+  "BackupRoomDescription": "Saglabājiet rezerves kopiju izvēlētā telpā vai {{sectionName}} sadaļā. Izmantojiet esošās telpas vai izveidojiet jaunu.",
+  "BackupServiceEnabled": "Rezerves pakalpojums veiksmīgi aktivēts.",
+  "ConnectService": "Pievienojiet pakalpojumu <1>šeit</1>, lai iespēju backup funkcijas.",
+  "ContactToPayer": "Sazinieties ar apmaksātāju (<1>{{email}}</1>), lai pieslēgtu rezerves pakalpojumu.",
+  "EnableBackupConfirm": "Iespējot Backup pakalpojums ļaus visiem {{productName}} administratoriem veidot rezerves kopijas jebkurā laikā, kamēr mokaņa ir pietiekama. Vai Jūs vēlaties turpināt?",
+  "FreeBackupsPerMonth": "Bezvērtīgi dubultniekopi: {{value}}/{{maxValue}} par šo mēnesi.",
+  "TemporaryDescription": "Izveidojiet rezerves kopiju, kas atrodas sadaļā \"Backup\". Pieejama lejupielāde 24 stundu laikā pēc izveidošanas.",
+  "ThirdPartyResourceDescription": "Pievienojieties un saglabājiet rezerves kopijas mākoņa kontos, piemēram, Dropbox, Box, OneDrive vai Google Drive.",
+  "ThirdPartyStorageDescription": "Izmantojiet trešo pušu pakalpojumus, lai saglabātu savus dubultniekus. Ideāli piemēroti, lai savienotu ārējus mākoņu krātuves platformas."
+}

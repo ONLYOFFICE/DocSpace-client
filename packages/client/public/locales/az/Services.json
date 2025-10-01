@@ -1,1 +1,12 @@
-{}
+{
+  "AutomaticBackupDescription": "Kənarlaşdırılmış məlumatların mühafizəsi üçün, əl ilə hərəkət etmədən, planlı ehtiyat nüsxələrini yaradın.",
+  "BackupRoomDescription": "Seçilmiş bir otağa və ya {{sectionName}} bölməsinə ehtiyat nüsxəni saxlayın. Mövcud otaqları istifadə edin və ya yeni bir otaq yaradın.",
+  "BackupServiceEnabled": "Ehtiyat Nüsxə xidməti uğurla aktivləşdirilib.",
+  "ConnectService": "Xidməti <1>burada</1> qoşun ki, ehtiyat nüsxə xüsusiyyətlərini aktivləşdirəsiniz.",
+  "ContactToPayer": "Ödəyicilə (<1>{{email}}</1>) əlaqə saxlayaraq ehtiyat xidməti ilə birləşdirin.",
+  "EnableBackupConfirm": "Backup xidməti aktiv edildikdə, bütün {{productName}} administratorları, əgər hesab balansında kifayət qədər vəsait varsa, hər zaman ehtiyat nüsxələrini yarada biləcəklər. Davam etmək istəyirsinizmi?",
+  "FreeBackupsPerMonth": "Pulsuz ehtiyat nüsxələr: {{value}}/{{maxValue}} cari ayda.",
+  "TemporaryDescription": "\"Backup\" bölməsində saxlanılan ehtiyat nüsxəsin yaradın. Yaratdıqdan sonra 24 saat ərzində yükləmək üçün mövcuddur.",
+  "ThirdPartyResourceDescription": "Dropbox, Box, OneDrive və ya Google Drive kimi bulud hesablarına qoşulub ehtiyat növbəsizləri saxlayın.",
+  "ThirdPartyStorageDescription": "Sizə məlumatlarınızı saxlamaq üçün üçüncü tərəf xidmətlərindən istifadə edin. Xarici bulud saxlama platformalarını birləşdirmək üçün idealdır."
+}

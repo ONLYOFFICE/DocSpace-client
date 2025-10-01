@@ -1,1 +1,12 @@
-{}
+{
+  "AutomaticBackupDescription": "Ota ajoitetut varmuuskopiot käyttöön jatkuvan datan suojauksen takaamiseksi ilman manuaalisia toimia.",
+  "BackupRoomDescription": "Tallenna varmuuskopio valittuun huoneeseen tai {{sectionName}}-osioon. Käytä olemassa olevia huoneita tai luo uusi.",
+  "BackupServiceEnabled": "Varmuuskopiointipalvelu otettu käyttöön onnistuneesti.",
+  "ConnectService": "Yhdistä palvelu <1>täällä</1> ottaaksesi käyttöön varmuuskopiointitoiminnallisuudet.",
+  "ContactToPayer": "Ota yhteyttä maksajaan (<1>{{email}}</1>) liittääksesi varmuuskopiointipalvelu.",
+  "EnableBackupConfirm": "Enabling the Backup service will allow all {{productName}} administrators to create backups anytime, as long as the wallet balance is sufficient. Are you sure you want to continue?",
+  "FreeBackupsPerMonth": "Ilmaiset varmuuskopiot: {{value}}/{{maxValue}} nykyisenä kuukautena.",
+  "TemporaryDescription": "Luo varmuuskopio \"Varmuuskopio\"-osiossa. Lataus saatavilla 24 tunnin sisällä luomisesta.",
+  "ThirdPartyResourceDescription": "Yhdistä ja tallenna varmuuskopiot pilvitileihin, kuten Dropbox, Box, OneDrive tai Google Drive.",
+  "ThirdPartyStorageDescription": "Käytä kolmannen osapuolen palveluita varmuuskopioiden tallentamiseen. Erinomainen vaihtoehto ulkoisten pilvitallennuspalveluiden yhdistämiseen."
+}

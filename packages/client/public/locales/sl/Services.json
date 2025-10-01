@@ -1,1 +1,12 @@
-{}
+{
+  "AutomaticBackupDescription": "Nastavite urnik rezervnih kopij za stalno zaščito podatkov brez ročnih posegov.",
+  "BackupRoomDescription": "Shranjevanje varnostne kopije v izbrano sobo ali odsek {{sectionName}}. Uporabite obstoječe sobe ali ustvarite novo.",
+  "BackupServiceEnabled": "Storitev varnostnega kopiranja je bila uspešno omogočena.",
+  "ConnectService": "Povežite storitev <1>tukaj</1>, da omogočite funkcije varnostnih kopij.",
+  "ContactToPayer": "Kontaktirajte plačnika (<1>{{email}}</1>) za povezavo varovalne storitve.",
+  "EnableBackupConfirm": "Omogočanje storitve varnostnih kopij bo omogočilo vsem skrbnikom {{productName}} ustvarjanje varnostnih kopij kadarkoli, dokler je stanje denarnice zadostno. Ste prepričani, da želite nadaljevati?",
+  "FreeBackupsPerMonth": "Brezplačni varnostni kopiji: {{value}}/{{maxValue}} za tekoči mesec.",
+  "TemporaryDescription": "Ustvarite varnostno kopijo, shranjeno v razdelku \"Varnostne kopije\". Na voljo za prenos v 24 urah po ustvaritvi.",
+  "ThirdPartyResourceDescription": "Povežite in varnostno kopirajte na račune v oblaku, kot so Dropbox, Box, OneDrive ali Google Drive.",
+  "ThirdPartyStorageDescription": "Uporabljajte storitve tretjih oseb za shranjevanje varnih kopij. Idealno za povezavo z zunanjimi platformami za shranjevanja v oblaku."
+}

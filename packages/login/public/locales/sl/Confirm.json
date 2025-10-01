@@ -29,5 +29,13 @@
   "SuccessDeactivate": "Vaš račun je bil uspešno ponovno aktiviran. Čez 10 sekund boste preusmerjeni na <1>stran</1>.",
   "SuccessReactivate": "Vaš račun je bil uspešno ponovno aktiviran. Čez 10 sekund boste preusmerjeni v <1>portal</1>.",
   "SuccessRemoved": "Vaš račun je bil uspešno odstranjen. Čez 10 sekund boste preusmerjeni na <1>stran</1>.",
-  "TermsAndConditions": "Z nadaljevanjem soglašate in razumete ter se strinjate z našimi <1>Pogoji in določili</1> in z <2>Izjavo o zasebnosti</2>."
+  "TermsAndConditions": "Z nadaljevanjem soglašate in razumete ter se strinjate z našimi <1>Pogoji in določili</1> in z <2>Izjavo o zasebnosti</2>.",
+  "ConnectApp": "Povežite aplikacijo",
+  "ConnectAppDescription": "Skenirajte priložen QR kodo z vašo aplikacijo za preverjanje. Lahko pa ročno vnesete podan ključ v vašo aplikacijo: <1>{{ secretKey }}</1>.",
+  "GetSuitableApp": "Pridobite ustrezno aplikacijo",
+  "GetSuitableAppDescription": "Uporabite združljivo aplikacijo, kot je Google Authenticator za <1>Android</1> in <4>iOS</4> ali Authenticator za <8>Windows Phone</8>.",
+  "TfaSubTitle": "Sledite preprostim korakom za nadaljevanje dela v tem {{productName}}:",
+  "TfaTitle": "Omogočena je dvofaktorska avtentikacija za varno dostopanje.",
+  "VerifyConnection": "Preverite povezavo",
+  "VerifyConnectionDescription": "Vnesite 6-mestno kodo, ki jo je ustvarila vaša aplikacija za preverjanje identitete, v polje spodaj, da dokončate nastavitev."
 }

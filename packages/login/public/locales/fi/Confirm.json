@@ -29,5 +29,13 @@
   "SuccessDeactivate": "Tilisi on onnistuneesti deaktivoitu. Sinut ohjataan <1>sivustolle</1> 10 sekunnissa.",
   "SuccessReactivate": "Tilisi on onnistuneesti aktivoitu uudelleen. Sinut ohjataan <1>portaaliin</1> 10 sekunnissa.",
   "SuccessRemoved": "Tilisi on onnistuneesti poistettu. 10 sekunnin päästä sinut ohjataan <1>sivusto</1>.",
-  "TermsAndConditions": "Jatkamalla ymmärrät ja hyväksyt <1>Ehdot</1> ja <2>Tietosuojalausunnon</2>."
+  "TermsAndConditions": "Jatkamalla ymmärrät ja hyväksyt <1>Ehdot</1> ja <2>Tietosuojalausunnon</2>.",
+  "ConnectApp": "Yhdistä sovellus",
+  "ConnectAppDescription": "Skannaa annettu QR-koodi tunnistussovelluksellasi. Vaihtoehtoisesti voit syöttää annetun salaisen avaimen manuaalisesti sovellukseesi: <1>{{ secretKey }}</1>.",
+  "GetSuitableApp": "Hanki sopiva sovellus",
+  "GetSuitableAppDescription": "Käytä yhteensopivaa sovellusta, kuten Google Authenticator <1>Android</1>-laitteille ja <4>iOS</4>-laitteille, tai Authenticator <8>Windows Phone</8>-laitteille.",
+  "TfaSubTitle": "Noudata yksinkertaisia ohjeita jatkaaksesi työtä tässä {{productName}}:ssa:",
+  "TfaTitle": "Kaksivaiheinen tunnistautuminen käytössä turvallisen pääsyn varmistamiseksi",
+  "VerifyConnection": "Tarkista yhteys",
+  "VerifyConnectionDescription": "Syötä alla olevaan kenttään authenticator-sovelluksesi luoma 6-numeroinen koodi suorittaaksesi asetuksen loppuun."
 }

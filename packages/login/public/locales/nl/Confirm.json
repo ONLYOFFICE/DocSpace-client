@@ -29,5 +29,13 @@
   "SuccessDeactivate": "Uw account is succesvol gedeactiveerd. Over 10 seconden wordt u doorgestuurd naar de <1>site</1>.",
   "SuccessReactivate": "Uw account is succesvol opnieuw geactiveerd. Over 10 seconden wordt u doorgestuurd naar de <1>ruimte</1>.",
   "SuccessRemoved": "Uw account is succesvol verwijderd. Over 10 seconden wordt u doorgestuurd naar de <1>site</1>.",
-  "TermsAndConditions": "Door verder te gaan, gaat u akkoord met onze <1>Algemene voorwaarden</1> en <2>Privacyverklaring</2>."
+  "TermsAndConditions": "Door verder te gaan, gaat u akkoord met onze <1>Algemene voorwaarden</1> en <2>Privacyverklaring</2>.",
+  "ConnectApp": "Verbind de app",
+  "ConnectAppDescription": "Scan de verstrekte QR-code met uw authenticator-app. Alternatief, voer handmatig de gegeven geheime sleutel in uw app in: <1>{{ secretKey }}</1>.",
+  "GetSuitableApp": "Krijg een geschikte app",
+  "GetSuitableAppDescription": "Gebruik een compatibele app zoals Google Authenticator voor <1>Android</1> en <4>iOS</4>, of Authenticator voor <8>Windows Phone</8>.",
+  "TfaSubTitle": "Volg eenvoudige stappen om verder te werken in dit {{productName}}:",
+  "TfaTitle": "Tweefactorauthenticatie ingeschakeld voor veilige toegang",
+  "VerifyConnection": "Verifieer de verbinding",
+  "VerifyConnectionDescription": "Voer de 6-cijferige code die door uw authenticator-app is gegenereerd, in het veld hieronder in om de instelling te voltooien."
 }

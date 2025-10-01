@@ -29,5 +29,13 @@
   "SuccessDeactivate": "Tài khoản của bạn đã bị vô hiệu hóa  thành công. Trong 10 giây, bạn sẽ được chuyển hướng đến <1>trang</1>.",
   "SuccessReactivate": "Tài khoản của bạn đã được kích hoạt lại thành công. Trong 10 giây, bạn sẽ được chuyển hướng đến <1>không gian</1>.",
   "SuccessRemoved": "Tài khoản của bạn đã được xóa thành công. Trong vòng 10 giây, bạn sẽ được chuyển hướng đến <1>trang</1>.",
-  "TermsAndConditions": "Với việc tiếp tục, bạn hiểu và đồng ý với <1>Điều khoản và điều kiện</1> và <2> Tuyên bố về quyền riêng tư </2> của chúng tôi."
+  "TermsAndConditions": "Với việc tiếp tục, bạn hiểu và đồng ý với <1>Điều khoản và điều kiện</1> và <2> Tuyên bố về quyền riêng tư </2> của chúng tôi.",
+  "ConnectApp": "Kết nối ứng dụng",
+  "ConnectAppDescription": "Quét mã QR được cung cấp bằng ứng dụng xác thực của bạn. Hoặc, nhập thủ công khóa bí mật được cung cấp vào ứng dụng của bạn: <1>{{ secretKey }}</1>.",
+  "GetSuitableApp": "Tải xuống một ứng dụng phù hợp",
+  "GetSuitableAppDescription": "Sử dụng một ứng dụng tương thích như Google Authenticator cho <1>Android</1> và <4>iOS</4>, hoặc Authenticator cho <8>Windows Phone</8>.",
+  "TfaSubTitle": "Làm theo các bước đơn giản để tiếp tục làm việc trong {{productName}} này:",
+  "TfaTitle": "Xác thực hai yếu tố đã được kích hoạt để có quyền truy cập an toàn",
+  "VerifyConnection": "Xác minh kết nối",
+  "VerifyConnectionDescription": "Nhập mã 6 chữ số được tạo bởi ứng dụng xác thực của bạn vào trường bên dưới để hoàn tất thiết lập."
 }

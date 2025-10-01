@@ -29,5 +29,13 @@
   "SuccessDeactivate": "Jūsu konts ir veiksmīgi deaktivizēts. Pēc 10 sekundēm jūs tiksiet novirzīts uz <1>vietni</1>.",
   "SuccessReactivate": "Jūsu konts ir veiksmīgi atkārtoti aktivizēts. Pēc 10 sekundēm jūs tiksiet novirzīts uz <1>portālu</1>.",
   "SuccessRemoved": "Jūsu konts ir veiksmīgi noņemts. Jūs tiksiet novirzīts uz <1>vietni</1> pēc 10 sekundēm.",
-  "TermsAndConditions": "Turpinot jūs saprotat un piekrītat mūsu <1>Noteikumiem un nosacījumiem</1> un <2>Paziņojumam par konfidencialitāti </2>."
+  "TermsAndConditions": "Turpinot jūs saprotat un piekrītat mūsu <1>Noteikumiem un nosacījumiem</1> un <2>Paziņojumam par konfidencialitāti </2>.",
+  "ConnectApp": "Pievienojiet lietotni",
+  "ConnectAppDescription": "Skenējiet norādīto QR kodu, izmantojot savu autentifikācijas lietotni. Alternatīvi, manuāli ievadiet doto slepeno atslēgu savā lietotnē: <1>{{ secretKey }}</1>.",
+  "GetSuitableApp": "Izvēlieties piemērotu lietotni",
+  "GetSuitableAppDescription": "Izmantojiet saderīgu lietotni, piemēram, Google Authenticator <1>Android</1> un <4>iOS</4> ierīcēm, vai Authenticator <8>Windows Phone</8> ierīcēm.",
+  "TfaSubTitle": "Sekojiet vienkāršiem soļiem, lai turpinātu darbu šajā {{productName}}:",
+  "TfaTitle": "Divu faktoru autentifikācija aktivizēta drošai piekļuvei",
+  "VerifyConnection": "Pārbaudīt savienojumu",
+  "VerifyConnectionDescription": "Ievadiet 6 ciparu kodu, kas ģenerēts ar jūsu autentifikācijas lietotni, zemāk esošajā laukā, lai pabeigtu iestatīšanu."
 }

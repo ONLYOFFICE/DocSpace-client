@@ -29,5 +29,13 @@
   "SuccessDeactivate": "계정이 성공적으로 비활성화되었습니다. 10초 후에 <1>사이트</1>로 리디렉션됩니다.",
   "SuccessReactivate": "계정이 성공적으로 재활성화되었습니다. 10초 후에 <1>{{productName}}</1>로 리디렉션됩니다.",
   "SuccessRemoved": "고객님의 계정이 성공적으로 제거되었습니다. 10초 후에 <1>사이트</1>로 리디렉션됩니다.",
-  "TermsAndConditions": "계속 하는 것은 당사의 <1>이용 약관</1> 및 <2>개인 정보 처리 방침</2>을 이해하고 동의하는 것으로 간주됩니다."
+  "TermsAndConditions": "계속 하는 것은 당사의 <1>이용 약관</1> 및 <2>개인 정보 처리 방침</2>을 이해하고 동의하는 것으로 간주됩니다.",
+  "ConnectApp": "앱 연결하기",
+  "ConnectAppDescription": "제공된 QR 코드를 인증 앱으로 스캔하세요. 또는, 주어진 비밀 키를 수동으로 앱에 입력하세요: <1>{{ secretKey }}</1>.",
+  "GetSuitableApp": "적절한 앱을 구하세요.",
+  "GetSuitableAppDescription": "Google Authenticator와 같은 호환 앱을 <1>Android</1> 및 <4>iOS</4>에서 사용하거나, Authenticator를 <8>Windows Phone</8>에서 사용하세요.",
+  "TfaSubTitle": "이 {{productName}}에서 계속 작업하려면 간단한 단계를 따르세요:",
+  "TfaTitle": "2단계 인증이 안전한 접근을 위해 활성화되었습니다.",
+  "VerifyConnection": "연결 확인",
+  "VerifyConnectionDescription": "아래 필드에 인증 앱에서 생성된 6자리 코드를 입력하여 설정을 완료하세요."
 }

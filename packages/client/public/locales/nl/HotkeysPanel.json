@@ -43,5 +43,7 @@
   "HotkeysUploadFile": "Bestand uploaden",
   "HotkeysUploadingObjects": "Items uploaden",
   "HotkeysZoomIn": "Zoom in",
-  "HotkeysZoomOut": "Zoom uit"
+  "HotkeysZoomOut": "Zoom uit",
+  "HotkeysCopySelectedItems": "Kopieer de geselecteerde items tekst",
+  "HotkeysDisablesSelectionArea": "Schakel het selectiegebied uit"
 }

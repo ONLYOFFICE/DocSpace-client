@@ -43,5 +43,7 @@
   "HotkeysUploadFile": "Lataa tiedosto",
   "HotkeysUploadingObjects": "Kohteiden lataaminen",
   "HotkeysZoomIn": "Lähennä",
-  "HotkeysZoomOut": "Loitonna"
+  "HotkeysZoomOut": "Loitonna",
+  "HotkeysCopySelectedItems": "Kopioi valitut kohteet teksti",
+  "HotkeysDisablesSelectionArea": "Poista valintausalue"
 }

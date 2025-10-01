@@ -43,5 +43,7 @@
   "HotkeysUploadFile": "Качи файл",
   "HotkeysUploadingObjects": "Качване на елементи",
   "HotkeysZoomIn": "Приближи",
-  "HotkeysZoomOut": "Отдалечи"
+  "HotkeysZoomOut": "Отдалечи",
+  "HotkeysCopySelectedItems": "Копиране на избраните елементи текст",
+  "HotkeysDisablesSelectionArea": "Деактивиране на областта за избор"
 }

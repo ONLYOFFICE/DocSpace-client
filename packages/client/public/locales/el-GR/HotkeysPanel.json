@@ -43,5 +43,7 @@
   "HotkeysUploadFile": "Μεταφόρτωση αρχείου",
   "HotkeysUploadingObjects": "Μεταφόρτωση στοιχείων",
   "HotkeysZoomIn": "Μεγέθυνση",
-  "HotkeysZoomOut": "Σμίκρυνση"
+  "HotkeysZoomOut": "Σμίκρυνση",
+  "HotkeysCopySelectedItems": "Αντιγράψτε το επιλεγμένο κείμενο",
+  "HotkeysDisablesSelectionArea": "Απενεργοποιήστε την περιοχή επιλογής"
 }

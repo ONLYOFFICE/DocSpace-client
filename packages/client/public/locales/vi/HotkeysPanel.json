@@ -43,5 +43,7 @@
   "HotkeysUploadFile": "Tải file lên",
   "HotkeysUploadingObjects": "Đang tải lên các mục",
   "HotkeysZoomIn": "Phóng to",
-  "HotkeysZoomOut": "Thu nhỏ"
+  "HotkeysZoomOut": "Thu nhỏ",
+  "HotkeysCopySelectedItems": "Sao chép các mục đã chọn văn bản",
+  "HotkeysDisablesSelectionArea": "Vô hiệu hóa vùng chọn"
 }

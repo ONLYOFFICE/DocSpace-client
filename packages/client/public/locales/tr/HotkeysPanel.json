@@ -43,5 +43,7 @@
   "HotkeysUploadFile": "Dosya yükle",
   "HotkeysUploadingObjects": "Öğeler yükleniyor",
   "HotkeysZoomIn": "Yakınlaştır",
-  "HotkeysZoomOut": "Uzaklaştır"
+  "HotkeysZoomOut": "Uzaklaştır",
+  "HotkeysCopySelectedItems": "Seçilen öğeleri kopyala",
+  "HotkeysDisablesSelectionArea": "Seçim alanını devre dışı bırak"
 }

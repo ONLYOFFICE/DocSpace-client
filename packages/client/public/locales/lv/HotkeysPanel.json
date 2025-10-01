@@ -43,5 +43,7 @@
   "HotkeysUploadFile": "Augšupielādēt failu",
   "HotkeysUploadingObjects": "Notiek vienumu augšupielāde",
   "HotkeysZoomIn": "Pietuvināt",
-  "HotkeysZoomOut": "Attālināt"
+  "HotkeysZoomOut": "Attālināt",
+  "HotkeysCopySelectedItems": "Kopēt atlasīto tekstu",
+  "HotkeysDisablesSelectionArea": "Atspējot atlases zonu"
 }

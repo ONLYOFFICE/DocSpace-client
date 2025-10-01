@@ -43,5 +43,7 @@
   "HotkeysUploadFile": "Przesyłanie pliku",
   "HotkeysUploadingObjects": "Wgrywanie elementów",
   "HotkeysZoomIn": "Powiększ",
-  "HotkeysZoomOut": "Pomniejsz"
+  "HotkeysZoomOut": "Pomniejsz",
+  "HotkeysCopySelectedItems": "Skopiuj wybrane elementy tekstu",
+  "HotkeysDisablesSelectionArea": "Wyłącz obszar zaznaczania"
 }

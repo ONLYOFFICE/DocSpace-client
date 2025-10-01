@@ -43,5 +43,7 @@
   "HotkeysUploadFile": "Fayl yüklə",
   "HotkeysUploadingObjects": "Elementlərin yüklənilməsi",
   "HotkeysZoomIn": "Yaxınlaşdırın",
-  "HotkeysZoomOut": "Uzaqlaşdırın"
+  "HotkeysZoomOut": "Uzaqlaşdırın",
+  "HotkeysCopySelectedItems": "Seçilmiş məqalələrin məzmununu surətini götür",
+  "HotkeysDisablesSelectionArea": "Seçim sahəsini deaktiv et"
 }

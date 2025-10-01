@@ -43,5 +43,7 @@
   "HotkeysUploadFile": "Завантажити файл",
   "HotkeysUploadingObjects": "Передавання елементів",
   "HotkeysZoomIn": "Збільшити",
-  "HotkeysZoomOut": "Зменшити"
+  "HotkeysZoomOut": "Зменшити",
+  "HotkeysCopySelectedItems": "Скопіювати вибрані елементи тексту",
+  "HotkeysDisablesSelectionArea": "Вимкнути область виділення"
 }

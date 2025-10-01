@@ -43,5 +43,7 @@
   "HotkeysUploadFile": "Nahrát soubor",
   "HotkeysUploadingObjects": "Nahrávání položek",
   "HotkeysZoomIn": "Přiblížení",
-  "HotkeysZoomOut": "Zvětšení"
+  "HotkeysZoomOut": "Zvětšení",
+  "HotkeysCopySelectedItems": "Zkopírovat vybrané položky textu",
+  "HotkeysDisablesSelectionArea": "Vypněte výběrovou oblast"
 }

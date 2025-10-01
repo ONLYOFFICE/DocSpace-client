@@ -43,5 +43,7 @@
   "HotkeysUploadFile": "파일 업로드",
   "HotkeysUploadingObjects": "항목 업로드",
   "HotkeysZoomIn": "확대",
-  "HotkeysZoomOut": "축소"
+  "HotkeysZoomOut": "축소",
+  "HotkeysCopySelectedItems": "선택한 항목 텍스트 복사",
+  "HotkeysDisablesSelectionArea": "선택 영역 비활성화"
 }

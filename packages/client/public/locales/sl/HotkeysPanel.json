@@ -43,5 +43,7 @@
   "HotkeysUploadFile": "Naloži datoteko",
   "HotkeysUploadingObjects": "Nalaganje predmetov",
   "HotkeysZoomIn": "Približaj",
-  "HotkeysZoomOut": "Oddalji"
+  "HotkeysZoomOut": "Oddalji",
+  "HotkeysCopySelectedItems": "Kopiraj izbrane elemente besedila",
+  "HotkeysDisablesSelectionArea": "Onemogoči območje izbire"
 }

@@ -26,7 +26,6 @@
 
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
-import { mobile, tablet } from "@docspace/shared/utils/device";
 
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
@@ -38,11 +37,6 @@ const SectionWrapper = styled.div<{ isChecked: boolean }>`
   padding: 12px;
   box-sizing: border-box;
   display: flex;
-  justify-content: flex-start;
-
-  @media ${tablet} {
-    max-width: 675px;
-  }
 
   border-radius: 6px;
   background: ${(props) =>
@@ -51,6 +45,11 @@ const SectionWrapper = styled.div<{ isChecked: boolean }>`
   .toggleButton {
     position: relative;
     margin-top: 0.5px;
+  }
+
+  .section-content {
+    flex: 1;
+    min-width: 0;
   }
 
   .section-title {
@@ -69,22 +68,27 @@ const SectionWrapper = styled.div<{ isChecked: boolean }>`
 
 const FlexContainer = styled.div`
   display: flex;
+  flex: 1;
+  max-width: 400px;
 `;
 
 const ImportItemWrapper = styled.div<{ isChecked: boolean }>`
+  display: flex;
+  flex-direction: column;
   padding-top: 8px;
-
-  @media ${mobile} {
-    width: 100%;
-  }
+  width: calc(50% - 20px);
 
   .workspace-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: ${(props) =>
       props.theme.client.settings.migration.importSectionTextColor};
   }
 
   .importSection {
-    min-width: 160px;
+    display: flex;
+    align-items: center;
     height: 36px;
     padding: 8px 12px;
     box-sizing: border-box;
@@ -100,12 +104,12 @@ const ImportItemWrapper = styled.div<{ isChecked: boolean }>`
         : props.theme.client.settings.migration.importItemDisableTextColor};
     font-weight: 600;
     line-height: 20px;
-    display: flex;
-    align-items: center;
     gap: 8px;
 
-    @media ${mobile} {
-      min-width: auto;
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .importSectionIcon {
@@ -134,6 +138,7 @@ const ArrowWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 16px;
+  flex-shrink: 0;
 
   .arrow-icon {
     transform: ${(props) =>
@@ -160,6 +165,7 @@ const ImportItem = ({
         fontSize="11px"
         fontWeight={600}
         lineHeight="12px"
+        title={workspace}
       >
         {workspace}
       </Text>
@@ -167,7 +173,9 @@ const ImportItem = ({
         {sectionIcon ? (
           <ReactSVG className="importSectionIcon" src={sectionIcon} />
         ) : null}
-        {sectionName}
+        <Text as="span" fontWeight={600} lineHeight="20px" title={sectionName}>
+          {sectionName}
+        </Text>
       </div>
     </ImportItemWrapper>
   );
@@ -192,7 +200,7 @@ const ImportSection = ({
         isDisabled={isDisabled}
         dataTestId="enable_import_section_button"
       />
-      <div>
+      <div className="section-content">
         <Text lineHeight="20px" fontWeight={600} className="section-title">
           {sectionName}
         </Text>

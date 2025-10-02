@@ -57,6 +57,7 @@ const AccountsTable = (props: AccountsTableProps) => {
     changeGroupType(UserTypes.RoomAdmin);
     toggleAllAccounts(false, [], checkedAccountType);
   };
+
   const setTypeUser = () => {
     changeGroupType(UserTypes.User);
     toggleAllAccounts(false, [], checkedAccountType);
@@ -109,16 +110,23 @@ const AccountsTable = (props: AccountsTableProps) => {
     </Consumer>
   );
 };
-export default inject<TStore>(({ setup, userStore, importAccountsStore }) => {
-  const { viewAs } = setup;
-  const { changeGroupType, UserTypes, toggleAllAccounts } = importAccountsStore;
-  const { isOwner } = userStore.user || {};
+export default inject<TStore>(
+  ({ setup, userStore, importAccountsStore, dialogsStore }) => {
+    const { viewAs } = setup;
+    const { changeGroupType, UserTypes, toggleAllAccounts } =
+      importAccountsStore;
+    const { isOwner } = userStore.user || {};
 
-  return {
-    viewAs,
-    changeGroupType,
-    UserTypes,
-    toggleAllAccounts,
-    isOwner,
-  };
-})(observer(AccountsTable));
+    const { setQuotaWarningDialogVisible: setInviteQuotaWarningDialogVisible } =
+      dialogsStore;
+
+    return {
+      viewAs,
+      changeGroupType,
+      UserTypes,
+      toggleAllAccounts,
+      isOwner,
+      setInviteQuotaWarningDialogVisible,
+    };
+  },
+)(observer(AccountsTable));

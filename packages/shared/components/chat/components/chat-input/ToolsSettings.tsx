@@ -333,7 +333,9 @@ const ToolsSettings = () => {
       return {
         key: mcpId,
         label: server.name,
-        icon: getServerIcon(server.serverType, isBase) ?? "",
+        icon:
+          (server.icon?.icon16 || getServerIcon(server.serverType, isBase)) ??
+          "",
         items,
       };
     });
@@ -429,7 +431,11 @@ const ToolsSettings = () => {
                       <div key={server.id} className={styles.toolSettingsItem}>
                         <div className={styles.toolSettingsItemInfo}>
                           <img
-                            src={getServerIcon(server.serverType, isBase) ?? ""}
+                            src={
+                              (server.icon?.icon16 ||
+                                getServerIcon(server.serverType, isBase)) ??
+                              ""
+                            }
                             alt={server.name}
                           />
                           <Text

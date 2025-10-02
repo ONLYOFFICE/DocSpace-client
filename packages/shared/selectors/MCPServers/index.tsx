@@ -66,7 +66,9 @@ const MCPServersSelector = ({ onSubmit, onClose }: MCPServersSelectorProps) => {
         key: server.id,
         id: server.id,
         label: server.name,
-        icon: getServerIcon(server.serverType, isBase) ?? "",
+        icon:
+          (server.icon?.icon32 || getServerIcon(server.serverType, isBase)) ??
+          "",
         isInputItem: false,
         onAcceptInput: () => {},
         onCancelInput: () => {},

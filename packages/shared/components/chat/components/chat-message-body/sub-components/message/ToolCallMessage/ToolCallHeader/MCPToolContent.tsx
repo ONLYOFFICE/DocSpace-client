@@ -40,10 +40,12 @@ export const MCPToolContent = ({ content }: { content: TToolCallContent }) => {
   const { t } = useTranslation(["Common"]);
   const { isBase } = useTheme();
 
-  const serverIcon = getServerIcon(
-    content.mcpServerInfo?.serverType || ServerType.Custom,
-    isBase,
-  );
+  const serverIcon =
+    content.mcpServerInfo?.icon.icon16 ||
+    getServerIcon(
+      content.mcpServerInfo?.serverType || ServerType.Custom,
+      isBase,
+    );
 
   return (
     <>

@@ -62,7 +62,8 @@ export const MCPTile = ({
   const { isBase } = useTheme();
   const { t } = useTranslation(["Common", "AISettings"]);
 
-  const icon = getServerIcon(item.serverType, isBase) ?? "";
+  const icon =
+    item.icon?.icon48 || (getServerIcon(item.serverType, isBase) ?? "");
 
   const getContextOptions = () => {
     return [

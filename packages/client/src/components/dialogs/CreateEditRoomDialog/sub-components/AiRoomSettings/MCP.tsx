@@ -78,7 +78,9 @@ const MCPSettings = ({ roomParams, setRoomParams }: MCPSettingsProps) => {
             key: item.id,
             id: item.id,
             label: item.name,
-            icon: getServerIcon(item.serverType, isBase) ?? "",
+            icon:
+              (item.icon?.icon24 || getServerIcon(item.serverType, isBase)) ??
+              "",
             isInputItem: false,
             onAcceptInput: () => {},
             onCancelInput: () => {},

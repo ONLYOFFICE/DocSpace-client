@@ -98,6 +98,12 @@ export type TToolCallContent = {
     serverId: string;
     serverName: string;
     serverType: ServerType;
+    icon: {
+      icon48: string;
+      icon32: string;
+      icon24: string;
+      icon16: string;
+    };
   };
   managed?: boolean;
 };
@@ -132,7 +138,12 @@ export type TServer = {
   name: string;
   serverType: ServerType;
   description?: string;
-  icon?: string;
+  icon?: {
+    icon48: string;
+    icon32: string;
+    icon24: string;
+    icon16: string;
+  };
   enabled?: boolean;
   connected?: boolean;
   headers: Record<string, string>;

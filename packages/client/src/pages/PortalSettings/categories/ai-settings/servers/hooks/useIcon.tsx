@@ -36,10 +36,10 @@ import { ONE_MEGABYTE } from "@docspace/shared/constants";
 
 import styles from "../styles/AddEditDialog.module.scss";
 
-export const useIcon = () => {
+export const useIcon = (initialValue?: string) => {
   const { t } = useTranslation(["AISettings", "OAuth"]);
 
-  const [icon, setIcon] = React.useState("");
+  const [icon, setIcon] = React.useState(initialValue || "");
   const [error, setError] = React.useState("");
 
   const initFormData = React.useRef({ icon });

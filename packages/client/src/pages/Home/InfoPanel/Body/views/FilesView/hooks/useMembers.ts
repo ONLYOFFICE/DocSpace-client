@@ -187,6 +187,7 @@ export const useMembers = ({
   );
 
   const fetchMembers = React.useCallback(async () => {
+    if (!room) return;
     setIsFirstLoading(true);
 
     abortController.current = new AbortController();

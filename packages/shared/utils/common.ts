@@ -1247,8 +1247,10 @@ export function getLogoUrl(
 ) {
   let logoTimestamp = "";
 
-  const timestamp = sessionStorage.getItem("logoUpdateTimestamp");
-  if (timestamp) logoTimestamp = `&t=${timestamp}`;
+  if (!checkIsSSR()) {
+    const timestamp = window.sessionStorage?.getItem("logoUpdateTimestamp");
+    if (timestamp) logoTimestamp = `&t=${timestamp}`;
+  }
 
   const url = `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}${culture ? `&culture=${culture}` : ""}${logoTimestamp}`;
 
@@ -1256,7 +1258,9 @@ export function getLogoUrl(
 }
 
 export function updateLogoTimestamp() {
-  sessionStorage.setItem("logoUpdateTimestamp", Date.now().toString());
+  if (checkIsSSR()) return;
+
+  window.sessionStorage?.setItem("logoUpdateTimestamp", Date.now().toString());
 }
 
 export const getUserTypeName = (

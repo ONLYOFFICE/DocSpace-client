@@ -72,6 +72,7 @@ export const enum SocketEvents {
   EncryptionProgress = "s:encryption-progress",
   ChangeMyType = "s:change-my-type",
   ChatMessageId = "s:commit-chat-message",
+  UpdateChat = "s:update-chat",
 }
 
 /**
@@ -281,6 +282,10 @@ export type TListenEventCallbackMap = {
     hasPersonalFolder: boolean;
   }) => void;
   [SocketEvents.ChatMessageId]: (data: { messageId: number }) => void;
+  [SocketEvents.UpdateChat]: (data: {
+    chatId: string;
+    chatTitle: string;
+  }) => void;
 };
 
 /**

@@ -153,13 +153,16 @@ export type TAddNewServer = {
   name: string;
   description: string;
   headers: Record<string, string>;
+  icon: string;
 };
 
 export type TUpdateServer = {
-  endpoint: string;
-  name: string;
+  endpoint?: string;
+  name?: string;
   description?: string;
   headers?: Record<string, string>;
+  icon?: string;
+  updateIcon?: boolean;
 };
 
 export type WebSearchConfig = {

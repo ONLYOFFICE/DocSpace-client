@@ -144,7 +144,6 @@ const Buttons = ({
           onSubmit={onExportMessage}
           roomId={roomId}
           chatName={chatName ?? ""}
-          messageId={messageId}
           getIcon={getIcon}
           showFolderSelector={showFolderSelector}
         />

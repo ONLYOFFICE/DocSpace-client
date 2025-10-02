@@ -78,23 +78,43 @@ const EditMCPDialogComponent = ({
     const headers = getAPIHeaders();
     const baseParams = getBaseParams();
 
-    // TODO: Add icon to request after changing API
     const icon = getIcon();
-    console.log(icon);
 
-    if (!baseParams) return;
+    if (!baseParams || !icon) return;
 
     setLoading(true);
 
-    const data: TUpdateServer = {
+    const formData: Omit<TUpdateServer, "updateIcon"> = {
       endpoint: baseParams.url,
       name: baseParams.name,
       description: baseParams.description,
       headers,
+      icon,
     };
 
+    const updateData: TUpdateServer = {};
+
+    if (baseParams.url !== server.endpoint) {
+      updateData.endpoint = formData.endpoint;
+    }
+    if (baseParams.name !== server.name) {
+      updateData.name = formData.name;
+    }
+    if (baseParams.description !== server.description) {
+      updateData.description = formData.description;
+    }
+
+    if (advancedSettingsChanged) {
+      updateData.headers = formData.headers;
+    }
+
+    if (iconChanged) {
+      if (icon) updateData.icon = icon;
+      updateData.updateIcon = true;
+    }
+
     try {
-      await updateMCP?.(server.id, data);
+      await updateMCP?.(server.id, updateData);
 
       toastr.success(t("AISettings:ServerUpdatedSuccess"));
 

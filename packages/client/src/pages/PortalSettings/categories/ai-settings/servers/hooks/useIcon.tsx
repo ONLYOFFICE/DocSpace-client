@@ -40,6 +40,7 @@ export const useIcon = () => {
   const { t } = useTranslation(["AISettings", "OAuth"]);
 
   const [icon, setIcon] = React.useState("");
+  const [error, setError] = React.useState("");
 
   const initFormData = React.useRef({ icon });
 
@@ -71,6 +72,8 @@ export const useIcon = () => {
       reader.onloadend = () => {
         if (reader.result && typeof reader.result === "string")
           setIcon(reader.result);
+
+        if (error) setError("");
       };
       reader.readAsDataURL(file);
 
@@ -85,12 +88,20 @@ export const useIcon = () => {
       img.onload = () => {
         const data = resizeImage.resize(img, widthProp, heightProp, "png");
         setIcon(data);
+
+        if (error) setError("");
       };
       img.src = URL.createObjectURL(file);
     }
   };
 
-  const getIcon = () => icon;
+  const getIcon = () => {
+    if (!icon) {
+      setError(t("OAuth:ThisRequiredField"));
+      return;
+    }
+    return icon;
+  };
 
   const hasChanges = !equal(initFormData.current, { icon });
 
@@ -102,6 +113,8 @@ export const useIcon = () => {
       isVertical
       labelVisible
       removeMargin
+      errorMessage={error}
+      hasError={!!error}
     >
       <div className={styles.iconBlock}>
         {icon ? <img className={styles.icon} alt="img" src={icon} /> : null}

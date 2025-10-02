@@ -34,6 +34,7 @@ import { getChat, getChats, deleteChat, renameChat } from "../../../api/ai";
 import { toastr } from "../../toast";
 
 import { TChatStoreProps } from "../Chat.types";
+import socket, { SocketEvents } from "../../../utils/socket";
 
 export default class ChatStore {
   currentChat: Nullable<TChat> = null;
@@ -172,6 +173,13 @@ export default class ChatStore {
     this.setTotalChats(this.totalChats - 1);
   };
 
+  updateChatTitle = (chatId: string, chatTitle: string) => {
+    const foundChatIndex = this.chats.findIndex((chat) => chat.id === chatId);
+    if (foundChatIndex > -1) {
+      this.chats[foundChatIndex].title = chatTitle;
+    }
+  };
+
   get hasNextChats() {
     return this.totalChats > this.chats.length;
   }
@@ -188,6 +196,29 @@ export const ChatStoreContextProvider = ({
   React.useEffect(() => {
     if (roomId) store.fetchChats();
   }, [store, roomId]);
+
+  React.useEffect(() => {
+    const callback = ({
+      chatId,
+      chatTitle,
+    }: {
+      chatId: string;
+      chatTitle: string;
+    }) => {
+      console.log(`[WS] ${SocketEvents.UpdateChat}, data: `, {
+        chatId,
+        chatTitle,
+      });
+
+      store.updateChatTitle(chatId, chatTitle);
+    };
+
+    socket?.on(SocketEvents.UpdateChat, callback);
+
+    return () => {
+      socket?.off(SocketEvents.UpdateChat, callback);
+    };
+  }, [store]);
 
   return (
     <ChatStoreContext.Provider value={store}>

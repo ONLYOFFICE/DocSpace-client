@@ -388,8 +388,7 @@ class ImportAccountsStore {
       this.importOptions = {
         importGroups: true,
         importPersonalFiles: true,
-        importSharedFiles: true,
-        importSharedFolders: true,
+        importSharedFilesAndFolders: true,
         importCommonFiles: true,
         importProjectFiles: true,
       };

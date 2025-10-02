@@ -100,7 +100,7 @@ const ImportStep = (props: ImportStepProps) => {
     <Wrapper>
       <ImportSection
         isChecked
-        sectionName={t("Settings:Users")}
+        sectionName={t("InfoPanel:Users")}
         description={t("Settings:UsersSectionDescription")}
         exportSection={{
           sectionName: usersExportDetails.name,

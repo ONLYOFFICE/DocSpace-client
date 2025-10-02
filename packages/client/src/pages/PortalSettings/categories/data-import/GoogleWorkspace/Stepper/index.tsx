@@ -127,7 +127,7 @@ export const getStepsData = (
           t={t}
           serviceName="Google Workspace"
           usersExportDetails={{
-            name: t("Settings:Users"),
+            name: t("InfoPanel:Users"),
           }}
           personalExportDetails={{
             name: t("Settings:GoogleDriveFiles"),

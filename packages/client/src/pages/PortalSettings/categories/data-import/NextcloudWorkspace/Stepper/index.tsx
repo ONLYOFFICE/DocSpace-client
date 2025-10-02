@@ -139,7 +139,7 @@ export const getStepsData = (
           t={t}
           serviceName="Nextcloud"
           usersExportDetails={{
-            name: t("Settings:Users"),
+            name: t("InfoPanel:Users"),
           }}
           personalExportDetails={{
             name: t("Settings:UsersFiles"),

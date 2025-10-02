@@ -369,7 +369,7 @@ module.exports = (env, argv) => {
 
   const banner = getBanner(version);
 
-  config.devtool = isProduction ? "source-map" : false; // TODO: replace to "eval-cheap-module-source-map" if you want to debug in a browser;
+  config.devtool = isProduction ? "source-map" : "eval-cheap-module-source-map"; // TODO: replace to "eval-cheap-module-source-map" if you want to debug in a browser;
 
   if (isProduction) {
     config.mode = "production";

@@ -85,6 +85,7 @@ const ThirdPartyModule = ({
   weekdaysLabelArray,
   setDefaultFolderId,
   isBackupPaid,
+  isFreeBackupsLimitReached,
 }: ThirdPartyModuleProps) => {
   const isResourcesDefault =
     defaultStorageType === BackupStorageType.ResourcesModuleType.toString();
@@ -168,7 +169,7 @@ const ThirdPartyModule = ({
         hoursArray={hoursArray}
         maxNumberCopiesArray={maxNumberCopiesArray}
       />
-      <NoteComponent isVisible={isBackupPaid} />
+      <NoteComponent isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)} />
     </div>
   );
 };

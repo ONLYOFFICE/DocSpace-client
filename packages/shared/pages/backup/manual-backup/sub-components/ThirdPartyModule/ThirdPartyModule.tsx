@@ -58,6 +58,7 @@ interface ThirdPartyModuleProps {
   isMaxProgress: boolean;
   buttonSize?: ButtonSize;
   isBackupPaid?: boolean;
+  isFreeBackupsLimitReached?: boolean;
 
   connectedThirdPartyAccount: Nullable<ConnectedThirdPartyAccountType>;
   isTheSameThirdPartyAccount: boolean;
@@ -125,6 +126,7 @@ const ThirdPartyModule = ({
   setNewPath,
   toDefault,
   isBackupPaid,
+  isFreeBackupsLimitReached,
 }: ThirdPartyModuleProps) => {
   const isMountRef = useRef(false);
   const folderRef = useRef("");
@@ -236,7 +238,7 @@ const ThirdPartyModule = ({
           />
         ) : null}
       </div>
-      <NoteComponent isVisible={isBackupPaid} />
+      <NoteComponent isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)} />
     </>
   );
 };

@@ -85,6 +85,7 @@ const ThirdPartyStorageModule = ({
   deleteValueFormSetting,
   selectedStorageId,
   isBackupPaid,
+  isFreeBackupsLimitReached,
 }: ThirdPartyStorageModuleProps) => {
   const {
     comboBoxOptions,
@@ -245,7 +246,7 @@ const ThirdPartyStorageModule = ({
           />
         ) : null}
       </div>
-      <NoteComponent isVisible={isBackupPaid} />
+      <NoteComponent isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)} />
     </>
   );
 };

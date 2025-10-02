@@ -66,6 +66,7 @@ export interface RoomsModuleProps {
   currentDeviceType?: DeviceType;
 
   isBackupPaid?: boolean;
+  isFreeBackupsLimitReached?: boolean;
 
   toDefault: VoidFunction;
   setBasePath: (folders: TBreadCrumb[]) => void;
@@ -92,6 +93,7 @@ const RoomsModule = ({
   currentDeviceType,
   settingsFileSelector,
   isBackupPaid,
+  isFreeBackupsLimitReached,
 }: RoomsModuleProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -213,7 +215,7 @@ const RoomsModule = ({
           testId="create_backup_room_button"
         />
       </div>
-      <NoteComponent isVisible={isBackupPaid} />
+      <NoteComponent isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)} />
     </div>
   );
 };

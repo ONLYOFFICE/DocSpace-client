@@ -54,7 +54,10 @@ const InviteQuotaWarningDialog = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const isAccounts = location.pathname.includes("accounts/people");
+
+  const isAccounts = ["accounts/people", "settings/data-import"].some((path) =>
+    location.pathname.includes(path),
+  );
 
   const [datesData, setDatesData] = useState({});
 

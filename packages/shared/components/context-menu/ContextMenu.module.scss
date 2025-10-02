@@ -104,8 +104,6 @@
       -moz-box-shadow: var(--context-menu-box-shadow);
       -webkit-box-shadow: var(--context-menu-box-shadow);
 
-      @include mixins.truncate;
-
       margin-top: -4px;
 
       margin-left: var(--context-menu-submenu-list-margin);

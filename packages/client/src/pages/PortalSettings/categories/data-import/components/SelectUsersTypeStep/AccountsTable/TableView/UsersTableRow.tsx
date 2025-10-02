@@ -118,9 +118,6 @@ const UsersTableRow = (props: TypeSelectTableRowProps) => {
   ) || { key: "", label: "" };
 
   const handleAccountToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-
     if (
       !e.target.closest(".dropdown-container") &&
       !userTypeRef.current?.contains(e.target)

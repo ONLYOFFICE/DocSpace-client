@@ -115,6 +115,8 @@ const User = ({
         force,
       })
       .then(async (item) => {
+        toastr.success(t("Common:AccessRightsChanged"));
+
         if (item?.error === RoomSecurityError.FormRoleBlockingDeletion) {
           return setRemoveUserConfirmation!(true, async () => {
             await updateRole(option, true);

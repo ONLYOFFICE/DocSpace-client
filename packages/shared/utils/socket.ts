@@ -231,7 +231,7 @@ export type TOptSocket = {
 export type TListenEventCallbackMap = {
   [SocketEvents.LogoutSession]: (
     loginEventId: unknown,
-    redirectUrl: string,
+    redirectUrl: string | null,
   ) => void;
   [SocketEvents.ModifyFolder]: (data?: TOptSocket) => void;
   [SocketEvents.ModifyRoom]: (data: TOptSocket) => void;

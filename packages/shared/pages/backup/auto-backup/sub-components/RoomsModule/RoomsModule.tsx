@@ -184,7 +184,9 @@ const RoomsModule = ({
         setMaxCopies={setMaxCopies}
         setMonthNumber={setMonthNumber}
       />
-      <NoteComponent isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)} />
+      <NoteComponent
+        isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)}
+      />
     </div>
   );
 };

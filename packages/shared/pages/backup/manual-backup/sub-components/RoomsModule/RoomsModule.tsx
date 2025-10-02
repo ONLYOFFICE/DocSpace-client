@@ -215,7 +215,9 @@ const RoomsModule = ({
           testId="create_backup_room_button"
         />
       </div>
-      <NoteComponent isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)} />
+      <NoteComponent
+        isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)}
+      />
     </div>
   );
 };

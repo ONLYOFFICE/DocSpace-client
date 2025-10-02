@@ -246,7 +246,9 @@ const ThirdPartyStorageModule = ({
           />
         ) : null}
       </div>
-      <NoteComponent isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)} />
+      <NoteComponent
+        isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)}
+      />
     </>
   );
 };

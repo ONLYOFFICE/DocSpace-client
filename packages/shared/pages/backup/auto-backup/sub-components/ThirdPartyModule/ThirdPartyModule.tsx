@@ -169,7 +169,9 @@ const ThirdPartyModule = ({
         hoursArray={hoursArray}
         maxNumberCopiesArray={maxNumberCopiesArray}
       />
-      <NoteComponent isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)} />
+      <NoteComponent
+        isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)}
+      />
     </div>
   );
 };

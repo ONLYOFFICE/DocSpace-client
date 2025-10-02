@@ -47,7 +47,7 @@ const ShareCalendar = ({
 
   const calendarComponent = (
     <Calendar
-      className={classNames(styles.calendar, "share-link_calendar")}
+      className={classNames(styles.calendar, styles.shareCalendar)}
       selectedDate={selectedDate}
       setSelectedDate={onDateSet}
       onChange={closeCalendar}

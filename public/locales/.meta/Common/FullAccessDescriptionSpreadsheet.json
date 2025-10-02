@@ -3,7 +3,7 @@
   "content": "Sharing, editing, commenting and renaming.",
   "content_en_sha1_hash": "3f487e1b3f61bbc134665933d4d4b44e8ae092f7",
   "created_at": "2025-09-29T18:22:04.749Z",
-  "updated_at": "2025-09-29T18:23:36.777Z",
+  "updated_at": "2025-10-01T15:17:48.475Z",
   "comment": {
     "text": "This text describes the permissions granted with \"Full Access\" for spreadsheet files, including the ability to share, edit, and comment. It appears as a label or tooltip to explain the scope of full access rights. Translators should ensure the description accurately reflects the capabilities of \"Full Access\" for spreadsheet files.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 612,
+      "line_number": 610,
       "context": "FileType.PDF,\n ),\n access: ShareAccessRights.FullAccess,\n isForm: P.not(true),\n },\n () => t(\"Common:FullAccessDescriptionSpreadsheet\"),\n )\n .with(\n {\n fileType: P.union(\n FileType.Spreadsheet,",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "The link has expired.",
   "content_en_sha1_hash": "ef3fc8d140fe94ebbb33acc6c724acb2c51a4cb9",
   "created_at": "2025-05-19T21:30:46.180Z",
-  "updated_at": "2025-08-26T11:15:14.248Z",
+  "updated_at": "2025-10-01T15:17:48.438Z",
   "comment": {
     "text": "The \"LinkExpired\" translation key is used to display an error message when a link has expired, likely in a login or confirmation process. It appears as a label on a button or dialog, providing users with a clear explanation of the issue. Translators should provide a corresponding error message in the local language that conveys a similar sense of urgency and clarity.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/sub-components/ExpiredComboBox.tsx",
-      "line_number": 172,
+      "line_number": 171,
       "context": "className={styles.expireText}\n as=\"div\"\n fontSize=\"12px\"\n fontWeight=\"400\"\n >\n {t(\"Common:LinkExpired\")}{\" \"}\n <Link\n type={LinkType.action}\n fontWeight={400}\n fontSize=\"12px\"\n color={globalColors.lightBlueMain}",
       "module": "/packages/shared"
     }

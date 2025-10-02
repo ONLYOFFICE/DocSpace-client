@@ -1,19 +1,19 @@
 {
-  "key_path": "EnableAutomaticBackupDescription",
-  "content": "Use this option to back up the space data.",
-  "content_en_sha1_hash": "5de5a960f26ee047ca6bba10e1c75d82b9e47c85",
-  "created_at": "2025-05-26T07:15:43.062Z",
-  "updated_at": "2025-10-01T15:17:48.497Z",
+  "key_path": "FeeAppliesToEachBackup",
+  "content": "Please note: A fee applies to each backup",
+  "content_en_sha1_hash": "512c44b45a36ce7fbdcc312908a8cfdf8e540e36",
+  "created_at": "2025-10-01T15:17:17.999Z",
+  "updated_at": "2025-10-01T15:17:52.249Z",
   "comment": {
-    "text": "This translation key is used to describe the option to enable automatic backups for space data. It provides context for users when this option is toggled or enabled in a UI component.",
+    "text": "This text informs the user that a fee is associated with each backup. It appears within a note component on the backup page, likely to clarify pricing details. Translators should ensure the wording accurately reflects the fee structure.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:05:37.869Z"
+    "updated_at": "2025-10-01T15:17:52.249Z"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 476,
-      "context": "className={classNames(\n styles.settingsUnavailable,\n \"backup_toggle-btn-description settings_unavailable\",\n )}\n >\n {t(\"Common:EnableAutomaticBackupDescription\")}\n </Text>\n </div>\n </div>\n {!isInitialError && selectedEnableSchedule && isEnableAuto ? (\n <div className=\"backup_modules\">",
+      "file_path": "/packages/shared/pages/backup/sub-components/NoteComponent.tsx",
+      "line_number": 41,
+      "context": "if (!isVisible) return null;\n \n return (\n <div className={styles.noteComponent}>\n <Text>{t(\"Common:FeeAppliesToEachBackup\")}</Text>\n </div>\n );\n };\n \n export default NoteComponent;",
       "module": "/packages/shared"
     }
   ],
@@ -163,6 +163,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

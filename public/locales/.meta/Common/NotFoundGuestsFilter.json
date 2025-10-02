@@ -3,7 +3,7 @@
   "content": "No guests found",
   "content_en_sha1_hash": "b91968e9823bf736346896bcc6a5923a94d5c5b3",
   "created_at": "2025-05-19T21:30:46.891Z",
-  "updated_at": "2025-09-23T07:24:24.179Z",
+  "updated_at": "2025-10-01T15:17:48.227Z",
   "comment": {
     "text": "The \"NotFoundGuestsFilter\" translation key is used to display a message when no guests are found in a contacts list. It appears as a header on an empty screen in the Home/ContactsBody section, informing users that there are no guest groups or members.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 686,
+      "line_number": 690,
       "context": ": t(\"Common:GroupsNotFoundDescription\"))\n }\n searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={\n activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuestsFilter\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:NotFoundMembers\")\n : t(\"Common:NotFoundGroups\")\n }\n searchEmptyScreenDescription={",
       "module": "/packages/shared"
     }

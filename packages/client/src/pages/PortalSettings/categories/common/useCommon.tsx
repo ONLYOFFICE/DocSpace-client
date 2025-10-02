@@ -128,7 +128,13 @@ const useCommon = ({
       actions.push(getBrandingData());
 
     await Promise.all(actions);
-  }, [getCustomizationData, getBrandingData, getBrandName, initWhiteLabel]);
+  }, [
+    getCustomizationData,
+    getBrandingData,
+    getBrandName,
+    initWhiteLabel,
+    isMobileView,
+  ]);
 
   return {
     getCustomizationData,

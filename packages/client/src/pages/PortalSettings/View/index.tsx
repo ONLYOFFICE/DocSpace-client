@@ -358,7 +358,6 @@ export const ViewComponent = inject(
       backupStore: backup,
       authStore,
       currentQuotaStore,
-      ssoStore,
       pluginStore,
       filesSettingsStore,
       webhooksStore,
@@ -370,6 +369,7 @@ export const ViewComponent = inject(
       paymentStore,
       servicesStore,
       currentTariffStatusStore,
+      ssoFormStore: ssoStore,
 
       // Direct values needed in safeProps
       isMobileView,

@@ -29,7 +29,6 @@ import { Trans } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
-import PeopleIcon from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
 import type { TFunction } from "i18next";
 import SelectFileStep from "../../components/SelectFileStep";
 import SelectUsersStep from "../../components/SelectUsersStep";
@@ -80,7 +79,11 @@ export const getStepsData = (
       description: isTypeSelectEmpty ? (
         <>
           <b>{t("Settings:RolesAreSet")}</b>
-          <div>{t("Settings:UsersAreRegistered")}</div>
+          <div>
+            {t("Settings:UsersAreRegistered", {
+              productName: t("Common:ProductName"),
+            })}
+          </div>
         </>
       ) : (
         <>
@@ -136,17 +139,13 @@ export const getStepsData = (
           t={t}
           serviceName="Nextcloud"
           usersExportDetails={{
-            name: t("Common:Contacts"),
-            icon: PeopleIcon,
+            name: t("Settings:Users"),
           }}
           personalExportDetails={{
             name: t("Settings:UsersFiles"),
           }}
-          sharedFilesExportDetails={{
-            name: t("Settings:SharedFiles"),
-          }}
-          sharedFoldersExportDetails={{
-            name: t("Settings:SharedFolders"),
+          sharedFilesAndFoldersExportDetails={{
+            name: t("Settings:SharedFilesAndFoldersDetails"),
           }}
         />
       ),

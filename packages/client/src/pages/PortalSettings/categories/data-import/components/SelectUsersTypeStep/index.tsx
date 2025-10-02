@@ -38,7 +38,7 @@ import AccountsPaging from "../../sub-components/AccountsPaging";
 import { Wrapper } from "../../StyledDataImport";
 import { InjectedTypeSelectProps, TypeSelectProps } from "../../types";
 import { MigrationButtons } from "../../sub-components/MigrationButtons";
-import UsersInfoBlock from "../../sub-components/UsersInfoBlock";
+import AdminsInfoBlock from "../../sub-components/AdminsInfoBlock";
 
 const PAGE_SIZE = 25;
 const REFRESH_TIMEOUT = 100;
@@ -62,12 +62,18 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
 
     cancelUploadDialogVisible,
     setCancelUploadDialogVisible,
+    totalUsedUsers,
+    limitAdmins,
   } = props as InjectedTypeSelectProps;
 
   const [boundaries, setBoundaries] = useState([0, PAGE_SIZE]);
   const [dataPortion, setDataPortion] = useState(
     filteredUsers.slice(...boundaries),
   );
+
+  useEffect(() => {
+    setDataPortion(filteredUsers.slice(...boundaries));
+  }, [boundaries, filteredUsers, users]);
 
   const handleDataChange = (leftBoundary: number, rightBoundary: number) => {
     setBoundaries([leftBoundary, rightBoundary]);
@@ -110,19 +116,13 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
     />
   );
 
-  useEffect(() => {
-    setDataPortion(filteredUsers.slice(...boundaries));
-  }, [boundaries, filteredUsers, users]);
-
   return (
     <Wrapper>
       {Buttons}
 
-      <UsersInfoBlock
-        quota={undefined}
-        totalUsedUsers={undefined}
-        numberOfSelectedUsers={undefined}
-        totalUsers={undefined}
+      <AdminsInfoBlock
+        limitAdmins={limitAdmins}
+        totalUsedUsers={totalUsedUsers}
       />
 
       {filteredUsers.length > 0 ? (
@@ -182,9 +182,7 @@ export default inject<TStore>(({ importAccountsStore, dialogsStore }) => {
     setMigratingWorkspace,
     setMigrationPhase,
     totalUsedUsers,
-    quota,
-    checkedUsers,
-    withEmailUsers,
+    limitAdmins,
   } = importAccountsStore;
   const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
     dialogsStore;
@@ -206,8 +204,6 @@ export default inject<TStore>(({ importAccountsStore, dialogsStore }) => {
     cancelUploadDialogVisible,
     setCancelUploadDialogVisible,
     totalUsedUsers,
-    quota,
-    checkedUsers,
-    withEmailUsers,
+    limitAdmins,
   };
 })(observer(SelectUsersTypeStep));

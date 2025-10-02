@@ -61,14 +61,20 @@ export const useBaseParams = (initialValues?: {
 
   const onChangeName = (value: string) => {
     setName(value);
+
+    if (nameError) setNameError("");
   };
 
   const onChangeUrl = (value: string) => {
     setUrl(value);
+
+    if (urlError) setUrlError("");
   };
 
   const onChangeDescription = (value: string) => {
     setDescription(value);
+
+    if (descriptionError) setDescriptionError("");
   };
 
   const requiredError = t("OAuth:ThisRequiredField");

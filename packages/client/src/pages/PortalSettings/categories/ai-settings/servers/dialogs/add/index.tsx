@@ -68,15 +68,14 @@ const AddMCPDialogComponent = ({ onClose, addNewMCP }: AddMCPDialogProps) => {
     const headers = getAPIHeaders();
     const baseParams = getBaseParams();
 
-    // TODO: Add icon to request after changing API
     const icon = getIcon();
-    console.log(icon);
 
-    if (!baseParams) return;
+    if (!baseParams || !icon) return;
 
     setLoading(true);
 
     const data: TAddNewServer = {
+      icon,
       endpoint: baseParams.url,
       name: baseParams.name,
       description: baseParams.description,

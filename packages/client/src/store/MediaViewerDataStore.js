@@ -166,17 +166,13 @@ class MediaViewerDataStore {
       return url;
     }
 
-    const { getPublicKey } = this.filesActionsStore;
-    const { bufferSelection } = this.filesStore;
+    const { getPublicKey, selectedFolderStore } = this.filesActionsStore;
 
     const filter = this.filesStore.filter;
 
-    const shareKey = await getPublicKey({
-      id: bufferSelection.folderId,
-      shared: bufferSelection.shared,
-      rootFolderType: bufferSelection.rootFolderType,
-      type: bufferSelection.type,
-    });
+    const selectedFolder = selectedFolderStore.getSelectedFolder();
+
+    const shareKey = await getPublicKey(selectedFolder);
 
     filter.key = shareKey;
 

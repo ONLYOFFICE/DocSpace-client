@@ -50,6 +50,7 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { parseQuota } from "SRC_DIR/pages/PortalSettings/utils/parseQuota";
 import { getUserByEmail } from "@docspace/shared/api/people";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import DialogsStore from "./DialogsStore";
 
 type TUsers = {
   new: TEnhancedMigrationUser[];
@@ -72,6 +73,7 @@ type TMigrationPhase = "" | "setup" | "migrating" | "complete";
 
 class ImportAccountsStore {
   private currentQuotaStore: CurrentQuotasStore | null = null;
+  private dialogsStore: DialogsStore | null = null;
 
   services: TWorkspaceService[] = [];
 
@@ -113,8 +115,7 @@ class ImportAccountsStore {
   importOptions = {
     importGroups: true,
     importPersonalFiles: true,
-    importSharedFiles: true,
-    importSharedFolders: true,
+    importSharedFilesAndFolders: true,
     importCommonFiles: true,
     importProjectFiles: true,
   };
@@ -126,9 +127,11 @@ class ImportAccountsStore {
   constructor(
     currentQuotaStoreConst: CurrentQuotasStore,
     settingsStoreConst: SettingsStore,
+    dialogsStore: DialogsStore,
   ) {
     this.currentQuotaStore = currentQuotaStoreConst;
     this.settingsStore = settingsStoreConst;
+    this.dialogsStore = dialogsStore;
     makeAutoObservable(this);
   }
 
@@ -175,14 +178,26 @@ class ImportAccountsStore {
     return totalPaidUsers;
   }
 
-  get numberOfSelectedUsers() {
+  get totalSelectedUsers() {
     return (
       this.checkedUsers.withEmail.length + this.checkedUsers.withoutEmail.length
     );
   }
 
+  get selectedWithEmail() {
+    return this.checkedUsers.withEmail.length;
+  }
+
+  get selectedWithoutEmail() {
+    return this.checkedUsers.withoutEmail.length;
+  }
+
   get totalUsers() {
     return this.withEmailUsers.length + this.users.withoutEmail.length;
+  }
+
+  get limitAdmins() {
+    return typeof this.quota.max === "number" ? this.quota.max : null;
   }
 
   setStep = (step: number) => {
@@ -382,6 +397,22 @@ class ImportAccountsStore {
   };
 
   changeUserType = (key: string, type: string) => {
+    if (type !== this.UserTypes.User && this.limitAdmins) {
+      const usersAdmins = this.users.result.filter(
+        (user) => user.userType !== this.UserTypes.User,
+      );
+      const wasAdmin = usersAdmins.some((user) => user.key === key);
+
+      if (!wasAdmin) {
+        const totalAdmins = this.quota.used + usersAdmins.length + 1;
+
+        if (totalAdmins > this.limitAdmins) {
+          this.dialogsStore?.setQuotaWarningDialogVisible(true);
+          return;
+        }
+      }
+    }
+
     this.users = {
       ...this.users,
       result: this.users.result.map((user) =>
@@ -394,6 +425,25 @@ class ImportAccountsStore {
     const checkedKeys = this.checkedUsers.result.map(
       (checkedUser) => checkedUser.key,
     );
+
+    if (type !== this.UserTypes.User && this.limitAdmins) {
+      const currentAdmins = this.users.result.filter(
+        (user) => user.userType !== this.UserTypes.User,
+      );
+
+      const newAdmins = this.checkedUsers.result.filter(
+        (user) => user.userType === this.UserTypes.User,
+      );
+
+      const totalAdmins =
+        this.quota.used + currentAdmins.length + newAdmins.length;
+
+      if (totalAdmins > this.limitAdmins) {
+        this.dialogsStore?.setQuotaWarningDialogVisible(true);
+        return;
+      }
+    }
+
     this.users = {
       ...this.users,
       result: this.users.result.map((user) =>

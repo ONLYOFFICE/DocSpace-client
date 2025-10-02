@@ -159,23 +159,12 @@ export const Wrapper = styled.div`
       margin-inline-end: 8px;
     }
   }
-`;
 
-export const UsersInfoBlock = styled.div`
-  display: flex;
-  align-items: center;
-  max-width: 660px;
-  background: ${(props) => props.theme.client.settings.migration.background};
-  padding: 12px 16px;
-  border-radius: 6px;
-  margin: 16px 0;
-
-  .selected-users-count {
-    margin-inline-end: 24px;
-  }
-
-  .selected-admins-count {
-    margin-inline-end: 8px;
+  .step-info-block {
+    display: inline-flex;
+    gap: 8px;
+    background: ${(props) =>
+      props.theme.client.settings.migration.infoBlockBackground};
   }
 `;
 
@@ -249,65 +238,40 @@ export const StyledTableContainer = styled(TableContainer).attrs(
   }
 `;
 
-export const StyledUsersInfoWrapper = styled.div.attrs(injectDefaultTheme)<{
-  selectedUsers: number;
-  totalLicenceLimit: number;
-}>`
+export const StyledInfoBlock = styled.div.attrs(injectDefaultTheme)`
   margin: 16px 0;
+  display: inline-flex;
+  align-items: center;
+  background: ${(props) =>
+    props.theme.client.settings.migration.infoBlockBackground};
+  box-sizing: border-box;
+  padding: 12px 16px;
+  border-radius: 6px;
 
-  .license-limit-warning {
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    color: ${(props) => props.theme.client.settings.migration.errorTextColor};
+  @media ${mobile} {
+    width: 100%;
   }
 
-  .users-info-wrapper {
-    display: flex;
-    align-items: center;
-    width: fit-content;
-    min-width: 660px;
-    background: ${(props) =>
-      props.theme.client.settings.migration.infoBlockBackground};
-    box-sizing: border-box;
-    padding: 12px 16px;
-    border-radius: 6px;
-    margin: 16px 0;
+  .selected-users-count {
+    color: ${(props) =>
+      props.theme.client.settings.migration.infoBlockTextColor};
+    font-weight: 700;
+    font-size: 14px;
+  }
 
-    @media (max-width: 1140px) {
-      width: 100%;
-    }
+  .selected-admins-count {
+    margin-inline-end: 8px;
+    color: ${(props) =>
+      props.theme.client.settings.migration.infoBlockTextColor};
+    font-weight: 700;
+    font-size: 14px;
 
-    @media ${mobile} {
-      flex-wrap: wrap;
-      min-width: auto;
-      gap: 12px;
-    }
-
-    .selected-users-count {
-      margin-inline-end: 24px;
-      color: ${(props) =>
-        props.theme.client.settings.migration.infoBlockTextColor};
+    span {
       font-weight: 700;
       font-size: 14px;
-    }
-
-    .selected-admins-count {
-      margin-inline-end: 8px;
+      margin-inline-start: 4px;
       color: ${(props) =>
         props.theme.client.settings.migration.infoBlockTextColor};
-      font-weight: 700;
-      font-size: 14px;
-
-      span {
-        font-weight: 700;
-        font-size: 14px;
-        margin-inline-start: 4px;
-        color: ${(props) =>
-          props.selectedUsers > props.totalLicenceLimit
-            ? props.theme.client.settings.migration.errorTextColor
-            : props.theme.client.settings.migration.infoBlockTextColor};
-      }
     }
   }
 `;

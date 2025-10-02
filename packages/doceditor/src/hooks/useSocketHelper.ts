@@ -95,7 +95,7 @@ const useSocketHelper = ({
       redirectUrl,
     }: {
       loginEventId: unknown;
-      redirectUrl: string;
+      redirectUrl: string | null;
     }) => {
       const eventId = Number(loginEventId);
 

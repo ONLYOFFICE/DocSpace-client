@@ -140,20 +140,9 @@ const WelcomePageSettingsComponent = (props) => {
     if (!isMobileDevice()) {
       setState((val) => ({ ...val, isCustomizationView: true }));
 
-      const currentUrl = window.location.href.replace(
-        window.location.origin,
-        "",
-      );
-
-      const newUrl = "/portal-settings/customization/general";
-
-      if (currentUrl.startsWith("/portal-settings/")) {
-        return;
+      if (location.pathname.includes("welcome-page-settings")) {
+        navigate("/portal-settings/customization/general");
       }
-
-      // if (newUrl === currentUrl) return;
-
-      navigate(newUrl);
     } else {
       setState((val) => ({ ...val, isCustomizationView: false }));
     }

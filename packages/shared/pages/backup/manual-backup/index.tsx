@@ -181,7 +181,8 @@ const ManualBackup = ({
   walletCustomerEmail,
   isThirdPartyAvailable,
   backupServicePrice,
-  isBackupPaid,
+  isBackupPaid = false,
+  isFreeBackupsLimitReached = false,
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -480,7 +481,9 @@ const ManualBackup = ({
                   />
                 ) : null}
               </div>
-              <NoteComponent isVisible={isBackupPaid} />
+              <NoteComponent
+                isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)}
+              />
             </>
           ) : null}
         </div>
@@ -524,6 +527,7 @@ const ManualBackup = ({
             currentDeviceType={currentDeviceType}
             maxWidth={maxWidth}
             isBackupPaid={isBackupPaid}
+            isFreeBackupsLimitReached={isFreeBackupsLimitReached}
           />
         ) : null}
       </div>
@@ -575,6 +579,7 @@ const ManualBackup = ({
             setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
             setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
             isBackupPaid={isBackupPaid}
+            isFreeBackupsLimitReached={isFreeBackupsLimitReached}
             {...commonModulesProps}
           />
         ) : null}
@@ -619,6 +624,7 @@ const ManualBackup = ({
             buttonSize={buttonSize}
             isThirdPartyAvailable={isThirdPartyAvailable ?? true}
             isBackupPaid={isBackupPaid}
+            isFreeBackupsLimitReached={isFreeBackupsLimitReached}
           />
         ) : null}
       </div>

@@ -68,6 +68,7 @@ interface ThirdPartyStorageModuleProps {
   isMaxProgress: boolean;
   buttonSize?: ButtonSize;
   isBackupPaid?: boolean;
+  isFreeBackupsLimitReached?: boolean;
   thirdPartyStorage: SelectedStorageType[];
   formSettings: Record<string, string>;
   errorsFieldsBeforeSafe: Record<string, boolean>;
@@ -111,6 +112,7 @@ const ThirdPartyStorageModule = ({
   setIsThirdStorageChanged,
   isThirdPartyAvailable,
   isBackupPaid,
+  isFreeBackupsLimitReached,
 }: ThirdPartyStorageModuleProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -296,7 +298,9 @@ const ThirdPartyStorageModule = ({
           />
         ) : null}
       </div>
-      <NoteComponent isVisible={isBackupPaid} />
+      <NoteComponent
+        isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)}
+      />
     </div>
   );
 };

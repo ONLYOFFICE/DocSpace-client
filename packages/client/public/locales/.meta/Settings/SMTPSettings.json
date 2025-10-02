@@ -3,7 +3,7 @@
   "content": "SMTP Settings",
   "content_en_sha1_hash": "52ff101f3a7156bd8a868fbddda28dc2f4dfb972",
   "created_at": "2025-05-19T21:30:52.745Z",
-  "updated_at": "2025-09-29T11:28:56.224Z",
+  "updated_at": "2025-10-02T08:48:56.497Z",
   "comment": {
     "text": "SMTP Settings translation key is used to display the title of a page or section within the PortalSettings category, typically in a tab or header. It appears in the integration settings file and is related to sending emails via SMTP (Simple Mail Transfer Protocol).",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/index.js",
-      "line_number": 51,
-      "context": "\"Common\",\n \"UploadPanel\",\n ]);\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"Settings:SMTPSettings\"));\n }, [ready]);\n \n if (showPortalSettingsLoader || !ready) return <SettingsSMTPSkeleton />;\n \n return (",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
+      "line_number": 111,
+      "context": "await getThirdPartyData();\n },\n },\n {\n id: \"smtp-settings\",\n name: t(\"Settings:SMTPSettings\"),\n content: <SMTPSettings />,\n onClick: async () => {\n clearAbortControllerArr();\n await getSMTPSettingsData();\n },",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
-      "line_number": 121,
-      "context": "await getThirdPartyData();\n },\n },\n {\n id: \"smtp-settings\",\n name: t(\"Settings:SMTPSettings\"),\n content: <SMTPSettings />,\n onClick: async () => {\n clearAbortControllerArr();\n await getSMTPSettingsData();\n },",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/index.js",
+      "line_number": 51,
+      "context": "\"Common\",\n \"UploadPanel\",\n ]);\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"Settings:SMTPSettings\"));\n }, [ready]);\n \n if (showPortalSettingsLoader || !ready) return <SettingsSMTPSkeleton />;\n \n return (",
       "module": "/packages/client"
     },
     {

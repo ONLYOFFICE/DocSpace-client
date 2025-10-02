@@ -144,7 +144,6 @@ const LinkRow = ({
             t={t}
             link={link}
             isLoaded={isLoaded}
-            isRoomsLink={isRoomsLink}
             isArchiveFolder={isArchiveFolder}
             removedExpiredLink={removedExpiredLink}
             changeExpirationOption={changeExpirationOption}

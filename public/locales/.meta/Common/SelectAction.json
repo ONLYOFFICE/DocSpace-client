@@ -3,13 +3,19 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2025-09-26T15:21:06.051Z",
+  "updated_at": "2025-10-01T15:17:48.083Z",
   "comment": {
     "text": "This translation key is used to display a label for selecting an action, such as choosing a file or folder, in various UI elements. It appears in a placeholder position within a dialog and on a component that handles file selection. Translators should provide a descriptive text that indicates the user's ability to make a choice.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:34:25.327Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/sub-components/HeadOfGroupParam/index.tsx",
+      "line_number": 57,
+      "context": "{!groupManager ? (\n <Styled.SelectGroupManager onClick={onShowSelectGroupManagerPanel}>\n <SelectorAddButton\n iconName={PlusSvgUrl}\n label={t(\"Common:SelectAction\")}\n testId=\"select_group_manager\"\n />\n </Styled.SelectGroupManager>\n ) : (\n <GroupMemberRow",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
       "line_number": 55,
@@ -26,12 +32,6 @@
       "file_path": "/packages/client/src/components/RoomsSelectorInput/index.js",
       "line_number": 125,
       "context": "isLoading={isLoading}\n isDisabled={isDisabled || isLoading}\n hasError={isError}\n scale\n isDocumentIcon={isDocumentIcon}\n placeholder={t(\"SelectAction\")}\n />\n \n <Backdrop\n visible={isPanelVisible}\n isAside",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/sub-components/HeadOfGroupParam/index.tsx",
-      "line_number": 57,
-      "context": "{!groupManager ? (\n <Styled.SelectGroupManager onClick={onShowSelectGroupManagerPanel}>\n <SelectorAddButton\n iconName={PlusSvgUrl}\n label={t(\"Common:SelectAction\")}\n testId=\"select_group_manager\"\n />\n </Styled.SelectGroupManager>\n ) : (\n <GroupMemberRow",
       "module": "/packages/client"
     },
     {
@@ -84,7 +84,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 470,
+      "line_number": 471,
       "context": "<PeopleSelector\n withCancelButton\n onCancel={onCloseContactSelector}\n cancelButtonLabel=\"\"\n disableSubmitButton={false}\n submitButtonLabel={t(\"Common:SelectAction\")}\n onSubmit={onSubmitContactSelector}\n withHeader\n headerProps={{\n onCloseClick: onCloseContactSelector,\n isCloseable: true,",
       "module": "/packages/client"
     },
@@ -150,7 +150,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 659,
+      "line_number": 663,
       "context": "renderCustomItem={renderCustomItem}\n aria-label={ariaLabel || \"People Selector\"}\n data-selector-type={dataSelectorType || \"people\"}\n dataTestId={dataTestId || \"people-selector\"}\n items={itemsList}\n submitButtonLabel={submitButtonLabel || t(\"Common:SelectAction\")}\n onSubmit={onSubmit}\n disableSubmitButton={disableSubmitButton || !selectedItems.length}\n selectedItem={isMultiSelect ? null : selectedItems[0]}\n submitButtonId={submitButtonId}\n emptyScreenImage={emptyScreenImage}",
       "module": "/packages/shared"
     },

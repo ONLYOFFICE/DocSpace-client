@@ -3,7 +3,7 @@
   "content": "Full access",
   "content_en_sha1_hash": "5e4017a2a48e628c8f3391f53547d028c3c5fa2c",
   "created_at": "2025-09-23T07:24:16.817Z",
-  "updated_at": "2025-09-29T18:22:19.740Z",
+  "updated_at": "2025-10-01T15:17:48.478Z",
   "comment": {
     "text": "This key represents the highest level of access granted to a shared folder or file. It's used to display the access level in the UI, specifically within access level cells and share settings, indicating the user has full read and write permissions. Translators should ensure the translation accurately conveys the scope of this access level.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 579,
+      "line_number": 577,
       "context": "return (\n match({ fileType: file.fileType, access, isForm: file.isForm })\n // Document\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.FullAccess },\n () => t(\"Common:FullAccessDescriptionDocument\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.Editing },\n () => t(\"Common:EditingDescriptionDocument\"),\n )",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 579,
+      "line_number": 577,
       "context": "return (\n match({ fileType: file.fileType, access, isForm: file.isForm })\n // Document\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.FullAccess },\n () => t(\"Common:FullAccessDescriptionDocument\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.Editing },\n () => t(\"Common:EditingDescriptionDocument\"),\n )",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 579,
+      "line_number": 577,
       "context": "return (\n match({ fileType: file.fileType, access, isForm: file.isForm })\n // Document\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.FullAccess },\n () => t(\"Common:FullAccessDescriptionDocument\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.Editing },\n () => t(\"Common:EditingDescriptionDocument\"),\n )",
       "module": "/packages/shared"
     }

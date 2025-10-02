@@ -3,13 +3,19 @@
   "content": "Remove",
   "content_en_sha1_hash": "e963907dac5cd5c017869b4c96c18021c9bd058b",
   "created_at": "2025-05-19T21:30:47.809Z",
-  "updated_at": "2025-09-29T18:22:19.476Z",
+  "updated_at": "2025-10-01T15:17:48.107Z",
   "comment": {
     "text": "This translation key is used for the text \"Remove\" in buttons and dialogs to provide a clear and consistent label for removing or deleting content. It appears on buttons such as \"Change User Type Modal Submit\", \"Delete File Modal Submit\", and labels for a list of options in a dialog, helping users understand the action being performed.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:34:45.439Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 199,
+      "context": "if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverButton\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:OKButton\");\n \n if (unsubscribe) return t(\"Common:Remove\");\n \n return t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n };",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/RemoveGuest/index.tsx",
       "line_number": 135,
@@ -48,13 +54,13 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 798,
+      "line_number": 796,
       "context": "access: ShareAccessRights.None,\n },\n {\n access: ShareAccessRights.None,\n key: \"remove\",\n label: t(\"Common:Remove\"),\n },\n ]\n : [],\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 798,
+      "line_number": 796,
       "context": "access: ShareAccessRights.None,\n },\n {\n access: ShareAccessRights.None,\n key: \"remove\",\n label: t(\"Common:Remove\"),\n },\n ]\n : [],\n };",
       "module": "/packages/shared"
     },

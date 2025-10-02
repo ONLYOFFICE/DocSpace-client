@@ -163,7 +163,7 @@ const DeveloperToolsWrapper = (props) => {
         path === `/developer-tools/${item.id}`,
     );
 
-    if (currentTab !== -1 && data.length) {
+    if (currentTab !== undefined && data.length) {
       setCurrentTabId(currentTab?.id);
     }
   }, [location.pathname]);

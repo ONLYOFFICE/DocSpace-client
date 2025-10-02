@@ -87,6 +87,7 @@ const ManualBackupWrapper = ({
       isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
       setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
       setDownloadingProgress={updateDownloadingProgress}
+      isBackupPaid={isBackupPaid}
       {...props}
     />
   );
@@ -148,6 +149,7 @@ export default inject<
       setIsInited,
 
       backupPageEnable,
+      backupsCount,
     } = backup;
 
     const { isPayer, backupServicePrice } = paymentStore;
@@ -179,7 +181,8 @@ export default inject<
       setThirdPartyProviders,
       openConnectWindow,
     } = thirdPartyStore;
-    const { isBackupPaid, isThirdPartyAvailable } = currentQuotaStore;
+    const { isBackupPaid, isThirdPartyAvailable, maxFreeBackups } =
+      currentQuotaStore;
 
     const { getIcon, filesSettings } = filesSettingsStore;
 
@@ -200,6 +203,10 @@ export default inject<
         : "";
 
     const colorScheme = currentColorScheme ?? undefined;
+
+    const backupCount = backupsCount ?? 0;
+    const isFreeBackupsLimitReached =
+      maxFreeBackups > 0 ? backupCount >= maxFreeBackups : true;
 
     return {
       // backup
@@ -283,6 +290,7 @@ export default inject<
       isThirdPartyAvailable,
 
       backupServicePrice,
+      isFreeBackupsLimitReached,
     };
   },
 )(observer(ManualBackupWrapper as React.FC<ExternalManualBackupProps>));

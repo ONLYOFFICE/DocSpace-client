@@ -44,7 +44,6 @@ const ExpiredComboBox = ({
   link,
   changeExpirationOption,
   isDisabled,
-  isRoomsLink,
   removedExpiredLink,
 }: ExpiredComboBoxProps) => {
   const { t, i18n } = useTranslation(["Common"]);
@@ -194,11 +193,10 @@ const ExpiredComboBox = ({
       {showCalendar ? (
         <ShareCalendar
           bodyRef={bodyRef}
-          onDateSet={setDateFromCalendar}
-          calendarRef={calendarRef}
-          closeCalendar={onCalendarClose}
           locale={i18n.language}
-          useDropDown={isRoomsLink}
+          calendarRef={calendarRef}
+          onDateSet={setDateFromCalendar}
+          closeCalendar={onCalendarClose}
         />
       ) : null}
     </div>

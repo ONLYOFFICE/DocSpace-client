@@ -2399,6 +2399,7 @@
   --settings-common-backup-rectangle-bg-color: #{$gray-light};
   --settings-backup-text-disabled: #{$gray};
   --settings-backup-background: #{$gray-light};
+  --settings-backup-note-color: #{$gray};
 }
 
 .dark {
@@ -2411,6 +2412,7 @@
   --settings-common-backup-rectangle-bg-color: #{$light-dark-gray-hover};
   --settings-backup-text-disabled: #{$gray-dark-text};
   --settings-backup-background: #{$dark-gray-light};
+  --settings-backup-note-color: #{$gray-dark};
 }
 
 .light {

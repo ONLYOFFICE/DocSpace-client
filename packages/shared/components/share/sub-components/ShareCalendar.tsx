@@ -27,10 +27,11 @@
 import moment from "moment";
 import classNames from "classnames";
 
-import { isMobile } from "../../../utils/device";
+import { useIsMobile } from "../../../hooks/useIsMobile";
 
 import { Calendar } from "../../calendar";
 import { DropDown } from "../../drop-down";
+
 import { ShareCalendarProps } from "../Share.types";
 import styles from "../Share.module.scss";
 
@@ -40,18 +41,19 @@ const ShareCalendar = ({
   calendarRef,
   locale,
   bodyRef,
-  useDropDown,
 }: ShareCalendarProps) => {
   const selectedDate = moment();
   const maxDate = moment().add(10, "years");
 
+  const isMobileView = useIsMobile();
+
   const calendarComponent = (
     <Calendar
-      className={classNames(styles.calendar, "share-link_calendar")}
+      className={classNames(styles.calendar, styles.shareCalendar)}
       selectedDate={selectedDate}
       setSelectedDate={onDateSet}
       onChange={closeCalendar}
-      isMobile={isMobile()}
+      isMobile={isMobileView}
       forwardedRef={calendarRef}
       locale={locale}
       minDate={selectedDate}
@@ -60,19 +62,22 @@ const ShareCalendar = ({
     />
   );
 
-  return useDropDown ? (
+  return (
     <DropDown
-      className={styles.dropDown}
       open
-      isDefaultMode={false}
+      isDefaultMode
       forwardedRef={bodyRef}
+      className={styles.dropDown}
       eventTypes={["mousedown"]}
-      withBackdrop={false}
+      withBackdrop={isMobileView}
+      isMobileView={isMobileView}
+      withBackground={isMobileView}
+      usePortalBackdrop={isMobileView}
+      shouldShowBackdrop={isMobileView}
+      clickOutsideAction={() => closeCalendar()}
     >
       {calendarComponent}
     </DropDown>
-  ) : (
-    calendarComponent
   );
 };
 

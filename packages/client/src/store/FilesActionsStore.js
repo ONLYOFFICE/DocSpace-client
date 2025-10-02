@@ -2729,9 +2729,12 @@ class FilesActionStore {
         this.onMarkAsRead(item);
 
       if (canWebEdit || canViewedDocs) {
-        const shareWebUrl = new URL(webUrl);
+        let shareKey = item.requestToken;
 
-        const shareKey = getObjectByLocation(shareWebUrl)?.share;
+        if (webUrl) {
+          const shareWebUrl = new URL(webUrl);
+          shareKey = getObjectByLocation(shareWebUrl)?.share;
+        }
 
         const isPDF = item.fileExst === ".pdf";
 

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
@@ -74,19 +74,13 @@ const DeleteDialogComponent = (props) => {
   } = props;
   const [isChecked, setIsChecked] = useState(false);
 
-  const selection = [];
-  let i = 0;
-
-  while (selectionProps.length !== i) {
-    const item = selectionProps[i];
-
-    if (!item?.isEditing) {
-      // if (item?.access === 0 || item?.access === 1 || unsubscribe) {
-      selection.push(item);
-      // }
-    }
-    i++;
-  }
+  const selection = useMemo(
+    () =>
+      unsubscribe
+        ? selectionProps
+        : selectionProps.filter((item) => !item?.isEditing),
+    [selectionProps, unsubscribe],
+  );
 
   const isTemplate = selection[0]?.isTemplate;
 

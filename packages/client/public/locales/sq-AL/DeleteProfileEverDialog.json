@@ -7,7 +7,6 @@
   "DeleteGuest": "Fshini mysafirin",
   "DeleteGuests": "Fshini mysafirët",
   "DeletePersonalDataApplicable": "*Zbatohet për përdoruesit e selektuar që kanë skedarë dhe dosje të tilla.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Dhomat e krijuara nga ky përdorues dhe dokumentet e ruajtura në këto dhoma do t'i ricaktohen automatikisht një administratori që kryen fshirjen: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Ricaktoni të dhënat manualisht për të zgjedhur një përdorues tjetër destinacioni për ricaktim.",
   "DeleteReqassignDescriptionGuest": "The {{userCaption}} do të fshihet nga të gjitha dhomat në të cilat ata janë ftuar. Dokumentet e krijuara nga ky {{userCaption}} në dhoma do t'u ricaktohen automatikisht pronarëve të dhomës.",
   "DeleteUser": "Fshini përdoruesin",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> do të fshihet. Ky veprim nuk mund të zhbëhet.",

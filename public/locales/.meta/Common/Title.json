@@ -3,7 +3,7 @@
   "content": "Title",
   "content_en_sha1_hash": "768e0c1c69573fb588f61f1308a015c11468e05f",
   "created_at": "2025-05-19T21:30:49.298Z",
-  "updated_at": "2025-09-29T18:22:19.488Z",
+  "updated_at": "2025-10-03T13:19:30.473Z",
   "comment": {
     "text": "This translation key is used to display the title of a header or panel element. It appears as a label on buttons, checkboxes, and other UI elements in various applications, such as panels, sections, and settings pages. Translators should focus on translating this content to provide clear and consistent titles throughout the product.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 365,
+      "line_number": 354,
       "context": "const settingsBlock = (\n <div className=\"settings-block\">\n <FieldContainer\n id=\"fieldContainerWelcomePage\"\n className=\"field-container-width\"\n labelText={`${t(\"Common:Title\")}`}\n isVertical\n hasError={!state.isValidTitle}\n >\n <TextInput\n tabIndex={5}",
       "module": "/packages/client"
     },

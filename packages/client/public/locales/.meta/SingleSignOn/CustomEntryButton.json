@@ -3,7 +3,7 @@
   "content": "Custom login button caption",
   "content_en_sha1_hash": "f5f09f9a9e14e9be404be171d68c52364d62b9c9",
   "created_at": "2025-05-19T21:30:50.073Z",
-  "updated_at": "2025-05-24T03:28:49.134Z",
+  "updated_at": "2025-10-03T13:19:30.641Z",
   "comment": {
     "text": "This translation key is used for the caption of a custom login button, which allows users to customize the label displayed on the login form. It appears as part of an SSO settings page and can be translated to provide a localized label for this feature.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/IdpSettings.js",
-      "line_number": 92,
+      "line_number": 85,
       "context": "return (\n <StyledWrapper>\n <UploadXML />\n \n <SsoFormField\n labelText={t(\"CustomEntryButton\")}\n name=\"spLoginLabel\"\n placeholder={t(\"Settings:SingleSignOn\")}\n tabIndex={4}\n tooltipContent={<Text fontSize=\"12px\">{t(\"CustomEntryTooltip\")}</Text>}\n tooltipClass=\"custom-entry-tooltip icon-button\"",
       "module": "/packages/client"
     }

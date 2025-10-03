@@ -50,7 +50,10 @@ export const getSideInfo = (
         if (!convert && index === lastIndex) {
           child = element;
         } else if (React.isValidElement(element) && "props" in element) {
-          info.push(element.props.children as React.JSX.Element);
+          const children = element.props.children;
+          if (children !== undefined && children !== null) {
+            info.push(children as React.JSX.Element);
+          }
         }
       }
     },

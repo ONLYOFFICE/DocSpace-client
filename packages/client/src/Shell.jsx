@@ -211,7 +211,7 @@ const Shell = ({ page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
-    const callback = (loginEventId, redirectUrl) => {
+    const callback = ({ loginEventId, redirectUrl }) => {
       console.log(
         `[WS] "logout-session"`,
         loginEventId,

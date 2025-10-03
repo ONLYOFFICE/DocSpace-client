@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
@@ -61,6 +61,7 @@ const SecurityWrapper = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const [currentTabId, setCurrentTabId] = useState();
 
   const defaultProps = createDefaultHookSettingsProps({
     settingsStore,
@@ -101,13 +102,11 @@ const SecurityWrapper = (props) => {
     },
   ];
 
-  const getCurrentTabId = () => {
+  useEffect(() => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
-    return currentTab && data.length ? currentTab.id : data[0].id;
-  };
-
-  const currentTabId = getCurrentTabId();
+    if (currentTab && data.length) setCurrentTabId(currentTab.id);
+  }, [location.pathname]);
 
   useEffect(() => {
     return () => {
@@ -124,6 +123,7 @@ const SecurityWrapper = (props) => {
         `/portal-settings/security/${e.id}`,
       ),
     );
+    setCurrentTabId(e.id);
   };
 
   if ((showPortalSettingsLoader && data.length) || !tReady)

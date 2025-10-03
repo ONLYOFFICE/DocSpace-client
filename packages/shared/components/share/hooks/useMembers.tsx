@@ -191,9 +191,11 @@ export const useMembers = (props: UseMembersProps) => {
   const getUsers = useCallback(() => {
     if (props.disabledSharedUser) return { content: [], headersCount: 0 };
 
-    const { users, groups, administrators, expected, guests } = memoMembers;
+    const { owner, users, groups, administrators, expected, guests } =
+      memoMembers;
 
     const membersList = [
+      ...owner,
       ...administrators,
       ...groups,
       ...users,

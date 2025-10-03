@@ -272,17 +272,24 @@ export default function withFileActions(WrappedFileItem) {
 
     onDragOver = (e) => {
       const { setDragging } = this.props;
-      if (
-        e.dataTransfer.items.length > 0 &&
-        e.dataTransfer.dropEffect !== "none"
-      ) {
+
+      const hasFiles =
+        e.dataTransfer.types.includes("Files") ||
+        e.dataTransfer.types.includes("application/x-moz-file");
+
+      if (hasFiles && e.dataTransfer.dropEffect !== "none") {
         setDragging(true);
       }
     };
 
     onDragLeave = (e) => {
       const { setDragging } = this.props;
-      if (!e.relatedTarget || !e.dataTransfer.items.length) {
+
+      const hasFiles =
+        e.dataTransfer.types.includes("Files") ||
+        e.dataTransfer.types.includes("application/x-moz-file");
+
+      if (!e.relatedTarget || !hasFiles) {
         setDragging(false);
       }
     };

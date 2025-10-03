@@ -54,7 +54,7 @@ const SourceItem = ({ source }: { source: TToolCallResultSourceData }) => {
 
   const iconUrl = isKnowledgeSource
     ? getKnowledgeDocumentIconURLByFileName(source.title)
-    : undefined; // TODO: Add when there will be solution for getting favicons
+    : source.faviconUrl;
 
   const sourceContent = isKnowledgeSource
     ? source.text

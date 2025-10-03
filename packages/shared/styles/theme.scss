@@ -2222,6 +2222,7 @@
   --chat-message-source-url-color: #{$light-gray-dark};
   --chat-message-source-bg-hover-color: #{$gray-light-mid};
   --chat-message-source-bg-pressed-color: #{$gray-strong};
+  --chat-message-external-link-icon-color: #{$gray};
 }
 
 .dark {
@@ -2267,6 +2268,7 @@
   --chat-message-source-url-color: #{$dark-gray-dark};
   --chat-message-source-bg-hover-color: #{$light-dark-gray-hover};
   --chat-message-source-bg-pressed-color: #{$black};
+  --chat-message-external-link-icon-color: #{$gray-dark};
 }
 
 .light {

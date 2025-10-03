@@ -30,6 +30,7 @@ export enum ToolCallStatus {
   Loading = "loading",
   Confirmation = "confirmation",
   Finished = "finished",
+  Failed = "failed",
 }
 
 export enum ToolCallPlacement {

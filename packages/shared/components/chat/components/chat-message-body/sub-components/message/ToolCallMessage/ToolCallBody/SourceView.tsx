@@ -26,14 +26,15 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { useId } from "react";
-import { useTranslation } from "react-i18next";
+import React, { useId, useState } from "react";
+import { ReactSVG } from "react-svg";
+
+import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 
 import type {
   TToolCallContent,
   TToolCallResultSourceData,
 } from "../../../../../../../../api/ai/types";
-import { Heading, HeadingLevel } from "../../../../../../../heading";
 import { Link, LinkTarget } from "../../../../../../../link";
 import { Text } from "../../../../../../../text";
 import { Tooltip } from "../../../../../../../tooltip";
@@ -46,6 +47,7 @@ import {
 
 const SourceItem = ({ source }: { source: TToolCallResultSourceData }) => {
   const tooltipId = useId();
+  const [faviconLoadError, setFaviconLoadError] = useState(false);
 
   const isKnowledgeSource = !!source.fileId;
 
@@ -68,9 +70,17 @@ const SourceItem = ({ source }: { source: TToolCallResultSourceData }) => {
       textDecoration="none"
       truncate
     >
-      {iconUrl ? (
-        <img src={iconUrl} alt="source icon" width={16} height={16} />
-      ) : null}
+      {faviconLoadError ? (
+        <ReactSVG className={styles.sourceFallbackIcon} src={UniverseIcon} />
+      ) : (
+        <img
+          src={iconUrl}
+          onError={() => setFaviconLoadError(true)}
+          alt="source icon"
+          width={16}
+          height={16}
+        />
+      )}
       <Text
         className={styles.sourceTitle}
         fontSize="14px"
@@ -89,6 +99,7 @@ const SourceItem = ({ source }: { source: TToolCallResultSourceData }) => {
           fontWeight={600}
           lineHeight="20px"
           truncate
+          title={!isKnowledgeSource ? sourceContent : undefined}
         >
           {sourceContent}
         </Text>
@@ -110,8 +121,6 @@ const SourceItem = ({ source }: { source: TToolCallResultSourceData }) => {
 };
 
 export const SourceView = ({ content }: { content: TToolCallContent }) => {
-  const { t } = useTranslation("Common");
-
   if (!content.result) return null;
 
   const sources: TToolCallResultSourceData[] = Array.isArray(
@@ -120,22 +129,8 @@ export const SourceView = ({ content }: { content: TToolCallContent }) => {
     ? content.result?.data
     : [content.result?.data];
 
-  const searchTopic = content.arguments.query;
-
   return (
     <div className={styles.sourceView}>
-      {searchTopic ? (
-        <Heading
-          className={styles.sourceViewHeading}
-          level={HeadingLevel.h4}
-          fontSize="15px"
-          fontWeight={600}
-          truncate
-        >
-          {`${t("Common:SearchFor")} ${searchTopic}`}
-        </Heading>
-      ) : null}
-
       <div className={styles.sourceViewList}>
         {sources.map((source, index) => (
           <SourceItem

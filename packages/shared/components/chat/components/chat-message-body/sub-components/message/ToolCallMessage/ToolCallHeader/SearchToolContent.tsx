@@ -32,42 +32,94 @@ import { ReactSVG } from "react-svg";
 
 import DocumentsIcon from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
+import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.svg?url";
 
-import type { TToolCallContent } from "../../../../../../../../api/ai/types";
+import {
+  TToolCallContent,
+  TToolCallResultSourceData,
+} from "../../../../../../../../api/ai/types";
 import { useMessageStore } from "../../../../../../store/messageStore";
 import styles from "../../../../ChatMessageBody.module.scss";
 import { Text } from "../../../../../../../text";
+import { Link, LinkTarget } from "../../../../../../../link";
+
+const WebCrawlingToolContent = ({ content }: { content: TToolCallContent }) => {
+  const { t } = useTranslation(["Common"]);
+
+  const toolInfo = ((content.result?.data as TToolCallResultSourceData)
+    ?.title || content.arguments.url) as string;
+
+  return (
+    <Link
+      style={{ display: "contents" }}
+      href={content.arguments?.url as string}
+      target={LinkTarget.blank}
+      textDecoration="none"
+    >
+      <ReactSVG className={styles.searchToolIcon} src={UniverseIcon} />
+      <Text fontSize="13px" lineHeight="20px" fontWeight={600} truncate>
+        {t("Common:WebCrawling")} | <span title={toolInfo}>{toolInfo}</span>
+      </Text>
+      <ReactSVG className={styles.externalLinkIcon} src={ExternalLinkIcon} />
+    </Link>
+  );
+};
+
+const WebSearchToolContent = ({ content }: { content: TToolCallContent }) => {
+  const { t } = useTranslation(["Common"]);
+
+  const toolInfo = content.arguments.query as string;
+
+  return (
+    <>
+      <ReactSVG className={styles.searchToolIcon} src={UniverseIcon} />
+      <Text fontSize="13px" lineHeight="20px" fontWeight={600} truncate>
+        {t("Common:WebSearch")} | <span title={toolInfo}>{toolInfo}</span>
+      </Text>
+    </>
+  );
+};
+
+const KnowledgeSearchToolContent = ({
+  content,
+}: {
+  content: TToolCallContent;
+}) => {
+  const { t } = useTranslation(["Common"]);
+
+  const toolInfo = content.arguments.query as string;
+
+  return (
+    <>
+      <ReactSVG className={styles.searchToolIcon} src={DocumentsIcon} />
+      <Text fontSize="13px" lineHeight="20px" fontWeight={600} truncate>
+        {t("Common:KnowledgeSearch")} | <span title={toolInfo}>{toolInfo}</span>
+      </Text>
+    </>
+  );
+};
 
 export const SearchToolContent = ({
   content,
 }: {
   content: TToolCallContent;
 }) => {
-  const { t } = useTranslation(["Common"]);
   const { knowledgeSearchToolName, webSearchToolName, webCrawlingToolName } =
     useMessageStore();
 
-  const searchToolsTitles: Record<string, string> = {
-    [knowledgeSearchToolName]: t("Common:KnowledgeSearch"),
-    [webSearchToolName]: t("Common:WebSearch"),
-    [webCrawlingToolName]: t("Common:WebCrawling"),
-  };
-
-  const searchToolIcons: Record<string, string> = {
-    [knowledgeSearchToolName]: DocumentsIcon,
-    [webSearchToolName]: UniverseIcon,
-    [webCrawlingToolName]: UniverseIcon,
-  };
-
-  const toolName = searchToolsTitles[content.name] || content.name;
-  const searchToolIcon = searchToolIcons[content.name];
-
   return (
     <>
-      <ReactSVG className={styles.searchToolIcon} src={searchToolIcon} />
-      <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
-        {toolName}
-      </Text>
+      {content.name === knowledgeSearchToolName ? (
+        <KnowledgeSearchToolContent content={content} />
+      ) : null}
+
+      {content.name === webSearchToolName ? (
+        <WebSearchToolContent content={content} />
+      ) : null}
+
+      {content.name === webCrawlingToolName ? (
+        <WebCrawlingToolContent content={content} />
+      ) : null}
     </>
   );
 };

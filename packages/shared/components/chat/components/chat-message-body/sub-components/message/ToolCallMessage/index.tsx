@@ -42,11 +42,15 @@ const ToolCallMessage = ({ content }: MessageToolCallProps) => {
 
   const hideConfirmDialog = () => setNeedConfirmation(false);
 
+  const hasError = !!content.result?.error;
+
   const toolCallStatus: ToolCallStatus = needConfirmation
     ? ToolCallStatus.Confirmation
     : !content.result
       ? ToolCallStatus.Loading
-      : ToolCallStatus.Finished;
+      : hasError
+        ? ToolCallStatus.Failed
+        : ToolCallStatus.Finished;
 
   return (
     <div className={styles.toolCallMessage}>

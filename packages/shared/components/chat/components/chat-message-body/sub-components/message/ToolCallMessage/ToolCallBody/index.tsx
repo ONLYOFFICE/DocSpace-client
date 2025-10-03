@@ -34,6 +34,7 @@ import type { ToolCallPlacement } from "../ToolCall.enum";
 import { useMessageStore } from "../../../../../../store/messageStore";
 import { CodeView } from "./CodeView";
 import { SourceView } from "./SourceView";
+import { Text } from "../../../../../../../text";
 
 type ToolCallBodyProps = {
   content: TToolCallContent;
@@ -41,14 +42,21 @@ type ToolCallBodyProps = {
 };
 
 export const ToolCallBody = ({ content, placement }: ToolCallBodyProps) => {
-  const { knowledgeSearchToolName, webSearchToolName, webCrawlingToolName } =
-    useMessageStore();
+  const { knowledgeSearchToolName, webSearchToolName } = useMessageStore();
 
-  const isSourceView = [
-    knowledgeSearchToolName,
-    webSearchToolName,
-    webCrawlingToolName,
-  ].includes(content.name);
+  if (content.result?.error) {
+    return (
+      <div className={styles.toolCallBody}>
+        <Text fontSize="14px" fontWeight={600} lineHeight="20px" truncate>
+          {content.result?.error as string}
+        </Text>
+      </div>
+    );
+  }
+
+  const isSourceView = [knowledgeSearchToolName, webSearchToolName].includes(
+    content.name,
+  );
 
   return (
     <div className={styles.toolCallBody}>

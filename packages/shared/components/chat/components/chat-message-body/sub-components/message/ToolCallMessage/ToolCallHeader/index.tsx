@@ -32,6 +32,7 @@ import { ReactSVG } from "react-svg";
 import { observer } from "mobx-react";
 
 import ToolFinish from "PUBLIC_DIR/images/tool.finish.svg?url";
+import AlertIcon from "PUBLIC_DIR/images/button.alert.transparent.react.svg?url";
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 
 import { Loader, LoaderTypes } from "../../../../../../../loader";
@@ -41,6 +42,7 @@ import styles from "../../../../ChatMessageBody.module.scss";
 import { ToolCallPlacement, ToolCallStatus } from "../ToolCall.enum";
 import { SearchToolContent } from "./SearchToolContent";
 import { MCPToolContent } from "./MCPToolContent";
+import { useMessageStore } from "../../../../../../store/messageStore";
 
 type ToolCallHeaderProps = {
   content: TToolCallContent;
@@ -62,6 +64,10 @@ export const ToolCallHeader = observer(
     expandable,
     isSearchTool,
   }: ToolCallHeaderProps) => {
+    const { webCrawlingToolName } = useMessageStore();
+
+    const isWebCrawlingTool = content.name === webCrawlingToolName;
+
     const statusIcons: Record<ToolCallStatus, React.ReactNode> = {
       [ToolCallStatus.Loading]: <Loader type={LoaderTypes.track} size="12px" />,
       [ToolCallStatus.Confirmation]: (
@@ -70,6 +76,7 @@ export const ToolCallHeader = observer(
       [ToolCallStatus.Finished]: (
         <ReactSVG src={ToolFinish} className={styles.toolFinishIcon} />
       ),
+      [ToolCallStatus.Failed]: <ReactSVG src={AlertIcon} />,
     };
 
     const statusIcon =
@@ -78,6 +85,8 @@ export const ToolCallHeader = observer(
         : statusIcons[status];
 
     const onClick = () => {
+      if (isWebCrawlingTool) return;
+
       setCollapsed(!collapsed);
     };
 
@@ -85,7 +94,7 @@ export const ToolCallHeader = observer(
       <div
         className={classNames(styles.toolCallHeader, {
           [styles.hide]: collapsed,
-          [styles.noClick]: !expandable,
+          [styles.pointer]: expandable,
         })}
         onClick={onClick}
       >

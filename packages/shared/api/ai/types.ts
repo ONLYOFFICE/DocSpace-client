@@ -85,7 +85,8 @@ export type TToolCallResultSourceData = {
 };
 
 export type TToolCallResultSource = {
-  data: TToolCallResultSourceData[];
+  data: TToolCallResultSourceData | TToolCallResultSourceData[];
+  error?: string;
 };
 
 export type TToolCallContent = {

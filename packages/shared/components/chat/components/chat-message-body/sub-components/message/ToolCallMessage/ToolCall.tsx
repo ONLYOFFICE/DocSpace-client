@@ -29,10 +29,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 
-import type {
-  TToolCallContent,
-  TToolCallResultSourceData,
-} from "../../../../../../../api/ai/types";
+import type { TToolCallContent } from "../../../../../../../api/ai/types";
 
 import styles from "../../../ChatMessageBody.module.scss";
 
@@ -60,15 +57,12 @@ export const ToolCall = observer(
       webCrawlingToolName,
     ].includes(content.name);
 
-    const hasSources =
-      isSearchTool &&
-      content.result &&
-      "data" in content.result &&
-      (content.result.data as TToolCallResultSourceData[]).length > 0;
+    const isWebCrawlingTool = content.name === webCrawlingToolName;
 
     const expandable =
-      placement === ToolCallPlacement.ConfirmDialog ||
-      (isSearchTool ? hasSources : status === ToolCallStatus.Finished);
+      (status === ToolCallStatus.Finished && !isWebCrawlingTool) ||
+      status === ToolCallStatus.Failed ||
+      placement === ToolCallPlacement.ConfirmDialog;
 
     return (
       <div

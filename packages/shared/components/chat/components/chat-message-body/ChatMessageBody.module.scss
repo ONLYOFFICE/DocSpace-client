@@ -301,8 +301,6 @@
 
     box-sizing: border-box;
 
-    cursor: pointer;
-
     div {
       height: 15px;
     }
@@ -324,6 +322,12 @@
       height: 16px;
     }
 
+    .externalLinkIcon {
+      path {
+        fill: var(--chat-message-external-link-icon-color);
+      }
+    }
+
     .arrowRightIcon svg path,
     .searchToolIcon svg path {
       fill: var(--text-color);
@@ -339,8 +343,8 @@
       }
     }
 
-    &.noClick {
-      pointer-events: none;
+    &.pointer {
+      cursor: pointer;
     }
   }
 
@@ -358,6 +362,8 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+
+    border-radius: 6px;
 
     .toolCallCodeViewItem {
       display: flex;
@@ -412,6 +418,15 @@
       flex: 1;
       min-width: 80px;
       color: var(--chat-message-source-url-color);
+    }
+
+    .sourceFallbackIcon {
+      width: 16px;
+      height: 16px;
+
+      path {
+        fill: var(--text-color);
+      }
     }
   }
 }

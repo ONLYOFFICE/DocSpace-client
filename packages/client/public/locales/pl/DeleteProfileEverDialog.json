@@ -7,7 +7,6 @@
   "DeleteGuest": "Usuń gościa",
   "DeleteGuests": "Usuń gości",
   "DeletePersonalDataApplicable": "*Dotyczy wybranych użytkowników, którzy mają takie pliki i katalogi.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Pokoje utworzone przez tego użytkownika oraz przechowywane w nich dokumenty zostaną automatycznie przypisane administratorowi, który dokonał usunięcia: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Przypisz dane ręcznie, aby wybrać innego użytkownika docelowego do ponownego przypisania.",
   "DeleteReqassignDescriptionGuest": "Użytkownik {{userCaption}} zostanie usunięty ze wszystkich pokoi, do których został zaproszony. Dokumenty utworzone przez użytkownika {{userCaption}} w pokojach zostaną automatycznie przypisane właścicielom pokoi.",
   "DeleteUser": "Usuń użytkownika",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> zostanie usunięty. Nie można cofnąć tej czynności.",

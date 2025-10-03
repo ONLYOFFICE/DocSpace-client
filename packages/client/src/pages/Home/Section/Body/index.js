@@ -407,17 +407,24 @@ const SectionBodyContent = (props) => {
 
   const onDragOver = (e) => {
     e.preventDefault();
-    if (
-      e.dataTransfer.items.length > 0 &&
-      e.dataTransfer.dropEffect !== "none"
-    ) {
+
+    const hasFiles =
+      e.dataTransfer.types.includes("Files") ||
+      e.dataTransfer.types.includes("application/x-moz-file");
+
+    if (hasFiles && e.dataTransfer.dropEffect !== "none") {
       setDragging(true);
     }
   };
 
   const onDragLeaveDoc = (e) => {
     e.preventDefault();
-    if (!e.relatedTarget || !e.dataTransfer.items.length) {
+
+    const hasFiles =
+      e.dataTransfer.types.includes("Files") ||
+      e.dataTransfer.types.includes("application/x-moz-file");
+
+    if (!e.relatedTarget || !hasFiles) {
       setDragging(false);
     }
   };

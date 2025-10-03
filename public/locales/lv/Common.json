@@ -355,6 +355,7 @@
   "Example": "Piemērs: {{example}}",
   "ExpiredLink": "Saites derīgums ir beidzies",
   "Favorites": "Iemīļākākie",
+  "FeeAppliesToEachBackup": "Lūdzu, ņemiet vērā: par katru rezerveskopiju tiek iekasēta maksa.",
   "FeedbackAndSupport": "Feedback & Support",
   "FileActionRequired": "Galamērķī jau ir fails ar nosaukumu «<1>{{fileName}}</1>».",
   "FileAvailableViaParentFolderLinkDescription": "Šis fails ir pieejams, izmantojot kopīgu saiti no tā vecākā mapes, bet jūs varat izveidot pielāgotu ārēju saiti ar konkrētām atļaujām.",
@@ -986,6 +987,5 @@
   "YouHaveUnsavedChanges": "Jums ir nesaglabātas izmaiņas",
   "YourCurrentDomain": "Jūsu pašreizējais domēns",
   "YourLogo": "Jūsu logotips",
-  "YourTurn": "Jūsu kārta",
-  "FeeAppliesToEachBackup": "Lūdzu, ņemiet vērā: par katru rezerveskopiju tiek iekasēta maksa."
+  "YourTurn": "Jūsu kārta"
 }

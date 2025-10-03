@@ -355,6 +355,7 @@
   "Example": "Nümunə: {{example}}",
   "ExpiredLink": "İstifadə müddəti bitmiş keçid",
   "Favorites": "Sevimli",
+  "FeeAppliesToEachBackup": "Xahiş edirik bildirin ki, hər bir ehtiyat nüsxəsi üçün ödəniş mövcuddur.",
   "FeedbackAndSupport": "Rəy və Dəstək",
   "FileActionRequired": "Hədəfdə artıq «<1>{{fileName}}</1> adlı fayl var.",
   "FileAvailableViaParentFolderLinkDescription": "Bu fayl, üst səviyyə qatlamasından paylaşılan keçid vasitəsilə əldə edilə bilər, ancaq siz xüsusi icazə ilə xüsusi xarici keçid yarada bilərsiniz.",
@@ -986,6 +987,5 @@
   "YouHaveUnsavedChanges": "Yadda saxlanmayan dəyişiklikləriniz var",
   "YourCurrentDomain": "Cari domen adınız",
   "YourLogo": "Loqonuz",
-  "YourTurn": "Sizin növbəniz",
-  "FeeAppliesToEachBackup": "Xahiş edirik bildirin ki, hər bir ehtiyat nüsxəsi üçün ödəniş mövcuddur."
+  "YourTurn": "Sizin növbəniz"
 }

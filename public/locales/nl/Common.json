@@ -355,6 +355,7 @@
   "Example": "Voorbeeld: {{example}}",
   "ExpiredLink": "Verlopen link",
   "Favorites": "Favorieten",
+  "FeeAppliesToEachBackup": "Let op: Er wordt een vergoeding per back-up in rekening gebracht.",
   "FeedbackAndSupport": "Feedback en Support",
   "FileActionRequired": "De bestemming bevat al een bestand met de naam «<1>{{fileName}}</1>».",
   "FileAvailableViaParentFolderLinkDescription": "Dit bestand is toegankelijk via een gedeelde link vanuit de bovenliggende map, maar u kunt een aangepaste externe link met specifieke machtigingen aanmaken.",
@@ -986,6 +987,5 @@
   "YouHaveUnsavedChanges": "U hebt niet opgeslagen wijzigingen",
   "YourCurrentDomain": "Uw huidige domein",
   "YourLogo": "Uw logo",
-  "YourTurn": "Uw beurt",
-  "FeeAppliesToEachBackup": "Let op: Er wordt een vergoeding per back-up in rekening gebracht."
+  "YourTurn": "Uw beurt"
 }

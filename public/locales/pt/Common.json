@@ -355,6 +355,7 @@
   "Example": "Exemplo: {{example}}",
   "ExpiredLink": "Link expirado",
   "Favorites": "Favoritos",
+  "FeeAppliesToEachBackup": "Por favor, note: Uma taxa é aplicada a cada backup.",
   "FeedbackAndSupport": "Feedback e Suporte",
   "FileActionRequired": "O destino já contém um arquivo chamado «<1>{{fileName}}</1>».",
   "FileAvailableViaParentFolderLinkDescription": "Este ficheiro é acessível através de um link partilhado a partir da sua pasta pai, mas pode criar um link externo personalizado com permissões específicas.",
@@ -986,6 +987,5 @@
   "YouHaveUnsavedChanges": "Tem alterações que não foram guardadas",
   "YourCurrentDomain": "O seu domínio atual",
   "YourLogo": "O seu logótipo",
-  "YourTurn": "A sua vez",
-  "FeeAppliesToEachBackup": "Por favor, note: Uma taxa é aplicada a cada backup."
+  "YourTurn": "A sua vez"
 }

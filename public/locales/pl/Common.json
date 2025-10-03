@@ -355,6 +355,7 @@
   "Example": "Przykład: {{example}}",
   "ExpiredLink": "Link wygasł",
   "Favorites": "Ulubione",
+  "FeeAppliesToEachBackup": "Uwaga: za każde tworzenie kopii zapasowej pobierana jest opłata.",
   "FeedbackAndSupport": "Opinie i wsparcie",
   "FileActionRequired": "Lokalizacja docelowa zawiera już plik o nazwie «<1>{{fileName}}</1>».",
   "FileAvailableViaParentFolderLinkDescription": "Ten plik jest dostępny za pomocą udostępnionego linku z folderu nadrzędnego, ale możesz utworzyć niestandardowy zewnętrzny link z określonymi uprawnieniami.",
@@ -986,6 +987,5 @@
   "YouHaveUnsavedChanges": "Masz niezapisane zmiany",
   "YourCurrentDomain": "Twoja obecna domena",
   "YourLogo": "Twoje Logo",
-  "YourTurn": "Twoja kolej",
-  "FeeAppliesToEachBackup": "Uwaga: za każde tworzenie kopii zapasowej pobierana jest opłata."
+  "YourTurn": "Twoja kolej"
 }

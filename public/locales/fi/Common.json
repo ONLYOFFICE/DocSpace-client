@@ -355,6 +355,7 @@
   "Example": "Esimerkki: {{example}}",
   "ExpiredLink": "Vanhentunut linkki",
   "Favorites": "Suosikit",
+  "FeeAppliesToEachBackup": "Huomioithan: Varmuuskopioista peritään maksu.",
   "FeedbackAndSupport": "Palaute & Tuki",
   "FileActionRequired": "Kohde sisältää jo tiedoston nimeltä «<1>{{fileName}}</1>».",
   "FileAvailableViaParentFolderLinkDescription": "Tämä tiedosto on saatavilla jaetun linkin kautta sen pääkansioista, mutta voit luoda mukautetun ulkoisen linkin tietyillä käyttöoikeuksilla.",
@@ -986,6 +987,5 @@
   "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourLogo": "Logosi",
-  "YourTurn": "Sinun vuorosi",
-  "FeeAppliesToEachBackup": "Huomioithan: Varmuuskopioista peritään maksu."
+  "YourTurn": "Sinun vuorosi"
 }

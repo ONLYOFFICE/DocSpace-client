@@ -5,6 +5,7 @@
   "AboutHeader": "Über dieses Programm",
   "AccessDenied": "Zugriff verweigert",
   "Accesses": "Zugriffe",
+  "AccessibleViaLink": "Über den Link zugänglich",
   "AccessPasswordMessage": "Diese Datei ist geschützt. Bitte geben Sie das Passwort ein, um darauf zuzugreifen oder sie im Originalformat herunterzuladen.",
   "AccessRights": "Zugriffsrechte",
   "Account": "Konto",
@@ -894,6 +895,5 @@
   "YouHaveUnsavedChanges": "Sie haben nicht gespeicherte Änderungen.",
   "YourCurrentDomain": "Ihre aktuelle Domain",
   "YourLogo": "Ihr Logo",
-  "YourTurn": "Jetzt sind Sie dran",
-  "AccessibleViaLink": "Über den Link zugänglich"
+  "YourTurn": "Jetzt sind Sie dran"
 }

@@ -355,6 +355,7 @@
   "Example": "Příklad: {{example}}",
   "ExpiredLink": "Vypršela platnost odkazu",
   "Favorites": "Oblíbené",
+  "FeeAppliesToEachBackup": "Upozornění: Za každou zálohu se platí poplatek.",
   "FeedbackAndSupport": "Zpětná vazba a technická podpora",
   "FileActionRequired": "V cílovém umístění se již nachází soubor s názvem «<1>{{fileName}}</1>».",
   "FileAvailableViaParentFolderLinkDescription": "Tento soubor je dostupný prostřednictvím sdíleného odkazu z jeho nadřazené složky, ale můžete vytvořit vlastní externí odkaz se specifickými oprávněními.",
@@ -986,6 +987,5 @@
   "YouHaveUnsavedChanges": "Máte neuložené změny",
   "YourCurrentDomain": "Vaše aktuální doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Jste na řadě",
-  "FeeAppliesToEachBackup": "Upozornění: Za každou zálohu se platí poplatek."
+  "YourTurn": "Jste na řadě"
 }

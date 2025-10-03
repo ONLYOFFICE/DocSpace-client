@@ -355,6 +355,7 @@
   "Example": "Пример: {{example}}",
   "ExpiredLink": "Изтекъл линк",
   "Favorites": "Любими",
+  "FeeAppliesToEachBackup": "Моля, обърнете внимание: Такса се прилага за всяко архивиране.",
   "FeedbackAndSupport": "Обратна връзка и поддръжка",
   "FileActionRequired": "Дестинацията вече съдържа файл с име «<1>{{fileName}}</1>».",
   "FileAvailableViaParentFolderLinkDescription": "Този файл е достъпен чрез споделена връзка от родителската папка, но можете да създадете персонализирана външна връзка със специфични разрешения.",
@@ -986,6 +987,5 @@
   "YouHaveUnsavedChanges": "Имате незапазени промени",
   "YourCurrentDomain": "Вашият текущ домейн",
   "YourLogo": "Вашето лого",
-  "YourTurn": "Ваш ред",
-  "FeeAppliesToEachBackup": "Моля, обърнете внимание: Такса се прилага за всяко архивиране."
+  "YourTurn": "Ваш ред"
 }

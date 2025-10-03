@@ -355,6 +355,7 @@
   "Example": "Primer: {{example}}",
   "ExpiredLink": "Iztečena povezava",
   "Favorites": "Najljubši",
+  "FeeAppliesToEachBackup": "Upoštevajte, da se za vsako varnostno kopijo zaračuna pristojbina.",
   "FeedbackAndSupport": "Povratne informacije & Pomoč",
   "FileActionRequired": "Destinacija že vsebuje datoteko z imenom «<1>{{fileName}}</1>».",
   "FileAvailableViaParentFolderLinkDescription": "Ta datoteka je dostopna prek skupne povezave iz nadstojne mape, vendar lahko ustvarite prilagojeno zunanjo povezavo s posebnimi dovoljenji.",
@@ -986,6 +987,5 @@
   "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
   "YourCurrentDomain": "Vaša trenutna domena",
   "YourLogo": "Vaš logotip",
-  "YourTurn": "Vi ste na vrsti",
-  "FeeAppliesToEachBackup": "Upoštevajte, da se za vsako varnostno kopijo zaračuna pristojbina."
+  "YourTurn": "Vi ste na vrsti"
 }

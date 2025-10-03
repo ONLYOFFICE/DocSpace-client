@@ -355,6 +355,7 @@
   "Example": "Örnek: {{example}}",
   "ExpiredLink": "Süresi dolmuş bağlantı",
   "Favorites": "Favoriler",
+  "FeeAppliesToEachBackup": "Lütfen unutmayın: Her yedekleme için bir ücret geçerlidir.",
   "FeedbackAndSupport": "Geri Bildirim & Destek",
   "FileActionRequired": "Hedef zaten «<1>{{fileName}}</1>» adlı bir dosya içeriyor.",
   "FileAvailableViaParentFolderLinkDescription": "Bu dosya, ana klasörden paylaşılan bir bağlantı aracılığıyla erişilebilir, ancak belirli izinlerle özel bir harici bağlantı oluşturabilirsiniz.",
@@ -986,6 +987,5 @@
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
-  "YourTurn": "Sıra sizde",
-  "FeeAppliesToEachBackup": "Lütfen unutmayın: Her yedekleme için bir ücret geçerlidir."
+  "YourTurn": "Sıra sizde"
 }

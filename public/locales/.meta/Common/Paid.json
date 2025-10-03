@@ -3,7 +3,7 @@
   "content": "Paid",
   "content_en_sha1_hash": "dc9d4584a55464cd571719ee0066acb16d411f86",
   "created_at": "2025-05-19T21:30:47.223Z",
-  "updated_at": "2025-09-29T11:28:55.992Z",
+  "updated_at": "2025-10-03T10:07:11.520Z",
   "comment": {
     "text": "This translation key is used to display a paid status label. It appears on a badge component in the contacts list, indicating that an account has made payments and should be considered paid. The text changes depending on whether a user is paying or not, using the \"Paid\" label for paid accounts.",
     "is_auto": true,
@@ -41,33 +41,27 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 387,
-      "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n fontWeight=\"700\"\n className=\"settings-section_badge\"\n isPaidBadge\n />\n ) : (",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
+      "line_number": 87,
+      "context": "title={t(\"DNSSettings\")}\n subtitle={t(\"DNSSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/dns-settings\"\n onClickLink={onClickLink}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}\n />\n {enablePortalRename ? (\n <MobileCategoryWrapper\n title={t(\"PortalRenaming\", { productName: t(\"Common:ProductName\") })}\n subtitle={t(\"PortalRenamingNavDescription\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
+      "line_number": 87,
+      "context": "title={t(\"DNSSettings\")}\n subtitle={t(\"DNSSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/dns-settings\"\n onClickLink={onClickLink}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}\n />\n {enablePortalRename ? (\n <MobileCategoryWrapper\n title={t(\"PortalRenaming\", { productName: t(\"Common:ProductName\") })}\n subtitle={t(\"PortalRenamingNavDescription\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 315,
+      "line_number": 310,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n isPaidBadge\n />\n ) : null}\n </div>\n ) : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 350,
+      "line_number": 344,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n isPaidBadge\n />\n ) : null}\n </div>\n ) : null}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 87,
-      "context": "title={t(\"DNSSettings\")}\n subtitle={t(\"DNSSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/dns-settings\"\n onClickLink={onClickLink}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}\n />\n {enablePortalRename ? (\n <MobileCategoryWrapper\n title={t(\"PortalRenaming\", { productName: t(\"Common:ProductName\") })}\n subtitle={t(\"PortalRenamingNavDescription\")}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 87,
-      "context": "title={t(\"DNSSettings\")}\n subtitle={t(\"DNSSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/dns-settings\"\n onClickLink={onClickLink}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}\n />\n {enablePortalRename ? (\n <MobileCategoryWrapper\n title={t(\"PortalRenaming\", { productName: t(\"Common:ProductName\") })}\n subtitle={t(\"PortalRenamingNavDescription\")}",
       "module": "/packages/client"
     },
     {
@@ -134,6 +128,12 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Statistics.js",
       "line_number": 101,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n className=\"paid-badge\"\n isPaidBadge\n />\n ) : null}\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
+      "line_number": 387,
+      "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n fontWeight=\"700\"\n className=\"settings-section_badge\"\n isPaidBadge\n />\n ) : (",
       "module": "/packages/client"
     },
     {

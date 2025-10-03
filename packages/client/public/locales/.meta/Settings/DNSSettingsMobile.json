@@ -3,7 +3,7 @@
   "content": "Send your request to our support team, and our specialists will help you with the settings.",
   "content_en_sha1_hash": "0e740861bfbbd6e22357a4b0271cb635490e5af2",
   "created_at": "2025-05-19T21:30:51.235Z",
-  "updated_at": "2025-09-17T13:43:01.727Z",
+  "updated_at": "2025-10-03T10:07:11.658Z",
   "comment": {
     "text": "This translation key is used for a message displayed when sending a request for DNS settings support, guiding users to contact specialists for assistance. It appears in the Portal Settings page on a mobile device and is intended to inform users about the next steps to resolve their issue.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 255,
+      "line_number": 250,
       "context": "</div>\n </>\n ) : (\n <>\n <div className=\"settings-block-description\">\n {t(\"DNSSettingsMobile\")}\n </div>\n <FieldContainer\n id=\"fieldContainerDNSSettings\"\n className=\"field-container-width settings_unavailable\"\n labelText={`${t(\"Common:YourCurrentDomain\")}`}",
       "module": "/packages/client"
     }

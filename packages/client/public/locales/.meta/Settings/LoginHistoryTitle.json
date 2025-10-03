@@ -3,7 +3,7 @@
   "content": "Login History",
   "content_en_sha1_hash": "d755284b3b68f68fa53e1d95ff88d8d202c5bbc1",
   "created_at": "2025-05-19T21:30:51.828Z",
-  "updated_at": "2025-09-26T15:21:06.440Z",
+  "updated_at": "2025-10-03T10:07:11.861Z",
   "comment": {
     "text": "The \"LoginHistoryTitle\" translation key is used to display the title \"Login History\" in various parts of the application's UI. It appears on a category page and is also set as the document title when accessing login history data. Translators should ensure this phrase accurately reflects the content being displayed.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/index.js",
-      "line_number": 86,
+      "line_number": 87,
       "context": "await getAccessPortalData();\n },\n },\n {\n id: \"login-history\",\n name: t(\"LoginHistoryTitle\"),\n content: <LoginHistory />,\n onClick: async () => {\n clearAbortControllerArr();\n await getLoginHistoryData();\n },",
       "module": "/packages/client"
     },

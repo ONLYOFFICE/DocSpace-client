@@ -1,26 +1,20 @@
 {
-  "key_path": "TemporaryStorage",
-  "content": "Temporary storage",
-  "content_en_sha1_hash": "d90c9723bbf93c4c8895c55a1d770e8294c92b66",
-  "created_at": "2025-05-26T07:15:48.746Z",
-  "updated_at": "2025-10-03T10:07:11.869Z",
+  "key_path": "SharedFilesAndFolders",
+  "content": "Shared files and folders",
+  "content_en_sha1_hash": "8cb552a10fc5a2919fbca9ebc6f9dfb0566bbf62",
+  "created_at": "2025-10-03T10:07:00.002Z",
+  "updated_at": "2025-10-03T10:07:11.691Z",
   "comment": {
-    "text": "This translation key is used for the label \"Temporary storage\" which appears as a radio button option in a manual backup page. It should be translated to indicate temporary storage options or settings in this specific UI context.",
-    "is_auto": true,
-    "updated_at": "2025-05-26T08:03:23.325Z"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/Backup/BackupServiceDialog.tsx",
-      "line_number": 87,
-      "context": "};\n \n const serviceOptions: ServiceOption[] = [\n {\n id: \"temporary\",\n title: t(\"Common:TemporaryStorage\"),\n description: t(\"TemporaryDescription\"),\n icon: <ClockIcon />,\n },\n {\n id: \"backup-room\",",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
+      "line_number": 186,
+      "context": "/>\n \n <ImportSection\n isChecked={importOptions.importSharedFilesAndFolders}\n onChange={(e) => onChange(e, \"importSharedFilesAndFolders\")}\n sectionName={t(\"Settings:SharedFilesAndFolders\")}\n description={\n <Trans\n t={t}\n i18nKey=\"SharedFilesAndFoldersDescription\"\n ns=\"Settings\"",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 431,
-      "context": "})}\n >\n <RadioButton\n key={0}\n id=\"temporary-storage\"\n label={t(\"Common:TemporaryStorage\")}\n name={TEMPORARY_STORAGE}\n isChecked={isCheckedTemporaryStorage}\n isDisabled={isCreateButtonDisabled}\n {...commonRadioButtonProps}\n testId=\"temporary_storage_radio_button\"",
-      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -169,6 +163,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

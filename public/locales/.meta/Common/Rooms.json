@@ -3,13 +3,25 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2025-09-26T15:21:06.037Z",
+  "updated_at": "2025-10-03T10:07:11.459Z",
   "comment": {
     "text": "The \"Rooms\" translation key is used to display the content \"Rooms\" in various parts of the user interface. This includes a file selector and a dialog box where it appears as a section title, providing context for users navigating room templates or reassigning data. It appears in UI elements such as buttons, text labels, and progress indicators.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:34:29.688Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList.js",
+      "line_number": 68,
+      "context": "const getTooltipContent = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n </Text>\n );\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
+      "line_number": 202,
+      "context": "<StyledProgress>\n <div className=\"data-start\"> {reassigningDataStart}</div>\n <div className=\"progress-container\">\n <div className=\"progress-section\">\n {!noRooms ? (\n <Text className=\"progress-section-text\">{t(\"Common:Rooms\")}</Text>\n ) : null}\n {noRoomFilesToMove ? null : (\n <Text className=\"progress-section-text\">\n {t(\"Common:Documents\")}\n </Text>",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RoomNoAccessContainer.js",
       "line_number": 47,
@@ -26,18 +38,6 @@
       "file_path": "/packages/client/src/components/RoomsSelectorInput/index.js",
       "line_number": 73,
       "context": "setIsDataReady,\n } = props;\n \n const [isPanelVisible, setIsPanelVisible] = useState(false);\n const BasePath = `${t(\"Common:ProductName\")} / ${t(\"Common:Rooms\")} `;\n const [path, setPath] = useState(\"\");\n \n const handleOnSubmit = (rooms) => {\n setPath(`${BasePath}/ ${rooms[0].label}`);\n onSubmit && onSubmit(rooms);",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList.js",
-      "line_number": 68,
-      "context": "const getTooltipContent = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n </Text>\n );\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
-      "line_number": 202,
-      "context": "<StyledProgress>\n <div className=\"data-start\"> {reassigningDataStart}</div>\n <div className=\"progress-container\">\n <div className=\"progress-section\">\n {!noRooms ? (\n <Text className=\"progress-section-text\">{t(\"Common:Rooms\")}</Text>\n ) : null}\n {noRoomFilesToMove ? null : (\n <Text className=\"progress-section-text\">\n {t(\"Common:Documents\")}\n </Text>",
       "module": "/packages/client"
     },
     {
@@ -66,26 +66,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 184,
-      "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
+      "line_number": 229,
+      "context": "sectionName: t(\"Common:Common\"),\n workspace: serviceName,\n sectionIcon: PortfolioIcon,\n }}\n importSection={{\n sectionName: t(\"Common:Rooms\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: RoomsIcon,\n }}\n isDisabled={false}\n dataTestId=\"import_common_files_section\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 184,
-      "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 184,
-      "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 184,
-      "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
+      "line_number": 229,
+      "context": "sectionName: t(\"Common:Common\"),\n workspace: serviceName,\n sectionIcon: PortfolioIcon,\n }}\n importSection={{\n sectionName: t(\"Common:Rooms\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: RoomsIcon,\n }}\n isDisabled={false}\n dataTestId=\"import_common_files_section\"",
       "module": "/packages/client"
     },
     {

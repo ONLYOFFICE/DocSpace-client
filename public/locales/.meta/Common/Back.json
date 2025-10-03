@@ -3,7 +3,7 @@
   "content": "Back",
   "content_en_sha1_hash": "b52b36b7269fbfc58ec24bb724691951a3decbe8",
   "created_at": "2025-05-19T21:30:43.167Z",
-  "updated_at": "2025-09-17T13:43:01.751Z",
+  "updated_at": "2025-10-03T10:07:11.685Z",
   "comment": {
     "text": "The translation key \"Back\" is used to display a label that navigates users back to a previous step or screen in a data import process. It appears as the label of a cancel button on forms such as the \"Add Emails Step\", allowing users to exit and return to their previous step.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/index.tsx",
-      "line_number": 115,
-      "context": "<MigrationButtons\n className=\"save-cancel-buttons\"\n onSaveClick={handleStepIncrement}\n onCancelClick={decrementStep}\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n showReminder\n displaySettings\n saveButtonDisabled={\n areCheckedUsersEmpty ||\n (quota.max && typeof quota.max === \"number\"",
+      "line_number": 113,
+      "context": "<MigrationButtons\n className=\"save-cancel-buttons\"\n onSaveClick={handleStepIncrement}\n onCancelClick={decrementStep}\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n showReminder\n displaySettings\n saveButtonDisabled={areCheckedUsersEmpty}\n migrationCancelLabel={t(\"Settings:CancelImport\")}\n onMigrationCancelClick={showCancelDialog}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 248,
+      "line_number": 264,
       "context": "<MigrationButtons\n className=\"save-cancel-buttons\"\n onSaveClick={incrementStep}\n onCancelClick={decrementStep}\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n migrationCancelLabel={t(\"Settings:CancelImport\")}\n onMigrationCancelClick={showCancelDialog}\n />",
       "module": "/packages/client"
     },
@@ -36,13 +36,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/index.tsx",
-      "line_number": 125,
-      "context": "<MigrationButtons\n className=\"save-cancel-buttons\"\n onSaveClick={handleStepIncrement}\n onCancelClick={decrementStep}\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n showReminder\n displaySettings\n saveButtonDisabled={\n canDisable\n ? areCheckedUsersEmpty ||",
+      "line_number": 124,
+      "context": "<MigrationButtons\n className=\"save-cancel-buttons\"\n onSaveClick={handleStepIncrement}\n onCancelClick={decrementStep}\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n showReminder\n displaySettings\n saveButtonDisabled={canDisable ? areCheckedUsersEmpty : false}\n migrationCancelLabel={t(\"Settings:CancelImport\")}\n onMigrationCancelClick={showCancelDialog}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/index.tsx",
-      "line_number": 106,
+      "line_number": 112,
       "context": "className=\"save-cancel-buttons\"\n onSaveClick={incrementStep}\n onCancelClick={decrementStep}\n showReminder\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n migrationCancelLabel={t(\"Settings:CancelImport\")}\n onMigrationCancelClick={showCancelDialog}\n />\n );",
       "module": "/packages/client"
     },
@@ -72,7 +72,7 @@
     },
     {
       "file_path": "/packages/shared/components/selector/sub-components/EmptyScreen.tsx",
-      "line_number": 168,
+      "line_number": 169,
       "context": "size={12}\n iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}\n isFill\n />\n <Link {...linkStyles}>\n {withSearch ? t(\"Common:ClearFilter\") : t(\"Common:Back\")}\n </Link>\n </div>\n </div>\n ) : null}\n </div>",
       "module": "/packages/shared"
     }

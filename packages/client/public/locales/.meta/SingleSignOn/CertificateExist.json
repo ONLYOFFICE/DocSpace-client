@@ -3,7 +3,7 @@
   "content": "Certificate with same action type already exists",
   "content_en_sha1_hash": "9973f20d2024018f1ead9a6896ef807f27346f7c",
   "created_at": "2025-05-19T21:30:50.070Z",
-  "updated_at": "2025-09-17T13:43:01.948Z",
+  "updated_at": "2025-10-03T10:07:11.913Z",
   "comment": {
     "text": "\"This translation key is used to display an error message when a certificate with the same action type already exists. It appears in forms or UI elements that allow users to create or edit certificates, such as the SSO form store.\"",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/SsoFormStore.js",
-      "line_number": 803,
+      "line_number": 807,
       "context": "this.idpCertificates = this.idpCertificates.filter(\n (certificate) => certificate.crt !== cert,\n );\n };\n \n checkSpCertificateExist = () => {\n if (\n this.spAction === SSO_SIGNING_ENCRYPT &&\n this.spCertificates.length > 0 &&\n !this.isEdit\n )",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/SsoFormStore.js",
-      "line_number": 803,
+      "line_number": 807,
       "context": "this.idpCertificates = this.idpCertificates.filter(\n (certificate) => certificate.crt !== cert,\n );\n };\n \n checkSpCertificateExist = () => {\n if (\n this.spAction === SSO_SIGNING_ENCRYPT &&\n this.spCertificates.length > 0 &&\n !this.isEdit\n )",
       "module": "/packages/client"
     }

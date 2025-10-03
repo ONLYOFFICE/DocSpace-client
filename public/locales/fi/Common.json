@@ -271,7 +271,6 @@
   "EditSharedLink": "Muokkaa jaettua linkkiä",
   "Email": "Sähköposti",
   "Embed": "Upota",
-  "Employees": "Työntekijät",
   "EmptyBackupList": "Ei varmuuskopioita. Luo yksi tai useampi varmuuskopio ja ne näkyvät tässä listassa.",
   "EmptyDescription": "Luettelo käyttäjistä, jotka on aiemmin kutsuttu {{productName}} tai erillisiin huoneisiin, ilmestyy tähän. Voit kutsua näitä käyttäjiä yhteistyöhön milloin tahansa.",
   "EmptyEmail": "Yhtään sähköpostia ei ole jäsennelty",

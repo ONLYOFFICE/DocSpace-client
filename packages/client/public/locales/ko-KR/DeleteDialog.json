@@ -1,11 +1,11 @@
 {
   "DeleteAllGroupDescription": "선택한 그룹이 삭제됩니다. 그룹의 사용자는 {{productName}}에서 삭제되지 않습니다. 정말로 계속하시겠습니까?",
   "DeleteAllGroupsTitle": "그룹 삭제",
-  "DeleteFiles": "이동할 파일이 <strong>({{filesCount}})</strong> 개 있습니다. {{trashSection}}으로 이동합니다.",
+  "DeleteFiles": "당신은 <strong>{{filesCount}}개의 파일</strong>을 {{trashSection}}으로 이동하려고 합니다.",
   "DeleteFilesAndFolders": "<strong>파일({{filesCount}}개)</strong>과 <strong>폴더({{foldersCount}}개)</strong>를 {{trashSection}}에 삭제하려고 합니다.",
   "DeleteFilesAndFoldersForever": "<strong>파일({{filesCount}})</strong>과 <strong>폴더({{foldersCount}})</strong>를 삭제하려고 합니다.",
   "DeleteFilesForever": "삭제하시려는 파일은 <strong>({{filesCount}})</strong>개입니다.",
-  "DeleteFolders": "이동할 폴더가 <strong>{{foldersCount}}개</strong> 있습니다. {{trashSection}}으로 이동합니다.",
+  "DeleteFolders": "당신은 <strong>폴더 ({{foldersCount}})</strong>를 {{trashSection}}로 이동하려고 합니다.)",
   "DeleteFoldersForever": "삭제하시려는 폴더는 <strong>{{foldersCount}}</strong>개입니다.",
   "DeleteGroupDescription": "{{groupName}} 그룹이 삭제됩니다. 그룹의 사용자는 {{productName}}에서 삭제되지 않습니다. 정말로 계속하시겠습니까?",
   "DeleteGroupTitle": "그룹 삭제",

@@ -1,7 +1,7 @@
 {
   "DeleteAllGroupDescription": "Seçilmiş qruplar silinəcək. Qruplardakı istifadəçilər {{productName}}-dən silinməyəcək. Davam etmək istədiyinizə əminsiniz?",
   "DeleteAllGroupsTitle": "Qrupları silin",
-  "DeleteFiles": "Artıq <strong>files ({{filesCount}})</strong> {{trashSection}} silinir.",
+  "DeleteFiles": "Siz <strong>faylları ({{filesCount}})</strong> {{trashSection}}-ə köçürmək üzrəsiniz.",
   "DeleteFilesAndFolders": "Yığcam <strong>faylları ({{filesCount}})</strong> və <strong>papqatlari ({{foldersCount}})</strong> {{trashSection}} qutusuna siləcəksiniz.",
   "DeleteFilesAndFoldersForever": "Yığmağıniz üçün <strong>fayllar ({{filesCount}})</strong> və <strong>papqatlari ({{foldersCount}})</strong> silinəcək.",
   "DeleteFilesForever": "Silməyə hazırlaşdığınız <strong>{{filesCount}}</strong> fayl var.",
@@ -21,7 +21,7 @@
   "FilePermanentlyDeleted": "Failə {{trashSection}} bölməsindən daimi şəkildə silinəcək.",
   "FilesDeletedAfter": "Fayllar 30 gün ərzində məhv ediləcəkdir.",
   "FilesPermanentlyDeleted": "Fayllar {{trashSection}} bölməsindən daimi şəkildə silinəcəkdir.",
-  "FolderDeletedAfter": "Papaq {{variables}} 30 gün ərzində mərhum ediləcəkdir.",
+  "FolderDeletedAfter": "Qovluq 30 gün ərzində daimi olaraq silinəcək.",
   "FolderPermanentlyDeleted": "Papq dəfə etibar etməyə qalıb {{trashSection}} bölməsindən silinəcək.",
   "FoldersDeletedAfter": "Papqalar 30 gün ərzində mərhum silinəcəkdir.",
   "FoldersPermanentlyDeleted": "Papqalar {{trashSection}} bölməsindən daimi şəkildə silinəcəkdir.",

@@ -201,5 +201,5 @@
   "WarningMoveToFormRoomServal": "Переміщення кількох файлів до кімнати заповнення форм не підтримується. Переміщуйте одну PDF-форму {{ organizationName }} за раз.",
   "WillBeDeletedPermanently": "{{date}} буде видалено назавжди",
   "YouLeftTheRoom": "Ви залишили кімнату",
-  "YourUserTypeHasChanged": "Ваш тип користувача змінено на <1>«{{userType}}»</1> адміністратором {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Ваш тип користувача змінено на <1>“{{userType}}”</1> адміністратором {{productName}} <1>{{adminName}}</1>."
 }

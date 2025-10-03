@@ -69,7 +69,7 @@
   "RoomExternalLinkDeleted": "Linkki <1>«{{linkTitle}}»</1> poistettu.",
   "RoomExternalLinkRenamed": "Linkki <1>«{{oldLinkTitle}}»</1> nimetty uudelleen <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "Edellinen linkki <1>«{{linkTitle}}»</1> peruutettu<br/> Uusi linkki <1>«{{linkTitle}}»</1> luotu",
-  "RoomFromArchiveRestore": "Huone palautettu {{sectionName}} -sta",
+  "RoomFromArchiveRestore": "Huone palautettu {{sectionName}}-sta",
   "RoomGroupAdded": "Ryhmät lisätty.",
   "RoomGroupAddedCount": "Ryhmät lisätty ({{count}}).",
   "RoomGroupRemove": "Ryhmät poistettu",

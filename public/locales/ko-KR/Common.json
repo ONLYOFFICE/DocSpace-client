@@ -296,7 +296,7 @@
   "EditorDescription": "기존 파일 작업: 보기, 편집, 검토, 의견 작성.",
   "EditSharedLink": "공유 링크 편집",
   "EditUserCount": "{{count}} {{productName}} 사용자",
-  "EditUserDefinition": "1 user = 1 user who opened and changed a document.",
+  "EditUserDefinition": "1 사용자 = 문서를 열고 변경한 1명의 사용자.",
   "EditUserInfo": "<1>이미 편집 중:</1> {{editingCount}}",
   "EditUserLimit": "<1>당신의 한도:</1> {{limit}} 명",
   "EditUserStatistics": "사용자 통계",

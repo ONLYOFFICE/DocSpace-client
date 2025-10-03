@@ -27,7 +27,7 @@
   "SystemTheme": "Використовувати системну тему",
   "SystemThemeDescription": "Автоматично перемикайтеся між світлою та темною темами, коли це робить ваша система.",
   "TelegramAccount": "Обліковий запис Telegram",
-  "TelegramAccountDescription": "Щоб підключити TelegramBot до вашого облікового запису, перейдіть за секретним посиланням та натисніть кнопку “Connect Telegram”.",
+  "TelegramAccountDescription": "Щоб підключити TelegramBot до вашого облікового запису, перейдіть за секретним посиланням та натисніть кнопку “Підключити Telegram”.",
   "TelegramAccountDisconnect": "Від’єднати Telegram",
   "TelegramAccountDisconnectDescription": "Ваш обліковий запис @{{username}} підключено для сповіщень Telegram. Ви можете від’єднати цей обліковий запис. У цьому випадку ви не отримуватимете сповіщення.",
   "TerminateAllSessions": "Завершити всі сеанси, крім поточного",

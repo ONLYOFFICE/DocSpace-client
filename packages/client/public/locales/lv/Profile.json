@@ -27,7 +27,7 @@
   "SystemTheme": "Izmantot sistēmas dizainu",
   "SystemThemeDescription": "Automātiski pārslēdzieties starp gaišiem un tumšiem dizainiem, kad to dara sistēma.",
   "TelegramAccount": "Telegram konts",
-  "TelegramAccountDescription": "Lai savienotu TelegramBot ar savu kontu, izmantojiet slepeno saiti un noklikšķiniet uz pogas “Connect Telegram”.",
+  "TelegramAccountDescription": "Lai savienotu TelegramBot ar savu kontu, izmantojiet slepeno saiti un noklikšķiniet uz pogas “Savienot ar Telegram”.",
   "TelegramAccountDisconnect": "Atvienot Telegram",
   "TelegramAccountDisconnectDescription": "Jūsu @{{username}} konts ir savienots telegramu paziņojumiem. Jūs varat atvienoties no šā konta. Šajā gadījumā jūs nesaņemsiet paziņojumus.",
   "TerminateAllSessions": "Pārtraukt visas sesijas, izņemot pašreizējo",

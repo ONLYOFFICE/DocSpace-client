@@ -6,7 +6,7 @@
   "ContactToPayer": "청구 담당자(<1>{{email}}</1>)에게 연락하여 백업 서비스를 연결하세요.",
   "EnableBackupConfirm": "백업 서비스 활성화는 {{productName}} 관리자가 지갑 잔액이 충분한 경우 언제든지 백업을 생성할 수 있도록 합니다. 계속 진행하시겠습니까?",
   "FreeBackupsPerMonth": "무료 백업: {{value}}/{{maxValue}} (이번 달 기준).",
-  "TemporaryDescription": "\"Backup\" 섹션에 백업을 저장합니다. 생성 후 24시간 이내에 다운로드 가능합니다.",
+  "TemporaryDescription": "\"백업\" 섹션에 백업을 저장합니다. 생성 후 24시간 이내에 다운로드 가능합니다.",
   "ThirdPartyResourceDescription": "Dropbox, Box, OneDrive 또는 Google Drive와 같은 클라우드 계정에 연결하고 백업을 저장하세요.",
   "ThirdPartyStorageDescription": "세 번째 서비스(third-party services)를 사용하여 백업을 저장하세요. 외부 클라우드 스토리지 플랫폼을 연결하는 데 적합합니다."
 }

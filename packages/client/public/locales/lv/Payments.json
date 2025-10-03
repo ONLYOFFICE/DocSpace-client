@@ -69,7 +69,7 @@
   "LinkNewCardEmail": "Lai saistītu jaunu karti, lūdzu, sazinieties ar maksātāju <1>{{email}}</1>",
   "ListContacts": "Saraksta kontaktpersonas",
   "ManagerTypesDescription": "Administratora kontu veidi un to privilēģijas",
-  "NeedMoreGoToServices": "Need more? Go to the <1>Pakalpojumi</1>",
+  "NeedMoreGoToServices": "Nepieciešams vairāk? Apmeklējiet <1>Pakalpojumus</1>",
   "NewRoomWillExceedLimit": "Šīs telpas izveide nav iespējama, jo ir sasniegts jūsu pašreizējā plānā iekļauto telpu skaita ierobežojums.",
   "NewStorageImmidiatelyAvailable": "Jaunais uzglabāšanas vietas pieejamība būs pieejama uzreiz pēc apmaksas.",
   "NewUsersWillExceedMembersLimit": "Nav iespējams pievienot jaunus maksas lietotājus, jo ir sasniegts jūsu pašreizējā plānā iekļauto administratoru skaita ierobežojums.",

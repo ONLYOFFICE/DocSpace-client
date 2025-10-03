@@ -296,7 +296,7 @@
   "EditorDescription": "Операції з існуючими файлами: перегляд, редагування, рецензування, коментування.",
   "EditSharedLink": "Редагувати спільне посилання",
   "EditUserCount": "{{count}} {{productName}} користувачів",
-  "EditUserDefinition": "1 user = 1 користувач, який відкрив та змінив документ.",
+  "EditUserDefinition": "1 користувач = 1 користувач, який відкрив та змінив документ.",
   "EditUserInfo": "<1>Вже редагується:</1> {{editingCount}}",
   "EditUserLimit": "<1>Ваш ліміт:</1> {{limit}} користувачів",
   "EditUserStatistics": "Статистика користувачів",

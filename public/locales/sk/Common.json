@@ -817,7 +817,7 @@
   "SharePermissionsEntityAccessScope": "<1>{{accessType}}</1> bude môcť <3>{{accessRights}}</3> {{shareContents}} z {{shareParent}}.",
   "ShareTheFolder": "zložka",
   "ShareTheOriginalFormForFillingOut": "Zdieľať pôvodný formulár na vyplnenie.",
-  "ShareTheRoom": "izba",
+  "ShareTheRoom": "miestnosť",
   "ShareToFillOut": "Zdieľať na vyplnenie",
   "ShareVia": "Zdieľať prostredníctvom",
   "ShareWithPortalUsers": "Zdieľanie s používateľmi {{productName}}",

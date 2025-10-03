@@ -5,7 +5,7 @@
   "DailyFeed": "Ikdienas {{productName}} plūsma",
   "DailyFeedDescription": "Lasiet {{productName}} jaunumus un notikumus ikdienas īssavilkumā.",
   "FileActivityNotify": "Faila aktivitātes paziņojumi",
-  "GoToSettings": "Перейти в Настройки",
+  "GoToSettings": "Iet uz Iestatījumiem",
   "IsNotValid": "Nav derīgs",
   "LdapEmailTooltip": "Šis lietotāja konts tiek ielādēts no LDAP. Lietotāja e-pasta adrese nav norādīta, un pašreizējā tika ģenerēta automātiski un nevar tikt izmantota, lai sūtītu paziņojumus.",
   "NotConfigured": "Nav konfigurēts",

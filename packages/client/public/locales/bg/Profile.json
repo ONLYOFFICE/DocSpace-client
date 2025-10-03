@@ -27,7 +27,7 @@
   "SystemTheme": "Използвайте системна тема",
   "SystemThemeDescription": "Автоматично превключване между светли и тъмни теми, в съответствие със системата ви.",
   "TelegramAccount": "Телеграм акаунт",
-  "TelegramAccountDescription": "За да свържете TelegramBot към вашия акаунт, следвайте секретния линк и кликнете на бутона “Connect Telegram”.",
+  "TelegramAccountDescription": "За да свържете TelegramBot към вашия акаунт, следвайте секретния линк и кликнете на бутона “Свържете Telegram”.",
   "TelegramAccountDisconnect": "Прекратяване на връзката с Telegram",
   "TelegramAccountDisconnectDescription": "Вашият акаунт @{{username}} е свързан за известия от Telegram. Можете да се откажете от този акаунт. В този случай няма да получавате известия.",
   "TerminateAllSessions": "Прекратете всички сесии освен текущата",

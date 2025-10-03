@@ -4,7 +4,7 @@
   "BackupServiceEnabled": "Varmuuskopiointipalvelu otettu käyttöön onnistuneesti.",
   "ConnectService": "Yhdistä palvelu <1>täällä</1> ottaaksesi käyttöön varmuuskopiointitoiminnallisuudet.",
   "ContactToPayer": "Ota yhteyttä maksajaan (<1>{{email}}</1>) liittääksesi varmuuskopiointipalvelu.",
-  "EnableBackupConfirm": "Enabling the Backup service will allow all {{productName}} administrators to create backups anytime, as long as the wallet balance is sufficient. Are you sure you want to continue?",
+  "EnableBackupConfirm": "Varmuuskopiointipalvelun ottaminen käyttöön sallii kaikkien {{productName}}-järjestelmänvalvojien luoda varmuuskopioita milloin tahansa, kunhan lompakon saldo on riittävä. Haluatko varmasti jatkaa?",
   "FreeBackupsPerMonth": "Ilmaiset varmuuskopiot: {{value}}/{{maxValue}} nykyisenä kuukautena.",
   "TemporaryDescription": "Luo varmuuskopio \"Varmuuskopio\"-osiossa. Lataus saatavilla 24 tunnin sisällä luomisesta.",
   "ThirdPartyResourceDescription": "Yhdistä ja tallenna varmuuskopiot pilvitileihin, kuten Dropbox, Box, OneDrive tai Google Drive.",

@@ -278,7 +278,7 @@
   "DownloadOperationDescription": "Gdy pliki będą gotowe, znajdziesz je w katalogu Pobrane swojej przeglądarki i będziesz w stanie zamknąć tę kartę.",
   "DownloadOperationTitle": "Trwa pobieranie pliku",
   "DownloadOriginalFormat": "W oryginalnym formacie",
-  "DropToLocation": "Zrzut do: {{folderName}}",
+  "DropToLocation": "Upuść do: {{folderName}}",
   "DropzoneTitleSecondary": "lub upuść plik tutaj",
   "Duplicate": "Duplikować",
   "EditAccessInfo": "Określiliśmy, ilu użytkowników może mieć dostęp do edycji dokumentów.",

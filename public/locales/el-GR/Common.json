@@ -278,7 +278,7 @@
   "DownloadOperationDescription": "Μόλις το κάνετε, μπορείτε να βρείτε τα αρχεία στον φάκελο λήψης του προγράμματος περιήγησής σας και να κλείσετε αυτήν την καρτέλα.",
   "DownloadOperationTitle": "Λήψη αρχείου σε εξέλιξη",
   "DownloadOriginalFormat": "Σε αρχική μορφή",
-  "DropToLocation": "Drop to: {{folderName}}",
+  "DropToLocation": "Αποθέστε στο: {{folderName}}",
   "DropzoneTitleSecondary": "ή εναποθέστε το αρχείο εδώ",
   "Duplicate": "Αντίγραφο",
   "EditAccessInfo": "Καθορίσαμε πόσοι χρήστες μπορούν να έχουν πρόσβαση στην επεξεργασία εγγράφων.",

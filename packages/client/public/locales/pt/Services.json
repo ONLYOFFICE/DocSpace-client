@@ -2,7 +2,7 @@
   "AutomaticBackupDescription": "Configure backups agendados para proteção contínua de dados sem ações manuais.",
   "BackupRoomDescription": "Salve um backup para um cômodo selecionado ou na seção {{sectionName}}. Use cômodos existentes ou crie um novo.",
   "BackupServiceEnabled": "Serviço de backup habilitado com sucesso.",
-  "ConnectService": "Conecte o serviço <1>here</1> para habilitar os recursos de backup.",
+  "ConnectService": "Conecte o serviço <1>aqui</1> para habilitar os recursos de backup.",
   "ContactToPayer": "Contacte o Pagador (<1>{{email}}</1>) para conectar o serviço de backup.",
   "EnableBackupConfirm": "Habilitar o serviço de Backup permitirá que todos os administradores do {{productName}} criem backups a qualquer momento, desde que o saldo da carteira seja suficiente. Tem certeza de que deseja continuar?",
   "FreeBackupsPerMonth": "Backups gratuitos: {{value}}/{{maxValue}} por mês corrente.",

@@ -278,7 +278,7 @@
   "DownloadOperationDescription": "Hazır olduğunda, dosyaları tarayıcınızın indirme klasöründe bulabilir ve bu sekmeyi kapatabilirsiniz.",
   "DownloadOperationTitle": "Dosya indirme işlemi devam ediyor",
   "DownloadOriginalFormat": "Orijinal formatta",
-  "DropToLocation": ": {{folderName}}'e düşürün",
+  "DropToLocation": "{{folderName}}'e düşürün",
   "DropzoneTitleSecondary": "veya dosyayı buraya bırakın",
   "Duplicate": "Çoğalt",
   "EditAccessInfo": "Belgeleri düzenlemeye kaç kullanıcının erişebileceğini belirttik.",

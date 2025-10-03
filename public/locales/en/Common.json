@@ -1004,7 +1004,6 @@
   "ConnectWebSearch": "To use web search, you need to connect it in the {{productName}} settings.",
   "ConnectMCPServers": "To use manage connection, you need to connect MCP Servers inside room settings",
   "Analyzing": "Analyzing...",
-  "SearchFor": "Search for",
   "WebSearch": "Web search",
   "WebCrawling": "Web crawling",
   "KnowledgeSearch": "Knowledge search"

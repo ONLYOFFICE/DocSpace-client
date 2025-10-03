@@ -468,6 +468,16 @@ export interface AdminsInfoBlockProps {
   totalUsedUsers?: number;
 }
 
+export const ImportOptionsKeys = {
+  ImportGroups: "importGroups",
+  ImportPersonalFiles: "importPersonalFiles",
+  ImportSharedFilesAndFolders: "importSharedFilesAndFolders",
+  ImportCommonFiles: "importCommonFiles",
+  ImportProjectFiles: "importProjectFiles",
+} as const;
+
+export type ImportOptionsKey = keyof typeof ImportOptionsKeys;
+
 type TExportDetails = { name: string; icon?: string };
 
 export interface ImportStepProps {
@@ -497,6 +507,8 @@ export interface InjectedImportStepProps extends ImportStepProps {
   cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
   setCancelUploadDialogVisible: TStore["dialogsStore"]["setCancelUploadDialogVisible"];
 }
+
+export type ImportOptions = keyof InjectedImportStepProps["importOptions"];
 
 export interface ImportProcessingStepProps {
   t: TFunction;

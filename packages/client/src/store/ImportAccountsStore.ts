@@ -44,6 +44,7 @@ import {
   TSendWelcomeEmailData,
   TEnhancedMigrationUser,
   TMigrationStatusResult,
+  TImportOptions,
 } from "@docspace/shared/api/settings/types";
 
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
@@ -70,6 +71,19 @@ type CheckedAccountTypes = "withEmail" | "withoutEmail" | "result";
 type LoadingState = "none" | "upload" | "proceed" | "done";
 
 type TMigrationPhase = "" | "setup" | "migrating" | "complete";
+
+export const ImportOptionsKeys = {
+  Groups: "importGroups",
+  PersonalFiles: "importPersonalFiles",
+  SharedFilesAndFolders: "importSharedFilesAndFolders",
+  CommonFiles: "importCommonFiles",
+  ProjectFiles: "importProjectFiles",
+} as const;
+
+export type ImportOptionsKey =
+  (typeof ImportOptionsKeys)[keyof typeof ImportOptionsKeys];
+
+type ImportOptionsType = Record<ImportOptionsKey, boolean>;
 
 class ImportAccountsStore {
   private currentQuotaStore: CurrentQuotasStore | null = null;
@@ -112,7 +126,7 @@ class ImportAccountsStore {
 
   files: string[] = [];
 
-  importOptions = {
+  importOptions: ImportOptionsType = {
     importGroups: true,
     importPersonalFiles: true,
     importSharedFilesAndFolders: true,
@@ -530,7 +544,7 @@ class ImportAccountsStore {
     }
   };
 
-  setImportOptions = (value: Record<string, boolean>) => {
+  setImportOptions = (value: Partial<ImportOptionsType>) => {
     this.importOptions = { ...this.importOptions, ...value };
   };
 
@@ -558,10 +572,19 @@ class ImportAccountsStore {
       Object.assign(item, { shouldImport: true }),
     );
 
+    const importOptions: TImportOptions = {
+      importGroups: this.importOptions.importGroups,
+      importPersonalFiles: this.importOptions.importPersonalFiles,
+      importSharedFiles: this.importOptions.importSharedFilesAndFolders,
+      importSharedFolders: this.importOptions.importSharedFilesAndFolders,
+      importCommonFiles: this.importOptions.importCommonFiles,
+      importProjectFiles: this.importOptions.importProjectFiles,
+    };
+
     return migrateFile({
       users,
       migratorName,
-      ...this.importOptions,
+      ...importOptions,
     });
   };
 

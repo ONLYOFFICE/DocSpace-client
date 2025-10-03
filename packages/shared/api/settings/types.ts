@@ -456,7 +456,8 @@ export type TMigrationGroup = {
 export type TImportOptions = {
   importGroups: boolean;
   importPersonalFiles: boolean;
-  importSharedFilesAndFolders: boolean;
+  importSharedFiles: boolean;
+  importSharedFolders: boolean;
   importCommonFiles: boolean;
   importProjectFiles: boolean;
 };

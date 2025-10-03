@@ -39,6 +39,7 @@ import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import ImportSection from "../sub-components/ImportSection";
 import { ImportStepProps, InjectedImportStepProps } from "../types";
 import { MigrationButtons } from "../sub-components/MigrationButtons";
+import { ImportOptionsKey } from "SRC_DIR/store/ImportAccountsStore";
 
 const Wrapper = styled.div`
   display: flex;
@@ -76,13 +77,13 @@ const ImportStep = (props: ImportStepProps) => {
     setCancelUploadDialogVisible,
   } = props as InjectedImportStepProps;
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>, name: string) => {
+  const onChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    name: ImportOptionsKey,
+  ) => {
     const checked = e.target.checked;
     setImportOptions({ [name]: checked });
   };
-
-  // const users =
-  //   t("Settings:Employees")[0].toUpperCase() + t("Settings:Employees").slice(1);
 
   const onCancelMigration = () => {
     cancelMigration();

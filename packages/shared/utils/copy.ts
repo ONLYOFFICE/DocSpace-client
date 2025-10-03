@@ -43,14 +43,13 @@ export const copyShareLink = async (link: string) => {
   if (navigator.clipboard && window.isSecureContext) {
     try {
       await navigator.clipboard.writeText(link);
+      return;
     } catch (err) {
       console.error(err);
     }
-  } else {
-    await wait(100);
-
-    copy(link);
   }
+  await wait(100);
+  copy(link);
 };
 
 const copyRowSelectedText = (e: KeyboardEvent) => {

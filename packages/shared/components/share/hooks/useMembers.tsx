@@ -173,6 +173,7 @@ export const useMembers = (props: UseMembersProps) => {
         );
 
         if (newMember) {
+          toastr.success(t("Common:AccessRightsChanged"));
           setMembers((prev) =>
             prev.map((item) =>
               item.sharedTo.id === member.id ? newMember : item,
@@ -184,7 +185,7 @@ export const useMembers = (props: UseMembersProps) => {
         toastr.error(error as TData);
       }
     },
-    [infoPanelSelection],
+    [infoPanelSelection, t],
   );
 
   const getUsers = useCallback(() => {

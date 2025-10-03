@@ -113,9 +113,7 @@ const FilterBlockItem = ({
       <div
         className={styles.filterBlockItemSelector}
         style={
-          item?.displaySelectorType === "button"
-            ? {}
-            : { height: "0", width: "0" }
+          item?.displaySelectorType === "button" ? {} : { display: "none" }
         }
         key={item.key}
         onClick={(event) =>

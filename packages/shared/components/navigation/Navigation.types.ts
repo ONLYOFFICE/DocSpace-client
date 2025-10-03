@@ -44,7 +44,7 @@ export type TContextButtonProps = {
   withMenu?: boolean;
   isTrashFolder?: boolean;
   isMobile: boolean;
-  isMobileOnly: boolean;
+  isMobileOnly?: boolean;
   id: string;
   title?: string;
   onCloseDropBox?: () => void;

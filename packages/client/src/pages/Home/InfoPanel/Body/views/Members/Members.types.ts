@@ -39,6 +39,7 @@ import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 
 export enum TInfoPanelMemberType {
+  owner = "owner",
   users = "users",
   groups = "groups",
   expected = "expected",
@@ -59,10 +60,14 @@ export type TInfoPanelMember = {
   isExpect?: boolean;
 } & (TUser | TGroup);
 
-export type TInfoPanelMembers = Record<
-  TInfoPanelMemberType,
-  TInfoPanelMember[]
->;
+export type TInfoPanelMembers = {
+  [TInfoPanelMemberType.owner]?: TInfoPanelMember[];
+  [TInfoPanelMemberType.users]: TInfoPanelMember[];
+  [TInfoPanelMemberType.groups]: TInfoPanelMember[];
+  [TInfoPanelMemberType.expected]: TInfoPanelMember[];
+  [TInfoPanelMemberType.guests]: TInfoPanelMember[];
+  [TInfoPanelMemberType.administrators]: TInfoPanelMember[];
+};
 
 type TMember = TTitleMember | TInfoPanelMember;
 

@@ -197,6 +197,7 @@ export interface UseShareProps {
 }
 
 export type TTitleID =
+  | "owner"
   | "groups"
   | "users"
   | "guests"

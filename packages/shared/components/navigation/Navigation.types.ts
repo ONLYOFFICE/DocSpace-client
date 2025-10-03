@@ -44,6 +44,7 @@ export type TContextButtonProps = {
   withMenu?: boolean;
   isTrashFolder?: boolean;
   isMobile: boolean;
+  isMobileOnly: boolean;
   id: string;
   title?: string;
   onCloseDropBox?: () => void;
@@ -167,6 +168,7 @@ export type TControlButtonProps = Omit<TToggleInfoPanelButtonProps, "id"> &
     isEmptyPage?: boolean;
 
     isMobile?: boolean;
+    isMobileOnly?: boolean;
     /** Used for guidance */
     addButtonRef?: RefObject<HTMLDivElement | null>;
     buttonRef?: React.RefObject<HTMLButtonElement>;

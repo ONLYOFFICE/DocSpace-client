@@ -2013,11 +2013,7 @@ class FilesActionStore {
       case "default-quota":
         return hasRoomsToResetQuota;
       case "vectorization":
-        return selection.some(
-          (s) =>
-            s.security?.Vectorization &&
-            s.vectorizationStatus === VectorizationStatus.Failed,
-        );
+        return selection.some((s) => s.security?.Vectorization);
       default:
         return false;
     }
@@ -3828,11 +3824,7 @@ class FilesActionStore {
   retryVectorization = async (files) => {
     const { updateFileVectorizationStatus } = this.filesStore;
 
-    const filteredFiles = files.filter(
-      (file) =>
-        file.security?.Vectorization &&
-        file.vectorizationStatus === VectorizationStatus.Failed,
-    );
+    const filteredFiles = files.filter((file) => file.security?.Vectorization);
 
     if (!filteredFiles.length) return;
 

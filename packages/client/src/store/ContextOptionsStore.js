@@ -124,7 +124,6 @@ import {
   FilterType,
   FileExtensions,
   ShareAccessRights,
-  VectorizationStatus,
 } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import {
@@ -1822,9 +1821,7 @@ class ContextOptionsStore {
         label: t("Files:Vectorization"),
         icon: RefreshReactSvgUrl,
         onClick: () => this.filesActionsStore.retryVectorization([item]),
-        disabled:
-          !item.security?.Vectorization ||
-          item.vectorizationStatus !== VectorizationStatus.Failed,
+        disabled: !item.security?.Vectorization,
       },
       {
         id: "option_preview",
@@ -2693,9 +2690,7 @@ class ContextOptionsStore {
     ).length;
 
     const canRetryVectorization = selection.some(
-      (k) =>
-        k.security?.Vectorization &&
-        k.vectorizationStatus === VectorizationStatus.Failed,
+      (k) => k.security?.Vectorization,
     );
 
     /* const removeFromFavoriteItems = selection.filter((k) =>

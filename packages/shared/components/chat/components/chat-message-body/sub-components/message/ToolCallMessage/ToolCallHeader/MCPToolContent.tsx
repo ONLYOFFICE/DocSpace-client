@@ -41,7 +41,7 @@ export const MCPToolContent = ({ content }: { content: TToolCallContent }) => {
   const { isBase } = useTheme();
 
   const serverIcon =
-    content.mcpServerInfo?.icon.icon16 ||
+    content.mcpServerInfo?.icon?.icon16 ||
     getServerIcon(
       content.mcpServerInfo?.serverType || ServerType.Custom,
       isBase,

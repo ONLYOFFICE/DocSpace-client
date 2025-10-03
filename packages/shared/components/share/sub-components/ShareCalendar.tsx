@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import moment from "moment";
-import classNames from "classnames";
 
 import { useIsMobile } from "../../../hooks/useIsMobile";
 
@@ -49,7 +48,7 @@ const ShareCalendar = ({
 
   const calendarComponent = (
     <Calendar
-      className={classNames(styles.calendar, styles.shareCalendar)}
+      className={styles.calendar}
       selectedDate={selectedDate}
       setSelectedDate={onDateSet}
       onChange={closeCalendar}

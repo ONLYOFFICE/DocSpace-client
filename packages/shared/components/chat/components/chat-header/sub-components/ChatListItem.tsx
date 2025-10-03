@@ -29,7 +29,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import HorizontalDotsIcon from "PUBLIC_DIR/images/icons/16/horizontal-dots.react.svg?url";
+import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 
 import type { TChat } from "../../../../../api/ai/types";
 import { ContextMenu, ContextMenuRefType } from "../../../../context-menu";
@@ -95,7 +95,7 @@ export const ChatListItem = ({
         {hoveredChatId === chat.id || !desktop ? (
           <div className={styles.iconButtonWrapper} onClick={onShowContextMenu}>
             <IconButton
-              iconName={HorizontalDotsIcon}
+              iconName={VerticalDotsReactSvgUrl}
               size={16}
               isClickable
               isFill

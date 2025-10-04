@@ -1242,6 +1242,7 @@ export const TableHeader = (props: TableHeaderProps) => {
         })}
         ref={headerRef}
         data-testid="table-header"
+        data-with-info-panel={infoPanelVisible ? "true" : "false"}
       >
         <div className={styles.tableHeaderRow}>
           {columns.map((column, index) => {

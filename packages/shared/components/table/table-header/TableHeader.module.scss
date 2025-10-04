@@ -27,7 +27,7 @@
  */
 
 .tableHeader {
-  position: fixed;
+  position: sticky;
   background: var(--background-color);
   display: grid;
   z-index: 1;
@@ -48,10 +48,4 @@
 
 .tableHeaderRow {
   display: contents;
-}
-
-.emptyTableContainer {
-  grid-column-start: 1;
-  grid-column-end: -1;
-  height: 40px;
 }

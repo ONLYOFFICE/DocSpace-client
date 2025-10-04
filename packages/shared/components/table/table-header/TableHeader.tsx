@@ -1234,56 +1234,52 @@ export const TableHeader = (props: TableHeaderProps) => {
   }, []);
 
   return (
-    <>
-      <div
-        id="table-container_caption-header"
-        className={classNames(styles.tableHeader, "table-container_header", {
-          "lengthen-header": isLengthenHeader,
+    <div
+      id="table-container_caption-header"
+      className={classNames(styles.tableHeader, "table-container_header", {
+        "lengthen-header": isLengthenHeader,
+      })}
+      ref={headerRef}
+      data-testid="table-header"
+    >
+      <div className={styles.tableHeaderRow}>
+        {columns.map((column, index) => {
+          const nextColumn = getNextColumn(columns, index);
+          const resizable = nextColumn ? nextColumn.resizable : false;
+
+          return (
+            <TableHeaderCell
+              key={column.key ?? "empty-cell"}
+              index={index}
+              column={column}
+              sorted={sorted || false}
+              sortBy={sortBy || ""}
+              resizable={resizable}
+              defaultSize={column.defaultSize}
+              onMouseDown={onMouseDown}
+              sortingVisible={sortingVisible || false}
+              tagRef={tagRef}
+              testId={`column-${column.key}`}
+            />
+          );
         })}
-        ref={headerRef}
-        data-testid="table-header"
-      >
-        <div className={styles.tableHeaderRow}>
-          {columns.map((column, index) => {
-            const nextColumn = getNextColumn(columns, index);
-            const resizable = nextColumn ? nextColumn.resizable : false;
 
-            return (
-              <TableHeaderCell
-                key={column.key ?? "empty-cell"}
-                index={index}
-                column={column}
-                sorted={sorted || false}
-                sortBy={sortBy || ""}
-                resizable={resizable}
-                defaultSize={column.defaultSize}
-                onMouseDown={onMouseDown}
-                sortingVisible={sortingVisible || false}
-                tagRef={tagRef}
-                testId={`column-${column.key}`}
-              />
-            );
-          })}
-
-          {showSettings ? (
-            <div
-              data-testid="settings-block"
-              className={styles.tableHeaderSettings}
-              title={settingsTitle}
-            >
-              <TableSettings
-                columns={columns}
-                disableSettings={
-                  (infoPanelVisible || hideColumns || isIndexEditingModeProp) ??
-                  false
-                }
-              />
-            </div>
-          ) : null}
-        </div>
+        {showSettings ? (
+          <div
+            data-testid="settings-block"
+            className={styles.tableHeaderSettings}
+            title={settingsTitle}
+          >
+            <TableSettings
+              columns={columns}
+              disableSettings={
+                (infoPanelVisible || hideColumns || isIndexEditingModeProp) ??
+                false
+              }
+            />
+          </div>
+        ) : null}
       </div>
-
-      <div className={styles.emptyTableContainer} />
-    </>
+    </div>
   );
 };

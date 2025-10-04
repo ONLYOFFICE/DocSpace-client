@@ -499,6 +499,7 @@
   "LiveChat": "Live chat",
   "LiveChatOff": "Live chat was successfully disconnected",
   "LiveChatOn": "Live chat was successfully connected",
+  "LinkExpirationDate": "The file shared by link will expire in <1>{{date}}</1>",
   "Load": "Load",
   "LoadingIsComplete": "Loading is complete 100%",
   "LoadingProcessing": "Loading...",

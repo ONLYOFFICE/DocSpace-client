@@ -142,6 +142,8 @@ export type TFile = {
   originTitle?: string;
   requestToken?: string;
   isFavorite?: boolean;
+  expirationDate?: string;
+  sharedForUser?: boolean;
 };
 
 export type TOpenEditRequest = {
@@ -234,6 +236,8 @@ export type TFolder = {
   shareSettings?: TShareSettings;
   availableShareRights?: TAvailableShareRights;
   isFavorite?: boolean;
+  expirationDate?: string;
+  sharedForUser?: boolean;
 };
 
 export type TGetFolderPath = TFolder[];

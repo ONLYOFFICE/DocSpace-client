@@ -26,8 +26,17 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+:global(.rtl) {
+  :local(.tableHeader) {
+    right: unset;
+    left: 20px;
+  }
+}
+
 .tableHeader {
   position: fixed;
+  right: 20px;
+
   background: var(--background-color);
   display: grid;
   z-index: 1;

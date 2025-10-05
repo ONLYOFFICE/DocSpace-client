@@ -25,35 +25,43 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { decode } from "he";
-import { use, useState } from "react";
+import { use, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { isMobile, isMobileOnly } from "react-device-detect";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-
-import { Avatar, AvatarSize } from "../../../../components/avatar";
-import {
-  ComboBox,
-  ComboBoxSize,
-  type TOption,
-} from "../../../../components/combobox";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+
 import { Text } from "../../../../components/text";
-import { updateRoomMemberRole } from "../../../../api/rooms";
 import { toastr } from "../../../../components/toast";
 import { HelpButton } from "../../../../components/help-button";
+import { Avatar, AvatarSize } from "../../../../components/avatar";
+import { ComboBoxSize, type TOption } from "../../../../components/combobox";
+import { AccessRightSelect } from "../../../../components/access-right-select";
+import { getShareAccessRightOptions } from "../../../../components/share/Share.helpers";
+
+import {
+  updateFileMemberAccess,
+  updateRoomMemberRole,
+} from "../../../../api/rooms";
+
 import { EmployeeStatus, ShareAccessRights } from "../../../../enums";
-import { isRoom } from "../../../../utils/typeGuards";
+import {
+  isFile,
+  isNextImage,
+  isRoom as isRoomCheck,
+} from "../../../../utils/typeGuards";
 import {
   getUserAvatarRoleByType,
   getUserType,
   getUserTypeTranslation,
 } from "../../../../utils/common";
-import { TGroupMemberInvitedInRoom } from "../../../../api/groups/types";
+
+import type { TGroupMemberInvitedInRoom } from "../../../../api/groups/types";
 
 import { getAccessOptions } from "../../../../utils/getAccessOptions";
-import { getUserRoleOptions } from "../../../../utils/room-members/getUserRoleOptions";
 import { filterPaidRoleOptions } from "../../../../utils/filterPaidRoleOptions";
+import { getUserRoleOptions } from "../../../../utils/room-members/getUserRoleOptions";
 
 import { EditGroupMembersDialogContext } from "../../EditGroupMembersDialog.provider";
 
@@ -72,38 +80,47 @@ const GroupMember = ({ member }: GroupMemberProps) => {
 
   const { infoPanelSelection, standalone } = use(EditGroupMembersDialogContext);
 
-  const roomType = isRoom(infoPanelSelection)
-    ? infoPanelSelection.roomType
-    : undefined;
+  const isRoom = isRoomCheck(infoPanelSelection);
 
-  const fullRoomRoleOptions = getAccessOptions(
-    t,
-    roomType,
-    false,
-    false,
-    member.owner,
-    user.isAdmin,
-    standalone,
-  );
+  const roomType = isRoom ? infoPanelSelection.roomType : undefined;
 
-  const userRoleOptions =
-    user.isAdmin || user.isOwner || user.isRoomAdmin
-      ? fullRoomRoleOptions
-      : filterPaidRoleOptions(
-          fullRoomRoleOptions as {
-            access: ShareAccessRights;
-            key: string;
-            label: string;
-          }[],
-        );
-
-  const userRole = member.owner
-    ? getUserRoleOptions(t).portalAdmin
-    : fullRoomRoleOptions.find(
-        (option) =>
-          "access" in option &&
-          option.access === (member.userAccess || member.groupAccess),
+  const options = useMemo(() => {
+    if (isRoom) {
+      const accessOptions = getAccessOptions(
+        t,
+        roomType,
+        false,
+        false,
+        member.owner,
+        user.isAdmin,
+        standalone,
       );
+
+      return user.isAdmin || user.isOwner || user.isRoomAdmin
+        ? accessOptions
+        : filterPaidRoleOptions(
+            accessOptions as {
+              access: ShareAccessRights;
+              key: string;
+              label: string;
+            }[],
+          );
+    }
+
+    if (!infoPanelSelection) return [];
+
+    return getShareAccessRightOptions(t, infoPanelSelection, false, false);
+  }, [isRoom, roomType, member.owner, user.isAdmin, standalone]);
+
+  const selectedAccessRight = useMemo(() => {
+    return member.owner
+      ? getUserRoleOptions(t).portalAdmin
+      : options.find(
+          (option) =>
+            "access" in option &&
+            option.access === (member.userAccess || member.groupAccess),
+        );
+  }, [options, member.userAccess, member.groupAccess, isRoom]);
 
   const hasIndividualRightsInRoom =
     member.owner ||
@@ -115,9 +132,20 @@ const GroupMember = ({ member }: GroupMemberProps) => {
 
   const typeLabel = getUserTypeTranslation(type, t);
 
+  const manualWidth = isRoom ? "auto" : "400px";
+
+  const defaultAvatar = isNextImage(DefaultUserPhotoUrl)
+    ? DefaultUserPhotoUrl.src
+    : DefaultUserPhotoUrl;
+
   const onChangeRole = async (userRoleOption: TOption) => {
     setIsLoading(true);
-    updateRoomMemberRole(infoPanelSelection?.id, {
+
+    const updateApi = isFile(infoPanelSelection)
+      ? updateFileMemberAccess
+      : updateRoomMemberRole;
+
+    updateApi(infoPanelSelection?.id, {
       invitations: [{ id: user.id, access: userRoleOption.access }],
       notify: false,
       sharingMessage: "",
@@ -143,7 +171,7 @@ const GroupMember = ({ member }: GroupMemberProps) => {
             ? AtReactSvgUrl
             : user.hasAvatar
               ? user.avatar
-              : DefaultUserPhotoUrl
+              : defaultAvatar
         }
       />
 
@@ -174,26 +202,28 @@ const GroupMember = ({ member }: GroupMemberProps) => {
             openOnClick={false}
             tooltipContent={
               <Text fontSize="12px" fontWeight={600}>
-                {t("Common:IndividualRights")}
+                {isRoom
+                  ? t("Common:IndividualRights")
+                  : t("Common:IndividualRightsShare")}
               </Text>
             }
           />
         ) : null}
       </div>
 
-      {userRole && userRoleOptions ? (
+      {selectedAccessRight && options ? (
         <div className="role-wrapper">
           {member.canEditAccess ? (
-            <ComboBox
+            <AccessRightSelect
               className="role-combobox"
-              selectedOption={userRole as TOption}
-              options={userRoleOptions as TOption[]}
+              selectedOption={selectedAccessRight as TOption}
+              accessOptions={options as TOption[]}
               scaled={false}
               withBackdrop={isMobile}
               size={ComboBoxSize.content}
               modernView
               title={t("Common:Role")}
-              manualWidth="auto"
+              manualWidth={manualWidth}
               isMobileView={isMobileOnly}
               directionY="both"
               displaySelectedOption
@@ -207,7 +237,9 @@ const GroupMember = ({ member }: GroupMemberProps) => {
               fontWeight={600}
               noSelect
             >
-              {"label" in userRole ? userRole.label : false}
+              {"label" in selectedAccessRight
+                ? selectedAccessRight.label
+                : false}
             </Text>
           )}
         </div>

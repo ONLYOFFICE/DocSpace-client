@@ -9,7 +9,6 @@
   "EmailChangeButton": "Change email",
   "EnableUserButton": "Enable",
   "GuestsRemoved": "Guest(s) successfully removed",
-  "IndividualRights": "Individual rights in the room",
   "LDAPAccountTooltip": "This user account is loaded from LDAP. If you need to change the user name and email address, or disable a user, refer to the LDAP directory.",
   "LDAPGroupTooltip": "This group is loaded from LDAP. If you need to rename it, add or remove users, refer to the LDAP directory.",
   "MembersCount": "members: {{count}}",

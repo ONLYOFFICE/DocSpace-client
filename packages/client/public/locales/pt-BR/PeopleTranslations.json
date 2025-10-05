@@ -9,7 +9,6 @@
   "EmailChangeButton": "Alterar e-mail",
   "EnableUserButton": "Habilitar",
   "GuestsRemoved": "Convidado(s) removido(s) com sucesso",
-  "IndividualRights": "Direitos individuais no sala",
   "LDAPAccountTooltip": "Esta conta de usuário é carregada do LDAP. Se precisar alterar o nome de usuário e o endereço de e-mail ou desabilitar um usuário, consulte o diretório LDAP.",
   "LDAPGroupTooltip": "Este grupo é carregado do LDAP. Se precisar renomeá-lo, adicionar ou remover usuários, consulte o diretório LDAP.",
   "MembersCount": "membros: {{count}}",

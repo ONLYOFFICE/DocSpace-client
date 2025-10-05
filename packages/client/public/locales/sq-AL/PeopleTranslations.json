@@ -9,7 +9,6 @@
   "EmailChangeButton": "Ndryshoni email-in",
   "EnableUserButton": "Aktivizoni",
   "GuestsRemoved": "Mysafiri/ët u hoqën me sukses",
-  "IndividualRights": "Të drejtat individuale në dhomë",
   "LDAPAccountTooltip": "Kjo llogari përdoruesi është ngarkuar nga LDAP. Nëse keni nevojë të ndryshoni emrin e përdoruesit dhe adresën e emailit, ose të çaktivizoni një përdorues, referojuni drejtorisë LDAP.",
   "LDAPGroupTooltip": "Ky grup është ngarkuar nga LDAP. Nëse keni nevojë ta riemërtoni, shtoni ose hiqni përdorues, referojuni direktorisë LDAP.",
   "MembersCount": "anëtarët: {{count}}",

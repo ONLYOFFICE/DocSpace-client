@@ -9,7 +9,6 @@
   "EmailChangeButton": "更改电子邮件",
   "EnableUserButton": "启用",
   "GuestsRemoved": "成功移除访客",
-  "IndividualRights": "房间内的个人权限",
   "LDAPAccountTooltip": "此用户帐户从 LDAP 加载。如果您需要更改用户名和电子邮件地址，或禁用用户，请参阅 LDAP 目录。",
   "LDAPGroupTooltip": "此组从 LDAP 加载。如果您需要重命名、添加或删除用户，请参阅 LDAP 目录。",
   "MembersCount": "成员：{{count}}",

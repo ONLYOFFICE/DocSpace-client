@@ -9,7 +9,6 @@
   "EmailChangeButton": "Thay đổi email",
   "EnableUserButton": "Kích hoạt",
   "GuestsRemoved": "(Các) Khách đã được xóa thành công",
-  "IndividualRights": "Quyền cá nhân trong phòng",
   "LDAPAccountTooltip": "Tài khoản người dùng này được tải từ LDAP. Nếu bạn cần thay đổi tên người dùng và địa chỉ email, hoặc vô hiệu hóa người dùng, hãy tham khảo thư mục LDAP.",
   "LDAPGroupTooltip": "Nhóm này được tải từ LDAP. Nếu bạn cần đổi tên, thêm hoặc xóa người dùng, hãy tham khảo thư mục LDAP.",
   "MembersCount": "thành viên: {{count}}",

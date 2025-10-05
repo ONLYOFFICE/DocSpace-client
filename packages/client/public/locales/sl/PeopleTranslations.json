@@ -9,7 +9,6 @@
   "EmailChangeButton": "Spremeni email",
   "EnableUserButton": "Omogoči",
   "GuestsRemoved": "Gostje so bili uspešno odstranjeni",
-  "IndividualRights": "Individualne pravice v sobi",
   "LDAPAccountTooltip": "Ta uporabniški račun je naložen iz LDAP. Za spremembo uporabniškega imena in e-poštnega naslova ali onemogočitev uporabnika, odpri imenik LDAP.",
   "LDAPGroupTooltip": "Ta skupina je naložena iz LDAP. Za preimenovanje, dodajanje ali odstranitev uporabnikov odpri imenik LDAP.",
   "MembersCount": "člani: {{count}}",

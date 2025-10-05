@@ -9,7 +9,6 @@
   "EmailChangeButton": "이메일 변경",
   "EnableUserButton": "활성화",
   "GuestsRemoved": "게스트가 제거되었습니다",
-  "IndividualRights": "방 내 개인 권리",
   "LDAPAccountTooltip": "이 사용자 계정은 LDAP에서 로드되었습니다. 사용자명과 이메일 주소를 변경하거나 사용자를 비활성화해야 하는 경우 LDAP 디렉토리를 참고하세요. ",
   "LDAPGroupTooltip": "이 그룹은 LDAP에서 로드되었습니다. 이름을 변경하거나 사용자를 제거해야 하는 경우 LDAP 디렉토리를 참고하세요.",
   "MembersCount": "구성원: {{count}}",

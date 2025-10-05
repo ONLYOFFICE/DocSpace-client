@@ -9,7 +9,6 @@
   "EmailChangeButton": "Vaihda sähköposti",
   "EnableUserButton": "Käytössä",
   "GuestsRemoved": "Vieras(vieraat) onnistuneesti poistettu",
-  "IndividualRights": "Yksilölliset oikeudet huoneessa",
   "LDAPAccountTooltip": "Tämä käyttäjätili on ladattu LDAP:lta. Jos haluat vaihtaa käyttäjänimeä tai sähköpostiosoitetta, tai poistaa käyttäjä käytöstä,se tehdään LDAP-hakemistossa.",
   "LDAPGroupTooltip": "Tämä ryhmä on ladattu LDAP:sta. Jos haluat nimetä sen uudelleen, lisätä tai poistaa käyttäjiä, se tehdään LDAP-hakemistossa.",
   "MembersCount": "jäsenet: {{count}}",

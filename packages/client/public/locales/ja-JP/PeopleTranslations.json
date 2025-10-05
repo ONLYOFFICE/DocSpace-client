@@ -9,7 +9,6 @@
   "EmailChangeButton": "メールの変更",
   "EnableUserButton": "有効にする",
   "GuestsRemoved": "ゲストの削除に成功しました",
-  "IndividualRights": "ルームでの個人権限",
   "LDAPAccountTooltip": "このユーザーアカウントはLDAPから読み込まれます。ユーザー名と電子メールアドレスの変更、またはユーザーの無効化が必要な場合は、 LDAP ディレクトリを参照してください。",
   "LDAPGroupTooltip": "このグループは LDAP から読み込まれます。名前を変更したり、ユーザーを追加または削除する必要がある場合は、LDAPディレクトリを参照してください。",
   "MembersCount": "メンバー: {{count}}",

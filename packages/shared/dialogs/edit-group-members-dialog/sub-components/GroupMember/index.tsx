@@ -174,7 +174,7 @@ const GroupMember = ({ member }: GroupMemberProps) => {
             openOnClick={false}
             tooltipContent={
               <Text fontSize="12px" fontWeight={600}>
-                {t("PeopleTranslations:IndividualRights")}
+                {t("Common:IndividualRights")}
               </Text>
             }
           />

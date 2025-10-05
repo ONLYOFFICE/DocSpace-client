@@ -9,7 +9,6 @@
   "EmailChangeButton": "Wijzig e-mail",
   "EnableUserButton": "Inschakelen",
   "GuestsRemoved": "Gast(en) succesvol verwijderd",
-  "IndividualRights": "Individuele rechten in de kamer",
   "LDAPAccountTooltip": "Deze gebruikersaccount wordt geladen vanuit LDAP. Raadpleeg de LDAP directory als u de gebruikersnaam en het e-mailadres wilt wijzigen of een gebruiker wilt deactiveren.",
   "LDAPGroupTooltip": "Deze groep wordt vanuit LDAP geladen. Raadpleeg de LDAP directory als u de naam moet wijzigen of gebruikers moet toevoegen of verwijderen.",
   "MembersCount": "leden: {{count}}",

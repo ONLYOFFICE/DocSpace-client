@@ -9,7 +9,6 @@
   "EmailChangeButton": "Schimbare email",
   "EnableUserButton": "Activează",
   "GuestsRemoved": "Invitat (Invitații) sunt eliminate cu succes",
-  "IndividualRights": "Permisiuni individuale în sala",
   "LDAPAccountTooltip": "Contul acestui utilizator este încărcat din LDAP. Dacă doriți să schimbați nume de utilizator  și adresa de e-mail sau să dezactivați utilizatorul, accesați repertoarul LDAP.",
   "LDAPGroupTooltip": "Acest grup este încărcat din LDAP. Dacă doriți să redenumiți grupul, să adăugați sau să eliminați utilizatori, accesați repertoarul LDAP.",
   "MembersCount": "membrii: {{count}}",

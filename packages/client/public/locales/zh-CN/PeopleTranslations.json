@@ -23,7 +23,6 @@
   "RemoveGuests": "移除多个访客",
   "RemoveGuestsDescription": "所选访客将从您邀请他们加入的所有房间中移除。此操作无法撤销。",
   "ResetAuth": "重置身份验证",
-  "SearchByGroupMembers": "按群组成员搜索",
   "SendInviteAgain": "再次发送邀请",
   "ShareGuest": "分享访客",
   "SSOAccountTooltip": "此用户帐户从 SSO 加载。如果您需要更改用户名和电子邮件地址，请参阅 SSO 服务器。",

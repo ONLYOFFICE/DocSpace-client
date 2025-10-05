@@ -23,7 +23,6 @@
   "RemoveGuests": "Odstrani goste",
   "RemoveGuestsDescription": "Izbrani gostje bodo odstranjeni iz vseh sob, v katere ste jih povabili. Tega dejanja ni mogoče razveljaviti.",
   "ResetAuth": "Ponastavi avtentikacijo",
-  "SearchByGroupMembers": "Iskanje po članih skupine",
   "SendInviteAgain": "Ponovno pošlji vabilo",
   "ShareGuest": "Deli gosta",
   "SSOAccountTooltip": "Ta uporabniški račun je naložen iz SSO. Za spremembo uporabniškega imena in e-poštnega naslova se obrni na strežnik SSO.",

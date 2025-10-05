@@ -886,5 +886,6 @@
   "YourCurrentDomain": "Votre domaine actuel",
   "YourLogo": "Votre logo",
   "YourTurn": "Votre tour",
-  "IndividualRights": "Autorisations individuelles dans la salle"
+  "IndividualRights": "Autorisations individuelles dans la salle",
+  "SearchByGroupMembers": "Rechercher les membres de groupe"
 }

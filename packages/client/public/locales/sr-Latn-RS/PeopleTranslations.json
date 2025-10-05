@@ -23,7 +23,6 @@
   "RemoveGuests": "Ukloni goste",
   "RemoveGuestsDescription": "Izabrani gosti biće uklonjeni iz svih prostorija u koje ste ih pozvali. Ova radnja se ne može opozvati.",
   "ResetAuth": "Resetuj autentifikaciju",
-  "SearchByGroupMembers": "Pretražuj po članovima grupe",
   "SendInviteAgain": "Pošalji još jednom pozivnicu",
   "ShareGuest": "Podeli gostu",
   "SSOAccountTooltip": "Ovaj korisnički nalog je učitan iz SSO-a. Ako treba da promenite korisničko ime i email adresu, obratite se SSO serveru.",

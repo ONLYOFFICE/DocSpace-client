@@ -23,7 +23,6 @@
   "RemoveGuests": "Ștergere invitați",
   "RemoveGuestsDescription": "Invitații selectați vor fi eliminați din toate sălile la care au fost invitați. Această acţiune nu poate fi anulată.",
   "ResetAuth": "Reinițializarea autentificării",
-  "SearchByGroupMembers": "Căutare după membru de grup",
   "SendInviteAgain": "Trimiteți invitația din nou",
   "ShareGuest": "Partajare invitat",
   "SSOAccountTooltip": "Contul acestui utilizator este încărcat prin SSO. Dacă doriți să schimbați nume de utilizator  și adresa de e-mail, accesați serverul SSO.",

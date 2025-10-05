@@ -23,7 +23,6 @@
   "RemoveGuests": "Xóa khách",
   "RemoveGuestsDescription": "Các khách được chọn sẽ bị xóa khỏi tất cả các phòng mà bạn đã mời họ vào. Hành động này không thể được hoàn tác.",
   "ResetAuth": "Đặt lại xác thực",
-  "SearchByGroupMembers": "Tìm kiếm theo thành viên nhóm",
   "SendInviteAgain": "Gửi lại lời mời",
   "ShareGuest": "Chia sẻ khách",
   "SSOAccountTooltip": "Tài khoản người dùng này được tải từ SSO. Nếu bạn cần thay đổi tên người dùng và địa chỉ email, hãy tham khảo máy chủ SSO.",

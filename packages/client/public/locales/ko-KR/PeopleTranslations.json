@@ -23,7 +23,6 @@
   "RemoveGuests": "게스트 제거",
   "RemoveGuestsDescription": "선택된 게스트가 초대한 모든 방에서 제거됩니다. 이 작업은 취소할 수 없습니다.",
   "ResetAuth": "인증 재설정",
-  "SearchByGroupMembers": "그룹 멤버로 검색",
   "SendInviteAgain": "초대장 다시 보내기",
   "ShareGuest": "게스트 공유",
   "SSOAccountTooltip": "이 사용자 계정은SSO에서 로드되었습니다. 사용자명과 이메일 주소를 변경해야 하는 경우SSO 서버를 참고하세요.",

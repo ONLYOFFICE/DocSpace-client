@@ -23,7 +23,6 @@
   "RemoveGuests": "Odstrániť hostí",
   "RemoveGuestsDescription": "Vybraní hostia budú odstránení zo všetkých miestností, do ktorých ste ich pozvali. Tento krok sa nedá vrátiť späť.",
   "ResetAuth": "Obnoviť autentifikáciu",
-  "SearchByGroupMembers": "Vyhľadávanie podľa členov skupiny",
   "SendInviteAgain": "Poslať pozvánku ešte raz",
   "ShareGuest": "Zdieľať hosťa",
   "SSOAccountTooltip": "Tento používateľský účet je nahraný zo SSO. Ak potrebujete zmeniť meno používateľa a e-mailovú adresu, obráťte sa na server SSO.",

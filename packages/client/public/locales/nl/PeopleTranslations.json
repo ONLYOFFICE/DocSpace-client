@@ -23,7 +23,6 @@
   "RemoveGuests": "Verwijder gasten",
   "RemoveGuestsDescription": "Geselecteerde gasten worden verwijderd uit alle kamers waarin u ze hebt uitgenodigd. Deze actie kan niet ongedaan worden gemaakt.",
   "ResetAuth": "Authenticatie opnieuw instellen",
-  "SearchByGroupMembers": "Zoeken op groepsleden",
   "SendInviteAgain": "Stuur uitnodiging opnieuw",
   "ShareGuest": "Deel gast",
   "SSOAccountTooltip": "Deze gebruikersaccount wordt geladen vanuit SSO. Raadpleeg de SSO-server als u de gebruikersnaam en het e-mailadres moet wijzigen.",

@@ -23,7 +23,6 @@
   "RemoveGuests": "Poista vieraat",
   "RemoveGuestsDescription": "Valitut vieraat poistetaan kaikista huoneista, joihin olet kutsunut heidät. Tätä toimintoa ei voi perua.",
   "ResetAuth": "Nollaa todennus",
-  "SearchByGroupMembers": "Etsi ryhmän jäsenien mukaan",
   "SendInviteAgain": "Lähetä kutsu uudelleen",
   "ShareGuest": "Jaa vieras",
   "SSOAccountTooltip": "Tämä käyttäjätili on ladattu SSO:sta. Jos haluat vaihtaa käyttäjänimeä ja sähköpostiosoitetta, se tehdään SSO-palvelimella.",

@@ -23,7 +23,6 @@
   "RemoveGuests": "Remover convidados",
   "RemoveGuestsDescription": "Os hóspedes selecionados serão removidos de todos os quartos para os quais você os convidou. Esta ação não pode ser desfeita.",
   "ResetAuth": "Repor a autenticação",
-  "SearchByGroupMembers": "Pesquise por membros do grupo",
   "SendInviteAgain": "Enviar convite novamente",
   "ShareGuest": "Partilhar convidado",
   "SSOAccountTooltip": "Esta conta de usuário é carregada do SSO. Se precisar alterar o nome de usuário e o endereço de e-mail, consulte o servidor SSO.",

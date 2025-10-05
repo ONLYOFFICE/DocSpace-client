@@ -895,5 +895,6 @@
   "YourCurrentDomain": "Su dominio actual",
   "YourLogo": "Su logotipo",
   "YourTurn": "Su turno",
-  "IndividualRights": "Permisos individuales en la sala"
+  "IndividualRights": "Permisos individuales en la sala",
+  "SearchByGroupMembers": "Buscar por miembros del grupo"
 }

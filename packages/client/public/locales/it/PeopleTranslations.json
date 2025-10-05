@@ -23,7 +23,6 @@
   "RemoveGuests": "Rimuovi ospiti",
   "RemoveGuestsDescription": "Gli ospiti selezionati saranno rimossi da tutte le stanze in cui sono stati invitati. Quest’azione non può essere annullata.",
   "ResetAuth": "Reimposta l'autenticazione",
-  "SearchByGroupMembers": "Ricerca per i membri del gruppo",
   "SendInviteAgain": "Inviare l'invito ancora una volta",
   "ShareGuest": "Condividi ospite",
   "SSOAccountTooltip": "Questo account utente viene caricato da SSO. Se è necessario modificare il nome utente e l'indirizzo e-mail, fai riferimento al server SSO.",

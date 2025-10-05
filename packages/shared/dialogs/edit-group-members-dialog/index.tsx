@@ -147,7 +147,7 @@ export const EditGroupMembers = ({
             >
               <SearchInput
                 className="search-input"
-                placeholder={t("PeopleTranslations:SearchByGroupMembers")}
+                placeholder={t("Common:SearchByGroupMembers")}
                 value={searchValue}
                 onChange={onChangeSearchValue}
                 onClearSearch={onClearSearch}

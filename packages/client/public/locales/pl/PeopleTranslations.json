@@ -23,7 +23,6 @@
   "RemoveGuests": "Usuń gości",
   "RemoveGuestsDescription": "Wybrani goście zostaną usunięci ze wszystkich pokoi, do których zostali przez Ciebie zaproszeni. Nie można cofnąć tej czynności.",
   "ResetAuth": "Zresetuj uwierzytelnianie",
-  "SearchByGroupMembers": "Wyszukaj według członków grupy",
   "SendInviteAgain": "Ponownie wyślij zaproszenie",
   "ShareGuest": "Udostępnij gościa",
   "SSOAccountTooltip": "Dane konto użytkownika jest ładowane z SSO. Aby zmienić nazwę użytkownika i adres e-mail, należy odwołać się do serwera SSO.",

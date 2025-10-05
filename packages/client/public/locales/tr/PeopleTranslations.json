@@ -23,7 +23,6 @@
   "RemoveGuests": "Konukları kaldır",
   "RemoveGuestsDescription": "Seçilen konuklar davet ettiğiniz tüm odalardan kaldırılacak. Bu eylem geri alınamaz.",
   "ResetAuth": "Kimlik doğrulamayı sıfırlayın",
-  "SearchByGroupMembers": "Grup üyelerine göre arama",
   "SendInviteAgain": "Bir kez daha davetiye gönder",
   "ShareGuest": "Konuk paylaş",
   "SSOAccountTooltip": "Bu kullanıcı hesabı SSO'dan yüklenmiştir. Kullanıcı adını ve e-posta adresini değiştirmeniz gerekirse, SSO sunucusuna başvurun.",

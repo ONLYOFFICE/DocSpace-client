@@ -23,7 +23,6 @@
   "RemoveGuests": "Remove guests",
   "RemoveGuestsDescription": "Selected guests will be removed from all rooms you have invited them to. This action cannot be undone.",
   "ResetAuth": "Reset authentication",
-  "SearchByGroupMembers": "Search by group members",
   "SendInviteAgain": "Send invitation once again",
   "ShareGuest": "Share guest",
   "SSOAccountTooltip": "This user account is loaded from SSO. If you need to change the user name and email address, refer to the SSO server.",

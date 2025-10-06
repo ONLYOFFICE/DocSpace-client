@@ -72,8 +72,9 @@ import LDAPContainer from "./sub-components/LDAPContainer";
 
 import { LoginDispatchContext, LoginValueContext } from "../Login";
 import OAuthClientInfo from "../ConsentInfo";
+import Captcha from "../Captcha";
 
-import { StyledCaptcha } from "./LoginForm.styled";
+//import { StyledCaptcha } from "./LoginForm.styled";
 
 const LoginForm = ({
   hashSettings,
@@ -627,29 +628,17 @@ const LoginForm = ({
       ) : null}
 
       {reCaptchaPublicKey && isCaptcha ? (
-        <StyledCaptcha isCaptchaError={isCaptchaError}>
-          <div className="captcha-wrapper">
-            {reCaptchaType === RecaptchaType.hCaptcha ? (
-              <HCaptcha
-                sitekey={reCaptchaPublicKey}
-                ref={hCaptchaRef}
-                onVerify={onSuccessfullyComplete}
-                theme={theme.isBase ? "light" : "dark"}
-                // onChange={onSuccessfullyComplete}
-              />
-            ) : (
-              <ReCAPTCHA
-                sitekey={reCaptchaPublicKey}
-                ref={captchaRef}
-                theme={theme.isBase ? "light" : "dark"}
-                onChange={onSuccessfullyComplete}
-              />
-            )}
-          </div>
-          {isCaptchaError ? (
-            <Text>{t("Errors:LoginWithBruteForceCaptcha")}</Text>
-          ) : null}
-        </StyledCaptcha>
+        <Captcha
+          type={reCaptchaType}
+          publicKey={reCaptchaPublicKey}
+          theme={theme}
+          isError={isCaptchaError}
+          errorText={t("Errors:LoginWithBruteForceCaptcha")}
+          onSuccessfullyComplete={onSuccessfullyComplete}
+          captchaRef={
+            reCaptchaType === RecaptchaType.hCaptcha ? hCaptchaRef : captchaRef
+          }
+        />
       ) : null}
       <Button
         id="login_submit"

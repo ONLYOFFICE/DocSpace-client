@@ -26,20 +26,6 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-:global(.rtl) {
-  :local(.tableHeader) {
-    right: unset !important;
-
-    &[data-with-info-panel="false"] {
-      left: 20px;
-    }
-
-    &[data-with-info-panel="true"] {
-      left: 421px; // 20px + 401px (info panel width)
-    }
-  }
-}
-
 .tableHeader {
   position: fixed;
 
@@ -58,6 +44,18 @@
   border-bottom: var(--table-header-border-bottom);
   margin: 0 -20px;
   padding: 0 20px;
+
+  :global(.rtl) & {
+    right: unset !important;
+
+    &[data-with-info-panel="false"] {
+      left: 20px;
+    }
+
+    &[data-with-info-panel="true"] {
+      left: 421px; // 20px + 401px (info panel width)
+    }
+  }
 
   &:global(.lengthen-header):not(:global(.hotkeys-lengthen-header)) {
     border-image-slice: 1;

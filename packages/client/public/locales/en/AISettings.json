@@ -39,5 +39,6 @@
   "Search": "Web Search",
   "SearchDescription": "Connect a web search engine to enhance AI chats with real-time information from the internet. Once configured, it will be available to all users in {{productName}}.",
   "SearchEngine": "Web Search Engine",
-  "APIKey": "API Key"
+  "APIKey": "API Key",
+  "ResetProviderKeyDescription": "The API key is displayed only once upon saving and is then hidden for security purposes. If it is reset, a new key must be provided; otherwise, AI features, including the chat, will be unavailable."
 }

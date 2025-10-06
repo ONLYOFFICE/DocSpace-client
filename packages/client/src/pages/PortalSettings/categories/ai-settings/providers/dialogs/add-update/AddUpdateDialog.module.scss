@@ -33,3 +33,14 @@
 
   padding-top: 24px;
 }
+
+.resetKeyHint {
+  box-sizing: border-box;
+  padding: 12px 16px;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 6px;
+  background: var(--ai-provider-key-hint-bg-color);
+  color: var(--ai-provider-key-hint-color);
+  margin-bottom: 4px;
+}

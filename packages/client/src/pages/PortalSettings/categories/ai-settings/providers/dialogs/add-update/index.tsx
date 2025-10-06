@@ -52,6 +52,7 @@ import {
   type TUpdateAiProvider,
 } from "@docspace/shared/api/ai/types";
 import { TData, toastr } from "@docspace/shared/components/toast";
+import { Link, LinkType } from "@docspace/shared/components/link";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -104,7 +105,7 @@ const AddUpdateDialogComponent = ({
   updateAIProvider,
   providerData,
 }: AddEditDialogProps) => {
-  const { t } = useTranslation(["Common", "AISettings", "OAuth"]);
+  const { t } = useTranslation(["Common", "AISettings", "OAuth", "Webhooks"]);
   const [selectedOption, setSelectedOption] = useState(
     getSelectedOptionByProviderType(providerData?.type),
   );
@@ -116,6 +117,9 @@ const AddUpdateDialogComponent = ({
         selectedOption.key as ProviderType,
         aiProviderTypesWithUrls,
       ),
+  );
+  const [isKeyInputHidden, setIsKeyInputHidden] = useState(
+    variant === "update",
   );
   const [isRequestRunning, setIsRequestRunning] = useState(false);
   const initFormData = useRef({
@@ -160,11 +164,19 @@ const AddUpdateDialogComponent = ({
       }
 
       if (variant === "update" && providerData?.id) {
-        const data: TUpdateAiProvider = {
-          key: providerKey,
-          title: providerTitle,
-          url: providerUrl,
-        };
+        const data: TUpdateAiProvider = {};
+
+        if (providerData.title !== providerTitle) {
+          data.title = providerTitle;
+        }
+
+        if (providerData.url !== providerUrl) {
+          data.url = providerUrl;
+        }
+
+        if (!isKeyInputHidden && providerKey.length > 0) {
+          data.key = providerKey;
+        }
 
         await updateAIProvider?.(providerData.id, data);
         toastr.success(t("AISettings:ProviderUpdatedSuccess"));
@@ -177,6 +189,8 @@ const AddUpdateDialogComponent = ({
       setIsRequestRunning(false);
     }
   };
+
+  const onResetKey = () => setIsKeyInputHidden(false);
 
   return (
     <ModalDialog
@@ -245,15 +259,32 @@ const AddUpdateDialogComponent = ({
             isVertical
             removeMargin
           >
-            <TextInput
-              size={InputSize.base}
-              type={InputType.text}
-              value={providerKey}
-              onChange={(e) => setProviderKey(e.target.value)}
-              scale
-              placeholder={t("AISettings:EnterKey")}
-              isDisabled={isRequestRunning}
-            />
+            {isKeyInputHidden ? (
+              <div className={styles.resetKeyBlock}>
+                <div className={styles.resetKeyHint}>
+                  {t("AISettings:ResetProviderKeyDescription")}
+                </div>
+                <Link
+                  type={LinkType.action}
+                  fontWeight={600}
+                  lineHeight="20px"
+                  isHovered
+                  onClick={onResetKey}
+                >
+                  {t("Webhooks:ResetKey")}
+                </Link>
+              </div>
+            ) : (
+              <TextInput
+                size={InputSize.base}
+                type={InputType.text}
+                value={providerKey}
+                onChange={(e) => setProviderKey(e.target.value)}
+                scale
+                placeholder={t("AISettings:EnterKey")}
+                isDisabled={isRequestRunning}
+              />
+            )}
           </FieldContainer>
         </div>
       </ModalDialog.Body>

@@ -2905,3 +2905,13 @@
 .dark {
   --quick-buttons-shared-color: #{$white};
 }
+
+.light {
+  --ai-provider-key-hint-bg-color: #{$gray-light};
+  --ai-provider-key-hint-color: #{$gray-text};
+}
+
+.dark {
+  --ai-provider-key-hint-bg-color: #{$dark-gray-light};
+  --ai-provider-key-hint-color: #{$dark-gray-dark};
+}

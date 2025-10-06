@@ -301,12 +301,18 @@
 
     box-sizing: border-box;
 
-    div {
-      height: 15px;
+    .toolStatusIcon {
+      & > div > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
 
     .toolFinishIcon {
       svg {
+        height: 12px;
+
         path {
           fill: var(--chat-input-send-button-background);
         }
@@ -322,9 +328,11 @@
       height: 16px;
     }
 
-    .externalLinkIcon {
-      path {
-        fill: var(--chat-message-external-link-icon-color);
+    .arrowRightIcon {
+      & > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
 
@@ -407,10 +415,18 @@
 
       &:hover {
         background-color: var(--chat-message-source-bg-hover-color);
+
+        .externalLinkIcon {
+          display: block;
+        }
       }
 
       &:active {
         background-color: var(--chat-message-source-bg-pressed-color);
+      }
+
+      .externalLinkIcon {
+        display: none;
       }
     }
 
@@ -427,6 +443,15 @@
       path {
         fill: var(--text-color);
       }
+    }
+  }
+
+  .externalLinkIcon {
+    width: 16px;
+    height: 16px;
+
+    path {
+      fill: var(--chat-message-external-link-icon-color);
     }
   }
 }

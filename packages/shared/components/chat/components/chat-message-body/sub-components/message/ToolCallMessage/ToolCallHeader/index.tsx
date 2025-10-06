@@ -98,7 +98,7 @@ export const ToolCallHeader = observer(
         })}
         onClick={onClick}
       >
-        {statusIcon}
+        <div className={styles.toolStatusIcon}>{statusIcon}</div>
 
         {isSearchTool ? (
           <SearchToolContent content={content} />

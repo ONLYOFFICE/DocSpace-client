@@ -30,6 +30,7 @@ import React, { useId, useState } from "react";
 import { ReactSVG } from "react-svg";
 
 import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
+import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.svg?url";
 
 import type {
   TToolCallContent,
@@ -116,6 +117,8 @@ const SourceItem = ({ source }: { source: TToolCallResultSourceData }) => {
           )}
         />
       ) : null}
+
+      <ReactSVG className={styles.externalLinkIcon} src={ExternalLinkIcon} />
     </Link>
   );
 };

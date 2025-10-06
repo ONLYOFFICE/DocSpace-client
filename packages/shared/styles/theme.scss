@@ -2309,6 +2309,8 @@
   --login-help-btn: #{$gray};
   --login-title-color: #{$black};
   --login-text-color: #{$gray};
+  --login-captcha-error-border: 1px solid #{$light-error-status};
+  --login-captcha-error-color: #{$light-error-status};
 }
 
 .dark {
@@ -2318,6 +2320,8 @@
   --login-help-btn: #{$gray-dark};
   --login-title-color: #{$white};
   --login-text-color: #{$gray-dark};
+  --login-captcha-error-border: 1px solid #{$light-error-status};
+  --login-captcha-error-color: #{$light-error-status};
 }
 
 .light {

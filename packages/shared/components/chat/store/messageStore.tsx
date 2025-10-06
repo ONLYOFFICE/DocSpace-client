@@ -534,6 +534,14 @@ export default class MessageStore {
       }
     }
   };
+
+  findPreviousUserMessage = (fromIndex: number) => {
+    for (let i = fromIndex + 1; i <= this.messages.length; i++) {
+      if (this.messages[i].role === RoleType.UserMessage)
+        return this.messages[i];
+    }
+    return undefined;
+  };
 }
 
 export const MessageStoreContext = React.createContext<MessageStore>(

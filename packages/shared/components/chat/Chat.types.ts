@@ -70,6 +70,7 @@ export type MessageButtonsProps = {
   messageId?: number;
   isLast: boolean;
   getIcon: TGetIcon;
+  messageIndex: number;
 };
 
 export type MessageCodeBlockProps = {

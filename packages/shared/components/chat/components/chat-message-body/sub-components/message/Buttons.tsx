@@ -37,7 +37,7 @@ import { exportChatMessage } from "../../../../../../api/ai";
 import { TBreadCrumb } from "../../../../../selector/Selector.types";
 
 import { toastr } from "../../../../../toast";
-import { Link, LinkType, LinkTarget } from "../../../../../link";
+import { Link, LinkTarget, LinkType } from "../../../../../link";
 
 import { useMessageStore } from "../../../../store/messageStore";
 
@@ -46,6 +46,8 @@ import ExportSelector from "../../../../components/export-selector";
 import styles from "../../ChatMessageBody.module.scss";
 
 import { MessageButtonsProps } from "../../../../Chat.types";
+import { FOLDER_FORM_VALIDATION } from "../../../../../../constants";
+import { ContentType } from "../../../../../../api/ai/enums";
 
 const Buttons = ({
   text,
@@ -53,9 +55,10 @@ const Buttons = ({
   messageId,
   // isLast,
   getIcon,
+  messageIndex,
 }: MessageButtonsProps) => {
   const { t } = useTranslation(["Common"]);
-  const { roomId } = useMessageStore();
+  const { roomId, findPreviousUserMessage } = useMessageStore();
 
   const [showFolderSelector, setShowFolderSelector] = React.useState(false);
 
@@ -109,6 +112,32 @@ const Buttons = ({
     setShowFolderSelector(false);
   };
 
+  const getExportedFileName = () => {
+    const userMessage = findPreviousUserMessage(messageIndex);
+    let text = "";
+
+    if (userMessage && userMessage.contents?.length > 0) {
+      for (const content of userMessage.contents) {
+        if (content.type === ContentType.Text) {
+          text = content.text;
+        }
+      }
+    }
+
+    if (!text) {
+      text = chatName || "";
+    }
+
+    const sanitizedStr = text
+      .slice(0, 49) // only first 50 chars
+      .replace(/[\r\n]+/g, " ") // multiline to single line
+      .replace(FOLDER_FORM_VALIDATION, "_") // unacceptable symbols to "_"
+      .replace(/_+/g, "_") // remove "_" duplicates
+      .trim();
+
+    return sanitizedStr;
+  };
+
   return (
     <>
       <div className={styles.buttonsBlock}>
@@ -145,7 +174,7 @@ const Buttons = ({
           onCloseFolderSelector={onCloseFolderSelector}
           onSubmit={onExportMessage}
           roomId={roomId}
-          chatName={chatName ?? ""}
+          getFileName={getExportedFileName}
           getIcon={getIcon}
           showFolderSelector={showFolderSelector}
         />

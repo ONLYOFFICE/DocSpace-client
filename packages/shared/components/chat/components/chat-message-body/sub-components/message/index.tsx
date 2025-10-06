@@ -161,6 +161,7 @@ const Message = ({
           chatName={currentChat?.title}
           isLast={isLast}
           messageId={message.id}
+          messageIndex={idx}
           getIcon={getIcon}
         />
       ) : null}

@@ -46,7 +46,7 @@ type ExportSelectorProps = {
     isChecked: boolean,
   ) => Promise<void>;
   roomId: string | number;
-  chatName: string;
+  getFileName: () => string;
 };
 
 const ExportSelector = ({
@@ -55,7 +55,7 @@ const ExportSelector = ({
   getIcon,
   onSubmit,
   roomId,
-  chatName,
+  getFileName,
 }: ExportSelectorProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -108,7 +108,7 @@ const ExportSelector = ({
       rootFolderType={FolderType.Rooms}
       footerCheckboxLabel={t("Common:OpenSavedDocument")}
       footerInputHeader={t("Common:FileName")}
-      currentFooterInputValue={chatName} // TODO: Maybe create file name from user message or assistant message. Adding messageId is not an option
+      currentFooterInputValue={getFileName()}
       descriptionText=""
       getFilesArchiveError={() => ""}
       currentDeviceType={

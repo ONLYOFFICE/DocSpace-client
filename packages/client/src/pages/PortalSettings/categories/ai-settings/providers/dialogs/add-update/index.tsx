@@ -53,6 +53,7 @@ import {
 } from "@docspace/shared/api/ai/types";
 import { TData, toastr } from "@docspace/shared/components/toast";
 import { Link, LinkType } from "@docspace/shared/components/link";
+import { PasswordInput } from "@docspace/shared/components/password-input";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -275,14 +276,15 @@ const AddUpdateDialogComponent = ({
                 </Link>
               </div>
             ) : (
-              <TextInput
+              <PasswordInput
                 size={InputSize.base}
-                type={InputType.text}
-                value={providerKey}
-                onChange={(e) => setProviderKey(e.target.value)}
-                scale
+                inputValue={providerKey}
+                onChange={(_, value) => setProviderKey(value!)}
+                isFullWidth
+                isDisableTooltip
                 placeholder={t("AISettings:EnterKey")}
                 isDisabled={isRequestRunning}
+                isSimulateType
               />
             )}
           </FieldContainer>

@@ -3,7 +3,7 @@
   "content": "IdP Single Sign-On Endpoint URL",
   "content_en_sha1_hash": "a1e3d72c09933def1425afc0eedb3892df293ce0",
   "created_at": "2025-05-19T21:30:50.145Z",
-  "updated_at": "2025-10-03T10:07:11.823Z",
+  "updated_at": "2025-10-03T13:19:30.643Z",
   "comment": {
     "text": "The SignOnEndpointUrl translation key is used to display the URL for Single Sign-On endpoint configuration, typically found in portal settings or integration settings. This value appears as a placeholder text when setting up an Identity Provider (IdP) integration, prompting users to enter their actual SSO endpoint URL.",
     "is_auto": true,

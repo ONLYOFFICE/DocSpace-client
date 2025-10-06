@@ -3,7 +3,7 @@
   "content": "The URL used for the single sign-on on the Identity provider side",
   "content_en_sha1_hash": "52920fb734942b1004a873fb087529c481adc18b",
   "created_at": "2025-05-19T21:30:50.147Z",
-  "updated_at": "2025-10-03T10:07:11.823Z",
+  "updated_at": "2025-10-03T13:19:30.644Z",
   "comment": {
     "text": "The translation key \"SignOnEndpointUrlTooltip\" is used to display the tooltip text explaining the URL used for single sign-on on the Identity provider side. It appears in a tooltip associated with a button that configures this setting.",
     "is_auto": true,

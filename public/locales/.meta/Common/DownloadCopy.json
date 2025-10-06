@@ -3,7 +3,7 @@
   "content": "Download copy",
   "content_en_sha1_hash": "f779a16e5bd57fac3371cd6ff082decdc8a0baad",
   "created_at": "2025-05-26T07:15:42.718Z",
-  "updated_at": "2025-10-03T10:07:11.993Z",
+  "updated_at": "2025-10-03T13:19:30.812Z",
   "comment": {
     "text": "This translation key is used to display a button that triggers manual backups, allowing users to download a copy of their data. It appears on a page with a backup settings interface and is likely used in a dialog or modal window when the user initiates a manual backup process. The translated text should read \"Download copy\".",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Welcome Page settings have been successfully saved",
   "content_en_sha1_hash": "9423c52b478ba171e34c7255eaa0faeb80e5c709",
   "created_at": "2025-05-19T21:30:52.827Z",
-  "updated_at": "2025-10-03T10:07:11.677Z",
+  "updated_at": "2025-10-03T13:19:30.540Z",
   "comment": {
     "text": "The \"SuccessfullySaveGreetingSettingsMessage\" translation key is used to display a success message after saving welcome page settings. It appears when the user clicks a button or submits form data in the Portal Settings categories common/Customization/welcome-page-settings.js file. This message informs the user that their changes have been successfully saved.",
     "is_auto": true,

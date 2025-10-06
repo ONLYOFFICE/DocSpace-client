@@ -7,7 +7,6 @@
   "DeleteGuest": "Poista vieras",
   "DeleteGuests": "Poista vieraat",
   "DeletePersonalDataApplicable": "*Valituille käyttäjille, joilla on sellaisia tiedostoja ja kansioita.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Tämän käyttäjän luomat huoneet ja näihin huoneisiin tallennetut asiakirjat siirretään automaattisesti järjestelmänvalvojalle, joka suorittaa poiston:<1>{{userPerformedDeletion}} ({{userYou}})</1>. Siirrä tiedot manuaalisesti valitaksesi toinen kohdekäyttäjä tietojen siirrolle.",
   "DeleteReqassignDescriptionGuest": "{{userCaption}} poistetaan kaikista huoneista, joihin heidät on kutsuttu. Tämän {{userCaption}} luomat huoneissa olevat asiakirjat siirretään automaattisesti huoneen omistajalle.",
   "DeleteUser": "Poista käyttäjä",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1>käyttäjä poistetaan. Tätä toimintoa ei voi perua.",

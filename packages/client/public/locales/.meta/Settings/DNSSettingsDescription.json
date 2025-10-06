@@ -3,7 +3,7 @@
   "content": "Set an alternative URL address for your space. Send your request to our support team to get help with the settings.",
   "content_en_sha1_hash": "07909a29d7f524535573d7fd44621cfb9130ebf3",
   "created_at": "2025-05-19T21:30:51.221Z",
-  "updated_at": "2025-10-03T10:07:11.659Z",
+  "updated_at": "2025-10-03T13:19:30.534Z",
   "comment": {
     "text": "This translation key is used for a button or link that allows users to set an alternative URL address for their space. It provides instructions on how to send a request to support for assistance with DNS settings. This text appears in a dialog box or settings page, likely within the PortalSettings category of customization options.",
     "is_auto": true,

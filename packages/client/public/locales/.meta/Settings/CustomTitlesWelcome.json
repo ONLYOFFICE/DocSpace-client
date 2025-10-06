@@ -3,7 +3,7 @@
   "content": "Welcome Page Settings",
   "content_en_sha1_hash": "087c1337487e8e7c3390215fdbb3d1c85858045c",
   "created_at": "2025-05-19T21:30:51.034Z",
-  "updated_at": "2025-10-03T10:07:11.676Z",
+  "updated_at": "2025-10-03T13:19:30.524Z",
   "comment": {
     "text": "The \"CustomTitlesWelcome\" translation key is used to display a welcome message or greeting title on the Portal Settings page. It appears when setting the default greeting title from session storage and needs to be translated to appear as a dynamic and customizable element in the UI.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Adjust the default space title displayed on the Welcome Page and in the From field of the email notifications.",
   "content_en_sha1_hash": "509f4c811b4bd79763d49e1085f1eb0c426ff7a3",
   "created_at": "2025-05-19T21:30:51.019Z",
-  "updated_at": "2025-10-03T10:07:11.679Z",
+  "updated_at": "2025-10-03T13:19:30.541Z",
   "comment": {
     "text": "The \"CustomTitlesDescription\" translation key is used to adjust the default space title displayed on the Welcome Page and in the From field of email notifications. It appears in a category item description section within the Portal Settings page.",
     "is_auto": true,

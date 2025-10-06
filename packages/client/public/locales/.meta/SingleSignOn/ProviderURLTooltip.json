@@ -3,7 +3,7 @@
   "content": "Identity Provider Entity Id (Issuer URL)",
   "content_en_sha1_hash": "76ee57556703e4be7173bf6ab9458305b3c58297",
   "created_at": "2025-05-19T21:30:50.125Z",
-  "updated_at": "2025-10-03T10:07:11.822Z",
+  "updated_at": "2025-10-03T13:19:30.643Z",
   "comment": {
     "text": "The translation key \"ProviderURLTooltip\" is used to display a tooltip for the \"Issuer URL\" label in the Single Sign On settings page, helping users understand the purpose of entering an entity ID. This tooltip appears next to a field where users can enter a provider's URL.",
     "is_auto": true,

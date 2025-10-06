@@ -53,6 +53,9 @@ type PropsFromCombobox = Pick<
   | "noSelect"
   | "isLoading"
   | "showDisabledItems"
+  | "withBackdrop"
+  | "title"
+  | "displaySelectedOption"
 >;
 
 export type AccessRightSelectProps = PropsFromCombobox & {

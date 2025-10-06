@@ -896,5 +896,7 @@
   "YouHaveUnsavedChanges": "Имеются несохраненные изменения",
   "YourCurrentDomain": "Ваш текущий домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша очередь"
+  "YourTurn": "Ваша очередь",
+  "IndividualRights": "Индивидуальные права в комнате",
+  "SearchByGroupMembers": "Поиск по участникам группы"
 }

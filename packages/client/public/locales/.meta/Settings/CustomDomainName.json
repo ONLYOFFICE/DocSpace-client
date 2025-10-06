@@ -3,7 +3,7 @@
   "content": "Custom domain name",
   "content_en_sha1_hash": "206b756397ab3dc81264df6cc5ef34724be21bde",
   "created_at": "2025-05-19T21:30:50.988Z",
-  "updated_at": "2025-10-03T10:07:11.657Z",
+  "updated_at": "2025-10-03T13:19:30.533Z",
   "comment": {
     "text": "Custom domain name label for a toggle button in DNS settings.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Change the space address that appears next to {{ domain }}.",
   "content_en_sha1_hash": "a7117de6c5149e0cb5b59057f4fa245e0e895b19",
   "created_at": "2025-05-19T21:30:52.262Z",
-  "updated_at": "2025-10-03T10:07:11.674Z",
+  "updated_at": "2025-10-03T13:19:30.538Z",
   "comment": {
     "text": "Change the space address that appears next to {{ domain }}. This translation is used to display a descriptive text in a portal settings page, likely on a button or similar UI element, informing users about the customization option for renaming the domain's space address.",
     "is_auto": true,

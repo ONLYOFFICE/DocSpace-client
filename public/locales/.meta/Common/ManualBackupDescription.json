@@ -3,7 +3,7 @@
   "content": "Use this option if you want to get all data contained in the space as a file.",
   "content_en_sha1_hash": "72b06ec623764ca1cdcbbdbe125f16fc48240dee",
   "created_at": "2025-05-26T07:15:44.992Z",
-  "updated_at": "2025-10-03T10:07:11.992Z",
+  "updated_at": "2025-10-03T13:19:30.811Z",
   "comment": {
     "text": "Use this option to download all data contained within a space as a file. This setting is typically found on backup and restore options in a space management interface.",
     "is_auto": true,

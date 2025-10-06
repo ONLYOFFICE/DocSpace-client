@@ -177,6 +177,21 @@ export const getGroupMembersInRoom = async (
   return res;
 };
 
+export const getGroupMembersShareFile = async (
+  fileId: string | number,
+  groupId: string,
+  filter: TGetGroupMembersInRoomFilter,
+) => {
+  const url = `/files/file/${fileId}/group/${groupId}/share?${toUrlParams(filter, false)}`;
+
+  const res = (await request({
+    method: "get",
+    url,
+  })) as TGetGroupMembersInRoom;
+
+  return res;
+};
+
 // * Update
 
 export const updateGroup = async (

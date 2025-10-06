@@ -3,7 +3,7 @@
   "content": "Viewing, editing, filling, commenting.",
   "content_en_sha1_hash": "2f4698df4bc2ecd3fe34b86347039a84e03d9045",
   "created_at": "2025-09-29T18:22:03.303Z",
-  "updated_at": "2025-10-01T15:17:48.477Z",
+  "updated_at": "2025-10-03T13:19:30.772Z",
   "comment": {
     "text": "This text describes the available actions for a PDF form, including viewing, editing, filling, and commenting. It's used to indicate the editing capabilities granted to the user, likely displayed near a button or control related to PDF form access. Translators should maintain the short, action-oriented style.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 686,
+      "line_number": 698,
       "context": "{\n fileType: FileType.PDF,\n access: ShareAccessRights.Editing,\n isForm: true,\n },\n () => t(\"Common:EditingDescriptionPDFForm\"),\n )\n .with(\n {\n fileType: FileType.PDF,\n access: ShareAccessRights.FormFilling,",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "The backup copy has been successfully created.",
   "content_en_sha1_hash": "485e01d52f6d2054b1caa6b7e516d51227b99e65",
   "created_at": "2025-05-19T21:30:50.661Z",
-  "updated_at": "2025-10-03T10:07:12.018Z",
+  "updated_at": "2025-10-03T13:19:30.831Z",
   "comment": {
     "text": "The translation key \"BackupCreatedSuccess\" is used to display a confirmation message when a backup copy has been successfully created. It appears in the UI after completing a backup operation, likely on a settings or utility page within an application, informing users of the success of their action.",
     "is_auto": true,

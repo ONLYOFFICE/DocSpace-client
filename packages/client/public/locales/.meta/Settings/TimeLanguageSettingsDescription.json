@@ -3,7 +3,7 @@
   "content": "Change Language and Time Zone Settings to adjust common {{productName}} language and time.",
   "content_en_sha1_hash": "9e6265da9246b0ab4fe70895c70f763d8cd5d9e2",
   "created_at": "2025-05-19T21:30:52.935Z",
-  "updated_at": "2025-10-03T10:07:11.661Z",
+  "updated_at": "2025-10-03T13:19:30.535Z",
   "comment": {
     "text": "This translation key is used for a descriptive text that explains the purpose of adjusting language and time zone settings in the application. It is displayed as part of a UI element to inform users about the impact on common product language and time, typically found in a Portal Settings category or customization options.",
     "is_auto": true,

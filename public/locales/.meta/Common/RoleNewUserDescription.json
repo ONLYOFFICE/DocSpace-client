@@ -3,7 +3,7 @@
   "content": "Users can create and edit files in the room, but can't create rooms, manage users, or access settings.",
   "content_en_sha1_hash": "c8c55fcf5248cbf283b206afa18995f50c6485cc",
   "created_at": "2025-05-19T21:30:48.058Z",
-  "updated_at": "2025-10-03T10:07:12.017Z",
+  "updated_at": "2025-10-03T13:19:30.830Z",
   "comment": {
     "text": "This translation key is used to display a description for non-admin users who can create and edit files in a room, but have limited access. It appears on screens related to file management within a room.",
     "is_auto": true,

@@ -7,7 +7,7 @@
   "DeleteGuest": "Delete guest",
   "DeleteGuests": "Delete guests",
   "DeletePersonalDataApplicable": "*Applicable for the selected users who have such files and folders.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Rooms created by this user and documents stored in these rooms will be reassigned automatically to an admin performing the deletion: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Reassign data manually to choose another destination user for reassignment.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} All shared files as well as rooms created by this contact will be reassigned automatically to an admin performing the deletion: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Reassign data manually to choose another destination user for reassignment.",
   "DeleteReqassignDescriptionGuest": "The {{userCaption}} will be deleted from all rooms to which they were invited. Documents created by this {{userCaption}} in rooms will be automatically reassigned to the room owners.",
   "DeleteUser": "Delete user",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> will be deleted. This action cannot be undone.",

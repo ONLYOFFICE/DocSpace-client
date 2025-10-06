@@ -3,7 +3,7 @@
   "content": "Enter domain name like this:",
   "content_en_sha1_hash": "ca975fa1b67c66cb5b4feebcdcf330bdab3ca160",
   "created_at": "2025-05-19T21:30:51.228Z",
-  "updated_at": "2025-10-03T10:07:11.657Z",
+  "updated_at": "2025-10-03T13:19:30.533Z",
   "comment": {
     "text": "This translation key is used to provide a hint about the expected format for a domain name input field in a DNS settings interface. It appears as a tooltip or label next to an input field where users can enter their domain name. The text helps clarify how the domain should be formatted, such as being entered without punctuation or special characters.",
     "is_auto": true,

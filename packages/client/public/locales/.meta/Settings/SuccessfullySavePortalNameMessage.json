@@ -3,7 +3,7 @@
   "content": "Space has been renamed successfully",
   "content_en_sha1_hash": "922f43c14405a630a03224ff173c2141d787702f",
   "created_at": "2025-05-19T21:30:52.834Z",
-  "updated_at": "2025-10-03T10:07:11.662Z",
+  "updated_at": "2025-10-03T13:19:30.536Z",
   "comment": {
     "text": "This translation key is used to display a success message when renaming a portal is successfully confirmed. It appears in the UI after clicking \"Save\" on the Portal Renaming dialog and is displayed via toastr to inform the user of the outcome.",
     "is_auto": true,

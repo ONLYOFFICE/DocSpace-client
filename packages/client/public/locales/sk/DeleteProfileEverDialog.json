@@ -7,7 +7,6 @@
   "DeleteGuest": "Odstrániť hosťa",
   "DeleteGuests": "Odstrániť hostí",
   "DeletePersonalDataApplicable": "*Platí pre vybraných používateľov, ktorí majú takéto súbory a priečinky.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Miestnosti vytvorené týmto používateľom a dokumenty uložené v týchto miestnostiach budú automaticky preradené administrátorovi, ktorý realizuje vymazávanie: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Ak chcete vybrať iného cieľového používateľa na opätovné priradenie, priraďte údaje ručne .",
   "DeleteReqassignDescriptionGuest": "{{userCaption}} bude odstránený zo všetkých miestností, do ktorých bol pozvaný. Dokumenty, ktoré {{userCaption}} vytvoril v miestnostiach, budú automaticky priradené vlastníkom miestností.",
   "DeleteUser": "Odstrániť používateľa",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> bude vymazaný. Tento úkon sa nedá odvolať.",

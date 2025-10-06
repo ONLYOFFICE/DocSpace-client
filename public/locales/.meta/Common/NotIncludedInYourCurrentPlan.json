@@ -3,7 +3,7 @@
   "content": "Not included in your current plan",
   "content_en_sha1_hash": "a90f73722d93d70d7588043f6bbdac0a0428fdbe",
   "created_at": "2025-08-26T11:14:08.402Z",
-  "updated_at": "2025-10-03T10:07:11.994Z",
+  "updated_at": "2025-10-03T13:19:30.812Z",
   "comment": {
     "text": "This text indicates that a feature or service is unavailable because it's not part of the user's current subscription plan. It appears within a locked state, likely on a module related to third-party storage, to inform the user about plan limitations. Translators should ensure the wording accurately conveys the unavailability due to subscription level.",
     "is_auto": true,

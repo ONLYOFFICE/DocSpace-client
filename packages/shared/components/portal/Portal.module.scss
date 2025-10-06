@@ -6,22 +6,22 @@
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 20px;
-  background-color: white;
+  background-color: #{$white};
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border-radius: 6px;
   z-index: 1000;
-  color: black;
+  color: #{$dark-black};
 
   &.blue {
-    background-color: #e3f2fd;
+    background-color: #{$portal-blue};
   }
 
   &.purple {
-    background-color: #f3e5f5;
+    background-color: #{$portal-purple};
   }
 
   &.green {
-    background-color: #e8f5e9;
+    background-color: #{$portal-green};
   }
 
   &.top30 {
@@ -41,7 +41,7 @@
   position: relative;
   width: 300px;
   height: 200px;
-  border: 2px dashed #ccc;
+  border: 2px dashed #{$gray-dark-pressed};
   margin: 20px;
   padding: 10px;
 }

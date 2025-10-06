@@ -3,7 +3,7 @@
   "content": "Metadata file not transferred",
   "content_en_sha1_hash": "cda5ccce62dbf3d4f7635fc868380764681ac8cb",
   "created_at": "2025-05-19T21:30:50.110Z",
-  "updated_at": "2025-10-03T10:07:11.913Z",
+  "updated_at": "2025-10-03T13:19:30.727Z",
   "comment": {
     "text": "This translation key is used to display an error message when a metadata file fails to transfer, typically appearing in an application that handles XML uploads. The text should be localized for use in UI elements such as tooltips or error notifications.",
     "is_auto": true,

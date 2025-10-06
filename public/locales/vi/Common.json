@@ -893,5 +893,7 @@
   "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourLogo": "Logo của bạn",
-  "YourTurn": "Phiên của bạn"
+  "YourTurn": "Phiên của bạn",
+  "IndividualRights": "Quyền cá nhân trong phòng",
+  "SearchByGroupMembers": "Tìm kiếm theo thành viên nhóm"
 }

@@ -3,7 +3,7 @@
   "content": "Preparing backup",
   "content_en_sha1_hash": "f35ddbcec9c65837f3811de3b81fc5dcd00e1d93",
   "created_at": "2025-05-26T07:15:46.295Z",
-  "updated_at": "2025-10-03T10:07:11.989Z",
+  "updated_at": "2025-10-03T13:19:30.810Z",
   "comment": {
     "text": "\"Preparing backup\" is a label used in various UI elements to indicate that a backup operation is in progress. It appears on buttons and dialogues related to manual backups, such as the \"Restore Backup\" button component, where it displays the current progress of the backup operation.",
     "is_auto": true,

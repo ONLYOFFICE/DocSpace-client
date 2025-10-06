@@ -24,17 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useDeferredValue } from "react";
 import { useTranslation } from "react-i18next";
 
 import { InputSize } from "../../components/text-input";
-import { getGroupMembersInRoom } from "../../api/groups";
+import {
+  getGroupMembersInRoom,
+  getGroupMembersShareFile,
+} from "../../api/groups";
 import { SearchInput } from "../../components/search-input";
 import { MIN_LOADER_TIMER } from "../../selectors/utils/constants";
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+import { isFile } from "../../utils/typeGuards";
 
 import type { TGroupMemberInvitedInRoom } from "../../api/groups/types";
-import { isRoom } from "../../utils/typeGuards";
 
 import EmptyContainer from "./EmptyContainer";
 import {
@@ -51,12 +54,17 @@ export const EditGroupMembers = ({
   infoPanelSelection,
   group,
   visible,
-  standalone,
+  standalone = false,
   setVisible,
+  onBackClick,
+  onClose,
 }: EditGroupMembersProps) => {
   const { t } = useTranslation(["Common"]);
 
   const [searchValue, setSearchValue] = useState<string>("");
+
+  const searchValueDeferred = useDeferredValue(searchValue);
+
   const [total, setTotal] = useState(0);
   const [groupMembers, setGroupMembers] = useState<
     TGroupMemberInvitedInRoom[] | null
@@ -71,7 +79,10 @@ export const EditGroupMembers = ({
 
   const onClearSearch = () => onChangeSearchValue("");
 
-  const onClose = () => setVisible(false);
+  const onClosePanel = () => {
+    setVisible(false);
+    onClose?.();
+  };
 
   const loadNextPage = async (startIndex: number) => {
     if (!infoPanelSelection) {
@@ -82,13 +93,17 @@ export const EditGroupMembers = ({
 
     try {
       setIsNextPageLoading(true);
-      const filter = { startIndex, count: 100, filterValue: searchValue };
+      const filter = {
+        startIndex,
+        count: 100,
+        filterValue: searchValueDeferred,
+      };
 
-      const data = await getGroupMembersInRoom(
-        infoPanelSelection.id,
-        group.id,
-        filter,
-      );
+      const api = isFile(infoPanelSelection)
+        ? getGroupMembersShareFile
+        : getGroupMembersInRoom;
+
+      const data = await api(infoPanelSelection.id, group.id, filter);
 
       setTotal(data.total);
       if (startIndex === 0 || !groupMembers) {
@@ -116,18 +131,15 @@ export const EditGroupMembers = ({
 
   useEffect(() => {
     loadNextPage(0);
-  }, [searchValue]);
-
-  if (!isRoom(infoPanelSelection)) {
-    onClose();
-    return;
-  }
+  }, [searchValueDeferred]);
 
   return (
     <ModalDialog
       visible={visible}
-      onClose={onClose}
+      onClose={onClosePanel}
       displayType={ModalDialogType.aside}
+      onBackClick={onBackClick}
+      isBackButton={!!onBackClick}
       withoutPadding
     >
       <ModalDialog.Header>
@@ -147,7 +159,7 @@ export const EditGroupMembers = ({
             >
               <SearchInput
                 className="search-input"
-                placeholder={t("PeopleTranslations:SearchByGroupMembers")}
+                placeholder={t("Common:SearchByGroupMembers")}
                 value={searchValue}
                 onChange={onChangeSearchValue}
                 onClearSearch={onClearSearch}

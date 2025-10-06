@@ -3,7 +3,7 @@
   "content": "Operations with files and folders: sharing, creating, uploading, editing, reviewing, moving, and deleting.",
   "content_en_sha1_hash": "7ee17dbf4813015e7b3ca9419c9a3d0b429d38b6",
   "created_at": "2025-09-29T18:22:04.702Z",
-  "updated_at": "2025-10-01T15:17:48.479Z",
+  "updated_at": "2025-10-03T13:19:30.773Z",
   "comment": {
     "text": "This text describes the scope of \"Full Access\" permissions. It explains that full access allows users to perform all file and folder actions, including sharing, creating, uploading, editing, reviewing, moving, and deleting. It’s used to clarify the extent of permissions granted within the UI, likely in a sharing or access control dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 577,
+      "line_number": 589,
       "context": "return (\n match({ fileType: file.fileType, access, isForm: file.isForm })\n // Document\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.FullAccess },\n () => t(\"Common:FullAccessDescriptionDocument\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.Editing },\n () => t(\"Common:EditingDescriptionDocument\"),\n )",
       "module": "/packages/shared"
     }

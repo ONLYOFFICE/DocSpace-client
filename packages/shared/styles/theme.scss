@@ -2909,9 +2909,13 @@
 .light {
   --ai-provider-key-hint-bg-color: #{$gray-light};
   --ai-provider-key-hint-color: #{$gray-text};
+
+  --web-search-hidden-key-description-color: #{$gray};
 }
 
 .dark {
   --ai-provider-key-hint-bg-color: #{$dark-gray-light};
   --ai-provider-key-hint-color: #{$dark-gray-dark};
+
+  --web-search-hidden-key-description-color: #{$gray-dark};
 }

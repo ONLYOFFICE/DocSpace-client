@@ -285,6 +285,7 @@ const AddUpdateDialogComponent = ({
                 placeholder={t("AISettings:EnterKey")}
                 isDisabled={isRequestRunning}
                 isSimulateType
+                autoComplete="off"
               />
             )}
           </FieldContainer>

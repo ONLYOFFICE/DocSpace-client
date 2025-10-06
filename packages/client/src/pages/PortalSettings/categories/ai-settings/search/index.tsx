@@ -34,10 +34,10 @@ import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { ComboBox, TOption } from "@docspace/shared/components/combobox";
 import { WebSearchType } from "@docspace/shared/api/ai/enums";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { PasswordInput } from "@docspace/shared/components/password-input";
 
 import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -52,6 +52,8 @@ type TSearchProps = {
   updateWebSearch?: AISettingsStore["updateWebSearch"];
 };
 
+const FAKE_KEY_VALUE = "0000000000000000";
+
 const SearchComponent = ({
   webSearchInitied,
   webSearchConfig,
@@ -60,7 +62,12 @@ const SearchComponent = ({
 }: TSearchProps) => {
   const { t } = useTranslation(["Common", "AISettings", "Settings"]);
 
-  const [value, setValue] = React.useState(webSearchConfig?.key ?? "");
+  const [isKeyHidden, setIsKeyHidden] = React.useState(
+    webSearchConfig?.enabled,
+  );
+  const [value, setValue] = React.useState(
+    webSearchConfig?.enabled ? FAKE_KEY_VALUE : "",
+  );
   const [selectedOption, setSelectedOption] = React.useState<WebSearchType>(
     () => {
       if (webSearchConfig?.type === WebSearchType.Exa) return WebSearchType.Exa;
@@ -70,18 +77,21 @@ const SearchComponent = ({
   );
   const [saveRequestRunning, setSaveRequestRunning] = React.useState(false);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+  const onChange = (_: React.ChangeEvent<HTMLInputElement>, value?: string) => {
+    setValue(value || "");
   };
 
   const onRestoreToDefault = async () => {
     setValue("");
     setSelectedOption(WebSearchType.None);
+    setIsKeyHidden(false);
 
     restoreWebSearch?.();
   };
 
   const onSave = async () => {
+    if (isKeyHidden) return;
+
     setSaveRequestRunning(true);
     await updateWebSearch?.(true, selectedOption, value);
     setSaveRequestRunning(false);
@@ -101,7 +111,11 @@ const SearchComponent = ({
   }, [selectedOption]);
 
   React.useEffect(() => {
-    setValue(webSearchConfig?.key ?? "");
+    if (webSearchConfig?.enabled) {
+      setIsKeyHidden(true);
+      setValue(FAKE_KEY_VALUE);
+    }
+
     setSelectedOption(() => {
       if (webSearchConfig?.type === WebSearchType.Exa) return WebSearchType.Exa;
 
@@ -148,10 +162,7 @@ const SearchComponent = ({
     );
 
   const isSaveDisabled =
-    !value ||
-    selectedOption === WebSearchType.None ||
-    (webSearchConfig?.key === value &&
-      selectedOption === webSearchConfig?.type);
+    !value || selectedOption === WebSearchType.None || isKeyHidden;
 
   return (
     <div className={generalStyles.search}>
@@ -197,13 +208,23 @@ const SearchComponent = ({
           labelText={t("AISettings:APIKey")}
           removeMargin
         >
-          <TextInput
-            type={InputType.text}
+          <PasswordInput
+            className={styles.passwordInput}
             placeholder={t("AISettings:EnterKey")}
-            value={value}
+            inputValue={value}
             onChange={onChange}
             scale
+            isSimulateType
+            isFullWidth
+            isDisableTooltip
+            isDisabled={isKeyHidden}
+            autoComplete="off"
           />
+          {isKeyHidden ? (
+            <Text className={styles.hiddenKeyDescription}>
+              {t("AISettings:WebSearchKeyHiddenDescription")}
+            </Text>
+          ) : null}
         </FieldContainer>
       </div>
       <div className={styles.buttonContainer}>
@@ -218,11 +239,13 @@ const SearchComponent = ({
         />
         <Button
           size={ButtonSize.small}
-          label={t("Settings:RestoreToDefault")}
+          label={t("Settings:ResetSettings")}
           scale={false}
           onClick={onRestoreToDefault}
           isDisabled={
-            webSearchConfig?.type === WebSearchType.None || saveRequestRunning
+            !webSearchConfig ||
+            webSearchConfig?.type === WebSearchType.None ||
+            saveRequestRunning
           }
         />
       </div>

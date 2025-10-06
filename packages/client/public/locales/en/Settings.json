@@ -205,6 +205,7 @@
   "QuotasDescription": "Here, you can set storage quota for users and rooms.",
   "Recalculate": "Recalculate",
   "ReportSaveLocation": "The report will be saved to {{sectionName}}",
+  "ResetSettings": "Reset settings",
   "RestoreToDefault": "Restore to default",
   "RolesAreSet": "Roles already set for the selected users.",
   "RoomQuotaDisabled": "Room quota has been successfully disabled.",

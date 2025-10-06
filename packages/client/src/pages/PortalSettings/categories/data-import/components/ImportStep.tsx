@@ -44,11 +44,7 @@ import { ImportOptionsKey } from "SRC_DIR/store/ImportAccountsStore";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
-
-  .save-cancel-buttons {
-    margin-top: 4px;
-  }
+  gap: 20px;
 `;
 
 const ImportStep = (props: ImportStepProps) => {
@@ -131,7 +127,7 @@ const ImportStep = (props: ImportStepProps) => {
               sectionName: t("Common:Contacts"),
             }}
             components={{
-              1: <b />,
+              1: <span />,
             }}
           />
         }
@@ -162,7 +158,7 @@ const ImportStep = (props: ImportStepProps) => {
               sectionName: t("Common:MyDocuments"),
             }}
             components={{
-              1: <b />,
+              1: <span />,
             }}
           />
         }
@@ -193,7 +189,7 @@ const ImportStep = (props: ImportStepProps) => {
               sectionName: t("Common:SharedWithMe"),
             }}
             components={{
-              1: <b />,
+              1: <span />,
             }}
           />
         }

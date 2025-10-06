@@ -146,10 +146,6 @@ export const Wrapper = styled.div`
     margin-bottom: 17px;
   }
 
-  .importUsersSearch {
-    margin-top: 20px;
-  }
-
   .sendLetterBlockWrapper {
     display: flex;
     align-items: center;
@@ -239,7 +235,6 @@ export const StyledTableContainer = styled(TableContainer).attrs(
 `;
 
 export const StyledInfoBlock = styled.div.attrs(injectDefaultTheme)`
-  margin: 16px 0;
   display: inline-flex;
   align-items: center;
   background: ${(props) =>
@@ -247,6 +242,7 @@ export const StyledInfoBlock = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
   padding: 12px 16px;
   border-radius: 6px;
+  margin-bottom: 16px;
 
   @media ${mobile} {
     width: 100%;

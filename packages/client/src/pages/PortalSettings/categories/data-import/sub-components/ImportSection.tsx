@@ -31,16 +31,18 @@ import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg?url";
 import { ImportItemProps, ImportSectionProps } from "../types";
+import { tablet } from "@docspace/shared/utils";
 
 const SectionWrapper = styled.div<{ isChecked: boolean }>`
   max-width: 700px;
-  padding: 12px;
+
+  @media ${tablet} {
+    max-width: 675px;
+  }
+
   box-sizing: border-box;
   display: flex;
-
-  border-radius: 6px;
-  background: ${(props) =>
-    props.theme.client.settings.migration.importSectionBackground};
+  gap: 4px;
 
   .toggleButton {
     position: relative;
@@ -63,6 +65,10 @@ const SectionWrapper = styled.div<{ isChecked: boolean }>`
         : props.theme.client.settings.migration.importItemDisableTextColor};
     margin-top: 4px;
     margin-bottom: 12px;
+    span {
+      font-size: 12px;
+      font-weight: 600;
+    }
   }
 `;
 
@@ -75,7 +81,6 @@ const FlexContainer = styled.div`
 const ImportItemWrapper = styled.div<{ isChecked: boolean }>`
   display: flex;
   flex-direction: column;
-  padding-top: 8px;
   width: calc(50% - 20px);
 
   .workspace-title {
@@ -92,7 +97,7 @@ const ImportItemWrapper = styled.div<{ isChecked: boolean }>`
     height: 36px;
     padding: 8px 12px;
     box-sizing: border-box;
-    margin-top: 12px;
+    margin-top: 6px;
     border-radius: 3px;
     background: ${(props) =>
       props.isChecked
@@ -133,7 +138,7 @@ const ImportItemWrapper = styled.div<{ isChecked: boolean }>`
 
 const ArrowWrapper = styled.div`
   margin: 32px 12px 0;
-  height: 36px;
+  height: 11px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -204,7 +209,7 @@ const ImportSection = ({
         <Text lineHeight="20px" fontWeight={600} className="section-title">
           {sectionName}
         </Text>
-        <Text fontSize="12px" className="section-description">
+        <Text fontSize="12px" lineHeight="16px" className="section-description">
           {description}
         </Text>
         <FlexContainer>

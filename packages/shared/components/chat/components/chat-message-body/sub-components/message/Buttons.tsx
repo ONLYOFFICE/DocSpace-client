@@ -29,7 +29,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
 import CopyIconUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
-import RefreshIconUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+// import RefreshIconUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import SaveToFileIconUrl from "PUBLIC_DIR/images/message.save.svg?url";
 
 import { exportChatMessage } from "../../../../../../api/ai";
@@ -51,7 +51,7 @@ const Buttons = ({
   text,
   chatName,
   messageId,
-  isLast,
+  // isLast,
   getIcon,
 }: MessageButtonsProps) => {
   const { t } = useTranslation(["Common"]);
@@ -119,17 +119,19 @@ const Buttons = ({
         >
           <ReactSVG src={CopyIconUrl} />
         </div>
-        {isLast ? (
-          <div
-            className={styles.buttonsBlockItem}
-            title={t("RefreshMessage")}
-            onClick={() => {
-              toastr.info(t("Common:WorkInProgress"));
-            }}
-          >
-            <ReactSVG src={RefreshIconUrl} />
-          </div>
-        ) : null}
+
+        {/*{isLast ? (*/}
+        {/*  <div*/}
+        {/*    className={styles.buttonsBlockItem}*/}
+        {/*    title={t("RefreshMessage")}*/}
+        {/*    onClick={() => {*/}
+        {/*      toastr.info(t("Common:WorkInProgress"));*/}
+        {/*    }}*/}
+        {/*  >*/}
+        {/*    <ReactSVG src={RefreshIconUrl} />*/}
+        {/*  </div>*/}
+        {/*) : null}*/}
+
         <div
           className={styles.buttonsBlockItem}
           onClick={() => setShowFolderSelector(true)}

@@ -3,7 +3,7 @@
   "content": "Settings have been successfully updated",
   "content_en_sha1_hash": "a3e0f1940499fb1b34253a9a7b050c2136e1f58b",
   "created_at": "2025-05-26T07:15:48.667Z",
-  "updated_at": "2025-10-01T15:17:48.238Z",
+  "updated_at": "2025-10-03T13:19:30.530Z",
   "comment": {
     "text": "The translation key \"SuccessfullySaveSettingsMessage\" is used to display a success message after saving portal settings. It appears in UI elements such as buttons or dialogs that trigger setting updates, providing feedback to the user that changes have been successfully applied.",
     "is_auto": true,
@@ -90,13 +90,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 174,
+      "line_number": 169,
       "context": "timerId = setTimeout(() => {\n setIsLoading(true);\n }, [200]);\n \n await saveDNSSettings();\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (e) {\n setIsError(true);\n toastr.error(e);\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 413,
+      "line_number": 406,
       "context": "setCookie(LANGUAGE, state.language.key || \"en\", {\n \"max-age\": COOKIE_EXPIRATION_YEAR,\n });\n window.timezone = state.timezone.key;\n })\n .then(() => toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\")))\n .then(\n () =>\n !user.cultureName &&\n lng !== state.language.key &&\n window.location.reload(),",
       "module": "/packages/client"
     },
@@ -168,7 +168,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 220,
+      "line_number": 230,
       "context": "const res = await setTfaSettings(type);\n setType(type);\n setShowReminder(false);\n saveToSessionStorage(\"defaultTfaSettings\", type);\n saveToSessionStorage(\"currentTfaSettings\", type);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n \n if (res) {\n setIsInit(false);\n window.location.replace(res);\n }",
       "module": "/packages/client"
     },
@@ -180,7 +180,7 @@
     },
     {
       "file_path": "/packages/client/src/store/SsoFormStore.js",
-      "line_number": 465,
+      "line_number": 469,
       "context": "this.isSubmitLoading = true;\n \n try {\n await submitSsoForm(data);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n this.isSubmitLoading = false;\n this.load();\n } catch (err) {\n toastr.error(err);\n console.error(err);",
       "module": "/packages/client"
     },

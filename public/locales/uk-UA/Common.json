@@ -885,5 +885,7 @@
   "YouHaveUnsavedChanges": "У вас є незбережені зміни",
   "YourCurrentDomain": "Ваш поточний домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша черга"
+  "YourTurn": "Ваша черга",
+  "IndividualRights": "Індивідуальні права в групі",
+  "SearchByGroupMembers": "Шукати за учасниками групи"
 }

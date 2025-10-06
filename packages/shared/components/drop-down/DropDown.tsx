@@ -346,7 +346,7 @@ const DropDown = ({
     );
   };
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const resizeListener = () => {
       if (isDefaultMode) {
         checkPositionPortal();

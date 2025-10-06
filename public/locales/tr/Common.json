@@ -893,5 +893,7 @@
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
-  "YourTurn": "Sıra sizde"
+  "YourTurn": "Sıra sizde",
+  "IndividualRights": "Odadaki bireysel haklar",
+  "SearchByGroupMembers": "Grup üyelerine göre arama"
 }

@@ -3,7 +3,7 @@
   "content": "Backup",
   "content_en_sha1_hash": "dd96994d01e723dd6f9b0bdb6119722dbeb9faf0",
   "created_at": "2025-05-19T21:30:50.645Z",
-  "updated_at": "2025-10-01T15:17:48.372Z",
+  "updated_at": "2025-10-03T13:19:30.526Z",
   "comment": {
     "text": "The translation key \"Backup\" is used to display the label for a backup option in the Portal Settings, likely appearing as a button or toggle. It corresponds to a specific section within the data management category.",
     "is_auto": true,
@@ -48,7 +48,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 631,
+      "line_number": 640,
       "context": "operationsCompleted={downloadingProgress === 100}\n operations={[\n {\n label:\n downloadingProgress === 100\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),",
       "module": "/packages/shared"
     },

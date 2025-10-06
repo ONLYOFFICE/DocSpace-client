@@ -894,5 +894,7 @@
   "YouHaveUnsavedChanges": "Имате несачуване промене",
   "YourCurrentDomain": "Ваш тренутни домен",
   "YourLogo": "Ваш лого",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "IndividualRights": "Индивидуална права у соби",
+  "SearchByGroupMembers": "Претражуј по члановима групе"
 }

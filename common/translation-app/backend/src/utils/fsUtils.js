@@ -199,8 +199,7 @@ async function writeTranslationFile(projectName, language, namespace, content) {
     await fs.ensureDir(langPath);
 
     const filePath = path.join(langPath, `${namespace}.json`);
-    await writeJsonWithConsistentEol(filePath, content);
-    return true;
+    return writeJsonWithConsistentEol(filePath, content).then(() => true);
   } catch (error) {
     console.error(
       `Error writing translation file for project ${projectName}, language ${language}, namespace ${namespace}:`,
@@ -716,7 +715,7 @@ async function writeJsonWithConsistentEol(filePath, content, options = {}) {
 
     // Use JSON.stringify with explicit options to ensure consistent line endings
     const jsonContent = JSON.stringify(content, null, spaces);
-    await fs.writeFile(filePath, jsonContent, { encoding: "utf8" });
+    return fs.writeFile(filePath, jsonContent, { encoding: "utf8" });
   } catch (error) {
     console.error(`Error writing JSON file ${filePath}:`, error);
     throw error;
@@ -738,6 +737,7 @@ function writeJsonWithConsistentEolSync(filePath, content, options = {}) {
     // Use JSON.stringify with explicit options to ensure consistent line endings
     const jsonContent = JSON.stringify(content, null, spaces);
     fs.writeFileSync(filePath, jsonContent, { encoding: "utf8" });
+    return true;
   } catch (error) {
     console.error(`Error writing JSON file ${filePath}:`, error);
     throw error;

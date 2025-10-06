@@ -242,12 +242,12 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             <IconButton
               iconName={ShareSvgUrl}
               className={classNames("badge copy-link icons-group", {
-                "create-share-link": !item.sharedForUser,
-                "link-shared": item.sharedForUser,
+                "create-share-link": !item.sharedForUser && !item.shared,
+                "link-shared": item.sharedForUser || item.shared,
               })}
               size={sizeQuickButton}
               onClick={openShareTab}
-              color={item.sharedForUser ? "accent" : undefined}
+              color={item.sharedForUser || item.shared ? "accent" : undefined}
               isDisabled={isDisabled}
               hoverColor="accent"
             />

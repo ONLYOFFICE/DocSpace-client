@@ -30,9 +30,13 @@ import { useIsMobile } from "../../../hooks/useIsMobile";
 
 import { Calendar } from "../../calendar";
 import { DropDown } from "../../drop-down";
+import { Scrollbar } from "../../scrollbar";
 
-import { ShareCalendarProps } from "../Share.types";
+import type { ShareCalendarProps } from "../Share.types";
 import styles from "../Share.module.scss";
+
+const calendarHeight = 376;
+const calendarWidth = 362;
 
 const ShareCalendar = ({
   onDateSet,
@@ -45,6 +49,11 @@ const ShareCalendar = ({
   const maxDate = moment().add(10, "years");
 
   const isMobileView = useIsMobile();
+
+  const height = Math.min(
+    typeof window !== "undefined" ? window.innerHeight : 0,
+    calendarHeight,
+  );
 
   const calendarComponent = (
     <Calendar
@@ -64,10 +73,12 @@ const ShareCalendar = ({
   return (
     <DropDown
       open
+      topSpace={0}
       isDefaultMode
+      directionY="both"
       forwardedRef={bodyRef}
-      className={styles.dropDown}
       eventTypes={["mousedown"]}
+      className={styles.dropDown}
       withBackdrop={isMobileView}
       isMobileView={isMobileView}
       withBackground={isMobileView}
@@ -75,7 +86,9 @@ const ShareCalendar = ({
       shouldShowBackdrop={isMobileView}
       clickOutsideAction={() => closeCalendar()}
     >
-      {calendarComponent}
+      <Scrollbar style={{ height, width: calendarWidth }}>
+        {calendarComponent}
+      </Scrollbar>
     </DropDown>
   );
 };

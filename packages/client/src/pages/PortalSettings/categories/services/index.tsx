@@ -58,11 +58,14 @@ const Services = (props: InjectedProps) => {
     setIsInitServicesPage,
     setVisibleWalletSetting,
     showPortalSettingsLoader,
+    isFreeTariff,
   } = props;
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
   const [isBackupVisible, setIsBackupVisible] = useState(false);
   const [isConfirmDialogVisible, setIsConfirmDialogVisible] = useState(false);
+  const [isCurrentConfirmDialogVisible, setIsCurrentConfirmDialogVisible] =
+    useState(false);
   const [isStorageCancelattion, setIsStorageCancellation] = useState(false);
   const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
     useState(false);
@@ -104,9 +107,17 @@ const Services = (props: InjectedProps) => {
   const confirmationDialogContent = {
     backup: {
       title: t("Common:Confirmation"),
-      body: t("Services:EnableBackupConfirm", {
-        productName: t("Common:ProductName"),
-      }),
+      body: !isCurrentConfirmDialogVisible
+        ? t("Services:EnableBackupConfirm", {
+            productName: t("Common:ProductName"),
+          })
+        : isFreeTariff
+          ? t("Services:DisableBackupConfirmWithoutQuota", {
+              productName: t("Common:ProductName"),
+            })
+          : t("Services:DisableBackupConfirm", {
+              productName: t("Common:ProductName"),
+            }),
     },
   };
 
@@ -142,6 +153,7 @@ const Services = (props: InjectedProps) => {
 
   const onToggle = async (id: string, currentEnabled: boolean) => {
     setConfirmActionType(id);
+    setIsCurrentConfirmDialogVisible(currentEnabled);
 
     if (id === TOTAL_SIZE) {
       if (currentEnabled) {
@@ -164,7 +176,8 @@ const Services = (props: InjectedProps) => {
       }
     }
 
-    if (!currentEnabled) setIsConfirmDialogVisible(true);
+    if (!currentEnabled || id === BACKUP_SERVICE)
+      setIsConfirmDialogVisible(true);
     else {
       const raw = {
         service: id,
@@ -205,7 +218,7 @@ const Services = (props: InjectedProps) => {
 
     const raw = {
       service: confirmActionType,
-      enabled: true,
+      enabled: !isCurrentConfirmDialogVisible,
     };
 
     setIsConfirmDialogVisible(false);
@@ -296,6 +309,7 @@ const mapStoreToProps = ({
   currentTariffStatusStore,
   paymentStore,
   clientLoadingStore,
+  currentQuotaStore,
 }: TStore) => {
   const {
     isInitServicesPage,
@@ -306,6 +320,7 @@ const mapStoreToProps = ({
     setVisibleWalletSetting,
   } = servicesStore;
   const { isGracePeriod, previousStoragePlanSize } = currentTariffStatusStore;
+  const { isFreeTariff } = currentQuotaStore;
   const {
     isShowStorageTariffDeactivatedModal,
     changeServiceState,
@@ -327,6 +342,7 @@ const mapStoreToProps = ({
     setIsInitServicesPage,
     setVisibleWalletSetting,
     showPortalSettingsLoader,
+    isFreeTariff,
   };
 };
 

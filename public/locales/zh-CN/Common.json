@@ -977,5 +977,7 @@
   "YouHaveUnsavedChanges": "您有未保存的变更",
   "YourCurrentDomain": "您当前的域",
   "YourLogo": "您的logo",
-  "YourTurn": "轮到您了"
+  "YourTurn": "轮到您了",
+  "IndividualRights": "房间内的个人权限",
+  "SearchByGroupMembers": "按群组成员搜索"
 }

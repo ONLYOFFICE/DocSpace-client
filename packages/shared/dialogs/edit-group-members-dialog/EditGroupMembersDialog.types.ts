@@ -28,7 +28,6 @@ import type { TFolder } from "../../api/files/types";
 import type { TRoom } from "../../api/rooms/types";
 import type { TFile } from "../../api/files/types";
 import type { TGroup } from "../../api/groups/types";
-import type { Nullable } from "../../types";
 
 export interface EditGroupMembersDialogProviderProps {
   infoPanelSelection: TFolder | TRoom | TFile;
@@ -39,6 +38,8 @@ export interface EditGroupMembersProps {
   visible: boolean;
   setVisible: (visible: boolean) => void;
   group: TGroup;
-  infoPanelSelection: Nullable<TRoom | TFile | TFolder>;
-  standalone: boolean;
+  infoPanelSelection: TRoom | TFile | TFolder;
+  standalone?: boolean;
+  onBackClick?: VoidFunction;
+  onClose?: VoidFunction;
 }

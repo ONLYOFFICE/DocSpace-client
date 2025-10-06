@@ -56,7 +56,13 @@ import ShareHeader from "../sub-components/ShareHeader";
 import { CreateButton } from "../sub-components/CreateButton";
 
 export const useMembers = (props: UseMembersProps) => {
-  const { selfId, shareMembersTotal, infoPanelSelection, linksCount } = props;
+  const {
+    selfId,
+    shareMembersTotal,
+    infoPanelSelection,
+    linksCount,
+    onClickGroup,
+  } = props;
 
   const abortController = useRef(new AbortController());
 
@@ -253,6 +259,7 @@ export const useMembers = (props: UseMembersProps) => {
             selectedOption={selectedOption}
             onSelectOption={(option) => onSelectOption(option, member)}
             index={index + linksCount}
+            onClickGroup={onClickGroup}
           />
         );
       }),

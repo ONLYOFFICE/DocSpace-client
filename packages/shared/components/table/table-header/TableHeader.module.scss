@@ -26,8 +26,31 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+:global(.rtl) {
+  :local(.tableHeader) {
+    right: unset !important;
+
+    &[data-with-info-panel="false"] {
+      left: 20px;
+    }
+
+    &[data-with-info-panel="true"] {
+      left: 421px; // 20px + 401px (info panel width)
+    }
+  }
+}
+
 .tableHeader {
   position: fixed;
+
+  &[data-with-info-panel="false"] {
+    right: 20px;
+  }
+
+  &[data-with-info-panel="true"] {
+    right: 421px; // 20px + 401px (info panel width)
+  }
+
   background: var(--background-color);
   display: grid;
   z-index: 1;

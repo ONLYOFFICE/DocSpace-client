@@ -217,7 +217,7 @@ const SearchComponent = ({
             isSimulateType
             isFullWidth
             isDisableTooltip
-            isDisabled={isKeyHidden}
+            isDisabled={isKeyHidden || selectedOption === WebSearchType.None}
             autoComplete="off"
           />
           {isKeyHidden ? (

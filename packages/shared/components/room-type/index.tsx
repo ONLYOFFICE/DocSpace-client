@@ -34,7 +34,6 @@ import { RoomsType } from "../../enums";
 import { RoomLogo } from "../room-logo";
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
-import { Badge } from "../badge";
 
 import {
   getRoomTypeDescriptionTranslation,
@@ -42,7 +41,6 @@ import {
 } from "./RoomType.utils";
 import styles from "./RoomType.module.scss";
 import { RoomTypeProps } from "./RoomType.types";
-import { globalColors } from "../../themes";
 
 const RoomType = ({
   roomType,

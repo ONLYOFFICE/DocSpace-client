@@ -67,6 +67,7 @@ const ShareCalendar = ({
       minDate={selectedDate}
       maxDate={maxDate}
       dataTestId="info_panel_share_calendar"
+      id="share_calendar"
     />
   );
 

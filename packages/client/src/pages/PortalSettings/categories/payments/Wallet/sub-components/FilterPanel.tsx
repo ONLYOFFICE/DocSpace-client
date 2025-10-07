@@ -26,6 +26,8 @@
 
 import { useTranslation } from "react-i18next";
 
+import ClearReactSvgUrl from "PUBLIC_DIR/images/icons/17/clear.react.svg?url";
+
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
   ModalDialog,
@@ -52,6 +54,8 @@ type FilterPanelProps = {
   onSelectType: (option: TOption) => void;
   onApplyFilter: () => void;
   isChanged: boolean;
+  clearFilter: () => void;
+  shouldShowClearButton: boolean;
 };
 
 const FilterPanel = ({
@@ -66,6 +70,8 @@ const FilterPanel = ({
   onSelectType,
   onApplyFilter,
   isChanged,
+  clearFilter,
+  shouldShowClearButton,
 }: FilterPanelProps) => {
   const { t } = useTranslation(["Payments", "Settings"]);
   return (
@@ -75,6 +81,17 @@ const FilterPanel = ({
       displayType={ModalDialogType.aside}
       className={styles.filterDialog}
       containerVisible={isSelectorVisible}
+      headerIcons={
+        shouldShowClearButton
+          ? [
+              {
+                key: "clear-filter",
+                url: ClearReactSvgUrl,
+                onClick: clearFilter,
+              },
+            ]
+          : []
+      }
     >
       <ModalDialog.Container>{selectorComponent}</ModalDialog.Container>
       <ModalDialog.Header>{t("Filter")}</ModalDialog.Header>

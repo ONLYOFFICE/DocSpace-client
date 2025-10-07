@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import moment from "moment";
@@ -64,6 +64,7 @@ import FilterPanel from "./sub-components/FilterPanel";
 import TransactionBody from "./sub-components/TransactionBody";
 import styles from "./styles/TransactionHistory.module.scss";
 import TableLoader from "./sub-components/TableLoader";
+import { Link } from "@docspace/shared/components/link";
 
 type TransactionHistoryProps = {
   getStartTransactionDate?: () => string;
@@ -92,6 +93,38 @@ const filter = () => {
 };
 
 let timerId = null;
+
+const useInitialState = (
+  getStartTransactionDate: () => string,
+  getEndTransactionDate: () => string,
+  initialType: TOption,
+) => {
+  const initialState = useMemo(() => {
+    return {
+      selectedType: initialType,
+      startDate: moment(getStartTransactionDate()),
+      endDate: moment(getEndTransactionDate()),
+      selectedContact: null as TUser | null,
+      isChanged: false,
+    };
+  }, []);
+
+  const isStateModified = (currentState: {
+    selectedType: TOption;
+    startDate: moment.Moment;
+    endDate: moment.Moment;
+    selectedContact: TUser | null;
+  }) => {
+    return (
+      currentState.selectedType.key !== initialState.selectedType.key ||
+      !currentState.startDate.isSame(initialState.startDate, "day") ||
+      !currentState.endDate.isSame(initialState.endDate, "day") ||
+      currentState.selectedContact !== initialState.selectedContact
+    );
+  };
+
+  return { initialState, isStateModified };
+};
 
 const fetchTransactions = async (
   fetchTransactionHistory: (
@@ -161,28 +194,92 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     },
   ];
 
+  const { initialState, isStateModified } = useInitialState(
+    getStartTransactionDate!,
+    getEndTransactionDate!,
+    typeOfHistoty[0],
+  );
+
   const [isSelectorVisible, setIsSelectorVisible] = useState(false);
-  const [selectedType, setSelectedType] = useState<TOption>(typeOfHistoty[0]);
+  const [selectedType, setSelectedType] = useState<TOption>(
+    initialState.selectedType,
+  );
   const [startDate, setStartDate] = useState<moment.Moment>(
-    moment(getStartTransactionDate!()),
+    initialState.startDate,
   );
-  const [endDate, setEndDate] = useState<moment.Moment>(
-    moment(getEndTransactionDate!()),
+  const [endDate, setEndDate] = useState<moment.Moment>(initialState.endDate);
+  const [selectedContact, setSelectedContact] = useState<TUser | null>(
+    initialState.selectedContact,
   );
-  const [selectedContact, setSelectedContact] = useState<TUser | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [hasAppliedDateFilter, setHasAppliedDateFilter] = useState(false);
   const [isFormationHistory, setIsFormationHistory] = useState(false);
   const [isFilterDialogVisible, setIsFilterDialogVisible] = useState(false);
-  const [isChanged, setIsChanged] = useState(false);
+  const [isChanged, setIsChanged] = useState(initialState.isChanged);
+
+  // Mobile filter state for dialog
+  const [mobileFilterState, setMobileFilterState] = useState({
+    selectedType: selectedType,
+    startDate: startDate,
+    endDate: endDate,
+    selectedContact: selectedContact,
+  });
 
   const openFilterDialog = () => {
+    // Initialize mobile filter state with current state when opening dialog
+    setMobileFilterState({
+      selectedType: selectedType,
+      startDate: startDate,
+      endDate: endDate,
+      selectedContact: selectedContact,
+    });
     setIsFilterDialogVisible(true);
   };
 
   const closeFilterDialog = () => {
+    // Reset mobile filter state to current state values when canceling dialog
+    setMobileFilterState({
+      selectedType: selectedType,
+      startDate: startDate,
+      endDate: endDate,
+      selectedContact: selectedContact,
+    });
     setIsFilterDialogVisible(false);
   };
+
+  const onClearFilter = async () => {
+    // Reset both state and mobile filter state to initial values
+    setSelectedType(initialState.selectedType);
+    setStartDate(initialState.startDate);
+    setEndDate(initialState.endDate);
+    setSelectedContact(initialState.selectedContact);
+    setIsChanged(initialState.isChanged);
+
+    // Also reset the mobile filter state
+    setMobileFilterState({
+      selectedType: initialState.selectedType,
+      startDate: initialState.startDate,
+      endDate: initialState.endDate,
+      selectedContact: initialState.selectedContact,
+    });
+
+    if (isMobile) closeFilterDialog();
+
+    await fetchTransactions(
+      fetchTransactionHistory,
+      setIsLoading,
+      initialState.selectedType.key as string,
+      initialState.startDate,
+      initialState.endDate,
+      initialState.selectedContact?.id,
+    );
+  };
+
+  const shouldShowClearButton = isStateModified({
+    selectedType,
+    startDate,
+    endDate,
+    selectedContact,
+  });
 
   const onCloseContactSelector = () => {
     setIsSelectorVisible(false);
@@ -193,13 +290,16 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   };
 
   const onSelectType = async (option: TOption) => {
-    setSelectedType(option);
-    setHasAppliedDateFilter(true);
-
     if (isFilterDialogVisible) {
+      setMobileFilterState((prev) => ({
+        ...prev,
+        selectedType: option,
+      }));
       setIsChanged(true);
       return;
     }
+
+    setSelectedType(option);
 
     await fetchTransactions(
       fetchTransactionHistory,
@@ -218,13 +318,16 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
       return;
     }
 
-    setStartDate(date);
-    setHasAppliedDateFilter(true);
-
     if (isFilterDialogVisible) {
+      setMobileFilterState((prev) => ({
+        ...prev,
+        startDate: date,
+      }));
       setIsChanged(true);
       return;
     }
+
+    setStartDate(date);
 
     await fetchTransactions(
       fetchTransactionHistory,
@@ -241,13 +344,16 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
       return;
     }
 
-    setEndDate(date);
-    setHasAppliedDateFilter(true);
-
     if (isFilterDialogVisible) {
+      setMobileFilterState((prev) => ({
+        ...prev,
+        endDate: date,
+      }));
       setIsChanged(true);
       return;
     }
+
+    setEndDate(date);
 
     await fetchTransactions(
       fetchTransactionHistory,
@@ -261,13 +367,17 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
   const onSubmitContactSelector = async (contacts: TSelectorItem[]) => {
     setIsSelectorVisible(false);
-    setSelectedContact(contacts[0] as unknown as TUser);
-    setHasAppliedDateFilter(true);
 
     if (isFilterDialogVisible) {
+      setMobileFilterState((prev) => ({
+        ...prev,
+        selectedContact: contacts[0] as unknown as TUser,
+      }));
       setIsChanged(true);
       return;
     }
+
+    setSelectedContact(contacts[0] as unknown as TUser);
 
     await fetchTransactions(
       fetchTransactionHistory,
@@ -280,12 +390,16 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   };
 
   const onCloseSelectedContact = async () => {
-    setSelectedContact(null);
-
     if (isFilterDialogVisible) {
+      setMobileFilterState((prev) => ({
+        ...prev,
+        selectedContact: null,
+      }));
       setIsChanged(true);
       return;
     }
+
+    setSelectedContact(null);
 
     await fetchTransactions(
       fetchTransactionHistory,
@@ -297,16 +411,22 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   };
 
   const onApplyFilter = async () => {
+    // Apply all mobile filter state values to actual state
+    setSelectedType(mobileFilterState.selectedType);
+    setStartDate(mobileFilterState.startDate);
+    setEndDate(mobileFilterState.endDate);
+    setSelectedContact(mobileFilterState.selectedContact);
+
     setIsFilterDialogVisible(false);
     setIsChanged(false);
 
     await fetchTransactions(
       fetchTransactionHistory,
       setIsLoading,
-      selectedType.key as string,
-      startDate,
-      endDate,
-      selectedContact?.id,
+      mobileFilterState.selectedType.key as string,
+      mobileFilterState.startDate,
+      mobileFilterState.endDate,
+      mobileFilterState.selectedContact?.id,
     );
   };
 
@@ -380,14 +500,22 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
           1: (
             <DatePicker
               key="start-date-picker"
-              initialDate={startDate}
+              initialDate={
+                isFilterDialogVisible ? mobileFilterState.startDate : startDate
+              }
               onChange={onStartDateChange}
               selectDateText={t("Common:SelectDate")}
               locale={moment.locale()}
-              openDate={startDate}
+              openDate={
+                isFilterDialogVisible ? mobileFilterState.startDate : startDate
+              }
               minDate={undefined}
-              maxDate={endDate}
-              outerDate={startDate}
+              maxDate={
+                isFilterDialogVisible ? mobileFilterState.endDate : endDate
+              }
+              outerDate={
+                isFilterDialogVisible ? mobileFilterState.startDate : startDate
+              }
               hideCross
               autoPosition={isTablet}
               testId="transaction_start_date_picker"
@@ -396,14 +524,22 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
           2: (
             <DatePicker
               key="end-date-picker"
-              initialDate={endDate}
+              initialDate={
+                isFilterDialogVisible ? mobileFilterState.endDate : endDate
+              }
               onChange={onEndDateChange}
               selectDateText={t("Common:SelectDate")}
               locale={moment.locale()}
-              openDate={endDate}
-              minDate={startDate}
+              openDate={
+                isFilterDialogVisible ? mobileFilterState.endDate : endDate
+              }
+              minDate={
+                isFilterDialogVisible ? mobileFilterState.startDate : startDate
+              }
               maxDate={undefined}
-              outerDate={endDate}
+              outerDate={
+                isFilterDialogVisible ? mobileFilterState.endDate : endDate
+              }
               hideCross
               autoPosition={isTablet}
               testId="transaction_end_date_picker"
@@ -414,17 +550,22 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     </div>
   );
 
-  const contactSelector = !selectedContact ? (
+  const currentContact = isFilterDialogVisible
+    ? mobileFilterState.selectedContact
+    : selectedContact;
+
+  const contactSelector = !currentContact ? (
     <SelectorAddButton
       label={t("SelectContact")}
       onClick={onSelectorAddButtonClick}
     />
   ) : (
     <SelectedItemPure
-      key={`${selectedContact}`}
-      propKey={selectedContact?.id}
-      label={selectedContact.displayName}
+      key={`${currentContact}`}
+      propKey={currentContact?.id}
+      label={currentContact.displayName}
       onClose={onCloseSelectedContact}
+      className={styles.selectedContactItem}
     />
   );
 
@@ -447,6 +588,16 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
       />
       {datesComponent}
       {contactSelector}
+      {shouldShowClearButton ? (
+        <Link
+          onClick={onClearFilter}
+          textDecoration="underline dotted"
+          dataTestId="clear_filter_button"
+          className={styles.clearFilter}
+        >
+          {t("Common:ClearFilter")}
+        </Link>
+      ) : null}
     </div>
   );
 
@@ -456,7 +607,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         id="filter-button"
         onClick={openFilterDialog}
         isOpen={isFilterDialogVisible}
-        isShowIndicator={hasAppliedDateFilter}
+        isShowIndicator={shouldShowClearButton}
         dataTestId="transaction_filter_icon"
       />
     </div>
@@ -494,11 +645,11 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         <Text isBold fontSize="16px" className={styles.transactionHistoryTitle}>
           {t("TransactionHistory")}
         </Text>
-        {(hasAppliedDateFilter || isTransactionHistoryExist) && isMobile
+        {(shouldShowClearButton || isTransactionHistoryExist) && isMobile
           ? mobileFilter
           : null}
       </div>
-      {(hasAppliedDateFilter || isTransactionHistoryExist) && !isMobile
+      {(shouldShowClearButton || isTransactionHistoryExist) && !isMobile
         ? filterCombobox
         : null}
 
@@ -506,7 +657,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         <TableLoader isMobile={isMobile} isTablet={isTablet} />
       ) : (
         <TransactionBody
-          hasAppliedDateFilter={hasAppliedDateFilter}
+          hasAppliedDateFilter={shouldShowClearButton}
           isTransactionHistoryExist={isTransactionHistoryExist!}
         />
       )}
@@ -552,10 +703,16 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
           datesComponent={datesComponent}
           contactSelector={contactSelector}
           typeOfHistoty={typeOfHistoty}
-          selectedType={selectedType}
+          selectedType={
+            isFilterDialogVisible
+              ? mobileFilterState.selectedType
+              : selectedType
+          }
           onSelectType={onSelectType}
           onApplyFilter={onApplyFilter}
           isChanged={isChanged}
+          clearFilter={onClearFilter}
+          shouldShowClearButton={shouldShowClearButton}
         />
       ) : null}
 

@@ -479,6 +479,7 @@ export const convertMembers = (
   membersList: RoomMember[],
   t: TFunction,
 ): TShareMembers => {
+  const owner: TShare[] = [];
   const users: TShare[] = [];
   const administrators: TShare[] = [];
   const expected: TShare[] = [];
@@ -508,6 +509,16 @@ export const convertMembers = (
 
         member.isExpect = true;
         expected.push(member);
+      } else if (isOwner && location.pathname.includes("rooms/personal")) {
+        if (owner.length === 0) {
+          owner.push({
+            id: "owner",
+            displayName: t("Common:Owner"),
+            isTitle: true,
+          } satisfies TTitleShare);
+        }
+
+        owner.push(member);
       } else if (access === ShareAccessRights.RoomManager || isOwner) {
         if (administrators.length === 0) {
           administrators.push({
@@ -556,6 +567,7 @@ export const convertMembers = (
   );
 
   return {
+    owner,
     administrators,
     users,
     expected,

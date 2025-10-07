@@ -27,7 +27,7 @@
 import ArrowIcon from "PUBLIC_DIR/images/arrow-left.react.svg?url";
 import ArrowTabletIcon from "PUBLIC_DIR/images/arrow-left.long.react.svg?url";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate } from "react-router";
 import { IconButton } from "../../icon-button";
 import { Text } from "../../text";
 import { DeviceType } from "../../../enums";
@@ -51,7 +51,6 @@ const BackButton = ({
 }) => {
   const { t } = useTranslation("Common");
   const navigate = useNavigate();
-  const location = useLocation();
 
   const onClickBack = () => {
     onLogoClickAction?.();
@@ -59,7 +58,7 @@ const BackButton = ({
     if (toggleArticleOpen && currentDeviceType === DeviceType.mobile)
       toggleArticleOpen();
 
-    navigate(location?.state?.fromUrl || "/");
+    navigate("/");
   };
 
   const icon =

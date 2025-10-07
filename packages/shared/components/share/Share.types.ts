@@ -40,7 +40,7 @@ import type { RoomMember } from "../../api/rooms/types";
 
 export type ShareCalendarProps = {
   onDateSet: (formattedDate: moment.Moment) => void;
-  closeCalendar: (formattedDate: moment.Moment) => void;
+  closeCalendar: () => void;
   calendarRef: React.RefObject<HTMLDivElement | null>;
   locale: string;
   bodyRef?: React.RefObject<HTMLDivElement | null>;
@@ -135,6 +135,7 @@ export type ShareProps = {
   isEditor?: boolean;
   onAddUser?: (item: TFolder | TFile) => void;
   disabledSharedUser?: boolean;
+  onClickGroup?: (group: TGroup) => void;
 };
 
 export interface LinkTitleProps {
@@ -170,6 +171,7 @@ export interface UseMembersProps {
   linksCount: number;
   onAddUser?: (item: TFolder | TFile) => void;
   disabledSharedUser?: boolean;
+  onClickGroup?: (group: TGroup) => void;
 }
 
 export interface UseShareProps {
@@ -197,6 +199,7 @@ export interface UseShareProps {
 }
 
 export type TTitleID =
+  | "owner"
   | "groups"
   | "users"
   | "guests"

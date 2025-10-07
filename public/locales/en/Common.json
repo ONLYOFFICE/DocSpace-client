@@ -45,6 +45,7 @@
   "AIAgentsDescription": "Set up a personal AI assistant for your team: add a knowledge base, choose the right model, and connect an MCP server. Invite colleagues so they can use the agent’s chats with you.",
   "Alert": "Alert",
   "All": "All",
+  "AccessRightsChanged": "Access rights changed",
   "AllowedCharacters": "Allowed characters",
   "AllTypesAvailableForEditing": "all file types available for editing in {{organizationName}}",
   "AmazonBucketTip": "Enter the unique name of the Amazon S3 bucket where you want to store your backups.",
@@ -498,6 +499,7 @@
   "LiveChat": "Live chat",
   "LiveChatOff": "Live chat was successfully disconnected",
   "LiveChatOn": "Live chat was successfully connected",
+  "LinkExpirationDate": "The file shared by link will expire in <1>{{date}}</1>",
   "Load": "Load",
   "LoadingIsComplete": "Loading is complete 100%",
   "LoadingProcessing": "Loading...",
@@ -987,5 +989,8 @@
   "YouHaveUnsavedChanges": "You have unsaved changes",
   "YourCurrentDomain": "Your current domain",
   "YourLogo": "Your logo",
-  "YourTurn": "Your turn"
+  "YourTurn": "Your turn",
+  "IndividualRights": "Individual rights in the room",
+  "SearchByGroupMembers": "Search by group members",
+  "IndividualRightsShare": "Individual rights"
 }

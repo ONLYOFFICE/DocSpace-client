@@ -3,7 +3,7 @@
   "content": "Expect users",
   "content_en_sha1_hash": "a90ef1efac83c2fbe3c15d7bcf5318e2c517db33",
   "created_at": "2025-05-19T21:30:54.775Z",
-  "updated_at": "2025-09-29T18:22:19.511Z",
+  "updated_at": "2025-10-03T13:19:30.503Z",
   "comment": {
     "text": "\"Used as a title in an info panel, indicating user expectations. Appears when displaying expected members in the InfoPanelStore.\"",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 503,
+      "line_number": 504,
       "context": "member.activationStatus === EmployeeActivationStatus.Pending\n ) {\n if (expected.length === 0) {\n expected.push({\n id: \"expected\",\n displayName: t(\"InfoPanel:ExpectUsers\"),\n isTitle: true,\n isExpect: true,\n } satisfies TTitleShare);\n }",
       "module": "/packages/shared"
     }

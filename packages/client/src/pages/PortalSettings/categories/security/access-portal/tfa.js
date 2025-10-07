@@ -177,16 +177,26 @@ const TwoFactorAuth = (props) => {
   }, []);
 
   useEffect(() => {
-    if (!isLoading || !tfaSettings) return;
     const currentSettings = getFromSessionStorage("currentTfaSettings");
     const defaultSettings = getFromSessionStorage("defaultTfaSettings");
-
-    if (isEqual(currentSettings, defaultSettings)) {
+    if (currentSettings === defaultSettings) {
       getSettings();
     } else {
       getSettingsFromDefault();
     }
-  }, [isLoading, tfaSettings]);
+  }, []);
+
+  useEffect(() => {
+    if (!isLoading) return;
+    const currentSettings = getFromSessionStorage("currentTfaSettings");
+    const defaultSettings = getFromSessionStorage("defaultTfaSettings");
+
+    if (currentSettings === defaultSettings) {
+      getSettings();
+    } else {
+      getSettingsFromDefault();
+    }
+  }, [isLoading]);
 
   useEffect(() => {
     if (!isLoading) return;

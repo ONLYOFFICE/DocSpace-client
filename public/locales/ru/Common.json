@@ -736,7 +736,7 @@
   "SharedLinks": "Общие ссылки",
   "ShareDocument": "Поделиться этим документом",
   "ShareDocumentDescription": "Предоставьте доступ к документу и установите уровень доступа.",
-  "SharedWithMe": "Поделились со мной",
+  "SharedWithMe": "Доступно для меня",
   "ShareInTheRoom": "Предоставить доступ в комнате",
   "ShareTheOriginalFormForFillingOut": "Предоставить доступ к исходной форме для заполнения.",
   "ShareToFillOut": "Предоставить доступ для заполнения",
@@ -897,5 +897,7 @@
   "YouHaveUnsavedChanges": "Имеются несохраненные изменения",
   "YourCurrentDomain": "Ваш текущий домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша очередь"
+  "YourTurn": "Ваша очередь",
+  "IndividualRights": "Индивидуальные права в комнате",
+  "SearchByGroupMembers": "Поиск по участникам группы"
 }

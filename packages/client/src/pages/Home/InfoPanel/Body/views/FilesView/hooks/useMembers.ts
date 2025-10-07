@@ -187,6 +187,7 @@ export const useMembers = ({
   );
 
   const fetchMembers = React.useCallback(async () => {
+    if (!room) return;
     setIsFirstLoading(true);
 
     abortController.current = new AbortController();
@@ -243,16 +244,19 @@ export const useMembers = ({
       );
     }
 
-    const [data, links] = await Promise.all(requests);
+    try {
+      const [data, links] = await Promise.all(requests);
+      if (links) setExternalLinks(links);
+      else setExternalLinks([]);
 
-    if (links) setExternalLinks(links);
-    else setExternalLinks([]);
+      const convertedMembers = convertMembers(data, true);
 
-    const convertedMembers = convertMembers(data, true);
+      setMembers(convertedMembers);
 
-    setMembers(convertedMembers);
-
-    setIsFirstLoading(false);
+      setIsFirstLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
   }, [room?.id, room?.roomType, room?.isTemplate, room?.security, searchValue]);
 
   const fetchMoreMembers = async () => {

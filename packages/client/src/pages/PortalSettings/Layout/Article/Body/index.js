@@ -300,9 +300,7 @@ const ArticleBodyContent = (props) => {
       const title = mapKeys(item.tKey);
       const linkData = getLinkData(item.key);
 
-      const style = isLastIndex
-        ? { margin: `${item.key.includes(9) ? "16px 0px" : "0"}` }
-        : { marginTop: `${item.key.includes(9) ? "16px" : "0"}` };
+      const style = { marginTop: `${item.key.includes(9) ? "16px" : "0"}` };
 
       items.push(
         <ArticleItem
@@ -320,6 +318,7 @@ const ArticleBodyContent = (props) => {
           style={style}
           $currentColorScheme={currentColorScheme}
           withAnimation
+          isEndOfBlock={isLastIndex}
         />,
       );
     });

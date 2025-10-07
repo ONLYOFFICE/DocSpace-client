@@ -192,12 +192,11 @@ const ExpiredComboBox = ({
       )}
       {showCalendar ? (
         <ShareCalendar
-          useDropDown
           bodyRef={bodyRef}
-          onDateSet={setDateFromCalendar}
-          calendarRef={calendarRef}
-          closeCalendar={onCalendarClose}
           locale={i18n.language}
+          calendarRef={calendarRef}
+          onDateSet={setDateFromCalendar}
+          closeCalendar={onCalendarClose}
         />
       ) : null}
     </div>

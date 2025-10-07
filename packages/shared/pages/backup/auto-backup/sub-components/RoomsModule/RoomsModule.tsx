@@ -84,6 +84,7 @@ const RoomsModule = ({
   setTime,
   setWeekday,
   isBackupPaid,
+  isFreeBackupsLimitReached,
 }: RoomsModuleProps) => {
   const { t } = useTranslation("Common");
 
@@ -183,7 +184,9 @@ const RoomsModule = ({
         setMaxCopies={setMaxCopies}
         setMonthNumber={setMonthNumber}
       />
-      <NoteComponent isVisible={isBackupPaid} />
+      <NoteComponent
+        isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)}
+      />
     </div>
   );
 };

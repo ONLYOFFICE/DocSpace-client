@@ -3,7 +3,6 @@
   "AllDataTransferred": "数据传输完毕",
   "DataReassignment": "数据重新分配",
   "DeleteProfileIsFinished": "重新分配完成后删除个人资料",
-  "DescriptionDataReassignment": "我们将传输用户创建的房间以及存储在用户房间中的文件。",
   "Interrupted": "中断，某些数据无法传输",
   "MoreAboutDataTransfer": "关于数据传输的更多信息",
   "NewDataOwner": "新数据所有者",

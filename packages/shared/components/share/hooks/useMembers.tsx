@@ -56,7 +56,13 @@ import ShareHeader from "../sub-components/ShareHeader";
 import { CreateButton } from "../sub-components/CreateButton";
 
 export const useMembers = (props: UseMembersProps) => {
-  const { selfId, shareMembersTotal, infoPanelSelection, linksCount } = props;
+  const {
+    selfId,
+    shareMembersTotal,
+    infoPanelSelection,
+    linksCount,
+    onClickGroup,
+  } = props;
 
   const abortController = useRef(new AbortController());
 
@@ -173,6 +179,7 @@ export const useMembers = (props: UseMembersProps) => {
         );
 
         if (newMember) {
+          toastr.success(t("Common:AccessRightsChanged"));
           setMembers((prev) =>
             prev.map((item) =>
               item.sharedTo.id === member.id ? newMember : item,
@@ -184,15 +191,17 @@ export const useMembers = (props: UseMembersProps) => {
         toastr.error(error as TData);
       }
     },
-    [infoPanelSelection],
+    [infoPanelSelection, t],
   );
 
   const getUsers = useCallback(() => {
     if (props.disabledSharedUser) return { content: [], headersCount: 0 };
 
-    const { users, groups, administrators, expected, guests } = memoMembers;
+    const { owner, users, groups, administrators, expected, guests } =
+      memoMembers;
 
     const membersList = [
+      ...owner,
       ...administrators,
       ...groups,
       ...users,
@@ -250,6 +259,7 @@ export const useMembers = (props: UseMembersProps) => {
             selectedOption={selectedOption}
             onSelectOption={(option) => onSelectOption(option, member)}
             index={index + linksCount}
+            onClickGroup={onClickGroup}
           />
         );
       }),

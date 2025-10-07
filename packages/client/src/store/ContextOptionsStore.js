@@ -1958,7 +1958,6 @@ class ContextOptionsStore {
         label: t("SaveAsTemplate"),
         icon: CreateTemplateSvgUrl,
         onClick: () => this.onSaveAsTemplate(item),
-        badgeLabel: t("Common:New"),
         disabled: !item.security?.Create || item.providerKey,
       },
       {

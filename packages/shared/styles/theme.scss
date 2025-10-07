@@ -646,11 +646,11 @@
 
 .light {
   --beta-badge-tooltip-box-shadow-color: #00000029;
-  --tooltip-text-color: #000000;
+  --tooltip-text-color: #{$dark-black};
 }
 
 .dark {
-  --tooltip-text-color: #ffffff;
+  --tooltip-text-color: #{$white};
 }
 
 .light {

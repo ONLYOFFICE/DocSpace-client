@@ -446,6 +446,7 @@
   "IncorrectLastName": "Λανθασμένο επώνυμο",
   "IncorrectLocalPart": "Εσφαλμένο τοπικό τμήμα",
   "IncorrectPassword": "Λανθασμένος κωδικός πρόσβασης",
+  "IndividualRights": "Ατομικά δικαιώματα στο δωμάτιο",
   "Info": "Πληροφορίες",
   "InfoPanel": "Πίνακας πληροφοριών",
   "InProgress": "Σε εξέλιξη",
@@ -765,6 +766,7 @@
   "SaveHereButton": "Αποθήκευση εδώ",
   "SaveToPublicRoom": "Αποθήκευση σε δημόσιο δωμάτιο",
   "Search": "Αναζήτηση",
+  "SearchByGroupMembers": "Αναζήτηση με βάση τα μέλη της ομάδας",
   "SearchEmptyRoomsDescription": "Δεν υπάρχουν δωμάτια που να ταιριάζουν σε αυτό το φίλτρο. Δοκιμάστε μια άλλη επιλογή ή καταργήστε το φίλτρο για να δείτε όλα τα δωμάτια.",
   "SectionMoveConfirmation": "Μετακίνηση στην {{sectionName}};",
   "SectionMoveNotification": "Το αρχείο θα μετακινηθεί στο {{sectionName}} {{date}}",
@@ -987,7 +989,5 @@
   "YouHaveUnsavedChanges": "Έχετε μη αποθηκευμένες αλλαγές",
   "YourCurrentDomain": "Το τρέχον όνομα τομέα σας",
   "YourLogo": "Το λογότυπό σας",
-  "YourTurn": "Η σειρά σας",
-  "IndividualRights": "Ατομικά δικαιώματα στο δωμάτιο",
-  "SearchByGroupMembers": "Αναζήτηση με βάση τα μέλη της ομάδας"
+  "YourTurn": "Η σειρά σας"
 }

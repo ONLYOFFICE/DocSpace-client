@@ -446,6 +446,7 @@
   "IncorrectLastName": "Nieprawidłowe nazwisko",
   "IncorrectLocalPart": "Niepoprawny identyfikator użytkownika",
   "IncorrectPassword": "Nieprawidłowe hasło",
+  "IndividualRights": "Indywidualne prawa w pokoju",
   "Info": "Info",
   "InfoPanel": "Panel informacyjny",
   "InProgress": "W toku",
@@ -765,6 +766,7 @@
   "SaveHereButton": "Zapisz tutaj",
   "SaveToPublicRoom": "Zapisz w Pokoju publicznym",
   "Search": "Wyszukaj",
+  "SearchByGroupMembers": "Wyszukaj według członków grupy",
   "SearchEmptyRoomsDescription": "Brak pokoi pasujących do tego filtra. Wypróbuj inny lub wyczyść filtr, aby wyświetlić wszystkie pokoje.",
   "SectionMoveConfirmation": "Przejdź do {{sectionName}}?",
   "SectionMoveNotification": "Plik zostanie przeniesiony do {{sectionName}} {{date}}",
@@ -987,7 +989,5 @@
   "YouHaveUnsavedChanges": "Masz niezapisane zmiany",
   "YourCurrentDomain": "Twoja obecna domena",
   "YourLogo": "Twoje Logo",
-  "YourTurn": "Twoja kolej",
-  "IndividualRights": "Indywidualne prawa w pokoju",
-  "SearchByGroupMembers": "Wyszukaj według członków grupy"
+  "YourTurn": "Twoja kolej"
 }

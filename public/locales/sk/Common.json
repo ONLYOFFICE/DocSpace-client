@@ -446,6 +446,7 @@
   "IncorrectLastName": "Nesprávne priezvisko",
   "IncorrectLocalPart": "Nesprávna miestna časť",
   "IncorrectPassword": "Nesprávne heslo",
+  "IndividualRights": "Individuálne práva v miestnosti",
   "Info": "Informácie",
   "InfoPanel": "Informačný panel",
   "InProgress": "Práve prebieha",
@@ -765,6 +766,7 @@
   "SaveHereButton": "Uložiť tu",
   "SaveToPublicRoom": "Uložiť do verejnej miestnosti",
   "Search": "Vyhľadávanie",
+  "SearchByGroupMembers": "Vyhľadávanie podľa členov skupiny",
   "SearchEmptyRoomsDescription": "Tomuto filtru nezodpovedá žiadna miestnosť. Ak chcete zobraziť všetky miestnosti, skúste iný filter alebo zrušte ho.",
   "SectionMoveConfirmation": "Presunúť do {{sectionName}}?",
   "SectionMoveNotification": "Súbor bude presunutý do {{sectionName}} {{date}}",
@@ -987,7 +989,5 @@
   "YouHaveUnsavedChanges": "Máte neuložené zmeny",
   "YourCurrentDomain": "Vaša aktuálna doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Ste na rade",
-  "IndividualRights": "Individuálne práva v miestnosti",
-  "SearchByGroupMembers": "Vyhľadávanie podľa členov skupiny"
+  "YourTurn": "Ste na rade"
 }

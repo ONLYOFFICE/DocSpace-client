@@ -445,6 +445,7 @@
   "IncorrectLastName": "Нетачно презиме",
   "IncorrectLocalPart": "Нетачан локални део",
   "IncorrectPassword": "Нетачна лозинка",
+  "IndividualRights": "Индивидуална права у соби",
   "Info": "Инфо",
   "InfoPanel": "Инфо панел",
   "InProgress": "У току",
@@ -764,6 +765,7 @@
   "SaveHereButton": "Сачувај овде",
   "SaveToPublicRoom": "Сачувај у Јавну собу",
   "Search": "Претрага",
+  "SearchByGroupMembers": "Претражуј по члановима групе",
   "SearchEmptyRoomsDescription": "Ниједна соба се не поклапа са овим филтером. Пробајте други или обришите филтер да бисте прегледали све собе.",
   "SectionMoveConfirmation": "Преместити у {{sectionName}}?",
   "SectionMoveNotification": "Фајл ће бити премештен у {{sectionName}} {{date}}",
@@ -986,7 +988,5 @@
   "YouHaveUnsavedChanges": "Имате несачуване промене",
   "YourCurrentDomain": "Ваш тренутни домен",
   "YourLogo": "Ваш лого",
-  "YourTurn": "Ваш ред",
-  "IndividualRights": "Индивидуална права у соби",
-  "SearchByGroupMembers": "Претражуј по члановима групе"
+  "YourTurn": "Ваш ред"
 }

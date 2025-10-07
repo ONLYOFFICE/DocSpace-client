@@ -446,6 +446,7 @@
   "IncorrectLastName": "Họ không đúng",
   "IncorrectLocalPart": "Tên miền cục bộ không chính xác",
   "IncorrectPassword": "Mật khẩu không chính xác",
+  "IndividualRights": "Quyền cá nhân trong phòng",
   "Info": "Thông tin",
   "InfoPanel": "Bảng thông tin",
   "InProgress": "Đang thực hiện",
@@ -765,6 +766,7 @@
   "SaveHereButton": "Lưu ở đây",
   "SaveToPublicRoom": "Lưu vào phòng Công cộng",
   "Search": "Tìm kiếm",
+  "SearchByGroupMembers": "Tìm kiếm theo thành viên nhóm",
   "SearchEmptyRoomsDescription": "Không có phòng phù hợp với bộ lọc này. Hãy thử bộ lọc khác hoặc xóa bộ lọc để xem tất cả các phòng.",
   "SectionMoveConfirmation": "Di chuyển đến {{sectionName}}?",
   "SectionMoveNotification": "Tệp tin sẽ được chuyển đến {{sectionName}} {{date}}",
@@ -987,7 +989,5 @@
   "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourLogo": "Logo của bạn",
-  "YourTurn": "Phiên của bạn",
-  "IndividualRights": "Quyền cá nhân trong phòng",
-  "SearchByGroupMembers": "Tìm kiếm theo thành viên nhóm"
+  "YourTurn": "Phiên của bạn"
 }

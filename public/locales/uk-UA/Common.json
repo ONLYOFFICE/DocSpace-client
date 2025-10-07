@@ -446,6 +446,7 @@
   "IncorrectLastName": "Невірне прізвище",
   "IncorrectLocalPart": "Неправильна локальна частина",
   "IncorrectPassword": "Неправильний пароль",
+  "IndividualRights": "Індивідуальні права в групі",
   "Info": "Інформація",
   "InfoPanel": "Інформаційна панель",
   "InProgress": "У процесі",
@@ -765,6 +766,7 @@
   "SaveHereButton": "Зберегти тут",
   "SaveToPublicRoom": "Зберегти в публічній кімнаті",
   "Search": "Пошук",
+  "SearchByGroupMembers": "Шукати за учасниками групи",
   "SearchEmptyRoomsDescription": "Немає кімнат, які відповідають цьому фільтру. Спробуйте інший або очистіть фільтр, щоб побачити всі кімнати.",
   "SectionMoveConfirmation": "Перейти до {{sectionName}}?",
   "SectionMoveNotification": "Файл буде переміщено до {{sectionName}} {{date}}",
@@ -987,7 +989,5 @@
   "YouHaveUnsavedChanges": "У вас є незбережені зміни",
   "YourCurrentDomain": "Ваш поточний домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша черга",
-  "IndividualRights": "Індивідуальні права в групі",
-  "SearchByGroupMembers": "Шукати за учасниками групи"
+  "YourTurn": "Ваша черга"
 }

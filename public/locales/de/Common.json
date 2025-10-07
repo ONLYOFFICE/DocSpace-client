@@ -399,6 +399,7 @@
   "IncorrectLastName": "Ungültiger Nachname",
   "IncorrectLocalPart": "Ungültiger lokaler Teil",
   "IncorrectPassword": "Falsches Passwort",
+  "IndividualRights": "Individuelle Rechte im Raum",
   "Info": "Informationen",
   "InfoPanel": "Info-Panel",
   "InProgress": "Laufend",
@@ -695,6 +696,7 @@
   "SaveHereButton": "Hier speichern",
   "SaveToPublicRoom": "Im öffentlichen Raum speichern",
   "Search": "Suche",
+  "SearchByGroupMembers": "Nach Gruppenmitgliedern suchen",
   "SearchEmptyRoomsDescription": "Keine Räume entsprechen diesem Filter. Versuchen Sie einen anderen Filter oder löschen Sie den Filter, um alle Räume anzuzeigen.",
   "SectionRequired": "Dieser Abschnitt ist erforderlich",
   "SelectAction": "Auswählen",
@@ -895,7 +897,5 @@
   "YouHaveUnsavedChanges": "Sie haben nicht gespeicherte Änderungen.",
   "YourCurrentDomain": "Ihre aktuelle Domain",
   "YourLogo": "Ihr Logo",
-  "YourTurn": "Jetzt sind Sie dran",
-  "IndividualRights": "Individuelle Rechte im Raum",
-  "SearchByGroupMembers": "Nach Gruppenmitgliedern suchen"
+  "YourTurn": "Jetzt sind Sie dran"
 }

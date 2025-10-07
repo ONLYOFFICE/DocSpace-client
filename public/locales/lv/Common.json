@@ -446,6 +446,7 @@
   "IncorrectLastName": "Nepareizs uzvārds",
   "IncorrectLocalPart": "Nepareiza lokālā daļa",
   "IncorrectPassword": "Nepareiza parole",
+  "IndividualRights": "Individuālās tiesības telpā",
   "Info": "Informācija",
   "InfoPanel": "Informācijas panelis",
   "InProgress": "Procesā",
@@ -765,6 +766,7 @@
   "SaveHereButton": "Saglabāt šeit",
   "SaveToPublicRoom": "Saglabāt publiskā telpā",
   "Search": "Meklēt",
+  "SearchByGroupMembers": "Meklēt pēc grupas dalībniekiem",
   "SearchEmptyRoomsDescription": "Šim filtram neatbilst neviena telpa. Izmēģiniet citu vai notīriet filtru, lai skatītu visas telpas.",
   "SectionMoveConfirmation": "Pārvietoties uz {{sectionName}}?",
   "SectionMoveNotification": "Fails būs pārvietots uz {{sectionName}} {{date}}",
@@ -987,7 +989,5 @@
   "YouHaveUnsavedChanges": "Jums ir nesaglabātas izmaiņas",
   "YourCurrentDomain": "Jūsu pašreizējais domēns",
   "YourLogo": "Jūsu logotips",
-  "YourTurn": "Jūsu kārta",
-  "IndividualRights": "Individuālās tiesības telpā",
-  "SearchByGroupMembers": "Meklēt pēc grupas dalībniekiem"
+  "YourTurn": "Jūsu kārta"
 }

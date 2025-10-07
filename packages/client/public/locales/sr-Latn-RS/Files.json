@@ -124,7 +124,7 @@
   "NoExternalLinks": "Nema spoljnih linkova",
   "Open": "Otvori",
   "OpenCreatedTemplate": "Otvori kreirani šablon",
-  "OpenedViaLink": "Otvoreno putem linka: pristup </strong>.\"{{access}}\"</strong>.",
+  "OpenedViaLink": "Otvoreno putem linka: pristup <strong>\"{{access}}\"</strong>.",
   "OpenLocation": "Otvori lokaciju",
   "OtherProcesses": "Drugi procesi",
   "PersonalContentRemovalNotice": "Vaši lični fajlovi i folderi u odeljku {{sectionName}} biće <1>obrisani</1>, jer gosti nemaju pristup ovom odeljku. Fajlovi ostaju dostupni za pregled i preuzimanje <1>30 dana</1>.",

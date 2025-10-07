@@ -446,6 +446,7 @@
   "IncorrectLastName": "Virheellinen sukunimi",
   "IncorrectLocalPart": "Virheellinen paikallinen osa",
   "IncorrectPassword": "Väärä salasana",
+  "IndividualRights": "Yksilölliset oikeudet huoneessa",
   "Info": "Info",
   "InfoPanel": "Tietopaneeli",
   "InProgress": "Käynnissä",
@@ -765,6 +766,7 @@
   "SaveHereButton": "Tallenna tähän",
   "SaveToPublicRoom": "Tallenna Julkiseen huoneeseen",
   "Search": "Haku",
+  "SearchByGroupMembers": "Etsi ryhmän jäsenien mukaan",
   "SearchEmptyRoomsDescription": "Tätä suodatinta vastaavia huoneita ei ole. Kokeile erilaista tai tyhjennä suodatin nähdäksesi kaikki huoneet.",
   "SectionMoveConfirmation": "Siirry {{sectionName}} -kohtaan?",
   "SectionMoveNotification": "Tiedosto siirretään {{sectionName}} {{date}} -kansioon.",
@@ -987,7 +989,5 @@
   "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourLogo": "Logosi",
-  "YourTurn": "Sinun vuorosi",
-  "IndividualRights": "Yksilölliset oikeudet huoneessa",
-  "SearchByGroupMembers": "Etsi ryhmän jäsenien mukaan"
+  "YourTurn": "Sinun vuorosi"
 }

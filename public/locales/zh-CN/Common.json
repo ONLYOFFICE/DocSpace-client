@@ -436,6 +436,7 @@
   "IncorrectLastName": "姓氏不正确",
   "IncorrectLocalPart": "不正确的本地部分",
   "IncorrectPassword": "密码错误",
+  "IndividualRights": "房间内的个人权限",
   "Info": "信息",
   "InfoPanel": "信息面板",
   "InProgress": "进行中",
@@ -755,6 +756,7 @@
   "SaveHereButton": "在此保存",
   "SaveToPublicRoom": "保存到公共房间",
   "Search": "搜索",
+  "SearchByGroupMembers": "按群组成员搜索",
   "SearchEmptyRoomsDescription": "没有符合此过滤条件的房间。请尝试另一个过滤条件或清除条件以查看所有房间。",
   "SectionMoveConfirmation": "移动到{{sectionName}}？",
   "SectionMoveNotification": "文件将被移动到{{sectionName}}{{date}}",
@@ -977,7 +979,5 @@
   "YouHaveUnsavedChanges": "您有未保存的变更",
   "YourCurrentDomain": "您当前的域",
   "YourLogo": "您的logo",
-  "YourTurn": "轮到您了",
-  "IndividualRights": "房间内的个人权限",
-  "SearchByGroupMembers": "按群组成员搜索"
+  "YourTurn": "轮到您了"
 }

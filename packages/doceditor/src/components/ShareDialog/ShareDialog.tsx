@@ -43,6 +43,8 @@ import { DeviceType, FolderType } from "@docspace/shared/enums";
 import type { LinkParamsType, Nullable } from "@docspace/shared/types";
 import { TPasswordSettings } from "@docspace/shared/api/settings/types";
 import { ShareSelector } from "@docspace/shared/components/share/selector";
+import type { TGroup } from "@docspace/shared/api/groups/types";
+import { EditGroupMembers } from "@docspace/shared/dialogs/edit-group-members-dialog";
 
 import ShareDialogHeader from "./ShareDialog.header";
 import type { SharingDialogProps } from "./ShareDialog.types";
@@ -63,6 +65,8 @@ const SharingDialog = ({
   const [linkParams, setLinkParams] = useState<Nullable<LinkParamsType>>(null);
   const [passwordSettings, setPasswordSettings] = useState<TPasswordSettings>();
   const [isSharePanelVisible, setIsSharePanelVisible] = useState(false);
+  const [isEditGroupPanelVisible, setIsEditGroupPanelVisible] = useState(false);
+  const [selectedGroup, setSelectedGroup] = useState<TGroup | null>(null);
 
   useEffect(() => {
     moment.locale(i18n.language);
@@ -88,12 +92,18 @@ const SharingDialog = ({
     setLinkParams(null);
   };
 
+  const closeEditGroupPanel = () => {
+    setIsEditGroupPanelVisible(false);
+    setSelectedGroup(null);
+  };
+
   const onClosePanel = () => {
     if (ref.current?.hasChanges()) {
       ref.current?.openChangesDialog("close");
       return;
     }
 
+    closeEditGroupPanel();
     closeEditLinkPanel();
     onCancel();
   };
@@ -101,6 +111,13 @@ const SharingDialog = ({
   const onCloseSharePanel = () => setIsSharePanelVisible(false);
 
   const onClickAddUser = () => setIsSharePanelVisible(true);
+
+  const onClickEditGroup = (group: TGroup) => {
+    if (group.isSystem) return;
+
+    setIsEditGroupPanelVisible(true);
+    setSelectedGroup(group);
+  };
 
   return (
     <ModalDialog
@@ -110,7 +127,9 @@ const SharingDialog = ({
       scrollbarCreateContext
       onClose={onClosePanel}
       displayType={ModalDialogType.aside}
-      containerVisible={editLinkPanelVisible || isSharePanelVisible}
+      containerVisible={
+        editLinkPanelVisible || isSharePanelVisible || isEditGroupPanelVisible
+      }
     >
       <ModalDialog.Container>
         <>
@@ -140,6 +159,16 @@ const SharingDialog = ({
               onCloseClick={onClosePanel}
             />
           ) : null}
+          {isEditGroupPanelVisible && selectedGroup ? (
+            <EditGroupMembers
+              group={selectedGroup}
+              onClose={onClosePanel}
+              infoPanelSelection={fileInfo}
+              visible={isEditGroupPanelVisible}
+              onBackClick={closeEditGroupPanel}
+              setVisible={setIsEditGroupPanelVisible}
+            />
+          ) : null}
         </>
       </ModalDialog.Container>
 
@@ -162,6 +191,7 @@ const SharingDialog = ({
               onlyOneLink={fileInfo.isForm}
               setEditLinkPanelIsVisible={handleSetEditLinkPanelIsVisible}
               setLinkParams={setLinkParams}
+              onClickGroup={onClickEditGroup}
             />
           </div>
         </section>

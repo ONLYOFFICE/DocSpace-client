@@ -119,16 +119,9 @@ const DNSSettingsComponent = (props) => {
     if (!isMobileDevice()) {
       setIsCustomizationView(true);
 
-      const currentUrl = window.location.href.replace(
-        window.location.origin,
-        "",
-      );
-
-      const newUrl = "/portal-settings/customization/general";
-
-      if (newUrl === currentUrl) return;
-
-      navigate(newUrl);
+      if (location.pathname.includes("dns-settings")) {
+        navigate("/portal-settings/customization/general");
+      }
     } else {
       setIsCustomizationView(false);
     }
@@ -141,8 +134,6 @@ const DNSSettingsComponent = (props) => {
     checkInnerWidth();
     window.addEventListener("resize", checkInnerWidth);
 
-    if (isMobileView) getCommonInitialValue();
-
     const scrollPortalName = checkScroll();
 
     if (scrollPortalName !== hasScroll) {
@@ -151,6 +142,10 @@ const DNSSettingsComponent = (props) => {
 
     return () => window.removeEventListener("resize", checkInnerWidth);
   }, []);
+
+  useEffect(() => {
+    if (isMobileView) getCommonInitialValue();
+  }, [isMobileView]);
 
   useEffect(() => {
     if (isLoadedSetting) setIsLoadedDNSSettings(isLoadedSetting);

@@ -112,15 +112,9 @@ const PortalRenamingComponent = (props) => {
     if (!isMobileDevice()) {
       setIsCustomizationView(true);
 
-      const currentUrl = window.location.href.replace(
-        window.location.origin,
-        "",
-      );
-
-      const newUrl = "/portal-settings/customization/general";
-      if (newUrl === currentUrl) return;
-
-      navigate(newUrl);
+      if (location.pathname.includes("portal-renaming")) {
+        navigate("/portal-settings/customization/general");
+      }
     } else {
       setIsCustomizationView(false);
     }

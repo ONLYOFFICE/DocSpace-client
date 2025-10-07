@@ -181,7 +181,8 @@ const ManualBackup = ({
   walletCustomerEmail,
   isThirdPartyAvailable,
   backupServicePrice,
-  isBackupPaid,
+  isBackupPaid = false,
+  isFreeBackupsLimitReached = false,
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -382,6 +383,9 @@ const ManualBackup = ({
   const mainDisabled = !isMaxProgress || pageIsDisabled;
   const additionalDisabled =
     !isMaxProgress || isNotPaidPeriod || pageIsDisabled;
+  const isDownloadButton =
+    temporaryLink && temporaryLink.length > 0 && isMaxProgress;
+  const isCreateButtonDisabled = mainDisabled && !isDownloadButton;
 
   return (
     <div className={styles.manualBackup}>
@@ -427,7 +431,7 @@ const ManualBackup = ({
             label={t("Common:TemporaryStorage")}
             name={TEMPORARY_STORAGE}
             isChecked={isCheckedTemporaryStorage}
-            isDisabled={mainDisabled}
+            isDisabled={isCreateButtonDisabled}
             {...commonRadioButtonProps}
             testId="temporary_storage_radio_button"
           />
@@ -456,12 +460,12 @@ const ManualBackup = ({
                   size={buttonSize}
                   testId="create_temporary_backup_button"
                 />
-                {temporaryLink && temporaryLink.length > 0 && isMaxProgress ? (
+                {isDownloadButton ? (
                   <Button
                     id="download-copy"
                     label={t("Common:DownloadCopy")}
                     onClick={onClickDownloadBackup}
-                    isDisabled={pageIsDisabled}
+                    // isDisabled={pageIsDisabled}
                     size={buttonSize}
                     style={{ marginInlineStart: "8px" }}
                     testId="download_temporary_copy_button"
@@ -477,7 +481,9 @@ const ManualBackup = ({
                   />
                 ) : null}
               </div>
-              <NoteComponent isVisible={isBackupPaid} />
+              <NoteComponent
+                isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)}
+              />
             </>
           ) : null}
         </div>
@@ -521,6 +527,7 @@ const ManualBackup = ({
             currentDeviceType={currentDeviceType}
             maxWidth={maxWidth}
             isBackupPaid={isBackupPaid}
+            isFreeBackupsLimitReached={isFreeBackupsLimitReached}
           />
         ) : null}
       </div>
@@ -572,6 +579,7 @@ const ManualBackup = ({
             setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
             setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
             isBackupPaid={isBackupPaid}
+            isFreeBackupsLimitReached={isFreeBackupsLimitReached}
             {...commonModulesProps}
           />
         ) : null}
@@ -616,6 +624,7 @@ const ManualBackup = ({
             buttonSize={buttonSize}
             isThirdPartyAvailable={isThirdPartyAvailable ?? true}
             isBackupPaid={isBackupPaid}
+            isFreeBackupsLimitReached={isFreeBackupsLimitReached}
           />
         ) : null}
       </div>

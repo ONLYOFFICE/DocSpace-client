@@ -7,7 +7,6 @@
   "DeleteGuest": "Eliminar invitado",
   "DeleteGuests": "Eliminar invitados",
   "DeletePersonalDataApplicable": "*Aplicable para los usuarios seleccionados que tienen dichos archivos y carpetas.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Las salas creadas por este usuario y los documentos almacenados en estas salas se reasignarán automáticamente al administrador que realice la eliminación: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Reasigne los datos manualmente para elegir otro usuario de destino para la reasignación.",
   "DeleteReqassignDescriptionGuest": "El {{userCaption}} se eliminará de todas las salas a las que haya sido invitado. Los documentos creados por este {{userCaption}} en las salas se reasignarán automáticamente a los propietarios de las salas.",
   "DeleteUser": "Eliminar el usuario",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> se eliminará. Esta acción no se puede deshacer.",

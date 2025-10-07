@@ -33,6 +33,7 @@ import type { TOption } from "../../../../../components/combobox";
 
 export interface ThirdPartyStorageModuleProps {
   isBackupPaid?: boolean;
+  isFreeBackupsLimitReached?: boolean;
   thirdPartyStorage: SelectedStorageType[];
   setStorageId: (id: Nullable<string>) => void;
   defaultStorageId: Nullable<string>;

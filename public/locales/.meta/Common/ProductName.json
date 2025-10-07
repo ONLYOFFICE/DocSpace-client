@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-10-01T15:17:48.037Z",
+  "updated_at": "2025-10-07T15:39:07.172Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -206,6 +206,12 @@
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
       "line_number": 113,
       "context": "return (\n <>\n <Text className=\"user-delete\">\n {onlyGuests\n ? t(\"ActionCannotBeUndoneGuests\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"ActionCannotBeUndone\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
+      "line_number": 125,
+      "context": "</Trans>\n </Text>\n <br />\n <Text>\n {t(\"GracePeriodActivatedDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </>\n );",
       "module": "/packages/client"
     },
     {
@@ -522,19 +528,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 539,
+      "line_number": 532,
       "context": "</div>\n ) : null}\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"TimeLanguageSettingsDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text>\n <Trans t={t} i18nKey=\"TimeLanguageSettingsSave\" />\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 131,
+      "line_number": 125,
       "context": "}\n }, [isMobileDevice, setIsCustomizationView]);\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalRenaming\", { productName: t(\"Common:ProductName\") }),\n );\n setPortalName(portalNameInitially);\n \n const checkScroll = checkScrollSettingsBlock();\n checkInnerWidth();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 131,
+      "line_number": 125,
       "context": "}\n }, [isMobileDevice, setIsCustomizationView]);\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalRenaming\", { productName: t(\"Common:ProductName\") }),\n );\n setPortalName(portalNameInitially);\n \n const checkScroll = checkScrollSettingsBlock();\n checkInnerWidth();",
       "module": "/packages/client"
     },
@@ -1038,13 +1044,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 482,
+      "line_number": 633,
       "context": "headerLabel: t(\"ListContacts\"),\n }}\n filter={filter}\n withInfo\n infoText={t(\"OnlyPortalAdminsShown\", {\n productName: t(\"Common:ProductName\"),\n })}\n emptyScreenHeader={t(\"Common:NotFoundMembers\")}\n emptyScreenDescription={t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n })}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 482,
+      "line_number": 633,
       "context": "headerLabel: t(\"ListContacts\"),\n }}\n filter={filter}\n withInfo\n infoText={t(\"OnlyPortalAdminsShown\", {\n productName: t(\"Common:ProductName\"),\n })}\n emptyScreenHeader={t(\"Common:NotFoundMembers\")}\n emptyScreenDescription={t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n })}",
       "module": "/packages/client"
     },
@@ -1140,7 +1146,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 249,
+      "line_number": 259,
       "context": "return (\n <MainContainer id=\"tfa-section\" ref={targetRef}>\n <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TwoFactorAuthEnableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {tfaSettingsUrl ? (\n <Link\n className=\"link-learn-more\"",
       "module": "/packages/client"
     },
@@ -1158,14 +1164,26 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/index.js",
-      "line_number": 77,
+      "line_number": 78,
       "context": "useSecurity(defaultProps.security);\n \n const data = [\n {\n id: \"access-portal\",\n name: t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n content: <AccessPortal />,\n onClick: async () => {\n clearAbortControllerArr();\n await getAccessPortalData();\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
-      "line_number": 108,
-      "context": "const confirmationDialogContent = {\n backup: {\n title: t(\"Common:Confirmation\"),\n body: t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n }),\n },\n };\n \n const getDialogContent = (actionType: string | null) => {",
+      "line_number": 112,
+      "context": "const confirmationDialogContent = {\n backup: {\n title: t(\"Common:Confirmation\"),\n body: !isCurrentConfirmDialogVisible\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),\n })",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
+      "line_number": 112,
+      "context": "const confirmationDialogContent = {\n backup: {\n title: t(\"Common:Confirmation\"),\n body: !isCurrentConfirmDialogVisible\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),\n })",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
+      "line_number": 112,
+      "context": "const confirmationDialogContent = {\n backup: {\n title: t(\"Common:Confirmation\"),\n body: !isCurrentConfirmDialogVisible\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),\n })",
       "module": "/packages/client"
     },
     {
@@ -1374,13 +1392,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2113,
+      "line_number": 2112,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2113,
+      "line_number": 2112,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },

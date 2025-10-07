@@ -29,13 +29,8 @@ import React from "react";
 import styles from "./IndicatorLoader.module.scss";
 
 const IndicatorLoader = () => {
-  const withSmartBanner = document.getElementById("smart-banner") || false;
-
   return (
-    <div
-      className={styles.indicatorLoader}
-      data-smart-banner={!!withSmartBanner}
-    >
+    <div className={styles.indicatorLoader}>
       <div id="ipl-progress-indicator" />
     </div>
   );

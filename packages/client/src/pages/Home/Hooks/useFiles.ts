@@ -157,6 +157,8 @@ const useFiles = ({
             fetchDefaultFiles(categoryType);
           });
       }, 1);
+
+      return;
     }
 
     const isRoomFolder = getObjectByLocation(location)?.folder;

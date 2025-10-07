@@ -90,7 +90,13 @@ const useSocketHelper = ({
   }, []);
 
   React.useEffect(() => {
-    const callback = async (loginEventId: unknown, redirectUrl: string) => {
+    const callback = async ({
+      loginEventId,
+      redirectUrl,
+    }: {
+      loginEventId: unknown;
+      redirectUrl: string | null;
+    }) => {
       const eventId = Number(loginEventId);
 
       if (eventId !== user?.loginEventId && eventId !== 0) return;

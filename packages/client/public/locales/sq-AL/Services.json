@@ -1,1 +1,12 @@
-{}
+{
+  "AutomaticBackupDescription": "Konfiguroni backup-e të planifikuara për mbrojtje të vazhdueshme të të dhënave, pa veprime manuale.",
+  "BackupRoomDescription": "Ruani një backup në një dhomë të përzgjedhur ose seksionin {{sectionName}}. Përdorni dhoma ekzistuese ose krijo një të re.",
+  "BackupServiceEnabled": "Shërbimi i backup-it u aktivizua me sukses.",
+  "ConnectService": "Lidhuni me shërbimin <1>këtu</1> për të aktivizuar veçoritë e backup-it.",
+  "ContactToPayer": "Kontaktoni paguesin (<1>{{email}}</1>) për të lidhur shërbimin e backup-it.",
+  "EnableBackupConfirm": "Aktivizimi i shërbimit të backup-it do t’i lejojë të gjithë administratorët e {{productName}} të krijojnë backup-e në çdo kohë, për sa kohë ka fonde në portofol. Jeni të sigurt që doni të vazhdoni?",
+  "FreeBackupsPerMonth": "Backup falas: {{value}}/{{maxValue}} për muajin aktual.",
+  "TemporaryDescription": "Krijoni një backup që do të ruhet në seksionin “Backup”. I disponueshëm për shkarkim brenda 24 orëve pas krijimit.",
+  "ThirdPartyResourceDescription": "Lidhuni dhe ruani backup-et në llogari cloud si Dropbox, Box, OneDrive ose Google Drive.",
+  "ThirdPartyStorageDescription": "Përdorni shërbime të palëve të treta për të ruajtur backup-et. Ideale për lidhje me platformat e jashtme cloud."
+}

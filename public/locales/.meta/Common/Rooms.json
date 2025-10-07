@@ -3,13 +3,25 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2025-09-26T15:21:06.037Z",
+  "updated_at": "2025-10-07T15:39:07.187Z",
   "comment": {
     "text": "The \"Rooms\" translation key is used to display the content \"Rooms\" in various parts of the user interface. This includes a file selector and a dialog box where it appears as a section title, providing context for users navigating room templates or reassigning data. It appears in UI elements such as buttons, text labels, and progress indicators.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:34:29.688Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList.js",
+      "line_number": 68,
+      "context": "const getTooltipContent = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n </Text>\n );\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
+      "line_number": 202,
+      "context": "<StyledProgress>\n <div className=\"data-start\"> {reassigningDataStart}</div>\n <div className=\"progress-container\">\n <div className=\"progress-section\">\n {!noRooms ? (\n <Text className=\"progress-section-text\">{t(\"Common:Rooms\")}</Text>\n ) : null}\n {noRoomFilesToMove ? null : (\n <Text className=\"progress-section-text\">\n {t(\"Common:Documents\")}\n </Text>",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RoomNoAccessContainer.js",
       "line_number": 47,
@@ -26,18 +38,6 @@
       "file_path": "/packages/client/src/components/RoomsSelectorInput/index.js",
       "line_number": 73,
       "context": "setIsDataReady,\n } = props;\n \n const [isPanelVisible, setIsPanelVisible] = useState(false);\n const BasePath = `${t(\"Common:ProductName\")} / ${t(\"Common:Rooms\")} `;\n const [path, setPath] = useState(\"\");\n \n const handleOnSubmit = (rooms) => {\n setPath(`${BasePath}/ ${rooms[0].label}`);\n onSubmit && onSubmit(rooms);",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList.js",
-      "line_number": 68,
-      "context": "const getTooltipContent = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n </Text>\n );\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
-      "line_number": 202,
-      "context": "<StyledProgress>\n <div className=\"data-start\"> {reassigningDataStart}</div>\n <div className=\"progress-container\">\n <div className=\"progress-section\">\n {!noRooms ? (\n <Text className=\"progress-section-text\">{t(\"Common:Rooms\")}</Text>\n ) : null}\n {noRoomFilesToMove ? null : (\n <Text className=\"progress-section-text\">\n {t(\"Common:Documents\")}\n </Text>",
       "module": "/packages/client"
     },
     {
@@ -108,8 +108,8 @@
     },
     {
       "file_path": "/packages/client/src/store/TreeFoldersStore.js",
-      "line_number": 70,
-      "context": "switch (folder.rootFolderType) {\n case FolderType.USER:\n folder.title = i18n.t(\"Common:MyDocuments\");\n break;\n case FolderType.Rooms:\n folder.title = i18n.t(\"Common:Rooms\");\n break;\n case FolderType.Archive:\n folder.title = i18n.t(\"Common:Archive\");\n break;\n case FolderType.TRASH:",
+      "line_number": 73,
+      "context": "break;\n case FolderType.SHARE:\n folder.title = i18n.t(\"Common:SharedWithMe\");\n break;\n case FolderType.Rooms:\n folder.title = i18n.t(\"Common:Rooms\");\n break;\n case FolderType.Archive:\n folder.title = i18n.t(\"Common:Archive\");\n break;\n case FolderType.TRASH:",
       "module": "/packages/client"
     }
   ],

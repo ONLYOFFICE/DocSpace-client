@@ -23,5 +23,6 @@
   "ThirdPartyInfo": "Ndryshoni informacionin e palës së tretë",
   "ThirdPartyTitle": "Shërbime të palëve të treta",
   "TitleShowActions": "Shfaqni veprimet e skedarit",
-  "TitleShowFolderActions": "Shfaqni veprimet e dosjeve"
+  "TitleShowFolderActions": "Shfaqni veprimet e dosjeve",
+  "TrashItemsDeleteSuccess": "Elementet e përzgjedhura u fshinë me sukses nga {{sectionName}}"
 }

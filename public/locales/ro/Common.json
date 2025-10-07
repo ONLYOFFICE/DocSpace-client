@@ -398,6 +398,7 @@
   "IncorrectLastName": "Numele incorect",
   "IncorrectLocalPart": "Partea locală este incorectă",
   "IncorrectPassword": "Parolă incorectă",
+  "IndividualRights": "Permisiuni individuale în sala",
   "Info": "Informații",
   "InfoPanel": "Panou informații",
   "InProgress": "În curs de desfășurare",
@@ -694,6 +695,7 @@
   "SaveHereButton": "Salvează aici",
   "SaveToPublicRoom": "Salvare în Sală publică",
   "Search": "Căutare",
+  "SearchByGroupMembers": "Căutare după membru de grup",
   "SearchEmptyRoomsDescription": "Filtru de sală nu a produs rezultate. Încercaţi un alt filtru sau ştergeţi filtrul pentru a vedea toate sălile.",
   "SectionRequired": "Acestă secțiune este obligatorie",
   "SelectAction": "Selectare",
@@ -894,7 +896,5 @@
   "YouHaveUnsavedChanges": "Nu ați salvat modificările efectuate de dvs",
   "YourCurrentDomain": "Domeniul dvs. actual",
   "YourLogo": "Logo-ul dvs",
-  "YourTurn": "Acum e rândul dvs.",
-  "IndividualRights": "Permisiuni individuale în sala",
-  "SearchByGroupMembers": "Căutare după membru de grup"
+  "YourTurn": "Acum e rândul dvs."
 }

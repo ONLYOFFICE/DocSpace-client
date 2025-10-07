@@ -2,5 +2,6 @@
   "CancellaionNotification": "Nezobrazovat znovu oznámení o zrušení",
   "DisplayFileExtension": "Zobrazení přípony souboru vedle názvu souboru",
   "OpenSameTab": "Otevřít editor {{organizationName}} na stejné kartě",
-  "OriginalCopy": "Uložit kopii souboru i v původním formátu"
+  "OriginalCopy": "Uložit kopii souboru i v původním formátu",
+  "TrashMoveConfirmation": "Zobrazit upozornění při přesouvání položek do {{sectionName}}"
 }

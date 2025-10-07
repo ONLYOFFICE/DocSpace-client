@@ -28,6 +28,15 @@
 
 import { isDesktop, isMobile } from "./device";
 
+function getTileWidth(
+  min: number,
+  max: number,
+  preferredPercent: number = 0.134,
+) {
+  const preferred = window.innerWidth * preferredPercent; // vw
+  return Math.max(min, Math.min(preferred, max));
+}
+
 // Used to update the number of tiles in a row after the window is resized.
 export const getCountTilesInRow = (
   isRooms?: boolean,
@@ -61,9 +70,9 @@ export const getCountTilesInRow = (
 
   let minTileWidth;
   if (isRooms || isTemplates) {
-    minTileWidth = 275 + tileGap;
+    minTileWidth = getTileWidth(275, 350) + tileGap;
   } else {
-    minTileWidth = 216 + tileGap;
+    minTileWidth = getTileWidth(216, 360) + tileGap;
   }
 
   return Math.floor(containerWidth / minTileWidth);

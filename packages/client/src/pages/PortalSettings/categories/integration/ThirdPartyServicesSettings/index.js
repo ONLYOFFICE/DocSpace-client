@@ -92,7 +92,7 @@ const RootContainer = styled.div`
 
   .request-block {
     margin-bottom: 20px;
-    padding: 46px;
+    padding: 32px 46px;
     display: flex;
     gap: 24px;
     align-items: center;

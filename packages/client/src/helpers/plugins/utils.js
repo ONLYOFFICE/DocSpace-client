@@ -139,7 +139,7 @@ export const messageActions = ({
         if (message.modalDialogProps) {
           setPluginDialogVisible && setPluginDialogVisible(true);
           setPluginDialogProps &&
-            setPluginDialogProps(message.modalDialogProps);
+            setPluginDialogProps({ ...message.modalDialogProps, pluginName });
         }
 
         break;

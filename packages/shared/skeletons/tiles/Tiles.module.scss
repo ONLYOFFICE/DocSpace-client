@@ -47,26 +47,44 @@
 .tilesSkeleton {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(clamp(216px, 13.4vw, 360px), 1fr)
+  );
   grid-gap: 16px;
 
   @include mixins.tablet-and-below {
-    grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(clamp(216px, 13.4vw, 360px), 1fr)
+    );
   }
 
   @include mixins.mobile {
-    grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(clamp(216px, 13.4vw, 360px), 1fr)
+    );
   }
 
   .tilesSkeletonRooms {
-    grid-template-columns: repeat(auto-fill, minmax(275mpx, 1fr));
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(clamp(275px, 13.4vw, 350px), 1fr)
+    );
 
     @include mixins.tablet-and-below {
-      grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+      grid-template-columns: repeat(
+        auto-fill,
+        minmax(clamp(275px, 13.4vw, 350px), 1fr)
+      );
     }
 
     @include mixins.mobile {
-      grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+      grid-template-columns: repeat(
+        auto-fill,
+        minmax(clamp(275px, 13.4vw, 350px), 1fr)
+      );
     }
   }
 }

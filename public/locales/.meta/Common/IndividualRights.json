@@ -1,26 +1,20 @@
 {
-  "key_path": "UploadPDFForm",
-  "content": "Upload PDF form",
-  "content_en_sha1_hash": "b5afa97be11c4d1636475bc3623a9f975f26ebd9",
-  "created_at": "2025-05-19T21:30:49.443Z",
-  "updated_at": "2025-10-07T15:39:07.178Z",
+  "key_path": "IndividualRights",
+  "content": "Individual rights in the room",
+  "content_en_sha1_hash": "50106622971aec0a90a7902b87dffefc200e8765",
+  "created_at": "2025-10-07T15:38:57.539Z",
+  "updated_at": "2025-10-07T15:44:37.810Z",
   "comment": {
-    "text": "UploadPDFForm is used as a label for a main button that allows users to upload a PDF form. It appears in a button component in the article section of a client-side application. The translation key is used to display this text in different languages.",
+    "text": "Text displayed in a tooltip within a group member dialog, indicating whether the member has individual rights within the room. Translators should choose between \"IndividualRights\" (for rooms) and \"IndividualRightsShare\" as appropriate. This helps users understand the permissions associated with a member.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:35:43.262Z"
+    "updated_at": "2025-10-07T15:44:37.810Z"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 403,
-      "context": "const uploadPDFFrom = {\n id: \"actions_upload-ready-Pdf-from\",\n className: \"main-button_drop-down_sub\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:UploadPDFForm\"),\n key: \"actions_upload-ready-Pdf-from\",\n items: [uploadFromDocSpace, uploadFormDevice],\n };\n \n // const moreActions = {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2956,
-      "context": "const uploadReadyPDFFrom = {\n id: \"personal_upload-ready-Pdf-from\",\n className: \"main-button_drop-down_sub\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:UploadPDFForm\"),\n key: \"personal_upload-ready-Pdf-from\",\n items: [\n {\n id: \"personal_upload-from-docspace\",\n className: \"main-button_drop-down\",",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/dialogs/edit-group-members-dialog/sub-components/GroupMember/index.tsx",
+      "line_number": 210,
+      "context": "offsetRight={0}\n openOnClick={false}\n tooltipContent={\n <Text fontSize=\"12px\" fontWeight={600}>\n {isRoom\n ? t(\"Common:IndividualRights\")\n : t(\"Common:IndividualRightsShare\")}\n </Text>\n }\n />\n ) : null}",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -123,13 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'formulier' is a correct translation for 'form', it's a more formal term. A more natural and commonly used translation in this context would be 'bestand' (file).",
-          "suggestion": "Upload PDF bestand"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -180,28 +168,22 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Отпреми PDF формулар' is not the most natural or accurate translation of 'Upload PDF form.' 'Отпреми' is more accurately 'upload' in the sense of 'dispatch' or 'send off'.  A more suitable translation would be 'Уплоад PDF образац' or 'Пошаљи PDF образац'.",
-          "suggestion": "Уплоад PDF образац"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Otpremi PDF formular' is not the most natural or accurate translation of 'Upload PDF form'. 'Otpremi' implies sending something, not uploading. A more accurate translation would use a verb that implies uploading, like 'Postovani' or 'Učitaj'.",
-          "suggestion": "Učitaj PDF formular"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -213,25 +195,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Передати PDF-форму' is not the most natural or accurate translation of 'Upload PDF form'. While 'Передати' (to transmit/pass) is related to uploading, 'Upload' often implies a more direct action of placing a file somewhere. A better translation would consider options like 'Завантажити PDF-форму' (to download/upload a PDF form) or 'Завантаження PDF-форми' (uploading a PDF form).",
-          "suggestion": "Consider 'Завантажити PDF-форму' or 'Завантаження PDF-форми'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation \"Tải biểu mẫu PDF\" is missing a full stop/period at the end of the sentence.",
-          "suggestion": "Tải biểu mẫu PDF ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

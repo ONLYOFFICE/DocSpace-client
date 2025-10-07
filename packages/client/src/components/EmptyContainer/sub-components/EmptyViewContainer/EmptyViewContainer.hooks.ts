@@ -238,6 +238,10 @@ export const useOptions = (
     window.dispatchEvent(event);
   }, [isWarningRoomsDialog, setQuotaWarningDialogVisible]);
 
+  const onCreateAIAgent = useCallback(() => {
+    console.log("Create AI Agent");
+  }, []);
+
   const openInfoPanel = useCallback(() => {
     if (!isVisibleInfoPanel) setVisibleInfoPanel?.(true);
 
@@ -329,6 +333,7 @@ export const useOptions = (
           navigate,
           onGoToPersonal,
           onGoToShared,
+          onCreateAIAgent,
         },
         logoText,
         isVisitor,

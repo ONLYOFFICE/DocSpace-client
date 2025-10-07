@@ -1,6 +1,8 @@
 {
   "CollaborationRoomEmptyTitle": "Welcome to the Collaboration room",
   "CollaboratorEmptyTitle": "The room is empty.",
+  "CreateAIAgent": "Create a new agent",
+  "CreateAIAgentDescription": "Start building your first AI agent",
   "CreateDocument": "Create a new document",
   "CreateDocumentDescription": "Take advantage of vast word processing functionality.",
   "CreateForm": "Create a new PDF form",
@@ -15,6 +17,8 @@
   "CreateSpreadsheetDescription": "Carry out precise calculations with minimal effort.",
   "CustomRoomEmptyTitle": "Welcome to the Custom room",
   "DefaultFolderDescription": "Drop files here or create new ones.",
+  "EmptyAIAgentsTitle": "Create your AI agent",
+  "EmptyAIAgentsDescription": "Set up a personalized assistant for your team by adding a knowledge base, selecting the ideal model, and connecting an MCP server. Invite your colleagues to collaborate and make the most of the agent’s chat capabilities.",
   "EmptyDescription": "Get started with quick actions:",
   "EmptyGroupAddedUserOptionDescription": "Add group members and assign the head",
   "EmptyGroupDeleteOptionDescription": "If you don't need this group anymore",

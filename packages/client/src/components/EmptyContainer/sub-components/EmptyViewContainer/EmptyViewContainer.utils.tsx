@@ -85,6 +85,9 @@ import DefaultFolderLight from "PUBLIC_DIR/images/emptyview/empty.default.folder
 import DefaultFolderUserDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.dark.svg";
 import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.light.svg";
 
+import EmptyAIAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
+import EmptyAIAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
+
 import {
   FilesSelectorFilterTypes,
   FilterType,
@@ -179,6 +182,9 @@ export const getRootDescription = (
   security: Nullable<TFolderSecurity>,
 ) => {
   return match([rootFolderType, access])
+    .with([FolderType.AIAgents, P._], () =>
+      t("EmptyView:EmptyAIAgentsDescription"),
+    )
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       t("Files:RoomEmptyContainerDescription"),
     )
@@ -292,6 +298,7 @@ export const getRootTitle = (
   rootFolderType: Nullable<FolderType>,
 ) => {
   return match([rootFolderType, access])
+    .with([FolderType.AIAgents, P._], () => t("EmptyView:EmptyAIAgentsTitle"))
     .with(
       [
         FolderType.Rooms,
@@ -504,6 +511,9 @@ export const getRootIcon = (
   isBaseTheme: boolean,
 ) => {
   return match([rootFolderType, access])
+    .with([FolderType.AIAgents, P._], () =>
+      isBaseTheme ? <EmptyAIAgentsLightIcon /> : <EmptyAIAgentsDarkIcon />,
+    )
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       isBaseTheme ? <EmptyRoomsRootLightIcon /> : <EmptyRoomsRootDarkIcon />,
     )

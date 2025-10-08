@@ -30,8 +30,32 @@ import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { injectDefaultTheme, NoUserSelect } from "@docspace/shared/utils";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { TLogo } from "@docspace/shared/api/rooms/types";
+import { TModel } from "@docspace/shared/components/room-icon/RoomIcon.types";
 
-const IconWrapper = styled.div.attrs(injectDefaultTheme)`
+type ItemIconProps = {
+  icon?: string;
+  fileExst?: string;
+  isPrivacy?: boolean;
+  isRoom?: boolean;
+  title: string;
+  logo?: TLogo | string;
+  color?: string;
+  isArchive?: boolean;
+  badgeUrl?: string;
+  size?: string;
+  radius?: string;
+  withEditing?: boolean;
+  showDefault?: boolean;
+  imgClassName?: string;
+  model?: TModel[];
+  onChangeFile?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className: string;
+  isTemplate?: boolean;
+  dataTestId?: string;
+};
+
+const IconWrapper = styled.div.attrs(injectDefaultTheme)<{ isRoom?: boolean }>`
   ${(props) =>
     props.isRoom &&
     css`
@@ -88,7 +112,7 @@ const ItemIcon = ({
   className,
   isTemplate,
   dataTestId,
-}) => {
+}: ItemIconProps) => {
   const isLoadedRoomIcon = !!logo;
   const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
 
@@ -106,7 +130,6 @@ const ItemIcon = ({
           logo={isRoom ? logo : icon}
           badgeUrl={badgeUrl || ""}
           isTemplate={isTemplate}
-          imgSrc={isRoom ? logo?.medium : icon}
           withEditing={withEditing}
           model={model}
           onChangeFile={onChangeFile}
@@ -114,11 +137,11 @@ const ItemIcon = ({
           dataTestId={dataTestId}
         />
       </IconWrapper>
-      {isPrivacy && fileExst ? <EncryptedFileIcon isEdit={false} /> : null}
+      {isPrivacy && fileExst ? <EncryptedFileIcon /> : null}
     </>
   );
 };
 
-export default inject(({ treeFoldersStore }) => {
+export default inject(({ treeFoldersStore }: TStore) => {
   return { isPrivacy: treeFoldersStore.isPrivacyFolder };
 })(observer(ItemIcon));

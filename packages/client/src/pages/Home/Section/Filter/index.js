@@ -819,17 +819,16 @@ const SectionFilterContent = ({
 
     const isLastTypeOptionsRooms = !connectedThirdParty.length && !tags?.length;
 
-    const folders =
-      !isFavoritesFolder && !isRecentFolder
-        ? [
-            {
-              id: "filter_type-folders",
-              key: FilterType.FoldersOnly.toString(),
-              group: FilterGroups.filterType,
-              label: t("Common:Folders"),
-            },
-          ]
-        : "";
+    const folders = !isRecentFolder
+      ? [
+          {
+            id: "filter_type-folders",
+            key: FilterType.FoldersOnly.toString(),
+            group: FilterGroups.filterType,
+            label: t("Common:Folders"),
+          },
+        ]
+      : [];
 
     const files = !isRecentFolder
       ? [

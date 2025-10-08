@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import moment from "moment";
 import "moment/min/locales.min";
@@ -50,6 +50,7 @@ import ShareDialogHeader from "./ShareDialog.header";
 import type { SharingDialogProps } from "./ShareDialog.types";
 
 import styles from "./ShareDialog.module.scss";
+import SocketHelper from "@docspace/shared/utils/socket";
 
 const SharingDialog = ({
   fileInfo,
@@ -58,6 +59,8 @@ const SharingDialog = ({
   selfId,
   onOpenPanel,
   filesSettings,
+  socketUrl,
+  shareKey,
 }: SharingDialogProps) => {
   const { t, i18n } = useTranslation(["Common"]);
   const ref = useRef<EditLinkPanelRef>(null);
@@ -68,9 +71,20 @@ const SharingDialog = ({
   const [isEditGroupPanelVisible, setIsEditGroupPanelVisible] = useState(false);
   const [selectedGroup, setSelectedGroup] = useState<TGroup | null>(null);
 
+  const initSocketRef = useRef(false);
+
   useEffect(() => {
     moment.locale(i18n.language);
   }, [i18n.language]);
+
+  useLayoutEffect(() => {
+    if (initSocketRef.current) return;
+
+    if (socketUrl) {
+      initSocketRef.current = true;
+      SocketHelper?.connect(socketUrl, shareKey ?? "");
+    }
+  }, [socketUrl, shareKey]);
 
   // Wrapper function to match the expected type for EditLinkPanel
   const handleGetPortalPasswordSettings = async (): Promise<void> => {

@@ -60,7 +60,9 @@ const PluginItem = ({
 }: PluginItemProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const imgSrc = image ? getPluginUrl(url, `/assets/${image}`) : null;
+  const imgSrc = image
+    ? getPluginUrl(url, `/assets/${image}?hash=${version}`)
+    : null;
 
   const onChangeStatus = () => {
     updatePlugin?.(name, !enabled, undefined, t);

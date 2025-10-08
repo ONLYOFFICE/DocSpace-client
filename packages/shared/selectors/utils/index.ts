@@ -53,6 +53,7 @@ export const convertRoomsToItems: (
       rootFolderType,
       shared,
       lifetime,
+      quotaLimit,
     } = room;
 
     const icon = logo?.medium || "";
@@ -81,6 +82,7 @@ export const convertRoomsToItems: (
       shared,
       lifetimeTooltip,
       cover,
+      quotaLimit,
       ...iconProp,
     };
   });

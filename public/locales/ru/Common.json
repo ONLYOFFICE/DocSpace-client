@@ -400,6 +400,7 @@
   "IncorrectLastName": "Некорректная фамилия",
   "IncorrectLocalPart": "Некорректное имя почтового ящика",
   "IncorrectPassword": "Неправильный пароль",
+  "IndividualRights": "Индивидуальные права в комнате",
   "Info": "Информация",
   "InfoPanel": "Информационная панель",
   "InProgress": "В процессе",
@@ -697,6 +698,7 @@
   "SaveHereButton": "Сохранить сюда",
   "SaveToPublicRoom": "Сохранить в публичную комнату",
   "Search": "Поиск",
+  "SearchByGroupMembers": "Поиск по участникам группы",
   "SearchEmptyRoomsDescription": "Ни одна комната не соответствует этому фильтру. Попробуйте другой или снимите фильтр, чтобы просмотреть все комнаты.",
   "SectionRequired": "Этот раздел является обязательным",
   "SelectAction": "Выбрать",
@@ -897,7 +899,5 @@
   "YouHaveUnsavedChanges": "Имеются несохраненные изменения",
   "YourCurrentDomain": "Ваш текущий домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша очередь",
-  "IndividualRights": "Индивидуальные права в комнате",
-  "SearchByGroupMembers": "Поиск по участникам группы"
+  "YourTurn": "Ваша очередь"
 }

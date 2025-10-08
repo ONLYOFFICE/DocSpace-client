@@ -1,8 +1,20 @@
 {
+  "ActionsWithFilesDescription": "Badges zullen activiteit op bestanden benadrukken — uploads, bewerkingen of shares — in de {{rooms}}, {{shared}} en {{documents}} secties.",
+  "AdminSetupRequired": "Admin setup vereist",
   "Badges": "Badges",
   "DailyFeed": "Daily {{productName}} feed",
   "DailyFeedDescription": "Lees nieuws en gebeurtenissen uit uw {{productName}} in een dagelijkse samenvatting.",
+  "FileActivityNotify": "Bestandsactiviteit notificaties",
+  "GoToSettings": "Ga naar Instellingen",
+  "IsNotValid": "Is niet geldig",
+  "LdapEmailTooltip": "Deze gebruikersaccount wordt geladen vanuit LDAP. Het e-mailadres van de gebruiker is niet gespecificeerd, en het huidige adres is automatisch gegenereerd en kan niet worden gebruikt om notificaties te verzenden.",
+  "NotConfigured": "Niet geconfigureerd",
   "Notifications": "Meldingen",
+  "RoomsActivityDescription": "Ontvang direct e-mail notificaties over nieuwe gedeelde bestanden/mappen en activiteit binnen uw {{sectionName}}.",
+  "RoomUpdateNotify": "Gedeelde content en {{sectionName}} activiteit",
+  "SettingUpNotifications": "Meldingen instellen",
+  "SuccessConnected": "{{serviceName}} is succesvol verbonden als notificatiekanaal. U ontvangt nu updates daar.",
+  "SuccessDisconnected": "{{serviceName}} is succesvol losgekoppeld als notificatiekanaal. Er worden geen notificaties meer naar toe gestuurd.",
   "UsefulTips": "Handige {{productName}} tips",
   "UsefulTipsDescription": "Ontvang handige gidsen over {{productName}}"
 }

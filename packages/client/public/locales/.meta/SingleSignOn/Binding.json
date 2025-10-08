@@ -3,7 +3,7 @@
   "content": "Binding:",
   "content_en_sha1_hash": "f2886990d903944b4327ac362e3de88962586c2c",
   "created_at": "2025-05-19T21:30:50.068Z",
-  "updated_at": "2025-10-03T13:19:30.644Z",
+  "updated_at": "2025-10-02T08:48:56.526Z",
   "comment": {
     "text": "This translation key is used for the text \"Binding:\" which appears as a label in a UI component. It is likely used to describe a binding option or setting within an Identity Provider (IdP) settings context, possibly displayed in a dialog or dropdown menu.",
     "is_auto": true,

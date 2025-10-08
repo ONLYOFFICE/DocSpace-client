@@ -133,6 +133,7 @@ const useIntegration = ({
   ]);
 
   return {
+    getLDAPData,
     getSSOData,
     getPluginsData,
     getThirdPartyData,

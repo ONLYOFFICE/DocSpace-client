@@ -398,6 +398,7 @@
   "IncorrectLastName": "Սխալ ազգանուն",
   "IncorrectLocalPart": "Սխալ տեղային մաս",
   "IncorrectPassword": "Սխալ գաղտնաբառ",
+  "IndividualRights": "Անհատական իրավունքները սենյակում",
   "Info": "Տեղեկություններ",
   "InfoPanel": "Տեղեկատվական վահանակ",
   "InProgress": "Ընթացքի մեջ է",
@@ -694,6 +695,7 @@
   "SaveHereButton": "Պահպանեք այստեղ",
   "SaveToPublicRoom": "Պահել հանրային սենյակում",
   "Search": "Որոնել",
+  "SearchByGroupMembers": "Որոնում ըստ խմբի անդամների",
   "SearchEmptyRoomsDescription": "Ոչ մի սենյակ չի համապատասխանում այս ֆիլտրին: Փորձեք մեկ այլ կամ մաքուր զտիչ՝ բոլոր սենյակները դիտելու համար:",
   "SectionRequired": "Այս բաժինը պարտադիր է",
   "SelectAction": "Ընտրել",
@@ -894,7 +896,5 @@
   "YouHaveUnsavedChanges": "Դուք չպահված փոփոխություններ ունեք",
   "YourCurrentDomain": "Ձեր ընթացիկ տիրույթը",
   "YourLogo": "Ձեր լոգոն",
-  "YourTurn": "Ձեր հերթն է",
-  "IndividualRights": "Անհատական իրավունքները սենյակում",
-  "SearchByGroupMembers": "Որոնում ըստ խմբի անդամների"
+  "YourTurn": "Ձեր հերթն է"
 }

@@ -398,6 +398,7 @@
   "IncorrectLastName": "Apellido incorrecto ",
   "IncorrectLocalPart": "Parte local incorrecta",
   "IncorrectPassword": "Contraseña incorrecta",
+  "IndividualRights": "Permisos individuales en la sala",
   "Info": "Información",
   "InfoPanel": "Panel de información",
   "InProgress": "En curso",
@@ -694,6 +695,7 @@
   "SaveHereButton": "Guardar aquí",
   "SaveToPublicRoom": "Guardar en Sala pública",
   "Search": "Buscar",
+  "SearchByGroupMembers": "Buscar por miembros del grupo",
   "SearchEmptyRoomsDescription": "No hay salas que coincidan con este filtro. Pruebe con otro o borre el filtro para ver todas las salas.",
   "SectionRequired": "Esta sección es obligatoria",
   "SelectAction": "Seleccionar",
@@ -894,7 +896,5 @@
   "YouHaveUnsavedChanges": "Tiene cambios no guardados",
   "YourCurrentDomain": "Su dominio actual",
   "YourLogo": "Su logotipo",
-  "YourTurn": "Su turno",
-  "IndividualRights": "Permisos individuales en la sala",
-  "SearchByGroupMembers": "Buscar por miembros del grupo"
+  "YourTurn": "Su turno"
 }

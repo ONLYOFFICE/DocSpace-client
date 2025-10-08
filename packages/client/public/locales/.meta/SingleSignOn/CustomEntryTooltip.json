@@ -3,7 +3,7 @@
   "content": "The caption for the button used to login into the space with the Single Sign-On service",
   "content_en_sha1_hash": "30b2a8cb8d27655e6b1304797109f48d75f5f655",
   "created_at": "2025-05-19T21:30:50.075Z",
-  "updated_at": "2025-10-03T13:19:30.642Z",
+  "updated_at": "2025-10-02T08:48:56.523Z",
   "comment": {
     "text": "The CustomEntryTooltip translation key is used to display a tooltip message that describes the purpose of the custom entry button in the Single Sign-On service, providing users with an explanation when hovering over or focusing on the button. This tooltip appears above a button for logging into a space using Single Sign-On. Translators should provide a clear and concise description that accurately reflects this functionality.",
     "is_auto": true,

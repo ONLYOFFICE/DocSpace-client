@@ -1,9 +1,24 @@
 {
   "DeleteAllGroupDescription": "Se eliminarán los grupos seleccionados. Los usuarios de los grupos no serán eliminados de {{productName}}. ¿Está seguro de que desea continuar?",
   "DeleteAllGroupsTitle": "Eliminar grupos",
+  "DeleteFolders": "Está a punto de mover <strong>carpetas ({{foldersCount}})</strong> a la {{trashSection}}.",
   "DeleteGroupDescription": "El grupo {{groupName}} se eliminará. Los usuarios del grupo no serán eliminados de {{productName}}. ¿Está seguro de que desea continuar? ",
   "DeleteGroupTitle": "Eliminar grupo",
+  "DeleteItem": "Está a punto de mover <strong>{{name}}</strong> a la {{trashSection}}.",
+  "DeleteRoom": "La sala <strong>«{{roomName}}»</strong> se eliminará de forma permanente. Se perderán todos los datos y accesos de los usuarios.",
+  "DeleteRoomTitle": "¿Eliminar esta sala?",
+  "DeleteRoomWarning": "Entiendo las consecuencias y deseo eliminar la sala.",
   "DeleteTemplate": "¿Realmente desea eliminar la sala de plantilla <1>«{{templateName}}»</1>? La plantilla no se podrá restaurar.",
   "DeleteTemplates": "¿Realmente desea eliminar pas plantillas de sala seleccionadas? No se podrán resaturar.",
-  "FileDeletedAfter": "El archivo se eliminará definitivamente dentro de 30 días."
+  "DeleteTemplateWarning": "Entiendo las consecuencias y deseo eliminar la plantilla.",
+  "FileDeletedAfter": "El archivo se eliminará definitivamente dentro de 30 días.",
+  "FilePermanentlyDeleted": "El archivo se eliminará permanentemente de la {{trashSection}}.",
+  "FilesDeletedAfter": "Los archivos se eliminarán permanentemente en 30 días.",
+  "FilesPermanentlyDeleted": "Los archivos se eliminarán permanentemente de la {{trashSection}}.",
+  "FolderDeletedAfter": "La carpeta se eliminará permanentemente en 30 días.",
+  "FolderPermanentlyDeleted": "La carpeta se eliminará permanentemente de la {{trashSection}}.",
+  "FoldersDeletedAfter": "Las carpetas se eliminarán permanentemente en 30 días.",
+  "FoldersPermanentlyDeleted": "Las carpetas se eliminarán permanentemente de la {{trashSection}}.",
+  "ItemsDeletedAfter": "Estos elementos se eliminarán permanentemente en 30 días.",
+  "ItemsPermanentlyDeleted": "Estos elementos se eliminarán permanentemente de la {{trashSection}}."
 }

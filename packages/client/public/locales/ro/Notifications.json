@@ -1,8 +1,20 @@
 {
+  "ActionsWithFilesDescription": "Ecusoanele vor evidenția activitatea în fișiere — încărcare, modificare sau partajare — în secțiunile {{rooms}}, {{shared}} și {{documents}}.",
+  "AdminSetupRequired": "Este necesară configurarea de către administrator",
   "Badges": "Ecusoane",
   "DailyFeed": "Fluxul zilnic {{productName}}",
   "DailyFeedDescription": "Citiţi ştirile şi evenimentele din spațiul dvs {{productName}} într-un rezumat zilnic.",
+  "FileActivityNotify": "Notificări de activitate în fișiere",
+  "GoToSettings": "Acces Setări",
+  "IsNotValid": "Nu este valabil",
+  "LdapEmailTooltip": "Contul acestui utilizator este încărcat din LDAP. Adresa de email a utilizatorului nu a fost indicată, iar cea curentă a fost generată automat și nu poate fi folosită pentru a trimite notificări.",
+  "NotConfigured": "Nu este configurat",
   "Notifications": "Notificări",
+  "RoomsActivityDescription": "Primiți instant notificările prin e-mail despre fișierele/dosarele partajate recent și despre activitatea în secțiunea {{sectionName}}.",
+  "RoomUpdateNotify": "Conținut partajat și activitate în {{sectionName}}",
+  "SettingUpNotifications": "Setare Notificări",
+  "SuccessConnected": "{{serviceName}} a fost conectat cu succes ca modul de notificare. Veți primi acum actualizări în acest mod.",
+  "SuccessDisconnected": "{{serviceName}} a fost deconectat cu succes ca modul de notificare. Notificările nu vor mai fi trimise în acest mod.",
   "UsefulTips": "Sfaturi utile {{productName}}",
   "UsefulTipsDescription": "Obţineţi instrucţiuni utile privind {{productName}}"
 }

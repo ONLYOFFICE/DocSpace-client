@@ -235,39 +235,48 @@ export const StyledTableContainer = styled(TableContainer).attrs(
 `;
 
 export const StyledInfoBlock = styled.div.attrs(injectDefaultTheme)`
-  display: inline-flex;
-  align-items: center;
-  background: ${(props) =>
-    props.theme.client.settings.migration.infoBlockBackground};
-  box-sizing: border-box;
-  padding: 12px 16px;
-  border-radius: 6px;
-  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
-  @media ${mobile} {
-    width: 100%;
-  }
+  .info-block-wrapper {
+    display: inline-flex;
+    align-items: center;
+    background: ${(props) =>
+      props.theme.client.settings.migration.infoBlockBackground};
+    box-sizing: border-box;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
 
-  .selected-users-count {
-    color: ${(props) =>
-      props.theme.client.settings.migration.infoBlockTextColor};
-    font-weight: 700;
-    font-size: 14px;
-  }
+    @media ${mobile} {
+      width: 100%;
+    }
 
-  .selected-admins-count {
-    margin-inline-end: 8px;
-    color: ${(props) =>
-      props.theme.client.settings.migration.infoBlockTextColor};
-    font-weight: 700;
-    font-size: 14px;
-
-    span {
-      font-weight: 700;
-      font-size: 14px;
-      margin-inline-start: 4px;
+    .selected-users-count {
       color: ${(props) =>
         props.theme.client.settings.migration.infoBlockTextColor};
+      font-weight: 700;
+      font-size: 14px;
     }
+
+    .selected-admins-count {
+      margin-inline-end: 8px;
+      color: ${(props) =>
+        props.theme.client.settings.migration.infoBlockTextColor};
+      font-weight: 700;
+      font-size: 14px;
+
+      span {
+        font-weight: 700;
+        font-size: 14px;
+        margin-inline-start: 4px;
+        color: ${(props) =>
+          props.theme.client.settings.migration.infoBlockTextColor};
+      }
+    }
+  }
+
+  .warning-text {
   }
 `;

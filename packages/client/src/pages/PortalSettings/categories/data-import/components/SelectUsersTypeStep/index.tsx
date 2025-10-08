@@ -102,6 +102,8 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
   const showCancelDialog = () => setCancelUploadDialogVisible(true);
   const hideCancelDialog = () => setCancelUploadDialogVisible(false);
 
+  const isLimitsReached = limitAdmins ? totalUsedUsers > limitAdmins : false;
+
   const Buttons = (
     <MigrationButtons
       className="save-cancel-buttons"
@@ -113,6 +115,7 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
       displaySettings
       migrationCancelLabel={t("Settings:CancelImport")}
       onMigrationCancelClick={showCancelDialog}
+      saveButtonDisabled={isLimitsReached}
     />
   );
 

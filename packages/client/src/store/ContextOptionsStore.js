@@ -504,11 +504,12 @@ class ContextOptionsStore {
       return toastr.success(t("Common:LinkCopySuccess"));
     }
 
-    if (isShared && !isArchive && !isSystemFolder) {
+    if (isShared && !isArchive && !isSystemFolder && !item.external) {
       try {
         const itemLink = item.isFolder
           ? await getFolderLink(item.id)
           : await getFileLink(item.id);
+
         copyToBuffer(itemLink.sharedTo.shareLink);
         item.customFilterEnabled
           ? toastr.success(

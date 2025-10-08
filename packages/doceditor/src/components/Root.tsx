@@ -395,8 +395,6 @@ const Root = ({
           onCancel={onCloseSharingDialog}
           filesSettings={filesSettings}
           onOpenPanel={openShareFormDialog}
-          socketUrl={settings?.socketUrl}
-          shareKey={shareKey}
         />
       ) : null}
 

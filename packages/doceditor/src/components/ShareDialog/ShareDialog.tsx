@@ -50,7 +50,7 @@ import ShareDialogHeader from "./ShareDialog.header";
 import type { SharingDialogProps } from "./ShareDialog.types";
 
 import styles from "./ShareDialog.module.scss";
-import SocketHelper from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
 const SharingDialog = ({
   fileInfo,
@@ -59,8 +59,6 @@ const SharingDialog = ({
   selfId,
   onOpenPanel,
   filesSettings,
-  socketUrl,
-  shareKey,
 }: SharingDialogProps) => {
   const { t, i18n } = useTranslation(["Common"]);
   const ref = useRef<EditLinkPanelRef>(null);
@@ -71,20 +69,19 @@ const SharingDialog = ({
   const [isEditGroupPanelVisible, setIsEditGroupPanelVisible] = useState(false);
   const [selectedGroup, setSelectedGroup] = useState<TGroup | null>(null);
 
-  const initSocketRef = useRef(false);
-
   useEffect(() => {
     moment.locale(i18n.language);
   }, [i18n.language]);
 
   useLayoutEffect(() => {
-    if (initSocketRef.current) return;
+    const fileSocketPart = `FILE-${fileInfo.id}`;
 
-    if (socketUrl) {
-      initSocketRef.current = true;
-      SocketHelper?.connect(socketUrl, shareKey ?? "");
-    }
-  }, [socketUrl, shareKey]);
+    if (!SocketHelper?.socketSubscribers.has(fileSocketPart))
+      SocketHelper?.emit(SocketCommands.Subscribe, {
+        roomParts: [fileSocketPart],
+        individual: true,
+      });
+  }, [fileInfo.id]);
 
   // Wrapper function to match the expected type for EditLinkPanel
   const handleGetPortalPasswordSettings = async (): Promise<void> => {

@@ -41,6 +41,4 @@ export type SharingDialogProps = {
   onOpenPanel: () => void;
   selfId?: string;
   filesSettings: TFilesSettings;
-  socketUrl?: string;
-  shareKey?: string;
 };

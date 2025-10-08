@@ -78,9 +78,46 @@ class AxiosClient {
 
   client: AxiosInstance | null = null;
 
+  isAuthenticated: boolean | null = null;
+
   constructor() {
     if (typeof window !== "undefined") this.initCSR();
   }
+
+  getResponsePathname = (response: AxiosResponse) => {
+    try {
+      const baseUrl = response.config.baseURL;
+      const requestUrl = response.config.url; // Get the full URL from the request config
+
+      if (!baseUrl || !requestUrl) return null;
+
+      const urlObject = new URL(requestUrl, baseUrl);
+      const pathname = urlObject.pathname; // Extract the pathname
+
+      return pathname;
+    } catch {
+      return null;
+    }
+  };
+
+  getRequestToken = () => {
+    if (typeof window === "undefined") return null;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const publicRoomKey = urlParams.get("key") || urlParams.get("share");
+
+    if (!publicRoomKey) return null;
+
+    const shouldAttachRequestToken = !this.isAuthenticated; // attach Request-Token header only for unauthenticated users
+
+    // console.log("getRequestToken", {
+    //   shouldAttachRequestToken,
+    //   isAuthenticated: this.isAuthenticated,
+    //   publicRoomKey,
+    // });
+
+    return shouldAttachRequestToken ? publicRoomKey : null;
+  };
 
   initCSR = () => {
     this.isSSR = false;
@@ -129,12 +166,11 @@ class AxiosClient {
       (config: InternalAxiosRequestConfig) => {
         if (typeof window === "undefined") return config;
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const publicRoomKey = urlParams.get("key") || urlParams.get("share");
+        const requestToken = this.getRequestToken(); // get Token from Public Room URL
 
-        if (publicRoomKey) {
+        if (requestToken) {
           config.headers = config.headers || {};
-          config.headers["Request-Token"] = publicRoomKey;
+          config.headers["Request-Token"] = requestToken;
         }
 
         return config;
@@ -222,6 +258,12 @@ class AxiosClient {
         ("isAxiosError" in response && response.isAxiosError)
       )
         return null;
+
+      if (this.getResponsePathname(response) === "/settings") {
+        this.isAuthenticated =
+          response?.data?.response?.ownerId !==
+          "00000000-0000-0000-0000-000000000000";
+      }
 
       if (
         response.data &&

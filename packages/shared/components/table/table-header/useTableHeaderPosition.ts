@@ -43,7 +43,7 @@ export const useTableHeaderPosition = (
 
       if (filterSelectedRow) {
         const rect = filterSelectedRow.getBoundingClientRect();
-        header.style.top = `${rect.bottom}px`;
+        header.style.top = `${Math.round(rect.bottom) + 2}px`;
       } else {
         header.style.top = "unset";
       }

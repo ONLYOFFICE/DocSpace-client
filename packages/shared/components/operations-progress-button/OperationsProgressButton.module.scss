@@ -64,6 +64,8 @@
     opacity 0.3s ease-in-out,
     transform 0.3s ease-in-out;
 
+  pointer-events: none;
+
   @include mixins.mobile {
     &.mainButtonVisible {
       bottom: 80px;
@@ -371,7 +373,8 @@
   height: 12px;
   border: 2px solid transparent;
   border-radius: 50%;
-  background-image: linear-gradient(rgb(85, 95, 101), rgb(85, 95, 101)),
+  background-image:
+    linear-gradient(rgb(85, 95, 101), rgb(85, 95, 101)),
     conic-gradient(
       from 0.25turn at 50% 30%,
       rgb(85, 95, 101),

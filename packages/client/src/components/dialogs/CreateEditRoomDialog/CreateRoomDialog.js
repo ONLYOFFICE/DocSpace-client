@@ -36,7 +36,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import RoomSelector from "@docspace/shared/selectors/Room";
 import { FolderType } from "@docspace/shared/enums";
 
-import TagHandler from "./handlers/TagHandler";
+import TagHandler from "../../../helpers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
 

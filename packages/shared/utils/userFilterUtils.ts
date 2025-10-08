@@ -116,19 +116,29 @@ export const cleanUpFilterObj = (filter: FilterObject, storageKey: string) => {
   return JSON.stringify(filterObject);
 };
 
+// TODO: remove in future versions
+// Deprecated method, will be removed in future versions
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getUserFilter = (storageKey: string) => {
-  const storageValue = localStorage.getItem(
-    `${storageKey}&ver=${FILTER_VERSION}`,
-  );
-  const filterValue = storageValue ? JSON.parse(storageValue) : {};
+  // Disable getting filter to localStorage
 
-  return filterValue;
+  // const storageValue = localStorage.getItem(
+  //   `${storageKey}&ver=${FILTER_VERSION}`,
+  // );
+  // const filterValue = storageValue ? JSON.parse(storageValue) : {};
+
+  // return filterValue;
+
+  return {};
 };
 
+// TODO: remove in future versions
+// Deprecated method, will be removed in future versions
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const setUserFilter = (storageKey: string, filterObj: FilterObject) => {
-  const filterValue = cleanUpFilterObj(filterObj, storageKey);
-
-  localStorage.setItem(`${storageKey}&ver=${FILTER_VERSION}`, filterValue);
+  // Disable saving filter to localStorage
+  // const filterValue = cleanUpFilterObj(filterObj, storageKey);
+  // localStorage.setItem(`${storageKey}&ver=${FILTER_VERSION}`, filterValue);
 };
 
 export const removeUserFilter = (storageKey: string) => {

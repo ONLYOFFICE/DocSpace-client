@@ -851,14 +851,16 @@ const SectionFilterContent = ({
       },
     ];
 
-    const archives = [
-      {
-        id: "filter_type-archive",
-        key: FilterType.ArchiveOnly.toString(),
-        group: FilterGroups.filterType,
-        label: t("Common:Archives"),
-      },
-    ];
+    const archives = !isRecentFolder
+      ? [
+          {
+            id: "filter_type-archive",
+            key: FilterType.ArchiveOnly.toString(),
+            group: FilterGroups.filterType,
+            label: t("Common:Archives"),
+          },
+        ]
+      : [];
 
     const media = [
       {

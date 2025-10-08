@@ -100,6 +100,10 @@ export const getDeepLink = (
   originalUrl?: string,
   isOpenOnlyApp?: boolean,
 ) => {
+  if (!deepLinkConfig) {
+    return (window.location.href = "/");
+  }
+
   const jsonData = {
     portal: location,
     email,

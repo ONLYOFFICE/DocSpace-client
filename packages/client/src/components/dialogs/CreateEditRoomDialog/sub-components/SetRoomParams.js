@@ -44,7 +44,7 @@ import AvatarEditorDialog from "../../AvatarEditorDialog";
 
 import VirtualDataRoomBlock from "./VirtualDataRoomBlock";
 
-import TagInput from "./TagInput";
+import TagInput from "../../../TagInput";
 import RoomQuota from "./RoomQuota";
 import InputParam from "./Params/InputParam";
 import ChangeRoomOwner from "./ChangeRoomOwner";

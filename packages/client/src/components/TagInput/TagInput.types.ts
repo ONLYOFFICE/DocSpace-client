@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import TagHandler from "../../../../../helpers/TagHandler";
+import TagHandler from "../../helpers/TagHandler";
 
 export type TagListProps = {
   tagHandler: TagHandler;

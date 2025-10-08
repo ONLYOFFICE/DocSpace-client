@@ -40,7 +40,7 @@ import {
   FILTER_SHARED_ROOM,
   FILTER_TEMPLATES_ROOM,
 } from "../../utils/filterConstants";
-import { getUserFilter, setUserFilter } from "../../utils/userFilterUtils";
+import { getUserFilter } from "../../utils/userFilterUtils";
 import { TSortOrder, TSortBy, Nullable } from "../../types";
 import { validateAndFixObject } from "../../utils/filterValidator";
 import { typeDefinition } from "./typeDefinition";

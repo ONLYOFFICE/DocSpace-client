@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { FC, useState } from "react";
-import { inject, observer } from "mobx-react";
 
 import { ShareSelector as ShareSelectorComponent } from "@docspace/shared/components/share/selector";
 
@@ -40,19 +39,24 @@ import { Portal } from "@docspace/shared/components/portal";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { RoomMember } from "@docspace/shared/api/rooms/types";
 
-interface ShareSelectorProps {
-  item: Nullable<TFile | TFolder>;
-}
-
-const ShareSelector: FC<ShareSelectorProps> = ({ item }) => {
+const ShareSelector: FC = () => {
   const [open, setOpen] = useState(false);
+  const [item, setItem] = useState<Nullable<TFile | TFolder>>(null);
 
   const onClose = () => {
     setOpen(false);
+    setItem(null);
   };
+
+  useEventListener("keyup", (event: KeyboardEvent) => {
+    if (event.key === "Escape") {
+      onClose();
+    }
+  });
 
   useEventListener(ShareEventName, (event: CustomEvent) => {
     setOpen(event.detail.open);
+    setItem(event.detail.item);
   });
 
   const onSubmit = (list: RoomMember[]) => {
@@ -82,10 +86,4 @@ const ShareSelector: FC<ShareSelectorProps> = ({ item }) => {
   );
 };
 
-export default inject<TStore>(({ infoPanelStore }) => {
-  const { infoPanelSelection } = infoPanelStore;
-
-  return {
-    item: Array.isArray(infoPanelSelection) ? null : infoPanelSelection,
-  };
-})(observer(ShareSelector as FC));
+export default ShareSelector;

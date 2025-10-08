@@ -31,7 +31,7 @@ export const useTableHeaderPosition = (
   headerRef: RefObject<HTMLDivElement | null>,
 ): void => {
   useEffect(() => {
-    if (!isSafari) return;
+    if (!isSafari) return undefined;
 
     const updateHeaderTop = () => {
       const header = headerRef?.current;

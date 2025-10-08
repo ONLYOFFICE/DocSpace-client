@@ -30,7 +30,7 @@ import { TFunction } from "i18next";
 
 import TagList from "./TagList";
 
-import InputParam from "../dialogs/CreateEditRoomDialog/sub-components/Params/InputParam";
+import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
 import TagDropdown from "./TagDropdown";
 
 const StyledTagInput = styled.div<{ hasTags: boolean }>`

@@ -39,7 +39,7 @@ import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
-import { StyledParam } from "../Params/StyledParam";
+import { StyledParam } from "SRC_DIR/components/CreateEditDialogParams/StyledParam";
 
 interface MCPSettingsProps {
   roomParams: TRoomParams;

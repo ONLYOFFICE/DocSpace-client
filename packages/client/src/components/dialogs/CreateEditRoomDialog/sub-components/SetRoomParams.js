@@ -46,7 +46,7 @@ import VirtualDataRoomBlock from "./VirtualDataRoomBlock";
 
 import TagInput from "../../../TagInput";
 import RoomQuota from "./RoomQuota";
-import InputParam from "./Params/InputParam";
+import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
 import ChangeRoomOwner from "./ChangeRoomOwner";
 import RoomTypeDropdown from "./RoomTypeDropdown";
 import PermanentSettings from "./PermanentSettings";

@@ -7,6 +7,7 @@
   "DesktopTheme": "Sincronizar com as configurações do editor de desktop",
   "DesktopThemeDescription": "Alterne automaticamente entre temas claros e escuros dependendo do tema atual dos editores de desktop.",
   "EditPhoto": "Editar Foto",
+  "EmailChangeSuccess": "Seu e-mail foi alterado com sucesso.",
   "EmailNotVerified": "E-mail não verificado",
   "ErrorAccountAlreadyUse": "Conta vinculada já em uso por outro usuário",
   "FileManagement": "Gerenciamento de arquivos",
@@ -17,6 +18,7 @@
   "LogoutDescription": "Observação. Todas as conexões ativas, exceto esta conexão, serão desconectadas, pois estão em uso no momento.",
   "LogoutFrom": "Sair de {{platform}} {{browser}}?",
   "MyProfile": "Meu perfil",
+  "NotificationsChannels": "Canais de notificação",
   "ProviderSuccessfullyConnected": "Provedor conectado com sucesso",
   "ProviderSuccessfullyDisconnected": "Provedor desconectado com sucesso",
   "SendAgain": "Envie novamente",
@@ -24,6 +26,10 @@
   "SuccessLogout": "A conexão ativa foi desconectada: {{platform}}, {{browser}}",
   "SystemTheme": "Usar tema do sistema",
   "SystemThemeDescription": "Alterne automaticamente entre temas claros e escuros quando o sistema o fizer.",
+  "TelegramAccount": "Conta do Telegram",
+  "TelegramAccountDescription": "Para conectar o TelegramBot à sua conta, siga o link secreto e clique no botão “Conectar Telegram”.",
+  "TelegramAccountDisconnect": "Desconectar Telegram",
+  "TelegramAccountDisconnectDescription": "Sua conta @{{username}} está conectada para receber notificações do Telegram. Você pode se desconectar desta conta. Nesse caso, você não receberá notificações.",
   "TerminateAllSessions": "Encerre todas as sessões, exceto a atual",
   "TwoFactorDescription": "A autenticação de dois fatores por meio de um aplicativo de geração de código foi habilitada para todos os usuários pelo administrador."
 }

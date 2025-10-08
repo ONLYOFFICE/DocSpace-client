@@ -1,1 +1,12 @@
-{}
+{
+  "AutomaticBackupDescription": "Thiết lập sao lưu theo lịch trình để bảo vệ dữ liệu liên tục mà không cần các thao tác thủ công.",
+  "BackupRoomDescription": "Lưu bản sao lưu vào phòng đã chọn hoặc phần {{sectionName}}. Sử dụng các phòng hiện có hoặc tạo một phòng mới.",
+  "BackupServiceEnabled": "Đã kích hoạt thành công dịch vụ sao lưu.",
+  "ConnectService": "Kết nối dịch vụ <1>tại đây</1> để kích hoạt các tính năng sao lưu",
+  "ContactToPayer": "Liên hệ với Bên thanh toán (<1>{{email}}</1>) để kết nối dịch vụ sao lưu.",
+  "EnableBackupConfirm": "Kích hoạt dịch vụ Sao lưu sẽ cho phép tất cả người quản trị {{productName}} tạo bản sao lưu bất cứ lúc nào, miễn là số dư ví đủ. Bạn có chắc chắn muốn tiếp tục không?",
+  "FreeBackupsPerMonth": "Sao lưu miễn phí: {{value}}/{{maxValue}} mỗi tháng hiện tại.",
+  "TemporaryDescription": "Tạo bản sao lưu được lưu trong phần “Sao lưu”. Có sẵn để tải xuống trong vòng 24 giờ sau khi tạo.",
+  "ThirdPartyResourceDescription": "Kết nối và lưu trữ bản sao lưu lên các tài khoản đám mây như Dropbox, Box, OneDrive hoặc Google Drive.",
+  "ThirdPartyStorageDescription": "Sử dụng các dịch vụ của bên thứ ba để lưu trữ bản sao lưu của bạn. Lý tưởng để kết nối các nền tảng lưu trữ đám mây bên ngoài."
+}

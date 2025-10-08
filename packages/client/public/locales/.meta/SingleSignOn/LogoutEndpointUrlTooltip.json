@@ -3,7 +3,7 @@
   "content": "The URL used for the single logout on the Service provider side",
   "content_en_sha1_hash": "66816769c4404873d8c5be819085b10b207f910a",
   "created_at": "2025-05-19T21:30:50.107Z",
-  "updated_at": "2025-10-03T13:19:30.645Z",
+  "updated_at": "2025-10-02T08:48:56.528Z",
   "comment": {
     "text": "This translation key is used to display the URL label for a single logout endpoint on the Service provider side in a dropdown menu or button. The text appears in a tooltip that explains the purpose of this setting in the Portal Settings page.",
     "is_auto": true,

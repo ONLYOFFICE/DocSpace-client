@@ -387,6 +387,7 @@
   "IncorrectLastName": "ນາມສະກຸນບໍ່ຖືກຕ້ອງ",
   "IncorrectLocalPart": "ທ້ອງຖິ່ນບໍ່ຖືກຕ້ອງ",
   "IncorrectPassword": "ລະຫັດລັບບໍ່ຖືກຕ້ອງ",
+  "IndividualRights": "ສິດທິສ່ວນບຸກຄົນໃນຫ້ອງ",
   "Info": "ຂໍ້ມູນ",
   "InfoPanel": "ແຜງຂໍ້ມູນ",
   "InProgress": "ກຳລັງດຳເນີນຢູ່",
@@ -681,6 +682,7 @@
   "SaveHereButton": "ບັນທຶກ ນີ້",
   "SaveToPublicRoom": "ບັນທຶກໃສ່ຫ້ອງສາທາລະນະ",
   "Search": "ຄົ້ນຫາ",
+  "SearchByGroupMembers": "ຄົ້ນຫາໂດຍສະມາຊິກກຸ່ມ",
   "SearchEmptyRoomsDescription": "ບໍ່ມີຫ້ອງໃດກົງກັບຕົວກອງນີ້. ລອງໃຊ້ອັນອື່ນ ຫຼືຕົວກັ່ນຕອງທີ່ຈະແຈ້ງເພື່ອເບິ່ງທຸກຫ້ອງ.",
   "SectionRequired": "ສ່ວນນີ້ແມ່ນຕ້ອງການແດ່",
   "SelectAction": "ເລືອກ",
@@ -881,7 +883,5 @@
   "YouHaveUnsavedChanges": "ທ່ານມີການປ່ຽນແປງທີ່ຍັງບໍ່ໄດ້ບັນທຶກ",
   "YourCurrentDomain": "ໂດເມນປັດຈຸບັນຂອງທ່ານ",
   "YourLogo": "ໂລໂກ້ຂອງທ່ານ",
-  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
-  "IndividualRights": "ສິດທິສ່ວນບຸກຄົນໃນຫ້ອງ",
-  "SearchByGroupMembers": "ຄົ້ນຫາໂດຍສະມາຊິກກຸ່ມ"
+  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ"
 }

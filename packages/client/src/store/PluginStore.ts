@@ -740,7 +740,7 @@ class PluginStore {
 
         pluginName: plugin.name,
 
-        icon: `${plugin.iconUrl}/assets/${value.icon}`,
+        icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
       });
     });
   };
@@ -892,7 +892,7 @@ class PluginStore {
           newItems.push({
             ...i,
             onClick,
-            icon: `${plugin.iconUrl}/assets/${i.icon}`,
+            icon: `${plugin.iconUrl}/assets/${i.icon}?hash=${plugin.version}`,
           });
         });
       }
@@ -931,7 +931,7 @@ class PluginStore {
 
         pluginName: plugin.name,
 
-        icon: `${plugin.iconUrl}/assets/${value.icon}`,
+        icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
         items: newItems.length > 0 ? newItems : null,
       });
     });
@@ -1006,7 +1006,7 @@ class PluginStore {
 
         pluginName: plugin.name,
 
-        icon: `${plugin.iconUrl}/assets/${value.icon}`,
+        icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
       });
     });
   };
@@ -1114,8 +1114,8 @@ class PluginStore {
 
       if (!correctUserType) return;
 
-      const fileIcon = `${plugin.iconUrl}/assets/${value.fileRowIcon}`;
-      const fileIconTile = `${plugin.iconUrl}/assets/${value.fileTileIcon}`;
+      const fileIcon = `${plugin.iconUrl}/assets/${value.fileRowIcon}?hash=${plugin.version}`;
+      const fileIconTile = `${plugin.iconUrl}/assets/${value.fileTileIcon}?hash=${plugin.version}`;
 
       const onClick = async (item: TFile) => {
         const device = this.getCurrentDevice();

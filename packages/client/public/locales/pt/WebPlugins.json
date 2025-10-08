@@ -8,6 +8,8 @@
   "NeedSettings": "Precisa inserir configurações",
   "NoPlugins": "Nenhum plug-in adicionado",
   "NotNeedSettings": "Não é necessário inserir configurações",
+  "PluginIsNotCompatible": "A versão do SDK do plugin não corresponde à versão do {{productName}}. Por favor, atualize para uma versão compatível.",
+  "PluginLoadedSuccessfully": "Plugin carregado com sucesso",
   "PluginSamples": "Amostras de plug-ins",
   "PluginSDK": "SDK de plug-in",
   "PluginSDKDescription": "Usando o Plugin SDK você pode estender a funcionalidade do {{productName}}, conectar serviços de terceiros ou aprimorar a experiência do usuário existente. Aqui você pode encontrar os exemplos de plugins com código-fonte disponíveis no GitHub.",

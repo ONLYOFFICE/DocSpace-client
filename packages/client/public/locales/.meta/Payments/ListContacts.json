@@ -3,7 +3,7 @@
   "content": "List contacts",
   "content_en_sha1_hash": "094b6fdf495423bd14fa097cffe40c5a271f14bd",
   "created_at": "2025-09-01T14:09:45.347Z",
-  "updated_at": "2025-10-01T08:28:22.124Z",
+  "updated_at": "2025-10-07T15:39:07.518Z",
   "comment": {
     "text": "This key displays the text \"List contacts\" as the header label for a dialog or modal. It appears in the Transaction History page within Portal Settings, specifically related to contact selection, and is visible to Portal Admins only.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 477,
+      "line_number": 628,
       "context": "onSubmit={onSubmitContactSelector}\n withHeader\n headerProps={{\n onCloseClick: onCloseContactSelector,\n isCloseable: true,\n headerLabel: t(\"ListContacts\"),\n }}\n filter={filter}\n withInfo\n infoText={t(\"OnlyPortalAdminsShown\", {\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/client"
     }

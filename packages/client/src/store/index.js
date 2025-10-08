@@ -91,6 +91,7 @@ import AiRoomStore from "./AiRoomStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
 import AISettingsStore from "./portal-settings/AISettingsStore";
+import CreateEditAgentStore from "./CreateEditAgentStore";
 
 const aiRoomStore = new AiRoomStore();
 
@@ -345,6 +346,17 @@ const createEditRoomStore = new CreateEditRoomStore(
   avatarEditorDialogStore,
 );
 
+const createEditAgentStore = new CreateEditAgentStore(
+  filesStore,
+  filesActionsStore,
+  selectedFolderStore,
+  tagsStore,
+  settingsStore,
+  clientLoadingStore,
+  dialogsStore,
+  avatarEditorDialogStore,
+);
+
 const webhooksStore = new WebhooksStore(settingsStore);
 const importAccountsStore = new ImportAccountsStore(
   currentQuotaStore,
@@ -436,6 +448,7 @@ const store = {
   aiRoomStore,
   aiSettingsStore,
   telegramStore,
+  createEditAgentStore,
 };
 
 export default store;

@@ -391,6 +391,8 @@ export const enum Events {
   CREATE_PDF_FORM_FILE = "create_pdf_form_file",
   SAVE_AS_TEMPLATE = "save_as_template",
   Share_PDF_Form = "share_pdf_form",
+  AGENT_CREATE = "create_agent",
+  AGENT_EDIT = "edit_agent",
 }
 
 /**

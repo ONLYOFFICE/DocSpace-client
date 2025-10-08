@@ -30,6 +30,7 @@ import { inject, observer } from "mobx-react";
 
 import { FileAction, Events } from "@docspace/shared/enums";
 import { getStartRoomParams } from "@docspace/shared/utils/rooms";
+import { getStartAgentParams } from "@docspace/shared/utils/aiAgents";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
@@ -38,6 +39,7 @@ import CreateEvent from "./CreateEvent";
 import RenameEvent from "./RenameEvent";
 import CreateRoomEvent from "./CreateRoomEvent";
 import EditRoomEvent from "./EditRoomEvent";
+import CreateAgentEvent from "./AgentEvents/CreateAgentEvent";
 import CreateGroupEvent from "./GroupEvents/CreateGroupEvent";
 import EditGroupEvent from "./GroupEvents/EditGroupEvent";
 import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
@@ -53,6 +55,8 @@ const GlobalEvents = ({
   setEditRoomDialogProps,
   createRoomDialogProps,
   setCreateRoomDialogProps,
+  createAgentDialogProps,
+  setCreateAgentDialogProps,
   setCover,
 
   setCreatePDFFormFile,
@@ -195,6 +199,21 @@ const GlobalEvents = ({
         setEditRoomDialogProps({
           visible: false,
           item: null,
+          onClose: null,
+        });
+      },
+    });
+  }, []);
+
+  const onCreateAgent = useCallback((e) => {
+    const startAgentParams = getStartAgentParams();
+    setCreateAgentDialogProps({
+      ...startAgentParams,
+      item: e.item,
+      visible: true,
+      onClose: () => {
+        setCreateAgentDialogProps({
+          visible: false,
           onClose: null,
         });
       },
@@ -368,6 +387,7 @@ const GlobalEvents = ({
     window.addEventListener(Events.CREATE, onCreate);
     window.addEventListener(Events.RENAME, onRename);
     window.addEventListener(Events.ROOM_CREATE, onCreateRoom);
+    window.addEventListener(Events.AGENT_CREATE, onCreateAgent);
     window.addEventListener(Events.ROOM_EDIT, onEditRoom);
     window.addEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
     window.addEventListener(Events.GROUP_CREATE, onCreateGroup);
@@ -397,6 +417,7 @@ const GlobalEvents = ({
       window.removeEventListener(Events.CREATE, onCreate);
       window.removeEventListener(Events.RENAME, onRename);
       window.removeEventListener(Events.ROOM_CREATE, onCreateRoom);
+      window.removeEventListener(Events.AGENT_CREATE, onCreateAgent);
       window.removeEventListener(Events.ROOM_EDIT, onEditRoom);
       window.removeEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
       window.removeEventListener(Events.GROUP_CREATE, onCreateGroup);
@@ -423,6 +444,7 @@ const GlobalEvents = ({
     onRename,
     onCreate,
     onCreateRoom,
+    onCreateAgent,
     onEditRoom,
     onCreateGroup,
     onEditGroup,
@@ -443,6 +465,9 @@ const GlobalEvents = ({
     ),
     editRoomDialogProps.visible && (
       <EditRoomEvent key={Events.ROOM_EDIT} {...editRoomDialogProps} />
+    ),
+    createAgentDialogProps.visible && (
+      <CreateAgentEvent key={Events.AGENT_CREATE} {...createAgentDialogProps} />
     ),
     createGroupDialogProps.visible && (
       <CreateGroupEvent key={Events.GROUP_CREATE} {...createGroupDialogProps} />
@@ -489,6 +514,8 @@ export default inject(
       setEditRoomDialogProps,
       createRoomDialogProps,
       setCreateRoomDialogProps,
+      createAgentDialogProps,
+      setCreateAgentDialogProps,
       setCover,
       setCreatePDFFormFile,
       createPDFFormFileProps,
@@ -503,6 +530,8 @@ export default inject(
       setEditRoomDialogProps,
       createRoomDialogProps,
       setCreateRoomDialogProps,
+      createAgentDialogProps,
+      setCreateAgentDialogProps,
       setCover,
       setCreatePDFFormFile,
       createPDFFormFileProps,

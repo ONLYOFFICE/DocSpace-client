@@ -191,4 +191,4 @@ export type TAIConfig = {
   webCrawlingToolName: string;
 };
 
-export type TAIAgent = TRoom;
+export type TAgent = TRoom;

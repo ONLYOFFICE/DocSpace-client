@@ -239,7 +239,10 @@ export const useOptions = (
   }, [isWarningRoomsDialog, setQuotaWarningDialogVisible]);
 
   const onCreateAIAgent = useCallback(() => {
-    console.log("Create AI Agent");
+    // TODO: AI: Add quota if it needed
+
+    const event = new Event(Events.AGENT_CREATE);
+    window.dispatchEvent(event);
   }, []);
 
   const openInfoPanel = useCallback(() => {

@@ -169,6 +169,8 @@ class DialogsStore {
 
   createRoomDialogVisible = false;
 
+  createAgentDialogVisible = false;
+
   createRoomConfirmDialogVisible = false;
 
   editLinkPanelIsVisible = false;
@@ -241,6 +243,12 @@ class DialogsStore {
   };
 
   createRoomDialogProps = {
+    title: "",
+    visible: false,
+    onClose: null,
+  };
+
+  createAgentDialogProps = {
     title: "",
     visible: false,
     onClose: null,
@@ -363,6 +371,10 @@ class DialogsStore {
 
   setCreateRoomDialogProps = (props) => {
     this.createRoomDialogProps = props;
+  };
+
+  setCreateAgentDialogProps = (props) => {
+    this.createAgentDialogProps = props;
   };
 
   setInviteLanguage = (culture) => {
@@ -784,6 +796,10 @@ class DialogsStore {
 
   setCreateRoomDialogVisible = (createRoomDialogVisible) => {
     this.createRoomDialogVisible = createRoomDialogVisible;
+  };
+
+  setCreateAgentDialogVisible = (value) => {
+    this.createAgentDialogVisible = value;
   };
 
   setCreateRoomConfirmDialogVisible = (createRoomConfirmDialogVisible) => {

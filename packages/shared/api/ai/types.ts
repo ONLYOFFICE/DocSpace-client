@@ -32,6 +32,7 @@ import {
   ServerType,
   WebSearchType,
 } from "./enums";
+import { TRoom } from "../rooms/types";
 
 export type TCreateAiProvider = {
   type: ProviderType;
@@ -189,3 +190,5 @@ export type TAIConfig = {
   webSearchToolName: string;
   webCrawlingToolName: string;
 };
+
+export type TAIAgent = TRoom;

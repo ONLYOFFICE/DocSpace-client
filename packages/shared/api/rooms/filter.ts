@@ -415,19 +415,19 @@ class RoomsFilter {
     );
 
     if (isEmpty(sharedStorageFilter) && userId) {
-      setUserFilter(sharedFilterKey, defaultFilter);
+      // setUserFilter(sharedFilterKey, defaultFilter);
       sharedStorageFilter = dtoFilter;
     }
 
     if (isEmpty(archivedStorageFilter) && userId) {
       defaultFilter.searchArea = RoomSearchArea.Archive;
-      setUserFilter(archivedFilterKey, defaultFilter);
+      // setUserFilter(archivedFilterKey, defaultFilter);
       archivedStorageFilter = dtoFilter;
     }
 
     if (isEmpty(templatesStorageFilter) && userId) {
       defaultFilter.searchArea = RoomSearchArea.Templates;
-      setUserFilter(templatesFilterKey, defaultFilter);
+      // setUserFilter(templatesFilterKey, defaultFilter);
       templatesStorageFilter = dtoFilter;
     }
 
@@ -445,15 +445,15 @@ class RoomsFilter {
         ? currentStorageFilter
         : dtoFilter;
 
-    if (userId && !withLocalStorage) {
-      if (dtoFilter.searchArea === RoomSearchArea.Active) {
-        setUserFilter(sharedFilterKey, dtoFilter);
-      } else if (dtoFilter.searchArea === RoomSearchArea.Archive) {
-        setUserFilter(archivedFilterKey, dtoFilter);
-      } else if (dtoFilter.searchArea === RoomSearchArea.Templates) {
-        setUserFilter(templatesFilterKey, dtoFilter);
-      }
-    }
+    // if (userId && !withLocalStorage) {
+    //   if (dtoFilter.searchArea === RoomSearchArea.Active) {
+    //     setUserFilter(sharedFilterKey, dtoFilter);
+    //   } else if (dtoFilter.searchArea === RoomSearchArea.Archive) {
+    //     setUserFilter(archivedFilterKey, dtoFilter);
+    //   } else if (dtoFilter.searchArea === RoomSearchArea.Templates) {
+    //     setUserFilter(templatesFilterKey, dtoFilter);
+    //   }
+    // }
 
     return toUrlParams(urlParams, true);
   };

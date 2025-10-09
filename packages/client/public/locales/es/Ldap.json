@@ -26,6 +26,7 @@
   "LdapGroupNameAttribute": "Atributo de nombre de grupo",
   "LdapGroupNameAttributeTooltip": "Por favor, especifique el atributo del objeto que corresponde al nombre del grupo.",
   "LdapGroupUserAttributeTooltip": "Introduzca el atributo de objeto de usuario utilizado para determinar si este usuario es miembro de los grupos.",
+  "LdapIntegrationDescription": "Importe usuarios y grupos a través de LDAP y habilite la autenticación de usuarios mediante los nombres de usuario y contraseñas almacenados en el servidor LDAP. Los usuarios se importarán inmediatamente después de guardar la configuración. Los usuarios añadidos posteriormente se importarán durante su primera autenticación. Si desea proporcionar acceso únicamente a través de LDAP, desactive la opción de invitar a nuevos miembros de {{productName}} a través de {{sectionName}}: <1>{{link}}</1>",
   "LdapLoginAttribute": "Atributo de inicio de sesión",
   "LdapLoginAttributeTooltip": "Introduzca el atributo del objeto correspondiente al inicio de sesión del usuario.",
   "LdapLoginTooltip": "Por favor, especifique el usuario de inicio de sesión que tenga derechos de acceso de lectura al servidor LDAP.",

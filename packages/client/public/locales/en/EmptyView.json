@@ -52,5 +52,7 @@
   "UploadDevicePDFFormOptionTitle": "Upload from device",
   "UploadFromPortalTitle": "Upload from {{productName}}",
   "UploadPDFFormOptionDescription": "Select a ready PDF form available in {{productName}} and upload it to the room.",
-  "VirtualDataRoomEmptyTitle": "Welcome to the Virtual Data Room"
+  "VirtualDataRoomEmptyTitle": "Welcome to the Virtual Data Room",
+  "ManageAccess": "Manage access",
+  "TemplateAccessDescription": "Control who can use this template"
 }

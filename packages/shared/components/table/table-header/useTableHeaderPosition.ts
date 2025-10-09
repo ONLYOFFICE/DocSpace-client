@@ -24,63 +24,48 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ITooltip, TooltipRefProps } from "react-tooltip";
+import { useEffect, RefObject } from "react";
+import { isSafari } from "react-device-detect";
 
-export type TTooltipPlace =
-  | "top"
-  | "top-start"
-  | "top-end"
-  | "right"
-  | "right-start"
-  | "right-end"
-  | "bottom"
-  | "bottom-start"
-  | "bottom-end"
-  | "left"
-  | "left-start"
-  | "left-end";
+export const useTableHeaderPosition = (
+  headerRef: RefObject<HTMLDivElement | null>,
+): void => {
+  useEffect(() => {
+    if (!isSafari) return undefined;
 
-export type TFallbackAxisSideDirection = "none" | "start" | "end";
+    const updateHeaderTop = () => {
+      const header = headerRef?.current;
+      if (!header) return;
 
-export type TGetTooltipContent = {
-  content: string | null;
-  activeAnchor: HTMLElement | null;
-};
+      const filterSelectedRow = document.querySelector(
+        ".filter-input_selected-row",
+      );
 
-export type TooltipProps = Pick<
-  ITooltip,
-  | "id"
-  | "place"
-  | "afterHide"
-  | "afterShow"
-  | "offset"
-  | "children"
-  | "isOpen"
-  | "clickable"
-  | "openOnClick"
-  | "float"
-  | "anchorSelect"
-  | "noArrow"
-  | "opacity"
-  | "imperativeModeOnly"
-> & {
-  /** Sets a callback function that generates the tip content dynamically */
-  getContent?: ({
-    content,
-    activeAnchor,
-  }: TGetTooltipContent) => React.ReactNode | string;
-  /** Accepts class */
-  className?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** Background color of the tooltip  */
-  color?: string;
-  /** Maximum width of the tooltip */
-  maxWidth?: string;
-  /** Whether to allow fallback to the perpendicular axis of the preferred placement */
-  fallbackAxisSideDirection?: TFallbackAxisSideDirection;
-  noUserSelect?: boolean;
-  ref?: React.RefObject<TooltipRefProps | null>;
-  dataTestId?: string;
-  tooltipStyle?: React.CSSProperties;
+      if (filterSelectedRow) {
+        const rect = filterSelectedRow.getBoundingClientRect();
+        header.style.top = `${Math.round(rect.bottom) + 2}px`;
+      } else {
+        header.style.top = "unset";
+      }
+    };
+
+    updateHeaderTop();
+
+    const observer = new MutationObserver(updateHeaderTop);
+    const body = document.body;
+
+    observer.observe(body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    window.addEventListener("resize", updateHeaderTop);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateHeaderTop);
+    };
+  }, [headerRef]);
 };

@@ -306,6 +306,7 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
         isOpen
         noUserSelect
         isClickable={false}
+        tooltipStyle={{ pointerEvents: "none" }}
       >
         <FloatingButton
           ref={previewContainerRef}

@@ -56,6 +56,7 @@ import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 import { TLogo } from "@docspace/shared/api/rooms/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import ChangeRoomOwner from "SRC_DIR/components/ChangeRoomOwner";
 
 const StyledSetAgentParams = styled.div<{ disableImageRescaling?: boolean }>`
   display: flex;
@@ -136,6 +137,7 @@ type setAgentParamsProps = {
   isWrongTitle: boolean;
   setIsWrongTitle: (value: boolean) => void;
   onKeyUp: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onOwnerChange: VoidFunction;
 
   // Store props
   folderFormValidation?: SettingsStore["folderFormValidation"];
@@ -180,6 +182,7 @@ const setAgentParams = ({
   cover,
   covers,
   setCover,
+  onOwnerChange,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
     "CreateEditRoomDialog",
@@ -445,6 +448,15 @@ const setAgentParams = ({
         isDisabled={isDisabled}
         dataTestId="create_edit_agent_tags_input"
       />
+
+      {isEdit ? (
+        <ChangeRoomOwner
+          canChangeOwner={agentParams.canChangeAgentOwner!}
+          roomOwner={agentParams.agentOwner!}
+          onOwnerChange={onOwnerChange}
+          isAgent
+        />
+      ) : null}
 
       <ModelSettings
         agentParams={agentParams}

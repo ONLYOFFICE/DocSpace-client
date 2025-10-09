@@ -43,7 +43,7 @@ import { ICover } from "SRC_DIR/components/dialogs/RoomLogoCoverDialog/RoomLogoC
 import TagHandler from "../../../helpers/TagHandler";
 import ChangeRoomOwnerPanel from "../../panels/ChangeRoomOwnerPanel";
 
-import SetRoomParams from "./sub-components/SetAgentParams";
+import SetAgentParams from "./sub-components/SetAgentParams";
 
 type EditAgentDialogProps = {
   visible: boolean;
@@ -105,7 +105,6 @@ const EditAgentDialog = ({
           currentParams.icon.uploadedFile === undefined)) ||
         prevParams.icon.uploadedFile === currentParams.icon.uploadedFile) &&
       // prevParams.quota === currentParams.quota &&
-      prevParams.denyDownload === currentParams.denyDownload &&
       prevParams.modelId === currentParams.modelId &&
       prevParams.providerId === currentParams.providerId &&
       prevParams.prompt === currentParams.prompt &&
@@ -150,9 +149,9 @@ const EditAgentDialog = ({
     if (changeRoomOwnerIsVisible) setChangeRoomOwnerIsVisible(false);
   };
 
-  // const onOwnerChange = () => {
-  //   setChangeRoomOwnerIsVisible(true);
-  // };
+  const onOwnerChange = () => {
+    setChangeRoomOwnerIsVisible(true);
+  };
 
   const onSetNewOwner = (agentOwner: TCreatedBy) => {
     setChangeRoomOwnerIsVisible(false);
@@ -189,7 +188,7 @@ const EditAgentDialog = ({
       <ModalDialog.Header>{t("Common:EditAgent")}</ModalDialog.Header>
 
       <ModalDialog.Body>
-        <SetRoomParams
+        <SetAgentParams
           tagHandler={tagHandler}
           agentParams={agentParams}
           setAgentParams={setAgentParams}
@@ -201,8 +200,7 @@ const EditAgentDialog = ({
           setIsValidTitle={setIsValidTitle}
           setIsWrongTitle={setIsWrongTitle}
           onKeyUp={onKeyUpHandler}
-          // onOwnerChange={onOwnerChange}
-          // canChangeOwner={agentParams?.security?.ChangeOwner}
+          onOwnerChange={onOwnerChange}
         />
       </ModalDialog.Body>
 

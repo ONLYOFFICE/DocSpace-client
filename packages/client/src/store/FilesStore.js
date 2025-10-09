@@ -2771,6 +2771,7 @@ class FilesStore {
         "reconnect-storage",
         "edit-room",
         "edit-agent",
+        "edit-agent",
         "invite-users-to-room",
         "external-link",
         "embedding-settings",
@@ -2793,12 +2794,6 @@ class FilesStore {
         "delete",
         "remove-shared-room",
       ];
-
-      // TODO: AI: Temporary. Change it while adding context menu for ai agents
-      if (isAgent) {
-        roomOptions = removeOptions(roomOptions, ["edit-room"]);
-        roomOptions.push("edit-agent");
-      }
 
       if (!item.external) {
         roomOptions = removeOptions(roomOptions, ["remove-shared-room"]);

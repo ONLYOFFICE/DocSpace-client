@@ -490,7 +490,6 @@
   "LinkHasExpiredAndHasBeenDisabled": "Link-ul a expirat și este dezactivat",
   "LinkIsValid": "Linkul este valabil pentru <1>{{date}}</1>.",
   "LinkName": "Numele linkului",
-  "LinkNoExpiration": "Acest fișier este blocat de {{userName}}",
   "LinkRemoved": "Link-ul a fost eliminat",
   "LinkSettings": "Setări link",
   "LinkSuccessfullyCopied": "Link-ul a fost copiat cu succes în clipboard",

@@ -74,6 +74,7 @@ const IntegrationWrapper = (props) => {
   });
 
   const {
+    getLDAPData,
     getSSOData,
     getPluginsData,
     getThirdPartyData,
@@ -86,7 +87,10 @@ const IntegrationWrapper = (props) => {
       id: "ldap",
       name: t("Settings:LDAP"),
       content: <LdapSettings />,
-      onClick: () => {},
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getLDAPData();
+      },
     },
     {
       id: "sso",

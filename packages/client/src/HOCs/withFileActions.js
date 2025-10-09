@@ -227,8 +227,14 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onFilesClick = (e) => {
-      const { t, item, openFileAction, setParentId, isTrashFolder } =
-        this.props;
+      const {
+        t,
+        item,
+        openFileAction,
+        setParentId,
+        isTrashFolder,
+        isNewBadgePanelVisible,
+      } = this.props;
 
       if (
         (e && e.target?.tagName === "INPUT") ||
@@ -236,6 +242,7 @@ export default function withFileActions(WrappedFileItem) {
         // !!e.target.closest(".additional-badges") ||
         e.target.closest(".tag") ||
         e.target.closest(".mainIcons") ||
+        isNewBadgePanelVisible ||
         isTrashFolder
       )
         return;
@@ -408,7 +415,7 @@ export default function withFileActions(WrappedFileItem) {
         openFileAction,
         createFoldersTree,
       } = filesActionsStore;
-      const { setSharingPanelVisible } = dialogsStore;
+      const { setSharingPanelVisible, newFilesPanelFolderId } = dialogsStore;
       const { updateSelection, isIndexEditingMode } = indexingStore;
       const {
         isPrivacyFolder,
@@ -569,6 +576,11 @@ export default function withFileActions(WrappedFileItem) {
         isBlockingOperation,
 
         withContentSelection,
+
+        isNewBadgePanelVisible:
+          newFilesPanelFolderId === item.id &&
+          item.isFolder &&
+          settingsStore.currentDeviceType === DeviceType.mobile,
       };
     },
   )(observer(WithFileActions));

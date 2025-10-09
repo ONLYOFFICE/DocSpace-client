@@ -138,7 +138,7 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
                 passwordSettings={passwordSettings}
                 simpleView={false}
                 placeholder={t("Common:Password")}
-                hasError={hasError}
+                hasError={!isPasswordValid}
                 isAutoFocussed
                 // onBlur={onBlurPassword}
                 onValidateInput={onValidatePassword}

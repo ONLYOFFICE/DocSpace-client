@@ -3,7 +3,7 @@
   "content": "Custom login button caption",
   "content_en_sha1_hash": "f5f09f9a9e14e9be404be171d68c52364d62b9c9",
   "created_at": "2025-05-19T21:30:50.073Z",
-  "updated_at": "2025-10-03T13:19:30.641Z",
+  "updated_at": "2025-10-02T08:48:56.522Z",
   "comment": {
     "text": "This translation key is used for the caption of a custom login button, which allows users to customize the label displayed on the login form. It appears as part of an SSO settings page and can be translated to provide a localized label for this feature.",
     "is_auto": true,

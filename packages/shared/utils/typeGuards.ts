@@ -32,6 +32,7 @@ import type {
   SeparatorType,
 } from "../components/context-menu";
 import type { TRoom } from "../api/rooms/types";
+import { FolderType } from "../enums";
 
 export const isNumber = (value: unknown): value is number => {
   return typeof value === "number";
@@ -70,7 +71,9 @@ export const isRoom = (item: unknown): item is TRoom => {
     typeof item === "object" &&
     item !== null &&
     (("isRoom" in item && item.isRoom === true) ||
-      ("roomType" in item && !isNil(item.roomType)))
+      ("roomType" in item && !isNil(item.roomType)) ||
+      ("rootFolderType" in item &&
+        item.rootFolderType === FolderType.RoomTemplates))
   );
 };
 

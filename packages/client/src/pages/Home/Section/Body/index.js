@@ -190,7 +190,8 @@ const SectionBodyContent = (props) => {
         !e.target.closest(".not-selectable") &&
         !e.target.closest(".info-panel") &&
         !e.target.closest(".table-container_group-menu") &&
-        !e.target.closest(".document-catalog")) ||
+        !e.target.closest(".document-catalog") &&
+        !e.target.closest("#share_calendar")) ||
       e.target.closest(".files-main-button") ||
       e.target.closest(".add-button") ||
       e.target.closest("#filter_search-input") ||

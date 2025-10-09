@@ -42,6 +42,7 @@ import {
 import { checkingForUnfixedSize, getSubstring } from "../Table.utils";
 import { isDesktop } from "../../../utils";
 import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
+import { useTableHeaderPosition } from "./useTableHeaderPosition";
 
 type TPrevHeaderData = Nullable<
   Pick<TableHeaderProps, "columnStorageName" | "sortBy" | "sorted" | "columns">
@@ -1233,6 +1234,8 @@ export const TableHeader = (props: TableHeaderProps) => {
     isMountedRef.current = true;
   }, []);
 
+  useTableHeaderPosition(headerRef);
+
   return (
     <>
       <div
@@ -1242,7 +1245,6 @@ export const TableHeader = (props: TableHeaderProps) => {
         })}
         ref={headerRef}
         data-testid="table-header"
-        data-with-info-panel={infoPanelVisible ? "true" : "false"}
       >
         <div className={styles.tableHeaderRow}>
           {columns.map((column, index) => {

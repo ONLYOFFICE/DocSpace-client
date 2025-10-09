@@ -66,9 +66,11 @@ import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg
 import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
 import PersonShareReactSvgUrl from "PUBLIC_DIR/images/person.share.react.svg?url";
 import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
+import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import {
+  createGroup,
   onDeletePersonalDataClick,
   onInviteAgainClick,
   shareGuest,
@@ -648,6 +650,7 @@ class ContactsConextOptionsStore {
 
   getContactsModel = (t: TTranslation, isSectionMenu: boolean) => {
     const { isOwner, isAdmin } = this.userStore.user!;
+    const isGroups = this.usersStore.contactsTab === "groups";
 
     const someDialogIsOpen = checkDialogsOpen();
 
@@ -693,7 +696,19 @@ class ContactsConextOptionsStore {
       },
     ];
 
-    return accountsUserOptions;
+    const groupsOptions = [
+      {
+        id: "create_group",
+        className: "main-button_drop-down",
+        icon: GroupReactSvgUrl,
+        label: t("PeopleTranslations:CreateGroup"),
+        onClick: createGroup,
+        action: "group",
+        key: "group",
+      },
+    ];
+
+    return isGroups ? groupsOptions : accountsUserOptions;
   };
 
   inviteUser = (userType: EmployeeType) => {

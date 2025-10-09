@@ -38,12 +38,13 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import commonStyles from "../helpers/Common.module.scss";
 
 export type SearchProps = {
+  searchValue: string;
   setSearchValue: (value: string) => void;
   resetSearch: VoidFunction;
 };
 
-const Search = ({ setSearchValue, resetSearch }: SearchProps) => {
-  const [value, setValue] = useState("");
+const Search = ({ setSearchValue, resetSearch, searchValue }: SearchProps) => {
+  const [value, setValue] = useState(searchValue);
 
   const onClose = () => {
     resetSearch?.();

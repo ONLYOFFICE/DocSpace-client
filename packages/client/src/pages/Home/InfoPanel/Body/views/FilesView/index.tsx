@@ -81,6 +81,9 @@ const FilesView = ({
 }: FilesViewProps) => {
   const { t } = useTranslation(["Common"]);
   const isThirdParty = "providerId" in selection && selection?.providerId;
+  const currentViewRef = React.useRef<FilesViewProps["currentView"] | null>(
+    null,
+  );
 
   const [value, setValue] = React.useState<string | null>(null);
   const [prevSelectionId, setPrevSelectionId] = React.useState<string | null>(
@@ -167,6 +170,8 @@ const FilesView = ({
 
   const fetchValue = React.useCallback(
     async (v: FilesViewProps["currentView"]) => {
+      currentViewRef.current = v;
+
       abortController.current?.abort();
       membersAbortController.current?.abort();
       shareAbortController.current?.abort();
@@ -174,6 +179,8 @@ const FilesView = ({
       setIsLoadingSuspense(true);
 
       if (v === InfoPanelView.infoDetails) {
+        if (currentViewRef.current !== v) return undefined;
+
         onEndAnimation();
         setIsLoadingSuspense(false);
         setIsFirstLoadingSuspense(false);
@@ -183,6 +190,8 @@ const FilesView = ({
 
       if (v === InfoPanelView.infoHistory) {
         if (isThirdParty) {
+          if (currentViewRef.current !== v) return undefined;
+
           setIsLoadingSuspense(false);
           setIsFirstLoadingSuspense(false);
           onEndAnimation();
@@ -193,13 +202,17 @@ const FilesView = ({
         try {
           await fetchHistory();
 
+          if (currentViewRef.current !== v) return undefined;
+
           setIsLoadingSuspense(false);
           setIsFirstLoadingSuspense(false);
 
           return v;
         } catch (e) {
+          if (e instanceof Error && e.name === "AbortError") {
+            return undefined;
+          }
           console.log(e);
-
           return undefined;
         }
       }
@@ -207,6 +220,9 @@ const FilesView = ({
       if (v === InfoPanelView.infoMembers) {
         try {
           await fetchMembers();
+
+          if (currentViewRef.current !== v) return undefined;
+
           scrollToTop();
 
           setIsLoadingSuspense(false);
@@ -214,8 +230,10 @@ const FilesView = ({
 
           return v;
         } catch (e) {
+          if (e instanceof Error && e.name === "AbortError") {
+            return undefined;
+          }
           console.log(e);
-
           return undefined;
         }
       }
@@ -224,16 +242,22 @@ const FilesView = ({
         try {
           await fetchExternalLinks();
 
+          if (currentViewRef.current !== v) return undefined;
+
           setIsLoadingSuspense(false);
           setIsFirstLoadingSuspense(false);
 
           return v;
         } catch (e) {
+          if (e instanceof Error && e.name === "AbortError") {
+            return undefined;
+          }
           console.log(e);
-
           return undefined;
         }
       }
+
+      if (currentViewRef.current !== v) return undefined;
 
       setIsFirstLoadingSuspense(false);
       setIsLoadingSuspense(false);
@@ -250,6 +274,7 @@ const FilesView = ({
       fetchExternalLinks,
       scrollToTop,
       onEndAnimation,
+      isThirdParty,
     ],
   );
 
@@ -265,12 +290,12 @@ const FilesView = ({
     }
 
     fetchValue(currentView).then((v) => {
-      if (!v) return;
+      if (!v || currentViewRef.current !== currentView) return;
 
       setPrevSelectionId(selection.id?.toString() || "");
       setValue(v);
     });
-  }, [currentView, fetchValue, selection.id, prevSelectionId]);
+  }, [currentView, fetchValue, selection.id, prevSelectionId, value]);
 
   const getView = () => {
     if (value === InfoPanelView.infoDetails)
@@ -332,6 +357,7 @@ const FilesView = ({
     ? {
         isRoomMembersPanel,
         searchProps: {
+          searchValue,
           setSearchValue,
           resetSearch: () => {
             setSearchValue("");

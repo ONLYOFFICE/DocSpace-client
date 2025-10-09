@@ -3,7 +3,7 @@
   "content": "IdP Entity Id",
   "content_en_sha1_hash": "ec80bd1846e6613c32d80934518fd3cfe3e05f8e",
   "created_at": "2025-05-19T21:30:50.123Z",
-  "updated_at": "2025-10-03T13:19:30.642Z",
+  "updated_at": "2025-10-02T08:48:56.524Z",
   "comment": {
     "text": "The translation key \"ProviderURL\" is used to translate the label for a field that displays the IDP entity URL in an identity provider settings page. It appears as part of a form field and requires a translated value for display purposes.",
     "is_auto": true,

@@ -2,6 +2,8 @@
   "AccountWillBeCreated": "{{productName}} nalog će biti kreiran za <1>{{email}}</1>. Molimo vas zavšite vašu registraciju:",
   "ConfirmOwnerPortalSuccessMessage": "Vlasnik {{productName}}-a je uspešno promenjen. Bićete preusmereni za 10 sekundi.",
   "ConfirmOwnerPortalTitle": "Molimo vas potvrdite da želite da promenite {{productName}} vlasnika na {{newOwner}}.",
+  "ConnectApp": "Poveži aplikaciju",
+  "ConnectAppDescription": "Skeniraj obezbeđeni QR kod koristeći svoju aplikaciju za autentifikaciju. Alternativno, ručno unesi dati tajni ključ u aplikaciju: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "Vaš trenutni broj mobilnog telefona",
   "DeleteProfileBtn": "Obriši moj nalog",
   "DeleteProfileConfirmation": "Pažnja! Spremate se da obrišete svoj nalog.",
@@ -16,6 +18,8 @@
   "EnterEmailHeader": "Unesite email",
   "EnterPhone": "Unesi broj mobilnog telefona",
   "GetCode": "Dobavi kod",
+  "GetSuitableApp": "Preuzmi odgovarajuću aplikaciju",
+  "GetSuitableAppDescription": "Koristi kompatibilnu aplikaciju kao što je Google Authenticator za <1>Android</1> i <4>iOS</4>, ili Authenticator za <8>Windows Phone</8>.",
   "LoginRegistryButton": "Pridruži se",
   "Newsletter": "Želim da se pretplatim na newsletter {{organizationName}}",
   "PassworResetTitle": "Sada možete kreirati novu lozinku.",
@@ -29,5 +33,9 @@
   "SuccessDeactivate": "Vaš nalog je uspešno deaktiviran. Za 10 sekundi bićete preusmereni na <1>site</1>.",
   "SuccessReactivate": "Vaš nalog je uspešno ponovo aktiviran. Za 10 sekundi bićete preusmereni na <1>portal</1>.",
   "SuccessRemoved": "Vaš nalog je uspešno uklonjen. Za 10 sekundi bićete preusmereni na <1>site</1>.",
-  "TermsAndConditions": "Nastavkom potvrđujete da ste saglasni sa našim <1>Uslovima korišćenja</1> i <2>Izjavom o privatnosti</2>."
+  "TermsAndConditions": "Nastavkom potvrđujete da ste saglasni sa našim <1>Uslovima korišćenja</1> i <2>Izjavom o privatnosti</2>.",
+  "TfaSubTitle": "Prati jednostavne korake da nastaviš sa radom u ovom {{productName}}:",
+  "TfaTitle": "Dvofaktorska autentifikacija omogućena za siguran pristup",
+  "VerifyConnection": "Proveri vezu",
+  "VerifyConnectionDescription": "Unesi 6-cifreni kod koji generiše tvoja aplikacija za autentifikaciju u polje ispod da dovršiš podešavanje."
 }

@@ -70,6 +70,7 @@ const Tooltip = ({
   imperativeModeOnly,
   noUserSelect,
   dataTestId,
+  tooltipStyle,
   ...rest
 }: TooltipProps) => {
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -84,7 +85,7 @@ const Tooltip = ({
     mouseleave: !openOnClick,
   };
 
-  const tooltipStyle = maxWidth
+  const containerStyle = maxWidth
     ? ({ ...style, "--tooltip-max-width": maxWidth } as React.CSSProperties)
     : style;
 
@@ -97,7 +98,7 @@ const Tooltip = ({
       <div
         ref={tooltipRef}
         className={tooltipClass}
-        style={tooltipStyle}
+        style={containerStyle}
         data-testid={dataTestId ?? "tooltip"}
       >
         <ReactTooltip
@@ -142,6 +143,7 @@ const Tooltip = ({
             }),
             shift(),
           ]}
+          style={tooltipStyle}
           {...rest}
         >
           {children}

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import moment from "moment";
 import "moment/min/locales.min";
@@ -50,6 +50,7 @@ import ShareDialogHeader from "./ShareDialog.header";
 import type { SharingDialogProps } from "./ShareDialog.types";
 
 import styles from "./ShareDialog.module.scss";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
 const SharingDialog = ({
   fileInfo,
@@ -71,6 +72,16 @@ const SharingDialog = ({
   useEffect(() => {
     moment.locale(i18n.language);
   }, [i18n.language]);
+
+  useLayoutEffect(() => {
+    const fileSocketPart = `FILE-${fileInfo.id}`;
+
+    if (!SocketHelper?.socketSubscribers.has(fileSocketPart))
+      SocketHelper?.emit(SocketCommands.Subscribe, {
+        roomParts: [fileSocketPart],
+        individual: true,
+      });
+  }, [fileInfo.id]);
 
   // Wrapper function to match the expected type for EditLinkPanel
   const handleGetPortalPasswordSettings = async (): Promise<void> => {

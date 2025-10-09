@@ -519,6 +519,7 @@
   "Name": "Name",
   "NeedPassword": "You need a password to access the room",
   "New": "New",
+  "NewAgent": "New agent",
   "NewDocument": "New document",
   "NewFolder": "New folder",
   "NewPDFForm": "New PDF form",

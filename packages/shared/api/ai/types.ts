@@ -202,9 +202,9 @@ export type TAgentLogo = {
 };
 
 export type TChatSettings = {
-  prompt: string;
-  providerId: TAiProvider["id"];
-  modelId: TModel["modelId"];
+  prompt?: string;
+  providerId?: TAiProvider["id"];
+  modelId?: TModel["modelId"];
 };
 
 export type TCreateAgentData = {
@@ -213,7 +213,7 @@ export type TCreateAgentData = {
   color?: string;
   tags?: string[];
   logo?: TAgentLogo;
-  chatSettings: TChatSettings;
+  chatSettings?: TChatSettings;
 };
 
 export type TEditAgentData = Partial<TCreateAgentData>;

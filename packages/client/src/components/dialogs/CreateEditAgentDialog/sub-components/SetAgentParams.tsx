@@ -137,7 +137,7 @@ type setAgentParamsProps = {
   isWrongTitle: boolean;
   setIsWrongTitle: (value: boolean) => void;
   onKeyUp: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  onOwnerChange: VoidFunction;
+  onOwnerChange?: VoidFunction;
 
   // Store props
   folderFormValidation?: SettingsStore["folderFormValidation"];

@@ -37,14 +37,17 @@ import { RoomsType, SearchArea } from "@docspace/shared/enums";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { Nullable } from "@docspace/shared/types";
-import { TRoomIconParams } from "@docspace/shared/utils/rooms";
 import { TWatermark } from "@docspace/shared/api/rooms/types";
 import {
   addServersForRoom,
+  createAIAgent,
   deleteServersForRoom,
 } from "@docspace/shared/api/ai";
-import { TAgentParams } from "@docspace/shared/utils/aiAgents";
-import { TAgent } from "@docspace/shared/api/ai/types";
+import {
+  TAgentIconParams,
+  TAgentParams,
+} from "@docspace/shared/utils/aiAgents";
+import { TAgent, TAgentLogo } from "@docspace/shared/api/ai/types";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -125,7 +128,7 @@ class CreateEditRoomStore {
     this.onClose = onClose;
   };
 
-  getLogoParams = (uploadedFile: File, icon: TRoomIconParams) => {
+  getLogoParams = (uploadedFile: File, icon: TAgentIconParams) => {
     const img = new Image();
     const url = URL.createObjectURL(uploadedFile);
 
@@ -243,7 +246,7 @@ class CreateEditRoomStore {
     }
   };
 
-  getAgentLogo = async (icon: TRoomIconParams) => {
+  getAgentLogo = async (icon: TAgentIconParams) => {
     try {
       const [logoParamsData, uploadedData] = await Promise.all([
         this.getLogoParams(icon.uploadedFile as unknown as File, icon),
@@ -254,7 +257,7 @@ class CreateEditRoomStore {
         tmpFile: (uploadedData as { responseData: { data: string } })
           .responseData.data,
         ...logoParamsData!,
-      };
+      } as TAgentLogo;
     } catch (err) {
       toastr.error(err as string);
     }
@@ -263,13 +266,7 @@ class CreateEditRoomStore {
   onCreateAgent = async (t: TFunction, successToast: Element | null = null) => {
     const agentParams = this.agentParams!;
 
-    return console.log("onCreateAgent", agentParams);
-
     const { cover, clearCoverProps } = this.dialogsStore!;
-
-    const createAgent = () => {
-      console.log("Create Agent", agentParams);
-    };
 
     const { tags, title, icon, logo, prompt, providerId, modelId } =
       agentParams;
@@ -278,7 +275,7 @@ class CreateEditRoomStore {
 
     const logoCover = cover
       ? {
-          cover: (cover as { cover: object }).cover,
+          cover: (cover as { cover: string }).cover,
           color: (cover as { color: string }).color,
         }
       : logo
@@ -289,13 +286,15 @@ class CreateEditRoomStore {
         : null;
 
     const createAgentData = {
-      title: title || t("Common:NewRoom"),
+      title: title || t("Common:NewAgent"),
       ...logoCover,
 
       ...(tagsToAddList.length && {
         tags: tagsToAddList,
       }),
-      logo: undefined as unknown,
+
+      logo: undefined as TAgentLogo | undefined,
+
       ...((prompt || providerId || modelId) && {
         chatSettings: {
           prompt,
@@ -309,11 +308,11 @@ class CreateEditRoomStore {
 
     try {
       if (icon.uploadedFile && typeof icon.uploadedFile !== "string") {
-        const roomLogo = await this.getAgentLogo(icon);
-        createAgentData.logo = roomLogo;
+        const agentLogo = await this.getAgentLogo(icon);
+        createAgentData.logo = agentLogo;
       }
 
-      const agent = (await createAgent(createAgentData)) as TAgent;
+      const agent = await createAIAgent(createAgentData);
 
       if ((agent as unknown as { errorMsg: string }).errorMsg) {
         return toastr.error(
@@ -327,7 +326,8 @@ class CreateEditRoomStore {
         addServersForRoom(agent.id, agentParams.mcpServers);
       }
 
-      this.onOpenNewAgent(agent);
+      // TODO: AI: Add open agent after creating
+      // this.onOpenNewAgent(agent);
 
       if (successToast)
         toastr.success(successToast as unknown as React.ReactNode);

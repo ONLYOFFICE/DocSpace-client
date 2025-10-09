@@ -43,7 +43,7 @@ import * as Styled from "./index.styled";
 type ChangeRoomOwnerProps = {
   currentUserId?: string;
   roomOwner: TCreatedBy;
-  onOwnerChange: () => void;
+  onOwnerChange?: () => void;
   currentColorScheme?: SettingsStore["currentColorScheme"];
   canChangeOwner: boolean;
   isAgent?: boolean;

@@ -42,6 +42,7 @@ import {
   addServersForRoom,
   createAIAgent,
   deleteServersForRoom,
+  editAIAgent,
 } from "@docspace/shared/api/ai";
 import {
   TAgentIconParams,
@@ -149,16 +150,15 @@ class CreateEditRoomStore {
     newParams: TAgentParams,
     agent: TAgent,
   ) => {
-    return console.log("onSaveEditAgent", newParams);
-
     const { cover, clearCoverProps } = this.dialogsStore!;
     const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore!;
-    // const { changeRoomOwner } = this.filesActionsStore!;
+    const { changeRoomOwner } = this.filesActionsStore!;
 
-    const { title, icon, agentId, prompt, providerId, modelId } = newParams;
+    const { title, icon, agentId, prompt, providerId, modelId, agentOwner } =
+      newParams;
 
     const isTitleChanged = !isEqual(title, agent.title);
-    // const isOwnerChanged = roomOwner && roomOwner.id !== agent.createdBy.id;
+    const isOwnerChanged = agentOwner && agentOwner.id !== agent.createdBy.id;
 
     const tags = newParams.tags.map((tag) => tag.name);
     const prevTags = agent.tags.sort();
@@ -169,14 +169,18 @@ class CreateEditRoomStore {
       ...(isTitleChanged && {
         title: title || t("Common:NewRoom"),
       }),
+
       ...(isTagsChanged && {
         tags,
       }),
+
       ...((cover as { cover: string; color: string } | null) && {
         cover: (cover as { cover: string; color: string } | null)?.cover,
         color: (cover as { cover: string; color: string } | null)?.color,
       }),
-      logo: undefined as unknown,
+
+      logo: undefined as TAgentLogo | undefined,
+
       ...((prompt || providerId || modelId) && {
         chatSettings: {
           prompt,
@@ -200,23 +204,28 @@ class CreateEditRoomStore {
     clearCoverProps();
 
     try {
-      try {
-        if (additionalRequest.length) {
-          const [logoParamsData, uploadedData] =
-            await Promise.all(additionalRequest);
+      if (additionalRequest.length) {
+        const [logoParamsData, uploadedData] =
+          await Promise.all(additionalRequest);
 
-          editAgentParams.logo = {
-            tmpFile: (uploadedData as { responseData: { data: string } })
-              .responseData.data,
-            ...logoParamsData!,
-          };
-        }
-      } catch (e) {
-        toastr.error(e as string);
+        editAgentParams.logo = {
+          tmpFile: (uploadedData as { responseData: { data: string } })
+            .responseData.data,
+          ...logoParamsData!,
+        } as TAgentLogo;
+      }
+    } catch (e) {
+      toastr.error(e as string);
+    }
+
+    try {
+      if (Object.keys(editAgentParams).length) {
+        await editAIAgent(agent.id, editAgentParams);
       }
 
-      if (Object.keys(editAgentParams).length)
-        await api.rooms.editRoom(agent.id, editAgentParams);
+      if (isOwnerChanged) {
+        requests.push(changeRoomOwner(t, agentOwner.id));
+      }
 
       if (isDeleteLogo) {
         requests.push(api.rooms.removeLogoFromRoom(agent.id));

@@ -134,19 +134,17 @@ const ExternalLinks = ({
       link.shareLink = await getPortalInviteLink(selectedAccess);
 
       setActiveLink(link);
+      copyLink(link.shareLink);
     } else {
-      api.rooms.setInvitationLinks(
-        roomId,
-        "Invite",
-        +selectedAccess,
-        shareLinks[0].id,
-      );
-
-      link = shareLinks[0];
-      setActiveLink(shareLinks[0]);
+      api.rooms
+        .setInvitationLinks(roomId, "Invite", +selectedAccess, shareLinks[0].id)
+        .then(() => {
+          link = shareLinks[0];
+          setActiveLink(shareLinks[0]);
+          copyLink(link.shareLink);
+        })
+        .catch((err) => toastr.error(err.message));
     }
-
-    copyLink(link.shareLink);
   };
 
   const toggleLinks = async (e) => {

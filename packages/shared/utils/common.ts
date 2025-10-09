@@ -97,6 +97,7 @@ import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie, setCookie } from "./cookie";
 import { checkIsSSR } from "./device";
+
 import { hasOwnProperty } from "./object";
 import { TFrameConfig } from "../types/Frame";
 import { isFile, isFolder } from "./typeGuards";
@@ -1244,10 +1245,11 @@ export function getLogoUrl(
   dark: boolean = false,
   def: boolean = false,
   culture?: string,
+  update: boolean = false,
 ) {
   let logoTimestamp = "";
 
-  if (!checkIsSSR()) {
+  if (update) {
     const timestamp = window.sessionStorage?.getItem("logoUpdateTimestamp");
     if (timestamp) logoTimestamp = `&t=${timestamp}`;
   }
@@ -1258,8 +1260,6 @@ export function getLogoUrl(
 }
 
 export function updateLogoTimestamp() {
-  if (checkIsSSR()) return;
-
   window.sessionStorage?.setItem("logoUpdateTimestamp", Date.now().toString());
 }
 

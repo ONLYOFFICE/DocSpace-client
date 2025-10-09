@@ -30,7 +30,7 @@ import { Navigate, useLocation, useSearchParams } from "react-router";
 import FilesFilter from "../api/files/filter";
 import AppLoader from "../components/app-loader";
 
-import { TenantStatus } from "../enums";
+import { TenantStatus, ValidationStatus } from "../enums";
 import { combineUrl } from "../utils/combineUrl";
 
 import type { PrivateRouteProps } from "./Routers.types";
@@ -70,6 +70,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
     limitedAccessDevToolsForUsers,
     standalone,
+    roomStatus,
   } = props;
 
   const location = useLocation();
@@ -107,7 +108,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         return <AppLoader />;
       }
 
-      if (!user && isAuthenticated) {
+      if (
+        (!user && isAuthenticated) ||
+        (user && roomStatus == ValidationStatus.Password)
+      ) {
         const filter = FilesFilter.getDefault();
         const subFolder = new URLSearchParams(window.location.search).get(
           "folder",

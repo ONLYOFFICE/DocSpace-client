@@ -1,8 +1,20 @@
 {
+  "ActionsWithFilesDescription": "Las insignias resaltarán la actividad de los archivos (cargas, ediciones o uso compartido) en las secciones {{rooms}}, {{shared}} y {{documents}}.",
+  "AdminSetupRequired": "Se requiere configuración administrativa",
   "Badges": "Distintivos",
   "DailyFeed": "Fuente diaria de {{productName}}",
   "DailyFeedDescription": "Lea las noticias y eventos de su {{productName}} en un resumen diario.",
+  "FileActivityNotify": "Notificaciones de actividad de archivos",
+  "GoToSettings": "Ir a Configuración",
+  "IsNotValid": "No es válido",
+  "LdapEmailTooltip": "Esta cuenta de usuario se carga desde LDAP. La dirección de correo electrónico del usuario no se ha especificado, y la actual se ha generado automáticamente y no se puede utilizar para enviar notificaciones.",
+  "NotConfigured": "No configurado",
   "Notifications": "Notificaciones",
+  "RoomsActivityDescription": "Reciba notificaciones instantáneas por correo electrónico sobre nuevos archivos/carpetas compartidos y actividad dentro de su {{sectionName}}.",
+  "RoomUpdateNotify": "Contenido compartido y actividad de {{sectionName}}",
+  "SettingUpNotifications": "Configuración de notificaciones",
+  "SuccessConnected": "{{serviceName}} se ha conectado correctamente como canal de notificaciones. Ahora podrá recibir actualizaciones en ese canal.",
+  "SuccessDisconnected": "{{serviceName}} se ha desconectado correctamente como canal de notificaciones. Ya no se enviarán notificaciones a ese canal.",
   "UsefulTips": "Consejos útiles sobre {{productName}}",
   "UsefulTipsDescription": "Obtenga guías útiles sobre {{productName}}"
 }

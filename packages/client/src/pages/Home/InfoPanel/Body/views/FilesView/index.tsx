@@ -152,7 +152,7 @@ const FilesView = ({
     fetchMembers,
     fetchMoreMembers,
     changeUserRole,
-    setSearchValue,
+    handleSearchMembers,
     abortController: membersAbortController,
   } = useMembers({
     room: infoPanelRoomSelection!,
@@ -357,9 +357,9 @@ const FilesView = ({
     ? {
         isRoomMembersPanel,
         searchProps: {
-          setSearchValue,
+          setSearchValue: handleSearchMembers,
           resetSearch: () => {
-            setSearchValue("");
+            handleSearchMembers("");
           },
         },
       }

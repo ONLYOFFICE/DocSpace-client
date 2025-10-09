@@ -357,7 +357,6 @@ const FilesView = ({
     ? {
         isRoomMembersPanel,
         searchProps: {
-          searchValue,
           setSearchValue: handleSearchMembers,
           resetSearch: () => {
             handleSearchMembers("");

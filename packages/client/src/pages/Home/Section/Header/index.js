@@ -645,8 +645,20 @@ const SectionHeaderContent = (props) => {
       categoryType === CategoryType.Archive) &&
     !isCurrentRoom;
 
-  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
-  const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
+  const logo = getLogoUrl(
+    WhiteLabelLogoType.LightSmall,
+    !theme.isBase,
+    false,
+    "",
+    true,
+  );
+  const burgerLogo = getLogoUrl(
+    WhiteLabelLogoType.LeftMenu,
+    !theme.isBase,
+    false,
+    "",
+    true,
+  );
 
   const titleIconTooltip = getTitleIconTooltip();
 

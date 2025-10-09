@@ -184,6 +184,8 @@ const SectionHeaderContent = (props) => {
     setChangeNameVisible,
     getIcon,
     contactsTab,
+    isRootRooms,
+    isArchive,
   } = props;
 
   const location = useLocation();
@@ -436,7 +438,22 @@ const SectionHeaderContent = (props) => {
   const getTitleIcon = () => {
     if (sharedType) return SharedLinkSvgUrl;
 
-    if (navigationButtonIsVisible && !isPublicRoom) return PublicRoomIconUrl;
+    if (navigationButtonIsVisible && !isPublicRoom) {
+      const roomInPath = (
+        isArchive ? selectedFolder?.navigationPath : navigationPath
+      )?.find((item) => item.isRoom);
+
+      const isInsideRoom = !!roomInPath;
+      const isInPublicRoom = isInsideRoom && roomInPath?.shared;
+      const isShared = roomInPath?.shared || selectedFolder?.shared;
+
+      if (
+        isInPublicRoom ||
+        (isShared && (isArchive ? selectedFolder?.isRoom : isRoom))
+      ) {
+        return PublicRoomIconUrl;
+      } else if (!isRootRooms && !isArchive) return PublicRoomIconUrl;
+    }
 
     if (isLifetimeEnabled) return LifetimeRoomIconUrl;
 
@@ -628,8 +645,20 @@ const SectionHeaderContent = (props) => {
       categoryType === CategoryType.Archive) &&
     !isCurrentRoom;
 
-  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
-  const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
+  const logo = getLogoUrl(
+    WhiteLabelLogoType.LightSmall,
+    !theme.isBase,
+    false,
+    "",
+    true,
+  );
+  const burgerLogo = getLogoUrl(
+    WhiteLabelLogoType.LeftMenu,
+    !theme.isBase,
+    false,
+    "",
+    true,
+  );
 
   const titleIconTooltip = getTitleIconTooltip();
 
@@ -1013,16 +1042,15 @@ export default inject(
 
     const isArchive = rootFolderType === FolderType.Archive;
     const isTemplate = rootFolderType === FolderType.RoomTemplates;
+    const isRootRooms = rootFolderType === FolderType.Rooms;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
 
-    const showNavigationButton =
-      !security?.CopyLink ||
-      isPublicRoom ||
-      isArchive ||
-      isSharedWithMeFolderRoot
-        ? false
-        : security?.Read && isShared;
+    const showNavigationButton = !!((!security?.CopyLink && !isArchive) ||
+    isPublicRoom ||
+    isSharedWithMeFolderRoot
+      ? false
+      : security?.Read && isShared);
 
     const rootFolderId = navigationPath.length
       ? navigationPath[navigationPath.length - 1]?.id
@@ -1163,6 +1191,8 @@ export default inject(
       getIcon: filesStore.filesSettingsStore.getIcon,
 
       contactsTab,
+      isRootRooms,
+      isArchive,
     };
   },
 )(

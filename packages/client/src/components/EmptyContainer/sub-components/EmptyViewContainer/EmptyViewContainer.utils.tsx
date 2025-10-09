@@ -536,6 +536,17 @@ export const helperOptions = (
     };
   };
 
+  const createTemplateAccessOption = (title: string, description: string) => {
+    return {
+      title,
+      description,
+      icon: <InviteUserFormIcon />,
+      key: "template-access",
+      onClick: actions.onOpenAccessSettings,
+      disabled: !security?.EditAccess || isFrame,
+    };
+  };
+
   const createCreateFileOption = (
     title: string,
     description: string,
@@ -578,6 +589,7 @@ export const helperOptions = (
 
   return {
     createInviteOption,
+    createTemplateAccessOption,
     createCreateFileOption,
     createUploadFromDocSpace,
     createUploadFromDeviceOption,

@@ -35,7 +35,7 @@ export type TAgentTagsParams = {
 };
 
 export type TAgentIconParams = {
-  uploadedFile: string | null;
+  uploadedFile: File | string | null;
   tmpFile: string;
   x: number;
   y: number;

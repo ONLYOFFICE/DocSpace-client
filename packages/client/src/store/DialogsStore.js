@@ -254,6 +254,12 @@ class DialogsStore {
     onClose: null,
   };
 
+  editAgentDialogProps = {
+    visible: false,
+    item: null,
+    onClose: null,
+  };
+
   createPDFFormFileProps = {
     visible: false,
     file: null,
@@ -375,6 +381,10 @@ class DialogsStore {
 
   setCreateAgentDialogProps = (props) => {
     this.createAgentDialogProps = props;
+  };
+
+  setEditAgentDialogProps = (props) => {
+    this.editAgentDialogProps = props;
   };
 
   setInviteLanguage = (culture) => {

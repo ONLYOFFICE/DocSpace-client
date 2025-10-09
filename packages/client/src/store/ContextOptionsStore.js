@@ -891,6 +891,12 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
+  onClickEditAgent = (item) => {
+    const event = new Event(Events.AGENT_EDIT);
+    event.item = item;
+    window.dispatchEvent(event);
+  };
+
   onSaveAsTemplate = (item) => {
     const event = new Event(Events.SAVE_AS_TEMPLATE);
     event.item = item;
@@ -1939,6 +1945,14 @@ class ContextOptionsStore {
         icon: SettingsReactSvgUrl,
         onClick: () => this.onEditRoomTemplate(item),
         disabled: !isTemplateOwner,
+      },
+      {
+        id: "option_edit-agent",
+        key: "edit-agent",
+        label: t("Common:EditAgent"),
+        icon: SettingsReactSvgUrl,
+        onClick: () => this.onClickEditAgent(item),
+        disabled: false,
       },
       {
         id: "option_save-as-template",

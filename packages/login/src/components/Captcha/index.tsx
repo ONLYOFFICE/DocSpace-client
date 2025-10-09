@@ -55,7 +55,11 @@ const Captcha = ({
   captchaRef,
 }: CaptchaProps) => {
   return (
-    <div className={styles.captchaWrapper}>
+    <div
+      className={classNames(styles.captchaWrapper, {
+        [styles.isError]: isError,
+      })}
+    >
       <div
         className={classNames(styles.captchaContainer, {
           [styles.isError]: isError,

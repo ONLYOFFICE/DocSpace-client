@@ -39,8 +39,8 @@
     margin-bottom: 2px;
   }
 
-  p {
-    &.isError {
+  &.isError {
+    p {
       color: var(--login-captcha-error-color);
     }
   }

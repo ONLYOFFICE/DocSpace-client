@@ -152,7 +152,12 @@ export const useFeedTranslation = (
             i18nKey="HistoryRoomCreated"
             values={{ roomTitle: (feed.data as TFeedData).title }}
             components={{
-              1: <HistoryText title={(feed.data as TFeedData).title!} />,
+              1: (
+                <HistoryText
+                  key={(feed.data as TFeedData).title!}
+                  title={(feed.data as TFeedData).title!}
+                />
+              ),
             }}
           />
         );
@@ -164,7 +169,12 @@ export const useFeedTranslation = (
             i18nKey="HistoryRoomCopied"
             values={{ roomTitle: (feed.data as TFeedData).title }}
             components={{
-              1: <strong title={(feed.data as TFeedData).title} />,
+              1: (
+                <strong
+                  key={(feed.data as TFeedData).title}
+                  title={(feed.data as TFeedData).title}
+                />
+              ),
             }}
           />
         );
@@ -179,8 +189,18 @@ export const useFeedTranslation = (
               roomTitle: (feed.data as TFeedData).newTitle,
             }}
             components={{
-              1: <HistoryText title={(feed.data as TFeedData).oldTitle!} />,
-              2: <HistoryText title={(feed.data as TFeedData).newTitle!} />,
+              1: (
+                <HistoryText
+                  key={(feed.data as TFeedData).oldTitle!}
+                  title={(feed.data as TFeedData).oldTitle!}
+                />
+              ),
+              2: (
+                <HistoryText
+                  key={(feed.data as TFeedData).newTitle!}
+                  title={(feed.data as TFeedData).newTitle!}
+                />
+              ),
             }}
           />
         );
@@ -206,7 +226,7 @@ export const useFeedTranslation = (
               linkTitle: (feed.data as TFeedData).title,
               oldLinkTitle: (feed.data as TFeedData).oldTitle,
             }}
-            components={{ 1: <strong /> }}
+            components={{ 1: <strong key={(feed.data as TFeedData).title} /> }}
           />
         );
       case FeedActionKeys.RoomExternalLinkDeleted:
@@ -219,7 +239,12 @@ export const useFeedTranslation = (
               linkTitle: (feed.data as TFeedData).title,
             }}
             components={{
-              1: <strong title={(feed.data as TFeedData).title} />,
+              1: (
+                <strong
+                  key={(feed.data as TFeedData).title}
+                  title={(feed.data as TFeedData).title}
+                />
+              ),
             }}
           />
         );
@@ -237,6 +262,10 @@ export const useFeedTranslation = (
             components={{
               1: (
                 <strong
+                  key={
+                    (feed.data as TFeedData).title ||
+                    (feed.data as TFeedData).sharedTo?.title
+                  }
                   title={
                     (feed.data as TFeedData).title ||
                     (feed.data as TFeedData).sharedTo?.title
@@ -301,7 +330,7 @@ export const useFeedTranslation = (
             i18nKey="RoomLifeTimeSet"
             values={{ data }}
             components={{
-              1: <strong />,
+              1: <strong key={data} />,
             }}
           />
         );

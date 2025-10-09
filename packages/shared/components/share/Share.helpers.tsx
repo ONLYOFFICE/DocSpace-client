@@ -268,6 +268,13 @@ export const getDate = (expirationDate: string) => {
   return moment.duration(calculatedDate + 1, "days").humanize();
 };
 
+export const isExpired = (expirationDate: string | Date) => {
+  const currentDare = moment(new Date());
+  const expDate = moment(new Date(expirationDate));
+
+  return currentDare.unix() - expDate.unix() > 0;
+};
+
 export const getPasswordDescription = (t: TFunction, link: TFileLink) => {
   return link.sharedTo.password ? (
     <>&nbsp;{t("Common:RoomShareLinkPassword")}</>

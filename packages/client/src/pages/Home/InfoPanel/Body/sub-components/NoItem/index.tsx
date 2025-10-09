@@ -27,7 +27,8 @@
 import React from "react";
 
 import type { TRoom } from "@docspace/shared/api/rooms/types";
-import { WithFlag } from "@docspace/shared/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import type { WithFlag } from "@docspace/shared/types";
 
 import NoGalleryItem from "./NoGalleryItem";
 import NoRoomItem from "./NoRoomItem";
@@ -40,7 +41,6 @@ type SharedRoom = WithFlag<
   "isLockedSharedRoom",
   {
     isLockedSharedRoom: true;
-    infoPanelSelection: TRoom;
   }
 >;
 
@@ -52,6 +52,7 @@ type NoItemsProps = {
   isRooms?: boolean;
   isFiles?: boolean;
   isTemplatesRoom?: boolean;
+  infoPanelSelection?: TRoom | TFile | TFolder | null;
 } & SharedRoom;
 
 const NoItem = ({
@@ -99,7 +100,7 @@ const NoItem = ({
   }
 
   if (infoPanelSelection?.expired && infoPanelSelection?.external)
-    return <ExpiredItem />;
+    return <ExpiredItem infoPanelSelection={infoPanelSelection} />;
 
   if (prevNoItemsRef.current.isLockedSharedRoom)
     return <LockedItem item={infoPanelSelection!} />;

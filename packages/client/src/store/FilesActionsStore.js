@@ -2586,30 +2586,54 @@ class FilesActionStore {
 
   onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
 
-  isExpiredLinkAsync = async (item) => {
+  isExpiredLinkAsync = async (item, withLoader = false) => {
+    if (item.expired) return true;
+    if (!item.external || !item.requestToken) return false;
+
     const { clearActiveOperations } = this.uploadDataStore;
     const { addActiveItems } = this.filesStore;
 
     const { endLoader, startLoader } = createLoader();
 
     try {
-      startLoader(() =>
-        runInAction(() => {
-          this.setGroupMenuBlocked(true);
-          addActiveItems(null, [item.id]);
-        }),
-      );
+      if (withLoader)
+        startLoader(() =>
+          runInAction(() => {
+            this.setGroupMenuBlocked(true);
+            addActiveItems(null, [item.id]);
+          }),
+        );
 
       const response = await api.rooms.validatePublicRoomKey(item.requestToken);
 
       const isExpired = response.status === ValidationStatus.Expired;
-      if (isExpired) {
-        const foundFolder = this.filesStore.folders.find(
-          (folder) => folder.id === item.id,
-        );
 
-        if (foundFolder && !foundFolder.expired) {
-          foundFolder.expired = true;
+      if (isExpired) {
+        const items = isFileCheck(item)
+          ? this.filesStore.files
+          : this.filesStore.folders;
+
+        const foundItem = items.find((i) => i.id === item.id);
+
+        if (foundItem && !foundItem.expired) {
+          foundItem.expired = true;
+        }
+
+        const { selection, bufferSelection } = this.filesStore;
+
+        const selectedItem =
+          selection && selection.length === 1
+            ? selection[0]
+            : bufferSelection
+              ? bufferSelection
+              : null;
+
+        if (
+          selectedItem &&
+          selectedItem.id === item.id &&
+          !selectedItem.expired
+        ) {
+          selectedItem.expired = isExpired;
         }
       }
 
@@ -2618,12 +2642,13 @@ class FilesActionStore {
       console.log(error);
       return false;
     } finally {
-      endLoader(() =>
-        runInAction(() => {
-          this.setGroupMenuBlocked(false);
-          clearActiveOperations([], [item.id]);
-        }),
-      );
+      if (withLoader)
+        endLoader(() =>
+          runInAction(() => {
+            this.setGroupMenuBlocked(false);
+            clearActiveOperations([], [item.id]);
+          }),
+        );
     }
   };
 

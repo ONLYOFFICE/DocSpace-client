@@ -2630,12 +2630,25 @@ class FilesActionStore {
   openFileAction = async (item, t, e) => {
     if (
       item.external &&
-      (item.expired || (await this.isExpiredLinkAsync(item)))
-    )
-      return toastr.error(
-        t("Common:RoomLinkExpired"),
-        t("Common:RoomNotAvailable"),
-      );
+      (item.expired || (await this.isExpiredLinkAsync(item, true)))
+    ) {
+      const isFile = isFileCheck(item);
+      const isFolder = isFolderCheck(item);
+
+      const description = isFile
+        ? t("Common:FileLinkExpired")
+        : isFolder
+          ? t("Common:FolderLinkExpired")
+          : t("Common:RoomLinkExpired");
+
+      const title = isFile
+        ? t("Common:FileNotAvailable")
+        : isFolder
+          ? t("Common:FolderNotAvailable")
+          : t("Common:RoomNotAvailable");
+
+      return toastr.error(description, title);
+    }
 
     if (isLockedSharedRoom(item))
       return this.dialogsStore.setPasswordEntryDialog(true, item);

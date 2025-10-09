@@ -69,7 +69,7 @@ export const TextInputPure = (props: TextInputProps) => {
       {...rest}
       className={`${styles.textInput} ${className || ""}`}
       style={combinedStyle}
-      isAutoFocussed={isMobile && isIOS ? false : isAutoFocussed}
+      isAutoFocussed={isAutoFocussed}
       guide={guide}
       size={size}
       data-testid={testId ?? "text-input"}

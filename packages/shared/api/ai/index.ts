@@ -47,6 +47,9 @@ import {
   type TUpdateServer,
   type WebSearchConfig,
   type TAIConfig,
+  TAgent,
+  TCreateAgentData,
+  TEditAgentData,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -525,4 +528,30 @@ export const updateWebSearchConfig = async (
     toastr.error(e as string);
     throw e;
   }
+};
+
+export const createAIAgent = async (data: TCreateAgentData) => {
+  const res = await request({ method: "POST", url: `${baseUrl}/agents`, data });
+
+  return res as TAgent;
+};
+
+export const editAIAgent = async (id: TAgent["id"], data: TEditAgentData) => {
+  const res = await request({
+    method: "PUT",
+    url: `${baseUrl}/agents/${id}`,
+    data,
+  });
+
+  return res as TAgent;
+};
+
+export const getAIAgent = async (id: TAgent["id"]) => {
+  const res = await request({ method: "GET", url: `${baseUrl}/agents/${id}` });
+
+  return res as TAgent;
+};
+
+export const deleteAIAgent = async (id: TAgent["id"]) => {
+  await request({ method: "DELETE", url: `${baseUrl}/agents/${id}` });
 };

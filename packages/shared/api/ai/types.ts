@@ -192,3 +192,28 @@ export type TAIConfig = {
 };
 
 export type TAgent = TRoom;
+
+export type TAgentLogo = {
+  tmpFile: string;
+  height: number;
+  width: number;
+  x: number;
+  y: number;
+};
+
+export type TChatSettings = {
+  prompt: string;
+  providerId: TAiProvider["id"];
+  modelId: TModel["modelId"];
+};
+
+export type TCreateAgentData = {
+  title: string;
+  cover?: string;
+  color?: string;
+  tags?: string[];
+  logo?: TAgentLogo;
+  chatSettings: TChatSettings;
+};
+
+export type TEditAgentData = Partial<TCreateAgentData>;

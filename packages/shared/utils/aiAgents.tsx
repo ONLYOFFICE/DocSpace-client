@@ -52,7 +52,6 @@ export type TAgentParams = {
   icon: TAgentIconParams;
   withCover: boolean;
   previewIcon: string | null;
-  denyDownload?: boolean;
   isAvailable?: boolean;
   logo?: unknown;
   iconWasUpdated?: boolean;
@@ -100,7 +99,6 @@ export const getFetchedAgentParams = (item: TAgent): TAgentParams => {
     previewIcon: null,
     agentOwner: item.createdBy,
     canChangeAgentOwner: item?.security?.ChangeOwner || false,
-    denyDownload: item.denyDownload,
     prompt: item.chatSettings?.prompt,
     providerId: item.chatSettings?.providerId,
     modelId: item.chatSettings?.modelId,

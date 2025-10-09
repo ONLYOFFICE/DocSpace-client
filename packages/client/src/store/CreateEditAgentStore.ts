@@ -152,11 +152,9 @@ class CreateEditRoomStore {
     const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore!;
     // const { changeRoomOwner } = this.filesActionsStore!;
 
-    const { denyDownload, title, icon, agentId, prompt, providerId, modelId } =
-      newParams;
+    const { title, icon, agentId, prompt, providerId, modelId } = newParams;
 
     const isTitleChanged = !isEqual(title, agent.title);
-    const isDenyDownloadChanged = denyDownload !== agent.denyDownload;
     // const isOwnerChanged = roomOwner && roomOwner.id !== agent.createdBy.id;
 
     const tags = newParams.tags.map((tag) => tag.name);
@@ -167,9 +165,6 @@ class CreateEditRoomStore {
     const editAgentParams = {
       ...(isTitleChanged && {
         title: title || t("Common:NewRoom"),
-      }),
-      ...(isDenyDownloadChanged && {
-        denyDownload,
       }),
       ...(isTagsChanged && {
         tags,
@@ -276,17 +271,8 @@ class CreateEditRoomStore {
       console.log("Create Agent", agentParams);
     };
 
-    const {
-      denyDownload,
-      tags,
-      title,
-      icon,
-      agentId,
-      logo,
-      prompt,
-      providerId,
-      modelId,
-    } = agentParams;
+    const { tags, title, icon, logo, prompt, providerId, modelId } =
+      agentParams;
 
     const tagsToAddList = tags.map((tag) => tag.name);
 
@@ -301,12 +287,10 @@ class CreateEditRoomStore {
             color: (logo as { color: string }).color,
           }
         : null;
+
     const createAgentData = {
-      agentId,
       title: title || t("Common:NewRoom"),
       ...logoCover,
-
-      denyDownload,
 
       ...(tagsToAddList.length && {
         tags: tagsToAddList,

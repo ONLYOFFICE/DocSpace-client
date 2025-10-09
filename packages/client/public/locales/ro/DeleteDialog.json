@@ -1,8 +1,8 @@
 {
   "DeleteAllGroupDescription": "Grupurile selectate vor fi șterse. Utilizatorii care fac parte din grupurile nu vor fi eliminați din {{productName}}. Sigur doriţi să continuați?",
   "DeleteAllGroupsTitle": "Ștergere grup",
-  "DeleteFiles": "Sunteți pe cale să mutați <strong>fișiere ({{filesCount}})</strong> în Coșul de gunoi.",
-  "DeleteFilesAndFolders": "Sunteți pe cale să ștergeți <strong>fișiere ({{filesCount}})</strong> și <strong>dosare ({{foldersCount}})</strong> și să le mutați în Coșul de gunoi.",
+  "DeleteFiles": "Sunteți pe cale să mutați <strong>fișiere ({{filesCount}})</strong> în {{trashSection}}.",
+  "DeleteFilesAndFolders": "Sunteți pe cale să ștergeți <strong>fișiere ({{filesCount}})</strong> și <strong>dosare ({{foldersCount}})</strong> și să le mutați în {{trashSection}}.",
   "DeleteFolders": "Sunteți pe cale să mutați <strong>dosare ({{foldersCount}})</strong> în  {{trashSection}} de gunoi.",
   "DeleteGroupDescription": "Grupul {{groupName}} va fi șters. Utilizatorii care fac parte din acest grup nu vor fi eliminați din {{productName}}. Sigur doriţi să continuați?",
   "DeleteGroupTitle": "Ștergere grup",

@@ -483,7 +483,6 @@
   "LinkCopySuccess": "Încărcarea fișierului media eșuată",
   "LinkCopySuccessWithCustomFilter": "Link-ul către fișierul cu <strong>Filtru particularizat</strong> activ a fost copiat cu succes în clipboard.",
   "LinkDoesNotExist": "Lunk-ul pe care încercați să-l deschideți nu există.",
-  "LinkExpirationDate": "Linkul <1>fără dată de expirare</1>",
   "LinkExpireAfter": "Link-ul expiră după data <1>{{date}} </1>",
   "LinkExpired": "Link-ul a expirat.",
   "LinkHasExpired": "Linkul pe care l-ați urmat a expirat.",

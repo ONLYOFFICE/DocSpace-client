@@ -34,7 +34,6 @@
   "SuccessReactivate": "Ihr Konto wurde erfolgreich wieder aktiviert. In 10 Sekunden werden Sie zum <1>Portal</1> weitergeleitet.",
   "SuccessRemoved": "Ihr Konto wurde erfolgreich entfernt. In 10 Sekunden werden Sie auf die <1>Seite</1> weitergeleitet.",
   "TermsAndConditions": "Indem Sie fortfahren, bestätigen Sie, dass Sie unsere <1>Allgemeinen Geschäftsbedingungen</1> und <2>Datenschutzerklärung</2> verstanden haben und damit einverstanden sind.",
-  "TfaSubTitle": "Verwenden Sie eine kompatible App wie Google Authenticator für <1>Android</1> und <4>iOS</4> oder Authenticator für <8>Windows Phone</8>.",
   "TfaTitle": "Zwei-Faktor-Authentifizierung für sicheren Zugriff aktiviert",
   "VerifyConnection": "Verbindung bestätigen",
   "VerifyConnectionDescription": "Geben Sie den von Ihrer Authentifizierungs-App generierten sechsstelligen Code in das Feld unten ein, um die Einrichtung abzuschließen."

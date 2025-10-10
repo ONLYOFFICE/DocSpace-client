@@ -123,7 +123,9 @@ const InfoPanelBodyContent = ({
   const isSeveralItems = Array.isArray(selection) && selection.length > 1;
   const isNoItem =
     !selection ||
-    (!Array.isArray(selection) && selection.expired && selection.external) ||
+    (!Array.isArray(selection) &&
+      selection.isLinkExpired &&
+      selection.external) ||
     isLockedSharedRoom ||
     (isRoot && !isGallery);
 

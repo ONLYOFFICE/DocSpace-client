@@ -137,7 +137,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
   const getExpirationLinkDateTooltipContent = () => {
     if (
       item.external &&
-      (item.expired === true ||
+      (item.isLinkExpired ||
         (expirationLinkDate && isExpired(expirationLinkDate)))
     )
       return (

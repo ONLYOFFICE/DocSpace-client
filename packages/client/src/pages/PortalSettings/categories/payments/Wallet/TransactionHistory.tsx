@@ -536,7 +536,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
               minDate={
                 isFilterDialogVisible ? mobileFilterState.startDate : startDate
               }
-              maxDate={undefined}
+              maxDate={initialState.endDate}
               outerDate={
                 isFilterDialogVisible ? mobileFilterState.endDate : endDate
               }

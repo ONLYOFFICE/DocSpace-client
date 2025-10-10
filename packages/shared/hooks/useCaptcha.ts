@@ -24,127 +24,75 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useRef, useCallback, useEffect } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
-import HCaptcha from "@hcaptcha/react-hcaptcha";
+import { useState, useCallback, useEffect } from "react";
 
 import { RecaptchaType } from "../enums";
-import { captchaManager } from "../utils/captchaManager";
 
 type UseCaptchaOptions = {
   publicKey?: string;
   type?: RecaptchaType;
-  enabled?: boolean;
-  id?: string;
+  initiallyVisible?: boolean;
 };
 
 type UseCaptchaReturn = {
   isVisible: boolean;
   isError: boolean;
-  isSuccessful: boolean;
-  captchaRef: React.RefObject<ReCAPTCHA | null>;
-  hCaptchaRef: React.RefObject<HCaptcha | null>;
-  show: () => void;
-  hide: () => void;
+  token: string | null;
+  shouldRender: boolean;
+  captchaType?: RecaptchaType;
+  request: () => void;
+  dismiss: () => void;
   reset: () => void;
-  getToken: () => string | null | undefined;
-  onSuccess: (token?: string) => void;
-  setError: (error: boolean) => void;
-
-  validateBeforeSubmit: () => { isValid: boolean; token?: string | null };
+  validate: () => {
+    isValid: boolean;
+    token?: string | null;
+  };
+  onTokenChange: (token: string | null) => void;
+  resetSignal: number;
 };
 
 export const useCaptcha = ({
   publicKey,
   type,
-  enabled = false,
-  id = "default",
+  initiallyVisible = false,
 }: UseCaptchaOptions = {}): UseCaptchaReturn => {
-  const [isVisible, setIsVisible] = useState(enabled);
+  const [isVisible, setIsVisible] = useState(
+    Boolean(publicKey && initiallyVisible),
+  );
   const [isError, setIsError] = useState(false);
-  const [isSuccessful, setIsSuccessful] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [resetSignal, setResetSignal] = useState(0);
 
-  const captchaRef = useRef<ReCAPTCHA>(null);
-  const hCaptchaRef = useRef<HCaptcha>(null);
-  const showTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const request = useCallback(() => {
+    if (!publicKey) return;
 
-  const isHCaptcha = type === RecaptchaType.hCaptcha;
-
-  const getToken = useCallback((): string | null | undefined => {
-    if (!publicKey || !isVisible) return undefined;
-
-    if (isHCaptcha) {
-      return captchaToken;
-    }
-
-    return captchaRef.current?.getValue();
-  }, [publicKey, isVisible, isHCaptcha, captchaToken]);
-
-  const reset = useCallback(() => {
+    setIsVisible(true);
     setIsError(false);
-    setIsSuccessful(false);
     setCaptchaToken(null);
+    setResetSignal((value) => value + 1);
+  }, [publicKey]);
 
-    if (isHCaptcha) {
-      hCaptchaRef.current?.resetCaptcha?.();
-    } else {
-      captchaRef.current?.reset?.();
-    }
-  }, [isHCaptcha]);
-
-  const hideInternal = useCallback(() => {
-    if (showTimeoutRef.current) {
-      clearTimeout(showTimeoutRef.current);
-      showTimeoutRef.current = null;
-    }
+  const dismiss = useCallback(() => {
+    if (!isVisible) return;
 
     setIsVisible(false);
     setIsError(false);
-    setIsSuccessful(false);
     setCaptchaToken(null);
+    setResetSignal((value) => value + 1);
+  }, [isVisible]);
 
-    if (isHCaptcha) {
-      hCaptchaRef.current?.resetCaptcha?.();
-    } else {
-      captchaRef.current?.reset?.();
-    }
-  }, [isHCaptcha]);
-
-  const hide = useCallback(() => {
-    captchaManager.notifyHide(id);
-    hideInternal();
-  }, [hideInternal, id]);
-
-  const show = useCallback(() => {
-    if (showTimeoutRef.current) {
-      clearTimeout(showTimeoutRef.current);
-    }
-
-    captchaManager.requestShow(id, hideInternal);
-
-    showTimeoutRef.current = setTimeout(() => {
-      showTimeoutRef.current = null;
-      setIsVisible(true);
-      setIsError(false);
-      setIsSuccessful(false);
-      setCaptchaToken(null);
-    }, 150);
-  }, [id, hideInternal]);
-
-  const onSuccess = useCallback((token?: string) => {
-    setIsSuccessful(true);
+  const reset = useCallback(() => {
     setIsError(false);
-    if (token) {
-      setCaptchaToken(token);
-    }
+    setCaptchaToken(null);
+    setResetSignal((value) => value + 1);
   }, []);
 
-  const setError = useCallback((error: boolean) => {
-    setIsError(error);
+  const onTokenChange = useCallback((token: string | null) => {
+    setCaptchaToken(token ?? null);
+    setIsError(false);
   }, []);
 
-  const validateBeforeSubmit = useCallback((): {
+  const validate = useCallback((): {
     isValid: boolean;
     token?: string | null;
   } => {
@@ -152,49 +100,40 @@ export const useCaptcha = ({
       return { isValid: true };
     }
 
-    if (!isSuccessful) {
+    if (!captchaToken) {
       setIsError(true);
       return { isValid: false };
     }
 
-    const token = getToken();
+    return { isValid: true, token: captchaToken };
+  }, [captchaToken, isVisible, publicKey]);
 
-    if (!isHCaptcha && token) {
+  useEffect(() => {
+    if (!publicKey) {
+      setIsVisible(false);
+      setCaptchaToken(null);
       setIsError(false);
     }
-
-    return {
-      isValid: true,
-      token,
-    };
-  }, [publicKey, isVisible, isSuccessful, getToken, isHCaptcha]);
+  }, [publicKey]);
 
   useEffect(() => {
     if (!isVisible) {
-      reset();
+      setCaptchaToken(null);
+      setIsError(false);
     }
-  }, [isVisible, reset]);
-
-  useEffect(() => {
-    return () => {
-      if (showTimeoutRef.current) {
-        clearTimeout(showTimeoutRef.current);
-      }
-    };
-  }, []);
+  }, [isVisible]);
 
   return {
     isVisible,
     isError,
-    isSuccessful,
-    captchaRef,
-    hCaptchaRef,
-    show,
-    hide,
+    token: captchaToken,
+    shouldRender: Boolean(publicKey && isVisible),
+    captchaType: type,
+    request,
+    dismiss,
     reset,
-    getToken,
-    onSuccess,
-    setError,
-    validateBeforeSubmit,
+    validate,
+    onTokenChange,
+    resetSignal,
   };
 };

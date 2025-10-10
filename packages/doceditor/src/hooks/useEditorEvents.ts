@@ -76,7 +76,7 @@ import {
   THistoryData,
   UseEventsProps,
 } from "@/types";
-import { onSDKInfo, type TInfoEvent } from "@/utils/events";
+import { onSDKInfo } from "@/utils/events";
 
 let docEditor: TDocEditor | null = null;
 

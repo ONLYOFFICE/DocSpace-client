@@ -67,23 +67,11 @@ const ForgotPasswordModalDialog = ({
   const captcha = useCaptcha({
     publicKey: reCaptchaPublicKey,
     type: reCaptchaType,
-    enabled: false,
-    id: "forgot-password-modal",
   });
-
-  const onCaptchaSuccess = React.useCallback(
-    (token?: string) => {
-      captcha.onSuccess(token);
-    },
-    [captcha],
-  );
 
   React.useEffect(() => {
     if (!isVisible) {
-      if (captcha.isVisible) {
-        captcha.hide();
-        captcha.reset();
-      }
+      captcha.dismiss();
       setEmailError(false);
       setIsShowError(false);
       setErrorText("");
@@ -102,7 +90,7 @@ const ForgotPasswordModalDialog = ({
       setEmailError(true);
       setIsShowError(true);
     } else {
-      const captchaValidation = captcha.validateBeforeSubmit();
+      const captchaValidation = captcha.validate();
       if (!captchaValidation.isValid) {
         return;
       }
@@ -141,7 +129,7 @@ const ForgotPasswordModalDialog = ({
           typeof error === "object" ? error?.response?.status : undefined;
 
         if (reCaptchaPublicKey && status === 403) {
-          captcha.show();
+          captcha.request();
         } else if (captcha.isVisible) {
           captcha.reset();
         }
@@ -233,17 +221,17 @@ const ForgotPasswordModalDialog = ({
               onBlur={onBlurEmail}
             />
           </FieldContainer>
-          {reCaptchaPublicKey && captcha.isVisible ? (
+          {captcha.shouldRender ? (
             <Captcha
               key="forgot-password-captcha"
-              type={reCaptchaType}
+              type={captcha.captchaType}
               publicKey={reCaptchaPublicKey}
-              theme={theme}
-              isError={captcha.isError}
+              themeMode={theme.isBase ? "light" : "dark"}
+              visible={captcha.isVisible}
+              hasError={captcha.isError}
               errorText={t("Errors:LoginWithBruteForceCaptcha")}
-              onSuccessfullyComplete={onCaptchaSuccess}
-              reCaptchaRef={captcha.captchaRef}
-              hCaptchaRef={captcha.hCaptchaRef}
+              onTokenChange={captcha.onTokenChange}
+              resetSignal={captcha.resetSignal}
             />
           ) : null}
         </ModalDialogContainer>

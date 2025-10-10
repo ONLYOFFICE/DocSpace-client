@@ -133,8 +133,6 @@ const LoginForm = ({
   const captcha = useCaptcha({
     publicKey: reCaptchaPublicKey,
     type: reCaptchaType,
-    enabled: false,
-    id: "login-form",
   });
 
   useLayoutEffect(() => {
@@ -208,8 +206,7 @@ const LoginForm = ({
 
   useEffect(() => {
     if (isModalOpen) {
-      captcha.hide();
-      captcha.reset();
+      captcha.dismiss();
     }
   }, [isModalOpen, captcha]);
 
@@ -264,7 +261,7 @@ const LoginForm = ({
   };
 
   const onSubmit = useCallback(async () => {
-    const captchaValidation = captcha.validateBeforeSubmit();
+    const captchaValidation = captcha.validate();
     if (!captchaValidation.isValid) {
       return;
     }
@@ -343,7 +340,7 @@ const LoginForm = ({
           reCaptchaPublicKey &&
           (error as { response: { status: number } })?.response?.status === 403
         ) {
-          captcha.show();
+          captcha.request();
         } else if (captcha.isVisible) {
           captcha.reset();
         }
@@ -468,7 +465,7 @@ const LoginForm = ({
         }
 
         if (reCaptchaPublicKey && error?.response?.status === 403) {
-          captcha.show();
+          captcha.request();
         } else if (captcha.isVisible) {
           captcha.reset();
         }
@@ -521,10 +518,6 @@ const LoginForm = ({
 
   const onChangeLdapLoginCheckbox = () =>
     setIsLdapLoginChecked(!isLdapLoginChecked);
-
-  const onCaptchaSuccess = (token?: string) => {
-    captcha.onSuccess(token);
-  };
 
   const errorMessage = () => {
     if (!password.trim()) {
@@ -622,17 +615,17 @@ const LoginForm = ({
         />
       ) : null}
 
-      {reCaptchaPublicKey && captcha.isVisible && !isModalOpen ? (
+      {!isModalOpen && captcha.shouldRender ? (
         <Captcha
           key="login-form-captcha"
-          type={reCaptchaType}
+          type={captcha.captchaType}
           publicKey={reCaptchaPublicKey}
-          theme={theme}
-          isError={captcha.isError}
+          themeMode={theme.isBase ? "light" : "dark"}
+          visible={captcha.isVisible}
+          hasError={captcha.isError}
           errorText={t("Errors:LoginWithBruteForceCaptcha")}
-          onSuccessfullyComplete={onCaptchaSuccess}
-          reCaptchaRef={captcha.captchaRef}
-          hCaptchaRef={captcha.hCaptchaRef}
+          onTokenChange={captcha.onTokenChange}
+          resetSignal={captcha.resetSignal}
         />
       ) : null}
       <Button

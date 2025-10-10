@@ -78,46 +78,9 @@ class AxiosClient {
 
   client: AxiosInstance | null = null;
 
-  isAuthenticated: boolean | null = null;
-
   constructor() {
     if (typeof window !== "undefined") this.initCSR();
   }
-
-  getResponsePathname = (response: AxiosResponse) => {
-    try {
-      const baseUrl = response.config.baseURL;
-      const requestUrl = response.config.url; // Get the full URL from the request config
-
-      if (!baseUrl || !requestUrl) return null;
-
-      const urlObject = new URL(requestUrl, baseUrl);
-      const pathname = urlObject.pathname; // Extract the pathname
-
-      return pathname;
-    } catch {
-      return null;
-    }
-  };
-
-  getRequestToken = () => {
-    if (typeof window === "undefined") return null;
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const publicRoomKey = urlParams.get("key") || urlParams.get("share");
-
-    if (!publicRoomKey) return null;
-
-    const shouldAttachRequestToken = !this.isAuthenticated; // attach Request-Token header only for unauthenticated users
-
-    // console.log("getRequestToken", {
-    //   shouldAttachRequestToken,
-    //   isAuthenticated: this.isAuthenticated,
-    //   publicRoomKey,
-    // });
-
-    return shouldAttachRequestToken ? publicRoomKey : null;
-  };
 
   initCSR = () => {
     this.isSSR = false;
@@ -132,6 +95,12 @@ class AxiosClient {
       headers = {
         "Access-Control-Allow-Credentials": "true",
       };
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const publicRoomKey = urlParams.get("key") || urlParams.get("share");
+    if (publicRoomKey) {
+      headers = { ...headers, "Request-Token": publicRoomKey };
     }
 
     const apiBaseURL = combineUrl(origin, proxy, prefix);
@@ -161,21 +130,6 @@ class AxiosClient {
     });
 
     this.client = axios.create(apxiosConfig);
-
-    this.client.interceptors.request.use(
-      (config: InternalAxiosRequestConfig) => {
-        if (typeof window === "undefined") return config;
-
-        const requestToken = this.getRequestToken(); // get Token from Public Room URL
-
-        if (requestToken) {
-          config.headers = config.headers || {};
-          config.headers["Request-Token"] = requestToken;
-        }
-
-        return config;
-      },
-    );
   };
 
   initSSR = (headersParam: Record<string, string>) => {
@@ -258,12 +212,6 @@ class AxiosClient {
         ("isAxiosError" in response && response.isAxiosError)
       )
         return null;
-
-      if (this.getResponsePathname(response) === "/settings") {
-        this.isAuthenticated =
-          response?.data?.response?.ownerId !==
-          "00000000-0000-0000-0000-000000000000";
-      }
 
       if (
         response.data &&

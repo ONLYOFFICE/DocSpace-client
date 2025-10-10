@@ -90,10 +90,8 @@ const Members = ({
   setExternalLink,
 
   isMembersPanelUpdating,
-  setPublicRoomKey,
   setAccessSettingsIsVisible,
   templateAvailable,
-  isRootFolder,
 }: MembersProps) => {
   const { t } = useTranslation([
     "InfoPanel",
@@ -104,8 +102,6 @@ const Members = ({
     "Settings",
     "CreateEditRoomDialog",
   ]);
-
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const { showLoading } = useLoader({
     isFirstLoading,
@@ -123,14 +119,14 @@ const Members = ({
       try {
         const link = await createExternalLink(roomId);
 
-        setExternalLink!(link, searchParams, setSearchParams, isCustomRoom);
+        setExternalLink!(link);
       } catch (error) {
         toastr.error(error as Error);
         console.error(error);
       }
     } else {
       getPrimaryLink!(infoPanelSelection!.id).then((link) => {
-        setExternalLink!(link, searchParams, setSearchParams, isCustomRoom);
+        setExternalLink!(link);
 
         const typeLink = link as {
           sharedTo: { shareLink: string; requestToken: string };
@@ -141,16 +137,6 @@ const Members = ({
         copyShareLink(shareLink);
 
         toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
-
-        const filterObj = FilesFilter.getFilter(window.location);
-
-        if (isPublicRoomType && filterObj && !filterObj.key && !isRootFolder) {
-          setPublicRoomKey!(typeLink.sharedTo.requestToken);
-          setSearchParams((prev) => {
-            prev.set("key", typeLink.sharedTo.requestToken);
-            return prev;
-          });
-        }
       });
     }
   };

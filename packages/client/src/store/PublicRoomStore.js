@@ -186,11 +186,7 @@ class PublicRoomStore {
     this.externalLinks = externalLinks;
   };
 
-  setPublicRoomKey = (key) => {
-    this.publicRoomKey = key;
-  };
-
-  setExternalLink = (link, searchParams, setSearchParams, isCustomRoom) => {
+  setExternalLink = (link) => {
     const linkIndex = this.externalLinks.findIndex(
       (l) => l.sharedTo.id === link.sharedTo.id,
     );
@@ -201,10 +197,6 @@ class PublicRoomStore {
       this.externalLinks = externalLinks;
     } else {
       externalLinks[linkIndex] = link;
-    }
-
-    if (isCustomRoom && searchParams && setSearchParams) {
-      this.updateUrlKeyForCustomRoom(searchParams, setSearchParams);
     }
   };
 
@@ -258,7 +250,6 @@ class PublicRoomStore {
     const url = getCategoryUrl(categoryType);
 
     filter.folder = subFolder || res.id;
-    filter.key = key;
 
     window.location.replace(`${url}?${filter.toUrlParams()}`);
   };
@@ -279,24 +270,19 @@ class PublicRoomStore {
     api.rooms
       .validatePublicRoomKey(key, params)
       .then((res) => {
-        runInAction(() => {
-          this.publicRoomKey = key;
-        });
-
         const needPassword = res.status === ValidationStatus.Password;
 
-        const currentUrl = window.location.href;
+        if (res?.shared && !needPassword) {
+          return this.gotoFolder(res);
+        }
 
-        const isNotRoomsSection = !currentUrl.includes("/rooms/shared");
-
-        if (
-          !needPassword &&
-          isNotRoomsSection &&
-          (res?.shared || res?.isAuthenticated)
-        ) {
+        if (res?.isAuthenticated && !needPassword) {
           return this.gotoFolder(res, key);
         }
 
+        runInAction(() => {
+          this.publicRoomKey = key;
+        });
         this.setRoomData(res);
       })
       .finally(() => this.setIsLoading(false));
@@ -343,29 +329,6 @@ class PublicRoomStore {
     if (isAuth) {
       localStorage.removeItem(PUBLIC_STORAGE_KEY);
       window.location.reload();
-    }
-  };
-
-  updateUrlKeyForCustomRoom = (searchParams, setSearchParams) => {
-    const primaryLink = this.primaryLink;
-
-    if (primaryLink) {
-      this.setPublicRoomKey(primaryLink.sharedTo.requestToken);
-      setSearchParams((prev) => {
-        prev.set("key", primaryLink.sharedTo.requestToken);
-        return prev;
-      });
-    } else if (this.roomLinks.length > 0) {
-      const firstAvailableLink = this.roomLinks[0];
-      this.setPublicRoomKey(firstAvailableLink.sharedTo.requestToken);
-      setSearchParams((prev) => {
-        prev.set("key", firstAvailableLink.sharedTo.requestToken);
-        return prev;
-      });
-    } else {
-      this.setPublicRoomKey(null);
-      searchParams.delete("key");
-      setSearchParams(searchParams);
     }
   };
 

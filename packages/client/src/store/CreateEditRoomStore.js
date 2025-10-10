@@ -665,7 +665,6 @@ class CreateEditRoomStore {
   onOpenNewRoom = async (room) => {
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
     const { setSelection } = this.filesStore;
-    const { getPublicKey } = this.filesActionsStore;
 
     const state = {
       isRoot: false,
@@ -677,14 +676,6 @@ class CreateEditRoomStore {
 
     const newFilter = FilesFilter.getDefault();
     newFilter.folder = room.id;
-
-    if (
-      room.roomType === RoomsType.PublicRoom ||
-      room.roomType === RoomsType.FormRoom
-    ) {
-      const shareKey = await getPublicKey({ ...room, shared: true });
-      if (shareKey) newFilter.key = shareKey;
-    }
 
     setIsSectionBodyLoading(true);
 

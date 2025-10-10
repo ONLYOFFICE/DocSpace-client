@@ -1667,8 +1667,6 @@ class FilesActionStore {
     const filter = FilesFilter.getDefault();
 
     filter.folder = id;
-    const shareKey = await this.getPublicKey(item);
-    if (shareKey) filter.key = shareKey;
 
     if (isRoom || isTemplate) {
       if (this.userStore.user?.id) {
@@ -1750,23 +1748,6 @@ class FilesActionStore {
 
     newFilter.search = title;
     newFilter.folder = parentId;
-
-    let publicKey;
-    if (item.toFolderId || item.folderId || item.parentId) {
-      const newFolder = await this.filesStore.getFolderInfo(parentId);
-      publicKey = await this.getPublicKey({
-        ...newFolder,
-        updatePublicKey: true,
-      });
-    } else {
-      publicKey = await this.getPublicKey({
-        ...item,
-        id: selectedFolderId,
-        shared,
-        rootFolderType,
-      });
-    }
-    if (publicKey) newFilter.key = publicKey;
 
     setIsLoading(
       window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||
@@ -2724,7 +2705,6 @@ class FilesActionStore {
         this.userStore.user?.id,
         roomType,
         currentTitle,
-        this.getPublicKey,
       );
 
       if (openingNewTab(url, e)) return;
@@ -3005,12 +2985,6 @@ class FilesActionStore {
     filter.sortOrder = filterObj.sortOrder;
 
     filter.folder = id;
-
-    if (!this.selectedFolderStore.isRootFolder && navigationPath[0]?.shared) {
-      const currentFolder = await this.filesStore.getFolderInfo(id);
-      const shareKey = await this.getPublicKey(currentFolder);
-      if (shareKey) filter.key = shareKey;
-    }
 
     const categoryType = getCategoryType(window.DocSpace.location);
     const path = getCategoryUrl(categoryType, id);
@@ -3523,14 +3497,10 @@ class FilesActionStore {
   };
 
   getPublicKey = async (folder) => {
-    if (
-      folder.shared &&
-      folder?.rootFolderType === FolderType.Rooms &&
-      !isSystemFolder(folder?.type)
-    ) {
+    if (folder.shared) {
       const filterObj = FilesFilter.getFilter(window.location);
 
-      if (filterObj?.key && !folder.updatePublicKey) {
+      if (filterObj?.key) {
         return filterObj.key;
       }
 

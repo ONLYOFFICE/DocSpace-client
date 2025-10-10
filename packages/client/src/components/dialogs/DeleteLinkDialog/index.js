@@ -33,9 +33,7 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 
-import api from "@docspace/shared/api";
 import { RoomsType } from "@docspace/shared/enums";
-import FilesFilter from "@docspace/shared/api/files/filter";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
 import { withTranslation } from "react-i18next";
@@ -78,39 +76,6 @@ const DeleteLinkDialogComponent = (props) => {
         if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {
           toastr.success(t("Common:GeneralLinkRevokedAndCreatedSuccessfully"));
         } else toastr.success(t("Files:LinkDeletedSuccessfully"));
-
-        const filterObj = FilesFilter.getFilter(window.location);
-
-        return api.rooms
-          .getRoomMembers(item.id, { filterType: 2 })
-          .then((updatedLinks) => {
-            const primaryLink = updatedLinks.items.find(
-              (updatedLink) => updatedLink.sharedTo.primary,
-            );
-
-            if (
-              link.sharedTo.primary &&
-              (isPublicRoomType || isFormRoom) &&
-              !isRootFolder
-            ) {
-              if (
-                primaryLink &&
-                filterObj.key !== primaryLink.sharedTo.requestToken
-              ) {
-                setPublicRoomKey(primaryLink.sharedTo.requestToken);
-                setSearchParams((prev) => {
-                  prev.set("key", primaryLink.sharedTo.requestToken);
-                  return prev;
-                });
-              }
-            }
-
-            if (isCustomRoom && filterObj.key) {
-              updateUrlKeyForCustomRoom(searchParams, setSearchParams);
-            }
-
-            return res;
-          });
       })
       .catch((err) => {
         console.log(err);

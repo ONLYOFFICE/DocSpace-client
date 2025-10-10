@@ -41,8 +41,9 @@ type CaptchaProps = {
   theme: { isBase: boolean };
   isError: boolean;
   errorText: string;
-  onSuccessfullyComplete: () => void;
-  captchaRef: React.RefObject<ReCAPTCHA | HCaptcha | null>;
+  onSuccessfullyComplete: (token?: string) => void;
+  reCaptchaRef?: React.RefObject<ReCAPTCHA | null>;
+  hCaptchaRef?: React.RefObject<HCaptcha | null>;
 };
 
 const Captcha = ({
@@ -52,8 +53,11 @@ const Captcha = ({
   isError,
   errorText,
   onSuccessfullyComplete,
-  captchaRef,
+  reCaptchaRef,
+  hCaptchaRef,
 }: CaptchaProps) => {
+  const isHCaptcha = type === RecaptchaType.hCaptcha;
+
   return (
     <div
       className={classNames(styles.captchaWrapper, {
@@ -65,19 +69,19 @@ const Captcha = ({
           [styles.isError]: isError,
         })}
       >
-        {type === RecaptchaType.hCaptcha ? (
+        {isHCaptcha ? (
           <HCaptcha
             sitekey={publicKey}
-            ref={captchaRef as React.RefObject<HCaptcha>}
-            onVerify={onSuccessfullyComplete}
+            ref={hCaptchaRef}
+            onVerify={(token) => onSuccessfullyComplete(token)}
             theme={theme.isBase ? "light" : "dark"}
           />
         ) : (
           <ReCAPTCHA
             sitekey={publicKey}
-            ref={captchaRef as React.RefObject<ReCAPTCHA>}
+            ref={reCaptchaRef}
             theme={theme.isBase ? "light" : "dark"}
-            onChange={onSuccessfullyComplete}
+            onChange={(token) => onSuccessfullyComplete(token ?? undefined)}
           />
         )}
       </div>

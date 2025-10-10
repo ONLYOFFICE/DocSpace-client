@@ -313,7 +313,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
 
           {!isRoom(item) &&
           item?.isFavorite &&
-          !isRecentFolder &&
           !isPublicRoom &&
           !isTrashFolder ? (
             <IconButton

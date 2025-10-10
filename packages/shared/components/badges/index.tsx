@@ -544,12 +544,7 @@ const Badges = ({
       ) : null}
       {showNew && isTile && !isRoom ? newFilesBadge : null}
 
-      {isFolder &&
-      isTile &&
-      isFavorite &&
-      !isRecentFolder &&
-      !isPublicRoom &&
-      !isTrashFolder ? (
+      {isFolder && isTile && isFavorite && !isPublicRoom && !isTrashFolder ? (
         <IconButton
           iconName={FavoriteFillReactSvgUrl}
           className={classNames("badge icons-group")}

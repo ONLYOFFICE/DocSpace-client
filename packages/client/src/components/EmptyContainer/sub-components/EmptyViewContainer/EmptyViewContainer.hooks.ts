@@ -156,6 +156,8 @@ export const useOptions = (
     setQuotaWarningDialogVisible,
     setSelectFileFormRoomDialogVisible,
     inviteUser: inviteRootUser,
+    setTemplateAccessSettingsVisible,
+
     isVisitor,
     isFrame,
     logoText,
@@ -278,6 +280,10 @@ export const useOptions = (
     onCreateAndCopySharedLink?.(selectedFolder, t);
   }, [selectedFolder, onCreateAndCopySharedLink, t]);
 
+  const onOpenAccessSettings = () => {
+    setTemplateAccessSettingsVisible(true);
+  };
+
   const options = useMemo(
     () =>
       getOptions(
@@ -303,6 +309,7 @@ export const useOptions = (
           navigate,
           onGoToPersonal,
           onGoToShared,
+          onOpenAccessSettings,
         },
         logoText,
         isVisitor,
@@ -320,6 +327,7 @@ export const useOptions = (
       rootFolderType,
       t,
       inviteUser,
+      onOpenAccessSettings,
       uploadFromDocspace,
       onUploadAction,
       createAndCopySharedLink,

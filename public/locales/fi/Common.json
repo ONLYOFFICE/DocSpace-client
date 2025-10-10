@@ -723,8 +723,6 @@
   "Reviewing": "Tarkistaminen",
   "RevokeLink": "Peru linkki",
   "Role": "Rooli",
-  "RoleBasedFilling": "Roolipohjainen täyttö",
-  "RoleBasedFillingDescription": "Täytä alkuperäinen lomake rooleineen muiden VDR:n osallistujien kanssa.",
   "RoleCommentator": "Kommentaattori",
   "RoleCommentatorDescription": "Toimenpiteet olemassa olevien tiedostojen kanssa: katselu, kommentointi.",
   "RoleContentCreatorDescription": "Sisällöntuottajat voivat luoda ja muokata huoneen tiedostoja, mutta eivät voi hallita käyttäjiä tai asetuksia. ",

@@ -258,6 +258,7 @@ const LoginForm = ({
   };
 
   const onSubmit = useCallback(async () => {
+    debugger;
     // errorText && setErrorText("");
     let captchaToken: string | undefined | null = "";
 
@@ -397,6 +398,7 @@ const LoginForm = ({
 
     login(user, hash, pwd, session, captchaToken, currentCulture, reCaptchaType)
       .then(async (res: string | object) => {
+        debugger;
         let redirectUrl = getCookie("x-redirect-authorization-uri");
         if (clientId && redirectUrl) {
           redirectUrl = window.atob(
@@ -458,6 +460,7 @@ const LoginForm = ({
         } else window.location.replace("/"); // TODO: save { user, hash } for tfa
       })
       .catch((error) => {
+        debugger;
         let errorMessage = "";
         if (typeof error === "object") {
           errorMessage =

@@ -723,8 +723,6 @@
   "Reviewing": "recenzowanie",
   "RevokeLink": "Unieważnij link",
   "Role": "Rola",
-  "RoleBasedFilling": "Wypełnianie oparte na rolach",
-  "RoleBasedFillingDescription": "Wypełnij formularz początkowy, biorąc pod uwagę rolę, z innymi uczestnikami Wirtualnego pokoju danych.",
   "RoleCommentator": "Komentujący",
   "RoleCommentatorDescription": "Operacje na istniejących plikach: przeglądanie, komentowanie.",
   "RoleContentCreatorDescription": "Twórcy treści mogą tworzyć oraz edytować pliki w pokoju, ale nie mogą zarządzać użytkownikami i nie mają dostępu do ustawień.",

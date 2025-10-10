@@ -722,8 +722,6 @@
   "Reviewing": "duke rishikuar",
   "RevokeLink": "Revokoni lidhjen",
   "Role": "Roli",
-  "RoleBasedFilling": "Plotësim i bazuar në role",
-  "RoleBasedFillingDescription": "Plotësoni formularin origjinal sipas roleve së bashku me pjesëmarrës të tjerë në VDR.",
   "RoleCommentator": "Komentues",
   "RoleCommentatorDescription": "Operacionet me skedarët ekzistues: shikimi, komentimi.",
   "RoleContentCreatorDescription": "Krijuesit e përmbajtjes mund të krijojnë dhe modifikojnë skedarë në dhomë, por nuk mund të menaxhojnë përdoruesit ose të kenë qasje te cilësimet.",

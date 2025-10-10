@@ -722,8 +722,6 @@
   "Reviewing": "revisando",
   "RevokeLink": "Revogar link",
   "Role": "Função",
-  "RoleBasedFilling": "Preenchimento baseado em funções",
-  "RoleBasedFillingDescription": "Preencha o formulário original por funções com outros participantes no VDR.",
   "RoleCommentator": "Comentarista",
   "RoleCommentatorDescription": "Operações com arquivos existentes: visualização, comentário.",
   "RoleContentCreatorDescription": "Os criadores de conteúdo podem criar e editar arquivos na sala, mas não podem gerenciar usuários ou acessar configurações.",

@@ -722,8 +722,6 @@
   "Reviewing": "مراجعة",
   "RevokeLink": "إبطال الرابط",
   "Role": "المسمى الوظيفي",
-  "RoleBasedFilling": "التعبئة على أساس الدور",
-  "RoleBasedFillingDescription": "قم بملء النموذج الأصلي حسب الأدوار مع المشاركين الآخرين في VDR.",
   "RoleCommentator": "معلّق",
   "RoleCommentatorDescription": "العمليات المتاحة على الملفات الحالية: العرض والتعليق.",
   "RoleContentCreatorDescription": "يمكن لمنشئي المحتوى إنشاء وتحرير الملفات في الغرفة، لكن لا يمكنهم إدارة المستخدمين أو الوصول إلى الإعدادات.",

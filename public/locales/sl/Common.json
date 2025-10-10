@@ -723,8 +723,6 @@
   "Reviewing": "pregledovanje",
   "RevokeLink": "Prekliči povezavo",
   "Role": "Vloga",
-  "RoleBasedFilling": "Uporabniško določeno izpolnjevanje",
-  "RoleBasedFillingDescription": "Izpolnite originalni obrazec po vlogah z drugimi udeleženci v VDR.",
   "RoleCommentator": "Komentator",
   "RoleCommentatorDescription": "Operacije z obstoječimi datotekami: ogledovanje, komentiranje.",
   "RoleContentCreatorDescription": "Ustvarjalci vsebine lahko ustvarjajo in urejajo datoteke v sobi, ne morejo pa upravljati uporabnikov ali dostopati do nastavitev.",

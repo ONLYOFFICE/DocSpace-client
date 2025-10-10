@@ -45,6 +45,8 @@ async function Page(props: TfaActivationProps) {
   const searchParams = await sp;
   const confirmKey = encodeParams(getStringFromSearchParams(searchParams));
 
+  debugger;
+
   const [res] = await Promise.all([getTfaSecretKeyAndQR(confirmKey)]);
 
   return (

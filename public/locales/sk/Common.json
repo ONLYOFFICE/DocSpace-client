@@ -723,8 +723,6 @@
   "Reviewing": "prehliadanie",
   "RevokeLink": "Zrušiť odkaz",
   "Role": "Rola",
-  "RoleBasedFilling": "Základné vyplňovanie na základe rolí",
-  "RoleBasedFillingDescription": "Vyplňte úvodný formulár podľa roly s ostatnými účastníkmi virtuálnej dátovej miestnosti.",
   "RoleCommentator": "Komentátor",
   "RoleCommentatorDescription": "Operácie s existujúcimi súbormi: prezeranie, komentovanie.",
   "RoleContentCreatorDescription": "Tvorcovia obsahu môžu vytvárať a upravovať súbory v miestnosti, ale nemôžu spravovať používateľov ani nastavenia.",

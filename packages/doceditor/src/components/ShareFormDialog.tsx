@@ -198,8 +198,8 @@ const ShareFormDialog = ({
     },
     {
       id: "virtual-data-room",
-      title: t("Common:RoleBasedFilling"),
-      description: t("Common:RoleBasedFillingDescription"),
+      title: t("Common:RecipientBasedFilling"),
+      description: t("Common:RecipientBasedFillingDescription"),
       buttonLabel: t("Common:ShareInTheRoom"),
       onClick: onClickVirtualDataRoom,
       icon: <RoleBasedFillingIcon />,

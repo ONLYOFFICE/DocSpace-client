@@ -722,8 +722,6 @@
   "Reviewing": "Überprüfung",
   "RevokeLink": "Link widerrufen",
   "Role": "Stelle",
-  "RoleBasedFilling": "Rollenbasiertes Ausfüllen",
-  "RoleBasedFillingDescription": "Füllen Sie das Originalformular nach Rollen mit anderen Teilnehmern im VDR aus.",
   "RoleCommentator": "Kommentator",
   "RoleCommentatorDescription": "Vorgänge mit bestehenden Dateien: Anzeigen, Kommentieren.",
   "RoleContentCreatorDescription": "Content-Ersteller können Dateien im Raum erstellen und bearbeiten, jedoch keine Benutzer verwalten oder auf Einstellungen zugreifen.",

@@ -722,8 +722,6 @@
   "Reviewing": "レビューの追加",
   "RevokeLink": "リンクの取り消し",
   "Role": "役割",
-  "RoleBasedFilling": "役割ベースの記入",
-  "RoleBasedFillingDescription": "VDR で他の参加者と役割ごとに元のフォームに記入します。",
   "RoleCommentator": "コメンテーター",
   "RoleCommentatorDescription": "既存ファイルに対する操作：閲覧、コメント。",
   "RoleContentCreatorDescription": "コンテンツ作成者はルーム内でファイルの作成や編集を行うことができますが、ユーザー管理や設定へのアクセスはできません。",

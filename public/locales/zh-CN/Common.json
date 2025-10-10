@@ -713,8 +713,6 @@
   "Reviewing": "审阅中",
   "RevokeLink": "撤销链接",
   "Role": "角色",
-  "RoleBasedFilling": "基于角色的填写",
-  "RoleBasedFillingDescription": "在虚拟数据房间中按角色与其他参与者共同填写原始表单。",
   "RoleCommentator": "可评论",
   "RoleCommentatorDescription": "支持的文件操作：查看、评论。",
   "RoleContentCreatorDescription": "内容创作者可以在房间中创建和编辑文件，但无法管理用户或访问设置。",

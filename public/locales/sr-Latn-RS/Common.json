@@ -722,8 +722,6 @@
   "Reviewing": "pregled",
   "RevokeLink": "Opozovi link",
   "Role": "Uloga",
-  "RoleBasedFilling": "Popunjavanje po ulogama",
-  "RoleBasedFillingDescription": "Popunite originalni obrazac po ulogama sa ostalim učesnicima u VDR-u.",
   "RoleCommentator": "Komentator",
   "RoleCommentatorDescription": "Operacije sa postojećim datotekama: pregledanje, komentarisanje.",
   "RoleContentCreatorDescription": "Kreatori sadržaja mogu kreirati i uređivati fajlove u prostoriji, ali ne mogu upravljati korisnicima niti pristupiti podešavanjima.",

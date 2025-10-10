@@ -723,8 +723,6 @@
   "Reviewing": "Pārskatīšana",
   "RevokeLink": "Atsaukt saiti",
   "Role": "Loma",
-  "RoleBasedFilling": "Lomas balstīta piepildīšana",
-  "RoleBasedFillingDescription": "Apiepilniniet sākotnējo formu ar lomām un citiem dalībniekiem VDR.",
   "RoleCommentator": "Komentētājs",
   "RoleCommentatorDescription": "Darbības ar esošajiem failiem: skatīšana, komentēšana.",
   "RoleContentCreatorDescription": "Satura veidotāji var izveidot un rediģēt failus telpā, bet nevar pārvaldīt lietotājus vai piekļūt iestatījumiem.",

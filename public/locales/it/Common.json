@@ -722,8 +722,6 @@
   "Reviewing": "revisione",
   "RevokeLink": "Revoca il link",
   "Role": "Ruolo",
-  "RoleBasedFilling": " Compilazione basata sui ruoli",
-  "RoleBasedFillingDescription": " Compila il modulo originale per ruoli insieme ad altri partecipanti nella VDR.",
   "RoleCommentator": "Commentatore",
   "RoleCommentatorDescription": "Operazioni con file esistenti: visualizzazione, commenti.",
   "RoleContentCreatorDescription": "I creatori di contenuti possono creare e modificare i file nella stanza, ma non possono gestire gli utenti o accedere alle impostazioni.",

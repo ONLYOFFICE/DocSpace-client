@@ -723,8 +723,6 @@
   "Reviewing": "Đánh giá",
   "RevokeLink": "Thu hồi liên kết",
   "Role": "Vai trò",
-  "RoleBasedFilling": "Điền dựa trên vai trò",
-  "RoleBasedFillingDescription": "Điền vào mẫu gốc theo vai trò với những người tham gia khác trong VDR.",
   "RoleCommentator": "Người nhận xét",
   "RoleCommentatorDescription": "Hoạt động với các tập tin hiện có: xem, nhận xét.",
   "RoleContentCreatorDescription": "Người tạo nội dung có thể tạo và chỉnh sửa các tập tin trong phòng, nhưng không thể quản lý người dùng hoặc truy cập cài đặt.",

@@ -723,8 +723,6 @@
   "Reviewing": "Gözden geçiriliyor",
   "RevokeLink": "Bağlantıyı iptal et",
   "Role": "Rol",
-  "RoleBasedFilling": "Rol tabanlı doldurma",
-  "RoleBasedFillingDescription": "VDR'deki diğer katılımcılarla birlikte rollere göre orijinal formu doldurun.",
   "RoleCommentator": "Yorumcu",
   "RoleCommentatorDescription": "Mevcut dosyalarla işlemler: görüntüleme, yorum yapma.",
   "RoleContentCreatorDescription": "İçerik oluşturucular odada dosya oluşturabilir ve düzenleyebilir fakat kullanıcıları yönetemez veya ayarlara erişemez.",

@@ -128,7 +128,6 @@ const Badges = ({
   customFilterExternalLink,
   onClickLock,
   onClickFavorite,
-  isRecentFolder,
   isPublicRoom,
 }: BadgesProps) => {
   const {

@@ -77,6 +77,7 @@ export const CategoryType = Object.freeze({
   Chat: 11,
   Groups: 12,
   Guests: 13,
+  AIAgents: 14,
 });
 
 /**

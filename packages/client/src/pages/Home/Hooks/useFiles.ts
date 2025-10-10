@@ -127,6 +127,16 @@ const useFiles = ({
     navigate(`${url}?${filter.toUrlParams()}`);
   };
 
+  const fetchDefaultAgents = () => {
+    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.AI_AGENTS);
+
+    const categoryType = getCategoryType(location) as number;
+
+    const url = getCategoryUrl(categoryType);
+
+    navigate(`${url}?${filter.toUrlParams()}`);
+  };
+
   const getFiles = React.useCallback(async () => {
     const categoryType = getCategoryType(location) as number; // TODO: Remove "as number" when getCategoryType is rewritten to TS
 
@@ -156,11 +166,23 @@ const useFiles = ({
 
     const isRoomFolder = getObjectByLocation(location)?.folder;
     const isRecentFolder = categoryType === CategoryType.Recent;
+    const isAIAgents = categoryType === CategoryType.AIAgents;
 
-    if (
+    if (isAIAgents) {
+      filterObj = RoomsFilter.getFilter(window.location);
+
+      isRooms = true;
+
+      if (!filterObj) {
+        fetchDefaultAgents();
+
+        return;
+      }
+    } else if (
       (categoryType == CategoryType.Shared ||
         categoryType == CategoryType.SharedRoom ||
-        categoryType == CategoryType.Archive) &&
+        categoryType == CategoryType.Archive ||
+        isAIAgents) &&
       !isRoomFolder
     ) {
       filterObj = RoomsFilter.getFilter(window.location);

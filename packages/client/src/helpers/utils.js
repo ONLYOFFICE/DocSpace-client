@@ -140,6 +140,8 @@ export const getCategoryType = (location) => {
     if (pathname.indexOf("groups") > -1) {
       categoryType = CategoryType.Groups;
     }
+  } else if (pathname.startsWith("/ai-agents")) {
+    categoryType = CategoryType.AIAgents;
   } else {
     categoryType = CategoryType.Shared;
   }
@@ -174,6 +176,9 @@ export const getCategoryUrl = (categoryType, folderId) => {
   const cType = categoryType;
 
   switch (cType) {
+    case CategoryType.AIAgents:
+      return "/ai-agents/filter";
+
     case CategoryType.Recent:
       return "/recent/filter";
 

@@ -45,6 +45,21 @@ import Captcha from "../../components/captcha";
 import type { RecoverAccessModalDialogProps } from "./RecoverAccessModalDialog.types";
 import styles from "./RecoverAccessModalDialog.module.scss";
 
+type TError =
+  | {
+      response?: {
+        status?: number | string;
+        data?: {
+          error?: {
+            message: string;
+          };
+        };
+      };
+      statusText?: string;
+      message?: string;
+    }
+  | string;
+
 const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
   visible,
   onClose,
@@ -122,7 +137,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
     setDescErr(false);
   };
 
-  const onSendRecoverRequest = () => {
+  const onSendRecoverRequest = async () => {
     if (!email.trim() || emailErr) {
       setIsShowError(true);
       return setEmailErr(true);
@@ -139,50 +154,53 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
     const captchaToken = captchaValidation.token ?? undefined;
 
     setLoading(true);
-    sendRecoverRequest(
-      email,
-      description,
-      captchaToken ? reCaptchaType : undefined,
-      captchaToken,
-    )
-      ?.then((res) => {
-        setLoading(false);
-        if (typeof res === "string") toastr.success(res);
-      })
-      ?.catch((error) => {
-        setLoading(false);
 
-        let errorMessage = "";
-        if (typeof error === "object") {
-          errorMessage =
-            error?.response?.data?.error?.message ||
-            error?.statusText ||
-            error?.message ||
-            "";
-        } else if (typeof error === "string") {
-          errorMessage = error;
-        }
+    try {
+      const res = await sendRecoverRequest(
+        email,
+        description,
+        captchaToken ? reCaptchaType : undefined,
+        captchaToken,
+      );
 
-        if (errorMessage) {
-          toastr.error(errorMessage);
-        }
+      setLoading(false);
+      if (typeof res === "string") toastr.success(res);
+      onRecoverModalClose();
+    } catch (e) {
+      const error = e as TError;
+      setLoading(false);
 
-        const status =
-          typeof error === "object" ? error?.response?.status : undefined;
+      let errorMessage = "";
+      if (typeof error === "object") {
+        errorMessage =
+          error?.response?.data?.error?.message ||
+          error?.statusText ||
+          error?.message ||
+          "";
+      } else if (typeof error === "string") {
+        errorMessage = error;
+      }
 
-        if (reCaptchaPublicKey && status === 403) {
-          captcha.show();
-        } else if (captcha.isVisible) {
-          captcha.reset();
-        }
-      })
-      .finally(onRecoverModalClose);
+      if (errorMessage) {
+        toastr.error(errorMessage);
+      }
+
+      const status =
+        typeof error === "object" ? error?.response?.status : undefined;
+
+      if (reCaptchaPublicKey && status === 403) {
+        captcha.show();
+      } else if (captcha.isVisible) {
+        captcha.reset();
+      }
+    }
   };
 
   return (
     <ModalDialog
       id={id}
       isLarge
+      autoMaxHeight
       visible={visible}
       onClose={onRecoverModalClose}
       displayType={ModalDialogType.modal}

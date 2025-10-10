@@ -101,7 +101,7 @@ const TagInput = ({
   };
 
   const handleBlur = () => {
-    closeDropdown();
+    // closeDropdown();
     onBlur && onBlur();
   };
 

@@ -26,22 +26,24 @@
 
 @use "../../styles/mixins";
 
-.captchaWrapper {
+.wrapper {
   margin: 16px 0;
   width: fit-content;
+}
 
-  .captchaContainer {
-    &.isError {
-      border: var(--login-captcha-error-border);
-      padding: 3px 3px 0 3px;
-      border-radius: 3px;
-      margin: 0px;
-    }
+.container {
+  display: inline-flex;
+}
+
+.wrapperError {
+  .container {
+    border: var(--login-captcha-error-border);
+    padding: 3px 3px 0;
+    border-radius: 3px;
+    margin: 0;
   }
 
-  &.isError {
-    p {
-      color: var(--login-captcha-error-color);
-    }
+  p {
+    color: var(--login-captcha-error-color);
   }
 }

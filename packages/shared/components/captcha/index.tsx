@@ -26,6 +26,7 @@
 
 "use client";
 
+import { useCallback, useEffect, useRef } from "react";
 import classNames from "classnames";
 import ReCAPTCHA from "react-google-recaptcha";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
@@ -36,56 +37,95 @@ import { Text } from "../text";
 import styles from "./Captcha.module.scss";
 
 type CaptchaProps = {
-  type: RecaptchaType | undefined;
-  publicKey: string;
-  theme: { isBase: boolean };
-  isError: boolean;
-  errorText: string;
-  onSuccessfullyComplete: (token?: string) => void;
-  reCaptchaRef?: React.RefObject<ReCAPTCHA | null>;
-  hCaptchaRef?: React.RefObject<HCaptcha | null>;
+  type?: RecaptchaType;
+  publicKey?: string;
+  themeMode?: "light" | "dark";
+  visible: boolean;
+  hasError?: boolean;
+  errorText?: string;
+  onTokenChange: (token: string | null) => void;
+  resetSignal: number;
 };
 
 const Captcha = ({
   type,
   publicKey,
-  theme,
-  isError,
+  themeMode = "light",
+  visible,
+  hasError = false,
   errorText,
-  onSuccessfullyComplete,
-  reCaptchaRef,
-  hCaptchaRef,
+  onTokenChange,
+  resetSignal,
 }: CaptchaProps) => {
+  const recaptchaRef = useRef<ReCAPTCHA | null>(null);
+  const hcaptchaRef = useRef<HCaptcha | null>(null);
+
   const isHCaptcha = type === RecaptchaType.hCaptcha;
+  const shouldRender = Boolean(publicKey && visible);
+
+  const handleReset = useCallback(() => {
+    if (isHCaptcha) {
+      hcaptchaRef.current?.resetCaptcha?.();
+    } else {
+      recaptchaRef.current?.reset?.();
+    }
+    onTokenChange(null);
+  }, [isHCaptcha, onTokenChange]);
+
+  useEffect(() => {
+    handleReset();
+  }, [handleReset, resetSignal]);
+
+  useEffect(() => {
+    if (!visible) {
+      handleReset();
+    }
+  }, [handleReset, visible]);
+
+  const handleVerify = useCallback(
+    (token: string | null) => {
+      onTokenChange(token ?? null);
+    },
+    [onTokenChange],
+  );
+
+  const handleExpire = useCallback(() => {
+    onTokenChange(null);
+  }, [onTokenChange]);
+
+  if (!shouldRender) {
+    return null;
+  }
 
   return (
     <div
-      className={classNames(styles.captchaWrapper, {
-        [styles.isError]: isError,
+      className={classNames(styles.wrapper, {
+        [styles.wrapperError]: hasError,
       })}
+      data-test-id="captcha-container"
     >
-      <div
-        className={classNames(styles.captchaContainer, {
-          [styles.isError]: isError,
-        })}
-      >
+      <div className={styles.container}>
         {isHCaptcha ? (
           <HCaptcha
-            sitekey={publicKey}
-            ref={hCaptchaRef}
-            onVerify={(token) => onSuccessfullyComplete(token)}
-            theme={theme.isBase ? "light" : "dark"}
+            sitekey={publicKey!}
+            ref={hcaptchaRef}
+            onVerify={handleVerify}
+            onExpire={handleExpire}
+            onError={handleExpire}
+            theme={themeMode}
           />
         ) : (
           <ReCAPTCHA
-            sitekey={publicKey}
-            ref={reCaptchaRef}
-            theme={theme.isBase ? "light" : "dark"}
-            onChange={(token) => onSuccessfullyComplete(token ?? undefined)}
+            sitekey={publicKey!}
+            ref={recaptchaRef}
+            theme={themeMode}
+            onChange={handleVerify}
+            onErrored={handleExpire}
+            onExpired={handleExpire}
           />
         )}
       </div>
-      {isError ? <Text>{errorText}</Text> : null}
+      {hasError && errorText ? <Text>{errorText}</Text> : null}
     </div>
   );
 };

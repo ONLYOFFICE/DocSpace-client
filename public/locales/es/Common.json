@@ -65,8 +65,6 @@
   "Archives": "Archivos",
   "ArchivingData": "Archivando datos",
   "Assign": "Asignar",
-  "AssignRoles": "¿Asignar roles?",
-  "AssignRolesDescription": "El formulario se ha enviado correctamente a {{roomName}}. Asigne roles a los usuarios elegidos para permitir el rellenado del formulario. ¿Desea continuar ahora o volver a hacerlo más tarde?",
   "AssignToRole": "Asignar a rol",
   "Attention": "¡Atención",
   "Audio": "Audio",

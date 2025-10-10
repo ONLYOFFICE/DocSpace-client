@@ -65,8 +65,6 @@
   "Archives": "Archive",
   "ArchivingData": "Archivieren der Daten",
   "Assign": "Zuweisen",
-  "AssignRoles": "Rollen zuweisen?",
-  "AssignRolesDescription": "Das Formular wurde erfolgreich in {{roomName}} gesendet. Weisen Sie den ausgewählten Benutzern Rollen zu, um das Ausfüllen des Formulars zu ermöglichen. Möchten Sie jetzt fortfahren oder später darauf zurückkommen?",
   "AssignToRole": "Einer Rolle zuweisen",
   "Attention": "Achtung",
   "Audio": "Audio",

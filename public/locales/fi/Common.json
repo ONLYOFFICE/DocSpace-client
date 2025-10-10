@@ -65,8 +65,6 @@
   "Archives": "Arkistot",
   "ArchivingData": "Tietojen arkistointi",
   "Assign": "Määritä",
-  "AssignRoles": "Määritetäänkö roolit?",
-  "AssignRolesDescription": "Lomake on lähetetty onnistuneesti {{roomName}}-kohteeseen. Määritä rooleja valituille käyttäjille, jotta he voivat täyttää lomakkeen. Haluatko jatkaa nyt vai palata siihen myöhemmin?",
   "AssignToRole": "Määrää rooliin",
   "Attention": "Huomio",
   "Audio": "Ääni",

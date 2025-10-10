@@ -65,8 +65,6 @@
   "Archives": "存档",
   "ArchivingData": "存档数据",
   "Assign": "分配",
-  "AssignRoles": "分配角色？",
-  "AssignRolesDescription": "表单已成功提交至{{roomName}}。请为选定用户分配角色以启用表单填写功能。是否立即执行，或稍后处理？",
   "AssignToRole": "分配角色",
   "Attention": "注意",
   "Audio": "音频",

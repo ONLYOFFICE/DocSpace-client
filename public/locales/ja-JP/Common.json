@@ -65,8 +65,6 @@
   "Archives": "アーカイブ",
   "ArchivingData": "データのアーカイブ",
   "Assign": "割り当て",
-  "AssignRoles": "役割を割り当てますか？",
-  "AssignRolesDescription": "フォームは {{roomName}} に正常に送信されました。選択したユーザーに役割を割り当てて、フォーム記入を有効にします。今すぐ進めますか、それとも後で行いますか？",
   "AssignToRole": "役割に割り当てる",
   "Attention": "注意",
   "Audio": "オーディオ",

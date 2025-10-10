@@ -9068,7 +9068,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>AssignRoles</name>
+								<name>AssignRecipients</name>
 								<description/>
 								<comment/>
 								<translations>
@@ -9203,7 +9203,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>AssignRolesDescription</name>
+								<name>AssignRecipientsDescription</name>
 								<description/>
 								<comment/>
 								<translations>

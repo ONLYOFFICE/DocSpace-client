@@ -65,8 +65,6 @@
   "Archives": "Arşivler",
   "ArchivingData": "Veriler arşivleniyor",
   "Assign": "Atamak",
-  "AssignRoles": "Rolleri atama?",
-  "AssignRolesDescription": "Form başarıyla {{roomName}}'e gönderildi. Form doldurmayı etkinleştirmek için seçilen kullanıcılara roller atayın. Şimdi devam etmek ister misiniz yoksa daha sonra geri dönmek ister misiniz?",
   "AssignToRole": "Role ata",
   "Attention": "Dikkat",
   "Audio": "Audio",

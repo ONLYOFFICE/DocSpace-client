@@ -65,8 +65,6 @@
   "Archives": "아카이브",
   "ArchivingData": "데이터 아카이브 중",
   "Assign": "지정하다",
-  "AssignRoles": "역할 할당하시겠습니까?",
-  "AssignRolesDescription": "{{roomName}}에 양식이 성공적으로 제출되었습니다. 선택한 사용자에게 역할을 할당하여 양식 작성을 활성화하세요. 지금 진행하시겠습니까, 아니면 나중에 다시 하시겠습니까?",
   "AssignToRole": "역할에 할당",
   "Attention": "주의",
   "Audio": "오디오",

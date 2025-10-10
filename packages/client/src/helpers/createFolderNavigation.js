@@ -17,7 +17,6 @@ export const createFolderNavigation = async (
   userId,
   roomType,
   currentTitle,
-  getPublicKey,
 ) => {
   if (!item) return { url: "", state: {} };
 
@@ -60,11 +59,6 @@ export const createFolderNavigation = async (
   }
 
   filter.folder = id;
-
-  if (getPublicKey) {
-    const shareKey = await getPublicKey(item);
-    if (shareKey) filter.key = shareKey;
-  }
 
   const isShared = shared || navigationPath?.findIndex((r) => r.shared) > -1;
 

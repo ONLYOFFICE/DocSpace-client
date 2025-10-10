@@ -291,12 +291,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
         setLinkParams({ link: response, item });
 
         if (isRoom(item)) {
-          setExternalLink?.(
-            response,
-            searchParams,
-            setSearchParams,
-            isCustomRoom,
-          );
+          setExternalLink?.(response);
           copyShareLink(item, response, t);
         } else {
           updateLink?.(response);

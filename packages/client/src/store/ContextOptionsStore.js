@@ -1189,18 +1189,10 @@ class ContextOptionsStore {
   };
 
   onCreateOform = async (navigate) => {
-    const { oformFromFolderId } = this.oformsStore;
-    const { getFolderInfo } = this.filesStore;
-    const { getPublicKey } = this.filesActionsStore;
-
     hideInfoPanel();
 
     const filesFilter = FilesFilter.getDefault();
     filesFilter.folder = this.oformsStore.oformFromFolderId;
-
-    const currentFolder = await getFolderInfo(oformFromFolderId);
-    const publicKey = await getPublicKey(currentFolder);
-    if (publicKey) filesFilter.key = publicKey;
 
     const filterUrlParams = filesFilter.toUrlParams();
 

@@ -1,3 +1,4 @@
+@use "../../styles/variables";
 @use "../../styles/variables/colors";
 
 .popup {
@@ -6,22 +7,22 @@
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 20px;
-  background-color: #{$white};
+  background-color: #{variables.$white};
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border-radius: 6px;
   z-index: 1000;
-  color: #{$dark-black};
+  color: #{variables.$dark-black};
 
   &.blue {
-    background-color: #{$portal-blue};
+    background-color: #{variables.$portal-blue};
   }
 
   &.purple {
-    background-color: #{$portal-purple};
+    background-color: #{variables.$portal-purple};
   }
 
   &.green {
-    background-color: #{$portal-green};
+    background-color: #{variables.$portal-green};
   }
 
   &.top30 {
@@ -41,7 +42,7 @@
   position: relative;
   width: 300px;
   height: 200px;
-  border: 2px dashed #{$gray-dark-pressed};
+  border: 2px dashed #{variables.$gray-dark-pressed};
   margin: 20px;
   padding: 10px;
 }

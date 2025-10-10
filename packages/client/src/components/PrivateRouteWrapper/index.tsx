@@ -58,6 +58,7 @@ const PrivateRouteWrapper = ({
   isLoadingPublicRoom,
   limitedAccessDevToolsForUsers,
   standalone,
+  roomStatus,
 }: Partial<PrivateRouteProps>) => {
   return (
     <PrivateRoute
@@ -88,6 +89,7 @@ const PrivateRouteWrapper = ({
       isLoadingPublicRoom={isLoadingPublicRoom}
       limitedAccessDevToolsForUsers={limitedAccessDevToolsForUsers!}
       standalone={standalone!}
+      roomStatus={roomStatus}
     >
       {children}
     </PrivateRoute>
@@ -128,6 +130,7 @@ export default inject<TStore>(
       validatePublicRoomKey,
       publicRoomKey,
       roomId,
+      roomStatus,
       isLoaded: isLoadedPublicRoom,
       isLoading: isLoadingPublicRoom,
     } = publicRoomStore;
@@ -157,6 +160,7 @@ export default inject<TStore>(
       isLoadingPublicRoom,
       limitedAccessDevToolsForUsers,
       standalone,
+      roomStatus,
     };
   },
 )(observer(PrivateRouteWrapper));

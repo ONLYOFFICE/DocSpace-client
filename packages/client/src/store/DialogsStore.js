@@ -834,8 +834,13 @@ class DialogsStore {
   };
 
   /**
+   * @typedef {import("@docspace/shared/api/files/types").TFile} TFile
+   * @typedef {import("@docspace/shared/api/files/types").TFolder} TFolder
+   * @typedef {import("@docspace/shared/api/rooms/types").TRoom} TRoom
+   *
    * @param {boolean =} visible
-   * @param {import("@docspace/shared/api/rooms/types").TRoom =} item
+   * @param { TRoom | TFolder | TFile } [item = null]
+   * @param {boolean} [isDownload = false]
    * @returns {void}
    */
   setPasswordEntryDialog = (

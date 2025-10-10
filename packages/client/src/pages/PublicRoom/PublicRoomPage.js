@@ -37,6 +37,7 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
+import { isPublicRoom } from "@docspace/shared/utils/common";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import SectionHeaderContent from "../Home/Section/Header";
@@ -235,7 +236,8 @@ export default inject(
     const { fetchPreviewMediaFile } = mediaViewerDataStore;
 
     const isAuthenticated =
-      validationData?.isAuthenticated || authStore.isAuthenticated;
+      (validationData?.isAuthenticated || authStore.isAuthenticated) &&
+      !isPublicRoom();
 
     return {
       isLoaded,

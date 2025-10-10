@@ -27,16 +27,16 @@
 @use "../../styles/mixins";
 
 .captchaWrapper {
-  margin: 24px 0;
+  margin: 16px 0;
   width: fit-content;
 
   .captchaContainer {
     &.isError {
-      border: 1px solid var(--login-captcha-error-border);
-      padding-block: 4px;
-      padding-inline: 2px 4px;
+      border: var(--login-captcha-error-border);
+      padding: 3px 3px 0 3px;
+      border-radius: 3px;
+      margin: 0px;
     }
-    margin-bottom: 2px;
   }
 
   &.isError {

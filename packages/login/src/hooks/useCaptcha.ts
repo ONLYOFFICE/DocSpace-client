@@ -68,6 +68,7 @@ export const useCaptcha = ({
 
   const captchaRef = useRef<ReCAPTCHA>(null);
   const hCaptchaRef = useRef<HCaptcha>(null);
+  const showTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const isHCaptcha = type === RecaptchaType.hCaptcha;
 
@@ -93,19 +94,44 @@ export const useCaptcha = ({
     }
   }, [isHCaptcha]);
 
-  const show = useCallback(() => {
-    captchaManager.requestShow(id);
+  const hideInternal = useCallback(() => {
+    if (showTimeoutRef.current) {
+      clearTimeout(showTimeoutRef.current);
+      showTimeoutRef.current = null;
+    }
 
-    setIsVisible(true);
-    reset();
-  }, [reset, id]);
+    setIsVisible(false);
+    setIsError(false);
+    setIsSuccessful(false);
+    setCaptchaToken(null);
+
+    if (isHCaptcha) {
+      hCaptchaRef.current?.resetCaptcha?.();
+    } else {
+      captchaRef.current?.reset?.();
+    }
+  }, [isHCaptcha]);
 
   const hide = useCallback(() => {
     captchaManager.notifyHide(id);
+    hideInternal();
+  }, [hideInternal, id]);
 
-    setIsVisible(false);
-    reset();
-  }, [reset, id]);
+  const show = useCallback(() => {
+    if (showTimeoutRef.current) {
+      clearTimeout(showTimeoutRef.current);
+    }
+
+    captchaManager.requestShow(id, hideInternal);
+
+    showTimeoutRef.current = setTimeout(() => {
+      showTimeoutRef.current = null;
+      setIsVisible(true);
+      setIsError(false);
+      setIsSuccessful(false);
+      setCaptchaToken(null);
+    }, 150);
+  }, [id, hideInternal]);
 
   const onSuccess = useCallback((token?: string) => {
     setIsSuccessful(true);
@@ -149,6 +175,13 @@ export const useCaptcha = ({
       reset();
     }
   }, [isVisible, reset]);
+  useEffect(() => {
+    return () => {
+      if (showTimeoutRef.current) {
+        clearTimeout(showTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return {
     isVisible,

@@ -27,24 +27,33 @@
 class CaptchaManager {
   private activeCaptchaId: string | null = null;
   private hiddenCaptchas: Set<string> = new Set();
+  private hideCallbacks: Map<string, () => void> = new Map();
 
   requestShow(captchaId: string, hideCallback?: () => void): boolean {
     if (this.activeCaptchaId === captchaId) {
       return true;
     }
 
-    if (this.activeCaptchaId && hideCallback) {
-      hideCallback();
+    if (this.activeCaptchaId && this.activeCaptchaId !== captchaId) {
+      const currentHideCallback = this.hideCallbacks.get(this.activeCaptchaId);
+      if (currentHideCallback) {
+        currentHideCallback();
+      }
     }
 
     this.activeCaptchaId = captchaId;
     this.hiddenCaptchas.delete(captchaId);
+
+    if (hideCallback) {
+      this.hideCallbacks.set(captchaId, hideCallback);
+    }
 
     return true;
   }
 
   notifyHide(captchaId: string): void {
     this.hiddenCaptchas.add(captchaId);
+    this.hideCallbacks.delete(captchaId);
 
     if (this.activeCaptchaId === captchaId) {
       this.activeCaptchaId = null;
@@ -62,6 +71,7 @@ class CaptchaManager {
   hideAll(): void {
     this.activeCaptchaId = null;
     this.hiddenCaptchas.clear();
+    this.hideCallbacks.clear();
   }
 }
 

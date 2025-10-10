@@ -2587,7 +2587,7 @@ class FilesActionStore {
   onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
 
   isExpiredLinkAsync = async (item, withLoader = false) => {
-    if (item.expired) return true;
+    if (item.isLinkExpired) return true;
     if (!item.external || !item.requestToken) return false;
 
     const { clearActiveOperations } = this.uploadDataStore;
@@ -2615,8 +2615,8 @@ class FilesActionStore {
 
         const foundItem = items.find((i) => i.id === item.id);
 
-        if (foundItem && !foundItem.expired) {
-          foundItem.expired = true;
+        if (foundItem && !foundItem.isLinkExpired) {
+          foundItem.isLinkExpired = true;
         }
 
         const { selection, bufferSelection } = this.filesStore;
@@ -2631,9 +2631,9 @@ class FilesActionStore {
         if (
           selectedItem &&
           selectedItem.id === item.id &&
-          !selectedItem.expired
+          !selectedItem.isLinkExpired
         ) {
-          selectedItem.expired = isExpired;
+          selectedItem.isLinkExpired = isExpired;
         }
       }
 
@@ -2655,7 +2655,7 @@ class FilesActionStore {
   openFileAction = async (item, t, e) => {
     if (
       item.external &&
-      (item.expired || (await this.isExpiredLinkAsync(item, true)))
+      (item.isLinkExpired || (await this.isExpiredLinkAsync(item, true)))
     ) {
       const isFile = isFileCheck(item);
       const isFolder = isFolderCheck(item);

@@ -254,7 +254,10 @@ class ContextOptionsStore {
   onOpenFolder = async (item, t) => {
     const { isExpiredLinkAsync } = this.filesActionsStore;
 
-    if (item.external && (item.expired || (await isExpiredLinkAsync(item)))) {
+    if (
+      item.external &&
+      (item.isLinkExpired || (await isExpiredLinkAsync(item)))
+    ) {
       const isRoom = isRoomUtil(item);
 
       const description = isRoom
@@ -574,7 +577,10 @@ class ContextOptionsStore {
   onCreateAndCopySharedLink = async (item, t) => {
     const { isExpiredLinkAsync } = this.filesActionsStore;
 
-    if (item.external && (item.expired || (await isExpiredLinkAsync(item))))
+    if (
+      item.external &&
+      (item.isLinkExpired || (await isExpiredLinkAsync(item)))
+    )
       return toastr.error(
         t("Common:RoomLinkExpired"),
         t("Common:RoomNotAvailable"),
@@ -1287,7 +1293,7 @@ class ContextOptionsStore {
         onClick: (e) => this.onClickPin(e, item.id, t),
         disabled:
           this.publicRoomStore.isPublicRoom ||
-          Boolean(item.external && item.expired),
+          Boolean(item.external && item.isLinkExpired),
         "data-action": "pin",
         action: "pin",
       },
@@ -1299,7 +1305,7 @@ class ContextOptionsStore {
         onClick: (e) => this.onClickPin(e, item.id, t),
         disabled:
           this.publicRoomStore.isPublicRoom ||
-          Boolean(item.external && item.expired),
+          Boolean(item.external && item.isLinkExpired),
         "data-action": "unpin",
         action: "unpin",
       },
@@ -1809,7 +1815,7 @@ class ContextOptionsStore {
         label: t("Open"),
         icon: FolderReactSvgUrl,
         onClick: () => this.onOpenFolder(item, t),
-        disabled: Boolean(item.external && item.expired),
+        disabled: Boolean(item.external && item.isLinkExpired),
       },
       {
         id: "option_fill-form",
@@ -1978,7 +1984,7 @@ class ContextOptionsStore {
         },
         disabled:
           (!item.security?.Download && !isLockedSharedRoom(item)) ||
-          Boolean(item.external && item.expired),
+          Boolean(item.external && item.isLinkExpired),
       },
       {
         id: "option_create-duplicate-room",
@@ -2062,14 +2068,17 @@ class ContextOptionsStore {
         disabled: item.isTemplate
           ? false
           : (isPublicRoomType && hasShareLinkRights) ||
-            Boolean(item.external && (item.expired || item.passwordProtected)),
+            Boolean(
+              item.external && (item.isLinkExpired || item.passwordProtected),
+            ),
       },
       {
         id: "option_copy-external-link",
         key: "external-link",
         label: t("Common:CopySharedLink"),
         icon: TabletLinkReactSvgUrl,
-        disabled: !hasShareLinkRights || Boolean(item.external && item.expired),
+        disabled:
+          !hasShareLinkRights || Boolean(item.external && item.isLinkExpired),
         onClick: () => this.onCreateAndCopySharedLink(item, t),
         // onLoad: () => this.onLoadLinks(t, item),
       },
@@ -2100,7 +2109,7 @@ class ContextOptionsStore {
         label: t("Common:Info"),
         icon: InfoOutlineReactSvgUrl,
         onClick: () => this.onShowInfoPanel(item),
-        disabled: isPublicRoom || Boolean(item.external && item.expired),
+        disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),
       },
       {
         id: "option_owner-change",

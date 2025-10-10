@@ -848,11 +848,8 @@ const useEditorEvents = ({
     async (e: object) => {
       onSDKInfo(e);
 
-      const mode = (e as TInfoEvent).data.mode;
-
-      // Documents opened in "view" mode currently cannot be added to Recent automatically on the server,
-      // so they are added manually on the client.
-      if (successAuth && fileInfo?.id && mode === "view") {
+      // Add to recently viewed files in any mode (read or edit)
+      if (successAuth && fileInfo?.id) {
         addFileToRecentlyViewed(fileInfo.id);
       }
     },

@@ -49,7 +49,7 @@ type UseCaptchaReturn = {
   hide: () => void;
   reset: () => void;
   getToken: () => string | null | undefined;
-  onSuccess: () => void;
+  onSuccess: (token?: string) => void;
   setError: (error: boolean) => void;
 
   validateBeforeSubmit: () => { isValid: boolean; token?: string | null };
@@ -64,6 +64,7 @@ export const useCaptcha = ({
   const [isVisible, setIsVisible] = useState(enabled);
   const [isError, setIsError] = useState(false);
   const [isSuccessful, setIsSuccessful] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   const captchaRef = useRef<ReCAPTCHA>(null);
   const hCaptchaRef = useRef<HCaptcha>(null);
@@ -74,15 +75,16 @@ export const useCaptcha = ({
     if (!publicKey || !isVisible) return undefined;
 
     if (isHCaptcha) {
-      return undefined;
+      return captchaToken;
     }
 
     return captchaRef.current?.getValue();
-  }, [publicKey, isVisible, isHCaptcha]);
+  }, [publicKey, isVisible, isHCaptcha, captchaToken]);
 
   const reset = useCallback(() => {
     setIsError(false);
     setIsSuccessful(false);
+    setCaptchaToken(null);
 
     if (isHCaptcha) {
       hCaptchaRef.current?.resetCaptcha?.();
@@ -105,9 +107,12 @@ export const useCaptcha = ({
     reset();
   }, [reset, id]);
 
-  const onSuccess = useCallback(() => {
+  const onSuccess = useCallback((token?: string) => {
     setIsSuccessful(true);
     setIsError(false);
+    if (token) {
+      setCaptchaToken(token);
+    }
   }, []);
 
   const setError = useCallback((error: boolean) => {

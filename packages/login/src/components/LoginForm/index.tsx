@@ -522,8 +522,8 @@ const LoginForm = ({
   const onChangeLdapLoginCheckbox = () =>
     setIsLdapLoginChecked(!isLdapLoginChecked);
 
-  const onCaptchaSuccess = () => {
-    captcha.onSuccess();
+  const onCaptchaSuccess = (token?: string) => {
+    captcha.onSuccess(token);
   };
 
   const errorMessage = () => {

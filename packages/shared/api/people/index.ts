@@ -283,8 +283,8 @@ export function deleteSelf(key) {
 
 export function sendInstructionsToChangePassword(
   email: string,
-  recaptchaResponse?: string,
   recaptchaType?: RecaptchaType,
+  recaptchaResponse?: string,
 ) {
   const data: Record<string, unknown> = { email };
 

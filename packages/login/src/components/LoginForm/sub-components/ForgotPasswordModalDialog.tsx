@@ -72,9 +72,12 @@ const ForgotPasswordModalDialog = ({
     id: "forgot-password-modal",
   });
 
-  const onCaptchaSuccess = React.useCallback(() => {
-    captcha.onSuccess();
-  }, [captcha]);
+  const onCaptchaSuccess = React.useCallback(
+    (token?: string) => {
+      captcha.onSuccess(token);
+    },
+    [captcha],
+  );
 
   React.useEffect(() => {
     if (!isVisible) {
@@ -112,8 +115,8 @@ const ForgotPasswordModalDialog = ({
       try {
         const res = (await sendInstructionsToChangePassword(
           email,
-          captchaToken,
           captchaToken ? reCaptchaType : undefined,
+          captchaToken,
         )) as string;
         toastr.success(res);
         onDialogClose();

@@ -128,7 +128,7 @@ const useFiles = ({
   };
 
   const fetchDefaultAgents = () => {
-    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.AI_AGENTS);
+    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.AIAgents);
 
     const categoryType = getCategoryType(location) as number;
 

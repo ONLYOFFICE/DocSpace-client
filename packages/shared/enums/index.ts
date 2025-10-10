@@ -205,7 +205,7 @@ export const enum RoomSearchArea {
   Active = "Active",
   Archive = "Archive",
   Templates = "Templates",
-  AI_AGENTS = "AiAgents",
+  AIAgents = "AiAgents",
 }
 /**
  * Enum for file action.

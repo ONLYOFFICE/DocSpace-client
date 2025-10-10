@@ -107,7 +107,7 @@ const useAgentsHelper = ({
       filter.page = page;
       filter.pageCount = PAGE_COUNT;
       filter.filterValue = filterValue;
-      filter.searchArea = RoomSearchArea.AI_AGENTS;
+      filter.searchArea = RoomSearchArea.AIAgents;
 
       const roomsFromApi = await getRooms(filter);
 

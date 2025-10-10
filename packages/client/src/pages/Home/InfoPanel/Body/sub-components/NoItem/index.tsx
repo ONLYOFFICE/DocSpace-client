@@ -99,7 +99,7 @@ const NoItem = ({
     };
   }
 
-  if (infoPanelSelection?.expired && infoPanelSelection?.external)
+  if (infoPanelSelection?.isLinkExpired && infoPanelSelection?.external)
     return <ExpiredItem infoPanelSelection={infoPanelSelection} />;
 
   if (prevNoItemsRef.current.isLockedSharedRoom)

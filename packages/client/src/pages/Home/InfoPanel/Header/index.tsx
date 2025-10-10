@@ -68,8 +68,8 @@ const InfoPanelHeaderContent = ({
     selection.isFolder &&
     selection.id === selection.rootFolderId;
 
-  const expired =
-    selection && "expired" in selection ? selection.expired : false;
+  const isLinkExpired =
+    selection && "isLinkExpired" in selection ? selection.isLinkExpired : false;
   const external =
     selection && "external" in selection ? selection.external : false;
 
@@ -80,7 +80,7 @@ const InfoPanelHeaderContent = ({
     !isContacts &&
     !isTrash &&
     !isLockedSharedRoom(selection as TRoom) &&
-    !(external && expired === true);
+    !(external && isLinkExpired);
 
   const isTemplate =
     selection &&

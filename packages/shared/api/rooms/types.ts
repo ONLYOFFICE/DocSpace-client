@@ -124,7 +124,7 @@ export type TRoom = {
   external?: boolean;
   passwordProtected?: boolean;
   requestToken?: string;
-  expired?: boolean;
+  isLinkExpired?: boolean;
   indexing?: boolean;
   denyDownload?: boolean;
   watermark?: TWatermark;

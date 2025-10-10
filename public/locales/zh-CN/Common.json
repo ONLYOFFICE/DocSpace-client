@@ -767,7 +767,6 @@
   "SelectorFormRoomEmptyScreenDescription": "要共享您的表单并收集回复，请创建填表房间。",
   "SelectorInfoBarDescription": "分享您的表单并通过表单填写房间收集数据。选择现有的房间或创建新的房间。",
   "SelectorInfoBarTitle": "发送到房间进行填写",
-  "SelectorInfoBarVDRDescription": "将表单共享至虚拟数据房间，并为房间成员分配填写角色。可选择现有房间或创建新房间。",
   "SelectorVDREmptyScreenDescription": "要共享表单并为房间成员分配填写角色，请创建虚拟数据房间。",
   "SelectPDFFormat": "选择 .PDF 文件",
   "SelectRoom": "选择房间",

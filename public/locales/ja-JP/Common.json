@@ -776,7 +776,6 @@
   "SelectorFormRoomEmptyScreenDescription": "フォームを共有して回答を収集するには、フォーム記入ルームを作成してください。",
   "SelectorInfoBarDescription": "フォーム記入ルームでフォームを共有し、回答を収集します。既存のルームを選択するか、新しいルームを作成してください。",
   "SelectorInfoBarTitle": "記入用ルームに送信する",
-  "SelectorInfoBarVDRDescription": "フォームをバーチャルデータルームに共有します。ルームの参加者に役割を割り当ててフォームを記入させます。既存のルームを選択するか、新しいルームを作成します。",
   "SelectorVDREmptyScreenDescription": "フォームを共有し、参加者に役割を割り当てるには、バーチャルデータルームを作成してください。",
   "SelectPDFFormat": ".PDFファイルを選択してください",
   "SelectRoom": "ルームの選択",

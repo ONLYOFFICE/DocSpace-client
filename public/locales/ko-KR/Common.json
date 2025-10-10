@@ -777,7 +777,6 @@
   "SelectorFormRoomEmptyScreenDescription": "양식을 공유하고 응답을 수집하려면 양식 작성 룸을 만드세요.",
   "SelectorInfoBarDescription": "양식 작성 룸을 통해 양식을 공유하고 응답을 수집합니다. 기존 룸을 선택하거나 새 룸을 만드세요.",
   "SelectorInfoBarTitle": "작성을 위해 룸으로 전송",
-  "SelectorInfoBarVDRDescription": "가상 데이터 룸에 양식을 공유하세요. 양식 작성을 위해 룸 참여자에게 역할을 할당하세요. 기존 룸을 선택하거나 새 룸을 생성하세요.",
   "SelectorVDREmptyScreenDescription": "양식을 공유하고 양식 작성을 위해 룸 참여자에게 역할을 할당하려면 가상 데이터 룸을 생성하세요.",
   "SelectPDFFormat": ".PDF 파일 선택",
   "SelectRoom": "방 선택",

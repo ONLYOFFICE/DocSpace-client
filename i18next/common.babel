@@ -106808,7 +106808,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>SelectorInfoBarTitle</name>
+								<name>SelectorInfoBarOfVDRDescription</name>
 								<description/>
 								<comment/>
 								<translations>
@@ -106943,7 +106943,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>SelectorInfoBarVDRDescription</name>
+								<name>SelectorInfoBarTitle</name>
 								<description/>
 								<comment/>
 								<translations>

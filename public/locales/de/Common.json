@@ -776,7 +776,6 @@
   "SelectorFormRoomEmptyScreenDescription": "Um Ihr Formular freizugeben und Antworten zu sammeln, erstellen Sie bitte einen Raum zum Formularausfüllen.",
   "SelectorInfoBarDescription": "Geben Sie Ihr Formular frei und sammeln Sie Antworten über einen Raum zum Formularausfüllen. Wählen Sie einen vorhandenen Raum aus oder erstellen Sie einen neuen.",
   "SelectorInfoBarTitle": "Zum Ausfüllen in den Raum schicken",
-  "SelectorInfoBarVDRDescription": "Teilen Sie Ihr Formular in einem virtuellen Datenraum. Weisen Sie den Raumteilnehmern Rollen zum Ausfüllen des Formulars zu. Wählen Sie einen vorhandenen Raum aus oder erstellen Sie einen neuen.",
   "SelectorVDREmptyScreenDescription": "Um Ihr Formular freizugeben und den Raumteilnehmern Rollen zum Ausfüllen zuzuweisen, erstellen Sie bitte einen virtuellen Datenraum.",
   "SelectPDFFormat": ".PDF-Datei auswählen",
   "SelectRoom": "Raum auswählen",

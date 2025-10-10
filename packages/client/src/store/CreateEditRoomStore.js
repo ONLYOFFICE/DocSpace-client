@@ -587,8 +587,6 @@ class CreateEditRoomStore {
       if (!isThirdparty && storageFolderId)
         deleteThirdParty(thirdpartyAccount.providerId);
 
-      this.onOpenNewRoom(room);
-
       if (processCreatingRoomFromData) {
         const selections =
           selection.length > 0 && selection[0] != null
@@ -601,6 +599,7 @@ class CreateEditRoomStore {
           (error) => console.error(error),
         );
       }
+      await this.onOpenNewRoom(room);
 
       if (successToast) toastr.success(successToast);
     } catch (err) {
@@ -691,7 +690,7 @@ class CreateEditRoomStore {
 
     const path = getCategoryUrl(CategoryType.SharedRoom, room.id);
 
-    setSelection && setSelection([]);
+    setSelection && setSelection([{ ...room, isRoom: true }]);
 
     window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
 

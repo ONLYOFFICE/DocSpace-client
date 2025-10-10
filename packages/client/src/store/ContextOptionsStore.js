@@ -511,7 +511,7 @@ class ContextOptionsStore {
       return toastr.success(t("Common:LinkCopySuccess"));
     }
 
-    if (isShared && !isArchive && !isSystemFolder && !item.external) {
+    if (isShared && !isArchive && !isSystemFolder && item.canShare) {
       try {
         const itemLink = item.isFolder
           ? await getFolderLink(item.id)

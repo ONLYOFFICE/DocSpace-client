@@ -75,6 +75,7 @@ type BodyProps = {
   setImage: AvatarEditorDialogStore["setImage"];
 
   contactsTab: UsersStore["contactsTab"];
+  checkIsExpiredLinkAsync: TStore["filesActionsStore"]["isExpiredLinkAsync"];
 };
 
 const InfoPanelBodyContent = ({
@@ -100,6 +101,7 @@ const InfoPanelBodyContent = ({
   onSaveRoomLogo,
   onChangeFile,
   setImage,
+  checkIsExpiredLinkAsync,
 }: BodyProps) => {
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
@@ -121,7 +123,7 @@ const InfoPanelBodyContent = ({
   const isSeveralItems = Array.isArray(selection) && selection.length > 1;
   const isNoItem =
     !selection ||
-    (isRoom && selection.expired && selection.external) ||
+    (!Array.isArray(selection) && selection.expired && selection.external) ||
     isLockedSharedRoom ||
     (isRoot && !isGallery);
 
@@ -142,6 +144,12 @@ const InfoPanelBodyContent = ({
     }
   }, [fileView, selection]);
 
+  React.useEffect(() => {
+    if (!selection) return;
+
+    checkIsExpiredLinkAsync(selection);
+  }, [selection]);
+
   const getView = () => {
     if (isUsers || isGuests) return <Users isGuests={isGuests} />;
 
@@ -154,13 +162,14 @@ const InfoPanelBodyContent = ({
 
     if (isNoItem || !selection) {
       const lockedSharedRoomProps = isLockedSharedRoom
-        ? { isLockedSharedRoom, infoPanelSelection: selection }
+        ? { isLockedSharedRoom }
         : {};
       return (
         <NoItem
           isRooms={isRooms}
           isFiles={isFiles}
           isTemplatesRoom={isTemplatesRoom}
+          infoPanelSelection={selection}
           {...lockedSharedRoomProps}
         />
       );
@@ -233,6 +242,7 @@ export default inject(
     avatarEditorDialogStore,
     dialogsStore,
     peopleStore,
+    filesActionsStore,
   }: TStore) => {
     const { contactsTab } = peopleStore.usersStore;
     const {
@@ -244,6 +254,7 @@ export default inject(
       setView,
     } = infoPanelStore;
 
+    const { isExpiredLinkAsync } = filesActionsStore;
     const { editRoomDialogProps, createRoomDialogProps, templateEventVisible } =
       dialogsStore;
 
@@ -282,6 +293,7 @@ export default inject(
       onSaveRoomLogo,
       onChangeFile,
       setImage,
+      checkIsExpiredLinkAsync: isExpiredLinkAsync,
     };
   },
 )(observer(InfoPanelBodyContent));

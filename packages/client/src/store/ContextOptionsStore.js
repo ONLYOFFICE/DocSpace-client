@@ -254,15 +254,19 @@ class ContextOptionsStore {
   onOpenFolder = async (item, t) => {
     const { isExpiredLinkAsync } = this.filesActionsStore;
 
-    if (
-      isRoomUtil(item) &&
-      item.external &&
-      (item.expired || (await isExpiredLinkAsync(item)))
-    )
-      return toastr.error(
-        t("Common:RoomLinkExpired"),
-        t("Common:RoomNotAvailable"),
-      );
+    if (item.external && (item.expired || (await isExpiredLinkAsync(item)))) {
+      const isRoom = isRoomUtil(item);
+
+      const description = isRoom
+        ? t("Common:RoomLinkExpired")
+        : t("Common:FolderLinkExpired");
+
+      const title = isRoom
+        ? t("Common:RoomNotAvailable")
+        : t("Common:FolderNotAvailable");
+
+      return toastr.error(description, title);
+    }
 
     if (isLockedSharedRoom(item))
       return this.dialogsStore.setPasswordEntryDialog(true, item);

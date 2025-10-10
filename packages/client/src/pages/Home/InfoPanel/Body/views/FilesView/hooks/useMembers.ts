@@ -309,12 +309,10 @@ export const useMembers = ({
     }
   };
 
-  React.useEffect(() => {
-    fetchMembers();
-    scrollToTop();
-
-    setIsMembersPanelUpdating(false);
-  }, [fetchMembers, setIsMembersPanelUpdating, scrollToTop, searchValue]);
+  const handleSearchMembers = (value: string) => {
+    setSearchValue(value);
+    setIsMembersPanelUpdating(true);
+  };
 
   React.useEffect(() => {
     if (isMembersPanelUpdating) {
@@ -436,7 +434,7 @@ export const useMembers = ({
 
   return {
     searchValue,
-    setSearchValue,
+    handleSearchMembers,
     isLoading,
     isFirstLoading,
     members,

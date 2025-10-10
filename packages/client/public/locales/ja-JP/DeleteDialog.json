@@ -3,7 +3,15 @@
   "DeleteAllGroupsTitle": "グループの削除",
   "DeleteGroupDescription": "{{groupName}} グループが削除されます。グループ内のユーザーは{{productName}}から削除されません。続けてよろしいですか？",
   "DeleteGroupTitle": "グループの削除",
+  "DeleteRoom": "<strong>「{{roomName}}」</strong> ルームは永久に削除されます。すべてのデータとユーザーアクセスが失われます。",
+  "DeleteRoomTitle": "このルームを削除しますか？",
+  "DeleteRoomWarning": "私は上記の説明を理解しており、ルームを削除したいです",
   "DeleteTemplate": "本当にテンプレートルーム<1>«{{templateName}}»</1>を削除しますか？テンプレートは復元できません。",
   "DeleteTemplates": "選択したルームテンプレートを本当に削除しますか？それらは復元できません。",
-  "FileDeletedAfter": "ファイルは30日で永久に削除されます。"
+  "DeleteTemplateWarning": "私は上記のことを理解しており、テンプレートを削除したいです。",
+  "FileDeletedAfter": "ファイルは30日で永久に削除されます。",
+  "FilesDeletedAfter": "ファイルは30日後に永久に削除されます。",
+  "FolderDeletedAfter": "フォルダーは30日以内に永久に削除されます。",
+  "FoldersDeletedAfter": "フォルダーは30日後に完全に削除されます。",
+  "ItemsDeletedAfter": "これらのアイテムは30日後に永久に削除されます。"
 }

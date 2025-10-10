@@ -36,6 +36,7 @@
   "InviteNewUsers": "Invite new users",
   "InviteRootRoomDescription": "Send an invitation to add new members to your {{productName}}",
   "InviteUsersOptionDescription": "Add members for joint editing in the room",
+  "ManageAccess": "Manage access",
   "MigrationDataDescription": "Import data to your {{productName}} from {{organizationName}} Workspace, Google Workspace, or Nextcloud.",
   "MigrationDataTitle": "Migration Data",
   "NoRecentFilesHereYet": "No recent files here yet",
@@ -46,13 +47,12 @@
   "ShareOptionTitle": "Share a room",
   "SharePublicRoomOptionDescription": "Enable external link access to other users.",
   "SharePublicRoomOptionTitle": "Share the room with all users",
+  "TemplateAccessDescription": "Control who can use this template",
   "UploadDeviceOptionDescription": "Upload any type files from your personal device",
   "UploadDeviceOptionTitle": "Upload from your Device",
   "UploadDevicePDFFormOptionDescription": "Upload a ready PDF form to the room from your device.",
   "UploadDevicePDFFormOptionTitle": "Upload from device",
   "UploadFromPortalTitle": "Upload from {{productName}}",
   "UploadPDFFormOptionDescription": "Select a ready PDF form available in {{productName}} and upload it to the room.",
-  "VirtualDataRoomEmptyTitle": "Welcome to the Virtual Data Room",
-  "ManageAccess": "Manage access",
-  "TemplateAccessDescription": "Control who can use this template"
+  "VirtualDataRoomEmptyTitle": "Welcome to the Virtual Data Room"
 }

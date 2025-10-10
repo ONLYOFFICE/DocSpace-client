@@ -28,8 +28,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 
-import { RecaptchaType } from "@docspace/shared/enums";
-
+import { RecaptchaType } from "../enums";
 import { captchaManager } from "../utils/captchaManager";
 
 type UseCaptchaOptions = {
@@ -175,6 +174,7 @@ export const useCaptcha = ({
       reset();
     }
   }, [isVisible, reset]);
+
   useEffect(() => {
     return () => {
       if (showTimeoutRef.current) {

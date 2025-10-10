@@ -30,8 +30,8 @@ import classNames from "classnames";
 import ReCAPTCHA from "react-google-recaptcha";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 
-import { RecaptchaType } from "@docspace/shared/enums";
-import { Text } from "@docspace/shared/components/text";
+import { RecaptchaType } from "../../enums";
+import { Text } from "../text";
 
 import styles from "./Captcha.module.scss";
 
@@ -89,4 +89,5 @@ const Captcha = ({
     </div>
   );
 };
+
 export default Captcha;

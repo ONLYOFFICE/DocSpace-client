@@ -24,15 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@docspace/shared/styles/mixins";
-
 .captchaWrapper {
   margin: 24px 0;
   width: fit-content;
 
   .captchaContainer {
     &.isError {
-      border: var(--login-captcha-error-border);
+      border: 1px solid #f24724;
       padding-block: 4px;
       padding-inline: 2px 4px;
     }
@@ -41,7 +39,7 @@
 
   &.isError {
     p {
-      color: var(--login-captcha-error-color);
+      color: #f24724;
     }
   }
 }

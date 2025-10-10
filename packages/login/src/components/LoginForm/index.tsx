@@ -62,7 +62,8 @@ import {
   getEmailFromInvitation,
   getRedirectURL,
 } from "@/utils";
-import { useCaptcha } from "@/hooks/useCaptcha";
+import { useCaptcha } from "@docspace/shared/hooks/useCaptcha";
+import Captcha from "@docspace/shared/components/captcha";
 
 import EmailContainer from "./sub-components/EmailContainer";
 import PasswordContainer from "./sub-components/PasswordContainer";
@@ -71,7 +72,6 @@ import LDAPContainer from "./sub-components/LDAPContainer";
 
 import { LoginDispatchContext, LoginValueContext } from "../Login";
 import OAuthClientInfo from "../ConsentInfo";
-import Captcha from "../Captcha";
 
 const LoginForm = ({
   hashSettings,

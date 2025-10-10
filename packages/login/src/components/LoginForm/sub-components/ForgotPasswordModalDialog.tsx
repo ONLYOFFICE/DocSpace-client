@@ -41,13 +41,12 @@ import { sendInstructionsToChangePassword } from "@docspace/shared/api/people";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { InputSize } from "@docspace/shared/components/text-input";
 import { ButtonKeys } from "@docspace/shared/enums";
+import { useCaptcha } from "@docspace/shared/hooks/useCaptcha";
+import Captcha from "@docspace/shared/components/captcha";
 
 import { ForgotPasswordModalDialogProps, TError } from "@/types";
-import { useCaptcha } from "@/hooks/useCaptcha";
 
 import ModalDialogContainer from "../../ModalDialogContainer";
-
-import Captcha from "../../Captcha";
 
 const ForgotPasswordModalDialog = ({
   isVisible,

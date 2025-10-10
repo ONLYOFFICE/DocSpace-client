@@ -2744,7 +2744,6 @@ class FilesStore {
       return templateOptions;
     }
     if (isRoom) {
-      const isAgent = item.roomType === RoomsType.AIRoom;
       const canInviteUserInRoom = item.security?.EditAccess;
       const canRemoveRoom = item.security?.Delete;
 

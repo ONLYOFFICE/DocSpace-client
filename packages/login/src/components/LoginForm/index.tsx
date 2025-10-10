@@ -36,8 +36,6 @@ import React, {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { isSafari } from "react-device-detect";
-import ReCAPTCHA from "react-google-recaptcha";
-import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useTheme } from "styled-components";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Id } from "react-toastify";
@@ -54,7 +52,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { thirdPartyLogin, checkConfirmLink } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
-import { ButtonKeys, RecaptchaType } from "@docspace/shared/enums";
+import { ButtonKeys } from "@docspace/shared/enums";
 import { getCookie } from "@docspace/shared/utils";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
@@ -64,6 +62,7 @@ import {
   getEmailFromInvitation,
   getRedirectURL,
 } from "@/utils";
+import { useCaptcha } from "@/hooks/useCaptcha";
 
 import EmailContainer from "./sub-components/EmailContainer";
 import PasswordContainer from "./sub-components/PasswordContainer";
@@ -73,8 +72,6 @@ import LDAPContainer from "./sub-components/LDAPContainer";
 import { LoginDispatchContext, LoginValueContext } from "../Login";
 import OAuthClientInfo from "../ConsentInfo";
 import Captcha from "../Captcha";
-
-//import { StyledCaptcha } from "./LoginForm.styled";
 
 const LoginForm = ({
   hashSettings,
@@ -132,12 +129,13 @@ const LoginForm = ({
   const [isLdapLoginChecked, setIsLdapLoginChecked] = useState(
     ldapEnabled || false,
   );
-  const [isCaptcha, setIsCaptcha] = useState(false);
-  const [isCaptchaSuccessful, setIsCaptchaSuccess] = useState(false);
-  const [isCaptchaError, setIsCaptchaError] = useState(false);
 
-  const captchaRef = useRef<ReCAPTCHA>(null);
-  const hCaptchaRef = useRef<HCaptcha>(null);
+  const captcha = useCaptcha({
+    publicKey: reCaptchaPublicKey,
+    type: reCaptchaType,
+    enabled: false,
+    id: "login-form",
+  });
 
   useLayoutEffect(() => {
     const email = getEmailFromInvitation(loginData);
@@ -209,18 +207,11 @@ const LoginForm = ({
   }, [authError, ready, t]);
 
   useEffect(() => {
-    if (!isModalOpen) return;
-
-    setIsCaptcha(false);
-    setIsCaptchaSuccess(false);
-    setIsCaptchaError(false);
-
-    if (reCaptchaType === RecaptchaType.hCaptcha) {
-      hCaptchaRef.current?.resetCaptcha?.();
-    } else {
-      captchaRef.current?.reset?.();
+    if (isModalOpen) {
+      captcha.hide();
+      captcha.reset();
     }
-  }, [isModalOpen, reCaptchaType]);
+  }, [isModalOpen, captcha]);
 
   useEffect(() => {
     const profile = localStorage.getItem("profile");
@@ -273,18 +264,12 @@ const LoginForm = ({
   };
 
   const onSubmit = useCallback(async () => {
-    // errorText && setErrorText("");
-    let captchaToken: string | undefined | null = "";
-
-    if (reCaptchaPublicKey && isCaptcha) {
-      if (!isCaptchaSuccessful) {
-        setIsCaptchaError(true);
-        return;
-      }
-
-      captchaToken = captchaRef.current?.getValue();
-      if (captchaToken) setIsCaptchaError(false);
+    const captchaValidation = captcha.validateBeforeSubmit();
+    if (!captchaValidation.isValid) {
+      return;
     }
+
+    const captchaToken = captchaValidation.token;
 
     let hasError = false;
 
@@ -358,11 +343,9 @@ const LoginForm = ({
           reCaptchaPublicKey &&
           (error as { response: { status: number } })?.response?.status === 403
         ) {
-          setIsCaptcha(true);
-        }
-
-        if (isCaptcha && captchaRef.current) {
-          captchaRef.current.reset();
+          captcha.show();
+        } else if (captcha.isVisible) {
+          captcha.reset();
         }
 
         setIsEmailErrorShow(true);
@@ -485,11 +468,9 @@ const LoginForm = ({
         }
 
         if (reCaptchaPublicKey && error?.response?.status === 403) {
-          setIsCaptcha(true);
-        }
-
-        if (isCaptcha && captchaRef.current) {
-          captchaRef.current.reset();
+          captcha.show();
+        } else if (captcha.isVisible) {
+          captcha.reset();
         }
 
         setIsEmailErrorShow(true);
@@ -499,7 +480,7 @@ const LoginForm = ({
       });
   }, [
     reCaptchaPublicKey,
-    isCaptcha,
+    captcha,
     identifier,
     password,
     identifierValid,
@@ -512,7 +493,6 @@ const LoginForm = ({
     client?.clientId,
     currentCulture,
     reCaptchaType,
-    isCaptchaSuccessful,
     linkData,
     router,
     baseDomain,
@@ -542,9 +522,8 @@ const LoginForm = ({
   const onChangeLdapLoginCheckbox = () =>
     setIsLdapLoginChecked(!isLdapLoginChecked);
 
-  const onSuccessfullyComplete = () => {
-    setIsCaptchaSuccess(true);
-    setIsCaptchaError(false);
+  const onCaptchaSuccess = () => {
+    captcha.onSuccess();
   };
 
   const errorMessage = () => {
@@ -643,17 +622,17 @@ const LoginForm = ({
         />
       ) : null}
 
-      {reCaptchaPublicKey && isCaptcha && !isModalOpen ? (
+      {reCaptchaPublicKey && captcha.isVisible && !isModalOpen ? (
         <Captcha
+          key="login-form-captcha"
           type={reCaptchaType}
           publicKey={reCaptchaPublicKey}
           theme={theme}
-          isError={isCaptchaError}
+          isError={captcha.isError}
           errorText={t("Errors:LoginWithBruteForceCaptcha")}
-          onSuccessfullyComplete={onSuccessfullyComplete}
-          captchaRef={
-            reCaptchaType === RecaptchaType.hCaptcha ? hCaptchaRef : captchaRef
-          }
+          onSuccessfullyComplete={onCaptchaSuccess}
+          reCaptchaRef={captcha.captchaRef}
+          hCaptchaRef={captcha.hCaptchaRef}
         />
       ) : null}
       <Button

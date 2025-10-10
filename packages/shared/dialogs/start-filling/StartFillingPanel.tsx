@@ -318,8 +318,8 @@ const StartFillingPanel = ({
           {infoBarVisible ? (
             <>
               <PublicRoomBar
-                headerText={t("Common:FillingStatusBarTitle")}
-                bodyText={t("Common:FillingStatusBarDescription")}
+                headerText={t("Common:StartFillingBarHeader")}
+                bodyText={t("Common:StartFillingBarDescription")}
                 iconName={InfoSvgUrl}
                 onClose={() => setInfoBarVisible(false)}
               />
@@ -331,7 +331,7 @@ const StartFillingPanel = ({
               [styles.titleMargin]: !infoBarVisible,
             })}
           >
-            {t("Common:RolesFromTheForm")}
+            {t("Common:RecipientsFromTheForm")}
           </p>
           <FillingRoleSelector
             roles={roles}

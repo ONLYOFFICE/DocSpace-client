@@ -220,7 +220,7 @@ const StartFillingPanel = ({
   const headerProps = useMemo(
     () =>
       ({
-        headerLabel: t("Common:AssignToRole"),
+        headerLabel: t("Common:AssignToRecipient"),
         withoutBackButton: false,
         withoutBorder: false,
         isCloseable: true,

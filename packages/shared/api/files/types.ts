@@ -144,6 +144,7 @@ export type TFile = {
   isFavorite?: boolean;
   expirationDate?: string;
   sharedForUser?: boolean;
+  external?: boolean;
 };
 
 export type TOpenEditRequest = {
@@ -238,6 +239,8 @@ export type TFolder = {
   isFavorite?: boolean;
   expirationDate?: string;
   sharedForUser?: boolean;
+  expired?: boolean;
+  external?: boolean;
 };
 
 export type TGetFolderPath = TFolder[];

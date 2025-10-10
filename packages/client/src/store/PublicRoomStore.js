@@ -240,7 +240,7 @@ class PublicRoomStore {
         : CategoryType.SharedWithMe;
 
     if (categoryType === CategoryType.SharedWithMe) {
-      sessionStorage.setItem(TOAST_FOLDER_PUBLIC_KEY, res.entityId.toString());
+      sessionStorage.setItem(TOAST_FOLDER_PUBLIC_KEY, res.id.toString());
     }
 
     const filter = FilesFilter.getDefault();

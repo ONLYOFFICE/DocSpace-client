@@ -480,6 +480,7 @@ const SetRoomParams = ({
         tooltipLabel={
           isTemplateSelected || isTemplate ? t("Files:RoomTagsTooltip") : ""
         }
+        isMobile={isMobile}
       />
 
       {/* //TODO: Uncomment when private rooms are done

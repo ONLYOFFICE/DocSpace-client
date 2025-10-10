@@ -858,8 +858,6 @@ class FilesTableHeader extends React.Component {
 
     setIsLoading(true);
 
-    const currentUrl = window.location.href;
-
     window.DocSpace.navigate(
       `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`,
     );

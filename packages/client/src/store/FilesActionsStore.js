@@ -77,11 +77,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { toastr } from "@docspace/shared/components/toast";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import {
-  isDesktop,
-  isLockedSharedRoom,
-  isSystemFolder,
-} from "@docspace/shared/utils";
+import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
   isFile as isFileCheck,
@@ -1707,11 +1703,7 @@ class FilesActionStore {
       sharedWithMeFolderId,
     } = this.treeFoldersStore;
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
-    const {
-      rootFolderType,
-      shared,
-      id: selectedFolderId,
-    } = this.selectedFolderStore;
+    const { rootFolderType } = this.selectedFolderStore;
 
     const setIsLoading = (param) => {
       setIsSectionBodyLoading(param);

@@ -233,7 +233,7 @@ class PublicRoomStore {
     );
   };
 
-  gotoFolder = (res, key) => {
+  gotoFolder = (res) => {
     const categoryType =
       res.isRoom || res.isRoomMember
         ? CategoryType.Shared

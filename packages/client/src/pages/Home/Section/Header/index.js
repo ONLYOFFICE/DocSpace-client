@@ -161,7 +161,6 @@ const SectionHeaderContent = (props) => {
     revokeFilesOrder,
     saveIndexOfFiles,
     infoPanelRoom,
-    getPublicKey,
     getIndexingArray,
     setCloseEditIndexDialogVisible,
     rootFolderId,
@@ -943,7 +942,6 @@ export default inject(
       createFoldersTree,
       revokeFilesOrder,
       saveIndexOfFiles,
-      getPublicKey,
     } = filesActionsStore;
 
     const { setIsVisible, isVisible, infoPanelRoomSelection } = infoPanelStore;
@@ -1165,7 +1163,6 @@ export default inject(
       rootFolderId,
       displayAbout,
       infoPanelRoom: infoPanelRoomSelection,
-      getPublicKey,
       getIndexingArray,
       setCloseEditIndexDialogVisible,
       welcomeFormFillingTipsVisible,

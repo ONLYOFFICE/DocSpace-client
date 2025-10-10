@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
-import { useSearchParams } from "react-router";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import className from "classnames";
@@ -45,7 +44,6 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
-import FilesFilter from "@docspace/shared/api/files/filter";
 import { createExternalLink } from "@docspace/shared/api/rooms";
 import MembersList from "@docspace/shared/components/share/sub-components/List";
 
@@ -445,8 +443,7 @@ export default inject(
 
     const { id: selfId } = userStore.user!;
 
-    const { primaryLink, additionalLinks, setExternalLink, setPublicRoomKey } =
-      publicRoomStore;
+    const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
 
     const { isArchiveFolderRoot } = treeFoldersStore;
     const { setTemplateAccessSettingsVisible: setAccessSettingsIsVisible } =
@@ -483,7 +480,6 @@ export default inject(
       isMembersPanelUpdating,
       setIsMembersPanelUpdating,
       currentId: id,
-      setPublicRoomKey,
       setAccessSettingsIsVisible,
       templateAvailable: templateAvailableToEveryone,
       isRootFolder,

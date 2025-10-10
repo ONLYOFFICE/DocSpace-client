@@ -28,7 +28,6 @@ import axios, {
   type AxiosInstance,
   type AxiosRequestConfig,
   type AxiosResponse,
-  type InternalAxiosRequestConfig,
 } from "axios";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";

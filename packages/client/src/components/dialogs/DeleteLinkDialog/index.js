@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router";
 import { inject, observer } from "mobx-react";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
@@ -51,13 +50,9 @@ const DeleteLinkDialogComponent = (props) => {
     isPublicRoomType,
     isFormRoom,
     isCustomRoom,
-    setPublicRoomKey,
-    isRootFolder,
-    updateUrlKeyForCustomRoom,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const onClose = () => {
     setIsVisible(false);

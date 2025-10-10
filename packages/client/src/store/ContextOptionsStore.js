@@ -128,7 +128,6 @@ import {
   formRoleMapping,
   getFileLink,
   getFolderLink,
-  removeSharedFolder,
   removeSharedFolderOrFile,
 } from "@docspace/shared/api/files";
 
@@ -639,27 +638,6 @@ class ContextOptionsStore {
   //   );
   // };
 
-  onRemoveSharedRooms = async (items) => {
-    if (!Array.isArray(items) || items.length === 0) return;
-
-    const { setGroupMenuBlocked } = this.filesActionsStore;
-    const { addActiveItems } = this.filesStore;
-    const { clearActiveOperations } = this.uploadDataStore;
-
-    const folderIds = items.map((item) => item.id);
-
-    try {
-      setGroupMenuBlocked(true);
-      addActiveItems(null, folderIds);
-      await removeSharedFolder(folderIds);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setGroupMenuBlocked(false);
-      clearActiveOperations([], folderIds);
-    }
-  };
-
   onRemoveSharedFilesOrFolder = async (items) => {
     if (!Array.isArray(items) || items.length === 0) return;
 
@@ -669,7 +647,7 @@ class ContextOptionsStore {
 
     const { folderIds, fileIds } = items.reduce(
       (acc, item) => {
-        if (isFolderUtil(item)) acc.folderIds.push(item.id);
+        if (isFolderUtil(item) || isRoomUtil(item)) acc.folderIds.push(item.id);
         else if (isFileUtil(item)) acc.fileIds.push(item.id);
 
         return acc;
@@ -2205,7 +2183,7 @@ class ContextOptionsStore {
         key: "remove-shared-room",
         label: t("Common:RemoveFromList"),
         icon: CircleCrossSvgUrl,
-        onClick: () => this.onRemoveSharedRooms([item]),
+        onClick: () => this.onRemoveSharedFilesOrFolder([item]),
         disabled: this.userStore?.user?.isAdmin || !item.external,
       },
       {

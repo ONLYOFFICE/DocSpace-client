@@ -70,7 +70,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     isTemplatesFolder,
     onClickLock,
     onClickFavorite,
-    isRecentFolder,
     isTrashFolder,
     openShareTab,
   } = props;
@@ -313,7 +312,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
 
           {!isRoom(item) &&
           item?.isFavorite &&
-          !isRecentFolder &&
           !isPublicRoom &&
           !isTrashFolder ? (
             <IconButton

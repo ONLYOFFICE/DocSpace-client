@@ -2403,13 +2403,6 @@ class FilesStore {
         ]);
       }
 
-      if (isRecentFolder) {
-        fileOptions = removeOptions(fileOptions, [
-          "mark-as-favorite",
-          "remove-from-favorites",
-        ]);
-      }
-
       if (!item.security?.FillingStatus) {
         fileOptions = removeOptions(fileOptions, ["filling-status"]);
       }
@@ -2565,13 +2558,6 @@ class FilesStore {
       if (isFavoritesFolder) {
         fileOptions = removeOptions(fileOptions, ["mark-as-favorite"]);
         fileOptions = removeOptions(fileOptions, ["delete"]);
-      }
-
-      if (isRecycleBinFolder) {
-        fileOptions = removeOptions(fileOptions, [
-          "mark-as-favorite",
-          "remove-from-favorites",
-        ]);
       }
 
       if (isEncrypted) {

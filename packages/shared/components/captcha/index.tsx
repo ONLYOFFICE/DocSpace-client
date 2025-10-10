@@ -119,6 +119,7 @@ const Captcha = ({
             sitekey={publicKey!}
             ref={recaptchaRef}
             theme={themeMode}
+            isolated
             onChange={handleVerify}
             onErrored={handleExpire}
             onExpired={handleExpire}

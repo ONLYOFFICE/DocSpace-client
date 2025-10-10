@@ -473,6 +473,8 @@ const SectionFilterContent = ({
     roomsFilter.filterValue,
     filter.search,
     usersFilter.search,
+    groupsFilter.search,
+    contactsTab,
   ]);
 
   const getSelectedSortData = React.useCallback(() => {

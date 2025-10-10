@@ -24,8 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import ReCAPTCHA from "react-google-recaptcha";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
+import { useTheme } from "styled-components";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { EmailInput } from "@docspace/shared/components/email-input";
@@ -39,24 +42,62 @@ import { toastr } from "@docspace/shared/components/toast";
 import { sendInstructionsToChangePassword } from "@docspace/shared/api/people";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { InputSize } from "@docspace/shared/components/text-input";
-import { ButtonKeys } from "@docspace/shared/enums";
+import { ButtonKeys, RecaptchaType } from "@docspace/shared/enums";
 
-import { ForgotPasswordModalDialogProps } from "@/types";
+import { ForgotPasswordModalDialogProps, TError } from "@/types";
 
 import ModalDialogContainer from "../../ModalDialogContainer";
+
+import Captcha from "../../Captcha";
 
 const ForgotPasswordModalDialog = ({
   isVisible,
   userEmail,
   onDialogClose,
+  reCaptchaPublicKey,
+  reCaptchaType,
 }: ForgotPasswordModalDialogProps) => {
   const [email, setEmail] = useState(userEmail ?? "");
   const [emailError, setEmailError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorText, setErrorText] = useState("");
   const [isShowError, setIsShowError] = useState(false);
+  const [isCaptchaVisible, setIsCaptchaVisible] = useState(false);
+  const [isCaptchaSuccessful, setIsCaptchaSuccessful] = useState(false);
+  const [isCaptchaError, setIsCaptchaError] = useState(false);
 
   const { t } = useTranslation(["Login", "Common"]);
+  const theme = useTheme();
+
+  const captchaRef = useRef<ReCAPTCHA | null>(null);
+  const hCaptchaRef = useRef<HCaptcha | null>(null);
+
+  const resetCaptcha = useCallback(() => {
+    if (!reCaptchaPublicKey) return;
+
+    if (reCaptchaType === RecaptchaType.hCaptcha) {
+      hCaptchaRef.current?.resetCaptcha?.();
+    } else {
+      captchaRef.current?.reset?.();
+    }
+
+    setIsCaptchaSuccessful(false);
+  }, [reCaptchaPublicKey, reCaptchaType]);
+
+  const getCaptchaToken = useCallback(() => {
+    if (!reCaptchaPublicKey || !isCaptchaVisible) return undefined;
+
+    if (reCaptchaType === RecaptchaType.hCaptcha) {
+      return hCaptchaRef.current?.getResponse?.() ?? undefined;
+    }
+
+    return captchaRef.current?.getValue?.() ?? undefined;
+  }, [reCaptchaPublicKey, isCaptchaVisible, reCaptchaType]);
+
+  const onSuccessfullyComplete = useCallback(() => {
+    setIsCaptchaSuccessful(true);
+    setIsCaptchaError(false);
+  }, []);
 
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     // console.log("onChangeEmail", event.target.value);
@@ -70,18 +111,75 @@ const ForgotPasswordModalDialog = ({
       setEmailError(true);
       setIsShowError(true);
     } else {
+      let captchaToken: string | undefined;
+
+      if (reCaptchaPublicKey && isCaptchaVisible) {
+        setIsCaptchaError(false);
+
+        if (!isCaptchaSuccessful) {
+          setIsCaptchaError(true);
+          return;
+        }
+
+        captchaToken = getCaptchaToken();
+
+        if (!captchaToken) {
+          setIsCaptchaError(true);
+          return;
+        }
+      }
+
       setIsLoading(true);
 
       try {
-        const res = (await sendInstructionsToChangePassword(email)) as string;
+        const res = (await sendInstructionsToChangePassword(
+          email,
+          captchaToken,
+          captchaToken ? reCaptchaType : undefined,
+        )) as string;
         toastr.success(res);
-      } catch (e) {
-        toastr.error(e as string);
-      } finally {
         onDialogClose();
+      } catch (e) {
+        const error = e as TError;
+
+        let errorMessage = "";
+        if (typeof error === "object") {
+          errorMessage =
+            error?.response?.data?.error?.message ||
+            error?.statusText ||
+            error?.message ||
+            "";
+        } else if (typeof error === "string") {
+          errorMessage = error;
+        }
+
+        if (errorMessage) {
+          toastr.error(errorMessage);
+        }
+
+        const status =
+          typeof error === "object" ? error?.response?.status : undefined;
+
+        if (reCaptchaPublicKey && status === 403) {
+          setIsCaptchaVisible(true);
+          setIsCaptchaError(true);
+          resetCaptcha();
+        }
+      } finally {
+        setIsLoading(false);
       }
     }
-  }, [email, emailError, onDialogClose]);
+  }, [
+    email,
+    emailError,
+    getCaptchaToken,
+    isCaptchaVisible,
+    isCaptchaSuccessful,
+    onDialogClose,
+    reCaptchaPublicKey,
+    reCaptchaType,
+    resetCaptcha,
+  ]);
 
   const onKeyDown = React.useCallback(
     (e: KeyboardEvent) => {
@@ -158,6 +256,21 @@ const ForgotPasswordModalDialog = ({
               onBlur={onBlurEmail}
             />
           </FieldContainer>
+          {reCaptchaPublicKey && isCaptchaVisible ? (
+            <Captcha
+              type={reCaptchaType}
+              publicKey={reCaptchaPublicKey}
+              theme={theme}
+              isError={isCaptchaError}
+              errorText={t("Errors:LoginWithBruteForceCaptcha")}
+              onSuccessfullyComplete={onSuccessfullyComplete}
+              captchaRef={
+                reCaptchaType === RecaptchaType.hCaptcha
+                  ? hCaptchaRef
+                  : captchaRef
+              }
+            />
+          ) : null}
         </ModalDialogContainer>
       </ModalDialog.Body>
       <ModalDialog.Footer>

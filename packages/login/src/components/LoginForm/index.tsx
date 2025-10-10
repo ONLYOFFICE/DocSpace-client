@@ -209,6 +209,20 @@ const LoginForm = ({
   }, [authError, ready, t]);
 
   useEffect(() => {
+    if (!isModalOpen) return;
+
+    setIsCaptcha(false);
+    setIsCaptchaSuccess(false);
+    setIsCaptchaError(false);
+
+    if (reCaptchaType === RecaptchaType.hCaptcha) {
+      hCaptchaRef.current?.resetCaptcha?.();
+    } else {
+      captchaRef.current?.reset?.();
+    }
+  }, [isModalOpen, reCaptchaType]);
+
+  useEffect(() => {
     const profile = localStorage.getItem("profile");
     if (!profile) return;
 
@@ -617,6 +631,8 @@ const LoginForm = ({
         isChecked={isChecked}
         identifier={typeof identifier === "string" ? identifier : identifier[0]}
         onChangeCheckbox={onChangeCheckbox}
+        reCaptchaPublicKey={reCaptchaPublicKey}
+        reCaptchaType={reCaptchaType}
       />
 
       {ldapDomain && ldapEnabled ? (
@@ -627,7 +643,7 @@ const LoginForm = ({
         />
       ) : null}
 
-      {reCaptchaPublicKey && isCaptcha ? (
+      {reCaptchaPublicKey && isCaptcha && !isModalOpen ? (
         <Captcha
           type={reCaptchaType}
           publicKey={reCaptchaPublicKey}

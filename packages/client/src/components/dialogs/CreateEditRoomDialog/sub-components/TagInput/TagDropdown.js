@@ -146,6 +146,7 @@ const TagDropdown = ({
       withBackdrop={false}
       isDefaultMode={false}
       manualY="54px"
+      eventTypes={["click"]}
     >
       {dropdownItems.length > MAX_ITEMS_COUNT ? (
         <Scrollbar style={{ height: `${32 * MAX_ITEMS_COUNT}px` }}>

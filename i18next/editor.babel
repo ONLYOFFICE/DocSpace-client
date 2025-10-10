@@ -2053,7 +2053,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>FormVDRConfirmationOfStartDescription</name>
+								<name>FormVDRConfirmationOfStartTitle</name>
 								<description/>
 								<comment/>
 								<translations>
@@ -2188,7 +2188,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>FormVDRConfirmationOfStartTitle</name>
+								<name>FormVDRNextRecepientDescription</name>
 								<description/>
 								<comment/>
 								<translations>
@@ -2458,7 +2458,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>FormVDRYourTurnDescription</name>
+								<name>FormVDRYouFirstRecepientDescription</name>
 								<description/>
 								<comment/>
 								<translations>

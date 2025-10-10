@@ -122,7 +122,7 @@ export const useShare = ({
 
           const idx = newLinks.findIndex((l) => "isLoaded" in l && l.isLoaded);
 
-          if (typeof idx !== "undefined") newLinks[idx] = { ...link };
+          if (idx !== -1) newLinks[idx] = { ...link };
 
           return newLinks;
         });
@@ -165,7 +165,7 @@ export const useShare = ({
 
         const idx = newLinks.findIndex((l) => "isLoaded" in l && l.isLoaded);
 
-        if (typeof idx !== "undefined") newLinks[idx] = { ...newLink };
+        if (idx !== -1) newLinks[idx] = { ...newLink };
 
         return newLinks;
       });
@@ -281,17 +281,21 @@ export const useShare = ({
         access: ShareAccessRights.None,
       });
 
-      if (link.canEditExpirationDate) {
+      if (link.canRevoke) {
+        setLoadingLinks((prev) => prev.filter((l) => l !== link.sharedTo.id));
+
+        if (newLink)
+          setFileLinks((links) =>
+            links.map((l) =>
+              "sharedTo" in l && l.sharedTo.id === link.sharedTo.id
+                ? newLink
+                : l,
+            ),
+          );
+        toastr.success(t("Common:GeneralLinkRevokedAndCreatedSuccessfully"));
+      } else {
         deleteLink(link.sharedTo.id);
         toastr.success(t("Common:LinkRemoved"));
-      } else {
-        setLoadingLinks((prev) => prev.filter((l) => l !== link.sharedTo.id));
-        setFileLinks((links) =>
-          links.map((l) =>
-            "sharedTo" in l && l.sharedTo.id === link.sharedTo.id ? newLink : l,
-          ),
-        );
-        toastr.success(t("Common:GeneralLinkRevokedAndCreatedSuccessfully"));
       }
     } catch (error) {
       console.error(error);
@@ -381,12 +385,8 @@ export const useShare = ({
       },
       {
         key: "delete-link-key",
-        label: link.canEditExpirationDate
-          ? t("Common:Delete")
-          : t("Common:RevokeLink"),
-        icon: link.canEditExpirationDate
-          ? TrashReactSvgUrl
-          : OutlineReactSvgUrl,
+        label: link.canRevoke ? t("Common:RevokeLink") : t("Common:Delete"),
+        icon: link.canRevoke ? OutlineReactSvgUrl : TrashReactSvgUrl,
         onClick: () => removeLink(link),
       },
     ];

@@ -264,7 +264,23 @@ class SettingsSetupStore {
 
     if (!result) return;
 
-    this.setSMTPFields(result);
+    const resultSettingsDefault = {
+      credentialsUserName: "",
+      credentialsUserPassword: "",
+      enableAuth: false,
+      enableSSL: false,
+      useNtlm: false,
+      host: "",
+      port: "25",
+      senderAddress: "",
+      senderDisplayName: "",
+    };
+
+    Object.keys(result).forEach(
+      (key) => (resultSettingsDefault[key] = result[key]),
+    );
+
+    this.setSMTPFields(resultSettingsDefault);
   };
 
   updateSMTPSettings = async () => {

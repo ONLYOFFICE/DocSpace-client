@@ -75,7 +75,6 @@ export type LinkRowProps = {
   loadingLinks: (string | number)[];
 
   isFolder?: boolean;
-  isPublicRoom?: boolean;
 
   onCopyLink: (link: TFileLink) => void;
   getData: (link: TFileLink) => ContextMenuModel[];

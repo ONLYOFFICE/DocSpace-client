@@ -1653,7 +1653,8 @@ class ContextOptionsStore {
     const hasInfoPanel = contextOptions.includes("show-info");
 
     // const emailSendIsDisabled = true;
-    const showSeparator0 = hasInfoPanel || !isMedia; // || !emailSendIsDisabled;
+    const showSeparator0 =
+      hasInfoPanel || !isMedia || (item.external && item.isLinkExpired); // || !emailSendIsDisabled;
 
     const separator0 = showSeparator0
       ? {

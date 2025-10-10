@@ -2372,6 +2372,10 @@ class FilesStore {
         "stop-filling",
       ];
 
+      if (item.external && item.isLinkExpired) {
+        fileOptions = ["select", "separator0", "remove-shared-folder-or-file"];
+      }
+
       if (optionsToRemove.length) {
         fileOptions = removeOptions(fileOptions, optionsToRemove);
       }
@@ -2893,6 +2897,10 @@ class FilesStore {
       "remove-shared-folder-or-file",
       "delete",
     ];
+
+    if (item.external && item.isLinkExpired) {
+      folderOptions = ["select", "separator0", "remove-shared-folder-or-file"];
+    }
 
     if (!isSharedWithMeFolderSection) {
       folderOptions = removeOptions(folderOptions, [

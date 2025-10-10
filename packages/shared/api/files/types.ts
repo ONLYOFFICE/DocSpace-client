@@ -461,6 +461,7 @@ export type TFileLink = {
   canEditAccess: boolean;
   canEditDenyDownload: boolean;
   canEditInternal: boolean;
+  canRevoke: boolean;
   canEditExpirationDate: boolean;
   isLocked: boolean;
   isOwner: boolean;

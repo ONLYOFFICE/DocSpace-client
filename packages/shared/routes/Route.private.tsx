@@ -24,13 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
-import { Navigate, useLocation, useSearchParams } from "react-router";
+import { Navigate, useLocation } from "react-router";
 
-import FilesFilter from "../api/files/filter";
 import AppLoader from "../components/app-loader";
 
-import { TenantStatus, ValidationStatus } from "../enums";
+import { TenantStatus } from "../enums";
 import { combineUrl } from "../utils/combineUrl";
 
 import type { PrivateRouteProps } from "./Routers.types";
@@ -51,7 +49,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     wizardCompleted,
 
     user,
-    isLoadedUser,
     children,
     restricted,
     tenantStatus,
@@ -62,71 +59,13 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     limitedAccessSpace,
     displayAbout,
 
-    validatePublicRoomKey,
-    publicRoomKey,
-    roomId,
-    isLoadedPublicRoom,
-    isLoadingPublicRoom,
-
     limitedAccessDevToolsForUsers,
     standalone,
-    roomStatus,
   } = props;
 
   const location = useLocation();
-  const [searchParams] = useSearchParams();
-
-  useEffect(() => {
-    const key = searchParams.get("key");
-
-    if (
-      key &&
-      (!publicRoomKey || publicRoomKey !== key) &&
-      location.pathname.includes("/rooms/shared") &&
-      !isLoadedPublicRoom &&
-      !isLoadingPublicRoom &&
-      isLoadedUser &&
-      validatePublicRoomKey
-    ) {
-      validatePublicRoomKey(key);
-    }
-  }, [
-    searchParams,
-    publicRoomKey,
-    location.pathname,
-    isLoadedPublicRoom,
-    isLoadingPublicRoom,
-    isLoadedUser,
-    validatePublicRoomKey,
-  ]);
 
   const renderComponent = () => {
-    const key = searchParams.get("key");
-
-    if (location.pathname.includes("/rooms/shared")) {
-      if (!isLoadedUser) {
-        return <AppLoader />;
-      }
-
-      if (
-        (!user && isAuthenticated) ||
-        (user && roomStatus == ValidationStatus.Password)
-      ) {
-        const filter = FilesFilter.getDefault();
-        const subFolder = new URLSearchParams(window.location.search).get(
-          "folder",
-        );
-        const path = "/rooms/share";
-
-        filter.folder = subFolder || roomId || "";
-        if (key) {
-          filter.key = key;
-        }
-
-        return <Navigate to={`${path}?${filter.toUrlParams()}`} />;
-      }
-    }
-
     if (!user && isAuthenticated) {
       if (isPortalDeactivate) {
         window.location.replace(

@@ -245,14 +245,7 @@ const DropDown = ({
       width: dropDownRef.current ? dropDownRef.current.offsetWidth : 240,
       isDropdownReady: true,
     }));
-  }, [
-    fixedDirection,
-    isRTL,
-    forwardedRef,
-    state.directionX,
-    state.directionY,
-    state.manualY,
-  ]);
+  }, [fixedDirection, isRTL, forwardedRef, directionX, directionY, manualY]);
 
   const renderDropDown = () => {
     const directionXStylesDisabled =

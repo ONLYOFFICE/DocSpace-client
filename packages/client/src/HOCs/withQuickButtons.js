@@ -160,7 +160,6 @@ export default function withQuickButtons(WrappedComponent) {
         isIndexEditingMode,
         roomLifetime,
         isTemplatesFolder,
-        isRecentFolder,
         isTrashFolder,
       } = this.props;
 
@@ -191,7 +190,6 @@ export default function withQuickButtons(WrappedComponent) {
           roomLifetime={roomLifetime}
           onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
-          isRecentFolder={isRecentFolder}
           isTrashFolder={isTrashFolder}
           openShareTab={this.openShareTab}
         />
@@ -230,7 +228,6 @@ export default function withQuickButtons(WrappedComponent) {
         isPersonalRoom,
         isArchiveFolder,
         isTemplatesFolder,
-        isRecentFolder,
         isTrashFolder,
       } = treeFoldersStore;
 
@@ -263,7 +260,6 @@ export default function withQuickButtons(WrappedComponent) {
         onCreateRoomFromTemplate,
         setBufferSelection: filesStore.setBufferSelection,
         lockFileAction,
-        isRecentFolder,
         isTrashFolder,
       };
     },

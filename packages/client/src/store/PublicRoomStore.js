@@ -35,12 +35,13 @@ import { isPublicRoom as isPublicRoomUtil } from "@docspace/shared/utils/common"
 import { LinkType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
-import { ValidationStatus } from "@docspace/shared/enums";
+import { FolderType, ValidationStatus } from "@docspace/shared/enums";
 import {
   PUBLIC_STORAGE_KEY,
   CategoryType,
   TOAST_FOLDER_PUBLIC_KEY,
 } from "@docspace/shared/constants";
+import { match } from "ts-pattern";
 
 class PublicRoomStore {
   externalLinks = [];
@@ -233,14 +234,38 @@ class PublicRoomStore {
     );
   };
 
-  gotoFolder = (res) => {
-    const categoryType =
-      res.isRoom || res.isRoomMember
-        ? CategoryType.Shared
-        : CategoryType.SharedWithMe;
+  gotoFolder = async (res) => {
+    const categoryType = await match(res)
+      .when(
+        (res) => res.isRoom || res.isRoomMember,
+        async () => CategoryType.Shared,
+      )
+      .otherwise(async () => {
+        try {
+          const folder = await api.files.getFolderInfo(res.id, true);
+
+          if (!folder) return CategoryType.SharedWithMe;
+
+          if (folder.rootFolderType === FolderType.USER) {
+            return CategoryType.Personal;
+          }
+
+          if (folder.rootFolderType === FolderType.Rooms) {
+            return CategoryType.Shared;
+          }
+
+          return CategoryType.SharedWithMe;
+        } catch (error) {
+          console.error(error);
+          return CategoryType.SharedWithMe;
+        }
+      });
 
     if (categoryType === CategoryType.SharedWithMe) {
-      sessionStorage.setItem(TOAST_FOLDER_PUBLIC_KEY, res.id.toString());
+      sessionStorage.setItem(
+        TOAST_FOLDER_PUBLIC_KEY,
+        res.entityId?.toString() ?? res.id.toString(),
+      );
     }
 
     const filter = FilesFilter.getDefault();

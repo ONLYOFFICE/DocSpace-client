@@ -93,7 +93,7 @@ export const useShare = ({
       setShareMembers(shareUsers.items);
       setShareMembersTotal(shareUsers.total);
     } catch (error) {
-      if (!axios.isAxiosError(error))
+      if (!axios.isCancel(error))
         console.error("Error fetching external links:", error);
 
       throw error;

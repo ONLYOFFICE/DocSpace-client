@@ -2372,6 +2372,10 @@ class FilesStore {
         "stop-filling",
       ];
 
+      if (item.external && item.isLinkExpired) {
+        fileOptions = ["select", "separator0", "remove-shared-folder-or-file"];
+      }
+
       if (optionsToRemove.length) {
         fileOptions = removeOptions(fileOptions, optionsToRemove);
       }
@@ -2394,13 +2398,6 @@ class FilesStore {
           "separator2",
           "remove-from-recent",
           "copy-general-link",
-          "mark-as-favorite",
-          "remove-from-favorites",
-        ]);
-      }
-
-      if (isRecentFolder) {
-        fileOptions = removeOptions(fileOptions, [
           "mark-as-favorite",
           "remove-from-favorites",
         ]);
@@ -2561,13 +2558,6 @@ class FilesStore {
       if (isFavoritesFolder) {
         fileOptions = removeOptions(fileOptions, ["mark-as-favorite"]);
         fileOptions = removeOptions(fileOptions, ["delete"]);
-      }
-
-      if (isRecycleBinFolder) {
-        fileOptions = removeOptions(fileOptions, [
-          "mark-as-favorite",
-          "remove-from-favorites",
-        ]);
       }
 
       if (isEncrypted) {
@@ -2893,6 +2883,10 @@ class FilesStore {
       "remove-shared-folder-or-file",
       "delete",
     ];
+
+    if (item.external && item.isLinkExpired) {
+      folderOptions = ["select", "separator0", "remove-shared-folder-or-file"];
+    }
 
     if (!isSharedWithMeFolderSection) {
       folderOptions = removeOptions(folderOptions, [

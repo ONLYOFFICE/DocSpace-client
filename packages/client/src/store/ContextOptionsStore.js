@@ -128,7 +128,6 @@ import {
   formRoleMapping,
   getFileLink,
   getFolderLink,
-  removeSharedFolder,
   removeSharedFolderOrFile,
 } from "@docspace/shared/api/files";
 
@@ -639,27 +638,6 @@ class ContextOptionsStore {
   //   );
   // };
 
-  onRemoveSharedRooms = async (items) => {
-    if (!Array.isArray(items) || items.length === 0) return;
-
-    const { setGroupMenuBlocked } = this.filesActionsStore;
-    const { addActiveItems } = this.filesStore;
-    const { clearActiveOperations } = this.uploadDataStore;
-
-    const folderIds = items.map((item) => item.id);
-
-    try {
-      setGroupMenuBlocked(true);
-      addActiveItems(null, folderIds);
-      await removeSharedFolder(folderIds);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setGroupMenuBlocked(false);
-      clearActiveOperations([], folderIds);
-    }
-  };
-
   onRemoveSharedFilesOrFolder = async (items) => {
     if (!Array.isArray(items) || items.length === 0) return;
 
@@ -669,7 +647,7 @@ class ContextOptionsStore {
 
     const { folderIds, fileIds } = items.reduce(
       (acc, item) => {
-        if (isFolderUtil(item)) acc.folderIds.push(item.id);
+        if (isFolderUtil(item) || isRoomUtil(item)) acc.folderIds.push(item.id);
         else if (isFileUtil(item)) acc.fileIds.push(item.id);
 
         return acc;
@@ -1211,18 +1189,10 @@ class ContextOptionsStore {
   };
 
   onCreateOform = async (navigate) => {
-    const { oformFromFolderId } = this.oformsStore;
-    const { getFolderInfo } = this.filesStore;
-    const { getPublicKey } = this.filesActionsStore;
-
     hideInfoPanel();
 
     const filesFilter = FilesFilter.getDefault();
     filesFilter.folder = this.oformsStore.oformFromFolderId;
-
-    const currentFolder = await getFolderInfo(oformFromFolderId);
-    const publicKey = await getPublicKey(currentFolder);
-    if (publicKey) filesFilter.key = publicKey;
 
     const filterUrlParams = filesFilter.toUrlParams();
 
@@ -1653,7 +1623,8 @@ class ContextOptionsStore {
     const hasInfoPanel = contextOptions.includes("show-info");
 
     // const emailSendIsDisabled = true;
-    const showSeparator0 = hasInfoPanel || !isMedia; // || !emailSendIsDisabled;
+    const showSeparator0 =
+      hasInfoPanel || !isMedia || (item.external && item.isLinkExpired); // || !emailSendIsDisabled;
 
     const separator0 = showSeparator0
       ? {
@@ -2212,7 +2183,7 @@ class ContextOptionsStore {
         key: "remove-shared-room",
         label: t("Common:RemoveFromList"),
         icon: CircleCrossSvgUrl,
-        onClick: () => this.onRemoveSharedRooms([item]),
+        onClick: () => this.onRemoveSharedFilesOrFolder([item]),
         disabled: this.userStore?.user?.isAdmin || !item.external,
       },
       {

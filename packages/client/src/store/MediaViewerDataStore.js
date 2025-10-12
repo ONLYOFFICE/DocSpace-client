@@ -152,7 +152,7 @@ class MediaViewerDataStore {
     return combineUrl(MEDIA_VIEW_URL, id);
   };
 
-  getFirstUrl = async () => {
+  getFirstUrl = () => {
     if (this.publicRoomStore.isPublicRoom) {
       const key = this.publicRoomStore.publicRoomKey;
       const filterObj = FilesFilter.getFilter(window.location);
@@ -166,15 +166,7 @@ class MediaViewerDataStore {
       return url;
     }
 
-    const { getPublicKey, selectedFolderStore } = this.filesActionsStore;
-
     const filter = this.filesStore.filter;
-
-    const selectedFolder = selectedFolderStore.getSelectedFolder();
-
-    const shareKey = await getPublicKey(selectedFolder);
-
-    filter.key = shareKey;
 
     const queryParams = filter.toUrlParams();
 

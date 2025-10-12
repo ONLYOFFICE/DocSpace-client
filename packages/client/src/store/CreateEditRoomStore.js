@@ -41,7 +41,7 @@ import {
   setTemplateAvailable,
   updateRoomMemberRole,
 } from "@docspace/shared/api/rooms";
-import { openMembersTab, showInfoPanel } from "SRC_DIR/helpers/info-panel";
+import { openMembersTab } from "SRC_DIR/helpers/info-panel";
 
 class CreateEditRoomStore {
   roomParams = null;
@@ -364,9 +364,11 @@ class CreateEditRoomStore {
   };
 
   onSaveAsTemplate = async (item, roomParams, openCreatedTemplate) => {
-    this.filesStore.setRoomCreated(true);
+    const { setSelection, setRoomCreated } = this.filesStore;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
     const { cover, clearCoverProps } = this.dialogsStore;
+
+    setRoomCreated(true);
 
     const {
       title,
@@ -450,6 +452,12 @@ class CreateEditRoomStore {
         roomType,
         rootFolderType: FolderType.RoomTemplates,
       });
+
+      if (isDesktop()) {
+        const roomInfo = await api.files.getFolderInfo(progressData.templateId);
+        openMembersTab();
+        setSelection([{ ...roomInfo, isRoom: true }]);
+      }
     }
 
     clearCoverProps();
@@ -481,7 +489,8 @@ class CreateEditRoomStore {
       preparingDataForCopyingToRoom,
     } = this.filesActionsStore;
     const { deleteThirdParty } = this.thirdPartyStore;
-    const { createRoom, selection, bufferSelection } = this.filesStore;
+    const { createRoom, selection, bufferSelection, setSelection } =
+      this.filesStore;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
     const { cover, clearCoverProps } = this.dialogsStore;
 
@@ -587,6 +596,8 @@ class CreateEditRoomStore {
       if (!isThirdparty && storageFolderId)
         deleteThirdParty(thirdpartyAccount.providerId);
 
+      this.onOpenNewRoom(room);
+
       if (processCreatingRoomFromData) {
         const selections =
           selection.length > 0 && selection[0] != null
@@ -599,7 +610,19 @@ class CreateEditRoomStore {
           (error) => console.error(error),
         );
       }
-      await this.onOpenNewRoom(room);
+
+      if (isDesktop()) {
+        let roomInfo = null;
+
+        if (isTemplate) {
+          roomInfo = await api.files.getFolderInfo(room.id);
+        } else {
+          roomInfo = room;
+        }
+
+        setSelection([{ ...roomInfo, isRoom: true }]);
+        openMembersTab();
+      }
 
       if (successToast) toastr.success(successToast);
     } catch (err) {
@@ -664,7 +687,6 @@ class CreateEditRoomStore {
 
   onOpenNewRoom = async (room) => {
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
-    const { setSelection } = this.filesStore;
     const { getPublicKey } = this.filesActionsStore;
 
     const state = {
@@ -690,14 +712,7 @@ class CreateEditRoomStore {
 
     const path = getCategoryUrl(CategoryType.SharedRoom, room.id);
 
-    setSelection && setSelection([{ ...room, isRoom: true }]);
-
     window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
-
-    if (isDesktop()) {
-      showInfoPanel();
-      openMembersTab();
-    }
   };
 }
 

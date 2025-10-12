@@ -31,17 +31,17 @@ import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { CategoryType } from "@docspace/shared/constants";
-
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { FolderType, RoomsType } from "@docspace/shared/enums";
-import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
 import {
   createTemplate,
   getCreateTemplateProgress,
   setTemplateAvailable,
   updateRoomMemberRole,
 } from "@docspace/shared/api/rooms";
-import { openMembersTab } from "SRC_DIR/helpers/info-panel";
+
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
+import { openMembersTab, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 class CreateEditRoomStore {
   roomParams = null;
@@ -455,6 +455,7 @@ class CreateEditRoomStore {
 
       if (isDesktop()) {
         const roomInfo = await api.files.getFolderInfo(progressData.templateId);
+        showInfoPanel();
         openMembersTab();
         setSelection([{ ...roomInfo, isRoom: true }]);
       }
@@ -620,8 +621,9 @@ class CreateEditRoomStore {
           roomInfo = room;
         }
 
-        setSelection([{ ...roomInfo, isRoom: true }]);
+        showInfoPanel();
         openMembersTab();
+        setSelection([{ ...roomInfo, isRoom: true }]);
       }
 
       if (successToast) toastr.success(successToast);

@@ -148,11 +148,18 @@ const SubmitToFormGallery = ({
   console.log(formItem);
 
   return (
-    <ModalDialog visible={visible} onClose={onClose} autoMaxHeight>
+    <Styled.ModalDialogStyled
+      visible={visible}
+      onClose={onClose}
+      isLarge={formItem}
+      autoMaxHeight
+    >
       <ModalDialog.Header>{t("Common:SubmitToFormGallery")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <div>{t("FormGallery:SubmitToGalleryDialogMainInfo")}</div>
-        <div>
+        <div className="info">
+          {t("FormGallery:SubmitToGalleryDialogMainInfo")}
+        </div>
+        <div className="info">
           <Trans
             t={t}
             i18nKey="SubmitToGalleryDialogGuideInfo"
@@ -165,8 +172,6 @@ const SubmitToFormGallery = ({
               href={guideLink || "#"}
               type="page"
               target="_blank"
-              isBold
-              isHovered
               dataTestId="submit_to_gallery_guide_link"
             >
               guide
@@ -176,25 +181,25 @@ const SubmitToFormGallery = ({
         </div>
 
         {formItem ? (
-          <Styled.FormItem>
-            <ReactSVG className="icon" src={getIcon(32, formItem.fileExst)} />
+          <div className="item-wrapper">
+            <ReactSVG className="icon" src={getIcon(24, formItem.fileExst)} />
             <div className="item-title">
               {formItem?.title ? (
-                [
+                <>
                   <span className="name" key="name">
                     {formItem.title}
-                  </span>,
-                  formItem.fileExst && (
+                  </span>
+                  {formItem.fileExst ? (
                     <span className="exst" key="exst">
                       {formItem.fileExst}
                     </span>
-                  ),
-                ]
+                  ) : null}
+                </>
               ) : (
                 <span className="name">{`${formItem.fileExst}`}</span>
               )}
             </div>
-          </Styled.FormItem>
+          </div>
         ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -211,10 +216,9 @@ const SubmitToFormGallery = ({
           <Button
             primary
             size="normal"
-            label={t("Common:SubmitToGallery")}
+            label={t("Settings:Submit")}
             onClick={onSubmitToGallery}
             isLoading={isSubmitting}
-            scale
             testId="submit_to_gallery_apply_button"
           />
         )}
@@ -222,11 +226,11 @@ const SubmitToFormGallery = ({
           size="normal"
           label={t("Common:CancelButton")}
           onClick={onClose}
-          scale
+          scale={!formItem}
           testId="submit_to_gallery_cancel_button"
         />
       </ModalDialog.Footer>
-    </ModalDialog>
+    </Styled.ModalDialogStyled>
   );
 };
 
@@ -248,4 +252,10 @@ export default inject(
     submitToFormGallery: oformsStore.submitToFormGallery,
     fetchGuideLink: oformsStore.fetchGuideLink,
   }),
-)(withTranslation("Common", "FormGallery")(observer(SubmitToFormGallery)));
+)(
+  withTranslation(
+    "Common",
+    "FormGallery",
+    "Settings",
+  )(observer(SubmitToFormGallery)),
+);

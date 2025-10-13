@@ -3,7 +3,7 @@
   "content": "Save as template",
   "content_en_sha1_hash": "e438319cba9a62ebf3bedfae2f7c1d57a2785c0e",
   "created_at": "2025-05-19T21:30:56.166Z",
-  "updated_at": "2025-10-13T13:22:35.559Z",
+  "updated_at": "2025-10-13T14:41:02.790Z",
   "comment": {
     "text": "The translation key \"SaveAsTemplate\" is used to display the label for a button that allows users to save a room as a template. This label appears in a dialog header and is intended to provide visual feedback about the action being performed. The translator should focus on creating a clear and concise phrase that describes the purpose of this action.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 944,
+      "line_number": 922,
       "context": "const event = new Event(Events.ROOM_EDIT);\n event.item = item;\n window.dispatchEvent(event);\n };\n \n onSaveAsTemplate = (item) => {\n const event = new Event(Events.SAVE_AS_TEMPLATE);\n event.item = item;\n window.dispatchEvent(event);\n };",
       "module": "/packages/client"
     }

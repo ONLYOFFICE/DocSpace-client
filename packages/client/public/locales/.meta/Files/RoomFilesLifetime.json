@@ -3,7 +3,7 @@
   "content": "The file lifetime is set to {{days}} {{period}} in this room",
   "content_en_sha1_hash": "c7afb68ede38e6aec1c4f6d16110d1acb00d1aaa",
   "created_at": "2025-05-19T21:30:56.096Z",
-  "updated_at": "2025-10-13T13:22:35.762Z",
+  "updated_at": "2025-10-13T14:41:02.949Z",
   "comment": {
     "text": "This translation key is used to display the file lifetime duration in a room. It will be shown as a tooltip when hovering over a file or in a selector, indicating how long the files will remain available in the room. The format includes days and period (e.g., \"1 day\" or \"2 weeks\").",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 467,
+      "line_number": 466,
       "context": "const getTitleIconTooltip = () => {\n if (sharedType) return t(\"Files:RecentlyOpenedTooltip\");\n \n if (lifetime)\n return `${t(\"Files:RoomFilesLifetime\", {\n days: lifetime.value,\n period: getLifetimePeriodTranslation(lifetime.period, t),\n })}. ${\n lifetime.deletePermanently\n ? t(\"Files:AfterFilesWillBeDeletedPermanently\")",
       "module": "/packages/client"
     },

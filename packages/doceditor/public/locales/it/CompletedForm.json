@@ -11,7 +11,6 @@
   "FormNumber": "Numero del modulo",
   "FormOwner": "Proprietario del modulo",
   "FormSectionCompleted": "Sezione del modulo completata",
-  "FormVDRCompletedDescription": "Il modulo è stato completato da tutti i ruoli ed è ora finalizzato. È disponibile in modalità di sola visualizzazione.",
   "FormVDRConfirmationOfStartTitle": "Il modulo è pronto per la compilazione nella stanza",
   "FormVDRSectionCompletedDescription": "La parte assegnata del modulo PDF è stata completata con successo. Lo stato della compilazione del modulo può essere monitorato nella stanza e nel pannello di stato della compilazione. Verrà inviata un'email di notifica una volta completato il modulo.",
   "LinkToFillOutForm": "Link per compilare il modulo:",

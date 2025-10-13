@@ -3,7 +3,7 @@
   "content": "bytes",
   "content_en_sha1_hash": "daf529a73101c2be626b99fc6938163e7a27620b",
   "created_at": "2025-05-19T21:30:43.348Z",
-  "updated_at": "2025-09-23T07:24:24.387Z",
+  "updated_at": "2025-10-13T13:22:36.004Z",
   "comment": {
     "text": "The \"Bytes\" translation key is used to display the unit \"byte\" in various parts of the application. It appears on a quota form, where users can select options such as kilobytes or gigabytes, indicating that this key is used for file size units in a UI context.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 698,
+      "line_number": 699,
       "context": "export const getConvertedSize = (t: (key: string) => string, bytes: number) => {\n let power = 0;\n let resultSize = bytes;\n \n const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 698,
+      "line_number": 699,
       "context": "export const getConvertedSize = (t: (key: string) => string, bytes: number) => {\n let power = 0;\n let resultSize = bytes;\n \n const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),",
       "module": "/packages/shared"
     }

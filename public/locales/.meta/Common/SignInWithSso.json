@@ -3,7 +3,7 @@
   "content": "Sign in with SSO",
   "content_en_sha1_hash": "01bb06993459150dbe13098f52962ab2acda16f8",
   "created_at": "2025-05-19T21:30:48.790Z",
-  "updated_at": "2025-09-23T07:24:24.454Z",
+  "updated_at": "2025-10-13T13:22:36.068Z",
   "comment": {
     "text": "Sign in with SSO is used to display the sign-in button for Single Sign-On. It appears on a form when the user selects SSO as their authentication method. Translators should ensure the phrase is consistent across all supported languages.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 441,
+      "line_number": 442,
       "context": "case \"microsoft\":\n return signUp\n ? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n case \"weixin\":\n return signUp\n ? t(\"Common:SignUpWithWechat\")",
       "module": "/packages/shared"
     }

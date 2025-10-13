@@ -11,7 +11,6 @@
   "FormNumber": "Số của biểu mẫu",
   "FormOwner": "Chủ sở hữu biểu mẫu",
   "FormSectionCompleted": "Phần Biểu Mẫu Đã Được Hoàn Thành",
-  "FormVDRCompletedDescription": "Biểu mẫu đã được tất cả các vai trò điền đầy đủ và hiện đã được khóa. Nó ở chế độ chỉ xem.",
   "FormVDRConfirmationOfStartTitle": "Biểu mẫu đã sẵn sàng để điền trong phòng",
   "FormVDRSectionCompletedDescription": "Phần được chỉ định của biểu mẫu PDF đã được hoàn thành xong. Trạng thái điền thông tin của biểu mẫu có thể được theo dõi trong phòng và thông qua bảng trạng thái Điền thông tin. Một thông báo qua email sẽ được gửi sau khi biểu mẫu được hoàn thành đầy đủ.",
   "LinkToFillOutForm": "Liên kết để điền biểu mẫu:",

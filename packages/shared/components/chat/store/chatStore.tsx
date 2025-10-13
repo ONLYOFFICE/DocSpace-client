@@ -63,12 +63,12 @@ export default class ChatStore {
     this.chats = value;
   };
 
-  setCurrentChat = (chat: TChat | null) => {
+  updateUrlChatId = (chatId: string) => {
     const currentSearch = new URLSearchParams(window.location.search);
 
-    if (currentSearch.get("chat") !== chat?.id) {
-      if (chat) {
-        currentSearch.set("chat", chat.id);
+    if (currentSearch.get("chat") !== chatId) {
+      if (chatId) {
+        currentSearch.set("chat", chatId);
       } else {
         currentSearch.delete("chat");
       }
@@ -78,6 +78,10 @@ export default class ChatStore {
         `${window.location.pathname}?${currentSearch.toString()}`,
       );
     }
+  };
+
+  setCurrentChat = (chat: TChat | null) => {
+    this.updateUrlChatId(chat?.id ?? "");
 
     this.currentChat = chat;
   };

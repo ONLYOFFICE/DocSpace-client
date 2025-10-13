@@ -74,6 +74,7 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
     totalChats,
     fetchNextChats,
     hasNextChats,
+    updateUrlChatId,
   } = useChatStore();
   const { fetchMessages, startNewChat, isRequestRunning } = useMessageStore();
 
@@ -101,6 +102,7 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
     await deleteChat(hoveredItem);
     if (hoveredItem === currentChat?.id) {
       startNewChat();
+      updateUrlChatId("");
     }
     setIsOpen(false);
     setHoveredItem("");
@@ -110,6 +112,7 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
     isRequestRunning,
     currentChat?.id,
     startNewChat,
+    updateUrlChatId,
   ]);
 
   const onSaveToFileAction = React.useCallback(async () => {

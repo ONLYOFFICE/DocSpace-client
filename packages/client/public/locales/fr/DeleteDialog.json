@@ -1,6 +1,9 @@
 {
   "DeleteAllGroupDescription": "Les groupes sélectionnés seront supprimés. Les utilisateurs des groupes ne seront pas supprimés de {{productName}}. Souhaitez-vous vraiment continuer ?",
   "DeleteAllGroupsTitle": "Supprimer les groupes",
+  "DeleteFiles": "Vous êtes sur le point de déplacer les <strong>fichiers ({{filesCount}})</strong> vers la {{trashSection}}.",
+  "DeleteFilesAndFolders": "Vous êtes sur le point de supprimer les <strong>fichiers ({{filesCount}})</strong> et les <strong>dossiers ({{foldersCount}})</strong> vers la {{trashSection}}.",
+  "DeleteFilesAndFoldersForever": "Vous êtes sur le point de supprimer les <strong>fichiers ({{filesCount}})</strong> et les <strong>dossiers ({{foldersCount}})</strong>.",
   "DeleteFolders": "Vous êtes sur le point de déplacer les <strong>dossiers ({{foldersCount}})</strong> vers la {{trashSection}}.",
   "DeleteGroupDescription": "Le groupe {{groupName}} sera supprimé. Les utilisateurs du groupe ne seront pas supprimés de {{productName}}. Souhaitez-vous vraiment continuer ?",
   "DeleteGroupTitle": "Supprimer le groupe",

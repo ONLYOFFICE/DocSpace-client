@@ -3,6 +3,7 @@
   "DeleteAllGroupsTitle": "Обриши групе",
   "DeleteFiles": "Управо ћеш преместити <strong>фајлове ({{filesCount}})</strong> у {{trashSection}}.",
   "DeleteFilesAndFolders": "Управо ћеш обрисати <strong>фајлове ({{filesCount}})</strong> и <strong>фолдере ({{foldersCount}})</strong> у {{trashSection}}.",
+  "DeleteFilesAndFoldersForever": "Управо ћеш обрисати <strong>фајлове ({{filesCount}})</strong> и <strong>фолдере ({{foldersCount}})</strong>.",
   "DeleteFolders": "Управо ћеш преместити <strong>фолдере ({{foldersCount}})</strong> у {{trashSection}}.",
   "DeleteGroupDescription": "Група {{groupName}} ће бити обрисана. Корисници у групи неће бити уклоњени са {{productName}}-а. Да ли сте сигурни да желите да наставите?",
   "DeleteGroupTitle": "Обриши групу",

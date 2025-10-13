@@ -24,6 +24,7 @@
   "EmptyRecentDescription": "Alle zuletzt im Portal geöffneten Dateien landen in diesem Bereich. Die Dateien werden 90 Tage lang gespeichert.",
   "EmptyRootRoomUserDescription": "Der geteilte Raum wird hier angezeigt.",
   "EmptyRootRoomUserTitle": "Es gibt noch keine Räume hier",
+  "EmptyShareDescription": "Hier finden Sie Dateien und Ordner, die andere {{productName}}-Mitglieder mit Ihnen geteilt haben. Ihre eigenen Dateien und Rauminhalte werden hier nicht angezeigt.",
   "EmptyShareTitle": "Es sind noch keine freigegebenen Elemente vorhanden",
   "EmptyTemplatesDescription": "Sie können eine Vorlage aus einem Raum im Bereich \"Räume\" erstellen",
   "EmptyTemplatesTitle": "Noch keine Vorlagen vorhanden",

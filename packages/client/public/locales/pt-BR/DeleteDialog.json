@@ -3,6 +3,7 @@
   "DeleteAllGroupsTitle": "Excluir grupos",
   "DeleteFiles": "Você está prestes a mover <strong>arquivos ({{filesCount}} )< /strong> para a {{trashSection}}.",
   "DeleteFilesAndFolders": "Você está prestes a excluir os <strong>arquivos ({{filesCount}})< /strong> e <strong>pastas ({{foldersCount}})</strong> para a {{trashSection}}.",
+  "DeleteFilesAndFoldersForever": "Você está prestes a excluir os <strong>arquivos ({{ filesCount }} )< /strong> e <strong>pastas ({{ foldersCount }})</strong>.",
   "DeleteFolders": "Você está prestes a mover <strong>pastas ({{foldersCount}})</strong> para a {{trashSection}}.",
   "DeleteGroupDescription": "O grupo {{groupName}} será excluído. Os usuários do grupo não serão removidos do {{productName}}. Você tem certeza que quer continuar?",
   "DeleteGroupTitle": "Excluir grupo",

@@ -70,7 +70,6 @@ const DataManagementWrapper = (props) => {
     currentTariffStatusStore,
     settingsStore,
     clearAbortControllerArr,
-    showPortalSettingsLoader,
   } = props;
 
   const navigate = useNavigate();
@@ -90,14 +89,9 @@ const DataManagementWrapper = (props) => {
     settingsStore,
   });
 
-  const {
-    getManualBackupData,
-    getAutoBackupData,
-
-    isEmptyContentBeforeLoader,
-    isInitialError,
-    setIsEmptyContentBeforeLoader,
-  } = useBackup(defaultProps.backup);
+  const { getManualBackupData, getAutoBackupData } = useBackup(
+    defaultProps.backup,
+  );
 
   const renderTooltip = (helpInfo, className) => {
     const isAutoBackupPage = window.location.pathname.includes(
@@ -141,14 +135,7 @@ const DataManagementWrapper = (props) => {
       id: "data-backup",
       name: t("Common:DataBackup"),
       content: (
-        <ManualBackup
-          buttonSize={buttonSize}
-          renderTooltip={renderTooltip}
-          isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
-          setIsEmptyContentBeforeLoader={setIsEmptyContentBeforeLoader}
-          isInitialLoading={showPortalSettingsLoader}
-          isInitialError={isInitialError}
-        />
+        <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
       ),
       onClick: async () => {
         clearAbortControllerArr();
@@ -159,13 +146,7 @@ const DataManagementWrapper = (props) => {
       id: "auto-backup",
       name: t("Common:AutoBackup"),
       content: (
-        <AutoBackup
-          buttonSize={buttonSize}
-          renderTooltip={renderTooltip}
-          isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
-          isInitialLoading={showPortalSettingsLoader}
-          isInitialError={isInitialError}
-        />
+        <AutoBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
       ),
       onClick: async () => {
         clearAbortControllerArr();
@@ -255,8 +236,6 @@ export const Component = inject(
       clearAbortControllerArr,
     } = settingsStore;
 
-    const { showPortalSettingsLoader } = clientLoadingStore;
-
     const buttonSize =
       currentDeviceType !== DeviceType.desktop ? "normal" : "small";
     return {
@@ -274,7 +253,6 @@ export const Component = inject(
       currentTariffStatusStore,
       settingsStore,
       clearAbortControllerArr,
-      showPortalSettingsLoader,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

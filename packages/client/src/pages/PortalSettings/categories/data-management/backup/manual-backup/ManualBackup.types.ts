@@ -29,32 +29,21 @@ import type { ManualBackupProps } from "@docspace/shared/pages/backup/manual-bac
 export interface InjectedManualBackupProps
   extends Omit<
     ManualBackupProps,
-    | "maxWidth"
-    | "buttonSize"
-    | "isNeedFilePath"
-    | "isInitialLoading"
-    | "isEmptyContentBeforeLoader"
+    "maxWidth" | "buttonSize" | "isNeedFilePath"
   > {
   resetDownloadingProgress: VoidFunction;
   setConnectedThirdPartyAccount: (account: any) => void;
   setBackupsCount: (count: number) => void;
   setIsInited: (inited: boolean) => void;
   isBackupPaid: boolean;
+  setIsEmptyContentBeforeLoader: (value: boolean) => void;
 }
 
 export interface ExternalManualBackupProps
   extends Pick<
     ManualBackupProps,
-    | "maxWidth"
-    | "buttonSize"
-    | "isNeedFilePath"
-    | "isInitialLoading"
-    | "isEmptyContentBeforeLoader"
-  > {
-  setIsEmptyContentBeforeLoader: (
-    value: boolean | ((prev: boolean) => boolean),
-  ) => void;
-}
+    "maxWidth" | "buttonSize" | "isNeedFilePath"
+  > {}
 
 export interface ManualBackupWrapperProps
   extends InjectedManualBackupProps,

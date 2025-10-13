@@ -481,7 +481,8 @@ class AuthStore {
     return (
       this.settingsStore?.isLoaded &&
       !!this.settingsStore?.socketUrl &&
-      !isPublicRoom()
+      !isPublicRoom() &&
+      !isPublicPreview()
       //  this.userStore?.isAuthenticated
     );
   }

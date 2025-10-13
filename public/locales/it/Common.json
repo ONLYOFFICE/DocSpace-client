@@ -758,6 +758,7 @@
   "Search": "Cerca",
   "SearchByGroupMembers": "Ricerca per i membri del gruppo",
   "SearchEmptyRoomsDescription": "Nessuna stanza corrisponde a questo filtro. Provane uno diverso o cancella il filtro per visualizzare tutte le stanze.",
+  "SectionMoveConfirmation": "Spostare in {{sectionName}}?",
   "SectionMoveNotification": "Il file sarà spostato in {{sectionName}} {{date}}",
   "SectionRequired": "Questa sezione è necessaria",
   "SelectAction": "Seleziona",

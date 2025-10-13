@@ -1,9 +1,24 @@
 {
   "DeleteAllGroupDescription": "سيتم حذف المجموعات المحددة. لن تتم إزالة المستخدمين في المجموعات من {{productName}}. هل أنت متأكد أنك تريد المتابعة؟",
   "DeleteAllGroupsTitle": "حذف المجموعات",
+  "DeleteFolders": "أنتم على وشك نقل <strong>مجلدات ({{foldersCount}})</strong> إلى {{trashSection}}. ",
   "DeleteGroupDescription": "سيتم حذف المجموعة {{groupName}}. لن تتم إزالة المستخدمين في المجموعة من {{productName}}. هل أنت متأكد أنك تريد المتابعة؟",
   "DeleteGroupTitle": "حذف المجموعة",
+  "DeleteItem": "أنتم على وشك نقل <strong>{{name}}</strong> إلى سلة المحذوفات. ",
+  "DeleteRoom": "سيتم حذف الغرفة <strong>\"\"{{roomName}}\"\"</strong> نهائيًا. ستفقدون جميع البيانات وصلاحيات وصول المستخدم. ",
+  "DeleteRoomTitle": "هل تريدون حذف هذه الغرفة؟ ",
+  "DeleteRoomWarning": "أنا أفهم العواقب وأريد حذف الغرفة ",
   "DeleteTemplate": "هل أنتم متأكدون من رغبتكم في حذف قالب الغرفة <1>«{{templateName}}»</1>؟ لا يمكن استعادة هذا القالب بعد الحذف.",
   "DeleteTemplates": "هل أنتم متأكدون من رغبتكم في حذف قوالب الغرف المحددة؟ لا يمكن استعادتها بعد الحذف.",
-  "FileDeletedAfter": "سيتم حذف الملف بشكل دائم خلال 30 يوم."
+  "DeleteTemplateWarning": "أنا أفهم العواقب وأريد حذف القالب ",
+  "FileDeletedAfter": "سيتم حذف الملف بشكل دائم خلال 30 يوم.",
+  "FilePermanentlyDeleted": "سيتم حذف الملف نهائيًا من {{trashSection}}. ",
+  "FilesDeletedAfter": "سيتم حذف الملفات نهائيًا في غضون 30 يومًا. ",
+  "FilesPermanentlyDeleted": "سيتم حذف الملفات نهائيًا من {{trashSection}}.",
+  "FolderDeletedAfter": "سيتم حذف المجلد نهائيًا في غضون 30 يومًا. ",
+  "FolderPermanentlyDeleted": "سيتم حذف المجلد نهائيًا من {{trashSection}}.",
+  "FoldersDeletedAfter": "سيتم حذف المجلدات نهائيًا في غضون 30 يومًا. ",
+  "FoldersPermanentlyDeleted": "سيتم حذف المجلدات نهائيًا من من {{trashSection}}. ",
+  "ItemsDeletedAfter": "سيتم حذف هذه العناصر نهائيًا في غضون 30 يومًا. ",
+  "ItemsPermanentlyDeleted": "سيتم حذف هذه العناصر نهائيًا من {{trashSection}}."
 }

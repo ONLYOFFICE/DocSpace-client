@@ -3,7 +3,7 @@
   "DeleteAllGroupsTitle": "Ջնջել խմբերը",
   "DeleteFiles": "Դուք պատրաստվում եք տեղափոխել <strong>ֆայլեր ({{filesCount}})</strong> {{trashSection}}։",
   "DeleteFilesAndFolders": "Դուք պատրաստվում եք ջնջել <strong>ֆայլեր ({{filesCount}})</strong> և <strong>պանակներ ({{foldersCount}})</strong> {{trashSection}}",
-  "DeleteFilesAndFoldersForever": "Դուք պատրաստվում եք ջնջել <strong>ֆայլեր ({{filesCount}})</strong> և <strong>պանակներ ({{foldersCount}})</strong> Աղբամանը։",
+  "DeleteFilesAndFoldersForever": "Դուք պատրաստվում եք ջնջել <strong>ֆայլեր ({{filesCount}})</strong> և <strong>պանակներ ({{foldersCount}})</strong>։",
   "DeleteFolders": "Դուք պատրաստվում եք տեղափոխել <strong>պանակներ ({{foldersCount}})</strong> {{trashSection}}.։",
   "DeleteFoldersForever": "Դուք պատրաստվում եք տեղափոխել <strong>պանակներ ({{foldersCount}})</strong> Աղբամանը։",
   "DeleteGroupDescription": "{{groupName}} խումբը կջնջվի: Խմբի օգտատերերը չեն հեռացվի {{productName}}-ից: Վստա՞հ եք, որ ցանկանում եք շարունակել:",

@@ -618,6 +618,7 @@ const LoginForm = ({
       {!isModalOpen && captcha.shouldRender ? (
         <Captcha
           key="login-form-captcha"
+          id="login-captcha-widget"
           type={captcha.captchaType}
           publicKey={reCaptchaPublicKey}
           themeMode={theme.isBase ? "light" : "dark"}

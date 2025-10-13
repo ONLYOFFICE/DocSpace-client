@@ -45,6 +45,7 @@ type CaptchaProps = {
   errorText?: string;
   onTokenChange: (token: string | null) => void;
   resetSignal: number;
+  id?: string;
 };
 
 const Captcha = ({
@@ -56,6 +57,7 @@ const Captcha = ({
   errorText,
   onTokenChange,
   resetSignal,
+  id,
 }: CaptchaProps) => {
   const recaptchaRef = useRef<ReCAPTCHA | null>(null);
   const hcaptchaRef = useRef<HCaptcha | null>(null);
@@ -109,6 +111,7 @@ const Captcha = ({
           <HCaptcha
             sitekey={publicKey!}
             ref={hcaptchaRef}
+            id={id}
             onVerify={handleVerify}
             onExpire={handleExpire}
             onError={handleExpire}
@@ -118,6 +121,7 @@ const Captcha = ({
           <ReCAPTCHA
             sitekey={publicKey!}
             ref={recaptchaRef}
+            id={id}
             theme={themeMode}
             isolated
             onChange={handleVerify}

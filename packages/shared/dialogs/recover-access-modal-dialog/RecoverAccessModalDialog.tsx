@@ -89,10 +89,18 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
   });
 
   React.useEffect(() => {
-    if (!visible) {
+    if (visible && reCaptchaPublicKey) {
+      captcha.request();
+    } else if (!visible) {
       captcha.dismiss();
     }
-  }, [visible, captcha.dismiss]);
+  }, [visible, reCaptchaPublicKey, captcha.request, captcha.dismiss]);
+
+  React.useEffect(() => {
+    return () => {
+      captcha.dismiss();
+    };
+  }, [captcha.dismiss]);
 
   const onRecoverModalClose = () => {
     setEmail("");
@@ -100,7 +108,6 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
     setDescription("");
     setDescErr(false);
     setIsShowError(false);
-    captcha.dismiss();
     onClose?.();
   };
 
@@ -271,6 +278,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
           {captcha.shouldRender ? (
             <Captcha
               key="recover-access-captcha"
+              id="recover-access-captcha-widget"
               type={captcha.captchaType}
               publicKey={reCaptchaPublicKey}
               themeMode={theme.isBase ? "light" : "dark"}

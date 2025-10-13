@@ -3,11 +3,11 @@
   "content": "Manage access",
   "content_en_sha1_hash": "a86dd53098f856629c1364983fdfab31101ce8e5",
   "created_at": "2025-10-13T13:22:31.435Z",
-  "updated_at": "2025-10-13T13:22:35.615Z",
+  "updated_at": "2025-10-13T14:27:29.338Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text appears as part of an option to manage access, likely within a UI element allowing users to control permissions or access rights. It's used to label or describe a setting related to template access. Translators should consider how this relates to granting or restricting access to templates.",
+    "is_auto": true,
+    "updated_at": "2025-10-13T14:27:29.338Z"
   },
   "usage": [
     {

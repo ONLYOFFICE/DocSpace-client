@@ -3,11 +3,11 @@
   "content": "{{recipientName}} recipient fields",
   "content_en_sha1_hash": "53712582e583acf37de8c8aa31ef32d299ecf79e",
   "created_at": "2025-10-13T13:22:10.828Z",
-  "updated_at": "2025-10-13T13:22:36.038Z",
+  "updated_at": "2025-10-13T14:23:28.393Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays a title for a section related to recipient fields, likely within a dialog or panel. The text appears as a header and includes the recipient's name dynamically, assisting users in understanding which fields pertain to a specific recipient. Translators should ensure the translated text maintains this clarity and context.",
+    "is_auto": true,
+    "updated_at": "2025-10-13T14:23:28.393Z"
   },
   "usage": [
     {

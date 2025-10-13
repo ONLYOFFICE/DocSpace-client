@@ -3,11 +3,11 @@
   "content": "Recipient role-based filling",
   "content_en_sha1_hash": "ebc4e0839dc0c879f17088af65d2186c9e8179ca",
   "created_at": "2025-10-13T13:22:10.782Z",
-  "updated_at": "2025-10-13T13:22:35.583Z",
+  "updated_at": "2025-10-13T14:24:22.180Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text appears as the title for a button or option, likely in a dialog or panel, and describes the action of filling out a form based on the recipient's role. It allows users to share a form with specific individuals or roles within a room or data room.",
+    "is_auto": true,
+    "updated_at": "2025-10-13T14:24:22.180Z"
   },
   "usage": [
     {

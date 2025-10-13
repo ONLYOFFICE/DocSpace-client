@@ -3,11 +3,11 @@
   "content": "Assign recipients",
   "content_en_sha1_hash": "a49c45ec13a9f05a2961da96af3a165f56370328",
   "created_at": "2025-10-13T13:21:58.745Z",
-  "updated_at": "2025-10-13T13:22:36.028Z",
+  "updated_at": "2025-10-13T14:26:53.585Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text appears as the title of a dialog window used to assign recipients. It indicates the action of assigning recipients to something, likely within a room or shared space. Translators should consider the context of recipient assignment in this UI element.",
+    "is_auto": true,
+    "updated_at": "2025-10-13T14:26:53.585Z"
   },
   "usage": [
     {

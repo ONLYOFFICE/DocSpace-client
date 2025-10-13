@@ -24,16 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RecaptchaType } from "../../enums";
+@use "../../styles/mixins";
 
-type RecoverAccessModalDialogProps = {
-  visible: boolean;
-  onClose: () => void;
-  textBody: string;
-  emailPlaceholderText: string;
-  id?: string;
-  reCaptchaPublicKey?: string;
-  reCaptchaType?: RecaptchaType;
-};
+.wrapper {
+  margin: 16px 0;
+  width: fit-content;
+}
 
-export type { RecoverAccessModalDialogProps };
+.container {
+  display: inline-flex;
+}
+
+.wrapperError {
+  .container {
+    border: var(--login-captcha-error-border);
+    padding: 3px 3px 0;
+    border-radius: 3px;
+    margin: 0;
+  }
+
+  p {
+    color: var(--login-captcha-error-color);
+  }
+}

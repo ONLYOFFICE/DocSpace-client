@@ -1918,7 +1918,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>FormVDRCompletedDescription</name>
+								<name>FormVDRConfirmationOfStartTitle</name>
 								<description/>
 								<comment/>
 								<translations>
@@ -2053,7 +2053,7 @@
 								</translations>
 							</concept_node>
 							<concept_node>
-								<name>FormVDRConfirmationOfStartTitle</name>
+								<name>FormVDRFinalizedDescription</name>
 								<description/>
 								<comment/>
 								<translations>

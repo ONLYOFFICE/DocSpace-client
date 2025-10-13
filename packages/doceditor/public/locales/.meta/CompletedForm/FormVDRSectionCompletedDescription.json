@@ -3,7 +3,7 @@
   "content": "The assigned portion of the PDF form has been successfully completed. The filling status of the form can be monitored in the room and via the Filling status panel. An email notification will be sent once the form is fully completed.",
   "content_en_sha1_hash": "991f481346496cdc95138d288ce826bccab52e60",
   "created_at": "2025-05-19T21:30:57.181Z",
-  "updated_at": "2025-10-13T13:22:35.968Z",
+  "updated_at": "2025-10-13T15:29:54.744Z",
   "comment": {
     "text": "This translation key is used for a message that informs users about the completion status of a PDF form. It appears in the UI as a confirmation or success message, typically after a form has been successfully filled out. The translator should provide a brief, neutral phrase to convey this information without implying approval or disapproval.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
       "line_number": 161,
-      "context": ": t(\"CompletedForm:FormVDRNextRecepientDescription\");\n }\n \n if (completed) return t(\"CompletedForm:FormVDRCompletedDescription\");\n \n return t(\"CompletedForm:FormVDRSectionCompletedDescription\");\n }, [t, isStartFilling, completed, isYournTurn]);\n \n const title = useMemo(() => getTitleWithoutExtension(form, false), [form]);\n \n const handleBackToRoom = () => {",
+      "context": ": t(\"CompletedForm:FormVDRNextRecepientDescription\");\n }\n \n if (completed) return t(\"CompletedForm:FormVDRFinalizedDescription\");\n \n return t(\"CompletedForm:FormVDRSectionCompletedDescription\");\n }, [t, isStartFilling, completed, isYournTurn]);\n \n const title = useMemo(() => getTitleWithoutExtension(form, false), [form]);\n \n const handleBackToRoom = () => {",
       "module": "/packages/doceditor"
     }
   ],

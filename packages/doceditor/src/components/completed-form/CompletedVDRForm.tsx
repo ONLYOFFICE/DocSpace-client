@@ -156,7 +156,7 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
         : t("CompletedForm:FormVDRNextRecepientDescription");
     }
 
-    if (completed) return t("CompletedForm:FormVDRCompletedDescription");
+    if (completed) return t("CompletedForm:FormVDRFinalizedDescription");
 
     return t("CompletedForm:FormVDRSectionCompletedDescription");
   }, [t, isStartFilling, completed, isYournTurn]);

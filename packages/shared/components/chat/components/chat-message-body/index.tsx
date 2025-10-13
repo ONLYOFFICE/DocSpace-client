@@ -58,7 +58,7 @@ const ChatMessageBody = ({
     fetchNextMessages,
     addMessageId,
   } = useMessageStore();
-  const { currentChat } = useChatStore();
+  const { currentChat, updateUrlChatId } = useChatStore();
 
   const { t } = useTranslation(["Common"]);
 
@@ -71,6 +71,12 @@ const ChatMessageBody = ({
   const disableAutoScrollRef = useRef(false);
 
   const isEmpty = messages.length === 0 || isLoading;
+
+  useEffect(() => {
+    return () => {
+      updateUrlChatId("");
+    };
+  }, []);
 
   useEffect(() => {
     if (!currentChat?.id) return;

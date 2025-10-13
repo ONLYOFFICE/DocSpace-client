@@ -32,7 +32,6 @@ import type {
   SeparatorType,
 } from "../components/context-menu";
 import type { TRoom } from "../api/rooms/types";
-import { FolderType } from "../enums";
 
 export const isNumber = (value: unknown): value is number => {
   return typeof value === "number";

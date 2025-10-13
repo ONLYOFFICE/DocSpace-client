@@ -41,6 +41,7 @@ import { TValidate } from "../../components/email-input/EmailInput.types";
 import { sendRecoverRequest } from "../../api/settings";
 import { useCaptcha } from "../../hooks/useCaptcha";
 import Captcha from "../../components/captcha";
+import { checkIsSSR, isMobileDevice } from "../../utils";
 
 import type { RecoverAccessModalDialogProps } from "./RecoverAccessModalDialog.types";
 import styles from "./RecoverAccessModalDialog.module.scss";
@@ -80,6 +81,10 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
 
   const [isShowError, setIsShowError] = useState(false);
 
+  const [modalDisplayType, setModalDisplayType] = useState(
+    ModalDialogType.modal,
+  );
+
   const { t } = useTranslation(["Login", "Common"]);
   const theme = useTheme();
 
@@ -102,12 +107,49 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
     };
   }, [captcha.dismiss]);
 
+  const updateDisplayType = React.useCallback(() => {
+    if (checkIsSSR()) return;
+
+    const isLandscape =
+      (typeof window.matchMedia === "function" &&
+        window.matchMedia("(orientation: landscape)").matches) ||
+      window.innerWidth > window.innerHeight;
+
+    if (isMobileDevice() && isLandscape) {
+      setModalDisplayType(ModalDialogType.aside);
+    } else {
+      setModalDisplayType(ModalDialogType.modal);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (!visible) {
+      setModalDisplayType(ModalDialogType.modal);
+      return undefined;
+    }
+
+    updateDisplayType();
+
+    if (checkIsSSR()) return undefined;
+
+    const handleResize = () => updateDisplayType();
+
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleResize);
+    };
+  }, [visible, updateDisplayType]);
+
   const onRecoverModalClose = () => {
     setEmail("");
     setEmailErr(false);
     setDescription("");
     setDescErr(false);
     setIsShowError(false);
+    setModalDisplayType(ModalDialogType.modal);
     onClose?.();
   };
 
@@ -196,10 +238,11 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
     <ModalDialog
       id={id}
       isLarge
-      autoMaxHeight
       visible={visible}
+      autoMaxHeight
+      withBodyScroll
       onClose={onRecoverModalClose}
-      displayType={ModalDialogType.modal}
+      displayType={modalDisplayType}
       aria-labelledby="recover-access-modal-title"
       dataTestId="recover_access_modal"
     >

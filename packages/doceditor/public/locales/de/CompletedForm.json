@@ -11,7 +11,6 @@
   "FormNumber": "Formularnummer",
   "FormOwner": "Formularinhaber",
   "FormSectionCompleted": "Formularabschnitt ausgefüllt",
-  "FormVDRCompletedDescription": "Das Formular wurde von allen Rollen vollständig ausgefüllt und ist nun abgeschlossen. Es ist im Nur-Ansicht-Modus verfügbar.",
   "FormVDRConfirmationOfStartTitle": "Formular liegt zum Ausfüllen im Raum bereit",
   "FormVDRSectionCompletedDescription": "Der zugewiesene Teil des PDF-Formulars wurde erfolgreich ausgefüllt. Der Füllstatus des Formulars kann im Raum und über das Feld \"Füllstatus\" verfolgt werden. Sobald das Formular vollständig ausgefüllt ist, wird eine E-Mail-Benachrichtigung gesendet.",
   "LinkToFillOutForm": "Link zum Ausfüllen des Formulars:",

@@ -3,17 +3,17 @@
   "content": "You are assigned to fill out the form as the first recipient. A notification has been sent to your email. You can start filling it out now or copy the filling link and return later.",
   "content_en_sha1_hash": "abe57d1bb832eca2b841d19f239c9aed0a72c490",
   "created_at": "2025-10-13T13:22:33.427Z",
-  "updated_at": "2025-10-13T13:22:35.966Z",
+  "updated_at": "2025-10-13T15:29:54.743Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text appears as a header description within the completed VDR form UI. It informs the first recipient that they are assigned to fill out the form, confirms a notification has been sent, and provides instructions to start filling it out or save the link for later. This helps guide the user through the form completion process.",
+    "is_auto": true,
+    "updated_at": "2025-10-13T14:28:08.669Z"
   },
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
       "line_number": 155,
-      "context": "}, [t, isStartFilling, completed]);\n \n const headerDescription = useMemo(() => {\n if (isStartFilling) {\n return isYournTurn\n ? t(\"CompletedForm:FormVDRYouFirstRecepientDescription\")\n : t(\"CompletedForm:FormVDRNextRecepientDescription\");\n }\n \n if (completed) return t(\"CompletedForm:FormVDRCompletedDescription\");",
+      "context": "}, [t, isStartFilling, completed]);\n \n const headerDescription = useMemo(() => {\n if (isStartFilling) {\n return isYournTurn\n ? t(\"CompletedForm:FormVDRYouFirstRecepientDescription\")\n : t(\"CompletedForm:FormVDRNextRecepientDescription\");\n }\n \n if (completed) return t(\"CompletedForm:FormVDRFinalizedDescription\");",
       "module": "/packages/doceditor"
     }
   ],

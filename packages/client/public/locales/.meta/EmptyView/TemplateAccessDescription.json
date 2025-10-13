@@ -3,11 +3,11 @@
   "content": "Control who can use this template",
   "content_en_sha1_hash": "7a70fe763658974b816d93c8d2eced737b8a3e72",
   "created_at": "2025-10-13T13:22:31.517Z",
-  "updated_at": "2025-10-13T13:22:35.615Z",
+  "updated_at": "2025-10-13T14:27:11.303Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text explains the purpose of a setting related to template access. It appears within a UI element (likely a button or setting) allowing users to manage permissions for who can utilize a specific template. Translators should ensure the meaning of controlling template usage is preserved.",
+    "is_auto": true,
+    "updated_at": "2025-10-13T14:27:11.303Z"
   },
   "usage": [
     {

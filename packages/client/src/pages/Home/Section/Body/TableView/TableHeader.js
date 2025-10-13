@@ -28,7 +28,7 @@ import React from "react";
 import { TableHeader } from "@docspace/shared/components/table";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Events, SortByFieldName, RoomsType } from "@docspace/shared/enums";
+import { Events, SortByFieldName } from "@docspace/shared/enums";
 
 class FilesTableHeader extends React.Component {
   constructor(props) {
@@ -846,13 +846,7 @@ class FilesTableHeader extends React.Component {
   };
 
   onFilter = (sortBy) => {
-    const {
-      filter,
-      setIsLoading,
-      isPublicRoom,
-      publicRoomKey,
-      isPublicRoomType,
-    } = this.props;
+    const { filter, setIsLoading } = this.props;
     const newFilter = filter.clone();
 
     if (newFilter.sortBy !== sortBy) {
@@ -863,15 +857,6 @@ class FilesTableHeader extends React.Component {
     }
 
     setIsLoading(true);
-
-    const currentUrl = window.location.href;
-
-    if (
-      isPublicRoom ||
-      (isPublicRoomType && publicRoomKey && currentUrl.includes("key"))
-    ) {
-      newFilter.key = publicRoomKey;
-    }
 
     window.DocSpace.navigate(
       `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`,
@@ -1054,13 +1039,7 @@ export default inject(
 
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
 
-    const { changeDocumentsTabs, isIndexedFolder, roomType } =
-      selectedFolderStore;
-
-    const isPublicRoomType =
-      roomType === RoomsType.PublicRoom ||
-      roomType === RoomsType.CustomRoom ||
-      roomType === RoomsType.FormRoom;
+    const { changeDocumentsTabs, isIndexedFolder } = selectedFolderStore;
 
     return {
       setRoomsFilter,
@@ -1142,7 +1121,6 @@ export default inject(
       isTemplatesFolder,
       isPublicRoom,
       publicRoomKey,
-      isPublicRoomType,
 
       isFrame,
       isRecentFolder,

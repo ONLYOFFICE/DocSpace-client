@@ -11,7 +11,6 @@
   "FormNumber": "Form numarası",
   "FormOwner": "Form sahibi",
   "FormSectionCompleted": "Form Bölümü Tamamlandı",
-  "FormVDRCompletedDescription": "Form, tüm roller tarafından tamamen dolduruldu ve sonlandırıldı. Salt görüntüleme modunda kullanılabilir.",
   "FormVDRConfirmationOfStartTitle": "Form, odada doldurulmaya hazır",
   "FormVDRSectionCompletedDescription": "PDF formunun atanmış bölümü başarıyla tamamlandı. Formun doldurulma durumu odaya ve Doldurma durumu paneline göre takip edilebilir. Form tamamen doldurulduğu zaman e-posta bildirimi gönderilecektir.",
   "LinkToFillOutForm": "Formu doldurma bağlantısı:",

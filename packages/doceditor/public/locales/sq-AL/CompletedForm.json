@@ -11,7 +11,6 @@
   "FormNumber": "Numri i formularit",
   "FormOwner": "Pronari i formularit",
   "FormSectionCompleted": "Seksioni i formularit u përfundua",
-  "FormVDRCompletedDescription": "Formulari është përfunduar plotësisht nga të gjitha rolet dhe tani është në modalitet vetëm për lexim.",
   "FormVDRConfirmationOfStartTitle": "Formulari është gati për plotësim në dhomë",
   "FormVDRSectionCompletedDescription": "Pjesa e caktuar e PDF-së është përfunduar me sukses. Statusi i plotësimit të formularit mund tl miratohet në dhomë dhe përmes panelit të statusit të plotësimit. Një njoftim me email do të dërgohet sapo formulari të jetë plotësisht i përfunduar. ",
   "LinkToFillOutForm": "Lidhje për të plotësuar formularin:",

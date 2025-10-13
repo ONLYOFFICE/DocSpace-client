@@ -11,7 +11,6 @@
   "FormNumber": "Veidlapas numurs",
   "FormOwner": "Veidlapas īpašnieks",
   "FormSectionCompleted": "Veidlapas sadaļa aizpildīta",
-  "FormVDRCompletedDescription": "Visas lomas ir pilnībā aizpildījušas veidlapu, un tagad tā ir pabeigta. Tā ir pieejama tikai skatīšanas režīmā.",
   "FormVDRConfirmationOfStartTitle": "Veidlapa ir gatava aizpildīšanai telpā",
   "FormVDRSectionCompletedDescription": "PDF veidlapas piešķirtā daļa ir veiksmīgi aizpildīta. Veidlapas aizpildīšanas statusu var uzraudzīt telpā un Aizpildīšanas statusa panelī. Kad veidlapa būs pilnībā aizpildīta, tiks nosūtīts e-pasta paziņojums.",
   "LinkToFillOutForm": "Saite veidlapas aizpildīšanai:",

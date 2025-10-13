@@ -49,9 +49,9 @@ const ManualBackupWrapper = ({
   setIsInited,
   isBackupPaid,
   setDownloadingProgress,
-  setIsEmptyContentBeforeLoader,
   isEmptyContentBeforeLoader,
   isInitialLoading,
+  setIsEmptyContentBeforeLoader,
   ...props
 }: ManualBackupWrapperProps) => {
   const { t } = useTranslation(["Settings", "Common"]);
@@ -108,6 +108,7 @@ export default inject<
     filesSettingsStore,
     currentQuotaStore,
     paymentStore,
+    clientLoadingStore,
   }) => {
     const {
       accounts,
@@ -150,6 +151,10 @@ export default inject<
 
       backupPageEnable,
       backupsCount,
+
+      isEmptyContentBeforeLoader,
+      setIsEmptyContentBeforeLoader,
+      isInitialError,
     } = backup;
 
     const { isPayer, backupServicePrice } = paymentStore;
@@ -185,6 +190,8 @@ export default inject<
       currentQuotaStore;
 
     const { getIcon, filesSettings } = filesSettingsStore;
+
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     const pageIsDisabled = isManagement()
       ? portals?.length === 1 || !backupPageEnable
@@ -247,6 +254,10 @@ export default inject<
       setSelectedThirdPartyAccount,
       setConnectedThirdPartyAccount,
 
+      isEmptyContentBeforeLoader,
+      setIsEmptyContentBeforeLoader,
+      isInitialError,
+
       // filesSelectorInput
       newPath,
       basePath,
@@ -291,6 +302,9 @@ export default inject<
 
       backupServicePrice,
       isFreeBackupsLimitReached,
+
+      // clientLoadingStore
+      isInitialLoading: showPortalSettingsLoader,
     };
   },
 )(observer(ManualBackupWrapper as React.FC<ExternalManualBackupProps>));

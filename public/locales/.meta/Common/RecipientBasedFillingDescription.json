@@ -3,11 +3,11 @@
   "content": "Fill out the original form with other recipients in VDR.",
   "content_en_sha1_hash": "f7ea31f31e087897513403fc518f11e1da026c4b",
   "created_at": "2025-10-13T13:22:10.804Z",
-  "updated_at": "2025-10-13T13:22:35.583Z",
+  "updated_at": "2025-10-13T14:23:55.153Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This description appears in a dialog or panel related to sharing a form, likely within a virtual data room. It explains how to complete the original form with other recipients. Translators should ensure the description accurately reflects the action of pre-filling the form for recipients.",
+    "is_auto": true,
+    "updated_at": "2025-10-13T14:23:55.153Z"
   },
   "usage": [
     {

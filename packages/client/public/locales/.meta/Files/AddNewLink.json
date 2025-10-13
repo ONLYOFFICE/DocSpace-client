@@ -3,7 +3,7 @@
   "content": "Add new link",
   "content_en_sha1_hash": "44ff7a980d99eb935ed009b254bb3b7b58a347c4",
   "created_at": "2025-05-19T21:30:55.216Z",
-  "updated_at": "2025-08-26T11:15:14.141Z",
+  "updated_at": "2025-10-13T14:41:02.933Z",
   "comment": {
     "text": "This translation key is used for the \"Add new link\" text that appears on a button in an info panel, prompting users to add a new link when a certain limit has been reached.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.tsx",
-      "line_number": 212,
+      "line_number": 196,
       "context": "isDisabled={\n additionalLinks\n ? additionalLinks.length >= countCanCreateLink\n : false\n }\n title={t(\"Files:AddNewLink\")}\n dataTestId=\"info_panel_members_add_new_link_button\"\n />\n \n {additionalLinks &&\n additionalLinks.length >= countCanCreateLink ? (",
       "module": "/packages/client"
     }

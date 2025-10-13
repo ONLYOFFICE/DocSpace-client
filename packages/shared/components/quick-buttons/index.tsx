@@ -70,7 +70,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     isTemplatesFolder,
     onClickLock,
     onClickFavorite,
-    isRecentFolder,
     isTrashFolder,
     openShareTab,
   } = props;
@@ -176,6 +175,9 @@ export const QuickButtons = (props: QuickButtonsProps) => {
 
     if (onClickLock) onClickLock();
   };
+
+  const showFavoriteIcon =
+    !isRoom(item) && item?.isFavorite && !isPublicRoom && !isTrashFolder;
 
   return (
     <div className="badges additional-badges badges__quickButtons">
@@ -311,11 +313,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             </>
           ) : null}
 
-          {!isRoom(item) &&
-          item?.isFavorite &&
-          !isRecentFolder &&
-          !isPublicRoom &&
-          !isTrashFolder ? (
+          {showFavoriteIcon ? (
             <IconButton
               iconName={
                 item?.isFavorite ? FavoriteFillReactSvgUrl : FavoriteReactSvgUrl

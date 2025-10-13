@@ -121,12 +121,15 @@ const InfoPanelHeaderContent = ({
   ];
 
   const isRoomsType =
-    !isRecentFolder &&
-    selection &&
-    "rootFolderType" in selection &&
-    isRoomUtil(selection) &&
-    (selection.rootFolderType === FolderType.Rooms ||
-      selection.rootFolderType === FolderType.Archive ||
+    (!isRecentFolder &&
+      selection &&
+      "rootFolderType" in selection &&
+      isRoomUtil(selection) &&
+      (selection.rootFolderType === FolderType.Rooms ||
+        selection.rootFolderType === FolderType.Archive)) ||
+    (!isRecentFolder &&
+      selection &&
+      "rootFolderType" in selection &&
       selection.rootFolderType === FolderType.RoomTemplates);
 
   if (isRoomsType) tabsData.unshift(memberTab);

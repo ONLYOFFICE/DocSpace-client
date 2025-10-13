@@ -11,7 +11,6 @@
   "FormNumber": "Číslo formulára",
   "FormOwner": "Vlastník formulára",
   "FormSectionCompleted": "Časť formulára vyplnená",
-  "FormVDRCompletedDescription": "Formulár bol úplne vyplnený všetkými rolami a teraz je dokončený. Je prístupný len v režime zobrazenia.",
   "FormVDRConfirmationOfStartTitle": "Formulár je pripravený na vyplnenie v miestnosti",
   "FormVDRSectionCompletedDescription": "Pridelená časť PDF formulára bola úspešne vyplnená. Aktuálny stav formulára môžete sledovať v miestnosti a prostredníctvom panela Miera vyplnenia. Keď bude formulár vyplnený, odošle sa e-mailové upozornenie.",
   "LinkToFillOutForm": "Odkaz na vyplnenie formulára:",

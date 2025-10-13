@@ -11,7 +11,6 @@
   "FormNumber": "Forma nömrəsi",
   "FormOwner": "Forma sahibi",
   "FormSectionCompleted": "Forma Bölməsi Tamamlandı",
-  "FormVDRCompletedDescription": "Forma bütün rollar tərəfindən tamamilə dolduruldu və indi son formadadır. Yalnız ekran rejimində mövcuddur.",
   "FormVDRConfirmationOfStartTitle": "Forma otaqda doldurulmağa hazırdır",
   "FormVDRSectionCompletedDescription": "The assigned portion of the PDF form has been successfully completed. The filling status of the form can be monitored in the room and via the Filling status panel. An email notification will be sent once the form is fully completed.",
   "LinkToFillOutForm": "Formanı doldurmaq üçün link:",

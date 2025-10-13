@@ -11,7 +11,6 @@
   "FormNumber": "Número de formulario",
   "FormOwner": "Propietario del formulario",
   "FormSectionCompleted": "Sección de formularios Completado",
-  "FormVDRCompletedDescription": "El formulario ha sido completado en su totalidad por todos los roles y ahora está finalizado. Está disponible solo para su visualización.",
   "FormVDRConfirmationOfStartTitle": "El formulario está listo para rellenarse en la sala",
   "FormVDRSectionCompletedDescription": "La parte asignada del formulario PDF se ha completado correctamente. El estado de rellenado del formulario puede ser monitoreado en la sala y mediante el panel de estado de rellenado.",
   "LinkToFillOutForm": "Enlace para rellenar el formulario:",

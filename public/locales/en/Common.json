@@ -436,7 +436,7 @@
   "HideArticleMenu": "Hide menu",
   "HistoryOpenedAtDate": "Opened the form to fill out",
   "HistoryStopDate": "Filling was stopped by <1>{{userName}}</1>",
-  "HistorySubmissionDate": "Submitted their part. The form was sent to the next role.",
+  "HistorySubmittedPartDescription": "Submitted their part. The form was sent to the next recipient.",
   "Homepage": "Homepage",
   "Hotkeys": "Hotkeys",
   "Hour": "hour",

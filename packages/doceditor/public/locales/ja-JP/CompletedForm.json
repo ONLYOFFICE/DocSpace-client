@@ -11,7 +11,6 @@
   "FormNumber": "フォーム番号",
   "FormOwner": "フォームの所有者",
   "FormSectionCompleted": "フォームセクションが完了",
-  "FormVDRCompletedDescription": "すべての役割によってフォームが完全に記入され、現在は最終化されています。閲覧専用モードで利用可能です。",
   "FormVDRConfirmationOfStartTitle": "フォームはルームで記入の準備ができています",
   "FormVDRSectionCompletedDescription": "PDFフォームの割り当てられた部分が正常に完了しました。フォームの記入状況は、ルームと記入状況パネルで監視できます。フォームが完全に完了すると、メール通知が送信されます。",
   "LinkToFillOutForm": "フォームに記入するリンク：",

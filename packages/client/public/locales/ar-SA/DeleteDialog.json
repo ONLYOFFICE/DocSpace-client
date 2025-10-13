@@ -6,7 +6,7 @@
   "DeleteFolders": "أنتم على وشك نقل <strong>مجلدات ({{foldersCount}})</strong> إلى {{trashSection}}. ",
   "DeleteGroupDescription": "سيتم حذف المجموعة {{groupName}}. لن تتم إزالة المستخدمين في المجموعة من {{productName}}. هل أنت متأكد أنك تريد المتابعة؟",
   "DeleteGroupTitle": "حذف المجموعة",
-  "DeleteItem": "أنتم على وشك نقل <strong>{{name}}</strong> إلى سلة المحذوفات. ",
+  "DeleteItem": "أنتم على وشك نقل <strong>{{name}}</strong> إلى {{trashSection}}. ",
   "DeleteRoom": "سيتم حذف الغرفة <strong>\"\"{{roomName}}\"\"</strong> نهائيًا. ستفقدون جميع البيانات وصلاحيات وصول المستخدم. ",
   "DeleteRoomTitle": "هل تريدون حذف هذه الغرفة؟ ",
   "DeleteRoomWarning": "أنا أفهم العواقب وأريد حذف الغرفة ",

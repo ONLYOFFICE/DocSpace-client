@@ -30,7 +30,6 @@ import type { AuthStore } from "../store/AuthStore";
 import type { UserStore } from "../store/UserStore";
 import type { SettingsStore } from "../store/SettingsStore";
 import type { CurrentTariffStatusStore } from "../store/CurrentTariffStatusStore";
-import { ValidationStatus } from "../enums";
 
 export interface PrivateRouteProps
   extends PropsWithChildren,
@@ -54,15 +53,7 @@ export interface PrivateRouteProps
   identityServerEnabled?: boolean;
   isCommunity?: boolean;
   isEnterprise?: boolean;
-  isLoadedUser?: boolean;
-
-  validatePublicRoomKey: ((key: string) => void) | undefined;
-  publicRoomKey: string | null | undefined;
-  roomId: string | undefined;
-  isLoadedPublicRoom: boolean | undefined;
-  isLoadingPublicRoom: boolean | undefined;
   standalone: boolean;
-  roomStatus?: ValidationStatus;
 }
 
 export interface PublicRouteProps

@@ -72,7 +72,6 @@ import {
   ROOMS_PROVIDER_TYPE_NAME,
   thumbnailStatuses,
   CategoryType,
-  SHARED_WITH_ME_PATH,
 } from "@docspace/shared/constants";
 
 import {
@@ -2307,8 +2306,7 @@ class FilesStore {
 
       const isSharedWithMeFolderSection =
         this.treeFoldersStore.sharedWithMeFolderId === item.rootFolderId &&
-        item.rootFolderType === FolderType.SHARE &&
-        window.location.pathname.includes(SHARED_WITH_ME_PATH);
+        item.rootFolderType === FolderType.SHARE;
 
       let fileOptions = [
         // "open",
@@ -2855,8 +2853,7 @@ class FilesStore {
 
     const isSharedWithMeFolderSection =
       this.treeFoldersStore.sharedWithMeFolderId === item.rootFolderId &&
-      item.rootFolderType === FolderType.SHARE &&
-      window.location.pathname.includes(SHARED_WITH_ME_PATH);
+      item.rootFolderType === FolderType.SHARE;
 
     let folderOptions = [
       "select",

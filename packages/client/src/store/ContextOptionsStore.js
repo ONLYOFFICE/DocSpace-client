@@ -134,7 +134,10 @@ import {
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { createLoader } from "@docspace/shared/utils/createLoader";
-import { FILLING_STATUS_ID } from "@docspace/shared/constants";
+import {
+  FILLING_STATUS_ID,
+  SHARED_WITH_ME_PATH,
+} from "@docspace/shared/constants";
 import {
   isFile as isFileUtil,
   isFolder as isFolderUtil,
@@ -2318,7 +2321,11 @@ class ContextOptionsStore {
           this.dialogsStore.setUnsubscribe(true);
           this.dialogsStore.setDeleteDialogVisible(true);
         },
-        disabled: false,
+        disabled:
+          // FIXME: temporary hack — backend should expose a flag to disable this
+          typeof window !== "undefined"
+            ? !window?.location?.pathname.includes(SHARED_WITH_ME_PATH)
+            : false,
       },
       {
         key: "separate-stop-filling",

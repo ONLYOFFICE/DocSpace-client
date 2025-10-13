@@ -52,6 +52,7 @@ type AiRoomTabsProps = {
   currentTab?: AiRoomStore["currentTab"];
   setCurrentTab: AiRoomStore["setCurrentTab"];
   setKnowledgeId: AiRoomStore["setKnowledgeId"];
+  setResultId: AiRoomStore["setResultId"];
 };
 
 const AiRoomTabs = ({
@@ -67,6 +68,7 @@ const AiRoomTabs = ({
   setCurrentTab,
 
   setKnowledgeId,
+  setResultId,
 }: AiRoomTabsProps) => {
   const navigate = useNavigate();
 
@@ -88,12 +90,12 @@ const AiRoomTabs = ({
       filesFilter.searchArea = SearchArea.Any;
 
       setKnowledgeId(null);
+      setResultId(null);
 
       navigate(`${path}?${filesFilter.toUrlParams()}`);
     } else {
-      if (tab.id !== "knowledge") {
-        setKnowledgeId(null);
-      }
+      setResultId(null);
+      setKnowledgeId(null);
 
       const path = getCategoryUrl(CategoryType.SharedRoom, rootRoomId ?? id);
 
@@ -153,7 +155,8 @@ export default inject(
     const { showTabsLoader, setIsSectionBodyLoading, currentClientView } =
       clientLoadingStore;
 
-    const { currentTab, setCurrentTab, setKnowledgeId } = aiRoomStore;
+    const { currentTab, setCurrentTab, setKnowledgeId, setResultId } =
+      aiRoomStore;
 
     const { id, rootRoomId } = selectedFolderStore;
     const { canUseChat } = accessRightsStore;
@@ -170,6 +173,7 @@ export default inject(
       setCurrentTab,
 
       setKnowledgeId,
+      setResultId,
 
       currentClientView,
     };

@@ -474,6 +474,7 @@ class FilesStore {
     if (
       this.selectedFolderStore.id !== fileInfo.folderId &&
       this.aiRoomStore.knowledgeId !== fileInfo.folderId &&
+      this.aiRoomStore.resultId !== fileInfo.folderId &&
       this.selectedFolderStore.rootFolderType !== FolderType.Recent &&
       this.selectedFolderStore.rootFolderType !== FolderType.Favorites
     )
@@ -514,7 +515,8 @@ class FilesStore {
 
       if (
         this.selectedFolderStore.id !== file.folderId &&
-        this.aiRoomStore.knowledgeId !== file.folderId
+        this.aiRoomStore.knowledgeId !== file.folderId &&
+        this.aiRoomStore.resultId !== file.folderId
       ) {
         const movedToIndex = this.getFolderIndex(file.folderId);
         if (movedToIndex > -1) this.folders[movedToIndex].filesCount++;
@@ -1845,8 +1847,10 @@ class FilesStore {
         ) {
           if (currentFolder.type === FolderType.Knowledge) {
             this.aiRoomStore.setKnowledgeId(currentFolder.id);
+            this.aiRoomStore.setResultId(null);
           } else {
             this.aiRoomStore.setKnowledgeId(null);
+            this.aiRoomStore.setResultId(currentFolder.id);
           }
 
           const aiRoom =
@@ -1864,11 +1868,14 @@ class FilesStore {
         } else if (currentFolder.roomType === RoomsType.AIRoom) {
           this.aiRoomStore.setCurrentTab("chat");
           this.aiRoomStore.setKnowledgeId(null);
+          this.aiRoomStore.setResultId(null);
         } else if (currentFolder.rootRoomType === RoomsType.AIRoom) {
           this.aiRoomStore.setCurrentTab("result");
           this.aiRoomStore.setKnowledgeId(null);
+          this.aiRoomStore.setResultId(currentFolder.id);
         } else {
           this.aiRoomStore.setKnowledgeId(null);
+          this.aiRoomStore.setResultId(null);
         }
 
         runInAction(() => {
@@ -2088,6 +2095,7 @@ class FilesStore {
     this.filesController = null;
 
     this.aiRoomStore.setKnowledgeId(null);
+    this.aiRoomStore.setResultId(null);
 
     const request = () =>
       api.rooms

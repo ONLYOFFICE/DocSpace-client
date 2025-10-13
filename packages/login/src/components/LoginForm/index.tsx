@@ -208,7 +208,7 @@ const LoginForm = ({
     if (isModalOpen) {
       captcha.dismiss();
     }
-  }, [isModalOpen, captcha]);
+  }, [isModalOpen, captcha.dismiss]);
 
   useEffect(() => {
     const profile = localStorage.getItem("profile");

@@ -92,7 +92,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
     if (!visible) {
       captcha.dismiss();
     }
-  }, [visible, captcha]);
+  }, [visible, captcha.dismiss]);
 
   const onRecoverModalClose = () => {
     setEmail("");
@@ -148,8 +148,8 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
       const res = await sendRecoverRequest(
         email,
         description,
-        captchaToken ? reCaptchaType : undefined,
         captchaToken,
+        reCaptchaType,
       );
 
       setLoading(false);

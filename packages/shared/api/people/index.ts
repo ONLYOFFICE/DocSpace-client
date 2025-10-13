@@ -283,17 +283,13 @@ export function deleteSelf(key) {
 
 export function sendInstructionsToChangePassword(
   email: string,
+  recaptchaResponse: string | null | undefined = "",
   recaptchaType?: RecaptchaType,
-  recaptchaResponse?: string,
 ) {
-  const data: Record<string, unknown> = { email };
+  const data: Record<string, unknown> = { email, recaptchaResponse };
 
-  if (recaptchaResponse) {
-    data.recaptchaResponse = recaptchaResponse;
-
-    if (typeof recaptchaType !== "undefined") {
-      data.recaptchaType = recaptchaType;
-    }
+  if (typeof recaptchaType !== "undefined") {
+    data.recaptchaType = recaptchaType;
   }
 
   return request({

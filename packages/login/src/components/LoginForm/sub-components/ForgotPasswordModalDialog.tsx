@@ -64,6 +64,8 @@ const ForgotPasswordModalDialog = ({
   const { t } = useTranslation(["Login", "Common"]);
   const theme = useTheme();
 
+  // Modal always uses its own captcha instance to avoid hCaptcha widget conflicts
+  // The parent LoginForm hides its captcha when modal is open
   const captcha = useCaptcha({
     publicKey: reCaptchaPublicKey,
     type: reCaptchaType,
@@ -76,7 +78,7 @@ const ForgotPasswordModalDialog = ({
       setIsShowError(false);
       setErrorText("");
     }
-  }, [isVisible, captcha]);
+  }, [isVisible, captcha.dismiss]);
 
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     // console.log("onChangeEmail", event.target.value);
@@ -95,15 +97,15 @@ const ForgotPasswordModalDialog = ({
         return;
       }
 
-      const captchaToken = captchaValidation.token ?? undefined;
+      const captchaToken = captchaValidation.token;
 
       setIsLoading(true);
 
       try {
         const res = (await sendInstructionsToChangePassword(
           email,
-          captchaToken ? reCaptchaType : undefined,
           captchaToken,
+          reCaptchaType,
         )) as string;
         toastr.success(res);
         onDialogClose();
@@ -140,7 +142,10 @@ const ForgotPasswordModalDialog = ({
   }, [
     email,
     emailError,
-    captcha,
+    captcha.validate,
+    captcha.request,
+    captcha.reset,
+    captcha.isVisible,
     onDialogClose,
     reCaptchaPublicKey,
     reCaptchaType,

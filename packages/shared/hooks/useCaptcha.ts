@@ -34,7 +34,7 @@ type UseCaptchaOptions = {
   initiallyVisible?: boolean;
 };
 
-type UseCaptchaReturn = {
+export type UseCaptchaReturn = {
   isVisible: boolean;
   isError: boolean;
   token: string | null;
@@ -73,13 +73,11 @@ export const useCaptcha = ({
   }, [publicKey]);
 
   const dismiss = useCallback(() => {
-    if (!isVisible) return;
-
     setIsVisible(false);
     setIsError(false);
     setCaptchaToken(null);
     setResetSignal((value) => value + 1);
-  }, [isVisible]);
+  }, []);
 
   const reset = useCallback(() => {
     setIsError(false);
@@ -96,17 +94,13 @@ export const useCaptcha = ({
     isValid: boolean;
     token?: string | null;
   } => {
-    if (!publicKey || !isVisible) {
-      return { isValid: true };
-    }
-
-    if (!captchaToken) {
+    if (isVisible && !captchaToken) {
       setIsError(true);
       return { isValid: false };
     }
 
     return { isValid: true, token: captchaToken };
-  }, [captchaToken, isVisible, publicKey]);
+  }, [captchaToken, isVisible]);
 
   useEffect(() => {
     if (!publicKey) {

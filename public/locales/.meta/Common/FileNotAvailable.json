@@ -3,7 +3,7 @@
   "content": "File not available",
   "content_en_sha1_hash": "1f1c6a46840542ee93667be29fe00c4a2ca6e55e",
   "created_at": "2025-10-13T13:22:03.372Z",
-  "updated_at": "2025-10-13T14:25:35.519Z",
+  "updated_at": "2025-10-13T14:41:02.910Z",
   "comment": {
     "text": "This message indicates that a requested file is unavailable. It's displayed when a user attempts to access a file that has expired or is no longer accessible, likely within an information panel or toast notification. Translators should ensure the wording conveys the file's unavailability.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2670,
+      "line_number": 2643,
       "context": ": isFolder\n ? t(\"Common:FolderLinkExpired\")\n : t(\"Common:RoomLinkExpired\");\n \n const title = isFile\n ? t(\"Common:FileNotAvailable\")\n : isFolder\n ? t(\"Common:FolderNotAvailable\")\n : t(\"Common:RoomNotAvailable\");\n \n return toastr.error(description, title);",
       "module": "/packages/client"
     }

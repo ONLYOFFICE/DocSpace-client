@@ -2421,7 +2421,7 @@ class FilesStore {
         ]);
       }
 
-      if (!canSetUpCustomFilter || !isExtsCustomFilter || isMyFolder) {
+      if (!canSetUpCustomFilter || !isExtsCustomFilter) {
         fileOptions = removeOptions(fileOptions, ["custom-filter"]);
       }
 
@@ -2558,6 +2558,13 @@ class FilesStore {
       if (isFavoritesFolder) {
         fileOptions = removeOptions(fileOptions, ["mark-as-favorite"]);
         fileOptions = removeOptions(fileOptions, ["delete"]);
+      }
+
+      if (isRecycleBinFolder) {
+        fileOptions = removeOptions(fileOptions, [
+          "mark-as-favorite",
+          "remove-from-favorites",
+        ]);
       }
 
       if (isEncrypted) {

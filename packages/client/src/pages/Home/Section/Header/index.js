@@ -161,7 +161,6 @@ const SectionHeaderContent = (props) => {
     revokeFilesOrder,
     saveIndexOfFiles,
     infoPanelRoom,
-    getPublicKey,
     getIndexingArray,
     setCloseEditIndexDialogVisible,
     rootFolderId,
@@ -186,6 +185,7 @@ const SectionHeaderContent = (props) => {
     contactsTab,
     isRootRooms,
     isArchive,
+    isSharedWithMeFolderRoot,
   } = props;
 
   const location = useLocation();
@@ -359,8 +359,6 @@ const SectionHeaderContent = (props) => {
     const filter = FilesFilter.getDefault();
 
     filter.folder = id;
-    const shareKey = await getPublicKey(selectedFolder);
-    if (shareKey) filter.key = shareKey;
 
     const itemIdx = selectedFolder.navigationPath.findIndex((v) => v.id === id);
 
@@ -452,7 +450,8 @@ const SectionHeaderContent = (props) => {
         (isShared && (isArchive ? selectedFolder?.isRoom : isRoom))
       ) {
         return PublicRoomIconUrl;
-      } else if (!isRootRooms && !isArchive) return PublicRoomIconUrl;
+      } else if (!isRootRooms && !isArchive && !isSharedWithMeFolderRoot)
+        return PublicRoomIconUrl;
     }
 
     if (isLifetimeEnabled) return LifetimeRoomIconUrl;
@@ -945,7 +944,6 @@ export default inject(
       createFoldersTree,
       revokeFilesOrder,
       saveIndexOfFiles,
-      getPublicKey,
     } = filesActionsStore;
 
     const { setIsVisible, isVisible, infoPanelRoomSelection } = infoPanelStore;
@@ -1167,7 +1165,6 @@ export default inject(
       rootFolderId,
       displayAbout,
       infoPanelRoom: infoPanelRoomSelection,
-      getPublicKey,
       getIndexingArray,
       setCloseEditIndexDialogVisible,
       welcomeFormFillingTipsVisible,
@@ -1193,6 +1190,7 @@ export default inject(
       contactsTab,
       isRootRooms,
       isArchive,
+      isSharedWithMeFolderRoot,
     };
   },
 )(

@@ -1755,16 +1755,6 @@ export async function checkIsPDFForm(fileId: string | number) {
   }) as Promise<boolean>;
 }
 
-export async function removeSharedFolder(folderIds: Array<string | number>) {
-  return request({
-    method: "delete",
-    url: `/files/recent`,
-    data: {
-      folderIds,
-    },
-  });
-}
-
 export async function removeSharedFolderOrFile(
   folderIds: Array<string | number> = [],
   fileIds: Array<string | number> = [],

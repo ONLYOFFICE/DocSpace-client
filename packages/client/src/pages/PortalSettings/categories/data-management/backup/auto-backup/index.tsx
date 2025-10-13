@@ -99,6 +99,7 @@ export default inject<
     thirdPartyStore,
     dialogsStore,
     currentQuotaStore,
+    clientLoadingStore,
   }) => {
     const language = authStore.language;
 
@@ -204,7 +205,12 @@ export default inject<
 
       setIsInited,
       setDefaultFolderId,
+
+      isEmptyContentBeforeLoader,
+      isInitialError,
     } = backup;
+
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     const isEnableAuto = backupPageEnable ?? false;
 
@@ -287,6 +293,8 @@ export default inject<
       setIsBackupProgressVisible,
       backupProgressError,
       setBackupProgressError,
+      isEmptyContentBeforeLoader,
+      isInitialError,
 
       // settingsStore
       automaticBackupUrl,
@@ -307,6 +315,7 @@ export default inject<
       setThirdPartyProviders,
       providers,
       deleteThirdParty,
+
       // dialogsStore
       connectDialogVisible,
       deleteThirdPartyDialogVisible,
@@ -315,6 +324,9 @@ export default inject<
       setIsInited,
       setDefaultFolderId,
       isBackupPaid,
+
+      // clientLoadingStore
+      isInitialLoading: showPortalSettingsLoader,
     };
   },
 )(observer(AutoBackupWrapper as React.FC<ExternalAutoBackupWrapperProps>));

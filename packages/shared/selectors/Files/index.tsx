@@ -655,7 +655,9 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     </>
   );
 
-  return currentDeviceType === DeviceType.mobile && !embedded ? (
+  return (currentDeviceType === DeviceType.mobile ||
+    currentDeviceType === DeviceType.tablet) &&
+    !embedded ? (
     <Portal visible={isPanelVisible} element={<div>{selectorComponent}</div>} />
   ) : (
     selectorComponent

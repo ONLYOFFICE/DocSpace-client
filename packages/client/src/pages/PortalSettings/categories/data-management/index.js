@@ -225,7 +225,6 @@ export const Component = inject(
     currentQuotaStore,
     backup,
     authStore,
-    clientLoadingStore,
   }) => {
     const {
       dataBackupUrl,

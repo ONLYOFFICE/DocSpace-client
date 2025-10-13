@@ -130,8 +130,8 @@ const InfoPanelBodyContent = ({
     (isRoot && !isGallery);
 
   const currentView = useMemo(() => {
-    return isRoom ? roomsView : fileView;
-  }, [isRoom, roomsView, fileView]);
+    return isRoom || isTemplatesRoom ? roomsView : fileView;
+  }, [isRoom, roomsView, fileView, isTemplatesRoom]);
 
   const deferredCurrentView = React.useDeferredValue(currentView);
 
@@ -140,11 +140,12 @@ const InfoPanelBodyContent = ({
       fileView === InfoPanelView.infoShare &&
       selection &&
       isFolderUtil(selection) &&
-      !selection?.canShare
+      !selection?.canShare &&
+      !isTemplatesRoom
     ) {
       setView(InfoPanelView.infoDetails);
     }
-  }, [fileView, selection]);
+  }, [fileView, selection, isTemplatesRoom]);
 
   React.useEffect(() => {
     if (!selection) return;

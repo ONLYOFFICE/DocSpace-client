@@ -2560,6 +2560,13 @@ class FilesStore {
         fileOptions = removeOptions(fileOptions, ["delete"]);
       }
 
+      if (isRecycleBinFolder) {
+        fileOptions = removeOptions(fileOptions, [
+          "mark-as-favorite",
+          "remove-from-favorites",
+        ]);
+      }
+
       if (isEncrypted) {
         fileOptions = removeOptions(fileOptions, [
           "open",

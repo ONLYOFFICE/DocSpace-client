@@ -3,7 +3,7 @@
   "content": "Share",
   "content_en_sha1_hash": "09ca55ca52d207f2cc1d9339e0226a88e9e96e2f",
   "created_at": "2025-05-19T21:30:48.615Z",
-  "updated_at": "2025-10-07T15:39:07.214Z",
+  "updated_at": "2025-10-13T13:22:35.669Z",
   "comment": {
     "text": "The translation key \"Share\" is used to display a button label in the user interface. It appears on a shared form panel and is linked to an icon representing sharing. The purpose of this text is to enable users to share content.",
     "is_auto": true,
@@ -36,13 +36,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2410,
+      "line_number": 2425,
       "context": "needsGrouping: true,\n minItemsCount: 1,\n },\n {\n groupKey: \"share\",\n groupLabel: t(\"Common:Share\"),\n groupIcon: ShareReactSvgUrl,\n itemKeys: [\n \"invite-users-to-room\",\n \"copy-shared-link\",\n \"manage-links\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareDialog/ShareDialog.tsx",
-      "line_number": 175,
+      "line_number": 186,
       "context": "/>\n ) : null}\n </>\n </ModalDialog.Container>\n \n <ModalDialog.Header>{t(\"Common:Share\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <section className={styles.shareContainer}>\n <div className=\"share-file_body\">\n <ShareDialogHeader\n file={fileInfo}",
       "module": "/packages/doceditor"
     },

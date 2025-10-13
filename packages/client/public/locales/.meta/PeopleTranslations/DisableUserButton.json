@@ -3,7 +3,7 @@
   "content": "Disable",
   "content_en_sha1_hash": "9a7d4e0687b14e2b7cda406900b802782cd50a62",
   "created_at": "2025-05-19T21:30:53.466Z",
-  "updated_at": "2025-09-29T11:28:55.909Z",
+  "updated_at": "2025-10-13T13:22:35.515Z",
   "comment": {
     "text": "This translation key is used as a button label in various contexts, including a change user status dialog and options store. It corresponds to the action of disabling or removing users from systems, such as guests or individuals. Translators should provide a clear and concise equivalent for this context.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 229,
+      "line_number": 232,
       "context": "case \"disable\":\n return {\n id: \"option_disable\",\n key: option,\n icon: RemoveReactSvgUrl,\n label: t(\"PeopleTranslations:DisableUserButton\"),\n onClick: () => this.onDisableClick(item),\n };\n case \"reassign-data\":\n return {\n id: \"option_reassign-data\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 229,
+      "line_number": 232,
       "context": "case \"disable\":\n return {\n id: \"option_disable\",\n key: option,\n icon: RemoveReactSvgUrl,\n label: t(\"PeopleTranslations:DisableUserButton\"),\n onClick: () => this.onDisableClick(item),\n };\n case \"reassign-data\":\n return {\n id: \"option_reassign-data\",",
       "module": "/packages/client"
     },

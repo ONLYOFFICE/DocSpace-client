@@ -3,7 +3,7 @@
   "content": "Info",
   "content_en_sha1_hash": "4b631f69842530d659306c8f06dbad594a6b1807",
   "created_at": "2025-05-19T21:30:45.900Z",
-  "updated_at": "2025-10-07T15:39:07.361Z",
+  "updated_at": "2025-10-13T13:22:35.746Z",
   "comment": {
     "text": "This translation key is used for the text \"Info\", which is displayed as a header or label in various UI components, including an info panel and an OAuth information dialog. The purpose of this text is to provide basic information or context, often accompanied by icons. It appears in places such as headers, dialogs, and context options.",
     "is_auto": true,
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 264,
+      "line_number": 267,
       "context": "case \"details\":\n return {\n id: \"option_details\",\n key: option,\n icon: InfoOutlineReactSvgUrl,\n label: t(\"Common:Info\"),\n onClick: () => this.onDetailsClick(item),\n };\n \n case \"invite-again\":\n return !this.settingsStore.allowInvitingMembers",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 264,
+      "line_number": 267,
       "context": "case \"details\":\n return {\n id: \"option_details\",\n key: option,\n icon: InfoOutlineReactSvgUrl,\n label: t(\"Common:Info\"),\n onClick: () => this.onDetailsClick(item),\n };\n \n case \"invite-again\":\n return !this.settingsStore.allowInvitingMembers",
       "module": "/packages/client"
     },
@@ -66,14 +66,14 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2095,
-      "context": "disabled: !item.security?.CreateRoomFrom,\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:Info\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.expired),\n },\n {",
+      "line_number": 2110,
+      "context": "disabled: !item.security?.CreateRoomFrom,\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:Info\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2095,
-      "context": "disabled: !item.security?.CreateRoomFrom,\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:Info\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.expired),\n },\n {",
+      "line_number": 2110,
+      "context": "disabled: !item.security?.CreateRoomFrom,\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:Info\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),\n },\n {",
       "module": "/packages/client"
     },
     {

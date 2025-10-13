@@ -3,7 +3,7 @@
   "content": "Pin to top",
   "content_en_sha1_hash": "a94cf5385edad5e968827d91757ef6b07d571826",
   "created_at": "2025-05-19T21:30:55.964Z",
-  "updated_at": "2025-09-26T15:21:06.470Z",
+  "updated_at": "2025-10-13T13:22:35.931Z",
   "comment": {
     "text": "This translation key is used for the label on a button or option that allows users to pin items to the top of their list. It appears in various contexts, including settings or options dialogs, where users can customize their interaction with pinned content. The text should be translated from \"Pin to top\" to make it consistent across different languages.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1280,
-      "context": "const pinOptions = [\n {\n id: \"option_pin-room\",\n key: \"pin-room\",\n label: t(\"PinToTop\"),\n icon: PinReactSvgUrl,\n onClick: (e) => this.onClickPin(e, item.id, t),\n disabled:\n this.publicRoomStore.isPublicRoom ||\n Boolean(item.external && item.expired),",
+      "line_number": 1291,
+      "context": "const pinOptions = [\n {\n id: \"option_pin-room\",\n key: \"pin-room\",\n label: t(\"PinToTop\"),\n icon: PinReactSvgUrl,\n onClick: (e) => this.onClickPin(e, item.id, t),\n disabled:\n this.publicRoomStore.isPublicRoom ||\n Boolean(item.external && item.isLinkExpired),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1280,
-      "context": "const pinOptions = [\n {\n id: \"option_pin-room\",\n key: \"pin-room\",\n label: t(\"PinToTop\"),\n icon: PinReactSvgUrl,\n onClick: (e) => this.onClickPin(e, item.id, t),\n disabled:\n this.publicRoomStore.isPublicRoom ||\n Boolean(item.external && item.expired),",
+      "line_number": 1291,
+      "context": "const pinOptions = [\n {\n id: \"option_pin-room\",\n key: \"pin-room\",\n label: t(\"PinToTop\"),\n icon: PinReactSvgUrl,\n onClick: (e) => this.onClickPin(e, item.id, t),\n disabled:\n this.publicRoomStore.isPublicRoom ||\n Boolean(item.external && item.isLinkExpired),",
       "module": "/packages/client"
     }
   ],

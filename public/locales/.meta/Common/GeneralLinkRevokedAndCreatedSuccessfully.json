@@ -3,7 +3,7 @@
   "content": "New general link created successfully",
   "content_en_sha1_hash": "58f4db47be46603e5a6da54723f845b9713e485d",
   "created_at": "2025-08-26T11:15:03.764Z",
-  "updated_at": "2025-09-23T07:24:24.103Z",
+  "updated_at": "2025-10-13T13:22:35.572Z",
   "comment": {
     "text": "This message confirms the successful creation of a new general link after an existing one has been revoked. It appears as a success notification (using `toastr`) in the UI, typically when sharing a link in a primary room or form. Translators should ensure the wording conveys both the revocation and creation aspects of the action.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
-      "line_number": 294,
-      "context": "setFileLinks((links) =>\n links.map((l) =>\n \"sharedTo\" in l && l.sharedTo.id === link.sharedTo.id ? newLink : l,\n ),\n );\n toastr.success(t(\"Common:GeneralLinkRevokedAndCreatedSuccessfully\"));\n }\n } catch (error) {\n console.error(error);\n }\n };",
+      "line_number": 295,
+      "context": "\"sharedTo\" in l && l.sharedTo.id === link.sharedTo.id\n ? newLink\n : l,\n ),\n );\n toastr.success(t(\"Common:GeneralLinkRevokedAndCreatedSuccessfully\"));\n } else {\n deleteLink(link.sharedTo.id);\n toastr.success(t(\"Common:LinkRemoved\"));\n }\n } catch (error) {",
       "module": "/packages/shared"
     }
   ],

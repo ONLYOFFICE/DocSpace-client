@@ -3,7 +3,7 @@
   "content": "File unlocked",
   "content_en_sha1_hash": "c60e9fe76b848fe79d0d3970f5c0c61d094278c2",
   "created_at": "2025-05-19T21:30:49.968Z",
-  "updated_at": "2025-10-07T15:39:07.165Z",
+  "updated_at": "2025-10-13T13:22:35.692Z",
   "comment": {
     "text": "The \"FileUnlocked\" translation key is used to display a success message when a file is unlocked. It appears in various UI elements, including buttons and tooltips, such as on a button that unlocks a file or in an info panel displaying file history. The text should indicate that the file has been successfully unlocked, providing feedback to users about the outcome of the action.",
     "is_auto": true,
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 467,
+      "line_number": 474,
       "context": "this.filesActionsStore\n .lockFileAction(id, !locked)\n .then(() =>\n locked\n ? toastr.success(t(\"Translations:FileUnlocked\"))\n : toastr.success(t(\"Translations:FileLocked\")),\n )\n .catch((err) => {\n toastr.error(err);\n });",
       "module": "/packages/client"
     }

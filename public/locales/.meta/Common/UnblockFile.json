@@ -3,7 +3,7 @@
   "content": "Unblock",
   "content_en_sha1_hash": "12aabd251c4213f1cebfe4cb83e6547df55552c3",
   "created_at": "2025-05-19T21:30:49.379Z",
-  "updated_at": "2025-10-07T15:39:07.620Z",
+  "updated_at": "2025-10-13T13:22:35.945Z",
   "comment": {
     "text": "This translation key is used to display the text \"Unblock\" in a file context, indicating that the file has been unlocked. It appears on a quick button or dialog and is used when unlocking a previously blocked file.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2153,
+      "line_number": 2168,
       "context": "),\n },\n {\n id: \"option_block-unblock-version\",\n key: \"block-unblock-version\",\n label: item.locked ? t(\"Common:UnblockFile\") : t(\"Common:BlockFile\"),\n icon: LockedReactSvgUrl,\n onClick: () => this.lockFile(item, t),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 267,
+      "line_number": 278,
       "context": "size={sizeQuickButton}\n data-id={id}\n data-locked={!!locked}\n onClick={onIconLockClick}\n color=\"accent\"\n title={t(\"Common:UnblockFile\")}\n data-tooltip-id={`lockTooltip${item.id}`}\n />\n {lockedBy && !canLock ? (\n <Tooltip\n id={`lockTooltip${item.id}`}",
       "module": "/packages/shared"
     }

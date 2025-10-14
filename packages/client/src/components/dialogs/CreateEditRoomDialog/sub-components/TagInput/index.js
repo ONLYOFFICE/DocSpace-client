@@ -72,7 +72,7 @@ const TagInput = ({
 
   const openDropdown = () => {
     if (isDisabled) return;
-    setIsScrollLocked(true);
+    // setIsScrollLocked(true);
     setIsDropdownOpen(true);
   };
 

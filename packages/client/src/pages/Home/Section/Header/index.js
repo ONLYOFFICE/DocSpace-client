@@ -431,7 +431,8 @@ const SectionHeaderContent = (props) => {
   };
 
   const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
-  const sharedType = location.state?.isExternal && !isPublicRoom;
+  const sharedType =
+    (location.state?.isExternal || selectedFolder?.external) && !isPublicRoom;
 
   const getTitleIcon = () => {
     if (sharedType) return SharedLinkSvgUrl;
@@ -719,7 +720,8 @@ const SectionHeaderContent = (props) => {
         <div
           className={classnames(styles.headerContainer, {
             [styles.infoPanelVisible]: isInfoPanelVisible,
-            [styles.isExternalFolder]: location.state?.isExternal,
+            [styles.isExternalFolder]:
+              location.state?.isExternal || selectedFolder?.external,
             [styles.isLifetimeEnabled]: isLifetimeEnabled,
           })}
         >

@@ -36,6 +36,7 @@
   "InviteNewUsers": "邀请新用户",
   "InviteRootRoomDescription": "发送邀请以添加新成员到您的{{productName}}",
   "InviteUsersOptionDescription": "添加成员以在房间中共同编辑。",
+  "ManageAccess": "管理访问",
   "MigrationDataDescription": "从{{organizationName}}工作区、Google 工作区或 Nextcloud 导入数据到您的{{productName}}。",
   "MigrationDataTitle": "迁移数据",
   "NoRecentFilesHereYet": "暂无最近文件",
@@ -46,13 +47,12 @@
   "ShareOptionTitle": "共享房间",
   "SharePublicRoomOptionDescription": "启用外部链接访问权限给其他用户。",
   "SharePublicRoomOptionTitle": "与所有用户共享房间",
+  "TemplateAccessDescription": "控制谁可以使用此模板",
   "UploadDeviceOptionDescription": "从您的个人设备上传任何类型的文件",
   "UploadDeviceOptionTitle": "从您的设备上传",
   "UploadDevicePDFFormOptionDescription": "从您的设备将准备好的 PDF 表单上传到房间。",
   "UploadDevicePDFFormOptionTitle": "从设备上传",
   "UploadFromPortalTitle": "从{{productName}}上传",
   "UploadPDFFormOptionDescription": "选择{{productName}}中可用的现成 PDF 表单并将其上传到房间。",
-  "VirtualDataRoomEmptyTitle": "欢迎来到虚拟数据房间",
-  "ManageAccess": "管理访问",
-  "TemplateAccessDescription": "控制谁可以使用此模板"
+  "VirtualDataRoomEmptyTitle": "欢迎来到虚拟数据房间"
 }

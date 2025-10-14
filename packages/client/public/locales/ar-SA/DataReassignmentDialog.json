@@ -3,6 +3,7 @@
   "AllDataTransferred": "تم تحويل جميع البيانات",
   "DataReassignment": "إعادة تعيين البيانات",
   "DeleteProfileIsFinished": "قم بحذف الحساب عند انتهاء إعادة التعيين",
+  "DescriptionDataReassignment": "سوف نقوم بنقل الملفات المشتركة والغرف التي تم إنشاؤها بواسطة جهة الاتصال.",
   "Interrupted": "نعتذر، بعض البيانات لا يمكن تحويلها",
   "MoreAboutDataTransfer": "المزيد عن تحويل البيانات",
   "NewDataOwner": "مالك البيانات الجديد",
@@ -14,6 +15,5 @@
   "ReassigningDataToItself": "تم بدء عملية إعادة تعيين البيانات من المستخدم <0>{{fromUser}}</0>  إلى المستخدم\n<1>{{toUser}}</1> <2>{{you}}</2>. يرجى العلم أن العملية من الممكن أن تستغرق بعض الوقت. ",
   "RoomsOnlyReassignment": "سيتم نقل الغرف التي أنشأها هذا المستخدم.",
   "StartTransferAgain": "بدء التحويل مجدداً",
-  "UserToWhomTheDataWillBeTransferred": "المستخدم الذي سيتم تحويل البيانات إليه",
-  "DescriptionDataReassignment": "سوف نقوم بنقل الملفات المشتركة والغرف التي تم إنشاؤها بواسطة جهة الاتصال."
+  "UserToWhomTheDataWillBeTransferred": "المستخدم الذي سيتم تحويل البيانات إليه"
 }

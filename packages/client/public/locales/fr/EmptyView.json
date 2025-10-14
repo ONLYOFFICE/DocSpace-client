@@ -36,6 +36,7 @@
   "InviteNewUsers": "Inviter de nouveaux utilisateurs",
   "InviteRootRoomDescription": "Envoyez une invitation pour ajouter de nouveaux membres à votre {{productName}}",
   "InviteUsersOptionDescription": "Ajoutez des membres de l'espace pour l'édition conjointe dans la salle",
+  "ManageAccess": "Gérer l'accès",
   "MigrationDataDescription": "Importez des données dans votre {{productName}} à partir de {{organizationName}} Workspace, Google Workspace ou Nextcloud.",
   "MigrationDataTitle": "Données de migration",
   "NoRecentFilesHereYet": "Aucun fichier récent pour le moment",
@@ -46,13 +47,12 @@
   "ShareOptionTitle": "Partager une salle",
   "SharePublicRoomOptionDescription": "Autoriser l'accès aux liens externes pour les autres utilisateurs.",
   "SharePublicRoomOptionTitle": "Partager la salle avec tous les utilisateurs",
+  "TemplateAccessDescription": "Contrôlez qui peut utiliser ce modèle.",
   "UploadDeviceOptionDescription": "Téléchargez n'importe quel type de fichier à partir de votre appareil personnel",
   "UploadDeviceOptionTitle": "Télécharger à partir de votre appareil",
   "UploadDevicePDFFormOptionDescription": "Téléchargez un formulaire PDF prêt à l'emploi dans la salle à partir de votre appareil.",
   "UploadDevicePDFFormOptionTitle": "Télécharger à partir de l'appareil",
   "UploadFromPortalTitle": "Télécharger à partir de {{productName}}",
   "UploadPDFFormOptionDescription": "Sélectionnez un formulaire PDF prêt à l'emploi disponible dans {{productName}} et téléchargez-le dans la salle.",
-  "VirtualDataRoomEmptyTitle": "Bienvenue dans la salle de données virtuelle",
-  "ManageAccess": "Gérer l'accès",
-  "TemplateAccessDescription": "Contrôlez qui peut utiliser ce modèle."
+  "VirtualDataRoomEmptyTitle": "Bienvenue dans la salle de données virtuelle"
 }

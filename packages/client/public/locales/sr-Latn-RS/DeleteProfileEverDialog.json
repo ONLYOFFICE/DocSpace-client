@@ -7,6 +7,7 @@
   "DeleteGuest": "Obriši gosta",
   "DeleteGuests": "Obriši goste",
   "DeletePersonalDataApplicable": "*Primenljivo za odabrane korisnike koji imaju takve datoteke i foldere.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Svi deljeni fajlovi kao i sobe kreirane od strane ovog kontakta biće automatski dodeljeni administratoru koji izvršava brisanje: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Dodelite podatke ručno da biste izabrali drugog korisnika za dodelu.",
   "DeleteReqassignDescriptionGuest": "{{userCaption}} će biti obrisan iz svih soba u koje su pozvani. Dokumenti koje je kreirao ovaj {{userCaption}} u sobama će automatski biti prebačeni na vlasnike sobe.",
   "DeleteUser": "Obriši korisnika",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> će biti obrisan. Ova radnja se ne može opozvati.",
@@ -17,6 +18,5 @@
   "SuccessfullyDeleteGuestInfoMessage": "Gost je uspešno obrisan",
   "SuccessfullyDeleteUserInfoMessage": "Korisnik je uspešno obrisan",
   "ToBeAbleToReassignData": "Da biste mogli ponovo da dodelite podatke, brišite jednog po jednog korisnika.",
-  "UserFilesRemovalScope": "Lični podaci, sve datoteke i fascikle u odeljcima {{sectionNameFirst}} i {{sectionNameSecond}} ovog korisnika će biti trajno izbrisani.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Svi deljeni fajlovi kao i sobe kreirane od strane ovog kontakta biće automatski dodeljeni administratoru koji izvršava brisanje: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Dodelite podatke ručno da biste izabrali drugog korisnika za dodelu."
+  "UserFilesRemovalScope": "Lični podaci, sve datoteke i fascikle u odeljcima {{sectionNameFirst}} i {{sectionNameSecond}} ovog korisnika će biti trajno izbrisani."
 }

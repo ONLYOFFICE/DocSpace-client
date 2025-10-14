@@ -3,6 +3,7 @@
   "AllDataTransferred": "Сви подаци пренешени",
   "DataReassignment": "Преусмеравање података",
   "DeleteProfileIsFinished": "Обришите профил када се додељивање заврши",
+  "DescriptionDataReassignment": "Пренећемо заједничке датотеке и собе креиране од контакта.",
   "Interrupted": "Прекинуто, неки подаци нису пребачени",
   "MoreAboutDataTransfer": "Више о преносу података",
   "NewDataOwner": "Нови власник података",
@@ -14,6 +15,5 @@
   "ReassigningDataToItself": "Процес поновне доделе података корисника <0>{{fromUser}}</0> кориснику <1>{{toUser}}</1> <2>{{you}}</2> је започео. Имајте на уму да може потрајати значајно време.",
   "RoomsOnlyReassignment": "Преносимо собе које је креирао контакт.",
   "StartTransferAgain": "Започни пренос поново",
-  "UserToWhomTheDataWillBeTransferred": "Корисник којем ће подаци бити пребачени",
-  "DescriptionDataReassignment": "Пренећемо заједничке датотеке и собе креиране од контакта."
+  "UserToWhomTheDataWillBeTransferred": "Корисник којем ће подаци бити пребачени"
 }

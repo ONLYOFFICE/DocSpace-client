@@ -4,10 +4,13 @@
   "DeleteFiles": "Você está prestes a mover <strong>arquivos ({{filesCount}} )< /strong> para a {{trashSection}}.",
   "DeleteFilesAndFolders": "Você está prestes a excluir os <strong>arquivos ({{filesCount}})< /strong> e <strong>pastas ({{foldersCount}})</strong> para a {{trashSection}}.",
   "DeleteFilesAndFoldersForever": "Você está prestes a excluir os <strong>arquivos ({{ filesCount }} )< /strong> e <strong>pastas ({{ foldersCount }})</strong>.",
+  "DeleteFilesForever": "Você está prestes a excluir <strong>arquivos ({{filesCount}})</strong>.",
   "DeleteFolders": "Você está prestes a mover <strong>pastas ({{foldersCount}})</strong> para a {{trashSection}}.",
+  "DeleteFoldersForever": "Você está prestes a excluir <strong>pastas ({{foldersCount}})</strong>.",
   "DeleteGroupDescription": "O grupo {{groupName}} será excluído. Os usuários do grupo não serão removidos do {{productName}}. Você tem certeza que quer continuar?",
   "DeleteGroupTitle": "Excluir grupo",
   "DeleteItem": "Você está prestes a mover <strong>{{name}}</strong> para a {{trashSection}}.",
+  "DeleteItemForever": "Você está prestes a excluir <strong>{{name}}</strong>.",
   "DeleteRoom": "A sala <strong>\"{{roomName}}\"</strong> será excluída permanentemente. Todos os dados e acessos dos usuários serão perdidos.",
   "DeleteRoomTitle": "Excluir esta sala?",
   "DeleteRoomWarning": "Entendo as consequências e quero apagar a sala",
@@ -24,9 +27,6 @@
   "FoldersPermanentlyDeleted": "As pastas serão removidas permanentemente da {{trashSection}}.",
   "ItemsDeletedAfter": "Esses itens serão excluídos permanentemente em 30 dias.",
   "ItemsPermanentlyDeleted": "Esses itens serão removidos permanentemente da {{trashSection}}.",
-  "DeleteFilesForever": "Você está prestes a excluir <strong>arquivos ({{filesCount}})</strong>.",
-  "DeleteFoldersForever": "Você está prestes a excluir <strong>pastas ({{foldersCount}})</strong>.",
-  "DeleteItemForever": "Você está prestes a excluir <strong>{{name}}</strong>.",
   "removeFromListDescription": "Você está prestes a remover <1>{{title}}</1> da lista. Tem certeza de que deseja continuar?",
   "removeFromListDescriptionPlural": "Você está prestes a remover <1>itens ({{count}})</1> da lista. Tem certeza de que deseja continuar?"
 }

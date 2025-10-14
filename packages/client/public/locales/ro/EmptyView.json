@@ -36,6 +36,7 @@
   "InviteNewUsers": "Invitați utilizatori noi",
   "InviteRootRoomDescription": "Trimiteți o invitație pentru a adăuga noi membri la {{productName}}",
   "InviteUsersOptionDescription": "Adăugați membrii pentru editarea colaborativă în sală.",
+  "ManageAccess": "Gestionează accesul",
   "MigrationDataDescription": "Importați datele în {{productName}} din {{organizationName}} Workspace, Google Workspace sau Nextcloud.",
   "MigrationDataTitle": "Datele de migrare",
   "NoRecentFilesHereYet": "Niciun fișier recent deocamdată aici",
@@ -46,13 +47,12 @@
   "ShareOptionTitle": "Partajare sală",
   "SharePublicRoomOptionDescription": "Activați accesul cu link extern pentru alți utilizatori.",
   "SharePublicRoomOptionTitle": "Partajați sala cu toți utilizatori",
+  "TemplateAccessDescription": "Controlează cine poate folosi această șablon.",
   "UploadDeviceOptionDescription": "Încărcați orice tip de fișier de pe dispozitivul dvs personal",
   "UploadDeviceOptionTitle": "Încărcare de pe dispozitivul dvs",
   "UploadDevicePDFFormOptionDescription": "Încărcați un formular PDF pregătit în sala de pe dispozitivul dvs.",
   "UploadDevicePDFFormOptionTitle": "Încărcare de pe dispozitivul",
   "UploadFromPortalTitle": "Încărcare de pe {{productName}}",
   "UploadPDFFormOptionDescription": "Selectați un formular PDF existent de pe {{productName}} și încărcați-l în sala.",
-  "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date",
-  "ManageAccess": "Gestionează accesul",
-  "TemplateAccessDescription": "Controlează cine poate folosi această șablon."
+  "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date"
 }

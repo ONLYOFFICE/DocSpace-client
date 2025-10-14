@@ -3,10 +3,14 @@
   "DeleteAllGroupsTitle": "Ștergere grup",
   "DeleteFiles": "Sunteți pe cale să mutați <strong>fișiere ({{filesCount}})</strong> în {{trashSection}}.",
   "DeleteFilesAndFolders": "Sunteți pe cale să ștergeți <strong>fișiere ({{filesCount}})</strong> și <strong>dosare ({{foldersCount}})</strong> și să le mutați în {{trashSection}}.",
+  "DeleteFilesAndFoldersForever": "Sunteți pe cale să ștergeți <strong>fișierele ({{filesCount}})</strong> și <strong>folderele ({{foldersCount}})</strong>.",
+  "DeleteFilesForever": "Pe cale să ștergeți <strong>fișiere ({{filesCount}})</strong>.",
   "DeleteFolders": "Sunteți pe cale să mutați <strong>dosare ({{foldersCount}})</strong> în  {{trashSection}} de gunoi.",
+  "DeleteFoldersForever": "Pe cale să ștergeți <strong>foldere ({{foldersCount}})</strong>.",
   "DeleteGroupDescription": "Grupul {{groupName}} va fi șters. Utilizatorii care fac parte din acest grup nu vor fi eliminați din {{productName}}. Sigur doriţi să continuați?",
   "DeleteGroupTitle": "Ștergere grup",
   "DeleteItem": "Sunteți pe cale să mutați <strong>{{name}}</strong> în {{trashSection}} de gunoi.",
+  "DeleteItemForever": "Veți șterge <strong>{{name}}</strong>.",
   "DeleteRoom": "Sala <strong>\"{{roomName}}\"</strong> va fi ștearsă definitiv. Toate datele  și conectările utilizatorilor se vor pierde.",
   "DeleteRoomTitle": "Doriți să ștergeți această sală?",
   "DeleteRoomWarning": "Confirm că înțeleg efectele și doresc să șterg sala",
@@ -23,10 +27,6 @@
   "FoldersPermanentlyDeleted": "Folderele vor fi şterse definitiv din {{trashSection}} de gunoi.",
   "ItemsDeletedAfter": "Aceste elemente vor fi şterse definitiv după 30 de zile.",
   "ItemsPermanentlyDeleted": "Aceste elemente vor fi şterse definitiv din {{trashSection}} de gunoi.",
-  "DeleteFilesForever": "Pe cale să ștergeți <strong>fișiere ({{filesCount}})</strong>.",
-  "DeleteFoldersForever": "Pe cale să ștergeți <strong>foldere ({{foldersCount}})</strong>.",
-  "DeleteItemForever": "Veți șterge <strong>{{name}}</strong>.",
   "removeFromListDescription": "Sunteți pe cale să eliminați <1>{{title}}</1> din listă. Sunteți sigur că doriți să continuați?",
-  "removeFromListDescriptionPlural": "Sunteți pe cale să eliminați <1>elemente ({{count}})</1> din listă. Sunteți sigur că doriți să continuați?",
-  "DeleteFilesAndFoldersForever": "Sunteți pe cale să ștergeți <strong>fișierele ({{filesCount}})</strong> și <strong>folderele ({{foldersCount}})</strong>."
+  "removeFromListDescriptionPlural": "Sunteți pe cale să eliminați <1>elemente ({{count}})</1> din listă. Sunteți sigur că doriți să continuați?"
 }

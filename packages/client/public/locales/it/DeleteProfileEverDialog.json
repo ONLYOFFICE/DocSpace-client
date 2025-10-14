@@ -7,6 +7,7 @@
   "DeleteGuest": "Elimina ospite",
   "DeleteGuests": "Elimina ospiti",
   "DeletePersonalDataApplicable": "*Applicabile agli utenti selezionati che dispongono di tali file e cartelle.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Tutti i file condivisi così come le stanze create da questo contatto saranno automaticamente riassegnati a un amministratore che esegue l'eliminazione: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Riassegna i dati manualmente per scegliere un altro utente di destinazione per la riassegnazione.",
   "DeleteReqassignDescriptionGuest": "Il {{userCaption}} verrà eliminato da tutte le stanze in cui è stato invitato. I documenti creati da questo {{userCaption}} nelle stanze saranno automaticamente riassegnati ai proprietari della stanza.",
   "DeleteUser": "Elimina utente",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> verrà eliminato. Questa azione non può essere annullata.",
@@ -17,6 +18,5 @@
   "SuccessfullyDeleteGuestInfoMessage": "L'ospite è stato eliminato con successo",
   "SuccessfullyDeleteUserInfoMessage": "L'utente è stato cancellato con successo",
   "ToBeAbleToReassignData": "Per poter riassegnare i dati, elimina un utente alla volta.",
-  "UserFilesRemovalScope": "I dati personali, tutti i file e le cartelle nelle sezioni {{sectionNameFirst}} e {{sectionNameSecond}} di questo utente verranno eliminati definitivamente.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Tutti i file condivisi così come le stanze create da questo contatto saranno automaticamente riassegnati a un amministratore che esegue l'eliminazione: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Riassegna i dati manualmente per scegliere un altro utente di destinazione per la riassegnazione."
+  "UserFilesRemovalScope": "I dati personali, tutti i file e le cartelle nelle sezioni {{sectionNameFirst}} e {{sectionNameSecond}} di questo utente verranno eliminati definitivamente."
 }

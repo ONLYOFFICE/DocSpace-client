@@ -3,6 +3,7 @@
   "AllDataTransferred": "Toate datele au fost transferate",
   "DataReassignment": "Reatribuirea datelor",
   "DeleteProfileIsFinished": "Ștergeți profilul când reatribuirea datelor se termină",
+  "DescriptionDataReassignment": "Vom transfera fișierele partajate și camerele create de contact.",
   "Interrupted": "Procesul a fost întrerupt, unele date nu au putut fi transferate",
   "MoreAboutDataTransfer": "Mai multe despre transfer de date",
   "NewDataOwner": "Proprietarul nou al datelor",
@@ -14,6 +15,5 @@
   "ReassigningDataToItself": "Procesul de reatribuire de date de la utilizatorul <0>{{fromUser}}</0> la utilizatorul<1>{{toUser}}</1> <2>{{you}}</2> a demarat. Vă rugăm să rețineți că acest proces poate dura o perioadă considerabilă de timp.",
   "RoomsOnlyReassignment": "Sălile create de acest utilizator vor fi transferate.",
   "StartTransferAgain": "Pornire transfer de date nou",
-  "UserToWhomTheDataWillBeTransferred": "Utilizatorul căruia îi vor transfera datele",
-  "DescriptionDataReassignment": "Vom transfera fișierele partajate și camerele create de contact."
+  "UserToWhomTheDataWillBeTransferred": "Utilizatorul căruia îi vor transfera datele"
 }

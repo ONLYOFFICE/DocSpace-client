@@ -34,8 +34,10 @@ import { isManagement } from "@docspace/shared/utils/common";
 import { BRAND_NAME_REGEX } from "@docspace/shared/constants";
 import { DeviceType } from "@docspace/shared/enums";
 
+import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveNavigation";
 import LoaderBrandName from "../sub-components/loaderBrandName";
 import useCommon from "../useCommon";
+import { brandingRedirectUrl } from "./constants";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 const BrandNameComponent = (props) => {
@@ -54,6 +56,12 @@ const BrandNameComponent = (props) => {
   } = props;
 
   const isMobileView = deviceType === DeviceType.mobile;
+
+  useResponsiveNavigation({
+    redirectUrl: brandingRedirectUrl,
+    currentLocation: "brand-name",
+    deviceType,
+  });
 
   const defaultProps = createDefaultHookSettingsProps({
     isMobileView,

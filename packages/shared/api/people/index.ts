@@ -38,6 +38,7 @@ import {
   AccountsSearchArea,
   EmployeeStatus,
   EmployeeType,
+  RecaptchaType,
 } from "../../enums";
 import { Nullable } from "../../types";
 
@@ -280,11 +281,21 @@ export function deleteSelf(key) {
   });
 }
 
-export function sendInstructionsToChangePassword(email) {
+export function sendInstructionsToChangePassword(
+  email: string,
+  recaptchaResponse: string | null | undefined = "",
+  recaptchaType?: RecaptchaType,
+) {
+  const data: Record<string, unknown> = { email, recaptchaResponse };
+
+  if (typeof recaptchaType !== "undefined") {
+    data.recaptchaType = recaptchaType;
+  }
+
   return request({
     method: "post",
     url: "/people/password",
-    data: { email },
+    data,
   });
 }
 

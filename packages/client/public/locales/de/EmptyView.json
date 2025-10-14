@@ -36,6 +36,7 @@
   "InviteNewUsers": "Neue Benutzer einladen",
   "InviteRootRoomDescription": "Senden Sie eine Einladung, um neue Mitglieder zu Ihrem {{productName}} hinzuzufügen",
   "InviteUsersOptionDescription": "Fügen Sie Mitglieder zur gemeinsamen Bearbeitung im Raum hinzu",
+  "ManageAccess": "Zugriff verwalten",
   "MigrationDataDescription": "Daten in Ihr {{productName}} aus dem {{organizationName}} Workspace, Google Workspace oder Nextcloud importieren.",
   "MigrationDataTitle": "Migrationsdaten",
   "NoRecentFilesHereYet": "Noch keine zuletzt verwendeten Dateien vorhanden",
@@ -46,13 +47,12 @@
   "ShareOptionTitle": "Raum teilen",
   "SharePublicRoomOptionDescription": "Aktivieren Sie den Zugriff auf externe Links für andere Nutzer.",
   "SharePublicRoomOptionTitle": "Den Raum mit allen Nutzern teilen",
+  "TemplateAccessDescription": "Wer diese Vorlage verwenden darf, steuern.",
   "UploadDeviceOptionDescription": "Laden Sie beliebige Dateitypen von Ihrem persönlichen Gerät hoch",
   "UploadDeviceOptionTitle": "Hochladen von Ihrem Gerät",
   "UploadDevicePDFFormOptionDescription": "Laden Sie ein fertiges PDF-Formular von Ihrem Gerät in den Raum hoch.",
   "UploadDevicePDFFormOptionTitle": "Hochladen vom Gerät",
   "UploadFromPortalTitle": "Von {{productName}} hochladen",
   "UploadPDFFormOptionDescription": "Wählen Sie ein fertiges PDF-Formular, das in {{productName}} verfügbar ist, und laden Sie es in den Raum hoch.",
-  "VirtualDataRoomEmptyTitle": "Willkommen im virtuellen Datenraum",
-  "ManageAccess": "Zugriff verwalten",
-  "TemplateAccessDescription": "Wer diese Vorlage verwenden darf, steuern."
+  "VirtualDataRoomEmptyTitle": "Willkommen im virtuellen Datenraum"
 }

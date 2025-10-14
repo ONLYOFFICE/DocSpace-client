@@ -3,6 +3,7 @@
   "AllDataTransferred": "Բոլոր տվյալները փոխանցված են",
   "DataReassignment": "Տվյալների վերաբաշխում",
   "DeleteProfileIsFinished": "Ջնջել պրոֆիլը, երբ վերահանձնումն ավարտվի",
+  "DescriptionDataReassignment": "Մենք կտեղափոխենք կիսված ֆայլերը և կամրորները, որոնք ստեղծվել են կապի միջոցով։",
   "Interrupted": "Ընդհատվեց, որոշ տվյալներ չհաջողվեց փոխանցել",
   "MoreAboutDataTransfer": "Ավելին տվյալների փոխանցման մասին",
   "NewDataOwner": "Տվյալների նոր սեփականատեր",
@@ -14,6 +15,5 @@
   "ReassigningDataToItself": "Օգտագործողի կողմից տվյալների վերաբաշխման գործընթացը <0>{{fromUser}}</0> օգտագործող <1>{{toUser}}</1> <2>{{you}}</2> սկսվեց։ Խնդրում ենք նկատի ունենալ, որ դա կարող է զգալի ժամանակ պահանջել:",
   "RoomsOnlyReassignment": "Մենք կփոխանցենք կոնտակտով ստեղծված սենյակները։",
   "StartTransferAgain": "Նորից սկսեք փոխանցումը",
-  "UserToWhomTheDataWillBeTransferred": "Օգտատեր, ում տվյալները կփոխանցվեն",
-  "DescriptionDataReassignment": "Մենք կտեղափոխենք կիսված ֆայլերը և կամրորները, որոնք ստեղծվել են կապի միջոցով։"
+  "UserToWhomTheDataWillBeTransferred": "Օգտատեր, ում տվյալները կփոխանցվեն"
 }

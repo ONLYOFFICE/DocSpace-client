@@ -36,6 +36,7 @@
   "InviteNewUsers": "Ftoni përdorues të rinj",
   "InviteRootRoomDescription": "Dërgoni një ftesë për të shtuar anëtarë të rinj në {{productName}}",
   "InviteUsersOptionDescription": "Shtoni anëtarë për redaktim të përbashkët në dhomë",
+  "ManageAccess": "Menaxho aksesin",
   "MigrationDataDescription": "Importoni të dhëna në {{productName}} nga {{organizationName}} Workspace, Google Workspace, or Nextcloud.",
   "MigrationDataTitle": "Të dhënat e migrimit",
   "NoRecentFilesHereYet": "Nuk ka skedarë të fundit ende.",
@@ -46,13 +47,12 @@
   "ShareOptionTitle": "Ndani një dhomë",
   "SharePublicRoomOptionDescription": "Aktivizoni qasjen në lidhje të jashtme për përdoruesit e tjerë.",
   "SharePublicRoomOptionTitle": "Ndani dhomën me të gjithë përdoruesit",
+  "TemplateAccessDescription": "Kontrolloni kush mund të përdorë këtë model.",
   "UploadDeviceOptionDescription": "Ngarkoni çdo lloj skedari nga pajisja juaj personale",
   "UploadDeviceOptionTitle": "Ngarkoni nga pajisja juaj",
   "UploadDevicePDFFormOptionDescription": "Ngarkoni një formular të gatshëm PDF në dhomë nga pajisja juaj.",
   "UploadDevicePDFFormOptionTitle": "Ngarkoni nga pajisja",
   "UploadFromPortalTitle": "Ngarkoni nga {{productName}}",
   "UploadPDFFormOptionDescription": "Selektoni një formular të gatshëm PDF të disponueshëm në {{productName}} dhe ngarkojeni në dhomë.",
-  "VirtualDataRoomEmptyTitle": "Mirë se vini në dhomën e të dhënave virtuale",
-  "ManageAccess": "Menaxho aksesin",
-  "TemplateAccessDescription": "Kontrolloni kush mund të përdorë këtë model."
+  "VirtualDataRoomEmptyTitle": "Mirë se vini në dhomën e të dhënave virtuale"
 }

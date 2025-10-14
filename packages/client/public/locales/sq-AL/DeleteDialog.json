@@ -3,10 +3,14 @@
   "DeleteAllGroupsTitle": "Fshini grupet",
   "DeleteFiles": "Jeni gati të zhvendosni në {{trashSection}} <strong>skedarët ({{filesCount}})</strong>.",
   "DeleteFilesAndFolders": "Jeni gati të fshini në {{trashSection}} <strong>skedarët ({{filesCount}})</strong> dhe <strong>dosjet ({{foldersCount}})</strong>.",
+  "DeleteFilesAndFoldersForever": "Jeni duke shuar <strong>skedarët ({{filesCount}})</strong> dhe <strong>foldet ({{foldersCount}})</strong>.",
+  "DeleteFilesForever": "Jeni duke shuar <strong>skedarë ({{filesCount}})</strong>.",
   "DeleteFolders": "Jeni gati të zhvendosni në {{trashSection}} <strong>dosjet ({{foldersCount}})</strong>.",
+  "DeleteFoldersForever": "Jeni duke shuar <strong>foldera ({{foldersCount}})</strong>.",
   "DeleteGroupDescription": "Grupi {{groupName}} do të fshihet. Përdoruesit në grup nuk do të hiqen nga {{productName}}. Jeni të sigurt që dëshironi të vazhdoni?",
   "DeleteGroupTitle": "Fshini grupin",
   "DeleteItem": "Jeni gati të zhvendosni në {{trashSection}} <strong>{{name}}</strong>.",
+  "DeleteItemForever": "Jeni gati për të fshirë <strong>{{name}}</strong>.",
   "DeleteRoom": "Dhoma <strong>\"{{roomName}}\"</strong> do të fshihet përgjithmonë. Të gjitha të dhënat dhe akseset e përdoruesve do të humbasin.",
   "DeleteRoomTitle": "Dëshironi të fshini këtë dhomë?",
   "DeleteRoomWarning": "I kuptoj pasojat dhe dua të fshij dhomën",
@@ -23,10 +27,6 @@
   "FoldersPermanentlyDeleted": "Dosjet do të fshihen përgjithmonë nga {{trashSection}}i.",
   "ItemsDeletedAfter": "Këto artikuj do të fshihen përgjithmonë pas 30 ditësh.",
   "ItemsPermanentlyDeleted": "Këto artikuj do të fshihen përgjithmonë nga {{trashSection}}i.",
-  "DeleteFilesForever": "Jeni duke shuar <strong>skedarë ({{filesCount}})</strong>.",
-  "DeleteFoldersForever": "Jeni duke shuar <strong>foldera ({{foldersCount}})</strong>.",
-  "DeleteItemForever": "Jeni gati për të fshirë <strong>{{name}}</strong>.",
   "removeFromListDescription": "Jeni gati për të hequr <1>{{title}}</1> nga lista. Jeni të sigurt që doni të vazgoni?",
-  "removeFromListDescriptionPlural": "Përpara se të hiqni <1>artikuj ({{count}})</1> nga lista. Jeni të sigurt që doni të vazgoni?",
-  "DeleteFilesAndFoldersForever": "Jeni duke shuar <strong>skedarët ({{filesCount}})</strong> dhe <strong>foldet ({{foldersCount}})</strong>."
+  "removeFromListDescriptionPlural": "Përpara se të hiqni <1>artikuj ({{count}})</1> nga lista. Jeni të sigurt që doni të vazgoni?"
 }

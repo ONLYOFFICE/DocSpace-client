@@ -3,6 +3,7 @@
   "AllDataTransferred": "数据传输完毕",
   "DataReassignment": "数据重新分配",
   "DeleteProfileIsFinished": "重新分配完成后删除个人资料",
+  "DescriptionDataReassignment": "我们会转移由联系人创建的共享文件和房间。",
   "Interrupted": "中断，某些数据无法传输",
   "MoreAboutDataTransfer": "关于数据传输的更多信息",
   "NewDataOwner": "新数据所有者",
@@ -14,6 +15,5 @@
   "ReassigningDataToItself": "从用户 <0>{{fromUser}}</0> 到用户<1>{{toUser}}</1> <2>{{you}}</2> 的数据转让过程已开始。请注意，这可能需要相当长的时间。",
   "RoomsOnlyReassignment": "我们将转由移联系人创建的房间。",
   "StartTransferAgain": "再次开始传输",
-  "UserToWhomTheDataWillBeTransferred": "数据传输对象用户",
-  "DescriptionDataReassignment": "我们会转移由联系人创建的共享文件和房间。"
+  "UserToWhomTheDataWillBeTransferred": "数据传输对象用户"
 }

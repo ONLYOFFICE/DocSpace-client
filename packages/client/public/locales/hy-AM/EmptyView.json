@@ -36,6 +36,7 @@
   "InviteNewUsers": "Հրավիրեք նոր օգտատերերի",
   "InviteRootRoomDescription": "Ուղարկեք հրավեր՝ ձեր {{productName}}-ին նոր անդամներ ավելացնելու համար",
   "InviteUsersOptionDescription": "Ավելացնել պորտալի անդամներ սենյակում համատեղ խմբագրման համար",
+  "ManageAccess": "Հասանելիության կառավարում",
   "MigrationDataDescription": "Ներմուծեք տվյալները ձեր {{productName}} {{organizationName}} Workspace-ից, Google Workspace-ից կամ Nextcloud-ից: ",
   "MigrationDataTitle": "Միգրացիոն տվյալներ",
   "NoRecentFilesHereYet": "Այստեղ դեռևս վերջերս բացված ֆայլեր չկան",
@@ -46,13 +47,12 @@
   "ShareOptionTitle": "Կիսվել սենյակով",
   "SharePublicRoomOptionDescription": "Միացնել արտաքին կապի հասանելիությունը այլ օգտատերերի համար:",
   "SharePublicRoomOptionTitle": "Կիսվել սենյակով բոլոր օգտատերերի հետ",
+  "TemplateAccessDescription": "Վերահսկեք, թե ով կարող է օգտագործել այս ձևանմուշը",
   "UploadDeviceOptionDescription": "Վերբեռնել ցանկացած տեսակի ֆայլ ձեր անձնական սարքից",
   "UploadDeviceOptionTitle": "Վերբեռնեք ձեր Սարքից",
   "UploadDevicePDFFormOptionDescription": "Վերբեռնեք պատրաստի PDF ձևը սենյակ ձեր սարքից:",
   "UploadDevicePDFFormOptionTitle": "Վերբեռնել սարքից",
   "UploadFromPortalTitle": "Վերբեռնում {{productName}}-ից",
   "UploadPDFFormOptionDescription": "Ընտրել պատրաստ PDF ձևը, որը հասանելի է {{productName}}-ում և վերբեռնեք այն սենյակ:",
-  "VirtualDataRoomEmptyTitle": "Բարի գալուստ Վիրտուալ Տվյալների Սենյակ",
-  "ManageAccess": "Հասանելիության կառավարում",
-  "TemplateAccessDescription": "Վերահսկեք, թե ով կարող է օգտագործել այս ձևանմուշը"
+  "VirtualDataRoomEmptyTitle": "Բարի գալուստ Վիրտուալ Տվյալների Սենյակ"
 }

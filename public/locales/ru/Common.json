@@ -436,6 +436,7 @@
   "HideArticleMenu": "Скрыть меню",
   "HistoryOpenedAtDate": "Открыта форма для заполнения",
   "HistoryStopDate": "Заполнение было остановлено <1>{{userName}}</1>",
+  "HistorySubmittedPartDescription": "Представили свою часть. Форма была отправлена следующему получателю.",
   "Homepage": "Главная страница",
   "Hotkeys": "Горячие клавиши",
   "Hour": "час",
@@ -995,6 +996,5 @@
   "YouHaveUnsavedChanges": "Имеются несохраненные изменения",
   "YourCurrentDomain": "Ваш текущий домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша очередь",
-  "HistorySubmittedPartDescription": "Представили свою часть. Форма была отправлена следующему получателю."
+  "YourTurn": "Ваша очередь"
 }

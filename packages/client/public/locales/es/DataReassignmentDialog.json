@@ -3,6 +3,7 @@
   "AllDataTransferred": "Todos los datos transferidos",
   "DataReassignment": "Reasignación de datos",
   "DeleteProfileIsFinished": "Borrar el perfil cuando finalice la reasignación",
+  "DescriptionDataReassignment": "Transferiremos archivos compartidos y salas creadas por contacto.",
   "Interrupted": "Interrupción, no se han podido transferir algunos datos",
   "MoreAboutDataTransfer": "Más información sobre la transferencia de datos",
   "NewDataOwner": "Nuevo propietario de los datos",
@@ -14,6 +15,5 @@
   "ReassigningDataToItself": "Se ha iniciado el proceso de reasignación de datos del usuario <0>{{fromUser}}</0> al usuario <1>{{toUser}}</1> <2>{{you}}</2>. Por favor, tenga en cuenta que puede tardar un tiempo considerable.",
   "RoomsOnlyReassignment": "Vamos a transferir las salas creadas por el contacto.",
   "StartTransferAgain": "Volver a iniciar la transferencia",
-  "UserToWhomTheDataWillBeTransferred": "Usuario al que se transferirán los datos",
-  "DescriptionDataReassignment": "Transferiremos archivos compartidos y salas creadas por contacto."
+  "UserToWhomTheDataWillBeTransferred": "Usuario al que se transferirán los datos"
 }

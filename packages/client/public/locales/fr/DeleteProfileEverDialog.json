@@ -7,6 +7,7 @@
   "DeleteGuest": "Supprimer l'invité",
   "DeleteGuests": "Supprimer les invités",
   "DeletePersonalDataApplicable": "*Applicable aux utilisateurs sélectionnés qui possèdent de tels fichiers et dossiers.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Tous les fichiers partagés ainsi que les salles créées par ce contact seront automatiquement réattribués à un administrateur effectuant la suppression : <1>{{userPerformedDeletion}} ({{userYou}})</1>. Réattribuez manuellement les données pour choisir un autre utilisateur de destination pour la réaffectation.",
   "DeleteReqassignDescriptionGuest": "L'{{userCaption}} sera supprimé de toutes les salles dans lesquelles il a été invité. Les documents créés par cet {{userCaption}} dans les salles seront automatiquement réattribués aux propriétaires de la salle.",
   "DeleteUser": "Supprimer l'utilisateur",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> sera supprimé. Cette action ne peut être annulée.",
@@ -17,6 +18,5 @@
   "SuccessfullyDeleteGuestInfoMessage": "L'invité a été supprimé avec succès",
   "SuccessfullyDeleteUserInfoMessage": "L'utilisateur a été supprimé avec succès",
   "ToBeAbleToReassignData": "Pour pouvoir réaffecter les données, supprimez un utilisateur à la fois.",
-  "UserFilesRemovalScope": "Les données personnelles, tous les fichiers et dossiers des sections {{sectionNameFirst}} et {{sectionNameSecond}} de cet utilisateur seront définitivement supprimés.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Tous les fichiers partagés ainsi que les salles créées par ce contact seront automatiquement réattribués à un administrateur effectuant la suppression : <1>{{userPerformedDeletion}} ({{userYou}})</1>. Réattribuez manuellement les données pour choisir un autre utilisateur de destination pour la réaffectation."
+  "UserFilesRemovalScope": "Les données personnelles, tous les fichiers et dossiers des sections {{sectionNameFirst}} et {{sectionNameSecond}} de cet utilisateur seront définitivement supprimés."
 }

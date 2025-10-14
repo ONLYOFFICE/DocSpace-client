@@ -3,6 +3,7 @@
   "AllDataTransferred": "すべてのデータが転送されました",
   "DataReassignment": "データの再割り当て",
   "DeleteProfileIsFinished": "再割り当てが終了したらプロファイルを削除する",
+  "DescriptionDataReassignment": "連絡先によって作成された共有ファイルとルームを転送します。",
   "Interrupted": "中断され、一部のデータを転送できませんでした",
   "MoreAboutDataTransfer": "データ転送の詳細",
   "NewDataOwner": "新しいデータ所有者",
@@ -14,6 +15,5 @@
   "ReassigningDataToItself": "ユーザ<0>{{fromUser}}</0>からユーザ<1>{{toUser}}</1> <2>{{you}}</2>へのデータ再割り当て処理が開始されました。時間がかかる場合があります。",
   "RoomsOnlyReassignment": "コンタクトによって作成されたルームを移転します。",
   "StartTransferAgain": "再び転送を開始する",
-  "UserToWhomTheDataWillBeTransferred": "データの転送先ユーザー",
-  "DescriptionDataReassignment": "連絡先によって作成された共有ファイルとルームを転送します。"
+  "UserToWhomTheDataWillBeTransferred": "データの転送先ユーザー"
 }

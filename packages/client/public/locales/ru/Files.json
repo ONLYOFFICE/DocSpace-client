@@ -163,6 +163,7 @@
   "RoomUnpinned": "Комната откреплена",
   "SaveAsTemplate": "Сохранить как шаблон",
   "SaveAsTemplateToast": "Шаблон комнаты <1>«{{title}}»</1> сохранен",
+  "ScheduledTrashMove": "{{date}} будет перенесен в раздел {{sectionName}})",
   "SendByEmail": "Отправить по почте",
   "ShareFolder": "Предоставить доступ к папке",
   "ShareFolderDescription": "Будет создана новая комната, и все содержимое выбранной папки будет скопировано в нее. После этого вы сможете пригласить других пользователей для совместной работы над файлами в комнате.",
@@ -200,6 +201,5 @@
   "WarningMoveToFormRoomServal": "Перемещение нескольких файлов в Комнату заполнения форм не поддерживается. Перемещайте по одной PDF-форме {{ organizationName }}.",
   "WillBeDeletedPermanently": "{{date}} будет удален навсегда",
   "YouLeftTheRoom": "Вы покинули комнату",
-  "YourUserTypeHasChanged": "Ваш тип пользователя был изменен на <1>«{{userType}}»</1> администратором {{productName}} <1>{{adminName}}</1>.",
-  "ScheduledTrashMove": "{{date}} будет перенесен в раздел {{sectionName}})"
+  "YourUserTypeHasChanged": "Ваш тип пользователя был изменен на <1>«{{userType}}»</1> администратором {{productName}} <1>{{adminName}}</1>."
 }

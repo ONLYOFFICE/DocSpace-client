@@ -36,6 +36,7 @@
   "InviteNewUsers": "新規ユーザーの招待する",
   "InviteRootRoomDescription": "{{productName}}に新しいメンバーを追加するための招待状を送信する",
   "InviteUsersOptionDescription": "ルームに共同編集用のメンバーを追加してください。",
+  "ManageAccess": "アクセス管理",
   "MigrationDataDescription": "{{organizationName}} のWorkspace、Google Workspace、または Nextcloud から、{{productName}} にデータをインポートできます。",
   "MigrationDataTitle": "移行データ",
   "NoRecentFilesHereYet": "最近のファイルはまだありません",
@@ -46,13 +47,12 @@
   "ShareOptionTitle": "ルームの共有",
   "SharePublicRoomOptionDescription": "他のユーザーへの外部リンクへのアクセスを許可します。",
   "SharePublicRoomOptionTitle": "他のユーザーへの外部リンクへのアクセスを許可します。",
+  "TemplateAccessDescription": "このテンプレートを使用できるユーザーを制限します。",
   "UploadDeviceOptionDescription": "個人デバイスからのファイルアップロード",
   "UploadDeviceOptionTitle": "デバイスからのアップロード",
   "UploadDevicePDFFormOptionDescription": "お使いのデバイスからルームにPDFフォームをアップロードする。",
   "UploadDevicePDFFormOptionTitle": "デバイスからのアップロード",
   "UploadFromPortalTitle": "{{productName}}からアップロード",
   "UploadPDFFormOptionDescription": "{{productName}}で利用可能なPDFフォームを選択し、ルームにアップロードする。",
-  "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ",
-  "ManageAccess": "アクセス管理",
-  "TemplateAccessDescription": "このテンプレートを使用できるユーザーを制限します。"
+  "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ"
 }

@@ -7,6 +7,7 @@
   "DeleteGuest": "حذف الضيف",
   "DeleteGuests": "حذف الضيوف",
   "DeletePersonalDataApplicable": "*ينطبق على المستخدمين المحددين الذين لديهم مثل هذه الملفات والمجلدات.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} ستتم إعادة تعيين جميع الملفات المشتركة والغرف التي أنشأتها جهة الاتصال هذه تلقائيًا إلى المسؤول الذي يقوم بالحذف: <1>{{userPerformedDeletion}} ({{userYou}})</1>. قوموا بإعادة تعيين البيانات يدويًا لاختيار مستخدم وجهة آخر لإعادة التعيين.",
   "DeleteReqassignDescriptionGuest": "سيتم حذف {{userCaption}} من جميع الغرف التي تم دعوتهم إليها. سيتم تلقائيًا إعادة تعيين المستندات التي أنشأها هذا {{userCaption}} في الغرف إلى مالكي الغرف.",
   "DeleteUser": "حذف المستخدم",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> سيتم حذفه. سيتم حذف مستندات المستخدم الشخصية المتوفرة للآخرين. هل أنت متأكد أنك تريد المتابعة؟",

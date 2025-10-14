@@ -3,6 +3,7 @@
   "AllDataTransferred": "Të gjitha të dhënat u transferuan",
   "DataReassignment": "Ricaktimi i të dhënave",
   "DeleteProfileIsFinished": "Fshini profilin kur të përfundojë ricaktimi",
+  "DescriptionDataReassignment": "Ne do të transferojmë fajllet e ndarë dhe dhomat e kriera nga kontakti.",
   "Interrupted": "U ndërpre, disa të dhëna nuk mund të transferoheshin",
   "MoreAboutDataTransfer": "Më shumë rreth transferimit të të dhënave",
   "NewDataOwner": "Pronar i ri i të dhënave",
@@ -14,6 +15,5 @@
   "ReassigningDataToItself": "Procesi i ricaktimit të të dhënave nga përdoruesi <0>{{fromUser}}</0> te përdoruesi <1>{{toUser}}</1> <2>{{you}}</2> ka filluar. Ju lutem vini re se mund të marrë një kohë të konsiderueshme.",
   "RoomsOnlyReassignment": "We will transfer rooms created by contact.",
   "StartTransferAgain": "Filloni përsëri transferimin",
-  "UserToWhomTheDataWillBeTransferred": "Përdoruesi tek i cili do të transferohen të dhënat",
-  "DescriptionDataReassignment": "Ne do të transferojmë fajllet e ndarë dhe dhomat e kriera nga kontakti."
+  "UserToWhomTheDataWillBeTransferred": "Përdoruesi tek i cili do të transferohen të dhënat"
 }

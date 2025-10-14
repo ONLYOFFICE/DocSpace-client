@@ -4,11 +4,11 @@
   "BackupServiceEnabled": "バックアップサービスが正常に有効になりました。",
   "ConnectService": "バックアップ機能を有効にするには、サービス<1>こちら</1>に接続してください。",
   "ContactToPayer": "バックアップサービスを接続するために、支払者（<1>{{email}}</1>）に連絡してください。",
+  "DisableBackupConfirm": "バックアップサービスを無効にすると、{{productName}} 管理者がバックアップを作成できなくなります。自動バックアップが有効になっている場合、無料の割り当て内で引き続き有効ですが、割り当てが完全に利用されると、永久に無効になります。続行しますか？",
+  "DisableBackupConfirmWithoutQuota": "バックアップ サービスを無効にすると、{{productName}} 管理者がバックアップを作成できなくなります。自動バックアップが有効になっている場合は、無効になります。続行しますか？",
   "EnableBackupConfirm": "バックアップサービスを有効にすると、すべての {{productName}} 管理者がウォレットの残高が十分な限り、いつでもバックアップを作成できるようになります。本当に続行してもよろしいですか？",
   "FreeBackupsPerMonth": "今月の無料バックアップ: {{value}}/{{maxValue}}",
   "TemporaryDescription": "「バックアップ」セクションに保存されるバックアップを作成します。作成後24時間以内にダウンロード可能です。",
   "ThirdPartyResourceDescription": "Dropbox、Box、OneDrive、またはGoogle Driveなどのクラウドアカウントに接続してバックアップを保存します。",
-  "ThirdPartyStorageDescription": "バックアップを保存するためにサードパーティのサービスを使用します。外部クラウドストレージプラットフォームに接続するのに最適です。",
-  "DisableBackupConfirm": "バックアップサービスを無効にすると、{{productName}} 管理者がバックアップを作成できなくなります。自動バックアップが有効になっている場合、無料の割り当て内で引き続き有効ですが、割り当てが完全に利用されると、永久に無効になります。続行しますか？",
-  "DisableBackupConfirmWithoutQuota": "バックアップ サービスを無効にすると、{{productName}} 管理者がバックアップを作成できなくなります。自動バックアップが有効になっている場合は、無効になります。続行しますか？"
+  "ThirdPartyStorageDescription": "バックアップを保存するためにサードパーティのサービスを使用します。外部クラウドストレージプラットフォームに接続するのに最適です。"
 }

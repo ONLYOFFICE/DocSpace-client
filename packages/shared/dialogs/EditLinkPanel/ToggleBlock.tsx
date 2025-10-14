@@ -49,20 +49,22 @@ const ToggleBlock: FC<PropsWithChildren<ToggleBlockProps>> = ({
 
   return (
     <>
-      <div id={tooltipId} className="edit-link-toggle-block">
+      <div className="edit-link-toggle-block">
         <div className="edit-link-toggle-header">
           <Text fontSize="16px" fontWeight={700}>
             {headerText}
           </Text>
           {withToggle ? (
-            <ToggleButton
-              isLoading={isLoading}
-              isDisabled={isDisabled}
-              isChecked={isChecked}
-              onChange={onChange}
-              className="edit-link-toggle"
-              dataTestId={dataTestId}
-            />
+            <div id={tooltipId}>
+              <ToggleButton
+                isLoading={isLoading}
+                isDisabled={isDisabled}
+                isChecked={isChecked}
+                onChange={onChange}
+                className="edit-link-toggle"
+                dataTestId={dataTestId}
+              />
+            </div>
           ) : null}
         </div>
         {bodyText ? (

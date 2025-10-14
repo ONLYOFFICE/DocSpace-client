@@ -11,7 +11,6 @@
   "FormNumber": "Numer formularza",
   "FormOwner": "Właściciel formularza",
   "FormSectionCompleted": "Ukończono sekcję formularza",
-  "FormVDRCompletedDescription": "Formularz został w pełni ukończony przez wszystkie role i jest teraz finalizowany. Jest dostępny w trybie tylko do odczytu.",
   "FormVDRConfirmationOfStartTitle": "Formularz jest gotowy do wypełnienia w pokoju",
   "FormVDRSectionCompletedDescription": "Przypisana część formularza PDF została pomyślnie wypełniona. Status wypełnienia formularza można monitorować w pokoju i za pośrednictwem panelu Status wypełnienia. Wyślemy powiadomienie e-mail, gdy formularz zostanie w pełni ukończony.",
   "LinkToFillOutForm": "Link do wypełnienia formularza:",

@@ -11,7 +11,6 @@
   "FormNumber": "表单编号",
   "FormOwner": "表单所有者",
   "FormSectionCompleted": "表单部分已完成",
-  "FormVDRCompletedDescription": "所有角色的用户已填写完表单，现已最终化，以只读模式提供。",
   "FormVDRConfirmationOfStartTitle": "表单已准备好，可在房间内进行填写",
   "FormVDRSectionCompletedDescription": "PDF 表单的指定部分已完成填写，可以通过房间或“填写状态”面板监控表单的填写状态。表单全部填写完成后，系统将自动发送邮件通知。",
   "LinkToFillOutForm": "填写表单链接：",

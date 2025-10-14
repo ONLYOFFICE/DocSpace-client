@@ -11,7 +11,6 @@
   "FormNumber": "Formular nr.",
   "FormOwner": "Proprietarul formularului",
   "FormSectionCompleted": "Secțiunea formularului completată",
-  "FormVDRCompletedDescription": "Formularul a fost completat integral de către toți utilizatorii cu toate rolurile și acum este finalizat. Este disponibil numai cu vizualizare.",
   "FormVDRConfirmationOfStartTitle": "Formularul este gata de completare în sală",
   "FormVDRSectionCompletedDescription": "Fragmentul atribuit din formularul PDF a fost completat cu succes. Monitorizarea stării de completare a formularului poate fi realizată din sală prin panou Stare de completare. O notificare prin e-mail va fi trimisă odată formularul completat în întregime.",
   "LinkToFillOutForm": "Link-ul pentru completarea formularului:",

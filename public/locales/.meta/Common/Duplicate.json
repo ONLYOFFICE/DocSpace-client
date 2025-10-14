@@ -3,7 +3,7 @@
   "content": "Duplicate",
   "content_en_sha1_hash": "972d57379db3e5be76d4ead709fef1ad71ff03d6",
   "created_at": "2025-05-19T21:30:44.727Z",
-  "updated_at": "2025-09-26T15:21:06.473Z",
+  "updated_at": "2025-10-13T14:41:03.113Z",
   "comment": {
     "text": "This translation key is used to display the label \"Duplicate\" for a button or action that allows users to create a duplicate of an item. It appears in various UI contexts, such as option menus and dialogs, where it enables users to replicate existing content. The goal of this text is to provide clarity and consistency across different languages.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1737,
+      "line_number": 1719,
       "context": "disabled: false,\n },\n {\n id: \"option_create-duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => this.onDuplicate(item, t),\n disabled: false,\n },\n ],",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1737,
+      "line_number": 1719,
       "context": "disabled: false,\n },\n {\n id: \"option_create-duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => this.onDuplicate(item, t),\n disabled: false,\n },\n ],",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1737,
+      "line_number": 1719,
       "context": "disabled: false,\n },\n {\n id: \"option_create-duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => this.onDuplicate(item, t),\n disabled: false,\n },\n ],",
       "module": "/packages/client"
     },

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Navigate } from "react-router";
+import { Navigate, redirect } from "react-router";
 
 import { validatePublicRoomKey } from "@docspace/shared/api/rooms";
 import { getSettingsFiles } from "@docspace/shared/api/files";
@@ -40,6 +40,7 @@ import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
 import { profileClientRoutes, generalClientRoutes } from "./general";
 import { contactsRoutes } from "./contacts";
+import { ValidationStatus } from "@docspace/shared/enums";
 
 /**
  * @type {import("react-router").RouteObject[]}
@@ -388,6 +389,15 @@ const ClientRoutes = [
         validatePublicRoomKey(key),
         getSettingsFiles(),
       ]);
+
+      if (
+        validateData.status === ValidationStatus.Ok &&
+        validateData.isAuthenticated
+      ) {
+        const response = redirect(`/media/view/${validateData.id}`);
+
+        return response;
+      }
 
       return { validateData, key, settings };
     },

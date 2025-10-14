@@ -3,7 +3,7 @@
   "content": "Users added ({{count}}).",
   "content_en_sha1_hash": "8c7b1ab7b60a1cc8856412fa9c57d6d974a69ffb",
   "created_at": "2025-05-19T21:30:54.905Z",
-  "updated_at": "2025-09-23T07:24:24.167Z",
+  "updated_at": "2025-10-13T13:22:35.725Z",
   "comment": {
     "text": "This translation key is used to display a count of users added to a room. It appears on a history view and is likely part of a button or label that displays this information to the user.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 251,
+      "line_number": 280,
       "context": "}}\n />\n );\n case FeedActionKeys.RoomCreateUser:\n if (hasRelatedItems)\n return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"Common:RoomCreateUser\");\n case FeedActionKeys.RoomUpdateAccessForUser:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"InfoPanel:RoomRemoveUser\");",
       "module": "/packages/client"
     },

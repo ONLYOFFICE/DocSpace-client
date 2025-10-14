@@ -23,5 +23,6 @@
   "ThirdPartyInfo": "Изменить настройки подключения",
   "ThirdPartyTitle": "Сторонние сервисы",
   "TitleShowActions": "Показать действия над файлом",
-  "TitleShowFolderActions": "Показать действия над папкой"
+  "TitleShowFolderActions": "Показать действия над папкой",
+  "TrashItemsDeleteSuccess": "Выбранные элементы были успешно удалены из раздела {{sectionName}}"
 }

@@ -3,7 +3,7 @@
   "content": "You have appointed a new owner.",
   "content_en_sha1_hash": "bfdff63ec08042212380b8b5ed1aeed73a496e37",
   "created_at": "2025-05-19T21:30:55.262Z",
-  "updated_at": "2025-10-01T15:17:48.406Z",
+  "updated_at": "2025-10-13T14:41:03.137Z",
   "comment": {
     "text": "This translation key is used for notifications that a new owner has been appointed. It displays a success message when a user successfully leaves a room and appoints a new owner in files management.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3134,
+      "line_number": 3138,
       "context": "const isMe = userId === this.userStore.user.id;\n if (isMe) setInRoom(true);\n }\n \n if (isLeaveChecked) await this.onLeaveRoom(t);\n else toastr.success(t(\"Files:AppointNewOwner\"));\n })\n .catch((e) => toastr.error(e))\n .finally(() => {\n setSelected(\"none\");\n });",
       "module": "/packages/client"
     }

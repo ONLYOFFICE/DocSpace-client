@@ -11,7 +11,6 @@
   "FormNumber": "Número do formulário",
   "FormOwner": "Proprietário do formulário",
   "FormSectionCompleted": "Seção do formulário concluída",
-  "FormVDRCompletedDescription": "O formulário foi totalmente preenchido por todas as funções e agora está finalizado. Ele está disponível no modo somente visualização.",
   "FormVDRConfirmationOfStartTitle": "O formulário está pronto para ser preenchido na sala",
   "FormVDRSectionCompletedDescription": "A parte atribuída do formulário em PDF foi concluída com sucesso. O status de preenchimento do formulário pode ser monitorado na sala e por meio do painel Status de preenchimento. Uma notificação por e-mail será enviada assim que o formulário for totalmente preenchido.",
   "LinkToFillOutForm": "Link para preencher o formulário:",

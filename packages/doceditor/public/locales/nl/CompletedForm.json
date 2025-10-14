@@ -11,7 +11,6 @@
   "FormNumber": "Formuliernummer",
   "FormOwner": "Formulier eigenaar",
   "FormSectionCompleted": "Formulier Sectie Voltooid",
-  "FormVDRCompletedDescription": "Het formulier is volledig ingevuld door alle rollen en is nu afgerond. Het is beschikbaar in de alleen-lezen modus.",
   "FormVDRConfirmationOfStartTitle": "Het formulier is klaar om in te vullen in de kamer",
   "FormVDRSectionCompletedDescription": "Het toegewezen gedeelte van het PDF formulier is met succes voltooid. De invulstatus van het formulier kan in de kamer en via het Invulstatus paneel worden gecontroleerd. Er wordt een e-mail melding verstuurd zodra het formulier volledig is ingevuld.",
   "LinkToFillOutForm": "Link om formulier in te vullen:",

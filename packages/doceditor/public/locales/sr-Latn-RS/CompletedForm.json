@@ -11,7 +11,6 @@
   "FormNumber": "Broj formulara",
   "FormOwner": "Vlasnik formulara",
   "FormSectionCompleted": "Sekcija obrasca je završena",
-  "FormVDRCompletedDescription": "Obrazac je u potpunosti popunjen od strane svih uloga i sada je dostupan samo za pregled.",
   "FormVDRConfirmationOfStartTitle": "Obrazac je spreman za popunjavanje u sobi",
   "FormVDRSectionCompletedDescription": "Dodeljeni deo PDF obrasca je uspešno popunjen. Status popunjavanja obrasca se može pratiti u sobi i putem panela za status popunjavanja. E-mail obaveštenje biće poslato kada obrazac bude u potpunosti popunjen.",
   "LinkToFillOutForm": "Link za popunjavanje obrasca:",

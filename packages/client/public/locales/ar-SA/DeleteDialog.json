@@ -3,10 +3,14 @@
   "DeleteAllGroupsTitle": "حذف المجموعات",
   "DeleteFiles": "أنتم على وشك نقل <strong>ملفات ({{filesCount}})</strong> إلى {{trashSection}}.",
   "DeleteFilesAndFolders": "أنتم على وشك نقل <strong>الملفات ({{filesCount}})</strong> و<strong>المجلدات ({{foldersCount}})</strong> إلى {{trashSection}}. ",
+  "DeleteFilesAndFoldersForever": "أنت على وشك حذف ملفات <strong>({{filesCount}})</strong> ومجلدات <strong>({{foldersCount}})</strong>.",
+  "DeleteFilesForever": "أنتم على وشك حذف <strong>ملفات ({{filesCount}})</strong>.",
   "DeleteFolders": "أنتم على وشك نقل <strong>مجلدات ({{foldersCount}})</strong> إلى {{trashSection}}. ",
+  "DeleteFoldersForever": "أنتم على وشك حذف <strong>مجلدات ({{foldersCount}})</strong>.",
   "DeleteGroupDescription": "سيتم حذف المجموعة {{groupName}}. لن تتم إزالة المستخدمين في المجموعة من {{productName}}. هل أنت متأكد أنك تريد المتابعة؟",
   "DeleteGroupTitle": "حذف المجموعة",
   "DeleteItem": "أنتم على وشك نقل <strong>{{name}}</strong> إلى {{trashSection}}. ",
+  "DeleteItemForever": "أنتم على وشك حذف <strong>{{name}}</strong>.",
   "DeleteRoom": "سيتم حذف الغرفة <strong>\"\"{{roomName}}\"\"</strong> نهائيًا. ستفقدون جميع البيانات وصلاحيات وصول المستخدم. ",
   "DeleteRoomTitle": "هل تريدون حذف هذه الغرفة؟ ",
   "DeleteRoomWarning": "أنا أفهم العواقب وأريد حذف الغرفة ",
@@ -22,5 +26,7 @@
   "FoldersDeletedAfter": "سيتم حذف المجلدات نهائيًا في غضون 30 يومًا. ",
   "FoldersPermanentlyDeleted": "سيتم حذف المجلدات نهائيًا من من {{trashSection}}. ",
   "ItemsDeletedAfter": "سيتم حذف هذه العناصر نهائيًا في غضون 30 يومًا. ",
-  "ItemsPermanentlyDeleted": "سيتم حذف هذه العناصر نهائيًا من {{trashSection}}."
+  "ItemsPermanentlyDeleted": "سيتم حذف هذه العناصر نهائيًا من {{trashSection}}.",
+  "removeFromListDescription": "أنتم على وشك إزالة <1>{{title}}</1> من القائمة. هل أنتم متأكدون من رغبتكم في المتابعة؟",
+  "removeFromListDescriptionPlural": "أنتم على وشك إزالة <1>عناصر ({{count}})</1> من القائمة. هل أنتم متأكدون من رغبتكم في المتابعة؟"
 }

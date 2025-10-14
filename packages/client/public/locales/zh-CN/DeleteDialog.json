@@ -3,7 +3,7 @@
   "DeleteAllGroupsTitle": "删除群组",
   "DeleteFiles": "您将要把<strong>{{filesCount}}个文件</strong>移至{{trashSection}}。",
   "DeleteFilesAndFolders": "您即将删除<strong>文件({{filesCount}})</strong>和<strong>文件夹({{foldersCount}})</strong>至 {{trashSection}}。",
-  "DeleteFilesAndFoldersForever": "您即将删除<strong>文件({{filesCount}})</strong>和<strong>文件夹({{foldersCount}})</strong>。\n",
+  "DeleteFilesAndFoldersForever": "您即将删除<strong>文件({{filesCount}})</strong>和<strong>文件夹({{foldersCount}})</strong>。",
   "DeleteFilesForever": "您将要删除 <strong>文件 ({{filesCount}})</strong>。",
   "DeleteFolders": "您即将把<strong>{{foldersCount}}个文件夹</strong>移至{{trashSection}}。",
   "DeleteFoldersForever": "您即将删除<strong>文件夹 ({{foldersCount}})</strong>。",

@@ -3,7 +3,7 @@
   "content": "Sign in with Twitter",
   "content_en_sha1_hash": "6c3c1de299e8e958290bcabc34a72ff09ce336c4",
   "created_at": "2025-05-19T21:30:48.799Z",
-  "updated_at": "2025-10-13T13:22:36.065Z",
+  "updated_at": "2025-10-14T06:16:54.833Z",
   "comment": {
     "text": "This translation key is used for the \"Sign in with Twitter\" text that appears on buttons or dialogs to enable users to sign into their account using their Twitter credentials. The text is part of a larger UI element that handles social media authentication options.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"تسجيل الدخول Twitter\" is a literal transliteration of \"Sign in with Twitter\" and doesn't convey the full meaning. It lacks a proper verb construction and doesn't flow naturally in Arabic. It should be something more like 'تسجيل الدخول باستخدام تويتر'.",
-          "suggestion": "تسجيل الدخول باستخدام تويتر"
+          "description": "The Arabic translation 'تسجيل الدخول Twitter' is a literal transcription of \"Sign in with Twitter\" and doesn't convey the meaning naturally in Arabic. It lacks the verb 'using' or similar phrasing.",
+          "suggestion": "تسجيل الدخول باستخدام Twitter"
         }
       ],
       "approved_at": null
@@ -60,7 +60,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Login' is a more technical term. While understandable, 'Anmelden mit Twitter' would be a more natural and user-friendly translation for 'Sign in with Twitter'.",
+          "description": "While 'Login über Twitter' is understandable, 'Sign in with Twitter' typically translates to 'Anmelden mit Twitter' in German. 'Login' is an Anglicism and less common in formal German contexts.",
           "suggestion": "Anmelden mit Twitter"
         }
       ],
@@ -147,19 +147,19 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Entrar com Twitter\" is understandable, a more natural and commonly used translation for \"Sign in with Twitter\" in Brazilian Portuguese would be \"Acessar com Twitter\". \"Entrar com\" implies entering a location, while \"Acessar com\" is more aligned with accessing a service.",
-          "suggestion": "Acessar com Twitter"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Conectare cu Twitter' is understandable, a more natural and common translation of 'Sign in with Twitter' in Romanian would be 'Autentificare cu Twitter' or 'Logare cu Twitter'. 'Conectare' implies a broader connection rather than the specific authentication action.",
+          "suggestion": "Autentificare cu Twitter"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -171,7 +171,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala word 'ට්විටර්' (Twiter) appears to be a transliteration and may contain a slight spelling error. The correct transliteration might be 'ට්විටර්'.",
+          "suggestion": "ට්විටර්"
+        },
+        {
+          "type": "spelling",
+          "description": "The Sinhala word 'පිවිසෙන්න' is generally correct, but double-check for regional variations or preferred phrasing. It's important to ensure the wording aligns with common usage.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -192,13 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Пријави се путем Twitter-а\" is not the most natural or common way to say \"Sign in with Twitter\" in Serbian. While technically correct, it sounds a bit formal and clunky.",
-          "suggestion": "Пријава преко Twitter-а"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses a hyphenated form of 'Twitter-а' which, while acceptable, may benefit from being more consistently styled. Depending on the platform's overall styling, a separate word (Twitter а) or other form might be preferred.",
-          "suggestion": "Пријави се преко Twitter а"
+          "description": "The translation 'Пријави се путем Twitter-а' while understandable, is not the most natural or commonly used phrasing in Serbian. A more natural translation would be 'Уloguj se putem Twitter-а' or 'Prijavi se preko Twitter-a'. The word 'putem' can be a bit formal in this context.",
+          "suggestion": "Уloguj se putem Twitter-а"
         }
       ],
       "approved_at": null
@@ -215,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Twitter hesabınız ile giriş yapın\" is a literal translation, but a more natural and idiomatic Turkish phrasing would be preferred for a button label. \"Twitter'la giriş yap\" is more common.",
-          "suggestion": "Twitter'la giriş yap"
+          "description": "The translation \"Twitter hesabınız ile giriş yapın\" is a literal translation and while understandable, it's not the most natural phrasing for a button or link in Turkish. A more common and user-friendly option would be something like \"Twitter'la giriş yap\" or \"Giriş yapmak için Twitter'ı kullan\"",
+          "suggestion": "Consider using \"Twitter'la giriş yap\" or \"Giriş yapmak için Twitter'ı kullan\""
         }
       ],
       "approved_at": null
@@ -236,13 +242,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While '使用Twitter登录' is understandable, a more natural and accurate translation of 'Sign in with Twitter' would be '通过Twitter登录' or '用Twitter登录'.  '使用Twitter登录' implies using Twitter to *do* something, rather than signing in *with* it.",
-          "suggestion": "通过Twitter登录"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

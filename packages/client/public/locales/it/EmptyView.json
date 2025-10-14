@@ -52,5 +52,7 @@
   "UploadDevicePDFFormOptionTitle": "Carica dal dispositivo",
   "UploadFromPortalTitle": "Carica da {{productName}}",
   "UploadPDFFormOptionDescription": "Seleziona un modulo PDF pronto disponibile in {{productName}} e caricalo nella stanza.",
-  "VirtualDataRoomEmptyTitle": "Benvenuto nella Virtual Data Room"
+  "VirtualDataRoomEmptyTitle": "Benvenuto nella Virtual Data Room",
+  "ManageAccess": "Gestisci l'accesso",
+  "TemplateAccessDescription": "Controlla chi può utilizzare questo modello"
 }

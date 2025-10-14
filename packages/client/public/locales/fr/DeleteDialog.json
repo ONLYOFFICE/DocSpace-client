@@ -23,5 +23,10 @@
   "FoldersDeletedAfter": "Les dossiers seront définitivement supprimés dans 30 jours.",
   "FoldersPermanentlyDeleted": "Les dossiers seront définitivement supprimés de la {{trashSection}}.",
   "ItemsDeletedAfter": "Ces éléments seront définitivement supprimés dans 30 jours.",
-  "ItemsPermanentlyDeleted": "Ces éléments seront définitivement supprimés de la {{trashSection}}."
+  "ItemsPermanentlyDeleted": "Ces éléments seront définitivement supprimés de la {{trashSection}}.",
+  "DeleteFilesForever": "Vous êtes sur le point de supprimer <strong>des fichiers ({{filesCount}})</strong>.",
+  "DeleteFoldersForever": "Vous êtes sur le point de supprimer <strong>dossiers ({{foldersCount}})</strong>.",
+  "DeleteItemForever": "Vous êtes sur le point de supprimer <strong>{{name}}</strong>.",
+  "removeFromListDescription": "Vous êtes sur le point de supprimer <1>{{title}}</1> de la liste. Êtes-vous sûr de vouloir continuer ?",
+  "removeFromListDescriptionPlural": "Vous êtes sur le point de supprimer <1>éléments ({{count}})</1> de la liste. Êtes-vous sûr de vouloir continuer ?"
 }

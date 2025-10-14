@@ -14,5 +14,6 @@
   "ReassigningDataToItself": "Der Prozess der Neuzuordnung der Daten von Benutzer <0>{{fromUser}}</0> zu Benutzer <1>{{toUser}}</1> <2>{{you}}</2> hat begonnen. Bitte beachten Sie, dass dies einige Zeit dauern kann.",
   "RoomsOnlyReassignment": "Wir übertragen die durch Kontaktaufnahme erstellten Räume.",
   "StartTransferAgain": "Übertragung erneut starten",
-  "UserToWhomTheDataWillBeTransferred": "Benutzer, an den die Daten übertragen werden sollen"
+  "UserToWhomTheDataWillBeTransferred": "Benutzer, an den die Daten übertragen werden sollen",
+  "DescriptionDataReassignment": "Wir werden freigegebene Dateien und Räume, die von Kontakten erstellt wurden, übertragen."
 }

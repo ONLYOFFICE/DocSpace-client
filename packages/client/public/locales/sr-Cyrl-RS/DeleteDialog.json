@@ -23,5 +23,10 @@
   "FoldersDeletedAfter": "Фолдери ће бити трајно обрисани за 30 дана",
   "FoldersPermanentlyDeleted": "Фолдери ће бити трајно уклоњени из {{trashSection}}.",
   "ItemsDeletedAfter": "Ове ставке ће бити трајно обрисане за 30 дана.",
-  "ItemsPermanentlyDeleted": "Фолдери ће бити трајно уклоњени из {{trashSection}}."
+  "ItemsPermanentlyDeleted": "Фолдери ће бити трајно уклоњени из {{trashSection}}.",
+  "DeleteFilesForever": "Упозоравамо вас да ћете избрисати <strong>фајлове ({{filesCount}})</strong>.",
+  "DeleteFoldersForever": "Упозоравамо вас да бришете <strong>фолдере ({{foldersCount}})</strong>.",
+  "DeleteItemForever": "Упозоравамо вас да ћете избрисати <strong>{{name}}</strong>.",
+  "removeFromListDescription": "Уклањате <1>{{title}}</1> са листе. Да ли сте сигурни да желите да наставите?",
+  "removeFromListDescriptionPlural": "Уклањате <1>{{count}} ставки</1> из листе. Да ли сте сигурни да желите да наставите?"
 }

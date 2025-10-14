@@ -52,5 +52,7 @@
   "UploadDevicePDFFormOptionTitle": "Hochladen vom Gerät",
   "UploadFromPortalTitle": "Von {{productName}} hochladen",
   "UploadPDFFormOptionDescription": "Wählen Sie ein fertiges PDF-Formular, das in {{productName}} verfügbar ist, und laden Sie es in den Raum hoch.",
-  "VirtualDataRoomEmptyTitle": "Willkommen im virtuellen Datenraum"
+  "VirtualDataRoomEmptyTitle": "Willkommen im virtuellen Datenraum",
+  "ManageAccess": "Zugriff verwalten",
+  "TemplateAccessDescription": "Wer diese Vorlage verwenden darf, steuern."
 }

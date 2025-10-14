@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "O convidado foi excluído com sucesso",
   "SuccessfullyDeleteUserInfoMessage": "O usuário foi excluído com sucesso",
   "ToBeAbleToReassignData": "Para poder reatribuir dados, exclua um usuário por vez.",
-  "UserFilesRemovalScope": "Os dados pessoais, todos os arquivos e pastas nas seções {{sectionNameFirst}} e {{sectionNameSecond}} desse usuário serão excluídos permanentemente."
+  "UserFilesRemovalScope": "Os dados pessoais, todos os arquivos e pastas nas seções {{sectionNameFirst}} e {{sectionNameSecond}} desse usuário serão excluídos permanentemente.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Todos os arquivos compartilhados, assim como salas criadas por este contato, serão reatribuídos automaticamente a um administrador realizando a exclusão: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Reatribua os dados manualmente para escolher outro usuário de destino para a reatribuição."
 }

@@ -14,5 +14,6 @@
   "ReassigningDataToItself": "Օգտագործողի կողմից տվյալների վերաբաշխման գործընթացը <0>{{fromUser}}</0> օգտագործող <1>{{toUser}}</1> <2>{{you}}</2> սկսվեց։ Խնդրում ենք նկատի ունենալ, որ դա կարող է զգալի ժամանակ պահանջել:",
   "RoomsOnlyReassignment": "Մենք կփոխանցենք կոնտակտով ստեղծված սենյակները։",
   "StartTransferAgain": "Նորից սկսեք փոխանցումը",
-  "UserToWhomTheDataWillBeTransferred": "Օգտատեր, ում տվյալները կփոխանցվեն"
+  "UserToWhomTheDataWillBeTransferred": "Օգտատեր, ում տվյալները կփոխանցվեն",
+  "DescriptionDataReassignment": "Մենք կտեղափոխենք կիսված ֆայլերը և կամրորները, որոնք ստեղծվել են կապի միջոցով։"
 }

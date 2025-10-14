@@ -8,5 +8,7 @@
   "FreeBackupsPerMonth": "Sauvegardes gratuites : {{value}}/{{maxValue}} pour le mois en cours.",
   "TemporaryDescription": "Créez une sauvegarde stockée dans la section « Sauvegarde ». Disponible au téléchargement dans les 24 heures suivant sa création.",
   "ThirdPartyResourceDescription": "Connectez et enregistrez des sauvegardes sur des comptes cloud comme Dropbox, Box, OneDrive ou Google Drive.",
-  "ThirdPartyStorageDescription": "Utilisez des services tiers pour stocker vos sauvegardes. Une option idéale pour connecter des plateformes de stockage cloud externes."
+  "ThirdPartyStorageDescription": "Utilisez des services tiers pour stocker vos sauvegardes. Une option idéale pour connecter des plateformes de stockage cloud externes.",
+  "DisableBackupConfirm": "Désactiver le service de sauvegarde empêchera les administrateurs de {{productName}} de créer des sauvegardes. Si la sauvegarde automatique est activée, elle restera active dans la limite de la franchise, mais une fois la franchise entièrement utilisée, elle sera définitivement désactivée. Êtes-vous sûr de vouloir continuer ?",
+  "DisableBackupConfirmWithoutQuota": "Désactiver le service de sauvegarde empêchera les administrateurs de {{productName}} de créer des sauvegardes. Si la sauvegarde automatique est activée, elle sera désactivée. Êtes-vous sûr de vouloir continuer ?"
 }

@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Invitatul a fost șters cu succes",
   "SuccessfullyDeleteUserInfoMessage": "Utilizatorul a fost șters cu succes",
   "ToBeAbleToReassignData": "Pentru a putea reafectaa datele, ștergeți utilizatorii unul câte unul.",
-  "UserFilesRemovalScope": "Datele personale, toate fișierele și dosarele din secţiunile {{sectionNameFirst}} și {{sectionNameSecond}} ale utilizatorului vor fi șterse definitiv."
+  "UserFilesRemovalScope": "Datele personale, toate fișierele și dosarele din secţiunile {{sectionNameFirst}} și {{sectionNameSecond}} ale utilizatorului vor fi șterse definitiv.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Toate fișierele partajate, precum și camerele create de acest contact, vor fi realocate automat unui administrator care efectuează ștergerea: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Realocați datele manual pentru a alege un alt utilizator de destinație pentru realocare."
 }

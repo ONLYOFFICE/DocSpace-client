@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "ゲストは正常に削除されました",
   "SuccessfullyDeleteUserInfoMessage": "ユーザーの削除に成功しました。",
   "ToBeAbleToReassignData": "データを再割り当てするためには、一度に一人のユーザーを削除してください。",
-  "UserFilesRemovalScope": "このユーザーの個人データ、{{sectionNameFirst}} および {{sectionNameSecond}} セクション内のすべてのファイルとフォルダは完全に削除されます。"
+  "UserFilesRemovalScope": "このユーザーの個人データ、{{sectionNameFirst}} および {{sectionNameSecond}} セクション内のすべてのファイルとフォルダは完全に削除されます。",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} この連絡先によって共有されたファイルや作成されたルームは、削除を実行する管理者へ自動的に再割り当てされます：<1>{{userPerformedDeletion}} ({{userYou}})</1>。再割り当て先を別のユーザーに指定するには、データを手動で再割り当てしてください。"
 }

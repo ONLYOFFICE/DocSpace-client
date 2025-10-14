@@ -52,5 +52,7 @@
   "UploadDevicePDFFormOptionTitle": "Carregar do dispositivo",
   "UploadFromPortalTitle": "Fazer upload de {{productName}}",
   "UploadPDFFormOptionDescription": "Selecione um formulário PDF pronto disponível em {{productName}} e carregue-o na sala.",
-  "VirtualDataRoomEmptyTitle": "Bem-vindo à Sala de Dados Virtual"
+  "VirtualDataRoomEmptyTitle": "Bem-vindo à Sala de Dados Virtual",
+  "ManageAccess": "Gerenciar acesso",
+  "TemplateAccessDescription": "Controle quem pode usar este modelo"
 }

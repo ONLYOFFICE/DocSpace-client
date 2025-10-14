@@ -36,6 +36,7 @@
   "InviteNewUsers": "Pozvání nových uživatelů",
   "InviteRootRoomDescription": "Odeslání pozvánky k přidání nových členů do vašeho {{productName}}",
   "InviteUsersOptionDescription": "Přidání členů pro společné úpravy v místnosti",
+  "ManageAccess": "Spravovat přístup",
   "MigrationDataDescription": "Import dat do vašeho {{productName}} z {{organizationName}} Workspace, Google Workspace nebo Nextcloud.",
   "MigrationDataTitle": "Migrační údaje",
   "NoRecentFilesHereYet": "Zde zatím žádné nedávné soubory.",
@@ -46,13 +47,12 @@
   "ShareOptionTitle": "Sdílení místnosti",
   "SharePublicRoomOptionDescription": "Povolení přístupu k externím odkazům ostatním uživatelům.",
   "SharePublicRoomOptionTitle": "Sdílení místnosti se všemi uživateli",
+  "TemplateAccessDescription": "Ovládejte, kdo může tento šablonu používat.",
   "UploadDeviceOptionDescription": "Nahrávání souborů libovolného typu z osobního zařízení",
   "UploadDeviceOptionTitle": "Nahrávání ze zařízení",
   "UploadDevicePDFFormOptionDescription": "Nahrajte do místnosti připravený PDF formulář ze svého zařízení.",
   "UploadDevicePDFFormOptionTitle": "Nahrávání ze zařízení",
   "UploadFromPortalTitle": "Nahrát z {{productName}}",
   "UploadPDFFormOptionDescription": "Vyberte připravený PDF formulář dostupný v {{productName}} a nahrajte jej do místnosti.",
-  "VirtualDataRoomEmptyTitle": "Vítejte ve virtuální datové místnosti",
-  "ManageAccess": "Spravovat přístup",
-  "TemplateAccessDescription": "Ovládejte, kdo může tento šablonu používat."
+  "VirtualDataRoomEmptyTitle": "Vítejte ve virtuální datové místnosti"
 }

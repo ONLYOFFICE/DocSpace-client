@@ -3,6 +3,7 @@
   "AllDataTransferred": "Vsi podatki so prenešeni",
   "DataReassignment": "Prerazporeditev podatkov",
   "DeleteProfileIsFinished": "Ko je prerazporeditev končana, izbrišite profil",
+  "DescriptionDataReassignment": "Prekošili bomo skupne datoteke in sobe, ki so jih ustvarili stiki.",
   "Interrupted": "Prekinjeno. Nekaterih podatkov ni bilo mogoče prenesti",
   "MoreAboutDataTransfer": "Več o prenosu podatkov",
   "NewDataOwner": "Nov lastnik podatkov",
@@ -14,6 +15,5 @@
   "ReassigningDataToItself": "Postopek prerazporeditve podatkov uporabnika <0>{{fromUser}}</0> na uporabnika <1>{{toUser}}</1> <2>{{you}}</2> se je začel. Upoštevajte, da lahko traja nekaj časa.",
   "RoomsOnlyReassignment": "Prenesli bomo sobe, ki jih je ustvaril kontakt.",
   "StartTransferAgain": "Ponovno začni prenos",
-  "UserToWhomTheDataWillBeTransferred": "Uporabnik, h kateremu bodo podatki preneseni",
-  "DescriptionDataReassignment": "Prekošili bomo skupne datoteke in sobe, ki so jih ustvarili stiki."
+  "UserToWhomTheDataWillBeTransferred": "Uporabnik, h kateremu bodo podatki preneseni"
 }

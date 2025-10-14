@@ -3,6 +3,7 @@
   "AllDataTransferred": "Všechna data přenesena",
   "DataReassignment": "Změna přiřazení dat",
   "DeleteProfileIsFinished": "Odstranit profil po dokončení změny přiřazení dat",
+  "DescriptionDataReassignment": "Budeme přenášet sdílené soubory a místnosti vytvořené kontaktem.",
   "Interrupted": "Přerušeno, některá data nebylo možné přenést",
   "MoreAboutDataTransfer": "Další informace o přenosu dat",
   "NewDataOwner": "Nový vlastník dat",
@@ -14,6 +15,5 @@
   "ReassigningDataToItself": "Byl zahájen proces přeřazení dat z uživatele <0>{{{fromUser}}</0> na uživatele <1>{{{toUser}}</1> <2>{{{you}}</2>. Upozorňujeme, že tento proces může trvat delší dobu.",
   "RoomsOnlyReassignment": "Přeneseme místnosti vytvořené kontaktem.",
   "StartTransferAgain": "Znovu spustit přenos",
-  "UserToWhomTheDataWillBeTransferred": "Uživatel, kterému budou údaje předány",
-  "DescriptionDataReassignment": "Budeme přenášet sdílené soubory a místnosti vytvořené kontaktem."
+  "UserToWhomTheDataWillBeTransferred": "Uživatel, kterému budou údaje předány"
 }

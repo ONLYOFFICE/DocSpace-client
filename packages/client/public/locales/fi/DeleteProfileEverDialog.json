@@ -7,6 +7,7 @@
   "DeleteGuest": "Poista vieras",
   "DeleteGuests": "Poista vieraat",
   "DeletePersonalDataApplicable": "*Valituille käyttäjille, joilla on sellaisia tiedostoja ja kansioita.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Kaikki jaetut tiedostot sekä tämän yhteystiedon luomat huoneet siirretään automaattisesti poistamista suorittavan ylläpitäjän nimiin: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Siirrä tiedot manuaalisesti valitaksesi toisen käyttäjän tiedon siirtoa varten.",
   "DeleteReqassignDescriptionGuest": "{{userCaption}} poistetaan kaikista huoneista, joihin heidät on kutsuttu. Tämän {{userCaption}} luomat huoneissa olevat asiakirjat siirretään automaattisesti huoneen omistajalle.",
   "DeleteUser": "Poista käyttäjä",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1>käyttäjä poistetaan. Tätä toimintoa ei voi perua.",
@@ -17,6 +18,5 @@
   "SuccessfullyDeleteGuestInfoMessage": "Vieras on onnistuneesti poistettu",
   "SuccessfullyDeleteUserInfoMessage": "Käyttäjä on poistettu onnistuneesti",
   "ToBeAbleToReassignData": "Poista yksi käyttäjä kerrallaan voidaksesi siirtää tietoja.",
-  "UserFilesRemovalScope": "Henkilötiedot, kaikki tämän käyttäjän tiedostot ja kansiot osioissa {{sectionNameFirst}} ja {{sectionNameSecond}} poistetaan pysyvästi.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Kaikki jaetut tiedostot sekä tämän yhteystiedon luomat huoneet siirretään automaattisesti poistamista suorittavan ylläpitäjän nimiin: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Siirrä tiedot manuaalisesti valitaksesi toisen käyttäjän tiedon siirtoa varten."
+  "UserFilesRemovalScope": "Henkilötiedot, kaikki tämän käyttäjän tiedostot ja kansiot osioissa {{sectionNameFirst}} ja {{sectionNameSecond}} poistetaan pysyvästi."
 }

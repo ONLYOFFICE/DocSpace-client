@@ -3,6 +3,7 @@
   "AllDataTransferred": "Visi dati pārsūtīti",
   "DataReassignment": "Datu maiņa",
   "DeleteProfileIsFinished": "Izdzēst profilu, kad atkārtota piešķiršana ir pabeigta",
+  "DescriptionDataReassignment": "Mēs pārsūtīsim koplietotos failus un telpas, kuras izveidoja kontaktpersona.",
   "Interrupted": "Pārtraukts, daži dati, iespējams, nevarēja pārsūtīt",
   "MoreAboutDataTransfer": "Vairāk par datu pārsūtīšanu",
   "NewDataOwner": "Jauns datu īpašnieks",
@@ -14,6 +15,5 @@
   "ReassigningDataToItself": "Ir sākts datu atkārtotas piešķiršanas process no lietotāja <0>{{fromUser}}</0> uz lietotāja <1>{{toUser}}</1> <2>{{you}}</2>. Ņemiet vērā, ka tas var aizņemt daudz laika.",
   "RoomsOnlyReassignment": "Mēs pārvietosim kontakta izveidotās telpas.",
   "StartTransferAgain": "Sākt pasūtīt vēlreiz",
-  "UserToWhomTheDataWillBeTransferred": "Lietotājs, kuram tiks pārsūtīti dati",
-  "DescriptionDataReassignment": "Mēs pārsūtīsim koplietotos failus un telpas, kuras izveidoja kontaktpersona."
+  "UserToWhomTheDataWillBeTransferred": "Lietotājs, kuram tiks pārsūtīti dati"
 }

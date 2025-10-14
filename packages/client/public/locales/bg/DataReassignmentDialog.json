@@ -3,6 +3,7 @@
   "AllDataTransferred": "Всички данни са прехвърлени",
   "DataReassignment": "Преназначаване на данните",
   "DeleteProfileIsFinished": "Изтрийте профила, когато преназначаването приключи",
+  "DescriptionDataReassignment": "Ще прехвърлим споделените файлове и стаи, създадени от контакт.",
   "Interrupted": "Прекъснато, някои данни не успяха да се прехвърлят",
   "MoreAboutDataTransfer": "Повече за прехвърлянето на данни",
   "NewDataOwner": "Нов собственик на данни",
@@ -14,6 +15,5 @@
   "ReassigningDataToItself": "Процесът по преназначаване на данни от потребител <0>{{fromUser}}</0> към потребител <1>{{toUser}}</1> <2>{{you}}</2> започна. Молим да имате предвид, че може да отнеме известно време.",
   "RoomsOnlyReassignment": "Ще прехвърлим стаите, създадени по контакт.",
   "StartTransferAgain": "Започни прехвърлянето отново",
-  "UserToWhomTheDataWillBeTransferred": "Потребител, към когото ще бъдат прехвърлени данните",
-  "DescriptionDataReassignment": "Ще прехвърлим споделените файлове и стаи, създадени от контакт."
+  "UserToWhomTheDataWillBeTransferred": "Потребител, към когото ще бъдат прехвърлени данните"
 }

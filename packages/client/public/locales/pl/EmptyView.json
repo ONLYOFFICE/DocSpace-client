@@ -36,6 +36,7 @@
   "InviteNewUsers": "Zaproś nowych użytkowników",
   "InviteRootRoomDescription": "Wyślij zaproszenia, aby dodać nowych członków do {{productName}}",
   "InviteUsersOptionDescription": "Dodaj członków do wspólnej edycji w pokoju",
+  "ManageAccess": "Zarządzaj dostępem",
   "MigrationDataDescription": "Importuj dane do {{productName}} z {{organizationName}} Workspace, Google Workspace lub Nextcloud.",
   "MigrationDataTitle": "Dane migracji",
   "NoRecentFilesHereYet": "Brak ostatnich plików tutaj jeszcze",
@@ -46,13 +47,12 @@
   "ShareOptionTitle": "Udostępnij pokój",
   "SharePublicRoomOptionDescription": "Włącz dostęp poprzez link zewnętrzny dla innych użytkowników.",
   "SharePublicRoomOptionTitle": "Udostępnij pokój wszystkim użytkownikom",
+  "TemplateAccessDescription": "Kontroluj, kto może korzystać z tego szablonu.",
   "UploadDeviceOptionDescription": "Prześlij pliki dowolnego typu ze swojego urządzenia osobistego",
   "UploadDeviceOptionTitle": "Prześlij ze swojego urządzenia",
   "UploadDevicePDFFormOptionDescription": "Prześlij gotowy formularz PDF do pokoju ze swojego urządzenia.",
   "UploadDevicePDFFormOptionTitle": "Prześlij z urządzenia",
   "UploadFromPortalTitle": "Prześlij z {{productName}}",
   "UploadPDFFormOptionDescription": "Wybierz gotowy formularz PDF dostępny w {{productName}} i prześlij go do pokoju.",
-  "VirtualDataRoomEmptyTitle": "Witaj w Wirtualnym pokoju danych",
-  "ManageAccess": "Zarządzaj dostępem",
-  "TemplateAccessDescription": "Kontroluj, kto może korzystać z tego szablonu."
+  "VirtualDataRoomEmptyTitle": "Witaj w Wirtualnym pokoju danych"
 }

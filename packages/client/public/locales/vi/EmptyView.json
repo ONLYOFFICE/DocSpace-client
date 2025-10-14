@@ -36,6 +36,7 @@
   "InviteNewUsers": "Mời người dùng mới",
   "InviteRootRoomDescription": "Gửi lời mời để thêm thành viên mới vào {{productName}} của bạn",
   "InviteUsersOptionDescription": "Thêm thành viên để cùng chỉnh sửa trong phòng",
+  "ManageAccess": "Quản lý quyền truy cập",
   "MigrationDataDescription": "Nhập dữ liệu {{productName}} của bạn từ {{organizationName}} Workspace, Google Workspace hoặc Nextcloud.",
   "MigrationDataTitle": "Di chuyển Dữ liệu",
   "NoRecentFilesHereYet": "Chưa có tệp nào gần đây cả.",
@@ -46,13 +47,12 @@
   "ShareOptionTitle": "Chia sẻ phòng",
   "SharePublicRoomOptionDescription": "Bật quyền truy cập liên kết bên ngoài cho người dùng khác.",
   "SharePublicRoomOptionTitle": "Chia sẻ phòng với tất cả người dùng",
+  "TemplateAccessDescription": "Kiểm soát ai có thể sử dụng mẫu này.",
   "UploadDeviceOptionDescription": "Tải lên bất kỳ loại tập tin nào từ thiết bị cá nhân của bạn",
   "UploadDeviceOptionTitle": "Tải lên từ Thiết bị của bạn",
   "UploadDevicePDFFormOptionDescription": "Tải biểu mẫu PDF đã sẵn sàng lên phòng từ thiết bị của bạn.",
   "UploadDevicePDFFormOptionTitle": "Tải lên từ thiết bị",
   "UploadFromPortalTitle": "Tải lên từ {{productName}}",
   "UploadPDFFormOptionDescription": "Chọn một biểu mẫu PDF sẵn có trong {{productName}} và tải nó lên phòng.",
-  "VirtualDataRoomEmptyTitle": "Chào mừng bạn đến với Phòng Dữ liệu Ảo",
-  "ManageAccess": "Quản lý quyền truy cập",
-  "TemplateAccessDescription": "Kiểm soát ai có thể sử dụng mẫu này."
+  "VirtualDataRoomEmptyTitle": "Chào mừng bạn đến với Phòng Dữ liệu Ảo"
 }

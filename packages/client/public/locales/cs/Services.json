@@ -4,11 +4,11 @@
   "BackupServiceEnabled": "Zálohovací služba byla úspěšně povolena.",
   "ConnectService": "Propojte službu <1>zde</1>, abyste povolili funkce zálohování.",
   "ContactToPayer": "Kontaktujte platitele (<1>{{email}}</1>) k připojení záložní služby.",
+  "DisableBackupConfirm": "Vypnutí služby Zálohování zabrání administrátorům {{productName}} ve vytváření záloh. Pokud je povoleno Automatické zálohování, zůstane aktivní v rámci bezplatné kvóty, ale jakmile bude kvóta plně využita, bude trvale deaktivována. Jste si jistí, že chcete pokračovat?",
+  "DisableBackupConfirmWithoutQuota": "Vypnutí služby Zálohování zabrání administrátorům {{productName}} ve vytváření záloh. Pokud je povoleno Automatické zálohování, bude deaktivováno. Jste si jistí, že chcete pokračovat?",
   "EnableBackupConfirm": "Zapnutí služby Zálohování umožní všem administrátorům {{productName}} vytvářet zálohy kdykoli, pokud je zůstatek na peněžence dostatečný. Jste si jistí, že chcete pokračovat?",
   "FreeBackupsPerMonth": "Bezplatné zálohy: {{value}}/{{maxValue}} za aktuální měsíc.",
   "TemporaryDescription": "Vytvořte zálohu uloženou v sekci „Záloha“. K dispozici ke stažení do 24 hodin po vytvoření.",
   "ThirdPartyResourceDescription": "Propojte a zálohujte data do cloudových účtů, jako jsou Dropbox, Box, OneDrive nebo Google Drive.",
-  "ThirdPartyStorageDescription": "Používejte služby třetích stran pro ukládání záloh. Ideální pro připojení externích cloudových úložišť.",
-  "DisableBackupConfirm": "Vypnutí služby Zálohování zabrání administrátorům {{productName}} ve vytváření záloh. Pokud je povoleno Automatické zálohování, zůstane aktivní v rámci bezplatné kvóty, ale jakmile bude kvóta plně využita, bude trvale deaktivována. Jste si jistí, že chcete pokračovat?",
-  "DisableBackupConfirmWithoutQuota": "Vypnutí služby Zálohování zabrání administrátorům {{productName}} ve vytváření záloh. Pokud je povoleno Automatické zálohování, bude deaktivováno. Jste si jistí, že chcete pokračovat?"
+  "ThirdPartyStorageDescription": "Používejte služby třetích stran pro ukládání záloh. Ideální pro připojení externích cloudových úložišť."
 }

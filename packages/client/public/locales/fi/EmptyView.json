@@ -36,6 +36,7 @@
   "InviteNewUsers": "Kutsu uusia käyttäjiä ",
   "InviteRootRoomDescription": "Lähetä kutsu lisätäksesi uusia jäseniä {{productName}}",
   "InviteUsersOptionDescription": "Lisää jäseniä huoneeseen yhteistä muokkausta varten",
+  "ManageAccess": "Hallitse pääsyä",
   "MigrationDataDescription": "Tuo tiedot {{productName}}:een {{organizationName}} työtilasta, Googlen työtilasta tai Nextcloudista.",
   "MigrationDataTitle": "Siirtotiedot",
   "NoRecentFilesHereYet": "Ei viimeaikaisia tiedostoja vielä täällä",
@@ -46,13 +47,12 @@
   "ShareOptionTitle": "Jaa huone",
   "SharePublicRoomOptionDescription": "Salli ulkoisen linkin käyttö muille jäsenille.",
   "SharePublicRoomOptionTitle": "Jaa huone kaikkien käyttäjien kesken",
+  "TemplateAccessDescription": "Hallitse, kuka voi käyttää tätä mallipohjaa.",
   "UploadDeviceOptionDescription": "Lataa minkä tahansa tyyppisiä tiedostoja henkilökohtaisesta laitteestasi",
   "UploadDeviceOptionTitle": "Lataa laitteestasi",
   "UploadDevicePDFFormOptionDescription": "Lataa huoneeseen valmis PDF-lomake laitteestasi.",
   "UploadDevicePDFFormOptionTitle": "Lataa laitteesta",
   "UploadFromPortalTitle": "Lataa {{productName}}:sta",
   "UploadPDFFormOptionDescription": "Valitse valmis PDF-lomake, joka on {{productName}}:ssa ja lataa se huoneeseen.",
-  "VirtualDataRoomEmptyTitle": "Tervetuloa Virtuaalisen datan huoneeseen.",
-  "ManageAccess": "Hallitse pääsyä",
-  "TemplateAccessDescription": "Hallitse, kuka voi käyttää tätä mallipohjaa."
+  "VirtualDataRoomEmptyTitle": "Tervetuloa Virtuaalisen datan huoneeseen."
 }

@@ -36,6 +36,7 @@
   "InviteNewUsers": "Πρόσκληση νέων χρηστών",
   "InviteRootRoomDescription": "Στείλτε μια πρόσκληση για να προσθέσετε νέα μέλη στο {{productName}}",
   "InviteUsersOptionDescription": "Προσθέστε μέλη για κοινή επεξεργασία στην δωμάτιο",
+  "ManageAccess": "Διαχείριση πρόσβασης",
   "MigrationDataDescription": "Εισαγωγή δεδομένων στο {{productName}} σας από το Workspace, το Google Workspace ή το Nextcloud της {{organizationName}}.",
   "MigrationDataTitle": "Δεδομένα μετάβασης",
   "NoRecentFilesHereYet": "Δεν υπάρχουν πρόσφατα αρχεία εδώ ακόμα",
@@ -46,13 +47,12 @@
   "ShareOptionTitle": "Κοινή χρήση δωματίου",
   "SharePublicRoomOptionDescription": "Ενεργοποιήστε την πρόσβαση σε εξωτερικούς συνδέσμους για άλλους χρήστες.",
   "SharePublicRoomOptionTitle": "Μοιραστείτε το δωμάτιο με όλους τους χρήστες",
+  "TemplateAccessDescription": "Ελέγξτε ποιος μπορεί να χρησιμοποιήσει αυτό το πρότυπο",
   "UploadDeviceOptionDescription": "Μεταφορτώστε αρχεία οποιουδήποτε τύπου από την προσωπική σας συσκευή",
   "UploadDeviceOptionTitle": "Μεταφόρτωση από τη συσκευή σας",
   "UploadDevicePDFFormOptionDescription": "Μεταφορτώστε μια έτοιμη φόρμα PDF στο δωμάτιο από τη συσκευή σας.",
   "UploadDevicePDFFormOptionTitle": "Μεταφόρτωση από τη συσκευή",
   "UploadFromPortalTitle": "Μεταφόρτωση από {{productName}}",
   "UploadPDFFormOptionDescription": "Επιλέξτε μια έτοιμη φόρμα PDF που είναι διαθέσιμη στο {{productName}} και μεταφορτώστε την στο δωμάτιο.",
-  "VirtualDataRoomEmptyTitle": "Καλώς ήρθατε στο Εικονικό Δωμάτιο Δεδομένων",
-  "ManageAccess": "Διαχείριση πρόσβασης",
-  "TemplateAccessDescription": "Ελέγξτε ποιος μπορεί να χρησιμοποιήσει αυτό το πρότυπο"
+  "VirtualDataRoomEmptyTitle": "Καλώς ήρθατε στο Εικονικό Δωμάτιο Δεδομένων"
 }

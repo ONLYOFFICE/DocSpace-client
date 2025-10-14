@@ -7,6 +7,7 @@
   "DeleteGuest": "Excluir convidado",
   "DeleteGuests": "Excluir convidados",
   "DeletePersonalDataApplicable": "*Aplicável aos usuários selecionados que possuem tais arquivos e pastas.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Todos os arquivos compartilhados, bem como salas criadas por este contato, serão reatribuídos automaticamente a um administrador que estiver realizando a exclusão: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Reatribua os dados manualmente para escolher outro usuário de destino para a reatribuição.",
   "DeleteReqassignDescriptionGuest": "O {{userCaption}} será excluído de todas as salas para as quais foram convidados. Os documentos criados por este {{userCaption}} nas salas serão automaticamente reatribuídos aos proprietários das salas.",
   "DeleteUser": "Eliminar utilizador",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> será excluído. Essa ação não pode ser desfeita.",
@@ -17,6 +18,5 @@
   "SuccessfullyDeleteGuestInfoMessage": "O convidado foi excluído com sucesso",
   "SuccessfullyDeleteUserInfoMessage": "O utilizador foi eliminado com êxito",
   "ToBeAbleToReassignData": "Para poder reatribuir dados, exclua um usuário por vez.",
-  "UserFilesRemovalScope": "Dados pessoais, todos os arquivos e pastas nas seções {{sectionNameFirst}} e {{sectionNameSecond}} deste usuário serão permanentemente excluídos.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Todos os arquivos compartilhados, bem como salas criadas por este contato, serão reatribuídos automaticamente a um administrador que estiver realizando a exclusão: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Reatribua os dados manualmente para escolher outro usuário de destino para a reatribuição."
+  "UserFilesRemovalScope": "Dados pessoais, todos os arquivos e pastas nas seções {{sectionNameFirst}} e {{sectionNameSecond}} deste usuário serão permanentemente excluídos."
 }

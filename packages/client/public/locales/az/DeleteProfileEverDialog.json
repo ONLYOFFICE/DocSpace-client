@@ -7,6 +7,7 @@
   "DeleteGuest": "Qonağı silin",
   "DeleteGuests": "Qonaqları silin",
   "DeletePersonalDataApplicable": "*Belə fayl və qovluqları olan seçilmiş istifadəçilərə aiddir.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Bu kontakt tərəfindən paylaşılmış bütün faylər və eləcə də yaradılmış otaqlar avtomatik olaraq silmə əməliyyatını həyata keçirən bir adminə({{userPerformedDeletion}}) ({{userYou}}) təyin ediləcəkdir. Yenidən təyin etmək üçün başqa bir istifadəçi seçmək üçün məlumatları əl ilə təyin edin.",
   "DeleteReqassignDescriptionGuest": "{{userCaption}} dəvət olunduqları bütün otaqlardan silinəcək. Bu {{userCaption}} tərəfindən otaqlarda yaradılmış sənədlər avtomatik olaraq otaq sahiblərinə təyin ediləcək.",
   "DeleteUser": "İstifadəçini sil",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> silinəcək. Bu əməliyyat geri qaytarıla bilməz.",
@@ -17,6 +18,5 @@
   "SuccessfullyDeleteGuestInfoMessage": "Qonaq uğurla silindi",
   "SuccessfullyDeleteUserInfoMessage": "İstifadəçi müvəffəqiyyətlə silinmişdir",
   "ToBeAbleToReassignData": "Məlumatı yenidən təyin etmək üçün bir istifadəçini silin.",
-  "UserFilesRemovalScope": "Şəxsi məlumatlar, bu istifadəçinin {{sectionNameFirst}} və {{sectionNameSecond}} bölmələrindəki bütün fayl və qovluqlar həmişəlik silinəcək.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Bu kontakt tərəfindən paylaşılmış bütün faylər və eləcə də yaradılmış otaqlar avtomatik olaraq silmə əməliyyatını həyata keçirən bir adminə({{userPerformedDeletion}}) ({{userYou}}) təyin ediləcəkdir. Yenidən təyin etmək üçün başqa bir istifadəçi seçmək üçün məlumatları əl ilə təyin edin."
+  "UserFilesRemovalScope": "Şəxsi məlumatlar, bu istifadəçinin {{sectionNameFirst}} və {{sectionNameSecond}} bölmələrindəki bütün fayl və qovluqlar həmişəlik silinəcək."
 }

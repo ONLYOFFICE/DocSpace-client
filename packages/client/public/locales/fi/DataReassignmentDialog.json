@@ -3,6 +3,7 @@
   "AllDataTransferred": "Kaikki tiedot siirretty",
   "DataReassignment": "Tietojen siirto",
   "DeleteProfileIsFinished": "Poista profiili, kun tietojen siirto on suoritettu",
+  "DescriptionDataReassignment": "Siirrämme yhteisiä tiedostoja ja yhteystietojen luomia huoneita.",
   "Interrupted": "Keskeytetty, osaa tiedoista ei voitu siirtää",
   "MoreAboutDataTransfer": "Enemmän tiedonsiirrosta",
   "NewDataOwner": "Uusien tietojen omistaja",
@@ -14,6 +15,5 @@
   "ReassigningDataToItself": "Toimintojen siirtotoiminto käyttäjältä <0>{{fromUser}}</0> käyttäjälle <1>{{toUser}}</1> <2>{{you}}</2> on alkanut. Ole hyvä ja huomioi, että tämä saattaa kestää jonkin aikaa.",
   "RoomsOnlyReassignment": "Siirrämme yhteyden luomat huoneet.",
   "StartTransferAgain": "Aloita siirto uudelleen",
-  "UserToWhomTheDataWillBeTransferred": "Käyttäjä, jolle tiedot siirretään",
-  "DescriptionDataReassignment": "Siirrämme yhteisiä tiedostoja ja yhteystietojen luomia huoneita."
+  "UserToWhomTheDataWillBeTransferred": "Käyttäjä, jolle tiedot siirretään"
 }

@@ -36,6 +36,7 @@
   "InviteNewUsers": "Uzaiciniet jaunus lietotājus",
   "InviteRootRoomDescription": "Nosūtiet uzaicinājumu pievienot jaunus dalībniekus savam {{productName}}",
   "InviteUsersOptionDescription": "Pievienojiet dalībniekus kopīgai rediģēšanai telpā",
+  "ManageAccess": "Pārvaldīt piekļuvi",
   "MigrationDataDescription": "Importējiet datus uz savu {{productName}} no {{organizationName}} Workspace, Google Workspace vai Nextcloud.",
   "MigrationDataTitle": "Migrācijas dati",
   "NoRecentFilesHereYet": "Šeit vēl nav neseno failu.",
@@ -46,13 +47,12 @@
   "ShareOptionTitle": "Kopīgot telpu",
   "SharePublicRoomOptionDescription": "Iespējojiet ārējo saišu piekļuvi citiem lietotājiem.",
   "SharePublicRoomOptionTitle": "Koplietot telpu ar visiem lietotājiem",
+  "TemplateAccessDescription": "Kontrolējiet, kas var izmantot šo veidni",
   "UploadDeviceOptionDescription": "Augšupielādējiet jebkāda veida failus no personīgās ierīces",
   "UploadDeviceOptionTitle": "Augšupielādēt no ierīces",
   "UploadDevicePDFFormOptionDescription": "Augšupielādējiet telpā gatavu PDF veidlapu no savas ierīces.",
   "UploadDevicePDFFormOptionTitle": "Augšupielādēt no ierīces",
   "UploadFromPortalTitle": "Augšupielādēt no {{productName}}",
   "UploadPDFFormOptionDescription": "Izvēlieties gatavu PDF veidlapu, kas pieejama šeit: {{productName}}, un augšupielādējiet to telpā.",
-  "VirtualDataRoomEmptyTitle": "Laipni lūdzam virtuālajā datu telpā",
-  "ManageAccess": "Pārvaldīt piekļuvi",
-  "TemplateAccessDescription": "Kontrolējiet, kas var izmantot šo veidni"
+  "VirtualDataRoomEmptyTitle": "Laipni lūdzam virtuālajā datu telpā"
 }

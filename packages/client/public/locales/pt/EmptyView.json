@@ -36,6 +36,7 @@
   "InviteNewUsers": "Convidar novos utilizadores",
   "InviteRootRoomDescription": "Enviar um convite para adicionar novos membros ao seu {{productName}}",
   "InviteUsersOptionDescription": "Adicione membros para edição conjunta na sala",
+  "ManageAccess": "Gerenciar acesso",
   "MigrationDataDescription": "Importe dados para o {{productName}} do {{organizationName}} Workspace, Google Workspace ou Nextcloud.",
   "MigrationDataTitle": "Dados de migração",
   "NoRecentFilesHereYet": "Ainda não há arquivos recentes aqui.",
@@ -46,13 +47,12 @@
   "ShareOptionTitle": "Dividir uma sala",
   "SharePublicRoomOptionDescription": "Habilite o acesso de link externo para outros utilizadors.",
   "SharePublicRoomOptionTitle": "Partilhar a sala com todos os utilizadores",
+  "TemplateAccessDescription": "Controle quem pode usar este modelo",
   "UploadDeviceOptionDescription": "Carregue qualquer tipo de arquivo do seu dispositivo pessoal",
   "UploadDeviceOptionTitle": "Carregar do seu dispositivo",
   "UploadDevicePDFFormOptionDescription": "Carregue um formulário PDF pronto para a sala a partir do seu dispositivo.",
   "UploadDevicePDFFormOptionTitle": "Carregar do dispositivo",
   "UploadFromPortalTitle": "Fazer upload de {{productName}}",
   "UploadPDFFormOptionDescription": "Selecione um formulário PDF pronto disponível em {{productName}} e carregue-o na sala.",
-  "VirtualDataRoomEmptyTitle": "Bem-vindo ao Data Room Virtual",
-  "ManageAccess": "Gerenciar acesso",
-  "TemplateAccessDescription": "Controle quem pode usar este modelo"
+  "VirtualDataRoomEmptyTitle": "Bem-vindo ao Data Room Virtual"
 }

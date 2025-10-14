@@ -3,7 +3,7 @@
   "content": "Select who will complete the fields for each recipient role on this form. Select a recipient role and assign it to a room member",
   "content_en_sha1_hash": "8485683e547463ba672162277ca9dccdbd3fd3e4",
   "created_at": "2025-10-13T13:22:14.685Z",
-  "updated_at": "2025-10-13T14:22:24.379Z",
+  "updated_at": "2025-10-14T04:14:32.152Z",
   "comment": {
     "text": "This text appears in a dialog or information bar, instructing the user to assign room members to recipient roles within a form. It explains how to select a role and associate it with a specific room member. The purpose is to guide users through the process of defining who completes the form fields for each role.",
     "is_auto": true,
@@ -111,7 +111,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Select a recipient role and assign it to a room member\" is not accurately translated. The meaning of 'assign' is lost in the Lao translation. It should convey the action of associating the role with a specific person.",
+          "suggestion": "ເລືອກບົດບາດຜູ້ຮັບ ແລະ ແຖະນາມໃຫ້ສະມາຊິກຫ້ອງ (Choose a recipient role and designate it to a room member)"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrasing 'ເລືອກບົດບາດຜູ້ຮັບ ແລະ ແຖະນາມໃຫ້ສະມາຊິກຫ້ອງ' could be slightly improved for flow and clarity.  While grammatically correct, it's a little abrupt.",
+          "suggestion": "ເລືອກບົດບາດຜູ້ຮັບ ແລະ ມອບຫມາຍບົດບາດໃຫ້ສະມາຊິກຫ້ອງ (Choose a recipient role and assign the role to a room member)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {

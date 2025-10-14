@@ -16,5 +16,8 @@
   "LinkToFillOutForm": "Formu doldurma bağlantısı:",
   "LinkToForm": "Form bağlantısı:",
   "LinkToViewOnlyForm": "Salt görüntülenebilir form bağlantısı:",
-  "Title": "Form tamamlandı"
+  "Title": "Form tamamlandı",
+  "FormVDRFinalizedDescription": "Form tüm alıcılar tarafından eksiksiz bir şekilde doldurulmuş ve artık son halini almıştır. Yalnızca görüntüleme modunda kullanılabilir.",
+  "FormVDRNextRecepientDescription": "İlk alıcı olarak atanan kullanıcıya zaten bir bildirim gönderildi ve formu doldurması istendi. Odaya gidebilir veya doldurma bağlantısını katılımcılarla paylaşabilirsiniz.",
+  "FormVDRYouFirstRecepientDescription": "İlk alıcı olarak formu doldurmanız istenmektedir. E-postanıza bir bildirim gönderildi. Formu şimdi doldurabilir veya doldurma bağlantısını kopyalayarak daha sonra geri dönebilirsiniz."
 }

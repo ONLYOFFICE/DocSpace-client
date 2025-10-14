@@ -3,7 +3,7 @@
   "content": "Warning",
   "content_en_sha1_hash": "e9c45563358e813f157ba81b33143542165ba84e",
   "created_at": "2025-05-19T21:30:49.575Z",
-  "updated_at": "2025-10-13T14:41:02.760Z",
+  "updated_at": "2025-10-13T19:40:32.373Z",
   "comment": {
     "text": "This \"Warning\" translation key is used to display a caution message when sensitive information about file protection is detected in a file. It appears as a warning text in error messages or dialog boxes, providing context for users when accessing protected files.",
     "is_auto": true,
@@ -282,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'අවවාදයයි' (awawadayaayi) is a more formal and less common way to translate 'Warning'. A more common and natural translation would be 'අනතුරු ඇඟවීම' (anadaru aegawima).",
-          "suggestion": "අනතුරු ඇඟවීම"
+          "description": "While 'අවවාදයයි' can mean 'warning', it's a rather formal and literary term. A more common and natural translation for 'Warning' in most contexts would be 'අතුරුත්තරණය' (aturuththaranya) or 'අපඉඟි' (apigi). 'අවවාදයයි' might be used in official or formal announcements but is not the typical usage.",
+          "suggestion": "Consider using 'අතුරුත්තරණය' (aturuththaranya) or 'අපඉඟි' (apigi) for a more common and natural translation."
         }
       ],
       "approved_at": null
@@ -331,6 +331,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,10 +3,14 @@
   "DeleteAllGroupsTitle": "Gruppen löschen",
   "DeleteFiles": "Sie sind dabei, <strong>Dateien ({{filesCount}})</strong> in den {{trashSection}} zu verschieben.",
   "DeleteFilesAndFolders": "Sie sind dabei, die <strong>Dateien ({{filesCount}})</strong> und <strong>Ordner ({{foldersCount}})</strong> in den {{trashSection}} zu löschen.",
+  "DeleteFilesAndFoldersForever": "Sie werden die <strong>Dateien ({{filesCount}})</strong> und <strong>Ordner ({{foldersCount}})</strong> löschen.",
+  "DeleteFilesForever": "Sie werden <strong>Dateien ({{filesCount}})</strong> löschen.",
   "DeleteFolders": "Sie sind dabei, <strong>Ordner ({{foldersCount}})</strong> in den {{trashSection}} zu verschieben.",
+  "DeleteFoldersForever": "Sie werden <strong>Ordner ({{foldersCount}})</strong> löschen.",
   "DeleteGroupDescription": "Die Gruppe {{groupName}} wird gelöscht. Benutzer in der Gruppe werden nicht aus {{productName}} entfernt. Sind Sie sicher, dass Sie fortfahren möchten?",
   "DeleteGroupTitle": "Gruppe löschen",
   "DeleteItem": "Sie sind dabei, <strong>{{name}}</strong> in den {{trashSection}} zu verschieben.",
+  "DeleteItemForever": "Sie werden <strong>{{name}}</strong> löschen.",
   "DeleteRoom": "Der Raum <strong>\"{{roomName}}\"</strong> wird dauerhaft gelöscht. Alle Daten und Benutzerzugriffe gehen verloren.",
   "DeleteRoomTitle": "Raum löschen?",
   "DeleteRoomWarning": "Ich verstehe die Konsequenzen und möchte den Raum löschen.",
@@ -22,5 +26,7 @@
   "FoldersDeletedAfter": "Die Ordner werden innerhalb von 30 Tagen dauerhaft gelöscht.",
   "FoldersPermanentlyDeleted": "Die Ordner werden dauerhaft aus dem {{trashSection}} entfernt.",
   "ItemsDeletedAfter": "Diese Elemente werden innerhalb von 30 Tagen dauerhaft gelöscht.",
-  "ItemsPermanentlyDeleted": "Diese Elemente werden dauerhaft aus dem {{trashSection}} entfernt."
+  "ItemsPermanentlyDeleted": "Diese Elemente werden dauerhaft aus dem {{trashSection}} entfernt.",
+  "removeFromListDescription": "Sie werden <1>{{title}}</1> aus der Liste entfernen. Sind Sie sicher, dass Sie fortfahren möchten?",
+  "removeFromListDescriptionPlural": "Sie werden <1>Elemente ({{count}})</1> aus der Liste entfernen. Sind Sie sicher, dass Sie fortfahren möchten?"
 }

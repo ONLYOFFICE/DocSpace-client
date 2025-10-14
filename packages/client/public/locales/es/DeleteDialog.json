@@ -1,10 +1,16 @@
 {
   "DeleteAllGroupDescription": "Se eliminarán los grupos seleccionados. Los usuarios de los grupos no serán eliminados de {{productName}}. ¿Está seguro de que desea continuar?",
   "DeleteAllGroupsTitle": "Eliminar grupos",
+  "DeleteFiles": "Está a punto de mover <strong>archivos ({{filesCount}})</strong> a la {{trashSection}}.",
+  "DeleteFilesAndFolders": "Está a punto de eliminar los <strong>archivos ({{filesCount}})</strong> y las <strong>carpetas ({{foldersCount}})</strong> a la {{trashSection}}.",
+  "DeleteFilesAndFoldersForever": "Está a punto de eliminar los <strong>archivos ({{filesCount}})</strong> y las <strong>carpetas ({{foldersCount}})</strong>.",
+  "DeleteFilesForever": "Está a punto de eliminar <strong>archivos ({{filesCount}})</strong>.",
   "DeleteFolders": "Está a punto de mover <strong>carpetas ({{foldersCount}})</strong> a la {{trashSection}}.",
+  "DeleteFoldersForever": "Estás a punto de eliminar <strong>carpetas ({{foldersCount}})</strong>.",
   "DeleteGroupDescription": "El grupo {{groupName}} se eliminará. Los usuarios del grupo no serán eliminados de {{productName}}. ¿Está seguro de que desea continuar? ",
   "DeleteGroupTitle": "Eliminar grupo",
   "DeleteItem": "Está a punto de mover <strong>{{name}}</strong> a la {{trashSection}}.",
+  "DeleteItemForever": "Está a punto de eliminar a <strong>{{name}}</strong>.",
   "DeleteRoom": "La sala <strong>«{{roomName}}»</strong> se eliminará de forma permanente. Se perderán todos los datos y accesos de los usuarios.",
   "DeleteRoomTitle": "¿Eliminar esta sala?",
   "DeleteRoomWarning": "Entiendo las consecuencias y deseo eliminar la sala.",
@@ -20,5 +26,7 @@
   "FoldersDeletedAfter": "Las carpetas se eliminarán permanentemente en 30 días.",
   "FoldersPermanentlyDeleted": "Las carpetas se eliminarán permanentemente de la {{trashSection}}.",
   "ItemsDeletedAfter": "Estos elementos se eliminarán permanentemente en 30 días.",
-  "ItemsPermanentlyDeleted": "Estos elementos se eliminarán permanentemente de la {{trashSection}}."
+  "ItemsPermanentlyDeleted": "Estos elementos se eliminarán permanentemente de la {{trashSection}}.",
+  "removeFromListDescription": "Está a punto de eliminar <1>{{title}}</1> de la lista. ¿Está seguro de que desea continuar?",
+  "removeFromListDescriptionPlural": "Está a punto de eliminar <1>elementos ({{count}})</1> de la lista. ¿Está seguro de que desea continuar?"
 }

@@ -3,6 +3,7 @@
   "AllDataTransferred": "Todos los datos transferidos",
   "DataReassignment": "Reasignación de datos",
   "DeleteProfileIsFinished": "Borrar el perfil cuando finalice la reasignación",
+  "DescriptionDataReassignment": "Transferiremos archivos compartidos y salas creadas por contacto.",
   "Interrupted": "Interrupción, no se han podido transferir algunos datos",
   "MoreAboutDataTransfer": "Más información sobre la transferencia de datos",
   "NewDataOwner": "Nuevo propietario de los datos",

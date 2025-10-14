@@ -16,5 +16,8 @@
   "LinkToFillOutForm": "Link za popunjavanje obrasca:",
   "LinkToForm": "Link za obrazac:",
   "LinkToViewOnlyForm": "Link za obrazac samo za pregled:",
-  "Title": "Formular je završen"
+  "Title": "Formular je završen",
+  "FormVDRFinalizedDescription": "Obrazac je u potpunosti ispunjen od strane svih primalaca i sada je završen. Dostupan je u režimu samo za gledanje.",
+  "FormVDRNextRecepientDescription": "Već je poslata obaveštenje korisniku dodeljenom kao prvi primalac, sa podsećanjem da popuni obrazac. Možete da se prebacite na sobu ili podelite link za popunjavanje sa učesnicima.",
+  "FormVDRYouFirstRecepientDescription": "Vi ste zaduženi da popunite obrazac kao prvi primalac. Obaveštenje je poslato na vašu elektronsku poštu. Možete da počnete da ga popunjavate sada ili da kopirate link za popunjavanje i vratite se kasnije."
 }

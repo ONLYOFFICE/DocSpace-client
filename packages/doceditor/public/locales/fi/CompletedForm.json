@@ -16,5 +16,8 @@
   "LinkToFillOutForm": "Linkki lomakkeen täyttämiseen:",
   "LinkToForm": "Linkki lomakkeeseen:",
   "LinkToViewOnlyForm": "Linkki katselutilaiseen lomakkeeseen:",
-  "Title": "Lomake on valmis"
+  "Title": "Lomake on valmis",
+  "FormVDRFinalizedDescription": "Lomake on täytetty kokonaan kaikkien vastaanottajien toimesta ja se on nyt valmis. Se on käytettävissä vain luku -tilassa.",
+  "FormVDRNextRecepientDescription": "Ilmoitus on jo lähetetty käyttäjälle, joka on määritetty ensimmäiseksi vastaanottajaksi, ja pyydetty häntä täyttämään lomake. Voit siirtyä huoneeseen tai jakaa täyttölinkin osallistujille.",
+  "FormVDRYouFirstRecepientDescription": "Sinut on nimitetty täyttämään lomake ensimmäisenä vastaanottajana. Ilmoitus on lähetetty sähköpostiisi. Voit aloittaa lomakkeen täyttämisen nyt tai kopioida täyttölinkin ja palata myöhemmin."
 }

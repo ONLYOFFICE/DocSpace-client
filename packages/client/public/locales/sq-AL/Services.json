@@ -4,6 +4,8 @@
   "BackupServiceEnabled": "Shërbimi i backup-it u aktivizua me sukses.",
   "ConnectService": "Lidhuni me shërbimin <1>këtu</1> për të aktivizuar veçoritë e backup-it.",
   "ContactToPayer": "Kontaktoni paguesin (<1>{{email}}</1>) për të lidhur shërbimin e backup-it.",
+  "DisableBackupConfirm": "Përkthimi i shërbimit Backup do të parandalojë administratorët e {{productName}} nga krijimi i kopjave rezervë. Nëse Auto Backup është aktivuar, ai do të mbetet aktiv brenda kuotës falas, por kur kjo kuotë do të plotësohet plotësisht, ai do të çaktivizohet përgjithimisht. Jeni të sigurt që doni të vazgoni?",
+  "DisableBackupConfirmWithoutQuota": "Përkthyerja e shërbimit Backup do të parandalojë administratorët e {{productName}} nga krijimi i kopjave rezervë. Nëse Auto Backup është aktivuar, ai do të çaktivizohet. Jeni të sigurt që doni të vazgoni?",
   "EnableBackupConfirm": "Aktivizimi i shërbimit të backup-it do t’i lejojë të gjithë administratorët e {{productName}} të krijojnë backup-e në çdo kohë, për sa kohë ka fonde në portofol. Jeni të sigurt që doni të vazhdoni?",
   "FreeBackupsPerMonth": "Backup falas: {{value}}/{{maxValue}} për muajin aktual.",
   "TemporaryDescription": "Krijoni një backup që do të ruhet në seksionin “Backup”. I disponueshëm për shkarkim brenda 24 orëve pas krijimit.",

@@ -4,6 +4,8 @@
   "BackupServiceEnabled": "Serviço de backup habilitado com sucesso.",
   "ConnectService": "Conecte o serviço <1>aqui</1> para habilitar os recursos de backup",
   "ContactToPayer": "Entre em contato com o Pagador (<1>{{email}}</1>) para conectar o serviço de backup.",
+  "DisableBackupConfirm": "Desativar o serviço de Backup impedirá que os administradores do {{productName}} criem backups. Se o Backup Automático estiver habilitado, ele permanecerá ativo dentro da cota gratuita, mas, uma vez que a cota for totalmente utilizada, ele será permanentemente desativado. Tem certeza de que deseja continuar?",
+  "DisableBackupConfirmWithoutQuota": "Desabilitar o serviço de Backup impedirá que os administradores do {{productName}} criem backups. Se o Auto Backup estiver ativado, ele será desativado. Tem certeza de que deseja continuar?",
   "EnableBackupConfirm": "A ativação do serviço de backup permitirá que todos os administradores do {{productName}} criem backups a qualquer momento, desde que o saldo da carteira seja suficiente. Tem certeza de que deseja continuar?",
   "FreeBackupsPerMonth": "Backups gratuitos: {{value}} /{{maxValue}} por mês atual.",
   "TemporaryDescription": "Crie um backup armazenado na seção \"Backup\". Disponível para download em até 24 horas após a criação.",

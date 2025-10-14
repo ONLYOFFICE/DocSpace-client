@@ -3,6 +3,7 @@
   "AllDataTransferred": "Všechna data přenesena",
   "DataReassignment": "Změna přiřazení dat",
   "DeleteProfileIsFinished": "Odstranit profil po dokončení změny přiřazení dat",
+  "DescriptionDataReassignment": "Budeme přenášet sdílené soubory a místnosti vytvořené kontaktem.",
   "Interrupted": "Přerušeno, některá data nebylo možné přenést",
   "MoreAboutDataTransfer": "Další informace o přenosu dat",
   "NewDataOwner": "Nový vlastník dat",

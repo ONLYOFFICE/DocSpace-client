@@ -3,7 +3,7 @@
   "content": "Scalability and clustering.",
   "content_en_sha1_hash": "6cc8e719d41e0d79ee36d84a4938186906c5e5a8",
   "created_at": "2025-05-26T07:15:49.299Z",
-  "updated_at": "2025-08-04T07:30:01.744Z",
+  "updated_at": "2025-10-13T21:31:58.398Z",
   "comment": {
     "text": "This translation key is used to display a header that explains the benefits of scalability and clustering. It appears in a UI component likely used to promote or describe the upgrade to Pro features. Translators should focus on conveying the concept of improving system performance and adaptability.",
     "is_auto": true,
@@ -129,7 +129,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'agregação' doesn't accurately convey the meaning of 'clustering' in this context. 'Clustering' refers to distributing resources across multiple instances or servers to improve performance and availability, while 'agregação' typically means aggregation or summation.",
+          "suggestion": "Escalabilidade e agrupamento."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'පරිමාණය' (parimāḍaya) is a reasonable translation for 'Scalability', 'පොකුරු කිරීම' (pokuru kirima) is a more literal translation of 'clustering' and may not fully capture the intended meaning in this context. A more natural translation for 'clustering' might be something like 'සමූහගත කිරීම' (samūhagat kirima) or 'කුඹුරු කිරීම' (kumburu kirima) depending on the desired nuance.",
+          "suggestion": "Consider using 'සමූහගත කිරීම' (samūhagat kirima) or 'කුඹුරු කිරීම' (kumburu kirima) for 'clustering'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Скалабилност' is a correct translation for 'Scalability,' 'груписање' is a more literal translation of 'clustering' than a functionally equivalent term. A more natural translation for 'clustering' in this context might be 'кластерисање' or a phrase conveying the concept of grouping for scalability.",
+          "suggestion": "Consider using 'кластерисање' or a phrase like 'заједничко окружење' (shared environment) to better convey the meaning of 'clustering' in the context of scalability."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

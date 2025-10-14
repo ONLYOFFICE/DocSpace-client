@@ -4,6 +4,8 @@
   "BackupServiceEnabled": "Rezerves pakalpojums veiksmīgi aktivēts.",
   "ConnectService": "Pievienojiet pakalpojumu <1>šeit</1>, lai iespēju backup funkcijas.",
   "ContactToPayer": "Sazinieties ar apmaksātāju (<1>{{email}}</1>), lai pieslēgtu rezerves pakalpojumu.",
+  "DisableBackupConfirm": "Atspējojot Backup pakalpojumu, {{productName}} administratori nevarēs veidot dublējumus. Ja ir ieslēgts Auto Backup, tas paliks aktīvs bezmaksas kvotas ietvaros, bet, kad kvota būs pilnībā izlietota, tas tiks pastāvīgi atspējots. Vai esat pārliecināts, ka vēlaties turpināt?",
+  "DisableBackupConfirmWithoutQuota": "Atvienojot Backup pakalpojumu, {{productName}} administratori nevarēs veidot dublējumus. Ja ir ieslēgts Auto Backup, tas tiks atslēgts. Vai esat pārliecināts, ka vēlaties turpināt?",
   "EnableBackupConfirm": "Iespējot Backup pakalpojums ļaus visiem {{productName}} administratoriem veidot rezerves kopijas jebkurā laikā, kamēr mokaņa ir pietiekama. Vai Jūs vēlaties turpināt?",
   "FreeBackupsPerMonth": "Bezvērtīgi dubultniekopi: {{value}}/{{maxValue}} par šo mēnesi.",
   "TemporaryDescription": "Izveidojiet rezerves kopiju, kas atrodas sadaļā \"Dublēšana\". Pieejama lejupielāde 24 stundu laikā pēc izveidošanas.",

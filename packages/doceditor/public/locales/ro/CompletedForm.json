@@ -16,5 +16,8 @@
   "LinkToFillOutForm": "Link-ul pentru completarea formularului:",
   "LinkToForm": "Link-ul către formular:",
   "LinkToViewOnlyForm": "Link-ul către formular numai cu vizualizare:",
-  "Title": "Formularul este completat"
+  "Title": "Formularul este completat",
+  "FormVDRFinalizedDescription": "Formularul a fost completat integral de toți destinatarul și este acum finalizat. Este disponibil în modul doar vizualizare.",
+  "FormVDRNextRecepientDescription": "O notificare a fost deja trimisă utilizatorului desemnat ca prim destinatar, solicitându-i să completeze formularul. Puteți naviga la încăpere sau puteți distribui link-ul de completare cu participanții.",
+  "FormVDRYouFirstRecepientDescription": "Vi se solicită să completați formularul ca prim beneficiar. A fost trimisă o notificare pe adresa dumneavoastră de e-mail. Puteți începe să-l completați acum sau să copiați link-ul de completare și să reveniți mai târziu."
 }

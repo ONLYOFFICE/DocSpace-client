@@ -4,6 +4,8 @@
   "BackupServiceEnabled": "Serviciul de copiere de rezervă a fost activat cu succes.",
   "ConnectService": "Conectați-vă serviciul <1>aici</1> pentru a activa funcțiile de copiere de rezervă.",
   "ContactToPayer": "Contactați Plătitorul (<1>{{email}}</1>) pentru a conecta serviciul de copiere de rezervă.",
+  "DisableBackupConfirm": "Dezactivarea serviciului Backup va împiedica administratorii {{productName}} să creeze copii de rezervă. Dacă Auto Backup este activat, acesta va rămâne activ în cadrul cotei gratuite, dar odată ce cota este complet utilizată, va fi dezactivat permanent. Ești sigur că dorești să continui?",
+  "DisableBackupConfirmWithoutQuota": "Dezactivarea serviciului Backup va împiedica administratorii {{productName}} să creeze copii de rezervă. Dacă Auto Backup este activat, acesta va fi dezactivat. Ești sigur că dorești să continui?",
   "EnableBackupConfirm": "Activarea serviciului de copiere de rezervă va permite tuturor administratorilor {{productName}} să creeze copii de rezervă oricând, atâta timp cât există soldul portofelului suficient. Sigur doriţi să continuați?",
   "FreeBackupsPerMonth": "Copii de rezervă gratuite: {{value}}/{{maxValue}} pentru luna curentă.",
   "TemporaryDescription": "Creați o copie de rezervă în secțiunea „Copiere de rezervă”. Este disponibilă pentru descărcare timp de 24 de ore după creare.",

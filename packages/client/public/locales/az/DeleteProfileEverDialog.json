@@ -7,6 +7,7 @@
   "DeleteGuest": "Qonağı silin",
   "DeleteGuests": "Qonaqları silin",
   "DeletePersonalDataApplicable": "*Belə fayl və qovluqları olan seçilmiş istifadəçilərə aiddir.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Bu kontakt tərəfindən paylaşılmış bütün faylər və eləcə də yaradılmış otaqlar avtomatik olaraq silmə əməliyyatını həyata keçirən bir adminə <1>{{userPerformedDeletion}}) ({{userYou}}) təyin ediləcəkdir</1>. Yenidən təyin etmək üçün başqa bir istifadəçi seçmək üçün məlumatları əl ilə təyin edin.",
   "DeleteReqassignDescriptionGuest": "{{userCaption}} dəvət olunduqları bütün otaqlardan silinəcək. Bu {{userCaption}} tərəfindən otaqlarda yaradılmış sənədlər avtomatik olaraq otaq sahiblərinə təyin ediləcək.",
   "DeleteUser": "İstifadəçini sil",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> silinəcək. Bu əməliyyat geri qaytarıla bilməz.",

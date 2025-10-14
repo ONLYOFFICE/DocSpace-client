@@ -3,7 +3,7 @@
   "content": "Size",
   "content_en_sha1_hash": "b7152342a267362add3c0d7f69f720f7a9c76c9e",
   "created_at": "2025-05-19T21:30:48.889Z",
-  "updated_at": "2025-10-13T13:22:35.704Z",
+  "updated_at": "2025-10-14T05:21:01.901Z",
   "comment": {
     "text": "This translation key is used to display the label \"Size\" in various UI elements, such as file extensions and table column headers, providing a clear and concise way to indicate size-related information.",
     "is_auto": true,
@@ -171,7 +171,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Formaat' is a valid translation for 'Size', it can have different connotations. 'Size' in the context of product specifications or dimensions might be better translated as 'Afmetingen' or 'Grootte'. 'Formaat' often refers to the format of a document or image.",
+          "suggestion": "Consider 'Afmetingen' or 'Grootte' depending on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -228,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Величина' (Velichina) can sometimes translate to 'Size', it's more accurately 'Magnitude' or 'Amount'. 'Size' often refers to dimensions (length, width, height) or scale, which 'Величина' doesn't always convey.",
-          "suggestion": "Consider 'Димензије' (Dimenziye) for dimensions or 'Величина' (Velichina) if referring to amount or magnitude, depending on the specific context. If the meaning is about physical dimensions, 'Времена' might be considered."
+          "description": "While \"Величина\" is a valid Serbian (Cyrillic) word, it doesn't directly translate to \"Size\" in all contexts. \"Size\" can refer to dimensions, measurements, or quantity. \"Величина\" more often implies magnitude or extent. A more accurate translation might depend on the specific context.",
+          "suggestion": "Consider alternatives like 'Величина' (magnitude), 'Димензије' (dimensions), or 'Вeљина' (size - more literal)."
         }
       ],
       "approved_at": null
@@ -264,10 +270,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '大小' (dàxiǎo) can translate to 'size', it more accurately means 'big and small' or 'height and width'. 'Size' in a general context might be better translated as '尺寸' (chǐcùn) or simply '大小' depending on the specific usage, but '大小' is less precise.",
-          "suggestion": "Consider '尺寸' (chǐcùn) or re-evaluate the context to determine the most appropriate translation.  '大小' is acceptable but lacks specificity."
+          "description": "The translation \"大小\" (dàxiǎo) means \"size\" or \"big and small\", but can be overly broad depending on the context. While it can be a valid translation for 'Size', it lacks the specificity and nuance of the English term. A more contextually appropriate translation might be required.",
+          "suggestion": "Consider translations like \"尺寸\" (chǐcun) which specifically refers to dimensions, or a more contextualized translation based on the surrounding text."
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

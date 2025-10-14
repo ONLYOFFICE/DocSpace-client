@@ -3,6 +3,7 @@
   "AllDataTransferred": "Wszystkie przekazane dane",
   "DataReassignment": "Ponowne przypisanie danych",
   "DeleteProfileIsFinished": "Usuń profil po przypisaniu danych do innego użytkownika",
+  "DescriptionDataReassignment": "Przekażemy udostępnione pliki i pokoje utworzone przez kontakt.",
   "Interrupted": "Przerwano, niektóre dane nie mogły zostać przekazane",
   "MoreAboutDataTransfer": "Więcej na temat transferu danych",
   "NewDataOwner": "Nowy właściciel danych",

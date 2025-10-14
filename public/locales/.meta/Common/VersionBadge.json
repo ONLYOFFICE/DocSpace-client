@@ -3,7 +3,7 @@
   "content": "V.{{version}}",
   "content_en_sha1_hash": "47c10c364922c18836956f7551a177d3ca888116",
   "created_at": "2025-05-19T21:30:49.503Z",
-  "updated_at": "2025-10-13T14:41:03.180Z",
+  "updated_at": "2025-10-13T20:30:00.411Z",
   "comment": {
     "text": "This translation key is used to display a version number badge in a digital product. The badge displays the current version of a software or application, and it appears on a badge component, likely on a button or dialog. Translators should replace \"V.\" with an appropriate localization character and adjust the formatting as needed for their target language.",
     "is_auto": true,
@@ -57,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Greek word 'Έκδ.' is an abbreviation of 'Έκδοση' (Ekdosi), which means 'Edition'. While commonly used, it is an informal abbreviation.  For a more formal version badge, a full word might be preferred.",
-          "suggestion": "Consider using 'Έκδοση' instead of 'Έκδ.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -155,9 +149,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'B.{{version}}' does not accurately convey the meaning of 'V.{{version}}'. 'V' typically represents 'Version' in English. 'B' doesn't have a standard equivalent in this context in Russian and could be misinterpreted.",
-          "suggestion": "Consider using a more accurate translation for 'V', such as 'Версия' (Versiya) or 'Верс.' (Vers.). A possible translation could be 'Верс.{{version}}'."
+          "type": "formatting",
+          "description": "The translation maintains the same formatting template \"B.{{version}}\" as the English \"V.{{version}}\". While technically not incorrect, it's unusual to simply substitute 'V' with 'B' without considering the meaning. 'B' often stands for 'Build' in Russian software contexts, but 'V' (Version) is a generally acceptable abbreviation.",
+          "suggestion": "Consider whether 'Версия' (Versiya - Version) is a more appropriate translation instead of using the 'B' abbreviation. If the abbreviated form is essential to maintain consistency with the English, ensure the meaning remains clear in the context."
         }
       ],
       "approved_at": null
@@ -165,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"අනු.\" can be a valid abbreviation, it doesn't directly translate \"Version\" in the same way as it's typically used in a version badge context.  A more accurate translation would convey the meaning of 'Version' within that context.",
+          "suggestion": "Consider alternatives like \"අවරුడు.{{version}}\" or \"වෙළුම.{{version}}\" which might better reflect the intended meaning in a version badge."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -180,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'R.{{version}}' doesn't accurately convey the meaning of 'V.{{version}}'. 'V.' in this context likely represents 'Version' and 'R.' doesn't have the same connotation in Slovenian. A more accurate translation would be something like 'Različica.{{version}}' or 'Vidljiva različica.{{version}}' depending on the intended nuance.",
+          "description": "The translation 'R.{{version}}' doesn't accurately convey the meaning of 'V.{{version}}'. 'V' in English stands for 'Version', and 'R' doesn't have a direct equivalent in this context in Slovenian. A more appropriate translation would depend on the specific meaning intended, but 'Različica.{{version}}' or 'Verzija.{{version}}' would likely be better.",
           "suggestion": "Različica.{{version}}"
         }
       ],
@@ -217,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -183,7 +183,6 @@
   "TooltipElementsCopyMessage": "复制{{element}}元素",
   "TooltipElementsMoveMessage": "移动{{element}}元素",
   "TrashAutoDeleteWarning": "{{sectionName}}中的项目将在30天后自动删除",
-  "TrashFunctionalityDescription": "所有已删除的文件将移至“{{sectionName}}”。您可以恢复误删的文件或将其永久删除。请注意，“{{sectionName}}”中的文件将在30天后自动删除，且删除后无法恢复。",
   "UnarchivedRoomAction": "房间 '{{name}}' 已取消存档。",
   "UnarchivedRoomsAction": "房间已取消存档。",
   "Unpin": "取消标记",

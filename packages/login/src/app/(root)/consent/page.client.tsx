@@ -121,7 +121,7 @@ const Consent = ({
 
   React.useEffect(() => {
     const redirect_url = getCookie("x-redirect-authorization-uri");
-    if (!redirect_url) return;
+    if (!redirect_url || !scopes.length) return;
 
     // Your cookie processing logic here
     const decodedRedirectUrl = window.atob(
@@ -148,7 +148,7 @@ const Consent = ({
       setCurrentScopes(splitedScopes);
     }
     setCookie("x-url", splitedURL[0]);
-  }, []);
+  }, [scopes]);
 
   React.useEffect(() => {
     const validateToken = async () => {

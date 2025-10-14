@@ -3,7 +3,7 @@
   "content": "Domains as IP addresses are not supported",
   "content_en_sha1_hash": "bf51d68a049b2ba8093c29b93ff3b61ca192aaa4",
   "created_at": "2025-05-19T21:30:44.599Z",
-  "updated_at": "2025-09-23T07:24:24.045Z",
+  "updated_at": "2025-10-13T13:22:35.496Z",
   "comment": {
     "text": "This translation key is used to display an error message indicating that domains are not supported as IP addresses. It is displayed in a dialog when the user attempts to enter a domain address that cannot be resolved as an IP address. Translators should consider the context of \"domains\" and how it may differ across languages and regions.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 175,
+      "line_number": 176,
       "context": "return t(\"Common:LocalDomain\");\n case ErrorKeys.IncorrectDomain:\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"Common:DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:",
       "module": "/packages/shared"
     }

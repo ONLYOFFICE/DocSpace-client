@@ -185,6 +185,7 @@ const SectionHeaderContent = (props) => {
     contactsTab,
     isRootRooms,
     isArchive,
+    isSharedWithMeFolderRoot,
   } = props;
 
   const location = useLocation();
@@ -449,7 +450,8 @@ const SectionHeaderContent = (props) => {
         (isShared && (isArchive ? selectedFolder?.isRoom : isRoom))
       ) {
         return PublicRoomIconUrl;
-      } else if (!isRootRooms && !isArchive) return PublicRoomIconUrl;
+      } else if (!isRootRooms && !isArchive && !isSharedWithMeFolderRoot)
+        return PublicRoomIconUrl;
     }
 
     if (isLifetimeEnabled) return LifetimeRoomIconUrl;
@@ -1188,6 +1190,7 @@ export default inject(
       contactsTab,
       isRootRooms,
       isArchive,
+      isSharedWithMeFolderRoot,
     };
   },
 )(

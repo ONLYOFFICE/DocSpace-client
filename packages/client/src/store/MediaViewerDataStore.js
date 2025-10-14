@@ -273,9 +273,10 @@ class MediaViewerDataStore {
     if (filesList.length > 0) {
       filesList.forEach((file) => {
         const canOpenPlayer =
-          file.viewAccessibility?.ImageView ||
-          file.viewAccessibility?.MediaView ||
-          (file.fileExst === ".pdf" && window.ClientConfig?.pdfViewer);
+          (file.viewAccessibility?.ImageView ||
+            file.viewAccessibility?.MediaView ||
+            (file.fileExst === ".pdf" && window.ClientConfig?.pdfViewer)) &&
+          !file.isLinkExpired;
 
         if (canOpenPlayer) {
           playlist.push({

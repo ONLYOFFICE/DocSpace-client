@@ -3,7 +3,7 @@
   "content": "Add users or groups",
   "content_en_sha1_hash": "343fc186f903e7448069e75bcbbdc0f190703881",
   "created_at": "2025-09-23T07:24:16.805Z",
-  "updated_at": "2025-10-07T15:39:07.694Z",
+  "updated_at": "2025-10-13T13:22:36.008Z",
   "comment": {
     "text": "This text appears on a button that allows users to add users or groups. It's used to initiate the process of adding new members to a shared resource. Translators should ensure the wording accurately reflects the action of adding users or groups.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/hooks/useMembers.tsx",
-      "line_number": 227,
+      "line_number": 274,
       "context": "content: [\n <ShareHeader key=\"header-users\" title={t(\"Common:ShareForUsers\")} />,\n <CreateButton\n key=\"create-block\"\n onClick={onAdded}\n title={t(\"Common:AddUsersOrGroups\")}\n />,\n ],\n headersCount: 2,\n };\n }",
       "module": "/packages/shared"
     }

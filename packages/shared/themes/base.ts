@@ -3077,6 +3077,9 @@ export const getBaseTheme = () => {
       submitToGalleryTile: {
         bodyText: grayText,
         closeIconFill: lightGrayDark,
+        border: `1px solid ${grayLightMid}`,
+        background: lightGraySelected,
+        colorExt: gray,
       },
     },
 

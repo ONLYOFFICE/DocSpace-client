@@ -3,7 +3,7 @@
   "content": "Properties",
   "content_en_sha1_hash": "bc6c88db2f0703a9e2461a4a8060ccf1cb881998",
   "created_at": "2025-05-19T21:30:54.899Z",
-  "updated_at": "2025-10-07T15:39:07.346Z",
+  "updated_at": "2025-10-13T14:41:02.917Z",
   "comment": {
     "text": "The translation key \"Properties\" is used to display a label for properties related to rooms or spaces. It appears in the UI as part of the Room Bar and Gallery components, likely on buttons, thumbnails, or descriptions that show room information.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2465,
+      "line_number": 2450,
       "context": ");\n \n if (showInfoOption && showVersionHistoryOption) {\n menuGroupsConfig.push({\n groupKey: \"info\",\n groupLabel: t(\"InfoPanel:Properties\"),\n groupIcon: ViewRowsReactSvgUrl,\n itemKeys: [\"show-info\", \"show-version-history\"],\n needsGrouping: false,\n minItemsCount: 1,\n });",
       "module": "/packages/client"
     }

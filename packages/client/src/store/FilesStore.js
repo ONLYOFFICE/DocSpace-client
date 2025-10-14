@@ -72,7 +72,6 @@ import {
   ROOMS_PROVIDER_TYPE_NAME,
   thumbnailStatuses,
   CategoryType,
-  SHARED_WITH_ME_PATH,
 } from "@docspace/shared/constants";
 
 import {
@@ -2307,8 +2306,7 @@ class FilesStore {
 
       const isSharedWithMeFolderSection =
         this.treeFoldersStore.sharedWithMeFolderId === item.rootFolderId &&
-        item.rootFolderType === FolderType.SHARE &&
-        window.location.pathname.includes(SHARED_WITH_ME_PATH);
+        item.rootFolderType === FolderType.SHARE;
 
       let fileOptions = [
         // "open",
@@ -2421,7 +2419,7 @@ class FilesStore {
         ]);
       }
 
-      if (!canSetUpCustomFilter || !isExtsCustomFilter || isMyFolder) {
+      if (!canSetUpCustomFilter || !isExtsCustomFilter) {
         fileOptions = removeOptions(fileOptions, ["custom-filter"]);
       }
 
@@ -2558,6 +2556,13 @@ class FilesStore {
       if (isFavoritesFolder) {
         fileOptions = removeOptions(fileOptions, ["mark-as-favorite"]);
         fileOptions = removeOptions(fileOptions, ["delete"]);
+      }
+
+      if (isRecycleBinFolder) {
+        fileOptions = removeOptions(fileOptions, [
+          "mark-as-favorite",
+          "remove-from-favorites",
+        ]);
       }
 
       if (isEncrypted) {
@@ -2848,8 +2853,7 @@ class FilesStore {
 
     const isSharedWithMeFolderSection =
       this.treeFoldersStore.sharedWithMeFolderId === item.rootFolderId &&
-      item.rootFolderType === FolderType.SHARE &&
-      window.location.pathname.includes(SHARED_WITH_ME_PATH);
+      item.rootFolderType === FolderType.SHARE;
 
     let folderOptions = [
       "select",

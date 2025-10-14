@@ -115,7 +115,12 @@ async function Page(props: {
                 oauthDataExists={oauthDataExists}
               />
             ) : null}
-            {settings.enableAdmMess ? <RecoverAccess /> : null}
+            {settings.enableAdmMess ? (
+              <RecoverAccess
+                reCaptchaPublicKey={settings?.recaptchaPublicKey}
+                reCaptchaType={settings?.recaptchaType}
+              />
+            ) : null}
             {settings.enabledJoin ? (
               <Register
                 id="login_register"

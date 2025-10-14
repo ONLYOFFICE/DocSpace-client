@@ -3,7 +3,7 @@
   "content": "Show Folder Actions",
   "content_en_sha1_hash": "bef5318e8ccef5256166f49092d119670d1acc28",
   "created_at": "2025-05-19T21:30:50.017Z",
-  "updated_at": "2025-10-01T08:28:21.949Z",
+  "updated_at": "2025-10-13T14:41:02.909Z",
   "comment": {
     "text": "This translation key is used to display a title for a button or menu that shows folder actions. It appears in various UI elements, such as buttons and row headers, indicating whether a selected item is a folder and prompting the user to view its actions.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 748,
+      "line_number": 776,
       "context": "titles={{\n warningText,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Translations:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={withMenu}\n onPlusClick={onPlusClick}\n isEmptyPage={isEmptyPage}",
       "module": "/packages/client"
     },

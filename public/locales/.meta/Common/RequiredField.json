@@ -3,7 +3,7 @@
   "content": "Required field",
   "content_en_sha1_hash": "04148d61b0b7212b69dd8b267c98c74a3ae36942",
   "created_at": "2025-05-19T21:30:47.872Z",
-  "updated_at": "2025-09-07T07:53:15.057Z",
+  "updated_at": "2025-10-13T13:22:35.503Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a field is required when editing a connection. It appears in a vertical text input field within a connect dialog and is used as an error message if the input value is empty.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 461,
+      "line_number": 463,
       "context": "onFocus={() => setForceHideRoomTypeDropdown(true)}\n onBlur={() => setForceHideRoomTypeDropdown(false)}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_room_input\"\n />",
       "module": "/packages/client"
     },
@@ -45,18 +45,6 @@
       "line_number": 176,
       "context": "className=\"name_field\"\n key=\"name\"\n isVertical\n hasError={!isValidName}\n labelVisible={false}\n errorMessage={t(\"Common:RequiredField\")}\n dataTestId=\"request_name_field\"\n >\n <TextInput\n id=\"your-name\"\n hasError={!isValidName}",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/login/src/app/(root)/confirm/Activation/page.client.tsx",
-      "line_number": 204,
-      "context": "<FieldContainer\n className=\"form-field\"\n isVertical\n labelVisible={false}\n hasError={!nameValid}\n errorMessage={t(\"Common:RequiredField\")}\n dataTestId=\"name_field\"\n >\n <TextInput\n id=\"name\"\n name=\"name\"",
-      "module": "/packages/login"
-    },
-    {
-      "file_path": "/packages/login/src/app/(root)/confirm/Activation/page.client.tsx",
-      "line_number": 204,
-      "context": "<FieldContainer\n className=\"form-field\"\n isVertical\n labelVisible={false}\n hasError={!nameValid}\n errorMessage={t(\"Common:RequiredField\")}\n dataTestId=\"name_field\"\n >\n <TextInput\n id=\"name\"\n name=\"name\"",
-      "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/EmailInputForm.tsx",
@@ -80,6 +68,18 @@
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/RegistrationForm.tsx",
       "line_number": 179,
       "context": "labelVisible={false}\n hasError={!fnameValid}\n errorMessage={\n errorText ||\n (fname.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"))\n }\n dataTestId=\"first_name_field_container\"\n >\n <TextInput",
+      "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/Activation/page.client.tsx",
+      "line_number": 204,
+      "context": "<FieldContainer\n className=\"form-field\"\n isVertical\n labelVisible={false}\n hasError={!nameValid}\n errorMessage={t(\"Common:RequiredField\")}\n dataTestId=\"name_field\"\n >\n <TextInput\n id=\"name\"\n name=\"name\"",
+      "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/Activation/page.client.tsx",
+      "line_number": 204,
+      "context": "<FieldContainer\n className=\"form-field\"\n isVertical\n labelVisible={false}\n hasError={!nameValid}\n errorMessage={t(\"Common:RequiredField\")}\n dataTestId=\"name_field\"\n >\n <TextInput\n id=\"name\"\n name=\"name\"",
       "module": "/packages/login"
     },
     {
@@ -113,33 +113,33 @@
       "module": "/packages/login"
     },
     {
+      "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
+      "line_number": 315,
+      "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
+      "line_number": 315,
+      "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
+      "line_number": 315,
+      "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
+      "line_number": 315,
+      "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
+      "module": "/packages/shared"
+    },
+    {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/PasswordAccessBlock.tsx",
       "line_number": 96,
       "context": "const onValidatePassword = (isValidate: boolean) => {\n setIsPasswordValid(isValidate);\n };\n \n const errorMessage = !passwordValue\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectPassword\");\n \n const hasError = isPasswordErrorShow && !isPasswordValid;\n \n const tooltipData = {",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 315,
-      "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 315,
-      "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 315,
-      "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 315,
-      "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
       "module": "/packages/shared"
     },
     {

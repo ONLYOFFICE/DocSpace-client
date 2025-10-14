@@ -11,7 +11,6 @@
   "FormNumber": "Lomakkeen numero",
   "FormOwner": "Lomakkeen omistaja",
   "FormSectionCompleted": "Lomakeosio valmis",
-  "FormVDRCompletedDescription": "Lomake on täytetty kaikkien roolien osalta ja on nyt valmis. Se on nähtävissä ainoastaan katselutilassa.",
   "FormVDRConfirmationOfStartTitle": "Lomake on huoneessa valmiina täytettäväksi ",
   "FormVDRSectionCompletedDescription": "PDF-lomakkeen määrätty osa on onnistuneesti täytetty. Lomakkeen täyttöstatusta voidaan monitoroida huoneessa ja täyttöstatuspaneelin kautta. Sähköposti-ilmoitus lähetetään, kun lomake on täytetty.",
   "LinkToFillOutForm": "Linkki lomakkeen täyttämiseen:",

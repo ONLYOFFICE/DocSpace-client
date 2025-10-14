@@ -3,7 +3,7 @@
   "content": "Sign in with Google",
   "content_en_sha1_hash": "4a0b7281397ff6a6cf1e5d19aad8dd3b71043677",
   "created_at": "2025-05-19T21:30:48.762Z",
-  "updated_at": "2025-10-13T13:22:36.064Z",
+  "updated_at": "2025-10-14T06:33:05.315Z",
   "comment": {
     "text": "The \"Sign in with Google\" translation key is used to display a button label or title that allows users to sign in to the application using their Google account credentials. This text typically appears on a login form, such as a button or dialog prompt, and is intended for display in multiple languages.",
     "is_auto": true,
@@ -30,12 +30,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'تسجيل الدخول Google' is a literal translation of \"Sign in Google\" and lacks the word 'with'. The phrase should convey 'Sign in *with* Google'.",
+          "description": "The Arabic translation 'تسجيل الدخول Google' is a literal transliteration of 'Sign in with Google'. It doesn't convey the full meaning and sounds awkward. A more natural translation would incorporate the verb 'using' or 'through'.",
           "suggestion": "تسجيل الدخول باستخدام Google"
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, it is common practice in Arabic to use a more natural sentence flow when referencing services. The current translation sounds slightly abrupt.",
+          "description": "The translation lacks proper spacing and flow.",
           "suggestion": "تسجيل الدخول عبر Google"
         }
       ],
@@ -65,7 +65,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Login über Google\" is understandable, \"Sign in with Google\" is better translated as 'Anmelden mit Google'. 'Login' is an English loanword and 'Anmelden' is the more natural German equivalent for signing in.",
+          "description": "'Login' is a less common and slightly less idiomatic translation of 'Sign in'. 'Anmelden mit Google' would be a more accurate and natural-sounding translation.",
           "suggestion": "Anmelden mit Google"
         }
       ],
@@ -98,13 +98,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Մուտք գործել Google-ով\" is a literal translation of \"Sign in with Google\" and, while understandable, isn't the most natural or idiomatic way to express the concept in Armenian. A more natural phrasing might emphasize the action of using Google to sign in.",
+          "suggestion": "Consider \"Մուտքագրվել Google-ի միջոցով\" (Mut'yagrbvel Google'i mijov) or \"Մուտքագրվել Google-ի օգտությամբ\" (Mut'yagrbvel Google'i ogut'yamb) - which translate to 'Sign in using Google' or 'Sign in with the help of Google'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Accedere con Google\" is understandable, a more natural and common translation of \"Sign in with Google\" in Italian would be \"Entra con Google\". \"Accedere\" implies accessing a more general resource, whereas \"Entra\" specifically refers to signing in.",
+          "suggestion": "Entra con Google"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -155,7 +167,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Entrar com Google' is a literal translation of 'Sign in with Google' but lacks the natural flow of Portuguese. A more idiomatic translation would be 'Acessar com Google' or 'Fazer login com Google'.",
+          "description": "The translation 'Entrar com Google' is a literal translation but lacks the natural flow of a common UI label. A more idiomatic and user-friendly translation would be 'Acessar com Google'.",
           "suggestion": "Acessar com Google"
         }
       ],
@@ -164,7 +176,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Conectare cu Google' is understandable, a more accurate and common translation of 'Sign in with Google' in Romanian would be 'Autentificare cu Google' or 'Logare cu Google'. 'Conectare' implies a connection, but 'Sign in' refers to authentication.",
+          "suggestion": "Autentificare cu Google"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -197,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Пријави се путем Google-а\" is not the most natural or accurate translation of \"Sign in with Google\". While understandable, it's a bit clunky. A more common and fluent translation would be something like \"Улазак преко Google-а\" or \"Пријава преко Google-а\".",
-          "suggestion": "Улазак преко Google-а"
+          "description": "The translation 'Пријави се путем Google-а' while understandable, is not the most natural or idiomatic Serbian (Cyrillic) translation for 'Sign in with Google'. A more common and accurate phrasing would be 'Улазак преко Google' or 'Пријава преко Google'.",
+          "suggestion": "Улазак преко Google"
         }
       ],
       "approved_at": null
@@ -209,7 +227,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Prijavi se putem Google-a\" is a somewhat literal translation and sounds less natural in Serbian. A more idiomatic and user-friendly translation would be preferable.",
+          "description": "While \"Prijavi se putem Google-a\" is understandable, a more natural and accurate translation would be \"Prijava sa Google-om\" or \"Uloguj se sa Google-om\".  'Prijavi se putem' is a bit clunky in Serbian.",
           "suggestion": "Prijava sa Google-om"
         }
       ],
@@ -236,7 +254,25 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"使用Google登录\" is understandable, a more natural and commonly used translation for \"Sign in with Google\" would be \"通过Google登录\" or \"使用Google账号登录\". \"使用Google登录\" sounds a bit awkward.",
+          "suggestion": "通过Google登录"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Identifikohuni me Google' is understandable, a more natural and common translation for 'Sign in with Google' in Albanian would be 'Kyquni me Google'. 'Identifikohuni' implies a more formal identification process.",
+          "suggestion": "Kyquni me Google"
+        }
+      ],
       "approved_at": null
     }
   }

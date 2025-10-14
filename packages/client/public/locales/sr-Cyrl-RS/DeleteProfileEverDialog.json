@@ -7,6 +7,7 @@
   "DeleteGuest": "Обриши госта",
   "DeleteGuests": "Обриши госте",
   "DeletePersonalDataApplicable": "*Применљиво за одабране кориснике који имају такве датотеке и фолдере.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Сви дељени фајлови као и собе креиране од стране овог контакта биће аутоматски додељени администратору који извршава брисање: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Доделите податке ручно да бисте изабрали другог корисника за доделу.",
   "DeleteReqassignDescriptionGuest": "{{userCaption}} ће бити обрисан из свих соба у које су позвани. Документи које је креирао овај {{userCaption}} у собама ће аутоматски бити пребачени на власнике собе.",
   "DeleteUser": "Обриши корисника",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> ц́е бити обрисан. Ова радња се не може опозвати.",

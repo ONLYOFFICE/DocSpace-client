@@ -4,6 +4,8 @@
   "BackupServiceEnabled": "Service de sauvegarde activé avec succès.",
   "ConnectService": "Connectez le service <1>ici</1> pour activer les fonctionnalités de sauvegarde",
   "ContactToPayer": "Contactez le payeur (<1>{{email}}</1>) pour connecter le service de sauvegarde.",
+  "DisableBackupConfirm": "Désactiver le service de sauvegarde empêchera les administrateurs de {{productName}} de créer des sauvegardes. Si la sauvegarde automatique est activée, elle restera active dans la limite de la franchise, mais une fois la franchise entièrement utilisée, elle sera définitivement désactivée. Êtes-vous sûr de vouloir continuer ?",
+  "DisableBackupConfirmWithoutQuota": "Désactiver le service de sauvegarde empêchera les administrateurs de {{productName}} de créer des sauvegardes. Si la sauvegarde automatique est activée, elle sera désactivée. Êtes-vous sûr de vouloir continuer ?",
   "EnableBackupConfirm": "L'activation du service de sauvegarde permettra à tous les administrateurs de {{productName}} de créer des sauvegardes à tout moment, tant que le solde du Wallet est suffisant. Voulez-vous vraiment continuer ?",
   "FreeBackupsPerMonth": "Sauvegardes gratuites : {{value}}/{{maxValue}} pour le mois en cours.",
   "TemporaryDescription": "Créez une sauvegarde stockée dans la section « Sauvegarde ». Disponible au téléchargement dans les 24 heures suivant sa création.",

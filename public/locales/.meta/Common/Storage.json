@@ -3,7 +3,7 @@
   "content": "Storage",
   "content_en_sha1_hash": "9e092dda4f0e27d0c7686ddd00272079e678b6e6",
   "created_at": "2025-05-19T21:30:49.092Z",
-  "updated_at": "2025-10-13T13:22:35.706Z",
+  "updated_at": "2025-10-14T03:37:42.921Z",
   "comment": {
     "text": "This translation key is used to display the content \"Storage\" in various places throughout the application, such as on a user's profile page or in an info panel. The text appears when displaying storage information and quotas for users. It provides context for translators to ensure consistency in language usage.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Yaddaş\" can mean memory, in the context of 'Storage' (as in data storage or storage space), it's not the most accurate translation. A more suitable translation would be something like 'Saxlama' or 'Əməliyyat yaddaşı'. \"Yaddaş\" primarily refers to memory as in recalling information.",
+          "suggestion": "Consider using 'Saxlama' or 'Əməliyyat yaddaşı' instead of 'Yaddaş'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -99,13 +105,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Speicherplatz' is a valid German word, it specifically means 'storage space'. The English 'Storage' can refer to a broader concept including storage solutions, storage services, or the act of storing, not just the space itself.  'Speicher' is a more general translation that would cover all potential meanings of 'Storage'.",
-          "suggestion": "Consider 'Speicher' as a more general translation, or 'Lagerung' if the context specifically refers to the act of storing."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Αποθ. χώρος' (Apo th. choro) is a technically correct translation incorporating an abbreviation for 'storage space,' it might not be the most natural or commonly used term for 'Storage' in a user interface or general context. A more common and understandable translation might be 'Αποθήκευση' (Apotheukeysi).",
-          "suggestion": "Consider using 'Αποθήκευση' (Apotheukeysi) instead of 'Αποθ. χώρος'."
+          "description": "While 'Αποθ. χώρος' is a valid Greek term related to storage, it's more literal (storage space). 'Storage' in this context, as a key name, might benefit from a more concise or general translation.",
+          "suggestion": "Consider alternatives like 'Αποθήκευση' (Apothikevsi - Storage/Saving) or 'Χώρος' (Horos - Space) depending on the intended nuance."
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Archivio' can sometimes translate to 'Storage', it primarily means 'Archive'. 'Storage' in the context of computing or data centers often implies space for data, which isn't the primary connotation of 'Archivio'.",
-          "suggestion": "Consider alternatives like 'Spazio di archiviazione', 'Memoria', or 'Deposito' depending on the specific context of 'Storage'."
+          "description": "While \"Archivio\" can sometimes translate to \"Storage,\" it primarily means \"Archive.\" \"Storage\" can also mean general space for keeping things, which \"Archivio\" doesn't always convey.",
+          "suggestion": "Consider alternatives like \"Spazio di archiviazione\" (storage space), \"Deposito\" (depository), or \"Magazzino\" (warehouse) depending on the context."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ເກັບມ້ຽນ' (keop mean) translates to 'storage' or 'to store', it can sometimes imply a more active process of storing. 'ເກັບມ້ຽນ' is a reasonable translation, but depending on the context, a more precise term for 'Storage' (as a noun representing a space or capacity) might be preferable.",
-          "suggestion": "Consider alternatives like 'ເຂື່ອນ' (khuean - reservoir/storage area) or 'ບ່ອນເກັບ' (bon keop - storage place) depending on the intended meaning. A direct equivalent like 'ຄົວເຮືອນເກັບ' might also be considered but is verbose."
+          "description": "While \"ເກັບມ້ຽນ\" (kep muean) can mean 'storage,' it more accurately translates to 'to store' or 'to collect.'  'Storage' as a noun referring to a place or system for storing things, is better conveyed with a different term.",
+          "suggestion": "Consider \"ເຂື່ອນແສກຮັກສາ\" (khuen saek haksá) which means 'storage area' or 'warehouse,' or \"ບ່ອນເກັບມ້ຽນ\" (bon kep muean) which means 'place to store'."
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Armazenar' means 'to store', the key refers to the concept of 'Storage' as a noun, not an action. 'Armazenamento' would be a more accurate translation for the noun 'Storage'.",
-          "suggestion": "Armazenamento"
+          "description": "The translation 'Armazenar' is a verb (to store) and not a noun, which aligns with the English word 'Storage'. 'Storage' refers to the capacity to store something, not the act of storing.",
+          "suggestion": "Consider translating 'Storage' as 'Armazenamento' (storage) or 'Espaço de armazenamento' (storage space) depending on the context."
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Armazenar' while technically meaning 'to store', isn't the best fit for a key named 'Storage'. 'Armazenamento' (Storage as a noun) or 'Espaço de Armazenamento' (Storage Space) would be more appropriate depending on the intended context within the application.",
-          "suggestion": "Consider 'Armazenamento' or 'Espaço de Armazenamento' instead."
+          "description": "While 'Armazenar' can mean 'to store', in the context of 'Storage' (as a noun, referring to storage space or facilities), it's not the most accurate translation. It's more of a verb.",
+          "suggestion": "Consider 'Armazenamento' (storage), 'Espaço de armazenamento' (storage space), or 'Depósito' (warehouse/deposit)."
         }
       ],
       "approved_at": null
@@ -240,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ආචයනය\" does not accurately convey the meaning of \"Storage\". \"ආචයනය\" generally refers to 'respect', 'reverence', or 'adoration'. It's not a suitable translation for \"Storage\".",
-          "suggestion": "Possible alternatives include: నిల్వ (Nilva), ගබඩා (Gabada), or සෑන්සුන් (Sansaunsun), depending on the specific context of 'Storage'."
+          "description": "The Sinhala translation \"ආචයනය\" (aachayanaya) does not accurately convey the meaning of \"Storage\". It generally translates to 'invocation' or 'appeal'.",
+          "suggestion": "A more accurate translation for \"Storage\" in Sinhala would depend on the context. Some possibilities include: నిల్వ (Nilwa), ගබඩා (Gabada), or ස්ථානගත කිරීම (Sthaanagathakirima)."
         }
       ],
       "approved_at": null
@@ -289,6 +289,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -4,6 +4,8 @@
   "BackupServiceEnabled": "백업 서비스 활성화 성공.",
   "ConnectService": "서비스 <1>여기</1>에 연결하여 백업 기능을 활성화하세요.",
   "ContactToPayer": "청구 담당자(<1>{{email}}</1>)에게 연락하여 백업 서비스를 연결하세요.",
+  "DisableBackupConfirm": "백업 서비스를 사용 중지하면 {{productName}} 관리자가 백업을 생성할 수 없습니다. 자동 백업이 활성화되어 있는 경우, 무료 할당량을 초과하지 않는 한 계속 활성화되지만, 할당량이 완전히 사용되면 영구적으로 비활성화됩니다. 계속 진행하시겠습니까?",
+  "DisableBackupConfirmWithoutQuota": "백업 서비스를 사용 중지하면 {{productName}} 관리자가 백업을 생성할 수 없습니다. 자동 백업이 활성화되어 있는 경우, 비활성화됩니다. 계속 진행하시겠습니까?",
   "EnableBackupConfirm": "백업 서비스 활성화는 {{productName}} 관리자가 지갑 잔액이 충분한 경우 언제든지 백업을 생성할 수 있도록 합니다. 계속 진행하시겠습니까?",
   "FreeBackupsPerMonth": "무료 백업: {{value}}/{{maxValue}} (이번 달 기준).",
   "TemporaryDescription": "\"백업\" 섹션에 백업을 저장합니다. 생성 후 24시간 이내에 다운로드 가능합니다.",

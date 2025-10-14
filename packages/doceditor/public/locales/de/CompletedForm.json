@@ -16,5 +16,8 @@
   "LinkToFillOutForm": "Link zum Ausfüllen des Formulars:",
   "LinkToForm": "Link zum Formular:",
   "LinkToViewOnlyForm": "Link zum schreibgeschützten Formular:",
-  "Title": "Das Formular ist ausgefüllt"
+  "Title": "Das Formular ist ausgefüllt",
+  "FormVDRFinalizedDescription": "Das Formular wurde vollständig von allen Empfängern ausgefüllt und ist nun abgeschlossen. Es ist im schreibgeschützten Modus verfügbar.",
+  "FormVDRNextRecepientDescription": "Es wurde bereits eine Benachrichtigung an den Benutzer gesendet, der als erster Empfänger zugewiesen wurde, um ihn zur Ausfüllung des Formulars aufzufordern. Sie können den Raum aufrufen oder den Link zum Ausfüllen mit den Teilnehmern teilen.",
+  "FormVDRYouFirstRecepientDescription": "Sie sind dazu bestimmt, das Formular als erster Empfänger auszufüllen. Eine Benachrichtigung wurde an Ihre E-Mail-Adresse gesendet. Sie können es jetzt ausfüllen oder den Link zum Ausfüllen kopieren und später zurückkehren."
 }

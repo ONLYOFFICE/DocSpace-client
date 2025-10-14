@@ -4,6 +4,8 @@
   "BackupServiceEnabled": "Ehtiyat Nüsxə xidməti uğurla aktivləşdirilib.",
   "ConnectService": "Xidməti <1>burada</1> qoşun ki, ehtiyat nüsxə xüsusiyyətlərini aktivləşdirəsiniz.",
   "ContactToPayer": "Ödəyicilə (<1>{{email}}</1>) əlaqə saxlayaraq ehtiyat xidməti ilə birləşdirin.",
+  "DisableBackupConfirm": "Yedəkləmə xidmətinin deaktiv edilməsi {{productName}} administratorlarının ehtiyat nüsxələri yaratmasının qarşısını alacaq. Avtomatik Yedəkləmə aktiv edilərsə, o, pulsuz kvota daxilində aktiv qalacaq, lakin kvota tam istifadə edildikdən sonra o, həmişəlik deaktiv ediləcək. Davam etmək istədiyinizə əminsiniz?",
+  "DisableBackupConfirmWithoutQuota": "Yedəkləmə xidmətinin deaktiv edilməsi {{productName}} administratorlarının ehtiyat nüsxələri yaratmasının qarşısını alacaq. Avtomatik Yedəkləmə aktiv edilərsə, o, deaktiv ediləcək. Davam etmək istədiyinizə əminsiniz?",
   "EnableBackupConfirm": "Backup xidməti aktiv edildikdə, bütün {{productName}} administratorları, əgər hesab balansında kifayət qədər vəsait varsa, hər zaman ehtiyat nüsxələrini yarada biləcəklər. Davam etmək istəyirsinizmi?",
   "FreeBackupsPerMonth": "Pulsuz ehtiyat nüsxələr: {{value}}/{{maxValue}} cari ayda.",
   "TemporaryDescription": "\"Yedəkləmə\" bölməsində saxlanılan ehtiyat nüsxəsin yaradın. Yaratdıqdan sonra 24 saat ərzində yükləmək üçün mövcuddur.",

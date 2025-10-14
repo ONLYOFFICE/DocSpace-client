@@ -4,11 +4,13 @@
   "DeleteFiles": "Դուք պատրաստվում եք տեղափոխել <strong>ֆայլեր ({{filesCount}})</strong> {{trashSection}}։",
   "DeleteFilesAndFolders": "Դուք պատրաստվում եք ջնջել <strong>ֆայլեր ({{filesCount}})</strong> և <strong>պանակներ ({{foldersCount}})</strong> {{trashSection}}",
   "DeleteFilesAndFoldersForever": "Դուք պատրաստվում եք ջնջել <strong>ֆայլեր ({{filesCount}})</strong> և <strong>պանակներ ({{foldersCount}})</strong>։",
+  "DeleteFilesForever": "Դուք այժմ ջնջելու եք <strong>ֆայլեր ({{filesCount}})</strong>։",
   "DeleteFolders": "Դուք պատրաստվում եք տեղափոխել <strong>պանակներ ({{foldersCount}})</strong> {{trashSection}}.։",
   "DeleteFoldersForever": "Դուք պատրաստվում եք տեղափոխել <strong>պանակներ ({{foldersCount}})</strong> Աղբամանը։",
   "DeleteGroupDescription": "{{groupName}} խումբը կջնջվի: Խմբի օգտատերերը չեն հեռացվի {{productName}}-ից: Վստա՞հ եք, որ ցանկանում եք շարունակել:",
   "DeleteGroupTitle": "Ջնջել խմբերը",
   "DeleteItem": "Դուք պատրաստվում եք տեղափոխել <strong>{{name}}</strong> {{trashSection}}։",
+  "DeleteItemForever": "Դուք այժմ ջնջելու եք <strong>{{name}}</strong>:ը։",
   "DeleteRoom": "Սենյակը <strong>\"{{roomName}}\"</strong> կջնջվի անդառնալիորեն։ Բոլոր տվյալները և օգտատերերի մուտքի իրավունքները կկորչեն։",
   "DeleteRoomTitle": "Ջնջե՞լ այս սենյակը։",
   "DeleteRoomWarning": "Ես հասկանում եմ հետևանքները և ցանկանում եմ ջնջել սենյակը",
@@ -24,5 +26,7 @@
   "FoldersDeletedAfter": "Թղթապանակները վերջնականապես կհեռացվեն 30 օրից։",
   "FoldersPermanentlyDeleted": "Թղթապանակները վերջնականապես կհեռացվեն {{trashSection}}։",
   "ItemsDeletedAfter": "Այս տարրերը վերջնականապես կհեռացվեն 30 օրից։",
-  "ItemsPermanentlyDeleted": "Այս տարրերը վերջնականապես կհեռացվեն {{trashSection}}։"
+  "ItemsPermanentlyDeleted": "Այս տարրերը վերջնականապես կհեռացվեն {{trashSection}}։",
+  "removeFromListDescription": "Դուք այժմ ջնջելու եք <1>{{title}}</1> ցուցակից։ Դուք համոզված եք, որ ուզում եք շարունակել։",
+  "removeFromListDescriptionPlural": "Դուք այժմ ջնջելու եք <1>մի քանի իրեր ({{count}})</1>: Դուք համոզված եք, որ ուզում եք շարունակել։"
 }

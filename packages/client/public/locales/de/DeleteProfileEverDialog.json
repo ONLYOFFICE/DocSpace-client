@@ -7,6 +7,7 @@
   "DeleteGuest": "Gast löschen",
   "DeleteGuests": "Gäste löschen",
   "DeletePersonalDataApplicable": "*Anwendbar für die ausgewählten Benutzer, die solche Dateien und Ordner haben.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Alle freigegebenen Dateien sowie Räume, die von diesem Kontakt erstellt wurden, werden automatisch einem Administrator zugewiesen, der die Löschung durchführt: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Daten manuell zuweisen, um einen anderen Zielbenutzer für die Zuweisung auszuwählen.",
   "DeleteReqassignDescriptionGuest": "Der {{userCaption}} wird aus allen Räumen entfernt, in die er eingeladen wurde. Dokumente, die von diesem {{userCaption}} in Räumen erstellt wurden, werden automatisch den Raumeigentümern neu zugewiesen.",
   "DeleteUser": "Benutzer löschen",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> wird gelöscht. Dieser Vorgang kann nicht rückgängig gemacht werden.",

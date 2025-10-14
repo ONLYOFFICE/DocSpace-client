@@ -23,5 +23,6 @@
   "ThirdPartyInfo": "ປ່ຽນຂໍ້ມູນພາກສ່ວນທີສາມ",
   "ThirdPartyTitle": "ການບໍລິການພາກສ່ວນທີສາມ",
   "TitleShowActions": "ສະແດງ ໄຟລ໌ ການ​ປະ​ຕິ​ບັດ",
-  "TitleShowFolderActions": "ສະແດງ ໂຟນເດີ ການ​ປະ​ຕິ​ບັດ"
+  "TitleShowFolderActions": "ສະແດງ ໂຟນເດີ ການ​ປະ​ຕິ​ບັດ",
+  "TrashItemsDeleteSuccess": "ອົງປະກອບທີ່ເລືອກຖືກລຶບອອກຈາກ {{sectionName}} ສຳເລັດແລ້ວ"
 }

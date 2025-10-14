@@ -16,5 +16,8 @@
   "LinkToFillOutForm": "Enlace para rellenar el formulario:",
   "LinkToForm": "Enlace al formulario:",
   "LinkToViewOnlyForm": "Enlace al formulario en modo de solo lectura:",
-  "Title": "El formulario está completado"
+  "Title": "El formulario está completado",
+  "FormVDRFinalizedDescription": "El formulario ha sido completado por todos los destinatarios y ya está finalizado. Está disponible en modo de solo lectura.",
+  "FormVDRNextRecepientDescription": "Ya se ha enviado una notificación al usuario asignado como primer destinatario, instándolo a completar el formulario. Puede navegar a la sala o compartir el enlace de completado con los participantes.",
+  "FormVDRYouFirstRecepientDescription": "Se le asigna completar el formulario como primer destinatario. Se ha enviado una notificación a su correo electrónico. Puede comenzar a completarlo ahora o copiar el enlace de completado y volver más tarde."
 }

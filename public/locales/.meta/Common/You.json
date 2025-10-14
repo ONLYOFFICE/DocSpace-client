@@ -3,7 +3,7 @@
   "content": "You",
   "content_en_sha1_hash": "905cb326c779f0123e079bf8ccb223176a3cf32d",
   "created_at": "2025-05-19T21:30:49.648Z",
-  "updated_at": "2025-06-30T12:20:31.221Z",
+  "updated_at": "2025-10-13T18:51:10.627Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that data is being reassigned or interrupted, typically in a dialog or button context. It appears in UI elements such as Data Reassignment Dialog and Delete Profile Ever Dialog, and is intended to notify users that an action is in progress related to their own data.",
     "is_auto": true,
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Dvs' is a formal way to say 'You' in Romanian. While technically a translation, it's likely not appropriate for all contexts. A more common and generally preferred translation would be 'Tu'.",
-          "suggestion": "Consider using 'Tu' as a more versatile and common translation for 'You'."
+          "description": "'Dvs' is a formal Romanian pronoun for 'You'. While technically a translation, it's overly formal for many contexts. The appropriateness depends on the specific use case. A more common and generally safer translation would be 'Tu'.",
+          "suggestion": "Consider using 'Tu' as a more general and less formal translation."
         }
       ],
       "approved_at": null
@@ -192,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Latin) translation 'Vi' for 'You' is incorrect. 'Vi' is the plural form of 'You'. The singular form is 'Ti'.",
+          "description": "The Serbian (Latin) translation 'Vi' is incorrect for the English word 'You'. 'Vi' is used for the formal/plural 'you'. The singular, informal 'you' is 'Ti'.",
           "suggestion": "Ti"
         }
       ],
@@ -220,6 +220,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'You' has two possible Albanian translations: 'Ti' (informal, singular) and 'Ju' (formal, plural or singular respectful). The translation provided doesn't specify which form is appropriate based on context. Without context, it's impossible to determine the correct choice.",
+          "suggestion": "Provide context or specify whether 'Ti' or 'Ju' is intended."
+        }
+      ],
       "approved_at": null
     }
   }

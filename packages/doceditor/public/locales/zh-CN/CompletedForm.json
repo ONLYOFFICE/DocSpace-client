@@ -16,5 +16,8 @@
   "LinkToFillOutForm": "填写表单链接：",
   "LinkToForm": "表单链接：",
   "LinkToViewOnlyForm": "只读表单链接：",
-  "Title": "表单已完成"
+  "Title": "表单已完成",
+  "FormVDRFinalizedDescription": "表单已由所有接收者完整填写，现已最终确定。目前处于只读模式。",
+  "FormVDRNextRecepientDescription": "已向指定为第一个接收者的用户发送通知，提示其填写表单。您可以导航至房间或与参与者分享填写链接。",
+  "FormVDRYouFirstRecepientDescription": "您被分配填写此表单作为第一接收者。 一份通知已发送至您的邮箱。 您现在可以开始填写，或复制填写链接稍后返回。"
 }

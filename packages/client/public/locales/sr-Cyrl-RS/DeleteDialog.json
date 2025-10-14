@@ -3,10 +3,14 @@
   "DeleteAllGroupsTitle": "Обриши групе",
   "DeleteFiles": "Управо ћеш преместити <strong>фајлове ({{filesCount}})</strong> у {{trashSection}}.",
   "DeleteFilesAndFolders": "Управо ћеш обрисати <strong>фајлове ({{filesCount}})</strong> и <strong>фолдере ({{foldersCount}})</strong> у {{trashSection}}.",
+  "DeleteFilesAndFoldersForever": "Управо ћеш обрисати <strong>фајлове ({{filesCount}})</strong> и <strong>фолдере ({{foldersCount}})</strong>.",
+  "DeleteFilesForever": "Упозоравамо вас да ћете избрисати <strong>фајлове ({{filesCount}})</strong>.",
   "DeleteFolders": "Управо ћеш преместити <strong>фолдере ({{foldersCount}})</strong> у {{trashSection}}.",
+  "DeleteFoldersForever": "Упозоравамо вас да бришете <strong>фолдере ({{foldersCount}})</strong>.",
   "DeleteGroupDescription": "Група {{groupName}} ће бити обрисана. Корисници у групи неће бити уклоњени са {{productName}}-а. Да ли сте сигурни да желите да наставите?",
   "DeleteGroupTitle": "Обриши групу",
   "DeleteItem": "Управо ћеш преместити <strong>{{name}}</strong> у {{trashSection}}.",
+  "DeleteItemForever": "Упозоравамо вас да ћете избрисати <strong>{{name}}</strong>.",
   "DeleteRoom": "Соба <strong>\"{{roomName}}\"</strong> ће бити трајно обрисана. Сви подаци и приступи корисника ће бити изгубљени.",
   "DeleteRoomTitle": "Обрисати ову собу?",
   "DeleteRoomWarning": "Разумем последице и желим да обришем собу",
@@ -22,5 +26,7 @@
   "FoldersDeletedAfter": "Фолдери ће бити трајно обрисани за 30 дана",
   "FoldersPermanentlyDeleted": "Фолдери ће бити трајно уклоњени из {{trashSection}}.",
   "ItemsDeletedAfter": "Ове ставке ће бити трајно обрисане за 30 дана.",
-  "ItemsPermanentlyDeleted": "Фолдери ће бити трајно уклоњени из {{trashSection}}."
+  "ItemsPermanentlyDeleted": "Фолдери ће бити трајно уклоњени из {{trashSection}}.",
+  "removeFromListDescription": "Уклањате <1>{{title}}</1> са листе. Да ли сте сигурни да желите да наставите?",
+  "removeFromListDescriptionPlural": "Уклањате <1>{{count}} ставки</1> из листе. Да ли сте сигурни да желите да наставите?"
 }

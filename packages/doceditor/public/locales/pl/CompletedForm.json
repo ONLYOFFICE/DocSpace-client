@@ -16,5 +16,8 @@
   "LinkToFillOutForm": "Link do wypełnienia formularza:",
   "LinkToForm": "Link do formularza:",
   "LinkToViewOnlyForm": "Link do formularza tylko do odczytu:",
-  "Title": "Formularz został wypełniony"
+  "Title": "Formularz został wypełniony",
+  "FormVDRFinalizedDescription": "Formularz został w całości wypełniony przez wszystkich odbiorców i jest teraz zatwierdzony. Dostępny jest w trybie tylko do odczytu.",
+  "FormVDRNextRecepientDescription": "Już wysłano powiadomienie do użytkownika wyznaczonego jako pierwszy odbiorca, z prośbą o wypełnienie formularza. Możesz przejść do pokoju lub udostępnić link do wypełnienia uczestnikom.",
+  "FormVDRYouFirstRecepientDescription": "Jesteś pierwszym odbiorcą formularza i musisz go wypełnić. Powiadomienie zostało wysłane na Twój adres e-mail. Możesz zacząć wypełniać formularz teraz lub skopiować link do wypełniania i wrócić później."
 }

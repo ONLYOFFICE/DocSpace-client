@@ -4,6 +4,8 @@
   "BackupServiceEnabled": "Varmuuskopiointipalvelu otettu käyttöön onnistuneesti.",
   "ConnectService": "Yhdistä palvelu <1>täällä</1> ottaaksesi käyttöön varmuuskopiointitoiminnallisuudet.",
   "ContactToPayer": "Ota yhteyttä maksajaan (<1>{{email}}</1>) liittääksesi varmuuskopiointipalvelu.",
+  "DisableBackupConfirm": "Varmuuskopiointipalvelun poistaminen käytöstä estää {{productName}}-järjestelmänvalvojia luomasta varmuuskopioita. Jos automaattinen varmuuskopiointi on käytössä, se pysyy aktiivisena ilmaisen kiintiön rajoissa, mutta kun kiintiö on täynnä, se poistetaan pysyvästi käytöstä. Haluatko varmasti jatkaa?",
+  "DisableBackupConfirmWithoutQuota": "Varmuuskopiointipalvelun poistaminen käytöstä estää {{productName}}-järjestelmänvalvojia luomasta varmuuskopioita. Jos automaattinen varmuuskopiointi on käytössä, se poistetaan käytöstä. Haluatko varmasti jatkaa?",
   "EnableBackupConfirm": "Varmuuskopiointipalvelun ottaminen käyttöön sallii kaikkien {{productName}}-järjestelmänvalvojien luoda varmuuskopioita milloin tahansa, kunhan lompakon saldo on riittävä. Haluatko varmasti jatkaa?",
   "FreeBackupsPerMonth": "Ilmaiset varmuuskopiot: {{value}}/{{maxValue}} nykyisenä kuukautena.",
   "TemporaryDescription": "Luo varmuuskopio \"Varmuuskopio\"-osiossa. Lataus saatavilla 24 tunnin sisällä luomisesta.",

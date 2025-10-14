@@ -4,6 +4,8 @@
   "BackupServiceEnabled": "Servis za bekap je uspešno omogućen.",
   "ConnectService": "Poveži servis <1>ovde</1> da bi omogućio opcije za bekap",
   "ContactToPayer": "Kontaktiraj platioca (<1>{{email}}</1>) da poveže servis za bekap.",
+  "DisableBackupConfirm": "Onemogućavanje usluge rezervnih kopija sprečiće administratore {{productName}} da prave rezervne kopije. Ako je automatsko rezervisanje uključeno, ono će ostati aktivno u okviru besplatnog prostora za čuvanje, ali kada se prostor za čuvanje popuni, biće trajno deaktivirano. Da li ste sigurni da želite da nastavite?",
+  "DisableBackupConfirmWithoutQuota": "Onemogućavanje usluge rezervne kopije sprečiće administratore {{productName}} da kreiraju rezervne kopije. Ako je uključena automatska rezervna kopija, ona će biti deaktivirana. Da li ste sigurni da želite da nastavite?",
   "EnableBackupConfirm": "Omogućavanje servisa za bekap će omogućiti svim {{productName}} administratorima da kreiraju bekape u bilo kom trenutku, sve dok je stanje na novčaniku dovoljno. Da li si siguran da želiš da nastaviš?",
   "FreeBackupsPerMonth": "Besplatni bekapi: {{value}}/{{maxValue}} u trenutnom mesecu.",
   "TemporaryDescription": "Kreiraj bekap sačuvan u odeljku \"Backup\". Dostupan za preuzimanje u roku od 24 sata nakon kreiranja.",

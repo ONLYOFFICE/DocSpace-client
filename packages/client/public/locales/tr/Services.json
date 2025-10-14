@@ -4,6 +4,8 @@
   "BackupServiceEnabled": "Yedekleme hizmeti başarıyla etkinleştirildi.",
   "ConnectService": "Yedekleme özelliklerini etkinleştirmek için <1>buradan</1> hizmete bağlanın",
   "ContactToPayer": "Ödeme Yapanı (<1>{{email}}</1>) ile yedek hizmeti bağlamak için iletişime geçin.",
+  "DisableBackupConfirm": "Yedekleme hizmetini devre dışı bırakmak, {{productName}} yöneticilerinin yedekleme oluşturmasını engelleyecektir. Otomatik Yedekleme etkinse, ücretsiz kotada aktif kalmaya devam edecektir, ancak kota tamamen kullanıldığında kalıcı olarak devre dışı bırakılacaktır. Devam etmek istediğinizden emin misiniz?",
+  "DisableBackupConfirmWithoutQuota": "Yedekleme hizmetini devre dışı bırakmak, {{productName}} yöneticilerinin yedekleme oluşturmasını engelleyecektir. Otomatik Yedekleme etkinse, devre dışı bırakılacaktır. Devam etmek istediğinizden emin misiniz?",
   "EnableBackupConfirm": "Yedekleme hizmetini etkinleştirmek, cüzdan bakiyesi yeterli olduğu sürece tüm {{productName}} yöneticilerinin istediği zaman yedek oluşturmasına izin verecektir. Devam etmek istediğinizden emin misiniz?",
   "FreeBackupsPerMonth": "Ücretsiz yedeklemeler: {{value}}/{{maxValue}} mevcut ay için.",
   "TemporaryDescription": "\"Yedek\" bölümünde saklanan bir yedek oluşturun. Oluşturulduktan sonraki 24 saat içinde indirilmeye hazır.",

@@ -257,6 +257,8 @@ const SubMenu = (props: SubMenuProps) => {
       e.preventDefault();
     }
 
+    if (items && !isMobileDevice) return;
+
     onClick?.({ originalEvent: e, action, item });
 
     if ((items || item.onLoad) && isMobileDevice) {
@@ -522,6 +524,12 @@ const SubMenu = (props: SubMenuProps) => {
       onClick(e);
     };
 
+    const onDoubleClick = (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    };
+
     const checked =
       item.checked && "isPortal" in item && item.isPortal ? (
         <IconButton
@@ -570,6 +578,7 @@ const SubMenu = (props: SubMenuProps) => {
     if (item.template) {
       const defaultContentOptions = {
         onClick,
+        onDoubleClick,
         className: linkClassName,
         labelClassName: "p-menuitem-text",
         iconClassName,
@@ -596,6 +605,7 @@ const SubMenu = (props: SubMenuProps) => {
           className={classNames(className, styles.subMenuItem)}
           style={{ ...item.style, ...style }}
           onClick={onClick}
+          onDoubleClick={onDoubleClick}
           onMouseDown={onMouseDown}
           onMouseEnter={(e) => onItemMouseEnter(e, item)}
           onMouseLeave={() => onItemMouseLeave(item)}
@@ -619,6 +629,7 @@ const SubMenu = (props: SubMenuProps) => {
         className={className || ""}
         style={{ ...item.style, ...style }}
         onClick={onClick}
+        onDoubleClick={onDoubleClick}
         onMouseDown={onMouseDown}
         onMouseEnter={(e) => onItemMouseEnter(e, item)}
         onMouseLeave={() => onItemMouseLeave(item)}

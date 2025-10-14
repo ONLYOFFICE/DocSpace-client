@@ -111,8 +111,6 @@ const useAccountsHotkeys = ({
         return enableSelection(e);
       }
 
-      enableSelection(e);
-
       if (e.shiftKey || e.ctrlKey || e.type === "keyup") return;
 
       switch (e.key) {

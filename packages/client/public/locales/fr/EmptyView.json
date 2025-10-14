@@ -52,5 +52,7 @@
   "UploadDevicePDFFormOptionTitle": "Télécharger à partir de l'appareil",
   "UploadFromPortalTitle": "Télécharger à partir de {{productName}}",
   "UploadPDFFormOptionDescription": "Sélectionnez un formulaire PDF prêt à l'emploi disponible dans {{productName}} et téléchargez-le dans la salle.",
-  "VirtualDataRoomEmptyTitle": "Bienvenue dans la salle de données virtuelle"
+  "VirtualDataRoomEmptyTitle": "Bienvenue dans la salle de données virtuelle",
+  "ManageAccess": "Gérer l'accès",
+  "TemplateAccessDescription": "Contrôlez qui peut utiliser ce modèle."
 }

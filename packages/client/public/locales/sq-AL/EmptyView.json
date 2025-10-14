@@ -52,5 +52,7 @@
   "UploadDevicePDFFormOptionTitle": "Ngarkoni nga pajisja",
   "UploadFromPortalTitle": "Ngarkoni nga {{productName}}",
   "UploadPDFFormOptionDescription": "Selektoni një formular të gatshëm PDF të disponueshëm në {{productName}} dhe ngarkojeni në dhomë.",
-  "VirtualDataRoomEmptyTitle": "Mirë se vini në dhomën e të dhënave virtuale"
+  "VirtualDataRoomEmptyTitle": "Mirë se vini në dhomën e të dhënave virtuale",
+  "ManageAccess": "Menaxho aksesin",
+  "TemplateAccessDescription": "Kontrolloni kush mund të përdorë këtë model."
 }

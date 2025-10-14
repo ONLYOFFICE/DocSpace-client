@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Mysafiri është fshirë me sukses",
   "SuccessfullyDeleteUserInfoMessage": "Përdoruesi është fshirë me sukses",
   "ToBeAbleToReassignData": "Për të qenë në gjendje të ricaktoni të dhëna, fshini një përdorues në të njëjtën kohë.",
-  "UserFilesRemovalScope": "Të dhënat personale, të gjithë skedarët dhe dosjet në seksionet {{sectionNameFirst}} dhe {{sectionNameSecond}} të këtij përdoruesi do të fshihen përgjithmonë."
+  "UserFilesRemovalScope": "Të dhënat personale, të gjithë skedarët dhe dosjet në seksionet {{sectionNameFirst}} dhe {{sectionNameSecond}} të këtij përdoruesi do të fshihen përgjithmonë.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Të gjitha fajljet e ndarë si dhe dhomat e kriera nga ky kontakt do të ri-përshajohen automatikisht tek një administrator që kryen fshirjen: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Ri-përshajohen dhënat manualisht për të zgjedhur një përdorues tjetër për ri-përshanim."
 }

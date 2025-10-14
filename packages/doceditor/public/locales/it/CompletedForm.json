@@ -16,5 +16,8 @@
   "LinkToFillOutForm": "Link per compilare il modulo:",
   "LinkToForm": "Link al modulo:",
   "LinkToViewOnlyForm": "Link alla versione di sola visualizzazione del modulo:",
-  "Title": "Il modulo è completato"
+  "Title": "Il modulo è completato",
+  "FormVDRFinalizedDescription": "Il modulo è stato compilato in ogni sua parte da tutti i destinatari ed è ora finalizzato. È disponibile in modalità sola lettura.",
+  "FormVDRNextRecepientDescription": "È già stata inviata una notifica all'utente designato come primo destinatario, invitandolo a compilare il modulo. Puoi accedere alla stanza o condividere il link di compilazione con i partecipanti.",
+  "FormVDRYouFirstRecepientDescription": "Sei incaricato di compilare il modulo come primo destinatario. È stata inviata una notifica al tuo indirizzo email. Puoi iniziare a compilarlo ora o copiare il link per la compilazione e tornarci in seguito."
 }

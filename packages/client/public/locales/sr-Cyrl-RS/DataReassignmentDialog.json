@@ -14,5 +14,6 @@
   "ReassigningDataToItself": "Процес поновне доделе података корисника <0>{{fromUser}}</0> кориснику <1>{{toUser}}</1> <2>{{you}}</2> је започео. Имајте на уму да може потрајати значајно време.",
   "RoomsOnlyReassignment": "Преносимо собе које је креирао контакт.",
   "StartTransferAgain": "Започни пренос поново",
-  "UserToWhomTheDataWillBeTransferred": "Корисник којем ће подаци бити пребачени"
+  "UserToWhomTheDataWillBeTransferred": "Корисник којем ће подаци бити пребачени",
+  "DescriptionDataReassignment": "Пренећемо заједничке датотеке и собе креиране од контакта."
 }

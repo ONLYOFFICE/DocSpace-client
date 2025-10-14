@@ -8,5 +8,7 @@
   "FreeBackupsPerMonth": "Besplatni bekapi: {{value}}/{{maxValue}} u trenutnom mesecu.",
   "TemporaryDescription": "Kreiraj bekap sačuvan u odeljku \"Backup\". Dostupan za preuzimanje u roku od 24 sata nakon kreiranja.",
   "ThirdPartyResourceDescription": "Poveži i sačuvaj bekape na cloud naloge kao što su Dropbox, Box, OneDrive ili Google Drive.",
-  "ThirdPartyStorageDescription": "Koristi servise trećih strana za skladištenje svojih bekapa. Idealno za povezivanje eksternih cloud platformi."
+  "ThirdPartyStorageDescription": "Koristi servise trećih strana za skladištenje svojih bekapa. Idealno za povezivanje eksternih cloud platformi.",
+  "DisableBackupConfirm": "Onemogućavanje usluge rezervnih kopija sprečiće administratore {{productName}} da prave rezervne kopije. Ako je automatsko rezervisanje uključeno, ono će ostati aktivno u okviru besplatnog prostora za čuvanje, ali kada se prostor za čuvanje popuni, biće trajno deaktivirano. Da li ste sigurni da želite da nastavite?",
+  "DisableBackupConfirmWithoutQuota": "Onemogućavanje usluge rezervne kopije sprečiće administratore {{productName}} da kreiraju rezervne kopije. Ako je uključena automatska rezervna kopija, ona će biti deaktivirana. Da li ste sigurni da želite da nastavite?"
 }

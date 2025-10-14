@@ -24,5 +24,9 @@
   "FoldersDeletedAfter": "Թղթապանակները վերջնականապես կհեռացվեն 30 օրից։",
   "FoldersPermanentlyDeleted": "Թղթապանակները վերջնականապես կհեռացվեն {{trashSection}}։",
   "ItemsDeletedAfter": "Այս տարրերը վերջնականապես կհեռացվեն 30 օրից։",
-  "ItemsPermanentlyDeleted": "Այս տարրերը վերջնականապես կհեռացվեն {{trashSection}}։"
+  "ItemsPermanentlyDeleted": "Այս տարրերը վերջնականապես կհեռացվեն {{trashSection}}։",
+  "DeleteFilesForever": "Դուք այժմ ջնջելու եք <strong>ֆայլեր ({{filesCount}})</strong>։",
+  "DeleteItemForever": "Դուք այժմ ջնջելու եք <strong>{{name}}</strong>:ը։",
+  "removeFromListDescription": "Դուք այժմ ջնջելու եք <1>{{title}}</1> ցուցակից։ Դուք համոզված եք, որ ուզում եք շարունակել։",
+  "removeFromListDescriptionPlural": "Դուք այժմ ջնջելու եք <1>մի քանի իրեր ({{count}})</1>: Դուք համոզված եք, որ ուզում եք շարունակել։"
 }

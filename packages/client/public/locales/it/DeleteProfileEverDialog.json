@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "L'ospite è stato eliminato con successo",
   "SuccessfullyDeleteUserInfoMessage": "L'utente è stato cancellato con successo",
   "ToBeAbleToReassignData": "Per poter riassegnare i dati, elimina un utente alla volta.",
-  "UserFilesRemovalScope": "I dati personali, tutti i file e le cartelle nelle sezioni {{sectionNameFirst}} e {{sectionNameSecond}} di questo utente verranno eliminati definitivamente."
+  "UserFilesRemovalScope": "I dati personali, tutti i file e le cartelle nelle sezioni {{sectionNameFirst}} e {{sectionNameSecond}} di questo utente verranno eliminati definitivamente.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Tutti i file condivisi così come le stanze create da questo contatto saranno automaticamente riassegnati a un amministratore che esegue l'eliminazione: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Riassegna i dati manualmente per scegliere un altro utente di destinazione per la riassegnazione."
 }

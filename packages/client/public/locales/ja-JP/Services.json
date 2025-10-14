@@ -8,5 +8,7 @@
   "FreeBackupsPerMonth": "今月の無料バックアップ: {{value}}/{{maxValue}}",
   "TemporaryDescription": "「バックアップ」セクションに保存されるバックアップを作成します。作成後24時間以内にダウンロード可能です。",
   "ThirdPartyResourceDescription": "Dropbox、Box、OneDrive、またはGoogle Driveなどのクラウドアカウントに接続してバックアップを保存します。",
-  "ThirdPartyStorageDescription": "バックアップを保存するためにサードパーティのサービスを使用します。外部クラウドストレージプラットフォームに接続するのに最適です。"
+  "ThirdPartyStorageDescription": "バックアップを保存するためにサードパーティのサービスを使用します。外部クラウドストレージプラットフォームに接続するのに最適です。",
+  "DisableBackupConfirm": "バックアップサービスを無効にすると、{{productName}} 管理者がバックアップを作成できなくなります。自動バックアップが有効になっている場合、無料の割り当て内で引き続き有効ですが、割り当てが完全に利用されると、永久に無効になります。続行しますか？",
+  "DisableBackupConfirmWithoutQuota": "バックアップ サービスを無効にすると、{{productName}} 管理者がバックアップを作成できなくなります。自動バックアップが有効になっている場合は、無効になります。続行しますか？"
 }

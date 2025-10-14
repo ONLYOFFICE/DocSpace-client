@@ -52,5 +52,7 @@
   "UploadDevicePDFFormOptionTitle": "デバイスからのアップロード",
   "UploadFromPortalTitle": "{{productName}}からアップロード",
   "UploadPDFFormOptionDescription": "{{productName}}で利用可能なPDFフォームを選択し、ルームにアップロードする。",
-  "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ"
+  "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ",
+  "ManageAccess": "アクセス管理",
+  "TemplateAccessDescription": "このテンプレートを使用できるユーザーを制限します。"
 }

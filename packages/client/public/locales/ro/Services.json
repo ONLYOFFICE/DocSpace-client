@@ -8,5 +8,7 @@
   "FreeBackupsPerMonth": "Copii de rezervă gratuite: {{value}}/{{maxValue}} pentru luna curentă.",
   "TemporaryDescription": "Creați o copie de rezervă în secțiunea „Copiere de rezervă”. Este disponibilă pentru descărcare timp de 24 de ore după creare.",
   "ThirdPartyResourceDescription": "Conectați-vă și salvați copia de rezervă în contul cloud precum Dropbox, Box, OneDrive sau Google Drive.",
-  "ThirdPartyStorageDescription": "Utilizați servicii externe pentru a vă stoca copii de rezervă. Ideal pentru conectarea platformelor externe de stocare în cloud."
+  "ThirdPartyStorageDescription": "Utilizați servicii externe pentru a vă stoca copii de rezervă. Ideal pentru conectarea platformelor externe de stocare în cloud.",
+  "DisableBackupConfirm": "Dezactivarea serviciului Backup va împiedica administratorii {{productName}} să creeze copii de rezervă. Dacă Auto Backup este activat, acesta va rămâne activ în cadrul cotei gratuite, dar odată ce cota este complet utilizată, va fi dezactivat permanent. Ești sigur că dorești să continui?",
+  "DisableBackupConfirmWithoutQuota": "Dezactivarea serviciului Backup va împiedica administratorii {{productName}} să creeze copii de rezervă. Dacă Auto Backup este activat, acesta va fi dezactivat. Ești sigur că dorești să continui?"
 }

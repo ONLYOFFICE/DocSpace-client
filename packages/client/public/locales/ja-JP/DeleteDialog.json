@@ -20,5 +20,13 @@
   "FoldersDeletedAfter": "フォルダーは30日後に完全に削除されます。",
   "FoldersPermanentlyDeleted": "フォルダーは{{trashSection}}から永久に削除されます。",
   "ItemsDeletedAfter": "これらのアイテムは30日後に永久に削除されます。",
-  "ItemsPermanentlyDeleted": "これらのアイテムは{{trashSection}}から永久に削除されます。"
+  "ItemsPermanentlyDeleted": "これらのアイテムは{{trashSection}}から永久に削除されます。",
+  "DeleteFilesForever": "ファイルを削除します（{{filesCount}}）。",
+  "DeleteFolders": "移動するフォルダは<strong>{{foldersCount}}個</strong>です。{{trashSection}}に移動します。",
+  "DeleteFoldersForever": "削除するフォルダは<strong>({{foldersCount}})</strong>です。",
+  "DeleteItemForever": "削除しようとしています：<strong>{{name}}</strong>.",
+  "FilePermanentlyDeleted": "ファイルは{{trashSection}}から完全に削除されます。",
+  "removeFromListDescription": "削除する前に、リストから<1>{{title}}</1> を削除します。続行しますか？",
+  "removeFromListDescriptionPlural": "リストから<1>アイテム（{{count}}）</1>を削除しようとしています。よろしいですか？",
+  "DeleteFilesAndFoldersForever": "<strong>ファイルを（{{filesCount}}）</strong>と<strong>フォルダを（{{foldersCount}}）</strong>削除しようとしています。"
 }

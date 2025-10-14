@@ -14,5 +14,6 @@
   "ReassigningDataToItself": "ユーザ<0>{{fromUser}}</0>からユーザ<1>{{toUser}}</1> <2>{{you}}</2>へのデータ再割り当て処理が開始されました。時間がかかる場合があります。",
   "RoomsOnlyReassignment": "コンタクトによって作成されたルームを移転します。",
   "StartTransferAgain": "再び転送を開始する",
-  "UserToWhomTheDataWillBeTransferred": "データの転送先ユーザー"
+  "UserToWhomTheDataWillBeTransferred": "データの転送先ユーザー",
+  "DescriptionDataReassignment": "連絡先によって作成された共有ファイルとルームを転送します。"
 }

@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Гост је успешно обрисан",
   "SuccessfullyDeleteUserInfoMessage": "Корисник је успешно обрисан",
   "ToBeAbleToReassignData": "Да бисте могли поново да доделите податке, бришите једног по једног корисника.",
-  "UserFilesRemovalScope": "Лични подаци, све датотеке и фасцикле у одељцима {{sectionNameFirst}} и {{sectionNameSecond}} овог корисника ће бити трајно избрисани."
+  "UserFilesRemovalScope": "Лични подаци, све датотеке и фасцикле у одељцима {{sectionNameFirst}} и {{sectionNameSecond}} овог корисника ће бити трајно избрисани.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Сви дељени фајлови као и собе креиране од стране овог контакта биће аутоматски додељени администратору који извршава брисање: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Доделите податке ручно да бисте изабрали другог корисника за доделу."
 }

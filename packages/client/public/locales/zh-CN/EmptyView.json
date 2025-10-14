@@ -52,5 +52,7 @@
   "UploadDevicePDFFormOptionTitle": "从设备上传",
   "UploadFromPortalTitle": "从{{productName}}上传",
   "UploadPDFFormOptionDescription": "选择{{productName}}中可用的现成 PDF 表单并将其上传到房间。",
-  "VirtualDataRoomEmptyTitle": "欢迎来到虚拟数据房间"
+  "VirtualDataRoomEmptyTitle": "欢迎来到虚拟数据房间",
+  "ManageAccess": "管理访问",
+  "TemplateAccessDescription": "控制谁可以使用此模板"
 }

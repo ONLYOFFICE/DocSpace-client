@@ -22,5 +22,11 @@
   "FoldersDeletedAfter": "Folderele vor fi şterse definitiv după 30 de zile.",
   "FoldersPermanentlyDeleted": "Folderele vor fi şterse definitiv din {{trashSection}} de gunoi.",
   "ItemsDeletedAfter": "Aceste elemente vor fi şterse definitiv după 30 de zile.",
-  "ItemsPermanentlyDeleted": "Aceste elemente vor fi şterse definitiv din {{trashSection}} de gunoi."
+  "ItemsPermanentlyDeleted": "Aceste elemente vor fi şterse definitiv din {{trashSection}} de gunoi.",
+  "DeleteFilesForever": "Pe cale să ștergeți <strong>fișiere ({{filesCount}})</strong>.",
+  "DeleteFoldersForever": "Pe cale să ștergeți <strong>foldere ({{foldersCount}})</strong>.",
+  "DeleteItemForever": "Veți șterge <strong>{{name}}</strong>.",
+  "removeFromListDescription": "Sunteți pe cale să eliminați <1>{{title}}</1> din listă. Sunteți sigur că doriți să continuați?",
+  "removeFromListDescriptionPlural": "Sunteți pe cale să eliminați <1>elemente ({{count}})</1> din listă. Sunteți sigur că doriți să continuați?",
+  "DeleteFilesAndFoldersForever": "Sunteți pe cale să ștergeți <strong>fișierele ({{filesCount}})</strong> și <strong>folderele ({{foldersCount}})</strong>."
 }

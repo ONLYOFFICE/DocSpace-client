@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Հյուրը հաջողությամբ ջնջվել է",
   "SuccessfullyDeleteUserInfoMessage": "Օգտվողը հաջողությամբ ջնջվել է",
   "ToBeAbleToReassignData": "Որպեսզի կարողանաք վերանշանակել տվյալները, ջնջեք մեկ օգտատեր:",
-  "UserFilesRemovalScope": "Անձնական տվյալները, բոլոր ֆայլերն ու թղթապանակները այս օգտատիրոջ {{sectionNameFirst}} և {{sectionNameSecond}} բաժիններում ընդմիշտ կջնջվեն:"
+  "UserFilesRemovalScope": "Անձնական տվյալները, բոլոր ֆայլերն ու թղթապանակները այս օգտատիրոջ {{sectionNameFirst}} և {{sectionNameSecond}} բաժիններում ընդմիշտ կջնջվեն:",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} բոլոր կիսվելի ֆայլերը և այս կոնտակտի կողմից ստեղծված սենյակները ավտոմատ կերպով կվերաբաշխվեն ջնջման գործողությունն իրականացնող ադմինիստրատորին՝ <1>{{userPerformedDeletion}} ({{userYou}})</1>: Վերաբաշխեք տվյալները ձեռքով՝ վերաբաշխման համար մեկ այլ օգտագործող ընտրելու համար։"
 }

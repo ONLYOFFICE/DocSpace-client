@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "L'invité a été supprimé avec succès",
   "SuccessfullyDeleteUserInfoMessage": "L'utilisateur a été supprimé avec succès",
   "ToBeAbleToReassignData": "Pour pouvoir réaffecter les données, supprimez un utilisateur à la fois.",
-  "UserFilesRemovalScope": "Les données personnelles, tous les fichiers et dossiers des sections {{sectionNameFirst}} et {{sectionNameSecond}} de cet utilisateur seront définitivement supprimés."
+  "UserFilesRemovalScope": "Les données personnelles, tous les fichiers et dossiers des sections {{sectionNameFirst}} et {{sectionNameSecond}} de cet utilisateur seront définitivement supprimés.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Tous les fichiers partagés ainsi que les salles créées par ce contact seront automatiquement réattribués à un administrateur effectuant la suppression : <1>{{userPerformedDeletion}} ({{userYou}})</1>. Réattribuez manuellement les données pour choisir un autre utilisateur de destination pour la réaffectation."
 }

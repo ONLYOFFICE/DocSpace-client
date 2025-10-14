@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Der Gast wurde erfolgreich gelöscht",
   "SuccessfullyDeleteUserInfoMessage": "Der Benutzer wurde erfolgreich gelöscht",
   "ToBeAbleToReassignData": "Um Daten neu zuweisen zu können, löschen Sie jeweils einen Benutzer.",
-  "UserFilesRemovalScope": "Persönliche Daten, alle Dateien und Ordner in den Abschnitten {{sectionNameFirst}} und {{sectionNameSecond}} dieses Benutzers werden dauerhaft gelöscht."
+  "UserFilesRemovalScope": "Persönliche Daten, alle Dateien und Ordner in den Abschnitten {{sectionNameFirst}} und {{sectionNameSecond}} dieses Benutzers werden dauerhaft gelöscht.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Alle freigegebenen Dateien sowie Räume, die von diesem Kontakt erstellt wurden, werden automatisch einem Administrator zugewiesen, der die Löschung durchführt: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Daten manuell zuweisen, um einen anderen Zielbenutzer für die Zuweisung auszuwählen."
 }

@@ -22,5 +22,11 @@
   "FoldersDeletedAfter": "Die Ordner werden innerhalb von 30 Tagen dauerhaft gelöscht.",
   "FoldersPermanentlyDeleted": "Die Ordner werden dauerhaft aus dem {{trashSection}} entfernt.",
   "ItemsDeletedAfter": "Diese Elemente werden innerhalb von 30 Tagen dauerhaft gelöscht.",
-  "ItemsPermanentlyDeleted": "Diese Elemente werden dauerhaft aus dem {{trashSection}} entfernt."
+  "ItemsPermanentlyDeleted": "Diese Elemente werden dauerhaft aus dem {{trashSection}} entfernt.",
+  "DeleteFilesForever": "Sie werden <strong>Dateien ({{filesCount}})</strong> löschen.",
+  "DeleteFoldersForever": "Sie werden <strong>Ordner ({{foldersCount}})</strong> löschen.",
+  "DeleteItemForever": "Sie werden <strong>{{name}}</strong> löschen.",
+  "removeFromListDescription": "Sie werden <1>{{title}}</1> aus der Liste entfernen. Sind Sie sicher, dass Sie fortfahren möchten?",
+  "removeFromListDescriptionPlural": "Sie werden <1>Elemente ({{count}})</1> aus der Liste entfernen. Sind Sie sicher, dass Sie fortfahren möchten?",
+  "DeleteFilesAndFoldersForever": "Sie werden die <strong>Dateien ({{filesCount}})</strong> und <strong>Ordner ({{foldersCount}})</strong> löschen."
 }

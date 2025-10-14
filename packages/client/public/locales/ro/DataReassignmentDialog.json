@@ -14,5 +14,6 @@
   "ReassigningDataToItself": "Procesul de reatribuire de date de la utilizatorul <0>{{fromUser}}</0> la utilizatorul<1>{{toUser}}</1> <2>{{you}}</2> a demarat. Vă rugăm să rețineți că acest proces poate dura o perioadă considerabilă de timp.",
   "RoomsOnlyReassignment": "Sălile create de acest utilizator vor fi transferate.",
   "StartTransferAgain": "Pornire transfer de date nou",
-  "UserToWhomTheDataWillBeTransferred": "Utilizatorul căruia îi vor transfera datele"
+  "UserToWhomTheDataWillBeTransferred": "Utilizatorul căruia îi vor transfera datele",
+  "DescriptionDataReassignment": "Vom transfera fișierele partajate și camerele create de contact."
 }

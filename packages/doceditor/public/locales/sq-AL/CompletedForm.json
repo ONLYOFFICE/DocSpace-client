@@ -16,5 +16,8 @@
   "LinkToFillOutForm": "Lidhje për të plotësuar formularin:",
   "LinkToForm": "Lidhje për te formulari:",
   "LinkToViewOnlyForm": "Lidhje për të parë vetëm formularin:",
-  "Title": "Formulari është plotësuar"
+  "Title": "Formulari është plotësuar",
+  "FormVDRFinalizedDescription": "Formulari është plotësuar plotësisht nga të gjithë marrësit dhe tani është përfunduar. Është i disponueshëm në modalitet vetëm për shikim.",
+  "FormVDRNextRecepientDescription": "Njoftim tashmë është dërguar përdoruesit të caktuar si marrësi i parë, duke e nxitur të plotësojë formularin. Mund të navigoni në dhomë ose të ndani lidhjen e plotësimit me pjesëtarët.",
+  "FormVDRYouFirstRecepientDescription": "Jeni caktuar për të plotësuar formularin si marrësi i parë. Një njoftim është dërguar në adresën tuaj të email-it. Mund të filloni ta plotësoni tani ose të kopjoni lidhjen e plotësimit dhe të ktheheni më vonë."
 }

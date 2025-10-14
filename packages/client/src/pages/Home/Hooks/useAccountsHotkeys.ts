@@ -107,7 +107,10 @@ const useAccountsHotkeys = ({
       const someDialogIsOpen = checkDialogsOpen();
       if (someDialogIsOpen) return;
 
-      if (e.key === "Alt" && (e.ctrlKey || e.metaKey)) {
+      if (
+        (e.key === "Alt" && (e.ctrlKey || e.metaKey)) ||
+        ((e.key === "Meta" || e.key === "Control") && e.altKey)
+      ) {
         return enableSelection(e);
       }
 

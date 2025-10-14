@@ -200,5 +200,6 @@
   "WarningMoveToFormRoomServal": "不支持将多个文件移动到表单填写房间。请每次移动一份{{ organizationName }}的 PDF 表单。",
   "WillBeDeletedPermanently": "{{date}} 将被永久删除",
   "YouLeftTheRoom": "您已退出房间",
-  "YourUserTypeHasChanged": "您的用户类型已被{{productName}}管理员<1>{{adminName}}</1>更改为 <1>“{{userType}}”</1>。"
+  "YourUserTypeHasChanged": "您的用户类型已被{{productName}}管理员<1>{{adminName}}</1>更改为 <1>“{{userType}}”</1>。",
+  "TrashFunctionalityDescription": "所有已删除的文件都将移动到 '{{sectionName}}'。恢复因错误删除的文件，或永久删除它们。'{{sectionName}}' 中的文件将在 30 天后自动删除。请注意，从 '{{sectionName}}' 中删除的文件将无法恢复。"
 }

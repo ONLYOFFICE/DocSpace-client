@@ -8,5 +8,7 @@
   "FreeBackupsPerMonth": "Bezpłatne kopie zapasowe: {{value}}/{{maxValue}} na bieżący miesiąc.",
   "TemporaryDescription": "Utwórz kopię zapasową w sekcji „Kopia zapasowa”. Dostępna do pobrania w ciągu 24 godzin od utworzenia.",
   "ThirdPartyResourceDescription": "Połącz i zapisuj kopie zapasowe w chmurze, takich jak Dropbox, Box, OneDrive lub Google Drive.",
-  "ThirdPartyStorageDescription": "Korzystaj z zewnętrznych usług do przechowywania kopii zapasowych. Idealne do łączenia platform zewnętrznych magazynów w chmurze."
+  "ThirdPartyStorageDescription": "Korzystaj z zewnętrznych usług do przechowywania kopii zapasowych. Idealne do łączenia platform zewnętrznych magazynów w chmurze.",
+  "DisableBackupConfirm": "Wyłączenie usługi Kopia Zapasowa uniemożliwi administratorom {{productName}} tworzenie kopii zapasowych. Jeśli włączono automatyczną kopię zapasową, pozostanie ona aktywna w ramach darmowego limitu, ale po jego wyczerpaniu zostanie trwale dezaktywowana. Czy chcesz kontynuować?",
+  "DisableBackupConfirmWithoutQuota": "Wyłączenie usługi Kopia zapasowa uniemożliwi administratorom {{productName}} tworzenie kopii zapasowych. Jeśli włączono automatyczne tworzenie kopii zapasowych, zostanie ono wyłączone. Czy chcesz kontynuować?"
 }

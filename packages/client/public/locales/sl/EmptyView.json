@@ -52,5 +52,7 @@
   "UploadDevicePDFFormOptionTitle": "Naloži iz naprave",
   "UploadFromPortalTitle": "Naloži iz {{productName}}",
   "UploadPDFFormOptionDescription": "Izberi pripravljen PDF obrazec, ki je na voljo v {{productName}} in ga naloži v sobo.",
-  "VirtualDataRoomEmptyTitle": "Dobrodošli v virtualni podatkovni sobi"
+  "VirtualDataRoomEmptyTitle": "Dobrodošli v virtualni podatkovni sobi",
+  "ManageAccess": "Upravljanje dostopa",
+  "TemplateAccessDescription": "Nadzirajte, kdo lahko uporabi to predlogo."
 }

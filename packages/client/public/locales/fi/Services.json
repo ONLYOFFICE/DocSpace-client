@@ -8,5 +8,7 @@
   "FreeBackupsPerMonth": "Ilmaiset varmuuskopiot: {{value}}/{{maxValue}} nykyisenä kuukautena.",
   "TemporaryDescription": "Luo varmuuskopio \"Varmuuskopio\"-osiossa. Lataus saatavilla 24 tunnin sisällä luomisesta.",
   "ThirdPartyResourceDescription": "Yhdistä ja tallenna varmuuskopiot pilvitileihin, kuten Dropbox, Box, OneDrive tai Google Drive.",
-  "ThirdPartyStorageDescription": "Käytä kolmannen osapuolen palveluita varmuuskopioiden tallentamiseen. Erinomainen vaihtoehto ulkoisten pilvitallennuspalveluiden yhdistämiseen."
+  "ThirdPartyStorageDescription": "Käytä kolmannen osapuolen palveluita varmuuskopioiden tallentamiseen. Erinomainen vaihtoehto ulkoisten pilvitallennuspalveluiden yhdistämiseen.",
+  "DisableBackupConfirm": "Varmuuskopiointipalvelun poistaminen käytöstä estää {{productName}}-järjestelmänvalvojia luomasta varmuuskopioita. Jos automaattinen varmuuskopiointi on käytössä, se pysyy aktiivisena ilmaisen kiintiön rajoissa, mutta kun kiintiö on täynnä, se poistetaan pysyvästi käytöstä. Haluatko varmasti jatkaa?",
+  "DisableBackupConfirmWithoutQuota": "Varmuuskopiointipalvelun poistaminen käytöstä estää {{productName}}-järjestelmänvalvojia luomasta varmuuskopioita. Jos automaattinen varmuuskopiointi on käytössä, se poistetaan käytöstä. Haluatko varmasti jatkaa?"
 }

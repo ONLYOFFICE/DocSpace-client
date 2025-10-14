@@ -52,5 +52,7 @@
   "UploadDevicePDFFormOptionTitle": "Передати з пристрою",
   "UploadFromPortalTitle": "Передати з {{productName}}",
   "UploadPDFFormOptionDescription": "Виберіть готову PDF-форму, доступну в {{productName}}, і передайте її до кімнати.",
-  "VirtualDataRoomEmptyTitle": "Ласкаво просимо до віртуальної кімнати даних"
+  "VirtualDataRoomEmptyTitle": "Ласкаво просимо до віртуальної кімнати даних",
+  "ManageAccess": "Керування доступом",
+  "TemplateAccessDescription": "Контролюйте, хто може використовувати цей шаблон."
 }

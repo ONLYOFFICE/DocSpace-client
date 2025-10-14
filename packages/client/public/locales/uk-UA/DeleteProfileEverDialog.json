@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Гостя успішно видалено",
   "SuccessfullyDeleteUserInfoMessage": "Користувача успішно видалено",
   "ToBeAbleToReassignData": "Щоб мати можливість перепризначити дані, видаляйте по одному користувачу за раз.",
-  "UserFilesRemovalScope": "Особисті дані, усі файли та папки у розділах {{sectionNameFirst}} та {{sectionNameSecond}} цього користувача будуть видалені назавжди."
+  "UserFilesRemovalScope": "Особисті дані, усі файли та папки у розділах {{sectionNameFirst}} та {{sectionNameSecond}} цього користувача будуть видалені назавжди.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Всі спільні файли, а також кімнати, створені цим контактом, будуть автоматично перепризначені адміністратору, який здійснює видалення: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Перепризначте дані вручну, щоб вибрати іншого користувача для перепризначення."
 }

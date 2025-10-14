@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Qonaq uğurla silindi",
   "SuccessfullyDeleteUserInfoMessage": "İstifadəçi müvəffəqiyyətlə silinmişdir",
   "ToBeAbleToReassignData": "Məlumatı yenidən təyin etmək üçün bir istifadəçini silin.",
-  "UserFilesRemovalScope": "Şəxsi məlumatlar, bu istifadəçinin {{sectionNameFirst}} və {{sectionNameSecond}} bölmələrindəki bütün fayl və qovluqlar həmişəlik silinəcək."
+  "UserFilesRemovalScope": "Şəxsi məlumatlar, bu istifadəçinin {{sectionNameFirst}} və {{sectionNameSecond}} bölmələrindəki bütün fayl və qovluqlar həmişəlik silinəcək.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Bu kontakt tərəfindən paylaşılmış bütün faylər və eləcə də yaradılmış otaqlar avtomatik olaraq silmə əməliyyatını həyata keçirən bir adminə({{userPerformedDeletion}}) ({{userYou}}) təyin ediləcəkdir. Yenidən təyin etmək üçün başqa bir istifadəçi seçmək üçün məlumatları əl ilə təyin edin."
 }

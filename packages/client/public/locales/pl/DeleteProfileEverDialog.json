@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Gość został pomyślnie usunięty",
   "SuccessfullyDeleteUserInfoMessage": "Użytkownik został pomyślnie usunięty",
   "ToBeAbleToReassignData": "Aby móc ponownie przypisać dane, należy usuwać po jednym użytkowniku na raz.",
-  "UserFilesRemovalScope": "Dane osobowe, wszystkie pliki i foldery w sekcjach {{sectionNameFirst}} i {{sectionNameSecond}} tego użytkownika zostaną trwale usunięte."
+  "UserFilesRemovalScope": "Dane osobowe, wszystkie pliki i foldery w sekcjach {{sectionNameFirst}} i {{sectionNameSecond}} tego użytkownika zostaną trwale usunięte.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Wszystkie udostępnione pliki, a także pokoje utworzone przez tego kontaktu zostaną automatycznie ponownie przydzielone administratorowi wykonującemu usunięcie: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Ręcznie ponownie przydziel dane, aby wybrać innego użytkownika jako miejsce przekierowania."
 }

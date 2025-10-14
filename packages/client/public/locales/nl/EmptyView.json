@@ -52,5 +52,7 @@
   "UploadDevicePDFFormOptionTitle": "Uploaden vanaf apparaat",
   "UploadFromPortalTitle": "Uploaden van {{productName}}",
   "UploadPDFFormOptionDescription": "Selecteer een PDF formulier dat beschikbaar is in {{productName}} en upload het naar de kamer.",
-  "VirtualDataRoomEmptyTitle": "Welkom bij de Virtuele Data Kamer"
+  "VirtualDataRoomEmptyTitle": "Welkom bij de Virtuele Data Kamer",
+  "ManageAccess": "Beheer toegang",
+  "TemplateAccessDescription": "Controleer wie dit sjabloon mag gebruiken."
 }

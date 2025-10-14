@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Viesis ir veiksmīgi izdzēsts",
   "SuccessfullyDeleteUserInfoMessage": "Lietotājs ir veiksmīgi izdzēsts",
   "ToBeAbleToReassignData": "Lai varētu atkārtoti piešķirt datus, vienlaikus izdzēsiet vienu lietotāju.",
-  "UserFilesRemovalScope": "Personas dati, visi faili un mapes šī lietotāja sadaļās {{sectionNameFirst}} un {{sectionNameSecond}} tiks neatgriezeniski dzēsti."
+  "UserFilesRemovalScope": "Personas dati, visi faili un mapes šī lietotāja sadaļās {{sectionNameFirst}} un {{sectionNameSecond}} tiks neatgriezeniski dzēsti.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Visi kopīgie faili kā arī istabas, kuras radījis šis kontakts, tiks automātiski pārdalīti administratoram, veicot dzēšanu: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Pārdaliet datus manuāli, lai izvēlētos citu galamērķa lietotāju pārdalei."
 }

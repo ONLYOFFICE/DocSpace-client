@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "De gast is succesvol verwijderd",
   "SuccessfullyDeleteUserInfoMessage": "De gebruiker is met succes verwijderd",
   "ToBeAbleToReassignData": "Verwijder één gebruiker per keer om gegevens opnieuw te kunnen toewijzen.",
-  "UserFilesRemovalScope": "Persoonsgegevens, alle bestanden en mappen in de secties {{sectionNameFirst}} en {{sectionNameSecond}} van deze gebruiker worden permanent verwijderd."
+  "UserFilesRemovalScope": "Persoonsgegevens, alle bestanden en mappen in de secties {{sectionNameFirst}} en {{sectionNameSecond}} van deze gebruiker worden permanent verwijderd.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Alle gedeelde bestanden en ruimtes die door deze contactpersoon zijn gemaakt, worden automatisch toegewezen aan een beheerder die de verwijdering uitvoert: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Wijs gegevens handmatig toe om een andere bestemminggebruiker voor toewijzing te kiezen."
 }

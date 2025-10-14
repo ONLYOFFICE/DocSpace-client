@@ -8,5 +8,7 @@
   "FreeBackupsPerMonth": "Brezplačni varnostni kopiji: {{value}}/{{maxValue}} za tekoči mesec.",
   "TemporaryDescription": "Ustvarite varnostno kopijo, shranjeno v razdelku \"Varnostne kopije\". Na voljo za prenos v 24 urah po ustvaritvi.",
   "ThirdPartyResourceDescription": "Povežite in varnostno kopirajte na račune v oblaku, kot so Dropbox, Box, OneDrive ali Google Drive.",
-  "ThirdPartyStorageDescription": "Uporabljajte storitve tretjih oseb za shranjevanje varnih kopij. Idealno za povezavo z zunanjimi platformami za shranjevanja v oblaku."
+  "ThirdPartyStorageDescription": "Uporabljajte storitve tretjih oseb za shranjevanje varnih kopij. Idealno za povezavo z zunanjimi platformami za shranjevanja v oblaku.",
+  "DisableBackupConfirm": "Onemogočanje storitve varnostnih kopij bo preprečilo skrbnikom {{productName}} ustvarjanje varnostnih kopij. Če je samodejno varnostno kopiranje omogočeno, bo ostalo aktivno v brezplačnem prostoru za shranjevanje, vendar ko bo ta prostor popolnoma izpolnjen, bo trajno deaktiviran. Ste prepričani, da želite nadaljevati?",
+  "DisableBackupConfirmWithoutQuota": "Onemogočanje storitve varnostnih kopij bo preprečilo skrbnikom {{productName}} ustvarjanje varnostnih kopij. Če je vklopljena samodejna varnostna kopija, bo deaktivirana. Ste prepričani, da želite nadaljevati?"
 }

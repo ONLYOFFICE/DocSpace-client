@@ -8,5 +8,7 @@
   "FreeBackupsPerMonth": "Ücretsiz yedeklemeler: {{value}}/{{maxValue}} mevcut ay için.",
   "TemporaryDescription": "\"Yedek\" bölümünde saklanan bir yedek oluşturun. Oluşturulduktan sonraki 24 saat içinde indirilmeye hazır.",
   "ThirdPartyResourceDescription": "Dropbox, Box, OneDrive veya Google Drive gibi bulut hesaplarına bağlanın ve yedeklemeleri kaydedin.",
-  "ThirdPartyStorageDescription": "Yedeklemelerinizi üçüncü taraf hizmetlerde saklayın. Harici bulut depolama platformlarını bağlamak için idealdir."
+  "ThirdPartyStorageDescription": "Yedeklemelerinizi üçüncü taraf hizmetlerde saklayın. Harici bulut depolama platformlarını bağlamak için idealdir.",
+  "DisableBackupConfirm": "Yedekleme hizmetini devre dışı bırakmak, {{productName}} yöneticilerinin yedekleme oluşturmasını engelleyecektir. Otomatik Yedekleme etkinse, ücretsiz kotada aktif kalmaya devam edecektir, ancak kota tamamen kullanıldığında kalıcı olarak devre dışı bırakılacaktır. Devam etmek istediğinizden emin misiniz?",
+  "DisableBackupConfirmWithoutQuota": "Yedekleme hizmetini devre dışı bırakmak, {{productName}} yöneticilerinin yedekleme oluşturmasını engelleyecektir. Otomatik Yedekleme etkinse, devre dışı bırakılacaktır. Devam etmek istediğinizden emin misiniz?"
 }

@@ -8,5 +8,7 @@
   "FreeBackupsPerMonth": "Backups gratuitos: {{value}}/{{maxValue}} por mês corrente.",
   "TemporaryDescription": "Crie um backup armazenado na seção \"Backup\". Disponível para download em até 24 horas após a criação.",
   "ThirdPartyResourceDescription": "Conecte e salve backups para contas na nuvem como Dropbox, Box, OneDrive ou Google Drive.",
-  "ThirdPartyStorageDescription": "Use serviços de terceiros para armazenar seus backups. Ideal para conectar plataformas de armazenamento em nuvem externas."
+  "ThirdPartyStorageDescription": "Use serviços de terceiros para armazenar seus backups. Ideal para conectar plataformas de armazenamento em nuvem externas.",
+  "DisableBackupConfirm": "Desativar o serviço de Backup impedirá que os administradores do {{productName}} criem backups. Se o Backup Automático estiver ativado, ele permanecerá ativo dentro da cota gratuita, mas, uma vez que a cota for totalmente utilizada, ele será permanentemente desativado. Tem certeza de que deseja continuar?",
+  "DisableBackupConfirmWithoutQuota": "Desativar o serviço de Backup impedirá que os administradores do {{productName}} criem backups. Se o Backup Automático estiver ativado, ele será desativado. Tem certeza de que deseja continuar?"
 }

@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Konuk başarıyla silindi",
   "SuccessfullyDeleteUserInfoMessage": "Kullanıcı başarıyla silindi",
   "ToBeAbleToReassignData": "Verileri yeniden atayabilmek için her seferinde sadece bir kullanıcıyı silin.",
-  "UserFilesRemovalScope": "Kişisel veriler, bu kullanıcının {{sectionNameFirst}} ve {{sectionNameSecond}} bölümlerindeki tüm dosya ve klasörler kalıcı olarak silinecektir."
+  "UserFilesRemovalScope": "Kişisel veriler, bu kullanıcının {{sectionNameFirst}} ve {{sectionNameSecond}} bölümlerindeki tüm dosya ve klasörler kalıcı olarak silinecektir.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Bu kişi tarafından paylaşılan tüm dosyalar ve oluşturulan odalar, silme işlemini gerçekleştiren bir yöneticiye otomatik olarak devredilecektir: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Devretme işlemini manuel olarak yapmak, devretme için başka bir kullanıcı seçmenizi sağlar."
 }

@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Гостът беше успешно изтрит",
   "SuccessfullyDeleteUserInfoMessage": "Потребителят беше изтрит успешно",
   "ToBeAbleToReassignData": "За да можете да преназначавате данни, изтривайте потребителите един по един.",
-  "UserFilesRemovalScope": "Лични данни, всички файлове и папки в раздели {{sectionNameFirst}} и {{sectionNameSecond}} на този потребител ще бъдат изтрити за постоянно."
+  "UserFilesRemovalScope": "Лични данни, всички файлове и папки в раздели {{sectionNameFirst}} и {{sectionNameSecond}} на този потребител ще бъдат изтрити за постоянно.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Всички споделени файлове, както и стаите, създадени от този контакт, ще бъдат автоматично преразпределени на администратор, извършващ изтриването: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Преразпределете данните ръчно, за да изберете друг потребител за преразпределение."
 }

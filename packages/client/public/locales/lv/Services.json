@@ -8,5 +8,7 @@
   "FreeBackupsPerMonth": "Bezvērtīgi dubultniekopi: {{value}}/{{maxValue}} par šo mēnesi.",
   "TemporaryDescription": "Izveidojiet rezerves kopiju, kas atrodas sadaļā \"Dublēšana\". Pieejama lejupielāde 24 stundu laikā pēc izveidošanas.",
   "ThirdPartyResourceDescription": "Pievienojieties un saglabājiet rezerves kopijas mākoņa kontos, piemēram, Dropbox, Box, OneDrive vai Google Drive.",
-  "ThirdPartyStorageDescription": "Izmantojiet trešo pušu pakalpojumus, lai saglabātu savus dubultniekus. Ideāli piemēroti, lai savienotu ārējus mākoņu krātuves platformas."
+  "ThirdPartyStorageDescription": "Izmantojiet trešo pušu pakalpojumus, lai saglabātu savus dubultniekus. Ideāli piemēroti, lai savienotu ārējus mākoņu krātuves platformas.",
+  "DisableBackupConfirm": "Atspējojot Backup pakalpojumu, {{productName}} administratori nevarēs veidot dublējumus. Ja ir ieslēgts Auto Backup, tas paliks aktīvs bezmaksas kvotas ietvaros, bet, kad kvota būs pilnībā izlietota, tas tiks pastāvīgi atspējots. Vai esat pārliecināts, ka vēlaties turpināt?",
+  "DisableBackupConfirmWithoutQuota": "Atvienojot Backup pakalpojumu, {{productName}} administratori nevarēs veidot dublējumus. Ja ir ieslēgts Auto Backup, tas tiks atslēgts. Vai esat pārliecināts, ka vēlaties turpināt?"
 }

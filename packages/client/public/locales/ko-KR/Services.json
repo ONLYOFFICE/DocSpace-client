@@ -8,5 +8,7 @@
   "FreeBackupsPerMonth": "무료 백업: {{value}}/{{maxValue}} (이번 달 기준).",
   "TemporaryDescription": "\"백업\" 섹션에 백업을 저장합니다. 생성 후 24시간 이내에 다운로드 가능합니다.",
   "ThirdPartyResourceDescription": "Dropbox, Box, OneDrive 또는 Google Drive와 같은 클라우드 계정에 연결하고 백업을 저장하세요.",
-  "ThirdPartyStorageDescription": "세 번째 서비스(third-party services)를 사용하여 백업을 저장하세요. 외부 클라우드 스토리지 플랫폼을 연결하는 데 적합합니다."
+  "ThirdPartyStorageDescription": "세 번째 서비스(third-party services)를 사용하여 백업을 저장하세요. 외부 클라우드 스토리지 플랫폼을 연결하는 데 적합합니다.",
+  "DisableBackupConfirm": "백업 서비스를 사용 중지하면 {{productName}} 관리자가 백업을 생성할 수 없습니다. 자동 백업이 활성화되어 있는 경우, 무료 할당량을 초과하지 않는 한 계속 활성화되지만, 할당량이 완전히 사용되면 영구적으로 비활성화됩니다. 계속 진행하시겠습니까?",
+  "DisableBackupConfirmWithoutQuota": "백업 서비스를 사용 중지하면 {{productName}} 관리자가 백업을 생성할 수 없습니다. 자동 백업이 활성화되어 있는 경우, 비활성화됩니다. 계속 진행하시겠습니까?"
 }

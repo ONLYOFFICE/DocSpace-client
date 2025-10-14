@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Vieras on onnistuneesti poistettu",
   "SuccessfullyDeleteUserInfoMessage": "Käyttäjä on poistettu onnistuneesti",
   "ToBeAbleToReassignData": "Poista yksi käyttäjä kerrallaan voidaksesi siirtää tietoja.",
-  "UserFilesRemovalScope": "Henkilötiedot, kaikki tämän käyttäjän tiedostot ja kansiot osioissa {{sectionNameFirst}} ja {{sectionNameSecond}} poistetaan pysyvästi."
+  "UserFilesRemovalScope": "Henkilötiedot, kaikki tämän käyttäjän tiedostot ja kansiot osioissa {{sectionNameFirst}} ja {{sectionNameSecond}} poistetaan pysyvästi.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Kaikki jaetut tiedostot sekä tämän yhteystiedon luomat huoneet siirretään automaattisesti poistamista suorittavan ylläpitäjän nimiin: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Siirrä tiedot manuaalisesti valitaksesi toisen käyttäjän tiedon siirtoa varten."
 }

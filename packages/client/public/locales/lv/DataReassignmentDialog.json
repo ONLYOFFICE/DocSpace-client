@@ -14,5 +14,6 @@
   "ReassigningDataToItself": "Ir sākts datu atkārtotas piešķiršanas process no lietotāja <0>{{fromUser}}</0> uz lietotāja <1>{{toUser}}</1> <2>{{you}}</2>. Ņemiet vērā, ka tas var aizņemt daudz laika.",
   "RoomsOnlyReassignment": "Mēs pārvietosim kontakta izveidotās telpas.",
   "StartTransferAgain": "Sākt pasūtīt vēlreiz",
-  "UserToWhomTheDataWillBeTransferred": "Lietotājs, kuram tiks pārsūtīti dati"
+  "UserToWhomTheDataWillBeTransferred": "Lietotājs, kuram tiks pārsūtīti dati",
+  "DescriptionDataReassignment": "Mēs pārsūtīsim koplietotos failus un telpas, kuras izveidoja kontaktpersona."
 }

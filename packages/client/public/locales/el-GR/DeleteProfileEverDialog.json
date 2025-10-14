@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Ο επισκέπτης διαγράφηκε επιτυχώς",
   "SuccessfullyDeleteUserInfoMessage": "Ο χρήστης έχει διαγραφεί επιτυχώς",
   "ToBeAbleToReassignData": "Για να μπορέσετε να αναθέσετε εκ νέου δεδομένα, διαγράψτε έναν χρήστη κάθε φορά.",
-  "UserFilesRemovalScope": "Προσωπικά δεδομένα, όλα τα αρχεία και φάκελοι στις ενότητες {{sectionNameFirst}} και {{sectionNameSecond}} αυτού του χρήστη θα διαγραφούν οριστικά."
+  "UserFilesRemovalScope": "Προσωπικά δεδομένα, όλα τα αρχεία και φάκελοι στις ενότητες {{sectionNameFirst}} και {{sectionNameSecond}} αυτού του χρήστη θα διαγραφούν οριστικά.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Όλα τα κοινόχρηστα αρχεία καθώς και οι αίθουσες που δημιουργήθηκαν από αυτόν τον χρήστη θα ανατεθούν αυτόματα σε έναν διαχειριστή που εκτελεί τη διαγραφή: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Αναθέστε τα δεδομένα χειροκίνητα για να επιλέξετε έναν άλλο προορισμό χρήστη για την ανακατανομή."
 }

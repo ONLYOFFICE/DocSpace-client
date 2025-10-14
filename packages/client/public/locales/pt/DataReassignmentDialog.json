@@ -14,5 +14,6 @@
   "ReassigningDataToItself": "O processo de reatribuição de dados do usuário <0>{{fromUser}}</0> para o usuário <1>{{toUser}}</1> <2>{{you}}</2> foi iniciado. Observe que isso pode levar um tempo considerável.",
   "RoomsOnlyReassignment": "Transferimos as salas criadas por contacto.",
   "StartTransferAgain": "Iniciar a transferência novamente",
-  "UserToWhomTheDataWillBeTransferred": "Usuário para quem os dados serão transferidos"
+  "UserToWhomTheDataWillBeTransferred": "Usuário para quem os dados serão transferidos",
+  "DescriptionDataReassignment": "Nós transferiremos arquivos compartilhados e salas criadas por contato."
 }

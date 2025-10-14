@@ -8,5 +8,7 @@
   "FreeBackupsPerMonth": "Pulsuz ehtiyat nüsxələr: {{value}}/{{maxValue}} cari ayda.",
   "TemporaryDescription": "\"Yedəkləmə\" bölməsində saxlanılan ehtiyat nüsxəsin yaradın. Yaratdıqdan sonra 24 saat ərzində yükləmək üçün mövcuddur.",
   "ThirdPartyResourceDescription": "Dropbox, Box, OneDrive və ya Google Drive kimi bulud hesablarına qoşulub ehtiyat növbəsizləri saxlayın.",
-  "ThirdPartyStorageDescription": "Sizə məlumatlarınızı saxlamaq üçün üçüncü tərəf xidmətlərindən istifadə edin. Xarici bulud saxlama platformalarını birləşdirmək üçün idealdır."
+  "ThirdPartyStorageDescription": "Sizə məlumatlarınızı saxlamaq üçün üçüncü tərəf xidmətlərindən istifadə edin. Xarici bulud saxlama platformalarını birləşdirmək üçün idealdır.",
+  "DisableBackupConfirm": "Yedəkləmə xidmətinin deaktiv edilməsi {{productName}} administratorlarının ehtiyat nüsxələri yaratmasının qarşısını alacaq. Avtomatik Yedəkləmə aktiv edilərsə, o, pulsuz kvota daxilində aktiv qalacaq, lakin kvota tam istifadə edildikdən sonra o, həmişəlik deaktiv ediləcək. Davam etmək istədiyinizə əminsiniz?",
+  "DisableBackupConfirmWithoutQuota": "Yedəkləmə xidmətinin deaktiv edilməsi {{productName}} administratorlarının ehtiyat nüsxələri yaratmasının qarşısını alacaq. Avtomatik Yedəkləmə aktiv edilərsə, o, deaktiv ediləcək. Davam etmək istədiyinizə əminsiniz?"
 }

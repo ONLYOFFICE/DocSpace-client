@@ -14,5 +14,6 @@
   "ReassigningDataToItself": "<0>{{fromUser}}</0> 사용자에서 <1>{{toUser}}</1> 사용자, <2>{{you}}</2>로의 데이터 재할당 프로세스가 시작되었습니다. 상당한 시간이 소요될 수 있으니 주의하시기 바랍니다.",
   "RoomsOnlyReassignment": "연락처가 생성한 룸이 이전될 예정입니다.",
   "StartTransferAgain": "전송 다시 시작",
-  "UserToWhomTheDataWillBeTransferred": "데이터를 이전 받을 사용자"
+  "UserToWhomTheDataWillBeTransferred": "데이터를 이전 받을 사용자",
+  "DescriptionDataReassignment": "연락처가 생성한 공유 파일 및 방을 이전하겠습니다."
 }

@@ -52,5 +52,7 @@
   "UploadDevicePDFFormOptionTitle": "Augšupielādēt no ierīces",
   "UploadFromPortalTitle": "Augšupielādēt no {{productName}}",
   "UploadPDFFormOptionDescription": "Izvēlieties gatavu PDF veidlapu, kas pieejama šeit: {{productName}}, un augšupielādējiet to telpā.",
-  "VirtualDataRoomEmptyTitle": "Laipni lūdzam virtuālajā datu telpā"
+  "VirtualDataRoomEmptyTitle": "Laipni lūdzam virtuālajā datu telpā",
+  "ManageAccess": "Pārvaldīt piekļuvi",
+  "TemplateAccessDescription": "Kontrolējiet, kas var izmantot šo veidni"
 }

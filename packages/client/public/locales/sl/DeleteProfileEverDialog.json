@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Gost je bil uspešno izbrisan",
   "SuccessfullyDeleteUserInfoMessage": "Uporabnik je bil uspešno izbrisan",
   "ToBeAbleToReassignData": "Če želite znova dodeliti podatke, izbrišite le enega uporabnika naenkrat.",
-  "UserFilesRemovalScope": "Osebni podatki, vse datoteke in mape v oddelkih {{sectionNameFirst}} in {{sectionNameSecond}} tega uporabnika bodo trajno izbrisane."
+  "UserFilesRemovalScope": "Osebni podatki, vse datoteke in mape v oddelkih {{sectionNameFirst}} in {{sectionNameSecond}} tega uporabnika bodo trajno izbrisane.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Vse skupne datoteke in sobe, ustvarjene s tem kontaktom, bodo samodejno dodeljene skrbniku, ki izvede izbris: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Ročno dodelite podatke, da izberete drugega uporabnika za ponovno dodelitev."
 }

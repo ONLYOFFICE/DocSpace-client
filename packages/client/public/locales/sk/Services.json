@@ -8,5 +8,7 @@
   "FreeBackupsPerMonth": "Bezplatné zálohy: {{value}}/{{maxValue}} za aktuálny mesiac.",
   "TemporaryDescription": "Vytvorte zálohu uloženú v sekcii „Záloha“. K stiahnutiu dostupná do 24 hodín po vytvorení.",
   "ThirdPartyResourceDescription": "Pripojte sa a zálohujte dáta do cloudových účtov ako Dropbox, Box, OneDrive alebo Google Drive.",
-  "ThirdPartyStorageDescription": "Používajte služby tretích strán na ukladanie záloh. Ideálne na pripojenie externých cloudových úložiskových platforiem."
+  "ThirdPartyStorageDescription": "Používajte služby tretích strán na ukladanie záloh. Ideálne na pripojenie externých cloudových úložiskových platforiem.",
+  "DisableBackupConfirm": "Vypnutie služby Zálohovanie zabráni administrátorom {{productName}} vo vytváraní záloh. Ak je povolená automatická záloha, zostane aktívna v rámci bezplatného miesta, ale po jeho úplnom využití bude trvale deaktivovaná. Ste si istí, že chcete pokračovať?",
+  "DisableBackupConfirmWithoutQuota": "Vypnutie služby Zálohovanie zabráni administrátorom {{productName}} vo vytváraní záloh. Ak je povolená automatická záloha, bude deaktivovaná. Ste si istí, že chcete pokračovať?"
 }

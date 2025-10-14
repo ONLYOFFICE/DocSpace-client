@@ -8,5 +8,7 @@
   "FreeBackupsPerMonth": "Gratis back-ups: {{value}}/{{maxValue}} per huidige maand.",
   "TemporaryDescription": "Maak een back-up opgeslagen in de sectie \"Back-up\". Beschikbaar om te downloaden binnen 24 uur na creatie.",
   "ThirdPartyResourceDescription": "Maak verbinding en bewaar back-ups naar cloud accounts zoals Dropbox, Box, OneDrive of Google Drive.",
-  "ThirdPartyStorageDescription": "Gebruik externe services om uw backups op te slaan. Ideaal voor het verbinden van externe cloud storage platforms."
+  "ThirdPartyStorageDescription": "Gebruik externe services om uw backups op te slaan. Ideaal voor het verbinden van externe cloud storage platforms.",
+  "DisableBackupConfirm": "Het uitschakelen van de Backup-service voorkomt dat {{productName}}-beheerders back-ups maken. Als Auto Backup is ingeschakeld, blijft deze actief binnen de gratis quota, maar zodra de quota volledig is benut, wordt deze permanent gedeactiveerd. Ben je zeker dat je verder wilt gaan?",
+  "DisableBackupConfirmWithoutQuota": "Het uitschakelen van de Backup service voorkomt dat {{productName}} beheerders back-ups maken. Als Auto Backup is ingeschakeld, wordt deze uitgeschakeld. Ben je zeker dat je wilt doorgaan?"
 }

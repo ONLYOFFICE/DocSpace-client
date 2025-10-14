@@ -14,5 +14,6 @@
   "ReassigningDataToItself": "Quá trình chuyển giao lại dữ liệu từ người dùng <0>{{fromUser}}</0> sang người dùng <1>{{toUser}}</1> <2>{{you}}</2> đã bắt đầu. Xin lưu ý rằng có thể mất một thời gian đáng kể.",
   "RoomsOnlyReassignment": "Chúng tôi sẽ chuyển các phòng được tạo bởi liên hệ.",
   "StartTransferAgain": "Bắt đầu chuyển lại",
-  "UserToWhomTheDataWillBeTransferred": "Người dùng mà dữ liệu sẽ được chuyển đến"
+  "UserToWhomTheDataWillBeTransferred": "Người dùng mà dữ liệu sẽ được chuyển đến",
+  "DescriptionDataReassignment": "Chúng tôi sẽ chuyển các tệp và phòng dùng chung được tạo bởi liên hệ."
 }

@@ -52,5 +52,7 @@
   "UploadDevicePDFFormOptionTitle": "Μεταφόρτωση από τη συσκευή",
   "UploadFromPortalTitle": "Μεταφόρτωση από {{productName}}",
   "UploadPDFFormOptionDescription": "Επιλέξτε μια έτοιμη φόρμα PDF που είναι διαθέσιμη στο {{productName}} και μεταφορτώστε την στο δωμάτιο.",
-  "VirtualDataRoomEmptyTitle": "Καλώς ήρθατε στο Εικονικό Δωμάτιο Δεδομένων"
+  "VirtualDataRoomEmptyTitle": "Καλώς ήρθατε στο Εικονικό Δωμάτιο Δεδομένων",
+  "ManageAccess": "Διαχείριση πρόσβασης",
+  "TemplateAccessDescription": "Ελέγξτε ποιος μπορεί να χρησιμοποιήσει αυτό το πρότυπο"
 }

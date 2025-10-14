@@ -14,5 +14,6 @@
   "ReassigningDataToItself": "<0>{{fromUser}}</0> istifadəçisindən <1>{{toUser}}</1> <2>{{you}}</2> istifadəçisinə verilənlərin yenidən təyin edilməsi prosesi başlayıb. Nəzərə alın ki, bu xeyli vaxt apara bilər.",
   "RoomsOnlyReassignment": "Sizinlə əlaqə saxlayıb yaratdığınız otaqları köçürəcəyik.",
   "StartTransferAgain": "Yenidən köçürməyə başlayın",
-  "UserToWhomTheDataWillBeTransferred": "Məlumatların ötürüləcəyi istifadəçi"
+  "UserToWhomTheDataWillBeTransferred": "Məlumatların ötürüləcəyi istifadəçi",
+  "DescriptionDataReassignment": "Əlaqə tərəfindən yaradılmış faylları və otaqları köçürəcəyik."
 }

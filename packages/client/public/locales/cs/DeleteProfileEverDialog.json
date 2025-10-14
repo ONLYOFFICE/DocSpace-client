@@ -17,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Host byl úspěšně odstraněn",
   "SuccessfullyDeleteUserInfoMessage": "Uživatel byl úspěšně odstraněn",
   "ToBeAbleToReassignData": "Abyste mohli data znovu přiřadit, odstraňte vždy jednoho uživatele.",
-  "UserFilesRemovalScope": "Osobní údaje, všechny soubory a složky v sekcích {{sectionNameFirst}} a {{sectionNameSecond}} tohoto uživatele budou trvale odstraněny."
+  "UserFilesRemovalScope": "Osobní údaje, všechny soubory a složky v sekcích {{sectionNameFirst}} a {{sectionNameSecond}} tohoto uživatele budou trvale odstraněny.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Všechny sdílené soubory a místnosti vytvořené tímto kontaktem budou automaticky přeřazeny administrátorovi provádějícímu smazání: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Pro přeřazení dat ručně si vyberte jiného uživatele pro přeřazení."
 }

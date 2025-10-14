@@ -3705,7 +3705,13 @@ class FilesStore {
     const newFolders = [...this.folders];
     const orderItems = [...this.folders, ...this.files].filter((x) => x.order);
 
-    if (orderItems.length > 0) {
+    const { isVDRRoomRoot, isRoot, isSharedWithMeFolderRoot } =
+      this.treeFoldersStore;
+
+    if (
+      (isVDRRoomRoot || (isSharedWithMeFolderRoot && !isRoot)) &&
+      orderItems.length > 0
+    ) {
       this.isEmptyPage && this.setIsEmptyPage(false);
 
       orderItems.sort((a, b) => {

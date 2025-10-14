@@ -426,6 +426,12 @@ class TreeFoldersStore {
     return FolderType.Archive === this.selectedFolderStore.rootFolderType;
   }
 
+  get isVDRRoomRoot() {
+    return (
+      FolderType.VirtualDataRoom === this.selectedFolderStore.parentRoomType
+    );
+  }
+
   get isDocumentsFolder() {
     return FolderType.USER === this.selectedFolderStore.rootFolderType;
   }

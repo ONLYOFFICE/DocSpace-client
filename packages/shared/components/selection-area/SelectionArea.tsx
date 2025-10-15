@@ -395,6 +395,8 @@ const SelectionArea = ({
     (e: MouseEvent) => {
       onMouseDown?.(e);
 
+      if (e.button !== 0) return;
+
       const target = e.target as HTMLElement;
 
       if (

@@ -24,15 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Navigate, redirect } from "react-router";
+import { Navigate } from "react-router";
 
-import { validatePublicRoomKey } from "@docspace/shared/api/rooms";
-import { getSettingsFiles } from "@docspace/shared/api/files";
 import componentLoader from "@docspace/shared/utils/component-loader";
 import Error404 from "@docspace/shared/components/errors/Error404";
 import { SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 
 import { ViewComponent } from "SRC_DIR/pages/Home/View";
+import { publicPreviewLoader } from "SRC_DIR/pages/PublicPreview/PublicPreview.helpers";
 
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
@@ -40,7 +39,6 @@ import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
 import { profileClientRoutes, generalClientRoutes } from "./general";
 import { contactsRoutes } from "./contacts";
-import { ValidationStatus } from "@docspace/shared/enums";
 
 /**
  * @type {import("react-router").RouteObject[]}
@@ -381,26 +379,7 @@ const ClientRoutes = [
 
       return { Component };
     },
-    loader: async ({ request }) => {
-      const searchParams = new URL(request.url).searchParams;
-      const key = searchParams.get("share");
-
-      const [validateData, settings] = await Promise.all([
-        validatePublicRoomKey(key),
-        getSettingsFiles(),
-      ]);
-
-      if (
-        validateData.status === ValidationStatus.Ok &&
-        validateData.isAuthenticated
-      ) {
-        const response = redirect(`/media/view/${validateData.id}`);
-
-        return response;
-      }
-
-      return { validateData, key, settings };
-    },
+    loader: publicPreviewLoader,
   },
   {
     path: "/rooms/share",

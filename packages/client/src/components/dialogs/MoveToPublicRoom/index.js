@@ -70,7 +70,7 @@ const MoveToPublicRoomComponent = (props) => {
   };
 
   const onMoveTo = () => {
-    const { destFolderId, folderIds, fileIds, isCopy } = moveToPublicRoomData;
+    const { destFolderId, folderIds, fileIds } = moveToPublicRoomData;
 
     if (!timerId)
       timerId = setTimeout(() => {

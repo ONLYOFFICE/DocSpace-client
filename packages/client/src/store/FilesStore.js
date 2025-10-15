@@ -4177,10 +4177,6 @@ class FilesStore {
     this.trashIsEmpty = isEmpty;
   };
 
-  setMovingInProgress = (movingInProgress) => {
-    this.movingInProgress = movingInProgress;
-  };
-
   setMainButtonMobileVisible = (visible) => {
     this.mainButtonMobileVisible = visible;
   };

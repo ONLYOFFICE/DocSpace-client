@@ -242,12 +242,7 @@ const DeleteDialogComponent = (props) => {
     isRoomDelete || isTemplate ? !isChecked : !selection.length;
 
   return (
-    <StyledModalWrapper
-      isLarge
-      isLoading={!tReady}
-      visible={visible}
-      onClose={onClose}
-    >
+    <StyledModalWrapper isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{noteText}</Text>

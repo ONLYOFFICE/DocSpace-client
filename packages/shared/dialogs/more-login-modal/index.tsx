@@ -94,6 +94,7 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
               data-url={item.url}
               data-providername={item.provider}
               onClick={onSocialLoginClick}
+              data-testid={`more-login-provider-item-${label}`}
             >
               <div className={styles.providerIcon}>
                 <IconComponent />

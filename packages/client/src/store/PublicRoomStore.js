@@ -267,6 +267,8 @@ class PublicRoomStore {
         res.entityId?.toString() ?? res.id.toString(),
       );
     }
+    const urlParams = new URLSearchParams(window.location.search);
+    const publicRoomKey = urlParams.get("key") || urlParams.get("share");
 
     const filter = FilesFilter.getDefault();
 
@@ -275,6 +277,7 @@ class PublicRoomStore {
     const url = getCategoryUrl(categoryType);
 
     filter.folder = subFolder || res.id;
+    filter.key = publicRoomKey;
 
     window.location.replace(`${url}?${filter.toUrlParams()}`);
   };

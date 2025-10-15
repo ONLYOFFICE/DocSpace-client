@@ -7,7 +7,6 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ValidationStatus } from "@docspace/shared/enums";
 import { PublicRoomPasswordForm } from "@docspace/shared/pages/PublicRoom";
 import useFilesSettings from "@docspace/shared/selectors/utils/hooks/useFilesSettings";
-import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 import PublicPreviewViewer from "./PublicPreview.viewer";
 import type { PublicPreviewLoaderProps } from "./PublicPreview.types";
@@ -21,19 +20,10 @@ export const PublicPreview = () => {
   const { getIcon } = useFilesSettings(undefined, settings);
 
   const onSuccessValidation = () => {
-    if (validateData.isAuthenticated) {
-      window.location.href = combineUrl(
-        window.ClientConfig?.proxy?.url,
-        `${MEDIA_VIEW_URL}${validateData.id}`,
-      );
-
-      return;
-    }
-
     revalidator.revalidate();
   };
 
-  return match(validateData.status)
+  return match(validateData?.status)
     .with(ValidationStatus.Ok, () => (
       <PublicPreviewViewer
         getIcon={(size: number, fileExst: string) => getIcon(fileExst, size)}

@@ -288,7 +288,8 @@ class MediaViewerDataStore {
             fileStatus: file.fileStatus,
             canShare: file.canShare,
             version: file.version,
-            thumbnailUrl: file.thumbnailUrl,
+            thumbnailUrl:
+              !file.providerItem && file.thumbnailUrl ? file.thumbnailUrl : "",
           });
 
           const thumbnailIsNotCreated =
@@ -315,7 +316,10 @@ class MediaViewerDataStore {
         fileId: this.previewFile.id,
         src: this.previewFile.viewUrl,
         version: this.previewFile.version,
-        thumbnailUrl: this.previewFile.thumbnailUrl,
+        thumbnailUrl:
+          !this.previewFile.providerItem && this.previewFile.thumbnailUrl
+            ? this.previewFile.thumbnailUrl
+            : "",
       });
 
       if (this.previewFile.viewAccessibility.ImageView) {

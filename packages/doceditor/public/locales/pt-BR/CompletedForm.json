@@ -12,12 +12,12 @@
   "FormOwner": "Proprietário do formulário",
   "FormSectionCompleted": "Seção do formulário concluída",
   "FormVDRConfirmationOfStartTitle": "O formulário está pronto para ser preenchido na sala",
+  "FormVDRFinalizedDescription": "O formulário foi totalmente preenchido por todos os destinatários e está agora finalizado. Está disponível em modo de somente leitura.",
+  "FormVDRNextRecepientDescription": "Já foi enviada uma notificação para o usuário designado como o primeiro destinatário, solicitando que ele preencha o formulário. Você pode navegar até a sala ou compartilhar o link de preenchimento com os participantes.",
   "FormVDRSectionCompletedDescription": "A parte atribuída do formulário em PDF foi concluída com sucesso. O status de preenchimento do formulário pode ser monitorado na sala e por meio do painel Status de preenchimento. Uma notificação por e-mail será enviada assim que o formulário for totalmente preenchido.",
+  "FormVDRYouFirstRecepientDescription": "Você está designado para preencher o formulário como o primeiro destinatário. Uma notificação foi enviada para o seu e-mail. Você pode começar a preenchê-lo agora ou copiar o link de preenchimento e retornar mais tarde.",
   "LinkToFillOutForm": "Link para preencher o formulário:",
   "LinkToForm": "Link para o formulário:",
   "LinkToViewOnlyForm": "Link para o formulário somente para visualização:",
-  "Title": "O formulário está preenchido",
-  "FormVDRFinalizedDescription": "O formulário foi totalmente preenchido por todos os destinatários e está agora finalizado. Está disponível em modo de somente leitura.",
-  "FormVDRNextRecepientDescription": "Já foi enviada uma notificação para o usuário designado como o primeiro destinatário, solicitando que ele preencha o formulário. Você pode navegar até a sala ou compartilhar o link de preenchimento com os participantes.",
-  "FormVDRYouFirstRecepientDescription": "Você está designado para preencher o formulário como o primeiro destinatário. Uma notificação foi enviada para o seu e-mail. Você pode começar a preenchê-lo agora ou copiar o link de preenchimento e retornar mais tarde."
+  "Title": "O formulário está preenchido"
 }

@@ -4,9 +4,9 @@
   "DeleteFiles": "Vous êtes sur le point de déplacer les <strong>fichiers ({{filesCount}})</strong> vers la {{trashSection}}.",
   "DeleteFilesAndFolders": "Vous êtes sur le point de supprimer les <strong>fichiers ({{filesCount}})</strong> et les <strong>dossiers ({{foldersCount}})</strong> vers la {{trashSection}}.",
   "DeleteFilesAndFoldersForever": "Vous êtes sur le point de supprimer les <strong>fichiers ({{filesCount}})</strong> et les <strong>dossiers ({{foldersCount}})</strong>.",
-  "DeleteFilesForever": "Vous êtes sur le point de supprimer <strong>des fichiers ({{filesCount}})</strong>.",
+  "DeleteFilesForever": "Vous êtes sur le point de supprimer les <strong>fichiers ({{filesCount}})</strong>.",
   "DeleteFolders": "Vous êtes sur le point de déplacer les <strong>dossiers ({{foldersCount}})</strong> vers la {{trashSection}}.",
-  "DeleteFoldersForever": "Vous êtes sur le point de supprimer <strong>dossiers ({{foldersCount}})</strong>.",
+  "DeleteFoldersForever": "Vous êtes sur le point de supprimer les <strong>dossiers ({{foldersCount}})</strong>.",
   "DeleteGroupDescription": "Le groupe {{groupName}} sera supprimé. Les utilisateurs du groupe ne seront pas supprimés de {{productName}}. Souhaitez-vous vraiment continuer ?",
   "DeleteGroupTitle": "Supprimer le groupe",
   "DeleteItem": "Vous êtes sur le point de déplacer <strong>{{name}}</strong> vers la {{trashSection}}.",
@@ -27,6 +27,6 @@
   "FoldersPermanentlyDeleted": "Les dossiers seront définitivement supprimés de la {{trashSection}}.",
   "ItemsDeletedAfter": "Ces éléments seront définitivement supprimés dans 30 jours.",
   "ItemsPermanentlyDeleted": "Ces éléments seront définitivement supprimés de la {{trashSection}}.",
-  "removeFromListDescription": "Vous êtes sur le point de supprimer <1>{{title}}</1> de la liste. Êtes-vous sûr de vouloir continuer ?",
-  "removeFromListDescriptionPlural": "Vous êtes sur le point de supprimer <1>éléments ({{count}})</1> de la liste. Êtes-vous sûr de vouloir continuer ?"
+  "removeFromListDescription": "Vous êtes sur le point de supprimer <1>{{title}}</1> de la liste. Souhaitez-vous vraiment continuer ?",
+  "removeFromListDescriptionPlural": "Vous êtes sur le point de supprimer <1>éléments ({{count}})</1> de la liste. Souhaitez-vous vraiment continuer ?"
 }

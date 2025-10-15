@@ -12,12 +12,12 @@
   "FormOwner": "Formularinhaber",
   "FormSectionCompleted": "Formularabschnitt ausgefüllt",
   "FormVDRConfirmationOfStartTitle": "Formular liegt zum Ausfüllen im Raum bereit",
+  "FormVDRFinalizedDescription": "Das Formular wurde vollständig von allen Empfängern ausgefüllt und ist nun abgeschlossen. Es ist im schreibgeschützten Modus verfügbar.",
+  "FormVDRNextRecepientDescription": "Dem als erster Empfänger festgelegten Benutzer wurde bereits eine Benachrichtigung mit der Aufforderung zum Ausfüllen des Formulars gesendet. Sie können zum Raum navigieren oder den Link zum Ausfüllen mit den Teilnehmern teilen.",
   "FormVDRSectionCompletedDescription": "Der zugewiesene Teil des PDF-Formulars wurde erfolgreich ausgefüllt. Der Füllstatus des Formulars kann im Raum und über das Feld \"Füllstatus\" verfolgt werden. Sobald das Formular vollständig ausgefüllt ist, wird eine E-Mail-Benachrichtigung gesendet.",
+  "FormVDRYouFirstRecepientDescription": "Sie sind dazu bestimmt, das Formular als erster Empfänger auszufüllen. Eine Benachrichtigung wurde an Ihre E-Mail-Adresse gesendet. Sie können es jetzt ausfüllen oder den Link zum Ausfüllen kopieren und später zurückkehren.",
   "LinkToFillOutForm": "Link zum Ausfüllen des Formulars:",
   "LinkToForm": "Link zum Formular:",
   "LinkToViewOnlyForm": "Link zum schreibgeschützten Formular:",
-  "Title": "Das Formular ist ausgefüllt",
-  "FormVDRFinalizedDescription": "Das Formular wurde vollständig von allen Empfängern ausgefüllt und ist nun abgeschlossen. Es ist im schreibgeschützten Modus verfügbar.",
-  "FormVDRNextRecepientDescription": "Es wurde bereits eine Benachrichtigung an den Benutzer gesendet, der als erster Empfänger zugewiesen wurde, um ihn zur Ausfüllung des Formulars aufzufordern. Sie können den Raum aufrufen oder den Link zum Ausfüllen mit den Teilnehmern teilen.",
-  "FormVDRYouFirstRecepientDescription": "Sie sind dazu bestimmt, das Formular als erster Empfänger auszufüllen. Eine Benachrichtigung wurde an Ihre E-Mail-Adresse gesendet. Sie können es jetzt ausfüllen oder den Link zum Ausfüllen kopieren und später zurückkehren."
+  "Title": "Das Formular ist ausgefüllt"
 }

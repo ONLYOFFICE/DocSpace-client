@@ -12,12 +12,12 @@
   "FormOwner": "Propietario del formulario",
   "FormSectionCompleted": "Sección de formularios Completado",
   "FormVDRConfirmationOfStartTitle": "El formulario está listo para rellenarse en la sala",
+  "FormVDRFinalizedDescription": "El formulario ha sido completado por todos los destinatarios y ya está finalizado. Está disponible en modo de solo lectura.",
+  "FormVDRNextRecepientDescription": "Ya se ha enviado una notificación al usuario asignado como primer destinatario, invitándole a rellenar el formulario. Puede navegar a la sala o compartir el enlace de rellenado con los participantes.",
   "FormVDRSectionCompletedDescription": "La parte asignada del formulario PDF se ha completado correctamente. El estado de rellenado del formulario puede ser monitoreado en la sala y mediante el panel de estado de rellenado.",
+  "FormVDRYouFirstRecepientDescription": "Se le ha asignado la tarea de rellenar el formulario como primer destinatario. Se le ha enviado una notificación a su correo electrónico. Puede empezar a rellenarlo ahora o copiar el enlace para rellenarlo y volver más tarde.",
   "LinkToFillOutForm": "Enlace para rellenar el formulario:",
   "LinkToForm": "Enlace al formulario:",
   "LinkToViewOnlyForm": "Enlace al formulario en modo de solo lectura:",
-  "Title": "El formulario está completado",
-  "FormVDRFinalizedDescription": "El formulario ha sido completado por todos los destinatarios y ya está finalizado. Está disponible en modo de solo lectura.",
-  "FormVDRNextRecepientDescription": "Ya se ha enviado una notificación al usuario asignado como primer destinatario, instándolo a completar el formulario. Puede navegar a la sala o compartir el enlace de completado con los participantes.",
-  "FormVDRYouFirstRecepientDescription": "Se le asigna completar el formulario como primer destinatario. Se ha enviado una notificación a su correo electrónico. Puede comenzar a completarlo ahora o copiar el enlace de completado y volver más tarde."
+  "Title": "El formulario está completado"
 }

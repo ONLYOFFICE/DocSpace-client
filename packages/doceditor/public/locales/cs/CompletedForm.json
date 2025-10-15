@@ -12,12 +12,12 @@
   "FormOwner": "Vlastník formuláře",
   "FormSectionCompleted": "Vyplněná část formuláře",
   "FormVDRConfirmationOfStartTitle": "Formulář je připraven k vyplnění v místnosti",
+  "FormVDRFinalizedDescription": "Formulář byl kompletně vyplněn všemi příjemci a nyní je finalizován. Je dostupný v režimu pouze pro čtení.",
+  "FormVDRNextRecepientDescription": "Uživatel, který je přidělen jako první příjemce, již obdržel upozornění, které ho vyzývá k vyplnění formuláře. Můžete přejít do místnosti nebo sdílet odkaz pro vyplnění s účastníky.",
   "FormVDRSectionCompletedDescription": "Přiřazená část PDF formuláře byla úspěšně dokončena. Stav vyplnění formuláře lze sledovat v místnosti a prostřednictvím panelu Stav vyplnění. Po úplném dokončení formuláře bude odesláno e-mailové oznámení.",
+  "FormVDRYouFirstRecepientDescription": "Jste pověřeni vyplnit formulář jako první příjemce. Na vaši e-mailovou adresu byla odeslána notifikace. Můžete začít formulář vyplňovat nyní nebo zkopírovat odkaz pro vyplňování a vrátit se k němu později.",
   "LinkToFillOutForm": "Odkaz na vyplnění formuláře:",
   "LinkToForm": "Odkaz na formulář:",
   "LinkToViewOnlyForm": "Odkaz na formulář určený pouze k prohlížení:",
-  "Title": "Formulář je vyplněn",
-  "FormVDRFinalizedDescription": "Formulář byl kompletně vyplněn všemi příjemci a nyní je finalizován. Je dostupný v režimu pouze pro čtení.",
-  "FormVDRNextRecepientDescription": "Uživatel, který je přidělen jako první příjemce, již obdržel upozornění, které ho vyzývá k vyplnění formuláře. Můžete přejít do místnosti nebo sdílet odkaz pro vyplnění s účastníky.",
-  "FormVDRYouFirstRecepientDescription": "Jste pověřeni vyplnit formulář jako první příjemce. Na vaši e-mailovou adresu byla odeslána notifikace. Můžete začít formulář vyplňovat nyní nebo zkopírovat odkaz pro vyplňování a vrátit se k němu později."
+  "Title": "Formulář je vyplněn"
 }

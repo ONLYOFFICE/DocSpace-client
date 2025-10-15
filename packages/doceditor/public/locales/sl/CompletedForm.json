@@ -12,12 +12,12 @@
   "FormOwner": "Lastnik obrazca",
   "FormSectionCompleted": "Razdelek obrazca izpolnjen",
   "FormVDRConfirmationOfStartTitle": "Obrazec je pripravljen za izpolnjevanje v sobi",
+  "FormVDRFinalizedDescription": "Obrazec je bil popolnoma izpolnjen od vseh prejemnikov in je zdaj dokončan. Je na voljo v načinu samo za ogled.",
+  "FormVDRNextRecepientDescription": "Obvestilo je že bilo poslanega uporabniku, dodeljenemu kot prvi prejemnik, da izpolni obrazec. Lahko se pomaknete do sobe ali delite povezavo za izpolnjevanje s sodelujočimi.",
   "FormVDRSectionCompletedDescription": "Dodeljeni del obrazca PDF je bil uspešno izpolnjen. Status izpolnjevanja obrazca lahko spremljate v sobi in preko panela Status izpolnjevanja. Ko bo obrazec v celoti izpolnjen, bo poslano e-poštno obvestilo.",
+  "FormVDRYouFirstRecepientDescription": "Vi ste dodeljeni za izpolnjevanje obrazca kot prvi prejemnik. Obvestilo je bilo poslano na vaš e-poštni naslov. Lahko ga začnete izpolnjevati zdaj ali pa kopirate povezavo za izpolnjevanje in se vrnete kasneje.",
   "LinkToFillOutForm": "Povezava do izpolnjevanja obrazca:",
   "LinkToForm": "Povezava do obrazca:",
   "LinkToViewOnlyForm": "Povezava do obrazca samo za ogled:",
-  "Title": "Obrazec je izpolnjen",
-  "FormVDRFinalizedDescription": "Obrazec je bil popolnoma izpolnjen od vseh prejemnikov in je zdaj dokončan. Je na voljo v načinu samo za ogled.",
-  "FormVDRNextRecepientDescription": "Obvestilo je že bilo poslanega uporabniku, dodeljenemu kot prvi prejemnik, da izpolni obrazec. Lahko se pomaknete do sobe ali delite povezavo za izpolnjevanje s sodelujočimi.",
-  "FormVDRYouFirstRecepientDescription": "Vi ste dodeljeni za izpolnjevanje obrazca kot prvi prejemnik. Obvestilo je bilo poslano na vaš e-poštni naslov. Lahko ga začnete izpolnjevati zdaj ali pa kopirate povezavo za izpolnjevanje in se vrnete kasneje."
+  "Title": "Obrazec je izpolnjen"
 }

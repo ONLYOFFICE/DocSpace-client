@@ -12,12 +12,12 @@
   "FormOwner": "Lomakkeen omistaja",
   "FormSectionCompleted": "Lomakeosio valmis",
   "FormVDRConfirmationOfStartTitle": "Lomake on huoneessa valmiina täytettäväksi ",
+  "FormVDRFinalizedDescription": "Lomake on täytetty kokonaan kaikkien vastaanottajien toimesta ja se on nyt valmis. Se on käytettävissä vain luku -tilassa.",
+  "FormVDRNextRecepientDescription": "Ilmoitus on jo lähetetty käyttäjälle, joka on määritetty ensimmäiseksi vastaanottajaksi, ja pyydetty häntä täyttämään lomake. Voit siirtyä huoneeseen tai jakaa täyttölinkin osallistujille.",
   "FormVDRSectionCompletedDescription": "PDF-lomakkeen määrätty osa on onnistuneesti täytetty. Lomakkeen täyttöstatusta voidaan monitoroida huoneessa ja täyttöstatuspaneelin kautta. Sähköposti-ilmoitus lähetetään, kun lomake on täytetty.",
+  "FormVDRYouFirstRecepientDescription": "Sinut on nimitetty täyttämään lomake ensimmäisenä vastaanottajana. Ilmoitus on lähetetty sähköpostiisi. Voit aloittaa lomakkeen täyttämisen nyt tai kopioida täyttölinkin ja palata myöhemmin.",
   "LinkToFillOutForm": "Linkki lomakkeen täyttämiseen:",
   "LinkToForm": "Linkki lomakkeeseen:",
   "LinkToViewOnlyForm": "Linkki katselutilaiseen lomakkeeseen:",
-  "Title": "Lomake on valmis",
-  "FormVDRFinalizedDescription": "Lomake on täytetty kokonaan kaikkien vastaanottajien toimesta ja se on nyt valmis. Se on käytettävissä vain luku -tilassa.",
-  "FormVDRNextRecepientDescription": "Ilmoitus on jo lähetetty käyttäjälle, joka on määritetty ensimmäiseksi vastaanottajaksi, ja pyydetty häntä täyttämään lomake. Voit siirtyä huoneeseen tai jakaa täyttölinkin osallistujille.",
-  "FormVDRYouFirstRecepientDescription": "Sinut on nimitetty täyttämään lomake ensimmäisenä vastaanottajana. Ilmoitus on lähetetty sähköpostiisi. Voit aloittaa lomakkeen täyttämisen nyt tai kopioida täyttölinkin ja palata myöhemmin."
+  "Title": "Lomake on valmis"
 }

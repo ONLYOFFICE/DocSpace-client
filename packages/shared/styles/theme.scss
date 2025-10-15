@@ -2867,3 +2867,13 @@
   --plugins-border-color: #{$gray-dark-strong};
   --plugins-error-status-color: #{$dark-error-status};
 }
+
+.light {
+  --more-login-row-hover-color: #{$gray-light};
+  --more-login-row-pressed-color: #{$gray-light-mid};
+}
+
+.dark {
+  --more-login-row-hover-color: #{$dark-gray-light};
+  --more-login-row-pressed-color: #{$gray-dark-mid};
+}

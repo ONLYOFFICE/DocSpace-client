@@ -198,9 +198,7 @@ const DeleteDialogComponent = (props) => {
 
     if (unsubscribe) return t("Common:Remove");
 
-    return t("Common:MoveToSection", {
-      sectionName: t("Common:TrashSection"),
-    });
+    return t("Common:MoveTo");
   };
 
   const getDialogTitle = () => {
@@ -244,7 +242,12 @@ const DeleteDialogComponent = (props) => {
     isRoomDelete || isTemplate ? !isChecked : !selection.length;
 
   return (
-    <StyledModalWrapper isLoading={!tReady} visible={visible} onClose={onClose}>
+    <StyledModalWrapper
+      isLarge
+      isLoading={!tReady}
+      visible={visible}
+      onClose={onClose}
+    >
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{noteText}</Text>

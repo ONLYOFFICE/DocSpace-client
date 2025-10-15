@@ -135,10 +135,12 @@ const Consent = ({
     if (splitedURL[1]) {
       const scopesStr = splitedURL[1].split("&")?.[0];
 
+      const decodedScopesStr = window.decodeURIComponent(scopesStr);
+
       const splitedScopes: string[] = [];
 
       scopes.forEach((scope) => {
-        if (scopesStr.includes(scope.name)) {
+        if (decodedScopesStr.includes(scope.name)) {
           splitedScopes.push(scope.name);
         }
       });

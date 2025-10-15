@@ -32,7 +32,6 @@ import { observer, inject } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import FilesSelector from "SRC_DIR/components/FilesSelector";
-import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -135,7 +134,7 @@ const SubmitToFormGallery = ({
     return (
       <FilesSelector
         key="select-file-dialog"
-        filterParam={"PDFTypes"}
+        filterParam="PDFTypes"
         descriptionText={t("Common:SelectPDFFormat")}
         isPanelVisible
         onSelectFile={onSelectForm}

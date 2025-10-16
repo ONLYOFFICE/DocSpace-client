@@ -1,0 +1,28 @@
+{
+  "key_path": "ReviewDescriptionFile",
+  "content": "Viewing, reviewing, commenting.",
+  "content_en_sha1_hash": "b4d8b6b8ce37549c9885b62e2e1334d954aff902",
+  "created_at": "2025-09-26T15:20:53.871Z",
+  "updated_at": "2025-09-26T15:53:09.406Z",
+  "comment": {
+    "text": "This description explains the functionality related to reviewing and commenting on a shared item. It is used to provide context for the \"Review\" permission, likely appearing as a tooltip or additional information near a review button or related UI element.",
+    "is_auto": true,
+    "updated_at": "2025-09-26T15:53:09.406Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 670,
+      "context": "},\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n key: \"review\",\n label: t(\"Common:Review\"),\n description: t(\"Common:ReviewDescriptionFile\"),\n },\n [ShareRights.Comment]: {\n access: ShareAccessRights.Comment,\n key: \"commenting\",\n label: t(\"Common:Comment\"),",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Settings have been successfully updated",
   "content_en_sha1_hash": "a3e0f1940499fb1b34253a9a7b050c2136e1f58b",
   "created_at": "2025-05-26T07:15:48.667Z",
-  "updated_at": "2025-09-19T15:39:23.128Z",
+  "updated_at": "2025-09-26T15:21:06.259Z",
   "comment": {
     "text": "The translation key \"SuccessfullySaveSettingsMessage\" is used to display a success message after saving portal settings. It appears in UI elements such as buttons or dialogs that trigger setting updates, providing feedback to the user that changes have been successfully applied.",
     "is_auto": true,
@@ -54,13 +54,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
-      "line_number": 113,
+      "line_number": 151,
       "context": "await setAdManagement(!type);\n setDisplayBanners(Boolean(type));\n setShowReminder(false);\n saveToSessionStorage(\"defaultDisplayBanners\", type);\n saveToSessionStorage(\"currentDisplayBanners\", type);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (e) {\n toastr.error(e!);\n } finally {\n setIsSaving(false);\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
-      "line_number": 157,
+      "line_number": 172,
       "context": "setIsSaving(true);\n await saveDeepLinkSettings(type);\n setShowReminder(false);\n saveToSessionStorage(\"defaultConfigureDeepLink\", type);\n saveToSessionStorage(\"currentConfigureDeepLink\", type);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (e) {\n toastr.error(e!);\n } finally {\n setIsSaving(false);\n }",
       "module": "/packages/client"
     },
@@ -126,13 +126,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
-      "line_number": 147,
+      "line_number": 148,
       "context": "};\n \n const onSaveClick = () => {\n const turnOn = type === \"enable\";\n setMessageSettings(turnOn);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n saveToSessionStorage(\"currentAdminMessageSettings\", type);\n saveToSessionStorage(\"defaultAdminMessageSettings\", type);\n setShowReminder(false);\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/bruteForceProtection.js",
-      "line_number": 259,
+      "line_number": 260,
       "context": "});\n \n getBruteForceProtection();\n setShowReminder(false);\n setIsLoadingSave(false);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n })\n .catch((error) => {\n toastr.error(error);\n });\n };",
       "module": "/packages/client"
     },
@@ -150,31 +150,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 235,
+      "line_number": 236,
       "context": "saveToSessionStorage(\"defaultIPSettings\", {\n enable,\n ips: newIps,\n });\n setShowReminder(false);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n \n setIsSaving(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/passwordStrength.js",
-      "line_number": 242,
+      "line_number": 243,
       "context": "useSpecialSymbols,\n );\n setShowReminder(false);\n saveToSessionStorage(\"currentPasswordSettings\", data);\n saveToSessionStorage(\"defaultPasswordSettings\", data);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n \n setIsSaving(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
-      "line_number": 234,
+      "line_number": 235,
       "context": "});\n }\n \n setSessionLifetimeSettings(sessionValue, type)\n .then(() => {\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n saveToSessionStorage(\"defaultSessionLifetimeSettings\", {\n lifetime: sessionValue?.toString(),\n type,\n });\n setShowReminder(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 215,
+      "line_number": 220,
       "context": "const res = await setTfaSettings(type);\n setType(type);\n setShowReminder(false);\n saveToSessionStorage(\"defaultTfaSettings\", type);\n saveToSessionStorage(\"currentTfaSettings\", type);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n \n if (res) {\n setIsInit(false);\n window.location.replace(res);\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 204,
+      "line_number": 208,
       "context": "saveToSessionStorage(\"defaultTrustedMailSettings\", {\n type,\n domains,\n });\n setShowReminder(false);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n \n setIsSaving(false);",
       "module": "/packages/client"
     },

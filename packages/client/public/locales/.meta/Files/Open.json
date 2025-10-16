@@ -3,7 +3,7 @@
   "content": "Open",
   "content_en_sha1_hash": "cf9b77061f7b3126b49d50a6fa68f7ca8c26b7a3",
   "created_at": "2025-05-19T21:30:55.917Z",
-  "updated_at": "2025-09-17T13:43:01.924Z",
+  "updated_at": "2025-09-23T07:24:24.325Z",
   "comment": {
     "text": "The translation key \"Open\" is used to display the label for a file opening action. It is commonly found on a button or link in UI elements that allow users to access or open files, such as external links or file picker dialogs. This key helps to provide clear and consistent language across different interfaces and locales.",
     "is_auto": true,
@@ -18,14 +18,14 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 134,
-      "context": "getFileLink,\n getFolderLink,\n removeSharedFolder,\n } from \"@docspace/shared/api/files\";\n \n import { checkDialogsOpen } from \"@docspace/shared/utils/checkDialogsOpen\";\n import { hasOwnProperty } from \"@docspace/shared/utils/object\";\n import { createLoader } from \"@docspace/shared/utils/createLoader\";\n import { FILLING_STATUS_ID } from \"@docspace/shared/constants\";\n import { isRoom as isRoomUtil } from \"@docspace/shared/utils/typeGuards\";\n import {",
+      "line_number": 135,
+      "context": "getFolderLink,\n removeSharedFolder,\n removeSharedFolderOrFile,\n } from \"@docspace/shared/api/files\";\n \n import { checkDialogsOpen } from \"@docspace/shared/utils/checkDialogsOpen\";\n import { hasOwnProperty } from \"@docspace/shared/utils/object\";\n import { createLoader } from \"@docspace/shared/utils/createLoader\";\n import { FILLING_STATUS_ID } from \"@docspace/shared/constants\";\n import {\n isFile as isFileUtil,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 134,
-      "context": "getFileLink,\n getFolderLink,\n removeSharedFolder,\n } from \"@docspace/shared/api/files\";\n \n import { checkDialogsOpen } from \"@docspace/shared/utils/checkDialogsOpen\";\n import { hasOwnProperty } from \"@docspace/shared/utils/object\";\n import { createLoader } from \"@docspace/shared/utils/createLoader\";\n import { FILLING_STATUS_ID } from \"@docspace/shared/constants\";\n import { isRoom as isRoomUtil } from \"@docspace/shared/utils/typeGuards\";\n import {",
+      "line_number": 135,
+      "context": "getFolderLink,\n removeSharedFolder,\n removeSharedFolderOrFile,\n } from \"@docspace/shared/api/files\";\n \n import { checkDialogsOpen } from \"@docspace/shared/utils/checkDialogsOpen\";\n import { hasOwnProperty } from \"@docspace/shared/utils/object\";\n import { createLoader } from \"@docspace/shared/utils/createLoader\";\n import { FILLING_STATUS_ID } from \"@docspace/shared/constants\";\n import {\n isFile as isFileUtil,",
       "module": "/packages/client"
     },
     {

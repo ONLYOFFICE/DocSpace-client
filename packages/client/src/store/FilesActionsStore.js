@@ -93,12 +93,10 @@ import {
   FILTER_ROOM_DOCUMENTS,
 } from "@docspace/shared/utils/filterConstants";
 import {
-  getCategoryType,
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import UsersFilter from "@docspace/shared/api/people/filter";
 import GroupsFilter from "@docspace/shared/api/groups/filter";
@@ -106,6 +104,7 @@ import {
   frameCallEvent,
   getConvertedSize,
   getObjectByLocation,
+  getCategoryType,
   splitFileAndFolderIds,
 } from "@docspace/shared/utils/common";
 import uniqueid from "lodash/uniqueId";
@@ -124,7 +123,7 @@ import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
 import { hideInfoPanel, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
-import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
 import { checkProtocol } from "../helpers/files-helpers";
 
 class FilesActionStore {
@@ -1702,8 +1701,13 @@ class FilesActionStore {
   };
 
   checkAndOpenLocationAction = async (item) => {
-    const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
-      this.treeFoldersStore;
+    const {
+      myRoomsId,
+      myFolderId,
+      archiveRoomsId,
+      recycleBinFolderId,
+      sharedWithMeFolderId,
+    } = this.treeFoldersStore;
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
     const {
       rootFolderType,
@@ -1725,6 +1729,7 @@ class FilesActionStore {
       myFolderId,
       archiveRoomsId,
       recycleBinFolderId,
+      sharedWithMeFolderId,
     ].includes(parentId);
 
     const state = {
@@ -2465,6 +2470,7 @@ class FilesActionStore {
           setUnsubscribe(true);
           setDeleteDialogVisible(true);
         },
+        iconUrl: RemoveOutlineSvgUrl,
       })
       .set("showInfo", showInfo);
 
@@ -2541,7 +2547,7 @@ class FilesActionStore {
       isFavoritesFolder,
       isRecycleBinFolder,
       isPrivacyFolder,
-      isShareFolder,
+      isSharedWithMeFolder,
       isRoomsFolder,
       isArchiveFolder,
       isRecentFolder,
@@ -2558,7 +2564,8 @@ class FilesActionStore {
 
     if (isPrivacyFolder) return this.getPrivacyFolderOption(itemsCollection, t);
 
-    if (isShareFolder) return this.getShareFolderOptions(itemsCollection, t);
+    if (isSharedWithMeFolder)
+      return this.getShareFolderOptions(itemsCollection, t);
 
     if (isRecentFolder) return this.getRecentFolderOptions(itemsCollection, t);
 

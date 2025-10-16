@@ -3,7 +3,7 @@
   "content": "Maximum number of external links created",
   "content_en_sha1_hash": "f2bb6f59b405402c64e0664aa39c4df21c8d83ab",
   "created_at": "2025-05-19T21:30:46.376Z",
-  "updated_at": "2025-08-26T11:15:14.141Z",
+  "updated_at": "2025-09-23T07:24:24.171Z",
   "comment": {
     "text": "The \"Maximum number of external links created\" translation key is used to display a tooltip or text label in the UI, indicating the maximum limit of external links allowed. It appears on an icon button and is part of the info panel on the home page, providing context for users when viewing certain types of content.",
     "is_auto": true,
@@ -17,9 +17,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/shared/components/share/index.tsx",
-      "line_number": 392,
-      "context": "};\n \n const getTextTooltip = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Common:MaximumNumberOfExternalLinksCreated\")}\n </Text>\n );\n };\n \n const onCopyLink = (link: TFileLink) => {",
+      "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
+      "line_number": 414,
+      "context": "const canAddLink = (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) > 0;\n \n const getTextTooltip = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Common:MaximumNumberOfExternalLinksCreated\")}\n </Text>\n );\n };\n \n const getLinkElements = () => {",
       "module": "/packages/shared"
     }
   ],

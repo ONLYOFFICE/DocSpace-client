@@ -888,6 +888,7 @@
   "LogoForEditors": "{{editorName}}エディタ用のロゴ",
   "LogoForViewer": "{{diagramViewer}}用のロゴ",
   "LogoDocsEditor": "エディターズヘッダーのロゴ",
+  "RoomCreateUser": "ユーザーが追加されました。",
   "PortalRestoring": "{{productName}}が復元中",
   "PreparationPortalDescription": "復元作業が終わると、自動的に{{productName}}にリダイレクトされます。"
 }

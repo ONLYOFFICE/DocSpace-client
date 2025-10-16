@@ -129,7 +129,7 @@ const TwoFactorAuth = (props) => {
     if (isInit) {
       setIsLoading(true);
     }
-  }, []);
+  }, [isInit]);
 
   useEffect(() => {
     if (!onSettingsSkeletonNotShown) return;
@@ -152,6 +152,10 @@ const TwoFactorAuth = (props) => {
   };
 
   useEffect(() => {
+    if (!isInit && !isMobileDevice()) {
+      getSecurityInitialValue();
+    }
+
     if (window.location.hash !== TFA_HASH) return;
     if (!targetRef?.current) {
       // If element is not available yet, try again after a small delay

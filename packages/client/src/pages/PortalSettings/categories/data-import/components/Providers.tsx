@@ -39,15 +39,22 @@ import NextcloudWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.nextc
 import WorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url";
 
 import { LinkType } from "@docspace/shared/components/link/Link.enums";
-import { Link } from "@docspace/shared/components/link";
+import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { WorkspacesContainer } from "../StyledDataImport";
 import DataImportLoader from "../sub-components/DataImportLoader";
 import { ProvidersProps, InjectedProvidersProps } from "../types";
 
 const Providers = (props: ProvidersProps) => {
-  const { theme, services, setWorkspace, logoText, showPortalSettingsLoader } =
-    props as InjectedProvidersProps;
+  const {
+    theme,
+    services,
+    setWorkspace,
+    logoText,
+    showPortalSettingsLoader,
+    dataImportUrl,
+    currentColorScheme,
+  } = props as InjectedProvidersProps;
 
   const { t, ready } = useTranslation(["Settings"]);
 
@@ -81,7 +88,21 @@ const Providers = (props: ProvidersProps) => {
           productName: t("Common:ProductName"),
           organizationName: logoText,
         })}
+
+        {dataImportUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme?.main?.accent}
+            target={LinkTarget.blank}
+            isHovered
+            href={dataImportUrl}
+            fontWeight="600"
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </Text>
+
       <Text className="data-import-subtitle">{t("UploadBackupData")}</Text>
 
       <div className="workspace-list">
@@ -115,7 +136,8 @@ export const Component = inject<TStore>(
   ({ settingsStore, importAccountsStore, clientLoadingStore }) => {
     const { services, setWorkspace } = importAccountsStore;
 
-    const { theme, logoText } = settingsStore;
+    const { theme, logoText, dataImportUrl, currentColorScheme } =
+      settingsStore;
 
     const { showPortalSettingsLoader } = clientLoadingStore;
 
@@ -125,6 +147,8 @@ export const Component = inject<TStore>(
       theme,
       setWorkspace,
       showPortalSettingsLoader,
+      dataImportUrl,
+      currentColorScheme,
     };
   },
 )(observer(Providers));

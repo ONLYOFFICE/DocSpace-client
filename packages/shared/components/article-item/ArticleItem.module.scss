@@ -359,6 +359,20 @@
     padding: 0 12px;
   }
 
+  &:global(.ai-agents) {
+    justify-content: flex-start;
+
+    .articleItemText {
+      width: auto !important;
+    }
+  }
+
+  &:global(.ai-agents):not(.showText) {
+    @include mixins.tablet {
+      justify-content: center;
+    }
+  }
+
   &.endOfBlock {
     margin-bottom: 16px;
   }

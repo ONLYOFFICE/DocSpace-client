@@ -40,9 +40,9 @@ import {
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TTranslation } from "@docspace/shared/types";
+import { CategoryType } from "@docspace/shared/constants";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 
 import {

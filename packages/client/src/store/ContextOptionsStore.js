@@ -128,13 +128,18 @@ import {
   getFileLink,
   getFolderLink,
   removeSharedFolder,
+  removeSharedFolderOrFile,
 } from "@docspace/shared/api/files";
 
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 import { FILLING_STATUS_ID } from "@docspace/shared/constants";
-import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
+import {
+  isFile as isFileUtil,
+  isFolder as isFolderUtil,
+  isRoom as isRoomUtil,
+} from "@docspace/shared/utils/typeGuards";
 import {
   getInfoPanelOpen,
   openMembersTab,
@@ -247,7 +252,11 @@ class ContextOptionsStore {
   onOpenFolder = async (item, t) => {
     const { isExpiredLinkAsync } = this.filesActionsStore;
 
-    if (item.external && (item.expired || (await isExpiredLinkAsync(item))))
+    if (
+      isRoomUtil(item) &&
+      item.external &&
+      (item.expired || (await isExpiredLinkAsync(item)))
+    )
       return toastr.error(
         t("Common:RoomLinkExpired"),
         t("Common:RoomNotAvailable"),
@@ -638,6 +647,40 @@ class ContextOptionsStore {
     }
   };
 
+  onRemoveSharedFilesOrFolder = async (items) => {
+    if (!Array.isArray(items) || items.length === 0) return;
+
+    const { addActiveItems } = this.filesStore;
+    const { setGroupMenuBlocked } = this.filesActionsStore;
+    // const { clearActiveOperations } = this.uploadDataStore;
+
+    const { folderIds, fileIds } = items.reduce(
+      (acc, item) => {
+        if (isFolderUtil(item)) acc.folderIds.push(item.id);
+        else if (isFileUtil(item)) acc.fileIds.push(item.id);
+
+        return acc;
+      },
+      { folderIds: [], fileIds: [] },
+    );
+
+    try {
+      runInAction(() => {
+        setGroupMenuBlocked(true);
+        addActiveItems(fileIds, folderIds);
+      });
+
+      await removeSharedFolderOrFile(folderIds, fileIds);
+    } catch (error) {
+      console.error(error);
+      toastr.error(error);
+    } finally {
+      runInAction(() => {
+        setGroupMenuBlocked(false);
+      });
+    }
+  };
+
   onClickDownload = (item, t) => {
     const { viewUrl, isFolder } = item;
     const isFile = !isFolder;
@@ -974,41 +1017,54 @@ class ContextOptionsStore {
 
     if (enablePlugins && this.pluginStore.contextMenuItemsList) {
       this.pluginStore.contextMenuItemsList.forEach((option) => {
-        if (contextOptions.includes(option.key)) {
-          const value = option.value;
+        // Helper function to recursively process context menu items
+        const processOptionValue = (value) => {
+          if (contextOptions.includes(value.key)) {
+            const onClick = async () => {
+              if (value.withActiveItem) {
+                const { setActiveFiles } = this.filesStore;
 
-          const onClick = async () => {
-            if (value.withActiveItem) {
-              const { setActiveFiles } = this.filesStore;
+                setActiveFiles([item.id]);
 
-              setActiveFiles([item.id]);
+                await value.onClick(item.id);
 
-              await value.onClick(item.id);
+                setActiveFiles([]);
+              } else {
+                value.onClick(item.id);
+              }
+            };
 
-              setActiveFiles([]);
-            } else {
-              value.onClick(item.id);
-            }
-          };
-
-          if (value.fileExt) {
-            if (value.fileExt.includes(item.fileExst)) {
-              pluginItems.push({
-                key: option.key,
-                label: value.label,
-                icon: value.icon,
-                onClick,
-              });
-            }
-          } else {
-            pluginItems.push({
-              key: option.key,
+            const processedOptionValue = {
+              key: value.key,
+              id: value.key,
               label: value.label,
               icon: value.icon,
               onClick,
-            });
+            };
+
+            const processedItems = [];
+            // Recursively process nested items if they exist
+            if (value.items && value.items.length > 0) {
+              value.items.forEach((nestedItem) => {
+                const processedItem = processOptionValue(nestedItem);
+                processedItem && processedItems.push(processedItem);
+              });
+
+              if (processedItems.length > 0) {
+                processedOptionValue.items = processedItems;
+              } else {
+                // If we have no processed items, we dont render this option
+                return null;
+              }
+            }
+
+            return processedOptionValue;
           }
-        }
+        };
+
+        const value = processOptionValue(option.value);
+
+        value && pluginItems.push(value);
       });
     }
 
@@ -1938,16 +1994,6 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
-        id: "option_archive-room",
-        key: "archive-room",
-        label: t("MoveToArchive"),
-        icon: RoomArchiveSvgUrl,
-        onClick: (e) => this.onClickArchive(e),
-        disabled: false,
-        "data-action": "archive",
-        action: "archive",
-      },
-      {
         id: "option_reconnect-storage",
         key: "reconnect-storage",
         label: t("Common:ReconnectStorage"),
@@ -1999,7 +2045,7 @@ class ContextOptionsStore {
       {
         id: "option_manage-links",
         key: "manage-links",
-        label: t("Common:ManageLinks"),
+        label: t("Common:ManageShare"),
         icon: SettingsReactSvgUrl,
         onClick: () => this.onClickShare(item),
         disabled: !item.canShare,
@@ -2225,6 +2271,16 @@ class ContextOptionsStore {
           isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),
       },
       {
+        id: "option_archive-room",
+        key: "archive-room",
+        label: t("MoveToArchive"),
+        icon: RoomArchiveSvgUrl,
+        onClick: (e) => this.onClickArchive(e),
+        disabled: false,
+        "data-action": "archive",
+        action: "archive",
+      },
+      {
         id: "option_unarchive-room",
         key: "unarchive-room",
         label: t("Common:Restore"),
@@ -2271,6 +2327,14 @@ class ContextOptionsStore {
         disabled: !this.treeFoldersStore.isRecentFolder,
       },
       {
+        id: "option_remove-shared-file-or-folder",
+        key: "remove-shared-folder-or-file",
+        label: t("Common:RemoveFromList"),
+        icon: CircleCrossSvgUrl,
+        onClick: () => this.onRemoveSharedFilesOrFolder([item]),
+        disabled: false,
+      },
+      {
         key: "separate-stop-filling",
         isSeparator: true,
       },
@@ -2290,15 +2354,15 @@ class ContextOptionsStore {
 
     if (pluginItems.length > 0) {
       if (pluginItems.length === 1) {
-        pluginItems.forEach((plugin) => {
-          options.splice(1, 0, {
-            id: `option_${plugin.key}`,
-            key: plugin.key,
-            label: plugin.label,
-            icon: plugin.icon,
-            disabled: false,
-            onClick: plugin.onClick,
-          });
+        const plugin = pluginItems[0];
+        options.splice(1, 0, {
+          id: `option_${plugin.key}`,
+          key: plugin.key,
+          label: plugin.label,
+          icon: plugin.icon,
+          disabled: false,
+          onClick: plugin.onClick,
+          items: plugin.items,
         });
       } else {
         options.splice(1, 0, {
@@ -2307,7 +2371,6 @@ class ContextOptionsStore {
           label: t("Common:Actions"),
           icon: PluginActionsSvgUrl,
           disabled: false,
-
           onLoad: () => this.onLoadPlugins(item),
         });
       }
@@ -2335,7 +2398,6 @@ class ContextOptionsStore {
             { key: "change-room-owner" },
             { key: "reconnect-storage" },
             { key: "export-room-index" },
-            { key: "archive-room" },
           ],
         ],
         needsGrouping: true,
@@ -2470,8 +2532,17 @@ class ContextOptionsStore {
       const groups = [
         ["select", "open"],
         ["share", "show-info"],
-        ["mark-as-favorite", "download", "move", "copy-to", "rename"],
-        ["remove-from-favorites", "restore", "delete"],
+        [
+          "mark-as-favorite",
+          "mark-read",
+          "link-for-room-members",
+          "download",
+          "move",
+          "copy-to",
+          "rename",
+        ],
+        ["restore"],
+        ["remove-from-favorites", "remove-shared-folder-or-file", "delete"],
       ];
 
       const items = resultOptions.filter((opt) => !opt.isSeparator);
@@ -2489,6 +2560,13 @@ class ContextOptionsStore {
           const isDeleteGroup = group.includes("delete");
           const shouldAddSeparator =
             result.length > 0 && (groupItems.length >= 2 || isDeleteGroup);
+
+          if (group.includes("restore")) {
+            result.push({
+              key: `separator${folderSeparatorIndex++}`,
+              isSeparator: true,
+            });
+          }
 
           if (shouldAddSeparator) {
             result.push({

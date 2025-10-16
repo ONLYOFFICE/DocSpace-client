@@ -34,6 +34,7 @@ import { updateTempContent } from "@docspace/shared/utils/common";
 import { regDesktop } from "@docspace/shared/utils/desktop";
 
 import { toastr } from "@docspace/shared/components/toast";
+import { DeviceType } from "@docspace/shared/enums";
 
 import FilesPanels from "./components/FilesPanels";
 import GlobalEvents from "./components/GlobalEvents";
@@ -97,6 +98,8 @@ const ClientContent = (props) => {
     isDesktopClientInit,
     setIsDesktopClientInit,
     showArticleLoader,
+
+    currentDeviceType,
   } = props;
 
   const location = useLocation();
@@ -154,7 +157,9 @@ const ClientContent = (props) => {
     location.pathname.includes("/accounts") ||
     (location.pathname.includes("/profile") &&
       location.state?.fromUrl?.includes("/accounts"));
-  const withMainButton = !isAccountsArticle;
+  const withMainButton = isAccountsArticle
+    ? currentDeviceType !== DeviceType.desktop
+    : true;
 
   return (
     <>
@@ -206,6 +211,7 @@ export const Client = inject(
       enablePlugins,
       isDesktopClientInit,
       setIsDesktopClientInit,
+      currentDeviceType,
     } = settingsStore;
 
     if (!userStore.user) return;
@@ -249,6 +255,7 @@ export const Client = inject(
         if (enablePlugins && !isInitPlugins) actions.push(initPlugins());
         await Promise.all(actions);
       },
+      currentDeviceType,
     };
   },
 )(withTranslation("Common")(observer(ClientContent)));

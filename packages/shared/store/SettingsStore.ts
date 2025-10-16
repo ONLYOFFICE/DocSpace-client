@@ -83,6 +83,7 @@ import { toastr } from "../components/toast";
 import { TData } from "../components/toast/Toast.type";
 import { version } from "../package.json";
 import { Nullable } from "../types";
+import { TApiKey } from "../api/api-keys/types";
 
 const themes = {
   Dark,
@@ -333,6 +334,12 @@ class SettingsStore {
 
   displayBanners: boolean = false;
 
+  apiKeys: TApiKey[] = [];
+
+  permissions: string[] = [];
+
+  errorKeys: Error | null = null;
+
   abortControllerArr: Nullable<AbortController>[] = [];
 
   constructor() {
@@ -360,6 +367,18 @@ class SettingsStore {
 
   setTenantStatus = (tenantStatus: TenantStatus) => {
     this.tenantStatus = tenantStatus;
+  };
+
+  setApiKeys = (apiKeys: TApiKey[]) => {
+    this.apiKeys = apiKeys;
+  };
+
+  setPermissions = (permissions: string[]) => {
+    this.permissions = permissions;
+  };
+
+  setErrorKeys = (error: Error | null) => {
+    this.errorKeys = error;
   };
 
   get wizardCompleted() {
@@ -571,6 +590,48 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
+  get configureDeepLinkUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.configureDeepLink
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.configureDeepLink}`
+      : this.helpCenterDomain;
+  }
+
+  get invitationSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.invitationSettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.invitationSettings}`
+      : this.helpCenterDomain;
+  }
+
+  get singleSignOnUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.singleSignOn
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.singleSignOn}`
+      : this.helpCenterDomain;
+  }
+
+  get pluginsSdkUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.pluginsSdk
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.pluginsSdk}`
+      : this.helpCenterDomain;
+  }
+
+  get smtpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.smtp
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.smtp}`
+      : this.helpCenterDomain;
+  }
+
+  get dataImportUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.dataImport
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.dataImport}`
+      : this.helpCenterDomain;
+  }
+
+  get apiKeysUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.apikeys
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.apikeys}`
+      : this.helpCenterDomain;
+  }
+
   get renamingSettingsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.renaming
       ? `${this.helpCenterDomain}${this.helpCenterEntries.renaming}`
@@ -683,12 +744,6 @@ class SettingsStore {
   get apiPluginSDKLink() {
     return this.apiDomain && this.apiEntries?.["plugins-sdk"]
       ? `${this.apiDomain}${this.apiEntries["plugins-sdk"]}`
-      : this.apiDomain;
-  }
-
-  get apiKeysLink() {
-    return this.apiDomain && this.apiEntries?.apikeys
-      ? `${this.apiDomain}${this.apiEntries.apikeys}`
       : this.apiDomain;
   }
 

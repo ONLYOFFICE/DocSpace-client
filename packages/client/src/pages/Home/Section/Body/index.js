@@ -88,7 +88,6 @@ const SectionBodyContent = (props) => {
     uploaded,
     onClickBack,
     isEmptyPage,
-    movingInProgress,
     currentDeviceType,
     isIndexEditingMode,
     changeIndex,
@@ -456,8 +455,6 @@ const SectionBodyContent = (props) => {
 
   if (isErrorRoomNotAvailable) return <RoomNoAccessContainer />;
 
-  if (isEmptyFilesList && movingInProgress) return null;
-
   if (
     isEmptyFilesList &&
     !welcomeFormFillingTipsVisible &&
@@ -501,7 +498,6 @@ export default inject(
       setScrollToItem,
       filesList,
       isEmptyPage,
-      movingInProgress,
       isErrorRoomNotAvailable,
     } = filesStore;
 
@@ -538,7 +534,6 @@ export default inject(
       filesList,
       uploaded,
       onClickBack: filesActionsStore.onClickBack,
-      movingInProgress,
       currentDeviceType: settingsStore.currentDeviceType,
       isEmptyPage,
       isIndexEditingMode: indexingStore.isIndexEditingMode,

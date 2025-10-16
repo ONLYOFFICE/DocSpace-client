@@ -75,7 +75,11 @@ const RoomsActivityContainer = ({
           dataTestId="rooms_activity_toggle_button"
         />
       </div>
-      <Text {...textDescriptionsProps}>{t("RoomsActivityDescription")}</Text>
+      <Text {...textDescriptionsProps}>
+        {t("RoomsActivityDescription", {
+          sectionName: t("Common:Rooms"),
+        })}
+      </Text>
     </div>
   );
 };

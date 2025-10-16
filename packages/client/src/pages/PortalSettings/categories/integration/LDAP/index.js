@@ -119,6 +119,7 @@ const LDAP = ({
             target="_blank"
             href={ldapSettingsUrl}
             dataTestId="ldap_settings_link"
+            fontWeight={600}
           >
             {t("Common:LearnMore")}
           </Link>

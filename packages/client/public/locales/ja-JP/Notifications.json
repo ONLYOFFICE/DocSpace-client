@@ -1,10 +1,8 @@
 {
-  "ActionsWithFilesDescription": "バッジは、ファイルのアップロード、作成、変更などのアクションを通知します。",
   "Badges": "バッジ",
   "DailyFeed": "{{productName}}の毎日フィード",
   "DailyFeedDescription": "{{productName}}のニュースやイベントのダイジェストを毎日お届けします。",
   "Notifications": "通知",
-  "RoomsActivityDescription": "1時間ごとに通知：ルームの全アクティビティを知らせます。",
   "UsefulTips": "{{productName}}の使い方やヒント",
   "UsefulTipsDescription": "{{productName}}に関するお役立ちガイドをゲット"
 }

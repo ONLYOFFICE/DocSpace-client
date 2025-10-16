@@ -26,9 +26,11 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
+import { Trans, useTranslation } from "react-i18next";
 
 import { useLocation } from "react-router";
 
+import { getCategoryType } from "@docspace/shared/utils/common";
 import { Consumer } from "@docspace/shared/utils";
 import { Nullable } from "@docspace/shared/types";
 
@@ -36,10 +38,14 @@ import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
 import { clearTextSelection } from "@docspace/shared/utils/copy";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
 import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
+import { toastr } from "@docspace/shared/components/toast";
+import { TOAST_FOLDER_PUBLIC_KEY } from "@docspace/shared/constants";
+import type { TFolder } from "@docspace/shared/api/files/types";
+import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
-import { getCategoryType } from "SRC_DIR/helpers/utils";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
 import ProfileSectionBodyContent from "../../Profile/Section/Body";
@@ -132,6 +138,7 @@ const View = ({
   checkTg,
 }: ViewProps) => {
   const location = useLocation();
+  const { t } = useTranslation(["Files", "Common"]);
 
   const isContactsPage = location.pathname.includes("accounts");
   const isProfilePage = location.pathname.includes("profile");
@@ -296,6 +303,32 @@ const View = ({
     }
   }, [isLoading, showHeaderLoader]);
 
+  const showToastAccess = useEventCallback(() => {
+    if (
+      selectedFolderStore.isFolder &&
+      sessionStorage.getItem(TOAST_FOLDER_PUBLIC_KEY) ===
+        selectedFolderStore.id?.toString()
+    ) {
+      const access = getAccessLabel(
+        t,
+        selectedFolderStore as unknown as TFolder,
+      );
+
+      toastr.info(
+        <Trans
+          t={t}
+          ns="Files"
+          i18nKey="OpenedViaLink"
+          values={{ access }}
+          components={{
+            strong: <strong />,
+          }}
+        />,
+      );
+      sessionStorage.removeItem(TOAST_FOLDER_PUBLIC_KEY);
+    }
+  });
+
   React.useEffect(() => {
     const getView = async () => {
       try {
@@ -337,6 +370,7 @@ const View = ({
         setIsLoading(false);
 
         clearTextSelection();
+        showToastAccess();
       } catch (error) {
         console.log(error);
         if ((error as Error).message === "canceled") {
@@ -349,9 +383,9 @@ const View = ({
     };
 
     getView();
-  }, [location, isContactsPage, isProfilePage]);
+  }, [location, isContactsPage, isProfilePage, showToastAccess]);
 
-  console.log("currentView", currentView);
+  // console.log("currentView", currentView);
 
   return (
     <LoaderWrapper isLoading={isLoading ? !showHeaderLoader : false}>

@@ -887,6 +887,7 @@
   "LogoForEditors": "Logotips redaktoram {{editorName}}",
   "LogoForViewer": "Logotips priekš {{diagramViewer}}",
   "LogoDocsEditor": "Redaktora galvenes logotips",
+  "RoomCreateUser": "Lietotāji ir pievienoti.",
   "PortalRestoring": "{{productName}} atjaunošana",
   "PreparationPortalDescription": "Kad atjaunošanas process būs pabeigts, jūs automātiski pārsūtīs uz jūsu {{productName}}."
 }

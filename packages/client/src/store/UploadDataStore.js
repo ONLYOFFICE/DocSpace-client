@@ -631,14 +631,15 @@ class UploadDataStore {
   };
 
   startConversion = async (t, isOpen = false) => {
-    const { isRecentFolder, isFavoritesFolder, isShareFolder } =
+    const { isRecentFolder, isFavoritesFolder, isSharedWithMeFolder } =
       this.treeFoldersStore;
 
     if (!this.converted) return;
 
     const { storeOriginalFiles } = this.filesSettingsStore;
 
-    const isSortedFolder = isRecentFolder || isFavoritesFolder || isShareFolder;
+    const isSortedFolder =
+      isRecentFolder || isFavoritesFolder || isSharedWithMeFolder;
     const needToRefreshFilesList = !isSortedFolder || !storeOriginalFiles;
 
     runInAction(() => (this.converted = false));
@@ -2046,7 +2047,6 @@ class UploadDataStore {
     toFillOut,
   ) => {
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
-    const { refreshFiles, setMovingInProgress } = this.filesStore;
     const pbData = { operation: OPERATIONS_NAME.move, operationId };
     return moveToFolder(
       destFolderId,
@@ -2094,9 +2094,6 @@ class UploadDataStore {
         this.clearActiveOperations(fileIds, folderIds);
 
         return Promise.reject(err);
-      })
-      .finally(() => {
-        refreshFiles().then(() => setMovingInProgress(false));
       });
   };
 
@@ -2233,14 +2230,11 @@ class UploadDataStore {
   };
 
   moveToCopyTo = (destFolderId, pbData, isCopy, fileIds, folderIds) => {
-    const { removeFiles } = this.filesStore;
-
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
     const isMovingSelectedFolder =
       !isCopy && folderIds && this.selectedFolderStore.id === folderIds[0];
 
     if (!isCopy || destFolderId === this.selectedFolderStore.id) {
-      !isCopy && removeFiles(fileIds, folderIds);
       this.clearActiveOperations(fileIds, folderIds);
 
       isMovingSelectedFolder &&

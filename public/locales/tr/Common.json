@@ -887,6 +887,7 @@
   "RevokeLink": "Bağlantıyı iptal et",
   "LogoForEditors": "{{editorName}} editörü için logo",
   "LogoForViewer": "{{diagramViewer}} için logo",
+  "RoomCreateUser": "Kullanıcılar eklendi.",
   "PortalRestoring": "{{productName}} geri yükleme",
   "PreparationPortalDescription": "Geri yükleme süreci tamamlandığında, otomatik olarak {{productName}}'inize yönlendirileceksiniz."
 }

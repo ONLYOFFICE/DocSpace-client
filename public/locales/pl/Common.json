@@ -888,6 +888,7 @@
   "LogoForEditors": "Logo dla edytora {{editorName}}",
   "LogoForViewer": "Logo dla {{diagramViewer}}",
   "LogoDocsEditor": "Logo dla nagłówka edytorów",
+  "RoomCreateUser": "Użytkownicy zostali dodani.",
   "PortalRestoring": "Odzyskiwanie {{productName}}",
   "PreparationPortalDescription": "Po zakończeniu procesu przywracania zostanie automatycznie przekierowany do {{productName}}."
 }

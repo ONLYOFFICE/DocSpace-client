@@ -62,7 +62,7 @@ const EmptyScreen = ({
   theme,
   withUpload,
   onDrop,
-  apiPluginSDKLink,
+  pluginsSdkUrl,
   currentColorScheme,
 }: PluginsEmptyScreen) => {
   const imageSrc = theme.isBase
@@ -75,7 +75,7 @@ const EmptyScreen = ({
       descriptionText={
         withUpload ? (
           <UploadDescription
-            apiPluginSDKLink={apiPluginSDKLink}
+            pluginsSdkUrl={pluginsSdkUrl}
             t={t}
             currentColorScheme={currentColorScheme}
           />

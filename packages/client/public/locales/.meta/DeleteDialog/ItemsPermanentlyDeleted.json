@@ -2,12 +2,12 @@
   "key_path": "ItemsPermanentlyDeleted",
   "content": "These items will be permanently removed from the Trash.",
   "content_en_sha1_hash": "45eb4beec2ff94a25d1831e29268f561e9b40f52",
-  "created_at": "2025-09-24T13:10:15.411Z",
-  "updated_at": "2025-09-24T13:11:13.297Z",
+  "created_at": "2025-09-26T15:21:04.468Z",
+  "updated_at": "2025-09-26T15:55:02.007Z",
   "comment": {
-    "text": "This text appears in a confirmation dialog, specifically after a user initiates the deletion of files and folders to the Trash. It informs the user that the items will be permanently removed after the Trash is emptied, serving as a final warning before the deletion is irreversible. Translators should ensure the tone conveys a sense of finality.",
+    "text": "This text appears within a confirmation dialog, specifically after a user initiates the deletion of files and folders to the trash. It informs the user that the items moved to the trash will be permanently removed. Translators should ensure the tone conveys a sense of finality.",
     "is_auto": true,
-    "updated_at": "2025-09-24T13:11:13.297Z"
+    "updated_at": "2025-09-26T15:55:02.007Z"
   },
   "usage": [
     {

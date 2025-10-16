@@ -60,7 +60,7 @@ const PluginPage = ({
   theme,
   isEmptyList,
   currentColorScheme,
-  apiPluginSDKLink,
+  pluginsSdkUrl,
 
   showPortalSettingsLoader,
 }: PluginsProps) => {
@@ -90,7 +90,7 @@ const PluginPage = ({
         theme={theme}
         onDrop={onDrop}
         withUpload={withUpload}
-        apiPluginSDKLink={apiPluginSDKLink}
+        pluginsSdkUrl={pluginsSdkUrl}
         currentColorScheme={currentColorScheme}
       />
     </StyledEmptyContainer>
@@ -106,7 +106,7 @@ const PluginPage = ({
         <>
           <UploadDescription
             t={t}
-            apiPluginSDKLink={apiPluginSDKLink}
+            pluginsSdkUrl={pluginsSdkUrl}
             currentColorScheme={currentColorScheme}
           />
           <Dropzone
@@ -143,7 +143,7 @@ export default inject(
     pluginStore: PluginStore;
     clientLoadingStore: ClientLoadingStore;
   }) => {
-    const { pluginOptions, currentColorScheme, theme, apiPluginSDKLink } =
+    const { pluginOptions, currentColorScheme, theme, pluginsSdkUrl } =
       settingsStore;
 
     const { showPortalSettingsLoader } = clientLoadingStore;
@@ -182,7 +182,7 @@ export default inject(
       currentColorScheme,
       theme,
       isEmptyList,
-      apiPluginSDKLink,
+      pluginsSdkUrl,
 
       showPortalSettingsLoader,
     };

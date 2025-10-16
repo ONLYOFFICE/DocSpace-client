@@ -4,7 +4,7 @@ import { StyledUploadDescription } from "../Plugins.styled";
 import { UploadDecsriptionProps } from "../Plugins.types";
 
 const UploadDescription = ({
-  apiPluginSDKLink,
+  pluginsSdkUrl,
   currentColorScheme,
   t,
 }: UploadDecsriptionProps) => {
@@ -13,13 +13,13 @@ const UploadDescription = ({
       <Text className="upload-description-text">
         {t("UploadDescription", { productName: t("Common:ProductName") })}
       </Text>
-      {apiPluginSDKLink ? (
+      {pluginsSdkUrl ? (
         <Link
           className="link-learn-more"
           color={currentColorScheme.main?.accent}
           isHovered
           target={LinkTarget.blank}
-          href={apiPluginSDKLink}
+          href={pluginsSdkUrl}
           dataTestId="api_plugins_sdk_link"
         >
           {t("Common:LearnMore")}

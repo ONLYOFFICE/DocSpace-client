@@ -888,6 +888,7 @@
   "LogoForEditors": "Editorin {{editorName}} logo",
   "LogoForViewer": "Logo kohteelle {{diagramViewer}}",
   "LogoDocsEditor": "Toimittajan otsikon logo",
+  "RoomCreateUser": "Käyttäjät lisätty.",
   "PortalRestoring": "{{productName}}-n palauttaminen",
   "PreparationPortalDescription": "Siinä vaiheessa kun palautuksen prosessi on ohi, sinut siirretään automaattisesti {{productName}}."
 }

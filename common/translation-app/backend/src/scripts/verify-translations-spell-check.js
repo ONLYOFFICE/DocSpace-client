@@ -31,6 +31,7 @@ const PROXY_API_URL =
   process.env.PROXY_API_URL ||
   "https://proxylist.geonode.com/api/proxy-list?limit=500&page=1&sort_by=lastChecked&sort_type=desc&protocols=http%2Chttps";
 const PROXY_BLACKLIST_FILE = path.join(appRootPath, "proxy-blacklist.json");
+const CHECKPOINT_FILE = path.join(appRootPath, "verification-checkpoint.json");
 
 // Dynamic proxy list - will be loaded from API
 let PROXY_LIST = [];
@@ -38,6 +39,15 @@ let currentProxyIndex = 0;
 const failedProxies = new Set();
 const proxyBlacklist = new Set(); // Persistent blacklist
 let useProxyMode = false; // Start without proxy, enable only on rate limit
+
+// Checkpoint data
+let checkpoint = {
+  lastProject: null,
+  lastMetadataFile: null,
+  lastLanguage: null,
+  tsvFilename: null,
+  processedKeys: new Set(),
+};
 
 const languageMap = {
   en: "English",
@@ -102,6 +112,73 @@ async function isOllamaRunning() {
   } catch (error) {
     console.log(`Ollama connection check failed: ${error.message}`);
     return false;
+  }
+}
+
+/**
+ * Load checkpoint from file
+ * @returns {Object} Checkpoint data
+ */
+function loadCheckpoint() {
+  try {
+    if (fs.existsSync(CHECKPOINT_FILE)) {
+      const data = fs.readFileSync(CHECKPOINT_FILE, "utf8");
+      const loaded = JSON.parse(data);
+      console.log(`📍 Loaded checkpoint from file`);
+      console.log(`   Last project: ${loaded.lastProject || "none"}`);
+      console.log(`   Last file: ${loaded.lastMetadataFile || "none"}`);
+      console.log(`   Last language: ${loaded.lastLanguage || "none"}`);
+      console.log(`   Processed keys: ${loaded.processedKeys?.length || 0}`);
+      return {
+        lastProject: loaded.lastProject,
+        lastMetadataFile: loaded.lastMetadataFile,
+        lastLanguage: loaded.lastLanguage,
+        tsvFilename: loaded.tsvFilename,
+        processedKeys: new Set(loaded.processedKeys || []),
+      };
+    }
+  } catch (error) {
+    console.warn(`⚠️  Failed to load checkpoint: ${error.message}`);
+  }
+  return {
+    lastProject: null,
+    lastMetadataFile: null,
+    lastLanguage: null,
+    tsvFilename: null,
+    processedKeys: new Set(),
+  };
+}
+
+/**
+ * Save checkpoint to file
+ */
+function saveCheckpoint() {
+  try {
+    const data = {
+      lastProject: checkpoint.lastProject,
+      lastMetadataFile: checkpoint.lastMetadataFile,
+      lastLanguage: checkpoint.lastLanguage,
+      tsvFilename: checkpoint.tsvFilename,
+      processedKeys: Array.from(checkpoint.processedKeys),
+      timestamp: new Date().toISOString(),
+    };
+    fs.writeFileSync(CHECKPOINT_FILE, JSON.stringify(data, null, 2), "utf8");
+  } catch (error) {
+    console.error(`❌ Failed to save checkpoint: ${error.message}`);
+  }
+}
+
+/**
+ * Clear checkpoint file
+ */
+function clearCheckpoint() {
+  try {
+    if (fs.existsSync(CHECKPOINT_FILE)) {
+      fs.unlinkSync(CHECKPOINT_FILE);
+      console.log(`🗑️  Cleared checkpoint file`);
+    }
+  } catch (error) {
+    console.error(`❌ Failed to clear checkpoint: ${error.message}`);
   }
 }
 
@@ -740,12 +817,9 @@ async function loadAllTranslations(projectPath, languages) {
  * @param {Object} counters - Object to track totalIssuesFound
  * @returns {Promise<Object>} Statistics
  */
-async function verifyTranslationsSpellCheck(
-  projectName,
-  tsvFilename,
-  counters
-) {
-  console.log(`Verifying translations for project: ${projectName}`);
+async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
+  const resuming = checkpoint.lastProject === project && checkpoint.lastMetadataFile !== null;
+  console.log(`Verifying translations for project: ${project}`);
 
   const stats = {
     totalProjects: 1,
@@ -761,9 +835,9 @@ async function verifyTranslationsSpellCheck(
   };
 
   try {
-    const localesPath = projectLocalesMap[projectName];
+    const localesPath = projectLocalesMap[project];
     if (!localesPath) {
-      throw new Error(`No locales path defined for project: ${projectName}`);
+      throw new Error(`No locales path defined for project: ${project}`);
     }
 
     const projectPath = path.join(appRootPath, localesPath);
@@ -794,21 +868,29 @@ async function verifyTranslationsSpellCheck(
     const metaPattern = path
       .join(projectPath, ".meta", "**", "*.json")
       .replace(/\\/g, "/");
-    const metaFiles = glob.sync(metaPattern) || [];
+    const metadataFiles = glob.sync(metaPattern);
+    console.log(`Found ${metadataFiles.length} metadata files`);
 
-    console.log(`Found ${metaFiles.length} metadata files`);
-    stats.totalFiles = metaFiles.length;
+    // Skip files until we reach checkpoint if resuming
+    let skipUntilFile = resuming ? checkpoint.lastMetadataFile : null;
 
-    // Process files sequentially to avoid overwhelming Ollama
-    let processedKeyCount = 0;
-    for (const metaFile of metaFiles) {
+    for (const metadataFile of metadataFiles) {
+      // Skip files until checkpoint
+      if (skipUntilFile && metadataFile !== skipUntilFile) {
+        continue;
+      }
+      if (skipUntilFile && metadataFile === skipUntilFile) {
+        console.log(` Resuming from file: ${path.basename(metadataFile)}`);
+        skipUntilFile = null; // Found checkpoint, process from here
+      }
+
       try {
-        const metaPathParts = metaFile.split(path.sep);
-        const key = path.basename(metaFile, ".json");
+        const metaPathParts = metadataFile.split(path.sep);
+        const key = path.basename(metadataFile, ".json");
         const namespace = metaPathParts[metaPathParts.length - 2];
         const keyPath = `${namespace}:${key}`;
 
-        const metadata = await fs.readJson(metaFile);
+        const metadata = await fs.readJson(metadataFile);
 
         const englishContent = getTranslationContent(
           translations,
@@ -823,7 +905,7 @@ async function verifyTranslationsSpellCheck(
         }
 
         stats.totalKeys++;
-        processedKeyCount++;
+        stats.totalFiles++;
 
         let metadataUpdated = false;
 
@@ -843,8 +925,8 @@ async function verifyTranslationsSpellCheck(
             const progress = {
               current: langIndex + 1,
               total: languages.length,
-              keyIndex: processedKeyCount,
-              totalKeys: metaFiles.length,
+              keyIndex: stats.totalKeys,
+              totalKeys: metadataFiles.length,
             };
 
             const issues = await verifyTranslation(
@@ -882,17 +964,26 @@ async function verifyTranslationsSpellCheck(
               // Save issues to CSV immediately
               for (const issue of issues) {
                 const issueData = {
-                  project: projectName,
-                  namespace,
-                  key,
-                  language,
-                  englishContent,
-                  translatedContent,
+                  project: project,
+                  metadataFile: metadataFile,
+                  keyPath: keyPath,
+                  language: language,
+                  englishContent: englishContent,
+                  translatedContent: translatedContent,
                   issueType: issue.type,
                   description: issue.description,
                   suggestion: issue.suggestion || "",
                 };
-                await appendIssueToTSV(issueData, tsvFilename);
+                await appendIssueToTSV(
+                  tsvFilename,
+                  project,
+                  metadataFile,
+                  keyPath,
+                  language,
+                  englishContent,
+                  translatedContent,
+                  issue
+                );
                 counters.totalIssuesFound++;
               }
             }
@@ -901,7 +992,7 @@ async function verifyTranslationsSpellCheck(
               `Error processing ${keyPath} for ${language}: ${langError.message}`
             );
             stats.errors.push({
-              file: metaFile,
+              file: metadataFile,
               key: keyPath,
               language,
               error: langError.message,
@@ -911,13 +1002,13 @@ async function verifyTranslationsSpellCheck(
 
         if (metadataUpdated) {
           metadata.updated_at = new Date().toISOString();
-          await writeJsonWithConsistentEol(metaFile, metadata);
+          await writeJsonWithConsistentEol(metadataFile, metadata);
         }
       } catch (fileError) {
         console.error(
-          `Error processing metadata file ${metaFile}: ${fileError.message}`
+          `Error processing metadata file ${metadataFile}: ${fileError.message}`
         );
-        stats.errors.push({ file: metaFile, error: fileError.message });
+        stats.errors.push({ file: metadataFile, error: fileError.message });
       }
     }
 
@@ -927,9 +1018,9 @@ async function verifyTranslationsSpellCheck(
     return stats;
   } catch (error) {
     console.error(
-      `Error verifying translations for project ${projectName}: ${error.message}`
+      `Error verifying translations for project ${project}: ${error.message}`
     );
-    stats.errors.push({ project: projectName, error: error.message });
+    stats.errors.push({ project: project, error: error.message });
     stats.endTime = new Date();
     stats.duration = (stats.endTime - stats.startTime) / 1000;
     return stats;
@@ -937,88 +1028,51 @@ async function verifyTranslationsSpellCheck(
 }
 
 /**
- * Exports issues to a TSV file (Tab-Separated Values)
- * @param {Array} issues - Array of issues to export
- * @param {string} filename - Output filename
+ * Appends issue to TSV file
+ * @param {string} tsvFilename - TSV filename
+ * @param {string} project - Project name
+ * @param {string} metadataFile - Metadata file path
+ * @param {string} keyPath - Translation key path
+ * @param {string} language - Language code
+ * @param {string} englishContent - English content
+ * @param {string} translatedContent - Translated content
+ * @param {Object} issue - Issue object
  */
-async function exportIssuesToTSV(issues, filename) {
-  if (issues.length === 0) {
-    return;
-  }
-
-  const tsvRows = [];
-
-  // TSV Header
-  const headers = [
-    "Project",
-    "Namespace",
-    "Key",
-    "Language",
-    "English Content",
-    "Translated Content",
-    "Issue Type",
-    "Description",
-    "Suggestion",
-  ];
-  tsvRows.push(headers.join("\t"));
-
-  // TSV Data rows
-  issues.forEach((issue) => {
-    const row = [
-      escapeTsvField(issue.project),
-      escapeTsvField(issue.namespace),
-      escapeTsvField(issue.key),
-      escapeTsvField(issue.language),
-      escapeTsvField(issue.englishContent),
-      escapeTsvField(issue.translatedContent),
-      escapeTsvField(issue.issueType),
-      escapeTsvField(issue.description),
-      escapeTsvField(issue.suggestion),
-    ];
-    tsvRows.push(row.join("\t"));
-  });
-
-  const tsvContent = tsvRows.join("\n");
-  const outputPath = path.join(appRootPath, filename);
-
-  await fs.writeFile(outputPath, tsvContent, "utf8");
-  return outputPath;
-}
-
-/**
- * Appends a single issue to the TSV file
- * @param {Object} issue - Issue to append
- * @param {string} filename - Output filename
- */
-async function appendIssueToTSV(issue, filename) {
-  const outputPath = path.join(appRootPath, filename);
-
+function appendIssueToTSV(
+  tsvFilename,
+  project,
+  metadataFile,
+  keyPath,
+  language,
+  englishContent,
+  translatedContent,
+  issue
+) {
+  const tsvPath = path.join(appRootPath, tsvFilename);
   const row = [
-    escapeTsvField(issue.project),
-    escapeTsvField(issue.namespace),
-    escapeTsvField(issue.key),
-    escapeTsvField(issue.language),
-    escapeTsvField(issue.englishContent),
-    escapeTsvField(issue.translatedContent),
-    escapeTsvField(issue.issueType),
-    escapeTsvField(issue.description),
-    escapeTsvField(issue.suggestion),
-  ];
+    project,
+    metadataFile,
+    keyPath,
+    language,
+    escapeTsvField(englishContent),
+    escapeTsvField(translatedContent),
+    issue.type || "",
+    escapeTsvField(issue.description || ""),
+    escapeTsvField(issue.suggestion || ""),
+  ].join("\t");
 
-  const tsvRow = row.join("\t") + "\n";
-  await fs.appendFile(outputPath, tsvRow, "utf8");
-}
-
-/**
- * Escapes a field for TSV format
- * @param {string} field - Field to escape
- * @returns {string} Escaped field
- */
-function escapeTsvField(field) {
-  if (field == null) return "";
-  const str = String(field);
-  // Replace tabs with spaces and newlines with spaces
-  return str.replace(/\t/g, " ").replace(/\n/g, " ").replace(/\r/g, "");
+  fs.appendFileSync(tsvPath, row + "\n", "utf8");
+  
+  // Update checkpoint
+  checkpoint.lastProject = project;
+  checkpoint.lastMetadataFile = metadataFile;
+  checkpoint.lastLanguage = language;
+  checkpoint.processedKeys.add(`${project}:${metadataFile}:${keyPath}:${language}`);
+  
+  // Save checkpoint every 5 issues
+  if (checkpoint.processedKeys.size % 5 === 0) {
+    saveCheckpoint();
+  }
 }
 
 /**
@@ -1027,6 +1081,10 @@ function escapeTsvField(field) {
  */
 async function verifyAllTranslationsSpellCheck() {
   console.log("Starting translation verification process...");
+
+  // Load checkpoint
+  checkpoint = loadCheckpoint();
+  const resuming = checkpoint.lastProject !== null;
 
   // Load proxy blacklist at startup
   proxyBlacklist.clear();
@@ -1048,6 +1106,8 @@ async function verifyAllTranslationsSpellCheck() {
   console.log("PROXY_API_URL: ", PROXY_API_URL);
   console.log("PROXY_BLACKLIST_FILE: ", PROXY_BLACKLIST_FILE);
   console.log("BLACKLISTED_PROXIES: ", proxyBlacklist.size);
+  console.log("CHECKPOINT_FILE: ", CHECKPOINT_FILE);
+  console.log("RESUMING: ", resuming ? "yes" : "no");
 
   const ollamaRunning = await isOllamaRunning();
   if (!ollamaRunning) {
@@ -1055,25 +1115,28 @@ async function verifyAllTranslationsSpellCheck() {
     process.exit(1);
   }
 
-  // Create TSV file with header immediately
-  const timestamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, -5);
-  const tsvFilename = `spell-check-issues-${timestamp}.tsv`;
+  // Use existing TSV file if resuming, otherwise create new one
+  let tsvFilename;
+  if (resuming && checkpoint.tsvFilename) {
+    tsvFilename = checkpoint.tsvFilename;
+    console.log(` Resuming with existing TSV file: ${tsvFilename}`);
+  } else {
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, -5);
+    tsvFilename = `spell-check-issues-${timestamp}.tsv`;
+    checkpoint.tsvFilename = tsvFilename;
+    saveCheckpoint();
+  }
   const tsvPath = path.join(appRootPath, tsvFilename);
-
-  // Write TSV header
-  const headers = [
-    "Project",
-    "Namespace",
-    "Key",
-    "Language",
-    "English Content",
-    "Translated Content",
-    "Issue Type",
-    "Description",
-    "Suggestion",
-  ];
-  await fs.writeFile(tsvPath, headers.join("\t") + "\n", "utf8");
-  console.log(`\nCreated TSV file: ${tsvPath}`);
+  
+  // Only write header if file doesn't exist (new run)
+  if (!fs.existsSync(tsvPath)) {
+    const tsvHeader =
+      "Project\tMetadata File\tKey\tLanguage\tEnglish Content\tTranslated Content\tIssue Type\tDescription\tSuggestion\n";
+    fs.writeFileSync(tsvPath, tsvHeader, "utf8");
+    console.log(` Created TSV file: ${tsvPath}`);
+  } else {
+    console.log(` Continuing with existing TSV file: ${tsvPath}`);
+  }
   console.log("Issues will be saved incrementally as they are found.\n");
 
   const counters = { totalIssuesFound: 0 };
@@ -1095,9 +1158,23 @@ async function verifyAllTranslationsSpellCheck() {
   const projects = Object.keys(projectLocalesMap);
   overallStats.totalProjects = projects.length;
 
+  // Skip to the checkpoint project if resuming
+  let skipUntilProject = resuming ? checkpoint.lastProject : null;
+  let foundCheckpoint = !resuming;
+
   for (const project of projects) {
+    // Skip projects until we reach the checkpoint
+    if (skipUntilProject && project !== skipUntilProject) {
+      console.log(` Skipping project: ${project} (already processed)`);
+      continue;
+    }
+    if (skipUntilProject && project === skipUntilProject) {
+      foundCheckpoint = true;
+      console.log(` Resuming from project: ${project}`);
+    }
+
     try {
-      console.log(`\n=== Processing project: ${project} ===\n`);
+      console.log(` Processing project: ${project}`);
       const projectStats = await verifyTranslationsSpellCheck(
         project,
         tsvFilename,
@@ -1142,13 +1219,16 @@ async function verifyAllTranslationsSpellCheck() {
 
   // Report final TSV status
   if (counters.totalIssuesFound > 0) {
-    console.log(`\n✓ Total issues saved to TSV: ${counters.totalIssuesFound}`);
-    console.log(`✓ TSV file location: ${tsvPath}`);
+    console.log(` Total issues saved to TSV: ${counters.totalIssuesFound}`);
+    console.log(` TSV file location: ${tsvPath}`);
   } else {
     // Remove empty TSV file if no issues found
     await fs.unlink(tsvPath).catch(() => {});
     console.log("\nNo issues found - TSV file not created.");
   }
+
+  // Clear checkpoint on successful completion
+  clearCheckpoint();
 
   return overallStats;
 }
@@ -1163,15 +1243,11 @@ verifyAllTranslationsSpellCheck()
 
     console.log("\n=== Verification Complete ===");
     console.log(`Total issues found: ${stats.updatedIssues}`);
-    console.log(
-      `Results saved to: ${path.join(
-        appRootPath,
-        `spell-check-issues-${new Date()
-          .toISOString()
-          .replace(/[:.]/g, "-")
-          .slice(0, -5)}.tsv`
-      )}`
-    );
+    if (checkpoint.tsvFilename) {
+      console.log(
+        `Results saved to: ${path.join(appRootPath, checkpoint.tsvFilename)}`
+      );
+    }
     console.log(`Blacklisted proxies: ${proxyBlacklist.size}`);
     console.log("\nThank you for using the translation verification tool!");
 
@@ -1213,6 +1289,9 @@ verifyAllTranslationsSpellCheck()
     console.log("\nDone!");
   })
   .catch((error) => {
-    console.error("Fatal error:", error);
+    console.error("\n=== Error During Verification ===");
+    console.error(error);
+    console.log("\n Checkpoint saved. You can resume by running the script again.");
+    saveCheckpoint();
     process.exit(1);
   });

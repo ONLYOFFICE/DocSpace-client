@@ -39,6 +39,9 @@ let currentProxyIndex = 0;
 const failedProxies = new Set();
 const proxyBlacklist = new Set(); // Persistent blacklist
 let useProxyMode = false; // Start without proxy, enable only on rate limit
+let lastDirectAttempt = 0; // Timestamp of last direct connection attempt
+let directConnectionAttempts = 0; // Counter for direct connection attempts
+const DIRECT_RETRY_INTERVAL = 60000; // Try direct connection every 60 seconds
 
 // Checkpoint data
 let checkpoint = {
@@ -266,6 +269,7 @@ async function fetchProxyList() {
 async function enableProxyMode() {
   if (!useProxyMode) {
     useProxyMode = true;
+    lastDirectAttempt = Date.now();
     console.log("\n⚠️  Rate limit detected! Enabling proxy mode...");
 
     // Fetch fresh proxy list if empty
@@ -285,6 +289,39 @@ async function enableProxyMode() {
       }\n`
     );
   }
+}
+
+/**
+ * Disable proxy mode when direct connection works again
+ */
+function disableProxyMode() {
+  if (useProxyMode) {
+    useProxyMode = false;
+    console.log("\n✅ Rate limit lifted! Disabling proxy mode...\n");
+  }
+}
+
+/**
+ * Check if we should try direct connection
+ * @returns {boolean} True if should try direct
+ */
+function shouldTryDirectConnection() {
+  if (!useProxyMode) {
+    return true; // Always use direct if not in proxy mode
+  }
+  
+  const now = Date.now();
+  const timeSinceLastAttempt = now - lastDirectAttempt;
+  
+  // Try direct connection every DIRECT_RETRY_INTERVAL
+  if (timeSinceLastAttempt >= DIRECT_RETRY_INTERVAL) {
+    lastDirectAttempt = now;
+    directConnectionAttempts++;
+    console.log(`🔍 Attempting direct connection (attempt #${directConnectionAttempts})...`);
+    return true;
+  }
+  
+  return false;
 }
 
 /**
@@ -379,21 +416,28 @@ async function quickTranslationCheck(
 ) {
   const maxRetries = 3;
   let lastError = null;
+  let triedDirect = false;
 
   for (let attempt = 0; attempt < maxRetries; attempt++) {
     let proxyUrl = null;
     const startTime = Date.now();
+    const tryDirect = shouldTryDirectConnection();
 
     try {
       // Add delay to avoid rate limiting (only when not using proxy)
-      if (!useProxyMode) {
+      if (!useProxyMode || tryDirect) {
         await new Promise((resolve) =>
           setTimeout(resolve, GOOGLE_TRANSLATE_DELAY)
         );
       }
 
-      // Get proxy only if proxy mode is enabled
-      proxyUrl = await getNextProxy();
+      // Get proxy only if proxy mode is enabled AND not trying direct
+      if (!tryDirect) {
+        proxyUrl = await getNextProxy();
+      } else {
+        triedDirect = true;
+      }
+      
       const fetchOptions = {};
 
       if (proxyUrl) {
@@ -442,13 +486,22 @@ async function quickTranslationCheck(
       // Calculate simple similarity
       const similarity = calculateSimilarity(backTranslated, original);
 
+      // If direct connection succeeded while in proxy mode, disable proxy mode
+      if (triedDirect && useProxyMode) {
+        disableProxyMode();
+      }
+
       return similarity >= SIMILARITY_THRESHOLD;
     } catch (error) {
       lastError = error;
 
       // Enable proxy mode on rate limit
       if (error.message && error.message.includes("Too Many Requests")) {
-        enableProxyMode();
+        // If we tried direct and got rate limited, stay in proxy mode
+        if (triedDirect) {
+          console.log("⚠️  Direct connection still rate limited, continuing with proxies");
+        }
+        await enableProxyMode();
         // Retry immediately with proxy
         continue;
       }
@@ -911,6 +964,15 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
 
         for (let langIndex = 0; langIndex < languages.length; langIndex++) {
           const language = languages[langIndex];
+          
+          // Save checkpoint when starting new language
+          if (checkpoint.lastLanguage !== language) {
+            checkpoint.lastProject = project;
+            checkpoint.lastMetadataFile = metadataFile;
+            checkpoint.lastLanguage = language;
+            saveCheckpoint();
+          }
+          
           try {
             const translatedContent = getTranslationContent(
               translations,
@@ -997,6 +1059,8 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
               language,
               error: langError.message,
             });
+            // Save checkpoint on error
+            saveCheckpoint();
           }
         }
 
@@ -1009,6 +1073,8 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
           `Error processing metadata file ${metadataFile}: ${fileError.message}`
         );
         stats.errors.push({ file: metadataFile, error: fileError.message });
+        // Save checkpoint on error
+        saveCheckpoint();
       }
     }
 
@@ -1063,16 +1129,11 @@ function appendIssueToTSV(
 
   fs.appendFileSync(tsvPath, row + "\n", "utf8");
   
-  // Update checkpoint
+  // Update checkpoint (will be saved when language changes)
   checkpoint.lastProject = project;
   checkpoint.lastMetadataFile = metadataFile;
   checkpoint.lastLanguage = language;
   checkpoint.processedKeys.add(`${project}:${metadataFile}:${keyPath}:${language}`);
-  
-  // Save checkpoint every 5 issues
-  if (checkpoint.processedKeys.size % 5 === 0) {
-    saveCheckpoint();
-  }
 }
 
 /**
@@ -1108,6 +1169,7 @@ async function verifyAllTranslationsSpellCheck() {
   console.log("BLACKLISTED_PROXIES: ", proxyBlacklist.size);
   console.log("CHECKPOINT_FILE: ", CHECKPOINT_FILE);
   console.log("RESUMING: ", resuming ? "yes" : "no");
+  console.log("DIRECT_RETRY_INTERVAL: ", DIRECT_RETRY_INTERVAL / 1000, "seconds");
 
   const ollamaRunning = await isOllamaRunning();
   if (!ollamaRunning) {

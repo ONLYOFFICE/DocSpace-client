@@ -44,7 +44,7 @@ import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router";
+
 import styled, { css } from "styled-components";
 import { useLocation } from "react-router";
 import { MainButton } from "@docspace/shared/components/main-button";

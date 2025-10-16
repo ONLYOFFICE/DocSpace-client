@@ -3,7 +3,7 @@
   "content": "Invite contacts",
   "content_en_sha1_hash": "43f0bde391682834922b0b6b0e4c82714e94586e",
   "created_at": "2025-05-19T21:30:45.983Z",
-  "updated_at": "2025-10-13T14:41:02.844Z",
+  "updated_at": "2025-10-16T07:29:35.499Z",
   "comment": {
     "text": "The translation key \"InviteContacts\" is used to display the phrase \"Invite contacts\". It appears as a button label on a UI element, allowing users to add new contact information.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2003,
+      "line_number": 2006,
       "context": "disabled: !isTemplateOwner,\n },\n {\n id: \"option_invite-users-to-room\",\n key: \"invite-users-to-room\",\n label: t(\"Common:InviteContacts\"),\n icon: PersonReactSvgUrl,\n onClick: (e) => this.onClickInviteUsers(e, item.roomType),\n disabled: false,\n action: item.id,\n },",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Describe your problem",
   "content_en_sha1_hash": "a3f26ab859868b6ad1c8933f5b3794feee142cae",
   "created_at": "2025-05-19T21:30:47.762Z",
-  "updated_at": "2025-09-07T07:53:15.452Z",
+  "updated_at": "2025-10-16T07:29:36.038Z",
   "comment": {
     "text": "This translation key is used as a placeholder text for a question that users are asked to describe their problem or issue in a recover access modal dialog.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog.tsx",
-      "line_number": 191,
+      "line_number": 312,
       "context": "heightScale={false}\n value={description}\n isDisabled={loading}\n heightTextArea=\"70px\"\n id=\"recover-access-modal_description\"\n placeholder={t(\"Common:RecoverDescribeYourProblemPlaceholder\")}\n onChange={onChangeDescription}\n maxLength={255}\n aria-label=\"Problem description\"\n aria-invalid={descErr}\n aria-required=\"true\"",
       "module": "/packages/shared"
     }

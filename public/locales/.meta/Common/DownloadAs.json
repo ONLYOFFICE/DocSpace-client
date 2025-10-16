@@ -3,7 +3,7 @@
   "content": "Download as",
   "content_en_sha1_hash": "e10ee8f09efe43f28dc9a950ae25d485fde3ca5e",
   "created_at": "2025-05-19T21:30:44.663Z",
-  "updated_at": "2025-10-13T14:41:03.122Z",
+  "updated_at": "2025-10-16T07:29:35.974Z",
   "comment": {
     "text": "The translation key \"DownloadAs\" is used to display the text \"Download as\", which appears on a download button in the UI. This text allows users to select a file format or destination when downloading a file from an application. It may appear in dialog boxes or buttons related to file management and downloads.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2192,
+      "line_number": 2195,
       "context": "disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {\n id: \"option_download-as\",\n key: \"download-as\",\n label: t(\"Common:DownloadAs\"),\n icon: DownloadAsReactSvgUrl,\n onClick: this.onClickDownloadAs,\n disabled: !item.security?.Download,\n },\n ...moveActions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2192,
+      "line_number": 2195,
       "context": "disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {\n id: \"option_download-as\",\n key: \"download-as\",\n label: t(\"Common:DownloadAs\"),\n icon: DownloadAsReactSvgUrl,\n onClick: this.onClickDownloadAs,\n disabled: !item.security?.Download,\n },\n ...moveActions,",
       "module": "/packages/client"
     },

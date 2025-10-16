@@ -17,17 +17,20 @@ const {
 const axios = require("axios");
 const { translate } = require("@vitalets/google-translate-api");
 const { HttpsProxyAgent } = require("https-proxy-agent");
-const fs = require("fs");
 
 const MODEL = process.env.OLLAMA_SPELLCHECK_MODEL || "gemma3n:latest";
 const LANGUAGES_TO_CHECK = process.argv[2] ? process.argv[2].split(",") : null;
 const OLLAMA_TIMEOUT = parseInt(process.env.OLLAMA_TIMEOUT, 10) || 90000;
 const USE_GOOGLE_PRECHECK = process.env.USE_GOOGLE_PRECHECK !== "false"; // Default true
-const SIMILARITY_THRESHOLD = parseFloat(process.env.SIMILARITY_THRESHOLD) || 0.85; // 85% similarity
-const GOOGLE_TRANSLATE_DELAY = parseInt(process.env.GOOGLE_TRANSLATE_DELAY, 10) || 100; // 100ms delay between requests
+const SIMILARITY_THRESHOLD =
+  parseFloat(process.env.SIMILARITY_THRESHOLD) || 0.85; // 85% similarity
+const GOOGLE_TRANSLATE_DELAY =
+  parseInt(process.env.GOOGLE_TRANSLATE_DELAY, 10) || 100; // 100ms delay between requests
 const PROXY_TIMEOUT = parseInt(process.env.PROXY_TIMEOUT, 10) || 5000; // 5 seconds max for proxy request
-const PROXY_API_URL = process.env.PROXY_API_URL || 'https://proxylist.geonode.com/api/proxy-list?limit=500&page=1&sort_by=lastChecked&sort_type=desc&protocols=http%2Chttps';
-const PROXY_BLACKLIST_FILE = path.join(appRootPath, 'proxy-blacklist.json');
+const PROXY_API_URL =
+  process.env.PROXY_API_URL ||
+  "https://proxylist.geonode.com/api/proxy-list?limit=500&page=1&sort_by=lastChecked&sort_type=desc&protocols=http%2Chttps";
+const PROXY_BLACKLIST_FILE = path.join(appRootPath, "proxy-blacklist.json");
 
 // Dynamic proxy list - will be loaded from API
 let PROXY_LIST = [];
@@ -109,9 +112,11 @@ async function isOllamaRunning() {
 function loadProxyBlacklist() {
   try {
     if (fs.existsSync(PROXY_BLACKLIST_FILE)) {
-      const data = fs.readFileSync(PROXY_BLACKLIST_FILE, 'utf8');
+      const data = fs.readFileSync(PROXY_BLACKLIST_FILE, "utf8");
       const blacklist = JSON.parse(data);
-      console.log(`📋 Loaded ${blacklist.length} blacklisted proxies from file`);
+      console.log(
+        `📋 Loaded ${blacklist.length} blacklisted proxies from file`
+      );
       return new Set(blacklist);
     }
   } catch (error) {
@@ -126,8 +131,14 @@ function loadProxyBlacklist() {
 function saveProxyBlacklist() {
   try {
     const blacklistArray = Array.from(proxyBlacklist);
-    fs.writeFileSync(PROXY_BLACKLIST_FILE, JSON.stringify(blacklistArray, null, 2), 'utf8');
-    console.log(`💾 Saved ${blacklistArray.length} blacklisted proxies to file`);
+    fs.writeFileSync(
+      PROXY_BLACKLIST_FILE,
+      JSON.stringify(blacklistArray, null, 2),
+      "utf8"
+    );
+    console.log(
+      `💾 Saved ${blacklistArray.length} blacklisted proxies to file`
+    );
   } catch (error) {
     console.error(`❌ Failed to save proxy blacklist: ${error.message}`);
   }
@@ -139,26 +150,32 @@ function saveProxyBlacklist() {
  */
 async function fetchProxyList() {
   try {
-    console.log('🔄 Fetching fresh proxy list from API...');
+    console.log("🔄 Fetching fresh proxy list from API...");
     const response = await axios.get(PROXY_API_URL, { timeout: 10000 });
-    
-    if (response.data && response.data.data && Array.isArray(response.data.data)) {
+
+    if (
+      response.data &&
+      response.data.data &&
+      Array.isArray(response.data.data)
+    ) {
       const allProxies = response.data.data
-        .filter(proxy => proxy.protocols && proxy.protocols.includes('http'))
-        .map(proxy => {
-          const protocol = proxy.protocols.includes('https') ? 'https' : 'http';
+        .filter((proxy) => proxy.protocols && proxy.protocols.includes("http"))
+        .map((proxy) => {
+          const protocol = proxy.protocols.includes("https") ? "https" : "http";
           return `${protocol}://${proxy.ip}:${proxy.port}`;
         });
-      
+
       // Filter out blacklisted proxies
-      const proxies = allProxies.filter(proxy => !proxyBlacklist.has(proxy));
-      
+      const proxies = allProxies.filter((proxy) => !proxyBlacklist.has(proxy));
+
       const filtered = allProxies.length - proxies.length;
-      console.log(`✅ Loaded ${proxies.length} fresh proxies (filtered ${filtered} blacklisted)`);
+      console.log(
+        `✅ Loaded ${proxies.length} fresh proxies (filtered ${filtered} blacklisted)`
+      );
       return proxies;
     }
-    
-    console.warn('⚠️  Failed to parse proxy list from API');
+
+    console.warn("⚠️  Failed to parse proxy list from API");
     return [];
   } catch (error) {
     console.error(`❌ Failed to fetch proxy list: ${error.message}`);
@@ -172,20 +189,24 @@ async function fetchProxyList() {
 async function enableProxyMode() {
   if (!useProxyMode) {
     useProxyMode = true;
-    console.log('\n⚠️  Rate limit detected! Enabling proxy mode...');
-    
+    console.log("\n⚠️  Rate limit detected! Enabling proxy mode...");
+
     // Fetch fresh proxy list if empty
     if (PROXY_LIST.length === 0) {
       PROXY_LIST = await fetchProxyList();
-      
+
       if (PROXY_LIST.length === 0) {
-        console.error('❌ No proxies available! Continuing without proxy...');
+        console.error("❌ No proxies available! Continuing without proxy...");
         useProxyMode = false;
         return;
       }
     }
-    
-    console.log(`📡 Available proxies: ${PROXY_LIST.length - failedProxies.size}/${PROXY_LIST.length}\n`);
+
+    console.log(
+      `📡 Available proxies: ${PROXY_LIST.length - failedProxies.size}/${
+        PROXY_LIST.length
+      }\n`
+    );
   }
 }
 
@@ -197,15 +218,17 @@ async function getNextProxy() {
   if (!useProxyMode || PROXY_LIST.length === 0) {
     return null;
   }
-  
-  const availableProxies = PROXY_LIST.filter((_, index) => !failedProxies.has(index));
-  
+
+  const availableProxies = PROXY_LIST.filter(
+    (_, index) => !failedProxies.has(index)
+  );
+
   if (availableProxies.length === 0) {
     // All proxies failed - try to fetch fresh list
-    console.log('⚠️  All proxies failed, fetching fresh list...');
+    console.log("⚠️  All proxies failed, fetching fresh list...");
     failedProxies.clear();
     currentProxyIndex = 0;
-    
+
     // Try to fetch new proxies
     const newProxies = await fetchProxyList();
     if (newProxies.length > 0) {
@@ -213,20 +236,20 @@ async function getNextProxy() {
       console.log(`✅ Loaded ${PROXY_LIST.length} new proxies`);
       return PROXY_LIST[0];
     }
-    
+
     // If still no proxies, return first one from old list
     return PROXY_LIST.length > 0 ? PROXY_LIST[0] : null;
   }
-  
+
   // Round-robin through available proxies
   const proxy = PROXY_LIST[currentProxyIndex];
   currentProxyIndex = (currentProxyIndex + 1) % PROXY_LIST.length;
-  
+
   // Skip failed proxies
   if (failedProxies.has(currentProxyIndex - 1)) {
     return await getNextProxy();
   }
-  
+
   return proxy;
 }
 
@@ -235,14 +258,20 @@ async function getNextProxy() {
  * @param {string} proxyUrl - Proxy URL to mark as failed
  * @param {string} reason - Reason for failure
  */
-function markProxyAsFailed(proxyUrl, reason = 'unknown') {
+function markProxyAsFailed(proxyUrl, reason = "unknown") {
   const index = PROXY_LIST.indexOf(proxyUrl);
   if (index !== -1 && !failedProxies.has(index)) {
     failedProxies.add(index);
-    
+
     // Add to persistent blacklist for certain errors
-    const permanentErrors = ['ECONNREFUSED', 'ETIMEDOUT', 'timeout', 'ENOTFOUND', 'EHOSTUNREACH'];
-    if (permanentErrors.includes(reason) || reason.startsWith('slow:')) {
+    const permanentErrors = [
+      "ECONNREFUSED",
+      "ETIMEDOUT",
+      "timeout",
+      "ENOTFOUND",
+      "EHOSTUNREACH",
+    ];
+    if (permanentErrors.includes(reason) || reason.startsWith("slow:")) {
       if (!proxyBlacklist.has(proxyUrl)) {
         proxyBlacklist.add(proxyUrl);
         // Save blacklist every 10 new entries to avoid too many writes
@@ -251,9 +280,11 @@ function markProxyAsFailed(proxyUrl, reason = 'unknown') {
         }
       }
     }
-    
+
     const remaining = PROXY_LIST.length - failedProxies.size;
-    console.log(`❌ Proxy failed (${reason}): ${proxyUrl} | Remaining: ${remaining}/${PROXY_LIST.length}`);
+    console.log(
+      `❌ Proxy failed (${reason}): ${proxyUrl} | Remaining: ${remaining}/${PROXY_LIST.length}`
+    );
   }
 }
 
@@ -264,47 +295,53 @@ function markProxyAsFailed(proxyUrl, reason = 'unknown') {
  * @param {string} language - The language code
  * @returns {Promise<boolean>} True if translation seems accurate, false otherwise
  */
-async function quickTranslationCheck(translatedContent, englishContent, language) {
+async function quickTranslationCheck(
+  translatedContent,
+  englishContent,
+  language
+) {
   const maxRetries = 3;
   let lastError = null;
-  
+
   for (let attempt = 0; attempt < maxRetries; attempt++) {
     let proxyUrl = null;
     const startTime = Date.now();
-    
+
     try {
       // Add delay to avoid rate limiting (only when not using proxy)
       if (!useProxyMode) {
-        await new Promise(resolve => setTimeout(resolve, GOOGLE_TRANSLATE_DELAY));
+        await new Promise((resolve) =>
+          setTimeout(resolve, GOOGLE_TRANSLATE_DELAY)
+        );
       }
-      
+
       // Get proxy only if proxy mode is enabled
       proxyUrl = await getNextProxy();
       const fetchOptions = {};
-      
+
       if (proxyUrl) {
         fetchOptions.agent = new HttpsProxyAgent(proxyUrl);
       }
-      
+
       // Translate the foreign language back to English with timeout
-      const translatePromise = translate(translatedContent, { 
-        from: language, 
-        to: 'en',
-        fetchOptions 
+      const translatePromise = translate(translatedContent, {
+        from: language,
+        to: "en",
+        fetchOptions,
       });
-      
+
       let result;
-      
+
       if (proxyUrl) {
         // Add timeout for proxy requests
         const timeoutPromise = new Promise((_, reject) => {
           const timer = setTimeout(() => {
-            reject(new Error('PROXY_TIMEOUT'));
+            reject(new Error("PROXY_TIMEOUT"));
           }, PROXY_TIMEOUT);
           // Ensure timer is cleared
           return timer;
         });
-        
+
         try {
           result = await Promise.race([translatePromise, timeoutPromise]);
         } catch (raceError) {
@@ -314,60 +351,67 @@ async function quickTranslationCheck(translatedContent, englishContent, language
       } else {
         result = await translatePromise;
       }
-      
+
       const requestTime = Date.now() - startTime;
-      
+
       // Mark slow proxies as failed
       if (proxyUrl && requestTime > PROXY_TIMEOUT * 0.8) {
         markProxyAsFailed(proxyUrl, `slow: ${requestTime}ms`);
       }
-      
+
       const backTranslated = result.text.toLowerCase().trim();
       const original = englishContent.toLowerCase().trim();
-      
+
       // Calculate simple similarity
       const similarity = calculateSimilarity(backTranslated, original);
-      
+
       return similarity >= SIMILARITY_THRESHOLD;
     } catch (error) {
       lastError = error;
-      
+
       // Enable proxy mode on rate limit
-      if (error.message && error.message.includes('Too Many Requests')) {
+      if (error.message && error.message.includes("Too Many Requests")) {
         enableProxyMode();
         // Retry immediately with proxy
         continue;
       }
-      
+
       // Mark proxy as failed if it was used
       if (proxyUrl) {
-        if (error.message === 'PROXY_TIMEOUT') {
-          markProxyAsFailed(proxyUrl, 'timeout');
-        } else if (error.code === 'ECONNREFUSED' || error.code === 'ETIMEDOUT') {
+        if (error.message === "PROXY_TIMEOUT") {
+          markProxyAsFailed(proxyUrl, "timeout");
+        } else if (
+          error.code === "ECONNREFUSED" ||
+          error.code === "ETIMEDOUT"
+        ) {
           markProxyAsFailed(proxyUrl, error.code);
         } else if (error.code) {
           markProxyAsFailed(proxyUrl, error.code);
         } else {
           // Unknown error with proxy
-          markProxyAsFailed(proxyUrl, 'error');
+          markProxyAsFailed(proxyUrl, "error");
         }
       }
-      
+
       // If it's the last attempt, log and return false
       if (attempt === maxRetries - 1) {
-        if (error.message.includes('Too Many Requests')) {
-          console.warn(`Google Translate rate limit reached for ${language}, falling back to Ollama`);
+        if (error.message.includes("Too Many Requests")) {
+          console.warn(
+            `Google Translate rate limit reached for ${language}, falling back to Ollama`
+          );
         } else {
-          console.warn(`Google Translate failed for ${language} after ${maxRetries} attempts: ${error.message}`);
+          console.warn(
+            `Google Translate failed for ${language} after ${maxRetries} attempts: ${error.message}`
+          );
         }
         return false;
       }
-      
+
       // Wait a bit before retrying
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise((resolve) => setTimeout(resolve, 300));
     }
   }
-  
+
   return false;
 }
 
@@ -380,16 +424,16 @@ async function quickTranslationCheck(translatedContent, englishContent, language
 function calculateSimilarity(str1, str2) {
   const longer = str1.length > str2.length ? str1 : str2;
   const shorter = str1.length > str2.length ? str2 : str1;
-  
+
   if (longer.length === 0) return 1.0;
-  
+
   // Simple word-based comparison
   const words1 = new Set(str1.split(/\s+/));
   const words2 = new Set(str2.split(/\s+/));
-  
-  const intersection = new Set([...words1].filter(x => words2.has(x)));
+
+  const intersection = new Set([...words1].filter((x) => words2.has(x)));
   const union = new Set([...words1, ...words2]);
-  
+
   // Jaccard similarity
   return intersection.size / union.size;
 }
@@ -420,26 +464,31 @@ async function verifyTranslation(
 
   // Quick pre-check with Google Translate if enabled
   if (USE_GOOGLE_PRECHECK) {
-    const keyProgressStr = progress && progress.keyIndex && progress.totalKeys
-      ? `[${progress.keyIndex}/${progress.totalKeys}] `
-      : "";
+    const keyProgressStr =
+      progress && progress.keyIndex && progress.totalKeys
+        ? `[${progress.keyIndex}/${progress.totalKeys}] `
+        : "";
     const langProgressStr = progress
       ? ` [${progress.current}/${progress.total}]`
       : "";
-    
+
     console.log(
       `${keyProgressStr}Quick check for ${keyPath} in ${language}${langProgressStr}`
     );
-    
-    const isAccurate = await quickTranslationCheck(translatedContent, englishContent, language);
-    
+
+    const isAccurate = await quickTranslationCheck(
+      translatedContent,
+      englishContent,
+      language
+    );
+
     if (isAccurate) {
       console.log(
         `${keyProgressStr}✓ Translation seems accurate, skipping Ollama check for ${keyPath} in ${language}${langProgressStr}`
       );
       return [];
     }
-    
+
     console.log(
       `${keyProgressStr}⚠ Translation may have issues, proceeding with Ollama check for ${keyPath} in ${language}${langProgressStr}`
     );
@@ -493,9 +542,10 @@ If the translation correctly conveys the meaning, return an empty array [].
 
   while (retries < maxRetries) {
     try {
-      const keyProgressStr = progress && progress.keyIndex && progress.totalKeys
-        ? `[${progress.keyIndex}/${progress.totalKeys}] `
-        : "";
+      const keyProgressStr =
+        progress && progress.keyIndex && progress.totalKeys
+          ? `[${progress.keyIndex}/${progress.totalKeys}] `
+          : "";
       const langProgressStr = progress
         ? ` [${progress.current}/${progress.total}]`
         : "";
@@ -530,14 +580,14 @@ If the translation correctly conveys the meaning, return an empty array [].
 
           // Remove markdown code blocks if present
           // Handle both ```json and ``` variants
-          if (jsonText.startsWith('```')) {
+          if (jsonText.startsWith("```")) {
             // Find the first newline after opening ```
-            const firstNewline = jsonText.indexOf('\n');
+            const firstNewline = jsonText.indexOf("\n");
             if (firstNewline !== -1) {
               jsonText = jsonText.substring(firstNewline + 1);
             }
             // Remove closing ```
-            const lastBackticks = jsonText.lastIndexOf('```');
+            const lastBackticks = jsonText.lastIndexOf("```");
             if (lastBackticks !== -1) {
               jsonText = jsonText.substring(0, lastBackticks);
             }
@@ -545,7 +595,7 @@ If the translation correctly conveys the meaning, return an empty array [].
           }
 
           // Check if response is truncated or corrupted
-          if (jsonText.includes('>]>]>]>]') || jsonText.length > 10000) {
+          if (jsonText.includes(">]>]>]>]") || jsonText.length > 10000) {
             console.warn(
               `Corrupted or truncated response for ${keyPath} in ${language}, skipping`
             );
@@ -554,8 +604,8 @@ If the translation correctly conveys the meaning, return an empty array [].
 
           // Clean up common JSON issues from LLM responses
           // Fix improperly escaped brackets in strings
-          jsonText = jsonText.replace(/\\\[/g, '[').replace(/\\\]/g, ']');
-          
+          jsonText = jsonText.replace(/\\\[/g, "[").replace(/\\\]/g, "]");
+
           // Try to parse as JSON
           const issues = JSON.parse(jsonText);
           if (Array.isArray(issues)) {
@@ -968,7 +1018,7 @@ function escapeTsvField(field) {
   if (field == null) return "";
   const str = String(field);
   // Replace tabs with spaces and newlines with spaces
-  return str.replace(/\t/g, ' ').replace(/\n/g, ' ').replace(/\r/g, '');
+  return str.replace(/\t/g, " ").replace(/\n/g, " ").replace(/\r/g, "");
 }
 
 /**
@@ -981,7 +1031,7 @@ async function verifyAllTranslationsSpellCheck() {
   // Load proxy blacklist at startup
   proxyBlacklist.clear();
   const loadedBlacklist = loadProxyBlacklist();
-  loadedBlacklist.forEach(proxy => proxyBlacklist.add(proxy));
+  loadedBlacklist.forEach((proxy) => proxyBlacklist.add(proxy));
 
   // console all variables
   console.log("OLLAMA_MODEL: ", MODEL);
@@ -990,7 +1040,10 @@ async function verifyAllTranslationsSpellCheck() {
   console.log("USE_GOOGLE_PRECHECK: ", USE_GOOGLE_PRECHECK);
   console.log("SIMILARITY_THRESHOLD: ", SIMILARITY_THRESHOLD);
   console.log("GOOGLE_TRANSLATE_DELAY: ", GOOGLE_TRANSLATE_DELAY, "ms");
-  console.log("PROXY_MODE: ", useProxyMode ? "enabled" : "disabled (will enable on rate limit)");
+  console.log(
+    "PROXY_MODE: ",
+    useProxyMode ? "enabled" : "disabled (will enable on rate limit)"
+  );
   console.log("PROXY_TIMEOUT: ", PROXY_TIMEOUT, "ms");
   console.log("PROXY_API_URL: ", PROXY_API_URL);
   console.log("PROXY_BLACKLIST_FILE: ", PROXY_BLACKLIST_FILE);
@@ -1110,7 +1163,15 @@ verifyAllTranslationsSpellCheck()
 
     console.log("\n=== Verification Complete ===");
     console.log(`Total issues found: ${stats.updatedIssues}`);
-    console.log(`Results saved to: ${path.join(appRootPath, `spell-check-issues-${new Date().toISOString().replace(/[:.]/g, "-").slice(0, -5)}.tsv`)}`);
+    console.log(
+      `Results saved to: ${path.join(
+        appRootPath,
+        `spell-check-issues-${new Date()
+          .toISOString()
+          .replace(/[:.]/g, "-")
+          .slice(0, -5)}.tsv`
+      )}`
+    );
     console.log(`Blacklisted proxies: ${proxyBlacklist.size}`);
     console.log("\nThank you for using the translation verification tool!");
 

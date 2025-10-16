@@ -490,7 +490,7 @@ class CreateEditRoomStore {
       preparingDataForCopyingToRoom,
     } = this.filesActionsStore;
     const { deleteThirdParty } = this.thirdPartyStore;
-    const { createRoom, selection, bufferSelection, setSelection } =
+    const { createRoom, selection, bufferSelection, setBufferSelection } =
       this.filesStore;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
     const { cover, clearCoverProps } = this.dialogsStore;
@@ -623,7 +623,7 @@ class CreateEditRoomStore {
 
         showInfoPanel();
         openMembersTab();
-        setSelection([{ ...roomInfo, isRoom: true }]);
+        setBufferSelection({ ...roomInfo, isRoom: true });
       }
 
       if (successToast) toastr.success(successToast);

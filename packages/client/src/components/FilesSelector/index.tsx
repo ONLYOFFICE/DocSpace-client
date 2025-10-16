@@ -144,7 +144,6 @@ const FilesSelectorWrapper = ({
   withCreate,
   folderIsShared,
   checkCreating,
-  logoText,
   isPortalView = false,
   withoutDescriptionText = false,
 }: FilesSelectorProps) => {

@@ -10,7 +10,7 @@
   "DeleteGroupDescription": "Il gruppo {{groupName}} verrà eliminato. Gli utenti del gruppo non verranno rimossi da {{productName}}. Sei sicuro di voler continuare?",
   "DeleteGroupTitle": "Elimina gruppo",
   "DeleteItem": "Stai per spostare <strong>{{name}}</strong> nel {{trashSection}}.",
-  "DeleteItemForever": "Sta per eliminare <strong>{{name}}</strong>.",
+  "DeleteItemForever": "Stai per eliminare <strong>{{name}}</strong>.",
   "DeleteRoom": "La stanza <strong>\"{{roomName}}\"</strong> verrà eliminata definitivamente. Tutti i dati e gli accessi utente andranno persi.",
   "DeleteRoomTitle": "Eliminare questa stanza?",
   "DeleteRoomWarning": "Comprendo le conseguenze e desidero eliminare la stanza",
@@ -27,6 +27,6 @@
   "FoldersPermanentlyDeleted": "Le cartelle saranno rimosse definitivamente dal {{trashSection}}.",
   "ItemsDeletedAfter": "Questi elementi saranno eliminati definitivamente tra 30 giorni.",
   "ItemsPermanentlyDeleted": "Questi elementi saranno rimossi definitivamente dal {{trashSection}}.",
-  "removeFromListDescription": "Sta per rimuovere <1>{{title}}</1> dalla lista. È sicuro di voler continuare?",
-  "removeFromListDescriptionPlural": "Sta per rimuovere <1>elementi ({{count}})</1> dalla lista. È sicuro di voler continuare?"
+  "removeFromListDescription": "Stai per rimuovere <1>{{title}}</1> dall’elenco. Sei sicuro di voler continuare?",
+  "removeFromListDescriptionPlural": "Stai per rimuovere <1>elementi ({{count}})</1> dall’elenco. Sei sicuro di voler continuare?"
 }

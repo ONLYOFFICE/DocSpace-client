@@ -90,43 +90,37 @@ const withLoading = (WrappedComponent) => {
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedLngTZSettings &&
-      !showPortalSettingsLoader;
+      isLoadedLngTZSettings;
 
     const isLoadedCustomizationSettingWelcomePageSettings =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedWelcomePageSettings &&
-      !showPortalSettingsLoader;
+      isLoadedWelcomePageSettings;
 
     const isLoadedCustomizationSettingPortalRenaming =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      loadedPortalRenaming &&
-      !showPortalSettingsLoader;
+      loadedPortalRenaming;
 
     const isLoadedCustomizationSettingDNSSettings =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedDNSSettings &&
-      !showPortalSettingsLoader;
+      isLoadedDNSSettings;
 
     const isLoadedCustomizationConfigureDeepLink =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedConfigureDeepLink &&
-      !showPortalSettingsLoader;
+      isLoadedConfigureDeepLink;
 
     const isLoadedCustomizationAdManagement =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedAdManagement &&
-      !showPortalSettingsLoader;
+      isLoadedAdManagement;
 
     const getIsLoadedPage = () => {
       switch (setting) {

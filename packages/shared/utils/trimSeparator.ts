@@ -24,6 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { ContextMenuModel } from "../components/context-menu/ContextMenu.types";
+
+const DESTRUCTIVE_ACTIONS = [
+  "delete",
+  "remove-from-recent",
+  "remove-shared-folder-or-file",
+  "remove-shared-room",
+  "unsubscribe",
+];
+
 export function trimSeparator(array: ContextMenuModel[]) {
   if (!array || !Array.isArray(array) || array.length === 0) return array;
 
@@ -38,6 +48,36 @@ export function trimSeparator(array: ContextMenuModel[]) {
     } else if (!el?.isSeparator && !el?.disabled) {
       result.push(el);
     }
+  }
+
+  // If there are few elements, remove all separators and leave only between the destructive group
+
+  const nonSeparatorItems = result.filter((item) => !item?.isSeparator);
+
+  if (nonSeparatorItems.length < 6) {
+    const filteredResult: ContextMenuModel[] = [];
+
+    for (let i = 0; i < result.length; i++) {
+      const item = result[i];
+
+      if (item?.isSeparator) {
+        const nextItem = result[i + 1];
+        if (
+          nextItem &&
+          DESTRUCTIVE_ACTIONS.includes(nextItem.key?.toString() || "")
+        ) {
+          filteredResult.push(item);
+        }
+      } else {
+        filteredResult.push(item);
+      }
+    }
+
+    if (filteredResult[filteredResult.length - 1]?.isSeparator) {
+      filteredResult.pop();
+    }
+
+    return filteredResult;
   }
 
   if (result[result.length - 1]?.isSeparator) result.pop();

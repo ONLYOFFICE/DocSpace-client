@@ -6,7 +6,7 @@
   "DeleteFilesAndFoldersForever": "您即将删除<strong>文件({{filesCount}})</strong>和<strong>文件夹({{foldersCount}})</strong>。",
   "DeleteFilesForever": "您即将删除<strong>{{filesCount}}个文件</strong>。",
   "DeleteFolders": "您即将把<strong>{{foldersCount}}个文件夹</strong>移至{{trashSection}}。",
-  "DeleteFoldersForever": "您即将删除<strong>{{filesCount}}个文件夹</strong>。",
+  "DeleteFoldersForever": "您即将删除<strong>({{foldersCount}})个文件夹</strong>。",
   "DeleteGroupDescription": "组{{groupName}} 将被删除。组中的用户不会从{{productName}}中删除。您确定要继续吗？",
   "DeleteGroupTitle": "删除群组",
   "DeleteItem": "您即将把<strong>{{name}}</strong>移至{{trashSection}}。",

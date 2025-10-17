@@ -3067,6 +3067,9 @@ const Dark: TTheme = {
     submitToGalleryTile: {
       bodyText: darkGrayDark,
       closeIconFill: darkGrayDark,
+      border: `1px solid ${grayDarkStrong}`,
+      background: darkGrayLight,
+      colorExt: gray,
     },
   },
 

@@ -3,7 +3,7 @@
   "content": "Learn more",
   "content_en_sha1_hash": "824d76b124e6289f372e2ff6bcba91e8939343bd",
   "created_at": "2025-05-19T21:30:46.111Z",
-  "updated_at": "2025-10-03T13:19:30.431Z",
+  "updated_at": "2025-10-16T07:29:35.565Z",
   "comment": {
     "text": "The translation key \"LearnMore\" is used to display a link or button that encourages users to access more information about a particular topic, in this case, privacy limitations warnings, DNS settings, or language and time zone settings. This text appears as a clickable link or button, prompting users to learn additional details.",
     "is_auto": true,
@@ -60,7 +60,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/index.js",
-      "line_number": 129,
+      "line_number": 123,
       "context": "href={isAutoBackupPage ? automaticBackupUrl : dataBackupUrl}\n target=\"_blank\"\n isBold\n isHovered\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </span>\n </Text>\n }",
       "module": "/packages/client"
     },
@@ -186,7 +186,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 257,
+      "line_number": 267,
       "context": "target={LinkTarget.blank}\n isHovered\n href={invitationSettingsUrl}\n fontWeight={600}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </LearnMoreWrapper>\n \n <div className={styles.content}>",
       "module": "/packages/client"
     },
@@ -198,7 +198,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/passwordStrength.js",
-      "line_number": 283,
+      "line_number": 291,
       "context": "color={currentColorScheme.main?.accent}\n target=\"_blank\"\n isHovered\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </LearnMoreWrapper>\n <Text fontSize=\"14px\" fontWeight=\"600\" className=\"length-subtitle\">\n {t(\"PasswordMinLenght\")}",
       "module": "/packages/client"
     },
@@ -210,7 +210,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 271,
+      "line_number": 259,
       "context": "target=\"_blank\"\n isHovered\n href={tfaSettingsUrl}\n dataTestId=\"tfa_component_learn_more\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </LearnMoreWrapper>\n \n <RadioButtonGroup",
       "module": "/packages/client"
     },
@@ -228,7 +228,7 @@
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 266,
+      "line_number": 265,
       "context": "fontSize=\"13px\"\n fontWeight={600}\n href={customFilterExternalLink}\n isHovered\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </>\n );",
       "module": "/packages/shared"
     },

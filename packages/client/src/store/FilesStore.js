@@ -72,7 +72,6 @@ import {
   ROOMS_PROVIDER_TYPE_NAME,
   thumbnailStatuses,
   CategoryType,
-  SHARED_WITH_ME_PATH,
 } from "@docspace/shared/constants";
 
 import {
@@ -1637,8 +1636,8 @@ class FilesStore {
 
     if (
       folderId === "@my" &&
-      this.userStore.user.isVisitor &&
-      !this.userStore.user.hasPersonalFolder
+      this.userStore.user?.isVisitor &&
+      !this.userStore.user?.hasPersonalFolder
     ) {
       const url = getCategoryUrl(CategoryType.Shared);
       return window.DocSpace.navigate(
@@ -2307,8 +2306,7 @@ class FilesStore {
 
       const isSharedWithMeFolderSection =
         this.treeFoldersStore.sharedWithMeFolderId === item.rootFolderId &&
-        item.rootFolderType === FolderType.SHARE &&
-        window.location.pathname.includes(SHARED_WITH_ME_PATH);
+        item.rootFolderType === FolderType.SHARE;
 
       let fileOptions = [
         // "open",
@@ -2372,6 +2370,10 @@ class FilesStore {
         "stop-filling",
       ];
 
+      if (item.external && item.isLinkExpired) {
+        fileOptions = ["select", "separator0", "remove-shared-folder-or-file"];
+      }
+
       if (optionsToRemove.length) {
         fileOptions = removeOptions(fileOptions, optionsToRemove);
       }
@@ -2399,13 +2401,6 @@ class FilesStore {
         ]);
       }
 
-      if (isRecentFolder) {
-        fileOptions = removeOptions(fileOptions, [
-          "mark-as-favorite",
-          "remove-from-favorites",
-        ]);
-      }
-
       if (!item.security?.FillingStatus) {
         fileOptions = removeOptions(fileOptions, ["filling-status"]);
       }
@@ -2424,7 +2419,7 @@ class FilesStore {
         ]);
       }
 
-      if (!canSetUpCustomFilter || !isExtsCustomFilter || isMyFolder) {
+      if (!canSetUpCustomFilter || !isExtsCustomFilter) {
         fileOptions = removeOptions(fileOptions, ["custom-filter"]);
       }
 
@@ -2858,8 +2853,7 @@ class FilesStore {
 
     const isSharedWithMeFolderSection =
       this.treeFoldersStore.sharedWithMeFolderId === item.rootFolderId &&
-      item.rootFolderType === FolderType.SHARE &&
-      window.location.pathname.includes(SHARED_WITH_ME_PATH);
+      item.rootFolderType === FolderType.SHARE;
 
     let folderOptions = [
       "select",
@@ -2893,6 +2887,10 @@ class FilesStore {
       "remove-shared-folder-or-file",
       "delete",
     ];
+
+    if (item.external && item.isLinkExpired) {
+      folderOptions = ["select", "separator0", "remove-shared-folder-or-file"];
+    }
 
     if (!isSharedWithMeFolderSection) {
       folderOptions = removeOptions(folderOptions, [
@@ -3707,7 +3705,13 @@ class FilesStore {
     const newFolders = [...this.folders];
     const orderItems = [...this.folders, ...this.files].filter((x) => x.order);
 
-    if (orderItems.length > 0) {
+    const { isVDRRoomRoot, isRoot, isSharedWithMeFolderRoot } =
+      this.treeFoldersStore;
+
+    if (
+      (isVDRRoomRoot || (isSharedWithMeFolderRoot && !isRoot)) &&
+      orderItems.length > 0
+    ) {
       this.isEmptyPage && this.setIsEmptyPage(false);
 
       orderItems.sort((a, b) => {
@@ -4187,10 +4191,6 @@ class FilesStore {
 
   setTrashIsEmpty = (isEmpty) => {
     this.trashIsEmpty = isEmpty;
-  };
-
-  setMovingInProgress = (movingInProgress) => {
-    this.movingInProgress = movingInProgress;
   };
 
   setMainButtonMobileVisible = (visible) => {

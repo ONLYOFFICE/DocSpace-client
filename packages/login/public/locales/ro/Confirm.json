@@ -2,6 +2,8 @@
   "AccountWillBeCreated": "Un cont {{productName}} va fi creat pentru adresa <1>{{email}}</1>. Finalizați inregistrarea activă:",
   "ConfirmOwnerPortalSuccessMessage": "Proprietarul {{productName}} a fost schimbat cu succes. Veţi fi redirecționat automat după 10 secunde.",
   "ConfirmOwnerPortalTitle": "Confirmați dacă doriți să schimbați proprietarul {{productName}} în {{newOwner}}.",
+  "ConnectApp": "Conectare aplicație",
+  "ConnectAppDescription": "Scanați codul QR cu ajutorul aplicației de autentificare. In mod alternativ, puteți introduce manual cheia secretă din aplicația dvs: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "Numărul dvs. de telefon mobil curent",
   "DeleteProfileBtn": "Șterge contul meu",
   "DeleteProfileConfirmation": "Atenție! Dumneavoastră sunteți pe cale de a șterge contul dvs.",
@@ -16,6 +18,8 @@
   "EnterEmailHeader": "Introduceți adresa de e-mail",
   "EnterPhone": "Introduceți număr de telefon mobil",
   "GetCode": "Obține codul",
+  "GetSuitableApp": "Obțineți o aplicație potrivită",
+  "GetSuitableAppDescription": "Folosiți o aplicație compatibilă, cum ar fi Google Authenticator pentru <1>Android</1> și <4>iOS</4>, sau Authenticator pentru <8>Windows Phone</8>.",
   "LoginRegistryButton": "Înregistrați-vă",
   "Newsletter": "Doresc să mă abonez la buletinul informativ {{organizationName}}",
   "PassworResetTitle": "Acum puteți crea o parolă nouă",
@@ -29,5 +33,9 @@
   "SuccessDeactivate": "Contul dvs a fost dezactivat cu succes. Veţi fi redirecţionat în 10 secunde către <1>site-ul</1>.",
   "SuccessReactivate": "Contul dvs a fost reactivat cu succes. Veți fi redirecționat către <1>portal</1> după 10 secunde.",
   "SuccessRemoved": "Contul dvs a fost eliminat cu succes. Veţi fi redirecţionat în 10 secunde către <1>site-ul</1>.",
-  "TermsAndConditions": "Dacă continuați, acceptați că sunteți de acord cu <1>Termenii si conditiile de utilizare</1> și <2>Politica de confidentialitate</2> a companiei."
+  "TermsAndConditions": "Dacă continuați, acceptați că sunteți de acord cu <1>Termenii si conditiile de utilizare</1> și <2>Politica de confidentialitate</2> a companiei.",
+  "TfaSubTitle": "Urmați aceste pașii simpli pentru a continua să lucrați în acest {{productName}}:",
+  "TfaTitle": "Autentificarea cu doi factori este activată pentru accesul securizat",
+  "VerifyConnection": "Verificați conexiunea",
+  "VerifyConnectionDescription": "Introduceți codul din 6 cifre generat de aplicația dvs de autentificare în câmpul de mai jos pentru a finaliza configurarea."
 }

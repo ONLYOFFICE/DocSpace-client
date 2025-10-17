@@ -1,1 +1,14 @@
-{}
+{
+  "AutomaticBackupDescription": "Stel geplande back-ups in voor continue gegevensbescherming zonder handmatige acties.",
+  "BackupRoomDescription": "Sla een back-up op naar een geselecteerde ruimte of de {{sectionName}} sectie. Gebruik bestaande ruimtes of maak er een nieuwe aan.",
+  "BackupServiceEnabled": "Back-upservice succesvol ingeschakeld.",
+  "ConnectService": "Verbind de service <1>hier</1> om back-upfuncties in te schakelen.",
+  "ContactToPayer": "Contact de Betaler (<1>{{email}}</1>) om de back-upservice te verbinden.",
+  "DisableBackupConfirm": "Het uitschakelen van de Backup-service voorkomt dat {{productName}}-beheerders back-ups maken. Als Auto Backup is ingeschakeld, blijft deze actief binnen de gratis quota, maar zodra de quota volledig is benut, wordt deze permanent gedeactiveerd. Ben je zeker dat je verder wilt gaan?",
+  "DisableBackupConfirmWithoutQuota": "Het uitschakelen van de Backup service voorkomt dat {{productName}} beheerders back-ups maken. Als Auto Backup is ingeschakeld, wordt deze uitgeschakeld. Ben je zeker dat je wilt doorgaan?",
+  "EnableBackupConfirm": "Het inschakelen van de Backup service stelt alle {{productName}} beheerders in staat om op elk moment back-ups te maken, zolang het wallet-saldo voldoende is. Ben je zeker dat je verder wilt gaan?",
+  "FreeBackupsPerMonth": "Gratis back-ups: {{value}}/{{maxValue}} per huidige maand.",
+  "TemporaryDescription": "Maak een back-up opgeslagen in de sectie \"Back-up\". Beschikbaar om te downloaden binnen 24 uur na creatie.",
+  "ThirdPartyResourceDescription": "Maak verbinding en bewaar back-ups naar cloud accounts zoals Dropbox, Box, OneDrive of Google Drive.",
+  "ThirdPartyStorageDescription": "Gebruik externe services om uw backups op te slaan. Ideaal voor het verbinden van externe cloud storage platforms."
+}

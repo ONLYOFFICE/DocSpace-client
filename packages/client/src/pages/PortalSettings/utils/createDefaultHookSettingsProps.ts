@@ -129,6 +129,11 @@ export const createDefaultHookSettingsProps = ({
     fetchPayerInfo: currentTariffStatusStore?.fetchPayerInfo,
     setBackupsCount: backupStore?.setBackupsCount,
     setIsInited: backupStore?.setIsInited,
+    setErrorInformation: backupStore?.setErrorInformation,
+    setIsInitialError: backupStore?.setIsInitialError,
+    setIsEmptyContentBeforeLoader: backupStore?.setIsEmptyContentBeforeLoader,
+    isInitialError: backupStore?.isInitialError,
+    isEmptyContentBeforeLoader: backupStore?.isEmptyContentBeforeLoader,
     addAbortControllers: settingsStore?.addAbortControllers,
   },
   integration: {

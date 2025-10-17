@@ -65,6 +65,7 @@ export const NewFilesPanelFileList = ({
                 components={{
                   1: (
                     <Link
+                      key="more-items-link"
                       className="more-items__link"
                       type={LinkType.action}
                       isBold

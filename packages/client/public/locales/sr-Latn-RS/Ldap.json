@@ -26,6 +26,7 @@
   "LdapGroupNameAttribute": "Atribut Imena Grupe",
   "LdapGroupNameAttributeTooltip": "Molimo navedite atribut objekta koji odgovara imenu grupe.",
   "LdapGroupUserAttributeTooltip": "Unesite korisnički atribut objekta korišćen da odredi da li je ovaj korisnik član grupa.",
+  "LdapIntegrationDescription": "Uvezi korisnike i grupe putem LDAP-a i omogući autentifikaciju korisnika preko prijava/lozinki sačuvanih na LDAP serveru. Korisnici će biti uvezeni odmah nakon što se podešavanja sačuvaju. Korisnici dodati kasnije biće uvezeni prilikom njihove prve autentifikacije. Ako želiš da obezbediš pristup samo putem LDAP-a, onemogući opciju za pozivanje novih {{productName}} članova putem {{sectionName}}: <1>{{link}}</1>",
   "LdapLoginAttribute": "Atribut Prijave",
   "LdapLoginAttributeTooltip": "Unesite atribut objekta koji odgovara korisničkoj prijavi.",
   "LdapLoginTooltip": "Molimo navedite korisnika za Prijavu koji ima prava pristupa za čitanje LDAP servera",

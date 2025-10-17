@@ -230,4 +230,6 @@ export type ForgotPasswordModalDialogProps = {
   isVisible: boolean;
   userEmail?: string;
   onDialogClose: () => void;
+  reCaptchaPublicKey?: string;
+  reCaptchaType?: RecaptchaType;
 };

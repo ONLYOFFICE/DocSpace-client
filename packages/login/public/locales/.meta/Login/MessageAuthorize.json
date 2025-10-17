@@ -3,7 +3,7 @@
   "content": "Log in to continue",
   "content_en_sha1_hash": "4d9fbae80d6981cfcad6ccaac1c77a8b467ea3fe",
   "created_at": "2025-05-19T21:30:57.245Z",
-  "updated_at": "2025-09-07T07:53:15.422Z",
+  "updated_at": "2025-10-16T07:29:36.006Z",
   "comment": {
     "text": "This translation key is used to display a message prompting users to log in to continue the login process. It appears on a login form and is displayed when the user has confirmed their email address but hasn't completed the login process yet.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 234,
+      "line_number": 237,
       "context": "sessionStorage.removeItem(\"confirmedData\");\n }\n \n if (email && ready && !emailConfirmedToastShown.current) {\n const messageEmailConfirmed = t(\"MessageEmailConfirmed\");\n const messageAuthorize = t(\"MessageAuthorize\");\n const text = `${messageEmailConfirmed} ${messageAuthorize}`;\n \n toastr.success(text);\n emailConfirmedToastShown.current = true;\n }",
       "module": "/packages/login"
     }

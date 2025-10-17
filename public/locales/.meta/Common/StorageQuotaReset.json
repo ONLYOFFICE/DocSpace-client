@@ -3,7 +3,7 @@
   "content": "Storage quota successfully set to default.",
   "content_en_sha1_hash": "b6fea99a34e64a58d31ebe5913e5b51c86e315db",
   "created_at": "2025-05-19T21:30:49.128Z",
-  "updated_at": "2025-09-29T18:22:19.425Z",
+  "updated_at": "2025-10-14T03:20:45.923Z",
   "comment": {
     "text": "This translation key is used for a success message when setting a storage quota to its default value, typically displayed after a button click or operation in the FilesActionsStore and SpaceQuota components. It informs users that the quota has been successfully reset to its original size.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2191,
+      "line_number": 2164,
       "context": "return item?.id ? item.id : item;\n });\n \n try {\n await resetRoomQuota(userIDs);\n toastr.success(t(\"Common:StorageQuotaReset\"));\n } catch (e) {\n toastr.error(e);\n }\n };",
       "module": "/packages/client"
     }
@@ -47,9 +47,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'default' is transliterated as 'defolt'. The correct spelling is 'defolt' or a more accurate equivalent in Azerbaijani should be considered.",
+          "suggestion": "Consider using 'standart' or 'baxılan' instead of 'defolt' to better reflect the meaning of 'default' in this context."
+        },
+        {
           "type": "incorrect_translation",
-          "description": "The word 'default' is transliterated as 'defolt'. It should be translated as 'standart' or 'bədii'.",
-          "suggestion": "Yaddaş kvotası uğurla standart olaraq ayarlandı."
+          "description": "While technically correct, 'Storage quota successfully set to default' is better conveyed with a more natural-sounding phrase in Azerbaijani. The current translation feels somewhat literal.",
+          "suggestion": "Consider a translation like 'Yaddaş kvotası əvvəlki göstəriciyə qaytarıldı' (Storage quota has been returned to the previous indicator) or 'Yaddaş kvotasının ilk göstəriciyə qoyuldu'."
         }
       ],
       "approved_at": null
@@ -75,13 +80,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'αποθ.' is an abbreviation for 'αποθηκευτικού χώρου' (storage space). While commonly understood, a more formal and complete spelling improves clarity.",
-          "suggestion": "αποθηκευτικού χώρου"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -108,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'default' is not accurately translated. 'Լռելյայն' (lrel'yayn) translates to 'silent' or 'implicit,' not 'default.'  'Սանդարժ' (sandarz) or a more descriptive phrase would be more accurate for 'default'.",
-          "suggestion": "Պահպանման քվոտան հաջողությամբ սահմանվեց սանդարժ։ (Pahp'anman kwotan hachoghut'yamb sahmanvetc sandarz.)  Or a phrase like: Պահպանման քվոտան հաջողությամբ սահմանվեց նախնական արժեքին։ (Pahp'anman kwotan hachoghut'yamb sahmanvetc nakhnakhan arzh'ekin.)"
+          "description": "The phrase \"լռելյայն\" (lrel'yayn) which translates to 'default' or 'silent' is a bit too formal and not the most natural way to express 'default' in this context. It implies a quiet or implicit setting rather than the intended meaning of the storage quota being reset to its original value.",
+          "suggestion": "Consider alternatives like \"վթևորվել է\" (vthevorvel e) which means 'was reset' or 'has been reset' or a simpler phrasing like \"վթևորվել է սկզբնական ցուցիչին\" (vthevorvel e sk'vzbnakan cucichin) which translates to 'was reset to the original value'."
         }
       ],
       "approved_at": null
@@ -138,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ກຳນົດກໍານານບ່ອນເກັບຂໍ້ມູນສຳເລັດແລ້ວຕາມຄ່າເລີ່ມຕົ້ນ' is a bit verbose and not the most natural way to express 'Storage quota successfully set to default.' The phrase 'ກຳນົດກໍານານ' can be simplified.",
-          "suggestion": "ເກືອບເຕັມຄໍານິເດືອນສຳເລັດແລ້ວ (Gep teum khano samret laeo)"
+          "description": "The Lao translation 'ກຳນົດກໍານານບ່ອນເກັບຂໍ້ມູນສຳເລັດແລ້ວຕາມຄ່າເລີ່ມຕົ້ນ' is overly formal and complex. 'ກໍານານ' is not the common word for 'quota'. A more natural translation would be closer to 'ອຸປະຖິ່ນເກັບຂໍ້ມູນຖືກຕັ້ງຄ່າໄວ້ເປັນຄ່າເລີ່ມຕົ້ນແລ້ວ' or 'ອຸປະຖິ່ນສັງເກດການເກັບຂໍ້ມູນຖືກຕັ້ງຄ່າຕາມຄ່າເລີ່ມຕົ້ນ.'",
+          "suggestion": "ອຸປະຖິ່ນເກັບຂໍ້ມູນຖືກຕັ້ງຄ່າໄວ້ເປັນຄ່າເລີ່ມຕົ້ນແລ້ວ"
         }
       ],
       "approved_at": null
@@ -162,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Limit pamięci został pomyślnie ustawiony na domyślny\" is not a direct or ideal translation of \"Storage quota successfully set to default.\"  'Limit pamięci' translates to 'Memory Limit,' which isn't precisely what 'Storage Quota' represents. A better translation would focus on 'quota' or 'przydział' relating to storage capacity.",
-          "suggestion": "Przydział pamięci został pomyślnie ustawiony na domyślny. / Kwota pamięci została pomyślnie zresetowana do domyślnej."
+          "description": "The translation 'Limit pamięci został pomyślnie ustawiony na domyślny' is a literal translation and doesn't quite capture the meaning of 'Storage quota successfully set to default.' A more natural and accurate translation would emphasize the reset aspect.",
+          "suggestion": "Limit przestrzeni dyskowej został przywrócony do domyślnego."
         }
       ],
       "approved_at": null
@@ -186,13 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Limită de stocare este setată cu succes la valorile prestabilite' is a bit literal and could be improved for naturalness. 'Prestabilitite' sounds overly formal in this context.",
-          "suggestion": "Limită de stocare a fost resetată la valorile implicite."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While not strictly incorrect, 'valorile prestabilite' implies a predefined list of values, whereas 'Storage quota successfully set to default' indicates a simple return to the original setting.",
-          "suggestion": "Limită de stocare a fost resetată la valoarea implicită."
+          "description": "The translation \"Limită de stocare este setată cu succes la valorile prestabilite.\" is not the most natural or direct translation of \"Storage quota successfully set to default.\" \"Valorile prestabilite\" implies a set of defaults, while the English implies a single default value. A more accurate translation would be something like \"Cota de stocare a fost resetată la valoarea implicită.\" or \"Cota de stocare a fost resetată la valoarea prestabilită.\"",
+          "suggestion": "Cota de stocare a fost resetată la valoarea implicită."
         }
       ],
       "approved_at": null
@@ -209,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආචයන සලාකය පෙරනිමියට සැකසිණි' doesn't accurately convey the meaning of 'Storage quota successfully set to default.' 'ආචයන' (aachayana) doesn't fit the context and suggests a ritual or offering. 'සලාකය' (salaakaya) generally means 'salve' or 'residue'.",
-          "suggestion": "A more accurate translation would be something along the lines of 'ගබඩාවේ ඉඩ ප්‍රමාණය පෙරනිමියට යවා ඇත' (Gabadawe idda pramanya peranimiyata yawa atha) - 'Storage space has been reset to default' or 'ගබඩාවේ ඉඩ ප්රමාණය පෙරනිමියට පිහිටුවන ලදි' (Gabadawe idda pramanya peranimiyata pihituwana ladi) - 'Storage space was established to default'."
+          "description": "The translation 'ආචයන සලාකය පෙරනිමියට සැකසිණි' doesn't accurately convey the meaning of \"Storage quota successfully set to default.\" The word 'ආචයන' (aachayana) doesn't fit the context and might be a mistranslation. It implies something like 'storage container' but isn't the common term for a storage quota.",
+          "suggestion": "A more accurate translation might be something along the lines of 'ගබඩා අවකාශය පෙරනිමියට යොදා ඇත' (gabada awashaya peranimiyata yoda ata ethena) which translates to 'Storage space has been reset to default.'"
         }
       ],
       "approved_at": null
@@ -221,7 +215,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Kvóta úložiska bola úspešne upravená na predvolené nastavenie' translates to 'Storage quota was successfully modified to the default setting'. The original English says 'set to default', which implies a reset to the initial value, not just a modification. 'Upravená' suggests an alteration, not necessarily a reset.",
+          "description": "The translation 'Kvóta úložiska bola úspešne upravená na predvolené nastavenie' translates to 'Storage quota was successfully modified to the default setting.' While not entirely wrong, it doesn't convey the same meaning as 'Storage quota successfully set to default.' 'Set' implies an action of establishing the quota, whereas 'modified' implies a change from a prior state.  'Reset' is a more accurate representation of the original meaning.",
           "suggestion": "Kvóta úložiska bola úspešne obnovená na predvolené nastavenie."
         }
       ],
@@ -238,14 +232,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'Складишна' is a misspelling. It should be 'Корисничка'.",
-          "suggestion": "Корисничка"
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While 'помиљавано' is a possible translation for 'default', it can sound slightly awkward. A more natural translation might be 'оснивачки' or 'почетно'.",
-          "suggestion": "оснивачки"
+          "description": "The word 'Складишна' (Skladishna) is not the correct term for 'Storage' in this context. It translates more closely to 'warehouse' or 'storage space'. The correct term should be 'Просторна' (Prostorna) or 'Чланивна' (Clanivna) which refers to 'storage quota'.",
+          "suggestion": "Replace 'Складишна' with 'Просторна' or 'Чланивна'."
         }
       ],
       "approved_at": null
@@ -275,6 +264,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -115,7 +115,6 @@ const TwoFactorAuth = (props) => {
     } else {
       setType(tfaSettings);
     }
-    setIsLoading(true);
   };
 
   useEffect(() => {
@@ -172,22 +171,11 @@ const TwoFactorAuth = (props) => {
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
-
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    const currentSettings = getFromSessionStorage("currentTfaSettings");
-    const defaultSettings = getFromSessionStorage("defaultTfaSettings");
-    if (currentSettings === defaultSettings) {
-      getSettings();
-    } else {
-      getSettingsFromDefault();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!isLoading) return;
+    if (!isLoading || !tfaSettings || isSaving) return;
     const currentSettings = getFromSessionStorage("currentTfaSettings");
     const defaultSettings = getFromSessionStorage("defaultTfaSettings");
 
@@ -196,7 +184,7 @@ const TwoFactorAuth = (props) => {
     } else {
       getSettingsFromDefault();
     }
-  }, [isLoading]);
+  }, [isLoading, tfaSettings]);
 
   useEffect(() => {
     if (!isLoading) return;

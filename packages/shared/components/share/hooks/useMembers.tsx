@@ -32,12 +32,14 @@ import type { IndexRange } from "react-virtualized";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { ShareAccessRights } from "../../../enums";
+import { isFile, isFolder } from "../../../utils/typeGuards";
 import { useUnmount } from "../../../hooks/useUnmount";
 import { useDidMount } from "../../../hooks/useDidMount";
 import { SHARED_MEMBERS_COUNT } from "../../../constants";
 import { ShareLinkService } from "../../../services/share-link.service";
 import { useEventListener } from "../../../hooks/useEventListener";
 import type { RoomMember } from "../../../api/rooms/types";
+import SocketHelper, { SocketEvents } from "../../../utils/socket";
 
 import type { TOption } from "../../combobox";
 import { TData, toastr } from "../../toast";
@@ -87,6 +89,51 @@ export const useMembers = (props: UseMembersProps) => {
     () => convertMembers(members ?? [], t),
     [members, t],
   );
+
+  const updateAccess = useCallback((res: string) => {
+    try {
+      const data: Record<string, ShareAccessRights> = JSON.parse(res);
+      const [memberId] = Object.keys(data);
+
+      if (!memberId) return;
+
+      const access = data[memberId];
+
+      setMembers((prevMembers) =>
+        prevMembers.map((member) => {
+          if (member.sharedTo.id === memberId) {
+            return {
+              ...member,
+              access,
+            };
+          }
+
+          return member;
+        }),
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    SocketHelper?.on(SocketEvents.SelfRestrictionFile, (res) => {
+      if (!isFile(infoPanelSelection) || res.id !== infoPanelSelection.id)
+        return;
+
+      updateAccess(res.data);
+    });
+    SocketHelper?.on(SocketEvents.SelfRestrictionFolder, (res) => {
+      if (!isFolder(infoPanelSelection) || res.id !== infoPanelSelection.id)
+        return;
+      updateAccess(res.data);
+    });
+
+    return () => {
+      SocketHelper?.off(SocketEvents.SelfRestrictionFile);
+      SocketHelper?.off(SocketEvents.SelfRestrictionFolder);
+    };
+  }, [infoPanelSelection, updateAccess]);
 
   useEventListener(
     ShareUpdateListEventName,

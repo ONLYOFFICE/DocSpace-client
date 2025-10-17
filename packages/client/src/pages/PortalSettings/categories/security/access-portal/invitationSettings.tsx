@@ -61,6 +61,7 @@ const InvitationSettings = ({
   setup,
   invitationSettingsUrl,
   currentColorScheme,
+  isInit,
 }: {
   t: TTranslation;
 
@@ -77,6 +78,7 @@ const InvitationSettings = ({
   setup: SettingsSetupStore;
   invitationSettingsUrl: string;
   currentColorScheme: TColorScheme;
+  isInit: boolean;
 }) => {
   const [showReminder, setShowReminder] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -140,6 +142,12 @@ const InvitationSettings = ({
   }, [isMobileDevice]);
 
   useEffect(() => {
+    if (isInit) {
+      setIsLoaded(true);
+    }
+  }, [isInit]);
+
+  useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
@@ -149,7 +157,8 @@ const InvitationSettings = ({
   useEffect(() => {
     if (
       typeof allowInvitingMembers !== "boolean" ||
-      typeof allowInvitingGuests !== "boolean"
+      typeof allowInvitingGuests !== "boolean" ||
+      !isLoaded
     )
       return;
 
@@ -161,9 +170,10 @@ const InvitationSettings = ({
     } else {
       getSettingsFromDefault();
     }
-  }, [allowInvitingMembers, allowInvitingGuests]);
+  }, [allowInvitingMembers, allowInvitingGuests, isLoaded]);
 
   useEffect(() => {
+    if (!isLoaded) return;
     const defaultSettings = getFromSessionStorage("defaultInvitationSettings");
 
     const newSettings = {
@@ -356,6 +366,8 @@ export const InvitationSettingsSection = inject(
       currentColorScheme,
     } = settingsStore;
 
+    const { isInit } = setup;
+
     return {
       setInvitationSettings,
       allowInvitingMembers,
@@ -366,6 +378,7 @@ export const InvitationSettingsSection = inject(
       setup,
       invitationSettingsUrl,
       currentColorScheme,
+      isInit,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(InvitationSettings)));

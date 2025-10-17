@@ -34,17 +34,11 @@ import { NewFilesPanelItemRoomProps } from "../NewFilesBadge.types";
 
 const NewFilesPanelItemRoomComponent = ({
   room,
-  getFolderInfo,
   openItemAction,
   onClose,
 }: NewFilesPanelItemRoomProps) => {
   const onClick = async () => {
-    const roomInfo = await getFolderInfo!(room.id);
-    openItemAction!({
-      ...roomInfo,
-      isFolder: true,
-      updatePublicKey: true,
-    });
+    openItemAction!({ ...room, isFolder: true });
     onClose();
   };
 
@@ -74,11 +68,8 @@ const NewFilesPanelItemRoomComponent = ({
   );
 };
 
-export const NewFilesPanelItemRoom = inject<TStore>(
-  ({ filesActionsStore, filesStore }) => {
-    const { openItemAction } = filesActionsStore;
-    const { getFolderInfo } = filesStore;
+export const NewFilesPanelItemRoom = inject<TStore>(({ filesActionsStore }) => {
+  const { openItemAction } = filesActionsStore;
 
-    return { openItemAction, getFolderInfo };
-  },
-)(observer(NewFilesPanelItemRoomComponent));
+  return { openItemAction };
+})(observer(NewFilesPanelItemRoomComponent));

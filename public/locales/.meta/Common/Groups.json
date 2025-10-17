@@ -3,7 +3,7 @@
   "content": "Groups",
   "content_en_sha1_hash": "ae9629f4ebb82c6331c0809fa9a0e54b00e578e6",
   "created_at": "2025-05-19T21:30:45.668Z",
-  "updated_at": "2025-10-03T13:19:30.370Z",
+  "updated_at": "2025-10-16T07:29:35.483Z",
   "comment": {
     "text": "The translation key \"Groups\" refers to the label used on a data import component to indicate that groups are being imported. It is used in a settings page and appears as a section name in a dialog box, allowing users to toggle the inclusion of group data in their imports.",
     "is_auto": true,
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/FilesView/hooks/useMembers.ts",
-      "line_number": 103,
+      "line_number": 104,
       "context": "label: t(\"InfoPanel:Administration\"),\n list: administrators,\n },\n {\n key: TInfoPanelMemberType.groups,\n label: t(\"Common:Groups\"),\n list: groups,\n },\n {\n key: TInfoPanelMemberType.users,\n label: t(\"InfoPanel:Users\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 527,
+      "line_number": 544,
       "context": "const getAccountsTitle = () => {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");\n case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\":\n return getInsideGroupTitle();\n case \"guests\":\n return t(\"Common:Guests\");\n default:",
       "module": "/packages/client"
     },
@@ -48,7 +48,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 539,
+      "line_number": 546,
       "context": "subjectType === MembersSubjectType.Group\n ) {\n if (groups.length === 0) {\n groups.push({\n id: \"groups\",\n displayName: t(\"Common:Groups\"),\n isTitle: true,\n } satisfies TTitleShare);\n }\n \n groups.push({ ...member, isGroup: true });",
       "module": "/packages/shared"
     },

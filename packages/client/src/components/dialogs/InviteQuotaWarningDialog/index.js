@@ -123,7 +123,11 @@ const InviteQuotaWarningDialog = (props) => {
         </Trans>
       </Text>
       <br />
-      <Text>{t("GracePeriodActivatedDescription")}</Text>
+      <Text>
+        {t("GracePeriodActivatedDescription", {
+          productName: t("Common:ProductName"),
+        })}
+      </Text>
     </>
   );
 

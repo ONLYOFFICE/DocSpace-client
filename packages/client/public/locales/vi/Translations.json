@@ -23,5 +23,6 @@
   "ThirdPartyInfo": "Thay đổi thông tin của bên thứ ba",
   "ThirdPartyTitle": "Dịch vụ của bên thứ ba",
   "TitleShowActions": "Hiển thị Hoạt động của File",
-  "TitleShowFolderActions": "Hiển thị Hoạt động Thư mục"
+  "TitleShowFolderActions": "Hiển thị Hoạt động Thư mục",
+  "TrashItemsDeleteSuccess": "Các mục đã chọn đã được xóa thành công khỏi {{sectionName}}"
 }

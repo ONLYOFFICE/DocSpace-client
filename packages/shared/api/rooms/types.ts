@@ -124,7 +124,7 @@ export type TRoom = {
   external?: boolean;
   passwordProtected?: boolean;
   requestToken?: string;
-  expired?: boolean;
+  isLinkExpired?: boolean;
   indexing?: boolean;
   denyDownload?: boolean;
   watermark?: TWatermark;
@@ -159,14 +159,6 @@ export type TExportRoomIndexTask = {
   resultFileUrl: string;
 };
 
-export type TPublicRoomPassword = {
-  id: string;
-  linkId: string;
-  shared: boolean;
-  status: ValidationStatus;
-  tenantId: string | number;
-};
-
 export type TNewFilesItem = TFile[] | { room: TRoom; items: TFile[] };
 
 export type TNewFiles = {
@@ -179,7 +171,7 @@ export type TValidateShareRoom = {
   isAuthenticated: boolean;
   linkId: string;
   shared: boolean;
-  status: number;
+  status: ValidationStatus;
   tenantId: number;
   title: string;
 
@@ -191,6 +183,8 @@ export type TValidateShareRoom = {
   entityType?: LinkSharingEntityType;
   isRoomMember?: boolean;
 };
+
+export type TPublicRoomPassword = TValidateShareRoom;
 
 export type RoomMember = {
   access: number;

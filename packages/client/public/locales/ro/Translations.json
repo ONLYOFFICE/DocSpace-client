@@ -23,5 +23,6 @@
   "ThirdPartyInfo": "Modificarea informațiilor despre servicii terțe",
   "ThirdPartyTitle": "Servicii terțe",
   "TitleShowActions": "Afișare acțiuni asupra fișierului",
-  "TitleShowFolderActions": "Afișare acțiuni asupra folderului"
+  "TitleShowFolderActions": "Afișare acțiuni asupra folderului",
+  "TrashItemsDeleteSuccess": "Elementele selectate au fost șterse cu succes din {{sectionName}}."
 }

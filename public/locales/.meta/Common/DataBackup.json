@@ -3,7 +3,7 @@
   "content": "Data backup",
   "content_en_sha1_hash": "557da1f0ef4a81b758b4c447e2a745dbf3a4b0fe",
   "created_at": "2025-05-26T07:15:42.350Z",
-  "updated_at": "2025-09-17T13:43:01.764Z",
+  "updated_at": "2025-10-13T14:41:02.976Z",
   "comment": {
     "text": "The translation key \"DataBackup\" is used to display the label for a data backup feature in the application. It appears in various contexts, including automatic and manual backup buttons or dialog titles, where it indicates that the user is backing up their data. This translation is crucial for providing clear instructions to users on how to back up their information securely.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/index.js",
-      "line_number": 142,
-      "context": "};\n \n const data = [\n {\n id: \"data-backup\",\n name: t(\"Common:DataBackup\"),\n content: (\n <ManualBackup\n buttonSize={buttonSize}\n renderTooltip={renderTooltip}\n isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}",
+      "line_number": 136,
+      "context": "};\n \n const data = [\n {\n id: \"data-backup\",\n name: t(\"Common:DataBackup\"),\n content: (\n <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />\n ),\n onClick: async () => {\n clearAbortControllerArr();",
       "module": "/packages/client"
     },
     {

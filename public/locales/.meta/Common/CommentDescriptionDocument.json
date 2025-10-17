@@ -3,7 +3,7 @@
   "content": "Viewing, commenting.",
   "content_en_sha1_hash": "ab9aa20a7e063b2cbc480a49ae304dcd35fda871",
   "created_at": "2025-09-29T18:22:01.476Z",
-  "updated_at": "2025-10-03T13:19:30.771Z",
+  "updated_at": "2025-10-13T13:22:36.017Z",
   "comment": {
     "text": "This text describes the ability to view and comment on a document. It's used to indicate the available actions, likely displayed as a button or option related to document access rights. Translators should ensure the description accurately reflects the actions of viewing and adding comments.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 601,
+      "line_number": 608,
       "context": "{ fileType: FileType.Document, access: ShareAccessRights.Review },\n () => t(\"Common:ReviewDescriptionDocument\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.Comment },\n () => t(\"Common:CommentDescriptionDocument\"),\n )\n .with(\n { fileType: FileType.Document, access: ShareAccessRights.ReadOnly },\n () => t(\"Common:RoleViewerDescription\"),\n )",
       "module": "/packages/shared"
     }

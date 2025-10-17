@@ -74,17 +74,8 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
           className={styles.transactionRowDescription}
         >
           {transaction.description}
+          {transaction.details ? ` (${transaction.details})` : ""}
         </Text>
-        {transaction.details ? (
-          <Text
-            fontWeight={600}
-            fontSize="11px"
-            as="span"
-            className={styles.transactionRowDetails}
-          >
-            ({transaction.details})
-          </Text>
-        ) : null}
       </TableCell>
       <TableCell>
         <Text fontWeight={600} fontSize="11px">

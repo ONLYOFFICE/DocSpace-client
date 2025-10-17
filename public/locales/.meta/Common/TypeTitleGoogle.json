@@ -3,7 +3,7 @@
   "content": "Google Drive",
   "content_en_sha1_hash": "07c2964c41f409a224efb389f282268e4928b85f",
   "created_at": "2025-05-26T07:15:48.984Z",
-  "updated_at": "2025-05-26T08:03:00.149Z",
+  "updated_at": "2025-10-13T23:46:56.912Z",
   "comment": {
     "text": "This translation key \"TypeTitleGoogle\" is used to display the label \"Google Drive\" in various contexts within the application, likely on buttons or other UI elements where file types are displayed. It appears to be part of a larger system for handling document types and cloud storage services.",
     "is_auto": true,
@@ -189,7 +189,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation \"Google sürücü\" is a literal translation of \"Google driver\" and is not the standard or expected Turkish term for \"Google Drive\". The correct term is \"Google Disk\".",
+          "suggestion": "Google Disk"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -205,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

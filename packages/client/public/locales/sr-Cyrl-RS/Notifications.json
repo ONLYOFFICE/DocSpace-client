@@ -1,8 +1,20 @@
 {
+  "ActionsWithFilesDescription": "Беџеви ће нагласити активност фајлова — отпремања, измене или дељења — у {{rooms}}, {{shared}} и {{documents}} одељцима.",
+  "AdminSetupRequired": "Потребно подешавање од стране администратора",
   "Badges": "Значке",
   "DailyFeed": "Дневни садржај {{productName}}-а",
   "DailyFeedDescription": "Читајте вести и догађаје из вашег {{productName}}-а у дневном прегледу.",
+  "FileActivityNotify": "Обавештења о активностима фајла",
+  "GoToSettings": "Иди на Подешавања",
+  "IsNotValid": "Није валидно",
+  "LdapEmailTooltip": "Овај кориснички налог је учитан са LDAP-а. Емаил адреса корисника није наведена и тренутна је генерисана аутоматски и не може се користити за слање обавештења.",
+  "NotConfigured": "Није конфигурисано",
   "Notifications": "Обавештења",
+  "RoomsActivityDescription": "Добијај инстант емаил обавештења о новим дељеним фајловима/фолдерима и активностима унутар твог {{sectionName}}.",
+  "RoomUpdateNotify": "Дељени садржај и активности у {{sectionName}}",
+  "SettingUpNotifications": "Подешавање обавештења",
+  "SuccessConnected": "{{serviceName}} је успешно повезан као канал за обавештења. Сада ћеш тамо примати ажурирања.",
+  "SuccessDisconnected": "{{serviceName}} је успешно искључен као канал за обавештења. Обавештења више неће бити слана тамо.",
   "UsefulTips": "Корисни {{productName}} савети",
   "UsefulTipsDescription": "Добиј корисне водиче о {{productName}}-у"
 }

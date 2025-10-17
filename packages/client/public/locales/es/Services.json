@@ -1,1 +1,14 @@
-{}
+{
+  "AutomaticBackupDescription": "Configure copias de seguridad programadas para una protección continua de los datos sin necesidad de realizar acciones manuales.",
+  "BackupRoomDescription": "Guarde una copia de seguridad en una sala seleccionada o en la sección {{sectionName}}. Utilice salas existentes o cree una nueva.",
+  "BackupServiceEnabled": "El servicio de copia de seguridad se ha habilitado correctamente.",
+  "ConnectService": "Conecte el servicio <1>aquí</1> para habilitar las funciones de copia de seguridad",
+  "ContactToPayer": "Póngase en contacto con el pagador (<1>{{email}}</1>) para conectar el servicio de copia de seguridad.",
+  "DisableBackupConfirm": "Deshabilitar el servicio de Copia de Seguridad evitará que los administradores de {{productName}} creen copias de seguridad. Si la Copia de Seguridad Automática está habilitada, permanecerá activa dentro de la cuota gratuita, pero una vez que la cuota se haya utilizado por completo, se desactivará de forma permanente. ¿Está seguro de que desea continuar?",
+  "DisableBackupConfirmWithoutQuota": "Deshabilitar el servicio de Copia de seguridad evitará que los administradores de {{productName}} creen copias de seguridad. Si la Copia de seguridad automática está habilitada, se desactivará. ¿Está seguro de que desea continuar?",
+  "EnableBackupConfirm": "Al habilitar el servicio de copia de seguridad, todos los administradores de {{productName}} podrán crear copias de seguridad en cualquier momento, siempre que el saldo del monedero sea suficiente. ¿Está seguro de que desea continuar?",
+  "FreeBackupsPerMonth": "Copias de seguridad gratuitas: {{value}}/{{maxValue}} por mes actual.",
+  "TemporaryDescription": "Cree una copia de seguridad almacenada en la sección «Copia de seguridad». Disponible para su descarga en un plazo de 24 horas tras su creación.",
+  "ThirdPartyResourceDescription": "Conecte y guarde copias de seguridad en cuentas en la nube como Dropbox, Box, OneDrive o Google Drive.",
+  "ThirdPartyStorageDescription": "Utilice servicios de terceros para almacenar sus copias de seguridad. Ideal para conectar plataformas externas de almacenamiento en la nube."
+}

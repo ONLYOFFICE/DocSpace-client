@@ -8,6 +8,8 @@
   "NeedSettings": "Potrebno je ući u podešavanja",
   "NoPlugins": "Nijedan dodatak nije dodat",
   "NotNeedSettings": "Nije potrebno ući u podešavanja",
+  "PluginIsNotCompatible": "Verzija plugin SDK-a se ne poklapa sa verzijom {{productName}}. Molimo ažuriraj na kompatibilnu verziju.",
+  "PluginLoadedSuccessfully": "Plugin uspešno učitan",
   "PluginSamples": "Uzorci dodataka",
   "PluginSDK": "Plugin SDK (SDK za dodatke)",
   "PluginSDKDescription": "Pomoću Plugin SDK-a (SDK za dodatke) možete proširiti funkcionalnost vašeg {{productName}}-a, povezati treće strane usluge ili unaprediti postojeće korisničko iskustvo. Ovde možete pronaći uzorke dodataka sa dostupnim izvornim kodom na GitHub-u.",

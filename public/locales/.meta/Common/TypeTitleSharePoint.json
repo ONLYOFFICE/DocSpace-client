@@ -3,7 +3,7 @@
   "content": "SharePoint",
   "content_en_sha1_hash": "6df6338dc8bb2f5c96b9a4865862a6cc6c776915",
   "created_at": "2025-05-26T07:15:49.006Z",
-  "updated_at": "2025-05-26T08:02:57.559Z",
+  "updated_at": "2025-10-13T23:42:59.952Z",
   "comment": {
     "text": "This translation key is used to display a title for SharePoint. It appears as a title for UI elements, such as buttons or dialogs, that interact with SharePoint files or accounts. The translator should provide a localized version of \"SharePoint\" for use in this context.",
     "is_auto": true,
@@ -205,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

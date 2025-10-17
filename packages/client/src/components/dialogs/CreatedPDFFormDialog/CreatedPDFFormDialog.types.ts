@@ -35,5 +35,5 @@ export interface CreatedPDFFormDialogProps {
 }
 
 export interface InjectedCreatedPDFFormDialogProps {
-  onCopyLink: TStore["contextOptionsStore"]["onCopyLink"];
+  getItemUrl: TStore["filesStore"]["getItemUrl"];
 }

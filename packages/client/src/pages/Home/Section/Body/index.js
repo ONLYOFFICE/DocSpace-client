@@ -88,7 +88,6 @@ const SectionBodyContent = (props) => {
     uploaded,
     onClickBack,
     isEmptyPage,
-    movingInProgress,
     currentDeviceType,
     isIndexEditingMode,
     changeIndex,
@@ -190,7 +189,8 @@ const SectionBodyContent = (props) => {
         !e.target.closest(".not-selectable") &&
         !e.target.closest(".info-panel") &&
         !e.target.closest(".table-container_group-menu") &&
-        !e.target.closest(".document-catalog")) ||
+        !e.target.closest(".document-catalog") &&
+        !e.target.closest("#share_calendar")) ||
       e.target.closest(".files-main-button") ||
       e.target.closest(".add-button") ||
       e.target.closest("#filter_search-input") ||
@@ -463,8 +463,6 @@ const SectionBodyContent = (props) => {
 
   if (isErrorRoomNotAvailable) return <RoomNoAccessContainer />;
 
-  if (isEmptyFilesList && movingInProgress) return null;
-
   if (
     isEmptyFilesList &&
     !welcomeFormFillingTipsVisible &&
@@ -508,7 +506,6 @@ export default inject(
       setScrollToItem,
       filesList,
       isEmptyPage,
-      movingInProgress,
       isErrorRoomNotAvailable,
     } = filesStore;
 
@@ -545,7 +542,6 @@ export default inject(
       filesList,
       uploaded,
       onClickBack: filesActionsStore.onClickBack,
-      movingInProgress,
       currentDeviceType: settingsStore.currentDeviceType,
       isEmptyPage,
       isIndexEditingMode: indexingStore.isIndexEditingMode,

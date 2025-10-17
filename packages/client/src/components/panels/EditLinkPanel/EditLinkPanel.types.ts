@@ -47,12 +47,7 @@ export interface InjectedEditLinkPanelProps {
   updateLink?: (link: TFileLink) => void;
   setLinkParams: (linkParams: LinkParamsType | null) => void;
 
-  setExternalLink: (
-    link: TFileLink,
-    searchParams: URLSearchParams,
-    setSearchParams: (searchParams: URLSearchParams) => void,
-    isCustomRoom: boolean,
-  ) => void;
+  setExternalLink: (link: TFileLink) => void;
 
   currentDeviceType: DeviceType;
 

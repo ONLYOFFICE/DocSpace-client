@@ -88,7 +88,7 @@ const styleBlock = `<style>
         line-height: 14px;
         user-select: none;
 
-        font-family: Roboto, "Open Sans", sans-serif, Arial;
+        font-family: Roboto, "Open Sans", -apple-system, "Segoe UI", sans-serif, Arial;
     }
 
     .docspace-button:hover {

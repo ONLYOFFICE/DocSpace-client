@@ -1,25 +1,25 @@
 {
-  "key_path": "FillingStatusBarTitle",
-  "content": "Process of filling out the form",
-  "content_en_sha1_hash": "36deb08f4df20c19eabe41542bc1e2c97f64a231",
-  "created_at": "2025-05-19T21:30:45.378Z",
-  "updated_at": "2025-06-26T19:00:18.304Z",
+  "key_path": "StartFillingBarDescription",
+  "content": "Select who will complete the fields for each recipient role on this form. Select a recipient role and assign it to a room member",
+  "content_en_sha1_hash": "8485683e547463ba672162277ca9dccdbd3fd3e4",
+  "created_at": "2025-10-13T13:22:14.685Z",
+  "updated_at": "2025-10-14T04:14:32.152Z",
   "comment": {
-    "text": "The translation key \"FillingStatusBarTitle\" is used to display a status bar title indicating that a form is being filled out. It appears in a modal dialog header and also in a start filling panel, providing context for the user about the current process of filling the form.",
+    "text": "This text appears in a dialog or information bar, instructing the user to assign room members to recipient roles within a form. It explains how to select a role and associate it with a specific room member. The purpose is to guide users through the process of defining who completes the form fields for each role.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:10.446Z"
+    "updated_at": "2025-10-13T14:22:24.379Z"
   },
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/FillingStatusPanel/index.tsx",
-      "line_number": 127,
-      "context": ">\n <ModalDialog.Header>{t(\"Common:FillingStatus\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {value ? (\n <PublicRoomBar\n headerText={t(\"Common:FillingStatusBarTitle\")}\n bodyText={t(\"Common:FillingStatusBarDescription\")}\n iconName={InfoSvgUrl}\n onClose={() => setValue(false)}\n className={styles.infoBar}\n />",
+      "line_number": 128,
+      "context": "<ModalDialog.Header>{t(\"Common:FillingStatus\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {value ? (\n <PublicRoomBar\n headerText={t(\"Common:StartFillingBarHeader\")}\n bodyText={t(\"Common:StartFillingBarDescription\")}\n iconName={InfoSvgUrl}\n onClose={() => setValue(false)}\n className={styles.infoBar}\n />\n ) : null}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
-      "line_number": 321,
-      "context": "<ModalDialog.Body>\n <section className={styles.container}>\n {infoBarVisible ? (\n <>\n <PublicRoomBar\n headerText={t(\"Common:FillingStatusBarTitle\")}\n bodyText={t(\"Common:FillingStatusBarDescription\")}\n iconName={InfoSvgUrl}\n onClose={() => setInfoBarVisible(false)}\n />\n <hr className={styles.divider} />",
+      "line_number": 322,
+      "context": "<section className={styles.container}>\n {infoBarVisible ? (\n <>\n <PublicRoomBar\n headerText={t(\"Common:StartFillingBarHeader\")}\n bodyText={t(\"Common:StartFillingBarDescription\")}\n iconName={InfoSvgUrl}\n onClose={() => setInfoBarVisible(false)}\n />\n <hr className={styles.divider} />\n </>",
       "module": "/packages/shared"
     }
   ],
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Process of filling out the form\" is somewhat verbose. A more natural Azerbaijani translation would be 'Formu doldurma prosesi' or 'Formanın doldurulması'.",
-          "suggestion": "Formu doldurma prosesi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -63,13 +57,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation 'Ablauf des Formularausfüllens' is a bit literal and could be improved for naturalness. 'Ablauf' implies a detailed sequence, which might be more than intended by 'Process of filling out the form'.",
-          "suggestion": "Formularausfüllungsprozess"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -111,13 +99,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"フォームに記入するプロセス\" is a very literal and slightly awkward translation. It sounds more formal and less natural than necessary for a status bar title.",
-          "suggestion": "フォーム記入中"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -131,9 +113,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The Lao translation uses 'ເຕີມຂໍ້ມູນໃສ່ແບບຟອມ'. While understandable, a slightly more natural phrasing might be preferable. 'ເຕີມຂໍ້ມູນໃນແບບຟອມ' is commonly used.",
-          "suggestion": "ເຕີມຂໍ້ມູນໃນແບບຟອມ"
+          "type": "incorrect_translation",
+          "description": "The phrase \"Select a recipient role and assign it to a room member\" is not accurately translated. The meaning of 'assign' is lost in the Lao translation. It should convey the action of associating the role with a specific person.",
+          "suggestion": "ເລືອກບົດບາດຜູ້ຮັບ ແລະ ແຖະນາມໃຫ້ສະມາຊິກຫ້ອງ (Choose a recipient role and designate it to a room member)"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrasing 'ເລືອກບົດບາດຜູ້ຮັບ ແລະ ແຖະນາມໃຫ້ສະມາຊິກຫ້ອງ' could be slightly improved for flow and clarity.  While grammatically correct, it's a little abrupt.",
+          "suggestion": "ເລືອກບົດບາດຜູ້ຮັບ ແລະ ມອບຫມາຍບົດບາດໃຫ້ສະມາຊິກຫ້ອງ (Choose a recipient role and assign the role to a room member)"
         }
       ],
       "approved_at": null
@@ -183,28 +170,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'පෝරමය' (poramaya) is a correct transliteration of 'form'. No spelling error here.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'පිරවීමේ' (pirawime) is a correct transliteration of 'filling'. No spelling error here.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ක්‍රියාවලිය' (kriyawaliya) is a correct transliteration of 'process'. No spelling error here.",
-          "suggestion": null
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is technically correct, it sounds a bit formal for a status bar title.  A more concise and natural phrasing might improve the user experience. 'පෝරමය පුරවන්නේ' (poramaya puravane) - 'Filling the form' could be an alternative.",
-          "suggestion": "පෝරමය පුරවන්නේ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -214,6 +180,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

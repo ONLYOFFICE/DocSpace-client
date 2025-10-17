@@ -115,6 +115,8 @@ const PasswordInput = ({
   // clipPasswordResource = "Password ",
   simulateSymbol = "•",
 }: PasswordInputProps) => {
+  const refTooltip = useRef(null);
+
   const usePrevious = (value: string) => {
     const inputValueRef = useRef<string>(undefined);
     useEffect(() => {
@@ -136,7 +138,8 @@ const PasswordInput = ({
     passwordSettings,
     onValidateInput,
   );
-  const { refTooltip, onChangeAction } = usePasswordInput(
+
+  const { onChangeAction } = usePasswordInput(
     isSimulateType,
     simulateSymbol,
     simpleView,
@@ -146,6 +149,7 @@ const PasswordInput = ({
     onChange,
     state.value,
   );
+
   const { onGeneratePassword } = usePasswordGenerator(
     generatorSpecial,
     passwordSettings,
@@ -185,20 +189,6 @@ const PasswordInput = ({
     [onBlur],
   );
 
-  const onFocusAction = () => {
-    const length = state.value?.length ?? 0;
-
-    const minLength = passwordSettings?.minLength;
-
-    if ((minLength && length < minLength) || hasError || hasWarning) {
-      if (refTooltip.current) {
-        const tooltip = refTooltip.current as TooltipRefProps;
-
-        tooltip?.open?.();
-      }
-    }
-  };
-
   const handleClickOutside = React.useCallback(
     (event: Event) => {
       if (refTooltip.current && refTooltipContent.current) {
@@ -235,7 +225,7 @@ const PasswordInput = ({
     [onKeyDown],
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     setState((s) => ({ ...s, copyLabel: clipActionResource }));
   }, [clipActionResource, clipCopiedResource, setState]);
 
@@ -249,6 +239,47 @@ const PasswordInput = ({
       } as ChangeEvent<HTMLInputElement>);
     }
   }, [inputValue, prevInputValue, isSimulateType, onChangeAction]);
+
+  useEffect(() => {
+    const length = state.value?.length ?? 0;
+
+    const minLength = passwordSettings?.minLength;
+
+    if (!refTooltip.current) {
+      return;
+    }
+    const tooltip = refTooltip.current as TooltipRefProps;
+
+    if ((minLength && length < minLength) || hasError || hasWarning) {
+      tooltip?.open?.();
+    }
+  }, [state.value, hasError, hasWarning, refTooltip]);
+
+  React.useEffect(() => {
+    const length = state.value?.length ?? 0;
+    const minLength = passwordSettings?.minLength ?? 0;
+
+    if (refTooltip.current) {
+      const tooltip = refTooltip.current as TooltipRefProps;
+      const meetsLength = length >= minLength;
+
+      if (
+        tooltip?.isOpen &&
+        meetsLength &&
+        hasError !== undefined &&
+        !hasError &&
+        !hasWarning
+      ) {
+        tooltip.close();
+      }
+    }
+  }, [
+    state.value,
+    hasError,
+    hasWarning,
+    passwordSettings?.minLength,
+    refTooltip,
+  ]);
 
   React.useImperativeHandle(ref, () => {
     return { onGeneratePassword, setState, value: state.value };
@@ -397,7 +428,6 @@ const PasswordInput = ({
           iconSize={16}
           isIconFill
           onBlur={onBlurAction}
-          onFocus={onFocusAction}
           onKeyDown={onKeyDownAction}
           hasWarning={hasWarning}
           placeholder={placeholder}

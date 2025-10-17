@@ -70,7 +70,7 @@ const useInputItemHelper = ({
 
       try {
         if (currentSelectedItemId)
-          await createFolder(currentSelectedItemId, value);
+          await createFolder(currentSelectedItemId, value.trimEnd());
         else if (roomType) {
           await createRoom({ roomType, title: value });
         }

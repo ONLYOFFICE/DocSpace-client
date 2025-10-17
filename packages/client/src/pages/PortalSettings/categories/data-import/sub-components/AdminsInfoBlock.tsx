@@ -32,20 +32,31 @@ import { StyledInfoBlock } from "../StyledDataImport";
 const AdminsInfoBlock = ({
   totalUsedUsers,
   limitAdmins,
-  limitReached,
 }: AdminsInfoBlockProps) => {
   const { t } = useTranslation(["Settings"]);
 
   if (!limitAdmins || !totalUsedUsers) return;
 
+  const isLimitReached = totalUsedUsers > limitAdmins;
+
+  const limitText = `${totalUsedUsers}/${limitAdmins}`;
+
   return (
-    <StyledInfoBlock>
+    <StyledInfoBlock isAdmins isLimitReached={isLimitReached}>
+      {isLimitReached ? (
+        <Text className="info-error-text" fontSize="12px" fontWeight={600}>
+          {t("DataImportAdminLimitExceeded")}
+        </Text>
+      ) : null}
       <div className="info-block-wrapper">
-        <Text as="div" className="selected-admins-count" truncate>
-          {t("Settings:LicenseLimitCounter")}
-          <Text as="span">
-            {totalUsedUsers}/{limitAdmins}
-          </Text>
+        <Text
+          as="div"
+          className="selected-admins-count"
+          title={`${t("LicenseLimitCounter")} ${limitText}`}
+          truncate
+        >
+          {t("LicenseLimitCounter")}
+          <Text as="span">{limitText}</Text>
         </Text>
         <HelpButton
           dataTestId="license_limit_help_button"
@@ -53,7 +64,7 @@ const AdminsInfoBlock = ({
           offsetRight={0}
           tooltipContent={
             <Text fontSize="12px">
-              {t("Settings:LicenseLimitDescription", {
+              {t("LicenseLimitDescription", {
                 productName: t("Common:ProductName"),
                 maxLimit: limitAdmins,
               })}
@@ -61,11 +72,6 @@ const AdminsInfoBlock = ({
           }
         />
       </div>
-      {limitReached ? (
-        <Text fontSize="12px" fontWeight={600}>
-          Warning
-        </Text>
-      ) : null}
     </StyledInfoBlock>
   );
 };

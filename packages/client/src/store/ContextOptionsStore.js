@@ -3111,12 +3111,17 @@ class ContextOptionsStore {
       icon: ActionsUploadReactSvgUrl,
     };
 
-    const templateGallery = {
-      key: "template-gallery",
-      label: t("Common:TemplateGallery"),
-      onClick: () => this.onShowTemplateGallery(),
-      icon: TemplateGalleryReactSvgUrl,
-    };
+    const templateGallery = templateGalleryAvailable
+      ? [
+          { key: "separator", isSeparator: true },
+          {
+            key: "template-gallery",
+            label: t("Common:TemplateGallery"),
+            onClick: () => this.onShowTemplateGallery(),
+            icon: TemplateGalleryReactSvgUrl,
+          },
+        ]
+      : [];
 
     if (isFormRoomType) {
       return this.getContextOptionsPlusFormRoom(t, {
@@ -3160,7 +3165,7 @@ class ContextOptionsStore {
           createNewPresentation,
           ...formActions,
           createNewFolder,
-          templateGalleryAvailable ? templateGallery : null,
+          ...templateGallery,
           { key: "separator", isSeparator: true },
           uploadFiles,
           showUploadFolder ? uploadFolder : null,

@@ -592,14 +592,20 @@ const ArticleMainButtonContent = (props) => {
     }
 
     if (templateGalleryAvailable) {
-      newActions.push({
-        id: "actions_open-template-gallery",
-        className: "main-button_drop-down",
-        icon: TemplateGalleryReactSvgUrl,
-        label: t("Common:TemplateGallery"),
-        onClick: onShowTemplateGallery,
-        key: "template-gallery",
-      });
+      newActions.push(
+        {
+          isSeparator: true,
+          key: "separator",
+        },
+        {
+          id: "actions_open-template-gallery",
+          className: "main-button_drop-down",
+          icon: TemplateGalleryReactSvgUrl,
+          label: t("Common:TemplateGallery"),
+          onClick: onShowTemplateGallery,
+          key: "template-gallery",
+        },
+      );
     }
 
     const menuModel = [...newActions];

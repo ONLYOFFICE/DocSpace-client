@@ -3,7 +3,7 @@
   "content": "The rooms are unarchived.",
   "content_en_sha1_hash": "309be23ffc42f49c87cb88b71417b839f9c77761",
   "created_at": "2025-05-19T21:30:56.280Z",
-  "updated_at": "2025-08-29T14:33:38.378Z",
+  "updated_at": "2025-10-13T14:41:03.134Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that rooms have been unarchived, typically appearing in a notification or success message. The phrase appears when an action updates folder status, specifically in the FilesActionsStore.js file.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1534,
+      "line_number": 1529,
       "context": "})\n \n .then(() => {\n const successTranslation =\n folders.length !== 1 && Array.isArray(folders)\n ? t(\"UnarchivedRoomsAction\")\n : Array.isArray(folders)\n ? t(\"UnarchivedRoomAction\", { name: folders[0].title })\n : t(\"UnarchivedRoomAction\", { name: folders.title });\n \n toastr.success(successTranslation);",
       "module": "/packages/client"
     }

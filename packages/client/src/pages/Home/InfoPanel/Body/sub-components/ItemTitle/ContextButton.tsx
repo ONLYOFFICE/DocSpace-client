@@ -123,6 +123,11 @@ const RoomsContextBtn = ({
     };
   }, [selection]);
 
+  const onHideContextMenu = () => {
+    // Callback is called when the context menu is closed.
+    // Required for proper cleanup in ContextMenu.
+  };
+
   return (
     <div className={styles.itemContextOptions}>
       <ContextMenuButton
@@ -148,6 +153,7 @@ const RoomsContextBtn = ({
         ignoreChangeView={isMobile()}
         header={contextMenuHeader}
         badgeUrl={contextMenuHeader?.badgeUrl}
+        onHide={onHideContextMenu}
       />
     </div>
   );

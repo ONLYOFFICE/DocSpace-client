@@ -3,7 +3,7 @@
   "content": "Import from {{organizationName}} Workspace",
   "content_en_sha1_hash": "e724af9a3984c03739c4b609de92912ffbbdbb33",
   "created_at": "2025-05-19T21:30:51.672Z",
-  "updated_at": "2025-08-26T11:14:27.657Z",
+  "updated_at": "2025-09-26T15:21:06.257Z",
   "comment": {
     "text": "This translation key is used for the \"Import from {{organizationName}} Workspace\" text, which appears on a button or similar element in the Portal Settings page, allowing users to import data from a specified organization workspace.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 334,
+      "line_number": 335,
       "context": "? workspace === \"GoogleWorkspace\"\n ? t(\"ImportFromGoogle\")\n : workspace === \"Nextcloud\"\n ? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")\n : t(header, {\n organizationName: logoText,",
       "module": "/packages/client"
     }

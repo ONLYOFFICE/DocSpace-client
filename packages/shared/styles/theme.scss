@@ -297,7 +297,7 @@
 
   --view-selector-items-count: unset;
 
-  --font-family: "Open Sans", sans-serif, Arial;
+  --font-family: "Open Sans", -apple-system, "Segoe UI", sans-serif, Arial;
 
   --text-input-transition: all 0.2s ease 0s;
   --text-input-box-shadow: inset 0 0 0 30px var(--input-bg);
@@ -315,6 +315,7 @@
   --aside-header-custom-height: 53px;
   --badge-border: 1px solid transparent;
   --badge-padding: 1px;
+  --badge-color: #{$white};
   --badge-line-height: 0.8;
   --badge-overflow: hidden;
   --context-menu-header-text-margin: 0 0 0 8px;
@@ -339,7 +340,8 @@
   --row-content-font-size: 12px;
   --row-content-font-style: normal;
   --row-content-font-weight: 600;
-  --row-content-font-family: "Open Sans", sans-serif, Arial;
+  --row-content-font-family:
+    "Open Sans", -apple-system, "Segoe UI", sans-serif, Arial;
   --row-content-max-width: 100%;
   --row-content-side-info-min-width: 160px;
   --row-content-side-info-margin: 0 6px;
@@ -645,11 +647,11 @@
 
 .light {
   --beta-badge-tooltip-box-shadow-color: #00000029;
-  --tooltip-text-color: #000000;
+  --tooltip-text-color: #{$dark-black};
 }
 
 .dark {
-  --tooltip-text-color: #ffffff;
+  --tooltip-text-color: #{$white};
 }
 
 .light {
@@ -1020,7 +1022,8 @@
   --row-content-font-size: 12px;
   --row-content-font-style: normal;
   --row-content-font-weight: 600;
-  --row-content-font-family: "Open Sans", sans-serif, Arial;
+  --row-content-font-family:
+    "Open Sans", -apple-system, "Segoe UI", sans-serif, Arial;
   --row-content-max-width: 100%;
   --row-content-side-info-min-width: 160px;
   --row-content-side-info-margin: 0 6px;
@@ -1042,7 +1045,8 @@
   --row-content-font-size: 12px;
   --row-content-font-style: normal;
   --row-content-font-weight: 600;
-  --row-content-font-family: "Open Sans", sans-serif, Arial;
+  --row-content-font-family:
+    "Open Sans", -apple-system, "Segoe UI", sans-serif, Arial;
   --row-content-height: 56px;
   --row-content-max-width: 100%;
 
@@ -1494,7 +1498,7 @@
 
 .light {
   --text-color: #{$black};
-  --font-family: "Open Sans", sans-serif, Arial;
+  --font-family: "Open Sans", -apple-system, "Segoe UI", sans-serif, Arial;
 }
 
 .light {
@@ -2308,6 +2312,8 @@
   --login-help-btn: #{$gray};
   --login-title-color: #{$black};
   --login-text-color: #{$gray};
+  --login-captcha-error-border: 1px solid #{$light-error-status};
+  --login-captcha-error-color: #{$light-error-status};
 }
 
 .dark {
@@ -2317,6 +2323,8 @@
   --login-help-btn: #{$gray-dark};
   --login-title-color: #{$white};
   --login-text-color: #{$gray-dark};
+  --login-captcha-error-border: 1px solid #{$dark-error-status};
+  --login-captcha-error-color: #{$dark-error-status};
 }
 
 .light {
@@ -2398,6 +2406,7 @@
   --settings-common-backup-rectangle-bg-color: #{$gray-light};
   --settings-backup-text-disabled: #{$gray};
   --settings-backup-background: #{$gray-light};
+  --settings-backup-note-color: #{$gray};
 }
 
 .dark {
@@ -2410,6 +2419,7 @@
   --settings-common-backup-rectangle-bg-color: #{$light-dark-gray-hover};
   --settings-backup-text-disabled: #{$gray-dark-text};
   --settings-backup-background: #{$dark-gray-light};
+  --settings-backup-note-color: #{$gray-dark};
 }
 
 .light {

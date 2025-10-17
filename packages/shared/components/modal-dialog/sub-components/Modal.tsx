@@ -73,6 +73,7 @@ const Modal = ({
   withBodyScrollForcibly = false,
   withBorder = false,
   dataTestId,
+  scrollbarCreateContext,
   backdropVisible = true,
   ...rest
 }: ModalSubComponentsProps) => {
@@ -261,6 +262,7 @@ const Modal = ({
                           className="modal-scroll"
                           noScrollY={isScrollLocked}
                           paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+                          createContext={scrollbarCreateContext}
                         >
                           {bodyComponent}
                         </Scrollbar>

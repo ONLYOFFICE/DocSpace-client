@@ -54,6 +54,7 @@ const HelpButton = (props: HelpButtonProps) => {
     isOpen,
     noUserSelect,
     dataTestId,
+    tooltipStyle,
     iconNode,
   } = props;
 
@@ -75,6 +76,7 @@ const HelpButton = (props: HelpButtonProps) => {
     anchorSelect,
     isOpen,
     noUserSelect,
+    tooltipStyle,
   };
 
   return (

@@ -103,6 +103,8 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   withBorder?: boolean;
   /** Test id */
   dataTestId?: string;
+
+  scrollbarCreateContext?: boolean;
   /** Controls the visibility of the backdrop overlay */
   backdropVisible?: boolean;
 };

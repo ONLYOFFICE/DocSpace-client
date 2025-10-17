@@ -3,7 +3,7 @@
   "content": "Please note that the editors will be unavailable during the upgrade. We also recommend to <1>backup your data</1> before you start.",
   "content_en_sha1_hash": "6254435f524d28160ed4c7af92aa2d841ada3ca0",
   "created_at": "2025-05-26T07:15:49.220Z",
-  "updated_at": "2025-08-11T18:11:59.376Z",
+  "updated_at": "2025-10-13T22:04:08.290Z",
   "comment": {
     "text": "This translation key is used to display a note informing users that editors will be unavailable during an upgrade process. The note also recommends backing up data before starting the process. It appears in the UI on the official documentation page for upgrading to a pro version, likely as part of a banner or informational message.",
     "is_auto": true,
@@ -27,19 +27,37 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are not properly closed or consistent with standard HTML practices. They should be consistently applied to all related spans or tags.  The Arabic text also contains these tags which are unnecessary.",
+          "suggestion": "Remove the HTML tags <1> and </1> completely. The Arabic text should simply be: \"يرجى ملاحظة أن المحررين لن يكونوا متوفرين أثناء الترقية. نوصي أيضًا بـ نسخ بياناتك احتياطيًا قبل البدء.\""
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag <1> is inconsistent with the English original. It should be a different tag to match the original.",
+          "suggestion": "Investigate and ensure consistent HTML tag usage with the English source (e.g., use <b> or <strong>)."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tag `<1>` is not translated consistently. In the English content, it's used for emphasizing 'backup your data', but it's also used for 'архивирате данните си' in Bulgarian.",
+          "suggestion": "Ensure consistent formatting for emphasis. Consider using a different markup or rephrasing the sentence if the existing markup is not suitable."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -51,7 +69,18 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The `<1>` tag is inconsistently applied. In the English content, it surrounds 'backup your data', but in the German translation, it surrounds 'Backup Ihrer Daten'.",
+          "suggestion": "Ensure consistent formatting of the `<1>` tags.  In the German translation, it should surround 'Ihre Daten' instead of 'Backup Ihrer Daten'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'We also recommend to' is translated as 'Wir empfehlen auch, dass Sie'. While grammatically correct, a more natural-sounding translation would be 'Wir empfehlen Ihnen auch'.",
+          "suggestion": "Change 'Wir empfehlen auch, dass Sie' to 'Wir empfehlen Ihnen auch'."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -69,7 +98,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag <1> is present in both the English and Finnish text. While technically correct, it's unusual to maintain the same HTML tag in a translation and might not be the desired formatting style.  Consider whether this is intended to be preserved or if it should be removed or replaced with a more appropriate formatting solution.",
+          "suggestion": "Review the intended styling/purpose of the <1> tag and determine if it should be removed, replaced, or adjusted to fit the Finnish context."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +116,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tag <1>backup your data</1> in the English content is replicated in the Armenian translation as <1>պահուստավորել ձեր տվյալները</1>.  While technically accurate, this formatting duplication is unnecessary and visually jarring. The tag should be removed from the Armenian translation.",
+          "suggestion": "Remove the <1> </1> tags from the Armenian translation."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +134,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are not consistently applied between the English and Japanese content. The English content uses them to highlight 'backup your data', while the Japanese uses them to highlight 'データのバックアップ'.",
+          "suggestion": "Ensure consistent formatting of the highlighted text using appropriate HTML tags or other formatting methods."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,25 +152,54 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'backup your data' is translated as 'ສໍາຮອງຂໍ້ມູນຂໍ້ມູນຂອງທ່ານ'.  'ສໍາຮອງຂໍ້ມູນ' is sufficient and more natural. The repetition of 'ຂໍ້ມູນ' is redundant.",
+          "suggestion": "ສໍາຮອງຂໍ້ມູນຂອງທ່ານ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'recommend to backup your data' is translated as 'iesakām arī dublēt datus'. While 'dublēt' means 'to duplicate', 'backup' implies a more comprehensive copy for recovery purposes. A more accurate translation might be 'iesakām veikt datu rezerves kopiju'.",
+          "suggestion": "Iesakām veikt datu rezerves kopiju."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tag <1> is preserved in the Latvian translation, mimicking the English original. While it may be intentional, it's worth considering whether it's necessary or natural in the Latvian context.",
+          "suggestion": "Consider removing the <1> tags if they aren't essential for the visual layout."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag `<1>` is not consistently formatted. It is used to mark both the instruction and the backup recommendation.",
+          "suggestion": "Maintain consistent HTML tag formatting throughout the translated text to ensure clarity and consistency. Consider using a different tag or unique identifier to distinguish the backup instruction."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` are not consistently applied in the Polish translation. They should mirror the English tags.",
+          "suggestion": "Ensure the HTML tags `<1>` are consistently applied around \"utworzenie kopii zapasowej swoich danych\" to match the English version."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -135,37 +211,73 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1>backup your data</1> were replicated in the Portuguese translation, instead of just the content 'backup de seus dados'.",
+          "suggestion": "Remove the surrounding <1> tags and only include 'backup de seus dados'."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag `<1>` is inconsistent between the English and Romanian versions. The English uses `<1>backup your data</1>` while the Romanian uses `<1>să creați o copie de rezervă</1>`.",
+          "suggestion": "Ensure consistent HTML tag usage across both languages. Consider using the same tag and structure for both versions."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tag `<1>` is preserved in the Russian translation. It should be removed.",
+          "suggestion": "Remove the `<1>` tags from the Russian translation."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The formatting tags <1>backup your data</1> in the English content are not consistently reflected in the Sinhala translation. The Sinhala translation uses <1>ඔබගේ දත්ත උපස්ථයක්</1> which is not a direct reflection of the English structure.",
+          "suggestion": "Consider mirroring the original formatting.  Perhaps <1>ඔබගේ දත්තෙහි පිටපතක්</1> would be more consistent."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag <1> is not consistently applied. It appears in both the English and Slovak content, but the closing tag is required.",
+          "suggestion": "Ensure consistent HTML formatting. Both opening and closing tags should be present and correctly applied. For example: <1>zálohovať si údaje</1>"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag <1> is preserved in the Slovenian translation.",
+          "suggestion": "Remove the HTML tag <1> from the translated text.  The tag is superfluous."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -177,7 +289,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tags `<1>backup your data</1>` are not properly closed/formatted in the Serbian translation. They should mirror the English format.",
+          "suggestion": "Molim obratite pažnju da će uređivači biti nedostupni u toku nadogradnje. Takođe preporučujemo da <1>napravite rezervnu kopiju vaših podataka</1> pre nego što počnete."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,13 +313,47 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'editors will be unavailable' is translated as 'các các tính năng chỉnh sửa sẽ không hữu dụng'. This is not an accurate translation. It implies the editing features will be useless, rather than the editors themselves being unavailable.",
+          "suggestion": "Xin lưu ý rằng các **nhà** chỉnh sửa sẽ không có mặt trong quá trình nâng cấp."
+        },
+        {
+          "type": "formatting",
+          "description": "The `<1>backup your data</1>` tag is preserved in the Vietnamese translation. While the concept is preserved, the HTML tag is not appropriate.",
+          "suggestion": "The HTML tag should be removed. The Vietnamese translation already correctly indicates data backup."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The `<1>backup your data</1>` tag is inconsistent with the English version's `<1>backup your data</1>`. It should be `<1>备份您的数据</1> to match the original HTML tag format.",
+          "suggestion": "<1>备份您的数据</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"backup your data\" is not accurately translated. \"Rezervoni\" implies a reservation or booking, not a backup.",
+          "suggestion": "Consider using a term like \"kopi sigurimi\" (security copy) or \"ruani\" (save) to accurately convey the meaning of 'backup'."
+        },
+        {
+          "type": "formatting",
+          "description": "The number '1' is present in both the English and Albanian text, but the formatting around it isn't consistent in terms of significance. It's unclear why it is marked.",
+          "suggestion": "If the numbers are for highlighting or specific instructions, ensure they are consistently used in both languages, or removed if not."
+        }
+      ],
       "approved_at": null
     }
   }

@@ -141,6 +141,17 @@ export function updateRoomMemberRole(id, data) {
     return res as { error?: RoomSecurityError };
   });
 }
+export function updateFileMemberAccess(id, data) {
+  const options = {
+    method: "put",
+    url: `/files/file/${id}/share`,
+    data,
+  };
+
+  return request(options).then((res) => {
+    return res as { error?: RoomSecurityError };
+  });
+}
 
 export function getHistory(
   selectionType: "file" | "folder",

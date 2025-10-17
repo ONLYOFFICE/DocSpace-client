@@ -3,7 +3,7 @@
   "content": "Not need enter settings",
   "content_en_sha1_hash": "7f28597ca75d3662220ad43431be4c426a249474",
   "created_at": "2025-05-19T21:30:49.916Z",
-  "updated_at": "2025-05-24T01:56:54.521Z",
+  "updated_at": "2025-09-24T13:10:16.963Z",
   "comment": {
     "text": "This translation key is used to display the text \"Not need enter settings\" in a settings plugin dialog. It appears as part of a button or similar UI element that indicates whether entering settings is necessary or not. The text helps users understand their current status and navigate accordingly.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.js",
-      "line_number": 80,
-      "context": "const locale = getCookie(LANGUAGE) || \"en\";\n const uploadDate = plugin.createOn && getCorrectDate(locale, plugin.createOn);\n \n const pluginStatus =\n plugin.status === PluginStatus.active\n ? t(\"NotNeedSettings\")\n : t(\"NeedSettings\");\n \n return (\n <StyledContainer withDelete={withDelete}>\n {withSeparator ? <StyledSeparator /> : null}",
+      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
+      "line_number": 45,
+      "context": "const locale = getCookie(LANGUAGE) || \"en\";\n const uploadDate = plugin.createOn && getCorrectDate(locale, plugin.createOn);\n \n const pluginStatus =\n plugin.status === PluginStatus.active\n ? t(\"NotNeedSettings\")\n : t(\"NeedSettings\");\n \n return (\n <div\n className={classNames(styles.container, {",
       "module": "/packages/client"
     }
   ],

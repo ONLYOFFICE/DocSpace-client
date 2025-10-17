@@ -3,7 +3,7 @@
   "content": "Your current domain",
   "content_en_sha1_hash": "b3923c670b1406884e6e252bae5cd97477f25260",
   "created_at": "2025-05-26T07:15:49.720Z",
-  "updated_at": "2025-09-17T13:43:01.727Z",
+  "updated_at": "2025-10-13T18:41:41.478Z",
   "comment": {
     "text": "This translation key is used to display \"Your current domain\" in various UI elements, such as settings pages and input fields, to provide users with clear information about their active domain. It appears on screens related to domain management and DNS settings, where users can edit or configure their domain details.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 260,
+      "line_number": 255,
       "context": "{t(\"DNSSettingsMobile\")}\n </div>\n <FieldContainer\n id=\"fieldContainerDNSSettings\"\n className=\"field-container-width settings_unavailable\"\n labelText={`${t(\"Common:YourCurrentDomain\")}`}\n isVertical\n >\n <TextInput\n {...textInputProps}\n isDisabled",
       "module": "/packages/client"
     },
@@ -33,13 +33,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"النطاق الحالي الخاص بك\" is a literal translation of \"Your current domain,\" it sounds slightly awkward and less natural in Arabic. A more idiomatic and common phrasing would be \"النطاق الخاص بك الحالي\" or \"النطاق الحالي\".",
+          "suggestion": "النطاق الخاص بك الحالي or النطاق الحالي"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Cari domen adınız' is not the most accurate rendering of 'Your current domain'. While 'Cari' means 'current', 'domen adınız' literally translates to 'your domain name' and doesn't fully capture the original meaning of 'domain'. It implies a name, rather than just the domain itself.",
+          "suggestion": "A more accurate translation would be something like 'Hazırki domeniniz' or 'Mövcud domeniniz'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -63,7 +75,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Το τρέχον όνομα τομέα σας\" is understandable, a more accurate and natural translation of \"Your current domain\" would be \"Ο τρέχων τομέας σας\". \"Όνομα\" implies a name, which isn't strictly accurate for a domain.",
+          "suggestion": "Ο τρέχων τομέας σας"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -105,7 +123,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '내 현재 도메인' is a literal translation but doesn't quite capture the natural flow of 'Your current domain' in a user interface or technical context. It could be misinterpreted.",
+          "suggestion": "Consider '현재 도메인' or '사용 중인 도메인' for a more natural and accurate translation. '현재 도메인' is concise, while '사용 중인 도메인' is more explicit."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -129,7 +153,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Twoja obecna domena\" is a literal translation, it might not be the most natural or idiomatic way to express \"Your current domain\" in Polish in a technical context. \"Twoja domena\" or \"Aktualna domena\" could be more appropriate depending on the specific usage.",
+          "suggestion": "Consider 'Twoja domena' or 'Aktualna domena' based on the context."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -159,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ඔබගේ වත්මන් වසම' is understandable, a more natural and accurate translation of 'Your current domain' would be 'ඔබේ දැනට පවතින డొమెయిన్' (obe denotu pavatina domain). The word 'වසම' (vasama) typically refers to a kingdom or territory, not a domain name.",
+          "suggestion": "ඔබේ දැනට පවතින డొమెయిన్"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -205,6 +241,18 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"您当前的域\" is a rather literal and stiff translation of \"Your current domain.\" It lacks the natural flow of common usage. '域' emphasizes a technical domain. A more user-friendly translation would consider alternatives like '您的域名' or '您所在的域名'.",
+          "suggestion": "Consider alternatives such as \"您的域名\" or \"您所在的域名\" for a more natural and user-friendly translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

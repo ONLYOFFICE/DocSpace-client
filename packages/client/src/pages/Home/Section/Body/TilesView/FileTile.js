@@ -121,7 +121,7 @@ const FileTile = (props) => {
     item.contentLength,
   );
 
-  const { thumbnailUrl } = item;
+  const { thumbnailUrl, providerItem } = item;
   const isDragDisabled = dragging && !isDragging;
 
   useEffect(() => {
@@ -232,7 +232,7 @@ const FileTile = (props) => {
       {...commonProps}
       key={item.id}
       temporaryIcon={temporaryIcon}
-      thumbnail={thumbnailUrl}
+      thumbnail={!providerItem && thumbnailUrl ? thumbnailUrl : ""}
       thumbSize={thumbSize}
       contentElement={quickButtonsComponent}
       thumbnailClick={onFilesClick}

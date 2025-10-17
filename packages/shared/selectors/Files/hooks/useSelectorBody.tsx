@@ -70,7 +70,7 @@ type PickedBreadCrumbsProps = Pick<
 type PickedSelectorBodyProps = Pick<
   SelectorProps,
   "items" | "onSelect" | "hasNextPage" | "totalItems" | "loadNextPage"
-> & { isRoot: boolean };
+> & { isRoot: boolean; selectedItemType?: string };
 
 const useSelectorBody = ({
   // header props
@@ -125,6 +125,8 @@ const useSelectorBody = ({
   withInit,
 
   isMultiSelect,
+
+  selectedItemType,
 }: Omit<FilesSelectorProps, "withSearch" | "onSubmit"> &
   PickedSearchProps &
   PickedSubmitButtonProps &
@@ -202,13 +204,13 @@ const useSelectorBody = ({
       }
     : {};
 
-  const isEmptyRoomsRootScreen = breadCrumbs?.[1]?.isRoom;
-  const emptyScreenHeader = isEmptyRoomsRootScreen
-    ? t("Common:EmptyRoomsHeader")
-    : t("Common:SelectorEmptyScreenHeader");
-  const emptyScreenDescription = isEmptyRoomsRootScreen
-    ? t("Common:EmptyRoomsDescription")
-    : "";
+  const isEmptyFilesRootScreen = selectedItemType === "files";
+  const emptyScreenHeader = isEmptyFilesRootScreen
+    ? t("Common:SelectorEmptyScreenHeader")
+    : t("Common:EmptyRoomsHeader");
+  const emptyScreenDescription = isEmptyFilesRootScreen
+    ? ""
+    : t("Common:EmptyRoomsDescription");
 
   const SelectorBody = (
     <Selector

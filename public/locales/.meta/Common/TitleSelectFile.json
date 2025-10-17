@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:49.307Z",
-  "updated_at": "2025-08-21T11:22:39.853Z",
+  "updated_at": "2025-10-14T00:27:57.103Z",
   "comment": {
     "text": "The translation key \"TitleSelectFile\" is used to display a file selection title in various places within the application. It appears as the label for checkboxes and dropdown menus related to file management, guiding users to select a file.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/shared/components/table/table-group-menu/TableGroupMenu.tsx",
       "line_number": 121,
-      "context": "className={classNames(styles.combobox, \"not-selectable\")}\n options={[]}\n selectedOption={{} as TOption}\n manualY=\"42px\"\n manualX=\"-32px\"\n title={t(\"Common:TitleSelectFile\")}\n isMobileView={isMobileView}\n onSelect={() => {}}\n dataTestId=\"table_group_menu_combobox\"\n />\n ) : null}",
+      "context": "className={classNames(styles.combobox, \"not-selectable\")}\n options={[]}\n selectedOption={{} as TOption}\n manualY=\"42px\"\n manualX=\"-32px\"\n title={t(\"Common:TitleSelectFile\")}\n isMobileView={isMobileView}\n onSelect={() => {}}\n dataTestId=\"table_group_menu_combobox\"\n withBackground={isMobileView}\n />",
       "module": "/packages/shared"
     }
   ],
@@ -69,7 +69,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Seleccionar' is not the most natural or commonly used translation of 'Select' in Spanish. While technically correct, 'Seleccionar' sounds somewhat formal and less idiomatic.",
+          "suggestion": "Consider using 'Elegir' or 'Escoger' which are more common and natural translations of 'Select' depending on the context.  'Seleccionar' is suitable but potentially less user-friendly."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -156,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Выделить\" while technically meaning \"to select\" or \"to highlight,\" doesn't convey the same nuance as the English \"Select\" in a user interface context.  \"Select\" implies choosing something from a list, whereas \"Выделить\" suggests marking or highlighting, which is slightly different.",
-          "suggestion": "Consider using \"Выбрать\" (Vybrat') which more directly translates to 'to choose' or 'to pick,' and is more aligned with the intended function of a selection button."
+          "description": "The translation \"Выделить\" (Vуdelit') doesn't accurately convey the meaning of \"Select\" in this context. 'Select' often implies choosing from a list, while 'Выделить' means 'to highlight' or 'to mark'.",
+          "suggestion": "Consider alternatives like \"Выбрать\" (Vybrat') which means 'to choose' or \"Найти\" (Nayti) which means 'to find' depending on the specific UI functionality."
         }
       ],
       "approved_at": null
@@ -165,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'තෝරන්න' (thoranna) is a verb meaning 'to select' or 'to choose'. While functionally related to 'Select', it doesn't convey the same meaning as the English word which functions as a noun/label. A more accurate translation would be 'ఎంపిక' (emhika) which means 'selection' or 'choice' or 'choose'.",
+          "suggestion": "ఎంపిక"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -186,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Изабери' does not accurately convey the meaning of 'Select'. 'Изабери' translates to 'Choose' or 'Pick', not 'Select'.",
-          "suggestion": "Одреди (Odredi) - which translates to 'Select'"
+          "description": "The Serbian (Cyrillic) translation \"Изабери\" means \"Choose\", not \"Select\". While similar, \"Select\" typically implies a more specific choice from a list, whereas \"Choose\" is a more general term. A more accurate translation of \"Select\" would be \"Одабири\" (Odaberi).",
+          "suggestion": "Одабири"
         }
       ],
       "approved_at": null
@@ -217,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

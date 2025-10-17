@@ -3,7 +3,7 @@
   "content": "<1>{{accessType}}</1> can <3>{{accessRights}}</3>.",
   "content_en_sha1_hash": "57556ede6f7f95270f4091a87f1817cf3698d880",
   "created_at": "2025-08-26T11:14:57.407Z",
-  "updated_at": "2025-08-26T11:24:13.414Z",
+  "updated_at": "2025-10-13T13:22:36.013Z",
   "comment": {
     "text": "This translation key displays the access type and associated rights for a file. It's used to inform the user about their permissions, likely within a sharing or access management interface. The `accessType` and `accessRights` values will be dynamically inserted into the text.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 383,
+      "line_number": 404,
       "context": "return (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"LinkAccessFile\"\n values={{ accessType, accessRights }}\n components={{\n 1: <strong key=\"strong-access-type\" />,\n 3: <strong key=\"strong-access-rights\" />,\n }}",
       "module": "/packages/shared"
     }

@@ -97,7 +97,6 @@ const FilesSelectorWrapper = ({
   checkFileConflicts,
   itemOperationToFolder,
   clearActiveOperations,
-  setMovingInProgress,
   setSelected,
   setMoveToPanelVisible,
   setRestorePanelVisible,
@@ -145,7 +144,6 @@ const FilesSelectorWrapper = ({
   withCreate,
   folderIsShared,
   checkCreating,
-  logoText,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -212,7 +210,7 @@ const FilesSelectorWrapper = ({
       // for backup
       if (!selection.length) return t("Common:BackupNotAllowedInFormRoom");
 
-      const option = { organizationName: logoText };
+      const option = { organizationName: t("Common:OrganizationName") };
 
       if (isCopy)
         return several
@@ -297,8 +295,6 @@ const FilesSelectorWrapper = ({
           } else {
             setIsRequestRunning(false);
             onCloseAndDeselectAction();
-            const move = !isCopy;
-            if (move) setMovingInProgress(move);
             sessionStorage.setItem("filesSelectorPath", `${selectedItemId}`);
 
             try {
@@ -523,13 +519,12 @@ export default inject(
 
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
 
-    const { currentDeviceType, logoText } = settingsStore;
+    const { currentDeviceType } = settingsStore;
 
     const {
       selection,
       bufferSelection,
       filesList,
-      setMovingInProgress,
       setSelected,
       filesSettingsStore,
     } = filesStore;
@@ -627,7 +622,6 @@ export default inject(
       checkFileConflicts,
       itemOperationToFolder,
       clearActiveOperations,
-      setMovingInProgress,
       setSelected,
       setCopyPanelVisible,
       setRestoreAllPanelVisible,
@@ -647,7 +641,6 @@ export default inject(
           : folderId || currentFolderIdProp,
       filesSettings,
       folderIsShared: shared,
-      logoText,
       openRoot,
     };
   },

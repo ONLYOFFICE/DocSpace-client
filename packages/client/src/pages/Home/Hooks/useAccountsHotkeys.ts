@@ -107,7 +107,10 @@ const useAccountsHotkeys = ({
       const someDialogIsOpen = checkDialogsOpen();
       if (someDialogIsOpen) return;
 
-      if ((e.key === "Alt" && e.ctrlKey) || (e.key === "Alt" && e.metaKey)) {
+      if (
+        (e.key === "Alt" && (e.ctrlKey || e.metaKey)) ||
+        ((e.key === "Meta" || e.key === "Control") && e.altKey)
+      ) {
         return enableSelection(e);
       }
 
@@ -133,7 +136,7 @@ const useAccountsHotkeys = ({
 
   // Select all accounts
   useHotkeys(
-    "shift+a, ctrl+a",
+    "shift+a, ctrl+a, command+a",
     (e) => {
       e.preventDefault();
       selectAll();

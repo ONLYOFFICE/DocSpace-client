@@ -24,15 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { withTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+import styled from "styled-components";
+
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
-import { withTranslation, Trans } from "react-i18next";
+import { getDialogContent } from "./DeleteDialog.helper";
 
-import { inject, observer } from "mobx-react";
+const StyledModalWrapper = styled(ModalDialog)`
+  strong {
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+  }
+`;
 
 const DeleteDialogComponent = (props) => {
   const {
@@ -52,33 +65,30 @@ const DeleteDialogComponent = (props) => {
     setIsRoomDelete,
     deleteRoomsAction,
     isPersonalRoom,
+    isSharedWithMeFolderRoot,
     isRoom,
     isTemplatesFolder,
     selection: selectionProps,
+    onRemoveSharedFilesOrFolder,
+    setUnsubscribe,
   } = props;
   const [isChecked, setIsChecked] = useState(false);
 
-  const selection = [];
-  let i = 0;
-
-  while (selectionProps.length !== i) {
-    const item = selectionProps[i];
-
-    if (!item?.isEditing) {
-      // if (item?.access === 0 || item?.access === 1 || unsubscribe) {
-      selection.push(item);
-      // }
-    }
-    i++;
-  }
+  const selection = useMemo(
+    () =>
+      unsubscribe
+        ? selectionProps
+        : selectionProps.filter((item) => !item?.isEditing),
+    [selectionProps, unsubscribe],
+  );
 
   const isTemplate = selection[0]?.isTemplate;
 
   const onClose = () => {
     if (
       selection.length === 1 &&
-      selection[0].isArchive &&
-      selection[0].isRootFolder === false
+      selection[0]?.isArchive &&
+      selection[0]?.isRootFolder === false
     ) {
       setSelected("none");
     }
@@ -86,6 +96,7 @@ const DeleteDialogComponent = (props) => {
     setRemoveMediaItem(null);
     setIsRoomDelete(false);
     setDeleteDialogVisible(false);
+    setUnsubscribe(false);
   };
 
   const onDelete = () => {
@@ -109,12 +120,7 @@ const DeleteDialogComponent = (props) => {
 
     if (!selection.length) return;
 
-    const filesId = [];
-    const foldersId = [];
-
-    selection.forEach((item) => {
-      item.fileExst ? filesId.push(item.id) : foldersId.push(item.id);
-    });
+    onRemoveSharedFilesOrFolder(selection);
   };
 
   const onDeleteRoom = async () => {
@@ -176,148 +182,67 @@ const DeleteDialogComponent = (props) => {
     };
   }, [onKeyUp]);
 
-  const moveToTrashTitle = () => {
-    if (unsubscribe) return t("UnsubscribeTitle");
+  const getAccessButtonLabel = () => {
+    if (isTemplate) {
+      return t("Common:Delete");
+    }
+
+    if (isRoomDelete) {
+      return t("Common:DeletePermanently");
+    }
+
+    if (isRecycleBinFolder) return t("EmptyTrashDialog:DeleteForeverButton");
+
+    if (isPrivacyFolder || selection[0]?.providerKey)
+      return t("Common:OKButton");
+
+    if (unsubscribe) return t("Common:Remove");
+
+    return t("Common:MoveTo");
+  };
+
+  const getDialogTitle = () => {
+    if (isTemplate) {
+      return `${t("Files:DeleteTemplate")}?`;
+    }
+
+    if (isRoomDelete) {
+      return t("DeleteRoomTitle");
+    }
+
+    if (isRecycleBinFolder) return t("EmptyTrashDialog:DeleteForeverTitle");
+
+    if (isPrivacyFolder || selection[0]?.providerKey)
+      return t("Common:Confirmation");
+
+    if (unsubscribe) return t("Common:RemoveFromList");
+
     return t("Common:SectionMoveConfirmation", {
       sectionName: t("Common:TrashSection"),
     });
   };
 
-  const moveToTrashNoteText = () => {
-    const isFolder = selection[0]?.isFolder || !!selection[0]?.parentId;
-    const isSingle = selection.length === 1;
-    const isThirdParty = selection[0]?.providerKey;
+  const noteText = getDialogContent(
+    t,
+    selection,
+    isTemplate,
+    isRoomDelete,
+    isRecycleBinFolder,
+    isPersonalRoom,
+    isRoom,
+    isTemplatesFolder,
+    isSharedWithMeFolderRoot,
+    unsubscribe,
+  );
 
-    if (isTemplate) {
-      return isSingle ? (
-        <Trans
-          i18nKey="DeleteTemplate"
-          ns="DeleteDialog"
-          t={t}
-          values={{ templateName: selection[0].title }}
-          components={{ 1: <Text fontWeight={600} as="span" /> }}
-        />
-      ) : (
-        t("DeleteTemplates")
-      );
-    }
-
-    if (isRoomDelete) {
-      return (
-        <>
-          <Trans t={t} i18nKey="DeleteRoom" ns="DeleteDialog">
-            The room <strong>\"{{ roomName: selection[0].title }}\"</strong>
-            will be permanently deleted. All data and user accesses will be
-            lost.
-          </Trans>{" "}
-          {t("Common:WantToContinue")}
-        </>
-      );
-    }
-
-    if (isRecycleBinFolder) {
-      return isSingle ? (
-        isFolder ? (
-          t("DeleteFolder")
-        ) : (
-          <>
-            <>{t("Common:DeleteFile")} </>
-            <>{t("Common:FilePermanentlyDeleted")} </>
-            <>{t("Common:WantToContinue")}</>
-          </>
-        )
-      ) : (
-        <>
-          <>{t("DeleteItems")} </>
-          <>{t("ItemsPermanentlyDeleted")} </>
-          <>{t("Common:WantToContinue")}</>
-        </>
-      );
-    }
-
-    if (isPersonalRoom) {
-      return isSingle ? (
-        isFolder ? (
-          <>
-            <>{t("DeleteFolder")} </>
-            <>{t("FolderPermanentlyDeleted")} </>
-            <>{t("Common:WantToContinue")}</>
-          </>
-        ) : (
-          <>
-            <>{t("Common:DeleteFile")} </>
-            <>{t("Common:FilePermanentlyDeleted")} </>
-            <>{t("Common:WantToContinue")}</>
-          </>
-        )
-      ) : (
-        <>
-          <>{t("DeleteItems")} </>
-          <>{t("ItemsPermanentlyDeleted")} </>
-          <>{t("Common:WantToContinue")}</>
-        </>
-      );
-    }
-
-    if (isRoom || isTemplatesFolder) {
-      return isSingle ? (
-        isFolder ? (
-          <>
-            <>{t("DeleteFolder")} </>
-            <>{t("DeleteSharedNote")} </>
-            {!isThirdParty ? <>{t("FolderPermanentlyDeleted")} </> : null}
-            <>{t("Common:WantToContinue")}</>
-          </>
-        ) : (
-          <>
-            <>{t("Common:DeleteFile")} </>
-            <>{t("DeleteSharedNote")} </>
-            {!isThirdParty ? <>{t("Common:FilePermanentlyDeleted")} </> : null}
-            <>{t("Common:WantToContinue")}</>
-          </>
-        )
-      ) : (
-        <>
-          <>{t("DeleteItems")} </>
-          <>{t("DeleteItemsSharedNote")} </>
-          {!isThirdParty ? <>{t("ItemsPermanentlyDeleted")} </> : null}
-          <>{t("Common:WantToContinue")}</>
-        </>
-      );
-    }
-  };
-
-  const title = isTemplate
-    ? `${t("Files:DeleteTemplate")}?`
-    : isRoomDelete
-      ? t("DeleteRoomTitle")
-      : isRecycleBinFolder
-        ? t("EmptyTrashDialog:DeleteForeverTitle")
-        : isPrivacyFolder || selection[0]?.providerKey
-          ? t("Common:Confirmation")
-          : moveToTrashTitle();
-
-  const noteText = unsubscribe ? t("UnsubscribeNote") : moveToTrashNoteText();
-
-  const accessButtonLabel = isTemplate
-    ? t("Common:Delete")
-    : isRoomDelete
-      ? t("Common:DeletePermanently")
-      : isRecycleBinFolder
-        ? t("EmptyTrashDialog:DeleteForeverButton")
-        : isPrivacyFolder || selection[0]?.providerKey
-          ? t("Common:OKButton")
-          : unsubscribe
-            ? t("UnsubscribeButton")
-            : t("Common:MoveToSection", {
-                sectionName: t("Common:TrashSection"),
-              });
+  const title = getDialogTitle();
+  const accessButtonLabel = getAccessButtonLabel();
 
   const isDisabledAccessButton =
     isRoomDelete || isTemplate ? !isChecked : !selection.length;
 
   return (
-    <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
+    <StyledModalWrapper isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{noteText}</Text>
@@ -356,7 +281,7 @@ const DeleteDialogComponent = (props) => {
           testId="delete_dialog_modal_cancel"
         />
       </ModalDialog.Footer>
-    </ModalDialog>
+    </StyledModalWrapper>
   );
 };
 
@@ -369,7 +294,13 @@ const DeleteDialog = withTranslation([
 ])(DeleteDialogComponent);
 
 export default inject(
-  ({ filesStore, dialogsStore, filesActionsStore, treeFoldersStore }) => {
+  ({
+    filesStore,
+    dialogsStore,
+    filesActionsStore,
+    treeFoldersStore,
+    contextOptionsStore,
+  }) => {
     const {
       selection,
       isLoading,
@@ -384,6 +315,7 @@ export default inject(
       isPersonalRoom,
       isRoom,
       isTemplatesFolderRoot,
+      isSharedWithMeFolderRoot,
     } = treeFoldersStore;
 
     const {
@@ -394,7 +326,10 @@ export default inject(
       unsubscribe,
       isRoomDelete,
       setIsRoomDelete,
+      setUnsubscribe,
     } = dialogsStore;
+
+    const { onRemoveSharedFilesOrFolder } = contextOptionsStore;
 
     return {
       selection: removeMediaItem
@@ -406,6 +341,7 @@ export default inject(
       visible,
       isPrivacyFolder,
       isRecycleBinFolder,
+      isSharedWithMeFolderRoot,
 
       setDeleteDialogVisible,
       deleteAction,
@@ -421,6 +357,8 @@ export default inject(
       isPersonalRoom,
       isRoom,
       isTemplatesFolder: isTemplatesFolderRoot,
+      onRemoveSharedFilesOrFolder,
+      setUnsubscribe,
     };
   },
 )(observer(DeleteDialog));

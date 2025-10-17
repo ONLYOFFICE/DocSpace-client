@@ -115,7 +115,13 @@ const HeaderUnAuth = ({
   windowIsOpen,
 }) => {
   const navigate = useNavigate();
-  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
+  const logo = getLogoUrl(
+    WhiteLabelLogoType.LightSmall,
+    !theme.isBase,
+    false,
+    "",
+    true,
+  );
 
   const currentCultureName = i18n.language;
 

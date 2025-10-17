@@ -23,5 +23,6 @@
   "ThirdPartyInfo": "Промени инфо треће стране",
   "ThirdPartyTitle": "Услуге трећих страна",
   "TitleShowActions": "Прикажи акције датотека",
-  "TitleShowFolderActions": "Прикажи акциије фолдера"
+  "TitleShowFolderActions": "Прикажи акциије фолдера",
+  "TrashItemsDeleteSuccess": "Изабрани елементи су успешно обрисани из {{sectionName}}"
 }

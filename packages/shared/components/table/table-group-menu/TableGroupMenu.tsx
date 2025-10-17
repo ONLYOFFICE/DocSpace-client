@@ -122,6 +122,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
           isMobileView={isMobileView}
           onSelect={() => {}}
           dataTestId="table_group_menu_combobox"
+          withBackground={isMobileView}
         />
       ) : null}
       <div

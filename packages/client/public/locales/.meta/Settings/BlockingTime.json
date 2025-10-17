@@ -3,7 +3,7 @@
   "content": "Blocking time (sec)",
   "content_en_sha1_hash": "490a942a08ee42cd63c3e4b0cf291fa362e24a10",
   "created_at": "2025-05-19T21:30:50.711Z",
-  "updated_at": "2025-09-19T15:39:23.245Z",
+  "updated_at": "2025-09-26T15:21:06.426Z",
   "comment": {
     "text": "This translation key is used for the label that displays a blocking time value in seconds on the brute force protection settings page. It appears in a dropdown menu or similar control within the security category of portal settings, allowing users to configure the duration for blocking IP addresses after a certain number of failed login attempts.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/bruteForceProtection.js",
-      "line_number": 70,
+      "line_number": 71,
       "context": "tfaStore,\n setup,\n } = props;\n \n const defaultNumberAttempt = numberAttempt?.toString();\n const defaultBlockingTime = blockingTime?.toString();\n const defaultCheckPeriod = checkPeriod?.toString();\n \n const [currentNumberAttempt, setCurrentNumberAttempt] =\n useState(defaultNumberAttempt);\n const [currentBlockingTime, setCurrentBlockingTime] =",
       "module": "/packages/client"
     }

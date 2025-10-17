@@ -3,7 +3,7 @@
   "content": "fill out",
   "content_en_sha1_hash": "d5e7896fc743c83c03105f8fb0a82f58eeeb222f",
   "created_at": "2025-08-26T11:14:56.354Z",
-  "updated_at": "2025-08-26T11:27:44.633Z",
+  "updated_at": "2025-10-13T13:22:36.012Z",
   "comment": {
     "text": "This key represents the permission level allowing users to \"fill out\" a form. It's used to describe a specific access right within the sharing options, likely displayed as a permission type or option in a UI element. Translators should consider the equivalent phrasing for allowing users to complete a form.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 289,
+      "line_number": 310,
       "context": "case ShareAccessRights.Comment:\n return t(\"Common:Comment\");\n case ShareAccessRights.ReadOnly:\n return t(\"Common:ReadOnly\");\n case ShareAccessRights.FormFilling:\n return t(\"Common:FillOut\");\n default:\n return \"\";\n }\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 289,
+      "line_number": 310,
       "context": "case ShareAccessRights.Comment:\n return t(\"Common:Comment\");\n case ShareAccessRights.ReadOnly:\n return t(\"Common:ReadOnly\");\n case ShareAccessRights.FormFilling:\n return t(\"Common:FillOut\");\n default:\n return \"\";\n }\n };",
       "module": "/packages/shared"
     }

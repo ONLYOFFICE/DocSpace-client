@@ -112,7 +112,7 @@ const AccountsTable = (props: AccountsTableProps) => {
 export default inject<TStore>(({ setup, userStore, importAccountsStore }) => {
   const { viewAs } = setup;
   const { changeGroupType, UserTypes, toggleAllAccounts } = importAccountsStore;
-  const { isOwner } = userStore.user!;
+  const { isOwner } = userStore.user || {};
 
   return {
     viewAs,

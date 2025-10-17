@@ -1,4 +1,5 @@
 {
+  "AccessLevel": "Access level",
   "AccessSettings": "Access settings",
   "AccessToTemplate": "Access to template",
   "ActionCannotUndone": "This action cannot be undone. Are you sure you want to continue?",
@@ -123,6 +124,7 @@
   "NoExternalLinks": "No external links",
   "Open": "Open",
   "OpenCreatedTemplate": "Open created template",
+  "OpenedViaLink": "Opened via link: access <strong>\"{{access}}\"</strong>.",
   "OpenLocation": "Open location",
   "OtherProcesses": "Other processes",
   "PersonalContentRemovalNotice": "Your personal files and folders in the {{sectionName}} section will be <1>deleted</1> since Guests don't have access to this section. Files remain available for viewing and downloading <1>for 30 days</1>.",

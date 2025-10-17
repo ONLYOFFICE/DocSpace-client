@@ -38,6 +38,7 @@ import {
   AccountsSearchArea,
   EmployeeStatus,
   EmployeeType,
+  RecaptchaType,
 } from "../../enums";
 import { Nullable } from "../../types";
 
@@ -57,12 +58,16 @@ export async function getUserList(
   if (filter) {
     checkFilterInstance(filter, Filter);
 
-    params = `/filter?${filter.toApiUrlParams()}`;
+    const search = filter.toApiUrlParams();
+
+    params = `/filter?${search}`;
   }
+
+  const url = `/people${params}`;
 
   const res = (await request({
     method: "get",
-    url: `/people${params}`,
+    url,
     signal,
   })) as TGetUserList;
 
@@ -276,11 +281,21 @@ export function deleteSelf(key) {
   });
 }
 
-export function sendInstructionsToChangePassword(email) {
+export function sendInstructionsToChangePassword(
+  email: string,
+  recaptchaResponse: string | null | undefined = "",
+  recaptchaType?: RecaptchaType,
+) {
+  const data: Record<string, unknown> = { email, recaptchaResponse };
+
+  if (typeof recaptchaType !== "undefined") {
+    data.recaptchaType = recaptchaType;
+  }
+
   return request({
     method: "post",
     url: "/people/password",
-    data: { email },
+    data,
   });
 }
 
@@ -621,6 +636,7 @@ export async function getMembersList(
   roomId: string | number,
   filter = Filter.getDefault(),
   signal?: AbortSignal,
+  targetEntityType: "file" | "folder" | "room" = "room",
 ) {
   let params = "";
 
@@ -642,13 +658,13 @@ export async function getMembersList(
 
   switch (searchArea) {
     case AccountsSearchArea.People:
-      url = `people/room/${roomId}${params}`;
+      url = `people/${targetEntityType}/${roomId}${params}`;
       break;
     case AccountsSearchArea.Groups:
-      url = `group/room/${roomId}${params}`;
+      url = `group/${targetEntityType}/${roomId}${params}`;
       break;
     default:
-      url = `accounts/room/${roomId}/search${params}`;
+      url = `accounts/${targetEntityType}/${roomId}/search${params}`;
   }
 
   const res = (await request({

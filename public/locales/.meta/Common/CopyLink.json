@@ -3,7 +3,7 @@
   "content": "Copy link",
   "content_en_sha1_hash": "2f84eea5d45da4f1ce1760b85db18a854f4e1b39",
   "created_at": "2025-05-19T21:30:43.782Z",
-  "updated_at": "2025-09-07T07:53:15.388Z",
+  "updated_at": "2025-10-16T07:29:35.971Z",
   "comment": {
     "text": "This translation key \"CopyLink\" is used to display a label that triggers the copy link functionality, appearing as a button in the Completed VDR Form component, prompting users to share or export a link. It appears on-screen when the user enables the \"Copy Link\" option, allowing them to share their file with others.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2022,
+      "line_number": 2039,
       "context": "disabled: !item.canShare,\n },\n {\n id: \"option_link-for-room-members\",\n key: \"link-for-room-members\",\n label: t(\"Common:CopyLink\"),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onCopyLink(item, t),\n disabled: item.isTemplate\n ? false\n : (isPublicRoomType && hasShareLinkRights) ||",
       "module": "/packages/client"
     },

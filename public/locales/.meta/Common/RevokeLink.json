@@ -3,7 +3,7 @@
   "content": "Revoke link",
   "content_en_sha1_hash": "60f184b7c84ca59ba034898a93f823c5c9571552",
   "created_at": "2025-08-26T11:15:03.776Z",
-  "updated_at": "2025-08-26T11:17:50.330Z",
+  "updated_at": "2025-10-13T14:41:02.806Z",
   "comment": {
     "text": "This key displays text on a button or dialog header, indicating the action of revoking a shared link. It appears in DeleteLinkDialog and LinkRow components, and the displayed text changes based on whether it's a public room or form room. Translators should consider the nuance of \"revoke\" versus \"delete\" in this context.",
     "is_auto": true,
@@ -12,26 +12,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
-      "line_number": 158,
+      "line_number": 118,
       "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>\n {link.sharedTo.primary && (isPublicRoomType || isFormRoom)\n ? t(\"Common:RevokeLink\")\n : t(\"Files:DeleteLink\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <DeleteLinkDialogContainer className=\"modal-dialog-content-body\">\n <Text lineHeight=\"20px\">{getDescription()}</Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
-      "line_number": 158,
+      "line_number": 118,
       "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>\n {link.sharedTo.primary && (isPublicRoomType || isFormRoom)\n ? t(\"Common:RevokeLink\")\n : t(\"Files:DeleteLink\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <DeleteLinkDialogContainer className=\"modal-dialog-content-body\">\n <Text lineHeight=\"20px\">{getDescription()}</Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/LinkRow.tsx",
-      "line_number": 171,
-      "context": "},\n {\n key: \"delete-link-key\",\n label:\n primary && (isPublicRoomType || isFormRoom)\n ? t(\"Common:RevokeLink\")\n : t(\"Common:Delete\"),\n icon:\n primary && (isPublicRoomType || isFormRoom)\n ? OutlineReactSvgUrl\n : TrashReactSvgUrl,",
+      "line_number": 167,
+      "context": "key: \"delete-link-separator\",\n isSeparator: true,\n },\n {\n key: \"delete-link-key\",\n label: link.canRevoke ? t(\"Common:RevokeLink\") : t(\"Common:Delete\"),\n icon: link.canRevoke ? OutlineReactSvgUrl : TrashReactSvgUrl,\n onClick: onDeleteLink,\n },\n ];\n };",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/shared/components/share/index.tsx",
-      "line_number": 432,
-      "context": "},\n {\n key: \"delete-link-key\",\n label: link.canEditExpirationDate\n ? t(\"Common:Delete\")\n : t(\"Common:RevokeLink\"),\n icon: link.canEditExpirationDate\n ? TrashReactSvgUrl\n : OutlineReactSvgUrl,\n onClick: () => removeLink(link),\n },",
+      "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
+      "line_number": 388,
+      "context": "key: \"delete-link-separator\",\n isSeparator: true,\n },\n {\n key: \"delete-link-key\",\n label: link.canRevoke ? t(\"Common:RevokeLink\") : t(\"Common:Delete\"),\n icon: link.canRevoke ? OutlineReactSvgUrl : TrashReactSvgUrl,\n onClick: () => removeLink(link),\n },\n ];\n };",
       "module": "/packages/shared"
     }
   ],

@@ -2,6 +2,8 @@
   "AccountWillBeCreated": " 将为 <1>{{email}}</1>创建{{productName}}帐户。请完成您的注册：",
   "ConfirmOwnerPortalSuccessMessage": " {{productName}}所有者已成功更改。您将于 10 秒后被重定向。",
   "ConfirmOwnerPortalTitle": "请确认您要将{{productName}}所有者更改为{{newOwner}}。",
+  "ConnectApp": "连接应用",
+  "ConnectAppDescription": "使用身份验证器应用扫描下方二维码，或手动将密钥<1>{{secretKey}}</1>输入到应用中。",
   "CurrentNumber": "您目前的手机号码",
   "DeleteProfileBtn": "删除我的账户",
   "DeleteProfileConfirmation": "注意！您即将删除账户。",
@@ -16,6 +18,8 @@
   "EnterEmailHeader": "输入电子邮件",
   "EnterPhone": "请填写您的手机号码",
   "GetCode": "获取代码",
+  "GetSuitableApp": "获取合适的应用",
+  "GetSuitableAppDescription": "使用兼容的应用，例如适用于 <1>Android</1> 和 <4>iOS</4>的Google Authenticator，或适用于 <8>Windows Phone</8>的Authenticator。",
   "LoginRegistryButton": "加入",
   "Newsletter": "我想订阅{{organizationName}}资讯",
   "PassworResetTitle": "现在您可创建新密码。",
@@ -29,5 +33,9 @@
   "SuccessDeactivate": "您的账户已成功停用。10 秒后您将被重定向至<1>站点</1>。",
   "SuccessReactivate": "您的账户已成功重新启用。10 秒后您将被重定向至<1>门户</1>。",
   "SuccessRemoved": "您的账户已删除成功。10 秒钟后，您将被重新转到<1>site</1>。",
-  "TermsAndConditions": "继续操作即表示您已理解并同意我们的<1>服务条款</1>和<2>隐私声明</2>。"
+  "TermsAndConditions": "继续操作即表示您已理解并同意我们的<1>服务条款</1>和<2>隐私声明</2>。",
+  "TfaSubTitle": "请按照简单的步骤继续使用此{{productName}}：",
+  "TfaTitle": "启用双重身份验证以确保安全访问",
+  "VerifyConnection": "验证连接",
+  "VerifyConnectionDescription": "请在下方输入身份验证器应用生成的6位验证码以完成设置。"
 }

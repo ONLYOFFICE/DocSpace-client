@@ -35,6 +35,8 @@ import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
+import { openShareTab } from "SRC_DIR/helpers/info-panel";
+
 export default function withQuickButtons(WrappedComponent) {
   class WithQuickButtons extends React.Component {
     constructor(props) {
@@ -138,6 +140,12 @@ export default function withQuickButtons(WrappedComponent) {
       onCreateRoomFromTemplate(item);
     };
 
+    openShareTab = () => {
+      const { item, setBufferSelection } = this.props;
+      openShareTab();
+      setBufferSelection(item);
+    };
+
     render() {
       const {
         t,
@@ -152,7 +160,7 @@ export default function withQuickButtons(WrappedComponent) {
         isIndexEditingMode,
         roomLifetime,
         isTemplatesFolder,
-        isRecentFolder,
+        isTrashFolder,
       } = this.props;
 
       const showLifetimeIcon =
@@ -182,7 +190,8 @@ export default function withQuickButtons(WrappedComponent) {
           roomLifetime={roomLifetime}
           onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
-          isRecentFolder={isRecentFolder}
+          isTrashFolder={isTrashFolder}
+          openShareTab={this.openShareTab}
         />
       );
 
@@ -219,7 +228,7 @@ export default function withQuickButtons(WrappedComponent) {
         isPersonalRoom,
         isArchiveFolder,
         isTemplatesFolder,
-        isRecentFolder,
+        isTrashFolder,
       } = treeFoldersStore;
 
       const { isIndexEditingMode } = indexingStore;
@@ -251,7 +260,7 @@ export default function withQuickButtons(WrappedComponent) {
         onCreateRoomFromTemplate,
         setBufferSelection: filesStore.setBufferSelection,
         lockFileAction,
-        isRecentFolder,
+        isTrashFolder,
       };
     },
   )(observer(WithQuickButtons));

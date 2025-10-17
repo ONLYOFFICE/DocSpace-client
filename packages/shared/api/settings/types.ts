@@ -154,7 +154,6 @@ export type TGetColorTheme = {
 };
 
 export type TApiEntries = {
-  apikeys: string;
   docspace: string;
   "javascript-sdk": string;
   "plugins-sdk": string;
@@ -229,6 +228,13 @@ export type THelpCenterEntries = {
   limiteddevtools: string;
   encryption: string;
   docspacefaq: string;
+  configureDeepLink: string;
+  invitationSettings: string;
+  singleSignOn: string;
+  pluginsSdk: string;
+  smtp: string;
+  dataImport: string;
+  apikeys: string;
 };
 
 export type TIntegrationsEntries = {

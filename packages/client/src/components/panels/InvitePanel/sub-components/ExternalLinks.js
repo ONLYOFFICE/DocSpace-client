@@ -46,7 +46,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { globalColors } from "@docspace/shared/themes";
-import { filterPaidRoleOptions } from "SRC_DIR/helpers";
+import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 import api from "@docspace/shared/api";
 import AccessSelector from "../../../AccessSelector";
 import PaidQuotaLimitError from "../../../PaidQuotaLimitError";

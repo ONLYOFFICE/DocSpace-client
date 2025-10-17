@@ -49,12 +49,14 @@ import { saveAs } from "@/utils";
 import type { ConflictStateType } from "@/types";
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 
+type SuccessResponse = `${string}form:${string}`;
+type FailedResponseType = string;
+type ResponseType = SuccessResponse | FailedResponseType;
+
 type SuccessResponseType = {
   form: TFile;
   message: string;
 };
-type FailedResponseType = string;
-type ResponseType = SuccessResponseType | FailedResponseType;
 
 const DefaultConflictDataDialogState: ConflictStateType = {
   visible: false,
@@ -76,8 +78,8 @@ const hasFileUrl = (arg: object): arg is { data: { url: string } } => {
 
 const isSuccessResponse = (
   res: ResponseType | undefined,
-): res is SuccessResponseType => {
-  return Boolean(res) && typeof res === "object" && "form" in res;
+): res is SuccessResponse => {
+  return !!res && res.includes("form");
 };
 
 const useStartFillingSelectDialog = (
@@ -151,7 +153,7 @@ const useStartFillingSelectDialog = (
           getFileInfo(fileInfo.id),
         ]);
 
-        const response = await saveAs<ResponseType>(
+        const response = await saveAs(
           file.title,
           fileUrl,
           selectedItemId,
@@ -160,7 +162,9 @@ const useStartFillingSelectDialog = (
         );
 
         if (isSuccessResponse(response)) {
-          const { form } = response;
+          const res = JSON.parse(response) as SuccessResponseType;
+
+          const { form } = res;
 
           switch (createDefineRoomType) {
             case RoomsType.FormRoom:

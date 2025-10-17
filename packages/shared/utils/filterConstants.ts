@@ -31,6 +31,7 @@ export const FILTER_DOCUMENTS = "UserFilter";
 export const FILTER_RECENT = "UserFilterRecent";
 export const FILTER_FAVORITES = "UserFilterFavorites";
 export const FILTER_TRASH = "UserFilterTrash";
+export const FILTER_SHARE = "UserFilterShare";
 
 // Room filters
 export const FILTER_SHARED_ROOM = "UserRoomsSharedFilter";

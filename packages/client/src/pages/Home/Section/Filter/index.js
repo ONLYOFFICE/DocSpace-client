@@ -60,6 +60,7 @@ import {
   FilterLocation,
   FilterSubject,
   FilterType,
+  FolderType,
   RoomSearchArea,
   RoomsProviderType,
   RoomsType,
@@ -131,8 +132,11 @@ const SectionFilterContent = ({
   showStorageInfo,
   isDefaultRoomsQuotaSet,
   isTemplatesFolder,
+  isSharedWithMeFolder,
 
   currentClientView,
+
+  getSelectedFolder,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -469,6 +473,8 @@ const SectionFilterContent = ({
     roomsFilter.filterValue,
     filter.search,
     usersFilter.search,
+    groupsFilter.search,
+    contactsTab,
   ]);
 
   const getSelectedSortData = React.useCallback(() => {
@@ -714,6 +720,65 @@ const SectionFilterContent = ({
     t,
   ]);
 
+  const getAuthorFilter = React.useCallback(() => {
+    const selectedFolder = getSelectedFolder();
+
+    const isFolderSharedWithMe =
+      selectedFolder.isFolder &&
+      !selectedFolder.isRootFolder &&
+      selectedFolder.rootFolderType === FolderType.SHARE;
+
+    if (isFolderSharedWithMe) return [];
+
+    if (isSharedWithMeFolder)
+      return [
+        {
+          key: FilterGroups.filterAuthor,
+          group: FilterGroups.filterAuthor,
+          label: t("ByAuthor"),
+          isHeader: true,
+        },
+        {
+          id: "filter_author-user-button",
+          key: FilterKeys.user,
+          group: FilterGroups.filterAuthor,
+          displaySelectorType: "button",
+          label: t("Translations:ChooseFromList"),
+        },
+      ];
+
+    return [
+      {
+        key: FilterGroups.filterAuthor,
+        group: FilterGroups.filterAuthor,
+        label: t("ByAuthor"),
+        isHeader: true,
+      },
+      {
+        id: "filter_author-me",
+        key: FilterKeys.me,
+        group: FilterGroups.filterAuthor,
+        label: t("Common:MeLabel"),
+      },
+      {
+        id: "filter_author-user",
+        key: FilterKeys.user,
+        group: FilterGroups.filterAuthor,
+        displaySelectorType: "link",
+      },
+      ...(isCollaborator || isVisitor
+        ? []
+        : [
+            {
+              id: "filter_author-other",
+              key: FilterKeys.other,
+              group: FilterGroups.filterAuthor,
+              label: t("Common:OtherLabel"),
+            },
+          ]),
+    ];
+  }, [getSelectedFolder, isSharedWithMeFolder, isCollaborator, isVisitor]);
+
   const getFilterData = React.useCallback(async () => {
     const quotaFilter = [
       {
@@ -756,17 +821,16 @@ const SectionFilterContent = ({
 
     const isLastTypeOptionsRooms = !connectedThirdParty.length && !tags?.length;
 
-    const folders =
-      !isFavoritesFolder && !isRecentFolder
-        ? [
-            {
-              id: "filter_type-folders",
-              key: FilterType.FoldersOnly.toString(),
-              group: FilterGroups.filterType,
-              label: t("Common:Folders"),
-            },
-          ]
-        : "";
+    const folders = !isRecentFolder
+      ? [
+          {
+            id: "filter_type-folders",
+            key: FilterType.FoldersOnly.toString(),
+            group: FilterGroups.filterType,
+            label: t("Common:Folders"),
+          },
+        ]
+      : [];
 
     const files = !isRecentFolder
       ? [
@@ -788,14 +852,16 @@ const SectionFilterContent = ({
       },
     ];
 
-    const archives = [
-      {
-        id: "filter_type-archive",
-        key: FilterType.ArchiveOnly.toString(),
-        group: FilterGroups.filterType,
-        label: t("Common:Archives"),
-      },
-    ];
+    const archives = !isRecentFolder
+      ? [
+          {
+            id: "filter_type-archive",
+            key: FilterType.ArchiveOnly.toString(),
+            group: FilterGroups.filterType,
+            label: t("Common:Archives"),
+          },
+        ]
+      : [];
 
     const media = [
       {
@@ -1075,36 +1141,7 @@ const SectionFilterContent = ({
         isDefaultRoomsQuotaSet &&
         filterOptions.push(...quotaFilter);
     } else {
-      const authorOption = [
-        {
-          key: FilterGroups.filterAuthor,
-          group: FilterGroups.filterAuthor,
-          label: t("ByAuthor"),
-          isHeader: true,
-        },
-        {
-          id: "filter_author-me",
-          key: FilterKeys.me,
-          group: FilterGroups.filterAuthor,
-          label: t("Common:MeLabel"),
-        },
-
-        {
-          id: "filter_author-user",
-          key: FilterKeys.user,
-          group: FilterGroups.filterAuthor,
-          displaySelectorType: "link",
-        },
-      ];
-
-      if (!isCollaborator && !isVisitor) {
-        authorOption.push({
-          id: "filter_author-other",
-          key: FilterKeys.other,
-          group: FilterGroups.filterAuthor,
-          label: t("Common:OtherLabel"),
-        });
-      }
+      const authorOption = getAuthorFilter();
 
       !isPublicRoom && filterOptions.push(...authorOption);
       filterOptions.push(...typeOptions);
@@ -1208,6 +1245,7 @@ const SectionFilterContent = ({
     isCollaborator,
     isVisitor,
     getContactsFilterData,
+    getAuthorFilter,
   ]);
 
   const getViewSettingsData = React.useCallback(() => {
@@ -1557,6 +1595,7 @@ export default inject(
       isPersonalRoom,
       isTrashFolder: isTrash,
       isTemplatesFolder,
+      isSharedWithMeFolder,
     } = treeFoldersStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
@@ -1565,7 +1604,7 @@ export default inject(
     const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     const { isIndexEditingMode } = indexingStore;
-    const { isIndexedFolder } = selectedFolderStore;
+    const { isIndexedFolder, getSelectedFolder } = selectedFolderStore;
 
     const { usersStore, groupsStore, viewAs: contactsViewAs } = peopleStore;
 
@@ -1588,6 +1627,7 @@ export default inject(
 
       isCollaborator: user?.isCollaborator,
       isVisitor: user?.isVisitor,
+      getSelectedFolder,
 
       filter,
       roomsFilter,
@@ -1601,6 +1641,7 @@ export default inject(
       isTemplatesFolder,
       isIndexing: isIndexedFolder,
       isIndexEditingMode,
+      isSharedWithMeFolder,
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       showFilterLoader: clientLoadingStore.showFilterLoader,

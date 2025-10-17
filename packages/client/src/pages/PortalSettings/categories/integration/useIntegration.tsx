@@ -24,10 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-import type { TDocServiceLocation } from "@docspace/shared/api/files/types";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 
 import SetupStore from "SRC_DIR/store/SettingsSetupStore";
@@ -46,9 +45,11 @@ export type UseIntegrationProps = {
   fetchAndSetConsumers?: SetupStore["fetchAndSetConsumers"];
   setInitSMTPSettings?: SetupStore["setInitSMTPSettings"];
   getDocumentServiceLocation?: FilesSettingsStore["getDocumentServiceLocation"];
+  setDocumentServiceLocation?: FilesSettingsStore["setDocumentServiceLocation"];
   loadLDAP?: LdapFormStore["load"];
   isLdapAvailable?: CurrentQuotasStore["isLdapAvailable"];
   isThirdPartyAvailable?: CurrentQuotasStore["isThirdPartyAvailable"];
+  setOpenThirdPartyModal?: SetupStore["setOpenThirdPartyModal"];
 };
 
 const useIntegration = ({
@@ -61,15 +62,13 @@ const useIntegration = ({
   fetchAndSetConsumers,
   setInitSMTPSettings,
   getDocumentServiceLocation,
+  setDocumentServiceLocation,
   loadLDAP,
   isLdapAvailable,
   isThirdPartyAvailable,
+  setOpenThirdPartyModal,
 }: UseIntegrationProps) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
-
-  const [openThirdPartyModal, setOpenThirdPartyModal] = useState(false);
-  const [documentServiceLocationData, setDocumentServiceLocationData] =
-    useState<TDocServiceLocation>();
 
   const getLDAPData = useCallback(async () => {
     isLdapAvailable && (await loadLDAP?.(t));
@@ -87,9 +86,9 @@ const useIntegration = ({
     const urlParts = window.location.href.split("?");
     if (urlParts.length > 1 && isThirdPartyAvailable) {
       const queryValue = urlParts[1].split("=")[1];
-      await fetchAndSetConsumers?.(queryValue).then(
-        (isConsumerExist) => isConsumerExist && setOpenThirdPartyModal(true),
-      );
+      await fetchAndSetConsumers?.(queryValue).then((isConsumerExist) => {
+        isConsumerExist && setOpenThirdPartyModal?.(true);
+      });
     } else {
       await getConsumers?.();
     }
@@ -101,7 +100,7 @@ const useIntegration = ({
 
   const getDocumentServiceData = useCallback(async () => {
     await getDocumentServiceLocation?.().then((result) => {
-      setDocumentServiceLocationData(result);
+      setDocumentServiceLocation?.(result);
     });
   }, [getDocumentServiceLocation]);
 
@@ -134,9 +133,7 @@ const useIntegration = ({
   ]);
 
   return {
-    openThirdPartyModal,
-    documentServiceLocationData,
-
+    getLDAPData,
     getSSOData,
     getPluginsData,
     getThirdPartyData,

@@ -134,16 +134,9 @@ const LanguageAndTimeZoneComponent = (props) => {
     if (!isMobileDevice()) {
       setState((val) => ({ ...val, isCustomizationView: true }));
 
-      const currentUrl = window.location.href.replace(
-        window.location.origin,
-        "",
-      );
-
-      const newUrl = "/portal-settings/customization/general";
-
-      if (newUrl === currentUrl) return;
-
-      navigate(newUrl);
+      if (location.pathname.includes("language-and-time-zone")) {
+        navigate("/portal-settings/customization/general");
+      }
     } else {
       setState((val) => ({ ...val, isCustomizationView: false }));
     }
@@ -483,6 +476,7 @@ const LanguageAndTimeZoneComponent = (props) => {
             noBorder={false}
             scaled
             scaledOptions
+            isDefaultMode={false}
             dropDownMaxHeight={300}
             className="dropdown-item-width combo-box-settings"
             showDisabledItems
@@ -507,6 +501,7 @@ const LanguageAndTimeZoneComponent = (props) => {
           noBorder={false}
           scaled
           scaledOptions
+          isDefaultMode={false}
           dropDownMaxHeight={300}
           className="dropdown-item-width combo-box-settings"
           showDisabledItems

@@ -28,11 +28,25 @@ import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const StyledLoader = styled.div`
-  max-width: 700px;
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(293px, 1fr));
-  gap: 20px;
+
+  .description {
+    max-width: 700px;
+    margin-bottom: 20px;
+  }
+
+  .request {
+    max-width: 700px;
+    margin-bottom: 20px;
+  }
+
+  .service-wrapper {
+    max-width: 700px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(293px, 1fr));
+    gap: 20px;
+  }
 `;
 
 const ThirdPartyLoader = () => {
@@ -40,13 +54,18 @@ const ThirdPartyLoader = () => {
 
   return (
     <StyledLoader>
-      {rectangles.map((_, index) => (
-        <RectangleSkeleton
-          key={`third-party-loader-${index}`}
-          height="120px"
-          borderRadius="6px"
-        />
-      ))}
+      <RectangleSkeleton className="description" height="87px" />
+      <RectangleSkeleton className="request" height="162px" />
+
+      <div className="service-wrapper">
+        {rectangles.map((_, index) => (
+          <RectangleSkeleton
+            key={`third-party-loader-${index}`}
+            height="120px"
+            borderRadius="6px"
+          />
+        ))}
+      </div>
     </StyledLoader>
   );
 };

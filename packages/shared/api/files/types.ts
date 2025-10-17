@@ -24,7 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TCreatedBy, TPathParts } from "../../types";
+import type {
+  TAvailableShareRights,
+  TCreatedBy,
+  TPathParts,
+} from "../../types";
 import type {
   EmployeeActivationStatus,
   EmployeeStatus,
@@ -79,17 +83,6 @@ export type TFileSecurity = {
   Embed: boolean;
 };
 
-export type TAvailableExternalRights = {
-  Comment: boolean;
-  CustomFilter: boolean;
-  Editing: boolean;
-  None: boolean;
-  Read: boolean;
-  Restrict: boolean;
-  Review: boolean;
-  FillForms: boolean;
-};
-
 export type TShareSettings = {
   ExternalLink?: number;
   PrimaryExternalLink?: number;
@@ -129,7 +122,7 @@ export type TFile = {
   viewUrl: string;
   webUrl: string;
   shortWebUrl: string;
-  availableExternalRights?: TAvailableExternalRights;
+  availableShareRights?: TAvailableShareRights;
   providerId?: number;
   providerKey?: string;
   providerItem?: boolean;
@@ -149,6 +142,10 @@ export type TFile = {
   originTitle?: string;
   requestToken?: string;
   isFavorite?: boolean;
+  expirationDate?: string;
+  sharedForUser?: boolean;
+  external?: boolean;
+  isLinkExpired?: boolean;
 };
 
 export type TOpenEditRequest = {
@@ -239,8 +236,12 @@ export type TFolder = {
   order?: string;
   isRoom?: false;
   shareSettings?: TShareSettings;
-  availableExternalRights?: TAvailableExternalRights;
+  availableShareRights?: TAvailableShareRights;
   isFavorite?: boolean;
+  expirationDate?: string;
+  sharedForUser?: boolean;
+  isLinkExpired?: boolean;
+  external?: boolean;
 };
 
 export type TGetFolderPath = TFolder[];
@@ -461,6 +462,7 @@ export type TFileLink = {
   canEditAccess: boolean;
   canEditDenyDownload: boolean;
   canEditInternal: boolean;
+  canRevoke: boolean;
   canEditExpirationDate: boolean;
   isLocked: boolean;
   isOwner: boolean;
@@ -550,4 +552,9 @@ export type TFileFillingFormStatus = {
   sequence: number;
   submitted: boolean;
   history?: Record<FillingFormStatusHistory, string>;
+};
+
+export type TShareToUser = {
+  shareTo: string;
+  access: ShareAccessRights;
 };

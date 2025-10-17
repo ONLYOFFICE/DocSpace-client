@@ -1,10 +1,20 @@
 {
-  "ActionsWithFilesDescription": "ستنبّهك الشارات بشأن إجراءاتك مثل رفع وإنشاء الملفات والتغييرات التي تطرأ عليها.",
+  "ActionsWithFilesDescription": "ستسلط الشارات الضوء على نشاط الملفات — التحميلات أو التعديلات أو المشاركات — عبر أقسام {{rooms}} و{{shared}} و{{documents}}.",
+  "AdminSetupRequired": "مطلوب إعداد من المسؤول",
   "Badges": "شارات",
   "DailyFeed": "أخبار {{productName}} اليومية",
   "DailyFeedDescription": "اطلع على الأخبار والفعاليات من {{productName}} الخاص بك في ملخص يومي.",
+  "FileActivityNotify": "إشعارات نشاط الملف",
+  "GoToSettings": "الانتقال إلى الإعدادات",
+  "IsNotValid": "غير صالح",
+  "LdapEmailTooltip": "تم تحميل حساب المستخدم هذا من LDAP. لم يتم تحديد عنوان البريد الإلكتروني للمستخدم، وقد تم إنشاء العنوان الحالي تلقائيًا ولا يمكن استخدامه لإرسال الإشعارات.",
+  "NotConfigured": "غير مهيأ",
   "Notifications": "الإشعارات",
-  "RoomsActivityDescription": "اشعارات كل ساعة. ابقَ على اطلاع بجميع الأنشطة في غرفك.",
+  "RoomsActivityDescription": "احصلوا على إشعارات فورية عبر البريد الإلكتروني حول الملفات/المجلدات المشتركة الجديدة والنشاط داخل {{sectionName}} الخاص بكم.",
+  "RoomUpdateNotify": "المحتوى المشترك ونشاط {{sectionName}}",
+  "SettingUpNotifications": "إعداد الإشعارات",
+  "SuccessConnected": "تم توصيل {{serviceName}} بنجاح كقناة إشعارات. ستتلقون الآن التحديثات هناك.",
+  "SuccessDisconnected": "تم فصل {{serviceName}} بنجاح كقناة إشعارات. لن يتم إرسال الإشعارات إلى هناك بعد الآن.",
   "UsefulTips": "نصائح مفيدة حول  {{productName}}",
   "UsefulTipsDescription": "احصل على دليل مفيد حول {{productName}}"
 }

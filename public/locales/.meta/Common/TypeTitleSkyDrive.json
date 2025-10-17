@@ -3,7 +3,7 @@
   "content": "OneDrive",
   "content_en_sha1_hash": "80753c986574153732103504426f45909268f96b",
   "created_at": "2025-05-26T07:15:49.018Z",
-  "updated_at": "2025-05-26T08:02:54.954Z",
+  "updated_at": "2025-10-13T23:41:04.766Z",
   "comment": {
     "text": "This translation key is used for a title that displays \"OneDrive\" and is typically found on cloud storage providers or folders. The translator should focus on ensuring this title matches the user's preferred cloud storage service to maintain consistency across the UI.",
     "is_auto": true,
@@ -205,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

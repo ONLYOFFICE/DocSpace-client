@@ -181,38 +181,36 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
         const onClick = async (): Promise<void> => {
           onClose?.();
 
-          if (item.value.withActiveItem) setActiveFiles?.([targetFile.id]);
+          if (item.withActiveItem) setActiveFiles?.([targetFile.id]);
 
-          await item.value.onClick(targetFile.id);
+          await item.onClick(targetFile.id);
 
-          if (item.value.withActiveItem) setActiveFiles?.([]);
+          if (item.withActiveItem) setActiveFiles?.([]);
         };
 
         if (
-          item.value.fileType &&
-          item.value.fileType.includes("image") &&
+          item.fileType &&
+          item.fileType.includes("image") &&
           !targetFile.viewAccessibility.ImageView
         )
           return;
         if (
-          item.value.fileType &&
-          item.value.fileType.includes("video") &&
+          item.fileType &&
+          item.fileType.includes("video") &&
           !targetFile.viewAccessibility.MediaView
         )
           return;
 
         model.unshift({
           id: item.key,
-          key: item.key,
           disabled: false,
-          ...item.value,
+          ...item,
           onClick,
         });
 
         desktopModel.unshift({
-          key: item.key,
           disabled: false,
-          ...item.value,
+          ...item,
           onClick: () => {
             onClick();
           },
@@ -403,7 +401,10 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
   useEffect(() => {
     const extension = getFileExtension(currentTitle);
 
-    if (!src) return onEmptyPlaylistError?.();
+    if (!src) {
+      onEmptyPlaylistError?.();
+      return;
+    }
 
     if (!isTiff(extension) && !isHeic(extension)) {
       TiffAbortSignalRef.current?.abort();

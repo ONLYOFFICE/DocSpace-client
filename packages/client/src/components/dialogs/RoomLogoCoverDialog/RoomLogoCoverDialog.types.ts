@@ -38,6 +38,11 @@ export interface ILogo {
   cover: ICover;
 }
 
+export interface ILogoCover {
+  color: string;
+  cover: string;
+}
+
 interface IRoomCoverDialogProps {
   icon: string | null | ILogo;
   color: string | null;
@@ -53,7 +58,7 @@ export interface RoomLogoCoverProps {
   title?: string;
   covers?: ICover[] | undefined;
   setCover: (color: string, icon: string | ICover) => void;
-  cover: ILogo;
+  cover: ILogoCover;
   setRoomCoverDialogProps: (params: IRoomCoverDialogProps) => void;
   roomCoverDialogProps: IRoomCoverDialogProps;
   forwardedRef?: React.ForwardedRef<HTMLDivElement>;
@@ -79,7 +84,7 @@ export type CoverDialogProps = RoomLogoCoverProps & {
 
 export interface CustomLogoProps {
   color: string | null;
-  icon: string | ILogo | ICover | null;
+  icon: string | ILogo | ICover | ILogoCover | null;
   withoutIcon: boolean;
   isBaseTheme: boolean;
   roomTitle: string;

@@ -3,7 +3,7 @@
   "content": "Recover access",
   "content_en_sha1_hash": "3f0e9f892fde12d93db01b89396951762c8bb282",
   "created_at": "2025-05-19T21:30:57.252Z",
-  "updated_at": "2025-05-24T15:03:39.403Z",
+  "updated_at": "2025-10-16T07:29:36.011Z",
   "comment": {
     "text": "The translation key \"RecoverAccess\" is used to display a text message that allows users to recover access to their account. In this case, it appears as a button or link on a modal dialog in the login process, prompting users to regain access if they encounter issues.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/components/RecoverAccess.tsx",
       "line_number": 32,
-      "context": "\"use client\";\n \n import { useTranslation } from \"react-i18next\";\n \n import { Link, LinkType } from \"@docspace/shared/components/link\";\n import RecoverAccessModalDialog from \"@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog\";\n \n import useRecoverDialog from \"@/hooks/useRecoverDialog\";\n \n const RecoverAccess = () => {\n const { t } = useTranslation([\"Login\", \"Common\"]);",
+      "context": "\"use client\";\n \n import { useTranslation } from \"react-i18next\";\n \n import { Link, LinkType } from \"@docspace/shared/components/link\";\n import RecoverAccessModalDialog from \"@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog\";\n import { RecaptchaType } from \"@docspace/shared/enums\";\n \n import useRecoverDialog from \"@/hooks/useRecoverDialog\";\n \n type RecoverAccessProps = {",
       "module": "/packages/login"
     }
   ],

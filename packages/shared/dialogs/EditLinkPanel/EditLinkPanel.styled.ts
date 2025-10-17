@@ -62,8 +62,19 @@ const StyledEditLinkBodyContent = styled.div`
       padding-bottom: 8px;
       gap: 8px;
 
-      .edit-link-toggle {
-        margin-inline: auto 28px;
+      align-items: center;
+
+      .edit-link-toggle--wrapper {
+        margin-inline-start: auto;
+        align-self: center;
+
+        display: flex;
+        align-items: center;
+
+        .edit-link-toggle {
+          position: static;
+          gap: 0px;
+        }
       }
     }
     .edit-link_password-block {

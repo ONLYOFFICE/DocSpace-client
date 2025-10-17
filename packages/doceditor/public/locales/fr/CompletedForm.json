@@ -12,12 +12,12 @@
   "FormOwner": "Propriétaire du formulaire",
   "FormSectionCompleted": "Section du formulaire remplie",
   "FormVDRConfirmationOfStartTitle": "Le formulaire est prêt à être rempli dans la salle",
+  "FormVDRFinalizedDescription": "Le formulaire a été entièrement rempli par tous les destinataires et est maintenant finalisé. Il est disponible en lecture seule.",
+  "FormVDRNextRecepientDescription": "Une notification a déjà été envoyée à l'utilisateur désigné comme premier destinataire, l'invitant à remplir le formulaire. Vous pouvez accéder à la salle ou partager le lien de remplissage avec les participants.",
   "FormVDRSectionCompletedDescription": "La partie assignée du formulaire PDF a été remplie avec succès. L'état de remplissage du formulaire peut être contrôlé dans la salle et via le panneau d'état de remplissage. Une notification par e-mail sera envoyée une fois que le formulaire sera entièrement rempli.",
+  "FormVDRYouFirstRecepientDescription": "Vous êtes chargé de remplir le formulaire en tant que premier destinataire. Une notification a été envoyée à votre adresse e-mail. Vous pouvez commencer à le remplir maintenant ou copier le lien de remplissage et y revenir plus tard.",
   "LinkToFillOutForm": "Lien pour remplir le formulaire :",
   "LinkToForm": "Lien vers le formulaire :",
   "LinkToViewOnlyForm": "Lien vers le formulaire en lecture seule :",
-  "Title": "Le formulaire est rempli",
-  "FormVDRFinalizedDescription": "Le formulaire a été entièrement rempli par tous les destinataires et est maintenant finalisé. Il est disponible en lecture seule.",
-  "FormVDRNextRecepientDescription": "Une notification a déjà été envoyée à l'utilisateur désigné comme premier destinataire, l'invitant à remplir le formulaire. Vous pouvez accéder à la salle ou partager le lien de remplissage avec les participants.",
-  "FormVDRYouFirstRecepientDescription": "Vous êtes chargé de remplir le formulaire en tant que premier destinataire. Une notification a été envoyée à votre adresse e-mail. Vous pouvez commencer à le remplir maintenant ou copier le lien de remplissage et y revenir plus tard."
+  "Title": "Le formulaire est rempli"
 }

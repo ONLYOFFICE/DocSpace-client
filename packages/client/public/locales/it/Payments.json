@@ -61,7 +61,7 @@
   "GoToStripe": "Vai su Stripe",
   "GracePeriodActivatedDescription": "Durante il periodo di prova, gli amministratori non possono creare nuove stanze e aggiungere nuovi utenti. Dopo la data di scadenza del periodo di prova, {{productName}} non sarà più disponibile fino a quando non verrà effettuato il pagamento.",
   "GracePeriodActivatedInfo": "Il periodo di tolleranza è valido <1>dal {{fromDate}} al {{byDate}}</1> (giorni rimanenti: {{delayDaysCount}}).",
-  "InvalidEmailWithActiveSubscription": "Il tuo abbonamento rimane attivo, ma ti consigliamo di scegliere un nuovo Pagatore che abbia accesso alle impostazioni dell&apos;abbonamento in {{productName}}.",
+  "InvalidEmailWithActiveSubscription": "Il tuo abbonamento rimane attivo, ma ti consigliamo di scegliere un nuovo Pagatore che abbia accesso alle impostazioni dell'abbonamento in {{productName}}.",
   "InvalidEmailWithActiveSubscriptionForAdmin": "Il tuo abbonamento rimane attivo, ma ti consigliamo di contattare il proprietario di {{productName}} per scegliere un nuovo Pagatore.",
   "InvalidEmailWithoutActiveSubscription": "Ti consigliamo di scegliere un nuovo Pagatore che abbia accesso alle impostazioni di abbonamento in {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Ti consigliamo di contattare il proprietario di {{productName}} per scegliere un nuovo Pagatore.",

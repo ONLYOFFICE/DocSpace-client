@@ -45,6 +45,7 @@ import {
 import {
   getObjectByLocation,
   getCategoryType,
+  isPublicRoom,
 } from "@docspace/shared/utils/common";
 import type { ValueOf } from "@docspace/shared/types";
 
@@ -133,6 +134,8 @@ const useFiles = ({
   };
 
   const getFiles = React.useCallback(async () => {
+    if (isPublicRoom()) return;
+
     const categoryType = getCategoryType(location);
 
     let filterObj = null;

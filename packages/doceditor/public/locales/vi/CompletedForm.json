@@ -12,12 +12,12 @@
   "FormOwner": "Chủ sở hữu biểu mẫu",
   "FormSectionCompleted": "Phần Biểu Mẫu Đã Được Hoàn Thành",
   "FormVDRConfirmationOfStartTitle": "Biểu mẫu đã sẵn sàng để điền trong phòng",
+  "FormVDRFinalizedDescription": "Mẫu đơn đã được điền đầy đủ bởi tất cả người nhận và hiện đã được hoàn thiện. Nó hiện đang ở chế độ chỉ xem.",
+  "FormVDRNextRecepientDescription": "Đã gửi thông báo cho người dùng được chỉ định là người nhận đầu tiên, nhắc nhở họ điền vào biểu mẫu. Bạn có thể điều hướng đến phòng hoặc chia sẻ liên kết điền với những người tham gia.",
   "FormVDRSectionCompletedDescription": "Phần được chỉ định của biểu mẫu PDF đã được hoàn thành xong. Trạng thái điền thông tin của biểu mẫu có thể được theo dõi trong phòng và thông qua bảng trạng thái Điền thông tin. Một thông báo qua email sẽ được gửi sau khi biểu mẫu được hoàn thành đầy đủ.",
+  "FormVDRYouFirstRecepientDescription": "Bạn được chỉ định điền vào biểu mẫu với vai trò là người nhận đầu tiên. Một thông báo đã được gửi đến email của bạn. Bạn có thể bắt đầu điền vào nó ngay bây giờ hoặc sao chép liên kết điền và quay lại sau.",
   "LinkToFillOutForm": "Liên kết để điền biểu mẫu:",
   "LinkToForm": "Liên kết đến biểu mẫu:",
   "LinkToViewOnlyForm": "Liên kết đến biểu mẫu chỉ xem:",
-  "Title": "Biểu mẫu đã được hoàn thành ",
-  "FormVDRFinalizedDescription": "Mẫu đơn đã được điền đầy đủ bởi tất cả người nhận và hiện đã được hoàn thiện. Nó hiện đang ở chế độ chỉ xem.",
-  "FormVDRNextRecepientDescription": "Đã gửi thông báo cho người dùng được chỉ định là người nhận đầu tiên, nhắc nhở họ điền vào biểu mẫu. Bạn có thể điều hướng đến phòng hoặc chia sẻ liên kết điền với những người tham gia.",
-  "FormVDRYouFirstRecepientDescription": "Bạn được chỉ định điền vào biểu mẫu với vai trò là người nhận đầu tiên. Một thông báo đã được gửi đến email của bạn. Bạn có thể bắt đầu điền vào nó ngay bây giờ hoặc sao chép liên kết điền và quay lại sau."
+  "Title": "Biểu mẫu đã được hoàn thành "
 }

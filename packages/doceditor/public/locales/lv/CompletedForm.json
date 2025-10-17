@@ -12,12 +12,12 @@
   "FormOwner": "Veidlapas īpašnieks",
   "FormSectionCompleted": "Veidlapas sadaļa aizpildīta",
   "FormVDRConfirmationOfStartTitle": "Veidlapa ir gatava aizpildīšanai telpā",
+  "FormVDRFinalizedDescription": "Forma ir pilnībā aizpildīta visu saņēmēju puses un tagad ir pabeigta. Tā ir pieejama tikai skatīšanai.",
+  "FormVDRNextRecepientDescription": "Paziņojums jau ir nosūtīts lietotājam, kas norādīts kā pirmais saņēmējs, mudinot viņu aizpildīt formu. Jūs varat pāriet uz telpu vai dalīties ar aizpildīšanas saiti dalībniekiem.",
   "FormVDRSectionCompletedDescription": "PDF veidlapas piešķirtā daļa ir veiksmīgi aizpildīta. Veidlapas aizpildīšanas statusu var uzraudzīt telpā un Aizpildīšanas statusa panelī. Kad veidlapa būs pilnībā aizpildīta, tiks nosūtīts e-pasta paziņojums.",
+  "FormVDRYouFirstRecepientDescription": "Jums ir uzdots aizpildīt formu kā pirmajam saņēmējam. Jūsu e-pastā ir nosūtīts paziņojums. Jūs varat sākt aizpildīt to tūlīt vai kopēt aizpildīšanas saiti un atgriezties vēlāk.",
   "LinkToFillOutForm": "Saite veidlapas aizpildīšanai:",
   "LinkToForm": "Saite uz veidlapu:",
   "LinkToViewOnlyForm": "Saite uz veidlapu tikai skatīšanas režīmā:",
-  "Title": "Veidlapa ir aizpildīta",
-  "FormVDRFinalizedDescription": "Forma ir pilnībā aizpildīta visu saņēmēju puses un tagad ir pabeigta. Tā ir pieejama tikai skatīšanai.",
-  "FormVDRNextRecepientDescription": "Paziņojums jau ir nosūtīts lietotājam, kas norādīts kā pirmais saņēmējs, mudinot viņu aizpildīt formu. Jūs varat pāriet uz telpu vai dalīties ar aizpildīšanas saiti dalībniekiem.",
-  "FormVDRYouFirstRecepientDescription": "Jums ir uzdots aizpildīt formu kā pirmajam saņēmējam. Jūsu e-pastā ir nosūtīts paziņojums. Jūs varat sākt aizpildīt to tūlīt vai kopēt aizpildīšanas saiti un atgriezties vēlāk."
+  "Title": "Veidlapa ir aizpildīta"
 }

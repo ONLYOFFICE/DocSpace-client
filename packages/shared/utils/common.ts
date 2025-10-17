@@ -148,8 +148,9 @@ export function createPasswordHash(
 
 export const isPublicRoom = () => {
   return (
-    window.location.pathname === "/rooms/share" ||
-    window.location.pathname.includes(PUBLIC_MEDIA_VIEW_URL)
+    typeof window !== "undefined" &&
+    (window.location.pathname === "/rooms/share" ||
+      window.location.pathname.includes(PUBLIC_MEDIA_VIEW_URL))
   );
 };
 

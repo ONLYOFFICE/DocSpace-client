@@ -3,7 +3,7 @@
   "content": "Mark as read",
   "content_en_sha1_hash": "c1ee860bc3a94be1ae96eaa05833713b79c6634b",
   "created_at": "2025-05-19T21:30:55.828Z",
-  "updated_at": "2025-10-13T14:41:02.865Z",
+  "updated_at": "2025-10-16T07:29:35.520Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Mark as read\" on a button that allows users to update the read status of a file. The button appears in a file listing interface, likely as part of a task or action menu.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 851,
+      "line_number": 854,
       "context": "// } else {\n // openShareTab();\n // }\n };\n \n onClickMarkRead = (item) => {\n const { markAsRead } = this.filesActionsStore;\n \n item.fileExst\n ? markAsRead([], [item.id], item)\n : markAsRead([item.id], [], item);",
       "module": "/packages/client"
     }

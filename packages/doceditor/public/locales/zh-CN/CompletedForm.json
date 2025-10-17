@@ -12,12 +12,12 @@
   "FormOwner": "表单所有者",
   "FormSectionCompleted": "表单部分已完成",
   "FormVDRConfirmationOfStartTitle": "表单已准备好，可在房间内进行填写",
+  "FormVDRFinalizedDescription": "表单已由所有接收者完整填写，现已最终确定。目前处于只读模式。",
+  "FormVDRNextRecepientDescription": "已向指定为第一个接收者的用户发送通知，提示其填写表单。您可以导航至房间或与参与者分享填写链接。",
   "FormVDRSectionCompletedDescription": "PDF 表单的指定部分已完成填写，可以通过房间或“填写状态”面板监控表单的填写状态。表单全部填写完成后，系统将自动发送邮件通知。",
+  "FormVDRYouFirstRecepientDescription": "您被指定为填写此表单的第一个接收者，通知已发送至您的邮箱。您可以立即开始填写，或者复制填写链接稍后填写。",
   "LinkToFillOutForm": "填写表单链接：",
   "LinkToForm": "表单链接：",
   "LinkToViewOnlyForm": "只读表单链接：",
-  "Title": "表单已完成",
-  "FormVDRFinalizedDescription": "表单已由所有接收者完整填写，现已最终确定。目前处于只读模式。",
-  "FormVDRNextRecepientDescription": "已向指定为第一个接收者的用户发送通知，提示其填写表单。您可以导航至房间或与参与者分享填写链接。",
-  "FormVDRYouFirstRecepientDescription": "您被分配填写此表单作为第一接收者。 一份通知已发送至您的邮箱。 您现在可以开始填写，或复制填写链接稍后返回。"
+  "Title": "表单已完成"
 }

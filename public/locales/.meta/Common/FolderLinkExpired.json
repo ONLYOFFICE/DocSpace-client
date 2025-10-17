@@ -3,7 +3,7 @@
   "content": "The folder link you are trying to open does not exist or has expired.",
   "content_en_sha1_hash": "bba1e2e3d46cb2a5515355ab89ac814b65f23722",
   "created_at": "2025-10-13T13:22:03.854Z",
-  "updated_at": "2025-10-13T14:41:02.912Z",
+  "updated_at": "2025-10-16T07:29:35.646Z",
   "comment": {
     "text": "This text is displayed to the user when a folder link is no longer valid or accessible. It appears in a UI element (likely a dialog or notification) indicating that the folder cannot be opened. Translators should ensure the phrasing clearly conveys that the link is broken.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 264,
+      "line_number": 267,
       "context": ") {\n const isRoom = isRoomUtil(item);\n \n const description = isRoom\n ? t(\"Common:RoomLinkExpired\")\n : t(\"Common:FolderLinkExpired\");\n \n const title = isRoom\n ? t(\"Common:RoomNotAvailable\")\n : t(\"Common:FolderNotAvailable\");",
       "module": "/packages/client"
     },

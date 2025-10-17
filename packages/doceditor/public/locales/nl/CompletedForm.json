@@ -12,12 +12,12 @@
   "FormOwner": "Formulier eigenaar",
   "FormSectionCompleted": "Formulier Sectie Voltooid",
   "FormVDRConfirmationOfStartTitle": "Het formulier is klaar om in te vullen in de kamer",
+  "FormVDRFinalizedDescription": "Het formulier is volledig ingevuld door alle ontvangers en is nu voltooid. Het is beschikbaar in alleen-lezen modus.",
+  "FormVDRNextRecepientDescription": "Er is al een melding naar de gebruiker gestuurd die als eerste ontvanger is toegewezen, om hen te vragen het formulier in te vullen. U kunt naar de ruimte navigeren of de link om het formulier in te vullen delen met de deelnemers.",
   "FormVDRSectionCompletedDescription": "Het toegewezen gedeelte van het PDF formulier is met succes voltooid. De invulstatus van het formulier kan in de kamer en via het Invulstatus paneel worden gecontroleerd. Er wordt een e-mail melding verstuurd zodra het formulier volledig is ingevuld.",
+  "FormVDRYouFirstRecepientDescription": "U wordt gevraagd om het formulier in te vullen als eerste ontvanger. Er is een melding naar uw e-mailadres gestuurd. U kunt het nu invullen of de link om het formulier in te vullen kopiëren en deze later terugkomen.",
   "LinkToFillOutForm": "Link om formulier in te vullen:",
   "LinkToForm": "Link naar formulier:",
   "LinkToViewOnlyForm": "Link naar alleen-lezen formulier:",
-  "Title": "Het formulier is ingevuld",
-  "FormVDRFinalizedDescription": "Het formulier is volledig ingevuld door alle ontvangers en is nu voltooid. Het is beschikbaar in alleen-lezen modus.",
-  "FormVDRNextRecepientDescription": "Er is al een melding naar de gebruiker gestuurd die als eerste ontvanger is toegewezen, om hen te vragen het formulier in te vullen. U kunt naar de ruimte navigeren of de link om het formulier in te vullen delen met de deelnemers.",
-  "FormVDRYouFirstRecepientDescription": "U wordt gevraagd om het formulier in te vullen als eerste ontvanger. Er is een melding naar uw e-mailadres gestuurd. U kunt het nu invullen of de link om het formulier in te vullen kopiëren en deze later terugkomen."
+  "Title": "Het formulier is ingevuld"
 }

@@ -6,7 +6,7 @@
   "DeleteFilesAndFoldersForever": "Está a punto de eliminar los <strong>archivos ({{filesCount}})</strong> y las <strong>carpetas ({{foldersCount}})</strong>.",
   "DeleteFilesForever": "Está a punto de eliminar <strong>archivos ({{filesCount}})</strong>.",
   "DeleteFolders": "Está a punto de mover <strong>carpetas ({{foldersCount}})</strong> a la {{trashSection}}.",
-  "DeleteFoldersForever": "Estás a punto de eliminar <strong>carpetas ({{foldersCount}})</strong>.",
+  "DeleteFoldersForever": "Está a punto de eliminar <strong>carpetas ({{foldersCount}})</strong>.",
   "DeleteGroupDescription": "El grupo {{groupName}} se eliminará. Los usuarios del grupo no serán eliminados de {{productName}}. ¿Está seguro de que desea continuar? ",
   "DeleteGroupTitle": "Eliminar grupo",
   "DeleteItem": "Está a punto de mover <strong>{{name}}</strong> a la {{trashSection}}.",

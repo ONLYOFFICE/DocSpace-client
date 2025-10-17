@@ -99,7 +99,7 @@ export const getDialogContent = (
     );
   }
 
-  if (isRecycleBinFolder) {
+  if (isRecycleBinFolder || isThirdParty) {
     if (isSingle) {
       return (
         <>
@@ -107,13 +107,15 @@ export const getDialogContent = (
             You are about to delete{" "}
             <strong>{{ name: selection[0]?.title }}</strong>.
           </Trans>{" "}
-          {isFolder
-            ? t("FolderPermanentlyDeleted", {
-                trashSection: t("Common:TrashSection"),
-              })
-            : t("FilePermanentlyDeleted", {
-                trashSection: t("Common:TrashSection"),
-              })}{" "}
+          {!isThirdParty
+            ? isFolder
+              ? t("FolderPermanentlyDeleted", {
+                  trashSection: t("Common:TrashSection"),
+                })
+              : t("FilePermanentlyDeleted", {
+                  trashSection: t("Common:TrashSection"),
+                })
+            : null}{" "}
           {t("Common:WantToContinue")}
         </>
       );
@@ -130,9 +132,11 @@ export const getDialogContent = (
             <strong>files ({{ filesCount }})</strong> and{" "}
             <strong>folders ({{ foldersCount }})</strong>.
           </Trans>{" "}
-          {t("ItemsPermanentlyDeleted", {
-            trashSection: t("Common:TrashSection"),
-          })}{" "}
+          {!isThirdParty
+            ? t("ItemsPermanentlyDeleted", {
+                trashSection: t("Common:TrashSection"),
+              })
+            : null}{" "}
           {t("Common:WantToContinue")}
         </>
       );
@@ -144,9 +148,11 @@ export const getDialogContent = (
           <Trans t={t} i18nKey="DeleteFilesForever" ns="DeleteDialog">
             You are about to delete <strong>files ({{ filesCount }})</strong>.
           </Trans>{" "}
-          {t("FilesPermanentlyDeleted", {
-            trashSection: t("Common:TrashSection"),
-          })}{" "}
+          {!isThirdParty
+            ? t("FilesPermanentlyDeleted", {
+                trashSection: t("Common:TrashSection"),
+              })
+            : null}{" "}
           {t("Common:WantToContinue")}
         </>
       );
@@ -159,9 +165,11 @@ export const getDialogContent = (
             You are about to delete{" "}
             <strong>folders ({{ foldersCount }})</strong>.
           </Trans>{" "}
-          {t("FoldersPermanentlyDeleted", {
-            trashSection: t("Common:TrashSection"),
-          })}{" "}
+          {!isThirdParty
+            ? t("FoldersPermanentlyDeleted", {
+                trashSection: t("Common:TrashSection"),
+              })
+            : null}{" "}
           {t("Common:WantToContinue")}
         </>
       );

@@ -4,9 +4,9 @@
   "DeleteFiles": "您将要把<strong>{{filesCount}}个文件</strong>移至{{trashSection}}。",
   "DeleteFilesAndFolders": "您即将删除<strong>文件({{filesCount}})</strong>和<strong>文件夹({{foldersCount}})</strong>至 {{trashSection}}。",
   "DeleteFilesAndFoldersForever": "您即将删除<strong>文件({{filesCount}})</strong>和<strong>文件夹({{foldersCount}})</strong>。",
-  "DeleteFilesForever": "您将要删除 <strong>文件 ({{filesCount}})</strong>。",
+  "DeleteFilesForever": "您即将删除<strong>{{filesCount}}个文件</strong>。",
   "DeleteFolders": "您即将把<strong>{{foldersCount}}个文件夹</strong>移至{{trashSection}}。",
-  "DeleteFoldersForever": "您即将删除<strong>文件夹 ({{foldersCount}})</strong>。",
+  "DeleteFoldersForever": "您即将删除<strong>({{foldersCount}})个文件夹</strong>。",
   "DeleteGroupDescription": "组{{groupName}} 将被删除。组中的用户不会从{{productName}}中删除。您确定要继续吗？",
   "DeleteGroupTitle": "删除群组",
   "DeleteItem": "您即将把<strong>{{name}}</strong>移至{{trashSection}}。",
@@ -28,5 +28,5 @@
   "ItemsDeletedAfter": "这些项目将在30天后永久删除。",
   "ItemsPermanentlyDeleted": "这些项目将从{{trashSection}}中永久删除。",
   "removeFromListDescription": "您将要从列表中移除 <1>{{title}}</1>。您确定要继续吗？",
-  "removeFromListDescriptionPlural": "您将从列表中移除 <1>项 ({{count}})</1>。您确定要继续吗？"
+  "removeFromListDescriptionPlural": "您即将从列表中移除 <1>{{count}} 个项目</1>。确定要继续吗？"
 }

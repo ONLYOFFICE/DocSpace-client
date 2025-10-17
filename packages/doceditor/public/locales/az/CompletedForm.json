@@ -12,12 +12,12 @@
   "FormOwner": "Forma sahibi",
   "FormSectionCompleted": "Forma Bölməsi Tamamlandı",
   "FormVDRConfirmationOfStartTitle": "Forma otaqda doldurulmağa hazırdır",
+  "FormVDRFinalizedDescription": "Forma bütün alıcıl tərəfindən tamamilə doldurulub və indi tamamlanıb. Baxma rejimi üçün mövcuddur.",
+  "FormVDRNextRecepientDescription": "Artıq ilk alıcı kimi təyin edilmiş istifadəçiyə bildiriş göndərilmişdir və ondan formanı doldurması tələb edilib. Siz otağa keçid edə bilərsiniz və ya doldurma linkini iştirakçılarla paylaşa bilərsiniz.",
   "FormVDRSectionCompletedDescription": "The assigned portion of the PDF form has been successfully completed. The filling status of the form can be monitored in the room and via the Filling status panel. An email notification will be sent once the form is fully completed.",
+  "FormVDRYouFirstRecepientDescription": "Sizə ilk alıcı kimi formanı doldurmağınız tapşırılıb. Emailinizə bildiriş göndərilib. İndi formanı doldurmağa başlay bilərsiniz və ya doldurma linkini kopyalamaq və daha sonra qayıtmaq olar.",
   "LinkToFillOutForm": "Formanı doldurmaq üçün link:",
   "LinkToForm": "Formaya keçid linki:",
   "LinkToViewOnlyForm": "Yalnız forma baxmaq üçün link:",
-  "Title": "Forma tamamlandı",
-  "FormVDRFinalizedDescription": "Forma bütün alıcıl tərəfindən tamamilə doldurulub və indi tamamlanıb. Baxma rejimi üçün mövcuddur.",
-  "FormVDRNextRecepientDescription": "Artıq ilk alıcı kimi təyin edilmiş istifadəçiyə bildiriş göndərilmişdir və ondan formanı doldurması tələb edilib. Siz otağa keçid edə bilərsiniz və ya doldurma linkini iştirakçılarla paylaşa bilərsiniz.",
-  "FormVDRYouFirstRecepientDescription": "Sizə ilk alıcı kimi formanı doldurmağınız tapşırılıb. Emailinizə bildiriş göndərilib. İndi formanı doldurmağa başlay bilərsiniz və ya doldurma linkini kopyalamaq və daha sonra qayıtmaq olar."
+  "Title": "Forma tamamlandı"
 }

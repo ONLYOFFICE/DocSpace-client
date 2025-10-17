@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-10-13T14:41:02.729Z",
+  "updated_at": "2025-10-16T07:29:35.481Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -1104,25 +1104,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 243,
+      "line_number": 253,
       "context": "return (\n <>\n <LearnMoreWrapper>\n <Text fontSize=\"13px\" fontWeight=\"400\" className={styles.contentText}>\n {t(\"InvitationSettingsDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n \n {invitationSettingsUrl ? (\n <Link",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 243,
+      "line_number": 253,
       "context": "return (\n <>\n <LearnMoreWrapper>\n <Text fontSize=\"13px\" fontWeight=\"400\" className={styles.contentText}>\n {t(\"InvitationSettingsDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n \n {invitationSettingsUrl ? (\n <Link",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 243,
+      "line_number": 253,
       "context": "return (\n <>\n <LearnMoreWrapper>\n <Text fontSize=\"13px\" fontWeight=\"400\" className={styles.contentText}>\n {t(\"InvitationSettingsDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n \n {invitationSettingsUrl ? (\n <Link",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 243,
+      "line_number": 253,
       "context": "return (\n <>\n <LearnMoreWrapper>\n <Text fontSize=\"13px\" fontWeight=\"400\" className={styles.contentText}>\n {t(\"InvitationSettingsDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n \n {invitationSettingsUrl ? (\n <Link",
       "module": "/packages/client"
     },
@@ -1146,7 +1146,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 259,
+      "line_number": 247,
       "context": "return (\n <MainContainer id=\"tfa-section\" ref={targetRef}>\n <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TwoFactorAuthEnableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {tfaSettingsUrl ? (\n <Link\n className=\"link-learn-more\"",
       "module": "/packages/client"
     },
@@ -1392,13 +1392,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2097,
+      "line_number": 2100,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2097,
+      "line_number": 2100,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
@@ -1476,7 +1476,7 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/consent/page.client.tsx",
-      "line_number": 295,
+      "line_number": 305,
       "context": "dataTestId=\"terms_of_service_link\"\n >\n terms of service\n </Link>\n . You can revoke this consent at any time in your{\" \"}\n {{ productName: t(\"Common:ProductName\") }} account settings.\n </Trans>\n </Text>\n </StyledDescriptionContainer>\n <StyledUserContainer>\n <div className=\"block\">",
       "module": "/packages/login"
     },

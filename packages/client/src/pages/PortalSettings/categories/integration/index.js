@@ -49,8 +49,6 @@ const IntegrationWrapper = (props) => {
   const {
     t,
     currentDeviceType,
-    toDefault,
-    isSSOAvailable,
     standalone,
     enablePlugins,
 
@@ -76,6 +74,7 @@ const IntegrationWrapper = (props) => {
   });
 
   const {
+    getLDAPData,
     getSSOData,
     getPluginsData,
     getThirdPartyData,
@@ -83,20 +82,15 @@ const IntegrationWrapper = (props) => {
     getDocumentServiceData,
   } = useIntegration(defaultProps.integration);
 
-  useEffect(() => {
-    return () => {
-      isSSOAvailable &&
-        !window.location.pathname.includes("sso") &&
-        toDefault();
-    };
-  }, []);
-
   const data = [
     {
       id: "ldap",
       name: t("Settings:LDAP"),
       content: <LdapSettings />,
-      onClick: () => {},
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getLDAPData();
+      },
     },
     {
       id: "sso",
@@ -202,13 +196,8 @@ export const Component = inject(
       currentDeviceType,
       clearAbortControllerArr,
     } = settingsStore;
-    const { load: toDefault } = ssoStore;
-
-    const { isSSOAvailable } = currentQuotaStore;
 
     return {
-      toDefault,
-      isSSOAvailable,
       standalone,
       currentDeviceType,
       enablePlugins,

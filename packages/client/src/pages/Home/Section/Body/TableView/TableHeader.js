@@ -28,7 +28,7 @@ import React from "react";
 import { TableHeader } from "@docspace/shared/components/table";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Events, SortByFieldName, RoomsType } from "@docspace/shared/enums";
+import { Events, SortByFieldName } from "@docspace/shared/enums";
 
 class FilesTableHeader extends React.Component {
   constructor(props) {
@@ -72,7 +72,7 @@ class FilesTableHeader extends React.Component {
       columnStorageName,
       columnInfoPanelStorageName,
       isRecentFolder,
-      isSharedWithMeFolder,
+      isSharedWithMeFolderRoot,
       isFavoritesFolder,
       isArchiveFolder,
       isIndexEditingMode,
@@ -99,7 +99,7 @@ class FilesTableHeader extends React.Component {
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
       isRecentFolder !== prevProps.isRecentFolder ||
-      isSharedWithMeFolder !== prevProps.isSharedWithMeFolder ||
+      isSharedWithMeFolderRoot !== prevProps.isSharedWithMeFolderRoot ||
       isFavoritesFolder !== prevProps.isFavoritesFolder ||
       showStorageInfo !== prevProps.showStorageInfo ||
       (!changeDocumentsTabs && sortBy !== stateSortBy) ||
@@ -203,10 +203,10 @@ class FilesTableHeader extends React.Component {
       isFavoritesFolder,
       isTemplatesFolder,
       isIndexing,
-      isSharedWithMeFolder,
+      isSharedWithMeFolderRoot,
     } = this.props;
 
-    if (isSharedWithMeFolder) return this.getSharedWithMeFolderColumns();
+    if (isSharedWithMeFolderRoot) return this.getSharedWithMeFolderColumns();
     if (isTemplatesFolder) return this.getTemplatesColumns();
     if (isRooms) return this.getRoomsColumns();
     if (isTrashFolder) return this.getTrashFolderColumns();
@@ -846,13 +846,7 @@ class FilesTableHeader extends React.Component {
   };
 
   onFilter = (sortBy) => {
-    const {
-      filter,
-      setIsLoading,
-      isPublicRoom,
-      publicRoomKey,
-      isPublicRoomType,
-    } = this.props;
+    const { filter, setIsLoading } = this.props;
     const newFilter = filter.clone();
 
     if (newFilter.sortBy !== sortBy) {
@@ -863,15 +857,6 @@ class FilesTableHeader extends React.Component {
     }
 
     setIsLoading(true);
-
-    const currentUrl = window.location.href;
-
-    if (
-      isPublicRoom ||
-      (isPublicRoomType && publicRoomKey && currentUrl.includes("key"))
-    ) {
-      newFilter.key = publicRoomKey;
-    }
 
     window.DocSpace.navigate(
       `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`,
@@ -986,7 +971,7 @@ export default inject(
       isPersonalReadOnly,
       isRecentFolder,
       isFavoritesFolder,
-      isSharedWithMeFolder,
+      isSharedWithMeFolderRoot,
     } = treeFoldersStore;
     const withContent = canShare;
     const sortingVisible = true;
@@ -1054,13 +1039,7 @@ export default inject(
 
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
 
-    const { changeDocumentsTabs, isIndexedFolder, roomType } =
-      selectedFolderStore;
-
-    const isPublicRoomType =
-      roomType === RoomsType.PublicRoom ||
-      roomType === RoomsType.CustomRoom ||
-      roomType === RoomsType.FormRoom;
+    const { changeDocumentsTabs, isIndexedFolder } = selectedFolderStore;
 
     return {
       setRoomsFilter,
@@ -1142,11 +1121,10 @@ export default inject(
       isTemplatesFolder,
       isPublicRoom,
       publicRoomKey,
-      isPublicRoomType,
 
       isFrame,
       isRecentFolder,
-      isSharedWithMeFolder,
+      isSharedWithMeFolderRoot,
       isFavoritesFolder,
       showSettings: frameConfig?.showSettings,
       isDefaultRoomsQuotaSet,

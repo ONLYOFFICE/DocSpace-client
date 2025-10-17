@@ -59,4 +59,6 @@ export type BadgeProps = TextProps & {
   /** Handler for mouse over events. Used for hover state management and interactions */
   /** When true, applies custom hover styles */
   isHovered?: boolean;
+  /** Data test id for testing */
+  dataTestId?: string;
 };

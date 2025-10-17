@@ -30,7 +30,10 @@ import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
 
-import { StyledBadgesContainer } from "../StyledTable";
+import {
+  StyledBadgesContainer,
+  StyledQuickButtonsContainer,
+} from "../StyledTable";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
@@ -56,12 +59,19 @@ const RecentRowDataComponent = (props) => {
     inProgress,
     showHotkeyBorder,
     badgesComponent,
+    quickButtonsComponent,
     tableStorageName,
     item,
     index,
   } = props;
 
   const lastColumn = getLastColumn(tableStorageName);
+
+  const quickButtonsComponentNode = (
+    <StyledQuickButtonsContainer>
+      {quickButtonsComponent}
+    </StyledQuickButtonsContainer>
+  );
 
   return (
     <>
@@ -85,6 +95,7 @@ const RecentRowDataComponent = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
+        {lastColumn === "Name" ? quickButtonsComponentNode : null}
       </TableCell>
 
       {authorRecentColumnIsEnabled ? (
@@ -105,6 +116,7 @@ const RecentRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "AuthorRecent" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -128,6 +140,7 @@ const RecentRowDataComponent = (props) => {
             item={item}
             sideColor={theme.filesSection.tableView.row.sideColor}
           />
+          {lastColumn === "LocationRecent" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -151,6 +164,7 @@ const RecentRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "LastOpenedRecent" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -174,6 +188,7 @@ const RecentRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "SizeRecent" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -197,6 +212,7 @@ const RecentRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "TypeRecent" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />

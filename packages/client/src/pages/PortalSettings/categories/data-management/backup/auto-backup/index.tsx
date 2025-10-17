@@ -53,7 +53,7 @@ const AutoBackupWrapper = ({
   isInitialLoading,
   isEmptyContentBeforeLoader,
   isInitialError,
-
+  isBackupPaid,
   ...props
 }: AutoBackupWrapperProps) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
@@ -79,6 +79,7 @@ const AutoBackupWrapper = ({
       isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
       setErrorInformation={setErrorInformation}
       isInitialError={isInitialError}
+      isBackupPaid={isBackupPaid}
       {...props}
     />
   );
@@ -97,6 +98,8 @@ export default inject<
     filesSelectorInput,
     thirdPartyStore,
     dialogsStore,
+    currentQuotaStore,
+    clientLoadingStore,
   }) => {
     const language = authStore.language;
 
@@ -110,6 +113,7 @@ export default inject<
       deleteThirdParty,
     } = thirdPartyStore;
 
+    const { isBackupPaid } = currentQuotaStore;
     const { automaticBackupUrl, currentColorScheme } = settingsStore;
 
     const {
@@ -201,7 +205,12 @@ export default inject<
 
       setIsInited,
       setDefaultFolderId,
+
+      isEmptyContentBeforeLoader,
+      isInitialError,
     } = backup;
+
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     const isEnableAuto = backupPageEnable ?? false;
 
@@ -284,6 +293,8 @@ export default inject<
       setIsBackupProgressVisible,
       backupProgressError,
       setBackupProgressError,
+      isEmptyContentBeforeLoader,
+      isInitialError,
 
       // settingsStore
       automaticBackupUrl,
@@ -304,6 +315,7 @@ export default inject<
       setThirdPartyProviders,
       providers,
       deleteThirdParty,
+
       // dialogsStore
       connectDialogVisible,
       deleteThirdPartyDialogVisible,
@@ -311,6 +323,10 @@ export default inject<
       setDeleteThirdPartyDialogVisible,
       setIsInited,
       setDefaultFolderId,
+      isBackupPaid,
+
+      // clientLoadingStore
+      isInitialLoading: showPortalSettingsLoader,
     };
   },
 )(observer(AutoBackupWrapper as React.FC<ExternalAutoBackupWrapperProps>));

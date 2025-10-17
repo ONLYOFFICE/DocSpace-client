@@ -57,6 +57,7 @@ const Share = (props: ShareProps) => {
     shareMembersTotal = 0,
     isEditor = false,
     onAddUser,
+    onClickGroup,
   } = props;
 
   // HACK: Hide share option for rooms — remove after implementation is ready
@@ -101,6 +102,7 @@ const Share = (props: ShareProps) => {
     linksCount: links.length,
     onAddUser,
     disabledSharedUser,
+    onClickGroup,
   });
 
   if (hideSharePanel) return null;

@@ -3,7 +3,7 @@
   "content": "Editor",
   "content_en_sha1_hash": "c7e9fb2ea6c3b8c3ce97645eb902c348d859f36d",
   "created_at": "2025-05-19T21:30:44.767Z",
-  "updated_at": "2025-09-26T15:21:06.234Z",
+  "updated_at": "2025-10-13T13:22:35.740Z",
   "comment": {
     "text": "The translation key \"Editor\" is used to display the label for an editing feature within a user interface, likely in a settings or configuration panel. It appears as a title and is linked to navigate to an editor view or functionality. The translated term should describe this editing capability in a neutral and descriptive manner.",
     "is_auto": true,
@@ -30,31 +30,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
-      "line_number": 100,
+      "line_number": 101,
       "context": "case ShareAccessRights.Comment:\n return t(\"Common:Commenting\");\n case ShareAccessRights.Review:\n return t(\"Common:Reviewing\");\n case ShareAccessRights.Editing:\n return t(\"Common:Editor\");\n default:\n return t(\"Common:ViewOnly\");\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 167,
-      "context": "> = {\n [ShareRights.Editing]: {\n access: ShareAccessRights.Editing,\n description: t(\"Common:RoleEditorDescription\"),\n key: \"editing\",\n label: t(\"Common:Editor\"),\n icon: AccessEditReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n description: t(\"Common:RoleReviewerDescription\"),",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 167,
-      "context": "> = {\n [ShareRights.Editing]: {\n access: ShareAccessRights.Editing,\n description: t(\"Common:RoleEditorDescription\"),\n key: \"editing\",\n label: t(\"Common:Editor\"),\n icon: AccessEditReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n description: t(\"Common:RoleReviewerDescription\"),",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 167,
-      "context": "> = {\n [ShareRights.Editing]: {\n access: ShareAccessRights.Editing,\n description: t(\"Common:RoleEditorDescription\"),\n key: \"editing\",\n label: t(\"Common:Editor\"),\n icon: AccessEditReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n description: t(\"Common:RoleReviewerDescription\"),",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 167,
+      "line_number": 169,
       "context": "> = {\n [ShareRights.Editing]: {\n access: ShareAccessRights.Editing,\n description: t(\"Common:RoleEditorDescription\"),\n key: \"editing\",\n label: t(\"Common:Editor\"),\n icon: AccessEditReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n description: t(\"Common:RoleReviewerDescription\"),",
       "module": "/packages/shared"
     },

@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import {
   TItem,
@@ -36,9 +36,10 @@ export default function useFilesFilter({
 }: useFilesFiltersProps) {
   const { t } = useTranslation(["Common"]);
   const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   const [filter, setFilter] = React.useState<FilesFilter>(
-    FilesFilter.getFilter({ search: `?${filesFilter}` } as Location)!,
+    FilesFilter.getFilter({ search: `?${filesFilter}`, pathname } as Location)!,
   );
 
   React.useEffect(() => {

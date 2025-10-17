@@ -205,18 +205,29 @@
         align-items: center;
         gap: 8px;
         cursor: pointer;
+        padding: 6px 10px;
+        border-radius: 6px;
+        background-color: var(--empty-view-link-bg-color);
 
         .empty-folder_link {
-          color: var(--selector-empty-screen-button-color);
+          color: var(--accent-main, --empty-view-link-color);
         }
 
-        &:hover {
-          .empty-folder_link {
-            color: var(--selector-empty-screen-hover-button-color);
-          }
+        svg path {
+          fill: var(--accent-main, --empty-view-link-color) !important;
+        }
 
-          svg path {
-            fill: var(--selector-empty-screen-hover-button-color);
+        &:hover:not(:active) {
+          background: var(--empty-view-link-bg-color-hover);
+          & > * {
+            opacity: 0.86;
+          }
+        }
+
+        &:active {
+          background: var(--empty-view-link-bg-color-press);
+          & > * {
+            filter: brightness(90%);
           }
         }
       }

@@ -76,7 +76,7 @@ export const TOTAL_SIZE = "total_size";
 type TServiceFeatureWithPrice = TNumericPaymentFeature & {
   price: {
     value: number;
-    currencySymbol: string;
+    currencySymbol?: string;
   };
 };
 
@@ -156,7 +156,10 @@ class PaymentStore {
 
   minBalanceError = false;
 
-  servicesQuotasFeatures: Map<string, TPaymentFeature> = new Map(); // temporary solution, should be in the service store
+  servicesQuotasFeatures: Map<
+    string,
+    TPaymentFeature | TServiceFeatureWithPrice
+  > = new Map(); // temporary solution, should be in the service store
 
   servicesQuotas: TPaymentQuota | null = null; // temporary solution, should be in the service store
 
@@ -301,7 +304,6 @@ class PaymentStore {
       fetchPayerInfo,
       isGracePeriod,
       isNotPaidPeriod,
-      walletCustomerStatusNotActive,
     } = this.currentTariffStatusStore;
     const { addedManagersCount } = this.currentQuotaStore;
 
@@ -320,7 +322,10 @@ class PaymentStore {
     if (this.isAlreadyPaid && this.isStripePortalAvailable) {
       requests.push(this.setPaymentAccount());
 
-      if (this.isPayer && walletCustomerStatusNotActive) {
+      if (
+        this.isPayer &&
+        this.currentTariffStatusStore.walletCustomerStatusNotActive
+      ) {
         requests.push(this.fetchCardLinked());
       }
 
@@ -665,7 +670,7 @@ class PaymentStore {
     this.reccomendedAmount = amount;
   };
 
-  setServiceQuota = async (serviceName = "backup") => {
+  setServiceQuota = async (serviceName = BACKUP_SERVICE) => {
     const abortController = new AbortController();
     this.settingsStore?.addAbortControllers(abortController);
 
@@ -673,15 +678,12 @@ class PaymentStore {
 
     const feature = service.features[0];
 
-    this.servicesQuotasFeatures = new Map([
-      [
-        feature.id,
-        {
-          ...feature,
-          price: service.price,
-        },
-      ],
-    ]);
+    const featureWithPrice = {
+      ...feature,
+      price: service.price,
+    } as TServiceFeatureWithPrice;
+
+    this.servicesQuotasFeatures.set(feature.id, featureWithPrice);
   };
 
   walletInit = async (t: TTranslation) => {
@@ -692,8 +694,7 @@ class PaymentStore {
       if (this.isVisibleWalletSettings) this.setVisibleWalletSetting(false);
     }
 
-    const { fetchPortalTariff, walletCustomerStatusNotActive } =
-      this.currentTariffStatusStore;
+    const { fetchPortalTariff } = this.currentTariffStatusStore;
 
     const requests = [];
 
@@ -707,7 +708,10 @@ class PaymentStore {
         if (this.isStripePortalAvailable) {
           requests.push(this.setPaymentAccount());
 
-          if (this.isPayer && walletCustomerStatusNotActive) {
+          if (
+            this.isPayer &&
+            this.currentTariffStatusStore.walletCustomerStatusNotActive
+          ) {
             requests.push(this.fetchCardLinked());
           }
         }
@@ -777,7 +781,6 @@ class PaymentStore {
     const {
       fetchPortalTariff,
       fetchPayerInfo,
-      walletCustomerStatusNotActive,
       isGracePeriod,
       isNotPaidPeriod,
     } = this.currentTariffStatusStore;
@@ -797,7 +800,10 @@ class PaymentStore {
     if (this.isAlreadyPaid && this.isStripePortalAvailable) {
       requests.push(this.setPaymentAccount());
 
-      if (this.isPayer && walletCustomerStatusNotActive) {
+      if (
+        this.isPayer &&
+        this.currentTariffStatusStore.walletCustomerStatusNotActive
+      ) {
         requests.push(this.fetchCardLinked());
       }
     } else {

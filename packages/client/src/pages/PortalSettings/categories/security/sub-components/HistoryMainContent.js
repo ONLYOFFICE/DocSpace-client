@@ -96,7 +96,7 @@ const MainContainer = styled.div`
     margin-bottom: 24px;
     .table-container_header {
       position: absolute;
-      z-index: 1 !important;
+      z-index: 0;
     }
 
     .history-row-container {

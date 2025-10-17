@@ -115,7 +115,7 @@ describe("<PasswordInput />", () => {
     expect(input).toHaveAttribute("type", "password");
   });
 
-  it("shows tooltip with password requirements on focus", async () => {
+  it("shows tooltip with password requirements", async () => {
     const user = userEvent.setup();
     render(
       <PasswordInput
@@ -131,7 +131,7 @@ describe("<PasswordInput />", () => {
     );
 
     const input = screen.getByTestId("password-input").querySelector("input");
-    await user.click(input!);
+    await user.type(input!, "testpassword");
 
     expect(screen.getByText("Password must contain:")).toBeInTheDocument();
     expect(screen.getByText("from 6 to 30 characters")).toBeInTheDocument();

@@ -3,7 +3,7 @@
   "content": "Enter name",
   "content_en_sha1_hash": "5df85959e93e078f85961a413efbd7ba4ef678d2",
   "created_at": "2025-05-19T21:30:44.990Z",
-  "updated_at": "2025-09-17T13:43:01.605Z",
+  "updated_at": "2025-10-13T13:22:35.535Z",
   "comment": {
     "text": "\"Enter name\" is used as a placeholder text in various input fields within the application, prompting users to provide a name. It appears in dialogue boxes, room setting pages, and other forms where user-inputted names are required.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 450,
+      "line_number": 452,
       "context": "<div className=\"logo-name-container\">\n {element}\n <InputParam\n id=\"shared_room-name\"\n title={inputTitle}\n placeholder={t(\"Common:EnterName\")}\n value={roomParams.title}\n onChange={onChangeName}\n isDisabled={isDisabled}\n isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 319,
+      "line_number": 313,
       "context": "onChange={onChangePortalName}\n isDisabled={\n (!isSettingPaid && !standalone) || isLoadingPortalNameSave\n }\n hasError={hasError}\n placeholder={`${t(\"Common:EnterName\")}`}\n />\n <div className=\"errorText\">{errorValue}</div>\n </FieldContainer>\n </div>\n );",
       "module": "/packages/client"
     },

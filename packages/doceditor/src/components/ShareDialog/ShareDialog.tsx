@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import moment from "moment";
 import "moment/min/locales.min";
@@ -43,11 +43,14 @@ import { DeviceType, FolderType } from "@docspace/shared/enums";
 import type { LinkParamsType, Nullable } from "@docspace/shared/types";
 import { TPasswordSettings } from "@docspace/shared/api/settings/types";
 import { ShareSelector } from "@docspace/shared/components/share/selector";
+import type { TGroup } from "@docspace/shared/api/groups/types";
+import { EditGroupMembers } from "@docspace/shared/dialogs/edit-group-members-dialog";
 
 import ShareDialogHeader from "./ShareDialog.header";
 import type { SharingDialogProps } from "./ShareDialog.types";
 
 import styles from "./ShareDialog.module.scss";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
 const SharingDialog = ({
   fileInfo,
@@ -63,10 +66,22 @@ const SharingDialog = ({
   const [linkParams, setLinkParams] = useState<Nullable<LinkParamsType>>(null);
   const [passwordSettings, setPasswordSettings] = useState<TPasswordSettings>();
   const [isSharePanelVisible, setIsSharePanelVisible] = useState(false);
+  const [isEditGroupPanelVisible, setIsEditGroupPanelVisible] = useState(false);
+  const [selectedGroup, setSelectedGroup] = useState<TGroup | null>(null);
 
   useEffect(() => {
     moment.locale(i18n.language);
   }, [i18n.language]);
+
+  useLayoutEffect(() => {
+    const fileSocketPart = `FILE-${fileInfo.id}`;
+
+    if (!SocketHelper?.socketSubscribers.has(fileSocketPart))
+      SocketHelper?.emit(SocketCommands.Subscribe, {
+        roomParts: [fileSocketPart],
+        individual: true,
+      });
+  }, [fileInfo.id]);
 
   // Wrapper function to match the expected type for EditLinkPanel
   const handleGetPortalPasswordSettings = async (): Promise<void> => {
@@ -88,12 +103,18 @@ const SharingDialog = ({
     setLinkParams(null);
   };
 
+  const closeEditGroupPanel = () => {
+    setIsEditGroupPanelVisible(false);
+    setSelectedGroup(null);
+  };
+
   const onClosePanel = () => {
     if (ref.current?.hasChanges()) {
       ref.current?.openChangesDialog("close");
       return;
     }
 
+    closeEditGroupPanel();
     closeEditLinkPanel();
     onCancel();
   };
@@ -101,6 +122,13 @@ const SharingDialog = ({
   const onCloseSharePanel = () => setIsSharePanelVisible(false);
 
   const onClickAddUser = () => setIsSharePanelVisible(true);
+
+  const onClickEditGroup = (group: TGroup) => {
+    if (group.isSystem) return;
+
+    setIsEditGroupPanelVisible(true);
+    setSelectedGroup(group);
+  };
 
   return (
     <ModalDialog
@@ -110,7 +138,9 @@ const SharingDialog = ({
       scrollbarCreateContext
       onClose={onClosePanel}
       displayType={ModalDialogType.aside}
-      containerVisible={editLinkPanelVisible || isSharePanelVisible}
+      containerVisible={
+        editLinkPanelVisible || isSharePanelVisible || isEditGroupPanelVisible
+      }
     >
       <ModalDialog.Container>
         <>
@@ -140,6 +170,16 @@ const SharingDialog = ({
               onCloseClick={onClosePanel}
             />
           ) : null}
+          {isEditGroupPanelVisible && selectedGroup ? (
+            <EditGroupMembers
+              group={selectedGroup}
+              onClose={onClosePanel}
+              infoPanelSelection={fileInfo}
+              visible={isEditGroupPanelVisible}
+              onBackClick={closeEditGroupPanel}
+              setVisible={setIsEditGroupPanelVisible}
+            />
+          ) : null}
         </>
       </ModalDialog.Container>
 
@@ -162,6 +202,7 @@ const SharingDialog = ({
               onlyOneLink={fileInfo.isForm}
               setEditLinkPanelIsVisible={handleSetEditLinkPanelIsVisible}
               setLinkParams={setLinkParams}
+              onClickGroup={onClickEditGroup}
             />
           </div>
         </section>

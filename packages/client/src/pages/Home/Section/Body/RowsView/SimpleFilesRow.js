@@ -268,7 +268,11 @@ const SimpleFilesRow = (props) => {
           <FilesRowContent
             item={item}
             sectionWidth={sectionWidth}
-            onFilesClick={onFilesClick}
+            onFilesClick={(event) => {
+              if (isMobile) return;
+
+              onFilesClick(event);
+            }}
             quickButtons={
               isMobileDevice || isRooms ? quickButtonsComponent : null
             }

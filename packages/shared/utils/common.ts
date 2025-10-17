@@ -97,6 +97,7 @@ import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie, setCookie } from "./cookie";
 import { checkIsSSR } from "./device";
+
 import { hasOwnProperty } from "./object";
 import { TFrameConfig } from "../types/Frame";
 import { isFile, isFolder } from "./typeGuards";
@@ -147,8 +148,9 @@ export function createPasswordHash(
 
 export const isPublicRoom = () => {
   return (
-    window.location.pathname === "/rooms/share" ||
-    window.location.pathname.includes(PUBLIC_MEDIA_VIEW_URL)
+    typeof window !== "undefined" &&
+    (window.location.pathname === "/rooms/share" ||
+      window.location.pathname.includes(PUBLIC_MEDIA_VIEW_URL))
   );
 };
 
@@ -1244,8 +1246,22 @@ export function getLogoUrl(
   dark: boolean = false,
   def: boolean = false,
   culture?: string,
+  update: boolean = false,
 ) {
-  return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}${culture ? `&culture=${culture}` : ""}`;
+  let logoTimestamp = "";
+
+  if (update) {
+    const timestamp = window.sessionStorage?.getItem("logoUpdateTimestamp");
+    if (timestamp) logoTimestamp = `&t=${timestamp}`;
+  }
+
+  const url = `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}${culture ? `&culture=${culture}` : ""}${logoTimestamp}`;
+
+  return url;
+}
+
+export function updateLogoTimestamp() {
+  window.sessionStorage?.setItem("logoUpdateTimestamp", Date.now().toString());
 }
 
 export const getUserTypeName = (

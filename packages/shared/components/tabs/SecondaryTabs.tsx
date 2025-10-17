@@ -77,6 +77,8 @@ const SecondaryTabs = (props: TabsProps) => {
   const tabItemsRef = useRef<(HTMLDivElement | null)[]>([]);
   const tabsContainerRef = useRef<HTMLDivElement>(null);
 
+  const [activeElement, setActiveElement] = useState<HTMLElement | null>(null);
+
   const isViewFirstTab = useViewTab(scrollRef, tabsRef, 0);
   const isViewLastTab = useViewTab(scrollRef, tabsRef, items.length - 1);
 
@@ -119,6 +121,20 @@ const SecondaryTabs = (props: TabsProps) => {
     onSelect,
     hotkeysId,
   });
+
+  const onMouseUp = (e: MouseEvent) => {
+    (e.target as HTMLElement)?.focus();
+    setActiveElement(e.target as HTMLElement);
+
+    setHotkeysIsActive(false);
+
+    return e;
+  };
+
+  useEffect(() => {
+    document.addEventListener("mouseup", onMouseUp);
+    return () => document.removeEventListener("mouseup", onMouseUp);
+  }, [selectedItemIndex, items, scrollToTab]);
 
   useEffect(() => {
     if (isLoading) return;
@@ -175,7 +191,7 @@ const SecondaryTabs = (props: TabsProps) => {
     );
 
     setHotkeysIsActive(tabsIsActive);
-  });
+  }, [activeElement]);
 
   const setSelectedItem = (selectedTabItem: TTabItem, index: number): void => {
     onSelect?.(selectedTabItem);

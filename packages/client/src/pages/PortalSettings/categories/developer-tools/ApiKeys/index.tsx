@@ -85,7 +85,7 @@ const ApiKeys = (props: ApiKeysProps) => {
     deleteApiKey(actionItem.id)
       .then((res) => {
         if (res) {
-          setApiKeys((prev) => prev.filter((k) => k.id !== actionItem.id));
+          setApiKeys(apiKeys?.filter((k) => k.id !== actionItem.id));
           toastr.success(t("Settings:SecretKeyDeleted"));
         }
       })

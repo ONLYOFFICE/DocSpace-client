@@ -7,6 +7,7 @@
   "DesktopTheme": "Synchronizácia s nastaveniami Editora pre počítač",
   "DesktopThemeDescription": "Automatické prepínanie medzi svetlými a tmavými témami v závislosti od aktuálnej témy editorov na počítači.",
   "EditPhoto": "Upraviť foto",
+  "EmailChangeSuccess": "Váš e-mail bol úspešne zmenený.",
   "EmailNotVerified": "E-mail nie je overený",
   "ErrorAccountAlreadyUse": "Prepojený účet už používa iný používateľ",
   "FileManagement": "Spravovanie súborov",
@@ -17,6 +18,7 @@
   "LogoutDescription": "Poznámka. Budú odhlásené všetky aktívne pripojenia okrem tohto pripojenia, keďže sa práve používa.",
   "LogoutFrom": "Odhlásiť sa z {{platform}} {{browser}}?",
   "MyProfile": "Môj profil",
+  "NotificationsChannels": "Kanály upozornení",
   "ProviderSuccessfullyConnected": "Poskytovateľ bol úspešne pripojený",
   "ProviderSuccessfullyDisconnected": "Poskytovateľ bol úspešne odpojený",
   "SendAgain": "Poslať znova",
@@ -24,6 +26,10 @@
   "SuccessLogout": "Aktívne pripojenie bolo odhlásené: {{platform}}, {{browser}}",
   "SystemTheme": "Použiť tému systému",
   "SystemThemeDescription": "Prepínajte medzi svetlými a tmavými témami automaticky, keď tak urobí váš systém.",
+  "TelegramAccount": "Telegram účet",
+  "TelegramAccountDescription": "Pripojenie TelegramBotu k vášmu účtu pomocou tajného odkazu kliknite na tlačidlo „Pripojiť Telegram“.",
+  "TelegramAccountDisconnect": "Odpojiť Telegram",
+  "TelegramAccountDisconnectDescription": "Váš účet @{{username}} je prepojený na telegramové notifikácie. Môžete sa odpojiť od tohto účtu. V tomto prípade nebudete dostávať notifikácie.",
   "TerminateAllSessions": "Ukončenie všetkých relácií okrem aktuálnej",
   "TwoFactorDescription": "Správca povolil všetkým používateľom dvojfaktorovú autentifikáciu prostredníctvom aplikácie generujúcej kód."
 }

@@ -12,7 +12,7 @@
   "EnableGuest": "Activar invitado",
   "EnableGuestDescription": "Si activa este invitado, este podrá volver a iniciar sesión en {{productName}}.",
   "EnableGuests": "Activar invitados",
-  "EnableGuestsDescription": "Si activa estos invitados, podrán volver a iniciar sesión en {{productName}}.",
+  "EnableGuestsDescription": "Si activa a estos invitados, podrán volver a iniciar sesión en {{productName}}.",
   "EnableUser": "Activar usuario",
   "EnableUserDescription": "Si activa a este usuario, podrá volver a iniciar sesión en {{productName}} y acceder a sus documentos y datos.",
   "EnableUsers": "Activar usuarios",

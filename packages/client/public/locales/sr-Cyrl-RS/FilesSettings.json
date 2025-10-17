@@ -2,5 +2,6 @@
   "CancellaionNotification": "Не приказуј више обавештење о отказивању",
   "DisplayFileExtension": "Приказ екстензије фајла поред имена фајла",
   "OpenSameTab": "Отвори {{organizationName}} уређивач у истој картици",
-  "OriginalCopy": "Сачувај копију датотеке у оригиналном формату такође"
+  "OriginalCopy": "Сачувај копију датотеке у оригиналном формату такође",
+  "TrashMoveConfirmation": "Прикажи обавештење када се ставке премештају у {{sectionName}}"
 }

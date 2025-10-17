@@ -2,5 +2,6 @@
   "CancellaionNotification": "عدم عرض إشعار الإلغاء مرة أخرى",
   "DisplayFileExtension": "عرض امتداد الملف بجوار اسم الملف",
   "OpenSameTab": "افتح محرر {{organizationName}} في نفس علامة التبويب",
-  "OriginalCopy": "احفظ نسخة الملف بالتنسيق الأصلي أيضًا"
+  "OriginalCopy": "احفظ نسخة الملف بالتنسيق الأصلي أيضًا",
+  "TrashMoveConfirmation": "عرض إشعار عند نقل العناصر إلى {{sectionName}}"
 }

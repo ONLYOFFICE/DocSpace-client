@@ -1,20 +1,20 @@
 {
-  "key_path": "SearchByGroupMembers",
-  "content": "Search by group members",
-  "content_en_sha1_hash": "184145132a97e055ac3dffd682c055646ed6d938",
-  "created_at": "2025-05-19T21:30:53.510Z",
-  "updated_at": "2025-09-26T15:21:06.546Z",
+  "key_path": "FormVDRNextRecepientDescription",
+  "content": "A notification has already been sent to the user assigned as the first recipient, prompting them to fill out the form. You can navigate to the room or share the filling link with the participants.",
+  "content_en_sha1_hash": "2ba6315a30c34466c5e72de1e89dcb7594314f72",
+  "created_at": "2025-10-13T13:22:33.412Z",
+  "updated_at": "2025-10-13T15:29:54.744Z",
   "comment": {
-    "text": "The translation key \"SearchByGroupMembers\" is used to describe the search input field in a dialogue, allowing users to find and select group members. The text appears in a modal body loader or dialog box, typically prompting users to enter a search query.",
+    "text": "This text appears in the UI to inform the user that a form notification has already been sent to the first recipient. It guides the user to either view the room or share the form link with participants. This description helps ensure the user understands the next steps in the form completion process.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:36.025Z"
+    "updated_at": "2025-10-13T14:28:27.923Z"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/dialogs/edit-group-members-dialog/index.tsx",
-      "line_number": 150,
-      "context": "infoPanelSelection={infoPanelSelection}\n standalone={standalone}\n >\n <SearchInput\n className=\"search-input\"\n placeholder={t(\"PeopleTranslations:SearchByGroupMembers\")}\n value={searchValue}\n onChange={onChangeSearchValue}\n onClearSearch={onClearSearch}\n size={InputSize.base}\n />",
-      "module": "/packages/shared"
+      "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
+      "line_number": 156,
+      "context": "const headerDescription = useMemo(() => {\n if (isStartFilling) {\n return isYournTurn\n ? t(\"CompletedForm:FormVDRYouFirstRecepientDescription\")\n : t(\"CompletedForm:FormVDRNextRecepientDescription\");\n }\n \n if (completed) return t(\"CompletedForm:FormVDRFinalizedDescription\");\n \n return t(\"CompletedForm:FormVDRSectionCompletedDescription\");",
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Qrup üzvlərinə görə axtarın\" is a literal translation but doesn't quite capture the intended meaning of \"Search by group members.\" A more natural phrasing would be something like \"Qrup üzvləri ilə axtar\" or \"Qrup üzvləri ilə axtarış et\".",
-          "suggestion": "Qrup üzvləri ilə axtar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -147,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Căutare după membru de grup' is not the most natural or accurate rendering of 'Search by group members'. While technically correct, it sounds somewhat clunky in Romanian. A more fluent translation would be 'Căutare prin membri de grup' or 'Căutare în funcție de membrii grupului'.",
-          "suggestion": "Căutare prin membri de grup"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -175,6 +163,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -1,20 +1,32 @@
 {
-  "key_path": "AssignToRole",
-  "content": "Assign to role",
-  "content_en_sha1_hash": "c15c6b3c6eb69973c21796b22a961b9f5e454bd4",
-  "created_at": "2025-05-19T21:30:43.120Z",
-  "updated_at": "2025-06-26T19:00:18.306Z",
+  "key_path": "RecipientBasedFilling",
+  "content": "Recipient role-based filling",
+  "content_en_sha1_hash": "ebc4e0839dc0c879f17088af65d2186c9e8179ca",
+  "created_at": "2025-10-13T13:22:10.782Z",
+  "updated_at": "2025-10-13T14:24:22.180Z",
   "comment": {
-    "text": "The \"Assign to role\" translation key is used to display a label on a panel header in a user interface. It appears as a button with this text and is part of a dialog that allows users to assign tasks to roles. The translators should provide a short and descriptive phrase that makes sense in the context of the application's workflow, such as \"Assign task to role\".",
+    "text": "This text appears as the title for a button or option, likely in a dialog or panel, and describes the action of filling out a form based on the recipient's role. It allows users to share a form with specific individuals or roles within a room or data room.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:19.549Z"
+    "updated_at": "2025-10-13T14:24:22.180Z"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
-      "line_number": 223,
-      "context": "const disabledSubmit = roles.some((role) => !role.user);\n \n const headerProps = useMemo(\n () =>\n ({\n headerLabel: t(\"Common:AssignToRole\"),\n withoutBackButton: false,\n withoutBorder: false,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
-      "module": "/packages/shared"
+      "file_path": "/packages/client/src/components/dialogs/FillPDFDialog/FillPDFDialog.tsx",
+      "line_number": 122,
+      "context": "onClick: () => openSelector(RoomsType.FormRoom),\n icon: <FormDataCollectionIcon />,\n },\n {\n id: \"role-based-filling\",\n title: t(\"Common:RecipientBasedFilling\"),\n description: t(\"Common:RecipientBasedFillingDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: () => openSelector(RoomsType.VirtualDataRoom),\n icon: <RoleBasedFillingIcon />,\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/ShareFormPanel/index.js",
+      "line_number": 103,
+      "context": "onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },\n {\n id: \"role-based-filling\",\n title: t(\"Common:RecipientBasedFilling\"),\n description: t(\"Common:RecipientBasedFillingDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickVirtualDataRoom,\n icon: <RoleBasedFillingIcon />,\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
+      "line_number": 201,
+      "context": "onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },\n {\n id: \"virtual-data-room\",\n title: t(\"Common:RecipientBasedFilling\"),\n description: t(\"Common:RecipientBasedFillingDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickVirtualDataRoom,\n icon: <RoleBasedFillingIcon />,\n },",
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {
@@ -81,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Նշանակել դեր' while literal, might not fully capture the nuance of 'Assign to role' in a software or user management context. 'Assign' implies a specific action of assigning someone or something to a predefined role. 'Նշանակել' is more general and can mean 'to designate' or 'to appoint'.",
-          "suggestion": "Consider a translation that more closely reflects the action of assignment, such as 'մասնագործական դեր ցուցաբերել' (masnagortsagan der tsutseaberel - assign a role) or 'դեր տեղաբաշխել' (der telabashkel - allocate a role), depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -174,16 +180,16 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Доделите улогу\" is a possible translation, it implies an action *being done* to a role. \"Assign to role\" is more accurately translated as \"Приреди улогу\" or \"Додели улогу за\". \"Доделите улогу\" is more like \"Allocate a role\" or \"Distribute a role\", but not assign.",
-          "suggestion": "Приреди улогу"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,13 +201,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Role ata' is understandable, a more natural and accurate Turkish translation of 'Assign to role' would be 'Role ver' or 'Rol atama yap'. 'Ata' is generally used for attributing something of heritage, not assigning a role.",
-          "suggestion": "Role ver"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -213,13 +213,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Chỉ định vai trò\" is a possible translation, it can be overly formal for a UI label like \"Assign to role\". A more natural and common translation would be something like \"Gán vai trò\" or \"Phân vai trò\".",
-          "suggestion": "Consider \"Gán vai trò\" or \"Phân vai trò\" for a more natural translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

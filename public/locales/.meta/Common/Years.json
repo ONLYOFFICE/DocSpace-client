@@ -3,7 +3,7 @@
   "content": "Years",
   "content_en_sha1_hash": "96f997bcecb36502ed4b296a795f72aff9d6bfe7",
   "created_at": "2025-05-19T21:30:49.621Z",
-  "updated_at": "2025-09-23T07:24:24.087Z",
+  "updated_at": "2025-10-17T14:43:53.380Z",
   "comment": {
     "text": "This translation key is used for labeling options in a \"Years\" dropdown menu within the File Lifetime dialog. It will appear as the label on a button or select element in this specific component, and its purpose is to display the translated phrase \"Years\".",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 463,
+      "line_number": 465,
       "context": "case 0:\n return t(\"Common:Days\").toLowerCase();\n case 1:\n return t(\"Common:Months\").toLowerCase();\n case 2:\n return t(\"Common:Years\").toLowerCase();\n \n default:\n return t(\"Common:Days\").toLowerCase();\n }\n };",
       "module": "/packages/shared"
     }
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ປີތົ່ວມາ\" does not accurately translate \"Years.\" \"ປີ\" (pi) means 'year,' but \"ປີތົ່ວມາ\" is a less common or potentially incorrect phrasing.  A more accurate and common translation of 'Years' would be 'ປີ' (pi) or 'ປີຕ່າງໆ' (pi tang tang).",
-          "suggestion": "ປີ or ປີຕ່າງໆ"
+          "description": "The Lao translation \"ປີތົ່ວມາ\" does not accurately translate \"Years.\" \"ປີ\" (pi) means 'year,' but \"ປີތົ່ວມາ\" (pi tua ma) doesn't convey the general concept of 'Years'. It literally translates to something like 'years coming' or 'years passing', which isn't the intended meaning. The correct translation should be simply \"ປີ\" (pi) or potentially a pluralized form like \"ປີຕ່າງໆ\" (pi tang tang) depending on the context.  Using \"ປີތົ່ວມາ\" suggests a timeline or duration, not just the word 'Years'.",
+          "suggestion": "ປີ (pi) or ປີຕ່າງໆ (pi tang tang)"
         }
       ],
       "approved_at": null
@@ -165,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala word 'වර්ශ' (varsha) is a common transliteration for 'year' but can also mean 'rain'. While potentially acceptable in some contexts, it's not the most precise translation of 'Years' in this scenario.",
+          "suggestion": "වර්ශවරු (varsavarunu) or වසර (vasara) might be more accurate translations for 'Years'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -180,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Let' for 'Years' is inaccurate. 'Let' means 'Let' or 'Allow' and does not convey the meaning of 'Years'. A more appropriate translation would depend on the context (e.g., 'Leti' for 'Years' in a general sense, or a more specific term if referring to a particular type of year).",
-          "suggestion": "Consider 'Leti' or a more contextually appropriate translation for 'Years'."
+          "description": "The Slovenian translation \"Let\" for \"Years\" is inaccurate. \"Let\" translates to \"Let\" or \"Allow\" in English, not \"Years\".  The correct translation depends on the intended meaning within the larger context. Possible correct translations could be \"Let\" (if referring to the quantity of years), or a more descriptive term depending on the context.",
+          "suggestion": "Review the context to determine the appropriate translation for 'Years'. Possible alternatives include 'Let' (number of years), or a more specific term depending on the context."
         }
       ],
       "approved_at": null
@@ -217,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

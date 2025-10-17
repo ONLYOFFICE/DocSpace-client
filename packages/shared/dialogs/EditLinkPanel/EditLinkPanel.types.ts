@@ -48,12 +48,7 @@ type ExternalLinkType =
       setSearchParams?: never;
     }
   | {
-      setExternalLink: (
-        link: TFileLink,
-        searchParams: URLSearchParams,
-        setSearchParams: (searchParams: URLSearchParams) => void,
-        isCustomRoom: boolean,
-      ) => void;
+      setExternalLink: (link: TFileLink) => void;
       searchParams: URLSearchParams;
       setSearchParams: (searchParams: URLSearchParams) => void;
     };

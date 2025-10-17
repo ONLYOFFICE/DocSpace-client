@@ -141,15 +141,19 @@ const GroupMember = ({ member }: GroupMemberProps) => {
   const onChangeRole = async (userRoleOption: TOption) => {
     setIsLoading(true);
 
-    const updateApi = isFile(infoPanelSelection)
-      ? updateFileMemberAccess
-      : updateRoomMemberRole;
+    const response = isFile(infoPanelSelection)
+      ? updateFileMemberAccess(infoPanelSelection?.id, {
+          share: [{ shareTo: user.id, access: userRoleOption.access }],
+          notify: false,
+          sharingMessage: "",
+        })
+      : updateRoomMemberRole(infoPanelSelection?.id, {
+          invitations: [{ id: user.id, access: userRoleOption.access }],
+          notify: false,
+          sharingMessage: "",
+        });
 
-    updateApi(infoPanelSelection?.id, {
-      invitations: [{ id: user.id, access: userRoleOption.access }],
-      notify: false,
-      sharingMessage: "",
-    })
+    response
       .then(() => {
         if (userRoleOption.access) {
           member.userAccess = userRoleOption.access;

@@ -3,7 +3,7 @@
   "content": "Room admin",
   "content_en_sha1_hash": "50dcd25d31ede11f1a215aad608488dd7f404e89",
   "created_at": "2025-05-19T21:30:48.170Z",
-  "updated_at": "2025-10-03T10:07:11.701Z",
+  "updated_at": "2025-10-17T14:43:53.505Z",
   "comment": {
     "text": "This translation key is used as a label for a dropdown button that displays \"Room admin\" in the PortalSettings page. It is also used in a payment form to display the term \"AdministratorDescription\". The text appears in a dialog and a payment container, indicating its use in UI elements related to user management and payment processing.",
     "is_auto": true,
@@ -24,19 +24,19 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 678,
+      "line_number": 682,
       "context": "},\n isAdmin && {\n id: \"accounts-add_manager\",\n className: \"main-button_drop-down\",\n icon: PersonManagerReactSvgUrl,\n label: t(\"Common:RoomAdmin\"),\n onClick: () => this.inviteUser(EmployeeType.RoomAdmin),\n \"data-type\": EmployeeType.RoomAdmin,\n action: EmployeeType.RoomAdmin,\n key: \"manager\",\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 333,
+      "line_number": 335,
       "context": "case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 333,
+      "line_number": 335,
       "context": "case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");",
       "module": "/packages/shared"
     },

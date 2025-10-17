@@ -1,32 +1,26 @@
 {
-  "key_path": "SharedFolders",
-  "content": "Shared folders",
-  "content_en_sha1_hash": "89815b84dde295d77a537a0bbb8ab594e7418560",
-  "created_at": "2025-05-19T21:30:52.705Z",
-  "updated_at": "2025-08-11T09:02:43.941Z",
+  "key_path": "StartFillingBarHeader",
+  "content": "How recipient assignment works",
+  "content_en_sha1_hash": "43b88913fea3bc03a189be6a9adf9a673b5f79ca",
+  "created_at": "2025-10-13T13:22:14.709Z",
+  "updated_at": "2025-10-14T04:11:09.542Z",
   "comment": {
-    "text": "This translation key is used to display the label \"Shared folders\" in various UI elements. It appears as a section name and description within import steps, allowing users to select shared folders for export.",
+    "text": "This text appears as the header for an informational bar within a modal dialog. It explains how recipient assignment functions, likely within a filling status or start-filling process. Translators should ensure the description accurately reflects the underlying functionality.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:27.086Z"
+    "updated_at": "2025-10-13T14:22:00.667Z"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 141,
-      "context": "}}\n sharedFilesExportDetails={{\n name: t(\"Settings:SharedFiles\"),\n }}\n sharedFoldersExportDetails={{\n name: t(\"Settings:SharedFolders\"),\n }}\n />\n ),\n },\n {",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/dialogs/FillingStatusPanel/index.tsx",
+      "line_number": 127,
+      "context": ">\n <ModalDialog.Header>{t(\"Common:FillingStatus\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {value ? (\n <PublicRoomBar\n headerText={t(\"Common:StartFillingBarHeader\")}\n bodyText={t(\"Common:StartFillingBarDescription\")}\n iconName={InfoSvgUrl}\n onClose={() => setValue(false)}\n className={styles.infoBar}\n />",
+      "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 149,
-      "context": "}}\n sharedFilesExportDetails={{\n name: t(\"Settings:SharedFiles\"),\n }}\n sharedFoldersExportDetails={{\n name: t(\"Settings:SharedFolders\"),\n }}\n />\n ),\n },\n {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 182,
-      "context": "dataTestId=\"import_shared_files_section\"\n />\n <ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
+      "line_number": 321,
+      "context": "<ModalDialog.Body>\n <section className={styles.container}>\n {infoBarVisible ? (\n <>\n <PublicRoomBar\n headerText={t(\"Common:StartFillingBarHeader\")}\n bodyText={t(\"Common:StartFillingBarDescription\")}\n iconName={InfoSvgUrl}\n onClose={() => setInfoBarVisible(false)}\n />\n <hr className={styles.divider} />",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -93,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Համօգտագործվող թղթապանակներ\" is a literal translation of 'shared folders' but it sounds unnatural and less common in Armenian. A more natural and commonly used translation would be something like 'Կիսվող թղթապանակներ' or 'Ընդհանուր թղթապանակներ'.",
-          "suggestion": "Կիսվող թղթապանակներ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -153,13 +141,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Pastas partilhadas\" is understandable, a more common and natural translation for \"Shared folders\" in Portuguese (Brazil) would be \"Pastas compartilhadas\". \"Partilhadas\" is more common in European Portuguese.",
-          "suggestion": "Pastas compartilhadas"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -180,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"බෙදාගත් බහාලුම්\" (bedagatha bahaluum) is a literal translation of \"shared folders,\" it might sound a bit technical or awkward in natural Sinhala usage. A more common and natural phrasing would be \"ගොන berbagi ොන්\" (gonon berbagi on).",
-          "suggestion": "ගොන berbagi ොන්"
+          "description": "The translation \"ලබන්නාගේ පැවරුම ක්‍රියාත්මක වන ආකාරය\" is a literal translation but doesn't fully convey the meaning of \"How recipient assignment works\". It's too technical and doesn't sound natural in Sinhala. It implies 'recipient ownership' rather than the process of assigning recipients.",
+          "suggestion": "Consider a more natural phrasing like \"ලබන්නන් බෙදා හැක්කේ කොහොමද\" (Labannan bada hakkawe kohomada) - 'How are recipients distributed/assigned?' or \"ලබන්නන් පත් කිරීමේ ක්‍රියාවලිය\" (Labannan patha karimawa kriyavaliya) - 'The process of assigning recipients'."
         }
       ],
       "approved_at": null
@@ -193,6 +175,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

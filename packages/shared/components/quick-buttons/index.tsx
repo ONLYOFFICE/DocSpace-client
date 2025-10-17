@@ -44,7 +44,7 @@ import { classNames, IconSizeType, isTablet, isDesktop } from "../../utils";
 import { FolderType, RoomsType, ShareAccessRights } from "../../enums";
 import { Tooltip } from "../tooltip";
 import { Text } from "../text";
-import { getDate } from "../share/Share.helpers";
+import { getDate, isExpired } from "../share/Share.helpers";
 import { IconButton } from "../icon-button";
 import { isRoom } from "../../utils/typeGuards";
 import { globalColors } from "../../themes/globalColors";
@@ -70,7 +70,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     isTemplatesFolder,
     onClickLock,
     onClickFavorite,
-    isRecentFolder,
     isTrashFolder,
     openShareTab,
   } = props;
@@ -135,6 +134,17 @@ export const QuickButtons = (props: QuickButtonsProps) => {
   );
 
   const getExpirationLinkDateTooltipContent = () => {
+    if (
+      item.external &&
+      (item.isLinkExpired ||
+        (expirationLinkDate && isExpired(expirationLinkDate)))
+    )
+      return (
+        <Text fontSize="12px" fontWeight={400} noSelect>
+          {t("Common:LinkExpired")}
+        </Text>
+      );
+
     if (!expirationLinkDate) return null;
 
     const date = getDate(expirationLinkDate);
@@ -165,6 +175,9 @@ export const QuickButtons = (props: QuickButtonsProps) => {
 
     if (onClickLock) onClickLock();
   };
+
+  const showFavoriteIcon =
+    !isRoom(item) && item?.isFavorite && !isPublicRoom && !isTrashFolder;
 
   return (
     <div className="badges additional-badges badges__quickButtons">
@@ -300,11 +313,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             </>
           ) : null}
 
-          {!isRoom(item) &&
-          item?.isFavorite &&
-          !isRecentFolder &&
-          !isPublicRoom &&
-          !isTrashFolder ? (
+          {showFavoriteIcon ? (
             <IconButton
               iconName={
                 item?.isFavorite ? FavoriteFillReactSvgUrl : FavoriteReactSvgUrl

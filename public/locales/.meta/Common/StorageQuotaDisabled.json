@@ -3,7 +3,7 @@
   "content": "Storage quota disabled.",
   "content_en_sha1_hash": "b6d30ca17df8d425a828140d44b2241bd12d1c5e",
   "created_at": "2025-05-19T21:30:49.119Z",
-  "updated_at": "2025-09-29T18:22:19.425Z",
+  "updated_at": "2025-10-14T03:25:25.020Z",
   "comment": {
     "text": "This translation key is used for a message displayed when storage quota is disabled. It informs users that their storage limit has been removed. This message appears in a success notification dialog and toast notification after certain actions are performed, such as enabling unlimited space or setting custom room quotas.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2176,
+      "line_number": 2149,
       "context": "return item?.id ? item.id : item;\n });\n \n try {\n await setCustomRoomQuota(userIDs, -1);\n toastr.success(t(\"Common:StorageQuotaDisabled\"));\n } catch (e) {\n toastr.error(e);\n }\n };",
       "module": "/packages/client"
     }
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'kvotası' while technically meaning 'quota', sounds slightly awkward in this context. A more natural phrasing might use 'saxlama həddi' or 'saxlama limiti'.",
-          "suggestion": "Yaddaş saxlama həddi deaktiv edildi."
+          "description": "While \"Yaddaş kvotası deaktiv edildi\" is understandable, a more natural and accurate translation would be \"Saxlanma kvotası deaktivləşdirilib.\" \"Yaddaş\" translates to 'memory', while 'storage' is more accurately represented by \"saxlanma\".  \"Deaktiv edildi\" is correct, but \"deaktivləşdirilib\" is a slightly more formal and common phrasing in this context.",
+          "suggestion": "Saxlanma kvotası deaktivləşdirilib."
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Storage quota disabled' implies that the storage quota is currently in a disabled state. The German translation 'Speicherquote wird deaktiviert' translates to 'Storage quota is being deactivated,' suggesting an action in progress rather than a current state. A more accurate translation would reflect a disabled state.",
-          "suggestion": "Speicherquoten sind deaktiviert."
+          "description": "The translation \"Speicherquote wird deaktiviert\" literally translates to 'Storage quota is being deactivated.' The English 'Storage quota disabled' implies a state of being disabled, not an ongoing process. A more accurate translation would convey a permanent disabled state.",
+          "suggestion": "Speicherquotenumleitung deaktiviert."
         }
       ],
       "approved_at": null
@@ -117,13 +117,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ストレージ容量制限が無効になっています。' is technically correct but reads slightly formal and can be improved for clarity and naturalness in a user interface context. A more user-friendly translation would be better.",
-          "suggestion": "ストレージ容量制限はオフになっています。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -138,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ກຳນົດຈຳນວນເກັບຮັກສາຖືກປິດການໃຊ້ງານແລ້ວ\" is too literal and lengthy. A more natural and concise translation would be better.",
-          "suggestion": "ອັດຖະການເກັບຂໍ້ມູນຖືກປິດແລ້ວ"
+          "description": "The translation 'ກຳນົດຈຳນວນເກັບຮັກສາຖືກປິດການໃຊ້ງານແລ້ວ' is a literal translation of 'Storage quota disabled' but sounds overly formal and complex for a user-facing message. A more natural and concise translation would be preferred.",
+          "suggestion": "Consider a simpler translation like 'ປິດການໃຊ້ງານກຳນົດຈຳນວນເກັບຮັກສາ' or 'ບໍ່ມີກຳນົດຈຳນວນເກັບຮັກສາ'"
         }
       ],
       "approved_at": null
@@ -162,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Limit pamięci został wyłączony' is not the most natural or accurate translation of 'Storage quota disabled.' 'Limit pamięci' translates to 'Memory Limit,' which isn't precisely what a storage quota represents. It implies a limit on RAM rather than storage space.",
-          "suggestion": "Przydział miejsca na dysku został wyłączony."
+          "description": "The translation 'Limit pamięci został wyłączony' is a literal translation of 'Storage quota disabled' that doesn't fully capture the nuance. 'Quota' refers to an allocated limit, and 'disabled' implies that functionality is turned off. 'Limit pamięci został wyłączony' is understandable, but not the most natural or accurate rendering in Polish.",
+          "suggestion": "A more natural translation would be something like 'Ograniczenie przestrzeni dyskowej zostało wyłączone' or 'Wyłączono limit przestrzeni dyskowej'."
         }
       ],
       "approved_at": null
@@ -186,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Cotă de stocare a fost dezactivată\" is a literal translation but doesn't flow naturally in Romanian. A more natural phrasing would be 'Cota de stocare este dezactivată' or 'Dezactivarea cotei de stocare'.",
-          "suggestion": "Cota de stocare este dezactivată."
+          "description": "While technically correct, \"Cotă de stocare a fost dezactivată\" sounds a bit formal and stiff for a user-facing message. A more natural phrasing would be preferred.",
+          "suggestion": "Cotă de stocare este dezactivată."
         }
       ],
       "approved_at": null
@@ -204,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ආචයන සලාකය අබල කෙරිණි.\" does not accurately convey the meaning of \"Storage quota disabled.\" The word 'ආචයන' is not directly related to storage and 'සලාකය' generally refers to a salad or a mixture. 'අබල කෙරිණි' means 'was spoiled' or 'was ruined'. The translation needs to be more precise and directly reflect the meaning of 'Storage quota disabled'.",
-          "suggestion": "A more accurate translation could be something like \"ගබඩාවේ ප්‍රමාණය අවම කිරීම අක්‍රිය කර ඇත\" (Gabadawe pramaṇaya avama kirima akriya kara ata) which translates to 'Storage quota limitation deactivated'."
+          "description": "The translation 'ආචයන සලාකය අබල කෙරිණි' does not accurately convey the meaning of \"Storage quota disabled.\" 'ආචයන සලාකය' doesn't directly relate to storage or quota. It seems to be a random combination of words.",
+          "suggestion": "A more accurate translation would be something like 'ගබඩා ඉඩ ප්‍රමාණය සීමාව අන්‍යය කර ඇත' (Gabada ida pramanaya seemawa aniya kara ath) which translates to 'Storage limit has been disabled' or 'ගබඩා සීමාව නිಷ್ක්‍රිය කර ඇත' (Gabada seemawa nishkriya kara ath) which translates to 'Storage limit has been deactivated'."
         }
       ],
       "approved_at": null
@@ -228,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Складишна квота онемогућена.\" is a literal translation that doesn't quite convey the intended meaning in a natural way. 'Складишна' directly translates to 'storage,' which is redundant since 'quota' inherently implies storage. A more natural translation would be something along the lines of \"Онемогућена квота за складиштење\" or simply \"Онемогућена квота\".",
-          "suggestion": "Онемогућена квота"
+          "description": "The translation \"Складишна квота онемогућена.\" is not the most natural or accurate translation of \"Storage quota disabled.\" While technically correct, it sounds awkward. \"Складишна\" is a less common and less direct translation of 'storage'.",
+          "suggestion": "Угашена квота за складиштење."
         }
       ],
       "approved_at": null
@@ -255,10 +249,22 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Đã vô hiệu hóa hạn mức lưu trữ\" is a bit formal and sounds unnatural in most contexts. A more natural and common translation would be 'Tắt hạn mức lưu trữ' or 'Hạn mức lưu trữ đã tắt'.",
+          "suggestion": "Tắt hạn mức lưu trữ"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

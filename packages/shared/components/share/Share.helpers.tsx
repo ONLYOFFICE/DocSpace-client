@@ -35,7 +35,7 @@ import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import FillFormsReactSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
-import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
+import PeopleIcon from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
 import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 // import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 // import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
@@ -266,6 +266,13 @@ export const getDate = (expirationDate: string) => {
   }
 
   return moment.duration(calculatedDate + 1, "days").humanize();
+};
+
+export const isExpired = (expirationDate: string | Date) => {
+  const currentDare = moment(new Date());
+  const expDate = moment(new Date(expirationDate));
+
+  return currentDare.unix() - expDate.unix() > 0;
 };
 
 export const getPasswordDescription = (t: TFunction, link: TFileLink) => {

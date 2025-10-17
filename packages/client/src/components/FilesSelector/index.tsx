@@ -97,7 +97,6 @@ const FilesSelectorWrapper = ({
   checkFileConflicts,
   itemOperationToFolder,
   clearActiveOperations,
-  setMovingInProgress,
   setSelected,
   setMoveToPanelVisible,
   setRestorePanelVisible,
@@ -296,8 +295,6 @@ const FilesSelectorWrapper = ({
           } else {
             setIsRequestRunning(false);
             onCloseAndDeselectAction();
-            const move = !isCopy;
-            if (move) setMovingInProgress(move);
             sessionStorage.setItem("filesSelectorPath", `${selectedItemId}`);
 
             try {
@@ -528,7 +525,6 @@ export default inject(
       selection,
       bufferSelection,
       filesList,
-      setMovingInProgress,
       setSelected,
       filesSettingsStore,
     } = filesStore;
@@ -626,7 +622,6 @@ export default inject(
       checkFileConflicts,
       itemOperationToFolder,
       clearActiveOperations,
-      setMovingInProgress,
       setSelected,
       setCopyPanelVisible,
       setRestoreAllPanelVisible,

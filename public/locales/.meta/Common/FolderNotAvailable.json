@@ -1,15 +1,34 @@
 {
-  "key_path": "Employees",
-  "content": "Employees",
-  "content_en_sha1_hash": "8c5b6be28fbd0079e21b3b9a2b7020b833c5f036",
-  "created_at": "2025-05-19T21:30:44.785Z",
-  "updated_at": "2025-05-24T01:02:35.516Z",
+  "key_path": "FolderNotAvailable",
+  "content": "Folder not available",
+  "content_en_sha1_hash": "e2620e8a4f8771e2e1c12697fa8bb94fd77939c9",
+  "created_at": "2025-10-13T13:22:03.877Z",
+  "updated_at": "2025-10-16T07:29:35.645Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text is displayed as the title when a folder is unavailable to the user. It appears in error messages, likely presented via a toastr notification, to explain why a folder cannot be accessed. Translators should ensure the wording conveys that the folder is inaccessible and may require action.",
+    "is_auto": true,
+    "updated_at": "2025-10-13T14:24:47.928Z"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/ExpiredItem.tsx",
+      "line_number": 88,
+      "context": "description: t(\"Common:FileLinkExpired\"),\n };\n \n if (isFolder(infoPanelSelection))\n return {\n title: t(\"Common:FolderNotAvailable\"),\n description: t(\"Common:FolderLinkExpired\"),\n };\n \n return {\n title: t(\"Common:RoomNotAvailable\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 271,
+      "context": "? t(\"Common:RoomLinkExpired\")\n : t(\"Common:FolderLinkExpired\");\n \n const title = isRoom\n ? t(\"Common:RoomNotAvailable\")\n : t(\"Common:FolderNotAvailable\");\n \n return toastr.error(description, title);\n }\n \n if (isLockedSharedRoom(item))",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 2645,
+      "context": ": t(\"Common:RoomLinkExpired\");\n \n const title = isFile\n ? t(\"Common:FileNotAvailable\")\n : isFolder\n ? t(\"Common:FolderNotAvailable\")\n : t(\"Common:RoomNotAvailable\");\n \n return toastr.error(description, title);\n }",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -161,16 +180,16 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Запослени\" is not the most accurate or commonly used translation of \"Employees\". A more appropriate translation would be \"Запослени\" or \"Радници\". While \"Запослени\" is technically correct, \"Радници\" is often preferred in this context.",
-          "suggestion": "Consider using \"Радници\" as a potentially better translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

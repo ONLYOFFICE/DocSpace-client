@@ -40,9 +40,10 @@ import { useTheme } from "@docspace/shared/hooks/useTheme";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 
 import styles from "./NoItem.module.scss";
+import { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 type LockedItemProps = {
-  item: TRoom;
+  item: TRoom | TFile | TFolder;
   setPasswordEntryDialog?: DialogsStore["setPasswordEntryDialog"];
 };
 

@@ -68,6 +68,8 @@ const ArticleBodyContent = (props) => {
 
   const location = useLocation();
 
+  const isMobileView = currentDeviceType === DeviceType.mobile;
+
   // React.useEffect(() => {
   //   // prevLocation.current = location;
   // }, [location]);
@@ -184,7 +186,7 @@ const ArticleBodyContent = (props) => {
   };
 
   const onSelect = () => {
-    if (currentDeviceType === DeviceType.mobile) {
+    if (isMobileView) {
       toggleArticleOpen();
     }
   };
@@ -317,7 +319,7 @@ const ArticleBodyContent = (props) => {
           folderId={item.id}
           style={style}
           $currentColorScheme={currentColorScheme}
-          withAnimation
+          withAnimation={!isMobileView}
           isEndOfBlock={isLastIndex}
         />,
       );

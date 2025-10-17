@@ -3,6 +3,7 @@
   "AllDataTransferred": "Усі дані передані",
   "DataReassignment": "Перепризначення даних",
   "DeleteProfileIsFinished": "Видалити профіль після завершення перепризначення",
+  "DescriptionDataReassignment": "Ми передамо спільні файли та кімнати, створені контактом.",
   "Interrupted": "Перервано, не вдалося передати деякі дані",
   "MoreAboutDataTransfer": "Детальніше про передавання даних",
   "NewDataOwner": "Новий власник даних",

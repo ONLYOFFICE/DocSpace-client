@@ -3,7 +3,7 @@
   "content": "Actions",
   "content_en_sha1_hash": "c3cd636a585b20c40ac2df5ffb403e83cb2eef51",
   "created_at": "2025-05-19T21:30:42.878Z",
-  "updated_at": "2025-10-01T08:28:21.732Z",
+  "updated_at": "2025-10-17T14:43:53.316Z",
   "comment": {
     "text": "This translation key is used to display a button or label that indicates actions available in an article or profile section. It appears on a main button and in some header sections, where it shows a title such as \"Actions\" or \"Invite\", depending on the context.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 747,
+      "line_number": 777,
       "context": "isInfoPanelVisible={isProfile ? false : isInfoPanelVisible}\n titles={{\n warningText,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Translations:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={withMenu}\n onPlusClick={onPlusClick}",
       "module": "/packages/client"
     },
@@ -36,8 +36,8 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2373,
-      "context": "});\n } else {\n options.splice(1, 0, {\n id: \"option_plugin-actions\",\n key: \"plugin_actions\",\n label: t(\"Common:Actions\"),\n icon: PluginActionsSvgUrl,\n disabled: false,\n \n onLoad: () => this.onLoadPlugins(item),\n });",
+      "line_number": 2377,
+      "context": "});\n } else {\n options.splice(1, 0, {\n id: \"option_plugin-actions\",\n key: \"plugin_actions\",\n label: t(\"Common:Actions\"),\n icon: PluginActionsSvgUrl,\n disabled: false,\n onLoad: () => this.onLoadPlugins(item),\n });\n }",
       "module": "/packages/client"
     },
     {

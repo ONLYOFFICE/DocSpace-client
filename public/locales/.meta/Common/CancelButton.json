@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2025-10-03T13:19:30.392Z",
+  "updated_at": "2025-10-17T14:43:53.337Z",
   "comment": {
     "text": "This translation key is used for the \"Cancel\" button in various UI elements such as dialogs and form buttons. It provides the text to be displayed when a user clicks the cancel action, allowing them to terminate an operation or return to their previous state. This key appears in files such as Dialog.js, QuotaForm, and ShareCollectSelector.",
     "is_auto": true,
@@ -132,7 +132,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 278,
+      "line_number": 276,
       "context": "testId=\"delete_dialog_modal_submit\"\n />\n <Button\n id=\"delete-file-modal_cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n onClick={onClose}\n isLoading={isLoading}\n testId=\"delete_dialog_modal_cancel\"",
       "module": "/packages/client"
     },
@@ -144,7 +144,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
-      "line_number": 187,
+      "line_number": 147,
       "context": "isDisabled={isLoading}\n />\n <Button\n id=\"delete-file-modal_cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n onClick={onClose}\n isDisabled={isLoading}\n />",
       "module": "/packages/client"
     },
@@ -204,7 +204,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
-      "line_number": 160,
+      "line_number": 167,
       "context": "scale\n />\n \n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n onClick={onClose}\n scale\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
@@ -234,7 +234,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/MoveToPublicRoom/index.js",
-      "line_number": 148,
+      "line_number": 145,
       "context": "isLoading={isLoading}\n />\n <Button\n id=\"delete-file-modal_cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n onClick={onClose}\n isLoading={isLoading}\n />",
       "module": "/packages/client"
     },
@@ -342,8 +342,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SubmitToFormGallery/index.js",
-      "line_number": 223,
-      "context": "testId=\"submit_to_gallery_apply_button\"\n />\n )}\n <Button\n size=\"normal\"\n label={t(\"Common:CancelButton\")}\n onClick={onClose}\n scale\n testId=\"submit_to_gallery_cancel_button\"\n />\n </ModalDialog.Footer>",
+      "line_number": 227,
+      "context": "testId=\"submit_to_gallery_apply_button\"\n />\n )}\n <Button\n size=\"normal\"\n label={t(\"Common:CancelButton\")}\n onClick={onClose}\n scale={!formItem}\n testId=\"submit_to_gallery_cancel_button\"\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
     {
@@ -582,7 +582,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/FilterPanel.tsx",
-      "line_number": 130,
+      "line_number": 147,
       "context": "testId=\"apply_filter_button\"\n />\n <Button\n onClick={closeFilterDialog}\n size={ButtonSize.medium}\n label={t(\"Common:CancelButton\")}\n scale\n testId=\"cancel_filter_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>",
       "module": "/packages/client"
     },
@@ -606,7 +606,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 337,
+      "line_number": 347,
       "context": "onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n saveButtonDataTestId=\"invitation_settings_save_button\"\n cancelButtonDataTestId=\"invitation_settings_cancel_button\"",
       "module": "/packages/client"
     },
@@ -618,7 +618,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/passwordStrength.js",
-      "line_number": 340,
+      "line_number": 348,
       "context": "onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"password-strength-save\"\n additionalClassCancelButton=\"password-strength-cancel\"",
       "module": "/packages/client"
     },
@@ -630,7 +630,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 317,
+      "line_number": 305,
       "context": "onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"two-factor-auth-save\"\n additionalClassCancelButton=\"two-factor-auth-cancel\"",
       "module": "/packages/client"
     },
@@ -738,7 +738,7 @@
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/ForgotPasswordModalDialog.tsx",
-      "line_number": 184,
+      "line_number": 272,
       "context": "/>\n <Button\n id=\"forgot-password-modal_cancel\"\n className=\"modal-dialog-button\"\n key=\"CancelBtn\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n primary={false}\n onClick={onDialogClose}\n // isLoading={isLoading}",
       "module": "/packages/login"
     },
@@ -834,13 +834,13 @@
     },
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 591,
+      "line_number": 586,
       "context": "<Button\n scale\n onClick={onClose}\n isDisabled={isLoading}\n size={ButtonSize.normal}\n label={t(\"Common:CancelButton\")}\n testId=\"edit_link_panel_cancel_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>\n </>",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog.tsx",
-      "line_number": 226,
+      "line_number": 361,
       "context": "isDisabled={loading}\n size={ButtonSize.normal}\n key=\"SendBtn-recover-close\"\n id=\"recover-access-modal_cancel\"\n className={styles.recoverButtonDialog}\n label={t(\"Common:CancelButton\")}\n onClick={onRecoverModalClose}\n testId=\"recover_access_modal_close_button\"\n />\n </div>\n </ModalDialog.Footer>",
       "module": "/packages/shared"
     },

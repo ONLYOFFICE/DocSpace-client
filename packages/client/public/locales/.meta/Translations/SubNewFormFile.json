@@ -3,7 +3,7 @@
   "content": "From text file",
   "content_en_sha1_hash": "521c29206ecb79ca73e09f93fdfd9794e26a24c1",
   "created_at": "2025-05-19T21:30:50.009Z",
-  "updated_at": "2025-10-01T08:28:21.727Z",
+  "updated_at": "2025-10-17T14:43:53.313Z",
   "comment": {
     "text": "\"This translation key is used to display the text 'From text file' in the UI, specifically on buttons or dropdowns related to uploading files.\"",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3102,
+      "line_number": 3105,
       "context": "};\n \n const createTemplateNewFormFile = {\n id: \"personal_template_new-form-file\",\n key: \"new-form-file\",\n label: t(\"Translations:SubNewFormFile\"),\n icon: FormFileReactSvgUrl,\n onClick: () => this.onCreateFormFromFile(t),\n disabled: isPrivacyFolder,\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3102,
+      "line_number": 3105,
       "context": "};\n \n const createTemplateNewFormFile = {\n id: \"personal_template_new-form-file\",\n key: \"new-form-file\",\n label: t(\"Translations:SubNewFormFile\"),\n icon: FormFileReactSvgUrl,\n onClick: () => this.onCreateFormFromFile(t),\n disabled: isPrivacyFolder,\n };",
       "module": "/packages/client"
     }

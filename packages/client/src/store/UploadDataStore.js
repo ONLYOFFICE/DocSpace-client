@@ -403,12 +403,9 @@ class UploadDataStore {
 
       updatedFile.fileInfo.fileExst = file.fileInfo.fileExst;
 
-      this.displayedConversionFiles[fileIndex] = {
-        ...updatedFile,
-        action: "convert",
-        error: null,
-        errorShown: false,
-      };
+      this.displayedConversionFiles[fileIndex].action = "convert";
+      this.displayedConversionFiles[fileIndex].error = null;
+      this.displayedConversionFiles[fileIndex].errorShown = false;
     } else {
       this.displayedConversionFiles.push(file);
     }
@@ -1584,6 +1581,27 @@ class UploadDataStore {
     }
   };
 
+  retryConvertFiles = (t, fileId) => {
+    const fileIndex = this.files.findIndex((f) => f.fileId === fileId);
+    const fileConversionInxex = this.displayedConversionFiles.findIndex(
+      (f) => f.fileId === fileId,
+    );
+
+    if (fileIndex > -1) {
+      const retryFile = this.files[fileIndex];
+      retryFile.inConversion = false;
+    }
+
+    if (fileConversionInxex === -1) return;
+
+    const retryFileConversion =
+      this.displayedConversionFiles[fileConversionInxex];
+
+    retryFileConversion.inConversion = false;
+
+    this.convertFileFromFiles(retryFileConversion, t);
+  };
+
   retryUploadFiles = (t, uniqueId) => {
     const fileIndex = this.files.findIndex((f) => f.uniqueId === uniqueId);
     const fileUploadedIndex = this.uploadedFilesHistory.findIndex(
@@ -2047,7 +2065,6 @@ class UploadDataStore {
     toFillOut,
   ) => {
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
-    const { refreshFiles, setMovingInProgress } = this.filesStore;
     const pbData = { operation: OPERATIONS_NAME.move, operationId };
     return moveToFolder(
       destFolderId,
@@ -2095,9 +2112,6 @@ class UploadDataStore {
         this.clearActiveOperations(fileIds, folderIds);
 
         return Promise.reject(err);
-      })
-      .finally(() => {
-        refreshFiles().then(() => setMovingInProgress(false));
       });
   };
 
@@ -2234,14 +2248,11 @@ class UploadDataStore {
   };
 
   moveToCopyTo = (destFolderId, pbData, isCopy, fileIds, folderIds) => {
-    const { removeFiles } = this.filesStore;
-
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
     const isMovingSelectedFolder =
       !isCopy && folderIds && this.selectedFolderStore.id === folderIds[0];
 
     if (!isCopy || destFolderId === this.selectedFolderStore.id) {
-      !isCopy && removeFiles(fileIds, folderIds);
       this.clearActiveOperations(fileIds, folderIds);
 
       isMovingSelectedFolder &&

@@ -3,7 +3,7 @@
   "content": "Sign in with WeChat",
   "content_en_sha1_hash": "9044841df03cf83e460dec7b8fdfd51a25bf49e2",
   "created_at": "2025-09-09T10:39:43.472Z",
-  "updated_at": "2025-09-23T07:24:24.463Z",
+  "updated_at": "2025-10-17T14:43:53.740Z",
   "comment": {
     "text": "This key provides the text for a button or link that allows users to sign in or sign up using their WeChat account. It appears when the user is signing in (not signing up) and chooses WeChat as their authentication method. Translators should ensure the phrasing accurately reflects the action of signing in with WeChat.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 447,
+      "line_number": 449,
       "context": "case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n case \"weixin\":\n return signUp\n ? t(\"Common:SignUpWithWechat\")\n : t(\"Common:SignInWithWechat\");\n default:\n return \"\";\n }\n }",
       "module": "/packages/shared"
     }
@@ -22,6 +22,280 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation directly transliterates \"WeChat\" instead of providing a more understandable phrasing or a commonly used Arabic equivalent if one exists. While technically correct, it may not be clear to all users in Saudi Arabia.",
+          "suggestion": "Consider phrasing like \"تسجيل الدخول باستخدام تطبيق WeChat\" (Sign in using the WeChat application) or researching if there's a commonly understood Arabic term for WeChat among the target audience.  Alternatively, provide a tooltip or explanation for 'WeChat' if direct transliteration is necessary."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Влезте с WeChat' while technically correct, could be more idiomatic. 'WeChat' is a brand name and often left untranslated in Bulgarian for clarity and recognition. A more natural phrasing might incorporate this understanding.",
+          "suggestion": "Влезте с WeChat (or Влезте през WeChat)"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation conveys the general meaning, 'Մուտք գործել WeChat-ով' is a literal translation that sounds slightly unnatural in Armenian. A more idiomatic translation would be preferred.",
+          "suggestion": "Մուտքագրվել WeChat-ի միջոցով"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'WeChat-ով' implies a possessive relationship that isn't entirely accurate. Using 'WeChat-ի միջոցով' (through WeChat) is more precise.",
+          "suggestion": "No change needed, but clarification in suggestion above."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Lao phrase 'ເຂົ້າສູ່ລະບົບ' is transliterated as 'keua suu lap', which is the standard Lao phrase for 'Sign in/Log in'.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'ເຂົ້າສູ່ລະບົບດ້ວຍ WeChat' is a literal translation. A more natural Lao phrasing might use a more idiomatic expression depending on the overall tone and style of the application. However, without further context, the current translation is understandable.",
+          "suggestion": "Consider alternatives like 'ເຂົ້າສູ່ລະບົບຜ່ານ WeChat' (Sign in through WeChat) or 'ໃຊ້ WeChat ເຂົ້າສູ່ລະບົບ' (Use WeChat to sign in) for a potentially more natural feel, depending on the brand voice."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Pieejieties ar WeChat\" doesn't accurately convey the meaning of \"Sign in with WeChat\". \"Pieejieties\" translates to 'access' or 'approach,' which isn't the intended action. A more accurate translation would focus on the action of signing in.",
+          "suggestion": "Ieteicams tulkot: \"Ieviesojieties ar WeChat\" (Log in with WeChat) or \"Reģistrējieties ar WeChat\" (Register with WeChat)."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Acesse com WeChat\" doesn't accurately convey the meaning of \"Sign in with WeChat.\" \"Acesse\" means 'access' which is a broader term. 'Sign in' implies a specific action of verifying identity.",
+          "suggestion": "Entrar com WeChat"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Conectare prin WeChat' is a functional equivalent but doesn't fully capture the nuance of 'Sign in with WeChat'. 'Conectare' implies a connection, but 'Sign in' suggests an authentication process. While understandable, it's not the most accurate translation.",
+          "suggestion": "Autentificare cu WeChat"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Войти через WeChat' is a very literal translation. A more natural and idiomatic Russian translation would be 'Войти с помощью WeChat' or 'Войти через WeChat с использованием...'",
+          "suggestion": "Consider 'Войти с помощью WeChat' or 'Войти через WeChat с использованием...' for a more natural flow."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"WeChat සමඟින් පුරනය වන්න\" doesn't accurately convey \"Sign in with WeChat\".  ' පුරනය වන්න' (puranaya vannä) translates to 'become old' or 'become antiquated' and isn't appropriate for a sign-in action. It suggests WeChat is making the user older.",
+          "suggestion": "A more accurate translation would convey the action of logging in or connecting. Possible suggestions include: \"WeChat වෙතින් ඇතුළත් වන්න\" (WeChat vetaṁ athulath vannä - Sign in with WeChat), \"WeChat භාවිතා කර පිවිසෙන්න\" (WeChat uta gamā piveśenna - Use WeChat to login) or similar phrasing. The best choice will depend on the overall tone and context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Prijava z WeChat' is technically correct, it might be more natural to use a more descriptive phrase that explains what 'WeChat' is for those unfamiliar with it. 'WeChat' is a messaging and social media app, and a direct translation might be unclear to some Slovenian speakers.",
+          "suggestion": "Consider alternatives like 'Prijava preko WeChat' (Sign in via WeChat) or 'Prijava z uporabo WeChat' (Sign in using WeChat) for better clarity, depending on the overall tone and style of the application."
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Пријави се помоћу WeChat-а' sounds a bit stiff and literal. A more natural translation would be something like 'У loguj se путем WeChat-а' or 'Пријави се преко WeChat-а'.",
+          "suggestion": "У loguj se путем WeChat-а"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Prijavi se pomoću WeChat-a\" sounds slightly unnatural in Serbian. A more common and natural phrasing would be \"Prijava preko WeChat-a\" or \"Uloguj se preko WeChat-a\".  'Prijavi se pomoću' is a bit clunky.",
+          "suggestion": "Prijava preko WeChat-a"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"使用微信登录\" is a functional translation, \"Sign in with WeChat\" often implies a more direct integration or a process where WeChat handles authentication. \"使用微信登录\" is more literally \"Use WeChat to log in\". A more nuanced translation might be \"微信登录\" or \"通过微信登录\" to better capture the intent.",
+          "suggestion": "微信登录 or 通过微信登录"
+        }
+      ],
       "approved_at": null
     }
   }

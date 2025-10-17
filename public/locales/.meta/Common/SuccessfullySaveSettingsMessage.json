@@ -3,7 +3,7 @@
   "content": "Settings have been successfully updated",
   "content_en_sha1_hash": "a3e0f1940499fb1b34253a9a7b050c2136e1f58b",
   "created_at": "2025-05-26T07:15:48.667Z",
-  "updated_at": "2025-10-03T13:19:30.530Z",
+  "updated_at": "2025-10-16T07:29:35.713Z",
   "comment": {
     "text": "The translation key \"SuccessfullySaveSettingsMessage\" is used to display a success message after saving portal settings. It appears in UI elements such as buttons or dialogs that trigger setting updates, providing feedback to the user that changes have been successfully applied.",
     "is_auto": true,
@@ -36,19 +36,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Branding/additionalResources.js",
-      "line_number": 80,
+      "line_number": 82,
       "context": "const settings = JSON.parse(JSON.stringify(additionalResourcesData));\n settings.feedbackAndSupportEnabled = feedbackEnabled;\n settings.helpCenterEnabled = helpEnabled;\n await setAdditionalResources(settings);\n await getAdditionalResources();\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n } finally {\n setIsLoading(false);\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Branding/additionalResources.js",
-      "line_number": 80,
+      "line_number": 82,
       "context": "const settings = JSON.parse(JSON.stringify(additionalResourcesData));\n settings.feedbackAndSupportEnabled = feedbackEnabled;\n settings.helpCenterEnabled = helpEnabled;\n await setAdditionalResources(settings);\n await getAdditionalResources();\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n } finally {\n setIsLoading(false);\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Branding/brandName.js",
-      "line_number": 78,
+      "line_number": 86,
       "context": "try {\n setIsSaving(true);\n await saveBrandName(data);\n setBrandName(data.logoText);\n \n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (err) {\n toastr.error(err);\n } finally {\n setIsSaving(false);\n }",
       "module": "/packages/client"
     },
@@ -144,7 +144,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 207,
+      "line_number": 217,
       "context": "allowInvitingMembers: isCheckedContacts,\n allowInvitingGuests: isCheckedGuests,\n });\n setShowReminder(false);\n \n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error as TData);\n }\n \n setIsSaving(false);",
       "module": "/packages/client"
     },
@@ -156,7 +156,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/passwordStrength.js",
-      "line_number": 243,
+      "line_number": 251,
       "context": "useSpecialSymbols,\n );\n setShowReminder(false);\n saveToSessionStorage(\"currentPasswordSettings\", data);\n saveToSessionStorage(\"defaultPasswordSettings\", data);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n \n setIsSaving(false);",
       "module": "/packages/client"
     },
@@ -168,7 +168,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 230,
+      "line_number": 218,
       "context": "const res = await setTfaSettings(type);\n setType(type);\n setShowReminder(false);\n saveToSessionStorage(\"defaultTfaSettings\", type);\n saveToSessionStorage(\"currentTfaSettings\", type);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n \n if (res) {\n setIsInit(false);\n window.location.replace(res);\n }",
       "module": "/packages/client"
     },
@@ -285,7 +285,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ajustes se han actualizado correctamente' is not the most natural or accurate rendering of 'Settings have been successfully updated'. A more natural translation would be 'La configuración se ha actualizado correctamente' or 'Los ajustes se han actualizado correctamente'.",
+          "suggestion": "La configuración se ha actualizado correctamente"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -421,6 +427,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

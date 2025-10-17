@@ -22,6 +22,7 @@
   "dependencies": {
     "@babel/runtime": "7.28.3",
     "@floating-ui/dom": "1.6.13",
+    "@hcaptcha/react-hcaptcha": "1.11.0",
     "@react-spring/web": "9.7.5",
     "@socket.io/component-emitter": "3.1.2",
     "@use-gesture/react": "10.3.1",
@@ -57,6 +58,7 @@
     "react-device-detect": "2.2.3",
     "react-draggable": "4.4.6",
     "react-dropzone": "11.7.1",
+    "react-google-recaptcha": "3.1.0",
     "react-hotkeys-hook": "3.4.7",
     "react-i18next": "14.0.1",
     "react-router": "7.5.2",
@@ -122,6 +124,7 @@
     "@types/react": "19.1.4",
     "@types/react-avatar-editor": "13.0.3",
     "@types/react-dom": "19.1.5",
+    "@types/react-google-recaptcha": "2.1.9",
     "@types/react-transition-group": "4.4.11",
     "@types/react-virtualized": "9.21.30",
     "@types/react-window": "1.8.8",

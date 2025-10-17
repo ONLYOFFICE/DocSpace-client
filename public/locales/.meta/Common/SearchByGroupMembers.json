@@ -1,26 +1,20 @@
 {
-  "key_path": "Employees",
-  "content": "users",
-  "content_en_sha1_hash": "5b7dcd14a4faa2cdd54cf6eb8d4bc35da31914a1",
-  "created_at": "2025-05-19T21:30:51.482Z",
-  "updated_at": "2025-05-26T07:57:32.524Z",
+  "key_path": "SearchByGroupMembers",
+  "content": "Search by group members",
+  "content_en_sha1_hash": "184145132a97e055ac3dffd682c055646ed6d938",
+  "created_at": "2025-10-07T15:38:57.553Z",
+  "updated_at": "2025-10-07T15:39:51.357Z",
   "comment": {
-    "text": "The translation key \"users\" is used to display a label for employee-related settings, likely appearing as a button or dropdown option in UI elements such as portal settings. The translated content will be displayed as an uppercase employee name (\"Settings:Employees\") followed by its original lowercased version, suggesting a reference to a specific type of employee or user category.",
+    "text": "This key provides the placeholder text for a search input field within a group members edit dialog. It allows users to search for members within a group by name or other identifying information. Translators should ensure the phrasing encourages users to search for group members.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:12.878Z"
+    "updated_at": "2025-10-07T15:39:51.357Z"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 83,
-      "context": "const checked = e.target.checked;\n setImportOptions({ [name]: checked });\n };\n \n const users =\n t(\"Settings:Employees\")[0].toUpperCase() + t(\"Settings:Employees\").slice(1);\n \n const onCancelMigration = () => {\n cancelMigration();\n clearCheckedAccounts();\n setStep(1);",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 83,
-      "context": "const checked = e.target.checked;\n setImportOptions({ [name]: checked });\n };\n \n const users =\n t(\"Settings:Employees\")[0].toUpperCase() + t(\"Settings:Employees\").slice(1);\n \n const onCancelMigration = () => {\n cancelMigration();\n clearCheckedAccounts();\n setStep(1);",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/dialogs/edit-group-members-dialog/index.tsx",
+      "line_number": 162,
+      "context": "infoPanelSelection={infoPanelSelection}\n standalone={standalone}\n >\n <SearchInput\n className=\"search-input\"\n placeholder={t(\"Common:SearchByGroupMembers\")}\n value={searchValue}\n onChange={onChangeSearchValue}\n onClearSearch={onClearSearch}\n size={InputSize.base}\n />",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -159,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'පරිශ්‍රීලකයින්' (parishreekalakin) is a transliteration of 'personnel' or 'workers', not a direct translation of 'users'. 'Users' typically refers to individuals who interact with a system or application.",
-          "suggestion": "A more accurate translation for 'users' would be 'භාවිතකරන්නන්' (bhavitakarnaannan) or 'පරිශීලකයන්' (parishilakayan)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -175,6 +163,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

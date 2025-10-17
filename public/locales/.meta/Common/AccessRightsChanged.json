@@ -3,7 +3,7 @@
   "content": "Access rights changed",
   "content_en_sha1_hash": "cdefb979afa2c5e08443d77985f7b5d925f6b122",
   "created_at": "2025-10-03T13:19:11.191Z",
-  "updated_at": "2025-10-03T13:20:43.570Z",
+  "updated_at": "2025-10-13T13:22:35.743Z",
   "comment": {
     "text": "This message confirms that a user's access rights have been modified. It appears as a success notification (using `toastr`) within the Members view, likely after updating a user’s sharing permissions or role. Translators should ensure the message clearly indicates a change in user access.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useMembers.tsx",
-      "line_number": 176,
+      "line_number": 229,
       "context": "const newMember = newShareItems.find(\n (item) => item.sharedTo.id === member.id,\n );\n \n if (newMember) {\n toastr.success(t(\"Common:AccessRightsChanged\"));\n setMembers((prev) =>\n prev.map((item) =>\n item.sharedTo.id === member.id ? newMember : item,\n ),\n );",
       "module": "/packages/shared"
     }

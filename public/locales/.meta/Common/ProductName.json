@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-10-03T13:19:30.368Z",
+  "updated_at": "2025-10-17T14:43:53.305Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -209,6 +209,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
+      "line_number": 128,
+      "context": "</Trans>\n </Text>\n <br />\n <Text>\n {t(\"GracePeriodActivatedDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </>\n );",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/RoomsContent.tsx",
       "line_number": 54,
       "context": "const chooseNewPlan = (\n <Text>\n {isPaymentPageAvailable\n ? t(\"ChooseNewPlan\")\n : t(\"MainBar:ContactToUpgradeTariff\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n );\n \n if (isRoomsTariffLimit)",
@@ -282,38 +288,38 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 194,
-      "context": "createUploadFromDeviceOption,\n } = helperOptions(actions, security, isFrame);\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
+      "line_number": 201,
+      "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 194,
-      "context": "createUploadFromDeviceOption,\n } = helperOptions(actions, security, isFrame);\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
+      "line_number": 201,
+      "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 194,
-      "context": "createUploadFromDeviceOption,\n } = helperOptions(actions, security, isFrame);\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
+      "line_number": 201,
+      "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 194,
-      "context": "createUploadFromDeviceOption,\n } = helperOptions(actions, security, isFrame);\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
+      "line_number": 201,
+      "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 194,
-      "context": "createUploadFromDeviceOption,\n } = helperOptions(actions, security, isFrame);\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
+      "line_number": 201,
+      "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 194,
-      "context": "createUploadFromDeviceOption,\n } = helperOptions(actions, security, isFrame);\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
+      "line_number": 201,
+      "context": "t(\"EmptyView:TemplateAccessDescription\"),\n );\n \n const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,",
       "module": "/packages/client"
     },
     {
@@ -426,13 +432,13 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 279,
+      "line_number": 277,
       "context": "/>\n </StyledSubHeader>\n <StyledDescription>\n {roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\", {\n productName: t(\"Common:ProductName\"),\n })\n : !allowInvitingGuests\n ? t(\"InviteViaLinkDescriptionRoomMembers\", {\n productName: t(\"Common:ProductName\"),\n })",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 279,
+      "line_number": 277,
       "context": "/>\n </StyledSubHeader>\n <StyledDescription>\n {roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\", {\n productName: t(\"Common:ProductName\"),\n })\n : !allowInvitingGuests\n ? t(\"InviteViaLinkDescriptionRoomMembers\", {\n productName: t(\"Common:ProductName\"),\n })",
       "module": "/packages/client"
     },
@@ -498,7 +504,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.tsx",
-      "line_number": 347,
+      "line_number": 331,
       "context": "headerText={t(\"Files:TemplateAvailable\")}\n bodyText={\n <>\n <div className=\"template-access_description\">\n {t(\"Files:TemplateAvailableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n {isTemplateOwner ? (\n <Link\n className=\"template-access_link\"",
       "module": "/packages/client"
     },
@@ -540,44 +546,44 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 110,
-      "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Contacts\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: AccountsIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
+      "line_number": 109,
+      "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Members\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: MembersIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 110,
-      "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Contacts\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: AccountsIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
+      "line_number": 109,
+      "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Members\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: MembersIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 110,
-      "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Contacts\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: AccountsIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
+      "line_number": 109,
+      "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Members\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: MembersIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 110,
-      "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Contacts\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: AccountsIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
+      "line_number": 109,
+      "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Members\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: MembersIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 110,
-      "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Contacts\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: AccountsIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
+      "line_number": 109,
+      "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Members\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: MembersIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 110,
-      "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Contacts\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: AccountsIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
+      "line_number": 109,
+      "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Members\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: MembersIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 110,
-      "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Contacts\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: AccountsIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
+      "line_number": 109,
+      "context": "workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Members\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: MembersIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"\n />",
       "module": "/packages/client"
     },
     {
@@ -588,79 +594,85 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/index.tsx",
-      "line_number": 82,
+      "line_number": 83,
       "context": "if (isOwner) {\n typeOptions.unshift({\n key: UserTypes.PortalAdmin,\n label: t(`Common:PortalAdmin`, {\n productName: t(\"Common:ProductName\"),\n }),\n onClick: setTypePortalAdmin,\n });\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 62,
+      "line_number": 61,
       "context": "),\n },\n {\n title: t(\"Settings:SelectUsers\"),\n description: t(\"Settings:SelectUsersDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 62,
+      "line_number": 61,
       "context": "),\n },\n {\n title: t(\"Settings:SelectUsers\"),\n description: t(\"Settings:SelectUsersDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 62,
+      "line_number": 61,
       "context": "),\n },\n {\n title: t(\"Settings:SelectUsers\"),\n description: t(\"Settings:SelectUsersDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 62,
+      "line_number": 61,
       "context": "),\n },\n {\n title: t(\"Settings:SelectUsers\"),\n description: t(\"Settings:SelectUsersDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 62,
+      "line_number": 61,
       "context": "),\n },\n {\n title: t(\"Settings:SelectUsers\"),\n description: t(\"Settings:SelectUsersDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 62,
+      "line_number": 61,
       "context": "),\n },\n {\n title: t(\"Settings:SelectUsers\"),\n description: t(\"Settings:SelectUsersDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 63,
+      "line_number": 62,
       "context": "),\n },\n {\n title: t(\"Settings:SelectUsersWithEmail\"),\n description: t(\"Settings:SelectUsersDescriptionNextcloud\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: (\n <SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />\n ),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 63,
+      "line_number": 62,
       "context": "),\n },\n {\n title: t(\"Settings:SelectUsersWithEmail\"),\n description: t(\"Settings:SelectUsersDescriptionNextcloud\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: (\n <SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />\n ),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 63,
+      "line_number": 62,
       "context": "),\n },\n {\n title: t(\"Settings:SelectUsersWithEmail\"),\n description: t(\"Settings:SelectUsersDescriptionNextcloud\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: (\n <SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />\n ),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 63,
+      "line_number": 62,
       "context": "),\n },\n {\n title: t(\"Settings:SelectUsersWithEmail\"),\n description: t(\"Settings:SelectUsersDescriptionNextcloud\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: (\n <SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />\n ),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 63,
+      "line_number": 62,
       "context": "),\n },\n {\n title: t(\"Settings:SelectUsersWithEmail\"),\n description: t(\"Settings:SelectUsersDescriptionNextcloud\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: (\n <SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />\n ),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 63,
+      "line_number": 62,
+      "context": "),\n },\n {\n title: t(\"Settings:SelectUsersWithEmail\"),\n description: t(\"Settings:SelectUsersDescriptionNextcloud\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: (\n <SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />\n ),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
+      "line_number": 62,
       "context": "),\n },\n {\n title: t(\"Settings:SelectUsersWithEmail\"),\n description: t(\"Settings:SelectUsersDescriptionNextcloud\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: (\n <SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />\n ),",
       "module": "/packages/client"
     },
@@ -698,24 +710,24 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
       "line_number": 51,
       "context": ") => {\n return [\n {\n title: t(\"Common:SelectFile\"),\n description: t(\"Settings:SelectFileDescriptionWorkspace\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: (\n <SelectFileStep\n t={t}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
+      "line_number": 51,
+      "context": ") => {\n return [\n {\n title: t(\"Common:SelectFile\"),\n description: t(\"Settings:SelectFileDescriptionWorkspace\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: (\n <SelectFileStep\n t={t}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AdminsInfoBlock.tsx",
+      "line_number": 55,
+      "context": "place=\"right\"\n offsetRight={0}\n tooltipContent={\n <Text fontSize=\"12px\">\n {t(\"Settings:LicenseLimitDescription\", {\n productName: t(\"Common:ProductName\"),\n maxLimit: limitAdmins,\n })}\n </Text>\n }\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/StepLayout.tsx",
       "line_number": 59,
       "context": "return (\n <>\n <DescriptionWrapper>\n <Text className=\"data-import-description\" lineHeight=\"20px\">\n {t(\"Settings:AboutDataImport\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n </Text>\n <Text\n className=\"data-import-counter\"",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/UsersInfoBlock.tsx",
-      "line_number": 51,
-      "context": "totalLicenceLimit={quota!.max}\n >\n {totalUsedUsers! > quota!.max ? (\n <Text className=\"license-limit-warning\">\n {t(\"Settings:UserLimitExceeded\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n ) : null}\n \n <div className=\"users-info-wrapper\">",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/UsersInfoBlock.tsx",
-      "line_number": 51,
-      "context": "totalLicenceLimit={quota!.max}\n >\n {totalUsedUsers! > quota!.max ? (\n <Text className=\"license-limit-warning\">\n {t(\"Settings:UserLimitExceeded\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n ) : null}\n \n <div className=\"users-info-wrapper\">",
       "module": "/packages/client"
     },
     {
@@ -954,7 +966,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/PluginItem.tsx",
-      "line_number": 123,
+      "line_number": 125,
       "context": "<Tooltip\n anchorSelect={`#${badgeId.replace(/\\./g, \"\\\\.\")}`}\n place=\"bottom\"\n getContent={() =>\n t(\"WebPlugins:PluginIsNotCompatible\", {\n productName: t(\"ProductName\"),\n })\n }\n />\n ) : null}",
       "module": "/packages/client"
     },
@@ -1038,13 +1050,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 482,
+      "line_number": 633,
       "context": "headerLabel: t(\"ListContacts\"),\n }}\n filter={filter}\n withInfo\n infoText={t(\"OnlyPortalAdminsShown\", {\n productName: t(\"Common:ProductName\"),\n })}\n emptyScreenHeader={t(\"Common:NotFoundMembers\")}\n emptyScreenDescription={t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n })}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 482,
+      "line_number": 633,
       "context": "headerLabel: t(\"ListContacts\"),\n }}\n filter={filter}\n withInfo\n infoText={t(\"OnlyPortalAdminsShown\", {\n productName: t(\"Common:ProductName\"),\n })}\n emptyScreenHeader={t(\"Common:NotFoundMembers\")}\n emptyScreenDescription={t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n })}",
       "module": "/packages/client"
     },
@@ -1098,25 +1110,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 243,
+      "line_number": 253,
       "context": "return (\n <>\n <LearnMoreWrapper>\n <Text fontSize=\"13px\" fontWeight=\"400\" className={styles.contentText}>\n {t(\"InvitationSettingsDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n \n {invitationSettingsUrl ? (\n <Link",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 243,
+      "line_number": 253,
       "context": "return (\n <>\n <LearnMoreWrapper>\n <Text fontSize=\"13px\" fontWeight=\"400\" className={styles.contentText}>\n {t(\"InvitationSettingsDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n \n {invitationSettingsUrl ? (\n <Link",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 243,
+      "line_number": 253,
       "context": "return (\n <>\n <LearnMoreWrapper>\n <Text fontSize=\"13px\" fontWeight=\"400\" className={styles.contentText}>\n {t(\"InvitationSettingsDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n \n {invitationSettingsUrl ? (\n <Link",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 243,
+      "line_number": 253,
       "context": "return (\n <>\n <LearnMoreWrapper>\n <Text fontSize=\"13px\" fontWeight=\"400\" className={styles.contentText}>\n {t(\"InvitationSettingsDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n \n {invitationSettingsUrl ? (\n <Link",
       "module": "/packages/client"
     },
@@ -1140,7 +1152,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 259,
+      "line_number": 247,
       "context": "return (\n <MainContainer id=\"tfa-section\" ref={targetRef}>\n <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TwoFactorAuthEnableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {tfaSettingsUrl ? (\n <Link\n className=\"link-learn-more\"",
       "module": "/packages/client"
     },
@@ -1164,8 +1176,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
-      "line_number": 108,
-      "context": "const confirmationDialogContent = {\n backup: {\n title: t(\"Common:Confirmation\"),\n body: t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n }),\n },\n };\n \n const getDialogContent = (actionType: string | null) => {",
+      "line_number": 112,
+      "context": "const confirmationDialogContent = {\n backup: {\n title: t(\"Common:Confirmation\"),\n body: !isCurrentConfirmDialogVisible\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),\n })",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
+      "line_number": 112,
+      "context": "const confirmationDialogContent = {\n backup: {\n title: t(\"Common:Confirmation\"),\n body: !isCurrentConfirmDialogVisible\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),\n })",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
+      "line_number": 112,
+      "context": "const confirmationDialogContent = {\n backup: {\n title: t(\"Common:Confirmation\"),\n body: !isCurrentConfirmDialogVisible\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff\n ? t(\"Services:DisableBackupConfirmWithoutQuota\", {\n productName: t(\"Common:ProductName\"),\n })",
       "module": "/packages/client"
     },
     {
@@ -1206,13 +1230,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 207,
+      "line_number": 209,
       "context": "case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 207,
+      "line_number": 209,
       "context": "case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":",
       "module": "/packages/client"
     },
@@ -1350,14 +1374,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
-      "line_number": 121,
-      "context": "const roomMode = getAccessTranslation().toLowerCase();\n \n sessionStorage.setItem(PUBLIC_SIGN_IN_TOAST, \"true\");\n \n const content = isFormRoom ? (\n t(\"Common:FormAuthorizeToast\", { productName: t(\"Common:ProductName\") })\n ) : (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"PublicAuthorizeToast\"",
+      "line_number": 122,
+      "context": "const roomMode = getAccessTranslation().toLowerCase();\n \n sessionStorage.setItem(PUBLIC_SIGN_IN_TOAST, access?.toString());\n \n const content = isFormRoom ? (\n t(\"Common:FormAuthorizeToast\", { productName: t(\"Common:ProductName\") })\n ) : (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"PublicAuthorizeToast\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
-      "line_number": 121,
-      "context": "const roomMode = getAccessTranslation().toLowerCase();\n \n sessionStorage.setItem(PUBLIC_SIGN_IN_TOAST, \"true\");\n \n const content = isFormRoom ? (\n t(\"Common:FormAuthorizeToast\", { productName: t(\"Common:ProductName\") })\n ) : (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"PublicAuthorizeToast\"",
+      "line_number": 122,
+      "context": "const roomMode = getAccessTranslation().toLowerCase();\n \n sessionStorage.setItem(PUBLIC_SIGN_IN_TOAST, access?.toString());\n \n const content = isFormRoom ? (\n t(\"Common:FormAuthorizeToast\", { productName: t(\"Common:ProductName\") })\n ) : (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"PublicAuthorizeToast\"",
       "module": "/packages/client"
     },
     {
@@ -1368,7 +1392,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 667,
+      "line_number": 671,
       "context": "isOwner && {\n id: \"accounts-add_administrator\",\n className: \"main-button_drop-down\",\n icon: PersonAdminReactSvgUrl,\n label: t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n }),\n onClick: () => this.inviteUser(EmployeeType.Admin),\n \"data-type\": EmployeeType.Admin,\n action: EmployeeType.Admin,\n key: \"administrator\",",
       "module": "/packages/client"
     },
@@ -1386,7 +1410,7 @@
     },
     {
       "file_path": "/packages/client/src/store/PluginStore.ts",
-      "line_number": 297,
+      "line_number": 298,
       "context": ");\n \n if (!isPluginCompatible) {\n toastr.error(\n t(\"PluginIsNotCompatible\", {\n productName: t(\"Common:ProductName\"),\n }),\n );\n } else {\n toastr.success(t(\"PluginLoadedSuccessfully\"));\n }",
       "module": "/packages/client"
     },
@@ -1458,7 +1482,7 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/consent/page.client.tsx",
-      "line_number": 295,
+      "line_number": 305,
       "context": "dataTestId=\"terms_of_service_link\"\n >\n terms of service\n </Link>\n . You can revoke this consent at any time in your{\" \"}\n {{ productName: t(\"Common:ProductName\") }} account settings.\n </Trans>\n </Text>\n </StyledDescriptionContainer>\n <StyledUserContainer>\n <div className=\"block\">",
       "module": "/packages/login"
     },
@@ -1746,25 +1770,25 @@
     },
     {
       "file_path": "/packages/shared/selectors/utils/index.ts",
-      "line_number": 192,
+      "line_number": 194,
       "context": "return items;\n };\n \n export const getDefaultBreadCrumb = (t: TTranslation) => {\n return {\n label: t(\"Common:ProductName\"),\n id: 0,\n isRoom: false,\n };\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 330,
+      "line_number": 332,
       "context": "switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 330,
+      "line_number": 332,
       "context": "switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 330,
+      "line_number": 332,
       "context": "switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");",
       "module": "/packages/shared"
     },

@@ -42,6 +42,7 @@ export const StyledPage = styled.div`
   background-size: cover;
 
   .logo-wrapper {
+    max-width: 386px;
     display: block;
     padding-bottom: 64px;
   }
@@ -167,6 +168,7 @@ export const StyledBody = styled.div`
     align-items: center;
     justify-content: center;
     padding-bottom: 64px;
+    max-width: 386px;
   }
 
   .password-field-wrapper {

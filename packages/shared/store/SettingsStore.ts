@@ -938,6 +938,8 @@ class SettingsStore {
     this.greetingSettings = greetingSettings;
   };
 
+  setCulture = (culture: string) => (this.culture = culture);
+
   getSettings = async () => {
     const settings: Nullable<TSettings> = await api.settings.getSettings(true);
 

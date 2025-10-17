@@ -97,10 +97,10 @@ class OformsStore {
     const userLocale = getCookie(LANGUAGE) || this.userStore.user?.cultureName;
     const convertedLocale = convertToLanguage(userLocale);
 
-    const locale = this.oformLocales?.includes(this.settingsStore.culture)
-      ? this.settingsStore.culture
-      : this.oformLocales?.includes(convertedLocale)
-        ? convertedLocale
+    const locale = this.oformLocales?.includes(convertedLocale)
+      ? convertedLocale
+      : this.oformLocales?.includes(this.settingsStore.culture)
+        ? this.settingsStore.culture
         : "en";
 
     return locale;

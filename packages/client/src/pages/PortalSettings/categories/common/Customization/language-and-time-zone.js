@@ -49,7 +49,6 @@ import useCommon from "../useCommon";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 import BetaBadge from "../../../../../components/BetaBadgeWrapper";
-import { getSettings } from "@docspace/shared/api/settings";
 
 const mapTimezonesToArray = (timezones) => {
   return timezones.map((timezone) => {
@@ -415,7 +414,7 @@ const LanguageAndTimeZoneComponent = (props) => {
       .then(() => {
         if (!user.cultureName && lng !== state.language.key)
           window.location.reload();
-        else getSettings();
+        else settingsStore.setCulture(state.language.key);
       })
       .catch((error) => toastr.error(error))
       .finally(() => setState((val) => ({ ...val, isLoading: false })));

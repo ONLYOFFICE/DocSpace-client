@@ -3,7 +3,7 @@
   "content": "Sign in with Facebook",
   "content_en_sha1_hash": "fbd1e9ae71740f8ee4b988eca5c601f8a0636814",
   "created_at": "2025-05-19T21:30:48.753Z",
-  "updated_at": "2025-10-14T06:36:45.020Z",
+  "updated_at": "2025-10-17T14:43:53.736Z",
   "comment": {
     "text": "Signs in a social media authentication process, typically appearing on buttons or dialogs to confirm selection of Facebook as an account provider.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 428,
+      "line_number": 429,
       "context": "? t(\"Common:SignUpWithGoogle\")\n : t(\"Common:SignInWithGoogle\");\n case \"facebook\":\n return signUp\n ? t(\"Common:SignUpWithFacebook\")\n : t(\"Common:SignInWithFacebook\");\n case \"twitter\":\n return signUp\n ? t(\"Common:SignUpWithTwitter\")\n : t(\"Common:SignInWithTwitter\");\n case \"linkedin\":",
       "module": "/packages/shared"
     }

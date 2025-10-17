@@ -3,11 +3,11 @@
   "content": "Shared files & folders",
   "content_en_sha1_hash": "8f7bbcd43045b1dcfd3143add155f7fc1d90d5ba",
   "created_at": "2025-10-03T10:07:00.010Z",
-  "updated_at": "2025-10-03T10:07:11.711Z",
+  "updated_at": "2025-10-17T14:44:26.440Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key represents the label for details related to shared files and folders during data export. It appears within data export configurations, likely in a section detailing shared content. Translators should ensure this accurately conveys the scope of files being exported.",
+    "is_auto": true,
+    "updated_at": "2025-10-17T14:44:26.440Z"
   },
   "usage": [
     {

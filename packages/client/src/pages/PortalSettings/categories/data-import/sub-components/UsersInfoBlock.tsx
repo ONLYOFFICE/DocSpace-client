@@ -35,7 +35,7 @@ const UsersInfoBlock = ({ selectedUsers, totalUsers }: UsersInfoBlockProps) => {
     <StyledInfoBlock>
       <div className="info-block-wrapper">
         <Text className="selected-users-count" truncate>
-          {t("Settings:SelectedUsersCounter", {
+          {t("SelectedUsersCounter", {
             selectedUsers,
             totalUsers,
           })}

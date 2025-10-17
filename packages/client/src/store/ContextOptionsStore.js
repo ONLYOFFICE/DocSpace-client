@@ -1011,41 +1011,54 @@ class ContextOptionsStore {
 
     if (enablePlugins && this.pluginStore.contextMenuItemsList) {
       this.pluginStore.contextMenuItemsList.forEach((option) => {
-        if (contextOptions.includes(option.key)) {
-          const value = option.value;
+        // Helper function to recursively process context menu items
+        const processOptionValue = (value) => {
+          if (contextOptions.includes(value.key)) {
+            const onClick = async () => {
+              if (value.withActiveItem) {
+                const { setActiveFiles } = this.filesStore;
 
-          const onClick = async () => {
-            if (value.withActiveItem) {
-              const { setActiveFiles } = this.filesStore;
+                setActiveFiles([item.id]);
 
-              setActiveFiles([item.id]);
+                await value.onClick(item.id);
 
-              await value.onClick(item.id);
+                setActiveFiles([]);
+              } else {
+                value.onClick(item.id);
+              }
+            };
 
-              setActiveFiles([]);
-            } else {
-              value.onClick(item.id);
-            }
-          };
-
-          if (value.fileExt) {
-            if (value.fileExt.includes(item.fileExst)) {
-              pluginItems.push({
-                key: option.key,
-                label: value.label,
-                icon: value.icon,
-                onClick,
-              });
-            }
-          } else {
-            pluginItems.push({
-              key: option.key,
+            const processedOptionValue = {
+              key: value.key,
+              id: value.key,
               label: value.label,
               icon: value.icon,
               onClick,
-            });
+            };
+
+            const processedItems = [];
+            // Recursively process nested items if they exist
+            if (value.items && value.items.length > 0) {
+              value.items.forEach((nestedItem) => {
+                const processedItem = processOptionValue(nestedItem);
+                processedItem && processedItems.push(processedItem);
+              });
+
+              if (processedItems.length > 0) {
+                processedOptionValue.items = processedItems;
+              } else {
+                // If we have no processed items, we dont render this option
+                return null;
+              }
+            }
+
+            return processedOptionValue;
           }
-        }
+        };
+
+        const value = processOptionValue(option.value);
+
+        value && pluginItems.push(value);
       });
     }
 
@@ -2347,15 +2360,15 @@ class ContextOptionsStore {
 
     if (pluginItems.length > 0) {
       if (pluginItems.length === 1) {
-        pluginItems.forEach((plugin) => {
-          options.splice(1, 0, {
-            id: `option_${plugin.key}`,
-            key: plugin.key,
-            label: plugin.label,
-            icon: plugin.icon,
-            disabled: false,
-            onClick: plugin.onClick,
-          });
+        const plugin = pluginItems[0];
+        options.splice(1, 0, {
+          id: `option_${plugin.key}`,
+          key: plugin.key,
+          label: plugin.label,
+          icon: plugin.icon,
+          disabled: false,
+          onClick: plugin.onClick,
+          items: plugin.items,
         });
       } else {
         options.splice(1, 0, {
@@ -2364,7 +2377,6 @@ class ContextOptionsStore {
           label: t("Common:Actions"),
           icon: PluginActionsSvgUrl,
           disabled: false,
-
           onLoad: () => this.onLoadPlugins(item),
         });
       }

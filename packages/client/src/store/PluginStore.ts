@@ -46,6 +46,7 @@ import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
 import {
   IContextMenuItem,
+  IContextMenuItemValidation,
   IEventListenerItem,
   IFileItem,
   IInfoPanelItem,
@@ -564,35 +565,28 @@ class PluginStore {
     return currentDeviceType as PluginDevices;
   };
 
-  validateContextMenuItem = (
+  getValidContextMenuItemKeys = (
     item: IContextMenuItem,
-    ctx: {
-      type?: PluginFileType;
-      fileExst?: string;
-      userRole?: PluginUsersType;
-      device?: PluginDevices;
-      security?: TRoomSecurity | TFolderSecurity;
-      itemSecurity?: TFileSecurity | TRoomSecurity | TFolderSecurity;
-    },
+    ctx: IContextMenuItemValidation,
   ) => {
+    const keys: string[] = [];
     const { type, fileExst, userRole, device, security, itemSecurity } = ctx;
 
-    if (type && item.fileType && !item.fileType.includes(type)) return false;
+    if (type && item.fileType && !item.fileType.includes(type)) return;
 
-    if (fileExst && item.fileExt && !item.fileExt.includes(fileExst))
-      return false;
+    if (fileExst && item.fileExt && !item.fileExt.includes(fileExst)) return;
 
     if (userRole && item.usersTypes && !item.usersTypes.includes(userRole))
-      return false;
+      return;
 
-    if (device && item.devices && !item.devices.includes(device)) return false;
+    if (device && item.devices && !item.devices.includes(device)) return;
 
     if (
       security &&
       item.security &&
       !item.security.every((key) => security[key as keyof typeof security])
     )
-      return false;
+      return;
 
     if (
       itemSecurity &&
@@ -601,9 +595,23 @@ class PluginStore {
         (key) => itemSecurity[key as keyof typeof itemSecurity],
       )
     )
-      return false;
+      return;
 
-    return true;
+    if (item.items && item.items.length > 0) {
+      item.items.forEach((subItem) => {
+        const validContextMenuItemKeys = this.getValidContextMenuItemKeys(
+          subItem,
+          ctx,
+        );
+
+        validContextMenuItemKeys &&
+          keys.push(item.key, ...validContextMenuItemKeys);
+      });
+    } else {
+      keys.push(item.key);
+    }
+
+    return Array.from(new Set(keys));
   };
 
   getContextMenuKeysByType = (
@@ -612,7 +620,7 @@ class PluginStore {
     security: TRoomSecurity | TFolderSecurity,
     itemSecurity: TFileSecurity | TRoomSecurity | TFolderSecurity,
   ) => {
-    if (!this.contextMenuItems) return;
+    if (this.contextMenuItems.size === 0) return;
 
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
@@ -623,7 +631,7 @@ class PluginStore {
     switch (type) {
       case PluginFileType.Files:
         items.forEach((item) => {
-          const isValid = this.validateContextMenuItem(item, {
+          const validKeys = this.getValidContextMenuItemKeys(item, {
             type,
             fileExst,
             userRole,
@@ -632,13 +640,13 @@ class PluginStore {
             itemSecurity,
           });
 
-          if (isValid) keys.push(item.key);
+          if (validKeys) keys.push(...validKeys);
         });
 
         break;
       case PluginFileType.Folders:
         items.forEach((item) => {
-          const isValid = this.validateContextMenuItem(item, {
+          const validKeys = this.getValidContextMenuItemKeys(item, {
             type,
             userRole,
             device,
@@ -646,12 +654,12 @@ class PluginStore {
             itemSecurity,
           });
 
-          if (isValid) keys.push(item.key);
+          if (validKeys) keys.push(...validKeys);
         });
         break;
       case PluginFileType.Rooms:
         items.forEach((item) => {
-          const isValid = this.validateContextMenuItem(item, {
+          const validKeys = this.getValidContextMenuItemKeys(item, {
             type,
             userRole,
             device,
@@ -659,12 +667,12 @@ class PluginStore {
             itemSecurity,
           });
 
-          if (isValid) keys.push(item.key);
+          if (validKeys) keys.push(...validKeys);
         });
         break;
       case PluginFileType.Image:
         items.forEach((item) => {
-          const isValid = this.validateContextMenuItem(item, {
+          const validKeys = this.getValidContextMenuItemKeys(item, {
             type,
             userRole,
             device,
@@ -673,12 +681,12 @@ class PluginStore {
             itemSecurity,
           });
 
-          if (isValid) keys.push(item.key);
+          if (validKeys) keys.push(...validKeys);
         });
         break;
       case PluginFileType.Video:
         items.forEach((item) => {
-          const isValid = this.validateContextMenuItem(item, {
+          const validKeys = this.getValidContextMenuItemKeys(item, {
             type,
             userRole,
             device,
@@ -686,7 +694,7 @@ class PluginStore {
             itemSecurity,
           });
 
-          if (isValid) keys.push(item.key);
+          if (validKeys) keys.push(...validKeys);
         });
         break;
       default:
@@ -707,9 +715,13 @@ class PluginStore {
 
     if (!items) return;
 
-    Array.from(items).forEach(([key, value]: [string, IContextMenuItem]) => {
+    const maxDepth = 2;
+    let currentDepth = 1;
+
+    // Helper function to recursively process context menu items
+    const processContextMenuItem = (value: IContextMenuItem) => {
       const onClick = async (fileId: number) => {
-        if (!value.onClick) return;
+        if (!value.onClick || value.items) return;
 
         const message = await value.onClick(fileId);
 
@@ -734,14 +746,32 @@ class PluginStore {
         });
       };
 
-      this.contextMenuItems.set(key, {
-        ...value,
+      const { items, ...rest } = value;
+
+      // Create processed result object
+      const processedItem: IContextMenuItem = {
+        ...rest,
         onClick,
-
         pluginName: plugin.name,
-
         icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
-      });
+      };
+
+      // Recursively process nested items if they exist
+      if (items && items.length > 0 && currentDepth < maxDepth) {
+        processedItem.items = items.map((nestedItem) => {
+          return processContextMenuItem(nestedItem);
+        });
+        currentDepth += 1;
+      }
+
+      return processedItem;
+    };
+
+    // Process all top-level items
+    Array.from(items).forEach(([key, value]: [string, IContextMenuItem]) => {
+      const contextMenuItem = processContextMenuItem(value);
+      this.contextMenuItems.set(key, contextMenuItem);
+      currentDepth = 1;
     });
   };
 
@@ -1205,6 +1235,7 @@ class PluginStore {
   }
 
   get contextMenuItemsList() {
+    console.log(this.contextMenuItems);
     const items: { key: string; value: IContextMenuItem }[] = Array.from(
       this.contextMenuItems,
       ([key, value]) => {

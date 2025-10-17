@@ -55,14 +55,14 @@ const ToggleBlock: FC<PropsWithChildren<ToggleBlockProps>> = ({
             {headerText}
           </Text>
           {withToggle ? (
-            <div id={tooltipId}>
+            <div className="edit-link-toggle--wrapper" id={tooltipId}>
               <ToggleButton
                 isLoading={isLoading}
                 isDisabled={isDisabled}
                 isChecked={isChecked}
                 onChange={onChange}
-                className="edit-link-toggle"
                 dataTestId={dataTestId}
+                className="edit-link-toggle"
               />
             </div>
           ) : null}

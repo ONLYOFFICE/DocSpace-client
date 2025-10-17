@@ -66,6 +66,7 @@
   "DataImportComplete": "Data import complete",
   "DataImportDescription": "Import data from a third party service to {{organizationName}} {{productName}}. Data import allows transferring data such as all users, their personal and shared documents.",
   "DataImportProcessing": "Processing of data import",
+  "DataImportAdminLimitExceeded": "Admin limit exceeded. To continue, please either adjust the number of admins or increase the admin limit.",
   "DeactivateOrDeletePortal": "Deactivate or delete space.",
   "DefaultSettings": "Default settings",
   "DefineQuotaPerRoom": "Define quota per room",

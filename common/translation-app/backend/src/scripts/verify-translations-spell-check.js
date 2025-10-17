@@ -21,7 +21,7 @@ const { HttpsProxyAgent } = require("https-proxy-agent");
 const MODEL = process.env.OLLAMA_SPELLCHECK_MODEL || "gemma3n:latest";
 const LANGUAGES_TO_CHECK = process.argv[2] ? process.argv[2].split(",") : null;
 const OLLAMA_TIMEOUT = parseInt(process.env.OLLAMA_TIMEOUT, 10) || 90000;
-const USE_GOOGLE_PRECHECK = process.env.USE_GOOGLE_PRECHECK !== "false"; // Default true
+const USE_GOOGLE_PRECHECK = process.env.USE_GOOGLE_PRECHECK === "true"; // Default false
 const SIMILARITY_THRESHOLD =
   parseFloat(process.env.SIMILARITY_THRESHOLD) || 0.85; // 85% similarity
 const GOOGLE_TRANSLATE_DELAY =
@@ -309,18 +309,20 @@ function shouldTryDirectConnection() {
   if (!useProxyMode) {
     return true; // Always use direct if not in proxy mode
   }
-  
+
   const now = Date.now();
   const timeSinceLastAttempt = now - lastDirectAttempt;
-  
+
   // Try direct connection every DIRECT_RETRY_INTERVAL
   if (timeSinceLastAttempt >= DIRECT_RETRY_INTERVAL) {
     lastDirectAttempt = now;
     directConnectionAttempts++;
-    console.log(`🔍 Attempting direct connection (attempt #${directConnectionAttempts})...`);
+    console.log(
+      `🔍 Attempting direct connection (attempt #${directConnectionAttempts})...`
+    );
     return true;
   }
-  
+
   return false;
 }
 
@@ -437,7 +439,7 @@ async function quickTranslationCheck(
       } else {
         triedDirect = true;
       }
-      
+
       const fetchOptions = {};
 
       if (proxyUrl) {
@@ -499,7 +501,9 @@ async function quickTranslationCheck(
       if (error.message && error.message.includes("Too Many Requests")) {
         // If we tried direct and got rate limited, stay in proxy mode
         if (triedDirect) {
-          console.log("⚠️  Direct connection still rate limited, continuing with proxies");
+          console.log(
+            "⚠️  Direct connection still rate limited, continuing with proxies"
+          );
         }
         await enableProxyMode();
         // Retry immediately with proxy
@@ -871,7 +875,8 @@ async function loadAllTranslations(projectPath, languages) {
  * @returns {Promise<Object>} Statistics
  */
 async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
-  const resuming = checkpoint.lastProject === project && checkpoint.lastMetadataFile !== null;
+  const resuming =
+    checkpoint.lastProject === project && checkpoint.lastMetadataFile !== null;
   console.log(`Verifying translations for project: ${project}`);
 
   const stats = {
@@ -964,7 +969,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
 
         for (let langIndex = 0; langIndex < languages.length; langIndex++) {
           const language = languages[langIndex];
-          
+
           // Save checkpoint when starting new language
           if (checkpoint.lastLanguage !== language) {
             checkpoint.lastProject = project;
@@ -972,7 +977,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
             checkpoint.lastLanguage = language;
             saveCheckpoint();
           }
-          
+
           try {
             const translatedContent = getTranslationContent(
               translations,
@@ -1094,6 +1099,18 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
 }
 
 /**
+ * Escape TSV field by replacing tabs and newlines
+ * @param {any} field - Field to escape
+ * @returns {string} Escaped field
+ */
+function escapeTsvField(field) {
+  if (field == null) return "";
+  const str = String(field);
+  // Replace tabs with spaces and newlines with spaces
+  return str.replace(/\t/g, " ").replace(/\n/g, " ").replace(/\r/g, "");
+}
+
+/**
  * Appends issue to TSV file
  * @param {string} tsvFilename - TSV filename
  * @param {string} project - Project name
@@ -1128,12 +1145,14 @@ function appendIssueToTSV(
   ].join("\t");
 
   fs.appendFileSync(tsvPath, row + "\n", "utf8");
-  
+
   // Update checkpoint (will be saved when language changes)
   checkpoint.lastProject = project;
   checkpoint.lastMetadataFile = metadataFile;
   checkpoint.lastLanguage = language;
-  checkpoint.processedKeys.add(`${project}:${metadataFile}:${keyPath}:${language}`);
+  checkpoint.processedKeys.add(
+    `${project}:${metadataFile}:${keyPath}:${language}`
+  );
 }
 
 /**
@@ -1169,7 +1188,11 @@ async function verifyAllTranslationsSpellCheck() {
   console.log("BLACKLISTED_PROXIES: ", proxyBlacklist.size);
   console.log("CHECKPOINT_FILE: ", CHECKPOINT_FILE);
   console.log("RESUMING: ", resuming ? "yes" : "no");
-  console.log("DIRECT_RETRY_INTERVAL: ", DIRECT_RETRY_INTERVAL / 1000, "seconds");
+  console.log(
+    "DIRECT_RETRY_INTERVAL: ",
+    DIRECT_RETRY_INTERVAL / 1000,
+    "seconds"
+  );
 
   const ollamaRunning = await isOllamaRunning();
   if (!ollamaRunning) {
@@ -1183,13 +1206,16 @@ async function verifyAllTranslationsSpellCheck() {
     tsvFilename = checkpoint.tsvFilename;
     console.log(` Resuming with existing TSV file: ${tsvFilename}`);
   } else {
-    const timestamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, -5);
+    const timestamp = new Date()
+      .toISOString()
+      .replace(/[:.]/g, "-")
+      .slice(0, -5);
     tsvFilename = `spell-check-issues-${timestamp}.tsv`;
     checkpoint.tsvFilename = tsvFilename;
     saveCheckpoint();
   }
   const tsvPath = path.join(appRootPath, tsvFilename);
-  
+
   // Only write header if file doesn't exist (new run)
   if (!fs.existsSync(tsvPath)) {
     const tsvHeader =
@@ -1353,7 +1379,9 @@ verifyAllTranslationsSpellCheck()
   .catch((error) => {
     console.error("\n=== Error During Verification ===");
     console.error(error);
-    console.log("\n Checkpoint saved. You can resume by running the script again.");
+    console.log(
+      "\n Checkpoint saved. You can resume by running the script again."
+    );
     saveCheckpoint();
     process.exit(1);
   });

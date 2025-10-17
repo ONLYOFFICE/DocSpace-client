@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "Podani argument je bil izven obsega veljavnih vrednosti.",
   "ErrorOccuredDownloadLog": "Med uvozom podatkov je prišlo do napak. Prenesite dnevnik, da jih preverite.",
   "ErrorsWereFound": "Najdenih je bilo {{errors}} napak",
-  "FolderToRoomImportNote": "Deljene mape bodo uvožene v razdelek {{sectionName}} kot sobe z uporabniki, ki so prejeli dostop. Upoštevajte: med uvoženjem lahko izgubite nekatere pravice dostopa.",
   "GoogleDriveFiles": "Google Drive datoteke",
   "HexCode": "Hex koda",
   "Import": "Uvoz",

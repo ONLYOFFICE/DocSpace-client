@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "නිරූපිත විස්තාරය වලංගු අගයන් පරාසයෙන් පිටත වේ.",
   "ErrorOccuredDownloadLog": "දත්ත ආනයනය අතරතුර දෝෂ සිදු විය. ඒවා පරීක්ෂා කිරීමට ලොග්ගය බාගත කරන්න.",
   "ErrorsWereFound": "දෝෂ {{errors}} ක් හමු විය",
-  "FolderToRoomImportNote": "බෙදාගත් ෆෝල්ඩර {{sectionName}} කොටසට ප්‍රවේශය ලබා දුන් පරිශීලකයින් සිටින කාමර ලෙස ආයාත කරනු ලැබේ. කරුණාකර සටහන් කර ගන්න: ආයාත කිරීමේදී සමහර ප්‍රවේශ අයිතිවාසිකම් අහිමි විය හැකිය.",
   "GoogleDriveFiles": "Google Drive හි ගොනු",
   "HexCode": "Hex කේතය",
   "Import": "ආයාත කරන්න",

@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "L'argument spécifié était en dehors de la plage des valeurs valides.",
   "ErrorOccuredDownloadLog": "Les erreurs se sont produites lors de l’importation des données. Téléchargez le journal pour les vérifier.",
   "ErrorsWereFound": "{{errors}} erreurs ont été détectées",
-  "FolderToRoomImportNote": "Les dossiers partagés seront importés dans la section {{sectionName}} en tant que salles avec les utilisateurs auxquels l'accès a été accordé. Veuillez noter : certains droits d'accès peuvent être perdus lors de l'importation",
   "GoogleDriveFiles": "Fichiers de Google Drive",
   "HexCode": "Code hexadécimal ",
   "Import": "Importer",

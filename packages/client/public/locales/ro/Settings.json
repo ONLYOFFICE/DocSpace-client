@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "Valoarea introdusă se află în afara intervalului de valori permis.",
   "ErrorOccuredDownloadLog": "Au intervenit erori în timpul importului de date. Descărcați jurnalul de activități pentru a le verifica.",
   "ErrorsWereFound": "{{errors}} de erori au fost găsite",
-  "FolderToRoomImportNote": "Folderele partajate vor fi importate în secțiunea {{sectionName}} ca și sălile cu utilizatorii cărora li s-a acordat accesul. Rețineți: este posibil ca unele drepturi de acces să se piardă în timpul importului",
   "GoogleDriveFiles": "Fișiere din Google Drive",
   "HexCode": "Cod hexa",
   "Import": "Import",

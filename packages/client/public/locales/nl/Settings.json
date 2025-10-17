@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "Het opgegeven argument lag buiten het bereik van geldige waarden.",
   "ErrorOccuredDownloadLog": "Er zijn fouten opgetreden tijdens het importeren van gegevens. Download het logbestand om dit te controleren.",
   "ErrorsWereFound": "{{errors}} fouten gevonden",
-  "FolderToRoomImportNote": "Gedeelde mappen worden geïmporteerd in de sectie {{sectionName}} als ruimtes met gebruikers die toegang hadden. Let op: sommige toegangsrechten kunnen verloren gaan tijdens de import.",
   "GoogleDriveFiles": "Bestanden op Google Drive",
   "HexCode": "Hexcode",
   "Import": "Import",

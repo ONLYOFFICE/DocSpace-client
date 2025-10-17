@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "指定された引数が有効な値の範囲外でした。",
   "ErrorOccuredDownloadLog": "データのインポート中にエラーが発生しました。ログをダウンロードして確認してください。",
   "ErrorsWereFound": "{{errors}} エラーが見つかりました",
-  "FolderToRoomImportNote": "共有フォルダは、アクセス権を付与されたユーザーと共に、{{sectionName}}セクションにルームとしてインポートされます。ご注意ください：インポート中に一部のアクセス権が失われる可能性があります。",
   "GoogleDriveFiles": "Googleドライブのファイル",
   "HexCode": "HEXコード",
   "Import": "インポート",

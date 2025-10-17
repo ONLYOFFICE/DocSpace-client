@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "Zadaný argument bol mimo rozsahu platných hodnôt.",
   "ErrorOccuredDownloadLog": "Počas importu údajov sa vyskytli chyby. Stiahnite si protokol, aby ste ich skontrolovali.",
   "ErrorsWereFound": "{{errors}} chýb nájdených",
-  "FolderToRoomImportNote": "Zdieľané priečinky budú importované do sekcie {{sectionName}} ako miestnosti s používateľmi, ktorým bol prístup povolený. Upozorňujeme, že pri importe sa môžu stratiť niektoré prístupové práva.",
   "GoogleDriveFiles": "Súbory Google Disk",
   "HexCode": "Hex kód",
   "Import": "Importovať",

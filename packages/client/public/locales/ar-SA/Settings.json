@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "الحجة المحددة كانت خارج نطاق القيم المتاحة.",
   "ErrorOccuredDownloadLog": "حدثت أخطاء أثناء استيراد البيانات. قم بتنزيل السجل للتحقق منها.",
   "ErrorsWereFound": "تم العثور على أخطاء {{errors}}",
-  "FolderToRoomImportNote": "سيتم استيراد المجلدات المشتركة إلى قسم {{sectionName}} كغرف مع المستخدمين الذين تم منحهم حق الوصول. يرجى ملاحظة: قد يتم فقدان بعض صلاحيات الوصول أثناء الاستيراد",
   "GoogleDriveFiles": "ملفات  Google Drive",
   "HexCode": "رمز سداسي عشري",
   "Import": "استيراد",

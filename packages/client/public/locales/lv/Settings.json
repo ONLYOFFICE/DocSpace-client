@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "Norādītais arguments bija ārpus derīgo vērtību diapazona.",
   "ErrorOccuredDownloadLog": "Datu importēšanas laikā radās kļūdas. Lejupielādējiet žurnālu, lai tos pārbaudītu.",
   "ErrorsWereFound": "tika atrasta (-s){{errors}} kļūda (-s)",
-  "FolderToRoomImportNote": "Kopīgās mapes tiks importētas {{sectionName}} sadaļā kā telpas ar lietotājiem, kuriem tika piešķirtas piekļuves tiesības. Lūdzu, ņemiet vērā: importa laikā daži piekļuves tiesību līmeņi var tikt zaudēti.",
   "GoogleDriveFiles": "Google Drive faili",
   "HexCode": "Heksadecimālais kods",
   "Import": "Importēt",

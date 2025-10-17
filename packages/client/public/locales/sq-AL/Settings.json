@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "Argumenti i specifikuar ishte jashtë gamës së vlerave të vlefshme.",
   "ErrorOccuredDownloadLog": "Ndodhën gabime gjatë importimit të të dhënave. Shkarkoni regjistrin për t'i kontrolluar ato.",
   "ErrorsWereFound": "{{errors}} janë gjendur gabime",
-  "FolderToRoomImportNote": "Dosjet e ndara do të importohen në seksionin {{sectionName}} si dhoma me përdorues që kishin akses. Shënim: disa të drejta aksesi mund të humbasin gjatë importit.",
   "GoogleDriveFiles": "Skedarët e Google Drive",
   "HexCode": "Kodi Hex",
   "Import": "Import",

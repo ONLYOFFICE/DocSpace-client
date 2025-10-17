@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "Belirtilen bağımsız değişken geçerli değer aralığının dışındaydı.",
   "ErrorOccuredDownloadLog": "Veri içe aktarma sırasında hatalar oluştu. Kontrol etmek için günlüğü indirin.",
   "ErrorsWereFound": "{{errors}} hata bulundu",
-  "FolderToRoomImportNote": "Paylaşılan klasörler, erişim izni verilen kullanıcılarla birlikte {{sectionName}} bölümüne oda olarak aktarılacaktır. Lütfen dikkat: bazı erişim hakları aktarım sırasında kaybolabilir.",
   "GoogleDriveFiles": "Google Drive Dosyaları",
   "HexCode": "Onaltılık kod",
   "Import": "İçe aktar",

@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "지정된 인수가 유효한 값의 범위를 벗어났습니다.",
   "ErrorOccuredDownloadLog": "데이터를 가져오기하는 동안 오류가 발생했습니다. 로그를 다운로드하여 확인하세요.",
   "ErrorsWereFound": "{{errors}}개의 오류가 발견되었습니다",
-  "FolderToRoomImportNote": "공유 폴더는 {{sectionName}} 섹션으로 가져오며, 접근 권한이 부여된 사용자를 포함한 방으로 생성됩니다. 참고: 일부 접근 권한은 가져오기 과정에서 손실될 수 있습니다.",
   "GoogleDriveFiles": "Google Drive의 파일",
   "HexCode": "헥스 코드",
   "Import": "가져오기",

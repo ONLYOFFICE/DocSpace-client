@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "Göstərilən arqument etibarlı dəyər diapazonundan kənarda idi.",
   "ErrorOccuredDownloadLog": "Məlumatı idxal edərkən xətalar baş verdi. Onları yoxlamaq üçün jurnalı endirin.",
   "ErrorsWereFound": "{{errors}} xətalar tapıldı",
-  "FolderToRoomImportNote": "Paylaşılmış qovluqlar, {{sectionName}} bölməsinə, daxil edilmiş istifadəçilərə icazə verilmiş otaqlar kimi idxal ediləcəkdir. Xahiş edirik: idxal zamanı bəzi icazə hüquqları itirilə bilər.",
   "GoogleDriveFiles": "Google Diskin Faylları",
   "HexCode": "Hex kodu",
   "Import": "İdxal edin",

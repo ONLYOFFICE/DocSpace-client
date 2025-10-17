@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "Das angegebene Argument lag außerhalb des gültigen Wertebereichs.",
   "ErrorOccuredDownloadLog": "Beim Datenimport sind Fehler aufgetreten. Laden Sie das Protokoll herunter, um sie zu überprüfen.",
   "ErrorsWereFound": "Es wurden {{errors}} Fehler gefunden",
-  "FolderToRoomImportNote": "Freigegebene Ordner werden als Räume mit Benutzern, denen Zugriff gewährt wurde, in den Bereich {{sectionName}} importiert. Bitte beachten Sie: Beim Import können einige Zugriffsrechte verloren gehen.",
   "GoogleDriveFiles": "Dateien von Google Drive",
   "HexCode": "Hex-Code",
   "Import": "Importieren",

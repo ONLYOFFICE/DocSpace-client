@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "Đối số được chỉ định nằm ngoài phạm vi giá trị hợp lệ.",
   "ErrorOccuredDownloadLog": "Đã xảy ra lỗi trong quá trình nhập dữ liệu. Hãy tải nhật ký xuống để kiểm tra.",
   "ErrorsWereFound": "đã tìm thấy {{errors}} lỗi",
-  "FolderToRoomImportNote": "Các thư mục dùng chung sẽ được nhập vào phần {{sectionName}} dưới dạng các phòng với những người dùng đã được cấp quyền truy cập. Xin lưu ý: một số quyền truy cập có thể bị mất trong quá trình nhập.",
   "GoogleDriveFiles": "Tập tin Google Drive",
   "HexCode": "Mã Hex",
   "Import": "Nhập",

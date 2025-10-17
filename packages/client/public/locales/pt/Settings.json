@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "O argumento especificado estava fora do intervalo de valores válidos.",
   "ErrorOccuredDownloadLog": "Ocorreram erros durante a importação de dados. Baixe o log para verificá-los.",
   "ErrorsWereFound": "{{errors}} erros foram encontrados",
-  "FolderToRoomImportNote": "As pastas compartilhadas serão importadas para a seção {{sectionName}} como salas com os usuários que receberam acesso. Observe: alguns direitos de acesso podem ser perdidos durante a importação.",
   "GoogleDriveFiles": "Arquivos do Google Drive",
   "HexCode": "Código hexadecimal",
   "Import": "Importar",

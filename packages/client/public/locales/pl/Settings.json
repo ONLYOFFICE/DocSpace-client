@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "Wybrany argument znajdował się poza zakresem prawidłowych wartości.",
   "ErrorOccuredDownloadLog": "W trakcie importowania danych wystąpiły błędy. Pobierz dziennik, aby je sprawdzić.",
   "ErrorsWereFound": "Znaleziono {{errors}} błędy(-ów)",
-  "FolderToRoomImportNote": "Wspólne foldery zostaną zaimportowane do sekcji {{sectionName}} jako pokoje z użytkownikami, którym przyznano dostęp. Należy pamiętać: niektóre uprawnienia dostępu mogą zostać utracone podczas importu.",
   "GoogleDriveFiles": "Pliki na Dysku Google",
   "HexCode": "Kod szesnastkowy",
   "Import": "Importuj",

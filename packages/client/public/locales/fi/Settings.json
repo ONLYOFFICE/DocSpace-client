@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "Määritetty argumentti oli kelvollisten arvojen ulkopuolella.",
   "ErrorOccuredDownloadLog": "Tietojen tuonnin aikana tapahtui virheitä. Lataa loki tarkistaaksesi ne.",
   "ErrorsWereFound": "{{errors}} virhettä löytyi",
-  "FolderToRoomImportNote": "Jaetut kansiot tuodaan {{sectionName}}-osioon huoneina käyttäjille, joille on myönnetty käyttöoikeudet. Huomioithan: osa käyttöoikeuksista voi kadota tuonnin yhteydessä.",
   "GoogleDriveFiles": "Google Driven tiedostot",
   "HexCode": "Hex-koodi",
   "Import": "Tuonti",

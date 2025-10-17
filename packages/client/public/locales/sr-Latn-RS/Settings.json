@@ -112,7 +112,6 @@
   "ErrorMessageBruteForceProtection": "Specificirani argument je izvan opsega validnih vrednosti.",
   "ErrorOccuredDownloadLog": "Došlo je do grešaka prilikom uvoza podataka. Preuzmite zapisnik da biste ih proverili.",
   "ErrorsWereFound": "{{errors}} greške su pronađene",
-  "FolderToRoomImportNote": "Deljeni folderi će biti uvezeni u {{sectionName}} odeljak kao sobe sa korisnicima kojima je dodeljen pristup. Napomena: neka prava pristupa mogu biti izgubljena tokom uvoza.",
   "GoogleDriveFiles": "Fajlovi na Google Drive-u",
   "HexCode": "Hex kod",
   "Import": "Uvezi",

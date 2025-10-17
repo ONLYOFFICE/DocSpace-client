@@ -234,20 +234,25 @@ export const StyledTableContainer = styled(TableContainer).attrs(
   }
 `;
 
-export const StyledInfoBlock = styled.div.attrs(injectDefaultTheme)`
+export const StyledInfoBlock = styled.div.attrs(injectDefaultTheme)<{
+  isLimitReached?: boolean;
+  isAdmins?: boolean;
+}>`
   display: flex;
+  align-items: start;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
+  margin-bottom: ${(props) => (props.isAdmins ? "20px" : "16px")};
 
   .info-block-wrapper {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+
     background: ${(props) =>
       props.theme.client.settings.migration.infoBlockBackground};
     box-sizing: border-box;
     padding: 12px 16px;
     border-radius: 6px;
-    margin-bottom: 16px;
 
     @media ${mobile} {
       width: 100%;
@@ -272,11 +277,17 @@ export const StyledInfoBlock = styled.div.attrs(injectDefaultTheme)`
         font-size: 14px;
         margin-inline-start: 4px;
         color: ${(props) =>
-          props.theme.client.settings.migration.infoBlockTextColor};
+          props.isLimitReached
+            ? props.theme.client.settings.migration.errorTextColor
+            : props.theme.client.settings.migration.infoBlockTextColor};
       }
     }
   }
 
-  .warning-text {
+  .info-error-text {
+    color: ${(props) =>
+      props.isLimitReached
+        ? props.theme.client.settings.migration.errorTextColor
+        : props.theme.client.settings.migration.infoBlockTextColor};
   }
 `;

@@ -74,7 +74,8 @@ export const createPluginFileHandlers = (
     e.currentTarget.setAttribute("download", title);
   };
 
-  newLinkProps.target = "_blank";
+  newLinkProps.href = undefined;
+  newLinkProps.to = undefined;
 
   return newLinkProps;
 };

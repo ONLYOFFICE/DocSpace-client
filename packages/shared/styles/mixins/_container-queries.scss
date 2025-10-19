@@ -26,10 +26,16 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@forward "text";
-@forward "inputs";
-@forward "icons";
-@forward "media-queries";
-@forward "container-queries";
-@forward "animations";
-@forward "direction";
+@use "../variables";
+
+@mixin mobileContainer($container-name) {
+  @container #{$container-name} (max-width: #{variables.$mobile}) {
+    @content;
+  }
+}
+
+@mixin tabletContainer($container-name) {
+  @container #{$container-name} (min-width: #{variables.$mobile + 0.1}) and (max-width: #{variables.$desktop - 0.1}) {
+    @content;
+  }
+}

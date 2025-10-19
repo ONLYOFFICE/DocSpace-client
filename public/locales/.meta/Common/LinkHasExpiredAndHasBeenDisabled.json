@@ -3,7 +3,7 @@
   "content": "The link has expired and has been disabled",
   "content_en_sha1_hash": "0d17398d6f4b329335a9bb4c55a3f6fff17c2689",
   "created_at": "2025-08-26T11:15:03.701Z",
-  "updated_at": "2025-09-23T07:24:24.405Z",
+  "updated_at": "2025-10-13T14:41:03.204Z",
   "comment": {
     "text": "This key displays a message within a dialog (likely an Edit Link Panel) to inform the user that a link has expired and is no longer functional. It indicates the link's disabled status due to expiration. Translators should ensure the message clearly conveys the link's unavailability.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 416,
+      "line_number": 411,
       "context": "return \"\";\n }\n \n if (isExpired) {\n return t(\"Common:LinkHasExpiredAndHasBeenDisabled\");\n }\n \n return expirationDate\n ? `${t(\"Common:LinkValidUntil\")}:`\n : t(\"Common:ChooseExpirationDate\");",
       "module": "/packages/shared"
     }

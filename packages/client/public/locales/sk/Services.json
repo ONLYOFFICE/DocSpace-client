@@ -1,1 +1,14 @@
-{}
+{
+  "AutomaticBackupDescription": "Nastavte si pravidelné zálohy pre nepretržité zabezpečenie dát bez manuálnych zásahov.",
+  "BackupRoomDescription": "Uložte zálohu do vybranej miestnosti alebo do sekcie {{sectionName}}. Použite existujúce miestnosti alebo vytvorte novú.",
+  "BackupServiceEnabled": "Zálohová služba bola úspešne povolená.",
+  "ConnectService": "Pripojte službu <1>tu</1>, aby ste mohli povoliť funkcie zálohovania.",
+  "ContactToPayer": "Kontaktujte platiteľa (<1>{{email}}</1>) na pripojenie záložnej služby.",
+  "DisableBackupConfirm": "Vypnutie služby Zálohovanie zabráni administrátorom {{productName}} vo vytváraní záloh. Ak je povolená automatická záloha, zostane aktívna v rámci bezplatného miesta, ale po jeho úplnom využití bude trvale deaktivovaná. Ste si istí, že chcete pokračovať?",
+  "DisableBackupConfirmWithoutQuota": "Vypnutie služby Zálohovanie zabráni administrátorom {{productName}} vo vytváraní záloh. Ak je povolená automatická záloha, bude deaktivovaná. Ste si istí, že chcete pokračovať?",
+  "EnableBackupConfirm": "Aktivácia služby Zálohovanie umožní všetkým administrátorom {{productName}} vytvárať zálohy kedykoľvek, pokiaľ bude dostatočný zostatok na peňaženke. Ste si istí, že chcete pokračovať?",
+  "FreeBackupsPerMonth": "Bezplatné zálohy: {{value}}/{{maxValue}} za aktuálny mesiac.",
+  "TemporaryDescription": "Vytvorte zálohu uloženú v sekcii „Záloha“. K stiahnutiu dostupná do 24 hodín po vytvorení.",
+  "ThirdPartyResourceDescription": "Pripojte sa a zálohujte dáta do cloudových účtov ako Dropbox, Box, OneDrive alebo Google Drive.",
+  "ThirdPartyStorageDescription": "Používajte služby tretích strán na ukladanie záloh. Ideálne na pripojenie externých cloudových úložiskových platforiem."
+}

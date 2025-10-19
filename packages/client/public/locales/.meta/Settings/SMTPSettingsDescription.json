@@ -3,7 +3,7 @@
   "content": "The SMTP settings are needed to set up an email account which will be used to send notifications from the portal using your own SMTP server instead of the one {{organizationName}} uses. Please fill in all the fields and click the 'Save' button. You can use the 'Send Test Mail' button to check if all the settings you entered are correct and work as supposed.",
   "content_en_sha1_hash": "4bf36a3101ed85c6f1e5966715d026a0cf242ce9",
   "created_at": "2025-05-19T21:30:52.753Z",
-  "updated_at": "2025-09-17T13:43:01.840Z",
+  "updated_at": "2025-09-29T11:28:56.225Z",
   "comment": {
     "text": "\"This translation key is used to describe the SMTP settings section, explaining its purpose and guiding users on how to set up their own email account for sending notifications. It appears in a UI component where users configure email settings.\"",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/index.js",
-      "line_number": 64,
-      "context": "return (\n <StyledComponent withoutExternalLink={!integrationSettingsUrl}>\n <div className=\"smtp-settings_main-title\">\n <Text className=\"smtp-settings_description\">\n {t(\"Settings:SMTPSettingsDescription\", {\n organizationName: logoText,\n })}\n </Text>\n {integrationSettingsUrl ? (\n <Link",
+      "line_number": 60,
+      "context": "return (\n <StyledComponent withoutExternalLink={!smtpUrl}>\n <div className=\"smtp-settings_main-title\">\n <Text className=\"smtp-settings_description\">\n {t(\"Settings:SMTPSettingsDescription\", {\n organizationName: logoText,\n })}\n </Text>\n {smtpUrl ? (\n <Link",
       "module": "/packages/client"
     }
   ],

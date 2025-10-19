@@ -26,12 +26,12 @@
 
 import { Navigate } from "react-router";
 
-import { validatePublicRoomKey } from "@docspace/shared/api/rooms";
-import { getSettingsFiles } from "@docspace/shared/api/files";
 import componentLoader from "@docspace/shared/utils/component-loader";
 import Error404 from "@docspace/shared/components/errors/Error404";
+import { SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 
 import { ViewComponent } from "SRC_DIR/pages/Home/View";
+import { publicPreviewLoader } from "SRC_DIR/pages/PublicPreview/PublicPreview.helpers";
 
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
@@ -136,7 +136,7 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "shared-with-me",
+            path: SHARED_WITH_ME_PATH,
             element: (
               <PrivateRoute>
                 <ViewComponent />
@@ -144,7 +144,7 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "shared-with-me/filter",
+            path: SHARED_WITH_ME_PATH + "/filter",
             element: (
               <PrivateRoute>
                 <ViewComponent />
@@ -325,17 +325,7 @@ const ClientRoutes = [
 
       return { Component };
     },
-    loader: async ({ request }) => {
-      const searchParams = new URL(request.url).searchParams;
-      const key = searchParams.get("share");
-
-      const [validateData, settings] = await Promise.all([
-        validatePublicRoomKey(key),
-        getSettingsFiles(),
-      ]);
-
-      return { validateData, key, settings };
-    },
+    loader: publicPreviewLoader,
   },
   {
     path: "/rooms/share",

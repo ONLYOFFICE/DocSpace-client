@@ -23,5 +23,6 @@
   "ThirdPartyInfo": "第三者機関情報の変更",
   "ThirdPartyTitle": "サードパーティのサービス",
   "TitleShowActions": "ファイルアクションを表示",
-  "TitleShowFolderActions": "フォルダアクションを表示"
+  "TitleShowFolderActions": "フォルダアクションを表示",
+  "TrashItemsDeleteSuccess": "選択した要素は{{sectionName}}から正常に削除されました"
 }

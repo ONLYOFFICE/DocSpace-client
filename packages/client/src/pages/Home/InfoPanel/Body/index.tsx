@@ -87,11 +87,13 @@ export default inject(
     avatarEditorDialogStore,
     dialogsStore,
     peopleStore,
+    filesActionsStore,
   }: TStore) => {
     const { contactsTab } = peopleStore.usersStore;
     const { roomsView, fileView, getIsFiles, getIsRooms, setView } =
       infoPanelStore;
 
+    const { isExpiredLinkAsync } = filesActionsStore;
     const { editRoomDialogProps, createRoomDialogProps, templateEventVisible } =
       dialogsStore;
 
@@ -124,6 +126,7 @@ export default inject(
       onSaveRoomLogo,
       onChangeFile,
       setImage,
+      checkIsExpiredLinkAsync: isExpiredLinkAsync,
     };
   },
 )(observer(InfoPanelBodyContent));

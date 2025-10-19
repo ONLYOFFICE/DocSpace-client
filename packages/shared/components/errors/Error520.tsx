@@ -101,17 +101,19 @@ const Error520 = ({
         isPrimaryButton={false}
         headerText={t("SomethingWentWrong")}
         customizedBodyText={errorLog?.message ?? customErrorLog?.message}
-      />
-      <Link
-        isHovered
-        className="link"
-        fontWeight={600}
-        type={LinkType.action}
-        onClick={onReloadClick}
-        color={currentColorScheme?.main?.accent}
       >
-        {t("ReloadPage")}
-      </Link>
+        <Link
+          isHovered
+          className="link"
+          fontWeight={600}
+          type={LinkType.action}
+          onClick={onReloadClick}
+          color={currentColorScheme?.main?.accent}
+        >
+          {t("ReloadPage")}
+        </Link>
+      </ErrorContainer>
+
       <ReportDialog
         user={user}
         error={errorLog ?? customErrorLog}

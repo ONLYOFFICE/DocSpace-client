@@ -142,6 +142,10 @@ export type TFile = {
   originTitle?: string;
   requestToken?: string;
   isFavorite?: boolean;
+  expirationDate?: string;
+  sharedForUser?: boolean;
+  external?: boolean;
+  isLinkExpired?: boolean;
 };
 
 export type TOpenEditRequest = {
@@ -234,6 +238,10 @@ export type TFolder = {
   shareSettings?: TShareSettings;
   availableShareRights?: TAvailableShareRights;
   isFavorite?: boolean;
+  expirationDate?: string;
+  sharedForUser?: boolean;
+  isLinkExpired?: boolean;
+  external?: boolean;
 };
 
 export type TGetFolderPath = TFolder[];
@@ -454,6 +462,7 @@ export type TFileLink = {
   canEditAccess: boolean;
   canEditDenyDownload: boolean;
   canEditInternal: boolean;
+  canRevoke: boolean;
   canEditExpirationDate: boolean;
   isLocked: boolean;
   isOwner: boolean;

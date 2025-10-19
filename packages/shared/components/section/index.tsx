@@ -233,6 +233,8 @@ const Section = (props: SectionProps) => {
     !primaryOperationsCompleted &&
     primaryOperationsArray.some((op) => op.operation === "upload");
 
+  const isInfoVisible = canDisplay && isInfoPanelVisible;
+
   return (
     isSectionAvailable && (
       <Provider value={providerValue}>
@@ -325,7 +327,7 @@ const Section = (props: SectionProps) => {
               onOpenPanel={onOpenUploadPanel}
               mainButtonVisible={mainButtonVisible}
               showCancelButton={showCancelButton}
-              isInfoPanelVisible={isInfoPanelVisible}
+              isInfoPanelVisible={isInfoVisible}
               dropTargetFolderName={dropTargetPreview}
               isDragging={dragging}
             />

@@ -3,25 +3,13 @@
   "content": "Create",
   "content_en_sha1_hash": "6e157c5da4410b7e9de85f5c93026b9176e69064",
   "created_at": "2025-05-19T21:30:43.828Z",
-  "updated_at": "2025-09-26T15:21:06.053Z",
+  "updated_at": "2025-10-16T07:29:35.513Z",
   "comment": {
     "text": "This translation key is used to display the label \"Create\" in a button within a modal dialog. It appears as the primary action button when creating a new group and is also shown in other contexts where creation is applicable.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:36:53.944Z"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 65,
-      "context": "productName: t(\"Common:ProductName\"),\n });\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");\n \n return t(\"Common:SaveButton\");\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/GlobalEvents/sub-components/Dialog.js",
-      "line_number": 242,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"submit\"\n key=\"GlobalSendBtn\"\n label={isCreateDialog ? t(\"Common:Create\") : t(\"Common:SaveButton\")}\n size=\"normal\"\n type=\"submit\"\n scale\n primary\n isLoading={isDisabled}",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/CreateGroupDialog.tsx",
       "line_number": 185,
@@ -35,6 +23,18 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
+      "line_number": 65,
+      "context": "productName: t(\"Common:ProductName\"),\n });\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");\n \n return t(\"Common:SaveButton\");\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/GlobalEvents/sub-components/Dialog.js",
+      "line_number": 242,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"submit\"\n key=\"GlobalSendBtn\"\n label={isCreateDialog ? t(\"Common:Create\") : t(\"Common:SaveButton\")}\n size=\"normal\"\n type=\"submit\"\n scale\n primary\n isLoading={isDisabled}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhookDialog.js",
       "line_number": 281,
       "context": "<ModalDialog.Footer>\n <Footer>\n <Button\n id={isSettingsModal ? \"save-button\" : \"create-button\"}\n label={\n isSettingsModal ? t(\"Common:SaveButton\") : t(\"Common:Create\")\n }\n size=\"normal\"\n primary\n onClick={handleSubmitClick}\n isDisabled={isLoading}",
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1250,
+      "line_number": 1234,
       "context": "getFormGalleryContextOptions = (item, t, navigate) => {\n return [\n {\n key: \"create\",\n label: t(\"Common:Create\"),\n onClick: () => this.onCreateOform(navigate),\n },\n {\n key: \"template-info\",\n label: t(\"FormGallery:TemplateInfo\"),",
       "module": "/packages/client"
     },
@@ -53,6 +53,12 @@
       "module": "/packages/login"
     },
     {
+      "file_path": "/packages/management/src/dialogs/create-portal/index.tsx",
+      "line_number": 239,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n isLoading={isLoading}\n key=\"CreateButton\"\n label={t(\"Common:Create\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onHandleClick}\n />",
+      "module": "/packages/management"
+    },
+    {
       "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",
       "line_number": 41,
       "context": "if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");\n \n return t(\"Common:SaveButton\");\n };",
@@ -60,15 +66,9 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 449,
+      "line_number": 456,
       "context": "\"manual-backup_buttons\",\n )}\n >\n <Button\n id=\"create-button\"\n label={t(\"Common:Create\")}\n onClick={onMakeTemporaryBackup}\n primary\n isDisabled={mainDisabled}\n size={buttonSize}\n testId=\"create_temporary_backup_button\"",
       "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/management/src/dialogs/create-portal/index.tsx",
-      "line_number": 239,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n isLoading={isLoading}\n key=\"CreateButton\"\n label={t(\"Common:Create\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onHandleClick}\n />",
-      "module": "/packages/management"
     }
   ],
   "languages": {

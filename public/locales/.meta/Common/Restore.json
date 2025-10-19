@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-19T21:30:47.901Z",
-  "updated_at": "2025-09-26T15:21:06.050Z",
+  "updated_at": "2025-10-16T07:29:35.509Z",
   "comment": {
     "text": "The translation key \"Restore\" is used to display a button label or header in various UI elements, such as buttons and dialogs. It indicates an action of recovering or returning a file or room to its original state. This translation key appears on screens like Restore Room Dialogs where users can restore a room.",
     "is_auto": true,
@@ -11,27 +11,27 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/dialogs/RestoreRoomDialog/index.js",
+      "line_number": 99,
+      "context": "isLoading={!tReady}\n visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"Common:Restore\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{description}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/RestoreRoomDialog/index.js",
+      "line_number": 99,
+      "context": "isLoading={!tReady}\n visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"Common:Restore\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{description}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
       "line_number": 49,
       "context": "isRestore?: boolean,\n isFormRoom?: boolean,\n isThirdParty?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreTo\");\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/RestoreRoomDialog/index.js",
-      "line_number": 99,
-      "context": "isLoading={!tReady}\n visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"Common:Restore\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{description}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/RestoreRoomDialog/index.js",
-      "line_number": 99,
-      "context": "isLoading={!tReady}\n visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"Common:Restore\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{description}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 403,
-      "context": "onSaveClick={onSaveGreetingSettings}\n onCancelClick={onRestoreGreetingSettings}\n showReminder={state.showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll={state.hasScroll}\n disableRestoreToDefault={greetingSettingsIsDefault}\n additionalClassSaveButton=\"welcome-page-save\"\n additionalClassCancelButton=\"welcome-page-cancel\"",
+      "line_number": 415,
+      "context": "onSaveClick={onSaveGreetingSettings}\n onCancelClick={onRestoreGreetingSettings}\n showReminder={state.showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll={state.hasScroll}\n disableRestoreToDefault={greetingSettingsIsDefault}\n saveButtonDisabled={state.saveButtonDisabled}\n additionalClassSaveButton=\"welcome-page-save\"",
       "module": "/packages/client"
     },
     {
@@ -42,39 +42,51 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2217,
+      "line_number": 2204,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2217,
+      "line_number": 2204,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2217,
+      "line_number": 2204,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2217,
+      "line_number": 2204,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2297,
+      "line_number": 2271,
       "context": "case \"unarchive\":\n if (!this.isAvailableOption(\"unarchive\")) return null;\n return {\n id: \"menu-unarchive\",\n key: \"unarchive\",\n label: t(\"Common:Restore\"),\n iconUrl: MoveReactSvgUrl,\n onClick: () => this.archiveRooms(\"unarchive\"),\n disabled: false,\n };\n case \"change-quota\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2297,
+      "line_number": 2271,
       "context": "case \"unarchive\":\n if (!this.isAvailableOption(\"unarchive\")) return null;\n return {\n id: \"menu-unarchive\",\n key: \"unarchive\",\n label: t(\"Common:Restore\"),\n iconUrl: MoveReactSvgUrl,\n onClick: () => this.archiveRooms(\"unarchive\"),\n disabled: false,\n };\n case \"change-quota\":",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
+      "line_number": 204,
+      "context": "className={classNames(\n styles.restoreBackupWarningDescription,\n \"restore-backup_warning-description\",\n )}\n >\n {t(\"Common:RestoreBackupWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}{\" \"}\n {!standalone ? (\n <Text\n as=\"span\"",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/button-component/ButtonComponent.tsx",
+      "line_number": 159,
+      "context": "<Button\n className={classNames(\n styles.restoreBackupButton,\n \"restore-backup_button\",\n )}\n label={t(\"Common:Restore\")}\n onClick={onRestoreClick}\n primary\n isDisabled={isButtonDisabled}\n isLoading={isLoadingButton}\n size={buttonSize}",
+      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
@@ -92,18 +104,6 @@
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
       "line_number": 628,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveAction}\n onCancelClick={onRestoreDefault}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll\n hideBorder\n showReminder={!isEqualLogo}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 204,
-      "context": "className={classNames(\n styles.restoreBackupWarningDescription,\n \"restore-backup_warning-description\",\n )}\n >\n {t(\"Common:RestoreBackupWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}{\" \"}\n {!standalone ? (\n <Text\n as=\"span\"",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/button-component/ButtonComponent.tsx",
-      "line_number": 159,
-      "context": "<Button\n className={classNames(\n styles.restoreBackupButton,\n \"restore-backup_button\",\n )}\n label={t(\"Common:Restore\")}\n onClick={onRestoreClick}\n primary\n isDisabled={isButtonDisabled}\n isLoading={isLoadingButton}\n size={buttonSize}",
       "module": "/packages/shared"
     }
   ],

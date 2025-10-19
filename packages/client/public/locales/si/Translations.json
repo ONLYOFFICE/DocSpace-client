@@ -23,5 +23,6 @@
   "ThirdPartyInfo": "තෙවන පාර්ශ්වයේ තොරතුරු සංශෝධනය",
   "ThirdPartyTitle": "තෙවන පාර්ශ්ව සේවා",
   "TitleShowActions": "ගොනුවේ ක්‍රියාමාර්ග පෙන්වන්න",
-  "TitleShowFolderActions": "බහාලුමේ ක්‍රියාමාර්ග පෙන්වන්න"
+  "TitleShowFolderActions": "බහාලුමේ ක්‍රියාමාර්ග පෙන්වන්න",
+  "TrashItemsDeleteSuccess": "තෝරාගත් අංග {{sectionName}} වෙතින් සාර්ථකව මකා දමන ලදී."
 }

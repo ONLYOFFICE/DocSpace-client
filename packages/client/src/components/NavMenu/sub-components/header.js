@@ -158,7 +158,13 @@ const HeaderComponent = ({
     return () => window.removeEventListener("resize", onResize);
   }, [onResize]);
 
-  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
+  const logo = getLogoUrl(
+    WhiteLabelLogoType.LightSmall,
+    !theme.isBase,
+    false,
+    "",
+    true,
+  );
 
   return (
     <>

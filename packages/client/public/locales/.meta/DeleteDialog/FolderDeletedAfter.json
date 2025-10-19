@@ -3,7 +3,7 @@
   "content": "The folder will be permanently deleted in 30 days.",
   "content_en_sha1_hash": "bee930c857053441f9edbd43b195e83dd1fae72e",
   "created_at": "2025-09-24T13:10:15.416Z",
-  "updated_at": "2025-09-24T13:12:04.483Z",
+  "updated_at": "2025-10-01T15:20:15.666Z",
   "comment": {
     "text": "This text informs the user about the permanent deletion timeline for a folder. It appears within a dialog, likely a deletion confirmation dialog, to explain that the folder will be permanently deleted after a 30-day grace period. Translators should ensure the timeframe remains accurate and culturally appropriate.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 147,
-      "context": "<strong>{{ name: selection[0].title }}</strong>\n to Trash.\n </Trans>{\" \"}\n {!isThirdParty\n ? isFolder\n ? t(\"FolderDeletedAfter\")\n : t(\"FileDeletedAfter\")\n : null}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );",
+      "line_number": 187,
+      "context": "<strong>{{ name: selection[0]?.title }}</strong>\n to {{ trashSection: t(\"Common:TrashSection\") }}.\n </Trans>{\" \"}\n {!isThirdParty\n ? isFolder\n ? t(\"FolderDeletedAfter\")\n : t(\"FileDeletedAfter\")\n : null}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );",
       "module": "/packages/client"
     }
   ],

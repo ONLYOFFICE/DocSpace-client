@@ -40,7 +40,7 @@ import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import { getUserType } from "@docspace/shared/utils/common";
-import { LANGUAGE } from "@docspace/shared/constants";
+import { LANGUAGE, SHARED_WITH_ME_PATH } from "@docspace/shared/constants";
 
 import config from "PACKAGE_FILE";
 
@@ -328,7 +328,7 @@ class InfoPanelStore {
       pathname.indexOf("personal") !== -1 ||
       pathname.indexOf("media") !== -1 ||
       pathname.indexOf("recent") !== -1 ||
-      pathname.indexOf("shared-with-me") !== -1
+      pathname.indexOf(SHARED_WITH_ME_PATH) !== -1
     );
   };
 

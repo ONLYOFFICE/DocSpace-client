@@ -52,6 +52,7 @@ const AccessSelectorBlock: FC<AccessSelectorBlockProps> = ({
         scaledOptions
         onSelect={onSelect}
         showDisabledItems
+        isDefaultMode={false}
       />
     </div>
   );

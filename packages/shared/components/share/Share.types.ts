@@ -40,7 +40,7 @@ import type { RoomMember } from "../../api/rooms/types";
 
 export type ShareCalendarProps = {
   onDateSet: (formattedDate: moment.Moment) => void;
-  closeCalendar: (formattedDate: moment.Moment) => void;
+  closeCalendar: () => void;
   calendarRef: React.RefObject<HTMLDivElement | null>;
   locale: string;
   bodyRef?: React.RefObject<HTMLDivElement | null>;
@@ -75,7 +75,6 @@ export type LinkRowProps = {
   loadingLinks: (string | number)[];
 
   isFolder?: boolean;
-  isPublicRoom?: boolean;
 
   onCopyLink: (link: TFileLink) => void;
   getData: (link: TFileLink) => ContextMenuModel[];
@@ -103,7 +102,6 @@ export type ExpiredComboBoxProps = {
     expirationDate: moment.Moment | null,
   ) => Promise<void>;
   isDisabled?: boolean;
-  isRoomsLink?: boolean;
   removedExpiredLink: (link: TFileLink) => void;
 };
 
@@ -136,6 +134,7 @@ export type ShareProps = {
   isEditor?: boolean;
   onAddUser?: (item: TFolder | TFile) => void;
   disabledSharedUser?: boolean;
+  onClickGroup?: (group: TGroup) => void;
 };
 
 export interface LinkTitleProps {
@@ -171,6 +170,7 @@ export interface UseMembersProps {
   linksCount: number;
   onAddUser?: (item: TFolder | TFile) => void;
   disabledSharedUser?: boolean;
+  onClickGroup?: (group: TGroup) => void;
 }
 
 export interface UseShareProps {
@@ -198,6 +198,7 @@ export interface UseShareProps {
 }
 
 export type TTitleID =
+  | "owner"
   | "groups"
   | "users"
   | "guests"

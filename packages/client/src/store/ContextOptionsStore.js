@@ -1883,15 +1883,6 @@ class ContextOptionsStore {
       ...muteOptions,
       separator0,
       {
-        id: "option_submit-to-gallery",
-        key: "submit-to-gallery",
-        label: t("Common:SubmitToTemplateGallery"),
-        icon: FormFileReactSvgUrl,
-        onClick: () => this.onClickSubmitToFormGallery(item),
-        isOutsideLink: true,
-        disabled: !item.security?.SubmitToFormGallery,
-      },
-      {
         id: "option_start-filling",
         key: "start-filling",
         label: t("Common:StartFilling"),

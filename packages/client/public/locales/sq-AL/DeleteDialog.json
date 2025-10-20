@@ -11,6 +11,7 @@
   "DeleteGroupTitle": "Fshini grupin",
   "DeleteItem": "Jeni gati të zhvendosni në {{trashSection}} <strong>{{name}}</strong>.",
   "DeleteItemForever": "Jeni gati të fshini <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Ju lutem vini re se nëse i keni ndarë me dikë, ai do të bëhet i padisponueshëm.",
   "DeleteRoom": "Dhoma <strong>\"{{roomName}}\"</strong> do të fshihet përgjithmonë. Të gjitha të dhënat dhe akseset e përdoruesve do të humbasin.",
   "DeleteRoomTitle": "Dëshironi të fshini këtë dhomë?",
   "DeleteRoomWarning": "I kuptoj pasojat dhe dua të fshij dhomën",

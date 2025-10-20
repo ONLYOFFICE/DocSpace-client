@@ -3,7 +3,7 @@
   "content": "Personal files",
   "content_en_sha1_hash": "e79d8267d987d7b931ea816e2a68ba4f1a20029a",
   "created_at": "2025-05-19T21:30:52.154Z",
-  "updated_at": "2025-09-02T07:59:28.497Z",
+  "updated_at": "2025-10-17T14:43:53.500Z",
   "comment": {
     "text": "The translation key \"PersonalFiles\" is used to display the phrase \"Personal files\" in a settings section. It appears as the label of a toggle button within an import settings dialog, allowing users to select or deselect importing personal files during data import.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 141,
-      "context": "/>\n \n <ImportSection\n isChecked={importOptions.importPersonalFiles}\n onChange={(e) => onChange(e, \"importPersonalFiles\")}\n sectionName={t(\"Settings:PersonalFiles\")}\n description={t(\"Settings:ImportFilesLocation\", {\n sectionName: t(\"Common:MyDocuments\"),\n })}\n exportSection={{\n sectionName: personalExportDetails.name,",
+      "line_number": 150,
+      "context": "/>\n \n <ImportSection\n isChecked={importOptions.importPersonalFiles}\n onChange={(e) => onChange(e, \"importPersonalFiles\")}\n sectionName={t(\"Settings:PersonalFiles\")}\n description={\n <Trans\n t={t}\n i18nKey=\"ImportFilesDescription\"\n ns=\"Settings\"",
       "module": "/packages/client"
     }
   ],

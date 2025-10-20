@@ -31,16 +31,15 @@ import React, { useMemo } from "react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
-import AutomaticBackup from "@docspace/shared/pages/auto-backup";
+import AutomaticBackup from "@docspace/shared/pages/backup/auto-backup";
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
-import { useDefaultOptions } from "@docspace/shared/pages/auto-backup/hooks";
+import { useDefaultOptions } from "@docspace/shared/pages/backup/auto-backup/hooks";
 
 import type {
   SettingsThirdPartyType,
   TFilesSettings,
-  TFolder,
 } from "@docspace/shared/api/files/types";
 import type {
   TBackupProgress,
@@ -55,7 +54,6 @@ import type { TPortals } from "@docspace/shared/api/management/types";
 import type { TStorageBackup } from "@docspace/shared/api/settings/types";
 
 import { useBackup } from "@/hooks/useBackup";
-import { useTreeFolders } from "@/hooks/useTreeFolders";
 import { useFilesSelectorInput } from "@/hooks/useFilesSelectorInput";
 import { useStores } from "@/hooks/useStores";
 import useAppState from "@/hooks/useAppState";
@@ -69,7 +67,6 @@ interface AutoBackupProps {
   portals: TPortals[];
   features: TPaymentFeature[];
   filesSettings: TFilesSettings;
-  foldersTree: TFolder[];
   backupProgress: TBackupProgress | TError | undefined;
 }
 
@@ -81,7 +78,6 @@ const AutoBackup = ({
   portals,
   features,
   filesSettings,
-  foldersTree,
   backupProgress,
 }: AutoBackupProps) => {
   const { t } = useTranslation(["Common"]);
@@ -91,8 +87,6 @@ const AutoBackup = ({
   const { user, settings } = useAppState();
 
   const language = user?.cultureName || "en";
-
-  const rootFoldersTitles = useTreeFolders({ foldersTree });
 
   const {
     accounts,
@@ -266,8 +260,6 @@ const AutoBackup = ({
       setIsBackupProgressVisible={setIsBackupProgressVisible}
       backupProgressError={backupProgressError}
       setBackupProgressError={setBackupProgressError}
-      // treeFoldersStore
-      rootFoldersTitles={rootFoldersTitles}
       // settingsStore
       automaticBackupUrl={automaticBackupUrl}
       currentColorScheme={currentColorScheme}

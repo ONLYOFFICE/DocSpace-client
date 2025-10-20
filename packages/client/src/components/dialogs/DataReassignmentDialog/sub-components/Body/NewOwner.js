@@ -82,10 +82,10 @@ const NewOwner = ({
   return (
     <>
       <StyledPeopleSelectorInfo>
-        <Text className="new-owner" noSelect>
+        <Text className="new-owner">
           {t("DataReassignmentDialog:NewDataOwner")}
         </Text>
-        <Text className="description" noSelect>
+        <Text className="description">
           {t("DataReassignmentDialog:UserToWhomTheDataWillBeTransferred")}
         </Text>
       </StyledPeopleSelectorInfo>

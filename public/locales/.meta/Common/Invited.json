@@ -3,7 +3,7 @@
   "content": "Invited",
   "content_en_sha1_hash": "53469df1c48ff6abdcf1b528fd8c8ac2baf05099",
   "created_at": "2025-05-19T21:30:45.993Z",
-  "updated_at": "2025-06-30T12:20:31.301Z",
+  "updated_at": "2025-09-23T07:24:24.137Z",
   "comment": {
     "text": "This translation key \"Invited\" is used to display a message indicating that an email invitation has been sent or received. It typically appears in UI elements related to invite functionality, such as input fields or search items, and helps users understand their current status regarding invitations.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 396,
+      "line_number": 403,
       "context": "{status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}\n </div>\n <SearchItemText>{email}</SearchItemText>\n </div>\n {shared ? (\n <SearchItemText $info>{t(\"Common:Invited\")}</SearchItemText>\n ) : null}\n {isDisabled ? (\n <SearchItemText info>{t(\"Common:Disabled\")}</SearchItemText>\n ) : null}\n </DropDownItem>",
       "module": "/packages/client"
     },
@@ -24,14 +24,14 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 110,
-      "context": "const isDisabled =\n disableDisabledUsers && status === EmployeeStatus.Disabled;\n \n const disabledText = isInvited\n ? t(\"Common:Invited\")\n : isDisabled\n ? t(\"Common:Disabled\")\n : \"\";\n \n const avatarRole = getUserAvatarRoleByType(role);",
+      "line_number": 111,
+      "context": "const isDisabled =\n disableDisabledUsers && status === EmployeeStatus.Disabled;\n \n const disabledText = isInvited\n ? (disabledInvitedText ?? t(\"Common:Invited\"))\n : isDisabled\n ? t(\"Common:Disabled\")\n : \"\";\n \n const avatarRole = getUserAvatarRoleByType(role);",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 110,
-      "context": "const isDisabled =\n disableDisabledUsers && status === EmployeeStatus.Disabled;\n \n const disabledText = isInvited\n ? t(\"Common:Invited\")\n : isDisabled\n ? t(\"Common:Disabled\")\n : \"\";\n \n const avatarRole = getUserAvatarRoleByType(role);",
+      "line_number": 111,
+      "context": "const isDisabled =\n disableDisabledUsers && status === EmployeeStatus.Disabled;\n \n const disabledText = isInvited\n ? (disabledInvitedText ?? t(\"Common:Invited\"))\n : isDisabled\n ? t(\"Common:Disabled\")\n : \"\";\n \n const avatarRole = getUserAvatarRoleByType(role);",
       "module": "/packages/shared"
     }
   ],

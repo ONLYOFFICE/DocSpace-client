@@ -3,7 +3,7 @@
   "content": "Client ID could not be found",
   "content_en_sha1_hash": "646757a660ae5e1cbb0cea4dc0aac8b737baaad3",
   "created_at": "2025-05-19T21:30:57.297Z",
-  "updated_at": "2025-05-26T07:57:32.887Z",
+  "updated_at": "2025-09-07T07:53:15.429Z",
   "comment": {
     "text": "This translation key is used to display an error message when a client ID cannot be found. It typically appears in a user interface element that prompts for authentication credentials or displays authorization errors. The exact UI context where this error message is shown is likely a login or authentication dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 129,
+      "line_number": 130,
       "context": "case OAuth2ErrorKey.client_not_found_error:\n return t(\"Errors:OAuthApplicationEmpty\");\n case OAuth2ErrorKey.client_permission_denied_error:\n return t(\"Common:AccessDenied\");\n case OAuth2ErrorKey.missing_client_id_error:\n return t(\"Errors:OAuthClientEmpty\");\n case OAuth2ErrorKey.something_went_wrong_error:\n return t(\"Common:UnknownError\");\n case OAuth2ErrorKey.missing_asc_cookie_error:\n default:\n return t(\"Common:Error\");",
       "module": "/packages/login"
     }

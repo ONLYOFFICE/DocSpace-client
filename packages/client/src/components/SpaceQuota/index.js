@@ -91,6 +91,7 @@ const SpaceQuota = (props) => {
     needResetSelection,
     setSelected,
     inRoom,
+    dataTestId,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -165,6 +166,9 @@ const SpaceQuota = (props) => {
   const action = item?.quotaLimit === -1 ? "no-quota" : "current-size";
 
   const selectedOption = options.find((elem) => elem.action === action);
+  const comboboxOptions = options.filter(
+    (elem) => elem.action !== "current-size",
+  );
 
   if (item.providerType) {
     return (
@@ -195,13 +199,14 @@ const SpaceQuota = (props) => {
       hideColumns={hideColumns}
       className={className}
       isLoading={isLoading}
+      data-testid={dataTestId}
     >
       <Text fontWeight={600}>{usedQuota} / </Text>
 
       <ComboBox
         className="combobobox-space-quota"
         selectedOption={selectedOption}
-        options={options}
+        options={comboboxOptions}
         onSelect={onChange}
         scaled={false}
         size="content"
@@ -243,7 +248,7 @@ export default inject(
       defaultRoomsQuota,
     } = currentQuotaStore;
 
-    const { infoPanelSelection } = infoPanelStore;
+    const { infoPanelSelection, isVisible: infoPanelVisible } = infoPanelStore;
     const inRoom = !!infoPanelSelection?.navigationPath;
 
     const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
@@ -270,7 +275,7 @@ export default inject(
       updateQuota,
       resetQuota,
       defaultSize,
-      needResetSelection,
+      needResetSelection: !infoPanelVisible || needResetSelection,
       inRoom,
     };
   },

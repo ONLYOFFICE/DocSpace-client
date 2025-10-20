@@ -47,7 +47,6 @@ import { EditorProps, TGoBack } from "@/types";
 import {
   onSDKRequestHistoryClose,
   onSDKRequestEditRights,
-  onSDKInfo,
   onSDKWarning,
   onSDKError,
   onSDKRequestRename,
@@ -118,6 +117,7 @@ const Editor = ({
     onRequestStartFilling,
 
     onRequestRefreshFile,
+    onInfo,
   } = useEditorEvents({
     user,
     successAuth,
@@ -227,8 +227,13 @@ const Editor = ({
   }
 
   try {
-    // if (newConfig.document && newConfig.document.info)
-    //  newConfig.document.info.favorite = false;
+    if (
+      newConfig.document &&
+      newConfig.document.info &&
+      !fileInfo?.requestToken
+    )
+      newConfig.document.info.favorite = !!fileInfo?.isFavorite;
+
     const url = typeof window !== "undefined" ? window.location.href : "";
 
     if (url.indexOf("anchor") !== -1) {
@@ -251,7 +256,7 @@ const Editor = ({
     onRequestEditRights: () =>
       onSDKRequestEditRights(t, fileInfo, newConfig.documentType),
     onAppReady: onSDKAppReady,
-    onInfo: onSDKInfo,
+    onInfo,
     onWarning: onSDKWarning,
     onError: onSDKError,
     onRequestHistoryData: onSDKRequestHistoryData,

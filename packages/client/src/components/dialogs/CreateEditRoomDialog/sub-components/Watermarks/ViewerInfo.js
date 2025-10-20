@@ -30,9 +30,9 @@ import { useTranslation } from "react-i18next";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
+import { TabItem } from "@docspace/shared/components/tab-item";
 import { WatermarkAdditions } from "@docspace/shared/enums";
 
-import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
 import { StyledWatermark } from "./StyledComponent";
 
 const tabsOptions = (t) => [
@@ -98,8 +98,16 @@ const getInitialTabs = (additions, isEdit, t) => {
 };
 
 const rotateOptions = (t) => [
-  { key: -45, label: t("Diagonal") },
-  { key: 0, label: t("Horizontal") },
+  {
+    key: -45,
+    label: t("Diagonal"),
+    dataTestId: "virtual_data_room_watermark_position_diagonal",
+  },
+  {
+    key: 0,
+    label: t("Horizontal"),
+    dataTestId: "virtual_data_room_watermark_position_horizontal",
+  },
 ];
 
 const getInitialRotate = (rotate, isEdit, isImage, t) => {
@@ -168,13 +176,12 @@ const ViewerInfoWatermark = ({
     });
   }, []);
 
-  const onSelect = (item) => {
+  const onSelect = (e) => {
+    const itemKey = e.currentTarget.dataset.key;
     const elementsData = elements.current;
+    elementsData[itemKey] = !elementsData[itemKey];
+
     let flagsCount = 0;
-
-    const key = item.id;
-
-    elementsData[key] = !elementsData[item.id];
 
     Object.keys(elementsData).forEach((k) => {
       const value = elementsData[k];
@@ -212,19 +219,34 @@ const ViewerInfoWatermark = ({
     });
   };
 
+  const lockLastSelection =
+    Object.values(elements.current).filter((v) => v === true).length === 1;
+
   return (
     <StyledWatermark>
       <Text className="watermark-title" fontWeight={600} lineHeight="20px">
         {t("AddWatermarkElements")}
       </Text>
 
-      <Tabs
-        items={initialInfoRef.dataTabs}
-        selectedItems={initialInfoRef.tabs.map((item) => item.index)}
-        onSelect={onSelect}
-        type={TabsTypes.Secondary}
-        multiple
-      />
+      <div className="watermark-tab_items">
+        {initialInfoRef.dataTabs.map((item) => {
+          const isActive =
+            initialInfoRef.tabs.findIndex((i) => i.index === item.index) > -1;
+
+          return (
+            <TabItem
+              key={item.id}
+              data-key={item.id}
+              label={item.name}
+              isActive={isActive}
+              lockLastSelection={lockLastSelection}
+              onSelect={onSelect}
+              withMultiSelect
+              dataTestId={`virtual_data_room_watermark_tab_${item.id.toLowerCase()}`}
+            />
+          );
+        })}
+      </div>
 
       <Text
         className="watermark-title title-without-top"
@@ -233,7 +255,13 @@ const ViewerInfoWatermark = ({
       >
         {t("AddStaticText")}
       </Text>
-      <TextInput scale value={textValue} tabIndex={1} onChange={onTextChange} />
+      <TextInput
+        scale
+        value={textValue}
+        tabIndex={1}
+        onChange={onTextChange}
+        testId="virtual_data_room_watermark_text_input"
+      />
 
       <Text className="watermark-title" fontWeight={600} lineHeight="20px">
         {t("Position")}
@@ -244,6 +272,7 @@ const ViewerInfoWatermark = ({
         onSelect={onPositionChange}
         scaled
         scaledOptions
+        dataTestId="virtual_data_room_watermark_position_combobox"
       />
     </StyledWatermark>
   );

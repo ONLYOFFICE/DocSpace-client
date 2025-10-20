@@ -70,9 +70,8 @@ import commonIconsStyles, {
 } from "./common-icons-style";
 import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
-import { NoUserSelect, TextUserSelect } from "./commonStyles";
+import { NoUserSelect } from "./commonStyles";
 import { commonInputStyles } from "./commonInputStyles";
-import { commonTextStyles } from "./commonTextStyles";
 import {
   RoomsTypeValues,
   RoomsTypes,
@@ -112,9 +111,7 @@ export {
   parseAddresses,
   getParts,
   NoUserSelect,
-  TextUserSelect,
   commonInputStyles,
-  commonTextStyles,
   INFO_PANEL_WIDTH,
   EmailSettings,
   parseAddress,
@@ -247,7 +244,9 @@ export const getLastColumn = (
 export const isLockedSharedRoom = (item?: TRoom) => {
   if (!item) return false;
 
-  return Boolean(item.external && item.passwordProtected && !item.expired);
+  return Boolean(
+    item.external && item.passwordProtected && !item.isLinkExpired,
+  );
 };
 
 export const addLog = (log: string, category: "socket") => {

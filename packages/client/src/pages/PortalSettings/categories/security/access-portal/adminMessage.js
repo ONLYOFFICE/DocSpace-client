@@ -58,6 +58,7 @@ const MainContainer = styled.div`
 const AdminMessage = (props) => {
   const {
     t,
+    tReady,
 
     enableAdmMess,
     setMessageSettings,
@@ -158,6 +159,8 @@ const AdminMessage = (props) => {
     setShowReminder(false);
   };
 
+  if (!tReady) return null;
+
   return (
     <MainContainer>
       <LearnMoreWrapper withoutExternalLink={!administratorMessageSettingsUrl}>
@@ -173,6 +176,7 @@ const AdminMessage = (props) => {
         {administratorMessageSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="administrator_message_component_learn_more"
             color={currentColorScheme.main?.accent}
             target="_blank"
             isHovered
@@ -190,16 +194,19 @@ const AdminMessage = (props) => {
         name="group"
         orientation="vertical"
         spacing="8px"
+        dataTestId="administrator_message_radio_button_group"
         options={[
           {
             id: "admin-message-disabled",
             label: t("Common:Disabled"),
             value: "disabled",
+            dataTestId: "administrator_message_disabled",
           },
           {
             id: "admin-message-enable",
             label: t("Common:Enable"),
             value: "enable",
+            dataTestId: "administrator_message_enabled",
           },
         ]}
         selected={type}
@@ -218,6 +225,8 @@ const AdminMessage = (props) => {
         hasScroll={false}
         additionalClassSaveButton="admin-message-save"
         additionalClassCancelButton="admin-message-cancel"
+        saveButtonDataTestId="administrator_message_save_button"
+        cancelButtonDataTestId="administrator_message_cancel_button"
       />
     </MainContainer>
   );

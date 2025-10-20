@@ -3,7 +3,7 @@
   "content": "Skip",
   "content_en_sha1_hash": "3da474537ac378c616d6b301acc1674bc348cecd",
   "created_at": "2025-05-19T21:30:48.925Z",
-  "updated_at": "2025-06-30T12:20:31.195Z",
+  "updated_at": "2025-10-14T05:06:56.376Z",
   "comment": {
     "text": "The translation key \"SkipTitle\" is used to display a label for a \"Skip\" button in various dialogues and forms. It prompts the user to skip or cancel an action, allowing them to move on without making changes.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/FormFillingTipsDialog/index.tsx",
-      "line_number": 151,
+      "line_number": 150,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"form-filling_tips_skip\"\n key=\"SkipTitle\"\n label={t(\"Common:SkipTitle\")}\n size={ButtonSize.small}\n onClick={onClose}\n scale\n />\n <Button",
       "module": "/packages/client"
     },
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation \"Παράλειψη\" is a more formal and less common word for 'Skip'. A more natural and common translation would be 'Άλμα' or 'Παράβλεψη'.",
-          "suggestion": "Άλμα or Παράβλεψη"
+          "description": "While \"Παράλειψη\" (Paráleipsi) is a valid Greek word meaning 'omission' or 'skip', it carries a more formal and technical connotation than the English 'Skip'. It's not the typical word used for a 'Skip' button or function in a user interface.",
+          "suggestion": "Consider alternatives like \"Άνωθεν\" (Ánothen - 'From the top' - often used for skipping to the beginning), \"Παράλειψη\" might be too formal, or a more colloquial term depending on the context of use. Without more context, it's difficult to suggest a perfect replacement."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Բաց թողնել\" (Bac toghnel) translates to 'to skip' or 'to miss out'. While functionally similar to 'Skip', it's a more verbose and less direct translation. A more concise and potentially more appropriate translation, depending on the context, would be something like \"կրկնվել\" (krknvel) meaning 'repeat' or simply \"կրկնել\" (krknel) if the user is meant to skip to the next iteration.",
-          "suggestion": "Consider \"կրկնել\" (krknel) or \"կրկնվել\" (krknvel) for a more concise and potentially more appropriate translation."
+          "description": "While \"Բաց թողնել\" (Bac toghnel) is a valid Armenian word meaning 'to skip' or 'to miss', it's a more verbose translation of the English 'Skip'. 'Skip' is often used as a short, direct action, and a more suitable translation in this context would be a shorter, more direct equivalent, reflecting the brevity of the English word.",
+          "suggestion": "Consider a shorter translation like \"կրկնիչ\" (krknich) or a more context-dependent option if 'Skip' refers to a specific action."
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Treci mai departe' is a literal translation of 'Move on' or 'Proceed', not 'Skip'. 'Skip' in this context likely implies a function to bypass something.",
-          "suggestion": "Consider translations like 'Ignora', 'Sari peste', or 'Omită', depending on the specific functionality being described."
+          "description": "'Treci mai departe' translates to 'Go on' or 'Proceed' rather than 'Skip'. While it conveys a similar action, it's not a direct translation.",
+          "suggestion": "Consider 'Sari peste' or 'Omitere' for a more accurate translation of 'Skip'."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"මඟහරින්න\" (magaharinna) is a command meaning \"avoid\" or \"let it pass\". While it can be used in a context of skipping, it's not the most direct or common translation of \"Skip\". A more accurate translation would be \"තියවන්න\" (thiyavanna) or a more colloquial option like \"වැඩිලාන්න\" (wadilanna).",
-          "suggestion": "Consider \"තියවන්න\" (thiyavanna) or \"වැඩිලාන්න\" (wadilanna) for a more accurate translation of \"Skip\"."
+          "description": "While \"මඟහරින්න\" (magaharinna) is a valid Sinhala word meaning 'to avoid' or 'to bypass', it doesn't directly translate to \"Skip\" in the context of a UI element. 'Skip' implies a simple action of moving past something, not necessarily avoiding it. A more accurate translation might be 'ලskip කරන්න' (lskip karanna) which incorporates the English word, or 'වැskip කරන්න' (waskip karanna) or 'දුරුවා හැරන්න' (duruva haeranna) which are more natural-sounding alternatives, depending on the specific context.",
+          "suggestion": "Consider 'ලskip කරන්න' (lskip karanna), 'වැskip කරන්න' (waskip karanna), or 'දුරුවා හැරන්න' (duruva haeranna)."
         }
       ],
       "approved_at": null
@@ -235,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

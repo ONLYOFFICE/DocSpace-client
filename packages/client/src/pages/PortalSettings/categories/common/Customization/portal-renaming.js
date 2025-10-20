@@ -57,8 +57,6 @@ const PortalRenamingComponent = (props) => {
     setIsLoadedPortalRenaming,
     isLoadedPage,
     tenantAlias,
-    initSettings,
-    setIsLoaded,
     domain,
     isSettingPaid,
     standalone,
@@ -114,15 +112,9 @@ const PortalRenamingComponent = (props) => {
     if (!isMobileDevice()) {
       setIsCustomizationView(true);
 
-      const currentUrl = window.location.href.replace(
-        window.location.origin,
-        "",
-      );
-
-      const newUrl = "/portal-settings/customization/general";
-      if (newUrl === currentUrl) return;
-
-      navigate(newUrl);
+      if (location.pathname.includes("portal-renaming")) {
+        navigate("/portal-settings/customization/general");
+      }
     } else {
       setIsCustomizationView(false);
     }
@@ -133,8 +125,6 @@ const PortalRenamingComponent = (props) => {
       t("PortalRenaming", { productName: t("Common:ProductName") }),
     );
     setPortalName(portalNameInitially);
-    const page = isMobileView ? "language-and-time-zone" : "general";
-    if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
 
     const checkScroll = checkScrollSettingsBlock();
     checkInnerWidth();
@@ -314,6 +304,7 @@ const PortalRenamingComponent = (props) => {
           id="textInputContainerPortalRenaming"
           scale
           value={portalName}
+          testId="customization_portal_renaming_text_input"
           onChange={onChangePortalName}
           isDisabled={
             (!isSettingPaid && !standalone) || isLoadingPortalNameSave
@@ -371,6 +362,7 @@ const PortalRenamingComponent = (props) => {
             target="_blank"
             isHovered
             href={renamingSettingsUrl}
+            dataTestId="portal_renaming_learn_more"
           >
             {t("Common:LearnMore")}
           </Link>
@@ -392,6 +384,8 @@ const PortalRenamingComponent = (props) => {
         saveButtonDisabled={!!errorValue}
         additionalClassSaveButton="portal-renaming-save"
         additionalClassCancelButton="portal-renaming-cancel"
+        saveButtonDataTestId="customization_portal_renaming_save_button"
+        cancelButtonDataTestId="customization_portal_renaming_cancel_button"
       />
       <PortalRenamingDialog
         visible={isShowModal}
@@ -414,14 +408,8 @@ export const PortalRenaming = inject(
       domainValidator,
     } = settingsStore;
     const { setPortalRename } = setup;
-    const {
-      isLoaded,
-      setIsLoadedPortalRenaming,
-      initSettings,
-      setIsLoaded,
-      setPortalName,
-      portalName,
-    } = common;
+    const { isLoaded, setIsLoadedPortalRenaming, setPortalName, portalName } =
+      common;
     const { isCustomizationAvailable } = currentQuotaStore;
 
     return {
@@ -429,8 +417,6 @@ export const PortalRenaming = inject(
       isLoaded,
       setIsLoadedPortalRenaming,
       tenantAlias,
-      initSettings,
-      setIsLoaded,
       domain: baseDomain,
       currentColorScheme,
       renamingSettingsUrl,

@@ -3,7 +3,7 @@
   "content": "No groups found",
   "content_en_sha1_hash": "115fe0fac776d359c73c775c747c4872f08c5965",
   "created_at": "2025-05-19T21:30:46.864Z",
-  "updated_at": "2025-06-30T12:20:31.375Z",
+  "updated_at": "2025-10-01T15:17:48.230Z",
   "comment": {
     "text": "This translation key is used to display a message when no groups are found in a list. It appears on an empty screen component, likely as the title or header of an empty list view, indicating that no groups meet the current filter criteria.",
     "is_auto": true,
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 650,
+      "line_number": 675,
       "context": "emptyScreenHeader ??\n (activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuests\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:EmptyHeader\")\n : t(\"Common:NotFoundGroups\"))\n }\n emptyScreenDescription={\n emptyScreenDescription ??\n (activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuestsDescription\")",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 650,
+      "line_number": 675,
       "context": "emptyScreenHeader ??\n (activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuests\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:EmptyHeader\")\n : t(\"Common:NotFoundGroups\"))\n }\n emptyScreenDescription={\n emptyScreenDescription ??\n (activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuestsDescription\")",
       "module": "/packages/shared"
     }

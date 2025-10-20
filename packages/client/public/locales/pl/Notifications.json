@@ -1,11 +1,20 @@
 {
-  "ActionsWithFilesDescription": "Etykiety informują o działaniach, takich jak wgrywanie, tworzenie i zmiany w plikach.",
+  "ActionsWithFilesDescription": "Odznaki będą wyróżniać aktywność plików — przesyłanie, edycje lub udostępnianie — w sekcjach {{rooms}}, {{shared}} i {{documents}}.",
+  "AdminSetupRequired": "Wymagane skonfigurowanie administratora",
   "Badges": "Etykiety",
   "DailyFeed": "Codzienne aktualności {{productName}}",
   "DailyFeedDescription": "Czytaj wiadomości i wydarzenia z {{productName}} w codziennym przeglądzie.",
-  "ManageNotifications": "Zarządzaj",
+  "FileActivityNotify": "Powiadomienia o aktywności plików",
+  "GoToSettings": "Przejdź do Ustawień",
+  "IsNotValid": "Nie jest prawidłowe",
+  "LdapEmailTooltip": "To konto użytkownika jest ładowane z LDAP. Adres e-mail użytkownika nie został określony, a aktualny został wygenerowany automatycznie i nie można go użyć do wysyłania powiadomień.",
+  "NotConfigured": "Nie skonfigurowano",
   "Notifications": "Powiadomienia",
-  "RoomsActivityDescription": "Cogodzinne powiadomienia. Bądź na bieżąco ze wszystkimi działaniami w Twoich pokojach.",
+  "RoomsActivityDescription": "Otrzymuj natychmiastowe powiadomienia e-mail o nowych udostępnionych plikach/folderach i aktywności wewnątrz {{sectionName}}.",
+  "RoomUpdateNotify": "Współdzielone treści i aktywność {{sectionName}}",
+  "SettingUpNotifications": "Konfigurowanie powiadomień",
+  "SuccessConnected": "{{serviceName}} zostało pomyślnie podłączone jako kanał powiadomień. Teraz będziesz tam otrzymywać aktualizacje.",
+  "SuccessDisconnected": "{{serviceName}} zostało pomyślnie odłączone jako kanał powiadomień. Powiadomienia nie będą już tam wysyłane.",
   "UsefulTips": "Przydatne wskazówki {{productName}}",
   "UsefulTipsDescription": "Uzyskaj przydatne przewodniki na temat {{productName}}"
 }

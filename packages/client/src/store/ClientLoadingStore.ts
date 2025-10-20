@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 const SHOW_LOADER_TIMER = 500;
 const MIN_LOADER_TIMER = 500;
@@ -46,6 +47,10 @@ class ClientLoadingStore {
   isArticleLoading: boolean = true;
 
   isProfileLoaded: boolean = false;
+
+  isPortalSettingsLoading: boolean = true;
+
+  settingsStore: SettingsStore | null = null;
 
   loaderStates: Record<SectionType, LoaderState> = {
     header: {
@@ -74,9 +79,28 @@ class ClientLoadingStore {
     },
   };
 
-  constructor() {
+  isChangePageRequestRunning = false;
+
+  currentClientView: "users" | "groups" | "files" | "profile" | "" = "";
+
+  constructor(settingsStore: SettingsStore) {
+    this.settingsStore = settingsStore;
     makeAutoObservable(this);
   }
+
+  setIsChangePageRequestRunning = (isChangePageRequestRunning: boolean) => {
+    this.isChangePageRequestRunning = isChangePageRequestRunning;
+  };
+
+  setIsPortalSettingsLoading = (isPortalSettingsLoading: boolean) => {
+    this.isPortalSettingsLoading = isPortalSettingsLoading;
+  };
+
+  setCurrentClientView = (
+    currentClientView: "users" | "groups" | "files" | "profile" | "",
+  ) => {
+    this.currentClientView = currentClientView;
+  };
 
   setIsLoaded = (isLoaded: boolean) => {
     this.isLoaded = isLoaded;
@@ -101,7 +125,16 @@ class ClientLoadingStore {
     }, window.ClientConfig?.loaders?.loaderTime ?? MIN_LOADER_TIMER);
   };
 
-  setIsProfileLoaded = (isProfileLoaded: boolean) => {
+  setIsProfileLoaded = (
+    isProfileLoaded: boolean,
+    withTimer: boolean = true,
+  ) => {
+    if (!withTimer) {
+      this.isProfileLoaded = isProfileLoaded;
+
+      return;
+    }
+
     setTimeout(() => {
       this.isProfileLoaded = isProfileLoaded;
     }, window.ClientConfig?.loaders?.loaderTime ?? MIN_LOADER_TIMER);
@@ -207,6 +240,7 @@ class ClientLoadingStore {
     isSectionBodyLoading: boolean,
     withTimer: boolean = true,
   ) => {
+    return;
     this.setIsLoading("body", isSectionBodyLoading, withTimer);
   };
 
@@ -224,10 +258,6 @@ class ClientLoadingStore {
     return this.isArticleLoading;
   }
 
-  get showProfileLoader(): boolean {
-    return !this.isProfileLoaded;
-  }
-
   get showHeaderLoader(): boolean {
     return this.loaderStates.header.isLoading || this.showArticleLoader;
   }
@@ -242,6 +272,14 @@ class ClientLoadingStore {
 
   get showBodyLoader(): boolean {
     return this.loaderStates.body.isLoading || this.showFilterLoader;
+  }
+
+  get showProfileLoader(): boolean {
+    return this.showHeaderLoader || !this.isProfileLoaded;
+  }
+
+  get showPortalSettingsLoader(): boolean {
+    return this.isPortalSettingsLoading;
   }
 }
 

@@ -1,6 +1,8 @@
 {
   "ChangePasswordSuccess": "Lozinka je uspešno promenjena",
   "CodeTitle": "Kod vam je poslat email-om",
+  "ConfirmEmailChange": "Potvrdi promenu email adrese",
+  "ConfirmEmailChangeText": "Zatražio si promenu email adrese na svom {{productName}} nalogu. Da nastaviš, prijavi se koristeći svoje trenutne kredencijale.",
   "ErrorInvalidText": "Za 10 sekundi bićete preusmereni na <1>{{productName}}</1>",
   "ForgotPassword": "Zaboravili ste vašu lozinku?",
   "LDAPUsernamePlaceholder": "Korisničko ime {{ldap_domain}}",

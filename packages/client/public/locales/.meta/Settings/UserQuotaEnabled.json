@@ -3,7 +3,7 @@
   "content": "User quota has been successfully enabled.",
   "content_en_sha1_hash": "54f6f93690a1ebe93c7db897adb749e9da5be3c2",
   "created_at": "2025-05-19T21:30:53.138Z",
-  "updated_at": "2025-06-30T12:20:31.739Z",
+  "updated_at": "2025-09-17T13:43:02.046Z",
   "comment": {
     "text": "The \"UserQuotaEnabled\" translation key is used to display a success message when user quota has been successfully enabled. It is typically displayed as a toast notification in an application, providing confirmation to users that their quotas have been set up correctly after enabling it.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
-      "line_number": 456,
+      "line_number": 486,
       "context": "const isEnable = +quota !== -1;\n \n try {\n await setDefaultUserQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"UserQuotaEnabled\")\n : t(\"UserQuotaDisabled\");\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);",
       "module": "/packages/shared"
     }

@@ -1,0 +1,28 @@
+{
+  "key_path": "TemporaryDescription",
+  "content": "Create a backup stored in the \"Backup\" section. Available for download within 24 hours after creation.",
+  "content_en_sha1_hash": "5ccf8dd995cc5edf39e02c55ac3494c75a5f638b",
+  "created_at": "2025-08-21T14:45:38.903Z",
+  "updated_at": "2025-08-21T14:48:05.730Z",
+  "comment": {
+    "text": "This text describes a temporary backup option. It appears in a dialog (BackupServiceDialog) and explains that the backup is stored in the \"Backup\" section and is available for download for 24 hours. Translators should ensure the description accurately conveys the temporary nature of this backup.",
+    "is_auto": true,
+    "updated_at": "2025-08-21T14:48:05.730Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/Backup/BackupServiceDialog.tsx",
+      "line_number": 88,
+      "context": "const serviceOptions: ServiceOption[] = [\n {\n id: \"temporary\",\n title: t(\"Common:TemporaryStorage\"),\n description: t(\"TemporaryDescription\"),\n icon: <ClockIcon />,\n },\n {\n id: \"backup-room\",\n title: t(\"Common:RoomsModule\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

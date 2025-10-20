@@ -3,7 +3,7 @@
   "content": "Yandex.Disk",
   "content_en_sha1_hash": "8a681c011333edb1749ed143646459238e1f67dc",
   "created_at": "2025-05-26T07:15:49.040Z",
-  "updated_at": "2025-05-26T08:02:50.113Z",
+  "updated_at": "2025-10-13T23:37:15.682Z",
   "comment": {
     "text": "This translation key is used to display the title \"Yandex.Disk\" in various UI contexts. It is commonly found on file dialogs and buttons within applications that interact with Yandex Disk storage services. The translation of this key will determine the displayed label for users accessing or managing files stored on Yandex Disk.",
     "is_auto": true,
@@ -159,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala translation 'යාන්ඩෙක්ස්.ඩිස්ක්' appears to be a transliteration of \"Yandex.Disk\" and may not be easily understood by Sinhala speakers. While technically a representation of the English name, it lacks a localized equivalent.",
+          "suggestion": "Consider researching or consulting with a localization expert to determine if a localized Sinhala equivalent exists for 'Yandex.Disk'. If a direct equivalent doesn't exist, a transliteration might be acceptable, but accompanied by a brief explanation if needed."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -205,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

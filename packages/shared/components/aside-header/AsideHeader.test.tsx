@@ -31,7 +31,7 @@ describe("AsideHeader", () => {
     const onCloseClick = jest.fn();
     render(<AsideHeader isCloseable onCloseClick={onCloseClick} />);
 
-    const closeButton = screen.getByTestId("icon-button");
+    const closeButton = screen.getByTestId("aside_header_close_icon_button");
     expect(closeButton).toBeInTheDocument();
 
     fireEvent.click(closeButton);

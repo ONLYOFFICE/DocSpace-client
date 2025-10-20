@@ -3,7 +3,7 @@
   "content": "The maximum length of a user name or another local part is 64 characters.",
   "content_en_sha1_hash": "ba7b9b65a0fda5b91b2999cd6da74cf668a5cc1d",
   "created_at": "2025-05-19T21:30:46.386Z",
-  "updated_at": "2025-06-18T17:11:42.327Z",
+  "updated_at": "2025-10-17T14:43:53.357Z",
   "comment": {
     "text": "\"This translation key is used to display an error message when a user name exceeds the maximum allowed length of 64 characters. It appears in dialogs where users are prompted to update their email address or local part.\"",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 179,
+      "line_number": 187,
       "context": "case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n default:\n return t(\"Common:IncorrectDomain\");\n }\n });",
       "module": "/packages/shared"
     }

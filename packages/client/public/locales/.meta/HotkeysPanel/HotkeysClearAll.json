@@ -3,7 +3,7 @@
   "content": "Clear all selections",
   "content_en_sha1_hash": "7d49842f4d504854e52ee0d1ad7b50eabc064b48",
   "created_at": "2025-05-19T21:30:55.028Z",
-  "updated_at": "2025-05-24T10:46:39.756Z",
+  "updated_at": "2025-08-12T19:46:25.977Z",
   "comment": {
     "text": "This translation key is used to display the label \"Clear all selections\" in a UI component that allows users to clear multiple selections. It appears as a button or similar action element.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
       "line_number": 98,
-      "context": "</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysClearAll\")}</Text>\n <Text {...keyTextStyles}>Shift + n {t(\"Common:Or\")} Esc</Text>\n </>\n </Row>\n </>\n );",
+      "context": "</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysClearAll\")}</Text>\n <Text {...keyTextStyles}>Shift + n {t(\"Common:Or\")} Esc</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
       "module": "/packages/client"
     }
   ],

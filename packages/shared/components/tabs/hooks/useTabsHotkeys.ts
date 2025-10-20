@@ -1,0 +1,164 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { useEffect, useCallback } from "react";
+import { useHotkeys, Options } from "react-hotkeys-hook";
+import { isMobile } from "react-device-detect";
+import { TTabsHotkey } from "../Tabs.types";
+
+const useTabsHotkeys = ({
+  enabledHotkeys,
+  setHotkeysIsActive,
+  items,
+  focusedTabIndex,
+  setFocusedTabIndex,
+  scrollToTab,
+  onSelect,
+  hotkeysId,
+}: TTabsHotkey) => {
+  const activateHotkeys = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Tab" && !isMobile) {
+        e.preventDefault();
+
+        const tabsElement = document.getElementsByClassName(
+          `secondary-tabs-scroll-${hotkeysId}`,
+        );
+
+        (tabsElement[0] as HTMLElement)?.focus();
+        setHotkeysIsActive(!enabledHotkeys);
+      }
+    },
+    [enabledHotkeys, setHotkeysIsActive, hotkeysId],
+  );
+
+  const setFocusedTab = (index: number) => {
+    setFocusedTabIndex(index);
+    scrollToTab(index);
+  };
+
+  const focusNextTab = () => {
+    if (focusedTabIndex === items.length - 1) setFocusedTab(0);
+    else setFocusedTab(focusedTabIndex + 1);
+  };
+
+  const focusPrevTab = () => {
+    if (focusedTabIndex === 0) setFocusedTab(items.length - 1);
+    else setFocusedTab(focusedTabIndex - 1);
+  };
+
+  const onSelectTab = (e: KeyboardEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    onSelect?.(items[focusedTabIndex]);
+  };
+
+  const focusFirstTab = () => {
+    setFocusedTab(0);
+  };
+  const focusLastTab = () => {
+    setFocusedTab(items.length - 1);
+  };
+
+  const hotkeysFilter = {
+    filter: (ev: KeyboardEvent) => {
+      const eElement = ev.target as HTMLElement;
+      const eInputElement = ev.target as HTMLInputElement;
+      return (
+        eInputElement?.type === "checkbox" || eElement?.tagName !== "INPUT"
+      );
+    },
+    filterPreventDefault: false,
+    enableOnTags: ["INPUT"],
+    enabled: enabledHotkeys,
+  } as Options;
+
+  const onKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (enabledHotkeys) {
+        const isDefaultKeys =
+          [
+            "PageUp",
+            "PageDown",
+            "Home",
+            "End",
+            "Space",
+            "ArrowUp",
+            "ArrowDown",
+            "ArrowLeft",
+            "ArrowRight",
+          ].indexOf(e.code) > -1;
+
+        if (isDefaultKeys) {
+          e.preventDefault();
+        }
+      }
+
+      activateHotkeys(e);
+    },
+    [activateHotkeys],
+  );
+
+  useEffect(() => {
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [onKeyDown]);
+
+  useHotkeys(
+    "*",
+    (e: KeyboardEvent) => {
+      if (e.shiftKey || e.ctrlKey) return;
+
+      switch (e.key) {
+        case "ArrowRight": {
+          return focusNextTab();
+        }
+
+        case "ArrowLeft": {
+          return focusPrevTab();
+        }
+
+        default:
+          break;
+      }
+    },
+    hotkeysFilter,
+  );
+
+  // Select focused tab
+  useHotkeys("Enter, Space", onSelectTab, hotkeysFilter);
+
+  // Focus first tab
+  useHotkeys("Home", focusFirstTab, hotkeysFilter);
+
+  // Focus last tab
+  useHotkeys("End", focusLastTab, hotkeysFilter);
+};
+
+export default useTabsHotkeys;

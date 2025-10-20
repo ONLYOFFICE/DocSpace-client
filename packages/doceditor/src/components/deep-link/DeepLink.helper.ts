@@ -76,6 +76,7 @@ const openDeepLink = (
 
     window.location.href = url;
   } catch (error) {
+    console.error(error);
     options?.onFail?.();
   }
 };
@@ -99,6 +100,10 @@ export const getDeepLink = (
   originalUrl?: string,
   isOpenOnlyApp?: boolean,
 ) => {
+  if (!deepLinkConfig) {
+    return (window.location.href = "/");
+  }
+
   const jsonData = {
     portal: location,
     email,

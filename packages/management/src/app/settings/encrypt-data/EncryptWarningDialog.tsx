@@ -35,6 +35,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { toastr } from "@docspace/shared/components/toast";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
 import { EncryptionStatus } from "@docspace/shared/enums";
 
@@ -56,6 +57,7 @@ export const EncryptWarningDialog = ({
   const onConfirm = async () => {
     try {
       await startEncryption(isNotifyChecked);
+      SocketHelper?.emit(SocketCommands.StorageEncryption);
       setEncryptWarningDialogVisible(false);
       window.location.href = "/encryption-portal";
     } catch (error) {

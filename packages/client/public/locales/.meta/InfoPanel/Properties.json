@@ -3,7 +3,7 @@
   "content": "Properties",
   "content_en_sha1_hash": "bc6c88db2f0703a9e2461a4a8060ccf1cb881998",
   "created_at": "2025-05-19T21:30:54.899Z",
-  "updated_at": "2025-05-24T10:06:46.621Z",
+  "updated_at": "2025-10-17T14:43:53.450Z",
   "comment": {
     "text": "The translation key \"Properties\" is used to display a label for properties related to rooms or spaces. It appears in the UI as part of the Room Bar and Gallery components, likely on buttons, thumbnails, or descriptions that show room information.",
     "is_auto": true,
@@ -11,15 +11,21 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.js",
-      "line_number": 41,
-      "context": "import { RoomIcon } from \"@docspace/shared/components/room-icon\";\n import { getRoomBadgeUrl } from \"@docspace/shared/utils/getRoomBadgeUrl\";\n import { Button } from \"@docspace/shared/components/button\";\n import PublicRoomBar from \"@docspace/shared/components/public-room-bar\";\n import DetailsHelper from \"../../helpers/DetailsHelper\";\n import { StyledProperties, StyledSubtitle } from \"../../styles/common\";\n \n import {\n StyledNoThumbnail,\n StyledThumbnail,\n StyledPublicRoomBar,",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.tsx",
+      "line_number": 107,
+      "context": "\"Common\",\n \"Translations\",\n \"Files\",\n \"RoomLogoCover\",\n ]);\n const [itemProperties, setItemProperties] = useState<\n ReturnType<DetailsHelper[\"getPropertyList\"]>\n >([]);\n const [isThumbnailError, setIsThumbmailError] = useState(false);\n \n const onThumbnailError = () => setIsThumbmailError(true);",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/index.js",
-      "line_number": 42,
-      "context": "StyledGalleryThumbnail,\n StyledGalleryFormDescription,\n } from \"../../styles/gallery\";\n import {\n StyledLink,\n StyledProperties,\n StyledSubtitle,\n } from \"../../styles/common\";\n \n const Gallery = ({\n t,",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/index.tsx",
+      "line_number": 143,
+      "context": "<div\n className={commonStyles.subtitle}\n data-testid=\"info_panel_gallery_properties_header\"\n >\n <Text fontWeight=\"600\" fontSize=\"14px\">\n {t(\"Properties\")}\n </Text>\n </div>\n \n <div\n className={commonStyles.properties}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2469,
+      "context": ");\n \n if (showInfoOption && showVersionHistoryOption) {\n menuGroupsConfig.push({\n groupKey: \"info\",\n groupLabel: t(\"InfoPanel:Properties\"),\n groupIcon: ViewRowsReactSvgUrl,\n itemKeys: [\"show-info\", \"show-version-history\"],\n needsGrouping: false,\n minItemsCount: 1,\n });",
       "module": "/packages/client"
     }
   ],

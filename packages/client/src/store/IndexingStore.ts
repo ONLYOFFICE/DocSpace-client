@@ -25,12 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
-import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+
+import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
+
 import SelectedFolderStore from "./SelectedFolderStore";
 
 class IndexingStore {
-  infoPanelStore;
-
   selectedFolderStore;
 
   isIndexEditingMode: boolean = false;
@@ -41,11 +41,7 @@ class IndexingStore {
 
   previousFilesList: any[] = [];
 
-  constructor(
-    infoPanelStore: InfoPanelStore,
-    selectedFolderStore: SelectedFolderStore,
-  ) {
-    this.infoPanelStore = infoPanelStore;
+  constructor(selectedFolderStore: SelectedFolderStore) {
     this.selectedFolderStore = selectedFolderStore;
     makeAutoObservable(this);
   }
@@ -79,7 +75,6 @@ class IndexingStore {
 
     if (existItem.length > 0) {
       if (existItem[0].order === selection[0].order) return;
-      // eslint-disable-next-line no-else-return
       else if (
         existItem[0].order &&
         existItem[0].order !== selection[0].order
@@ -107,15 +102,13 @@ class IndexingStore {
   };
 
   setIsIndexEditingMode = (mode: boolean) => {
-    const { setIsVisible } = this.infoPanelStore;
-
     if (!mode) {
       this.clearUpdateSelection();
       this.setPreviousFilesList([]);
     }
 
     if (mode) {
-      setIsVisible(false);
+      hideInfoPanel();
     }
 
     this.isIndexEditingMode = mode;

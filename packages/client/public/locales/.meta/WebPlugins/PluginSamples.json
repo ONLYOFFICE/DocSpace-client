@@ -3,7 +3,7 @@
   "content": "Plugin samples",
   "content_en_sha1_hash": "52548adb731eeeda86b2df3c051c254dd28ffc5b",
   "created_at": "2025-05-19T21:30:49.918Z",
-  "updated_at": "2025-05-24T01:56:05.843Z",
+  "updated_at": "2025-08-04T07:30:01.451Z",
   "comment": {
     "text": "This translation key is used to display \"Plugin samples\" as a heading in the developer tools section of the Portal Settings page. It appears as a bold title above a list of plugin SDK-related content when the user clicks on a link or navigates to this page.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/PluginSDK/index.js",
-      "line_number": 152,
-      "context": "onClick={() => window.open(apiPluginSDKLink, \"_blank\")}\n />\n {!isEmptyList && list.length > 0 ? (\n <>\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"PluginSamples\")}\n </Text>\n <div className=\"plugin-list\">{list}</div>\n </>\n ) : null}\n </StyledContainer>",
+      "line_number": 154,
+      "context": "testId=\"read_instructions_button\"\n />\n {!isEmptyList && list.length > 0 ? (\n <>\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"PluginSamples\")}\n </Text>\n <div className=\"plugin-list\">{list}</div>\n </>\n ) : null}\n </StyledContainer>",
       "module": "/packages/client"
     }
   ],

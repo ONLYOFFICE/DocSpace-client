@@ -27,8 +27,9 @@
 import React, { useCallback, useEffect } from "react";
 
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
+import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
+import { useTheme } from "../../../hooks/useTheme";
 import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "../../../constants";
 import { Zendesk } from "../../zendesk";
 import { zendeskAPI } from "../../zendesk/Zendesk.utils";
@@ -55,7 +56,8 @@ const ArticleLiveChat = ({
   isInfoPanelVisible,
 }: ArticleZendeskProps) => {
   const { t, ready } = useTranslation("Common");
-  const { interfaceDirection, currentColorScheme } = useTheme();
+  const { currentColorScheme } = useTheme();
+  const { isRTL } = useInterfaceDirection();
   const infoPanelOffset = isInfoPanelVisible ? 400 : 0;
 
   useEffect(() => {
@@ -118,9 +120,9 @@ const ArticleLiveChat = ({
 
   useEffect(() => {
     zendeskAPI.addChanges("webWidget", "updateSettings", {
-      position: { horizontal: interfaceDirection === "ltr" ? "right" : "left" },
+      position: { horizontal: isRTL ? "left" : "right" },
     });
-  }, [interfaceDirection]);
+  }, [isRTL]);
 
   const onZendeskLoaded = useCallback(() => {
     const isShowChat =

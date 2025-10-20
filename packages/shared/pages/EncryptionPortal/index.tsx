@@ -24,29 +24,40 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import ErrorContainer from "../../components/error-container/ErrorContainer";
+import classNames from "classnames";
+
 import { Text } from "../../components/text";
 import { PreparationPortalProgress } from "../../components/preparation-portal-progress";
+import ErrorContainer from "../../components/error-container/ErrorContainer";
 import PreparationPortalLoader from "../../skeletons/preparation-portal";
 
-import SocketHelper, { SocketEvents } from "../../utils/socket";
-import { getEncryptionProgress } from "../../api/settings";
+import { EncryptionStatus } from "../../enums";
 
+import {
+  getEncryptionProgress,
+  getEncryptionSettings,
+} from "../../api/settings";
+
+import SocketHelper, { SocketEvents } from "../../utils/socket";
 import { returnToPortal } from "./EncryptionPortal.utils";
-import { StyledEncryptionPortal } from "./EncryptionPortal.styled";
+import { EncryptionPortalProps } from "./EncryptionPortal.types";
+
+import styles from "./EncryptionPortal.module.scss";
 
 let requestsCount = 0;
 
-export const EncryptionPortal = () => {
+export const EncryptionPortal: React.FC<EncryptionPortalProps> = () => {
   const { t, ready } = useTranslation("Common");
 
   const errorInternalServer = t("Common:ErrorInternalServer");
 
   const [percent, setPercent] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
+  const [statusEncryption, setStatusEncryption] =
+    useState<EncryptionStatus | null>(null);
 
   const getProgress = useCallback(async () => {
     const setMessage = (error?: unknown) => {
@@ -99,22 +110,25 @@ export const EncryptionPortal = () => {
   }, [errorInternalServer]);
 
   useEffect(() => {
-    SocketHelper?.on(SocketEvents.EncryptionProgress, (opt) => {
-      const { percentage, error } = opt;
-      const roundedPercentage = Math.round(percentage);
+    SocketHelper?.on(
+      SocketEvents.EncryptionProgress,
+      (opt: { percentage: number; error?: string }) => {
+        const { percentage, error } = opt;
+        const roundedPercentage = Math.round(percentage);
 
-      setPercent(roundedPercentage);
+        setPercent(roundedPercentage);
 
-      if (roundedPercentage >= 100) {
-        if (error) {
-          setErrorMessage(error);
+        if (roundedPercentage >= 100) {
+          if (error) {
+            setErrorMessage(error);
 
-          return;
+            return;
+          }
+
+          returnToPortal();
         }
-
-        returnToPortal();
-      }
-    });
+      },
+    );
   }, [getProgress]);
 
   useEffect(() => {
@@ -122,28 +136,69 @@ export const EncryptionPortal = () => {
     getProgress();
   }, [ready, getProgress]);
 
-  const headerText = errorMessage ? t("Error") : t("EncryptionPortalTitle");
+  useEffect(() => {
+    if (typeof statusEncryption === "number") return;
+    const asyncFunction = async () => {
+      const encryptionSettings = await getEncryptionSettings();
+      setStatusEncryption(encryptionSettings.status);
+    };
+    asyncFunction();
+  }, [statusEncryption]);
+
+  const headerText = errorMessage
+    ? t("Error")
+    : statusEncryption === EncryptionStatus.Decrypted ||
+        statusEncryption === EncryptionStatus.DecryptionStarted
+      ? t("DecryptionPortalTitle")
+      : t("EncryptionPortalTitle");
 
   const componentBody = errorMessage ? (
-    <Text className="encryption-portal_error">{`${errorMessage}`}</Text>
+    <Text
+      className={styles.encryptionPortalError}
+      data-testid="encryption-portal-error"
+      data-error="true"
+      aria-live="assertive"
+    >
+      {`${errorMessage}`}
+    </Text>
   ) : (
     <PreparationPortalProgress
       text={t("EncryptionPortalSubtitle")}
       percent={percent}
+      data-testid="encryption-progress-bar"
+      role="progressbar"
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={percent}
+      aria-label="Encryption Progress"
+      data-percent={percent}
     />
   );
 
+  const classes = classNames(styles.encryptionPortal, {
+    [styles.error]: !!errorMessage,
+  });
+
   return (
-    <StyledEncryptionPortal errorMessage={!!errorMessage}>
+    <div className={classes} data-testid="encryption-portal" aria-busy={!ready}>
       <ErrorContainer
         headerText={headerText}
         className="encryption-portal"
         hideLogo
+        data-testid="encryption-portal-container"
       >
-        <div className="encryption-portal_body-wrapper">
+        <div
+          className={styles.encryptionPortalBodyWrapper}
+          data-testid="encryption-portal-body"
+          data-error={errorMessage ? "true" : undefined}
+          data-progress={!errorMessage && ready ? "true" : undefined}
+          data-socket-error={
+            errorMessage && percent >= 100 ? "true" : undefined
+          }
+        >
           {!ready ? <PreparationPortalLoader /> : componentBody}
         </div>
       </ErrorContainer>
-    </StyledEncryptionPortal>
+    </div>
   );
 };

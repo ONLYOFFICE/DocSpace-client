@@ -30,6 +30,7 @@ import { Text } from "@docspace/shared/components/text";
 // import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import styled, { useTheme } from "styled-components";
 import { Button } from "@docspace/shared/components/button";
+import { TwoFactorCampaignBanner } from "@docspace/shared/components/two-factor-campaign";
 // import { toastr } from "@docspace/shared/components/toast";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Badge } from "@docspace/shared/components/badge";
@@ -95,7 +96,7 @@ const MainContainer = styled.div`
     margin-bottom: 24px;
     .table-container_header {
       position: absolute;
-      z-index: 1 !important;
+      z-index: 0;
     }
 
     .history-row-container {
@@ -173,6 +174,10 @@ const HistoryMainContent = (props) => {
     getReport,
     isSettingNotPaid,
     isLoadingDownloadReport,
+    tfaEnabled,
+    withCampaign,
+    currentColorScheme,
+    loginHistory,
   } = props;
 
   const [loginLifeTime, setLoginLifeTime] = useState(String(lifetime) || "180");
@@ -218,6 +223,12 @@ const HistoryMainContent = (props) => {
 
   return (
     <MainContainer isSettingNotPaid={isSettingNotPaid}>
+      <TwoFactorCampaignBanner
+        tfaEnabled={tfaEnabled}
+        currentColorScheme={currentColorScheme}
+        withCampaign={withCampaign}
+        style={{ marginBottom: "20px" }}
+      />
       {isSettingNotPaid ? (
         <Badge
           className="paid-badge"
@@ -298,6 +309,11 @@ const HistoryMainContent = (props) => {
       <DownLoadWrapper>
         <Button
           className="download-report_button"
+          dataTestId={
+            loginHistory
+              ? "login_history_download_report_button"
+              : "audit_trail_download_report_button"
+          }
           primary
           label={downloadReport}
           size="normal"

@@ -30,7 +30,10 @@
 import { request } from "../client";
 import { TAPIPlugin } from "./types";
 
-export const getPlugins = async (enabled: null | boolean) => {
+export const getPlugins = async (
+  enabled: null | boolean,
+  signal?: AbortSignal,
+) => {
   const url = enabled
     ? `/settings/webplugins?enabled=${enabled}`
     : `/settings/webplugins`;
@@ -38,6 +41,7 @@ export const getPlugins = async (enabled: null | boolean) => {
   const res = (await request({
     method: "GET",
     url,
+    signal,
   })) as TAPIPlugin[];
 
   return res;

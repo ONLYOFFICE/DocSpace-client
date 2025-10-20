@@ -3,7 +3,7 @@
   "content": "Inviter",
   "content_en_sha1_hash": "3c7ec332618c13ff995265101cc14ca416ddf331",
   "created_at": "2025-05-19T21:30:46.002Z",
-  "updated_at": "2025-06-30T12:20:31.370Z",
+  "updated_at": "2025-08-12T19:46:26.045Z",
   "comment": {
     "text": "The \"Inviter\" translation key is used to display a label indicating the user who invited someone to an event or platform. It appears in an info panel on the users page and is used by a filter option that allows users to select the inviter as a filtering criterion.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 247,
-      "context": "</Text>\n {typeData}\n \n {isGuests && infoPanelSelection.createdBy?.displayName ? (\n <>\n <Text className=\"info_field\" noSelect title={t(\"Common:Inviter\")}>\n {t(\"Common:Inviter\")}\n </Text>\n <Text\n className=\"info_data first-row\"\n fontSize=\"13px\"",
+      "line_number": 259,
+      "context": "</Text>\n {typeData}\n \n {isGuests && userSelection.createdBy?.displayName ? (\n <>\n <Text className={styles.infoField} title={t(\"Common:Inviter\")}>\n {t(\"Common:Inviter\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight={600} title={statusLabel}>\n {userSelection.createdBy.displayName}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 247,
-      "context": "</Text>\n {typeData}\n \n {isGuests && infoPanelSelection.createdBy?.displayName ? (\n <>\n <Text className=\"info_field\" noSelect title={t(\"Common:Inviter\")}>\n {t(\"Common:Inviter\")}\n </Text>\n <Text\n className=\"info_data first-row\"\n fontSize=\"13px\"",
+      "line_number": 259,
+      "context": "</Text>\n {typeData}\n \n {isGuests && userSelection.createdBy?.displayName ? (\n <>\n <Text className={styles.infoField} title={t(\"Common:Inviter\")}>\n {t(\"Common:Inviter\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight={600} title={statusLabel}>\n {userSelection.createdBy.displayName}\n </Text>",
       "module": "/packages/client"
     },
     {

@@ -41,7 +41,7 @@ import { TColorScheme } from "@docspace/shared/themes";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import TransactionHistory from "./TransactionHistory";
-import TopUpModal from "./TopUpModal";
+import TopUpModal from "../../../../../components/panels/TopUpBalance/TopUpModal";
 import WalletRefilledModal from "./WalletRefilledModal";
 import { formattedBalanceTokens } from "./utils";
 import PayerInformation from "../PayerInformation";
@@ -77,7 +77,6 @@ type WalletProps = {
   fetchBalance?: () => Promise<void>;
   fetchTransactionHistory?: () => Promise<void>;
   canUpdateTariff: VoidFunction;
-  setVisibleWalletSetting?: (value: boolean) => void;
   isNotPaidPeriod?: boolean;
   isMobile?: boolean;
   walletCustomerStatusNotActive?: boolean;
@@ -86,6 +85,7 @@ type WalletProps = {
   payerEmail?: string;
   walletHelpUrl?: string;
   currentColorScheme?: TColorScheme;
+  reccomendedAmount?: string;
 };
 
 const typeClassMap: Record<string, string> = {
@@ -108,7 +108,6 @@ const Wallet = (props: WalletProps) => {
     fetchBalance,
     fetchTransactionHistory,
     canUpdateTariff,
-    setVisibleWalletSetting,
     isNotPaidPeriod,
     isMobile,
     walletCustomerStatusNotActive,
@@ -117,6 +116,7 @@ const Wallet = (props: WalletProps) => {
     payerEmail,
     walletHelpUrl,
     currentColorScheme,
+    reccomendedAmount,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -134,7 +134,6 @@ const Wallet = (props: WalletProps) => {
 
   const onClose = () => {
     setVisible(false);
-    if (isVisibleWalletSettings) setVisibleWalletSetting?.(false);
   };
 
   const onOpen = () => {
@@ -202,6 +201,7 @@ const Wallet = (props: WalletProps) => {
           fontWeight={600}
           href={walletHelpUrl}
           color={currentColorScheme?.main?.accent}
+          dataTestId="wallet_learn_more_link"
         >
           {t("Common:LearnMore")}
         </Link>
@@ -209,7 +209,6 @@ const Wallet = (props: WalletProps) => {
 
       {isCardLinkedToPortal ? (
         <PayerInformation
-          style={undefined}
           theme={undefined}
           user={undefined}
           accountLink={undefined}
@@ -217,6 +216,9 @@ const Wallet = (props: WalletProps) => {
           email={undefined}
           isNotPaidPeriod={undefined}
           isStripePortalAvailable={undefined}
+          style={{
+            marginTop: "18px",
+          }}
         />
       ) : null}
       <div className={styles.balanceWrapper}>
@@ -251,6 +253,7 @@ const Wallet = (props: WalletProps) => {
           className={classNames(styles.topUpButton, {
             [styles.isMobileButton]: isMobile,
           })}
+          testId="top_up_balance_button"
         />
       </div>
 
@@ -302,6 +305,7 @@ const Wallet = (props: WalletProps) => {
           visible={visible}
           onClose={onClose}
           isEditAutoPayment={isEditAutoPayment}
+          reccomendedAmount={reccomendedAmount}
         />
       ) : null}
 
@@ -332,8 +336,8 @@ export default inject(
       fetchBalance,
       fetchTransactionHistory,
       canUpdateTariff,
-      setVisibleWalletSetting,
       isCardLinkedToPortal,
+      reccomendedAmount,
     } = paymentStore;
     const { isFreeTariff } = currentQuotaStore;
     const {
@@ -357,7 +361,6 @@ export default inject(
       fetchBalance,
       fetchTransactionHistory,
       canUpdateTariff,
-      setVisibleWalletSetting,
       isCardLinkedToPortal,
       isNotPaidPeriod,
       isMobile,
@@ -365,6 +368,7 @@ export default inject(
       payerEmail: walletCustomerEmail,
       walletHelpUrl,
       currentColorScheme,
+      reccomendedAmount,
     };
   },
 )(observer(Wallet));

@@ -71,13 +71,27 @@ export const Providers = ({
   const expectedPathName = `/${redirectURL}`;
 
   React.useEffect(() => {
-    if (redirectURL && confirmType === "GuestShareLink") {
+    if (
+      redirectURL &&
+      (confirmType === "GuestShareLink" || confirmType === "EmailChange")
+    ) {
       sessionStorage.setItem(
         "referenceUrl",
         `/confirm/${confirmType}?${searchParams?.toString()}`,
       );
     }
   }, [redirectURL, searchParams, confirmType]);
+
+  React.useEffect(() => {
+    // On the first navigation from an email link, the auth cookie is not sent
+    // because it has SameSite=Strict. To access the cookie,
+    // we perform a client-side redirect and set a special flag.
+    if (confirmType === "EmailChange" && !searchParams.get("redirected")) {
+      window.location.replace(
+        `/confirm/${confirmType}?${searchParams?.toString()}&redirected=true`,
+      );
+    }
+  }, [searchParams, confirmType]);
 
   React.useEffect(() => {
     if (shouldRedirect && redirectURL && pathName !== expectedPathName)

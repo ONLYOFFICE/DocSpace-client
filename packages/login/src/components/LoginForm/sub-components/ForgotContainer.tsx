@@ -32,6 +32,7 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
+import { RecaptchaType } from "@docspace/shared/enums";
 
 import { LoginDispatchContext } from "@/components/Login";
 
@@ -42,6 +43,8 @@ interface IForgotContainer {
   isChecked: boolean;
   identifier: string;
   onChangeCheckbox: VoidFunction;
+  reCaptchaPublicKey?: string;
+  reCaptchaType?: RecaptchaType;
 }
 
 const ForgotContainer = ({
@@ -49,6 +52,8 @@ const ForgotContainer = ({
   isChecked,
   identifier,
   onChangeCheckbox,
+  reCaptchaPublicKey,
+  reCaptchaType,
 }: IForgotContainer) => {
   const { setIsModalOpen } = useContext(LoginDispatchContext);
   const { t } = useTranslation(["Login", "Common"]);
@@ -86,8 +91,10 @@ const ForgotContainer = ({
                     <Text fontSize="12px">{t("RememberHelper")}</Text>
                   }
                   tooltipMaxWidth={isMobileOnly ? "240px" : "340px"}
+                  dataTestId="remember_help_button"
                 />
               }
+              dataTestId="remember_checkbox"
             />
           ) : null}
         </div>
@@ -99,6 +106,7 @@ const ForgotContainer = ({
           isHovered={false}
           onClick={onClick}
           id="login_forgot-password-link"
+          dataTestId="forgot_password_link"
         >
           {t("ForgotPassword")}
         </Link>
@@ -109,6 +117,8 @@ const ForgotContainer = ({
           isVisible={isDialogVisible}
           userEmail={identifier}
           onDialogClose={onDialogClose}
+          reCaptchaPublicKey={reCaptchaPublicKey}
+          reCaptchaType={reCaptchaType}
         />
       ) : null}
     </div>

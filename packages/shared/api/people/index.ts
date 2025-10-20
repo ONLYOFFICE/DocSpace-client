@@ -38,6 +38,7 @@ import {
   AccountsSearchArea,
   EmployeeStatus,
   EmployeeType,
+  RecaptchaType,
 } from "../../enums";
 import { Nullable } from "../../types";
 
@@ -57,12 +58,16 @@ export async function getUserList(
   if (filter) {
     checkFilterInstance(filter, Filter);
 
-    params = `/filter?${filter.toApiUrlParams()}`;
+    const search = filter.toApiUrlParams();
+
+    params = `/filter?${search}`;
   }
+
+  const url = `/people${params}`;
 
   const res = (await request({
     method: "get",
-    url: `/people${params}`,
+    url,
     signal,
   })) as TGetUserList;
 
@@ -216,8 +221,13 @@ export function changePassword(userId, passwordHash, key) {
   });
 }
 
-export async function changeEmail(userId: string, email: string, key: string) {
-  const data = { email };
+export async function changeEmail(
+  userId: string,
+  email: string,
+  encemail: string,
+  key: string,
+) {
+  const data = encemail ? { encemail } : { email };
 
   const res = (await request({
     method: "put",
@@ -239,7 +249,7 @@ export async function updateActivationStatus(
     url: `/people/activationstatus/${activationStatus}`,
     data: { userIds: [userId] },
     headers: { confirm: key },
-  })) as TUser;
+  })) as TUser[];
 
   return res;
 }
@@ -271,11 +281,21 @@ export function deleteSelf(key) {
   });
 }
 
-export function sendInstructionsToChangePassword(email) {
+export function sendInstructionsToChangePassword(
+  email: string,
+  recaptchaResponse: string | null | undefined = "",
+  recaptchaType?: RecaptchaType,
+) {
+  const data: Record<string, unknown> = { email, recaptchaResponse };
+
+  if (typeof recaptchaType !== "undefined") {
+    data.recaptchaType = recaptchaType;
+  }
+
   return request({
     method: "post",
     url: "/people/password",
-    data: { email },
+    data,
   });
 }
 
@@ -314,10 +334,11 @@ export function changeProductAdmin(userId, productId, administrator) {
   });
 }
 
-export async function getUserById(userId: string) {
+export async function getUserById(userId: string, signal?: AbortSignal) {
   const res = (await request({
     method: "get",
     url: `/people/${userId}`,
+    signal,
   })) as TUser;
 
   res.displayName = Encoder.htmlDecode(res.displayName);
@@ -615,6 +636,7 @@ export async function getMembersList(
   roomId: string | number,
   filter = Filter.getDefault(),
   signal?: AbortSignal,
+  targetEntityType: "file" | "folder" | "room" = "room",
 ) {
   let params = "";
 
@@ -636,13 +658,13 @@ export async function getMembersList(
 
   switch (searchArea) {
     case AccountsSearchArea.People:
-      url = `people/room/${roomId}${params}`;
+      url = `people/${targetEntityType}/${roomId}${params}`;
       break;
     case AccountsSearchArea.Groups:
-      url = `group/room/${roomId}${params}`;
+      url = `group/${targetEntityType}/${roomId}${params}`;
       break;
     default:
-      url = `accounts/room/${roomId}/search${params}`;
+      url = `accounts/${targetEntityType}/${roomId}/search${params}`;
   }
 
   const res = (await request({

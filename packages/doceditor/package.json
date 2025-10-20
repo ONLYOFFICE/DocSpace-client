@@ -1,6 +1,6 @@
 {
   "name": "@docspace/doceditor",
-  "version": "3.2.1",
+  "version": "3.5.0",
   "private": true,
   "scripts": {
     "build:translations": "node ./scripts/buildTranslations.js",
@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@docspace/shared": "workspace:*",
-    "@onlyoffice/document-editor-react": "file:./onlyoffice-document-editor-react-1.6.2.tgz",
+    "@onlyoffice/document-editor-react": "2.1.1",
     "classnames": "2.5.1",
     "crypto-js": "4.2.0",
     "date-and-time": "3.6.0",
@@ -25,10 +25,10 @@
     "lodash": "4.17.21",
     "moment": "2.30.1",
     "nconf": "0.12.1",
-    "next": "15.3.2",
-    "react": "19.1.0",
+    "next": "15.5.2",
+    "react": "19.1.1",
     "react-device-detect": "2.2.3",
-    "react-dom": "19.1.0",
+    "react-dom": "19.1.1",
     "react-i18next": "14.0.1",
     "sass": "1.79.5",
     "styled-components": "5.3.11",
@@ -40,6 +40,18 @@
     "he": "1.2.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.34.0",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
+    "eslint": "9.34.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-jsx-a11y": "6.10.0",
+    "eslint-plugin-prettier": "5.2.1",
+    "eslint-plugin-react": "7.37.1",
+    "eslint-plugin-react-hooks": "5.1.0",
+    "globals": "^15.0.0",
+    "typescript-eslint": "^8.15.0",
     "@babel/core": "7.25.8",
     "@svgr/webpack": "8.1.0",
     "@types/crypto-js": "4.2.2",
@@ -51,14 +63,14 @@
     "@types/react-dom": "19.1.5",
     "@types/styled-components": "5.1.34",
     "cross-env": "^7.0.3",
-    "eslint": "8.57.1",
-    "eslint-config-next": "15.3.2",
+    "css-minimizer-webpack-plugin": "^7.0.2",
+    "eslint-config-next": "15.5.2",
     "nconf": "0.12.1",
-    "prettier": "3.3.3",
+    "prettier": "3.6.2",
     "sass": "1.79.5",
     "shx": "0.3.4",
     "terser-webpack-plugin": "5.3.10",
-    "typescript": "5.6.3"
+    "typescript": "5.9.2"
   },
   "nx": {
     "targets": {

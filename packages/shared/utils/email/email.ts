@@ -26,7 +26,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable no-useless-escape */
+
 /* eslint-disable no-control-regex */
 import emailAddresses, { ParsedGroup, ParsedMailbox } from "email-addresses";
 

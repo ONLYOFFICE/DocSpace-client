@@ -3,7 +3,7 @@
   "content": "The image size is too large, please select another image.",
   "content_en_sha1_hash": "70aa576311994ef2eb1361f70f15d79707597c1f",
   "created_at": "2025-05-19T21:30:48.898Z",
-  "updated_at": "2025-06-30T12:20:31.214Z",
+  "updated_at": "2025-10-14T05:18:12.360Z",
   "comment": {
     "text": "The translation key \"SizeImageLarge\" is used to display an error message when an image file exceeds a certain size limit. This message is intended to inform users that their selected image is too large and should be replaced with a smaller one. It appears in various UI components, including dialog boxes and form fields, where image uploads are required.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/store/AvatarEditorDialogStore.js",
-      "line_number": 205,
-      "context": ".catch((error) => {\n if (\n error instanceof Error &&\n error.message === \"recursion depth exceeded\"\n ) {\n toastr.error(t(\"Common:SizeImageLarge\"));\n }\n });\n } catch (error) {\n toastr.error(t(\"Common:NotSupportedFormat\"));\n }",
+      "line_number": 203,
+      "context": ".catch((error) => {\n if (\n error instanceof Error &&\n error.message === \"recursion depth exceeded\"\n ) {\n toastr.error(t(\"Common:SizeImageLarge\"));\n }\n });\n } catch (error) {\n console.error(error);\n toastr.error(t(\"Common:NotSupportedFormat\"));",
       "module": "/packages/client"
     }
   ],
@@ -99,7 +99,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The apostrophe in 'l&apos;immagine' is using an HTML entity. It should be a standard apostrophe.",
+          "suggestion": "La dimensione dell'immagine è troppo grande, seleziona un'altra immagine."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -168,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'විශාලයි' (vishālai) is spelled correctly, but could be slightly more natural in this context. While grammatically correct, 'ඉතා විශාලයි' (itā vishālai) - 'very large' - might sound better.",
-          "suggestion": "රූපයේ ප්‍රමාණය ඉතා විශාලයි (Rūpaye pramāṇaya itā vishālai)"
+          "description": "The word 'විශාලයි' (vishalayi) is technically correct for 'large' but sounds slightly awkward in this context. A more natural phrasing might use 'ඉතා විශාල' (itha vishala).",
+          "suggestion": "රූපයේ ප්‍රමාණය ඉතා විශාලයි → රූපයේ ප්‍රමාණය ඉතා ඉතා විශාලයි"
         }
       ],
       "approved_at": null
@@ -217,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -38,7 +38,7 @@ const StyledTableRow = styled(TableRow)`
     text-overflow: ellipsis;
   }
 
-  .username {
+  .checkbox-text {
     font-size: 13px;
     font-weight: 600;
     color: ${(props) => props.theme.client.settings.migration.subtitleColor};
@@ -83,11 +83,22 @@ const UsersTableRow = (props: UsersTableRowProps) => {
   const { t, displayName, email, isDuplicate, isChecked, toggleAccount } =
     props;
 
+  const handleRowClick = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement).closest(".user-select")) {
+      return;
+    }
+    toggleAccount(e);
+  };
+
   return (
-    <StyledTableRow onClick={toggleAccount}>
+    <StyledTableRow onClick={handleRowClick}>
       <TableCell className="checkboxWrapper">
-        <Checkbox isChecked={isChecked} onChange={toggleAccount} />
-        <Text className="username">{displayName}</Text>
+        <Checkbox
+          isChecked={isChecked}
+          label={displayName}
+          onChange={toggleAccount}
+          className="user-select"
+        />
       </TableCell>
 
       <TableCell>

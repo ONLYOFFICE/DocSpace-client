@@ -36,7 +36,7 @@ import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 
 import { getCorrectDate } from "@docspace/shared/utils";
 import styles from "../../styles/TransactionHistory.module.scss";
-import { accountingLedgersFormat } from "../../utils";
+import { accountingLedgersFormat, getServiceQuantity } from "../../utils";
 
 type TransactionRowViewProps = {
   transaction: TTransactionCollection;
@@ -51,32 +51,66 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
   theme,
   sectionWidth,
 }) => {
-  const { credit, withdrawal, currency } = transaction;
+  const { credit, debit, currency } = transaction;
   const { t } = useTranslation("Payments");
   const isCredit = credit > 0;
 
   const formattedAmount = accountingLedgersFormat(
     language,
-    credit || withdrawal,
+    credit || debit,
     isCredit,
     currency,
   );
 
-  const getServiceQuantity = (quantity: number, service?: string) => {
-    let serviceName = service;
-
-    if (service != null && service.includes("disk-storage")) {
-      serviceName = "disk-storage";
-    }
-
-    switch (serviceName) {
-      case "disk-storage":
-        return `${quantity} ${t("Common:Gigabyte")}`;
-      default:
-        return "—";
-    }
-  };
   const correctDate = getCorrectDate(language, transaction.date);
+
+  const getRowChildren = () => {
+    const children = [
+      <div key="description">
+        <Text
+          fontWeight={600}
+          fontSize="14px"
+          as="span"
+          className={styles.transactionRowDescription}
+        >
+          {transaction.description}
+        </Text>
+        {transaction.details ? (
+          <Text fontWeight={600} fontSize="14px" as="span">
+            ({transaction.details})
+          </Text>
+        ) : null}
+      </div>,
+      <div key="spacer" />,
+      <Text
+        key="date"
+        fontWeight={600}
+        fontSize="11px"
+        dataTestId="transaction_date"
+      >
+        {correctDate}
+      </Text>,
+    ];
+
+    if (transaction.participantDisplayName) {
+      children.push(
+        <Text key="participant" fontWeight={600} fontSize="11px">
+          {transaction.participantDisplayName}
+        </Text>,
+      );
+    }
+
+    if (transaction.serviceUnit) {
+      children.push(
+        <Text key="quantity" fontWeight={600} fontSize="11px">
+          {getServiceQuantity(t, transaction.quantity, transaction.serviceUnit)}
+        </Text>,
+      );
+    }
+
+    return children;
+  };
+
   return (
     <Row
       className={styles.transactionRow}
@@ -96,18 +130,7 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
         sideColor={theme?.filesSection?.rowView?.sideColor || ""}
         sectionWidth={sectionWidth}
       >
-        <Text fontWeight={600} fontSize="15px">
-          {transaction.description}
-        </Text>
-        <div />
-
-        <Text fontWeight={600} fontSize="11px">
-          {correctDate}
-        </Text>
-
-        <Text fontWeight={600} fontSize="11px">
-          {getServiceQuantity(transaction.quantity, transaction.service)}
-        </Text>
+        {getRowChildren()}
       </RowContent>
     </Row>
   );

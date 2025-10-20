@@ -114,7 +114,7 @@ describe("<ArticleItem />", () => {
     );
     const articleItemSibling = screen.getByTestId("article-item-sibling");
     fireEvent.mouseUp(articleItemSibling);
-    expect(mockOnDrop).toHaveBeenCalledWith(undefined, "Documents");
+    expect(mockOnDrop).toHaveBeenCalledWith(undefined, "Documents", undefined);
   });
 
   it("applies active styles when isActive is true", () => {

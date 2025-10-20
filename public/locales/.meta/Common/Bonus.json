@@ -3,7 +3,7 @@
   "content": "Bonus",
   "content_en_sha1_hash": "4d963cfab70d8c850b1221649bcc7b4d96d558d3",
   "created_at": "2025-05-19T21:30:43.309Z",
-  "updated_at": "2025-06-30T12:20:31.104Z",
+  "updated_at": "2025-10-17T14:43:53.307Z",
   "comment": {
     "text": "This translation key is used to display the text \"Bonus\" in various parts of the UI, such as article titles and settings pages. It appears in interactive elements like buttons and dialogues, indicating a reward or special feature within the application.",
     "is_auto": true,
@@ -18,20 +18,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 232,
+      "line_number": 234,
       "context": "return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:DeveloperTools\":\n return t(\"Common:DeveloperTools\");\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 627,
+      "line_number": 634,
       "context": "{\n id: \"portal-settings_catalog-bonus\",\n key: \"11\",\n type: PageType.bonus,\n link: \"bonus\",\n tKey: \"Common:Bonus\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-portal-bonus\",\n key: \"11-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/management/src/components/article/index.tsx",
-      "line_number": 118,
-      "context": "linkData={{ path: \"/payments\", state: {} }}\n />\n ) : (\n <ArticleItem\n key=\"bonus\"\n text={t(\"Common:Bonus\")}\n iconNode={<GiftReactSvg />}\n showText={showText}\n onClick={() => onItemClick(\"bonus\")}\n isActive={pathname === \"/bonus\"}\n folderId=\"management_catalog-bonus\"",
+      "line_number": 126,
+      "context": "withAnimation\n />\n ) : (\n <ArticleItem\n key=\"bonus\"\n text={t(\"Common:Bonus\")}\n iconNode={<GiftReactSvg />}\n showText={showText}\n onClick={() => onItemClick(\"bonus\")}\n isActive={activePath.includes(\"bonus\")}\n folderId=\"management_catalog-bonus\"",
       "module": "/packages/management"
     },
     {

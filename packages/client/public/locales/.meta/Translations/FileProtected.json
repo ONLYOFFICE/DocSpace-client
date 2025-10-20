@@ -3,7 +3,7 @@
   "content": "The file is password protected",
   "content_en_sha1_hash": "3f1a3e1fb99e2c4ac9bfd19915c5facc2ea9c102",
   "created_at": "2025-05-19T21:30:49.967Z",
-  "updated_at": "2025-05-26T07:57:32.130Z",
+  "updated_at": "2025-10-16T07:29:35.479Z",
   "comment": {
     "text": "The translation key \"FileProtected\" is used to display a message indicating that a file has been password protected. It appears in an error message within a form creation process and is displayed as a warning to the user.",
     "is_auto": true,
@@ -11,26 +11,26 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/dialogs/ConvertPasswordDialog/index.js",
+      "line_number": 149,
+      "context": "<StyledComponent>\n <div className=\"convert-password-dialog_content\">\n <div className=\"convert-password-dialog_caption\">\n <Text>\n {makeForm\n ? t(\"Translations:FileProtected\").concat(\n \". \",\n t(\"ConversionPasswordMasterFormCaption\"),\n )\n : t(\"Translations:FileProtected\").concat(\n \". \",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/ConvertPasswordDialog/index.js",
+      "line_number": 149,
+      "context": "<StyledComponent>\n <div className=\"convert-password-dialog_content\">\n <div className=\"convert-password-dialog_caption\">\n <Text>\n {makeForm\n ? t(\"Translations:FileProtected\").concat(\n \". \",\n t(\"ConversionPasswordMasterFormCaption\"),\n )\n : t(\"Translations:FileProtected\").concat(\n \". \",",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/Hooks/useCreateFileError.ts",
-      "line_number": 66,
+      "line_number": 77,
       "context": "toastr.error(\n t(\"ConvertPasswordDialog:CreationError\"),\n t(\"Common:Warning\"),\n );\n } else {\n toastr.error(t(\"Translations:FileProtected\"), t(\"Common:Warning\"));\n }\n \n setFormCreationInfo?.({\n newTitle: error?.fileInfo?.title,\n fromExst: \".docx\",",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/ConvertPasswordDialog/index.js",
-      "line_number": 149,
-      "context": "<StyledComponent>\n <div className=\"convert-password-dialog_content\">\n <div className=\"convert-password-dialog_caption\">\n <Text>\n {makeForm\n ? t(\"Translations:FileProtected\").concat(\n \". \",\n t(\"ConversionPasswordMasterFormCaption\"),\n )\n : t(\"Translations:FileProtected\").concat(\n \". \",",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/ConvertPasswordDialog/index.js",
-      "line_number": 149,
-      "context": "<StyledComponent>\n <div className=\"convert-password-dialog_content\">\n <div className=\"convert-password-dialog_caption\">\n <Text>\n {makeForm\n ? t(\"Translations:FileProtected\").concat(\n \". \",\n t(\"ConversionPasswordMasterFormCaption\"),\n )\n : t(\"Translations:FileProtected\").concat(\n \". \",",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 351,
+      "line_number": 381,
       "context": "if (errorMessage.indexOf(\"password\") == -1) {\n toastr.error(errorMessage, t(\"Common:Warning\"));\n return;\n }\n \n toastr.error(t(\"Translations:FileProtected\"), t(\"Common:Warning\"));\n setFormCreationInfo({\n newTitle,\n fromExst: fileExst,\n toExst: this.filesSettingsStore.extsWebRestrictedEditing[0],\n fileInfo: item,",
       "module": "/packages/client"
     }

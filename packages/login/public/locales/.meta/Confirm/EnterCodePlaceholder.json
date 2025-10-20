@@ -3,7 +3,7 @@
   "content": "Enter code",
   "content_en_sha1_hash": "ab45ae5b415e0ca602923ec9615648ed55ebb00f",
   "created_at": "2025-05-19T21:30:57.362Z",
-  "updated_at": "2025-06-30T12:20:31.663Z",
+  "updated_at": "2025-08-21T11:22:39.934Z",
   "comment": {
     "text": "This translation key is used for a placeholder text that asks users to \"Enter code\" in various input fields throughout the TFA activation and authentication processes. It appears as a placeholder when the field is not editable or contains a limited number of characters, such as in a 6-digit code entry field.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaActivation/page.client.tsx",
-      "line_number": 223,
+      "line_number": 266,
       "context": "type={InputType.text}\n size={InputSize.large}\n scale\n isAutoFocussed\n tabIndex={1}\n placeholder={t(\"EnterCodePlaceholder\")}\n isDisabled={isLoading}\n maxLength={6}\n onChange={onChangeInput}\n value={code}\n hasError={!!error}",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaAuth/page.client.tsx",
-      "line_number": 168,
+      "line_number": 157,
       "context": "type={InputType.text}\n size={InputSize.large}\n scale\n isAutoFocussed\n tabIndex={1}\n placeholder={t(\"EnterCodePlaceholder\")}\n isDisabled={isLoading}\n maxLength={6}\n onChange={onChangeInput}\n value={code}\n hasError={!!error}",
       "module": "/packages/login"
     }

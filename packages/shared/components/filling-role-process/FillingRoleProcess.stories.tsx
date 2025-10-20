@@ -27,7 +27,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import FillingRoleProcess from "./FillingRoleProcess";
-import { FileFillingFormStatus } from "../../enums";
+import { FileFillingFormStatus, FillingFormStatusHistory } from "../../enums";
 
 const meta = {
   title: "Components/FillingRoleProcess",
@@ -58,20 +58,89 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof FillingRoleProcess>;
 
+const createMockUser = (id: string, displayName: string) => ({
+  id,
+  displayName,
+  access: 0,
+  firstName: displayName.split(" ")[0],
+  lastName: displayName.split(" ")[1] || "",
+  userName: displayName.toLowerCase().replace(/\s+/g, "."),
+  email: `${displayName.toLowerCase().replace(/\s+/g, ".")}@example.com`,
+  status: 1, // EmployeeStatus.Active
+  activationStatus: 1, // EmployeeActivationStatus.Activated
+  department: "Development",
+  workFrom: "2023-01-01T10:00:00Z",
+  avatarMax: "",
+  avatarMedium: "",
+  avatarOriginal: "",
+  avatar: "",
+  isAdmin: false,
+  isRoomAdmin: false,
+  isLDAP: false,
+  listAdminModules: [],
+  isOwner: false,
+  isVisitor: false,
+  isCollaborator: false,
+  isAnonim: false,
+  mobilePhoneActivationStatus: 0,
+  isSSO: false,
+  avatarSmall: "",
+  profileUrl: "",
+  hasAvatar: false,
+  groups: [],
+  mobilePhone: "",
+  title: "",
+});
+
+const mockProcessDetails = [
+  {
+    sequence: 1,
+    user: createMockUser("user1", "John Doe"),
+    roleName: "Approver",
+    roleStatus: FileFillingFormStatus.None,
+    roleColor: "#FF9500",
+    submitted: false,
+    history: {
+      [FillingFormStatusHistory.OpenedAtDate]: "2023-01-01T10:00:00Z",
+      [FillingFormStatusHistory.SubmissionDate]: "2023-01-02T11:30:00Z",
+      [FillingFormStatusHistory.StopDate]: "2023-01-02T11:30:00Z",
+    } as const,
+  },
+  {
+    sequence: 2,
+    user: createMockUser("user2", "Jane Smith"),
+    roleName: "Reviewer",
+    roleStatus: FileFillingFormStatus.Completed,
+    roleColor: "#2AB0FC",
+    submitted: true,
+    history: {
+      [FillingFormStatusHistory.OpenedAtDate]: "2023-01-03T09:15:00Z",
+      [FillingFormStatusHistory.SubmissionDate]: "2023-01-02T11:30:00Z",
+      [FillingFormStatusHistory.StopDate]: "2023-01-04T15:45:00Z",
+    } as const,
+  },
+];
+
 export const Default: Story = {
   args: {
+    processDetails: mockProcessDetails,
     fileStatus: FileFillingFormStatus.InProgress,
+    currentUserId: "user1",
   },
 };
 
 export const Completed: Story = {
   args: {
+    processDetails: mockProcessDetails,
     fileStatus: FileFillingFormStatus.Completed,
+    currentUserId: "user1",
   },
 };
 
 export const Stopped: Story = {
   args: {
+    processDetails: mockProcessDetails,
     fileStatus: FileFillingFormStatus.Stopped,
+    currentUserId: "user1",
   },
 };

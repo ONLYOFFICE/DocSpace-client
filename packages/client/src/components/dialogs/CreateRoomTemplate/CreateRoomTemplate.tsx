@@ -146,7 +146,11 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
   };
 
   const checkIfUserInvited = (user: TUser) => {
-    return inviteItems.findIndex((x) => x.id === user.id) > -1;
+    return (
+      inviteItems.findIndex(
+        (x) => x.id === user.id && x.templateAccess !== ShareAccessRights.None,
+      ) > -1
+    );
   };
 
   const onSubmitItems = (users: TSelectorItem[]) => {
@@ -248,6 +252,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
             label={t("Files:OpenCreatedTemplate")}
             isChecked={openCreatedIsChecked}
             onChange={onChangeOpenCreated}
+            dataTestId="create_room_template_open_checkbox"
           />
 
           <div className="create-room-template_buttons">

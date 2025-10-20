@@ -67,6 +67,7 @@ const ChangePhoneForm = () => {
         hasError={false}
         guide={false}
         value=""
+        testId="phone_input"
       />
 
       <Button
@@ -76,6 +77,7 @@ const ChangePhoneForm = () => {
         label={t("GetCode")}
         tabIndex={2}
         isDisabled={false}
+        testId="get_code_button"
       />
     </>
   );

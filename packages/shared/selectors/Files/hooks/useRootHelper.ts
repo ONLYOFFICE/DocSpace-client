@@ -42,6 +42,8 @@ const useRootHelper = ({
 
   setItems,
   treeFolders,
+  withRecentTreeFolder,
+  withFavoritesTreeFolder,
 
   setTotal,
   setHasNextPage,
@@ -82,7 +84,10 @@ const useRootHelper = ({
 
       if (
         (!isUserOnly && folder.rootFolderType === FolderType.Rooms) ||
-        folder.rootFolderType === FolderType.USER
+        folder.rootFolderType === FolderType.USER ||
+        (withRecentTreeFolder && folder.rootFolderType === FolderType.Recent) ||
+        (withFavoritesTreeFolder &&
+          folder.rootFolderType === FolderType.Favorites)
       ) {
         newItems.push({
           label: folder.title,
@@ -116,6 +121,8 @@ const useRootHelper = ({
     setItems,
     setTotal,
     treeFolders,
+    withRecentTreeFolder,
+    withFavoritesTreeFolder,
     t,
   ]);
 

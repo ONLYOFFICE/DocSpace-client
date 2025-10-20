@@ -32,11 +32,12 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter, useSearchParams } from "next/navigation";
 import { PublicRoomPasswordForm } from "@docspace/shared/pages/PublicRoom";
+import type { TValidateShareRoom } from "@docspace/shared/api/rooms/types";
 
 export default function PublicRoomPasswordPageClient({
-  roomTitle,
+  validation,
 }: {
-  roomTitle: string;
+  validation: TValidateShareRoom;
 }) {
   const { t } = useTranslation("Common");
   const router = useRouter();
@@ -52,7 +53,7 @@ export default function PublicRoomPasswordPageClient({
     <PublicRoomPasswordForm
       t={t}
       roomKey={roomKey || ""}
-      roomTitle={roomTitle}
+      validationData={validation}
       onSuccessValidationCallback={onSuccessValidation}
     />
   );

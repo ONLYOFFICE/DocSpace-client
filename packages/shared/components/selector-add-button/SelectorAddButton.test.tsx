@@ -25,10 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
-
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 import { SelectorAddButton } from ".";
 
@@ -39,13 +37,13 @@ const baseProps = {
 
 describe("<SelectorAddButton />", () => {
   it("renders without error", () => {
-    renderWithTheme(<SelectorAddButton {...baseProps} />);
+    render(<SelectorAddButton {...baseProps} />);
 
     expect(screen.getByTestId("selector-add-button")).toBeInTheDocument();
   });
 
   it("renders with title", () => {
-    renderWithTheme(<SelectorAddButton {...baseProps} />);
+    render(<SelectorAddButton {...baseProps} />);
 
     expect(screen.getByTestId("selector-add-button")).toHaveAttribute(
       "title",
@@ -54,7 +52,7 @@ describe("<SelectorAddButton />", () => {
   });
 
   it("accepts id", () => {
-    renderWithTheme(<SelectorAddButton {...baseProps} id="testId" />);
+    render(<SelectorAddButton {...baseProps} id="testId" />);
 
     expect(screen.getByTestId("selector-add-button")).toHaveAttribute(
       "id",
@@ -63,17 +61,15 @@ describe("<SelectorAddButton />", () => {
   });
 
   it("accepts className", () => {
-    renderWithTheme(
-      <SelectorAddButton {...baseProps} className="test-class" />,
-    );
+    render(<SelectorAddButton {...baseProps} className="test-class" />);
 
-    expect(screen.getByTestId("selector-add-button")).toHaveClass("test-class");
+    expect(screen.getByTestId("selector-add-button-container")).toHaveClass(
+      "test-class",
+    );
   });
 
   it("accepts style", () => {
-    renderWithTheme(
-      <SelectorAddButton {...baseProps} style={{ color: "red" }} />,
-    );
+    render(<SelectorAddButton {...baseProps} style={{ color: "red" }} />);
 
     expect(screen.getByTestId("selector-add-button")).toHaveStyle({
       color: "red",
@@ -82,7 +78,7 @@ describe("<SelectorAddButton />", () => {
 
   it("handles click when not disabled", () => {
     const onClick = jest.fn();
-    renderWithTheme(<SelectorAddButton {...baseProps} onClick={onClick} />);
+    render(<SelectorAddButton {...baseProps} onClick={onClick} />);
 
     fireEvent.click(screen.getByTestId("selector-add-button"));
     expect(onClick).toHaveBeenCalled();
@@ -90,23 +86,21 @@ describe("<SelectorAddButton />", () => {
 
   it("doesn't handle click when disabled", () => {
     const onClick = jest.fn();
-    renderWithTheme(
-      <SelectorAddButton {...baseProps} isDisabled onClick={onClick} />,
-    );
+    render(<SelectorAddButton {...baseProps} isDisabled onClick={onClick} />);
 
     fireEvent.click(screen.getByTestId("selector-add-button"));
     expect(onClick).not.toHaveBeenCalled();
   });
 
   it("applies isDisabled class when disabled", () => {
-    renderWithTheme(<SelectorAddButton {...baseProps} isDisabled />);
+    render(<SelectorAddButton {...baseProps} isDisabled />);
 
     const button = screen.getByTestId("selector-add-button");
     expect(button).toHaveClass("isDisabled");
   });
 
   it("applies isAction class when isAction prop is true", () => {
-    renderWithTheme(<SelectorAddButton {...baseProps} isAction />);
+    render(<SelectorAddButton {...baseProps} isAction />);
 
     const button = screen.getByTestId("selector-add-button");
     expect(button).toHaveClass("isAction");
@@ -114,9 +108,7 @@ describe("<SelectorAddButton />", () => {
 
   it("renders IconButton with correct props", () => {
     const iconSize = 16;
-    renderWithTheme(
-      <SelectorAddButton {...baseProps} iconSize={iconSize} isDisabled />,
-    );
+    render(<SelectorAddButton {...baseProps} iconSize={iconSize} isDisabled />);
 
     const iconButton = screen.getByTestId("icon-button");
     expect(iconButton).toBeInTheDocument();

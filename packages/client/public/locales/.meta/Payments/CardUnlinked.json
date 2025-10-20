@@ -3,13 +3,19 @@
   "content": "Card unlinked",
   "content_en_sha1_hash": "e03b19150f5805fbb3aba830ef26e26249fb29e2",
   "created_at": "2025-06-24T16:31:06.632Z",
-  "updated_at": "2025-06-30T12:20:31.558Z",
+  "updated_at": "2025-09-02T07:59:28.418Z",
   "comment": {
     "text": "This translation key is used to display a message when a wallet customer's card status is not active. It appears in UI as \"Card unlinked\" and indicates that the customer's card has been disconnected from their wallet account.",
     "is_auto": true,
     "updated_at": "2025-06-24T16:32:23.442Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/TopUpBalance/sub-components/PaymentMethod.tsx",
+      "line_number": 133,
+      "context": ") : (\n <CheckReactSvg />\n )}\n <Text fontWeight={600} fontSize=\"14px\">\n {walletCustomerStatusNotActive\n ? t(\"CardUnlinked\")\n : t(\"CardLinked\")}\n </Text>\n </div>\n <Link\n fontWeight={600}",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
       "line_number": 162,
@@ -18,14 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletContainer.tsx",
-      "line_number": 260,
+      "line_number": 263,
       "context": "</div>\n \n {walletCustomerStatusNotActive ? (\n <div className={styles.walletCustomerStatusNotActive}>\n <Text fontWeight={600} className={styles.warningColor}>\n {t(\"CardUnlinked\")}\n </Text>\n <Text as=\"span\" className={styles.warningColor}>\n {isPayer ? (\n t(\"LinkNewCard\")\n ) : (",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/PaymentMethod.tsx",
-      "line_number": 98,
-      "context": ") : (\n <CheckReactSvg />\n )}\n <Text fontWeight={600} fontSize=\"14px\">\n {walletCustomerStatusNotActive\n ? t(\"CardUnlinked\")\n : t(\"CardLinked\")}\n </Text>\n </div>\n <Link\n fontWeight={600}",
       "module": "/packages/client"
     }
   ],

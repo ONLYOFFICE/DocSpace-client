@@ -25,9 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 import { Loader } from ".";
 import { LoaderTypes } from "./Loader.enums";
@@ -41,52 +40,52 @@ const baseProps = {
 
 describe("<Loader />", () => {
   test("renders without error", () => {
-    renderWithTheme(<Loader {...baseProps} />);
+    render(<Loader {...baseProps} />);
     expect(screen.getByTestId("loader")).toBeInTheDocument();
   });
 
   test("renders base type with text", () => {
-    renderWithTheme(<Loader {...baseProps} />);
+    render(<Loader {...baseProps} />);
     expect(screen.getByText("Loading")).toBeInTheDocument();
   });
 
   test("renders oval type", () => {
-    renderWithTheme(<Loader {...baseProps} type={LoaderTypes.oval} />);
+    render(<Loader {...baseProps} type={LoaderTypes.oval} />);
     expect(screen.getByTestId("loader")).toBeInTheDocument();
     expect(screen.getByTestId("oval-loader")).toBeInTheDocument();
   });
 
   test("renders dual-ring type", () => {
-    renderWithTheme(<Loader {...baseProps} type={LoaderTypes.dualRing} />);
+    render(<Loader {...baseProps} type={LoaderTypes.dualRing} />);
     expect(screen.getByTestId("loader")).toBeInTheDocument();
     expect(screen.getByTestId("dual-ring-loader")).toBeInTheDocument();
   });
 
   test("renders rombs type", () => {
-    renderWithTheme(<Loader {...baseProps} type={LoaderTypes.rombs} />);
+    render(<Loader {...baseProps} type={LoaderTypes.rombs} />);
     expect(screen.getByTestId("loader")).toBeInTheDocument();
     expect(screen.getByTestId("rombs-loader")).toBeInTheDocument();
   });
 
   test("renders track type", () => {
-    renderWithTheme(<Loader {...baseProps} type={LoaderTypes.track} />);
+    render(<Loader {...baseProps} type={LoaderTypes.track} />);
     expect(screen.getByTestId("loader")).toBeInTheDocument();
     expect(screen.getByTestId("track-loader")).toBeInTheDocument();
   });
 
   test("accepts custom className", () => {
-    renderWithTheme(<Loader {...baseProps} className="custom-loader" />);
+    render(<Loader {...baseProps} className="custom-loader" />);
     expect(screen.getByTestId("loader")).toHaveClass("custom-loader");
   });
 
   test("accepts custom style", () => {
     const customStyle = { marginTop: "20px" };
-    renderWithTheme(<Loader {...baseProps} style={customStyle} />);
+    render(<Loader {...baseProps} style={customStyle} />);
     expect(screen.getByTestId("loader")).toHaveStyle(customStyle);
   });
 
   test("accepts custom id", () => {
-    renderWithTheme(<Loader {...baseProps} id="custom-loader" />);
+    render(<Loader {...baseProps} id="custom-loader" />);
     expect(screen.getByTestId("loader")).toHaveAttribute("id", "custom-loader");
   });
 });

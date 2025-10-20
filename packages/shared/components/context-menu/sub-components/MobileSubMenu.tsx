@@ -1,21 +1,26 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import { ReactSVG } from "react-svg";
 import { CSSTransition } from "react-transition-group";
-import { useTheme } from "styled-components";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import { DomHelpers, classNames } from "../../../utils";
 import { ContextMenuSkeleton } from "../../../skeletons/context-menu";
 import { Scrollbar } from "../../scrollbar";
 import { Badge } from "../../badge";
-import { ContextMenuModel, ContextMenuType } from "../ContextMenu.types";
+import {
+  ContextMenuModel,
+  ContextMenuType,
+  TOnMobileItemClick,
+} from "../ContextMenu.types";
 import { globalColors } from "../../../themes";
+import { useTheme } from "../../../hooks/useTheme";
 
 interface MobileSubMenuProps {
   onLeafClick: (e: React.MouseEvent) => void;
   root?: boolean;
   resetMenu: boolean;
   mobileSubMenuItems?: ContextMenuModel[];
+  onMobileItemClick?: TOnMobileItemClick;
 }
 
 const MenuItem = ({
@@ -27,7 +32,7 @@ const MenuItem = ({
   onClick: (e: React.MouseEvent) => void;
   style: React.CSSProperties;
 }) => {
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   if (item.disabled) return null;
 
@@ -64,6 +69,7 @@ const MenuItem = ({
     <li
       id={item.id}
       key={item.key}
+      data-testid={item.dataTestId ?? item.key}
       role="none"
       className={className}
       style={{ ...item.style, ...style }}
@@ -88,7 +94,7 @@ const MenuItem = ({
             style={{ marginInlineStart: "10px" }}
             backgroundColor={
               item.isPaidBadge
-                ? theme.isBase
+                ? isBase
                   ? globalColors.favoritesStatus
                   : globalColors.favoriteStatusDark
                 : globalColors.lightBlueMain
@@ -126,6 +132,7 @@ export const MobileSubMenu = ({
   root,
   resetMenu,
   mobileSubMenuItems,
+  onMobileItemClick,
 }: MobileSubMenuProps) => {
   const [submenu, setSubmenu] = useState<ContextMenuModel[] | null>(null);
   const subMenuRef = useRef<HTMLUListElement>(null);
@@ -183,11 +190,13 @@ export const MobileSubMenu = ({
 
       item.onClick?.({ originalEvent: e, action: item.action, item });
 
-      if (!item.items) {
+      if (item.items || item.onLoad) {
+        onMobileItemClick?.(e, item.label as string, item.items, item.onLoad);
+      } else {
         onLeafClick(e);
       }
     },
-    [onLeafClick],
+    [onLeafClick, onMobileItemClick],
   );
 
   const renderMenu = useCallback(

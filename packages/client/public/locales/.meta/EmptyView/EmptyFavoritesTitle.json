@@ -1,0 +1,28 @@
+{
+  "key_path": "EmptyFavoritesTitle",
+  "content": "No favorites yet",
+  "content_en_sha1_hash": "95bc68017dfed8ed0ded21e039540b341d9e4f0c",
+  "created_at": "2025-08-29T14:33:36.166Z",
+  "updated_at": "2025-09-23T07:24:24.017Z",
+  "comment": {
+    "text": "This text appears in an empty state view, specifically within the \"Favorites\" section. It informs the user that they have not yet added any items to their favorites list. Translators should ensure the tone is friendly and encouraging.",
+    "is_auto": true,
+    "updated_at": "2025-08-29T14:34:42.584Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 329,
+      "context": ")\n .with([FolderType.USER, ShareAccessRights.None], () =>\n t(\"Common:EmptyScreenFolder\"),\n )\n .with([FolderType.SHARE, P._], () => t(\"EmptyView:EmptyShareTitle\"))\n .with([FolderType.Favorites, P._], () => t(\"EmptyView:EmptyFavoritesTitle\"))\n .with([FolderType.Recent, P._], () => t(\"EmptyView:NoRecentFilesHereYet\"))\n .with([FolderType.Archive, P._], () => t(\"Files:ArchiveEmptyScreenHeader\"))\n .with([FolderType.TRASH, P._], () => t(\"Common:EmptyScreenFolder\"))\n .otherwise(() => \"\");\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

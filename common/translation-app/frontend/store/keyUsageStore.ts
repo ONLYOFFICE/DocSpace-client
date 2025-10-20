@@ -146,8 +146,8 @@ export const useKeyUsageStore = create<KeyUsageState>()(
       loadStats: async () => {
         try {
           set({ isLoadingStats: true });
-          const stats = await api.getKeyUsageStats();
-          set({ stats, isLoadingStats: false });
+          const response = await api.getKeyUsageStats();
+          set({ stats: response.data, isLoadingStats: false });
         } catch (error) {
           console.error('Error loading key usage stats:', error);
           set({ isLoadingStats: false });

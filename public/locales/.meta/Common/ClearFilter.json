@@ -3,7 +3,7 @@
   "content": "Clear filter",
   "content_en_sha1_hash": "b667d6f9f635decfb59140eb7361aedc90b3b761",
   "created_at": "2025-05-19T21:30:43.475Z",
-  "updated_at": "2025-06-30T12:20:31.115Z",
+  "updated_at": "2025-10-07T15:39:07.185Z",
   "comment": {
     "text": "The translation key \"ClearFilter\" is used to display a clear filter button or link that resets filters in a search or filtering interface. It appears as a prominent action item on pages like Form Gallery and Contacts Body, where it helps users remove existing filters.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyFilterContainer.js",
-      "line_number": 117,
+      "line_number": 118,
       "context": "const options = [\n {\n key: \"empty-view-filter\",\n to: \"\",\n description: t(\"Common:ClearFilter\"),\n icon: <ClearEmptyFilterSvg />,\n onClick: onResetFilter,\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/FormGallery/Body.js",
-      "line_number": 133,
+      "line_number": 135,
       "context": "isHovered\n type=\"action\"\n fontWeight=\"600\"\n display=\"flex\"\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </StyledEmptyContainerLinks>\n }\n />\n ) : (",
       "module": "/packages/client"
     },
@@ -36,55 +36,55 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/index.tsx",
-      "line_number": 159,
-      "context": "type={LinkType.action}\n isHovered\n fontWeight=\"600\"\n onClick={onClearFilter}\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n )}",
+      "line_number": 168,
+      "context": "isHovered\n fontWeight=\"600\"\n onClick={onClearFilter}\n dataTestId=\"accounts_clear_filter_link\"\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n )}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/index.tsx",
-      "line_number": 155,
+      "line_number": 162,
       "context": "type={LinkType.action}\n isHovered\n fontWeight=\"600\"\n onClick={onClearFilter}\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n )}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/RowView/index.tsx",
-      "line_number": 206,
+      "line_number": 211,
       "context": "type={LinkType.action}\n isHovered\n fontWeight=\"600\"\n onClick={onClearFilter}\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n )}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/TableView/index.tsx",
-      "line_number": 156,
+      "line_number": 163,
       "context": "type={LinkType.action}\n isHovered\n fontWeight=\"600\"\n onClick={onClearFilter}\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n )}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/RowView/index.tsx",
-      "line_number": 218,
+      "line_number": 224,
       "context": "type={LinkType.action}\n isHovered\n fontWeight=\"600\"\n onClick={onClearFilter}\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n )}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/index.tsx",
-      "line_number": 217,
+      "line_number": 222,
       "context": "type={LinkType.action}\n isHovered\n fontWeight=\"600\"\n onClick={onClearFilter}\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n )}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/EmptyFilter.js",
-      "line_number": 110,
-      "context": "{t(\"NoResultsMatched\")}\n </Text>\n <span className=\"clearFilter\" onClick={clearFilters}>\n <img\n src={ClearEmptyFilterIcon}\n alt={t(\"ClearFilter\")}\n className=\"clearFilterIcon\"\n />\n <Link\n color={theme.isBase ? globalColors.lightGrayDark : \"inherit\"}\n isHovered",
+      "line_number": 57,
+      "context": "const options = [\n {\n key: \"empty-view-filter\",\n to: \"\",\n description: t(\"Common:ClearFilter\"),\n icon: <ClearEmptyFilterSvg />,\n onClick: clearFilters,\n },\n ];",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/EmptyFilter.js",
-      "line_number": 119,
-      "context": "color={theme.isBase ? globalColors.lightGrayDark : \"inherit\"}\n isHovered\n fontWeight={600}\n type=\"action\"\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </span>\n </div>\n </EmptyFilterContent>\n </EmptyFilterWrapper>",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
+      "line_number": 598,
+      "context": "onClick={onClearFilter}\n textDecoration=\"underline dotted\"\n dataTestId=\"clear_filter_button\"\n className={styles.clearFilter}\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n ) : null}\n </div>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/selector/sub-components/EmptyScreen.tsx",
-      "line_number": 170,
+      "line_number": 169,
       "context": "size={12}\n iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}\n isFill\n />\n <Link {...linkStyles}>\n {withSearch ? t(\"Common:ClearFilter\") : t(\"Common:Back\")}\n </Link>\n </div>\n </div>\n ) : null}\n </div>",
       "module": "/packages/shared"
     }

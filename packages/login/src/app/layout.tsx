@@ -79,6 +79,15 @@ export default async function RootLayout({
   ]);
 
   if (
+    type === "EmailChange" &&
+    typeof settings !== "string" &&
+    queryParams?.redirected &&
+    !settings?.socketUrl
+  ) {
+    redirectUrl = "login?emailChange=true";
+  }
+
+  if (
     type === "GuestShareLink" &&
     typeof settings !== "string" &&
     !settings?.socketUrl

@@ -3,7 +3,7 @@
   "content": "No users match your search. Please adjust your search parameters or clear the search field to view the full list of users.",
   "content_en_sha1_hash": "e38c6445c5ffaacd4c043f8ec2d9a0484e70bae4",
   "created_at": "2025-05-19T21:30:46.936Z",
-  "updated_at": "2025-06-30T12:20:31.239Z",
+  "updated_at": "2025-10-01T15:17:48.222Z",
   "comment": {
     "text": "\"No users are found based on your search criteria. This message is displayed when a user cannot be retrieved due to an empty or invalid search result.\"",
     "is_auto": true,
@@ -11,15 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/EditGroupMembersDialog/EmptyContainer.tsx",
-      "line_number": 53,
-      "context": "return (\n <StyledEmptyScreen\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n />\n );\n };\n \n export default EmptyContainer;",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/EmptyContainer.tsx",
-      "line_number": 53,
-      "context": "return (\n <StyledEmptyScreen\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n />\n );\n };\n \n export default EmptyContainer;",
+      "line_number": 50,
+      "context": "return (\n <EmptyScreenContainer\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n className={styles.emptyScreen}\n />\n );\n };",
       "module": "/packages/client"
     },
     {
@@ -30,43 +24,49 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/index.tsx",
-      "line_number": 143,
-      "context": ") : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
+      "line_number": 150,
+      "context": "imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/index.tsx",
-      "line_number": 139,
-      "context": ") : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
+      "line_number": 146,
+      "context": "imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/RowView/index.tsx",
-      "line_number": 190,
-      "context": ") : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
+      "line_number": 195,
+      "context": "imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/TableView/index.tsx",
-      "line_number": 140,
-      "context": ") : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
+      "line_number": 147,
+      "context": "imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/RowView/index.tsx",
-      "line_number": 202,
-      "context": ") : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
+      "line_number": 208,
+      "context": "imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/index.tsx",
-      "line_number": 201,
-      "context": ") : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
+      "line_number": 206,
+      "context": "imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/shared/dialogs/edit-group-members-dialog/EmptyContainer.tsx",
+      "line_number": 54,
+      "context": "return (\n <StyledEmptyScreen\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n />\n );\n };\n \n export default EmptyContainer;",
+      "module": "/packages/shared"
+    },
+    {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 674,
+      "line_number": 699,
       "context": "}\n searchEmptyScreenDescription={\n activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundFilterGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:NotFoundUsersDescription\")\n : t(\"Common:GroupsNotFoundDescription\")\n }\n hasNextPage={hasNextPage}\n isNextPageLoading={isNextPageLoading}\n loadNextPage={loadNextPage}",
       "module": "/packages/shared"
     }

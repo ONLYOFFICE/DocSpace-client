@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable, runInAction } from "mobx";
+import axios from "axios";
+
 import api from "../api";
 import {
   TPaymentFeature,
@@ -34,6 +36,7 @@ import {
 import { MANAGER, TOTAL_SIZE, YEAR_KEY } from "../constants";
 import { Nullable } from "../types";
 import { CurrentQuotasStore } from "./CurrentQuotaStore";
+import { SettingsStore } from "./SettingsStore";
 
 type QuotaId = string | number;
 
@@ -113,9 +116,15 @@ class PaymentQuotasStore {
 
   private currentQuotaStore: CurrentQuotasStore;
 
-  constructor(currentQuotaStore: CurrentQuotasStore) {
+  private settingsStore: SettingsStore;
+
+  constructor(
+    currentQuotaStore: CurrentQuotasStore,
+    settingsStore: SettingsStore,
+  ) {
     makeAutoObservable(this);
     this.currentQuotaStore = currentQuotaStore;
+    this.settingsStore = settingsStore;
   }
 
   setIsLoaded = (isLoaded: boolean) => {
@@ -153,28 +162,37 @@ class PaymentQuotasStore {
 
   setPortalPaymentQuotas = async () => {
     if (this.isLoaded) return;
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
 
-    const res = await api.portal.getPortalPaymentQuotas();
-    if (!res) return;
-
-    const { isFreeTariff, currentQuotaId } = this.currentQuotaStore;
-
-    const quotasById = createQuotasMap(res);
-    const quotasByYear = createYearQuotasMap(quotasById);
-
-    runInAction(() => {
-      const result = getCurrentQuota(
-        isFreeTariff,
-        currentQuotaId,
-        quotasById,
-        quotasByYear,
+    try {
+      const res = await api.portal.getPortalPaymentQuotas(
+        abortController.signal,
       );
+      if (!res) return;
 
-      this.portalPaymentQuotas = result?.quota || null;
-      this.portalPaymentQuotasFeatures = result?.featuresMap || new Map();
-    });
+      const { isFreeTariff, currentQuotaId } = this.currentQuotaStore;
 
-    this.setIsLoaded(true);
+      const quotasById = createQuotasMap(res);
+      const quotasByYear = createYearQuotasMap(quotasById);
+
+      runInAction(() => {
+        const result = getCurrentQuota(
+          isFreeTariff,
+          currentQuotaId,
+          quotasById,
+          quotasByYear,
+        );
+
+        this.portalPaymentQuotas = result?.quota || null;
+        this.portalPaymentQuotasFeatures = result?.featuresMap || new Map();
+      });
+
+      this.setIsLoaded(true);
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+      throw error;
+    }
   };
 }
 

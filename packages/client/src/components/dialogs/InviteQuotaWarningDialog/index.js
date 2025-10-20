@@ -54,6 +54,7 @@ const InviteQuotaWarningDialog = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+
   const isAccounts = location.pathname.includes("accounts/people");
 
   const [datesData, setDatesData] = useState({});
@@ -104,13 +105,13 @@ const InviteQuotaWarningDialog = (props) => {
 
   const contentForGracePeriod = (
     <>
-      <Text fontWeight={700} noSelect>
+      <Text fontWeight={700}>
         {t("BusinessPlanPaymentOverdue", {
           planName: currentTariffPlanTitle,
         })}
       </Text>
       <br />
-      <Text noSelect as="div">
+      <Text as="div">
         <Trans t={t} i18nKey="GracePeriodActivatedInfo" ns="Payments">
           Grace period activated
           <strong>
@@ -120,7 +121,11 @@ const InviteQuotaWarningDialog = (props) => {
         </Trans>
       </Text>
       <br />
-      <Text>{t("GracePeriodActivatedDescription")}</Text>
+      <Text>
+        {t("GracePeriodActivatedDescription", {
+          productName: t("Common:ProductName"),
+        })}
+      </Text>
     </>
   );
 

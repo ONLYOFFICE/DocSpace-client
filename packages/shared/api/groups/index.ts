@@ -83,7 +83,10 @@ export const createGroup = async (
 
 // * Read
 
-export const getGroups = async (filter = Filter.getDefault()) => {
+export const getGroups = async (
+  filter = Filter.getDefault(),
+  signal?: AbortSignal,
+) => {
   let params = "";
 
   if (filter) {
@@ -95,6 +98,7 @@ export const getGroups = async (filter = Filter.getDefault()) => {
   const res = (await request({
     method: "get",
     url: `/group${params}`,
+    signal,
   })) as TGetGroupList;
 
   res.items = decodeGroups(res.items);
@@ -164,6 +168,21 @@ export const getGroupMembersInRoom = async (
   filter: TGetGroupMembersInRoomFilter,
 ) => {
   const url = `/files/folder/${folderId}/group/${groupId}/share?${toUrlParams(filter, false)}`;
+
+  const res = (await request({
+    method: "get",
+    url,
+  })) as TGetGroupMembersInRoom;
+
+  return res;
+};
+
+export const getGroupMembersShareFile = async (
+  fileId: string | number,
+  groupId: string,
+  filter: TGetGroupMembersInRoomFilter,
+) => {
+  const url = `/files/file/${fileId}/group/${groupId}/share?${toUrlParams(filter, false)}`;
 
   const res = (await request({
     method: "get",

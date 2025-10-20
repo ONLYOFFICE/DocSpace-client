@@ -3,7 +3,7 @@
   "content": "The file cannot be copied to this room. Please try to copy the {{organizationName}} PDF form.",
   "content_en_sha1_hash": "a1c3d143cde07c3cc51c27c08a8705ae800f1435",
   "created_at": "2025-05-19T21:30:49.585Z",
-  "updated_at": "2025-06-18T07:34:14.802Z",
+  "updated_at": "2025-10-17T14:43:53.328Z",
   "comment": {
     "text": "This translation key displays a warning message when attempting to copy a file to a form room. It indicates that the file cannot be copied due to its format (pdf) and suggests copying the organization's pdf form instead. This message appears in the Files Selector component.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
-      "line_number": 219,
-      "context": "const option = { organizationName: logoText };\n \n if (isCopy)\n return several\n ? t(\"Files:WarningCopyToFormRoomServal\", option)\n : t(\"Common:WarningCopyToFormRoom\", option);\n \n if (isMove)\n return several\n ? t(\"Files:WarningMoveToFormRoomServal\", option)\n : t(\"Files:WarningMoveToFormRoom\", option);",
+      "line_number": 218,
+      "context": "const option = { organizationName: t(\"Common:OrganizationName\") };\n \n if (isCopy)\n return several\n ? t(\"Files:WarningCopyToFormRoomServal\", option)\n : t(\"Common:WarningCopyToFormRoom\", option);\n \n if (isMove)\n return several\n ? t(\"Files:WarningMoveToFormRoomServal\", option)\n : t(\"Files:WarningMoveToFormRoom\", option);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/SelectFolderDialog.tsx",
-      "line_number": 66,
-      "context": "const withFooterCheckbox =\n fileSaveAsExtension !== \"zip\" && fileInfo.fileExst !== \"fb2\";\n \n const formProps = useMemo(() => {\n return {\n message: t(\"Common:WarningCopyToFormRoom\", {\n organizationName,\n }),\n isRoomFormAccessible:\n Boolean(fileInfo.isForm) && fileSaveAsExtension === \"pdf\",\n };",
+      "line_number": 65,
+      "context": "const withFooterCheckbox =\n fileSaveAsExtension !== \"zip\" && fileInfo.fileExst !== \"fb2\";\n \n const formProps = useMemo(() => {\n return {\n message: t(\"Common:WarningCopyToFormRoom\", {\n organizationName: t(\"Common:OrganizationName\"),\n }),\n isRoomFormAccessible:\n Boolean(fileInfo.isForm) && fileSaveAsExtension === \"pdf\",\n };",
       "module": "/packages/doceditor"
     }
   ],
@@ -33,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"نسخ نموذج PDF الخاص بـ\" (copy the PDF form belonging to) is a bit clunky. A more natural phrasing would be \"نموذج PDF الخاص بـ\" (the PDF form of) or \"نموذج PDF لـ\" (PDF form for).",
-          "suggestion": "لا يمكن نسخ الملف إلى هذه الغرفة. يُرجى محاولة نسخ نموذج PDF لـ {{organizationName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -63,13 +57,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is overly literal and sounds unnatural in German. A more natural phrasing would be something like 'Die Datei lässt sich nicht in diesen Raum kopieren. Versuchen Sie bitte, das PDF-Formular von {{organizationName}} zu kopieren.'",
-          "suggestion": "Die Datei lässt sich nicht in diesen Raum kopieren. Versuchen Sie bitte, das PDF-Formular von {{organizationName}} zu kopieren."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -78,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'διαγραφή' (diagrapi) means 'deletion' or 'erasure', not 'copy'. The intended meaning is 'copy'.",
-          "suggestion": "Δεν είναι δυνατή η αντιγραφή του αρχείου σε αυτό το δωμάτιο. Δοκιμάστε να αντιγράψετε τη φόρμα PDF του {{organizationName}}."
+          "description": "The English phrase \"copied\" is translated as \"διαγραφή\" (diagrafe), which means \"deletion\" or \"erasing.\" It should be translated as \"αντιγραφή\" (antigrafi) which means \"copying\".",
+          "suggestion": "Replace \"διαγραφή\" with \"αντιγραφή\"."
         }
       ],
       "approved_at": null
@@ -90,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'sala' translates to 'room' but in this context, 'room' refers to a digital room or repository. A more accurate translation would be 'área', 'espacio', or 'contenedor'.",
-          "suggestion": "El archivo no se puede copiar en esta área/espacio/contenedor. Por favor, intente copiar el formulario PDF de {{organizationName}}."
+          "description": "The translation of 'room' is not ideal. 'Sala' implies a literal room, while the context suggests a defined area or space within the application. A more appropriate term might be 'área' or 'espacio'.",
+          "suggestion": "El archivo no se puede copiar en esta área. Por favor, intente copiar el formulario PDF de {{organizationName}}."
         }
       ],
       "approved_at": null
@@ -111,13 +99,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"The file cannot be copied to this room\" is translated as \"Ֆայլը չի կարող պատճենվել այս սենյակում\". While technically correct, a more natural phrasing in Armenian might be \"Ֆայլը չի կարողանում պատճենվել այս սենյակում\" or \"Ֆայլը հնարավոր չէ պատճենել այս սենյակում\".",
-          "suggestion": "Ֆայլը հնարավոր չէ պատճենել այս սենյակում:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -126,8 +108,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Please try to copy the {{organizationName}} PDF form' is translated as 'Si prega di provare a copiare un modulo PDF {{organizationName}} alla volta.' The addition of 'alla volta' (one at a time) changes the meaning.  The original implies trying to copy the form, not necessarily one at a time.",
-          "suggestion": "Si prega di provare a copiare il modulo PDF {{organizationName}}."
+          "description": "The Italian translation 'alla volta' (one at a time) doesn't accurately convey the original meaning of the English sentence which simply indicates an issue with copying to the room. It implies a limit of one copy at a time, which isn't the intended meaning.",
+          "suggestion": "Il file non può essere copiato in questa stanza. Si prega di provare a copiare il modulo PDF {{organizationName}}."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'Si prega di provare' is a bit formal for a warning message. A more conversational tone might be preferred.",
+          "suggestion": "Provate a copiare il modulo PDF {{organizationName}}."
         }
       ],
       "approved_at": null
@@ -149,14 +136,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ຖ່າຍອອກໄປ\" (thay ok pai) implies copying out of somewhere, which isn't quite the intended meaning. A better phrasing would convey that it cannot be copied *to* the room.",
-          "suggestion": "ເອກະສານນີ້ບໍ່ສາມາດຖ່າຍໃສ່ຫ້ອງນີ້ໄດ້ (eksakan ni bo ma san thai sai hong ni dai)"
-        },
-        {
           "type": "spelling",
-          "description": "While not strictly incorrect, 'ເອກະສານ' (eksakan) is a more formal term. For a warning message, 'ເອກະສານ' might sound a little stiff.",
-          "suggestion": "ບເອກະສານນີ້ບໍ່ສາມາດຖ່າຍໃສ່ຫ້ອງນີ້ໄດ້ (b eksakan ni bo ma san thai sai hong ni dai)"
+          "description": "The word 'ດ້ວຍ' (duay) at the end of the Lao translation could be interpreted as 'with' and doesn't fit the context of the instruction. It implies the user should copy the form 'with' something.",
+          "suggestion": "ເອກະສານນີ້ບໍ່ສາມາດຖ່າຍອອກໄປໃນຫ້ອງນີ້ໄດ້ ກະລຸນາພະຍາຍາມຖ່າຍແບບຟອມ PDF ຂອງ {{organizationName}}."
         }
       ],
       "approved_at": null
@@ -184,14 +166,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ficheiro' is a valid Portuguese word but might be better replaced with 'arquivo' for broader understanding and consistency with common usage in this context.",
-          "suggestion": "arquivo"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'formulário PDF {{organizationName}}' lacks proper punctuation. A hyphen should be added after 'PDF' to make it read as 'formulário PDF-{{organizationName}}'.",
-          "suggestion": "formulário PDF-{{organizationName}}"
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The file cannot be copied' is translated as 'O ficheiro não pode ser copiado'. While technically correct, a more natural and common Portuguese translation would be 'O arquivo não pode ser copiado'. 'Arquivo' is more frequently used than 'ficheiro' in this context.",
+          "suggestion": "O arquivo não pode ser copiado"
         }
       ],
       "approved_at": null
@@ -202,13 +179,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'PDF form {{organizationName}} PDF form' is redundant and doesn't accurately reflect the English content. The English content refers to a specific PDF form associated with the organization.",
-          "suggestion": "O arquivo não pode ser copiado para esta sala. Tente copiar o formulário PDF {{organizationName}}."
+          "description": "The phrase \"PDF form\" is repeated unnecessarily. It's redundant to say \"formulário em PDF {{organizationName}} PDF form\". The second 'PDF form' is not needed.",
+          "suggestion": "O arquivo não pode ser copiado para esta sala. Tente copiar o formulário em PDF {{organizationName}}."
         },
         {
-          "type": "grammar",
-          "description": "The repetition of 'PDF' makes the sentence sound awkward in Portuguese.",
-          "suggestion": "O arquivo não pode ser copiado para esta sala. Tente copiar o formulário PDF {{organizationName}}."
+          "type": "formatting",
+          "description": "Spacing after punctuation. There should be a space after the period.",
+          "suggestion": "O arquivo não pode ser copiado para esta sala. Tente copiar o formulário em PDF {{organizationName}}. "
         }
       ],
       "approved_at": null
@@ -218,14 +195,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'această' should be 'această'.",
-          "suggestion": "această"
-        },
-        {
           "type": "grammar",
-          "description": "The sentence structure is slightly awkward. 'Încercați să copiați' could be improved.",
-          "suggestion": "Încercați să copiați formularul PDF {{organizationName}}."
+          "description": "The word 'această' should be 'această' (feminine, nominative case) to agree with 'sală'.",
+          "suggestion": "Imposibil de copiat fișierul în **această** sală. Încercați să copiați formularul PDF {{organizationName}}."
         }
       ],
       "approved_at": null
@@ -236,13 +208,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"The file cannot be copied to this room\" is translated accurately, but the overall phrasing feels a bit stiff and unnatural in Russian.  A more natural phrasing might incorporate a more conversational tone.",
-          "suggestion": "Файл не удается скопировать в эту комнату. Пожалуйста, попробуйте скопировать PDF-форму {{organizationName}}."
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, the inclusion of a space before the 'PDF-форму' is slightly less common and could be improved.",
-          "suggestion": "Файл не удается скопировать в эту комнату. Пожалуйста, попробуйте скопировать PDF форму {{organizationName}}."
+          "description": "The phrase \"эта комнату\" (this room) is grammatically correct but sounds unnatural in this context. It's more appropriate to use \"в это помещение\" or \"в эту папку\" (into this folder) to match the implied 'room' being a virtual folder or space.",
+          "suggestion": "Файл не может быть скопирован в это помещение. Пожалуйста, попробуйте скопировать PDF-форму {{organizationName}}."
         }
       ],
       "approved_at": null
@@ -250,7 +217,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ආකෘතිය' (aakruththiaya) could be improved. While technically correct, 'ලිපි' (lipi) would be a more natural translation for 'form' in this context, referring to a document format.",
+          "suggestion": "මෙම කාමරයට ගොනුව පිටපත් කළ නොහැකි ය. කරුණාකර {{organizationName}} PDF ලිපිය පිටපත් කිරීමට උත්සාහ කරන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -265,8 +238,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Please try to copy the {{organizationName}} PDF form' is not accurately translated. A more natural Slovenian translation would be 'Poskusite kopirati PDF obrazec {{organizationName}}.' or 'Poskusite posredovati PDF obrazec {{organizationName}}'. The current translation is a bit awkward and uses 'kopirati' twice unnecessarily.",
+          "description": "The phrase 'Please try to copy the {{organizationName}} PDF form' is not the most natural way to express this in Slovenian. A more common and user-friendly phrasing would be 'Poskusite kopirati PDF obrazec {{organizationName}}'.",
           "suggestion": "Poskusite kopirati PDF obrazec {{organizationName}}."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, adding a period after 'sobo' would improve readability. Slovenian generally prefers ending sentences with a period.",
+          "suggestion": "Datoteke ni mogoče kopirati v to sobo. "
         }
       ],
       "approved_at": null
@@ -277,13 +255,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'фајл' (file) is spelled correctly but might be better replaced with 'датутека' to align better with common terminology in formal contexts.",
-          "suggestion": "датутека"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'PDF образац' is technically correct, but using 'PDF формулар' might be more common and sound more natural.",
-          "suggestion": "PDF формулар"
+          "description": "The word 'собу' should likely be 'собу'.",
+          "suggestion": "собу"
         }
       ],
       "approved_at": null
@@ -303,16 +276,34 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Ukrainian translation uses a hyphenated word 'PDF-форму'. While understandable, it's more natural to use the unhyphenated form 'PDF форму'.",
+          "suggestion": "PDF форму"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Please try to copy' is somewhat indirect. A more direct translation emphasizing action would improve clarity in Vietnamese. 'Xin hãy thử sao chép' is acceptable but could be improved.",
+          "suggestion": "Xin hãy sao chép biểu mẫu PDF {{organizationName}}."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

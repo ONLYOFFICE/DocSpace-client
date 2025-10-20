@@ -25,12 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
 
 import styles from "./SelectionArea.module.scss";
 import { frames } from "./SelectionArea.utils";
 import { SelectionAreaProps, TArrayTypes } from "./SelectionArea.types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "../../utils";
+import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
 const SelectionArea = ({
   onMove,
@@ -45,6 +45,7 @@ const SelectionArea = ({
   arrayTypes,
   containerClass,
   itemClass,
+  onMouseDown,
 }: SelectionAreaProps) => {
   const areaLocation = React.useRef({ x1: 0, x2: 0, y1: 0, y2: 0 });
   const areaRect = React.useRef(new DOMRect());
@@ -56,15 +57,13 @@ const SelectionArea = ({
   const scrollSpeed = React.useRef({ x: 0, y: 0 });
   const selectableNodes = React.useRef(new Set<Element>());
 
-  const theme = useTheme();
+  const { isRTL } = useInterfaceDirection();
 
   const isIntersects = React.useCallback(
     (itemIndex: number, itemType: string) => {
       const { right, left, bottom, top } = areaRect.current;
       if (!scrollElement.current) return;
       const { scrollTop } = scrollElement.current;
-
-      const isRtl = theme.interfaceDirection === "rtl";
 
       let itemTop;
       let itemBottom;
@@ -128,7 +127,7 @@ const SelectionArea = ({
         let columnIndex = (itemIndex + countOfMissingTiles) % countTilesInRow!;
 
         // Mirror fileIndex for RTL interface (2, 1, 0 => 0, 1, 2)
-        if (isRtl && viewAs === "tile") {
+        if (isRTL && viewAs === "tile") {
           columnIndex = countTilesInRow! - 1 - columnIndex;
         }
 
@@ -162,13 +161,7 @@ const SelectionArea = ({
 
       return bottom > itemTop && top < itemBottom;
     },
-    [
-      arrayTypes,
-      countTilesInRow,
-      defaultHeaderHeight,
-      theme.interfaceDirection,
-      viewAs,
-    ],
+    [arrayTypes, countTilesInRow, defaultHeaderHeight, isRTL, viewAs],
   );
 
   const recalculateSelectionAreaRect = React.useCallback(() => {
@@ -400,6 +393,10 @@ const SelectionArea = ({
 
   const onTapStart = React.useCallback(
     (e: MouseEvent) => {
+      onMouseDown?.(e);
+
+      if (e.button !== 0) return;
+
       const target = e.target as HTMLElement;
 
       if (

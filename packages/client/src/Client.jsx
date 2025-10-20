@@ -30,14 +30,11 @@ import { useLocation, Outlet } from "react-router";
 import { withTranslation } from "react-i18next";
 
 import Article from "@docspace/shared/components/article";
-import {
-  updateTempContent,
-  showLoader,
-  hideLoader,
-} from "@docspace/shared/utils/common";
+import { updateTempContent } from "@docspace/shared/utils/common";
 import { regDesktop } from "@docspace/shared/utils/desktop";
 
 import { toastr } from "@docspace/shared/components/toast";
+import { DeviceType } from "@docspace/shared/enums";
 
 import FilesPanels from "./components/FilesPanels";
 import GlobalEvents from "./components/GlobalEvents";
@@ -49,12 +46,18 @@ import {
 import ArticleWrapper from "./components/ArticleWrapper";
 
 const ClientArticle = React.memo(
-  ({ withMainButton, showArticleLoader, isInfoPanelVisible }) => {
+  ({
+    withMainButton,
+    showArticleLoader,
+    isInfoPanelVisible,
+    isAccountsArticle,
+  }) => {
     return (
       <ArticleWrapper
         isInfoPanelVisible={isInfoPanelVisible}
         withMainButton={withMainButton}
         showArticleLoader={showArticleLoader}
+        showBackButton={isAccountsArticle}
       >
         <Article.Header>
           <ArticleHeaderContent />
@@ -65,7 +68,7 @@ const ClientArticle = React.memo(
         </Article.MainButton>
 
         <Article.Body>
-          <ArticleBodyContent />
+          <ArticleBodyContent isAccountsArticle={isAccountsArticle} />
         </Article.Body>
       </ArticleWrapper>
     );
@@ -88,15 +91,15 @@ const ClientContent = (props) => {
     showMenu,
     isFrame,
     isInfoPanelVisible,
-    withMainButton,
     t,
 
-    isLoading,
     setIsFilterLoading,
     setIsHeaderLoading,
     isDesktopClientInit,
     setIsDesktopClientInit,
     showArticleLoader,
+
+    currentDeviceType,
   } = props;
 
   const location = useLocation();
@@ -143,13 +146,21 @@ const ClientContent = (props) => {
     isDesktop,
   ]);
 
-  React.useEffect(() => {
-    if (isLoading) {
-      showLoader();
-    } else {
-      hideLoader();
-    }
-  }, [isLoading]);
+  // React.useEffect(() => {
+  //   if (isLoading) {
+  //     showLoader();
+  //   } else {
+  //     hideLoader();
+  //   }
+  // }, [isLoading]);
+
+  const isAccountsArticle =
+    location.pathname.includes("/accounts") ||
+    (location.pathname.includes("/profile") &&
+      location.state?.fromUrl?.includes("/accounts"));
+  const withMainButton = isAccountsArticle
+    ? currentDeviceType !== DeviceType.desktop
+    : true;
 
   return (
     <>
@@ -164,6 +175,7 @@ const ClientContent = (props) => {
               setIsHeaderLoading={setIsHeaderLoading}
               setIsFilterLoading={setIsFilterLoading}
               showArticleLoader={showArticleLoader}
+              isAccountsArticle={isAccountsArticle}
             />
           )
         ) : (
@@ -173,6 +185,7 @@ const ClientContent = (props) => {
             setIsHeaderLoading={setIsHeaderLoading}
             setIsFilterLoading={setIsFilterLoading}
             showArticleLoader={showArticleLoader}
+            isAccountsArticle={isAccountsArticle}
           />
         )
       ) : null}
@@ -201,6 +214,7 @@ export const Client = inject(
       enablePlugins,
       isDesktopClientInit,
       setIsDesktopClientInit,
+      currentDeviceType,
     } = settingsStore;
 
     if (!userStore.user) return;
@@ -213,8 +227,6 @@ export const Client = inject(
       setIsSectionHeaderLoading,
       showArticleLoader,
     } = clientLoadingStore;
-
-    const withMainButton = true; // !isVisitor; // Allways true for any type of users
 
     const { isInit: isInitPlugins, initPlugins } = pluginStore;
 
@@ -233,7 +245,6 @@ export const Client = inject(
       isEncryption: isEncryptionSupport,
       isLoaded: authStore.isLoaded && clientLoadingStore.isLoaded,
       setIsLoaded: clientLoadingStore.setIsLoaded,
-      withMainButton,
       isInfoPanelVisible: isVisible && !isProfile,
       setIsFilterLoading: setIsSectionFilterLoading,
       setIsHeaderLoading: setIsSectionHeaderLoading,
@@ -247,6 +258,7 @@ export const Client = inject(
         if (enablePlugins && !isInitPlugins) actions.push(initPlugins());
         await Promise.all(actions);
       },
+      currentDeviceType,
     };
   },
 )(withTranslation("Common")(observer(ClientContent)));

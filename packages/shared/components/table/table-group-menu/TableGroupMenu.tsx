@@ -95,6 +95,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
       ) : (
         <Checkbox
           id="menu-checkbox_selected-all-file"
+          dataTestId="table_group_menu_checkbox"
           className={classNames(
             styles.checkbox,
             "table-container_group-menu-checkbox",
@@ -120,6 +121,8 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
           title={t("Common:TitleSelectFile")}
           isMobileView={isMobileView}
           onSelect={() => {}}
+          dataTestId="table_group_menu_combobox"
+          withBackground={isMobileView}
         />
       ) : null}
       <div
@@ -134,6 +137,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
             key={item.id || item.label}
             item={item}
             isBlocked={isBlocked}
+            dataTestId={`table_group_menu_item_${item.id}`}
           />
         ))}
       </Scrollbar>

@@ -73,6 +73,7 @@ const Row = (props: RowProps) => {
     badgeUrl,
     isDisabled,
     isIndexEditingMode,
+    dataTestId,
   } = props;
 
   const cm = useRef<ContextMenuRefType>(null);
@@ -164,6 +165,7 @@ const Row = (props: RowProps) => {
       onContextMenu={onContextMenu}
       className={classNames(
         styles.row,
+        checked ? "checked" : "",
         {
           [styles.withoutBorder]: withoutBorder,
           [styles.modern]: mode === "modern",
@@ -172,7 +174,7 @@ const Row = (props: RowProps) => {
         },
         className,
       )}
-      data-testid="row"
+      data-testid={dataTestId ?? "row"}
     >
       {inProgress ? (
         <Loader

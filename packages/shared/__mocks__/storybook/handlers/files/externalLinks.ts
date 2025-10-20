@@ -53,6 +53,9 @@ const generateFileLink = ({
 } = {}): TFileLink => {
   return {
     access,
+    canEditInternal: true,
+    canEditExpirationDate: true,
+    canRevoke: true,
     sharedTo: {
       id,
       title,
@@ -63,8 +66,9 @@ const generateFileLink = ({
       primary,
       internal,
       requestToken: "",
-      expirationDate,
+      expirationDate: expirationDate?.toISOString(),
     },
+    canEditDenyDownload: false,
     isLocked: false,
     isOwner: false,
     canEditAccess: false,

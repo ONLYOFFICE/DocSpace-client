@@ -3,7 +3,7 @@
   "content": "The URL used for the single sign-on on the Identity provider side",
   "content_en_sha1_hash": "52920fb734942b1004a873fb087529c481adc18b",
   "created_at": "2025-05-19T21:30:50.147Z",
-  "updated_at": "2025-05-24T03:10:39.933Z",
+  "updated_at": "2025-10-02T08:48:56.526Z",
   "comment": {
     "text": "The translation key \"SignOnEndpointUrlTooltip\" is used to display the tooltip text explaining the URL used for single sign-on on the Identity provider side. It appears in a tooltip associated with a button that configures this setting.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/IdpSettings.js",
-      "line_number": 123,
+      "line_number": 118,
       "context": "? \"https://idpservice/SSO/POST\"\n : \"https://idpservice/SSO/REDIRECT\"\n }\n tabIndex={7}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"SignOnEndpointUrlTooltip\")}</Text>\n }\n tooltipClass=\"sign-on-endpoint-url-tooltip icon-button\"\n value={ssoBinding?.includes(\"POST\") ? ssoUrlPost : ssoUrlRedirect}\n hasError={\n ssoBinding?.includes(\"POST\")",
       "module": "/packages/client"
     }

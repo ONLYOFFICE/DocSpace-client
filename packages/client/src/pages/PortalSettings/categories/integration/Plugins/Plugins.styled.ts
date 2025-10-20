@@ -36,6 +36,20 @@ const StyledEmptyContainer = styled.div`
   justify-content: center;
 `;
 
+const StyledUploadDescription = styled.div.attrs(injectDefaultTheme)`
+  .upload-description-text {
+    max-width: 700px;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    line-height: 20px;
+  }
+
+  .link-learn-more {
+    display: inline-block;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+`;
+
 const StyledContainer = styled.div`
   width: 100%;
   max-width: 700px;
@@ -144,4 +158,5 @@ export {
   PluginListContainer,
   StyledPluginItem,
   StyledPluginHeader,
+  StyledUploadDescription,
 };

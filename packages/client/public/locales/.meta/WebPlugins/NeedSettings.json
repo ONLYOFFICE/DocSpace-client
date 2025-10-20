@@ -3,7 +3,7 @@
   "content": "Need enter settings",
   "content_en_sha1_hash": "7c8461e2e83ab971323d60705984dfd56a9fc031",
   "created_at": "2025-05-19T21:30:49.912Z",
-  "updated_at": "2025-05-24T01:58:09.356Z",
+  "updated_at": "2025-09-24T13:10:16.963Z",
   "comment": {
     "text": "This translation key is used for the label of a settings-related button or dialog. It displays the phrase \"Need enter settings\" to indicate that user settings need to be accessed or updated, typically in a plugin management interface.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.js",
-      "line_number": 80,
-      "context": "const locale = getCookie(LANGUAGE) || \"en\";\n const uploadDate = plugin.createOn && getCorrectDate(locale, plugin.createOn);\n \n const pluginStatus =\n plugin.status === PluginStatus.active\n ? t(\"NotNeedSettings\")\n : t(\"NeedSettings\");\n \n return (\n <StyledContainer withDelete={withDelete}>\n {withSeparator ? <StyledSeparator /> : null}",
+      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
+      "line_number": 45,
+      "context": "const locale = getCookie(LANGUAGE) || \"en\";\n const uploadDate = plugin.createOn && getCorrectDate(locale, plugin.createOn);\n \n const pluginStatus =\n plugin.status === PluginStatus.active\n ? t(\"NotNeedSettings\")\n : t(\"NeedSettings\");\n \n return (\n <div\n className={classNames(styles.container, {",
       "module": "/packages/client"
     }
   ],

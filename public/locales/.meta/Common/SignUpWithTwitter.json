@@ -3,7 +3,7 @@
   "content": "Sign up with Twitter",
   "content_en_sha1_hash": "ac85b9d56e771c61d5bb37e328709add95b76780",
   "created_at": "2025-05-19T21:30:48.871Z",
-  "updated_at": "2025-06-08T12:02:32.924Z",
+  "updated_at": "2025-10-17T14:43:53.736Z",
   "comment": {
     "text": "This translation key is used to display the sign-up process instructions for Twitter, appearing as a button label or prompt.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 397,
+      "line_number": 432,
       "context": "return signUp\n ? t(\"Common:SignUpWithFacebook\")\n : t(\"Common:SignInWithFacebook\");\n case \"twitter\":\n return signUp\n ? t(\"Common:SignUpWithTwitter\")\n : t(\"Common:SignInWithTwitter\");\n case \"linkedin\":\n return signUp\n ? t(\"Common:SignUpWithLinkedIn\")\n : t(\"Common:SignInWithLinkedIn\");",
       "module": "/packages/shared"
     }
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'التسجيل بواسطة Twitter' is a very literal translation. A more natural and idiomatic Arabic (Saudi Arabia) translation would be something like 'سجل باستخدام Twitter' or 'انضم باستخدام Twitter'. 'بواسطة' is a bit formal and less common in this context.",
+          "suggestion": "سجل باستخدام Twitter"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -42,7 +48,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Влезте чрез Twitter\" uses \"Влезте\" which means \"Log in\" or \"Enter\", not \"Sign up\". The English phrase \"Sign up with Twitter\" implies creating a new account or registering.",
+          "description": "The translation 'Влезте чрез Twitter' literally means 'Log in with Twitter'. The original text 'Sign up with Twitter' implies registration, not login. 'Влезте' implies an existing account.",
           "suggestion": "Регистрирайте се чрез Twitter"
         }
       ],
@@ -54,7 +60,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Czech translation 'Zaregistrovat se přes Twitteru' is grammatically incorrect. The preposition 'přes' requires the nominative case, not the genitive ('Twitteru').",
+          "description": "The Czech translation \"Zaregistrovat se přes Twitteru\" uses the genitive case (\"Twitteru\") which is not the grammatically correct case for this context. The correct case should be the accusative (\"Twitter\").",
           "suggestion": "Zaregistrovat se přes Twitter"
         }
       ],
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຂົ້າສູ່ລະບົບດ້ວຍ Twitter\" literally translates to \"Log in with Twitter\". The English phrase \"Sign up with Twitter\" implies creating a new account, not logging into an existing one. While 'ເຂົ້າສູ່ລະບົບ' is a common phrase, it's not the best fit here.",
-          "suggestion": "ສາທິດສິດິສຳານູນດ້ວຍ Twitter\" (Sathit sitisamanun duai Twitter) - This translates more closely to 'Register with Twitter' or 'Sign up with Twitter' and conveys the intended action."
+          "description": "The Lao translation 'ເຂົ້າສູ່ລະບົບດ້ວຍ Twitter' literally translates to 'Log in with Twitter'. The English 'Sign up with Twitter' has a different meaning; it refers to creating an account, not logging into an existing one.",
+          "suggestion": "ສ້າງບັນຊີດ້ວຍ Twitter (Sang ban chi duay Twitter) - This translates to 'Create an account with Twitter'."
         }
       ],
       "approved_at": null
@@ -156,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Twitter' is misspelled as 'Twiiter' in the Portuguese translation.",
+          "description": "The word 'Twitter' is misspelled as 'Twiiter'.",
           "suggestion": "Cadastre-se com Twitter"
         }
       ],
@@ -168,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Conectare prin Twitter\" is understandable, it doesn't perfectly capture the meaning of \"Sign up with Twitter.\" \"Conectare\" implies connecting an existing account, whereas \"Sign up\" implies creating a new one.",
-          "suggestion": "Înscrie-te cu Twitter"
+          "description": "“Conectare prin Twitter” translates to \"Connect with Twitter,\" which isn't as direct as \"Sign up with Twitter.\" While functionally similar, the nuance is lost. 'Înregistrare prin Twitter' or 'Creare cont prin Twitter' would be more accurate.",
+          "suggestion": "Înregistrare prin Twitter"
         }
       ],
       "approved_at": null
@@ -186,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ට්විටර් සමඟ පිවිසෙන්න' while technically meaning 'Log in with Twitter', doesn't accurately convey the meaning of 'Sign up with Twitter'. 'Sign up' implies creating a new account, while 'Log in' implies accessing an existing one.",
+          "description": "The translation 'ට්විටර් සමඟ පිවිසෙන්න' literally translates to 'Enter with Twitter'. While understandable, 'Sign up with Twitter' implies registration, not just entering. A more accurate translation would convey the intent of creating an account.",
           "suggestion": "ට්විටර් ඔස්සේ ලියාපදිංචි වන්න"
         }
       ],
@@ -204,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Vpiši se s Twitter' is a literal translation but not the most natural phrasing for a button label. 'Sign up with Twitter' often implies connecting to Twitter, which is better conveyed by suggesting linking or joining.",
-          "suggestion": "Poveži se s Twitter"
+          "description": "The translation 'Vpiši se s Twitter' while understandable, isn't the most natural or accurate translation of 'Sign up with Twitter'. It literally translates to 'Enter yourself with Twitter'.",
+          "suggestion": "A more accurate and natural translation would be 'Prijavi se s Twitter' or 'Registriraj se s Twitter'."
         }
       ],
       "approved_at": null
@@ -216,13 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While understandable, \"Региструј се путем Twitter-а\" is a somewhat literal and slightly awkward translation. A more natural and idiomatic translation would convey the meaning better.",
-          "suggestion": "Региструј се са Twitter-ом"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of the preposition \"путем\" (putem) followed by a genitive case is grammatically correct but less common in this context. Using \"са\" (sa) followed by an instrumental case is preferred.",
-          "suggestion": "No change to grammar; stylistic preference."
+          "description": "While technically correct, \"Региструј се путем Twitter-а\" is a bit clunky. A more natural and common phrasing in Serbian would be \"Пријави се путем Twitter-а\" or \"Повежи се са Twitter-ом\".",
+          "suggestion": "Пријави се путем Twitter-а"
         }
       ],
       "approved_at": null
@@ -232,8 +233,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Serbian translation 'Registruj se putem Twitter-a' could be improved for clarity and consistency. Adding a hyphen between 'Twitter' and 'a' would be more standard Serbian usage.",
+          "type": "spelling",
+          "description": "The word 'Twitter' should be consistently capitalized.",
           "suggestion": "Registruj se putem Twitter-a"
         }
       ],
@@ -263,10 +264,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"用 Twitter 帐号注册\" is understandable, it's a slightly literal and less natural translation of \"Sign up with Twitter.\" A more common and natural phrasing would be closer to \"使用 Twitter 注册\" or \"通过 Twitter 注册\".",
+          "description": "While \"用 Twitter 帐号注册\" is understandable, a more accurate and natural-sounding translation would be \"使用 Twitter 注册\" or \"通过 Twitter 注册\". \"用...注册\" is less common and slightly awkward in this context.",
           "suggestion": "使用 Twitter 注册"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

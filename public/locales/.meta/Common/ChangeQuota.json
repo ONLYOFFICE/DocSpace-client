@@ -3,7 +3,7 @@
   "content": "Change quota",
   "content_en_sha1_hash": "02de777a63ceae10d68258c04b8924d83239debc",
   "created_at": "2025-05-19T21:30:43.407Z",
-  "updated_at": "2025-07-10T11:11:06.778Z",
+  "updated_at": "2025-10-13T14:41:02.752Z",
   "comment": {
     "text": "\"Change quota\" is used as a button label and header title in a modal dialog to prompt user action of changing storage limits. It appears in two contexts: a warning quota dialog and a space quota settings dialog. The translation key should be used for situations where users need to edit or adjust their storage quotas.",
     "is_auto": true,
@@ -11,39 +11,39 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/dialogs/ChangeQuotaDialog/index.js",
+      "line_number": 51,
+      "context": "size,\n } = props;\n const { t } = useTranslation(\"Common\");\n return (\n <ModalDialog visible={visible} onClose={onCloseClick}>\n <ModalDialog.Header>{t(\"Common:ChangeQuota\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent>\n <Text>{t(\"Common:SetQuotaStorageLimit\")}</Text>\n <QuotaForm\n onSetQuotaBytesSize={onSetQuotaBytesSize}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
+      "line_number": 99,
+      "context": "<Text style={{ marginBottom: \"16px\" }}>{getWarningDescription()}</Text>\n <Text>{t(\"Settings:WantToContinue\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:ChangeQuota\")}\n size={ButtonSize.normal}\n primary\n onClick={onClickRedirect}\n scale\n testId=\"continue_change_quota_button\"",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/SpaceQuota/index.js",
       "line_number": 47,
       "context": "const getOptions = (t, item, spaceLimited) => {\n const items = [\n {\n id: \"info-account-quota_edit\",\n key: \"change-quota\",\n label: t(\"Common:ChangeQuota\"),\n action: \"change\",\n },\n {\n id: \"info-account-quota_current-size\",\n key: \"current-size\",",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/ChangeQuotaDialog/index.js",
-      "line_number": 51,
-      "context": "size,\n } = props;\n const { t } = useTranslation(\"Common\");\n return (\n <ModalDialog visible={visible} onClose={onCloseClick}>\n <ModalDialog.Header>{t(\"Common:ChangeQuota\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent>\n <Text noSelect>{t(\"Common:SetQuotaStorageLimit\")}</Text>\n <QuotaForm\n onSetQuotaBytesSize={onSetQuotaBytesSize}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
-      "line_number": 101,
-      "context": "</Text>\n <Text noSelect>{t(\"Settings:WantToContinue\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:ChangeQuota\")}\n size={ButtonSize.normal}\n primary\n onClick={onClickRedirect}\n scale\n />",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/StorageSpaceUsed.js",
-      "line_number": 79,
+      "line_number": 80,
       "context": "};\n const getContextModel = () => {\n return [\n {\n key: \"change-quota\",\n label: t(\"Common:ChangeQuota\"),\n icon: ChangQuotaReactSvgUrl,\n onClick: onChangeDialogClick,\n },\n {\n key: \"disable-quota\",",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2299,
-      "context": "case \"change-quota\":\n if (!this.isAvailableOption(\"change-quota\")) return null;\n return {\n id: \"menu-change-quota\",\n key: \"change-quota\",\n label: t(\"Common:ChangeQuota\"),\n iconUrl: ChangQuotaReactSvgUrl,\n onClick: () => this.changeRoomQuota(selection),\n disabled: !showStorageInfo,\n };\n case \"default-quota\":",
+      "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
+      "line_number": 207,
+      "context": "iconUrl: DisableReactSvgUrl,\n },\n {\n id: \"menu-change-quota\",\n key: \"change-quota\",\n label: t(\"Common:ChangeQuota\"),\n disabled: !hasUsersToChangeQuota || isGuests,\n iconUrl: ChangQuotaReactSvgUrl,\n onClick: () => changeUserQuota(selection as unknown as TUser[]),\n },\n {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
-      "line_number": 231,
-      "context": "iconUrl: DisableReactSvgUrl,\n },\n {\n id: \"menu-change-quota\",\n key: \"change-quota\",\n label: t(\"Common:ChangeQuota\"),\n disabled: !hasUsersToChangeQuota || isGuests,\n iconUrl: ChangQuotaReactSvgUrl,\n onClick: () => changeUserQuota(selection as unknown as TUser[]),\n },\n {",
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 2281,
+      "context": "case \"change-quota\":\n if (!this.isAvailableOption(\"change-quota\")) return null;\n return {\n id: \"menu-change-quota\",\n key: \"change-quota\",\n label: t(\"Common:ChangeQuota\"),\n iconUrl: ChangQuotaReactSvgUrl,\n onClick: () => this.changeRoomQuota(selection),\n disabled: !showStorageInfo,\n };\n case \"default-quota\":",
       "module": "/packages/client"
     }
   ],

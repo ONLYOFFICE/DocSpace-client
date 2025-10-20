@@ -3,7 +3,7 @@
   "content": "Top up balance",
   "content_en_sha1_hash": "c9ec141fc5fcaffb8be65dc754acb82e2c543f06",
   "created_at": "2025-05-28T09:33:06.822Z",
-  "updated_at": "2025-06-30T12:20:31.563Z",
+  "updated_at": "2025-08-21T14:45:44.107Z",
   "comment": {
     "text": "The translation key \"TopUpBalance\" is used to display the text \"Top up balance\" as a label on a button in a payment wallet settings section. This button likely prompts users to add funds to their account balance.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletContainer.tsx",
-      "line_number": 247,
-      "context": "</div>\n \n <Button\n size={isMobile ? ButtonSize.normal : ButtonSize.small}\n primary\n label={t(\"TopUpBalance\")}\n onClick={onOpen}\n isDisabled={!canUpdateTariff || isNotPaidPeriod}\n scale={isMobile}\n className={classNames(styles.topUpButton, {\n [styles.isMobileButton]: isMobile,",
+      "line_number": 44,
+      "context": "import { TColorScheme } from \"@docspace/shared/themes\";\n \n import RefreshReactSvgUrl from \"PUBLIC_DIR/images/icons/16/refresh.react.svg?url\";\n \n import TransactionHistory from \"./TransactionHistory\";\n import TopUpModal from \"../../../../../components/panels/TopUpBalance/TopUpModal\";\n import WalletRefilledModal from \"./WalletRefilledModal\";\n import { formattedBalanceTokens } from \"./utils\";\n import PayerInformation from \"../PayerInformation\";\n import AutoPaymentInfo from \"./sub-components/AutoPaymentInfo\";\n import styles from \"./styles/Wallet.module.scss\";",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Title",
   "content_en_sha1_hash": "768e0c1c69573fb588f61f1308a015c11468e05f",
   "created_at": "2025-05-19T21:30:49.298Z",
-  "updated_at": "2025-06-30T12:20:31.285Z",
+  "updated_at": "2025-10-14T00:30:05.777Z",
   "comment": {
     "text": "This translation key is used to display the title of a header or panel element. It appears as a label on buttons, checkboxes, and other UI elements in various applications, such as panels, sections, and settings pages. Translators should focus on translating this content to provide clear and consistent titles throughout the product.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 516,
-      "context": "{t(\"JavascriptSdk:InterfaceElements\")}\n </Text>\n \n <div className=\"embedding-panel_checkbox-container\">\n <CheckboxElement\n label={t(\"Common:Title\")}\n onChange={onHeaderChange}\n isChecked={embeddingConfig.showTitle}\n img={theme.isBase ? HeaderUrl : HeaderDarkUrl}\n title={t(\"JavascriptSdk:Header\")}\n description={t(\"JavascriptSdk:HeaderDescription\")}",
+      "line_number": 518,
+      "context": "{t(\"JavascriptSdk:InterfaceElements\")}\n </Text>\n \n <div className=\"embedding-panel_checkbox-container\">\n <CheckboxElement\n label={t(\"Common:Title\")}\n onChange={onHeaderChange}\n isChecked={embeddingConfig.showTitle}\n img={theme.isBase ? HeaderUrl : HeaderDarkUrl}\n title={t(\"JavascriptSdk:Header\")}\n description={t(\"JavascriptSdk:HeaderDescription\", {",
       "module": "/packages/client"
     },
     {
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 326,
-      "context": "const settingsBlock = (\n <div className=\"settings-block\">\n <FieldContainer\n id=\"fieldContainerWelcomePage\"\n className=\"field-container-width\"\n labelText={`${t(\"Common:Title\")}`}\n isVertical\n >\n <TextInput\n tabIndex={5}\n id=\"textInputContainerWelcomePage\"",
+      "line_number": 354,
+      "context": "const settingsBlock = (\n <div className=\"settings-block\">\n <FieldContainer\n id=\"fieldContainerWelcomePage\"\n className=\"field-container-width\"\n labelText={`${t(\"Common:Title\")}`}\n isVertical\n hasError={!state.isValidTitle}\n >\n <TextInput\n tabIndex={5}",
       "module": "/packages/client"
     },
     {
@@ -48,19 +48,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 383,
-      "context": "<CheckboxGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Title\")}\n onChange={onChangeShowTitle}\n isChecked={config.showTitle}\n />\n <HelpButton\n place=\"right\"",
+      "line_number": 384,
+      "context": "<CheckboxGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Title\")}\n onChange={onChangeShowTitle}\n isChecked={config.showTitle}\n dataTestId=\"title_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 383,
-      "context": "<CheckboxGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Title\")}\n onChange={onChangeShowTitle}\n isChecked={config.showTitle}\n />\n <HelpButton\n place=\"right\"",
+      "line_number": 384,
+      "context": "<CheckboxGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Title\")}\n onChange={onChangeShowTitle}\n isChecked={config.showTitle}\n dataTestId=\"title_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/FieldMapping.js",
-      "line_number": 116,
+      "line_number": 120,
       "context": "value={location}\n hasError={locationHasError}\n />\n \n <SsoFormField\n labelText={t(\"Common:Title\")}\n name=\"title\"\n placeholder={SSO_TITLE}\n tabIndex={20}\n value={title}\n hasError={titleHasError}",
       "module": "/packages/client"
     }
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"සිරැසිය\" (siraseya) translates to 'head' or 'forehead', not 'title'. The correct translation should be something like \"ගීතය\" (geetha - song title) or \"ශීර්ෂකය\" (shirshakaya - heading/title).",
-          "suggestion": "ශීර්ෂකය (shirshakaya) or ගීතය (geetha) depending on the context."
+          "description": "The Sinhala translation \"සිරැසිය\" translates to \"trouble\", \"difficulty\", or \"misery\". It does not accurately represent the English word \"Title\".",
+          "suggestion": "The correct translation for \"Title\" in Sinhala is \"ගිණුම\" (ginuma)."
         }
       ],
       "approved_at": null
@@ -253,6 +253,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

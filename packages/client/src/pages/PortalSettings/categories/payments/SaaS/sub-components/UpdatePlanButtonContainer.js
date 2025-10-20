@@ -165,6 +165,7 @@ const UpdatePlanButtonContainer = ({
                 onClick={goLinkCard}
                 fontWeight={600}
                 style={{ textDecoration: "underline" }}
+                data-testid="add_payment_method_link"
               >
                 {t("AddPaymentMethod")}
               </a>
@@ -195,6 +196,7 @@ const UpdatePlanButtonContainer = ({
         waitingForQuota();
       }
     } catch (e) {
+      console.error(e);
       toastr.error(t("ErrorNotification"));
       setIsLoading(false);
       clearTimeout(timerId);
@@ -260,6 +262,7 @@ const UpdatePlanButtonContainer = ({
         isDisabled={isLessCountThanAcceptable || isLoading || isDisabled}
         onClick={goToStripePortal}
         isLoading={isLoading}
+        testId="upgrade_plan_button"
       />
     ) : (
       <DowngradePlanButtonContainer
@@ -284,6 +287,7 @@ const UpdatePlanButtonContainer = ({
           isDisabled={isLoading || isDisabled}
           onClick={onOpenPaymentDialog}
           isLoading={isLoading}
+          testId="upgrade_plan_button"
         />
       );
     }
@@ -305,6 +309,7 @@ const UpdatePlanButtonContainer = ({
         }
         onClick={onUpdateTariff}
         isLoading={isLoading}
+        testId="upgrade_plan_button"
       />
     );
   };
@@ -373,6 +378,7 @@ const UpdatePlanButtonContainer = ({
               primary
               scale
               onClick={onUpdateTariff}
+              testId="confirm_payment_button"
             />
             <Button
               key="CancelButton"
@@ -380,6 +386,7 @@ const UpdatePlanButtonContainer = ({
               size={ButtonSize.normal}
               scale
               onClick={onClose}
+              testId="cancel_payment_button"
             />
           </ModalDialog.Footer>
         </ModalDialog>

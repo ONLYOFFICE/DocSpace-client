@@ -182,6 +182,29 @@ export type TBackupProgress = {
   isCompleted: boolean;
 };
 
+export type TDocServerLicense = {
+  branding: boolean;
+  customization: boolean;
+  timeLimited: boolean;
+  end_date: string;
+  trial: boolean;
+  customer_id: string;
+  resource_key: string;
+  users_count: number;
+  users_expire: number;
+  connections: number;
+  docspace_dev: boolean;
+};
+
+export type TLicenseQuota = {
+  userQuota: Record<string, string>;
+  license: TDocServerLicense;
+  totalUsers: number;
+  portalUsers: number;
+  externalUsers: number;
+  licenseTypeByUsers: boolean;
+};
+
 export type TCustomerInfo = {
   paymentMethodStatus: number;
   email: string | null;
@@ -214,9 +237,12 @@ export type TTransactionCollection = {
   quantity: number;
   amount: number;
   credit: number;
-  withdrawal: number;
+  debit: number;
   currency: string;
   description: string;
+  details: string;
+  participantName?: string;
+  participantDisplayName?: string;
 };
 
 export type TTransactionHistory = {
@@ -233,4 +259,15 @@ export type TAutoTopUpSettings = {
   minBalance: number;
   upToBalance: number;
   currency: string | null;
+};
+
+export type TransactionHistoryReport = {
+  id: string;
+  error: string;
+  percentage: number;
+  isCompleted: boolean;
+  status: number;
+  resultFileId: number;
+  resultFileName: string;
+  resultFileUrl: string;
 };

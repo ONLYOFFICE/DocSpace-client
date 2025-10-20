@@ -3,7 +3,7 @@
   "content": "Created",
   "content_en_sha1_hash": "accf40c89baa4fa88e6a7ff11e1f805beecafd3f",
   "created_at": "2025-05-19T21:30:55.310Z",
-  "updated_at": "2025-05-26T07:57:32.451Z",
+  "updated_at": "2025-09-23T07:24:24.175Z",
   "comment": {
     "text": "This translation key is used for the label that appears next to a column header, specifically the \"Created\" column in a table view. It's part of the UI element on the page /packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js. The translated text will be displayed as the title for this column.",
     "is_auto": true,
@@ -12,25 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 269,
+      "line_number": 271,
       "context": "onClick: this.onFilter,\n },\n { ...authorBlock },\n {\n key: \"Created\",\n title: t(\"ByCreation\"),\n enable: createdColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 269,
+      "line_number": 271,
       "context": "onClick: this.onFilter,\n },\n { ...authorBlock },\n {\n key: \"Created\",\n title: t(\"ByCreation\"),\n enable: createdColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 269,
-      "context": "onClick: this.onFilter,\n },\n { ...authorBlock },\n {\n key: \"Created\",\n title: t(\"ByCreation\"),\n enable: createdColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 269,
+      "line_number": 271,
       "context": "onClick: this.onFilter,\n },\n { ...authorBlock },\n {\n key: \"Created\",\n title: t(\"ByCreation\"),\n enable: createdColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
@@ -48,8 +42,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
-      "line_number": 229,
-      "context": "onIconClick={onCopyClick}\n type={InputType.text}\n maxLength={10000}\n />\n <Text className=\"dates\">\n <strong>{t(\"Files:ByCreation\")}</strong>: {dates.created}\n <br />\n <strong>{t(\"Expires\")}</strong>: {dates.expires}\n </Text>\n </>\n )}",
+      "line_number": 239,
+      "context": "type={InputType.text}\n maxLength={10000}\n testId=\"generate_token_input\"\n />\n <Text dataTestId=\"generate_token_dates\" className=\"dates\">\n <strong>{t(\"Files:ByCreation\")}</strong>: {dates.created}\n <br />\n <strong>{t(\"Expires\")}</strong>: {dates.expires}\n </Text>\n </>\n )}",
       "module": "/packages/client"
     }
   ],

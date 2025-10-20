@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TTranslation } from "@docspace/shared/types";
 import { Trans } from "react-i18next";
 import { TFunction } from "i18next";
-
 import moment from "moment";
-import { FeedActionKeys } from "./FeedInfo";
+import { FeedActionKeys } from "@docspace/shared/api/rooms/types";
+import { TTranslation } from "@docspace/shared/types";
+
 import { HistoryText } from "./HistoryText";
 import { Feed } from "./HistoryBlockContent/HistoryBlockContent.types";
 
@@ -227,7 +227,7 @@ export const useFeedTranslation = (
       );
     case FeedActionKeys.RoomCreateUser:
       if (hasRelatedItems) return t("InfoPanel:RoomCreateUserCount", { count });
-      return t("InfoPanel:RoomCreateUser");
+      return t("Common:RoomCreateUser");
     case FeedActionKeys.RoomUpdateAccessForUser:
       return t("InfoPanel:RoomUpdateAccess");
     case FeedActionKeys.RoomRemoveUser:
@@ -300,7 +300,7 @@ export const useFeedTranslation = (
       });
     case FeedActionKeys.RoomIndexExportSaved:
       return t("InfoPanel:RoomIndexExportLocation", {
-        sectionName: t("Common:MyFilesSection"),
+        sectionName: t("Common:MyDocuments"),
       });
     case FeedActionKeys.FormSubmit:
       return t("InfoPanel:FilledOutForm");

@@ -102,6 +102,7 @@ module.exports = ({ config }) => {
                 params: {
                   overrides: {
                     removeViewBox: false,
+                    cleanupIds: false,
                   },
                 },
               },

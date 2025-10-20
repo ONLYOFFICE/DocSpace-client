@@ -85,6 +85,16 @@ export type Point = {
   y: number;
 };
 
+export type PluginContextMenuItem = {
+  key: string;
+  label: string;
+  onClick: (id: number) => Promise<void>;
+  icon: string;
+  fileType?: ["video", "image"];
+  withActiveItem?: boolean;
+  items?: PluginContextMenuItem[];
+};
+
 export type MediaViewerProps = {
   /** Function for translating text. */
   t: TranslationType;
@@ -117,16 +127,7 @@ export type MediaViewerProps = {
   /** ID of the archive room. */
   archiveRoomsId?: number;
   /** Context menu items for plugins. */
-  pluginContextMenuItems?: {
-    key: string;
-    value: {
-      label: string;
-      onClick: (id: number) => Promise<void>;
-      icon: string;
-      fileType?: ["video", "image"];
-      withActiveItem?: boolean;
-    };
-  }[];
+  pluginContextMenuItems?: PluginContextMenuItem[];
   /** Callback function called when the media viewer is closed. */
   onClose?: VoidFunction;
   /** Callback function called when an error occurs. */

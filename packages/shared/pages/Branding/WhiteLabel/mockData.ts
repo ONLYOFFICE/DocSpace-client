@@ -50,6 +50,7 @@ export const mockLogos: ILogo[] = [
       light: LightSmallSvgUrl,
       dark: DarkLightSmallSvgUrl,
     },
+    type: 0, // Assuming type 0 is for light logos
   },
   {
     name: "LoginPage",
@@ -62,6 +63,7 @@ export const mockLogos: ILogo[] = [
       light: LoginPageSvgUrl,
       dark: DarkLoginPageSvgUrl,
     },
+    type: 1, // Assuming type 1 is for dark logos
   },
   {
     name: "Favicon",
@@ -74,6 +76,7 @@ export const mockLogos: ILogo[] = [
       light: FaviconUrl,
       dark: "",
     },
+    type: 2, // Assuming type 2 is for favicon
   },
   {
     name: "DocsEditor",
@@ -86,6 +89,7 @@ export const mockLogos: ILogo[] = [
       light: DocsEditorSvgUrl,
       dark: "",
     },
+    type: 3, // Assuming type 3 is for DocsEditor logos
   },
   {
     name: "DocsEditorEmbed",
@@ -98,6 +102,7 @@ export const mockLogos: ILogo[] = [
       light: DocsEditorEmbedSvgUrl,
       dark: "",
     },
+    type: 4, // Assuming type 4 is for DocsEditorEmbed logos
   },
   {
     name: "LeftMenu",
@@ -110,6 +115,7 @@ export const mockLogos: ILogo[] = [
       light: LeftMenuSvgUrl,
       dark: DarkLeftMenuSvgUrl,
     },
+    type: 5, // Assuming type 5 is for left menu logos
   },
   {
     name: "AboutPage",
@@ -122,5 +128,6 @@ export const mockLogos: ILogo[] = [
       light: AboutPageSvgUrl,
       dark: DarkAboutPageSvgUrl,
     },
+    type: 6, // Assuming type 6 is for About page logos
   },
 ];

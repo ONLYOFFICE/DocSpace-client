@@ -25,34 +25,35 @@
  * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
+import { type TFunction } from "i18next";
 
-import type { TTranslation, TViewAs } from "../../types";
-import { type DeviceType } from "../../enums";
+import type { TViewAs } from "../../types";
 import { type TRoom, TRoomLifetime } from "../../api/rooms/types";
 import { type TFile, type TFolder } from "../../api/files/types";
 
 type TQuickButtonItem = TFile | TFolder | TRoom;
 
 export type QuickButtonsProps = {
-  t: TTranslation;
+  t: TFunction;
   item: TQuickButtonItem;
   viewAs: TViewAs;
-  currentDeviceType: DeviceType;
   roomLifetime?: TRoomLifetime;
   expiredDate?: string | null;
 
   isDisabled?: boolean;
-  folderCategory?: boolean;
   isPublicRoom?: boolean;
-  isPersonalRoom?: boolean;
   isArchiveFolder?: boolean;
   isTemplatesFolder?: boolean;
   isIndexEditingMode?: boolean;
   showLifetimeIcon?: boolean;
+  isRecentFolder?: boolean;
+  isTrashFolder?: boolean;
 
-  onClickLock?: VoidFunction;
   onClickDownload?: VoidFunction;
   onCopyPrimaryLink?: VoidFunction;
   onClickShare?: VoidFunction;
   onCreateRoom?: VoidFunction;
+  onClickLock?: VoidFunction;
+  onClickFavorite?: VoidFunction;
+  openShareTab?: VoidFunction;
 };

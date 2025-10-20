@@ -24,13 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TFolder } from "@docspace/shared/api/files/types";
-import type { AutomaticBackupProps } from "@docspace/shared/pages/auto-backup/AutoBackup.types";
-import type { TTranslation } from "@docspace/shared/types";
+import type { AutomaticBackupProps } from "@docspace/shared/pages/backup/auto-backup/AutoBackup.types";
 
 export type ExternalAutoBackupWrapperProps = Pick<
   AutomaticBackupProps,
-  "buttonSize" | "isNeedFilePath"
+  | "buttonSize"
+  | "isNeedFilePath"
+  | "isEmptyContentBeforeLoader"
+  | "isInitialLoading"
+  | "isInitialError"
 >;
 
 export interface InjectedAutoBackupWrapperProps
@@ -42,11 +44,9 @@ export interface InjectedAutoBackupWrapperProps
     | "isInitialLoading"
     | "isInitialError"
   > {
-  setStorageRegions: (regions: unknown) => void;
-  getProgress: (t: TTranslation) => Promise<void>;
-  fetchTreeFolders: () => Promise<TFolder[] | undefined>;
   resetDownloadingProgress: VoidFunction;
   setterSelectedEnableSchedule: (enable: boolean) => void;
+  setIsInited: (inited: boolean) => void;
 }
 
 export type AutoBackupWrapperProps = InjectedAutoBackupWrapperProps &

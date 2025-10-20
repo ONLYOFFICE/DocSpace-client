@@ -12,8 +12,6 @@
   "FolderTitleSkyDrive": "مجلد OneDrive",
   "FolderTitleWebDav": "مجلد WebDAV",
   "FolderTitleYandex": "مجلد Yandex",
-  "GuestReleaseTipLink": "تعرف على المزيد حول أنواع المستخدمين",
-  "LinkHasExpiredAndHasBeenDisabled": "تم انتهاء صلاحية الرابط وتم تعطيله",
   "LinkValidTime": "هذا الرابط صالح لمدة {{days_count}} أيام فقط.",
   "NewForm": "نموذج PDF",
   "OwnerChange": "تغيير المالك",
@@ -25,5 +23,6 @@
   "ThirdPartyInfo": "تغيير معلومات الجهة الخارجية",
   "ThirdPartyTitle": "الخدمات الجهة الخارجية",
   "TitleShowActions": "عرض إجراءات الملف",
-  "TitleShowFolderActions": "عرض إجراءات المجلد"
+  "TitleShowFolderActions": "عرض إجراءات المجلد",
+  "TrashItemsDeleteSuccess": "تم حذف العناصر المحددة بنجاح من {{sectionName}}"
 }

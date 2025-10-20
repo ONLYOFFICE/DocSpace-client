@@ -76,6 +76,8 @@ export type FilesSelectorProps = TSelectorHeader & {
   folderIsShared?: boolean;
 
   treeFolders?: TFolder[];
+  withRecentTreeFolder?: boolean;
+  withFavoritesTreeFolder?: boolean;
 
   theme: TTheme;
 
@@ -85,7 +87,6 @@ export type FilesSelectorProps = TSelectorHeader & {
   setRestorePanelVisible: (value: boolean) => void;
   setCopyPanelVisible: (value: boolean) => void;
   setRestoreAllPanelVisible: (value: boolean) => void;
-  setMovingInProgress: (value: boolean) => void;
   setIsDataReady?: (value: boolean) => void;
   setSelected: (selected: "close" | "none", clearBuffer?: boolean) => void;
   setConflictDialogData: (conflicts: unknown, operationData: unknown) => void;

@@ -30,8 +30,6 @@ import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
-
 import { injectDefaultTheme } from "@docspace/shared/utils";
 import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
 
@@ -90,7 +88,7 @@ const CustomizationNavbar = ({
       />
       {enablePortalRename ? (
         <MobileCategoryWrapper
-          title={t("PortalRenaming")}
+          title={t("PortalRenaming", { productName: t("Common:ProductName") })}
           subtitle={t("PortalRenamingNavDescription")}
           url="/portal-settings/customization/general/portal-renaming"
           onClickLink={onClickLink}
@@ -125,8 +123,4 @@ export default inject(({ common, settingsStore, currentTariffStatusStore }) => {
     enablePortalRename,
     isEnterprise,
   };
-})(
-  withCultureNames(
-    observer(withTranslation(["Settings", "Common"])(CustomizationNavbar)),
-  ),
-);
+})(observer(withTranslation(["Settings", "Common"])(CustomizationNavbar)));

@@ -75,6 +75,7 @@ const ButtonDelete = ({
       )}
       onClick={onClick}
       title={t("Common:Delete")}
+      data-testid="cropper_delete_button"
     >
       <ReactSVG src={TrashReactSvgUrl} />
       <div

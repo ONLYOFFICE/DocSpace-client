@@ -48,7 +48,6 @@ type ChangeUserStatusDialogComponentProps = {
   setSelected: UsersStore["setSelected"];
   needResetUserSelection: UsersStore["needResetUserSelection"];
 
-  setInfoPanelSelection: InfoPanelStore["setInfoPanelSelection"];
   infoPanelVisible: InfoPanelStore["isVisible"];
   setSelection: UsersStore["setSelection"];
 
@@ -62,7 +61,6 @@ const ChangeUserStatusDialogComponent = ({
   updateUserStatus,
   setSelected,
   needResetUserSelection,
-  setInfoPanelSelection,
   infoPanelVisible,
   setSelection,
   status,
@@ -89,7 +87,6 @@ const ChangeUserStatusDialogComponent = ({
         if (users.length === 1 && infoPanelVisible) {
           const user = getPeopleListItem(users[0]);
 
-          setInfoPanelSelection(user);
           setSelection([user]);
         }
 
@@ -124,7 +121,6 @@ const ChangeUserStatusDialogComponent = ({
     isRequestRunning,
     needResetUserSelection,
     onClose,
-    setInfoPanelSelection,
     setSelected,
     status,
     t,
@@ -215,6 +211,7 @@ const ChangeUserStatusDialogComponent = ({
       onClose={onCloseAction}
       displayType={ModalDialogType.modal}
       autoMaxHeight
+      dataTestId="change_user_status_dialog"
     >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -230,6 +227,7 @@ const ChangeUserStatusDialogComponent = ({
           onClick={onChangeUserStatus}
           isLoading={isRequestRunning}
           isDisabled={userIDs.length === 0}
+          testId="change_user_status_dialog_submit"
         />
         <Button
           id="change-user-status-modal_cancel"
@@ -238,6 +236,7 @@ const ChangeUserStatusDialogComponent = ({
           scale
           onClick={onCloseAction}
           isDisabled={isRequestRunning}
+          testId="change_user_status_dialog_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -255,17 +254,16 @@ export default inject(({ peopleStore, infoPanelStore }: TStore) => {
     setSelection,
   } = peopleStore.usersStore!;
 
-  const { setInfoPanelSelection, isVisible: infoPanelVisible } = infoPanelStore;
+  const { isVisible: infoPanelVisible } = infoPanelStore;
 
   return {
-    needResetUserSelection,
+    needResetUserSelection: !infoPanelVisible || needResetUserSelection,
     updateUserStatus,
 
     setSelected,
 
     getPeopleListItem,
 
-    setInfoPanelSelection,
     infoPanelVisible,
     setSelection,
   };

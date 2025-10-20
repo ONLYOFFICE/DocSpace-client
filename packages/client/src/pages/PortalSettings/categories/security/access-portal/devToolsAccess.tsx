@@ -64,7 +64,7 @@ const DevToolsAccess = ({
   currentColorScheme: TColorScheme;
   limitedDevToolsBlockHelpUrl: string;
 }) => {
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t, ready } = useTranslation(["Settings", "Common"]);
 
   const [accessEnabled, setAccessEnabled] = useState("false");
   const [showReminder, setShowReminder] = useState(false);
@@ -195,6 +195,8 @@ const DevToolsAccess = ({
     setShowReminder(false);
   };
 
+  if (!ready) return null;
+
   return (
     <MainContainer>
       <LearnMoreWrapper>
@@ -206,6 +208,7 @@ const DevToolsAccess = ({
         {limitedDevToolsBlockHelpUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="developer_tools_access_component_learn_more"
             color={currentColorScheme.main?.accent}
             target={LinkTarget.blank}
             isHovered
@@ -223,16 +226,19 @@ const DevToolsAccess = ({
         name="group"
         orientation="vertical"
         spacing="8px"
+        dataTestId="developer_tools_access_radio_button"
         options={[
           {
             id: "dev-tools-access-disabled",
             label: t("Common:Disabled"),
             value: "true",
+            dataTestId: "developer_tools_access_disabled",
           },
           {
             id: "dev-tools-access-enable",
             label: t("Common:Enable"),
             value: "false",
+            dataTestId: "developer_tools_access_enabled",
           },
         ]}
         selected={accessEnabled}
@@ -252,6 +258,8 @@ const DevToolsAccess = ({
         isSaving={isSaving}
         additionalClassSaveButton="dev-tools-access-save"
         additionalClassCancelButton="dev-tools-access-cancel"
+        saveButtonDataTestId="developer_tools_access_save_button"
+        cancelButtonDataTestId="developer_tools_access_cancel_button"
       />
     </MainContainer>
   );

@@ -33,7 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { toastr } from "@docspace/shared/components/toast";
-import { size } from "@docspace/shared/utils";
+import { size, isMobileDevice } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { DeviceType } from "@docspace/shared/enums";
@@ -41,6 +41,8 @@ import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorag
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { LearnMoreWrapper } from "../StyledSecurity";
 import UserFields from "../sub-components/user-fields";
+import useSecurity from "../useSecurity";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 import IpSecurityLoader from "../sub-components/loaders/ip-security-loader";
 
@@ -76,14 +78,17 @@ const MainContainer = styled.div`
 const IpSecurity = (props) => {
   const {
     t,
+    tReady,
     ipRestrictionEnable,
     ipRestrictions,
     setIpRestrictions,
-    isInit,
     ipSettingsUrl,
     currentColorScheme,
     currentDeviceType,
-    loadSettings,
+
+    settingsStore,
+    tfaStore,
+    setup,
   } = props;
 
   const navigate = useNavigate();
@@ -94,9 +99,17 @@ const IpSecurity = (props) => {
   const [enable, setEnable] = useState(false);
   const [ips, setIps] = useState();
   const [showReminder, setShowReminder] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [autoFocus, setAutoFocus] = useState(false);
+
+  const defaultProps = createDefaultHookSettingsProps({
+    settingsStore,
+    tfaStore,
+    setup,
+  });
+
+  const { getSecurityInitialValue } = useSecurity(defaultProps.security);
 
   const checkWidth = () => {
     window.innerWidth > size.mobile &&
@@ -130,17 +143,20 @@ const IpSecurity = (props) => {
   };
 
   useEffect(() => {
+    if (isMobileDevice()) {
+      getSecurityInitialValue();
+      setIsLoaded(true);
+    }
+  }, [isMobileDevice]);
+
+  useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
-
-    if (!isInit) loadSettings().then(() => setIsLoading(true));
-    else setIsLoading(true);
 
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    if (!isLoading) return;
     const currentSettings = getFromSessionStorage("currentIPSettings");
     const defaultSettings = getFromSessionStorage("defaultIPSettings");
 
@@ -149,11 +165,9 @@ const IpSecurity = (props) => {
     } else {
       getSettingsFromDefault();
     }
-  }, [isLoading]);
+  }, []);
 
   useEffect(() => {
-    if (!isLoading) return;
-
     const defaultSettings = getFromSessionStorage("defaultIPSettings");
     const newSettings = {
       enable,
@@ -234,7 +248,7 @@ const IpSecurity = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
+  if ((currentDeviceType === DeviceType.mobile && !isLoaded) || !tReady) {
     return <IpSecurityLoader />;
   }
 
@@ -247,6 +261,7 @@ const IpSecurity = (props) => {
         {ipSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="ip_security_component_learn_more"
             color={currentColorScheme.main?.accent}
             target="_blank"
             isHovered
@@ -264,16 +279,19 @@ const IpSecurity = (props) => {
         name="group"
         orientation="vertical"
         spacing="8px"
+        dataTestId="ip_security_radio_button_group"
         options={[
           {
             id: "ip-security-disabled",
             label: t("Common:Disabled"),
             value: "disabled",
+            dataTestId: "ip_security_disabled",
           },
           {
             id: "ip-security-enable",
             label: t("Common:Enable"),
             value: "enable",
+            dataTestId: "ip_security_enabled",
           },
         ]}
         selected={enable ? "enable" : "disabled"}
@@ -291,6 +309,9 @@ const IpSecurity = (props) => {
           regexp={regexp}
           classNameAdditional="add-allowed-ip-address"
           isAutoFocussed={autoFocus}
+          inputDataTestId="ip_security_ip_input"
+          deleteIconDataTestId="ip_security_delete_ip_icon"
+          addButtonDataTestId="ip_security_add_ip_button"
         />
       ) : null}
 
@@ -318,37 +339,36 @@ const IpSecurity = (props) => {
         isSaving={isSaving}
         additionalClassSaveButton="ip-security-save"
         additionalClassCancelButton="ip-security-cancel"
+        saveButtonDataTestId="ip_security_save_button"
+        cancelButtonDataTestId="ip_security_cancel_button"
       />
     </MainContainer>
   );
 };
 
-export const IpSecuritySection = inject(({ settingsStore, setup }) => {
-  const {
-    ipRestrictionEnable,
-    ipRestrictions,
-    setIpRestrictions,
-    ipSettingsUrl,
-    currentColorScheme,
-    currentDeviceType,
-    getIpRestrictionsEnable,
-    getIpRestrictions,
-  } = settingsStore;
+export const IpSecuritySection = inject(
+  ({ settingsStore, tfaStore, setup }) => {
+    const {
+      ipRestrictionEnable,
+      ipRestrictions,
+      setIpRestrictions,
+      ipSettingsUrl,
+      currentColorScheme,
+      currentDeviceType,
+    } = settingsStore;
 
-  const { isInit } = setup;
+    return {
+      ipRestrictionEnable,
+      ipRestrictions,
+      setIpRestrictions,
 
-  const loadSettings = async () => {
-    await getIpRestrictionsEnable();
-    await getIpRestrictions();
-  };
-  return {
-    ipRestrictionEnable,
-    ipRestrictions,
-    setIpRestrictions,
-    isInit,
-    ipSettingsUrl,
-    currentColorScheme,
-    currentDeviceType,
-    loadSettings,
-  };
-})(withTranslation(["Settings", "Common"])(observer(IpSecurity)));
+      ipSettingsUrl,
+      currentColorScheme,
+      currentDeviceType,
+
+      settingsStore,
+      tfaStore,
+      setup,
+    };
+  },
+)(withTranslation(["Settings", "Common"])(observer(IpSecurity)));

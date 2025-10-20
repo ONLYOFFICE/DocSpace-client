@@ -3,7 +3,7 @@
   "content": "Add allowed IP address",
   "content_en_sha1_hash": "af9c05a9deff4df886dbc45b353bc08a5f221460",
   "created_at": "2025-05-19T21:30:50.310Z",
-  "updated_at": "2025-05-24T05:56:46.202Z",
+  "updated_at": "2025-09-26T15:21:06.433Z",
   "comment": {
     "text": "\"This translation key is used for the 'Add Allowed IP address' label in the access portal settings, which appears as a button label.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 287,
+      "line_number": 305,
       "context": "{enable ? (\n <UserFields\n className=\"user-fields\"\n inputs={ips}\n buttonLabel={t(\"AddAllowedIP\")}\n onChangeInput={onChangeInput}\n onDeleteInput={onDeleteInput}\n onClickAdd={onClickAdd}\n regexp={regexp}\n classNameAdditional=\"add-allowed-ip-address\"",
       "module": "/packages/client"
     }

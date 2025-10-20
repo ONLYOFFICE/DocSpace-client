@@ -26,31 +26,32 @@
 
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
-import { mobile, tablet } from "@docspace/shared/utils/device";
 
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg?url";
 import { ImportItemProps, ImportSectionProps } from "../types";
+import { tablet } from "@docspace/shared/utils";
 
 const SectionWrapper = styled.div<{ isChecked: boolean }>`
   max-width: 700px;
-  padding: 12px;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: flex-start;
 
   @media ${tablet} {
     max-width: 675px;
   }
 
-  border-radius: 6px;
-  background: ${(props) =>
-    props.theme.client.settings.migration.importSectionBackground};
+  box-sizing: border-box;
+  display: flex;
+  gap: 4px;
 
   .toggleButton {
     position: relative;
     margin-top: 0.5px;
+  }
+
+  .section-content {
+    flex: 1;
+    min-width: 0;
   }
 
   .section-title {
@@ -64,31 +65,39 @@ const SectionWrapper = styled.div<{ isChecked: boolean }>`
         : props.theme.client.settings.migration.importItemDisableTextColor};
     margin-top: 4px;
     margin-bottom: 12px;
+    span {
+      font-size: 12px;
+      font-weight: 600;
+    }
   }
 `;
 
 const FlexContainer = styled.div`
   display: flex;
+  flex: 1;
+  max-width: 400px;
 `;
 
 const ImportItemWrapper = styled.div<{ isChecked: boolean }>`
-  padding-top: 8px;
-
-  @media ${mobile} {
-    width: 100%;
-  }
+  display: flex;
+  flex-direction: column;
+  width: calc(50% - 20px);
 
   .workspace-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: ${(props) =>
       props.theme.client.settings.migration.importSectionTextColor};
   }
 
   .importSection {
-    min-width: 160px;
+    display: flex;
+    align-items: center;
     height: 36px;
     padding: 8px 12px;
     box-sizing: border-box;
-    margin-top: 12px;
+    margin-top: 6px;
     border-radius: 3px;
     background: ${(props) =>
       props.isChecked
@@ -100,12 +109,12 @@ const ImportItemWrapper = styled.div<{ isChecked: boolean }>`
         : props.theme.client.settings.migration.importItemDisableTextColor};
     font-weight: 600;
     line-height: 20px;
-    display: flex;
-    align-items: center;
     gap: 8px;
 
-    @media ${mobile} {
-      min-width: auto;
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .importSectionIcon {
@@ -129,11 +138,12 @@ const ImportItemWrapper = styled.div<{ isChecked: boolean }>`
 
 const ArrowWrapper = styled.div`
   margin: 32px 12px 0;
-  height: 36px;
+  height: 11px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 16px;
+  flex-shrink: 0;
 
   .arrow-icon {
     transform: ${(props) =>
@@ -160,6 +170,7 @@ const ImportItem = ({
         fontSize="11px"
         fontWeight={600}
         lineHeight="12px"
+        title={workspace}
       >
         {workspace}
       </Text>
@@ -167,7 +178,9 @@ const ImportItem = ({
         {sectionIcon ? (
           <ReactSVG className="importSectionIcon" src={sectionIcon} />
         ) : null}
-        {sectionName}
+        <Text as="span" fontWeight={600} lineHeight="20px" title={sectionName}>
+          {sectionName}
+        </Text>
       </div>
     </ImportItemWrapper>
   );
@@ -181,20 +194,22 @@ const ImportSection = ({
   description,
   exportSection,
   importSection,
+  dataTestId,
 }: ImportSectionProps) => {
   return (
-    <SectionWrapper isChecked={isChecked}>
+    <SectionWrapper data-testid={dataTestId} isChecked={isChecked}>
       <ToggleButton
         isChecked={isChecked}
         onChange={onChange || (() => {})}
         className="toggleButton"
         isDisabled={isDisabled}
+        dataTestId="enable_import_section_button"
       />
-      <div>
+      <div className="section-content">
         <Text lineHeight="20px" fontWeight={600} className="section-title">
           {sectionName}
         </Text>
-        <Text fontSize="12px" className="section-description">
+        <Text fontSize="12px" lineHeight="16px" className="section-description">
           {description}
         </Text>
         <FlexContainer>

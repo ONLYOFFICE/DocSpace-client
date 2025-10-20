@@ -3,7 +3,7 @@
   "content": "Info",
   "content_en_sha1_hash": "4b631f69842530d659306c8f06dbad594a6b1807",
   "created_at": "2025-05-19T21:30:45.900Z",
-  "updated_at": "2025-07-10T11:11:06.886Z",
+  "updated_at": "2025-10-17T14:43:53.462Z",
   "comment": {
     "text": "This translation key is used for the text \"Info\", which is displayed as a header or label in various UI components, including an info panel and an OAuth information dialog. The purpose of this text is to provide basic information or context, often accompanied by icons. It appears in places such as headers, dialogs, and context options.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/index.tsx",
-      "line_number": 220,
-      "context": "}\n \n return (\n <StyledInfoPanelHeader withTabs={withTabs}>\n <AsideHeader\n header={t(\"Common:Info\")}\n onCloseClick={closeInfoPanel}\n withoutBorder\n className=\"header-text\"\n isCloseable\n />",
+      "line_number": 203,
+      "context": "className={classNames(styles.infoPanelHeader, {\n [styles.withTabs]: withTabs,\n })}\n >\n <AsideHeader\n header={t(\"Common:Info\")}\n onCloseClick={closeInfoPanel}\n withoutBorder\n className=\"header-text\"\n isCloseable\n dataTestId=\"info_panel_aside_header\"",
       "module": "/packages/client"
     },
     {
@@ -23,69 +23,69 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1950,
-      "context": "// onLoad: () => this.onLoadLinks(t, item),\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:Info\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.expired),\n },\n ...pinOptions,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1950,
-      "context": "// onLoad: () => this.onLoadLinks(t, item),\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:Info\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.expired),\n },\n ...pinOptions,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2205,
-      "context": "case \"show-info\":\n if (isDesktop()) return null;\n return {\n id: \"menu-show-info\",\n key: \"show-info\",\n label: t(\"Common:Info\"),\n iconUrl: InfoOutlineReactSvgUrl,\n onClick: this.onShowInfoPanel,\n };\n case \"copy\":\n if (!this.isAvailableOption(\"copy\")) return null;",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 698,
-      "context": "};\n \n const infoOption = {\n key: \"info\",\n icon: SettingsIconUrl,\n label: t(\"Common:Info\"),\n onClick: onShowInfo,\n disabled: isInfo,\n };\n \n if (!isSettings) {",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 269,
+      "line_number": 267,
       "context": "case \"details\":\n return {\n id: \"option_details\",\n key: option,\n icon: InfoOutlineReactSvgUrl,\n label: t(\"Common:Info\"),\n onClick: () => this.onDetailsClick(item),\n };\n \n case \"invite-again\":\n return !this.settingsStore.allowInvitingMembers",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 269,
+      "line_number": 267,
       "context": "case \"details\":\n return {\n id: \"option_details\",\n key: option,\n icon: InfoOutlineReactSvgUrl,\n label: t(\"Common:Info\"),\n onClick: () => this.onDetailsClick(item),\n };\n \n case \"invite-again\":\n return !this.settingsStore.allowInvitingMembers",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 470,
-      "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: () => this.infoPanelStore.setIsVisible(true),\n },\n {",
+      "line_number": 493,
+      "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: showInfoPanel,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 470,
-      "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: () => this.infoPanelStore.setIsVisible(true),\n },\n {",
+      "line_number": 493,
+      "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: showInfoPanel,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 470,
-      "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: () => this.infoPanelStore.setIsVisible(true),\n },\n {",
+      "line_number": 493,
+      "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: showInfoPanel,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 470,
-      "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: () => this.infoPanelStore.setIsVisible(true),\n },\n {",
+      "line_number": 493,
+      "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: showInfoPanel,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
-      "line_number": 194,
-      "context": ": this.contextOptionsStore.getUsersChangeTypeOptions(t),\n },\n {\n id: \"menu-info\",\n key: \"info\",\n label: t(\"Common:Info\"),\n disabled:\n isVisible ||\n !(isTablet() || isMobile() || !isDesktop()) ||\n selection.length > 1,\n onClick: this.onOpenInfoPanel,",
+      "line_number": 170,
+      "context": ": this.contextOptionsStore.getUsersChangeTypeOptions(t),\n },\n {\n id: \"menu-info\",\n key: \"info\",\n label: t(\"Common:Info\"),\n disabled:\n isInfoPanelVisible ||\n !(isTablet() || isMobile() || !isDesktop()) ||\n selection.length > 1,\n onClick: showInfoPanel,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2096,
+      "context": "disabled: !item.security?.CreateRoomFrom,\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:Info\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2096,
+      "context": "disabled: !item.security?.CreateRoomFrom,\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:Info\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 2187,
+      "context": "case \"show-info\":\n if (isDesktop()) return null;\n return {\n id: \"menu-show-info\",\n key: \"show-info\",\n label: t(\"Common:Info\"),\n iconUrl: InfoOutlineReactSvgUrl,\n onClick: showInfoPanel,\n };\n case \"copy\":\n if (!this.isAvailableOption(\"copy\")) return null;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/OAuthStore.ts",
+      "line_number": 732,
+      "context": "};\n \n const infoOption = {\n key: \"info\",\n icon: SettingsIconUrl,\n label: t(\"Common:Info\"),\n onClick: onShowInfo,\n disabled: isInfo,\n dataTestId: \"oauth_info_option\",\n };",
       "module": "/packages/client"
     },
     {
@@ -96,7 +96,7 @@
     },
     {
       "file_path": "/packages/shared/components/toast/sub-components/Toastr.tsx",
-      "line_number": 74,
+      "line_number": 60,
       "context": "const TOAST_CONFIGS: Record<ToastType, NotifyConfig> = {\n [ToastType.success]: { type: ToastType.success, defaultTitleKey: \"Done\" }, // t(\"Common:Done\")\n [ToastType.error]: { type: ToastType.error, defaultTitleKey: \"Warning\" }, // t(\"Common:Warning\")\n [ToastType.warning]: { type: ToastType.warning, defaultTitleKey: \"Alert\" }, // t(\"Common:Alert\")\n [ToastType.info]: { type: ToastType.info, defaultTitleKey: \"Info\" }, // t(\"Common:Info\")\n };\n \n const getTitle = (type: \"Done\" | \"Warning\" | \"Alert\" | \"Info\") => {\n const cookieLang = getCookie(\"asc_language\");\n const lang =",
       "module": "/packages/shared"
     }

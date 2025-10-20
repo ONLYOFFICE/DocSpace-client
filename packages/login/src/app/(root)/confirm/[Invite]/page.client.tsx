@@ -64,7 +64,7 @@ import { TValidate } from "@docspace/shared/components/email-input";
 import { TCreateUserData, TError } from "@/types";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
 import { Text } from "@docspace/shared/components/text";
-import { login } from "@docspace/shared/api/user";
+import { login, thirdPartyLogin } from "@docspace/shared/api/user";
 import {
   createUser,
   getUserByEmail,
@@ -110,8 +110,10 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     invitationSettings,
   } = props;
 
-  const { linkData, roomData } = useContext(ConfirmRouteContext);
+  const { linkData, roomData, confirmLinkResult } =
+    useContext(ConfirmRouteContext);
   const { t, i18n } = useTranslation(["Confirm", "Common"]);
+
   const router = useRouter();
 
   const organizationName = logoText || t("Common:OrganizationName");
@@ -120,7 +122,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const emailFromLink = linkData?.email ? linkData.email : "";
+  const emailFromLink = confirmLinkResult?.email ? confirmLinkResult.email : "";
   const roomName = roomData?.title;
   const roomId = roomData?.roomId;
 
@@ -158,22 +160,51 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     async (profile: string) => {
       const signupAccount: { [key: string]: string | undefined } = {
         EmployeeType: linkData.emplType,
-        Email: linkData.email,
+        Email: confirmLinkResult.email,
         Key: linkData.key,
         SerializedProfile: profile,
         culture: currentCultureName,
       };
 
+      setIsLoading(true);
+
       const confirmKey = linkData.confirmHeader;
 
       try {
-        await signupOAuth(signupAccount, confirmKey);
+        const user = await signupOAuth(signupAccount, confirmKey);
 
-        const url = roomData.roomId
+        if (!user) {
+          toastr.error(t("Common:SomethingWentWrong"));
+          return;
+        }
+
+        const response = (await thirdPartyLogin(
+          profile,
+          currentCultureName,
+        )) as {
+          confirmUrl: string;
+          token: unknown;
+        };
+
+        if (
+          !response ||
+          (response && !response.token && !response.confirmUrl)
+        ) {
+          throw new Error("Empty API response");
+        }
+
+        const finalUrl = roomData.roomId
           ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
           : defaultPage;
-        window.location.replace(url);
+
+        if (response.confirmUrl) {
+          sessionStorage.setItem("referenceUrl", finalUrl);
+          return window.location.replace(response.confirmUrl);
+        }
+
+        window.location.replace(finalUrl);
       } catch (error) {
+        setIsLoading(false);
         const knownError = error as TError;
         let errorMessage: string;
 
@@ -192,7 +223,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     [
       currentCultureName,
       defaultPage,
-      linkData.email,
+      confirmLinkResult.email,
       linkData.emplType,
       linkData.key,
       roomData.roomId,
@@ -416,7 +447,11 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === ButtonKeys.enter) {
-      registrationForm ? onSubmit() : onContinue();
+      if (registrationForm) {
+        onSubmit();
+      } else {
+        onContinue();
+      }
     }
   };
 
@@ -479,7 +514,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     if (!capabilities?.oauthEnabled) return false;
 
     let existProviders = 0;
-    thirdPartyProviders && thirdPartyProviders.length > 0;
     thirdPartyProviders?.forEach((item) => {
       const key = item.provider as keyof typeof PROVIDERS_DATA;
       if (

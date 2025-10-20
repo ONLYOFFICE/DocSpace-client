@@ -29,6 +29,7 @@ import isUndefined from "lodash/isUndefined";
 import { useSearchParams } from "next/navigation";
 
 import {
+  addFileToRecentlyViewed,
   createFile,
   getEditDiff,
   getEditHistory,
@@ -38,6 +39,8 @@ import {
   openEdit,
   restoreDocumentsVersion,
   sendEditorNotify,
+  markAsFavorite,
+  removeFromFavorite,
 } from "@docspace/shared/api/files";
 import {
   TEditHistory,
@@ -73,6 +76,7 @@ import {
   THistoryData,
   UseEventsProps,
 } from "@/types";
+import { onSDKInfo } from "@/utils/events";
 
 let docEditor: TDocEditor | null = null;
 
@@ -251,7 +255,7 @@ const useEditorEvents = ({
     if (docEditor) {
       // console.log("call assign for asc files editor doceditor");
       assign(
-        window as unknown as { [key: string]: {} },
+        window as unknown as { [key: string]: object },
         ["ASC", "Files", "Editor", "docEditor"],
         docEditor,
       ); // Do not remove: it's for Back button on Mobile App
@@ -484,8 +488,7 @@ const useEditorEvents = ({
           }),
         );
 
-        usersNotFound &&
-          usersNotFound.length > 0 &&
+        if (usersNotFound && usersNotFound.length > 0) {
           docEditor?.showMessage?.(
             t
               ? t("UsersWithoutAccess", {
@@ -493,6 +496,7 @@ const useEditorEvents = ({
                 })
               : "",
           );
+        }
       } catch (e) {
         toastr.error(e as TData);
       }
@@ -595,25 +599,27 @@ const useEditorEvents = ({
       setDocSaved(!(event as { data: boolean }).data);
 
       setTimeout(() => {
-        docSaved
-          ? setDocumentTitle(
-              t,
-              docTitle,
-              config?.document.fileType ?? "",
-              documentReady,
-              successAuth ?? false,
-              organizationName,
-              setDocTitle,
-            )
-          : setDocumentTitle(
-              t,
-              `*${docTitle}`,
-              config?.document.fileType ?? "",
-              documentReady,
-              successAuth ?? false,
-              organizationName,
-              setDocTitle,
-            );
+        if (docSaved) {
+          setDocumentTitle(
+            t,
+            docTitle,
+            config?.document.fileType ?? "",
+            documentReady,
+            successAuth ?? false,
+            organizationName,
+            setDocTitle,
+          );
+        } else {
+          setDocumentTitle(
+            t,
+            `*${docTitle}`,
+            config?.document.fileType ?? "",
+            documentReady,
+            successAuth ?? false,
+            organizationName,
+            setDocTitle,
+          );
+        }
       }, 500);
     },
     [
@@ -628,9 +634,23 @@ const useEditorEvents = ({
   );
 
   const onMetaChange = React.useCallback(
-    (event: object) => {
+    async (event: object) => {
       const newTitle = (event as { data: { title: string } }).data.title;
-      // const favorite = event.data.favorite;
+      const favorite = (event as { data: { favorite: boolean } }).data.favorite;
+
+      if (favorite !== fileInfo?.isFavorite && fileInfo?.id) {
+        try {
+          if (favorite) {
+            await markAsFavorite([fileInfo.id], []);
+          } else {
+            await removeFromFavorite([fileInfo.id], []);
+          }
+        } catch (error) {
+          console.error(error);
+        } finally {
+          docEditor?.setFavorite?.(favorite);
+        }
+      }
 
       if (newTitle && newTitle !== docTitle) {
         setDocumentTitle(
@@ -655,14 +675,14 @@ const useEditorEvents = ({
     ],
   );
 
-  const generateLink = (actionData: {}) => {
+  const generateLink = (actionData: object) => {
     return encodeURIComponent(JSON.stringify(actionData));
   };
 
   const onMakeActionLink = React.useCallback((event: object) => {
     const url = window.location.href;
 
-    const actionData = (event as { data: {} }).data;
+    const actionData = (event as { data: object }).data;
 
     const link = generateLink(actionData);
 
@@ -778,7 +798,7 @@ const useEditorEvents = ({
   }, [setFillingStatusDialogVisible]);
 
   const onRequestStartFilling = useCallback(
-    (event: {}) => {
+    (event: object) => {
       switch (config?.startFillingMode) {
         case StartFillingMode.ShareToFillOut:
           openShareFormDialog?.();
@@ -824,6 +844,18 @@ const useEditorEvents = ({
     config?.editorConfig.mode,
   ]);
 
+  const onInfo = React.useCallback(
+    async (e: object) => {
+      onSDKInfo(e);
+
+      // Add to recently viewed files in any mode (read or edit)
+      if (successAuth && fileInfo?.id) {
+        addFileToRecentlyViewed(fileInfo.id);
+      }
+    },
+    [onSDKInfo, successAuth, fileInfo?.id],
+  );
+
   return {
     createUrl,
     documentReady,
@@ -850,6 +882,7 @@ const useEditorEvents = ({
     onRequestFillingStatus,
     onRequestStartFilling,
     onRequestRefreshFile,
+    onInfo,
   };
 };
 

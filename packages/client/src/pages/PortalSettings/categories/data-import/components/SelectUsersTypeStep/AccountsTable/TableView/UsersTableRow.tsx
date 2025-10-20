@@ -48,7 +48,7 @@ const StyledTableRow = styled(TableRow)`
     text-overflow: ellipsis;
   }
 
-  .username {
+  .checkbox-text {
     font-size: 13px;
     font-weight: 600;
     color: ${(props) => props.theme.client.settings.migration.subtitleColor};
@@ -117,25 +117,48 @@ const UsersTableRow = (props: TypeSelectTableRowProps) => {
     (option) => option.key === type,
   ) || { key: "", label: "" };
 
-  const handleAccountToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-
+  const checkIsClickOnUserTypeSelect = (
+    e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+  ) => {
     if (
-      !e.target.closest(".dropdown-container") &&
-      !userTypeRef.current?.contains(e.target)
+      (e.target as HTMLElement).closest(".dropdown-container") ||
+      userTypeRef.current?.contains(e.target as HTMLElement)
     ) {
+      return true;
+    }
+    return false;
+  };
+
+  const checkIsClickOnUserSelect = (
+    e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    if ((e.target as HTMLElement).closest(".user-select")) {
+      return true;
+    }
+    return false;
+  };
+
+  const onRowClick = (
+    e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const isClickOnUserTypeSelect = checkIsClickOnUserTypeSelect(e);
+    const isClickOnUserSelect = checkIsClickOnUserSelect(e);
+
+    if (!isClickOnUserTypeSelect && !isClickOnUserSelect) {
       toggleAccount();
     }
   };
 
   return (
-    <StyledTableRow>
+    <StyledTableRow onClick={onRowClick}>
       <TableCell className="checkboxWrapper">
-        <Checkbox isChecked={isChecked} onChange={handleAccountToggle} />
-        <Text className="username" truncate>
-          {displayName}
-        </Text>
+        <Checkbox
+          onChange={() => toggleAccount()}
+          isChecked={isChecked}
+          label={displayName}
+          truncate
+          className="user-select"
+        />
       </TableCell>
 
       <TableCell>
@@ -150,6 +173,7 @@ const UsersTableRow = (props: TypeSelectTableRowProps) => {
             displaySelectedOption
             modernView
             manualWidth="auto"
+            dataTestId="user_type_combobox"
           />
         </div>
       </TableCell>

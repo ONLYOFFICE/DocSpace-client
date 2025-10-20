@@ -80,7 +80,7 @@ const EditMCPDialogComponent = ({
 
     const icon = getIcon();
 
-    if (!baseParams || !icon) return;
+    if (!baseParams) return;
 
     setLoading(true);
 

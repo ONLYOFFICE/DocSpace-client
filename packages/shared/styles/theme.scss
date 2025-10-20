@@ -2959,3 +2959,11 @@
 .dark {
   --mcp-icon-bg-opacity: 0.1;
 }
+
+.light {
+  --delete-image-link-color: #{$light-gray-dark};
+}
+
+.dark {
+  --delete-image-link-color: #{$white};
+}

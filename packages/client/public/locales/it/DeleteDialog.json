@@ -11,6 +11,7 @@
   "DeleteGroupTitle": "Elimina gruppo",
   "DeleteItem": "Stai per spostare <strong>{{name}}</strong> nel {{trashSection}}.",
   "DeleteItemForever": "Stai per eliminare <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Tieni presente che se li hai condivisi con qualcuno, non saranno più disponibili.",
   "DeleteRoom": "La stanza <strong>\"{{roomName}}\"</strong> verrà eliminata definitivamente. Tutti i dati e gli accessi utente andranno persi.",
   "DeleteRoomTitle": "Eliminare questa stanza?",
   "DeleteRoomWarning": "Comprendo le conseguenze e desidero eliminare la stanza",

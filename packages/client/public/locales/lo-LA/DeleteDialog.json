@@ -11,6 +11,7 @@
   "DeleteGroupTitle": "ລົບກຸ່ມ",
   "DeleteItem": "ທ່ານກຳລັງຈະຍ້າຍ <strong>{{name}}</strong> ໄປໃສ່ {{trashSection}}.",
   "DeleteItemForever": "ທ່ານກຳລັງຈະລຶບ <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "ກະ​ລຸ​ນາ​ສັງ​ເກດ​ວ່າ​ຖ້າ​ຫາກ​ວ່າ​ທ່ານ​ໄດ້​ແບ່ງ​ປັນ​ໃຫ້​ເຂົາ​ເຈົ້າ​ກັບ​ຜູ້​ໃດ​ຜູ້​ຫນຶ່ງ​, ພວກ​ເຂົາ​ຈະ​ກາຍ​ເປັນ​ບໍ່​ມີ​.",
   "DeleteRoom": "ຫ້ອງ <strong>\"{{roomName}}\"</strong> ຈະຖືກລຶບອອກຖາວອນ. ຂໍ້ມູນ ແລະການເຂົ້າເຖິງຜູ້ໃຊ້ທັງໝົດຈະສູນເສຍໄປ.",
   "DeleteRoomTitle": "ລຶບຫ້ອງນີ້ບໍ?",
   "DeleteRoomWarning": "ຂ້ອຍເຂົ້າໃຈຜົນສະທ້ອນແລະຕ້ອງການລຶບຫ້ອງ",

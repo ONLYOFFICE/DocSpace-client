@@ -42,7 +42,7 @@ import AIAgentsSelector from "@docspace/shared/selectors/AIAgent";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { CategoryType } from "@docspace/shared/constants";
 
 import {
   UploadPanel,

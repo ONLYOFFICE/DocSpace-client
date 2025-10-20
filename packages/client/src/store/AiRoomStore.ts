@@ -46,7 +46,6 @@ class AiRoomStore {
   };
 
   setCurrentTab = (currentTab: "chat" | "knowledge" | "result") => {
-    console.log("set", currentTab);
     this.currentTab = currentTab;
   };
 
@@ -90,7 +89,6 @@ class AiRoomStore {
 
     setTimeout(() => {
       if (resultId) {
-        console.log(resultId, "sub");
         SocketHelper?.emit(SocketCommands.Subscribe, {
           roomParts: [`DIR-${resultId}`],
           individual: true,

@@ -9,17 +9,23 @@ export const NoEmailUsersBlock = ({
 }: NoEmailUsersProps) => {
   return (
     <p className="users-without-email">
-      <Trans
-        t={t}
-        ns="Settings"
-        i18nKey={
-          isSelectUsersStep
-            ? "AccountsUsersWithoutEmails"
-            : "AccountsWithoutEmails"
-        }
-        values={{ users }}
-        components={{ 1: <Text as="span" fontWeight="600" /> }}
-      />
+      {isSelectUsersStep ? (
+        <Trans
+          t={t}
+          ns="Settings"
+          i18nKey="AccountsUsersWithoutEmails"
+          values={{ users }}
+          components={{ 1: <Text as="span" fontWeight="600" /> }}
+        />
+      ) : (
+        <Trans
+          t={t}
+          ns="Settings"
+          i18nKey="AccountsWithoutEmails"
+          values={{ users }}
+          components={{ 1: <Text as="span" fontWeight="600" /> }}
+        />
+      )}
     </p>
   );
 };

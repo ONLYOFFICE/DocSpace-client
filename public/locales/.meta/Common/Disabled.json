@@ -3,7 +3,7 @@
   "content": "Disabled",
   "content_en_sha1_hash": "f4f4473df8cb59f0a369aebee3d1509adc0151c6",
   "created_at": "2025-05-19T21:30:44.535Z",
-  "updated_at": "2025-06-08T12:02:32.673Z",
+  "updated_at": "2025-10-16T07:29:35.622Z",
   "comment": {
     "text": "This translation key is used to display the text \"Disabled\" when a feature or setting is disabled in the UI. It appears as part of dropdown menus and options lists in various admin settings and configuration pages.",
     "is_auto": true,
@@ -12,50 +12,50 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 399,
+      "line_number": 406,
       "context": "</div>\n {shared ? (\n <SearchItemText $info>{t(\"Common:Invited\")}</SearchItemText>\n ) : null}\n {isDisabled ? (\n <SearchItemText info>{t(\"Common:Disabled\")}</SearchItemText>\n ) : null}\n </DropDownItem>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
-      "line_number": 196,
-      "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"admin-message-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"disabled\",\n },\n {\n id: \"admin-message-enable\",\n label: t(\"Common:Enable\"),",
+      "line_number": 201,
+      "context": "spacing=\"8px\"\n dataTestId=\"administrator_message_radio_button_group\"\n options={[\n {\n id: \"admin-message-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"disabled\",\n dataTestId: \"administrator_message_disabled\",\n },\n {\n id: \"admin-message-enable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
-      "line_number": 229,
-      "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"dev-tools-access-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"true\",\n },\n {\n id: \"dev-tools-access-enable\",\n label: t(\"Common:Enable\"),",
+      "line_number": 233,
+      "context": "spacing=\"8px\"\n dataTestId=\"developer_tools_access_radio_button\"\n options={[\n {\n id: \"dev-tools-access-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"true\",\n dataTestId: \"developer_tools_access_disabled\",\n },\n {\n id: \"dev-tools-access-enable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 270,
-      "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"ip-security-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"disabled\",\n },\n {\n id: \"ip-security-enable\",\n label: t(\"Common:Enable\"),",
+      "line_number": 286,
+      "context": "spacing=\"8px\"\n dataTestId=\"ip_security_radio_button_group\"\n options={[\n {\n id: \"ip-security-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"disabled\",\n dataTestId: \"ip_security_disabled\",\n },\n {\n id: \"ip-security-enable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
-      "line_number": 264,
-      "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"session-lifetime-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"disabled\",\n },\n {\n id: \"session-lifetime-enable\",\n label: t(\"Common:Enable\"),",
+      "line_number": 289,
+      "context": "spacing=\"8px\"\n dataTestId=\"session_lifetime_radio_button_group\"\n options={[\n {\n id: \"session-lifetime-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"disabled\",\n dataTestId: \"session_lifetime_disabled\",\n },\n {\n id: \"session-lifetime-enable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 205,
-      "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"tfa-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"none\",\n },\n // TODO: hide while 2fa by sms is not working\n /* {\n id: \"by-sms\",",
+      "line_number": 275,
+      "context": "spacing=\"8px\"\n dataTestId=\"tfa_radio_button_group\"\n options={[\n {\n id: \"tfa-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"none\",\n dataTestId: \"tfa_radio_button_disabled\",\n },\n // TODO: hide while 2fa by sms is not working\n /* {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 250,
-      "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"trusted-mail-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"0\",\n },\n {\n id: \"any-domains\",\n label: t(\"AllDomains\"),",
+      "line_number": 261,
+      "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"trusted-mail-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"0\",\n dataTestId: \"trusted_mail_disabled\",\n },\n {\n id: \"any-domains\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 110,
-      "context": "disableDisabledUsers && status === EmployeeStatus.Disabled;\n \n const disabledText = isInvited\n ? t(\"Common:Invited\")\n : isDisabled\n ? t(\"Common:Disabled\")\n : \"\";\n \n const avatarRole = getUserAvatarRoleByType(role);\n \n const i: TSelectorItem = {",
+      "line_number": 113,
+      "context": "disableDisabledUsers && status === EmployeeStatus.Disabled;\n \n const disabledText = isInvited\n ? (disabledInvitedText ?? t(\"Common:Invited\"))\n : isDisabled\n ? t(\"Common:Disabled\")\n : \"\";\n \n const avatarRole = getUserAvatarRoleByType(role);\n \n const i: TSelectorItem = {",
       "module": "/packages/shared"
     }
   ],
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Deaktiv edildi' can mean 'disabled,' it's more accurately translated as 'deactivated' or 'turned off.' 'Disabled' implies a state of being unable to be used, whereas 'Deaktiv edildi' suggests a previous active state that has been stopped.",
-          "suggestion": "Consider 'İstifadəyə qapanıb' for a closer meaning to 'disabled' which implies an inability to be used."
+          "description": "While \"Deaktiv edildi\" is a possible translation for \"Disabled\", it more accurately translates to \"deactivated.\" \"Disabled\" can also mean unable to function, which might be better conveyed by a different term depending on the context. Without more context, it's difficult to determine if this is the best translation.",
+          "suggestion": "Consider alternatives like \"Əngəllənmiş\" (Impeded), \"Fəaliyyətsiz\" (Inactive), or \"Çalışmayan\" (Non-functional) depending on the intended meaning."
         }
       ],
       "approved_at": null
@@ -87,7 +87,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Деактивиран' (Deaktiviran) can mean disabled, it more accurately translates to 'deactivated' or 'inactive'. 'Disabled' implies a state of being unable to function, which 'Деактивиран' doesn't fully convey. A more accurate translation depending on the context might be 'Увреден' (Uvreden - impaired/damaged) or 'Неактивен' (Neaktiven - inactive).",
+          "suggestion": "Consider 'Увреден' (Uvreden) or 'Неактивен' (Neaktiven) as alternatives depending on the specific meaning of 'Disabled' in the original context."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -141,13 +147,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation '無効' generally means 'invalid' or 'void' rather than 'disabled'. While it can be used in some contexts to convey 'disabled,' it's not the most accurate or natural translation.",
-          "suggestion": "Consider alternatives like '無効化' (mueika - to disable) or '停止' (teishi - stop) depending on the context.  A more direct translation might require more context to be accurate."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation \"Wyłączono\" translates to \"Disabled\" or \"Turned off\" in English, but lacks the nuance of a setting being disabled. While not strictly incorrect, it's not the most accurate translation for the context of a user-configurable setting.",
-          "suggestion": "Consider \"Wyłączone\" or \"Niedostępne\" depending on the specific context of the setting."
+          "description": "The Polish translation \"Wyłączono\" translates to 'Switched off' or 'Turned off', not 'Disabled'. While it can sometimes be used in a similar context, it's not a direct equivalent of 'Disabled'.",
+          "suggestion": "Consider a more accurate translation like \"Nieaktywny\" (Inactive) or \"Utrzymane w stanie wyłączonym\" (Kept in a disabled state) depending on the precise nuance required."
         }
       ],
       "approved_at": null
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Онемогућено' can be a valid translation, 'Деактивирано' might be a more accurate and common translation for 'Disabled' in many contexts, especially in UI/software settings. 'Онемогућено' often implies a more severe disabling or incapacitation.",
-          "suggestion": "Consider using 'Деактивирано' as a potential alternative."
+          "description": "While \"Онемогућено\" is a valid Serbian (Cyrillic) word, it translates more literally to 'immobilized' or 'incapacitated'. For a 'Disabled' status, a more common and appropriate translation would be 'Искуљено' or 'Онијемогућено'.",
+          "suggestion": "Consider using 'Искуљено' or 'Онијемогућено' for a more accurate translation of 'Disabled'."
         }
       ],
       "approved_at": null
@@ -243,7 +243,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Onemogućeno' while technically meaning 'disabled' or 'deactivated' doesn't perfectly capture the nuance of 'Disabled' (as a status or attribute). A more accurate translation, depending on context, might be 'Isključeno' or 'Nije omogućeno'.",
+          "suggestion": "Consider 'Isključeno' or 'Nije omogućeno' for a closer translation, depending on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -252,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Devre dışı bırakıldı\" translates to \"deactivated\" or \"disconnected\", not simply \"Disabled\". It's a more descriptive phrase than the English word \"Disabled\".",
-          "suggestion": "Consider a more direct translation such as \"Kapalı\" (Closed/Off) or \"Engellendi\" (Blocked/Disabled), depending on the context."
+          "description": "The Turkish translation \"Devre dışı bırakıldı\" translates to \"deactivated\" or \"switched off,\" which isn't a direct equivalent to \"Disabled\". While it conveys a similar concept, it's more active and specific. A more accurate translation would depend on the context (e.g., 'Kapalı' for 'off', 'Engellendi' for 'blocked/disabled').",
+          "suggestion": "Consider 'Kapalı' (for 'off') or 'Engellendi' (for 'disabled'), depending on context."
         }
       ],
       "approved_at": null
@@ -270,8 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Đã vô hiệu hóa' is a possible translation, it's a bit formal and lengthy for a simple 'Disabled' state. A more natural and concise translation might be better.",
-          "suggestion": "Vô hiệu"
+          "description": "While 'Đã vô hiệu hóa' is a possible translation, it's quite formal and doesn't always fit the context of 'Disabled'. 'Tắt' or 'Vô hiệu' might be more appropriate depending on what 'Disabled' refers to. 'Đã vô hiệu hóa' implies a more complex process than simply disabling something.",
+          "suggestion": "Consider 'Tắt' or 'Vô hiệu' as alternatives, depending on the context."
         }
       ],
       "approved_at": null

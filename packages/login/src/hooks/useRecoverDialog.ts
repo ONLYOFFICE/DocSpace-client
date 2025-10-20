@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import { LoginDispatchContext } from "@/components/Login";
 
-const useRecoverDialog = ({}) => {
+const useRecoverDialog = () => {
   const [recoverDialogVisible, setRecoverDialogVisible] = useState(false);
 
   const { setIsModalOpen } = useContext(LoginDispatchContext);

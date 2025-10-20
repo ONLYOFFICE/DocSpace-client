@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { i18n } from "i18next";
+import { i18n as i18nType } from "i18next";
 import { match, P } from "ts-pattern";
 
 import { Base, Dark, TColorScheme, TTheme } from "@docspace/shared/themes";
@@ -43,7 +43,7 @@ type MatchType = [ThemeKeys | undefined, ThemeKeys | undefined];
 
 export interface UseThemeProps {
   user?: TUser;
-  i18n?: i18n;
+  i18n?: i18nType;
   systemTheme?: ThemeKeys;
   colorTheme?: TGetColorTheme;
   lang?: string;
@@ -94,25 +94,25 @@ const useTheme = ({
     isRequestRunning.current = true;
     const colorThemes = await getAppearanceTheme();
 
-    const colorTheme = colorThemes.themes.find(
+    const newColorTheme = colorThemes.themes.find(
       (t) => t.id === colorThemes.selected,
     );
 
     isRequestRunning.current = false;
-    if (colorTheme) setCurrentColorTheme(colorTheme);
+    if (newColorTheme) setCurrentColorTheme(newColorTheme);
   }, []);
 
   const getUserTheme = React.useCallback(() => {
     const SYSTEM_THEME = getSystemTheme();
 
-    let theme = user?.theme ?? SYSTEM_THEME;
+    let newTheme = user?.theme ?? SYSTEM_THEME;
     const interfaceDirection = i18n?.dir ? i18n.dir(lang) : "ltr";
 
-    if (user?.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
+    if (user?.theme === ThemeKeys.SystemStr) newTheme = SYSTEM_THEME;
 
     const fontFamily = getFontFamilyDependingOnLanguage(i18n?.language ?? "en");
 
-    const isBaseTheme = theme === ThemeKeys.BaseStr;
+    const isBaseTheme = newTheme === ThemeKeys.BaseStr;
     const themeCookie = isBaseTheme ? ThemeKeys.BaseStr : ThemeKeys.DarkStr;
 
     setTheme({
@@ -147,4 +147,3 @@ const useTheme = ({
 };
 
 export default useTheme;
-

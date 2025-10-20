@@ -3,7 +3,7 @@
   "content": "Send an invitation letter to add new members to the portal",
   "content_en_sha1_hash": "b91e346ed7862a7a8be3833a1c53720528e3000b",
   "created_at": "2025-05-19T21:30:56.532Z",
-  "updated_at": "2025-05-26T07:57:32.455Z",
+  "updated_at": "2025-06-30T12:20:31.375Z",
   "comment": {
     "text": "Send an invitation letter to new members to join the portal. This key is used in an empty screen on the contacts page when there are no guests to invite.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
       "line_number": 143,
-      "context": "if (isFiltered)\n return [\n {\n key: \"empty-view-invite-new-users\",\n title: t(\"EmptyView:InviteNewUsers\"),\n description: t(\"EmptyView:SendInvitationLetter\"),\n disabled: isRoomAdmin || currentGroup?.isLDAP || isEmptyGuests,\n icon: <InviteUserIcon />,\n model: (getContactsModel(t, false) ?? []).filter(\n (m) => typeof m !== \"boolean\",\n ) as ContextMenuModel[],",
+      "context": "if (isFiltered)\n return [\n {\n key: \"empty-view-invite-new-users\",\n title: t(\"EmptyView:InviteNewUsers\"),\n description: t(\"EmptyView:SendInvitationLetter\"),\n disabled: isRoomAdmin || currentGroup?.isLDAP || isEmptyGuests,\n icon: <InviteUserIcon />,\n model: (getContactsModel?.(t, false) ?? []).filter(\n (m) => typeof m !== \"boolean\",\n ) as ContextMenuModel[],",
       "module": "/packages/client"
     }
   ],

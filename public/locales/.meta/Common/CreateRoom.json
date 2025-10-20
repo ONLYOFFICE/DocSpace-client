@@ -3,7 +3,7 @@
   "content": "Create room",
   "content_en_sha1_hash": "bc487b9d588a5f906e3f1cf66e5d6096e1b21ed5",
   "created_at": "2025-05-19T21:30:43.921Z",
-  "updated_at": "2025-06-08T12:02:32.578Z",
+  "updated_at": "2025-10-16T07:29:35.557Z",
   "comment": {
     "text": "This translation key is used for the \"Create room\" button label in various UI components, such as buttons and dialog headers. It appears when a user clicks on the \"Create room\" link or button to initiate the creation of a new room.",
     "is_auto": true,
@@ -11,21 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 253,
-      "context": "onClick={onCreateRoom}\n iconName={PlusSvgUrl}\n isFill\n />\n <Link onClick={onCreateRoom} {...linkStyles}>\n {t(\"Common:CreateRoom\")}\n </Link>\n </div>\n );\n \n const archiveButtons = !isVisitor && (",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 223,
+      "line_number": 225,
       "context": "const isTemplate = !roomParams.type && !isTemplateSelected;\n \n const dialogHeader = !roomParams.type\n ? t(\"ChooseRoomType\")\n : t(\"Common:CreateRoom\");\n \n return (\n <ModalDialog\n displayType=\"aside\"\n withBodyScroll",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ShareFolderDialog/index.js",
       "line_number": 66,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"create-room\"\n key=\"OKButton\"\n label={t(\"Common:CreateRoom\")}\n size=\"normal\"\n primary\n onClick={onAction}\n scale\n />",
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"create-room\"\n key=\"OKButton\"\n label={t(\"Common:CreateRoom\")}\n size=\"normal\"\n primary\n onClick={onAction}\n scale\n testId=\"share_folder_dialog_create_room_button\"",
       "module": "/packages/client"
     },
     {
@@ -37,49 +31,49 @@
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/CreationBlock.js",
       "line_number": 72,
-      "context": "</>\n </Row>\n \n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"Common:CreateRoom\")}</Text>\n <Text {...keyTextStyles}>{`${AltKey} + Shift + r`}</Text>\n </>\n </Row>\n </>\n );",
+      "context": "</>\n </Row>\n \n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"Common:CreateRoom\")}</Text>\n <Text {...keyTextStyles}>Shift + r</Text>\n </>\n </Row>\n </>\n );",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.js",
-      "line_number": 157,
-      "context": ">\n {t(\"Files:RoomTemplateDescription\")}\n </Text>\n \n <Button\n label={t(\"Common:CreateRoom\")}\n className=\"room-template_button\"\n onClick={onCreateRoom}\n size=\"extraSmall\"\n primary\n />",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1862,
-      "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.tsx",
+      "line_number": 209,
+      "context": "className={styles.roomTemplateText}\n >\n {t(\"Files:RoomTemplateDescription\")}\n </Text>\n <Button\n label={t(\"Common:CreateRoom\")}\n className={styles.roomTemplateButton}\n onClick={onCreateRoom}\n size={ButtonSize.extraSmall}\n primary\n testId=\"info_panel_details_create_room_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1862,
-      "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
+      "line_number": 1919,
+      "context": "isSeparator: true,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1862,
-      "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
+      "line_number": 1919,
+      "context": "isSeparator: true,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1919,
+      "context": "isSeparator: true,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2211,
+      "line_number": 2204,
       "context": "case \"create-room\":\n if (!this.isAvailableOption(\"create-room\")) return null;\n return {\n id: \"menu-create-room\",\n label: t(\"Common:CreateRoom\"),\n onClick: this.onClickCreateRoom,\n iconUrl: CatalogRoomsReactSvgUrl,\n };\n \n case \"download\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 475,
-      "context": "styles.iconBadge,\n \"badge tablet-row-create-room icons-group  tablet-badge\",\n )}\n size={IconSizeType.medium}\n onClick={onCreateRoom}\n title={t(\"Common:CreateRoom\")}\n hoverColor=\"accent\"\n />\n ) : null}\n {showNew && !isTile && isRoom ? newFilesBadge : null}\n {showNew && isTile && isRoom ? (",
+      "line_number": 536,
+      "context": "styles.iconBadge,\n \"badge tablet-row-create-room icons-group  tablet-badge\",\n )}\n size={IconSizeType.medium}\n onClick={onCreateRoom}\n title={t(\"Common:CreateRoom\")}\n hoverColor=\"accent\"\n />\n ) : null}\n {showNew && !isTile ? newFilesBadge : null}\n {showNew && isTile && isRoom ? (",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 209,
-      "context": "size={IconSizeType.medium}\n onClick={onCreateRoom}\n color={colorLock}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CreateRoom\")}\n />\n ) : null}\n {showCopyLinkIcon ? (\n <IconButton\n iconName={LinkReactSvgUrl}",
+      "line_number": 225,
+      "context": "className=\"badge create-room icons-group\"\n size={IconSizeType.medium}\n onClick={onCreateRoom}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CreateRoom\")}\n />\n ) : null}\n {showCopyLinkIcon ? (\n <IconButton\n iconName={LinkReactSvgUrl}",
       "module": "/packages/shared"
     }
   ],
@@ -102,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Otaq yaradın\" literally translates to \"You created a room.\" While technically correct, it's less natural than a more direct translation for a button or action label. A more suitable translation would convey 'Create Room' as a command or instruction.",
-          "suggestion": "Otaq yarat"
+          "description": "The translation \"Otaq yaradın\" directly translates to \"You created a room.\" The English phrase \"Create room\" is an imperative and more accurately translates to \"Yaradın otaq\" or \"Otaq yaradın!\" (Create a room!). The current translation implies that the user *has* already created a room.",
+          "suggestion": "Yaradın otaq"
         }
       ],
       "approved_at": null
@@ -225,13 +219,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'කාමරය සාදන්න' (kaamaraya saadan’na) is a literal translation of 'create room'. A more natural and common translation would be 'මමගෙම කාමරයක් සාදන්න' (mama gemo kaamaraayak saadan'na) meaning 'create my own room' or 'create a room'. Or simply 'කාමරයක් සාදා ගන්න' (kaamarayak saada gana) meaning 'to create a room'.",
-          "suggestion": "කාමරයක් සාදා ගන්න (kaamarayak saada gana)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -252,7 +240,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Креирај собу' is understandable, a more natural and common Serbian (Cyrillic) translation for 'Create room' would be 'Направи собу'. 'Креирај' has a more formal or technical connotation.",
+          "description": "While \"Креирај собу\" is understandable, a more natural and commonly used translation of \"Create room\" in Serbian (Cyrillic) would be \"Направи собу\" or \"Отвори собу\". \"Креирај\" is more formal and less frequently used in this context.",
           "suggestion": "Направи собу"
         }
       ],

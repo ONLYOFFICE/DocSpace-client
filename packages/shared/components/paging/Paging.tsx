@@ -52,6 +52,7 @@ const Paging = (props: PagingProps) => {
     showCountItem = true,
     onSelectPage,
     onSelectCount,
+    dataTestId,
   } = props;
 
   const onSelectPageAction = (option: TOption) => {
@@ -67,7 +68,7 @@ const Paging = (props: PagingProps) => {
 
   return (
     <div
-      data-testid="paging"
+      data-testid={dataTestId ?? "paging"}
       id={id}
       className={classNames(styles.paging, className)}
       style={style}
@@ -80,6 +81,7 @@ const Paging = (props: PagingProps) => {
           label={previousLabel}
           onClick={previousAction}
           isDisabled={disablePrevious}
+          testId="paging_previous_button"
         />
         {pageItems ? (
           <div className={styles.page}>
@@ -91,6 +93,7 @@ const Paging = (props: PagingProps) => {
               onSelect={onSelectPageAction}
               scaledOptions={pageItems.length < 6}
               selectedOption={selectedPageItem}
+              dataTestId="paging_page_items_combobox"
               {...setDropDownMaxHeight}
             />
           </div>
@@ -102,6 +105,7 @@ const Paging = (props: PagingProps) => {
           label={nextLabel}
           onClick={nextAction}
           isDisabled={disableNext}
+          testId="paging_next_button"
         />
       </div>
       {showCountItem
@@ -115,6 +119,7 @@ const Paging = (props: PagingProps) => {
                 scaledOptions
                 onSelect={onSelectCountAction}
                 selectedOption={selectedCountItem}
+                dataTestId="paging_count_items_combobox"
               />
             </div>
           )

@@ -63,7 +63,7 @@ export const BrandNamePage = ({
     redirectUrl: "/settings/branding",
     currentLocation: "brand-name",
     deviceType: currentDeviceType,
-    pathname: pathname,
+    pathname,
   });
 
   const onSave = async (data: IWhiteLabelData) => {
@@ -82,10 +82,9 @@ export const BrandNamePage = ({
       isSettingPaid={isSettingPaid}
       standalone={standalone}
       onSave={onSave}
-      isBrandNameLoaded={true}
+      isBrandNameLoaded
       defaultBrandName={brandName}
       brandName={brandName}
     />
   );
 };
-

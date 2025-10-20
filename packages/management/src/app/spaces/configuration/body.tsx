@@ -117,7 +117,7 @@ export const Body = ({
         await setDomainName(domain);
         try {
           const result = (await setPortalName(name)) as string;
-          let url = new URL(result);
+          const url = new URL(result);
           url.searchParams.append("referenceUrl", "/management");
           window.location.replace(url);
         } catch (err) {
@@ -154,7 +154,7 @@ export const Body = ({
       </FieldContainer>
       <FieldContainer
         isVertical
-        labelText={t("PortalName")}
+        labelText={t("PortalName", { productName: t("Common:ProductName") })}
         labelVisible
         hasError={!!(portalNameError || checkDomainError)}
         errorMessage={portalNameError || checkDomainError}
@@ -177,7 +177,7 @@ export const Body = ({
         }
         label={t("Common:Connect")}
         onClick={onConnectClick}
-        primary={true}
+        primary
         tabIndex={3}
         isLoading={isLoading}
         // scale={false}
@@ -185,4 +185,3 @@ export const Body = ({
     </StyledBody>
   );
 };
-

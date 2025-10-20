@@ -1,13 +1,13 @@
 {
   "ActiveSessions": "الجلسات النشطة",
   "AutoDeleteTitle": "سيتم حذف جميع الجلسات التي تزيد عن 60 يومًا تلقائيًا.",
-  "ChangeEmailSuccess": "تم تغيير البريد الإلكتروني بنجاح",
   "ChangePasswordAfterLoggingOut": "تغيير كلمة المرور بعد تسجيل الخروج",
   "ConnectSocialNetworks": "ربط حساباتك على الشبكات الاجتماعية",
   "DescriptionForSecurity": "من أجل مزيد من الأمان، يجب عليك تغيير كلمة المرور.",
   "DesktopTheme": "المزامنة مع إعدادات محرر سطح المكتب",
   "DesktopThemeDescription": "قم بالتبديل تلقائيًا بين السمات الفاتحة والداكنة وفقًا للقالب الحالي لمحرري سطح المكتب.",
   "EditPhoto": "تحرير الصورة",
+  "EmailChangeSuccess": "لقد تم تغيير بريدكم الإلكتروني بنجاح.",
   "EmailNotVerified": "البريد الإلكتروني غير موثق",
   "ErrorAccountAlreadyUse": "الحساب المرتبط قيد الاستخدام بالفعل من قبل مستخدم آخر",
   "FileManagement": "إدارة الملف",
@@ -18,6 +18,7 @@
   "LogoutDescription": "ملحوظة. سيتم تسجيل خروج جميع الاتصالات النشطة باستثناء هذا الاتصال ، حيث إنه قيد الاستخدام حاليًا.",
   "LogoutFrom": "هل تريد الخروج من {{platform}} {{browser}}؟",
   "MyProfile": "ملفي الشخصي",
+  "NotificationsChannels": "قنوات الإشعارات",
   "ProviderSuccessfullyConnected": "المزود متصل بنجاح",
   "ProviderSuccessfullyDisconnected": "تم قطع الاتصال بالمزود بنجاح",
   "SendAgain": "أعد الإرسال مرة أخرى",
@@ -25,6 +26,10 @@
   "SuccessLogout": "تم تسجيل خروج الاتصال النشط: {{platform}} ، {{browser}}",
   "SystemTheme": "استخدم قالب النظام",
   "SystemThemeDescription": "قم بالتبديل تلقائيًا بين القوالب الفاتحة والداكنة عندما يقوم نظامك بذلك.",
+  "TelegramAccount": "حساب Telegram",
+  "TelegramAccountDescription": "لربط TelegramBot بحسابكم، اتبعوا الرابط السري وانقروا على زر \"ربط Telegram\".",
+  "TelegramAccountDisconnect": "فصل Telegram",
+  "TelegramAccountDisconnectDescription": "حسابكم @{{username}} متصل لتلقي إشعارات Telegram. يمكنكم فصل هذا الحساب. في هذه الحالة، لن تتلقوا الإشعارات.",
   "TerminateAllSessions": "إنهاء جميع الجلسات باستثناء الجلسات الحالية",
   "TwoFactorDescription": "تم تمكين المصادقة الثنائية عبر تطبيق إنشاء التعليمات البرمجية لجميع المستخدمين من قبل المسؤول."
 }

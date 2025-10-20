@@ -142,7 +142,6 @@ const FolderInput = ({
     setIsDialogOpen(true);
   };
   const onClose = () => {
-    console.log("call close");
     setIsDialogOpen(false);
   };
 

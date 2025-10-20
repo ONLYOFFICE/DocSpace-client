@@ -25,11 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { getStringFromSearchParams, encodeParams } from "@/utils";
-import {
-  getSettings,
-  getTfaSecretKeyAndQR,
-  getUserFromConfirm,
-} from "@/utils/actions";
+import { getTfaSecretKeyAndQR } from "@/utils/actions";
+
+import { logger } from "logger.mjs";
+
+import { GreetingContainer } from "@/components/GreetingContainer";
 
 import { StyledForm } from "./page.styled";
 import TfaActivationForm from "./page.client";
@@ -39,28 +39,23 @@ type TfaActivationProps = {
 };
 
 async function Page(props: TfaActivationProps) {
-  const searchParams = await props.searchParams;
-  const confirmKey = encodeParams(getStringFromSearchParams(searchParams));
-  const uid = searchParams.uid;
+  logger.info("TfaActivation page");
 
-  const [res, settings, user] = await Promise.all([
-    getTfaSecretKeyAndQR(confirmKey),
-    getSettings(),
-    getUserFromConfirm(uid, confirmKey),
-  ]);
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
+  const confirmKey = encodeParams(getStringFromSearchParams(searchParams));
+
+  const [res] = await Promise.all([getTfaSecretKeyAndQR(confirmKey)]);
 
   return (
     <>
-      {settings && typeof settings !== "string" && (
-        <StyledForm className="set-app-container">
-          <TfaActivationForm
-            secretKey={res.manualEntryKey}
-            qrCode={res.qrCodeSetupImageUrl}
-            passwordHash={settings?.passwordHash}
-            userName={user?.userName}
-          />
-        </StyledForm>
-      )}
+      <GreetingContainer />
+      <StyledForm className="set-app-container">
+        <TfaActivationForm
+          secretKey={res.manualEntryKey}
+          qrCode={res.qrCodeSetupImageUrl}
+        />
+      </StyledForm>
     </>
   );
 }

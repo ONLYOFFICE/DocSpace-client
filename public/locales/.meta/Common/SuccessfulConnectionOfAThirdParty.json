@@ -3,7 +3,7 @@
   "content": "Third-party service was successfully connected.",
   "content_en_sha1_hash": "d90004d45511c7e00dbd7ab694c8f7ffb4579948",
   "created_at": "2025-05-26T07:15:48.645Z",
-  "updated_at": "2025-05-26T08:03:27.753Z",
+  "updated_at": "2025-10-14T02:29:36.338Z",
   "comment": {
     "text": "This translation key is used to display a success message when a third-party service is successfully connected. It appears as an alert after clicking a connection button in the ConnectDialog component.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 214,
+      "line_number": 204,
       "context": "provider_id,\n roomCreation,\n )\n .then(async (res) => {\n setSaveThirdpartyResponse?.(res);\n toastr.success(t(\"Common:SuccessfulConnectionOfAThirdParty\"));\n await fetchThirdPartyProviders();\n })\n .catch((err) => {\n onClose();\n toastr.error(err);",
       "module": "/packages/shared"
     }
@@ -75,13 +75,25 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Le service tiers a été connecté avec succès' is literal and slightly awkward. While technically correct, it doesn't flow as naturally in French. 'Tiers' is also not the most common or natural way to refer to a third party in this context.",
+          "suggestion": "Le service d'un partenaire a été connecté avec succès."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Երրորդ կողմի ծառայությունը հաջողությամբ միացավ:\" literally translates to \"The third party's service successfully connected.\" While not entirely wrong, it's less natural than alternatives. A more idiomatic translation would focus on the connection being established *with* the third-party service.",
+          "suggestion": "Consider a translation like \"Հաջողությամբ կազմվեց կապ երրորդ կողմի ծառայության հետ:\" or \"Հաջողությամբ միացանք երրորդ կողմի ծառայությանը:\" depending on the intended nuance."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -123,37 +135,78 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Usługa podmiotu trzeciego została pomyślnie podłączona' is technically correct but sounds slightly awkward in Polish. 'Podłączona' implies physically connecting something, whereas a service connection is more of a logical or established link.",
+          "suggestion": "Usługa zewnętrznego dostawcy została pomyślnie połączona."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'podmiot trzeci' is a literal translation of 'third-party', it can sound overly formal or bureaucratic in many contexts.  'Zewnętrzny dostawca' is a more natural and easily understood alternative.",
+          "suggestion": "Consider replacing 'podmiot trzeci' with 'zewnętrzny dostawca'."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"conectado com êxito\" is a slightly less natural way to express \"successfully connected\" in Portuguese. A more common and idiomatic phrasing would be \"conectado com sucesso\".",
+          "suggestion": "O serviço de terceiros foi conectado com sucesso."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, it's a more literal translation and doesn't convey the same natural flow as the English. \"Conectado com sucesso\" is grammatically correct, but a more idiomatic translation would be better.",
+          "suggestion": "Serviço de terceiros conectado com sucesso."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Serviciu terț conectat cu succes' is a literal translation that doesn't flow naturally in Romanian. It sounds slightly awkward. A more idiomatic translation would be better.",
+          "suggestion": "Conectare reușită la serviciu terț."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Подключение стороннего ресурса прошло успешно\" is a literal translation and slightly awkward. While technically correct, a more natural phrasing in Russian might be preferred.",
+          "suggestion": "Успешно подключен сторонний ресурс."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'තෙවන පාර්ශ්ව සේවාව සම්බන්ධිතයි' translates to 'The third-party service is connected.' While technically correct, it doesn't convey the sense of 'successfully connected.' It misses the indication of a positive outcome.",
+          "suggestion": "තෙවන පාර්ශ්ව සේවාව සාර්ථකව සම්බන්ධ විය."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,19 +218,37 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Storitev tretje osebe je bila uspešno povezana' is not the most natural or accurate rendering of 'Third-party service was successfully connected.' While technically correct, 'povezana' (connected) implies a more direct connection. A more appropriate translation might use a verb suggesting integration or linkage.",
+          "suggestion": "Storitev tretje osebe je bila uspešno integrirana."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Услуга треће стране је успешно повезана.\" is a literal translation and sounds awkward in Serbian. A more natural phrasing would emphasize the successful connection to a third-party service.",
+          "suggestion": "Успјешно је успостављена веза са услугом треће стране."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Usluga treće strane je uspešno povezana' is a literal translation and doesn't quite capture the natural flow of the English phrase 'Third-party service was successfully connected.' A more natural-sounding translation would be 'Uspešno je ostvarena konekcija sa uslugom treće strane.' or 'Usluga treće strane je uspešno uspostavljena.'.",
+          "suggestion": "Uspešno je ostvarena konekcija sa uslugom treće strane."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,10 +266,22 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Dịch vụ của bên thứ ba đã được kết nối thành công\" literally translates to \"The service of a third party has been connected successfully.\" While not entirely incorrect, it's a bit clunky and doesn't flow as naturally as it could in Vietnamese. A more natural phrasing would convey the idea of successful connection more elegantly.",
+          "suggestion": "Dịch vụ của bên thứ ba đã kết nối thành công."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

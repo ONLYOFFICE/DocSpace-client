@@ -25,15 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import capitalize from "lodash/capitalize";
+import type { TFunction } from "i18next";
 import { DateTime, Info } from "luxon";
 
-import {
-  Options,
-  PeriodOptionType,
-  PeriodType,
-  TFunction,
-  Unit,
-} from "./Cron.types";
+import { Options, PeriodOptionType, PeriodType, Unit } from "./Cron.types";
 
 export const parseNumber = (value: unknown) => {
   if (typeof value === "string") {
@@ -445,7 +440,6 @@ export const findDate = (arr: number[][], dateProp: DateTime) => {
   let hourChanged: boolean;
   let date = dateProp;
 
-  // eslint-disable-next-line no-plusplus
   while (--retry) {
     date = shiftMonth(arr, date);
     [date, monthChanged] = shiftDay(arr, date);

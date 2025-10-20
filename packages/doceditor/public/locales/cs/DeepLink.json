@@ -1,5 +1,7 @@
 {
+  "DeepLinkOnlyAppText": "Dokument můžete otevřít pouze v mobilní aplikaci.",
   "DeepLinkText": "Dokument můžete otevřít na portálu nebo v mobilní aplikaci",
+  "DownloadApp": "Stáhněte si aplikaci",
   "OpenInApp": "Otevřít v aplikaci",
   "OpeningDocument": "Otevření dokumentu",
   "RememberChoice": "Zapamatovat si tuto volbu při příštím otevírání dokumentů",

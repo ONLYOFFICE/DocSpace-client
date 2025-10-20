@@ -88,7 +88,6 @@ const SectionBodyContent = (props) => {
     uploaded,
     onClickBack,
     isEmptyPage,
-    movingInProgress,
     currentDeviceType,
     isIndexEditingMode,
     changeIndex,
@@ -100,6 +99,7 @@ const SectionBodyContent = (props) => {
     userId,
     onEnableFormFillingGuid,
     isArchiveFolderRoot,
+    setDropTargetPreview,
   } = props;
 
   useEffect(() => {
@@ -189,7 +189,8 @@ const SectionBodyContent = (props) => {
         !e.target.closest(".not-selectable") &&
         !e.target.closest(".info-panel") &&
         !e.target.closest(".table-container_group-menu") &&
-        !e.target.closest(".document-catalog")) ||
+        !e.target.closest(".document-catalog") &&
+        !e.target.closest("#share_calendar")) ||
       e.target.closest(".files-main-button") ||
       e.target.closest(".add-button") ||
       e.target.closest("#filter_search-input") ||
@@ -243,19 +244,30 @@ const SectionBodyContent = (props) => {
       if (currentDroppable) {
         if (viewAs === "table") {
           const value = currentDroppable.getAttribute("value");
+
+          const documentTitle = currentDroppable.getAttribute(
+            "data-document-title",
+          );
+          setDropTargetPreview(documentTitle);
+
           const classElements = document.getElementsByClassName(value);
 
           // add check for column with width = 0, because without it dark theme d`n`d have bug color
           // 30 - it`s column padding
           Array.from(classElements).forEach((cl) => {
             if (cl.clientWidth - 30) {
-              cl.classList.add("droppable-hover");
+              cl.classList.remove("droppable-hover");
             }
           });
           if (isIndexEditingMode) {
             droppableSeparator.remove();
           }
         } else {
+          const documentTitle = currentDroppable.getAttribute(
+            "data-document-title",
+          );
+          setDropTargetPreview(documentTitle);
+
           currentDroppable.classList.remove("droppable-hover");
         }
       }
@@ -264,6 +276,12 @@ const SectionBodyContent = (props) => {
       if (currentDroppable) {
         if (viewAs === "table") {
           const value = currentDroppable.getAttribute("value");
+
+          const documentTitle = currentDroppable.getAttribute(
+            "data-document-title",
+          );
+          setDropTargetPreview(documentTitle);
+
           const classElements = document.getElementsByClassName(value);
 
           // add check for column with width = 0, because without it dark theme d`n`d have bug color
@@ -280,7 +298,14 @@ const SectionBodyContent = (props) => {
           currentDroppable.classList.add("droppable-hover");
           currentDroppable = droppable;
           droppableSeparator = indexSeparatorNode;
+
+          const documentTitle = currentDroppable.getAttribute(
+            "data-document-title",
+          );
+          setDropTargetPreview(documentTitle);
         }
+      } else {
+        setDropTargetPreview(null);
       }
     } else if (isIndexEditingMode) {
       droppableSeparator && droppableSeparator.remove();
@@ -344,8 +369,9 @@ const SectionBodyContent = (props) => {
       (folder) => folder.id == selectedFolderId,
     );
 
-    if (!isIndexEditingMode)
+    if (!isIndexEditingMode && selectedFolderId) {
       return onMoveTo(selectedFolderId, title, destFolderInfo);
+    }
     if (filesList.length === 1) return;
 
     const replaceableItemId = Number.isNaN(+selectedFolderId)
@@ -381,17 +407,24 @@ const SectionBodyContent = (props) => {
 
   const onDragOver = (e) => {
     e.preventDefault();
-    if (
-      e.dataTransfer.items.length > 0 &&
-      e.dataTransfer.dropEffect !== "none"
-    ) {
+
+    const hasFiles =
+      e.dataTransfer.types.includes("Files") ||
+      e.dataTransfer.types.includes("application/x-moz-file");
+
+    if (hasFiles && e.dataTransfer.dropEffect !== "none") {
       setDragging(true);
     }
   };
 
   const onDragLeaveDoc = (e) => {
     e.preventDefault();
-    if (!e.relatedTarget || !e.dataTransfer.items.length) {
+
+    const hasFiles =
+      e.dataTransfer.types.includes("Files") ||
+      e.dataTransfer.types.includes("application/x-moz-file");
+
+    if (!e.relatedTarget || !hasFiles) {
       setDragging(false);
     }
   };
@@ -429,8 +462,6 @@ const SectionBodyContent = (props) => {
   ]);
 
   if (isErrorRoomNotAvailable) return <RoomNoAccessContainer />;
-
-  if (isEmptyFilesList && movingInProgress) return null;
 
   if (
     isEmptyFilesList &&
@@ -475,7 +506,6 @@ export default inject(
       setScrollToItem,
       filesList,
       isEmptyPage,
-      movingInProgress,
       isErrorRoomNotAvailable,
     } = filesStore;
 
@@ -483,6 +513,8 @@ export default inject(
       dialogsStore;
 
     const { onEnableFormFillingGuid } = contextOptionsStore;
+    const { primaryProgressDataStore, uploaded } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
 
     return {
       dragging,
@@ -508,9 +540,8 @@ export default inject(
       scrollToItem,
       setScrollToItem,
       filesList,
-      uploaded: uploadDataStore.uploaded,
+      uploaded,
       onClickBack: filesActionsStore.onClickBack,
-      movingInProgress,
       currentDeviceType: settingsStore.currentDeviceType,
       isEmptyPage,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
@@ -520,6 +551,7 @@ export default inject(
       formFillingTipsVisible,
       userId: userStore?.user?.id,
       onEnableFormFillingGuid,
+      setDropTargetPreview,
     };
   },
 )(

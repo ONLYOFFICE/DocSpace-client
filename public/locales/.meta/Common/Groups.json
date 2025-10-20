@@ -3,7 +3,7 @@
   "content": "Groups",
   "content_en_sha1_hash": "ae9629f4ebb82c6331c0809fa9a0e54b00e578e6",
   "created_at": "2025-05-19T21:30:45.668Z",
-  "updated_at": "2025-05-26T07:57:32.466Z",
+  "updated_at": "2025-10-16T07:29:35.483Z",
   "comment": {
     "text": "The translation key \"Groups\" refers to the label used on a data import component to indicate that groups are being imported. It is used in a settings page and appears as a section name in a dialog box, allowing users to toggle the inclusion of group data in their imports.",
     "is_auto": true,
@@ -11,28 +11,46 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/Section/Tabs/ContactsTabs/index.tsx",
-      "line_number": 149,
-      "context": "onClick: onPeople,\n content: null,\n },\n {\n id: \"groups\",\n name: t(\"Common:Groups\"),\n onClick: onGroups,\n content: null,\n },\n ];",
+      "file_path": "/packages/client/src/components/Article/Body/AccountsItems.tsx",
+      "line_number": 76,
+      "context": "folderId=\"accounts_catalog-members\"\n withAnimation\n />\n <ArticleItem\n key=\"accounts-groups\"\n text={t(\"Common:Groups\")}\n linkData={getLinkData(\"groups\")}\n title={t(\"Common:Groups\")}\n icon={getCatalogIconUrlByType(PageType.groups)}\n showText={showText}\n onClick={onClickAction}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/Article/Body/AccountsItems.tsx",
+      "line_number": 76,
+      "context": "folderId=\"accounts_catalog-members\"\n withAnimation\n />\n <ArticleItem\n key=\"accounts-groups\"\n text={t(\"Common:Groups\")}\n linkData={getLinkData(\"groups\")}\n title={t(\"Common:Groups\")}\n icon={getCatalogIconUrlByType(PageType.groups)}\n showText={showText}\n onClick={onClickAction}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/FilesView/hooks/useMembers.ts",
+      "line_number": 104,
+      "context": "label: t(\"InfoPanel:Administration\"),\n list: administrators,\n },\n {\n key: TInfoPanelMemberType.groups,\n label: t(\"Common:Groups\"),\n list: groups,\n },\n {\n key: TInfoPanelMemberType.users,\n label: t(\"InfoPanel:Users\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
+      "line_number": 544,
+      "context": "const getAccountsTitle = () => {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");\n case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\":\n return getInsideGroupTitle();\n case \"guests\":\n return t(\"Common:Guests\");\n default:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 119,
+      "line_number": 120,
       "context": "/>\n \n <ImportSection\n isChecked={importOptions.importGroups}\n onChange={(e) => onChange(e, \"importGroups\")}\n sectionName={t(\"Common:Groups\")}\n description={t(\"Settings:GroupsDescription\", {\n serviceName,\n contactsName: t(\"Common:Contacts\"),\n })}\n exportSection={{",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 119,
+      "line_number": 120,
       "context": "/>\n \n <ImportSection\n isChecked={importOptions.importGroups}\n onChange={(e) => onChange(e, \"importGroups\")}\n sectionName={t(\"Common:Groups\")}\n description={t(\"Settings:GroupsDescription\", {\n serviceName,\n contactsName: t(\"Common:Contacts\"),\n })}\n exportSection={{",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/InfoPanelStore.js",
-      "line_number": 599,
-      "context": "const hasPrevGroupsTitle = this.getHasPrevTitle(groups, \"groups\");\n \n if (groups.length && !hasPrevGroupsTitle) {\n groups.unshift({\n id: \"groups\",\n displayName: t(\"Common:Groups\"),\n isTitle: true,\n });\n }\n \n const hasPrevUsersTitle = this.getHasPrevTitle(users, \"user\");",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 546,
+      "context": "subjectType === MembersSubjectType.Group\n ) {\n if (groups.length === 0) {\n groups.push({\n id: \"groups\",\n displayName: t(\"Common:Groups\"),\n isTitle: true,\n } satisfies TTitleShare);\n }\n \n groups.push({ ...member, isGroup: true });",
+      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/Groups/index.tsx",
@@ -42,7 +60,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 565,
+      "line_number": 607,
       "context": "content: null,\n },\n ...[\n withGroups && {\n id: GROUP_TAB_ID,\n name: t(\"Common:Groups\"),\n onClick: () => changeActiveTab(GROUP_TAB_ID),\n content: null,\n },\n ],\n ...[",
       "module": "/packages/shared"
     }
@@ -138,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ກຸ່ມໆ\" (kum-kum) is a reduplicated form which implies a large quantity or repetitive nature of groups. While it could be used in certain contexts, \"ກຸ່ມ\" (kum) is the direct and more accurate translation of 'Groups'. Using the reduplicated form might introduce an unintended nuance.",
-          "suggestion": "ກຸ່ມ"
+          "description": "The Lao translation \"ກຸ່ມໆ\" (kum-kum) is a reduplicated form of \"ກຸ່ມ\" (kum), which means 'group'. While reduplication can sometimes indicate plurality or emphasis, it's not the standard or most accurate translation of 'Groups' in this context. It could be perceived as informal or even childish depending on the application.",
+          "suggestion": "The most appropriate translation is \"ກຸ່ມ\" (kum). Alternatively, if you want to emphasize plurality or a collection of groups, a more formal approach might be \"ບັນດາກຸ່ມ\" (ban-da kum) or \"ກຸ່ມຕ່າງໆ\" (kum tang-tang)."
         }
       ],
       "approved_at": null
@@ -192,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'සමූහ' while technically meaning 'groups' or 'assemblies', isn't the most common or natural rendering of 'Groups' in Sinhala. It's a bit formal and literal.",
-          "suggestion": "Consider 'ගෝඨා' (gotha) or 'මණ්ඩපය' (mandapaya) as more commonly used translations, depending on the specific context. 'කොට්ටාම' (kotama) can also work for smaller groups."
+          "description": "The Sinhala translation 'සමූහ' is a valid word but doesn't fully capture the nuance of 'Groups' in this context. 'Groups' often implies a collection of people or entities working together, whereas 'සමූහ' can be a more general term for a collection or aggregate.",
+          "suggestion": "Consider using 'මණ්ඩල' or 'කුඹුල්' which can more accurately convey a group of people working together. The best choice depends on the specific context of how 'Groups' is used."
         }
       ],
       "approved_at": null
@@ -216,7 +234,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Групе' is the plural form of 'group' (groups). The English content is singular, so the translation should be the singular form.",
+          "description": "The Serbian (Cyrillic) translation 'Групе' is the plural form of 'group'. The English 'Groups' likely refers to a singular noun or a generic term, and the singular form 'Група' would be more accurate.",
           "suggestion": "Група"
         }
       ],

@@ -3,7 +3,7 @@
   "content": "Error uploading files: {{count}}",
   "content_en_sha1_hash": "58de59ef14082ec9957dcf4b46c13ec933ca7a05",
   "created_at": "2025-05-19T21:30:55.637Z",
-  "updated_at": "2025-06-08T12:02:32.886Z",
+  "updated_at": "2025-09-07T07:53:15.448Z",
   "comment": {
     "text": "The \"ErrorUploadingFiles\" translation key is used to display an error message when uploading files fails. It shows the number of failed uploads and appears in a button's tooltip or similar context where file upload errors are relevant, providing context for translators to localize this specific user experience.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/operations-progress-button/index.tsx",
-      "line_number": 267,
-      "context": "if (getPercent()) {\n return (\n <Text fontWeight={600}>\n {operationName}\n <br />\n {t(\"Common:ErrorUploadingFiles\", { count: getErrorCount() })}\n </Text>\n );\n }\n return (\n <Text fontWeight={600}>",
+      "line_number": 317,
+      "context": ") {\n return (\n <Text fontWeight={600}>\n {operationName}\n <br />\n {t(\"Common:ErrorUploadingFiles\", { count: getErrorCount() })}\n </Text>\n );\n }\n \n return (",
       "module": "/packages/shared"
     }
   ],

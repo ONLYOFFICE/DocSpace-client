@@ -66,7 +66,7 @@ const RenameEvent = ({
   }, [item]);
 
   const onUpdate = React.useCallback(
-    (e, value) => {
+    async (e, value) => {
       const originalTitle = getTitleWithoutExtension(item);
 
       let timerId;
@@ -88,7 +88,7 @@ const RenameEvent = ({
       }, 500);
 
       isFile
-        ? updateFile(item.id, value)
+        ? await updateFile(item.id, value)
             .then(() => completeAction(item, type))
             .then(() =>
               toastr.success(
@@ -109,7 +109,7 @@ const RenameEvent = ({
 
               onCancel();
             })
-        : renameFolder(item.id, value)
+        : await renameFolder(item.id, value)
             .then(() => completeAction(item, type))
             .then(() => {
               toastr.success(

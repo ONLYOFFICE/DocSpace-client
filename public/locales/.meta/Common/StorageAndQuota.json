@@ -3,7 +3,7 @@
   "content": "Storage / Quota",
   "content_en_sha1_hash": "0803802b74bb476878a34c8d544b0b2f5a1fecb8",
   "created_at": "2025-05-19T21:30:49.101Z",
-  "updated_at": "2025-05-26T07:57:32.405Z",
+  "updated_at": "2025-10-14T03:33:54.248Z",
   "comment": {
     "text": "This translation key is used to display a label indicating storage and quota information. It appears as a table header column title in a UI component, informing users about the available storage capacity. The text will vary depending on whether default rooms quota has been set or not.",
     "is_auto": true,
@@ -11,20 +11,20 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
-      "line_number": 205,
-      "context": "return this.t(\"Common:Tags\");\n case \"Storage\":\n if (this.item.usedSpace !== undefined) {\n return this.isDefaultRoomsQuotaSet &&\n this.item.quotaLimit !== undefined\n ? this.t(\"Common:StorageAndQuota\")\n : this.t(\"Common:Storage\");\n }\n \n return null;\n default:",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
+      "line_number": 232,
+      "context": "return this.t(\"Common:Tags\");\n case \"Storage\":\n if (\"usedSpace\" in this.item && this.item.usedSpace !== undefined) {\n return this.isDefaultRoomsQuotaSet &&\n this.item.quotaLimit !== undefined\n ? this.t(\"Common:StorageAndQuota\")\n : this.t(\"Common:Storage\");\n }\n \n return null;\n default:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 633,
+      "line_number": 735,
       "context": "showStorageInfo &&\n columns.splice(columns.length, 0, {\n key: \"Storage\",\n title:\n isDefaultRoomsQuotaSet && !isArchiveFolder\n ? t(\"Common:StorageAndQuota\")\n : t(\"Common:Storage\"),\n enable: roomQuotaColumnIsEnable,\n sortBy: SortByFieldName.UsedSpace,\n resizable: true,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 633,
+      "line_number": 735,
       "context": "showStorageInfo &&\n columns.splice(columns.length, 0, {\n key: \"Storage\",\n title:\n isDefaultRoomsQuotaSet && !isArchiveFolder\n ? t(\"Common:StorageAndQuota\")\n : t(\"Common:Storage\"),\n enable: roomQuotaColumnIsEnable,\n sortBy: SortByFieldName.UsedSpace,\n resizable: true,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     }
@@ -48,13 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Yaddaş\" generally translates to \"Memory\" or \"Storage,\" it's not the most direct or common translation for \"Storage\" in the context of cloud services or data storage quotas. \"Saxtələşdirilmiş Yaddaş\" or \"Saxlanma\" would be more accurate.",
-          "suggestion": "Consider \"Saxtələşdirilmiş Yaddaş\" or \"Saxlanma\" instead of \"Yaddaş\"."
-        },
-        {
-          "type": "formatting",
-          "description": "The slash '/' is retained, but it might be better to use a more natural separator for Azerbaijani, such as a dash or a comma.",
-          "suggestion": "Consider replacing the slash '/' with a dash '-' or a comma ',' (e.g., \"Yaddaş - Kvota\" or \"Yaddaş, Kvota\")"
+          "description": "While \"Yaddaş\" translates to \"Memory\" or \"Storage,\" \"Kvota\" is a correct transliteration of \"Quota.\" \"Storage\" is better conveyed as \"Saxtalanma\" or a similar term rather than just \"Yaddaş,\" which can be ambiguous.",
+          "suggestion": "Consider using \"Saxtalanma / Kvota\" or a more descriptive term for 'Storage' that aligns with the specific context."
         }
       ],
       "approved_at": null
@@ -83,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"Quota\" is not accurately translated. \"Ποσόστωση\" typically refers to a percentage or a share, not a storage quota.",
-          "suggestion": "Consider using \"Όριο\" or \"Χώρος αποθήκευσης\" for 'Quota' to better convey the intended meaning."
+          "description": "“Ποσόστωση” is a more technical term for 'quota' and might not be the most user-friendly translation for a general audience. A more common and understandable term might be 'Όριο' (orio) which means 'limit'.",
+          "suggestion": "Consider using 'Όριο' instead of 'Ποσόστωση' for better clarity."
         }
       ],
       "approved_at": null
@@ -119,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term \"Storage\" is better translated as \"Spazio di archiviazione\" or \"Memoria\" in Italian, rather than just \"Archivio\". \"Archivio\" specifically refers to an archive, a collection of historical records, which doesn't accurately represent storage in a computing context.",
-          "suggestion": "Spazio di archiviazione / Quota"
+          "description": "While \"Archivio\" can refer to storage, it's a more specific term (archive) than the general \"Storage\". \"Storage\" in this context likely refers to available space or capacity. A more accurate translation might consider terms like \"Spazio di archiviazione\" or \"Memoria\" depending on the specific context.",
+          "suggestion": "Consider \"Spazio di archiviazione\" or \"Memoria\" for a broader meaning of 'Storage'."
         }
       ],
       "approved_at": null
@@ -131,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ストレージ／容量制限' while understandable, is a bit literal. '容量制限' specifically means 'capacity limit'. A more natural and accurate translation of 'Storage / Quota' would consider the nuance of 'quota' as a pre-allocated or controlled amount of storage.  'ストレージ制限' would be a closer equivalent.",
-          "suggestion": "ストレージ制限"
+          "description": "The translation \"ストレージ／容量制限\" is a functional translation, but \"容量制限\" (capacity limit) is not the most natural or common way to express \"Quota\" in Japanese in this context.  While technically correct, it's a bit stiff and less user-friendly.",
+          "suggestion": "Consider alternatives like \"利用制限\", \"割り当て\", or \"制限\" depending on the specific meaning intended.  For instance, \"ストレージ／利用制限\" or \"ストレージ／割り当て制限\" might be better. If brevity is paramount, simply \"ストレージ／制限\" might suffice, although it loses some specificity."
         }
       ],
       "approved_at": null
@@ -149,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ເກັບມ້ຽນ\" (keap muean) translates to 'storage' or 'collecting', it might not be the most natural or commonly understood term in this context. 'ອະນຸຍາດ' (anuyat) translates to 'permission' or 'quota', which is accurate but the combination might feel slightly less fluid.",
-          "suggestion": "Consider alternatives for 'Storage' that are more commonly used in a tech context, such as 'ຄ່າຮັກສາຂໍ້ມູນ' (kham haksah khomun) or 'ເນື້ອທີ່ເກັບຂໍ້ມູນ' (neua thi keap khomun)."
+          "description": "The Lao translation \"ເກັບມ້ຽນ / ຈຳນວນອະນຸຍາດ\" is a literal translation of \"Storage / Quota\" but may not be the most natural or easily understood phrase in Lao. \"ເກັບມ້ຽນ\" (kept/stored) is acceptable for 'Storage', but 'ຈຳນວນອະນຸຍາດ' (allowed amount) might be too formal or complex for 'Quota'.",
+          "suggestion": "Consider a more concise and common Lao phrase for 'Quota'. Possible alternatives include: 'ຂະໜານນ້ອຍ' (space limit) or 'ອັດຕາປະລິມານ' (volume rate)."
         }
       ],
       "approved_at": null
@@ -173,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Pamięć\" can translate to 'Storage,' it more accurately means 'Memory.' 'Storage' in the context of quotas often refers to allocated space, not just memory.",
-          "suggestion": "Przestrzeń / Limit"
+          "description": "While 'Pamięć' is a valid translation for 'Storage', 'Limit' isn't the most accurate translation for 'Quota' in this context. 'Quota' refers to a specific allocation or restriction.",
+          "suggestion": "Consider using 'Limit Przydziału' or 'Przydział' for a more precise translation of 'Quota'."
         }
       ],
       "approved_at": null
@@ -209,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ආචයනය / සලාකය\" does not accurately convey the meaning of \"Storage / Quota\". \"ආචයනය\" generally refers to 'collection' or 'accumulation,' while 'සලාකය' can mean 'salt' or a 'tax.' It doesn't directly represent storage or a quota.",
-          "suggestion": "A more accurate translation might be \"ගබඩො 収納 / කොත\" (Gabado Sanrakshaya / Kotha), where 'Gabado Sanrakshaya' conveys storage and 'Kotha' can mean quota.  Alternatively, \"சேமிப்பு இடம் / ஒதுக்கீடு\" (Semippu Idam / Othukēdhu) could be considered, drawing from other South Asian languages for more clarity."
+          "description": "'ආචයනය' does not accurately translate 'Storage'. 'ආචයනය' generally refers to 'acquisition' or 'collection'. A more appropriate translation for 'Storage' would be 'ගබඩැනය' (gabadenaya) or 'သိမ်းเก็บ' (sim kape). 'සලාකය' is a reasonable translation for 'Quota'.",
+          "suggestion": "Replace 'ආචයනය' with 'ගබඩැනය' or 'သိမ်းเก็บ'."
         }
       ],
       "approved_at": null
@@ -236,7 +231,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Skladište\" can mean storage, \"Kvota\" accurately translates \"Quota.\" However, \"Storage\" can have a broader meaning, and a more accurate Serbian translation might be \"Prostor za skladištenje\" or a similar variation that better conveys the overall concept of allocated storage.",
+          "suggestion": "Consider \"Prostor za skladištenje / Kvota\" or a similar phrasing to better reflect the full meaning of \"Storage / Quota\"."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -258,6 +259,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import type { TFunction } from "i18next";
 import {
   render,
   screen,
@@ -40,9 +41,14 @@ import { MediaViewerProps } from "./MediaViewer.types";
 import { NextButton } from "./sub-components/Buttons/NextButton";
 import { PrevButton } from "./sub-components/Buttons/PrevButton";
 
-jest.mock("../../utils/common", () => ({
-  getFileExtension: jest.fn((filename) => filename.split(".").pop()),
-}));
+jest.mock("../../utils/common", () => {
+  const originalModule = jest.requireActual("../../utils/common");
+
+  return {
+    ...originalModule,
+    getFileExtension: jest.fn((filename) => filename.split(".").pop()),
+  };
+});
 
 jest.mock("./sub-components/ViewerWrapper", () => ({
   ViewerWrapper: jest.fn(
@@ -69,6 +75,7 @@ jest.mock("./sub-components/ViewerWrapper", () => ({
 
 // Mock data
 const mockFile = {
+  shortWebUrl: "",
   id: 1,
   title: "test.jpg",
   fileExst: ".jpg",
@@ -180,7 +187,7 @@ const createMockProps = (overrides = {}): MediaViewerProps => ({
   currentDeviceType: DeviceType.desktop,
   isPublicFile: false,
   autoPlay: false,
-  t: (key: string) => key,
+  t: ((key: string) => key) as unknown as TFunction,
   getIcon: (size: number, ext: string) => `icon-${size}-${ext}`,
   onClose: jest.fn(),
   onDelete: jest.fn(),
@@ -286,7 +293,7 @@ describe("MediaViewer", () => {
       fireEvent.click(closeButton);
       expect(props.onClose).toHaveBeenCalled();
     } else {
-      console.error("Close button not found");
+      console.log("Close button not found");
     }
   });
 

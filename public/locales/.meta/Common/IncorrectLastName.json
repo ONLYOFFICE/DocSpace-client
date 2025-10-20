@@ -3,7 +3,7 @@
   "content": "Incorrect last name",
   "content_en_sha1_hash": "e6d8ae96009dfffac13c9480940ff88579d7b844",
   "created_at": "2025-05-19T21:30:45.873Z",
-  "updated_at": "2025-05-26T07:57:32.221Z",
+  "updated_at": "2025-08-21T11:22:39.797Z",
   "comment": {
     "text": "This translation key is used to display an error message indicating that the surname entered is incorrect. It appears in a form field within a registration dialog and is triggered when an invalid last name is provided. The label \"Incorrect last name\" helps translators understand the specific context of the error message.",
     "is_auto": true,
@@ -13,13 +13,13 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
       "line_number": 161,
-      "context": "className=\"field\"\n hasError={!isSurnameValid}\n errorMessage={\n lastName.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectLastName\")\n }\n >\n <TextInput\n className=\"last-name\"\n scale",
+      "context": "placeholder: t(\"Common:LastName\"),\n hasError: !isSurnameValid,\n errorMessage:\n lastName.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectLastName\"),\n className: \"last-name\",\n dataTestId: \"change_name_last_name_field\",\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/RegistrationForm.tsx",
-      "line_number": 208,
-      "context": "errorMessage={\n errorText\n ? errorText\n : sname.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectLastName\")\n }\n >\n <TextInput\n id=\"last-name\"\n name=\"last-name\"",
+      "line_number": 210,
+      "context": "hasError={!snameValid}\n errorMessage={\n errorText ||\n (sname.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectLastName\"))\n }\n dataTestId=\"last_name_field_container\"\n >\n <TextInput\n id=\"last-name\"",
       "module": "/packages/login"
     }
   ],
@@ -60,7 +60,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Ungültiger Nachname\" is technically correct (invalid last name), \"Falscher Nachname\" might be a more natural and common translation for \"Incorrect last name\" in many contexts. \"Ungültiger\" often implies a system error or technical invalidity, whereas \"falsch\" simply means wrong.",
+          "description": "While \"Ungültiger Nachname\" is understandable, a more accurate and natural translation of \"Incorrect last name\" would be \"Falscher Nachname\". \"Ungültiger\" implies invalidity in a system or data validation sense, which isn't necessarily the intended meaning.",
           "suggestion": "Falscher Nachname"
         }
       ],
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"姓が正しくありません\" literally translates to \"Last name is incorrect.\" While understandable, a more natural and nuanced translation might convey the intended meaning of 'Incorrect last name' more accurately depending on the context. It's a bit direct.",
-          "suggestion": "Consider alternatives like \"名字が違っています\" (Namae ga chigatteimasu - 'Family name is different') or \"苗字が正しくありません\" (Namaza ga seishiku arimasen - 'Given name/family name is not correct'). The best option depends on the overall tone and context of the application."
+          "description": "The translation '姓が正しくありません' is a literal translation of 'Incorrect last name' but could be more natural depending on the context. While technically correct, it's a bit stiff. A more conversational translation might be '苗字が違います' (namae ga chigaimasu) which means 'the surname is different'.",
+          "suggestion": "苗字が違います (namae ga chigaimasu)"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"유효하지 않은 성입니다\" (yu-hyo-ha-ji a-neun seong-im-ni-da) translates to 'Invalid last name'. While close, it doesn't perfectly capture the nuance of 'Incorrect last name'. 'Incorrect' implies a mistake, while 'Invalid' implies it's not acceptable. Depending on the context, a more appropriate translation might be something like '잘못된 성입니다' (jal-mot-deun seong-im-ni-da) which means 'Wrong last name'.",
-          "suggestion": "Consider '잘못된 성입니다' (jal-mot-deun seong-im-ni-da) for a more direct translation of 'Incorrect last name'."
+          "description": "The Korean translation \"유효하지 않은 성입니다\" (yu-hyo-ha-ji a-neun seong-im-ni-da) translates to \"Invalid last name\". While close to \"Incorrect last name,\" \"Invalid\" has a slightly different connotation.  A more literal and arguably more accurate translation might be \"잘못된 성입니다\" (jal-mot-dwen seong-im-ni-da).",
+          "suggestion": "잘못된 성입니다"
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Numele incorect' literally translates to 'The incorrect name'. The English phrase 'Incorrect last name' implies a specific part of the name is wrong, not the entire name. A more accurate translation would be 'Prenume greșit' or 'Nume de familie greșit'.",
-          "suggestion": "Nume de familie greșit"
+          "description": "The translation 'Numele incorect' is a literal translation and doesn't fully capture the nuance of 'Incorrect last name'. It implies the name itself is incorrect, rather than just being wrong in a form or record.",
+          "suggestion": "Consider a more descriptive translation like 'Prenume greșit' (wrong surname) or 'Nume de familie incorect' (incorrect family name), depending on the specific context."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'අග නම වැරදිය' while literally meaning 'last name is wrong,' doesn't convey the precise meaning of 'Incorrect last name' which implies an error was made. A more accurate translation would highlight the mistake.",
-          "suggestion": "තවผิด නම"
+          "description": "The Sinhala translation \"අග නම වැරදිය\" is a literal translation but doesn't convey the meaning of \"Incorrect last name\" naturally in Sinhala. A more natural phrasing would be something like \"අවසන් නාමය වැරදි\" or \"අන්තිම නම වැරදි\".",
+          "suggestion": "අවසන් නාමය වැරදි"
         }
       ],
       "approved_at": null
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'last name' is typically translated as 'prezime' in Serbian (Cyrillic), not 'prezime'. While 'prezime' exists, 'prezime' is the more commonly used and accurate translation in this context.",
-          "suggestion": "Нетачно презиме -> Нетачно презиме"
+          "description": "The English phrase \"Incorrect last name\" refers to a mistake in the last name field. \"Презиме\" translates to 'middle name' which is not the correct meaning. It should be \"Фамилија\" or \"Презбило\" to mean last name.",
+          "suggestion": "Нетачна фамилија"
         }
       ],
       "approved_at": null
@@ -240,7 +240,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Họ không đúng\" while literally meaning 'They are not correct/right' doesn't accurately convey the meaning of \"Incorrect last name.\" It focuses on the possessor rather than the last name itself.",
+          "description": "The translation \"Họ không đúng\" literally translates to 'They are not correct' or 'The surname is incorrect'. While understandable, it's not the most natural or precise translation of 'Incorrect last name'. A more accurate and natural translation would be something like \"Tên đệm không đúng\" or \"Họ không chính xác\".",
           "suggestion": "Tên đệm không đúng"
         }
       ],
@@ -252,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"姓氏不正确\" is a literal translation, it's not the most natural or user-friendly phrasing for an error message. \"Incorrect last name\" often implies a mismatch or typo, and the Chinese translation doesn't fully capture this nuance. A more suitable translation would be something like \"姓氏输入错误\" (Last name input error) or \"姓氏与记录不符\" (Last name does not match the record).",
-          "suggestion": "姓氏输入错误"
+          "description": "The translation '姓氏不正确' is accurate but slightly formal. A more natural phrasing for a user-facing error message could be considered.",
+          "suggestion": "姓氏错误 (Xìngshì cuòwù) - 'Incorrect surname/last name'"
         }
       ],
       "approved_at": null

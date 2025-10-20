@@ -3,7 +3,7 @@
   "content": "Users can create and edit files in the room, but can't create rooms, manage users, or access settings.",
   "content_en_sha1_hash": "c8c55fcf5248cbf283b206afa18995f50c6485cc",
   "created_at": "2025-05-19T21:30:48.058Z",
-  "updated_at": "2025-05-26T07:57:32.990Z",
+  "updated_at": "2025-10-03T13:19:30.830Z",
   "comment": {
     "text": "This translation key is used to display a description for non-admin users who can create and edit files in a room, but have limited access. It appears on screens related to file management within a room.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1262,
-      "context": "if (isRoomAdmin)\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n \n if (isCollaborator) return t(\"Common:RoleNewUserDescription\");\n \n return t(\"Translations:RoleGuestDescriprion\");\n };\n \n export function setLanguageForUnauthorized(culture: string) {",
+      "line_number": 1302,
+      "context": "if (isRoomAdmin)\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyDocuments\"),\n });\n \n if (isCollaborator) return t(\"Common:RoleNewUserDescription\");\n \n return t(\"Translations:RoleGuestDescriprion\");\n };\n \n export function setLanguageForUnauthorized(",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 68,
+      "line_number": 69,
       "context": "const getUserDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RolePowerUserFormRoomDescription\");\n case None:\n return t(\"Common:RoleNewUserDescription\");\n default:\n return t(\"Common:RoleContentCreatorDescription\");\n }\n };",
       "module": "/packages/shared"
     }
@@ -78,13 +78,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation states users can 'hallita käyttäjiä' (manage users), which contradicts the original English stating they cannot. The original meaning is lost.",
-          "suggestion": "Käyttäjät voivat luoda ja muokata huoneen tiedostoja, mutta eivät voi luoda huoneita, tai päästä asetuksiin."
+          "description": "The translation includes 'hallita käyttäjiä' (manage users), which contradicts the English content stating users cannot manage users.",
+          "suggestion": "Käyttäjät voivat luoda ja muokata huoneen tiedostoja, mutta eivät voi luoda huoneita tai käyttää asetuksia."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation also includes 'tai päästä asetuksiin' which is a looser translation of 'or access settings'. It's acceptable but could be more precise.",
-          "suggestion": "Käyttäjät voivat luoda ja muokata huoneen tiedostoja, mutta eivät voi luoda huoneita, hallita käyttäjiä, tai muuttaa asetuksia."
+          "type": "spelling",
+          "description": "The word 'huoneen' should likely be 'huoneita' to match the plural context described in the original English.",
+          "suggestion": "Käyttäjät voivat luoda ja muokata huoneita tiedostoja, mutta eivät voi luoda huoneita tai käyttää asetuksia."
         }
       ],
       "approved_at": null
@@ -100,14 +100,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Armenian translation 'սակայն չեն կարող սենյակներ ստեղծել...' sounds slightly awkward. A more natural phrasing would be 'չեն կարող սենյակներ ստեղծել'.",
-          "suggestion": "չեն կարող սենյակներ ստեղծել"
+          "type": "formatting",
+          "description": "The translation uses a comma after \"խմբագրել\" (edit), which creates an unnatural pause. A conjunction or no punctuation would be more appropriate.",
+          "suggestion": "Օգտատերերը կարող են ստեղծել ֆայլեր սենյակում և խմբագրել դրանք, սակայն չեն կարող..."
         },
         {
-          "type": "grammar",
-          "description": "The word order after 'կառավարել օգտատերերին' is a little clunky. Adding a conjunction might improve flow.",
-          "suggestion": "կառավարել օգտատերերին կամ մուտք գործել կարգավորումներ"
+          "type": "incorrect_translation",
+          "description": "The phrase 'manage users' is translated as 'կառավարել օգտատերերին'. While technically correct, 'կառավարել' is a strong word.  A more appropriate word for user management in a collaborative environment might be 'ներառել' (include) or 'գործել' (operate/work with).",
+          "suggestion": "Օգտատերերը կարող են ստեղծել ֆայլեր սենյակում և խմբագրել դրանք, սակայն չեն կարող սենյակներ ստեղծել, ներառել օգտատերերին կամ մուտք գործել կարգավորումներ:"
         }
       ],
       "approved_at": null
@@ -139,13 +139,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'lietotājI' is a slightly incorrect grammatical form. It should be 'lietotāji'.",
-          "suggestion": "lietotāji"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -153,9 +147,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation uses 'ruimte' instead of 'kamer' which is more commonly associated with 'room' in this context. While 'ruimte' isn't incorrect, 'kamer' aligns better with the English meaning of 'room' implying a defined space.",
-          "suggestion": "Gebruikers kunnen bestanden in de kamer aanmaken en bewerken, maar kunnen geen ruimtes aanmaken, gebruikers beheren of instellingen openen."
+          "type": "spelling",
+          "description": "The word 'ruimte' is used repeatedly. While technically correct, 'omgeving' or 'werkruimte' might be more natural depending on the context of 'room'.",
+          "suggestion": "Consider replacing 'ruimte' with 'omgeving' or 'werkruimte' for improved naturalness. Requires further context to determine the best choice."
         }
       ],
       "approved_at": null
@@ -172,13 +166,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'utilizadors' is misspelled. The correct Portuguese word is 'utilizadores'.",
+          "description": "The word 'utilizadors' is misspelled. The correct Portuguese word for 'users' is 'utilizadores'.",
           "suggestion": "utilizadores"
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure could be improved for better flow. While grammatically correct, it sounds slightly awkward.",
-          "suggestion": "Os utilizadores podem criar e editar arquivos na sala, mas não podem criar salas, gerenciar utilizadores ou acessar configurações."
+          "type": "incorrect_translation",
+          "description": "While 'gerenciar utilizadors' is understandable, a more accurate and natural translation for 'manage users' would be 'administrar utilizadores' or 'gerir utilizadores'.",
+          "suggestion": "administrar utilizadores"
         }
       ],
       "approved_at": null
@@ -195,13 +189,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'room' is translated as 'sală', which is correct for a physical room. However, in this context, 'room' refers to a collaborative workspace or online space.  A more accurate translation would be something like 'spațiu' or 'mediu'.",
-          "suggestion": "Utilizatori pot crea și modifica fișiere în spațiu, dar nu pot crea spațiile, gestiona utilizatorii sau accesa setările."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'create rooms' as 'crea sălile' is grammatically incorrect.  It should be 'crea spații' to match the corrected translation of 'room'.",
-          "suggestion": "Utilizatori pot crea și modifica fișiere în spațiu, dar nu pot crea spațiile, gestiona utilizatorii sau accesa setările."
+          "description": "The word 'room' is translated as 'sală' which typically means 'hall' or 'room' in a formal context. In this case, 'room' refers to a collaborative workspace, and a better translation would be 'spațiu' or 'mediu de lucru'.",
+          "suggestion": "Utilizatori pot crea și modifica fișiere în spațiul de lucru, dar nu pot crea spații de lucru, gestiona utilizatorii sau accesa setările."
         }
       ],
       "approved_at": null
@@ -218,18 +207,23 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පරිශීලකයින්' appears multiple times. It seems to be a transliteration and might be incorrect. The correct word for 'users' in Sinhala is 'භාවිතකරුවන්' (bhavitakaruwan).",
-          "suggestion": "Replace 'පරිශීලකයින්' with 'භාවිතකරුවන්'."
+          "description": "The word 'පරිශීලකයින්' (parishilakayin) is a slightly awkward transliteration of 'users'. It should be 'භාවිතකරුවන්' (bhavitakaruwan) or 'පරිශ්‍රමකරුවන්' (parishramakaruwan) for a more natural feel.",
+          "suggestion": "භාවිතකරුවන් or පරිශ්‍රමකරුවන්"
         },
         {
           "type": "spelling",
-          "description": "The word 'සැකසුම්' is likely a misspelling and should be 'මානාලිංග' or 'ආකාරශීලි'.",
-          "suggestion": "Replace 'සැකසුම්' with 'මානාලිංග' or 'ආකාරශීලි'."
+          "description": "The word 'ගොණු' (gonu) which means 'files' has an incorrect vowel marking. It should be 'ගොණු' (gonu) with a 'u' vowel.",
+          "suggestion": "ගොණු"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'හැකියාවක් లేదు' (hakiyaawak లేదు) translates to 'not possible' which is a bit stronger than the original 'can't'. 'හැකියාවක් නැත' (hakiyaawak nathe) is a more appropriate translation for 'can't'.",
+          "suggestion": "හැකියාවක් නැත"
         },
         {
           "type": "grammar",
-          "description": "The sentence structure in the Sinhala translation could be improved for better flow. Combining sentences or rephrasing can enhance readability.",
-          "suggestion": "Consider restructuring the sentences for a more natural flow in Sinhala. For example: 'භාවිතකරුවන් గది තුළ ගොණු නිර්මාණය කර සංස්කරණය කළ හැකිය, නමුත් ඔවුන් గది නිර්මාණය කිරීමට, පරිශීලකයන් ನಿರ್ವಹಿಸಲು හෝ මානාලිංග වෙත ප්‍රවේශ වීමට හැකියාවක් లేదు.'"
+          "description": "The sentence structure could be improved for better flow. The repetition of 'හැකියාවක්' is a bit clunky.",
+          "suggestion": "පරිශීලකයින් గది තුළ ගොණු නිර්මාණය කර සංස්කරණය කළ හැකිය, නමුත් ඔවුන් గది නිර්මාණය කිරීමට, පරිශීලකයන් ನಿರ್ವಹ කිරීමට හෝ සැකසුම් වෙත ප්‍රවේශ වීමට අවසර නැත."
         }
       ],
       "approved_at": null
@@ -270,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Ukrainian translation uses 'а також' which can sound slightly clunky. A more natural flow could be achieved by restructuring the sentence.",
-          "suggestion": "Користувачі можуть створювати та редагувати файли в кімнаті, але не можуть створювати кімнати, керувати користувачами або мати доступ до параметрів."
+          "description": "The use of 'а також' is slightly clunky in this context. It's grammatically correct but less fluent.",
+          "suggestion": "Replace 'а також не мають доступу до параметрів' with 'та не мають доступу до параметрів'."
         }
       ],
       "approved_at": null

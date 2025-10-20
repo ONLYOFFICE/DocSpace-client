@@ -70,7 +70,7 @@ export const DomainSettings = observer(({ baseDomain }: IProps) => {
           type={InputType.text}
           size={InputSize.base}
           value={baseDomain}
-          isDisabled={true}
+          isDisabled
           scale
         />
       </FieldContainer>
@@ -81,11 +81,10 @@ export const DomainSettings = observer(({ baseDomain }: IProps) => {
             : ButtonSize.normal
         }
         label={t("Common:EditButton")}
-        primary={true}
+        primary
         onClick={onEditButtonClick}
         scale={false}
       />
     </StyledDomainSettings>
   );
 });
-

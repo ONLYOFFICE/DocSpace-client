@@ -25,12 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
 
 import styles from "./SelectionArea.module.scss";
 import { frames } from "./SelectionArea.utils";
 import { SelectionAreaProps, TArrayTypes } from "./SelectionArea.types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "../../utils";
+import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
 const SelectionArea = ({
   onMove,
@@ -45,6 +45,7 @@ const SelectionArea = ({
   arrayTypes,
   containerClass,
   itemClass,
+  onMouseDown,
 }: SelectionAreaProps) => {
   const areaLocation = React.useRef({ x1: 0, x2: 0, y1: 0, y2: 0 });
   const areaRect = React.useRef(new DOMRect());
@@ -56,15 +57,13 @@ const SelectionArea = ({
   const scrollSpeed = React.useRef({ x: 0, y: 0 });
   const selectableNodes = React.useRef(new Set<Element>());
 
-  const theme = useTheme();
+  const { isRTL } = useInterfaceDirection();
 
   const isIntersects = React.useCallback(
     (itemIndex: number, itemType: string) => {
       const { right, left, bottom, top } = areaRect.current;
       if (!scrollElement.current) return;
       const { scrollTop } = scrollElement.current;
-
-      const isRtl = theme.interfaceDirection === "rtl";
 
       let itemTop;
       let itemBottom;
@@ -74,7 +73,7 @@ const SelectionArea = ({
       if (viewAs === "tile") {
         let countOfMissingTiles = 0;
         const itemGap =
-          arrayTypes.find((x) => x.type === itemType)?.rowGap || 0;
+          arrayTypes?.find((x) => x.type === itemType)?.rowGap || 0;
 
         // TOP/BOTTOM item position
         if (itemIndex === 0) {
@@ -86,12 +85,14 @@ const SelectionArea = ({
           );
           const headersCount = indexOfType === 0 ? 0 : indexOfType;
 
-          itemTop = headersCount * defaultHeaderHeight;
+          itemTop = defaultHeaderHeight
+            ? headersCount * defaultHeaderHeight
+            : 0;
           const itemHeight =
             arrayOfTypes.current[indexOfType].itemHeight + itemGap;
 
           if (!headersCount) {
-            const rowIndex = Math.trunc(itemIndex / countTilesInRow);
+            const rowIndex = Math.trunc(itemIndex / countTilesInRow!);
 
             itemTop += elemRect.current.top + itemHeight * rowIndex - scrollTop;
             itemBottom = itemTop + itemHeight - itemGap;
@@ -99,7 +100,7 @@ const SelectionArea = ({
             let prevRowsCount = 0;
 
             for (let i = 0; i < indexOfType; i += 1) {
-              const item = arrayTypes.find(
+              const item = arrayTypes?.find(
                 (x) => x.type === arrayOfTypes.current[i].type,
               );
 
@@ -115,7 +116,7 @@ const SelectionArea = ({
             }
 
             const nextRow =
-              Math.floor((itemIndex + countOfMissingTiles) / countTilesInRow) -
+              Math.floor((itemIndex + countOfMissingTiles) / countTilesInRow!) -
               prevRowsCount;
 
             itemTop += elemRect.current.top + itemHeight * nextRow - scrollTop;
@@ -123,11 +124,11 @@ const SelectionArea = ({
           }
         }
 
-        let columnIndex = (itemIndex + countOfMissingTiles) % countTilesInRow;
+        let columnIndex = (itemIndex + countOfMissingTiles) % countTilesInRow!;
 
         // Mirror fileIndex for RTL interface (2, 1, 0 => 0, 1, 2)
-        if (isRtl && viewAs === "tile") {
-          columnIndex = countTilesInRow - 1 - columnIndex;
+        if (isRTL && viewAs === "tile") {
+          columnIndex = countTilesInRow! - 1 - columnIndex;
         }
 
         // LEFT/RIGHT item position
@@ -160,13 +161,7 @@ const SelectionArea = ({
 
       return bottom > itemTop && top < itemBottom;
     },
-    [
-      arrayTypes,
-      countTilesInRow,
-      defaultHeaderHeight,
-      theme.interfaceDirection,
-      viewAs,
-    ],
+    [arrayTypes, countTilesInRow, defaultHeaderHeight, isRTL, viewAs],
   );
 
   const recalculateSelectionAreaRect = React.useCallback(() => {
@@ -398,6 +393,10 @@ const SelectionArea = ({
 
   const onTapStart = React.useCallback(
     (e: MouseEvent) => {
+      onMouseDown?.(e);
+
+      if (e.button !== 0) return;
+
       const target = e.target as HTMLElement;
 
       if (
@@ -455,7 +454,7 @@ const SelectionArea = ({
         if (scroll instanceof Element) {
           if (!isRooms && viewAs === "tile") {
             elemRect.current.top =
-              scroll.scrollTop + itemsContainerRect.top + folderHeaderHeight;
+              scroll.scrollTop + itemsContainerRect.top + folderHeaderHeight!;
             elemRect.current.left = scroll.scrollLeft + itemsContainerRect.left;
           } else {
             elemRect.current.top = scroll.scrollTop + itemsContainerRect.top;

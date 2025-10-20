@@ -27,7 +27,10 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
+import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.light.svg?url";
+import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.dark.svg?url";
+import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.light.svg?url";
+import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.dark.svg?url";
 
 import { Selector, TSelectorItem } from "../../components/selector";
 import {
@@ -47,6 +50,8 @@ import {
   LoadersContext,
   LoadersContextProvider,
 } from "../utils/contexts/Loaders";
+
+import { useTheme } from "../../hooks/useTheme";
 
 const RoomSelectorComponent = ({
   id,
@@ -91,6 +96,7 @@ const RoomSelectorComponent = ({
   initSearchValue,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
+  const { isBase } = useTheme();
 
   const { isFirstLoad, isNextPageLoading, setIsFirstLoad } =
     React.useContext(LoadersContext);
@@ -234,12 +240,16 @@ const RoomSelectorComponent = ({
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}
       isMultiSelect={isMultiSelect}
-      emptyScreenImage={EmptyScreenCorporateSvgUrl}
+      emptyScreenImage={
+        isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
+      }
       emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyRoomsHeader")}
       emptyScreenDescription={
         emptyScreenDescription ?? t("Common:EmptyRoomsDescription")
       }
-      searchEmptyScreenImage={EmptyScreenCorporateSvgUrl}
+      searchEmptyScreenImage={
+        isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl
+      }
       searchEmptyScreenHeader={t("Common:NotFoundTitle")}
       searchEmptyScreenDescription={t("Common:SearchEmptyRoomsDescription")}
       totalItems={total}
@@ -257,6 +267,7 @@ const RoomSelectorComponent = ({
         />
       }
       isSSR={withInit}
+      dataTestId="room_selector"
     />
   );
 };

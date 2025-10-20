@@ -3,13 +3,19 @@
   "content": "Move to",
   "content_en_sha1_hash": "349f807a5e5497d0e5f0e5eb83dd8a59d2dd2c7d",
   "created_at": "2025-05-19T21:30:46.631Z",
-  "updated_at": "2025-06-08T12:02:32.584Z",
+  "updated_at": "2025-10-16T07:29:35.508Z",
   "comment": {
     "text": "The translation key \"MoveTo\" is used to display the label for a button that allows users to move files or items to a new location. It appears in various UI elements, such as file management dialogs and context menus, providing an intuitive way for users to select a destination. This text should be translated to provide a clear and consistent experience across different languages.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:35:27.277Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 201,
+      "context": "if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:OKButton\");\n \n if (unsubscribe) return t(\"Common:Remove\");\n \n return t(\"Common:MoveTo\");\n };\n \n const getDialogTitle = () => {\n if (isTemplate) {\n return `${t(\"Files:DeleteTemplate\")}?`;",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
       "line_number": 51,
@@ -18,25 +24,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1617,
+      "line_number": 1704,
       "context": "icon: CopyReactSvgUrl,\n items: [\n {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: isEditing\n ? () => this.onShowEditingToast(t)\n : () => this.onMoveAction(item),\n disabled: false,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1617,
-      "context": "icon: CopyReactSvgUrl,\n items: [\n {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: isEditing\n ? () => this.onShowEditingToast(t)\n : () => this.onMoveAction(item),\n disabled: false,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1617,
+      "line_number": 1704,
       "context": "icon: CopyReactSvgUrl,\n items: [\n {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: isEditing\n ? () => this.onShowEditingToast(t)\n : () => this.onMoveAction(item),\n disabled: false,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2241,
+      "line_number": 2234,
       "context": "case \"moveTo\":\n if (!this.isAvailableOption(\"moveTo\")) return null;\n return {\n id: \"menu-move-to\",\n label: t(\"Common:MoveTo\"),\n onClick: () => setMoveToPanelVisible(true),\n iconUrl: MoveReactSvgUrl,\n };\n case \"pin\":\n return {",
       "module": "/packages/client"
     },
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Yerini dəyiş\" literally means \"Change your place.\" While it can convey a similar idea, \"Move to\" implies a relocation or direction, which isn't fully captured. A more accurate translation would be something like \"Getmək\" or \"Köçür\" or \"Hərəkət et\"",
-          "suggestion": "Consider \"Getmək\", \"Köçür\", or \"Hərəkət et\" as alternatives to better reflect the meaning of \"Move to\"."
+          "description": "The Azerbaijani translation \"Yerini dəyiş\" translates to \"Change your place\" or \"Change position,\" which is not the intended meaning of \"Move to.\" It doesn't convey the action of relocating or proceeding to a specified location.",
+          "suggestion": "A more accurate translation would be something like \"Getmək\" (to go/move) or \"Köçürülmə\" (relocation), or a phrase like \"O yerə keç\" (Go to that place)."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Verschieben' translates to 'move' or 'relocate', but 'Move to' implies movement *towards* a specific location. 'Verschieben' is a more general term for moving something from one place to another.",
-          "suggestion": "Consider 'Gehen zu' or 'Bewegen zu' for a more accurate translation of 'Move to', depending on the context. 'Zum' might also be appropriate, e.g., 'Gehe zum...'"
+          "description": "'Verschieben' translates to 'move' or 'relocate', but 'MoveTo' implies a destination. A more accurate translation might be 'Gehe zu' or 'Bewegen zu'.",
+          "suggestion": "Gehe zu"
         }
       ],
       "approved_at": null
@@ -105,13 +105,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Mover a' is a literal translation of 'Move to,' it's not the most natural or idiomatic way to express this in Spanish. 'Move to' can have various meanings depending on the context (physical movement, transferring responsibility, etc.). 'Mover a' implies solely physical movement.",
-          "suggestion": "Consider alternative translations like 'Ir a', 'Trasladarse a', or 'Dirigirse a', depending on the intended meaning of 'Move to'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -120,7 +114,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Siirrä' translates to 'move' or 'transfer' in a more general sense. While it can mean 'move to', it lacks the specific nuance of 'move to' indicating destination. A more accurate translation might be 'Siirry'.",
+          "description": "While 'Siirrä' can mean 'move', it's more accurately translated as 'transfer' or 'relocate'. 'Move to' implies movement *towards* a location, which 'Siirrä' doesn't fully convey. A better translation might be 'Siirry'.",
           "suggestion": "Siirry"
         }
       ],
@@ -138,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Տեղափոխել' translates to 'relocate' or 'transport', not 'move to'. While it conveys a sense of movement, it's not the most accurate translation of 'Move to'.",
-          "suggestion": "Consider alternatives like 'տեղաշարժվել' (teghasharzhvel) which more closely aligns with the meaning of 'move to', or 'գնալ' (gnal) for a more general 'go to'."
+          "description": "'Տեղափոխել' translates to 'relocate' or 'transport' rather than 'move to'. While it conveys a movement, it's not the most direct equivalent.",
+          "suggestion": "Consider 'ԲԱՑԱՐՄԱՆԻՑ ՏԵՂԵՎԱՐՄԱՆԻՑ' (Bacarmanic tegevarmanic) or 'ԸՆԹԱՐՄԱՆԻՑ' (Entarmanic) to better reflect 'Move to'."
         }
       ],
       "approved_at": null
@@ -156,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"に移動します\" while technically correct, is a more formal/complete way of saying \"Move to\". It implies 'will move to'. A more direct and potentially more appropriate translation, depending on context, could be just \"移動\" or \"移動します\"",
-          "suggestion": "Consider \"移動\" or \"移動します\" depending on the desired level of formality."
+          "description": "The translation \"に移動します\" while technically correct, doesn't fully capture the brevity and directness of \"Move to\". It's a more formal/complete phrasing than often used in UI elements or short instructions.",
+          "suggestion": "Consider alternatives like \"移動\" or \"へ移動\" for a more concise and common phrasing, depending on the context. \"移動\" is the most succinct."
         }
       ],
       "approved_at": null
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'이동 위치' translates to 'movement location' or 'destination' which isn't a direct or natural equivalent to 'Move to'. It's too literal.",
-          "suggestion": "Consider '이동' (Move), '이동하다' (To move), '옮기다' (To relocate), or a more contextually appropriate phrase depending on the usage."
+          "description": "The Korean translation \"이동 위치\" (idong wichi) translates more closely to 'movement location' or 'destination' rather than the English phrase 'Move to'. It lacks the action implied in the original phrase.",
+          "suggestion": "Consider a translation like \"이동하다\" (idonghada - to move) or \"이동\" (idong - move/movement) depending on the context.  Alternatively, \"~로 이동\" (~ro idong - move to ~) could be used to directly translate 'Move to'."
         }
       ],
       "approved_at": null
@@ -216,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Mutare în\" doesn't accurately convey the meaning of \"Move to\". \"Mutare în\" literally translates to \"Move in\", which implies movement *into* a location, rather than simply moving *to* a location. A more accurate translation would depend on the specific context, but options like \"Mergi la\", \"Să te muti la\", or \"Adu-te la\" might be more appropriate.",
-          "suggestion": "Consider alternative translations like \"Mergi la\", \"Să te muti la\", or \"Adu-te la\", depending on the intended nuance."
+          "description": "The Romanian translation \"Mutare în\" is a literal translation of \"Move to\" but doesn't convey the intended meaning in a natural way. \"Move to\" is often used to indicate direction or location, not necessarily a physical movement.",
+          "suggestion": "Consider alternatives like \"Mergi la\", \"Du-te la\", \"Îndreptă-te spre\", or a more context-specific translation depending on the intended meaning of 'Move to'."
         }
       ],
       "approved_at": null
@@ -228,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Переместить' translates more closely to 'Move' or 'Relocate' rather than 'Move to'. While understandable in context, it's not a direct equivalent.",
-          "suggestion": "Consider 'Перейти к' (Pereyti k) or 'Двигаться к' (Dvigat'sya k) for a more accurate translation of 'Move to'."
+          "description": "While 'Переместить' can mean 'move', it's more accurately translated as 'relocate' or 'move (something to a new place)'. 'Move to' implies direction and destination, which isn't fully captured by 'Переместить'. A more contextually appropriate translation might be 'Перейти в' or 'Двигаться к'.",
+          "suggestion": "Consider 'Перейти в' or 'Двигаться к' depending on the specific context."
         }
       ],
       "approved_at": null
@@ -240,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"මෙයට ගෙනයන්න\" does not accurately convey the meaning of \"Move to\".  \"මෙයට ගෙනයන්න\" translates to something closer to \"Bring here\". \"Move to\" implies relocation or movement to a specified location.",
-          "suggestion": "A more accurate translation could be something like \"යාන්න\" (yanna - to go) or \"පිහිටුවා\" (pihatuva - to relocate/establish) depending on the context."
+          "description": "The Sinhala translation \"මෙයට ගෙනයන්න\" (meyata gena yanna) literally translates to 'bring here' or 'take here'. 'Move to' implies a change in location, not necessarily bringing something to a location. A more accurate translation would convey the meaning of relocating or transferring.",
+          "suggestion": "තැවරීමට\" (tawarimita) - meaning 'to move to', or \"වරයකට යන්න\" (warakota yanna) - meaning 'to go to a place'."
         }
       ],
       "approved_at": null
@@ -264,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Помери у\" does not accurately convey the meaning of \"Move to\". \"Помери у\" literally translates to \"Move into\" or \"Move in\". \"Move to\" implies movement towards a location, which is not fully captured by \"Помери у\".",
-          "suggestion": "Consider a more accurate translation such as \"Премести се у\" (Premesi se u) which means 'Move to' or \"Иди у\" (Idi u) which means 'Go to'."
+          "description": "The Serbian (Cyrillic) translation \"Помери у\" does not accurately translate \"Move to\". \"Помери у\" literally means \"Move in/into\". \"Move to\" implies a destination, which would be better conveyed with a term like \"Пребаци на\" or \"Премести се у\".",
+          "suggestion": "Consider using \"Пребаци на\" or \"Премести се у\" as a more accurate translation of \"Move to\"."
         }
       ],
       "approved_at": null
@@ -276,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Pomeri u\" does not accurately convey the meaning of \"Move to\". \"Pomeri u\" translates to something like \"Move in\" or \"Move into\", which is a different action.",
-          "suggestion": "A more accurate translation would be \"Prebaci u\" or \"Premesti u\", depending on the context of \"Move to\"."
+          "description": "The Serbian translation 'Pomeri u' does not accurately convey the meaning of 'Move to'. 'Pomeri u' translates more closely to 'Move into' or 'Move towards' and implies movement *into* something, whereas 'Move to' implies movement *to* a location.",
+          "suggestion": "Consider alternatives such as 'Idi na' (Go to), 'Preseli se u' (Relocate to), or 'Prebaci se na' (Switch to), depending on the specific context."
         }
       ],
       "approved_at": null
@@ -288,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Şuraya taşı\" directly translates to \"Move there carry\". It's not the most natural or accurate translation of \"Move to\". A more idiomatic translation would be \"Git\" or \"Taşı\". \"Şuraya\" is not required as 'to' implies a location.",
-          "suggestion": "Git"
+          "description": "The Turkish translation 'Şuraya taşı' translates to 'Move there/to that place' rather than the intended 'Move to'. It implies a destination specified elsewhere, not a general instruction to move to a place.",
+          "suggestion": "Taşı"
         }
       ],
       "approved_at": null

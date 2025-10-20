@@ -1,0 +1,28 @@
+{
+  "key_path": "PDF",
+  "content": "PDF",
+  "content_en_sha1_hash": "d613d88cb2d86f484f6f82d44ac1fc60722abe20",
+  "created_at": "2025-08-07T11:18:30.590Z",
+  "updated_at": "2025-08-13T18:28:17.992Z",
+  "comment": {
+    "text": "This key displays the file format \"PDF\" within a settings section, specifically referencing a logo for editors. It appears alongside logo dimensions in the WhiteLabel settings page. Translators should ensure the translation accurately represents the file type.",
+    "is_auto": true,
+    "updated_at": "2025-08-07T11:22:24.503Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
+      "line_number": 541,
+      "context": "<Text\n fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {t(\"LogoForEditors\", { editorName: t(\"Common:PDF\") })} (\n {logoUrls[12].size.width}x{logoUrls[12].size.height})\n </Text>\n <div className={styles.logosWrapper}>\n <Logo\n name={logoUrls[12].name}",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

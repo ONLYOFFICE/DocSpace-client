@@ -3,7 +3,7 @@
   "content": "This room is available to anyone with the link. External users will have Form Filler permission for all the files.",
   "content_en_sha1_hash": "71456b52b18baef0b2e68e4d7a533ffa05a20307",
   "created_at": "2025-05-19T21:30:56.804Z",
-  "updated_at": "2025-05-26T07:57:32.440Z",
+  "updated_at": "2025-10-13T14:41:02.935Z",
   "comment": {
     "text": "This translation key is used to describe a form room bar that indicates external users have Form Filler permission for all files. It appears in a public room bar container and is translated based on whether the room has form room or public permissions.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.js",
-      "line_number": 333,
-      "context": "? t(\"Files:RoomAvailableViaSharedLink\")\n : t(\"Files:RoomAvailableViaExternalLink\")\n }\n bodyText={\n isFormRoom\n ? t(\"CreateEditRoomDialog:FormRoomBarDescription\")\n : t(\"CreateEditRoomDialog:PublicRoomBarDescription\")\n }\n />\n </StyledPublicRoomBarContainer>\n ) : null}",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.tsx",
+      "line_number": 372,
+      "context": "? t(\"Files:RoomAvailableViaSharedLink\")\n : t(\"Files:RoomAvailableViaExternalLink\")\n }\n bodyText={\n isFormRoom\n ? t(\"CreateEditRoomDialog:FormRoomBarDescription\")\n : t(\"CreateEditRoomDialog:PublicRoomBarDescription\")\n }\n />\n </div>\n ) : null}",
       "module": "/packages/client"
     }
   ],
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Forma Doldurma icazəsi\" is a literal translation of \"Form Filler permission\" and doesn't convey the meaning naturally in Azerbaijani. A more appropriate translation would be something along the lines of \"Forma doldurma səlahiyyəti\" or \"Forma ilə doldurma funksiyası\".",
-          "suggestion": "Xarici istifadəçilərin bütün fayllar üçün Forma ilə doldurma funksiyası olacaq."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -75,18 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"This room is available to anyone with the link\" is not accurately translated. \"Kenelle tahansa, jolla on linkki\" is a literal translation but sounds awkward and doesn't convey the meaning of general accessibility as well as it could.",
-          "suggestion": "This room is accessible with a link, or: Linkillä pääsee tähän huoneeseen."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The wording \"Ulkoiset käyttäjät saavat lomakkeen täyttäjänoikeudet kaikkiin tiedostoihin\" is a direct translation but sounds overly formal and technical. It could be simplified.",
-          "suggestion": "External users have form-filling permissions for all files, or: Ulkopuolisilla käyttäjillä on oikeus täyttää lomakkeita kaikissa tiedostoissa."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -98,122 +81,49 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ձևաթղթի լրացման թույլտվություն\" is a literal translation of 'Form Filler permission' and while technically correct, it's not the most natural or common way to express this in Armenian. A more fluid translation might be 'տեղեկությունների լրացման իրավունք' (right to fill in information) or a similar phrasing depending on context.",
-          "suggestion": "Consider rephrasing to something like 'տեղեկությունների լրացման իրավունք' or a similarly natural phrasing that conveys 'Form Filler permission'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Form Filler' is a specific role and should be translated to accurately convey that meaning in Italian. 'Compilatore moduli' is a literal translation, but might not be the best choice for clarity and context.",
-          "suggestion": "Consider a more descriptive phrase like 'Utenti esterni avranno l'autorizzazione di compilazione moduli' or 'Utenti esterni potranno compilare i moduli'."
-        },
-        {
-          "type": "formatting",
-          "description": "The Italian translation uses a full stop (.) at the end of the sentence. While grammatically correct, the English version has a period, making the two sentences slightly different in style. A comma (,) would be more consistent with the English version's cadence.",
-          "suggestion": "Replace the period with a comma: 'Questa stanza è a disposizione di chiunque abbia il link, gli utenti esterni avranno l'autorizzazione come Compilatore moduli per tutti i file.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Form Filler permission' is not accurately conveyed by 'フォーム記入権限'. While 'フォーム記入' is understandable, '権限' (authority/permission) is a bit strong and formal for the intended meaning of being able to fill out forms. A more accurate translation would focus on the ability to edit/fill in forms.",
-          "suggestion": "このルームはリンクがあれば誰でも利用できます。外部ユーザーはすべてのファイルに記入・編集権限が与えられます。"
-        },
-        {
-          "type": "formatting",
-          "description": "The Japanese sentence feels slightly clunky. Adding a particle or rephrasing could improve readability.",
-          "suggestion": "このルームはリンクがあれば誰でも利用できます。外部ユーザーは、すべてのファイルについてフォーム入力が可能です。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Form Filler permission\" is not directly equivalent to a commonly understood term in Korean in this context. \"Form Filler\" refers to a specific permission level within a system. A more natural translation would describe the functionality of that permission.",
-          "suggestion": "이 룸은 링크를 가진 누구나 이용할 수 있습니다. 외부 사용자는 모든 파일에 대해 편집 권한을 갖습니다."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word '양식' can refer to both forms and templates. In this context, '편집 권한' (edit permission) would be more accurate and commonly understood by Korean users, as it encompasses the ability to fill in and modify the content.",
-          "suggestion": "이 룸은 링크를 가진 누구나 이용할 수 있습니다. 외부 사용자는 모든 파일에 대해 편집 권한을 갖습니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Form Filler permission' is not accurately translated. 'Form Filler' refers to a specific level of access, and the Lao translation doesn't convey this specific meaning. A more accurate translation would describe the permission level.",
-          "suggestion": "ຫ້ອງນີ້ມີໃຫ້ທຸກຄົນທີ່ມີລິ້ງ. ຜູ້ໃຊ້ພາຍນອກຈະສາມາດເບິ່ງ ແລະ ຕື່ມຂໍ້ມູນໃນໄຟລ໌ທັງຫມົດໄດ້."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'ໄຟລ໌ທັງຫມົດ' (all files) could be rephrased to improve readability and flow. While technically correct, it's slightly awkward.",
-          "suggestion": "ຫ້ອງນີ້ມີໃຫ້ທຸກຄົນທີ່ມີລິ້ງ. ຜູ້ໃຊ້ພາຍນອກຈະສາມາດເບິ່ງ ແລະ ຕື່ມຂໍ້ມູນໃນໄຟລ໌ທັງໝົດຂອງຫ້ອງນີ້ໄດ້."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Form Filler permission' is not a standard or easily understood translation of 'Form Filler permission' in this context. A more accurate translation would focus on the ability to fill out forms.",
-          "suggestion": "Ārējiem lietotājiem būs atļauts aizpildīt veidlapas (External users will be allowed to fill out forms)."
-        },
-        {
-          "type": "grammar",
-          "description": "While technically correct, 'visiem failiem' (all files) sounds a bit clunky in Latvian. It implies every single file, which might not be the intended meaning. It might be better to imply access to forms *within* the files.",
-          "suggestion": "Ārējiem lietotājiem būs veidlapu aizpildītāja atļauja failos (External users will have Form Filler permission in files)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Form Filler permission' is not directly equivalent to 'rechten voor het invullen van formulieren'. 'Form Filler permission' implies a specific level of access within the application. A more accurate translation might convey this specific permission level.",
-          "suggestion": "Consider translating 'Form Filler permission' as something like 'toegang tot het invullen van formulieren' or 'mogelijkheid om formulieren in te vullen' to better reflect the intended meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"uprawnienie umożliwiające wypełnienie formularza\" is a literal and somewhat clunky translation of \"Form Filler permission\". A more natural and accurate Polish equivalent would be something like \"możliwość wypełniania formularzy\" or \"uprawnienia do wypełniania formularzy\".",
-          "suggestion": "Ten pokój jest dostępny dla każdego, kto ma link. Użytkownicy zewnętrzni będą mieli możliwość wypełniania formularzy dla wszystkich plików."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -231,52 +141,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Romanian translation uses the incorrect grammatical construction 'vor fi acordaţi'. It should be 'vor avea' to match the English structure ('will have').",
-          "suggestion": "Această sală este disponibilă tuturor la linkul. Utilizatorii externi vor avea permisiunea de Completator de formulare pentru toate fişiere."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'linkul' is a slightly awkward phrasing. While technically correct, a more natural wording is preferable.",
-          "suggestion": "Această sală este disponibilă tuturor cu linkul/prin link."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"Заполнение форм\" (Form Filling) is a literal translation of 'Form Filler' and doesn't convey the intended meaning of permission level. It sounds unnatural in Russian. The intended meaning is that external users have permission to only fill out forms, not edit or view other content.",
-          "suggestion": "Возможные варианты: «Внешним пользователям будет предоставлен доступ только для заполнения форм.» or «Внешним пользователям будет предоставлен уровень доступа, позволяющий только заполнять формы.»"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase \"Для всех внешних пользователей будет установлен уровень доступа...\" is a bit wordy and formal. It could be improved for readability.",
-          "suggestion": "Внешним пользователям будет предоставлен..."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Form Filler permission\" is not directly equivalent to any existing Sinhala term. A more accurate translation would convey the functionality of being able to fill out forms.",
-          "suggestion": "පිටුපරදිශත පරිශීලකයින්ට ආකෘති පිරවීමේ හැකියාව හිමි වනු ඇත."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'පිටුපරදිශත' (pitudaradishata) is potentially a typo. It should likely be ' පිටත' (pitha) which means 'external'.",
-          "suggestion": "පිටත"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -294,30 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Form Filler' is not directly translatable. 'Popunjavanje formulara' is a literal translation but doesn't convey the intended meaning of having permission to edit/fill out forms. It's more appropriate to describe the permission more clearly.",
-          "suggestion": "Спољни корисници имаће дозволу за уређивање/пуњење формулара за све датотеке."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Form Filler' is not directly equivalent to 'Popunjavanje Formulara'. 'Popunjavanje Formulara' is more accurately 'Form Filling'. While understandable, 'Form Filler' implies a specific role or permission level that might not be the intended meaning.",
-          "suggestion": "Consider translating 'Form Filler' as 'Popunjavanje Obrazaca' or 'Ispunjavanje Obrazaca' depending on the specific context and desired formality. A more literal but potentially less clear option would be 'Popunjavanje Formulara' (as it currently is)."
-        },
-        {
-          "type": "formatting",
-          "description": "Consistency in terminology. 'Prostorija' is used for 'room'. Ensure this is consistently used throughout the application.",
-          "suggestion": "Maintain consistency in terminology."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

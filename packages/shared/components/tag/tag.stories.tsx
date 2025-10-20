@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -56,18 +55,6 @@ export const Default: Story = {
     id: "",
     className: "",
     style: { color: "red" },
-  },
-};
-
-export const WithDropDown: Story = {
-  args: {
-    tag: "script",
-    label: "Script",
-    isNewTag: false,
-    isDisabled: false,
-    onDelete: () => {},
-    onClick: () => {},
-    advancedOptions: ["Option 1", "Option 2"],
   },
 };
 

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { RefObject } from "react";
-import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
+import { GuidanceRefKey } from "../guidance/sub-components/Guid.types";
 import { ContextMenuModel } from "../context-menu";
 
 export type MainButtonProps = {

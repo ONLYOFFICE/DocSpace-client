@@ -23,7 +23,6 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import moment from "moment";
 
 export const calculateDifference = (
   quantity: number,
@@ -32,19 +31,6 @@ export const calculateDifference = (
   if (!quantity) return 0;
 
   return Math.abs(currentAllocated - quantity);
-};
-
-export const getDaysUntilPayment = (date) => {
-  const today = moment();
-  const dueDate = moment(date);
-  return dueDate.diff(today, "days");
-};
-
-export const calculateTotalPrice = (
-  quantity: number,
-  unitPrice: number,
-): number => {
-  return Number((quantity * unitPrice).toFixed(2));
 };
 
 export const isUpgrade = (quantity: number, current: number) =>

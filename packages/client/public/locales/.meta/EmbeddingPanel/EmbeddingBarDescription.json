@@ -3,7 +3,7 @@
   "content": "Embedding will only work for the URLs specified by the {{productName}} admin in the JavaScript SDK settings.",
   "content_en_sha1_hash": "20daf7700e4107dbbb22b33a47d01501c6b64d05",
   "created_at": "2025-05-19T21:30:56.585Z",
-  "updated_at": "2025-05-26T07:57:32.355Z",
+  "updated_at": "2025-08-26T11:15:14.113Z",
   "comment": {
     "text": "This translation key is used for the description of a button that allows users to add their website URL to an \"allow list\" for embedding. It appears in a UI element where users can configure the allowed URLs for embedding. Translators should focus on creating a clear and concise message that will be displayed in this context.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 423,
+      "line_number": 433,
       "context": "}}\n >\n {`\"Add the website URL for embedding to the <1>allow list</1>.\"`}\n </Trans>\n ) : (\n t(\"EmbeddingPanel:EmbeddingBarDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n )}\n </Text>\n <IconButton",
       "module": "/packages/client"
     }

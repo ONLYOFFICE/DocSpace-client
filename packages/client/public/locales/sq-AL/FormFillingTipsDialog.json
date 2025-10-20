@@ -1,1 +1,15 @@
-{}
+{
+  "DescriptionUploading": "Krijoni formularë PDF në {{productName}}, p.sh. në {{sectionName}} tuaj dhe ngarkoni të gatshmet në dhomë. Përdorni bibliotekën e integruar të shablloneve dhe zgjidhni midis modeleve të shumta PDF të gatshme.",
+  "HeaderComplete": "Analizim i lehtë i përgjigjeve të mbledhura",
+  "HeaderSharing": "Ndani shpejt",
+  "HeaderStarting": "Duke filluar procesin e plotësimit të formularit",
+  "HeaderSubmitting": "Dërgimi i përgjigjeve",
+  "HeaderUploading": "Ngarkim i lehtë i formularëve",
+  "TitleComplete": "Kontrolloni format e mbushura dhe analizoni automatikisht të dhënat e mbledhura në një tabelë. T gjitha – brenda një dhome.",
+  "TitleSharing": "Ftoni anëtarë të tjerë {{productName}} në dhomë për të plotësuar formatet PDF të ngarkuara. Kopjoni një lidhje me qasje publike për të ndarë dhomën me përdorues të jashtëm.",
+  "TitleStarting": "Kur një formular hapet për plotësim, një kopie individuale krijohet automatikisht për çdo përgjigjurës dhe ruhet në folderin \"Në Progres\". Kjo do të thotë se formulari është filluar, por nuk është përfunduar ende.",
+  "TitleSubmitting": "Pasi butoni \"Complete & Submit\" klikohet në formën e hapur, ai zhvendoset në folderi \"Complete\".",
+  "WelcomeDescription": "Këtu, ju mund të organizoni plotësimin e lehtë të formularëve PDF, të mbledhni dhe të analizoni lehtësisht përgjigjet. Jeni gati të filloni?",
+  "WelcomeFillingForm": "Mirësevjen në Dhoma e Plotësimit të Formularëve!",
+  "WelcomeStartTutorial": "Bëni një tur të shkurtër"
+}

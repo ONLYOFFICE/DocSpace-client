@@ -26,6 +26,7 @@
 
 import type { TTranslation } from "@docspace/shared/types";
 import { TColorScheme } from "@docspace/shared/themes";
+import FilesStore from "SRC_DIR/store/FilesStore";
 
 export interface ICover {
   data: string;
@@ -35,6 +36,11 @@ export interface ICover {
 export interface ILogo {
   color: string;
   cover: ICover;
+}
+
+export interface ILogoCover {
+  color: string;
+  cover: string;
 }
 
 interface IRoomCoverDialogProps {
@@ -52,7 +58,7 @@ export interface RoomLogoCoverProps {
   title?: string;
   covers?: ICover[] | undefined;
   setCover: (color: string, icon: string | ICover) => void;
-  cover: ILogo;
+  cover: ILogoCover;
   setRoomCoverDialogProps: (params: IRoomCoverDialogProps) => void;
   roomCoverDialogProps: IRoomCoverDialogProps;
   forwardedRef?: React.ForwardedRef<HTMLDivElement>;
@@ -73,11 +79,12 @@ export type CoverDialogProps = RoomLogoCoverProps & {
   editRoomDialogPropsVisible: boolean;
   roomLogoCoverDialogVisible: boolean;
   templateEventVisible: boolean;
+  setEnabledHotkeys?: FilesStore["setEnabledHotkeys"];
 };
 
 export interface CustomLogoProps {
   color: string | null;
-  icon: string | ILogo | null;
+  icon: string | ILogo | ICover | ILogoCover | null;
   withoutIcon: boolean;
   isBaseTheme: boolean;
   roomTitle: string;

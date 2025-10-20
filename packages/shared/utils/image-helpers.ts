@@ -29,6 +29,7 @@ enum IconNames {
   WordCommon = "wordCommon.svg",
   Cell = "cell.svg",
   CellCommon = "cellCommon.svg",
+  Diagram = "diagram.svg",
   Slide = "slide.svg",
   SlideCommon = "slideCommon.svg",
   Pdf = "pdf.svg",
@@ -67,6 +68,9 @@ const iconsMap: Record<IconNames, string[]> = {
     ".sxw",
     ".wps",
     ".wpt",
+    ".pages",
+    ".hwp",
+    ".hwpx",
   ],
   [IconNames.Cell]: [".xlsx", ".xltx", ".xlsb", ".xltm", ".xlsm"],
   [IconNames.CellCommon]: [
@@ -78,7 +82,9 @@ const iconsMap: Record<IconNames, string[]> = {
     ".ett",
     ".ots",
     ".sxc",
+    ".numbers",
   ],
+  [IconNames.Diagram]: [".vsdx", ".vssx", ".vstx", ".vsdm", ".vssm", ".vstm"],
   [IconNames.Slide]: [".pptx", ".potx", ".ppsx", ".pptm", ".ppsm", ".potm"],
   [IconNames.SlideCommon]: [
     ".ppt",
@@ -90,6 +96,8 @@ const iconsMap: Record<IconNames, string[]> = {
     ".dpt",
     ".sxi",
     ".pot",
+    ".key",
+    ".odg",
   ],
   [IconNames.Pdf]: [".pdf"],
   [IconNames.Form]: [".docxf", ".oform"],
@@ -135,38 +143,35 @@ const iconsMap: Record<IconNames, string[]> = {
   [IconNames.ArchiveRoom]: ["archiveRoom"],
 };
 
-const getSvgByName = (name: string): string => `${name.replace(/^\./, "")}.svg`;
+const createIconEntries = (icons: Record<string, string[]>) => {
+  const all = Object.entries(icons).flatMap(([iconName, formats]) =>
+    formats.map((format): [string, string] => [format, iconName]),
+  );
+  const nonRoom = all.filter(([, iconName]) => !iconName.startsWith("room/"));
 
-const getUrlByName = (name: string, size: number): string =>
-  // eslint-disable-next-line import/no-dynamic-require, global-require
+  return { all, nonRoom };
+};
+
+const { all, nonRoom } = createIconEntries(iconsMap);
+
+const getUrlByName = (size: number, name: string): string =>
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   require(`PUBLIC_DIR/images/icons/${size}/${name}?url`);
 
-const findIconKey = (format: string): string =>
-  Object.keys(iconsMap).find((icon) =>
-    iconsMap[icon as IconNames]?.includes(format),
-  ) || IconNames.File;
+const generateMapForSize = (
+  size: number,
+  entries: [string, string][],
+): Map<string, string> =>
+  new Map(
+    entries.map(([format, iconName]) => {
+      const svg = `${format.replace(/^\./, "")}.svg`;
+      const url = getUrlByName(size, iconName);
 
-const generateSvgUrlPair = (format: string, size: number): [string, string] => {
-  const key = findIconKey(format);
-  return [getSvgByName(format), getUrlByName(key, size)];
-};
-
-const getIconsMap = (size: number): Map<string, string> => {
-  const entries = Object.values(iconsMap)
-    .flat()
-    .filter((format) => !format.includes("Room") || size === 32)
-    .map<[string, string]>((format) => {
-      const [svg, url] = generateSvgUrlPair(format, size);
       return [svg, url];
-    });
+    }),
+  );
 
-  return new Map(entries);
-};
-
-export const iconSize24 = getIconsMap(24);
-
-export const iconSize32 = getIconsMap(32);
-
-export const iconSize64 = getIconsMap(64);
-
-export const iconSize96 = getIconsMap(96);
+export const iconSize24 = generateMapForSize(24, nonRoom);
+export const iconSize32 = generateMapForSize(32, all);
+export const iconSize64 = generateMapForSize(64, nonRoom);
+export const iconSize96 = generateMapForSize(96, nonRoom);

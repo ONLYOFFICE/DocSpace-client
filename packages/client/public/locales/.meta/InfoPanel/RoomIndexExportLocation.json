@@ -3,7 +3,7 @@
   "content": "Export of the room index saved to {{sectionName}}",
   "content_en_sha1_hash": "0bcf2b9b4084c5312b362571de6bc7eab5374c07",
   "created_at": "2025-05-19T21:30:54.927Z",
-  "updated_at": "2025-06-08T12:02:32.706Z",
+  "updated_at": "2025-10-13T13:22:35.734Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that the room index has been exported and saved to a specific location. It is typically displayed in a UI element related to file management or history, such as a button label or dialog title. The \"sectionName\" variable refers to the name of the \"My Files\" section.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 353,
+      "context": "case FeedActionKeys.RoomUnarchived:\n return t(\"InfoPanel:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyDocuments\"),\n });\n case FeedActionKeys.FormSubmit:\n return t(\"InfoPanel:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 299,
-      "context": "case FeedActionKeys.RoomUnarchived:\n return t(\"InfoPanel:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomIndexExportLocation:\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n case FeedActionKeys.FormSubmit:\n return t(\"InfoPanel:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:",
+      "line_number": 302,
+      "context": "case FeedActionKeys.RoomUnarchived:\n return t(\"InfoPanel:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyDocuments\"),\n });\n case FeedActionKeys.FormSubmit:\n return t(\"InfoPanel:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:",
       "module": "/packages/client"
     }
   ],

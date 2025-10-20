@@ -32,7 +32,7 @@ import styles from "../Section.module.scss";
 import { isDesktop, isMobile } from "../../../utils/device";
 
 const SectionFilter = React.memo(
-  ({ className, ...props }: SectionFilterProps) => {
+  ({ className, children, withTabs }: SectionFilterProps) => {
     const [scrollTop, setScrollTop] = useState(0);
     const [isFixed, setIsFixed] = useState(false);
 
@@ -69,9 +69,11 @@ const SectionFilter = React.memo(
       <div
         className={classNames(styles.filter, "section-filter", className, {
           [styles.isFixed]: !isDesktop() ? isFixed : false,
+          [styles.withTabs]: withTabs,
         })}
-        {...props}
-      />
+      >
+        {children}
+      </div>
     );
   },
 );

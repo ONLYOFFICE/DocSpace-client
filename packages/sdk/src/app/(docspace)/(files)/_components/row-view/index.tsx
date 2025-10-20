@@ -29,8 +29,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 
-import { RowContainer } from "@docspace/shared/components/rows";
-import styles from "@docspace/shared/styles/FilesRowContainer.module.scss";
+import { FilesRowContainer } from "@docspace/shared/components/files-row";
 import { useIsServer } from "@docspace/shared/hooks/useIsServer";
 
 import { Row } from "./sub-components/Row";
@@ -49,8 +48,8 @@ const RowView = ({
   const isSSR = useIsServer();
 
   return (
-    <RowContainer
-      className={`files-row-container ${styles.filesRowContainer}`}
+    <FilesRowContainer
+      className="files-row-container"
       filesLength={items.length}
       itemCount={total}
       hasMoreFiles={hasMoreFiles}
@@ -61,7 +60,7 @@ const RowView = ({
     >
       {items.map((item, index) => (
         <Row
-          key={`${item.id}_${index}`}
+          key={`${item.id}`}
           index={index}
           item={item}
           filterSortBy={filterSortBy}
@@ -70,7 +69,7 @@ const RowView = ({
           isSSR={isSSR}
         />
       ))}
-    </RowContainer>
+    </FilesRowContainer>
   );
 };
 

@@ -3,7 +3,7 @@
   "content": "Removed from favorites",
   "content_en_sha1_hash": "c259d9197c21c066bff3db7e0f183ec9c293053c",
   "created_at": "2025-05-19T21:30:56.030Z",
-  "updated_at": "2025-06-08T12:02:32.557Z",
+  "updated_at": "2025-10-16T07:29:35.475Z",
   "comment": {
     "text": "This translation key \"RemovedFromFavorites\" is used to display a message when an item is removed from favorites. It is typically displayed as a success toast after removing an item from favorites in the UI.",
     "is_auto": true,
@@ -11,27 +11,33 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/HOCs/withBadges.js",
+      "line_number": 179,
+      "context": "onClickFavorite = () => {\n const { t, item, setFavoriteAction } = this.props;\n \n if (item?.isFavorite) {\n setFavoriteAction(\"remove\", [item])\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))\n .catch((err) => toastr.error(err));\n return;\n }\n \n setFavoriteAction(\"mark\", [item])",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/HOCs/withHotkeys.js",
-      "line_number": 355,
-      "context": "if (isFavoritesFolder) {\n const items = selection.map((item) => item.id);\n \n setFavoriteAction(\"remove\", items)\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))\n .catch((err) => toastr.error(err));\n \n return;\n }",
+      "line_number": 376,
+      "context": "if (isAvailableOption(\"delete\") && !isGroupMenuBlocked) {\n if (isRecentFolder) return;\n \n if (isFavoritesFolder) {\n setFavoriteAction(\"remove\", selection)\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))\n .catch((err) => toastr.error(err));\n \n return;\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/HOCs/withQuickButtons.js",
-      "line_number": 80,
-      "context": "onClickFavorite = (showFavorite) => {\n const { t, item, setFavoriteAction } = this.props;\n \n if (showFavorite) {\n setFavoriteAction(\"remove\", item.id)\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))\n .catch((err) => toastr.error(err));\n return;\n }\n \n setFavoriteAction(\"mark\", item.id)",
+      "line_number": 71,
+      "context": "onClickFavorite = () => {\n const { t, item, setFavoriteAction } = this.props;\n \n if (item?.isFavorite) {\n setFavoriteAction(\"remove\", [item])\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))\n .catch((err) => toastr.error(err));\n return;\n }\n \n setFavoriteAction(\"mark\", [item])",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 439,
-      "context": "this.filesActionsStore\n .setFavoriteAction(action, id)\n .then(() =>\n action === \"mark\"\n ? toastr.success(t(\"MarkedAsFavorite\"))\n : toastr.success(t(\"RemovedFromFavorites\")),\n )\n .catch((err) => toastr.error(err));\n };\n \n lockFile = (item, t) => {",
+      "line_number": 464,
+      "context": "this.filesActionsStore\n .setFavoriteAction(action, items)\n .then(() =>\n action === \"mark\"\n ? toastr.success(t(\"MarkedAsFavorite\"))\n : toastr.success(t(\"RemovedFromFavorites\")),\n )\n .catch((err) => toastr.error(err));\n };\n \n lockFile = (item, t) => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2496,
-      "context": "alt: t(\"RemoveFromFavorites\"),\n iconUrl: FavoritesReactSvgUrl,\n onClick: () => {\n const items = selection.map((item) => item.id);\n this.setFavoriteAction(\"remove\", items)\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))\n .catch((err) => toastr.error(err));\n },\n })\n .set(\"showInfo\", showInfo);",
+      "line_number": 2490,
+      "context": "label: t(\"RemoveFromFavorites\"),\n alt: t(\"RemoveFromFavorites\"),\n iconUrl: FavoritesFillReactSvgUrl,\n onClick: () => {\n this.setFavoriteAction(\"remove\", selection)\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))\n .catch((err) => toastr.error(err));\n },\n }) */\n .set(\"showInfo\", showInfo);",
       "module": "/packages/client"
     }
   ],
@@ -54,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Favoritlərdən sil' literally translates to 'Deleted from favorites.' While understandable, 'Removed from favorites' implies a more active choice. A more accurate and natural translation would emphasize the removal action.",
-          "suggestion": "Seçimlərə əlavə edilmədi"
+          "description": "The translation 'Favoritlərdən sil' is a literal translation of 'Removed from favorites.' While understandable, a more natural and idiomatic translation would be something like 'Seçilmişlərdən silindi' or 'Favoritlərə əlavə edilmədi'. 'Sil' implies a direct deletion action, which might be too strong depending on the context.",
+          "suggestion": "Seçilmişlərdən silindi"
         }
       ],
       "approved_at": null
@@ -105,7 +111,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Հեռացված է ընտրյալներից' is technically correct but could be more natural. While it literally means 'Removed from favorites,' a more common and idiomatic translation would be something like 'Հեռացվել է սիրվածներից' or 'Հեռացվել է նախընտրածներից'.",
+          "suggestion": "Consider 'Հեռացվել է սիրվածներից' or 'Հեռացվել է նախընտրածներից'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -180,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ප්‍රියතමයන්ගෙන් ඉවත් කෙරිණි' literally translates to 'Removed from favorites'. While technically correct, it's a passive construction that might sound slightly awkward in Sinhala depending on the context. A more natural phrasing might be preferable depending on the application.",
-          "suggestion": "Consider alternatives like 'ප්‍රියතමයන්ගෙන් ඉවතට දැමිනි' (Priyathamayan gennan iwathata daamini) which is a more active voice, or 'ප්‍රියතමයන්ගෙන් ඉවත් කරන ලදි' (Priyathamayan gennan iwath karan ladi) which is also a common construction."
+          "description": "The translation 'ප්‍රියතමයන්ගෙන් ඉවත් කෙරිණි' while technically meaning 'Removed from favorites', sounds overly formal and passive for a UI element. A more natural and common phrasing for 'Removed from favorites' would be something like 'ප්‍රියතමයන්ගෙන් ඉවත්වී' or 'ප්‍රියතමයන්ගෙන් අයින් විය'.",
+          "suggestion": "Consider 'ප්‍රියතමයන්ගෙන් ඉවත්වී' or 'ප්‍රියතමයන්ගෙන් අයින් විය'."
         }
       ],
       "approved_at": null
@@ -204,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Уклоњено из омиљеног' is grammatically correct, a more natural and commonly used translation for 'Removed from favorites' in Serbian (Cyrillic) would be 'Избрисано из омиљених'.",
+          "description": "While technically correct, \"Уклоњено из омиљеног\" translates to 'Removed from favorites' but sounds slightly unnatural in Serbian. A more common and natural phrasing would be \"Избрисано из омиљених\" or \"Ускрњено из омиљених\".",
           "suggestion": "Избрисано из омиљених"
         }
       ],

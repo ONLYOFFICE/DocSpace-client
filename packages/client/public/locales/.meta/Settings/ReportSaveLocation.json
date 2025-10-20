@@ -3,7 +3,7 @@
   "content": "The report will be saved to {{sectionName}}",
   "content_en_sha1_hash": "55671fe19ba077a1c4e0ef79f837de41f87ae103",
   "created_at": "2025-05-19T21:30:52.387Z",
-  "updated_at": "2025-06-08T12:02:32.819Z",
+  "updated_at": "2025-10-07T15:39:07.520Z",
   "comment": {
     "text": "The \"ReportSaveLocation\" translation key is used to display a section name where reports will be saved. It appears in UI elements related to report download, providing context for users about the location of their files.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 313,
-      "context": "onClick={getReport}\n isLoading={isFormationHistory}\n isDisabled={isNotPaidPeriod}\n />\n <Text as=\"span\" className={styles.downloadReportDescription}>\n {t(\"Settings:ReportSaveLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n </Text>\n </div>\n ) : null}",
+      "line_number": 689,
+      "context": "isDisabled={isNotPaidPeriod}\n scale={isMobile}\n testId=\"download_report_button\"\n />\n <Text as=\"span\" className={styles.downloadReportDescription}>\n {t(\"Settings:ReportSaveLocation\", {\n sectionName: t(\"Common:MyDocuments\"),\n })}\n </Text>\n </div>\n </>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 144,
-      "context": "securityLifetime={securityLifetime}\n lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"DownloadReportBtnText\")}\n downloadReportDescription={t(\"ReportSaveLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n getReport={getAuditTrailReport}\n isSettingNotPaid={!isAuditAvailable}\n isLoadingDownloadReport={isLoadingDownloadReport}",
+      "line_number": 116,
+      "context": "securityLifetime={securityLifetime}\n lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"DownloadReportBtnText\")}\n downloadReportDescription={t(\"ReportSaveLocation\", {\n sectionName: t(\"Common:MyDocuments\"),\n })}\n getReport={getAuditTrailReport}\n isSettingNotPaid={!isAuditAvailable}\n isLoadingDownloadReport={isLoadingDownloadReport}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
-      "line_number": 98,
-      "context": "lifetime={securityLifetime.loginHistoryLifeTime}\n securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"DownloadReportBtnText\")}\n downloadReportDescription={t(\"ReportSaveLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n getReport={getLoginHistoryReport}\n isSettingNotPaid={!isAuditAvailable}\n />",
+      "line_number": 100,
+      "context": "lifetime={securityLifetime.loginHistoryLifeTime}\n securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"DownloadReportBtnText\")}\n downloadReportDescription={t(\"ReportSaveLocation\", {\n sectionName: t(\"Common:MyDocuments\"),\n })}\n getReport={getLoginHistoryReport}\n isSettingNotPaid={!isAuditAvailable}\n tfaEnabled={tfaEnabled}",
       "module": "/packages/client"
     }
   ],
@@ -39,13 +39,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Arabic text includes a non-breaking space ( ) which may cause layout issues. It's often better to use a regular space.",
-          "suggestion": "سيتم حفظ التقرير في {{sectionName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -54,13 +48,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Hesabat {{sectionName}} bölməsində qeyd ediləcək' doesn't accurately convey the meaning of 'The report will be saved to {{sectionName}}'. It translates to 'The report will be noted in the {{sectionName}} section,' which implies a record, not a storage location. The intent is to state where the report is saved, not where it's documented.",
+          "description": "The translation 'Hesabat {{sectionName}} bölməsində qeyd ediləcək' doesn't accurately convey the meaning of 'The report will be saved to {{sectionName}}'. 'Qeyd ediləcək' means 'will be noted' or 'will be recorded', not 'will be saved'.",
           "suggestion": "Hesabat {{sectionName}} bölməsinə saxlanılacaq"
         },
         {
           "type": "formatting",
-          "description": "The Azerbaijani text contains a non-breaking space (represented by the unicode character &#x20;) between 'Hesabat' and '{{sectionName}}'. While not necessarily incorrect, it's more common to have a standard space in this context.",
-          "suggestion": "Hesabat {{sectionName}} bölməsində qeyd ediləcək"
+          "description": "The word 'bölməsində' and 'bölməsinə' use slightly different case conventions. Maintaining consistent formatting is recommended.",
+          "suggestion": "Review the existing localization style guide for casing conventions and apply them consistently."
         }
       ],
       "approved_at": null
@@ -101,7 +95,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Raportti tallennetaan {{sectionName}}-osioon' literally translates to 'The report is saved to {{sectionName}}-section'.  A more natural Finnish phrasing would imply the report is being saved *within* the section.  It's a bit clunky and doesn't flow as well.",
+          "description": "The translation 'Raportti tallennetaan {{sectionName}}-osioon' is a bit too literal. A more natural Finnish phrasing would be something like 'Raportti tallennetaan {{sectionName}}-kohtaan' or 'Raportti tallennetaan osioon {{sectionName}}'. Using '-osioon' sounds awkward.",
           "suggestion": "Raportti tallennetaan {{sectionName}}-kohtaan"
         }
       ],
@@ -137,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The parentheses '()' after '{{sectionName}}' look awkward and unnecessary in Korean. While technically correct for grammatical function, it disrupts the flow and sounds less natural.",
-          "suggestion": "보고서가 {{sectionName}}으로 저장됩니다"
+          "description": "The parenthesis '(으)로' is a grammatical marker indicating the object being acted upon. While not strictly incorrect, it can sound slightly unnatural in this context. A more natural phrasing would remove one of the parentheses.",
+          "suggestion": "보고서가 {{sectionName}}로 저장됩니다"
         }
       ],
       "approved_at": null
@@ -155,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The ellipsis '...' is missing after 'saglabāta'. It's implied in the English version and should be included in the Latvian translation to match the formatting style.",
-          "suggestion": "Atskaite tiks saglabāta... {{sectionName}}"
+          "description": "The Latvian translation uses a non-breaking space ( ) instead of a regular space before '{{sectionName}}'. This can lead to display issues.",
+          "suggestion": "Replace ' ' with a regular space (' ')."
         }
       ],
       "approved_at": null
@@ -203,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"Poročilo bo shranjeno v {{sectionName}}\" is not Sinhala. It appears to be Slovenian. The English content refers to a report being saved to a specified location, which should be translated into Sinhala.",
-          "suggestion": "Parek nirdeshaya {{sectionName}} gihin sahayakkarayak samkarshaya vuna."
+          "description": "The Sinhala translation 'Poročilo bo shranjeno v {{sectionName}}' appears to be Slovenian, not Sinhala. It translates to 'The report will be saved in {{sectionName}}'.",
+          "suggestion": "The Sinhala translation needs to be provided. A possible translation could be: నివేదిక {{sectionName}} లో సేవ్ చేయబడుతుంది (Niveḍika {{sectionName}} lō savā baḍunaṭi)"
         }
       ],
       "approved_at": null
@@ -239,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The space before 'bölümüne' should be removed. It's better to have it directly attached.",
-          "suggestion": "Rapor {{sectionName}} bölümüne kaydedilecektir"
+          "description": "The word 'bölümüne' sounds slightly awkward in this context. While technically correct, it's more natural to use a more direct phrasing indicating location.",
+          "suggestion": "Rapor {{sectionName}} konumuna kaydedilecektir"
         }
       ],
       "approved_at": null

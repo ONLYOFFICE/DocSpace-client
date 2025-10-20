@@ -130,6 +130,7 @@ export type TSettings = {
   logoText: string;
   displayAbout: boolean;
   externalResources: TExternalResources;
+  licenseAgreementsUrl?: string;
 };
 
 export type TCustomSchema = {
@@ -153,7 +154,6 @@ export type TGetColorTheme = {
 };
 
 export type TApiEntries = {
-  apikeys: string;
   docspace: string;
   "javascript-sdk": string;
   "plugins-sdk": string;
@@ -170,6 +170,7 @@ export type TCommonEntries = {
   license: string;
   paymentemail: string;
   supportemail: string;
+  feedback: string;
 };
 
 export type THelpCenterEntries = {
@@ -182,6 +183,7 @@ export type THelpCenterEntries = {
   becometranslator: string;
   connectamazon: string;
   connectapple: string;
+  connectweixin: string;
   connectbox: string;
   connectclickatell: string;
   connectdocusign: string;
@@ -202,6 +204,7 @@ export type THelpCenterEntries = {
   connectwordpress: string;
   connectyandex: string;
   creatingbackup: string;
+  configuringsettings: string;
   docspacemanagingrooms: string;
   enterpriseinstall: string;
   enterpriseinstallscript: string;
@@ -224,6 +227,14 @@ export type THelpCenterEntries = {
   welcomepage: string;
   limiteddevtools: string;
   encryption: string;
+  docspacefaq: string;
+  configureDeepLink: string;
+  invitationSettings: string;
+  singleSignOn: string;
+  pluginsSdk: string;
+  smtp: string;
+  dataImport: string;
+  apikeys: string;
 };
 
 export type TIntegrationsEntries = {
@@ -514,4 +525,14 @@ export type TEncryptionSettings = {
   password: string;
   status: EncryptionStatus;
   notifyUsers: boolean;
+};
+
+export type TTelegramCheck = {
+  status: string;
+  username?: string;
+};
+
+export type TNotificationChannel = {
+  name: string;
+  isEnabled: boolean;
 };

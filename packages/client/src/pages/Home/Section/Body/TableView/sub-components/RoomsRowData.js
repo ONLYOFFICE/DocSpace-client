@@ -61,6 +61,7 @@ const RoomsRowDataComponent = (props) => {
     quickButtonsComponent,
     item,
     tableStorageName,
+    index,
   } = props;
 
   const lastColumn = getLastColumn(tableStorageName);
@@ -74,6 +75,7 @@ const RoomsRowDataComponent = (props) => {
     <>
       <TableCell
         {...dragStyles}
+        dataTestId={`rooms-cell-name-${index}`}
         className={classNames(
           selectionProp?.className,
           "table-container_file-name-cell",
@@ -96,6 +98,7 @@ const RoomsRowDataComponent = (props) => {
 
       {roomColumnTypeIsEnabled ? (
         <TableCell
+          dataTestId={`rooms-cell-type-${index}`}
           style={
             !roomColumnTypeIsEnabled
               ? { background: "none !important" }
@@ -119,6 +122,7 @@ const RoomsRowDataComponent = (props) => {
 
       {roomColumnTagsIsEnabled ? (
         <TableCell
+          dataTestId={`rooms-cell-tags-${index}`}
           style={
             !roomColumnTagsIsEnabled
               ? { background: "none !important" }
@@ -138,6 +142,7 @@ const RoomsRowDataComponent = (props) => {
 
       {roomColumnOwnerIsEnabled ? (
         <TableCell
+          dataTestId={`rooms-cell-owner-${index}`}
           style={
             !roomColumnOwnerIsEnabled
               ? { background: "none" }
@@ -161,6 +166,7 @@ const RoomsRowDataComponent = (props) => {
 
       {roomColumnActivityIsEnabled ? (
         <TableCell
+          dataTestId={`rooms-cell-activity-${index}`}
           style={
             !roomColumnActivityIsEnabled
               ? { background: "none" }
@@ -183,7 +189,15 @@ const RoomsRowDataComponent = (props) => {
       )}
       {showStorageInfo ? (
         roomQuotaColumnIsEnable ? (
-          <TableCell className="table-cell_Storage/Quota">
+          <TableCell
+            dataTestId={`rooms-cell-storage-${index}`}
+            className="table-cell_Storage/Quota"
+            style={
+              !roomQuotaColumnIsEnable
+                ? { background: "none" }
+                : dragStyles.style
+            }
+          >
             <SpaceQuota
               item={item}
               type="room"

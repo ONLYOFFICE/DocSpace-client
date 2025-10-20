@@ -3,7 +3,7 @@
   "content": "Delete forever?",
   "content_en_sha1_hash": "0e0027aade000ea790cb5c39b96cbcc240beec7d",
   "created_at": "2025-05-19T21:30:56.571Z",
-  "updated_at": "2025-06-02T10:20:51.134Z",
+  "updated_at": "2025-10-16T07:29:35.579Z",
   "comment": {
     "text": "This translation key is used for the phrase \"Delete forever?\" which prompts a user to confirm their intention to delete a folder or file permanently. It appears in a modal dialog header when deleting a privacy folder or an empty trash.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 271,
-      "context": "};\n \n const title = isTemplate\n ? t(\"Files:DeleteTemplate\")\n : isRoomDelete || isRecycleBinFolder\n ? t(\"EmptyTrashDialog:DeleteForeverTitle\")\n : isPrivacyFolder || selection[0]?.providerKey\n ? t(\"Common:Confirmation\")\n : moveToTrashTitle();\n \n const noteText = unsubscribe ? t(\"UnsubscribeNote\") : moveToTrashNoteText();",
+      "line_number": 213,
+      "context": "if (isRoomDelete) {\n return t(\"DeleteRoomTitle\");\n }\n \n if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverTitle\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:Confirmation\");\n \n if (unsubscribe) return t(\"Common:RemoveFromList\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/EmptyTrashDialog/index.js",
       "line_number": 98,
-      "context": "isLoading={!tReady}\n visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"DeleteForeverTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect>{description}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "context": "isLoading={!tReady}\n visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"DeleteForeverTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{description}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/client"
     }
   ],

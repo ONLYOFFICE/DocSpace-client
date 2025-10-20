@@ -31,7 +31,7 @@ import { Text } from "@docspace/shared/components/text";
 import { StyledHeader } from "./configuration.styled";
 
 export const Header = () => {
-  const { t } = useTranslation(["Management"]);
+  const { t } = useTranslation(["Management", "Common"]);
 
   return (
     <StyledHeader>
@@ -42,9 +42,10 @@ export const Header = () => {
         {t("ConfigurationHeader")}
       </Text>
       <Text fontSize="12px" lineHeight="16px" fontWeight={400}>
-        {t("ConfigurationDescription")}
+        {t("ConfigurationDescription", {
+          productName: t("Common:ProductName"),
+        })}
       </Text>
     </StyledHeader>
   );
 };
-

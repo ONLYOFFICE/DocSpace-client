@@ -3,7 +3,7 @@
   "content": "Code to insert successfully copied to clipboard",
   "content_en_sha1_hash": "c574d56e885b5568a713afd840749a5369418b97",
   "created_at": "2025-05-19T21:30:56.574Z",
-  "updated_at": "2025-05-26T07:57:32.354Z",
+  "updated_at": "2025-08-26T11:15:14.112Z",
   "comment": {
     "text": "This translation key is used for a success message displayed when code is successfully copied to the clipboard. It is shown in a notification toast after the user clicks a button that triggers the copy action. Translators should provide a message indicating successful copying of code, suitable for various language and cultural contexts.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 249,
+      "line_number": 248,
       "context": "});\n };\n \n const onCopyLink = () => {\n copy(codeBlock);\n toastr.success(t(\"EmbeddingPanel:CodeSuccessfullyCopied\"));\n };\n \n const onHeaderChange = () => {\n setEmbeddingConfig((config) => {\n return { ...config, showTitle: !config.showTitle };",
       "module": "/packages/client"
     }

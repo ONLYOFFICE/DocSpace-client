@@ -7,14 +7,16 @@
   "DeleteGuest": "Fshini mysafirin",
   "DeleteGuests": "Fshini mysafirët",
   "DeletePersonalDataApplicable": "*Zbatohet për përdoruesit e selektuar që kanë skedarë dhe dosje të tilla.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Dhomat e krijuara nga ky përdorues dhe dokumentet e ruajtura në këto dhoma do t'i ricaktohen automatikisht një administratori që kryen fshirjen: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Ricaktoni të dhënat manualisht për të zgjedhur një përdorues tjetër destinacioni për ricaktim.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Të gjitha fajljet e ndarë si dhe dhomat e kriera nga ky kontakt do të ri-përshajohen automatikisht tek një administrator që kryen fshirjen: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Ri-përshajohen dhënat manualisht për të zgjedhur një përdorues tjetër për ri-përshanim.",
   "DeleteReqassignDescriptionGuest": "The {{userCaption}} do të fshihet nga të gjitha dhomat në të cilat ata janë ftuar. Dokumentet e krijuara nga ky {{userCaption}} në dhoma do t'u ricaktohen automatikisht pronarëve të dhomës.",
   "DeleteUser": "Fshini përdoruesin",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> do të fshihet. Ky veprim nuk mund të zhbëhet.",
+  "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> do të fshihet. Ky veprim nuk mund të zhbëhet.",
   "DeletingUsers": "Përdoruesit duke u fshirë",
+  "PersonalDataDeletionInfo": "Të dhënat personale, të gjithë skedarët dhe dosjet personale në seksionet {{sectionNameFirst}} dhe {{sectionNameSecond}}* të përdoruesve të zgjedhur do të fshihen përgjithmonë. Skedarët dhe dosjet e përdoruesve të zgjedhur të mbajtur në seksione të zakonshme* si dhomat do të mbeten në {{productName}}.",
   "PleaseNote": "Ju lutem shënoni:",
   "ReassignDataToAnotherUser": "Ricaktoni të dhënat tek një përdorues tjetër",
   "SuccessfullyDeleteGuestInfoMessage": "Mysafiri është fshirë me sukses",
   "SuccessfullyDeleteUserInfoMessage": "Përdoruesi është fshirë me sukses",
-  "ToBeAbleToReassignData": "Për të qenë në gjendje të ricaktoni të dhëna, fshini një përdorues në të njëjtën kohë."
+  "ToBeAbleToReassignData": "Për të qenë në gjendje të ricaktoni të dhëna, fshini një përdorues në të njëjtën kohë.",
+  "UserFilesRemovalScope": "Të dhënat personale, të gjithë skedarët dhe dosjet në seksionet {{sectionNameFirst}} dhe {{sectionNameSecond}} të këtij përdoruesi do të fshihen përgjithmonë."
 }

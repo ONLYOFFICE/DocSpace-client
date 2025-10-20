@@ -31,8 +31,15 @@
 import { AxiosRequestConfig } from "axios";
 
 import moment from "moment";
-import { FolderType, MembersSubjectType, ShareAccessRights } from "../../enums";
+import { Nullable } from "types";
+import {
+  FolderType,
+  MembersSubjectType,
+  ShareAccessRights,
+  ShareLinkType,
+} from "../../enums";
 import { request } from "../client";
+import type { TFileLink } from "../files/types";
 import {
   checkFilterInstance,
   decodeDisplayName,
@@ -45,6 +52,8 @@ import {
   TPublicRoomPassword,
   TValidateShareRoom,
   TRoom,
+  TGetRoomMembers,
+  TFeed,
 } from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
@@ -89,7 +98,16 @@ export function getRoomInfo(id) {
   });
 }
 
-export function getRoomMembers(id, filter) {
+export async function getRoomMembers(
+  id: string | number,
+  filter: {
+    filterType?: number;
+    filterValue?: string;
+    count?: number;
+    startIndex?: number;
+  },
+  signal?: AbortSignal,
+) {
   let params = "";
 
   const str = toUrlParams(filter);
@@ -98,17 +116,18 @@ export function getRoomMembers(id, filter) {
   const options = {
     method: "get",
     url: `/files/rooms/${id}/share${params}`,
+    signal,
   };
 
-  return request(options).then((res) => {
-    res.items.forEach((item) => {
-      if (item.subjectType === MembersSubjectType.Group) {
-        item.sharedTo.isGroup = true;
-      }
-    });
+  const res = (await request(options)) as TGetRoomMembers;
 
-    return res;
+  res.items.forEach((item) => {
+    if (item.subjectType === MembersSubjectType.Group) {
+      item.sharedTo.isGroup = true;
+    }
   });
+
+  return res;
 }
 
 export function updateRoomMemberRole(id, data) {
@@ -119,16 +138,27 @@ export function updateRoomMemberRole(id, data) {
   };
 
   return request(options).then((res) => {
-    return res;
+    return res as { error?: RoomSecurityError };
+  });
+}
+export function updateFileMemberAccess(id, data) {
+  const options = {
+    method: "put",
+    url: `/files/file/${id}/share`,
+    data,
+  };
+
+  return request(options).then((res) => {
+    return res as { error?: RoomSecurityError };
   });
 }
 
 export function getHistory(
   selectionType: "file" | "folder",
-  id,
-  requestToken,
-  filter,
-  signal = null,
+  id: number | string,
+  filter: { page: number; startIndex: number; count: number },
+  signal: Nullable<AbortSignal> = null,
+  requestToken?: string,
 ) {
   let params = "";
 
@@ -143,29 +173,7 @@ export function getHistory(
 
   if (requestToken) options.headers = { "Request-Token": requestToken };
 
-  return request(options).then((res) => res);
-}
-
-export function getRoomHistory(id) {
-  const options = {
-    method: "get",
-    url: `/feed/filter?module=rooms&withRelated=true&id=${id}`,
-  };
-
-  return request(options).then((res) => {
-    return res;
-  });
-}
-
-export function getFileHistory(id) {
-  const options = {
-    method: "get",
-    url: `/feed/filter?module=files&withRelated=true&id=${id}`,
-  };
-
-  return request(options).then((res) => {
-    return res;
-  });
+  return request<TFeed>(options).then((res) => res);
 }
 
 export function createRoom(data) {
@@ -415,15 +423,16 @@ export function editExternalLink(
   linkId: number | string,
   title: string,
   access: ShareAccessRights,
-  expirationDate: moment.Moment,
+  expirationDate: moment.Moment | string | null,
   linkType: number,
-  password: string,
+  password: string | undefined,
   disabled: boolean,
   denyDownload: boolean,
+  internal: boolean,
 ) {
   const skipRedirect = true;
 
-  return request(
+  return request<TFileLink>(
     {
       method: "put",
 
@@ -437,10 +446,41 @@ export function editExternalLink(
         password,
         disabled,
         denyDownload,
+        internal,
       },
     },
     skipRedirect,
   );
+}
+export function createExternalLink(
+  roomId: number | string,
+  link: Partial<{
+    title: string;
+    access: ShareAccessRights;
+    expirationDate: moment.Moment | string | null;
+    linkType: number;
+    password: string | undefined;
+    denyDownload: boolean;
+    internal: boolean;
+  }> = {},
+) {
+  const skipRedirect = true;
+
+  const data = {
+    internal: false,
+    linkType: ShareLinkType.External,
+    access: ShareAccessRights.ReadOnly,
+    ...link,
+  };
+
+  return request(
+    {
+      method: "put",
+      url: `/files/rooms/${roomId}/links`,
+      data,
+    },
+    skipRedirect,
+  ) as Promise<TFileLink>;
 }
 
 export function getExternalLinks(roomId, type) {
@@ -452,17 +492,23 @@ export function getExternalLinks(roomId, type) {
   });
 }
 
-export function getPrimaryLink(roomId) {
-  return request({
-    method: "get",
-    url: `files/rooms/${roomId}/link`,
-  });
+export function getPrimaryLink(roomId: number | string) {
+  return request(
+    {
+      method: "get",
+      url: `files/rooms/${roomId}/link`,
+    },
+    true,
+  ) as Promise<TFileLink>;
 }
 
-export function validatePublicRoomKey(key) {
+export function validatePublicRoomKey(
+  key: string,
+  searchParams?: URLSearchParams,
+) {
   return request<TValidateShareRoom>({
     method: "get",
-    url: `files/share/${key}`,
+    url: `files/share/${key}${searchParams && searchParams.size > 0 ? `?${searchParams.toString()}` : ""}`,
   });
 }
 
@@ -597,7 +643,7 @@ export function getTemplateAvailable(id: number) {
     url: `/files/roomtemplate/${id}/public`,
   };
 
-  return request(options);
+  return request(options) as Promise<boolean>;
 }
 
 export function setTemplateAvailable(id: number, isAvailable: boolean) {

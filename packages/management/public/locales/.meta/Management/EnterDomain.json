@@ -3,7 +3,7 @@
   "content": "Enter domain name",
   "content_en_sha1_hash": "4aad4fadabc0049631d44b1adfbfcc29e2437e12",
   "created_at": "2025-05-19T21:30:57.452Z",
-  "updated_at": "2025-05-26T07:57:33.003Z",
+  "updated_at": "2025-08-12T19:46:26.411Z",
   "comment": {
     "text": "This translation key is used to display a message prompting users to enter a domain name. It appears as a placeholder text in UI components that accept domain names, such as input fields and dialog boxes.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/management/src/dialogs/change-domain/index.tsx",
-      "line_number": 131,
-      "context": "type={InputType.text}\n size={InputSize.base}\n hasError={!!domainNameError}\n onChange={onHandleDomain}\n value={domain}\n placeholder={t(\"EnterDomain\")}\n className=\"create-portal-input\"\n />\n <div>\n {domainNameError &&\n domainNameError.map((err, index) => (",
+      "line_number": 129,
+      "context": "type={InputType.text}\n size={InputSize.base}\n hasError={!!domainNameError}\n onChange={onHandleDomain}\n value={domain}\n placeholder={t(\"EnterDomain\")}\n className=\"create-portal-input\"\n />\n <div>\n {domainNameError\n ? domainNameError.map((err) => (",
       "module": "/packages/management"
     }
   ],

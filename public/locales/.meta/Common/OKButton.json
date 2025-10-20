@@ -3,7 +3,7 @@
   "content": "OK",
   "content_en_sha1_hash": "9ce3bd4224c8c1780db56b4125ecf3f24bf748b7",
   "created_at": "2025-06-05T23:02:58.880Z",
-  "updated_at": "2025-06-08T12:02:32.601Z",
+  "updated_at": "2025-10-16T07:29:35.530Z",
   "comment": {
     "text": "The \"OKButton\" translation key is used to display the label for an OK button in various modal dialogs, such as archive, backup, and pricing plan change dialogs. This label serves as a confirmation action when users want to proceed or accept changes. It appears on buttons with \"primary\" and \"scale\" styles.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ArchiveDialog/index.js",
-      "line_number": 96,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"shared_move-to-archived-modal_submit\"\n key=\"OKButton\"\n label={t(\"Common:OKButton\")}\n size=\"normal\"\n primary\n onClick={onAction}\n scale\n />",
+      "line_number": 106,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"shared_move-to-archived-modal_submit\"\n key=\"OKButton\"\n label={t(\"Common:OKButton\")}\n size=\"normal\"\n primary\n onClick={onAction}\n scale\n isDisabled={isLoading}",
       "module": "/packages/client"
     },
     {
@@ -36,14 +36,14 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Footer/index.js",
-      "line_number": 55,
+      "line_number": 54,
       "context": "<Button\n label={\n isAbortTransfer && percent !== 100\n ? t(\"DataReassignmentDialog:StartTransferAgain\")\n : percent === 100\n ? t(\"Common:OKButton\")\n : t(\"DataReassignmentDialog:AbortTransfer\")\n }\n size=\"normal\"\n scale\n onClick={",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 283,
-      "context": "const accessButtonLabel = isTemplate\n ? t(\"Common:Delete\")\n : isRoomDelete || isRecycleBinFolder\n ? t(\"EmptyTrashDialog:DeleteForeverButton\")\n : isPrivacyFolder || selection[0]?.providerKey\n ? t(\"Common:OKButton\")\n : unsubscribe\n ? t(\"UnsubscribeButton\")\n : t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n });",
+      "line_number": 197,
+      "context": "}\n \n if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverButton\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:OKButton\");\n \n if (unsubscribe) return t(\"Common:Remove\");\n \n return t(\"Common:MoveTo\");\n };",
       "module": "/packages/client"
     },
     {
@@ -54,19 +54,19 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
-      "line_number": 150,
+      "line_number": 154,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={\n isPaymentPageAvailable ? t(\"UpgradePlan\") : t(\"Common:OKButton\")\n }\n size=\"normal\"\n primary\n onClick={isPaymentPageAvailable ? onUpgradePlan : onClose}\n scale",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
-      "line_number": 91,
+      "line_number": 90,
       "context": "</div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={isRoomOwner ? t(\"Files:AssignOwner\") : t(\"Common:OKButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onLeaveRoom}\n isDisabled={isLoading}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/LifetimeDialog/index.js",
-      "line_number": 81,
+      "line_number": 79,
       "context": "/>\n <div className=\"modal-dialog_lifetime-buttons\">\n <Button\n id=\"delete-file-modal_submit\"\n key=\"OKButton\"\n label={t(\"Common:OKButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onAcceptClick}\n />",
       "module": "/packages/client"
     },
@@ -102,8 +102,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/PreviewDialog.tsx",
-      "line_number": 287,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n size={ButtonSize.normal}\n scale\n label={t(\"Common:OKButton\")}\n onClick={onClose}\n />\n </ModalDialog.Footer>\n </ModalDialog>\n );",
+      "line_number": 288,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n size={ButtonSize.normal}\n scale\n label={t(\"Common:OKButton\")}\n onClick={onClose}\n testId=\"preview_dialog_ok_button\"\n />\n </ModalDialog.Footer>\n </ModalDialog>",
       "module": "/packages/client"
     },
     {
@@ -132,33 +132,33 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ConflictResolveDialog/ConflictResolveDialog.tsx",
-      "line_number": 50,
+      "line_number": 51,
       "context": "isLoading={false}\n visible={visible}\n onClose={reject}\n onSubmit={resolve}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n submitButtonLabel={t(\"Common:OKButton\")}\n messageText={\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"FileActionRequired\"",
       "module": "/packages/doceditor"
     },
     {
+      "file_path": "/packages/management/src/app/settings/encrypt-data/EncryptWarningDialog.tsx",
+      "line_number": 88,
+      "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"CreateButton\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onConfirm}\n />",
+      "module": "/packages/management"
+    },
+    {
       "file_path": "/packages/shared/dialogs/backup-to-public-room-dialog/index.tsx",
       "line_number": 88,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-modal_submit\"\n key=\"OKButton\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onBackupTo}\n />",
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-modal_submit\"\n key=\"OKButton\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onBackupTo}\n testId=\"save_backup_to_room_button\"",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/change-storage-quota/index.tsx",
-      "line_number": 157,
+      "line_number": 158,
       "context": "/>\n ) : null}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onSaveClick}\n isLoading={isLoading}\n isDisabled={!isDisableQuota ? size.trim() === \"\" : false}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/delete-third-party/DeleteThirdPartyDialog.tsx",
       "line_number": 136,
-      "context": "<Button\n scale\n primary\n isLoading={isLoading}\n size={ButtonSize.normal}\n label={t(\"Common:OKButton\")}\n onClick={onDeleteThirdParty}\n />\n <Button\n scale\n onClick={onClose}",
+      "context": "<Button\n scale\n primary\n isLoading={isLoading}\n size={ButtonSize.normal}\n label={t(\"Common:OKButton\")}\n onClick={onDeleteThirdParty}\n testId=\"delete_third_party_button\"\n />\n <Button\n scale",
       "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/management/src/app/settings/encrypt-data/EncryptWarningDialog.tsx",
-      "line_number": 86,
-      "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"CreateButton\"\n label={t(\"Common:OKButton\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onConfirm}\n />",
-      "module": "/packages/management"
     }
   ],
   "languages": {

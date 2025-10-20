@@ -3,19 +3,13 @@
   "content": "{{productName}} admin",
   "content_en_sha1_hash": "c2ab2049e1e222685c5af15f68e5f6c5b11e8747",
   "created_at": "2025-05-19T21:30:47.411Z",
-  "updated_at": "2025-05-26T07:57:32.437Z",
+  "updated_at": "2025-10-13T13:22:35.786Z",
   "comment": {
     "text": "This translation key is used to display \"PortalAdmin\" as a label for users who have full access, appearing in tooltips and UI elements related to user management. It is likely to be displayed on buttons, dropdowns, or other interactive elements where user permissions are being managed. The key is used consistently with other labels, such as \"Common:PortalOwner\", suggesting it may appear in multiple places throughout the application.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:35:00.398Z"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/User.js",
-      "line_number": 257,
-      "context": "const uniqueTooltipId = `userTooltip_${Math.random()}`;\n \n const tooltipContent = `${\n user.isOwner\n ? t(\"Common:PortalOwner\", { productName: t(\"Common:ProductName\") })\n : t(\"Common:PortalAdmin\", { productName: t(\"Common:ProductName\") })\n }. ${t(\"Common:HasFullAccess\")}`;\n \n return user.isTitle ? (\n <StyledUserTypeHeader isExpect={isExpect}>\n <Text className=\"title\">{user.displayName}</Text>",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/index.tsx",
       "line_number": 81,
@@ -35,14 +29,20 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/shared/components/share/sub-components/User.tsx",
+      "line_number": 128,
+      "context": "const uniqueTooltipId = `userTooltip_${id}`;\n \n const tooltipContent = `${\n \"isOwner\" in user && user.isOwner\n ? t(\"Common:PortalOwner\", { productName: t(\"Common:ProductName\") })\n : t(\"Common:PortalAdmin\", { productName: t(\"Common:ProductName\") })\n }. ${t(\"Common:HasFullAccess\")}`;\n \n const itemAvatar = isSystem\n ? EveryoneIconUrl\n : isExpect",
+      "module": "/packages/shared"
+    },
+    {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 323,
+      "line_number": 330,
       "context": "export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {\n switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 323,
+      "line_number": 330,
       "context": "export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {\n switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:",
       "module": "/packages/shared"
     }
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'مسئول {{productName}}' doesn't accurately convey the meaning of '{{productName}} admin'. 'مسئول' means 'responsible person' or 'official'. While a portal admin is a responsible person, 'admin' has a more specific meaning in this context, implying administrative privileges and control.",
-          "suggestion": "Consider using a more precise translation like 'مدير {{productName}}' (manager of {{productName}}) or 'مسؤول {{productName}}' ({{productName}} administrator) if available.  Researching common terminology for 'admin' in the Saudi Arabian context would be helpful."
+          "description": "The translation \"مسئول {{productName}}\" while technically meaning 'responsible for {{productName}}' doesn't directly convey the meaning of 'admin'. 'Admin' implies a level of access and control, which is not fully captured by 'مسئول'. A more accurate translation would consider terms like 'مدير' (mudeer - manager) or 'مسؤول النظام' (mas'ool an-nizaam - system administrator).",
+          "suggestion": "Consider 'مدير {{productName}}' or 'مسؤول {{productName}}' depending on the precise nuance required."
         }
       ],
       "approved_at": null
@@ -69,25 +69,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, the translation \"{{productName}} admini\" is a direct transliteration and doesn't reflect the common Azerbaijani way of expressing 'admin' in this context. The more natural and idiomatic translation would be something like '{{productName}} administratorı'.",
-          "suggestion": "{{productName}} administratorı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Администратор на {{productName}}' is technically correct, but could be more natural. 'Администратор на' literally translates to 'Administrator of'. A more common and idiomatic translation would be '{{productName}} администратор'.",
-          "suggestion": "{{productName}} администратор"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -96,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Portal Admin' is translated as 'Správce prostoru'. While 'Správce' (Administrator) is correct, 'prostor' (space) doesn't fully convey the meaning of 'Portal'. A more accurate translation might be 'Správce portálu'.",
-          "suggestion": "Správce portálu {{productName}}"
+          "description": "The Czech translation \"Správce prostoru {{productName}}\" doesn't directly translate to \"{{productName}} admin\". \"Správce\" means \"manager\" or \"administrator\", and \"prostor\" means \"space\" or \"area\". While it conveys a similar meaning, it's not a direct translation. A closer translation might be \"Administrátor {{productName}}\" or \"Správce {{productName}}\".",
+          "suggestion": "Consider \"Administrátor {{productName}}\" or \"Správce {{productName}}\" for a more accurate translation."
         }
       ],
       "approved_at": null
@@ -108,13 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"{{productName}}-Verwaltung\" is not a direct or ideal translation of \"{{productName}} admin\". \"Verwaltung\" implies management or administration, but \"admin\" usually refers to a specific user role or access level. A better translation would more accurately reflect the meaning of 'admin'.",
-          "suggestion": "{{productName}} Adminbereich"
-        },
-        {
-          "type": "formatting",
-          "description": "The hyphen in the translation \"{{productName}}-Verwaltung\" might be unnecessarily disruptive and could be replaced with a space for improved readability.",
-          "suggestion": "{{productName}} Verwaltung"
+          "description": "The German translation \"{{productName}}-Verwaltung\" is a literal translation of \"admin\" as \"Verwaltung\" (administration). While understandable, a more natural and idiomatic translation would be something like \"{{productName}}-Admin\".",
+          "suggestion": "{{productName}}-Admin"
         }
       ],
       "approved_at": null
@@ -125,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"{{productName}} admin\" implies that 'admin' is modifying 'productName'. The Greek translation \"Διαχειριστής {{productName}}\" translates to 'Administrator {{productName}}', which doesn't maintain the original meaning. A more accurate translation would be something like \"{{productName}} διαχειριστής\" or \"{{productName}} διοικητής\".",
-          "suggestion": "{{productName}} διαχειριστής"
+          "description": "The translation \"Διαχειριστής {{productName}}\" is a literal translation of 'admin' as 'Διαχειριστής' which, while technically correct, might not be the most natural-sounding phrasing in Greek for this context. A more natural equivalent might be something like \"{{productName}} διοικητής\" or \"{{productName}} διαχειριστικό λογαριασμό\".",
+          "suggestion": "Consider \"{{productName}} διοικητής\" or \"{{productName}} διαχειριστικό λογαριασμό\" for a more natural phrasing."
         }
       ],
       "approved_at": null
@@ -142,9 +125,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation includes a hyphen that may not be necessary or stylistically appropriate. Consider whether it's needed for clarity or flow.",
-          "suggestion": "{{productName}} järjestelmänvalvoja"
+          "type": "incorrect_translation",
+          "description": "The translation \"- järjestelmänvalvoja\" directly translates to \"- administrator\" and lacks the nuance of \"admin.\" While \"järjestelmänvalvoja\" is technically correct, \"admin\" is commonly used and understood in Finnish IT contexts. A more natural and accurate translation would consider incorporating \"admin\" to maintain consistency with the English term.",
+          "suggestion": "{{productName}}-admin"
         }
       ],
       "approved_at": null
@@ -155,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Administrateur de {{productName}}' is not the most natural or accurate translation of '{{productName}} admin'. 'Admin' typically translates to 'administrateur', but using 'de' implies possession, which isn't the intended meaning.  A more suitable translation would be '{{productName}} administrateur'.",
-          "suggestion": "{{productName}} administrateur"
+          "description": "The translation \"Administrateur de {{productName}}\" is not the most natural or accurate translation of \"{{productName}} admin\".  \"Admin\" implies someone who manages or has administrative control, which is better conveyed with a word like \"gestionnaire\" or \"responsable\". Using \"Administrateur de\" is overly formal and potentially less understandable.",
+          "suggestion": "gestionnaire de {{productName}}"
         }
       ],
       "approved_at": null
@@ -167,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"{{productName}}-ի ադմինիստրատոր\" is too literal and doesn't convey the meaning of 'admin' in the context of a portal administrator. \"ադմինիստրատոր\" is a formal term that might sound awkward.  A more natural and common translation would be something along the lines of '{{productName}}-ի վարչատարածք' or '{{productName}}-ի հաշվառման մասնաճյուղ'.",
-          "suggestion": "{{productName}}-ի վարչատարածք"
+          "description": "The Armenian translation '{{productName}}-ի ադմինիստրատոր' literally translates to '{{productName}}-ի administrator'.  While 'ադմինիստրատոր' is a valid word for 'administrator', the more natural and common Armenian equivalent of 'admin' in this context would be 'ադմին'.",
+          "suggestion": "{{productName}}-ի ադմին"
         }
       ],
       "approved_at": null
@@ -176,7 +159,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Amministratore di {{productName}}\" is a somewhat literal translation. A more natural and idiomatic translation would be \"Amministratore di {{productName}}\" or \"Amministratore {{productName}}\".",
+          "suggestion": "Consider \"Amministratore {{productName}}\" or \"Amministratore di {{productName}}\" for a more fluent Italian phrasing."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -197,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຜູ້ເບິ່ງແຍງ {{productName}}\" literally translates to 'viewer' or 'supervisor' of {{productName}}, not 'admin'.  'Admin' implies administrative privileges and responsibilities.",
-          "suggestion": "Consider a translation that more accurately conveys the meaning of 'admin,' such as \"ຜູ້ບໍລິຫານ {{productName}}\" ({{productName}} administrator) or \"ຜູ້ປົກຄອງ {{productName}}\" ({{productName}} manager/guardian)."
+          "description": "The Lao translation \"ຜູ້ເບິ່ງແຍງ {{productName}}\" literally translates to 'viewer/supervisor of {{productName}}'. While it conveys a sense of administration, 'admin' typically implies full control and management. A more accurate translation might involve words signifying 'management' or 'administrator'.",
+          "suggestion": "Consider alternatives like \"ຜູ້ບໍ່ງານ {{productName}}\" (manager of {{productName}}) or \"ຜູ້ລົບກວນ {{productName}}\" (administrator of {{productName}}), depending on the specific nuance desired."
         }
       ],
       "approved_at": null
@@ -209,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"administrators\" doesn't perfectly capture the meaning of \"admin.\" While it's close, \"admin\" often refers to a specific user role or designation. \"Administrators\" implies a broader group.",
-          "suggestion": "{{productName}} administrators"
+          "description": "While \"administrators\" is a possible translation, \"admin\" is more common and closer to the original meaning of 'admin'. It's a more direct equivalent.",
+          "suggestion": "{{productName}} admin"
         }
       ],
       "approved_at": null
@@ -227,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Administrator {{productName}}\" is a literal translation but may not be the most natural or idiomatic way to express \"{{productName}} admin\" in Polish. \"Administrator\" implies a person, while \"admin\" refers to the administrative role or access. A better translation might be something like \"Panel administracyjny {{productName}}\" or \"Zarządzanie {{productName}}\".",
-          "suggestion": "Consider alternatives like \"Panel administracyjny {{productName}}\" or \"Zarządzanie {{productName}}\" for a more natural translation."
+          "description": "The translation 'Administrator {{productName}}' doesn't fully capture the meaning of '{{productName}} admin'. It's a more formal translation and loses the 'admin' designation which implies a user role.",
+          "suggestion": "Administrator {{productName}}"
         }
       ],
       "approved_at": null
@@ -236,13 +225,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Administrador do {{productName}}' is slightly awkward. A more natural Portuguese phrasing would be 'Administrador de {{productName}}'. The preposition 'do' implies possession, which isn't the intended meaning here.",
-          "suggestion": "Administrador de {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -257,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Administratorul {{productName}}\" is a literal translation but doesn't fully convey the meaning of \"{{productName}} admin\". It's more accurately \"{{productName}} administrator\" or \"Administrator {{productName}}\". The original phrasing implies a role or access level.",
-          "suggestion": "Administratorul {{productName}}"
+          "description": "The translation 'Administratorul {{productName}}' doesn't perfectly capture the meaning of '{{productName}} admin'. 'Administratorul' simply means 'The administrator', while '{{productName}} admin' implies the administrator *of* {{productName}}. A better translation would consider adding a preposition to clarify this relationship.",
+          "suggestion": "Consider alternatives like 'Administratorul {{productName}}' (Administrator of {{productName}})"
         }
       ],
       "approved_at": null
@@ -272,7 +255,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '{{productName}} පරිපාලක' is a literal translation of 'admin' but may not be the most natural or accurate way to convey the meaning of 'admin' in a portal context in Sinhala. A more appropriate term might be 'प्रධාන පරිපාලක' (Pradhana Pariapalaka) meaning 'chief administrator', or 'ප්‍රධාන අංශ පරිපාලක' (Pradhana Ansa Pariapalaka) which translates to 'head of department administrator', depending on the specific context.",
+          "suggestion": "Consider '{{productName}} ප්‍රධාන පරිපාලක' ({{productName}} Pradhana Pariapalaka) or '{{productName}} පරිපාලක අංශ ප්‍රධානී' ({{productName}} Pariapalaka Ansa Pradhanini) depending on the desired nuance."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -281,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Administrátor {{productName}}' doesn't directly translate '{{productName}} admin'. A more accurate translation would include the word 'for' or a similar preposition to convey possession or responsibility.",
-          "suggestion": "Administrátor pre {{productName}}"
+          "description": "The Slovak translation 'Administrátor {{productName}}' is a literal translation but doesn't fully capture the meaning of '{{productName}} admin'. A more natural Slovak equivalent would be something like 'Správca {{productName}}' or 'Administrácia {{productName}}'.",
+          "suggestion": "Správca {{productName}}"
         }
       ],
       "approved_at": null
@@ -293,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'skrbnik' can mean administrator, it carries a connotation of caretaker or guardian, which might not fully capture the meaning of 'admin' in a product context. A more direct translation for 'admin' in a technical/product setting might be 'administrator' or a more localized equivalent.",
-          "suggestion": "Consider 'administrator' or investigate a more contextually appropriate term for 'admin' in Slovenian product terminology."
+          "description": "While 'skrbnik' can mean 'administrator' or 'caretaker,' in the context of '{{productName}} admin,' a more precise and commonly used translation would be 'administrator' or 'upravljalec'. 'Skrbnik' implies a more caretaking role.",
+          "suggestion": "{{productName}} administrator"
         }
       ],
       "approved_at": null
@@ -305,8 +294,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"{{productName}} админ\" is a direct transliteration of 'admin' and does not accurately convey the meaning of 'admin' in the context of a portal administrator.  'Admin' in this context implies someone who manages the portal, not just someone with the title 'admin'.",
-          "suggestion": "{{productName}} управник портала"
+          "description": "The Serbian (Cyrillic) translation 'админ' is a direct transliteration of 'admin' and lacks proper grammatical adaptation for Serbian. While understandable, it's not the most natural or professional-sounding translation. A more appropriate translation would be something like 'администратор'.",
+          "suggestion": "администратор"
         }
       ],
       "approved_at": null
@@ -335,8 +324,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Quản trị viên {{productName}}\" is technically correct but lacks a more natural flow. \"Admin {{productName}}\" would be a more common and concise way to express it in Vietnamese, particularly in a technical context. While \"Quản trị viên\" is accurate, it can be slightly formal.",
-          "suggestion": "Admin {{productName}}"
+          "description": "While \"Quản trị viên\" is a valid translation for \"admin\", it's a more formal term. A more common and slightly more colloquial translation might be \"Admin\" or \"Người quản trị\".",
+          "suggestion": "Consider using \"Admin\" or \"Người quản trị\" as alternatives to \"Quản trị viên\" depending on the desired tone."
         }
       ],
       "approved_at": null

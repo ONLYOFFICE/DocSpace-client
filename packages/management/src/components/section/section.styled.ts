@@ -33,6 +33,7 @@ export const StyledSection = styled.section`
   padding-inline-start: 20px;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   button {
     width: fit-content;
@@ -83,4 +84,3 @@ export const StyledHeading = styled.div`
   gap: 12px;
   align-items: center;
 `;
-

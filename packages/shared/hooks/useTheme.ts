@@ -29,7 +29,7 @@ import { use } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 
 export const useTheme = () => {
-  const theme = use(ThemeContext);
+  const { theme, currentColorScheme } = use(ThemeContext);
 
-  return { theme, isBase: theme === "Base" };
+  return { theme, isBase: theme === "Base", currentColorScheme };
 };

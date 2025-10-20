@@ -3,7 +3,7 @@
   "content": "Add payment method",
   "content_en_sha1_hash": "0b2386ed404bc961486196ff481a3604415e357f",
   "created_at": "2025-05-28T09:33:06.617Z",
-  "updated_at": "2025-06-05T23:06:25.310Z",
+  "updated_at": "2025-09-02T07:59:28.418Z",
   "comment": {
     "text": "This translation key is used for the label \"Add payment method\" that appears on a button component in a portal settings category, prompting users to add a new payment method.",
     "is_auto": true,
@@ -11,9 +11,27 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/PaymentMethod.tsx",
-      "line_number": 98,
-      "context": "</Link>\n </div>\n ) : (\n <div className={styles.addPaymentMethodContainer}>\n <SelectorAddButton onClick={goLinkCard} />\n <Text fontWeight={600}>{t(\"AddPaymentMethod\")}</Text>\n </div>\n )}\n </div>\n );\n };",
+      "file_path": "/packages/client/src/components/panels/TopUpBalance/sub-components/PaymentMethod.tsx",
+      "line_number": 146,
+      "context": "}\n textDecoration=\"underline dashed\"\n dataTestId=\"payment_method_link\"\n >\n {walletCustomerStatusNotActive\n ? t(\"AddPaymentMethod\")\n : t(\"GoToStripe\")}\n </Link>\n </div>\n ) : (\n <div className={styles.addPaymentMethodContainer}>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/TopUpBalance/sub-components/PaymentMethod.tsx",
+      "line_number": 146,
+      "context": "}\n textDecoration=\"underline dashed\"\n dataTestId=\"payment_method_link\"\n >\n {walletCustomerStatusNotActive\n ? t(\"AddPaymentMethod\")\n : t(\"GoToStripe\")}\n </Link>\n </div>\n ) : (\n <div className={styles.addPaymentMethodContainer}>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
+      "line_number": 170,
+      "context": "onClick={goLinkCard}\n fontWeight={600}\n style={{ textDecoration: \"underline\" }}\n data-testid=\"add_payment_method_link\"\n >\n {t(\"AddPaymentMethod\")}\n </a>\n </>\n ) : (\n t(\"ErrorNotification\")\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletContainer.tsx",
+      "line_number": 295,
+      "context": "as=\"span\"\n onClick={goLinkCard}\n fontWeight={600}\n textDecoration=\"underline\"\n >\n {t(\"AddPaymentMethod\")}\n </Link>\n ) : null}\n </div>\n ) : (\n <AutoPaymentInfo onOpen={onOpenLink} />",
       "module": "/packages/client"
     }
   ],

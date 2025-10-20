@@ -3,7 +3,7 @@
   "content": "Back",
   "content_en_sha1_hash": "b52b36b7269fbfc58ec24bb724691951a3decbe8",
   "created_at": "2025-05-19T21:30:43.167Z",
-  "updated_at": "2025-06-08T12:02:32.740Z",
+  "updated_at": "2025-10-03T13:19:30.553Z",
   "comment": {
     "text": "The translation key \"Back\" is used to display a label that navigates users back to a previous step or screen in a data import process. It appears as the label of a cancel button on forms such as the \"Add Emails Step\", allowing users to exit and return to their previous step.",
     "is_auto": true,
@@ -12,68 +12,68 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/index.tsx",
-      "line_number": 114,
-      "context": "<MigrationButtons\n className=\"save-cancel-buttons\"\n onSaveClick={handleStepIncrement}\n onCancelClick={decrementStep}\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n showReminder\n displaySettings\n saveButtonDisabled={\n areCheckedUsersEmpty || (quota.max ? totalUsedUsers > quota.max : false)\n }",
+      "line_number": 115,
+      "context": "<MigrationButtons\n className=\"save-cancel-buttons\"\n onSaveClick={handleStepIncrement}\n onCancelClick={decrementStep}\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n showReminder\n displaySettings\n saveButtonDisabled={\n areCheckedUsersEmpty ||\n (quota.max && typeof quota.max === \"number\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 278,
+      "line_number": 248,
       "context": "<MigrationButtons\n className=\"save-cancel-buttons\"\n onSaveClick={incrementStep}\n onCancelClick={decrementStep}\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n migrationCancelLabel={t(\"Settings:CancelImport\")}\n onMigrationCancelClick={showCancelDialog}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 471,
-      "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onUploadToServer}\n onCancelClick={returnToProviders}\n saveButtonLabel={t(\"Settings:UploadToServer\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n />\n ) : (\n <SaveCancelButtons",
+      "line_number": 473,
+      "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onUploadToServer}\n onCancelClick={returnToProviders}\n saveButtonLabel={t(\"Settings:UploadToServer\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n saveButtonDataTestId=\"upload_to_server_button\"\n cancelButtonDataTestId=\"back_to_providers_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 471,
-      "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onUploadToServer}\n onCancelClick={returnToProviders}\n saveButtonLabel={t(\"Settings:UploadToServer\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n />\n ) : (\n <SaveCancelButtons",
+      "line_number": 473,
+      "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onUploadToServer}\n onCancelClick={returnToProviders}\n saveButtonLabel={t(\"Settings:UploadToServer\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n saveButtonDataTestId=\"upload_to_server_button\"\n cancelButtonDataTestId=\"back_to_providers_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/index.tsx",
-      "line_number": 124,
+      "line_number": 125,
       "context": "<MigrationButtons\n className=\"save-cancel-buttons\"\n onSaveClick={handleStepIncrement}\n onCancelClick={decrementStep}\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n showReminder\n displaySettings\n saveButtonDisabled={\n canDisable\n ? areCheckedUsersEmpty ||",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/index.tsx",
-      "line_number": 105,
+      "line_number": 106,
       "context": "className=\"save-cancel-buttons\"\n onSaveClick={incrementStep}\n onCancelClick={decrementStep}\n showReminder\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n migrationCancelLabel={t(\"Settings:CancelImport\")}\n onMigrationCancelClick={showCancelDialog}\n />\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingUserContainer.tsx",
-      "line_number": 62,
-      "context": "<div className=\"sign-in-container\">\n {type === \"LinkInvite\" && !emailFromLink && (\n <div className=\"back-title\">\n <IconButton size={16} iconName={ArrowIcon} onClick={onClickBack} />\n <Text fontWeight={600} onClick={onClickBack}>\n {t(\"Common:Back\")}\n </Text>\n </div>\n )}\n \n <Text fontWeight={600} fontSize={\"16px\"}>",
+      "line_number": 71,
+      "context": "<Text\n fontWeight={600}\n onClick={onClickBack}\n dataTestId=\"greeting_back_text\"\n >\n {t(\"Common:Back\")}\n </Text>\n </div>\n ) : null}\n \n <Text fontWeight={600} fontSize=\"16px\">",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/EmailContainer.tsx",
-      "line_number": 88,
-      "context": "<div className=\"invitation-info-container\">\n <div className=\"sign-in-container\">\n <div className=\"back-title\">\n <IconButton size={16} iconName={ArrowIcon} onClick={onClickBack} />\n <Text fontWeight={600} onClick={onClickBack}>\n {t(\"Common:Back\")}\n </Text>\n </div>\n <Text fontWeight={600} fontSize={\"16px\"}>\n {t(\"Common:LoginButton\")}\n </Text>",
+      "line_number": 97,
+      "context": "<Text\n fontWeight={600}\n onClick={onClickBack}\n dataTestId=\"email_invitation_back_text\"\n >\n {t(\"Common:Back\")}\n </Text>\n </div>\n <Text fontWeight={600} fontSize=\"16px\">\n {t(\"Common:LoginButton\")}\n </Text>",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/shared/components/article/sub-components/BackButton.tsx",
-      "line_number": 61,
+      "line_number": 83,
       "context": "className={styles.backButton}\n data-show-article={showText ? \"true\" : \"false\"}\n onClick={onClickBack}\n >\n <IconButton className={styles.arrowIcon} iconName={icon} isClickable />\n {showText ? <Text truncate>{t(\"Common:Back\")}</Text> : null}\n </div>\n );\n };\n \n export default BackButton;",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/guidance/sub-components/Guid.tsx",
-      "line_number": 386,
+      "line_number": 387,
       "context": "<div className=\"button-container\">\n {currentStep !== 0 ? (\n <Button\n id=\"form-filling_tips_back\"\n key=\"TipsBack\"\n label={t(\"Common:Back\")}\n size={ButtonSize.extraSmall}\n onClick={onPrev}\n />\n ) : null}\n <Button",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/selector/sub-components/EmptyScreen.tsx",
-      "line_number": 175,
-      "context": "withSearch\n ? () => onClearSearch?.(() => setIsSearch(false))\n : createItem.onBackClick\n }\n >\n {withSearch ? t(\"Common:ClearFilter\") : t(\"Common:Back\")}\n </Link>\n </div>\n </div>\n ) : null}\n </div>",
+      "line_number": 169,
+      "context": "size={12}\n iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}\n isFill\n />\n <Link {...linkStyles}>\n {withSearch ? t(\"Common:ClearFilter\") : t(\"Common:Back\")}\n </Link>\n </div>\n </div>\n ) : null}\n </div>",
       "module": "/packages/shared"
     }
   ],
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"前に\" means \"before\" or \"in front of\", not \"back\". The correct translation for \"back\" would be \"後方\" (kouhou) or \"背面\" (saigen).",
-          "suggestion": "Use \"後方\" (kouhou) or \"背面\" (saigen) instead."
+          "description": "'前に' (mae ni) means 'front' or 'before', not 'back'. The correct Japanese translation for 'Back' would be '後ろ' (ushiro).",
+          "suggestion": "Use '後ろ' (ushiro) instead of '前に' (mae ni)."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ກັບຄືນໄປບ່ອນ\" literally translates to \"back to place\" or \"return to place.\" While it conveys a sense of returning, it's not a direct or appropriate translation of the English word \"Back.\" \"Back\" can refer to the rear, a return action, or support.",
-          "suggestion": "Consider alternatives like \"ດ້ານຫລັງ\" (dan lang - rear/back), \"ກັບກັນ\" (gap gan - return), or \"ສະຫນັບສະຫນູນ\" (sap sap sanuun - support), depending on the intended meaning within the broader context."
+          "description": "The Lao translation \"ກັບຄືນໄປບ່ອນ\" literally translates to \"back to place\" or \"return to place.\" While it can imply 'back,' it's not a direct and concise equivalent to the English word 'Back.' It lacks the simple meaning of return or opposite direction.",
+          "suggestion": "A more accurate translation would be something like \"ຫຼັງ\" (lang) which is a direct translation of 'back' as in the opposite of front, or “ກັບກ້າຽນ” (gap gien) which implies going back."
         }
       ],
       "approved_at": null
@@ -276,8 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'后退' generally means 'to retreat' or 'to move backward'. While it can imply 'back' in certain contexts (like a button), it's not a direct, universally applicable translation of 'Back' (as in the back of something, or the back button). A more accurate translation would depend on the specific context where 'Back' is used.",
-          "suggestion": "Consider alternatives like '背面' (back side), '后部' (rear), or context-specific terms if 'Back' refers to a button or navigation."
+          "description": "'后退' (hòutuì) generally means 'to retreat' or 'to move backward'. While it can sometimes be used for 'back' (as in, a button that moves you back), it's not the most direct or common translation. A more appropriate translation for 'Back' (as in, the back of something, or the back button) could be '背面' (bèi miàn) or '返回' (fǎnhuí).",
+          "suggestion": "Consider '背面' (bèi miàn) or '返回' (fǎnhuí) depending on the context."
         }
       ],
       "approved_at": null

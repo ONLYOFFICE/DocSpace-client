@@ -27,8 +27,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import FillingRoleProcess from "./FillingRoleProcess";
-import { FileFillingFormStatus, RoleStatus } from "../../enums";
-import type { TUser } from "../../api/people/types";
+import { FileFillingFormStatus, FillingFormStatusHistory } from "../../enums";
 
 const meta = {
   title: "Components/FillingRoleProcess",
@@ -59,168 +58,89 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof FillingRoleProcess>;
 
-const mockUser: TUser = {
-  id: "1",
-  userName: "John Smith",
-  email: "john@example.com",
-  avatar: "avatar-url",
-  avatarMax: "avatar-max-url",
-  avatarMedium: "avatar-medium-url",
-  avatarOriginal: "avatar-original-url",
-  displayName: "John Smith",
-  isVisitor: false,
-
-  isCollaborator: true,
-  isRoomAdmin: false,
-  firstName: "John",
-  lastName: "Smith",
+const createMockUser = (id: string, displayName: string) => ({
+  id,
+  displayName,
+  access: 0,
+  firstName: displayName.split(" ")[0],
+  lastName: displayName.split(" ")[1] || "",
+  userName: displayName.toLowerCase().replace(/\s+/g, "."),
+  email: `${displayName.toLowerCase().replace(/\s+/g, ".")}@example.com`,
   status: 1, // EmployeeStatus.Active
   activationStatus: 1, // EmployeeActivationStatus.Activated
-  workFrom: "",
-  department: "",
-  isLDAP: false,
+  department: "Development",
+  workFrom: "2023-01-01T10:00:00Z",
+  avatarMax: "",
+  avatarMedium: "",
+  avatarOriginal: "",
+  avatar: "",
   isAdmin: false,
+  isRoomAdmin: false,
+  isLDAP: false,
   listAdminModules: [],
   isOwner: false,
+  isVisitor: false,
+  isCollaborator: false,
+  isAnonim: false,
   mobilePhoneActivationStatus: 0,
   isSSO: false,
-  profileUrl: "",
-  access: 0,
   avatarSmall: "",
+  profileUrl: "",
   hasAvatar: false,
-  isAnonim: false,
-};
+  groups: [],
+  mobilePhone: "",
+  title: "",
+});
+
+const mockProcessDetails = [
+  {
+    sequence: 1,
+    user: createMockUser("user1", "John Doe"),
+    roleName: "Approver",
+    roleStatus: FileFillingFormStatus.None,
+    roleColor: "#FF9500",
+    submitted: false,
+    history: {
+      [FillingFormStatusHistory.OpenedAtDate]: "2023-01-01T10:00:00Z",
+      [FillingFormStatusHistory.SubmissionDate]: "2023-01-02T11:30:00Z",
+      [FillingFormStatusHistory.StopDate]: "2023-01-02T11:30:00Z",
+    } as const,
+  },
+  {
+    sequence: 2,
+    user: createMockUser("user2", "Jane Smith"),
+    roleName: "Reviewer",
+    roleStatus: FileFillingFormStatus.Completed,
+    roleColor: "#2AB0FC",
+    submitted: true,
+    history: {
+      [FillingFormStatusHistory.OpenedAtDate]: "2023-01-03T09:15:00Z",
+      [FillingFormStatusHistory.SubmissionDate]: "2023-01-02T11:30:00Z",
+      [FillingFormStatusHistory.StopDate]: "2023-01-04T15:45:00Z",
+    } as const,
+  },
+];
 
 export const Default: Story = {
   args: {
+    processDetails: mockProcessDetails,
     fileStatus: FileFillingFormStatus.InProgress,
-    processDetails: [
-      {
-        id: "1",
-        user: mockUser,
-        processStatus: RoleStatus.Filled,
-        roleName: "Manager",
-        histories: [
-          {
-            id: "1",
-            action: "Form sent",
-            date: "2025-02-13T10:00:00Z",
-          },
-          {
-            id: "2",
-            action: "Form signed",
-            date: "2025-02-13T11:00:00Z",
-          },
-        ],
-      },
-      {
-        id: "2",
-        user: { ...mockUser, id: "2", userName: "Alice Johnson" },
-        processStatus: RoleStatus.YourTurn,
-        roleName: "Reviewer",
-        histories: [
-          {
-            id: "3",
-            action: "Form received",
-            date: "2025-02-13T11:05:00Z",
-          },
-        ],
-      },
-      {
-        id: "3",
-        user: { ...mockUser, id: "3", userName: "Bob Wilson" },
-        processStatus: RoleStatus.Waiting,
-        roleName: "Approver",
-        histories: [],
-      },
-    ],
+    currentUserId: "user1",
   },
 };
 
 export const Completed: Story = {
   args: {
+    processDetails: mockProcessDetails,
     fileStatus: FileFillingFormStatus.Completed,
-    processDetails: [
-      {
-        id: "1",
-        user: mockUser,
-        processStatus: RoleStatus.Filled,
-        roleName: "Manager",
-        histories: [
-          {
-            id: "1",
-            action: "Form sent",
-            date: "2025-02-13T10:00:00Z",
-          },
-          {
-            id: "2",
-            action: "Form signed",
-            date: "2025-02-13T11:00:00Z",
-          },
-        ],
-      },
-      {
-        id: "2",
-        user: { ...mockUser, id: "2", userName: "Alice Johnson" },
-        processStatus: RoleStatus.Filled,
-        roleName: "Reviewer",
-        histories: [
-          {
-            id: "3",
-            action: "Form received",
-            date: "2025-02-13T11:05:00Z",
-          },
-          {
-            id: "4",
-            action: "Form reviewed",
-            date: "2025-02-13T12:00:00Z",
-          },
-        ],
-      },
-    ],
+    currentUserId: "user1",
   },
 };
 
 export const Stopped: Story = {
   args: {
+    processDetails: mockProcessDetails,
     fileStatus: FileFillingFormStatus.Stopped,
-    processDetails: [
-      {
-        id: "1",
-        user: mockUser,
-        processStatus: RoleStatus.Filled,
-        roleName: "Manager",
-        histories: [
-          {
-            id: "1",
-            action: "Form sent",
-            date: "2025-02-13T10:00:00Z",
-          },
-          {
-            id: "2",
-            action: "Form signed",
-            date: "2025-02-13T11:00:00Z",
-          },
-        ],
-      },
-      {
-        id: "2",
-        user: { ...mockUser, id: "2", userName: "Alice Johnson" },
-        processStatus: RoleStatus.Stopped,
-        roleName: "Reviewer",
-        histories: [
-          {
-            id: "3",
-            action: "Form received",
-            date: "2025-02-13T11:05:00Z",
-          },
-          {
-            id: "4",
-            action: "Process stopped",
-            date: "2025-02-13T12:00:00Z",
-          },
-        ],
-      },
-    ],
+    currentUserId: "user1",
   },
 };

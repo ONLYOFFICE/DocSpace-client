@@ -36,30 +36,36 @@ const TABLE_INSIDE_GROUP_COLUMNS = `insideGroupTableColumns_ver-${TableVersions.
 const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
 const TABLE_RECENT_COLUMNS = `recentTableColumns_ver-${TableVersions.Recent}`;
+const TABLE_FAVORITES_COLUMNS = `favoritesTableColumns_ver-${TableVersions.Favorites}`;
 const TABLE_VDR_INDEXING_COLUMNS = `vdrIndexingColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TEMPLATES_ROOM_COLUMNS = `templatesRoomsTableColumns_ver-${TableVersions.Rooms}`;
+const TABLE_SHARED_WITH_ME_COLUMNS = `sharedWithMeTableColumns_ver-${TableVersions.SharedWithMe}`;
 
 const COLUMNS_SIZE = `filesColumnsSize_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE = `roomsColumnsSize_ver-${TableVersions.Rooms}`;
 const COLUMNS_TRASH_SIZE = `trashColumnsSize_ver-${TableVersions.Trash}`;
 const COLUMNS_RECENT_SIZE = `recentColumnsSize_ver-${TableVersions.Recent}`;
+const COLUMNS_FAVORITES_SIZE = `favoritesColumnsSize_ver-${TableVersions.Favorites}`;
 const COLUMNS_VDR_INDEXING_SIZE = `vdrIndexingColumnsSize_ver-${TableVersions.Rooms}`;
 const COLUMNS_PEOPLE_SIZE = `peopleColumnsSize_ver-${TableVersions.People}`;
 const COLUMNS_GUESTS_SIZE = `guestsColumnsSize_ver-${TableVersions.Guests}`;
 const COLUMNS_GROUPS_SIZE = `groupsColumnsSize_ver-${TableVersions.Groups}`;
 const COLUMNS_INSIDE_GROUPS_SIZE = `insideGroupColumnsSize_ver-${TableVersions.InsideGroup}`;
 const COLUMNS_TEMPLATES_ROOM_SIZE = `templatesRoomsColumnsSize_ver-${TableVersions.Rooms}`;
+const COLUMNS_SHARED_WITH_ME_SIZE = `sharedWithMeColumnsSize_ver-${TableVersions.SharedWithMe}`;
 
 const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE_INFO_PANEL = `roomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 const COLUMNS_TRASH_SIZE_INFO_PANEL = `trashColumnsSizeInfoPanel_ver-${TableVersions.Trash}`;
 const COLUMNS_RECENT_SIZE_INFO_PANEL = `recentColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
+const COLUMNS_FAVORITES_SIZE_INFO_PANEL = `favoritesColumnsSizeInfoPanel_ver-${TableVersions.Favorites}`;
 const COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL = `vdrIndexingColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 const COLUMNS_PEOPLE_INFO_PANEL_SIZE = `infoPanelPeopleColumnsSize_ver-${TableVersions.People}`;
 const COLUMNS_GUESTS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVersions.Guests}`;
 const COLUMNS_GROUPS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVersions.Groups}`;
 const COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE = `infoPanelInsideGroupPeopleColumnsSize_ver-${TableVersions.InsideGroup}`;
 const COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL = `templatesRoomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
+const COLUMNS_SHARED_WITH_ME_INFO_PANEL_SIZE = `infoPanelSharedWithMeColumnsSize_ver-${TableVersions.SharedWithMe}`;
 
 class TableStore {
   authStore;
@@ -90,7 +96,7 @@ class TableStore {
 
   authorColumnIsEnabled = false;
 
-  roomColumnIsEnabled = true;
+  locationColumnIsEnabled = true;
 
   erasureColumnIsEnabled = true;
 
@@ -102,17 +108,35 @@ class TableStore {
 
   typeColumnIsEnabled = false;
 
+  locationRecentColumnIsEnabled = true;
+
   authorRecentColumnIsEnabled = true;
 
-  modifiedRecentColumnIsEnabled = false;
-
-  createdRecentColumnIsEnabled = false;
-
-  sizeRecentColumnIsEnabled = true;
+  sizeRecentColumnIsEnabled = false;
 
   typeRecentColumnIsEnabled = false;
 
-  lastOpenedColumnIsEnabled = true;
+  lastOpenedRecentColumnIsEnabled = true;
+
+  authorShareWithMeColumnIsEnabled = true;
+
+  accessLevelShareWithMeColumnIsEnabled = true;
+
+  modifiedShareWithMeColumnIsEnabled = true;
+
+  sizeShareWithMeColumnIsEnabled = false;
+
+  typeShareWithMeColumnIsEnabled = false;
+
+  locationFavoritesColumnIsEnabled = true;
+
+  authorFavoritesColumnIsEnabled = true;
+
+  modifiedFavoritesColumnIsEnabled = true;
+
+  sizeFavoritesColumnIsEnabled = true;
+
+  typeFavoritesColumnIsEnabled = false;
 
   authorTrashColumnIsEnabled = true;
 
@@ -226,8 +250,32 @@ class TableStore {
     this.authorColumnIsEnabled = enable;
   };
 
+  setLocationRecentColumn = (enable) => {
+    this.locationRecentColumnIsEnabled = enable;
+  };
+
   setAuthorRecentColumn = (enable) => {
     this.authorRecentColumnIsEnabled = enable;
+  };
+
+  setLocationFavoritesColumn = (enable) => {
+    this.locationFavoritesColumnIsEnabled = enable;
+  };
+
+  setAuthorFavoritesColumn = (enable) => {
+    this.authorFavoritesColumnIsEnabled = enable;
+  };
+
+  setModifiedFavoritesColumn = (enable) => {
+    this.modifiedFavoritesColumnIsEnabled = enable;
+  };
+
+  setSizeFavoritesColumn = (enable) => {
+    this.sizeFavoritesColumnIsEnabled = enable;
+  };
+
+  setTypeFavoritesColumn = (enable) => {
+    this.typeFavoritesColumnIsEnabled = enable;
   };
 
   setAuthorVDRColumn = (enable) => {
@@ -242,10 +290,6 @@ class TableStore {
     this.createdColumnIsEnabled = enable;
   };
 
-  setCreatedRecentColumn = (enable) => {
-    this.createdRecentColumnIsEnabled = enable;
-  };
-
   setCreatedVDRColumn = (enable) => {
     this.createdVDRColumnIsEnabled = enable;
   };
@@ -254,16 +298,12 @@ class TableStore {
     this.modifiedColumnIsEnabled = enable;
   };
 
-  setModifiedRecentColumn = (enable) => {
-    this.modifiedRecentColumnIsEnabled = enable;
-  };
-
   setModifiedVDRColumn = (enable) => {
     this.modifiedVDRColumnIsEnabled = enable;
   };
 
-  setRoomColumn = (enable) => {
-    this.roomColumnIsEnabled = enable;
+  setLocationColumn = (enable) => {
+    this.locationColumnIsEnabled = enable;
   };
 
   setErasureColumn = (enable) => {
@@ -307,7 +347,24 @@ class TableStore {
 
   setTypeTrashColumn = (enable) => (this.typeTrashColumnIsEnabled = enable);
 
-  setLastOpenedColumn = (enable) => (this.lastOpenedColumnIsEnabled = enable);
+  setAuthorShareWithMeColumn = (enable) =>
+    (this.authorShareWithMeColumnIsEnabled = enable);
+
+  setAccessLevelShareWithMeColumn = (enable) => {
+    this.accessLevelShareWithMeColumnIsEnabled = enable;
+  };
+
+  setModifiedShareWithMeColumn = (enable) =>
+    (this.modifiedShareWithMeColumnIsEnabled = enable);
+
+  setSizeShareWithMeColumn = (enable) =>
+    (this.sizeShareWithMeColumnIsEnabled = enable);
+
+  setTypeShareWithMeColumn = (enable) =>
+    (this.typeShareWithMeColumnIsEnabled = enable);
+
+  setLastOpenedRecentColumn = (enable) =>
+    (this.lastOpenedRecentColumnIsEnabled = enable);
 
   setGroupsColumnPeople = (enable) =>
     (this.peopleGroupsColumnIsEnabled = enable);
@@ -344,7 +401,7 @@ class TableStore {
   setInsideGroupColumnStorage = (enable) =>
     (this.storageInsideGroupColumnIsEnabled = enable);
 
-  setColumnsEnable = (frameTableColumns, isRecentTab) => {
+  setColumnsEnable = (frameTableColumns) => {
     const { contactsTab } = this.peopleStore.usersStore;
     const storageColumns = localStorage.getItem(this.tableStorageName);
     const splitColumns = storageColumns
@@ -360,6 +417,9 @@ class TableStore {
         isTrashFolder,
         isTemplatesFolder,
         isPersonalReadOnly,
+        isRecentFolder,
+        isFavoritesFolder,
+        isSharedWithMeFolderRoot,
       } = this.treeFoldersStore;
 
       const contactsView = getContactsView();
@@ -389,6 +449,22 @@ class TableStore {
         this.setTemplateRoomColumnQuota(
           splitColumns.includes("StorageTemplates"),
         );
+
+        return;
+      }
+
+      if (isSharedWithMeFolderRoot) {
+        this.setAuthorShareWithMeColumn(
+          splitColumns.includes("AuthorShareWithMe"),
+        );
+        this.setAccessLevelShareWithMeColumn(
+          splitColumns.includes("AccessLevelShareWithMe"),
+        );
+        this.setModifiedShareWithMeColumn(
+          splitColumns.includes("ModifiedShareWithMe"),
+        );
+        this.setSizeShareWithMeColumn(splitColumns.includes("SizeShareWithMe"));
+        this.setTypeShareWithMeColumn(splitColumns.includes("TypeShareWithMe"));
 
         return;
       }
@@ -433,7 +509,7 @@ class TableStore {
       }
 
       if (isTrashFolder) {
-        this.setRoomColumn(splitColumns.includes("Room"));
+        this.setLocationColumn(splitColumns.includes("Location"));
         this.setAuthorTrashColumn(splitColumns.includes("AuthorTrash"));
         this.setCreatedTrashColumn(splitColumns.includes("CreatedTrash"));
         this.setErasureColumn(splitColumns.includes("Erasure"));
@@ -442,13 +518,27 @@ class TableStore {
         return;
       }
 
-      if (isRecentTab) {
-        this.setModifiedRecentColumn(splitColumns.includes("ModifiedRecent"));
+      if (isRecentFolder) {
+        this.setLocationRecentColumn(splitColumns.includes("LocationRecent"));
         this.setAuthorRecentColumn(splitColumns.includes("AuthorRecent"));
-        this.setCreatedRecentColumn(splitColumns.includes("CreatedRecent"));
-        this.setLastOpenedColumn(splitColumns.includes("LastOpened"));
+        this.setLastOpenedRecentColumn(
+          splitColumns.includes("LastOpenedRecent"),
+        );
         this.setSizeRecentColumn(splitColumns.includes("SizeRecent"));
         this.setTypeRecentColumn(splitColumns.includes("TypeRecent"));
+        return;
+      }
+
+      if (isFavoritesFolder) {
+        this.setLocationFavoritesColumn(
+          splitColumns.includes("LocationFavorites"),
+        );
+        this.setAuthorFavoritesColumn(splitColumns.includes("AuthorFavorites"));
+        this.setModifiedFavoritesColumn(
+          splitColumns.includes("ModifiedFavorites"),
+        );
+        this.setSizeFavoritesColumn(splitColumns.includes("SizeFavorites"));
+        this.setTypeFavoritesColumn(splitColumns.includes("TypeFavorites"));
         return;
       }
 
@@ -467,7 +557,6 @@ class TableStore {
         this.setErasureColumn(splitColumns.includes("Erasure"));
       this.setSizeColumn(splitColumns.includes("Size"));
       this.setTypeColumn(splitColumns.includes("Type"));
-      this.setLastOpenedColumn(splitColumns.includes("LastOpened"));
     }
   };
 
@@ -488,10 +577,15 @@ class TableStore {
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     switch (key) {
-      case "Room":
-        this.setRoomColumn(!this.roomColumnIsEnabled);
+      case "Location":
+        this.setLocationColumn(!this.locationColumnIsEnabled);
         return;
-
+      case "LocationRecent":
+        this.setLocationRecentColumn(!this.locationRecentColumnIsEnabled);
+        return;
+      case "LocationFavorites":
+        this.setLocationFavoritesColumn(!this.locationFavoritesColumnIsEnabled);
+        return;
       case "Author":
         this.setAuthorColumn(!this.authorColumnIsEnabled);
         return;
@@ -500,6 +594,9 @@ class TableStore {
         return;
       case "AuthorRecent":
         this.setAuthorRecentColumn(!this.authorRecentColumnIsEnabled);
+        return;
+      case "AuthorFavorites":
+        this.setAuthorFavoritesColumn(!this.authorFavoritesColumnIsEnabled);
         return;
       case "AuthorIndexing":
         this.setAuthorVDRColumn(!this.authorVDRColumnIsEnabled);
@@ -512,9 +609,6 @@ class TableStore {
         return;
       case "CreatedTrash":
         this.setCreatedTrashColumn(!this.createdTrashColumnIsEnabled);
-        return;
-      case "CreatedRecent":
-        this.setCreatedRecentColumn(!this.createdRecentColumnIsEnabled);
         return;
       case "CreatedIndexing":
         this.setCreatedVDRColumn(!this.createdVDRColumnIsEnabled);
@@ -530,13 +624,12 @@ class TableStore {
       case "Modified":
         this.setModifiedColumn(!this.modifiedColumnIsEnabled);
         return;
-      case "ModifiedRecent":
-        this.setModifiedRecentColumn(!this.modifiedRecentColumnIsEnabled);
-        return;
       case "ModifiedIndexing":
         this.setModifiedVDRColumn(!this.modifiedVDRColumnIsEnabled);
         return;
-
+      case "ModifiedFavorites":
+        this.setModifiedFavoritesColumn(!this.modifiedFavoritesColumnIsEnabled);
+        return;
       case "Erasure":
         this.setErasureColumn(!this.erasureColumnIsEnabled);
         return;
@@ -549,6 +642,9 @@ class TableStore {
         return;
       case "SizeRecent":
         this.setSizeRecentColumn(!this.sizeRecentColumnIsEnabled);
+        return;
+      case "SizeFavorites":
+        this.setSizeFavoritesColumn(!this.sizeFavoritesColumnIsEnabled);
         return;
 
       case "SizeIndexing":
@@ -575,6 +671,10 @@ class TableStore {
         this.setTypeRecentColumn(!this.typeRecentColumnIsEnabled);
         return;
 
+      case "TypeFavorites":
+        this.setTypeFavoritesColumn(!this.typeFavoritesColumnIsEnabled);
+        return;
+
       case "TypeIndexing":
         this.setTypeVDRColumn(!this.typeVDRColumnIsEnabled);
         return;
@@ -599,14 +699,38 @@ class TableStore {
         this.setRoomColumnActivity(!this.roomColumnActivityIsEnabled);
         return;
 
+      case "AuthorShareWithMe":
+        this.setAuthorShareWithMeColumn(!this.authorShareWithMeColumnIsEnabled);
+        return;
+
+      case "AccessLevelShareWithMe":
+        this.setAccessLevelShareWithMeColumn(
+          !this.accessLevelShareWithMeColumnIsEnabled,
+        );
+        return;
+
+      case "ModifiedShareWithMe":
+        this.setModifiedShareWithMeColumn(
+          !this.modifiedShareWithMeColumnIsEnabled,
+        );
+        return;
+
+      case "SizeShareWithMe":
+        this.setSizeShareWithMeColumn(!this.sizeShareWithMeColumnIsEnabled);
+        return;
+
+      case "TypeShareWithMe":
+        this.setTypeShareWithMeColumn(!this.typeShareWithMeColumnIsEnabled);
+        return;
+
       case "ActivityTemplates":
         this.setTemplateRoomColumnActivity(
           !this.templateRoomColumnActivityIsEnabled,
         );
         return;
 
-      case "LastOpened":
-        this.setLastOpenedColumn(!this.lastOpenedColumnIsEnabled);
+      case "LastOpenedRecent":
+        this.setLastOpenedRecentColumn(!this.lastOpenedRecentColumnIsEnabled);
         return;
 
       case "Mail":
@@ -651,7 +775,7 @@ class TableStore {
     }
   };
 
-  getColumns = (defaultColumns, isRecentTab) => {
+  getColumns = (defaultColumns) => {
     const { isFrame, frameConfig } = this.settingsStore;
     const storageColumns = localStorage.getItem(this.tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
@@ -660,7 +784,7 @@ class TableStore {
     const columns = [];
 
     if (splitColumns) {
-      this.setColumnsEnable(null, isRecentTab);
+      this.setColumnsEnable(null);
 
       defaultColumns.forEach((col) => {
         const column = splitColumns.find((key) => key === col.key);
@@ -688,8 +812,10 @@ class TableStore {
       isRoomsFolder,
       isArchiveFolder,
       isTrashFolder,
-      isRecentTab,
+      isRecentFolder,
       isTemplatesFolder,
+      isFavoritesFolder,
+      isSharedWithMeFolderRoot,
     } = this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
@@ -730,8 +856,12 @@ class TableStore {
       tableStorageName = `${TABLE_INSIDE_GROUP_COLUMNS}=${userId}`;
     else if (isTrashFolder)
       tableStorageName = `${TABLE_TRASH_COLUMNS}=${userId}`;
-    else if (isRecentTab)
+    else if (isRecentFolder)
       tableStorageName = `${TABLE_RECENT_COLUMNS}=${userId}`;
+    else if (isFavoritesFolder)
+      tableStorageName = `${TABLE_FAVORITES_COLUMNS}=${userId}`;
+    else if (isSharedWithMeFolderRoot)
+      tableStorageName = `${TABLE_SHARED_WITH_ME_COLUMNS}=${userId}`;
     else if (isIndexedFolder)
       tableStorageName = `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`;
     else if (isDocumentsFolder) tableStorageName = `${TABLE_COLUMNS}=${userId}`;
@@ -748,8 +878,10 @@ class TableStore {
       isRoomsFolder,
       isArchiveFolder,
       isTrashFolder,
-      isRecentTab,
+      isRecentFolder,
       isTemplatesFolder,
+      isFavoritesFolder,
+      isSharedWithMeFolderRoot,
     } = this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
@@ -782,8 +914,10 @@ class TableStore {
     else if (isRooms) columnStorageName = `${COLUMNS_ROOMS_SIZE}=${userId}`;
     else if (isTrashFolder)
       columnStorageName = `${COLUMNS_TRASH_SIZE}=${userId}`;
-    else if (isRecentTab)
+    else if (isRecentFolder)
       columnStorageName = `${COLUMNS_RECENT_SIZE}=${userId}`;
+    else if (isFavoritesFolder)
+      columnStorageName = `${COLUMNS_FAVORITES_SIZE}=${userId}`;
     else if (isIndexedFolder)
       columnStorageName = `${COLUMNS_VDR_INDEXING_SIZE}=${userId}`;
     else if (isContactsPeople)
@@ -794,6 +928,8 @@ class TableStore {
       columnStorageName = `${COLUMNS_INSIDE_GROUPS_SIZE}=${userId}`;
     else if (isContactsGroups)
       columnStorageName = `${COLUMNS_GROUPS_SIZE}=${userId}`;
+    else if (isSharedWithMeFolderRoot)
+      columnStorageName = `${COLUMNS_SHARED_WITH_ME_SIZE}=${userId}`;
     else if (isDocumentsFolder) columnStorageName = `${COLUMNS_SIZE}=${userId}`;
     else columnStorageName = "";
 
@@ -808,8 +944,10 @@ class TableStore {
       isRoomsFolder,
       isArchiveFolder,
       isTrashFolder,
-      isRecentTab,
+      isRecentFolder,
       isTemplatesFolder,
+      isFavoritesFolder,
+      isSharedWithMeFolderRoot,
     } = this.treeFoldersStore;
 
     const { isIndexedFolder } = this.selectedFolderStore;
@@ -843,8 +981,10 @@ class TableStore {
       columnInfoPanelStorageName = `${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`;
     else if (isTrashFolder)
       columnInfoPanelStorageName = `${COLUMNS_TRASH_SIZE_INFO_PANEL}=${userId}`;
-    else if (isRecentTab)
+    else if (isRecentFolder)
       columnInfoPanelStorageName = `${COLUMNS_RECENT_SIZE_INFO_PANEL}=${userId}`;
+    else if (isFavoritesFolder)
+      columnInfoPanelStorageName = `${COLUMNS_FAVORITES_SIZE_INFO_PANEL}=${userId}`;
     else if (isIndexedFolder)
       columnInfoPanelStorageName = `${COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL}=${userId}`;
     else if (isContactsPeople)
@@ -855,6 +995,8 @@ class TableStore {
       columnInfoPanelStorageName = `${COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE}=${userId}`;
     else if (isContactsGroups)
       columnInfoPanelStorageName = `${COLUMNS_GROUPS_INFO_PANEL_SIZE}=${userId}`;
+    else if (isSharedWithMeFolderRoot)
+      columnInfoPanelStorageName = `${COLUMNS_SHARED_WITH_ME_INFO_PANEL_SIZE}=${userId}`;
     else if (isDocumentsFolder)
       columnInfoPanelStorageName = `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
     else columnInfoPanelStorageName = "";

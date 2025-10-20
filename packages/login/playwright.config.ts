@@ -50,6 +50,11 @@ export default defineConfig({
     trace: "on-first-retry",
   },
   snapshotPathTemplate: "{testDir}/screenshots{/projectName}/{arg}{ext}",
+  expect: {
+    toHaveScreenshot: {
+      threshold: 0.16,
+    },
+  },
 
   /* Configure projects for major browsers */
   projects: [
@@ -73,7 +78,7 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "yarn test:start",
+    command: "pnpm run test:start",
     port: PORT,
     timeout: 1000 * 60 * 5,
   },

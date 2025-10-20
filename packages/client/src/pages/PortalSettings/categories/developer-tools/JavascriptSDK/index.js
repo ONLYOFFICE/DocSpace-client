@@ -51,7 +51,7 @@ import CustomImgDark from "PUBLIC_DIR/images/sdk-presets_custom_dark.react.svg?u
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import Integration from "./sub-components/Integration";
 import PresetTile from "./sub-components/PresetTile";
-import CSP from "./sub-components/csp";
+import CSPSetting from "./sub-components/csp";
 
 import {
   SDKContainer,
@@ -163,12 +163,13 @@ const PortalIntegration = (props) => {
           color={currentColorScheme?.main?.accent}
           fontSize="13px"
           fontWeight="400"
+          dataTestId="sdk_api_library_link"
           onClick={() => window.open(sdkLink, "_blank")}
         >
           {" "}
           {t("APILink")}.
         </Link>
-        <CSP t={t} theme={theme} />
+        <CSPSetting t={t} theme={theme} />
       </CategoryDescription>
       <CategoryHeader>
         {t("SelectModeEmbedding", { productName: t("Common:ProductName") })}
@@ -185,6 +186,7 @@ const PortalIntegration = (props) => {
             description={data.description}
             image={data.image}
             handleOnClick={data.handleOnClick}
+            dataTestId={`sdk_preset_${data.title}_container`}
           />
         ))}
       </PresetsContainer>

@@ -3,7 +3,7 @@
   "content": "Unknown",
   "content_en_sha1_hash": "bc7819b34ff87570745fbe461e36a16f80e562ce",
   "created_at": "2025-05-19T21:30:49.397Z",
-  "updated_at": "2025-05-26T07:57:32.452Z",
+  "updated_at": "2025-10-13T23:28:25.766Z",
   "comment": {
     "text": "The translation key \"Common:Unknown\" is used to display a placeholder for unknown file types in the client's table view. It appears in the 'TypeCell' component, typically on buttons or dialogues related to file management, and should be translated to reflect an accurate description of the unknown file type.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/shared/utils/getFileType.ts",
-      "line_number": 8,
-      "context": "import { FileType } from \"../enums\";\n \n export const getFileTypeName = (fileType: FileType | string, t: TFunction) => {\n switch (fileType) {\n case FileType.Unknown:\n return t(\"Common:Unknown\");\n case FileType.Archive:\n return t(\"Common:Archive\");\n case FileType.Video:\n return t(\"Common:Video\");\n case FileType.Audio:",
+      "line_number": 11,
+      "context": "fileType: FileType | string,\n t: TTranslation,\n ) => {\n switch (fileType) {\n case FileType.Unknown:\n return t(\"Common:Unknown\");\n case FileType.Archive:\n return t(\"Common:Archive\");\n case FileType.Video:\n return t(\"Common:Video\");\n case FileType.Audio:",
       "module": "/packages/shared"
     }
   ],
@@ -208,6 +208,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"I/E panjohur\" is a somewhat awkward construction in Albanian. 'I panjohur' (masculine) or 'E panjohur' (feminine) are the standard translations of 'Unknown', depending on the noun it modifies.  The 'I/E' is not usually used in this context.",
+          "suggestion": "Use 'I panjohur' (if referring to a masculine noun) or 'E panjohur' (if referring to a feminine noun)."
+        }
+      ],
       "approved_at": null
     }
   }

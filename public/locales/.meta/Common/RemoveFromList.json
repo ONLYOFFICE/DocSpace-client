@@ -3,7 +3,7 @@
   "content": "Remove from list",
   "content_en_sha1_hash": "23a97691b4e6c4fdf5bb0cb8f8d5ab31d1af9fd4",
   "created_at": "2025-05-19T21:30:47.827Z",
-  "updated_at": "2025-06-08T12:02:32.848Z",
+  "updated_at": "2025-10-16T07:29:35.579Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Remove from list\" in a user interface, typically on a button or dialog related to managing shared rooms. The text appears when a user has permission to remove items and external data is not expired.",
     "is_auto": true,
@@ -11,44 +11,56 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2110,
-      "context": "Boolean(item.external && item.expired),\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => this.onRemoveSharedRooms([item]),\n disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {",
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 218,
+      "context": "if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverTitle\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:Confirmation\");\n \n if (unsubscribe) return t(\"Common:RemoveFromList\");\n \n return t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2110,
-      "context": "Boolean(item.external && item.expired),\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => this.onRemoveSharedRooms([item]),\n disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {",
+      "line_number": 2187,
+      "context": "disabled: !item.security?.Duplicate,\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => this.onRemoveSharedFilesOrFolder([item]),\n disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2110,
-      "context": "Boolean(item.external && item.expired),\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => this.onRemoveSharedRooms([item]),\n disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {",
+      "line_number": 2187,
+      "context": "disabled: !item.security?.Duplicate,\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => this.onRemoveSharedFilesOrFolder([item]),\n disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2110,
-      "context": "Boolean(item.external && item.expired),\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => this.onRemoveSharedRooms([item]),\n disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {",
+      "line_number": 2187,
+      "context": "disabled: !item.security?.Duplicate,\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => this.onRemoveSharedFilesOrFolder([item]),\n disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2187,
+      "context": "disabled: !item.security?.Duplicate,\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => this.onRemoveSharedFilesOrFolder([item]),\n disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2187,
+      "context": "disabled: !item.security?.Duplicate,\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => this.onRemoveSharedFilesOrFolder([item]),\n disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2346,
+      "line_number": 2339,
       "context": "iconUrl: DeleteReactSvgUrl,\n };\n case \"remove-from-recent\":\n return {\n id: \"menu-remove-from-recent\",\n label: t(\"Common:RemoveFromList\"),\n onClick: () => this.onClickRemoveFromRecent(selection),\n iconUrl: RemoveOutlineSvgUrl,\n };\n default:\n break;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2346,
+      "line_number": 2339,
       "context": "iconUrl: DeleteReactSvgUrl,\n };\n case \"remove-from-recent\":\n return {\n id: \"menu-remove-from-recent\",\n label: t(\"Common:RemoveFromList\"),\n onClick: () => this.onClickRemoveFromRecent(selection),\n iconUrl: RemoveOutlineSvgUrl,\n };\n default:\n break;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/sub-components/PasswordRow.tsx",
-      "line_number": 135,
+      "line_number": 133,
       "context": "});\n \n if (type !== \"remove\") {\n options.push({\n key: \"remove\",\n label: t(\"Common:RemoveFromList\"),\n onClick: removeFromList,\n disabled: false,\n icon: RemoveIcon,\n });\n }",
       "module": "/packages/shared"
     }
@@ -93,13 +105,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Κατάργηση από τη λίστα' while technically correct, has a slightly formal tone for a user interface element like 'Remove from list'. It implies a more permanent or severe action. 'Αφαίρεση από τη λίστα' or 'Αφαίρεση από την λίστα' would be more appropriate for a standard 'Remove' function.",
-          "suggestion": "Αφαίρεση από τη λίστα"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -183,7 +189,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Șterge din lista\" is understandable, \"Elimină din listă\" or \"Înlătură din listă\" would be more accurate translations of 'Remove from list'. \"Șterge\" implies deleting, which might not always be the intended action (e.g., archiving).",
+          "suggestion": "Elimină din listă"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -195,13 +207,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"ලැයිස්තුවෙන් ඉවත් කරන්න\" is a very literal translation. A more natural and common phrasing in Sinhala would be \"දුරුවන්න\" (duruwanna) or \"එවත්වන්න\" (evathwanna). \"ඉවත් කරන්න\" is generally used for removing something from a place, rather than a list.",
-          "suggestion": "දුරුවන්න (duruwanna) or එවත්වන්න (evathwanna)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -222,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Уклони са листе' literally translates to 'Remove from list', but a more natural and idiomatic Serbian translation would be 'Обавезно уклони' or 'Уклони'. 'Уклони са листе' feels awkward and unnatural.",
-          "suggestion": "Обавезно уклони"
+          "description": "The Serbian translation \"Уклони са листе\" literally translates to \"Remove from list\" but sounds unnatural and less common in Serbian. A more natural and idiomatic translation would be \"Избриши са листе\" or \"Одабрани са листе\".",
+          "suggestion": "Избриши са листе"
         }
       ],
       "approved_at": null
@@ -234,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Ukloni sa liste' is not the most natural or accurate translation of 'Remove from list'. 'Ukloni' means 'remove' in a more forceful or permanent sense. A more common and appropriate translation would be 'Izbaci iz liste' or 'Ukloni iz liste'.",
-          "suggestion": "Izbaci iz liste"
+          "description": "The Serbian translation \"Ukloni sa liste\" is not the most natural or accurate translation of \"Remove from list\". 'Ukloniti' implies a forceful or permanent removal. A more common and appropriate translation would use 'Izbrisati' or 'Ukloniti sa spiska'.",
+          "suggestion": "Izbrisati sa liste"
         }
       ],
       "approved_at": null

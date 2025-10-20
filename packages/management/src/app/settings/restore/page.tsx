@@ -29,8 +29,6 @@ import {
   getBackupProgress,
   getBackupSchedule,
   getBackupStorage,
-  getFoldersTree,
-  getPortalTariff,
   getQuota,
   getSettingsFiles,
   getSettingsThirdParty,
@@ -38,8 +36,11 @@ import {
 } from "@/lib/actions";
 
 import Restore from "./page.client";
+import { logger } from "../../../../logger.mjs";
 
 async function Page() {
+  logger.info("Restore page");
+
   const [
     account,
     backupSchedule,

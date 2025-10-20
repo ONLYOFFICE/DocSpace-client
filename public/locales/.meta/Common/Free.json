@@ -3,7 +3,7 @@
   "content": "Free",
   "content_en_sha1_hash": "75f527181b574f84568f33f67adc3b267a6fef9c",
   "created_at": "2025-05-19T21:30:45.558Z",
-  "updated_at": "2025-05-28T09:30:02.163Z",
+  "updated_at": "2025-10-01T15:17:48.186Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Free\" in various contexts across different platforms. It is commonly found on price labels and informational sections, indicating that a product or service has no cost associated with it.",
     "is_auto": true,
@@ -12,26 +12,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/SmartBanner/index.js",
-      "line_number": 75,
+      "line_number": 78,
       "context": "windows: \"\",\n kindle: \"\",\n };\n \n const priceText = {\n ios: t(\"Common:Free\"),\n android: t(\"Common:Free\"),\n windows: \"\",\n kindle: \"\",\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/SmartBanner/index.js",
-      "line_number": 75,
+      "line_number": 78,
       "context": "windows: \"\",\n kindle: \"\",\n };\n \n const priceText = {\n ios: t(\"Common:Free\"),\n android: t(\"Common:Free\"),\n windows: \"\",\n kindle: \"\",\n };",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/GalleryItemTitle.js",
-      "line_number": 77,
-      "context": "<StyledTitle ref={itemTitleRef}>\n <ReactSVG className=\"icon\" src={getIcon(32, \".pdf\")} />\n <Text className=\"text\">{gallerySelected?.attributes?.name_form}</Text>\n \n <Text color={currentColorScheme.main?.accent} className=\"free-label\">\n {t(\"Common:Free\")}\n </Text>\n {gallerySelected ? (\n <StyledGalleryContextOptions>\n <ContextMenu\n ref={contextMenuRef}",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/ItemTitle.tsx",
+      "line_number": 95,
+      "context": ">\n <ReactSVG className=\"icon\" src={getIcon?.(32, \".pdf\") ?? \"\"} />\n <Text className=\"text\">{gallerySelected?.attributes?.name_form}</Text>\n \n <Text color={currentColorScheme?.main?.accent} className=\"free-label\">\n {t(\"Common:Free\")}\n </Text>\n {gallerySelected ? (\n <div\n className={styles.contextOptions}\n data-testid=\"info_panel_gallery_context_options\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 214,
-      "context": "};\n \n const typeData = renderTypeData();\n \n const statusText =\n isVisitor || isCollaborator ? t(\"Common:Free\") : t(\"Common:Paid\");\n \n if (!ready) return <InfoPanelViewLoader view=\"users\" />;\n \n return (\n <StyledUsersContent>",
+      "line_number": 215,
+      "context": "const typeData = renderTypeData();\n \n const { isVisitor, isCollaborator } = userSelection;\n \n const statusText =\n isVisitor || isCollaborator ? t(\"Common:Free\") : t(\"Common:Paid\");\n \n if (!ready) return <InfoPanelViewLoader view=\"users\" />;\n \n return (\n <>",
       "module": "/packages/client"
     },
     {

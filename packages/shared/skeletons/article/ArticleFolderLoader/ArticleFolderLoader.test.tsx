@@ -1,8 +1,7 @@
 import React from "react";
-import { screen } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { renderWithTheme } from "../../../utils/render-with-theme";
 import { ArticleFolderLoader } from ".";
 
 describe("ArticleFolderLoader", () => {
@@ -12,14 +11,12 @@ describe("ArticleFolderLoader", () => {
   };
 
   it("renders without error", () => {
-    renderWithTheme(<ArticleFolderLoader {...defaultProps} />);
+    render(<ArticleFolderLoader {...defaultProps} />);
     expect(screen.getByTestId("article-folder-loader")).toBeInTheDocument();
   });
 
   it("renders correct number of blocks and rectangles for non-visitor", () => {
-    renderWithTheme(
-      <ArticleFolderLoader {...defaultProps} isVisitor={false} />,
-    );
+    render(<ArticleFolderLoader {...defaultProps} isVisitor={false} />);
 
     const blocks = screen.getAllByTestId("article-folder-loader-block");
     const rectangles = screen.getAllByTestId("rectangle-skeleton");
@@ -29,7 +26,7 @@ describe("ArticleFolderLoader", () => {
   });
 
   it("renders correct number of blocks and rectangles for visitor", () => {
-    renderWithTheme(<ArticleFolderLoader {...defaultProps} isVisitor />);
+    render(<ArticleFolderLoader {...defaultProps} isVisitor />);
 
     const blocks = screen.getAllByTestId("article-folder-loader-block");
     const rectangles = screen.getAllByTestId("rectangle-skeleton");
@@ -40,23 +37,21 @@ describe("ArticleFolderLoader", () => {
 
   it("applies custom className", () => {
     const className = "custom-class";
-    renderWithTheme(
-      <ArticleFolderLoader {...defaultProps} className={className} />,
-    );
+    render(<ArticleFolderLoader {...defaultProps} className={className} />);
 
     expect(screen.getByTestId("article-folder-loader")).toHaveClass(className);
   });
 
   it("applies custom style", () => {
     const style = { margin: "20px" };
-    renderWithTheme(<ArticleFolderLoader {...defaultProps} style={style} />);
+    render(<ArticleFolderLoader {...defaultProps} style={style} />);
 
     expect(screen.getByTestId("article-folder-loader")).toHaveStyle(style);
   });
 
   it("applies custom id", () => {
     const id = "custom-id";
-    renderWithTheme(<ArticleFolderLoader {...defaultProps} id={id} />);
+    render(<ArticleFolderLoader {...defaultProps} id={id} />);
 
     expect(screen.getByTestId("article-folder-loader")).toHaveAttribute(
       "id",
@@ -65,7 +60,7 @@ describe("ArticleFolderLoader", () => {
   });
 
   it("renders blocks with data-show-text attribute", () => {
-    renderWithTheme(<ArticleFolderLoader {...defaultProps} showText />);
+    render(<ArticleFolderLoader {...defaultProps} showText />);
 
     const blocks = screen.getAllByTestId("article-folder-loader-block");
     blocks.forEach((block) => {
@@ -74,7 +69,7 @@ describe("ArticleFolderLoader", () => {
   });
 
   it("renders blocks without data-show-text attribute", () => {
-    renderWithTheme(<ArticleFolderLoader {...defaultProps} showText={false} />);
+    render(<ArticleFolderLoader {...defaultProps} showText={false} />);
 
     const blocks = screen.getAllByTestId("article-folder-loader-block");
     blocks.forEach((block) => {

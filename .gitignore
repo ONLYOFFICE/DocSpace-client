@@ -35,5 +35,9 @@ packages/runtime.json
 playwright-report
 common/tests/reports/tests-results.html
 
+.nx/cache
+.nx/workspace-data
+
 **/.next/
 common/translation-app/backend/db
+common/translation-app/frontend/tsconfig.tsbuildinfo

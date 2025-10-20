@@ -24,12 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { headers } from "next/headers";
+
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { TSettings } from "@docspace/shared/api/settings/types";
 
 import { getFilesSettings, getFolder } from "@/api/files";
 import { getSettings } from "@/api/settings";
-import { PAGE_COUNT } from "@/utils/constants";
+import { PAGE_COUNT, PATHNAME_HEADER } from "@/utils/constants";
 
 import PublicRoomPage from "./page.client";
 
@@ -38,6 +40,7 @@ export default async function PublicRoom({
 }: {
   searchParams: Promise<{ [key: string]: string }>;
 }) {
+  const hdrs = await headers();
   const params = await searchParams;
   const baseConfig = Object.fromEntries(
     Object.entries(params).map(([k, v]) => [
@@ -45,12 +48,14 @@ export default async function PublicRoom({
       v === "true" ? true : v === "false" ? false : v,
     ]),
   );
+  const pathname = hdrs.get(PATHNAME_HEADER) ?? "";
 
   const filterStr = new URLSearchParams(params).toString();
   const folderId = baseConfig.folder;
 
   const filter = FilesFilter.getFilter({
     search: `?${filterStr}`,
+    pathname,
   } as Location)!;
 
   filter.pageCount = PAGE_COUNT;
@@ -68,11 +73,11 @@ export default async function PublicRoom({
       portalSettings={portalSettings! as TSettings}
       filesFilter={filterStr}
       shareKey={baseConfig.key as string}
-      baseConfig={{
-        showFilter: baseConfig.showFilter as boolean,
-        showHeader: baseConfig.showHeader as boolean,
-        folder: baseConfig.id as string,
-      }}
+      // baseConfig={{
+      //   showFilter: baseConfig.showFilter as boolean,
+      //   showHeader: baseConfig.showHeader as boolean,
+      //   folder: baseConfig.id as string,
+      // }}
     />
   );
 }

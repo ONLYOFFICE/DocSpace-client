@@ -3,7 +3,7 @@
   "content": "Room manager",
   "content_en_sha1_hash": "609082b01c00bb9850dc11687f7204de4f4b10da",
   "created_at": "2025-05-19T21:30:48.209Z",
-  "updated_at": "2025-05-28T09:30:02.413Z",
+  "updated_at": "2025-09-17T13:43:01.692Z",
   "comment": {
     "text": "This translation key is used to display the label \"Room Manager\" for room management permissions. It appears in a dropdown or select field within a UI component related to sharing access rights, likely on a settings page or permission dialog.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/MembersHelper.js",
-      "line_number": 44,
-      "context": "access: ShareAccessRights.FullAccess,\n type: \"admin\",\n },\n roomAdmin: {\n key: \"roomAdmin\",\n label: this.t(\"Common:RoomManager\"),\n access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },\n collaborator: {\n key: \"collaborator\",",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
+      "line_number": 47,
+      "context": "access: ShareAccessRights.FullAccess,\n type: \"admin\",\n },\n roomAdmin: {\n key: \"roomAdmin\",\n label: this.t(\"Common:RoomManager\"),\n tooltip: this.t(\"InviteDialog:UserMaxAvailableRoleWarning\", {\n productName: this.t(\"Common:ProductName\"),\n }),\n access: ShareAccessRights.RoomManager,\n type: \"manager\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 121,
-      "context": ": ShareAccessRights.RoomManager,\n type: EmployeeType.RoomAdmin,\n },\n roomManager: {\n key: \"roomManager\",\n label: t(\"Common:RoomManager\"),\n description: getRoomAdminDescription(roomType, t),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:\n roomType === None",
+      "line_number": 122,
+      "context": ": ShareAccessRights.RoomManager,\n type: EmployeeType.RoomAdmin,\n },\n roomManager: {\n key: \"roomManager\",\n label: t(\"Common:RoomManager\"),\n description: getRoomAdminDescription(roomType, t),\n tooltip: t(\"UserMaxAvailableRoleWarning\", {\n productName: t(\"Common:ProductName\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),",
       "module": "/packages/shared"
     }
   ],

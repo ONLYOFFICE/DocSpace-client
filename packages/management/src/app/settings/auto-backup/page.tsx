@@ -32,13 +32,15 @@ import {
   getAllPortals,
   getQuota,
   getSettingsFiles,
-  getFoldersTree,
   getBackupProgress,
 } from "@/lib/actions";
 
 import AutoBackup from "./page.client";
+import { logger } from "../../../../logger.mjs";
 
 async function Page() {
+  logger.info("AutoBackup page");
+
   const [
     account,
     backupSchedule,
@@ -49,7 +51,6 @@ async function Page() {
     portals,
     quota,
     settingsFiles,
-    foldersTree,
   ] = await Promise.all([
     getSettingsThirdParty(),
     getBackupSchedule(),
@@ -59,13 +60,11 @@ async function Page() {
     getAllPortals(),
     getQuota(),
     getSettingsFiles(),
-    getFoldersTree(),
   ]);
 
   return (
     <AutoBackup
       account={account}
-      foldersTree={foldersTree}
       filesSettings={settingsFiles}
       portals={portals?.tenants || []}
       features={quota?.features || []}
@@ -78,4 +77,3 @@ async function Page() {
 }
 
 export default Page;
-

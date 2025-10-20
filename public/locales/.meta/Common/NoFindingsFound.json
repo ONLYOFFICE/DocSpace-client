@@ -3,7 +3,7 @@
   "content": "No findings",
   "content_en_sha1_hash": "ab5062b935491263fcc3318d6d8d558b82d2b044",
   "created_at": "2025-05-19T21:30:46.827Z",
-  "updated_at": "2025-05-26T07:57:32.148Z",
+  "updated_at": "2025-08-27T10:14:35.035Z",
   "comment": {
     "text": "This translation key is used to display the text \"No findings\" in a component that represents an empty state, likely appearing as part of a filter or search result. It provides a clear message when there are no relevant results found.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyFilterContainer.js",
-      "line_number": 128,
+      "line_number": 129,
       "context": "const imageSrc = getIconURL();\n \n return (\n <EmptyView\n icon={imageSrc}\n title={t(\"Common:NoFindingsFound\")}\n options={options}\n description={descriptionText}\n />\n );\n };",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Webhook history",
   "content_en_sha1_hash": "d5c876e94d902e5dbeaa0db16f985a22a99969df",
   "created_at": "2025-05-19T21:30:49.879Z",
-  "updated_at": "2025-05-24T02:04:03.024Z",
+  "updated_at": "2025-08-04T07:30:01.473Z",
   "comment": {
     "text": "This translation key is used for the label of a dropdown item that displays \"Webhook history\". It appears in a table or list where webhooks are displayed, likely as part of an interface for managing webhooks in the Portal Settings.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksRowView/WebhookRow.js",
-      "line_number": 95,
+      "line_number": 100,
       "context": "onClick: onSettingsOpen,\n },\n {\n id: \"webhook-history\",\n key: \"Webhook history dropdownItem\",\n label: t(\"WebhookHistory\"),\n icon: HistoryIcon,\n onClick: redirectToHistory,\n },\n {\n key: \"Separator dropdownItem\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksTableView/WebhooksTableRow.js",
-      "line_number": 132,
-      "context": "icon: SettingsIcon,\n onClick: onSettingsOpen,\n },\n {\n key: \"Webhook history dropdownItem\",\n label: t(\"WebhookHistory\"),\n icon: HistoryIcon,\n onClick: redirectToHistory,\n },\n {\n key: \"Separator dropdownItem\",",
+      "line_number": 140,
+      "context": "onClick: onSettingsOpen,\n dataTestId: \"webhook_settings_item\",\n },\n {\n key: \"Webhook history dropdownItem\",\n label: t(\"WebhookHistory\"),\n icon: HistoryIcon,\n onClick: redirectToHistory,\n dataTestId: \"webhook_history_item\",\n },\n {",
       "module": "/packages/client"
     }
   ],

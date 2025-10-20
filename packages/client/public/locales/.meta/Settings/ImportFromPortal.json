@@ -3,7 +3,7 @@
   "content": "Import from {{organizationName}} Workspace",
   "content_en_sha1_hash": "e724af9a3984c03739c4b609de92912ffbbdbb33",
   "created_at": "2025-05-19T21:30:51.672Z",
-  "updated_at": "2025-05-24T04:57:25.789Z",
+  "updated_at": "2025-09-26T15:21:06.257Z",
   "comment": {
     "text": "This translation key is used for the \"Import from {{organizationName}} Workspace\" text, which appears on a button or similar element in the Portal Settings page, allowing users to import data from a specified organization workspace.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 319,
+      "line_number": 335,
       "context": "? workspace === \"GoogleWorkspace\"\n ? t(\"ImportFromGoogle\")\n : workspace === \"Nextcloud\"\n ? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")\n : t(header, {\n organizationName: logoText,",
       "module": "/packages/client"
     }
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Входирай' (Vhodirai) doesn't accurately translate 'Import'. It's closer to 'Enter' or 'Input'. The correct translation for 'Import' would be something like 'Импортирай' (Importirai) or 'Зареди' (Zaredi).",
+          "description": "The translation \"Входирай от {{organizationName}} Workspace\" is not the most natural or accurate translation of \"Import from {{organizationName}} Workspace\". \"Входирай\" implies 'log in' or 'enter', not 'import'.",
           "suggestion": "Импортирай от {{organizationName}} Workspace"
         }
       ],
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a hyphen where a space might be preferred. While acceptable, 'Workspace-ից' could be improved to 'աշխատասեղանից' (ashkhatasեղanits) for a more natural flow in Armenian.",
+          "suggestion": "Ներմուծում {{organizationName}} աշխատասեղանից"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '{{organizationName}} වැඩබිම් වෙතින් ආනයනය කරන්න' is a literal translation and sounds slightly unnatural. A more natural phrasing might be '{{organizationName}} වැඩබිමෙන් ආනයනය කරන්න' or '{{organizationName}} වැඩබිමෙන් ගෙන එන්න'.",
-          "suggestion": "{{organizationName}} වැඩබිමෙන් ආනයනය කරන්න"
+          "description": "The translation '{{organizationName}} වැඩබිම් වෙතින් ආනයනය කරන්න' is a literal translation. A more natural and idiomatic Sinhala translation for 'Import from {{organizationName}} Workspace' might be something along the lines of '{{organizationName}} වැඩබිමෙන් දත්ත ආපනයනය කරන්න' or '{{organizationName}} වැඩබිමට දත්ත ආපනයනය කරන්න'. The current translation feels somewhat awkward in Sinhala.",
+          "suggestion": "{{organizationName}} වැඩබිමෙන් දත්ත ආපනයනය කරන්න"
         }
       ],
       "approved_at": null
@@ -186,13 +192,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Увези са {{organizationName}} Workspace-а' doesn't accurately convey the meaning of 'Import from {{organizationName}} Workspace'. 'Увези' (Uvezi) means 'Import' but implies physically moving something. The correct verb to use would indicate importing data or settings, not physically moving something. A better translation would convey the concept of 'importing data/settings'.",
-          "suggestion": "Упореди са {{organizationName}} Workspace-а"
+          "description": "The Serbian translation \"Увези са {{organizationName}} Workspace-а\" uses the verb 'увези' (uvesi) which means 'import' in the sense of bringing something in (like smuggling). The correct term would convey 'Import from' in the sense of 'take data from'.",
+          "suggestion": "Извуци са {{organizationName}} Workspace-а"
         },
         {
           "type": "formatting",
-          "description": "The possessive suffix '-а' is attached to 'Workspace' which feels slightly awkward. While grammatically correct, it's not the most natural phrasing.",
-          "suggestion": "Упореди са {{organizationName}} Workspace"
+          "description": "The Serbian translation adds a hyphen to Workspace. While not technically incorrect, it's unusual in a UI context and can be inconsistent.",
+          "suggestion": "Извуци са {{organizationName}} Workspace"
         }
       ],
       "approved_at": null
@@ -202,9 +208,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The preposition 'sa' can sound slightly unnatural when used in this context. While grammatically correct, it might be better to use a different phrasing to convey the meaning of importing *from* a workspace. The Serbian 'iz' is often preferred for 'from' in this type of context.",
-          "suggestion": "Uvezi iz {{organizationName}} Workspace-a"
+          "type": "formatting",
+          "description": "The translation includes an unnecessary hyphen before 'a' in 'Workspace-a'. It should be 'Workspace' or 'Workspace-om'.",
+          "suggestion": "Uvezi sa {{organizationName}} Workspace"
         }
       ],
       "approved_at": null

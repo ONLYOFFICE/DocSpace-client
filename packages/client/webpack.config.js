@@ -27,27 +27,24 @@
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ModuleFederationPlugin =
-  require("webpack").container.ModuleFederationPlugin;
 const DefinePlugin = require("webpack").DefinePlugin;
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const BannerPlugin = require("webpack").BannerPlugin;
-const ESLintPlugin = require("eslint-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 const minifyJson = require("@docspace/shared/utils/minifyJson");
-
-const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
+const { getBuildDate, getBanner } =
+  require("@docspace/shared/utils/build").default;
 
 const path = require("path");
 
 const pkg = require("./package.json");
 const runtime = require("../runtime.json");
-const deps = pkg.dependencies || {};
 const homepage = pkg.homepage;
 const title = pkg.title;
 const version = pkg.version;
@@ -115,6 +112,7 @@ const config = {
       SRC_DIR: path.resolve(__dirname, "./src"),
       PACKAGE_FILE: path.resolve(__dirname, "package.json"),
       COMMON_DIR: path.resolve(__dirname, "../common"),
+      "@docspace/shared": path.resolve(__dirname, "../shared"),
     },
   },
 
@@ -202,7 +200,17 @@ const config = {
             loader: "@svgr/webpack",
             options: {
               svgoConfig: {
-                plugins: [{ removeViewBox: false }],
+                plugins: [
+                  {
+                    name: "preset-default",
+                    params: {
+                      overrides: {
+                        removeViewBox: false,
+                        cleanupIds: false,
+                      },
+                    },
+                  },
+                ],
               },
             },
           },
@@ -217,7 +225,7 @@ const config = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: [{ loader: "style-loader" }, { loader: "css-loader" }],
       },
       {
         test: /\.module\.s[ac]ss$/i,
@@ -250,7 +258,7 @@ const config = {
       {
         test: /(?<!\.module)\.s[ac]ss$/i,
         use: [
-          "style-loader",
+          { loader: "style-loader" },
           {
             loader: "css-loader",
             options: {
@@ -286,12 +294,12 @@ const config = {
               ],
               plugins: [
                 "@babel/plugin-transform-runtime",
-                "@babel/plugin-proposal-class-properties",
+                "@babel/plugin-transform-class-properties",
                 "@babel/plugin-proposal-export-default-from",
               ],
             },
           },
-          "source-map-loader",
+          { loader: "source-map-loader" },
         ],
       },
     ],
@@ -319,23 +327,23 @@ const config = {
       ],
     }),
   ],
-};
 
-const getBuildDate = () => {
-  const timeElapsed = Date.now();
-  const today = new Date(timeElapsed);
-  return JSON.stringify(today.toISOString().split(".")[0] + "Z");
-};
-
-const getBuildYear = () => {
-  const timeElapsed = Date.now();
-  const today = new Date(timeElapsed);
-  return today.getFullYear();
+  // Extract css processed by MiniCssExtractPlugin in a single file
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: "styles",
+          type: "css/mini-extract",
+          chunks: "all",
+          enforce: true,
+        },
+      },
+    },
+  },
 };
 
 module.exports = (env, argv) => {
-  config.devtool = "source-map";
-
   const isProduction = argv.mode === "production";
   const styleLoader = isProduction
     ? MiniCssExtractPlugin.loader
@@ -359,53 +367,45 @@ module.exports = (env, argv) => {
     return rule;
   });
 
+  const banner = getBanner(version);
+
+  config.devtool = isProduction ? "source-map" : false; // TODO: replace to "eval-cheap-module-source-map" if you want to debug in a browser;
+
   if (isProduction) {
     config.mode = "production";
-    config.optimization = {
-      splitChunks: {
-        chunks: "all",
-      },
-      minimize: !env.minimize,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            format: {
-              comments: /\*\s*\(c\)\s+Copyright\s+Ascensio\s+System\s+SIA/i,
+    config.optimization.splitChunks.chunks = "all";
+    config.optimization.minimize = !env.minimize;
+    config.optimization.minimizer = [
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: [
+            "default",
+            {
+              discardComments: {
+                removeAll: false,
+                remove: (comment) => {
+                  // Keep copyright comments that contain the copyright text
+                  const isCopyright =
+                    comment.includes("Copyright Ascensio System SIA") &&
+                    comment.includes("https://www.onlyoffice.com/");
+                  return !isCopyright;
+                },
+              },
             },
-          },
-          extractComments: false,
-          parallel: false,
-        }),
-      ],
-    };
-  }
-
-  // Extract css processed by MiniCssExtractPlugin in a single file
-  config.optimization = {
-    splitChunks: {
-      cacheGroups: {
-        styles: {
-          name: "styles",
-          type: "css/mini-extract",
-          chunks: "all",
-          enforce: true,
+          ],
         },
-      },
-    },
-  };
-
-  config.plugins.push(
-    new ModuleFederationPlugin({
-      name: "client",
-      filename: "remoteEntry.js",
-      remotes: [],
-      exposes: {},
-      shared: {
-        ...deps,
-        ...sharedDeps,
-      },
-    }),
-  );
+      }),
+      new TerserPlugin({
+        terserOptions: {
+          format: {
+            comments: /\*\s*\(c\)\s+Copyright\s+Ascensio\s+System\s+SIA/i,
+          },
+        },
+        extractComments: false,
+        parallel: false,
+      }),
+    ];
+  }
 
   const htmlTemplate = {
     title: title,
@@ -458,35 +458,14 @@ module.exports = (env, argv) => {
     config.plugins.push(new BundleAnalyzerPlugin());
   }
 
+  // Add banner to JS files
   config.plugins.push(
     new BannerPlugin({
       raw: true,
-      banner: `/*
-* (c) Copyright Ascensio System SIA 2009-${getBuildYear()}. All rights reserved
-*
-* https://www.onlyoffice.com/
-*
-* Version: ${version} (build: ${getBuildDate()})
-*/`,
+      test: /\.(js|css)$/,
+      banner,
     }),
   );
-
-  if (!env.lint || env.lint == "true") {
-    console.log("Enable eslint");
-    config.plugins.push(
-      new ESLintPlugin({
-        configType: "eslintrc",
-        cacheLocation: path.resolve(
-          __dirname,
-          "../../node_modules/.cache/.eslintcache",
-        ),
-        quiet: true,
-        formatter: "json",
-      }),
-    );
-  } else {
-    console.log("Skip eslint");
-  }
 
   return config;
 };

@@ -3,7 +3,7 @@
   "content": "Filter",
   "content_en_sha1_hash": "d7decf1aa22b02ae8abf9a96849ee423eee838e4",
   "created_at": "2025-05-19T21:30:55.685Z",
-  "updated_at": "2025-06-08T12:02:32.720Z",
+  "updated_at": "2025-10-07T15:39:07.370Z",
   "comment": {
     "text": "The translation key \"Filter\" is used to display a button or label in various UI components, typically related to filtering options. In the context of the provided files, it appears as a header title (\"Files:Filter\") in a modal dialog, prompting users to select filter criteria. Translators should provide a clear and concise text that reflects this purpose.",
     "is_auto": true,
@@ -23,9 +23,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 47,
-      "context": "import { DeviceType } from \"@docspace/shared/enums\";\n import {\n ModalDialog,\n ModalDialogType,\n } from \"@docspace/shared/components/modal-dialog\";\n import FilterIcon from \"@docspace/shared/components/filter/sub-components/FilterIcon\";\n \n import TransactionBody from \"./sub-components/TransactionBody\";\n import styles from \"./styles/TransactionHistory.module.scss\";\n import TableLoader from \"./sub-components/TableLoader\";",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/FilterPanel.tsx",
+      "line_number": 45,
+      "context": "TOption,\n } from \"@docspace/shared/components/combobox\";\n \n import styles from \"../styles/TransactionHistory.module.scss\";\n \n type FilterPanelProps = {\n isFilterDialogVisible: boolean;\n closeFilterDialog: () => void;\n isSelectorVisible: boolean;\n selectorComponent: React.ReactNode;\n datesComponent: React.ReactNode;",
       "module": "/packages/client"
     }
   ],
@@ -93,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Զտել\" (Ztel) can mean 'filter', it's a more general term. A more precise translation for 'Filter' in the context of file management (like a filter setting) might be something like \"Ֆիլտրել\" (Filtrvel) or \"Դիրքավորել\" (Dirkavorvel) depending on the nuance desired. \"Զտել\" can imply a more thorough cleansing or purification, which might not be the intended meaning of a file filter.",
-          "suggestion": "Consider \"Ֆիլտրել\" (Filtrvel) or \"Դիրքավորել\" (Dirkavorvel) for a more accurate translation of 'Filter' in this context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -171,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'පෙරහන' (perahana) doesn't accurately convey the meaning of 'Filter' in this context. 'පෙරහන' typically means 'reveal' or 'uncover'. A more appropriate translation would be something along the lines of 'පෙඩී' (pedi) or 'ගැටරැ' (gataraya).",
-          "suggestion": "Consider 'පෙඩී' (pedi) or 'ගැටරැ' (gataraya)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

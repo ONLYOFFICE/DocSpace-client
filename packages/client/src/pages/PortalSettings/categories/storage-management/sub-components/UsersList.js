@@ -31,6 +31,8 @@ import { useNavigate } from "react-router";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import Filter from "@docspace/shared/api/people/filter";
+import { removeUserFilter } from "@docspace/shared/utils/userFilterUtils";
+import { FILTER_PEOPLE } from "@docspace/shared/utils/filterConstants";
 
 import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
 
@@ -54,7 +56,7 @@ const StatisticsComponent = (props) => {
 
     const urlFilter = userFilterData.toUrlParams();
 
-    currentUserId && localStorage.removeItem(`PeopleFilter=${currentUserId}`);
+    if (currentUserId) removeUserFilter(`${FILTER_PEOPLE}=${currentUserId}`);
     navigate(`/accounts/people/filter?${urlFilter}`);
   };
 
@@ -92,6 +94,7 @@ const StatisticsComponent = (props) => {
           {...buttonProps}
           label={t("Common:ShowMore")}
           onClick={onClickUsers}
+          testId="show_more_users_button"
         />
       ) : null}
     </StyledStatistics>

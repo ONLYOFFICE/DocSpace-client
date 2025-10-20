@@ -3,7 +3,7 @@
   "content": "Enter description",
   "content_en_sha1_hash": "4841a72a99c70608a67394ab003dc3eadc91c8c4",
   "created_at": "2025-05-19T21:30:53.876Z",
-  "updated_at": "2025-05-24T07:30:00.661Z",
+  "updated_at": "2025-08-04T07:30:01.425Z",
   "comment": {
     "text": "The \"EnterDescription\" translation key is used to display a placeholder text in a text area group component. It appears as a label and serves as a hint for users to enter a description when filling out a form. Translators can use this key to provide a clear and concise message that helps users understand the purpose of the field.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 184,
-      "context": "</FieldContainer>\n \n <TextAreaGroup\n label={t(\"Common:Description\")}\n name=\"description\"\n placeholder={t(\"EnterDescription\")}\n value={descriptionValue}\n onChange={onChange}\n increaseHeight={isLogoRequiredError}\n />\n <InputGroup",
+      "line_number": 189,
+      "context": "</FieldContainer>\n \n <TextAreaGroup\n label={t(\"Common:Description\")}\n name=\"description\"\n placeholder={t(\"EnterDescription\")}\n value={descriptionValue}\n onChange={onChange}\n increaseHeight={isLogoRequiredError}\n dataTestId=\"description_textarea_group\"\n />",
       "module": "/packages/client"
     }
   ],

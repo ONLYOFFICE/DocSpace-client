@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Trans } from "react-i18next";
+import { TFunction } from "i18next";
 
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
@@ -39,10 +40,10 @@ export const showSuccessExportRoomIndexToast = (
 ) => {
   const toastMessage = (
     <Trans
-      t={t}
+      t={t as TFunction}
       i18nKey="FileExportDestination"
       ns="Files"
-      values={{ fileName, sectionName: t("Common:MyFilesSection") }}
+      values={{ fileName, sectionName: t("Common:MyDocuments") }}
       components={{
         1: (
           <Link
@@ -66,7 +67,7 @@ export const showSuccessCreateFolder = (
 ) => {
   const toastMessage = (
     <Trans
-      t={t}
+      t={t as TFunction}
       i18nKey="FolderSuccessfullyCreated"
       ns="Files"
       values={{ folderTitle: item.title }}

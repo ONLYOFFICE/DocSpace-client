@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
+
 import { useCallback, useEffect, useMemo } from "react";
 import classnames from "classnames";
 import { observer } from "mobx-react";
@@ -40,6 +41,7 @@ import { getLogoUrl } from "@docspace/shared/utils/common";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 
+import useDeviceType from "@/hooks/useDeviceType";
 import { useNavigationStore } from "../../_store/NavigationStore";
 import { useFilesSelectionStore } from "../../_store/FilesSelectionStore";
 import { useFilesListStore } from "../../_store/FilesListStore";
@@ -50,7 +52,6 @@ import useContextMenuModel from "../../_hooks/useContextMenuModel";
 import useHeaderMenu from "../../_hooks/useHeaderMenu";
 
 import type { HeaderProps } from "./Header.types";
-import useDeviceType from "@/hooks/useDeviceType";
 
 export type { HeaderProps };
 
@@ -75,7 +76,7 @@ const Header = ({
   const { displayAbout } = useSettingsStore();
   const { currentDeviceType } = useDeviceType();
   const { getHeaderContextMenuModel } = useContextMenuModel({});
-  const { getHeaderMenu, onCheckboxChange } = useHeaderMenu({});
+  const { getHeaderMenu, onCheckboxChange } = useHeaderMenu();
   const { isBase: isBaseTheme } = useTheme();
 
   const tableGroupMenuVisible = filesSelectionStore.selection.length > 0;
@@ -144,8 +145,8 @@ const Header = ({
     >
       {tableGroupMenuVisible ? (
         <TableGroupMenu
-          withComboBox={true}
-          withoutInfoPanelToggler={true}
+          withComboBox
+          withoutInfoPanelToggler
           isChecked={isChecked}
           isIndeterminate={!isChecked}
           headerMenu={getHeaderContextMenuModel()}
@@ -170,10 +171,10 @@ const Header = ({
             navigationItems={currentNavigationItems}
             getContextOptionsPlus={() => []}
             getContextOptionsFolder={() => []}
-            onClickFolder={(id) => {
+            onClickFolder={(idFolder) => {
               openFolder(
-                id,
-                currentNavigationItems.find((v) => v.id === id)?.title ??
+                idFolder,
+                currentNavigationItems.find((v) => v.id === idFolder)?.title ??
                   currentNavigationItems[0].title,
               );
             }}

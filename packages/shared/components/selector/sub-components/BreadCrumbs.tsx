@@ -26,9 +26,8 @@
 
 import React from "react";
 
-import { classNames } from "@docspace/shared/utils/classNames";
-
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+import { classNames } from "../../../utils";
 
 import {
   ContextMenuButton,
@@ -160,6 +159,7 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
     breadCrumbsLoader,
     isBreadCrumbsLoading,
     onSelectBreadCrumb,
+    bodyIsLoading,
   } = React.use(BreadCrumbsContext);
   const setIsSearch = React.use(SearchDispatchContext);
 
@@ -198,12 +198,17 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
       "minmax(1px, max-content) 12px minmax(1px, max-content)";
   }
 
-  if (!withBreadCrumbs || !visible) return null;
+  if (!withBreadCrumbs || !visible) {
+    if (withBreadCrumbs && !visible && bodyIsLoading) return breadCrumbsLoader;
+
+    return null;
+  }
 
   if (isBreadCrumbsLoading) return breadCrumbsLoader;
 
   return (
     <div
+      id="selector_bread_crumbs"
       className={styles.breadCrumbs}
       style={
         {
@@ -235,6 +240,7 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
         ) : (
           <Text
             key={`bread-crumb-item-${item.id}`}
+            dataTestId={`selector_bread_crumb_item_${item.id}`}
             fontSize="16px"
             fontWeight={600}
             lineHeight="22px"

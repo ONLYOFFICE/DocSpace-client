@@ -3,7 +3,7 @@
   "content": "Close",
   "content_en_sha1_hash": "bbfa773e5a63a5ea58c9b6207e608ca0120e592a",
   "created_at": "2025-05-19T21:30:43.485Z",
-  "updated_at": "2025-06-02T10:20:51.102Z",
+  "updated_at": "2025-09-23T07:24:24.081Z",
   "comment": {
     "text": "This translation key is used for the label \"Close\", which represents a button that closes a dialog or modal window, found in various places such as buttons, dialogs, and modals.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
-      "line_number": 235,
+      "line_number": 236,
       "context": "scale\n onClick={onConvert}\n />\n <Button\n key=\"CloseButton\"\n label={t(\"Common:CloseButton\")}\n size=\"normal\"\n scale\n onClick={onCloseDialog}\n />\n </div>",
       "module": "/packages/client"
     },
@@ -30,20 +30,26 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
-      "line_number": 241,
+      "line_number": 251,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={\n token\n ? `${t(\"Common:Copy\")} & ${t(\"Common:CloseButton\")}`\n : t(\"Webhooks:Generate\")\n }\n primary\n scale\n onClick={onGenerate}",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/Backup/BackupServiceDialog.tsx",
+      "line_number": 170,
+      "context": "))}\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:CloseButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n scale\n testId=\"service-backup-dialog-close-button\"\n />",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/doceditor/src/components/Editor.tsx",
-      "line_number": 217,
-      "context": "};\n \n if (SHOW_CLOSE && !sdkConfig?.isSDK) {\n newConfig.editorConfig.customization.close = {\n visible: SHOW_CLOSE,\n text: t(\"Common:CloseButton\"),\n };\n }\n }\n \n //if (newConfig.document && newConfig.document.info)",
+      "line_number": 224,
+      "context": "};\n \n if (SHOW_CLOSE && !sdkConfig?.isSDK) {\n newConfig.editorConfig.customization.close = {\n visible: SHOW_CLOSE,\n text: t(\"Common:CloseButton\"),\n };\n }\n }\n \n try {",
       "module": "/packages/doceditor"
     },
     {
-      "file_path": "/packages/shared/pages/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 301,
-      "context": "isDisabled={isCopyingToLocal || !isChecked}\n />\n <Button\n className=\"close\"\n size={ButtonSize.normal}\n label={t(\"Common:CloseButton\")}\n onClick={onModalClose}\n />\n </div>\n </StyledFooterContent>\n </ModalDialog.Footer>",
+      "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
+      "line_number": 346,
+      "context": "testId=\"backup_list_restore_button\"\n />\n <Button\n className=\"close\"\n size={ButtonSize.normal}\n label={t(\"Common:CloseButton\")}\n onClick={onModalClose}\n testId=\"backup_list_close_button\"\n />\n </div>\n </div>",
       "module": "/packages/shared"
     }
   ],
@@ -66,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Bağlayın\" typically means \"Connect\" or \"Tie\" and is not the appropriate translation for \"Close\".",
-          "suggestion": "The correct translation for \"Close\" in Azerbaijani is \"Bağla\" or \"Qapayın\"."
+          "description": "The Azerbaijani translation \"Bağlayın\" means \"Connect\" or \"Tie\" and does not accurately translate \"Close\".",
+          "suggestion": "The correct translation for \"Close\" in Azerbaijani is \"Qapayın\" or \"Basta\"."
         }
       ],
       "approved_at": null
@@ -96,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Κλείσιμο\" is a valid Greek word, it literally translates to \"Closing\" or \"Closure\" rather than \"Close\". The direct translation of \"Close\" would be \"Κλείσε\" (imperative form) or \"Κλείσιμο\" as a noun, but \"Κλείσιμο\" as a label for a button sounds less natural. A more appropriate translation would depend on context.  For a button, a simpler option like \"Κλείσιμο\" as a noun might be preferable, but in some contexts, a more descriptive term might be required.",
-          "suggestion": "Consider alternatives like \"Κλείσε\" (imperative, if appropriate for the context) or simply \"Κλείσιμο\" (the noun form) if you want the direct meaning of 'Close'."
+          "description": "While 'Κλείσιμο' is a valid Greek word related to 'close', it's more accurately translated as 'Closing' or 'Closure' rather than the simple 'Close'.  For a button label, a more direct translation like 'Κλείσε' (Kléise) would be more suitable.",
+          "suggestion": "Consider using 'Κλείσε' (Kléise) for a more direct and user-friendly translation of 'Close' on a button."
         }
       ],
       "approved_at": null
@@ -138,7 +144,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'クローズ' (kuroozu) is a direct transliteration of 'Close,' it's not the most natural or commonly used term for a close button in Japanese.  '閉じる' (tojiru) is a more standard and appropriate translation.",
+          "description": "While \"クローズ\" (kuroozu) is a direct transliteration of \"Close\", it's not the most natural or common way to express 'Close' in Japanese in the context of a button or UI element. A more appropriate translation would be \"閉じる\" (shijiru).",
           "suggestion": "閉じる"
         }
       ],
@@ -204,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'වසන්න' (vasanna) typically means 'stay' or 'remain', not 'close' in the context of a button.",
-          "suggestion": "A more appropriate translation for 'Close' would be 'මගහැරීම' (magahærim) or 'වසම කිරීම' (vasama kirima)."
+          "description": "The Sinhala translation \"වසන්න\" (vasannna) typically means 'stay' or 'remain', not 'close' in the context of a button that dismisses something.",
+          "suggestion": "A more appropriate translation for 'Close' would be \"මග හැරීම\" (mag herima) or \"නවහනවා\" (navah navah), or possibly \"වසන්න\" in a specific context where the meaning of 'stay' aligns with the desired action (though this is unlikely for a standard close button)."
         }
       ],
       "approved_at": null
@@ -231,7 +237,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Zatvori' is a valid word in Serbian, it translates more accurately to 'Shut' or 'Lock' rather than 'Close'. A better translation for 'Close' in this context would be 'Zapri' or potentially 'Izlaz'.",
+          "suggestion": "Zapri"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

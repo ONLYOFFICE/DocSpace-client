@@ -3,7 +3,7 @@
   "content": "Room recovered from {{sectionName}}",
   "content_en_sha1_hash": "1c11c187e0180d5bc1d6bc5280e1c79c32f7ac71",
   "created_at": "2025-06-02T10:19:22.204Z",
-  "updated_at": "2025-06-08T12:02:32.705Z",
+  "updated_at": "2025-10-13T13:22:35.733Z",
   "comment": {
     "text": "The \"RoomFromArchiveRestore\" translation key is used to display a message indicating that a room has been recovered from an archive. It appears on a page related to restoring rooms in the application and helps users understand what action was taken.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 349,
+      "context": "case FeedActionKeys.RoomArchived:\n return t(\"InfoPanel:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomUnarchived:\n return t(\"InfoPanel:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyDocuments\"),",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 295,
-      "context": "case FeedActionKeys.RoomArchived:\n return t(\"InfoPanel:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomUnarchived:\n return t(\"InfoPanel:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomIndexExportLocation:\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),",
+      "line_number": 298,
+      "context": "case FeedActionKeys.RoomArchived:\n return t(\"InfoPanel:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomUnarchived:\n return t(\"InfoPanel:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyDocuments\"),",
       "module": "/packages/client"
     }
   ],

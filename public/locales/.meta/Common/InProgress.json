@@ -3,7 +3,7 @@
   "content": "In progress",
   "content_en_sha1_hash": "b6bd42e4e7302e5e9a15930c8fcdb73fc2c0cf18",
   "created_at": "2025-05-19T21:30:45.918Z",
-  "updated_at": "2025-06-08T12:02:32.632Z",
+  "updated_at": "2025-10-13T13:22:35.561Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"In progress\" in a file management application. It appears on a status bar in a data reassignment dialog, indicating the current state of the file.",
     "is_auto": true,
@@ -13,12 +13,12 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
       "line_number": 142,
-      "context": "t,\n }) => {\n const inProgressNode = (\n <div className=\"in-progress\">\n <Loader className=\"in-progress-loader\" size=\"20px\" type=\"track\" />\n <Text className=\"status\">{t(\"Common:InProgress\")}</Text>\n </div>\n );\n \n const pendingNode = (\n <Text className=\"status status-pending\" noSelect>",
+      "context": "t,\n }) => {\n const inProgressNode = (\n <div className=\"in-progress\">\n <Loader className=\"in-progress-loader\" size=\"20px\" type=\"track\" />\n <Text className=\"status\">{t(\"Common:InProgress\")}</Text>\n </div>\n );\n \n const pendingNode = (\n <Text className=\"status status-pending\">",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 272,
+      "line_number": 275,
       "context": "case FileFillingFormStatus.Draft:\n return t(\"Common:BadgeMyDraftTitle\");\n case FileFillingFormStatus.YourTurn:\n return t(\"Common:YourTurn\");\n case FileFillingFormStatus.InProgress:\n return t(\"Common:InProgress\");\n case FileFillingFormStatus.Stopped:\n return t(\"Common:Stopped\");\n case FileFillingFormStatus.Completed:\n return t(\"Common:Complete\");\n default:",
       "module": "/packages/shared"
     }
@@ -87,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Ընթացքի մեջ է\" is a possible translation for \"In progress\", it's a bit verbose and not the most natural or common phrasing in Armenian. A more concise and idiomatic translation would be preferable.",
-          "suggestion": "Consider alternatives like \"Մշակվում է\" (Mashakvum e) or \"Շարունակվում է\" (Sharunakvum e) depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -165,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"සිදු වෙමින්\" (sidu vemin) is a possible translation, it can be interpreted as 'being done' or 'happening'. 'In progress' often implies active work is ongoing. A more direct and commonly used translation for 'in progress' in a project management or status context would be \"ដំណើរ ලමින්\" (darana lamin) or \"ගෙනයමින්\" (genayamin).",
-          "suggestion": "Consider using \"ដំណើរ ලමින්\" (darana lamin) or \"ගෙනයමින්\" (genayamin) instead of \"සිදු වෙමින්\" (sidu vemin)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -192,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'У току' is understandable, it's not the most natural or common translation of 'In progress' in Serbian. It has a slightly archaic or formal feel. A more common and natural translation would be 'U toku' (with a space).",
-          "suggestion": "U toku"
+          "description": "While 'У току' is a possible translation for 'In progress', it has a slightly archaic and formal feel. A more common and natural translation in many contexts might be 'У расу'. 'У току' is more often used for things like a legal process.",
+          "suggestion": "У расу"
         }
       ],
       "approved_at": null

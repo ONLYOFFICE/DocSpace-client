@@ -3,7 +3,7 @@
   "content": "The list of users previously invited to {{productName}} or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
   "content_en_sha1_hash": "1d362dc2343872ee8eb091bb0dc4c37db51fa081",
   "created_at": "2025-05-19T21:30:44.795Z",
-  "updated_at": "2025-05-26T07:57:32.974Z",
+  "updated_at": "2025-10-01T15:17:48.517Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that the list of previously invited users can be accessed and invited for collaboration in certain situations. It appears on an empty screen when no content is displayed, likely in a button or dialog context, such as in a settings or invitation section of the UI.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 637,
+      "line_number": 682,
       "context": "emptyScreenDescription={\n emptyScreenDescription ??\n (activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:EmptyDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:GroupsNotFoundDescription\"))\n }\n searchEmptyScreenImage={emptyScreenImage}",
       "module": "/packages/shared"
     }
@@ -42,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Тук ще се появят или списък с потребители, предварително поканени в {{productName}}, или отделни стаи' is not a precise translation of 'The list of users previously invited to {{productName}} or separate rooms'. The 'или' (or) structure creates an ambiguity that doesn't exist in the English original. It implies the *list* is either users or rooms, not users and rooms.",
-          "suggestion": "Тук ще се появят потребители, които преди това са били поканени в {{productName}} или отделни стаи. Ще можете да поканите тези потребители за сътрудничество по всяко време."
+          "description": "The phrase 'or separate rooms' is not accurately translated. The Bulgarian translation implies 'or separate rooms' refers to the *rooms* themselves, not that the users were invited to separate rooms. The English implies users were invited to different rooms, but the Bulgarian reads like the rooms themselves are an alternative to invited users.",
+          "suggestion": "Тук ще се появи списък с потребители, предишно поканени в {{productName}} или в отделни стаи. Ще можете да поканите тези потребители за сътрудничество по всяко време."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'предварително поканени' is slightly awkward. While grammatically correct, it’s not the most natural way to express 'previously invited'.",
-          "suggestion": "поканени преди това"
+          "description": "The phrase 'или списък с потребители' is slightly awkward. While technically correct, it's not the most natural flow in Bulgarian.",
+          "suggestion": "Тук ще се появи списък с потребители, които са били предишно поканени в {{productName}}, или отделни стаи."
         }
       ],
       "approved_at": null
@@ -56,7 +56,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'separate rooms' is translated as 'samostatných místností'. While technically correct, 'samostatných místností' feels slightly formal and less natural in this context. A more conversational and appropriate translation would be 'oddělených místností' or 'jiných místností'.",
+          "suggestion": "Zde se zobrazí seznam uživatelů, kteří byli dříve pozváni do prostoru {{productName}} nebo do oddělených/jiných místností. Tyto uživatele budete moci kdykoli pozvat ke spolupráci."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -95,13 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ցանկացած ժամանակ կկարողանաք հրավիրել\" is a bit clunky. A more natural translation of 'You will be able to invite' would be something like 'կկարողանաք հրավիրել' or 'ունենալու եք հրավիրելու հնարավորությունը'.",
-          "suggestion": "Կկարողանաք հրավիրել այս օգտատերերին համագործակցության:"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of punctuation (colon) at the end of the first sentence might be too formal for this context. Consider a period instead.",
-          "suggestion": "Այստեղ կհայտնվի նախկինում {{productName}} կամ առանձին սենյակներ հրավիրված օգտատերերի ցանկը։ Դուք կկարողանաք հրավիրել այս օգտատերերին համագործակցության:"
+          "description": "The phrase \"ցանկացած ժամանակ կկարողանաք\" is a bit awkward and overly formal. A more natural phrasing for \"at any time\" would be \"ցանկալսած պահին\" or a simpler \"ցանկացած պահի\" .",
+          "suggestion": "Այստեղ կհայտնվի նախկինում {{productName}} կամ առանձին սենյակներ հրավիրված օգտատերերի ցանկը: Դուք ցանկալսած պահին կկարողանաք հրավիրել այս օգտատերերին համագործակցության:"
         }
       ],
       "approved_at": null
@@ -111,9 +112,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The preposition 'a' is repeated unnecessarily after '{{productName}}'.",
-          "suggestion": "Qui apparirà l’elenco degli utenti precedentemente invitati a {{productName}} o stanze separate. Potrai invitare questi utenti a collaborare in qualsiasi momento."
+          "type": "incorrect_translation",
+          "description": "The phrase \"oa stanze separate\" is grammatically incorrect and doesn't accurately translate \"or separate rooms\".  It should be \"o stanze separate\" or preferably rephrased for better flow and clarity in Italian.",
+          "suggestion": "Qui apparirà l’elenco degli utenti precedentemente invitati a {{productName}} o in stanze separate. Potrai invitare questi utenti a collaborare in qualsiasi momento."
         }
       ],
       "approved_at": null
@@ -121,7 +122,18 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"別室に招待したユーザー\" (users invited to separate rooms) is slightly awkward and doesn't perfectly capture the original meaning of 'or separate rooms'. It implies invitation to a different physical room, which might not be the intended meaning. The original English is more general.",
+          "suggestion": "Consider rephrasing to something like \"または別のグループに招待したユーザー\" (users invited to another group) or \"または別のスペースに招待したユーザー\" (users invited to another space) to better reflect the intended meaning."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"コラボレーションのために招待することができるようになります\" (you will be able to invite these users for collaboration) is overly formal and a bit verbose. It's not a natural way to say this in Japanese.",
+          "suggestion": "A more natural phrasing would be \"これらのユーザーをいつでもコラボレーションのために招待できます\" (you can invite these users for collaboration at any time) or simply \"いつでもコラボレーションのために招待できます\" (you can invite at any time)."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -133,31 +145,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ເມື່ອກ່ອນ' (meu khon) which translates to 'previously' is grammatically correct but could be slightly improved for natural flow. It's a little stiff.",
+          "suggestion": "Consider rephrasing the initial part of the sentence to something like 'ຜູ້ໃຊ້ທີ່ເຄີຍຖືກເຊີນໄປ...' (phu sai thi kheu thuk chen pai... - users who used to be invited to...)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"atsevišķām telpām\" can be improved. While technically correct, it's a bit clunky. A more natural phrasing would be \"atsevišķās istabas\" or \"atsevišķās grupās\" depending on the intended meaning of 'rooms'.  'Telpas' generally refers to physical spaces.",
-          "suggestion": "Šeit tiks parādīts to lietotāju saraksts, kas iepriekš uzaicināti uz {{productName}} vai atsevišķās istabas / atsevišķās grupās."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"te allen tijde\" can sound overly formal and slightly awkward in this context. A more natural phrasing would be \"op elk moment\" or \"altijd\".",
-          "suggestion": "U kunt deze gebruikers op elk moment of altijd uitnodigen om samen te werken."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -166,8 +172,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"kiedykolwiek zechcesz\" is overly formal and doesn't accurately reflect the informal tone of 'at any time'. It implies a conditional willingness.",
-          "suggestion": "Będziesz w stanie zaprosić tych użytkowników do współpracy w dowolnym momencie."
+          "description": "The phrase \"kiedykolwiek zechcesz\" is a very literal and slightly awkward translation of \"at any time\". It sounds overly formal and unnatural in Polish. A more natural translation would be \"w dowolnym momencie\" or \"zawsze, gdy chcesz\".",
+          "suggestion": "W każdej chwili lub zawsze, gdy chcesz."
         }
       ],
       "approved_at": null
@@ -187,13 +193,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses \"în\" before both \"{{productName}}\" and \"săli separate.\" While grammatically correct, it feels slightly redundant. Consider rephrasing for a more fluent read.",
-          "suggestion": "Lista de utilizatori invitaţi anterior în {{productName}} sau în săli separate va fi afișată aici. Puteți invita acești utilizatori să colaboreze în orice moment."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -208,13 +208,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පරිශ්‍රීලකයින්' (parishreelakayin) is used repeatedly and might be too formal or uncommon for the target audience. A more common term for 'users' would be more appropriate.",
-          "suggestion": "Consider using 'භාවිත කරන්නන්' (bhavithakarnanan) or 'භාවිතකාරි' (bhavithakari) as alternatives for 'පරිශ්‍රීලකයින්'."
+          "description": "The word 'පරිශ්‍රීලකයින්' (parishreelakayin) is a less common and potentially less clear term for 'users'. A more common and accessible term would be preferable.",
+          "suggestion": "Consider using 'භාවිතකරුවන්' (bhavitakaruwan) for 'users' instead of 'පරිශ්‍රීලකයින්' (parishreelakayin)."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'ඔබට ඕනෑම විටෙක සහයෝගයෙන් වැඩ කිරීමට මෙම පරිශ්‍රීලකයින්ට ආරාධනා කිරීමට හැකිය' is a bit convoluted. It could be phrased more directly.",
-          "suggestion": "Replace with something like 'ඔබට ඕනෑම වෙලාවක ඔවුන්ව සහයෝගයෙන් වැඩ කිරීමට ආරාධනා කල හැකිය' (You can invite them for collaboration at any time)."
+          "description": "The sentence structure 'ඔබට ඕනෑම විටෙක සහයෝගයෙන් වැඩ කිරීමට මෙම පරිශ්‍රීලකයින්ට ආරාධනා කිරීමට හැකිය' is slightly awkward. It could be improved for better flow.",
+          "suggestion": "Replace with: 'ඔබට ඕනෑම විටෙක මෙම පරිශ්‍රීලකයින්ට සහයෝගයෙන් වැඩ කිරීමට ආරාධනා කල හැකිය.' or 'ඕනෑම විටෙක ඔබට මෙම පරිශ්‍රීලකයින්ව සහයෝගයෙන් වැඩ කිරීමට ආරාධනා කල හැකිය.'"
         }
       ],
       "approved_at": null
@@ -234,13 +234,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses a period (.) after \"овде\" which appears more natural in Serbian (Cyrillic) for sentences continuing with a statement rather than ending. A comma (,) would be more fitting for a list introduction.",
-          "suggestion": "Листа корисника који су претходно позвани у {{productName}} или одвојене собе, појавиће се овде. Моћи ћете да позовете ове кориснике за сарадњу у било које време."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -260,9 +254,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Ukrainian translation uses a colon (:) after 'Тут'. While grammatically correct, it might sound slightly more formal than necessary for a user interface. Consider removing it for a more conversational tone.",
-          "suggestion": "Тут з’явиться список користувачів, яких раніше запросили до {{productName}} або окремих кімнат. Ви зможете запросити цих користувачів до співпраці в будь-який час."
+          "type": "incorrect_translation",
+          "description": "The English phrase \"at any time\" is not perfectly captured by \"в будь-який час\". While understandable, a more natural and accurate translation might emphasize immediacy or flexibility. \"За потреби\" or \"коли вам потрібно\" could be considered.",
+          "suggestion": "За потреби"
         }
       ],
       "approved_at": null

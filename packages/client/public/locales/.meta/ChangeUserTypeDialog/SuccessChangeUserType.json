@@ -3,7 +3,7 @@
   "content": "The user type was successfully changed",
   "content_en_sha1_hash": "3ee5a6b6de38a88a91c320830641268174acb905",
   "created_at": "2025-05-19T21:30:56.939Z",
-  "updated_at": "2025-06-02T10:20:51.043Z",
+  "updated_at": "2025-06-30T12:20:31.140Z",
   "comment": {
     "text": "This translation key is used for a success message that appears when a user type is successfully changed. It's displayed to the user in a notification, likely triggered by an event or callback after the update process completes.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/GlobalEvents/ChangeUserTypeEvent.tsx",
-      "line_number": 97,
-      "context": "updatePromise\n .then((users) => {\n toastr.success(\n isGuestsDialog\n ? t(\"SuccessChangeGuestType\")\n : t(\"SuccessChangeUserType\"),\n );\n \n successCallback?.(users);\n })\n .catch(() => {",
+      "line_number": 98,
+      "context": "updatePromise\n .then((users) => {\n toastr.success(\n isGuestsDialog\n ? t(\"SuccessChangeGuestType\")\n : t(\"SuccessChangeUserType\"),\n );\n \n successCallback?.(users as TUser[]);\n })\n .catch(() => {",
       "module": "/packages/client"
     }
   ],

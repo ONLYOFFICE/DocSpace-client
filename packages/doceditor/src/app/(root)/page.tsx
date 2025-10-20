@@ -54,7 +54,8 @@ const initialSearchParams: Awaited<RootPageProps["searchParams"]> = {
 };
 
 async function Page(props: RootPageProps) {
-  const searchParams = await props.searchParams;
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
   const {
     fileId,
     fileid,
@@ -137,7 +138,9 @@ async function Page(props: RootPageProps) {
       logger.debug(
         `fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Open file password component`,
       );
-      return <FilePassword {...roomData.response} shareKey={share} />;
+      return (
+        <FilePassword validationData={roomData.response} shareKey={share} />
+      );
     }
   }
 
@@ -176,13 +179,13 @@ async function Page(props: RootPageProps) {
 
   return (
     <>
-      {url && (
+      {url ? (
         <Script
           id="onlyoffice-api-script"
           strategy="beforeInteractive"
           src={docApiUrl}
         />
-      )}
+      ) : null}
       <Root
         {...data}
         shareKey={share}

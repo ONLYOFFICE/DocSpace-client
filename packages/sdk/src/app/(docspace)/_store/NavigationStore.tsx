@@ -119,8 +119,10 @@ export const NavigationStoreContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const store = React.useMemo(() => new NavigationStore(), []);
+
   return (
-    <NavigationStoreContext.Provider value={new NavigationStore()}>
+    <NavigationStoreContext.Provider value={store}>
       {children}
     </NavigationStoreContext.Provider>
   );

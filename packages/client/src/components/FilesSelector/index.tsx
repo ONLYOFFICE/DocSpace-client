@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-restricted-syntax */
 import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -54,7 +53,7 @@ import FilesStore from "SRC_DIR/store/FilesStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
-import { getAcceptButtonLabel, getHeaderLabel, getIsDisabled } from "./utils";
+import { getAcceptButtonLabel, getIsDisabled } from "./utils";
 
 let disabledItems: (string | number)[] = [];
 
@@ -89,6 +88,8 @@ const FilesSelectorWrapper = ({
   rootFolderType,
 
   treeFolders,
+  withRecentTreeFolder,
+  withFavoritesTreeFolder,
 
   selection,
   // disabledItems,
@@ -96,7 +97,6 @@ const FilesSelectorWrapper = ({
   checkFileConflicts,
   itemOperationToFolder,
   clearActiveOperations,
-  setMovingInProgress,
   setSelected,
   setMoveToPanelVisible,
   setRestorePanelVisible,
@@ -144,7 +144,6 @@ const FilesSelectorWrapper = ({
   withCreate,
   folderIsShared,
   checkCreating,
-  logoText,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -211,7 +210,7 @@ const FilesSelectorWrapper = ({
       // for backup
       if (!selection.length) return t("Common:BackupNotAllowedInFormRoom");
 
-      const option = { organizationName: logoText };
+      const option = { organizationName: t("Common:OrganizationName") };
 
       if (isCopy)
         return several
@@ -296,8 +295,6 @@ const FilesSelectorWrapper = ({
           } else {
             setIsRequestRunning(false);
             onCloseAndDeselectAction();
-            const move = !isCopy;
-            if (move) setMovingInProgress(move);
             sessionStorage.setItem("filesSelectorPath", `${selectedItemId}`);
 
             try {
@@ -336,19 +333,19 @@ const FilesSelectorWrapper = ({
     }
   };
 
-  const headerLabel = getHeaderLabel(
-    t,
-    isEditorDialog,
-    isCopy,
-    isRestoreAll,
-    isMove,
-    isSelect,
-    filterParam,
-    isRestore,
-    isFormRoom,
-    isThirdParty,
-    isSelectFolder,
-  );
+  // const headerLabel = getHeaderLabel(
+  //   t,
+  //   isEditorDialog,
+  //   isCopy,
+  //   isRestoreAll,
+  //   isMove,
+  //   isSelect,
+  //   filterParam,
+  //   isRestore,
+  //   isFormRoom,
+  //   isThirdParty,
+  //   isSelectFolder,
+  // );
 
   const defaultAcceptButtonLabel = getAcceptButtonLabel(
     t,
@@ -406,6 +403,8 @@ const FilesSelectorWrapper = ({
       getIcon={getIcon}
       setIsDataReady={setIsDataReady}
       treeFolders={treeFolders}
+      withRecentTreeFolder={withRecentTreeFolder}
+      withFavoritesTreeFolder={withFavoritesTreeFolder}
       onSetBaseFolderPath={onSetBaseFolderPath}
       isUserOnly={isUserOnly}
       isRoomsOnly={isRoomsOnly}
@@ -421,7 +420,6 @@ const FilesSelectorWrapper = ({
       onSubmit={onAccept}
       getIsDisabled={getIsDisabledAction}
       withHeader={withHeader}
-      headerLabel={headerLabel}
       submitButtonLabel={acceptButtonLabel || defaultAcceptButtonLabel}
       withCancelButton={withCancelButton}
       isPanelVisible={isPanelVisible}
@@ -489,6 +487,7 @@ export default inject(
       id,
       currentFolderId: currentFolderIdProp,
       isThirdParty,
+      openRoot: openRootProp,
     }: FilesSelectorProps,
   ) => {
     const {
@@ -502,7 +501,7 @@ export default inject(
       filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
 
-    const { treeFolders, roomsFolderId, myFolderId } = treeFoldersStore;
+    const { treeFolders, roomsFolderId } = treeFoldersStore;
 
     const {
       restorePanelVisible,
@@ -520,13 +519,12 @@ export default inject(
 
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
 
-    const { currentDeviceType, logoText } = settingsStore;
+    const { currentDeviceType } = settingsStore;
 
     const {
       selection,
       bufferSelection,
       filesList,
-      setMovingInProgress,
       setSelected,
       filesSettingsStore,
     } = filesStore;
@@ -570,13 +568,29 @@ export default inject(
       selectionsWithoutEditing.filter((i) => "isFolder" in i && i.isFolder)
         .length > 0;
 
+    const getFolderIdForRecent = () => {
+      // Don't know which folder should be selected. Can be files from different folders
+      if (selectionsWithoutEditing.length !== 1) {
+        return undefined;
+      }
+
+      const [selectedFile] = selectionsWithoutEditing;
+
+      // File is shared via link
+      if ("requestToken" in selectedFile && selectedFile.requestToken) {
+        return undefined;
+      }
+
+      return "folderId" in selectedFile ? selectedFile?.folderId : undefined;
+    };
+
     const fromFolderId =
       id ||
       (rootFolderType === FolderType.Archive ||
       rootFolderType === FolderType.TRASH
         ? undefined
         : rootFolderType === FolderType.Recent
-          ? myFolderId
+          ? getFolderIdForRecent()
           : selectedId === selectionsWithoutEditing[0]?.id &&
               "isFolder" in selectionsWithoutEditing[0] &&
               selectionsWithoutEditing[0]?.isFolder
@@ -584,6 +598,8 @@ export default inject(
             : selectedId);
 
     const folderId = fromFolderId;
+    const openRoot =
+      openRootProp || (rootFolderType === FolderType.Recent && !fromFolderId);
 
     return {
       fromFolderId,
@@ -606,7 +622,6 @@ export default inject(
       checkFileConflicts,
       itemOperationToFolder,
       clearActiveOperations,
-      setMovingInProgress,
       setSelected,
       setCopyPanelVisible,
       setRestoreAllPanelVisible,
@@ -626,7 +641,7 @@ export default inject(
           : folderId || currentFolderIdProp,
       filesSettings,
       folderIsShared: shared,
-      logoText,
+      openRoot,
     };
   },
 )(observer(FilesSelectorWrapper));

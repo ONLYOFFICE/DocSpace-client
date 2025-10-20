@@ -23,6 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 "use client";
 
 import { observer } from "mobx-react";
@@ -34,7 +35,7 @@ import isNil from "lodash/isNil";
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
-import { RestoreBackup } from "@docspace/shared/pages/restore-backup";
+import { RestoreBackup } from "@docspace/shared/pages/backup/restore-backup";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { ButtonSize } from "@docspace/shared/components/button";
@@ -97,7 +98,7 @@ const Restore = ({
     isBackupProgressVisible,
     errorsFieldsBeforeSafe,
     thirdPartyStorage,
-    defaults,
+
     isTheSameThirdPartyAccount,
     downloadingProgress,
     connectedThirdPartyAccount,

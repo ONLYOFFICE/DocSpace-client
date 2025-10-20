@@ -3,7 +3,7 @@
   "content": "Use Http",
   "content_en_sha1_hash": "a4ed8cbde9503b55d14f45b94b48f75e0a869a86",
   "created_at": "2025-05-26T07:15:49.377Z",
-  "updated_at": "2025-05-26T08:01:57.109Z",
+  "updated_at": "2025-10-13T21:00:28.226Z",
   "comment": {
     "text": "This translation key is used to display a message indicating whether to use HTTP or another protocol. It appears as a toggle button in the Amazon settings component and provides context for users about server-side encryption methods.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/amazon-settings/AmazonSettings.tsx",
-      "line_number": 88,
+      "line_number": 85,
       "context": "const regionPlaceholder =\n selectedStorage && selectedStorage.properties[2]?.title;\n \n const serviceUrlPlaceholder = t(\"Common:ServiceUrl\");\n const SSEPlaceholder = t(\"Common:ServerSideEncryptionMethod\");\n const useHttpPlaceholder = t(\"Common:UseHttp\");\n const serverSideEncryption = t(\"Common:AmazonSSE\");\n const clientSideEncryption = t(\"Common:AmazonCSE\");\n \n const sseKms = \"SSE-KMS\";\n const sseS3 = \"SSE-S3\";",
       "module": "/packages/shared"
     }
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Http istifadə edin' is a literal translation and doesn't fully convey the intended meaning. A more natural Azerbaijani phrasing would be 'HTTP istifadəsini aktiv edin' or 'HTTP-ni istifadə edin'.",
+          "suggestion": "HTTP-ni istifadə edin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation \"Sisällettävä Http\" doesn't accurately convey the meaning of \"Use Http\". \"Sisällettävä\" means \"containing\" or \"to contain\", which isn't the intended meaning. It suggests HTTP is something that *must* be included, not that it should be *used*.",
+          "suggestion": "Käytä Http"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -141,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Utilizare Http\" is technically correct, it sounds unnatural and lacks the conciseness of the English \"Use Http\". A more natural Romanian translation would be something like \"Folosește Http\" or \"Utilizează Http\".",
+          "suggestion": "Folosește Http"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

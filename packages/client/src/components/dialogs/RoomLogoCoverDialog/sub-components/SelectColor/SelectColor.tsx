@@ -58,7 +58,7 @@ export const SelectColor = ({
   openColorPicker,
   setOpenColorPicker,
 }: SelectColorProps) => {
-  const isDefaultColor = logoColors.includes(roomColor);
+  const isDefaultColor = logoColors.includes(roomColor!);
   const [pickerColor, setPickerColor] = useState<string | null>(
     isDefaultColor ? "" : roomColor || "",
   );
@@ -93,9 +93,13 @@ export const SelectColor = ({
     <div className="select-color-container">
       <div className="color-name">{t("Common:Color")}</div>
       <div className="colors-container">
-        {logoColors.map((color) =>
+        {logoColors.map((color, index) =>
           color === selectedColor ? (
-            <SelectedColorItem key={color} color={color}>
+            <SelectedColorItem
+              key={color}
+              color={color}
+              data-testid={`color_item_selected_${index}`}
+            >
               <div className="circle" color={color} />
             </SelectedColorItem>
           ) : (
@@ -103,14 +107,16 @@ export const SelectColor = ({
               key={color}
               color={color}
               onClick={() => onChangeColor(color)}
+              data-testid={`color_item_${index}`}
             />
           ),
         )}
         {roomColor ? (
           <CustomSelectedColor
             isSelected={isSelectedColorPicker}
-            color={pickerColor}
+            color={pickerColor!}
             ref={iconRef}
+            data-testid="color_item_custom_selected"
           >
             {isSelectedColorPicker ? (
               <div className="color-picker-circle">
@@ -137,6 +143,7 @@ export const SelectColor = ({
             isEmptyColor
             isSelected={openColorPicker}
             ref={iconRef}
+            data-testid="color_item_add_custom"
           >
             <IconButton
               className="select-color-plus-icon"
@@ -161,7 +168,7 @@ export const SelectColor = ({
                 onApply={onApply}
                 isPickerOnly
                 handleChange={onApply}
-                appliedColor={selectedColor}
+                appliedColor={selectedColor!}
                 applyButtonLabel={t("Common:ApplyButton")}
                 cancelButtonLabel={t("Common:CancelButton")}
               />
@@ -169,7 +176,6 @@ export const SelectColor = ({
           </StyledModalDialog>
         ) : (
           <DropDown
-            directionX="both"
             directionY="both"
             topSpace={16}
             forwardedRef={iconRef}
@@ -186,7 +192,7 @@ export const SelectColor = ({
                   onApply={onApply}
                   isPickerOnly
                   handleChange={onApply}
-                  appliedColor={selectedColor}
+                  appliedColor={selectedColor!}
                   applyButtonLabel={t("Common:ApplyButton")}
                   cancelButtonLabel={t("Common:CancelButton")}
                 />

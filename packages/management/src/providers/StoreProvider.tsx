@@ -38,4 +38,3 @@ const StoreProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export default StoreProvider;
-

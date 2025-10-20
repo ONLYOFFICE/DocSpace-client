@@ -3,7 +3,7 @@
   "content": "Balance",
   "content_en_sha1_hash": "90eef613042c5a51f542421065b68b886d473807",
   "created_at": "2025-05-28T09:33:06.646Z",
-  "updated_at": "2025-06-08T12:02:32.819Z",
+  "updated_at": "2025-09-02T07:59:28.610Z",
   "comment": {
     "text": "The \"BalanceText\" translation key is used to display the English phrase \"Balance\" in a wallet-related context, specifically within a payment settings portal, and appears as part of a header element.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletContainer.tsx",
-      "line_number": 178,
-      "context": "{isCardLinkedToPortal ? <PayerInformation /> : null}\n \n <div className={styles.balanceWrapper}>\n <div className={styles.headerContainer}>\n <Text isBold fontSize=\"16px\">\n {t(\"BalanceText\")}\n </Text>\n \n {!isNotPaidPeriod && isCardLinkedToPortal ? (\n <RefreshIconButton isRefreshing={isRefreshing} onClick={onClick} />\n ) : null}",
+      "line_number": 227,
+      "context": "/>\n ) : null}\n <div className={styles.balanceWrapper}>\n <div className={styles.headerContainer}>\n <Text isBold fontSize=\"18px\" className={styles.balanceTitle}>\n {t(\"BalanceText\")}\n </Text>\n \n {!isNotPaidPeriod && isCardLinkedToPortal ? (\n <RefreshIconButton isRefreshing={isRefreshing} onClick={onClick} />\n ) : null}",
       "module": "/packages/client"
     }
   ],

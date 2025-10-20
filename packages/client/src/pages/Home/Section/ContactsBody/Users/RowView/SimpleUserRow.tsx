@@ -27,14 +27,14 @@
 import React from "react";
 
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
-import { TData } from "@docspace/shared/components/row/Row.types";
+import type { TData } from "@docspace/shared/components/rows/row/Row.types";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
 import UserContent from "./UserContent";
 
 import { StyledSimpleUserRow, StyledWrapper } from "./RowView.styled";
-import { SimpleUserRowProps } from "./RowView.types";
+import type { SimpleUserRowProps } from "./RowView.types";
 
 const SimpleUserRow = (props: SimpleUserRowProps) => {
   const {
@@ -47,7 +47,11 @@ const SimpleUserRow = (props: SimpleUserRowProps) => {
     isActive,
     value,
     inProgress,
+    contactsTab,
+    itemIndex,
   } = props;
+
+  const isGuests = contactsTab === "guests";
 
   const isChecked = checkedProps!.checked;
 
@@ -83,6 +87,11 @@ const SimpleUserRow = (props: SimpleUserRowProps) => {
           onRowClick={() => {}}
           isIndexEditingMode={false}
           inProgress={inProgress}
+          dataTestId={
+            isGuests
+              ? `contacts_guests_row_${itemIndex}`
+              : `contacts_users_row_${itemIndex}`
+          }
         >
           <UserContent {...props} />
         </StyledSimpleUserRow>

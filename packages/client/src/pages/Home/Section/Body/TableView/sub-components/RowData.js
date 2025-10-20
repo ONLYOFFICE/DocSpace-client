@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
 import { IndexIconButtons } from "@docspace/shared/components/index-icon-buttons";
@@ -52,6 +51,7 @@ const RowDataComponent = (props) => {
     dragStyles,
     selectionProp,
     value,
+    documentTitle,
     theme,
     onContentFileSelect,
     checkedProps,
@@ -62,32 +62,14 @@ const RowDataComponent = (props) => {
     quickButtonsComponent,
 
     tableStorageName,
-    columnStorageName,
     isIndexEditingMode,
     changeIndex,
-    isIndexedFolder,
     erasureColumnIsEnabled,
+    index,
+    isPersonalReadOnly,
   } = props;
 
-  const [lastColumn, setLastColumn] = useState(
-    getLastColumn(
-      tableStorageName,
-      localStorage.getItem(columnStorageName),
-      isIndexedFolder,
-    ),
-  );
-
-  useEffect(() => {
-    const newLastColumn = getLastColumn(
-      tableStorageName,
-      localStorage.getItem(columnStorageName),
-      isIndexedFolder,
-    );
-
-    if (newLastColumn && newLastColumn !== lastColumn) {
-      setLastColumn(newLastColumn);
-    }
-  });
+  const lastColumn = getLastColumn(tableStorageName);
 
   const quickButtonsComponentNode = (
     <StyledQuickButtonsContainer>
@@ -117,14 +99,18 @@ const RowDataComponent = (props) => {
     <>
       <TableCell
         {...dragStyles}
+        dataTestId={`files-cell-name-${index}`}
         className={classNames(
           selectionProp?.className,
           "table-container_file-name-cell",
-          lastColumn === "Name" && isIndexEditingMode
-            ? "index-buttons-name"
-            : "",
+          dragStyles.className,
+          {
+            "table-container_file-name-cell-first":
+              value?.indexOf("first") > -1,
+          },
         )}
         value={value}
+        documentTitle={documentTitle}
       >
         <FileNameCell
           theme={theme}
@@ -142,8 +128,11 @@ const RowDataComponent = (props) => {
 
       {authorColumnIsEnabled ? (
         <TableCell
+          dataTestId={`files-cell-author-${index}`}
           style={
-            !authorColumnIsEnabled ? { background: "none" } : dragStyles.style
+            !authorColumnIsEnabled
+              ? { background: "none !important" }
+              : dragStyles.style
           }
           {...selectionProp}
           className={classNames(
@@ -166,6 +155,7 @@ const RowDataComponent = (props) => {
 
       {createdColumnIsEnabled ? (
         <TableCell
+          dataTestId={`files-cell-created-${index}`}
           style={
             !createdColumnIsEnabled
               ? { background: "none !important" }
@@ -193,6 +183,7 @@ const RowDataComponent = (props) => {
 
       {modifiedColumnIsEnabled ? (
         <TableCell
+          dataTestId={`files-cell-modified-${index}`}
           style={
             !modifiedColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
@@ -215,8 +206,9 @@ const RowDataComponent = (props) => {
         <div />
       )}
 
-      {erasureColumnIsEnabled ? (
+      {isPersonalReadOnly && erasureColumnIsEnabled ? (
         <TableCell
+          dataTestId={`files-cell-erasure-${index}`}
           style={
             !erasureColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
@@ -237,6 +229,7 @@ const RowDataComponent = (props) => {
 
       {sizeColumnIsEnabled ? (
         <TableCell
+          dataTestId={`files-cell-size-${index}`}
           style={
             !sizeColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
@@ -259,6 +252,7 @@ const RowDataComponent = (props) => {
 
       {typeColumnIsEnabled ? (
         <TableCell
+          dataTestId={`files-cell-type-${index}`}
           style={
             !typeColumnIsEnabled
               ? { background: "none !important" }
@@ -284,7 +278,7 @@ const RowDataComponent = (props) => {
   );
 };
 
-export default inject(({ tableStore, selectedFolderStore }) => {
+export default inject(({ tableStore, treeFoldersStore }) => {
   const {
     authorColumnIsEnabled,
     createdColumnIsEnabled,
@@ -292,11 +286,10 @@ export default inject(({ tableStore, selectedFolderStore }) => {
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
     tableStorageName,
-    columnStorageName,
     erasureColumnIsEnabled,
   } = tableStore;
 
-  const { isIndexedFolder } = selectedFolderStore;
+  const { isPersonalReadOnly } = treeFoldersStore;
 
   return {
     authorColumnIsEnabled,
@@ -305,9 +298,8 @@ export default inject(({ tableStore, selectedFolderStore }) => {
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
     tableStorageName,
-    columnStorageName,
 
-    isIndexedFolder,
     erasureColumnIsEnabled,
+    isPersonalReadOnly,
   };
 })(observer(RowDataComponent));

@@ -51,6 +51,11 @@ const Tags: FC<TagsProps> = ({
   onMouseEnter,
   onMouseLeave,
   showCreateTag,
+  isDefaultMode = true,
+  directionY,
+  fixedDirection,
+  manualY,
+  manualX,
 }) => {
   const [renderedTags, setRenderedTags] = React.useState<TagType[]>([]);
   const [isOpenDropdown, setIsOpenDropdown] = React.useState(false);
@@ -199,6 +204,11 @@ const Tags: FC<TagsProps> = ({
             roomType={tag.roomType}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
+            isDefaultMode={isDefaultMode}
+            directionY={directionY}
+            fixedDirection={fixedDirection}
+            manualY={manualY}
+            manualX={manualX}
             advancedPopup={tag.advancedOptions ? advancedPopup : undefined}
             openDropdown={isOpenDropdown}
             setOpenDropdown={setIsOpenDropdown}

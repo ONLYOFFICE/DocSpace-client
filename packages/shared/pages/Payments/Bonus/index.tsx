@@ -27,15 +27,15 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
+import { Text } from "../../../components/text";
+import { PaymentsStandaloneLoader } from "../../../skeletons/payments";
 
-import { BenefitsContainer } from "../Standalone/BenefitsContainer";
-import { ContactContainer } from "./ContactContainer";
-import { OfficialDocumentation } from "./OfficialDocumentation";
+import { BenefitsContainer } from "../common/BenefitsContainer";
+import { ContactContainer } from "./sub-components/ContactContainer";
+import { OfficialDocumentation } from "./sub-components/OfficialDocumentation";
 
-import { StyledBonus } from "./Bonus.styled";
 import { IBonusProps } from "./Bonus.types";
+import styles from "./Bonus.module.scss";
 
 export const Bonus = ({
   isEnterprise,
@@ -56,7 +56,7 @@ export const Bonus = ({
   if (!ready) return <PaymentsStandaloneLoader />;
 
   return (
-    <StyledBonus>
+    <div data-testid="bonus" className={styles.bonus}>
       <BenefitsContainer
         isTrial={isTrial}
         isEnterprise={isEnterprise}
@@ -83,6 +83,6 @@ export const Bonus = ({
         demoOrderUrl={demoOrderUrl}
         feedbackAndSupportUrl={feedbackAndSupportUrl}
       />
-    </StyledBonus>
+    </div>
   );
 };

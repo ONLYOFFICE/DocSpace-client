@@ -34,7 +34,7 @@ import { getCountTilesInRow } from "@docspace/shared/utils";
 
 import { StyledCard, StyledItem } from "../StyledTileView";
 
-const Card = ({ children, countTilesInRow, ...rest }) => {
+const Card = ({ children, ...rest }) => {
   const horizontalGap = 16;
   const fileHeight = 220 + horizontalGap;
   const cardHeight = fileHeight;
@@ -58,7 +58,6 @@ const InfiniteGrid = (props) => {
   const {
     children,
     hasMoreFiles,
-    filterTotal,
     fetchMoreFiles,
     filesLength,
     className,

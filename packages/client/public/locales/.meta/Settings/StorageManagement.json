@@ -3,7 +3,7 @@
   "content": "Storage management",
   "content_en_sha1_hash": "aee08f8d5281c4277ee7ebdfe0a0f452865e73b5",
   "created_at": "2025-05-19T21:30:52.780Z",
-  "updated_at": "2025-06-08T12:02:32.730Z",
+  "updated_at": "2025-09-26T15:21:06.255Z",
   "comment": {
     "text": "The \"StorageManagement\" translation key is used to display the storage management section title on the Portal Settings page. It provides a clear and concise label for this section, helping users navigate through the settings. This translation key appears in a header context, likely as part of a category or tab navigation menu.",
     "is_auto": true,
@@ -12,25 +12,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 235,
+      "line_number": 238,
       "context": "return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");\n case \"StorageManagement\":\n return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");\n default:\n throw new Error(\"Unexpected translation key\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/index.js",
       "line_number": 62,
-      "context": "}, []);\n \n const { t, ready } = useTranslation([\"Settings\", \"Common\"]);\n \n useEffect(() => {\n ready && setDocumentTitle(t(\"Settings:StorageManagement\"));\n }, [ready]);\n \n if (!ready || !isInit) return <SettingsStorageManagementSkeleton />;\n \n return (",
+      "context": "}, []);\n \n const { t, ready } = useTranslation([\"Settings\", \"Common\"]);\n \n useEffect(() => {\n ready && setDocumentTitle(t(\"Settings:StorageManagement\"));\n }, [ready]);\n \n if (showPortalSettingsLoader) return <SettingsStorageManagementSkeleton />;\n \n return (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 416,
+      "line_number": 423,
       "context": "{\n id: \"portal-settings_catalog-portal-storageManagement\",\n key: \"6\",\n type: PageType.storageManagement,\n link: \"management\",\n tKey: \"StorageManagement\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-storageManagement\",\n key: \"6-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 416,
+      "line_number": 423,
       "context": "{\n id: \"portal-settings_catalog-portal-storageManagement\",\n key: \"6\",\n type: PageType.storageManagement,\n link: \"management\",\n tKey: \"StorageManagement\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-storageManagement\",\n key: \"6-0\",",
       "module": "/packages/client"
     }
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Διαχείριση αποθ. χώρου\" is understandable, it's a somewhat literal translation of \"Storage management\". A more natural and commonly used Greek term would be \"Διαχείριση αποθηκεύσεων\" or \"Διαχείριση αποθηκευτικού χώρου\".",
-          "suggestion": "Διαχείριση αποθηκεύσεων"
+          "description": "While \"Διαχείριση αποθ. χώρου\" is understandable, a more accurate and common translation for \"Storage management\" would be \"Διαχείριση αποθήκευσης\" or \"Διαχείριση χώρου αποθήκευσης\". \"Αποθ. χώρου\" is a shortened form that might be less clear to some users.",
+          "suggestion": "Διαχείριση αποθήκευσης"
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Պահպանման կառավարում\" (Pahp'anman karavarum) is technically 'storage management', a more natural and idiomatic translation in Armenian would be something closer to 'Տվալների պահպանման աշխատանքներ' (Tvalnery pahp'anman ashxatankner) or 'Պահպանման համակարգերի կառավարում' (Pahp'anman hamakarger kаravаrum). \"Պահպանման կառավարում\" is a literal translation that may sound slightly awkward to a native Armenian speaker.",
-          "suggestion": "Consider using 'Տվալների պահպանման աշխատանքներ' or 'Պահպանման համակարգերի կառավարում' for a more natural translation."
+          "description": "The Armenian translation \"Պահպանման կառավարում\" translates more accurately to \"Preservation Management\" rather than \"Storage Management\". While 'storage' can be associated with 'preservation,' the direct equivalent of 'storage' is not conveyed.",
+          "suggestion": "Consider a more accurate translation like \"Տվյալների պահպանման աշխատանքներ\" (Data Preservation Work) or \"Պահեստային աշխատանքներ\" (Storage Operations) depending on the intended meaning of 'Storage Management'."
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Zarządzanie pamięcią\" is a literal translation, \"Storage management\" generally refers to managing storage devices (like hard drives, SSDs, or cloud storage), not just memory (RAM). \"Zarządzanie magazynem\" would be a more accurate translation.",
-          "suggestion": "Zarządzanie magazynem"
+          "description": "While \"Zarządzanie pamięcią\" translates literally to \"Memory management\", in the context of \"Storage management\", a more accurate translation would be \"Zarządzanie pamięcią masową\" or \"Zarządzanie przestrzenią dyskową\". \"Pamięcią\" can imply RAM, not persistent storage.",
+          "suggestion": "Zarządzanie pamięcią masową"
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ආචයන කළමනාකරණය' doesn't accurately convey the meaning of 'Storage management'. 'ආචයන' (aachayana) translates to 'observance' or 'ceremony', which is not related to storage.",
-          "suggestion": "A more appropriate translation would be something like 'သိimpanan කළමනාකරණය' (simpana kalamanakaraṇaya) meaning 'storage management', or 'දත්ත කළමනාකරණය' (datta kalamanakaraṇaya) meaning 'data management'."
+          "description": "The Sinhala translation \"ආචයන කළමනාකරණය\" translates to something like \"device management\" or \"apparatus management\" and not \"storage management.\" The word 'ආචයන' (aachayana) refers to a device or apparatus.",
+          "suggestion": "භ 収納 කළමනාකරණය (Bh 収納 kamanaakarayanaya) - This would more accurately represent 'storage management'. Alternatively, තැටි කළමනාකරණය (thati kamanaakarayanaya) - meaning 'data management' or 'storage management' could be used, depending on the specific context."
         }
       ],
       "approved_at": null

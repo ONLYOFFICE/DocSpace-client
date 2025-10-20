@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import AcceptIconSvgUrl from "PUBLIC_DIR/images/selector.input.accept.svg?url";
 import CancelIconSvgUrl from "PUBLIC_DIR/images/selector.input.cancel.svg?url";
@@ -33,6 +34,8 @@ import { InputSize, InputType, TextInput } from "../../text-input";
 import { IconButton } from "../../icon-button";
 import { RoomIcon } from "../../room-icon";
 import { RoomLogo } from "../../room-logo";
+import { Loader, LoaderTypes } from "../../loader";
+
 import styles from "../Selector.module.scss";
 import { InputItemProps } from "../Selector.types";
 
@@ -53,6 +56,7 @@ const InputItem = ({
   setSavedInputValue,
 }: InputItemProps) => {
   const [value, setValue] = React.useState(defaultInputValue);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const requestRunning = React.useRef<boolean>(false);
   const canceled = React.useRef<boolean>(false);
@@ -61,12 +65,14 @@ const InputItem = ({
   const onAcceptInputAction = React.useCallback(async () => {
     if (requestRunning.current || !value) return;
     setSavedInputValue(null);
+    setIsLoading(true);
     requestRunning.current = true;
 
     await onAcceptInput(value);
 
     canceled.current = true;
     requestRunning.current = false;
+    setIsLoading(false);
   }, [onAcceptInput, setSavedInputValue, value]);
 
   const onCancelInputAction = React.useCallback(() => {
@@ -150,12 +156,37 @@ const InputItem = ({
         onChange={onChange}
         forwardedRef={inputRef}
         placeholder={placeholder}
+        isDisabled={isLoading}
+        testId="selector_input_item"
       />
-      <div className={styles.inputWrapper} onClick={onAcceptInputAction}>
-        <IconButton iconName={AcceptIconSvgUrl} size={16} />
+      <div
+        className={classNames(styles.inputWrapper, {
+          [styles.loading]: isLoading,
+        })}
+        onClick={onAcceptInputAction}
+      >
+        {isLoading ? (
+          <Loader type={LoaderTypes.track} size="16px" />
+        ) : (
+          <IconButton
+            iconName={AcceptIconSvgUrl}
+            size={16}
+            dataTestId="selector_new_item_accept"
+          />
+        )}
       </div>
-      <div className={styles.inputWrapper} onClick={onCancelInputAction}>
-        <IconButton iconName={CancelIconSvgUrl} size={16} />
+      <div
+        className={classNames(styles.inputWrapper, {
+          [styles.loading]: isLoading,
+        })}
+        onClick={onCancelInputAction}
+      >
+        <IconButton
+          iconName={CancelIconSvgUrl}
+          size={16}
+          isDisabled={isLoading}
+          dataTestId="selector_new_item_cancel"
+        />
       </div>
     </div>
   );

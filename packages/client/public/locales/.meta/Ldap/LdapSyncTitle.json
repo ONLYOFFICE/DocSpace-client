@@ -3,7 +3,7 @@
   "content": "Sync LDAP data",
   "content_en_sha1_hash": "eacc43f7e59fe313e63f3f6f031fcc75dac16efb",
   "created_at": "2025-05-19T21:30:54.316Z",
-  "updated_at": "2025-06-08T12:02:32.729Z",
+  "updated_at": "2025-08-11T18:11:59.196Z",
   "comment": {
     "text": "This translation key is used for the title \"Sync LDAP data\" and appears as a page title in the Portal Settings. It provides context for users navigating to the synchronization settings within LDAP integration.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 222,
+      "line_number": 225,
       "context": "case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:DeveloperTools\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/LdapMobileView.js",
-      "line_number": 60,
-      "context": "badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n disabled={!isLdapEnabled}\n />\n <MobileCategoryWrapper\n title={t(\"Ldap:LdapSyncTitle\")}\n subtitle={t(\"LdapMobileSyncDescription\")}\n url=\"/portal-settings/integration/ldap/sync-data\"\n withPaidBadge={!isLDAPAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}",
+      "line_number": 61,
+      "context": "onClickLink={onClickLink}\n disabled={!isLdapEnabled}\n dataTestId=\"ldap_settings\"\n />\n <MobileCategoryWrapper\n title={t(\"Ldap:LdapSyncTitle\")}\n subtitle={t(\"LdapMobileSyncDescription\")}\n url=\"/portal-settings/integration/ldap/sync-data\"\n withPaidBadge={!isLDAPAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}",
       "module": "/packages/client"
     },
     {
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 333,
+      "line_number": 340,
       "context": "{\n id: \"portal-settings_catalog-ldap-sync-data\",\n key: \"4-0-1\",\n icon: \"\",\n link: \"sync-data\",\n tKey: \"Ldap:LdapSyncTitle\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-third-party-services\",",
       "module": "/packages/client"
     }
@@ -57,7 +57,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'LDAP məlumatlarını sinxronizasiya edin' is a very literal translation. A more natural and idiomatic translation would be 'LDAP məlumatlarını yeniləyin' or 'LDAP məlumatlarını uyğunlaşdırın'. The term 'sinkronizasiya edin' feels somewhat formal and less commonly used in this context.",
+          "suggestion": "LDAP məlumatlarını yeniləyin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -132,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຊິງຂໍ້ມູນ LDAP\" is a literal transliteration, but doesn't accurately convey the meaning of \"Sync LDAP data.\" 'ຊິງ' typically means 'to snatch' or 'to take,' which isn't appropriate for a synchronization process.  A more accurate translation would involve conveying the idea of 'synchronizing' or 'updating.'",
-          "suggestion": "Consider a translation like \"ອັບເດດຂໍ້ມູນ LDAP\" (Update LDAP data) or \"ເຊື່ອມໂອນຂໍ້ມູນ LDAP\" (Synchronize LDAP data)."
+          "description": "The Lao translation 'ຊິງຂໍ້ມູນ LDAP' is a literal transliteration of 'Sync data LDAP' and doesn't accurately convey the meaning of 'Sync LDAP data'. 'ຊິງ' implies taking or grabbing, which isn't the intended action. A more accurate translation would focus on synchronization.",
+          "suggestion": "ອັບເດດຂໍ້ມູນ LDAP"
         }
       ],
       "approved_at": null
@@ -186,13 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'එල්ඩීඒපී' (LDAP) is a transliteration and while understandable, it might be more user-friendly to use a more common or accepted transliteration or a brief explanation if LDAP isn't widely known.",
-          "suggestion": "Consider 'LDAP දත්ත' or 'අldap දත්ත' or briefly explain what LDAP is if appropriate for the audience."
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the sentence could be slightly more natural. Using 'සමමුහුර්ත කරන්න' is accurate but can be perceived as somewhat formal for a UI label.",
-          "suggestion": "Consider 'එල්ඩීඒපී දත්ත යාවත්කාලීකරණය කරන්න' (Update LDAP data) or 'එල්ඩීඒපී දත්ත යාවත්කාලීකරණය' (Update LDAP data - shorter)"
+          "description": "The Sinhala word 'සමමුහුර්ත' (samamuhuwrta) is technically correct but a more natural and common term for 'sync' in this context might be 'අsynchronize' (asinkronize) or 'එකතු කිරීම' (ekathu kirima).",
+          "suggestion": "Consider using 'එල්ඩීඒපී දත්ත එකතු කිරීම' (Ldap data ekathu kirima) or 'එල්ඩීඒපී දත්ත අsynchronize කිරීම'."
         }
       ],
       "approved_at": null

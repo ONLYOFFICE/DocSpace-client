@@ -37,4 +37,3 @@ export const StyledLayout = styled.div`
     flex-direction: column;
   }
 `;
-

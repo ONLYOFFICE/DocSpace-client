@@ -35,7 +35,7 @@ import { useTranslation } from "react-i18next";
 import { Heading } from "@docspace/shared/components/heading";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { IconButton } from "@docspace/shared/components/icon-button";
-
+import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 import type { TGetAllPortals } from "@docspace/shared/api/management/types";
 
 import { getHeaderByPathname } from "@/lib";
@@ -67,11 +67,13 @@ export const Section = ({
 
   const { key, isSubPage } = getHeaderByPathname(pathname, t);
 
+  useDocumentTitle(t("Common:SpaceManagement"));
+
   return (
     <StyledSection>
       <StyledSectionHeader>
         <StyledHeading>
-          {isSubPage && (
+          {isSubPage ? (
             <IconButton
               iconName={ArrowPathReactSvgUrl}
               size={17}
@@ -79,12 +81,12 @@ export const Section = ({
               onClick={onBack}
               className="arrow-button"
             />
-          )}
-          <Heading className="headline" type="content" truncate={true}>
+          ) : null}
+          <Heading className="headline" type="content" truncate>
             {key}
           </Heading>
         </StyledHeading>
-        {showBar && <Bar title={barTitle} />}
+        {showBar ? <Bar title={barTitle} /> : null}
       </StyledSectionHeader>
       <Scrollbar id="sectionScroll" scrollClass="section-scroll" fixedSize>
         {children}

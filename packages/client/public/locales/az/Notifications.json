@@ -1,11 +1,20 @@
 {
-  "ActionsWithFilesDescription": "Nişanlar sizə fayl yükləmələri, yeni yaradılanlar və dəyişikliklər haqqında məlumat verir.",
+  "ActionsWithFilesDescription": "Badges, {{rooms}}, {{shared}}, və {{documents}} bölmələri üzrə fayl fəaliyyətini — yükləmə, redaktə və ya paylaşma — vurğulayacaq.",
+  "AdminSetupRequired": "İdarəçi təyinatı tələb olunur",
   "Badges": "Beyclər",
   "DailyFeed": "Gündəlik {{productName}} axını",
   "DailyFeedDescription": "{{productName}}-dəki xəbərləri və hadisələri gündəlik xülasədə oxuyun.",
-  "ManageNotifications": "İdarə etmək",
+  "FileActivityNotify": "Fəaliyyətə dair bildirişlər",
+  "GoToSettings": "İdarəyə keçid edin",
+  "IsNotValid": "Mövcud deyil",
+  "LdapEmailTooltip": "Bu istifadəçi hesabının məlumatları LDAP-dən yüklənib. İstifadəçinin e-poçt ünvanı göstərilməyib və hazırkı e-poçt ünvanı avtomatik yaradılıb, bildiriş göndərmək üçün istifadə edilə bilməz.",
+  "NotConfigured": "Kəsilmədən hazırlanmayıb",
   "Notifications": "Bildirişlər",
-  "RoomsActivityDescription": "Saatlıq bildirişlər. Otaqlarınızdakı bütün hərəkətlərdən xəbərdar olun",
+  "RoomsActivityDescription": "Yeni paylaşılmış fayllar/papqalar və {{sectionName}} içərisindəki fəaliyyət haqda dərhal e-poçt bildirişləri alın.",
+  "RoomUpdateNotify": "Paylaşılmış məzmun və {{sectionName}} fəaliyyəti",
+  "SettingUpNotifications": "Bildirişləri təyin etmək",
+  "SuccessConnected": "{{serviceName}} bildiriş kanalı kimi uğurla qoşulub. İndidən buraya yeniliklər gələcək.",
+  "SuccessDisconnected": "{{serviceName}} bildiriş kanalı kimi uğurla əlaqədən kəsilmişdir. Bildirişlər oraya göndərilməyəcəkdir.",
   "UsefulTips": "Faydalı {{productName}} məsləhətləri",
   "UsefulTipsDescription": "{{productName}}-də faydalı təlimatlar əldə edin"
 }

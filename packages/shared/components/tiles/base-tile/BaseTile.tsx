@@ -25,24 +25,21 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useRef } from "react";
-import { isMobile } from "react-device-detect";
+import { isMobile } from "../../../utils";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "../../checkbox";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/shared/components/context-menu-button";
-import {
-  ContextMenu,
-  ContextMenuRefType,
-} from "@docspace/shared/components/context-menu";
-import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { HeaderType } from "@docspace/shared/components/context-menu/ContextMenu.types";
-import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+} from "../../context-menu-button";
+import { ContextMenu, ContextMenuRefType } from "../../context-menu";
+import { hasOwnProperty } from "../../../utils/object";
+import { HeaderType } from "../../context-menu/ContextMenu.types";
+import { Loader, LoaderTypes } from "../../loader";
 
-import { BaseTileProps, TileChildProps } from "./BaseTile.types";
+import { BaseTileProps, TileChildProps, ItemProps } from "./BaseTile.types";
 
 import styles from "./BaseTile.module.scss";
 
@@ -70,6 +67,8 @@ export const BaseTile = ({
   onRoomClick,
   checkboxContainerRef,
   forwardRef,
+  dataTestId,
+  badgeUrl,
 }: BaseTileProps) => {
   const childrenArray = React.Children.toArray(topContent);
 
@@ -83,29 +82,31 @@ export const BaseTile = ({
     contextOptions?.length > 0;
 
   const firstChild = childrenArray[0] as React.ReactElement<TileChildProps>;
-  const contextMenuHeader: HeaderType | undefined =
-    React.isValidElement(firstChild) && firstChild.props?.item
-      ? {
-          title:
-            firstChild.props.item.title ||
-            firstChild.props.item.displayName ||
-            "",
-          icon: firstChild.props.item.icon,
-          original: firstChild.props.item.logo?.original || "",
-          large: firstChild.props.item.logo?.large || "",
-          medium: firstChild.props.item.logo?.medium || "",
-          small: firstChild.props.item.logo?.small || "",
-          color: firstChild.props.item.logo?.color,
-          cover: firstChild.props.item.logo?.cover
-            ? typeof firstChild.props.item.logo.cover === "string"
-              ? {
-                  data: firstChild.props.item.logo.cover,
-                  id: "",
-                }
-              : firstChild.props.item.logo.cover
-            : undefined,
-        }
-      : undefined;
+  const childItem = React.isValidElement(firstChild)
+    ? (firstChild.props as TileChildProps | undefined)?.item
+    : undefined;
+
+  const srcItem: ItemProps | undefined = childItem ?? item;
+
+  const contextMenuHeader: HeaderType | undefined = srcItem
+    ? {
+        title: srcItem.title || srcItem.displayName || "",
+        icon: srcItem.icon,
+        original: srcItem.logo?.original || "",
+        large: srcItem.logo?.large || "",
+        medium: srcItem.logo?.medium || "",
+        small: srcItem.logo?.small || "",
+        color: srcItem.logo?.color,
+        cover: srcItem.logo?.cover
+          ? typeof srcItem.logo.cover === "string"
+            ? {
+                data: srcItem.logo.cover,
+                id: "",
+              }
+            : srcItem.logo.cover
+          : undefined,
+      }
+    : undefined;
 
   const getOptions = () => {
     if (tileContextClick) {
@@ -119,7 +120,7 @@ export const BaseTile = ({
   };
 
   const onRoomIconClick = () => {
-    if (!isMobile) return;
+    if (!isMobile()) return;
     onSelect?.(true, item);
   };
 
@@ -174,6 +175,7 @@ export const BaseTile = ({
       onContextMenu={onContextMenu}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
+      data-testid={dataTestId ?? "tile"}
     >
       <div className={styles.topContent}>
         {element && !isEdit ? (
@@ -225,6 +227,9 @@ export const BaseTile = ({
             ref={cmRef}
             header={contextMenuHeader}
             withBackdrop
+            ignoreChangeView={isMobile()}
+            headerOnlyMobile
+            badgeUrl={badgeUrl}
           />
         </div>
       </div>

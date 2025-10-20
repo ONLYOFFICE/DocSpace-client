@@ -3,7 +3,7 @@
   "content": "The limit for storage space and the number of rooms is about to be exceeded",
   "content_en_sha1_hash": "44751111553d2a9d8e1f31fcccffe6db2490587b",
   "created_at": "2025-05-19T21:30:54.131Z",
-  "updated_at": "2025-05-24T07:59:45.797Z",
+  "updated_at": "2025-10-01T08:28:21.902Z",
   "comment": {
     "text": "The translation key \"StorageAndRoomHeader\" is used to display a warning message when the storage space and room limits are about to be exceeded. This message appears in a quotas bar component, specifically at the header section, providing context for users of the \"QuotasBarTypes.RoomsAndStorageTariffLimit\" case.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 284,
+      "line_number": 288,
       "context": "header: t(\"StorageAndUserTariffLimitHeader\"),\n description: getUpgradeTariffDescription(),\n };\n case QuotaBarTypes.RoomsAndStorageTariff:\n return {\n header: t(\"StorageAndRoomHeader\"),\n description: getUpgradeTariffDescription(),\n };\n case QuotaBarTypes.RoomsAndStorageTariffLimit:\n return {\n header: t(\"StorageAndRoomLimitHeader\"),",
       "module": "/packages/client"
     }

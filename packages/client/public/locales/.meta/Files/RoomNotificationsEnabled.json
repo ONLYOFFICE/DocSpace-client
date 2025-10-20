@@ -3,7 +3,7 @@
   "content": "Room notifications enabled",
   "content_en_sha1_hash": "adb84d67ce76ed3d465ff82c4794d196b48c9f28",
   "created_at": "2025-05-19T21:30:56.105Z",
-  "updated_at": "2025-05-24T11:30:28.978Z",
+  "updated_at": "2025-10-13T14:41:03.133Z",
   "comment": {
     "text": "This translation key is used for the notification message displayed when room notifications are enabled or disabled. It typically appears in a toast notification or confirmation dialog box after an action related to room notifications is performed. The key ensures that users see the correct status message based on their current setting.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1362,
+      "line_number": 1381,
       "context": "muteRoomNotification(id, muteStatus)\n .then(() =>\n toastr.success(\n muteStatus\n ? t(\"RoomNotificationsDisabled\")\n : t(\"RoomNotificationsEnabled\"),\n ),\n )\n .catch((e) => toastr.error(e))\n .finally(() => {\n Promise.all([",
       "module": "/packages/client"
     }
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Otaq bildirişləri aktiv edildi\" is a literal translation of 'Room notifications enabled' that doesn't quite capture the intended meaning. A more natural and idiomatic translation would convey that notifications *are* enabled, rather than that they *were enabled*.",
+          "description": "The translation 'Otaq bildirişləri aktiv edildi' is a bit literal and not the most natural way to say 'Room notifications enabled' in Azerbaijani. A more natural phrasing would be something like 'Otaq bildirişləri işləkdir' or 'Otaq bildirişləri fəaldır'.",
           "suggestion": "Otaq bildirişləri işləkdir"
         }
       ],
@@ -54,13 +54,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Oznámení o místnosti povolena' is not the most natural or accurate rendering of 'Room notifications enabled'. A more accurate translation would reflect that the notifications *themselves* are enabled.",
-          "suggestion": "Oznámení o místnosti jsou povolena"
+          "description": "The translation 'Oznámení o místnosti povolena' is grammatically awkward and doesn't accurately convey the meaning of 'Room notifications enabled'. The verb 'povolena' (allowed) is passive and doesn't align well with the active sense of 'enabled'.",
+          "suggestion": "Oznámení o místnosti jsou povolená"
         },
         {
           "type": "grammar",
-          "description": "While technically correct, the use of 'povolena' (feminine past passive participle) doesn't flow as naturally as a more active voice construction in Czech.",
-          "suggestion": "Oznámení pro místnosti jsou povolena"
+          "description": "The translation 'Oznámení o místnosti povolena' uses a singular form ('povolena') for a plural concept (notifications).",
+          "suggestion": "Oznámení o místnosti jsou povolená"
         }
       ],
       "approved_at": null
@@ -77,7 +77,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ενεργοποίηση ειδοποιήσεων δωματίου\" literally translates to 'Activation of room notifications'. While understandable, a more natural and concise translation would be 'Ενεργοποιημένες ειδοποιήσεις δωματίου' which means 'Room notifications enabled'.",
+          "description": "The translation 'Ενεργοποίηση ειδοποιήσεων δωματίου' literally translates to 'Activation of room notifications'. While not entirely wrong, a more natural and commonly used translation would be 'Ενεργοποιημένες ειδοποιήσεις δωματίου' (Enabled room notifications).",
           "suggestion": "Ενεργοποιημένες ειδοποιήσεις δωματίου"
         }
       ],
@@ -116,7 +116,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ルームの通知が有効\" is understandable, a more natural and accurate translation of \"Room notifications enabled\" would be something like \"部屋の通知が有効です\" (Heya no tsuuchi ga yuukou desu). The addition of 'desu' adds politeness and completeness.",
+          "suggestion": "部屋の通知が有効です"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -131,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ເປີດການແຈ້ງເຕືອນຫ້ອງແລ້ວ\" literally translates to \"Room notifications opened already.\" It implies the notifications were previously disabled and now are enabled. A more accurate and neutral translation would be something along the lines of \"ການແຈ້ງເຕືອນຫ້ອງຖືກເປີດໃຊ້ງານແລ້ວ\" or \"ການແຈ້ງເຕືອນຫ້ອງເຮັດງານໄດ້ແລ້ວ\" or simply \"ແຈ້ງເຕືອນຫ້ອງເປີດໃຊ້ງານ\" which means \"Room notifications enabled\".",
-          "suggestion": "ແຈ້ງເຕືອນຫ້ອງເປີດໃຊ້ງານ"
+          "description": "The Lao translation 'ເປີດການແຈ້ງເຕືອນຫ້ອງແລ້ວ' literally translates to 'Room notifications opened already'. It implies the action has already been performed. The English 'Room notifications enabled' means the notifications are currently enabled.",
+          "suggestion": "ເປີດການແຈ້ງເຕືອນຫ້ອງ"
         }
       ],
       "approved_at": null
@@ -140,31 +146,25 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Telpas paziņojumi ir aktīvi\" is understandable, a more natural and direct translation of \"Room notifications enabled\" would be \"Telpas paziņojumi ieslēgti\". \"Aktīvi\" implies a more general state of being active, whereas 'ieslēgti' specifically conveys 'enabled'.",
+          "suggestion": "Telpas paziņojumi ieslēgti"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Kamer meldingen ingeschakeld\" is a very literal translation and doesn't flow naturally in Dutch. A more common and natural phrasing would be something like \"Kamermeldingen geactiveerd\" or \"Kamermeldingen aan\".",
-          "suggestion": "Kamermeldingen geactiveerd"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Powiadomienia dla pokoju zostały włączone' is a bit verbose and doesn't quite capture the conciseness of 'Room notifications enabled'. A more direct and natural translation would be better.",
-          "suggestion": "Powiadomienia w pokoju włączone"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -185,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Notificările pentru sala sunt activate' is too literal. A more natural Romanian translation would be 'Notificări de sală activate' or 'Notificări pentru sală active'. The current translation sounds awkward.",
-          "suggestion": "Notificări de sală activate"
+          "description": "The translation 'Notificările pentru sala sunt activate' is a bit too literal and not the most natural phrasing in Romanian. While technically correct, it lacks fluency.",
+          "suggestion": "Consider a more natural phrasing like 'Notificări pentru încăpere activate' or 'Notificări pentru cameră activate'."
         }
       ],
       "approved_at": null
@@ -209,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While grammatically correct, \"Upozornenia o miestnosti sú zapnuté\" is a less natural and somewhat literal translation of \"Room notifications enabled.\" A more idiomatic Slovak translation would be better.",
-          "suggestion": "Upozornenia na miestnosť sú povolené"
+          "description": "The translation 'Upozornenia o miestnosti sú zapnuté' is technically correct but sounds a bit clunky and literal. A more natural Slovak translation would be 'Zapnuté upozornenia na miestnosti' or 'Upozornenia na miestnosti sú povolené'.",
+          "suggestion": "Zapnuté upozornenia na miestnosti"
         }
       ],
       "approved_at": null
@@ -221,7 +221,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Slovenian translation 'Obvestila sobe omogočena' is grammatically awkward.  'Omogočena' should agree in number with 'obvestila'.  Since 'obvestila' is plural, 'omogočena' should be 'omogočena'.",
+          "description": "The Slovenian translation 'Obvestila sobe omogočena' is grammatically awkward. 'Omogočena' describes what is enabled, but it needs to agree with 'obvestila' (notifications) which is plural. The verb 'so' (are) also doesn't quite fit.",
           "suggestion": "Obvestila sobe so omogočena"
         }
       ],
@@ -233,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Нотификације собе омогућене' is not the most natural or accurate translation of 'Room notifications enabled'. While technically correct, a more common and fluent translation would be something like 'Обавештења собе укључена' or 'Укључена обавештења собе'.",
-          "suggestion": "Обавештења собе укључена"
+          "description": "The translation 'Нотификације собе омогућене' is a literal translation but could be improved for naturalness in Serbian. 'Room notifications enabled' implies notifications specifically for a room, and 'Нотификације собе омогућене' sounds slightly awkward. A more natural phrasing might prioritize clarity and flow.",
+          "suggestion": "Омогућене нотификације за собе"
         }
       ],
       "approved_at": null
@@ -245,8 +245,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Notifikacije sobe omogućene' is not the most natural or accurate translation of 'Room notifications enabled'. A more common and accurate translation would be 'Omogućene notifikacije za sobu' or 'Notifikacije u sobi su omogućene'. The current translation sounds slightly awkward in Serbian.",
-          "suggestion": "Omogućene notifikacije za sobu"
+          "description": "The translation 'Notifikacije sobe omogućene' is a literal translation but doesn't quite capture the meaning of 'Room notifications enabled' in a natural Serbian way. It sounds a bit clunky.",
+          "suggestion": "Uključene obavijesti za sobu"
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'omogućene' might be better replaced with a more common phrasing for enabling notifications.",
+          "suggestion": "Uključene"
         }
       ],
       "approved_at": null
@@ -260,19 +265,19 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'кімнати' (kimnaty) is a genitive singular form. It should be in the nominative singular form, 'кімната' (kimnata).",
-          "suggestion": "Сповіщення кімнати ввімкнено"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Đã bật thông báo phòng\" is understandable, a more natural and accurate translation of 'Room notifications enabled' would be 'Bật thông báo phòng' or 'Thông báo phòng đã bật'. 'Đã bật' implies an action that is already completed, whereas 'enabled' is a state.",
+          "suggestion": "Bật thông báo phòng"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
@@ -281,8 +286,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"房间通知启用\" doesn't fully convey the meaning of \"Room notifications enabled.\" It literally translates to \"Room notification enable.\" A more natural and accurate translation would emphasize the state of being enabled.",
-          "suggestion": "房间通知已启用 (Fángjiān tōngzhī yǐ qǐyòng) - Room notifications are enabled."
+          "description": "While technically correct, \"房间通知启用\" is a bit formal and not the most natural way to express \"Room notifications enabled.\" A more user-friendly and common translation would be preferred.",
+          "suggestion": "房间通知开启"
         }
       ],
       "approved_at": null

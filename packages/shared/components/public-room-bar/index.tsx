@@ -45,6 +45,7 @@ const PublicRoomBar = (props: PublicRoomBarProps) => {
     onClose,
     barIsVisible,
     className,
+    dataTestId,
     ...rest
   } = props;
 
@@ -63,7 +64,7 @@ const PublicRoomBar = (props: PublicRoomBarProps) => {
       )}
       {...rest}
       ref={ref}
-      data-testid="public-room-bar"
+      data-testid={dataTestId ?? "public_room_bar"}
     >
       <div className={styles.textContainer}>
         <div className={styles.headerBody}>

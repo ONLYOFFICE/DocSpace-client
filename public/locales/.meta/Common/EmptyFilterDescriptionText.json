@@ -3,7 +3,7 @@
   "content": "No files or folders match this filter. Try a different one or clear filter to view all files.",
   "content_en_sha1_hash": "42721305ae7c575eab45e8f5de5335ef93280072",
   "created_at": "2025-05-19T21:30:44.822Z",
-  "updated_at": "2025-06-08T12:02:32.920Z",
+  "updated_at": "2025-09-26T15:21:06.571Z",
   "comment": {
     "text": "This translation key is used for a message displayed when no files or folders match a filter. It appears as a description text in an empty screen, suggesting alternative actions to try or clear the filter to view all files.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 227,
-      "context": "theme?.isBase\n ? EmptyScreenFilterAltSvgUrl\n : EmptyScreenFilterAltDarkSvgUrl\n }\n searchEmptyScreenHeader={t(\"Common:NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"Common:EmptyFilterDescriptionText\")}\n isLoading={showLoader}\n rowLoader={\n <RowLoader\n isMultiSelect={false}\n isUser={isRoot}",
+      "line_number": 236,
+      "context": "emptyScreenDescription={emptyScreenDescription}\n searchEmptyScreenImage={\n isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl\n }\n searchEmptyScreenHeader={t(\"Common:NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"Common:EmptyFilterDescriptionText\")}\n isLoading={showLoader}\n rowLoader={\n <RowLoader\n isMultiSelect={false}\n isUser={isRoot}",
       "module": "/packages/shared"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"فلتر واضح\" (filter wadih) is a literal translation of 'clear filter' and while understandable, it's not the most natural or idiomatic way to say it in Arabic. A better translation would be something like 'فلتر بدون شروط' (filter bidun shuroot) - filter without conditions, or simply 'فلتر أساسي' (filter asasi) - basic filter.",
-          "suggestion": "فلتر بدون شروط أو فلتر أساسي"
+          "description": "The phrase 'فلتر واضحًا' (filter wadihan) is an awkward and incorrect translation of 'clear filter'. It literally means 'clear filter' but doesn't convey the intended meaning of removing the filter to view all files. A more natural translation would be 'قم بإزالة الفلتر' (qim bi'azalat al-filter) or 'إزالة الفلتر' (azalat al-filter).",
+          "suggestion": "قم بإزالة الفلتر (qim bi'azalat al-filter) or إزالة الفلتر (azalat al-filter)."
         }
       ],
       "approved_at": null
@@ -42,13 +42,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Xahiş edirik digər süzgəc parametrindən istifadə edin\" is a bit clunky. A more natural translation for 'Try a different one' would be something like 'başqa süzgəc seçin'.",
+          "description": "The phrase \"Xahiş edirik digər süzgəc parametrindən istifadə edin\" is overly formal and doesn't quite capture the casual tone of the English phrase \"Try a different one\". A more natural phrasing would be closer to \"başqa süzgəc seçin\" or \"başqa süzgəc cəhd edin\".",
           "suggestion": "başqa süzgəc seçin"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"bütün faylların göstərilməsi üçün süzgəci sıfırlayın\" is a bit verbose and less natural. A more direct translation of 'clear filter' would be 'süzgəci təmizləyin'.",
-          "suggestion": "süzgəci təmizləyin"
+          "description": "The translation of \"clear filter\" is a bit awkward. \"süzgəci sıfırlayın\" (reset the filter) is correct, but a more natural phrasing, closer to 'filtrləri təmizləyin' would be better.",
+          "suggestion": "filtrləri təmizləyin"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the structure of the sentence is a bit long and can be improved for readability. Separating the sentences could make the text more user-friendly.",
+          "suggestion": "Heç bir fayl və ya qovluq bu süzgəcə uyğun deyil. Başqa süzgəc seçin və ya bütün faylların göstərilməsi üçün filtrləri təmizləyin."
         }
       ],
       "approved_at": null
@@ -59,8 +64,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Bulgarian sentence \"Нито един файл или папка не пасват на този филтър\" uses the plural form of 'pasvat' (pasват) which is incorrect. It should agree with the singular 'файл' and 'папка', so it should be 'Нито един файл или папка не пасва на този филтър'.",
-          "suggestion": "Нито един файл или папка не пасва на този филтър."
+          "description": "The Bulgarian translation uses the verb 'пасват' (pasvat) which is in the plural form. The subject 'файл или папка' (file or folder) is plural, but the intended meaning refers to each file or folder individually. The singular form 'пасва' would be more accurate.",
+          "suggestion": "Нито един файл или папка не пасва на този филтър. Изпробвайте друг или изчистете филтъра, за да видите всички файлове."
         }
       ],
       "approved_at": null
@@ -77,8 +82,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"entfernen Sie diesen\" is a less natural way to say 'clear filter'. 'Löschen' or 'Zurücksetzen' would be more common and idiomatic for 'clear'.",
-          "suggestion": "Keine Dateien oder Ordner entsprechen diesem Filter. Versuchen Sie einen anderen Filter oder löschen Sie diesen, um alle Dateien zu sehen."
+          "description": "The phrase \"entsprechen diesem Filter\" is grammatically correct but slightly awkward. A more natural phrasing would be \"passen zu diesem Filter\" or \"stimmen mit diesem Filter überein\".",
+          "suggestion": "Keine Dateien oder Ordner passen zu diesem Filter. Versuchen Sie einen anderen Filter oder entfernen Sie diesen, um alle Dateien zu sehen."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'clear filter' translates literally as 'entfernen Sie diesen'. While technically correct, it's less common to say 'entfernen Sie diesen' when referring to clearing a filter. 'Löschen Sie den Filter' or 'den Filter zurücksetzen' would be more natural.",
+          "suggestion": "Keine Dateien oder Ordner passen zu diesem Filter. Versuchen Sie einen anderen Filter oder löschen Sie den Filter, um alle Dateien zu sehen."
         }
       ],
       "approved_at": null
@@ -89,13 +99,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Με αυτό το φίλτρο\" is a bit awkward. A more natural translation of \"With this filter\" would be \"Για αυτό το φίλτρο\" or simply omitting the introductory phrase.",
-          "suggestion": "Για αυτό το φίλτρο δεν ταιριάζει κανένα αρχείο ή φάκελος. Δοκιμάστε ένα διαφορετικό ή καταργήστε το φίλτρο για να δείτε όλα τα αρχεία."
+          "description": "The phrase \"Με αυτό το φίλτρο δεν ταιριάζει κανένα αρχείο ή φάκελος\" is a literal translation that doesn't flow naturally in Greek. A more idiomatic translation would be closer to 'Δεν βρέθηκαν αρχεία ή φάκελοι με αυτό το φίλτρο.'",
+          "suggestion": "Δεν βρέθηκαν αρχεία ή φάκελοι με αυτό το φίλτρο."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'καταργήστε' (remove) is technically correct but 'αποκαταργήστε' (clear/reset) might be a slightly better fit for the context of clearing a filter.",
-          "suggestion": "Για αυτό το φίλτρο δεν ταιριάζει κανένα αρχείο ή φάκελος. Δοκιμάστε ένα διαφορετικό ή αποκαταργήστε το φίλτρο για να δείτε όλα τα αρχεία."
+          "description": "The phrase \"καταργήστε το φίλτρο\" is correct but a more natural wording for a user interface would be 'αποκαταστήστε το φίλτρο' or 'καθαρίστε το φίλτρο'.",
+          "suggestion": "αποκαταστήστε το φίλτρο"
         }
       ],
       "approved_at": null
@@ -124,13 +134,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon after 'չի համապատասխանում այս զտիչին' is followed by a space. It should be directly followed by the next phrase.",
-          "suggestion": "Ոչ մի ֆայլ կամ պանակ չի համապատասխանում այս զտիչինՓորձեք մեկ այլ կամ մաքուր զտիչ՝ բոլոր ֆայլերը դիտելու համար:"
+          "description": "The colon after \"այս զտիչին\" is followed by a space, but the subsequent word \"Փորձեք\" should be directly attached to the colon. Consistent spacing would improve readability.",
+          "suggestion": "Ոչ մի ֆայլ կամ պանակ չի համապատասխանում այս զտիչինՓորձեք..."
         },
         {
-          "type": "spelling",
-          "description": "The word 'մաքուր' might be better translated as 'մաքրել' to match the action of clearing a filter. 'մաքուր' means 'clean' as an adjective, while 'մաքրել' means 'to clean'.",
-          "suggestion": "Ոչ մի ֆայլ կամ պանակ չի համապատասխանում այս զտիչին:Փորձեք մեկ այլ կամ մաքրել զտիչ՝ բոլոր ֆայլերը դիտելու համար:"
+          "type": "incorrect_translation",
+          "description": "The phrase \"մաքուր զտիչ\" literally translates to 'clean filter'. While understandable, a more idiomatic translation of 'clear filter' might be 'մաքրել զտիչը' or 'զտիչը ջնջել'.",
+          "suggestion": "Ոչ մի ֆայլ կամ պանակ չի համապատասխանում այս զտիչին:Փորձեք մեկ այլ կամ մաքրել զտիչը՝ բոլոր ֆայլերը դիտելու համար:"
         }
       ],
       "approved_at": null
@@ -147,13 +157,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase '別のフィルタを試すか' could be improved. While technically correct, it sounds slightly unnatural. A more natural phrasing might be '別のフィルタを試すか、または'.",
-          "suggestion": "別のフィルタを試すか、または"
+          "description": "The phrase \"別のフィルタを試すか\" is slightly unnatural in this context. A more natural phrasing would be \"別のフィルタを試すか、または...\"",
+          "suggestion": "別のフィルタを試すか、またはフィルタを解除して..."
         },
         {
           "type": "formatting",
-          "description": "There's a slight lack of visual flow. Adding a comma or conjunction after '試すか' would improve readability.",
-          "suggestion": "別のフィルタを試すか、フィルタを解除して"
+          "description": "The use of \"か\" for 'or' is grammatically correct, but using a conjunction like 'または' might improve readability.",
+          "suggestion": "別のフィルタを試すか、またはフィルタを解除して..."
         }
       ],
       "approved_at": null
@@ -163,14 +173,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"다르게 시도하거나\" is a bit awkward. A more natural Korean phrasing for 'Try a different one' would be \"다른 필터를 사용해보세요\" or \"다른 필터를 시도해보세요\".",
-          "suggestion": "다른 필터를 사용해보세요"
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure is a little long. Breaking it into two sentences would improve readability.",
-          "suggestion": "이 필터에 해당하는 파일이나 폴더가 없습니다. 다른 필터를 사용해보세요, 또는 필터를 삭제하여 모든 파일을 확인하세요."
+          "type": "spelling",
+          "description": "The word '필터를' (filter-eul) should be '필터를' (filter-eul). It's the object marker particle.",
+          "suggestion": "필터를 삭제하여"
         }
       ],
       "approved_at": null
@@ -181,13 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ຕົວກັ່ນຕອງ' is likely a typo. It should be 'ຕົວກອງ'.",
-          "suggestion": "ຕົວກອງ"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'ລຶບລ້າງຂໍ້ມູນ' sounds awkward. 'ລຶບຕົວກອງ' or 'ລົບຕົວກອງ' would be more natural for 'clear filter'.",
-          "suggestion": "ລຶບຕົວກອງ"
+          "description": "The word 'ຕົວກັ່ນຕອງ' is misspelled. The correct spelling is 'ຕົວກັ່ນຕອງ'.",
+          "suggestion": "ຕົວກັ່ນຕອງ"
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"izmēģiniet citu filtru\" is a bit awkward. A more natural translation for 'Try a different one' would be 'izvēlieties citu filtru' or 'mēģiniet citu filtru'.",
-          "suggestion": "mēģiniet citu filtru"
+          "description": "The phrase \"izmēģiniet citu filtru\" could be improved. While technically correct, a more natural phrasing for a user interface in Latvian would be \"izvēlieties citu filtru\" (choose a different filter).",
+          "suggestion": "izvēlieties citu filtru"
         }
       ],
       "approved_at": null
@@ -216,13 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'wybranego filtra' is a bit awkward. While technically correct, it implies the filter was *selected*. A more natural phrasing would indicate the filter is being applied.",
-          "suggestion": "Żaden plik ani folder nie pasuje do tego filtra. Wypróbuj inny lub usuń go, aby zobaczyć wszystkie pliki."
-        },
-        {
-          "type": "formatting",
-          "description": "The original English uses a period at the end of the entire sentence. The Polish translation uses a period only after the first clause. While not strictly incorrect, it deviates from the original.",
-          "suggestion": "Żaden plik ani folder nie pasuje do tego filtra. Wypróbuj inny lub usuń go, aby zobaczyć wszystkie pliki."
+          "description": "The phrase 'wybranego filtra' (selected filter) is slightly awkward. While technically correct, it's not the most natural phrasing in Polish. A more common phrasing would be 'tego filtra'.",
+          "suggestion": "Żaden plik ani folder nie pasują do tego filtra. Wypróbuj inny lub usuń go, aby zobaczyć wszystkie pliki."
         }
       ],
       "approved_at": null
@@ -233,7 +228,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'limpe-o' (clean it) is grammatically correct but sounds a bit awkward in this context. It's unclear what 'it' refers to. A more natural phrasing would be 'limpe o filtro' (clear the filter).",
+          "description": "The phrase \"limpe-o\" is grammatically correct but sounds slightly awkward. A more natural phrasing would be \"limpe o filtro\".",
           "suggestion": "limpe o filtro"
         }
       ],
@@ -245,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'transparente' is not the correct translation for 'clear' in this context. It implies transparency, not clearing or removing a filter.",
-          "suggestion": "Use 'limpar' or 'remover' instead of 'transparente'."
+          "description": "The word 'transparente' is used instead of 'limpar' or 'remover'. 'Transparente' means 'transparent' and doesn't convey the intended meaning of clearing a filter.",
+          "suggestion": "Nenhum arquivo ou pasta corresponde a este filtro. Tente um filtro diferente ou limpe o filtro para visualizar todos os arquivos."
         }
       ],
       "approved_at": null
@@ -257,23 +252,18 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Romanian translation uses 'Aplicați' which implies a direct action. 'Îl eliminați' also has a similar direct feel, which doesn't quite match the softer tone of the English 'clear filter'. A more passive construction would be better.",
-          "suggestion": "Niciun fișier sau dosar nu corespunde setărilor filtru. Încercați un alt filtru sau eliminați-l pentru a afișa toate fișiere."
+          "description": "The phrase \"setările filtru\" is grammatically incorrect. It should be \"setărilor de filtru\" or simply \"filtrului\".",
+          "suggestion": "Niciun fișier sau dosar nu corespunde setărilor de filtru sau Niciun fișier sau dosar nu corespunde filtrului."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English 'clear filter' is translated as 'îl eliminați'. While 'eliminați' is a possible translation of 'clear', it can be interpreted as 'delete'. 'Eliminați-l' refers to the filter, but a better translation may depend on the UI - if the UI offers a 'clear' button, 'ștergeți' would be closer to the intended meaning.",
-          "suggestion": "Niciun fișier sau dosar nu corespunde setărilor filtru. Încercați un alt filtru sau ștergeți-l pentru a afișa toate fișiere."
+          "description": "“Aplicați un alt filtru sau îl eliminați” is a somewhat awkward translation of “or clear filter”.  A more natural Romanian phrasing would be \"sau ștergeți filtrul\".",
+          "suggestion": "Niciun fișier sau dosar nu corespunde setărilor de filtru sau filtrului. Sau ștergeți filtrul ca să afișați toate fișiere."
         },
         {
-          "type": "formatting",
-          "description": "The Romanian sentence structure is a bit convoluted and could be improved for readability. Splitting it into two sentences might be more natural.",
-          "suggestion": "Niciun fișier sau dosar nu corespunde setărilor filtru. Încercați un alt filtru sau ștergeți-l pentru a vedea toate fișierele."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'vedea' should be 'afișa' to be consistent with the English 'view'.",
-          "suggestion": "Niciun fișier sau dosar nu corespunde setărilor filtru. Încercați un alt filtru sau ștergeți-l pentru a afișa toate fișierele."
+          "type": "grammar",
+          "description": "The phrase “ca să afișați toate fișiere” is not grammatically correct.  It should be “pentru a afișa toate fișierele” or “ca să afișați toate fișierele”.",
+          "suggestion": "Niciun fișier sau dosar nu corespunde setărilor de filtru sau filtrului. Sau ștergeți filtrul pentru a afișa toate fișierele."
         }
       ],
       "approved_at": null
@@ -284,13 +274,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Пожалуйста, выберите другие параметры' is a less direct translation of 'Try a different one'. It implies selecting parameters rather than just trying a different filter. A more accurate translation would be something along the lines of 'Попробуйте другой фильтр'.",
-          "suggestion": "Попробуйте другой фильтр"
+          "description": "The translation \"В этом разделе нет файлов или папок, соответствующих фильтру. Пожалуйста, выберите другие параметры или очистите фильтр, чтобы показать все файлы в этом разделе.\" is too literal and verbose. \"Выберите другие параметры\" is not a natural way to suggest trying a different filter. The phrasing also makes it sound like all files are within the current section rather than a general list.",
+          "suggestion": "В этом разделе нет файлов или папок, соответствующих фильтру. Попробуйте другой фильтр или очистите его, чтобы увидеть все файлы."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'в этом разделе' (in this section) is not directly conveyed in the English content and is an unnecessary addition. It introduces a section context that wasn't present in the original.",
-          "suggestion": "Очистите фильтр, чтобы показать все файлы."
+          "description": "The phrase \"очистите его\" could be clearer. While understandable, 'его' refers back to фильтр. A more explicit pronoun or simply using 'очистите фильтр' might improve comprehension.",
+          "suggestion": "очистите фильтр"
         }
       ],
       "approved_at": null
@@ -300,14 +290,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'බහාලුම්' (bahaalum) which translates to 'folders' should be 'මතලේ' (mathale) for better clarity and natural flow in Sinhala. While 'bahaalum' is technically correct, 'mathale' is more commonly used in this context.",
-          "suggestion": "මෙම පෙරහනට ගැළපෙන ගොනු හෝ මතලේ නැත."
+          "type": "incorrect_translation",
+          "description": "The translation of \"Try a different one\" is not ideal. While \"වෙනත් පෙරහනක් දමන්න\" is technically correct, it could be more naturally phrased. \"වෙනත් පෙරහනක් භාවිතා කරන්න\" or \"වෙනත් පෙරහනක් තෝරන්න\" might be better.",
+          "suggestion": "වෙනත් පෙරහනක් භාවිතා කරන්න"
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure could be improved for a more natural flow.  'වෙනත් පෙරහනක් දමන්න හෝ සියළුම ගොනු බැලීමට පෙරහන ඉවතලන්න' is grammatically correct, but sounds a bit clunky. It can be improved to 'වෙනත් පෙරහනක් දමාන්න, නැත්නම් සියළුම ගොනු බැලීමට පෙරහන ඉවතලන්න.'",
-          "suggestion": "වෙනත් පෙරහනක් දමාන්න, නැත්නම් සියළුම ගොනු බැලීමට පෙරහන ඉවතලන්න."
+          "type": "incorrect_translation",
+          "description": "The translation of \"clear filter\" as \"පෙරහන ඉවතලන්න\" is acceptable, but could be slightly improved for clarity. 'පෙරහන අවලංගු කරන්න' might be more precise in this context.",
+          "suggestion": "පෙරහන අවලංගු කරන්න"
         }
       ],
       "approved_at": null
@@ -315,7 +305,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovak translation uses a full stop (.) at the end of the second sentence, but not the first. It should be consistent. While grammatically correct, consistency in punctuation enhances readability.",
+          "suggestion": "Add a full stop (.) at the end of the first sentence: \"Tomuto filtru nevyhovujú žiadne súbory ani priečinky. Skúste použiť iný alebo vyčistite filter a zobrazte všetky súbory.\""
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -330,13 +326,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Ниједна датотека или фолдер се поклапају са овим филтером\" is a slightly awkward phrasing. The verb 'poklapaju' (match) is in the plural, but 'datoteka' and 'folder' are both singular.",
-          "suggestion": "Ниједна датотека или фолдер не одговара овом филтеру. (Nijedna datoteka ili folder ne odgovara ovom filteru.) - 'does not correspond to this filter'."
+          "description": "The phrase \"Ниједна датотека или фолдер се поклапају са овим филтером\" is a literal translation and sounds unnatural in Serbian.  The verb agreement is awkward. It should be closer to 'No files or folders *match* this filter'.",
+          "suggestion": "Нема датотека нити фолдера који одговарају овом филтеру."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Пробајте другачији или обришите филтер' uses 'обришите' (delete) for 'clear'. While technically correct, 'очистите' (clean) might be a more natural choice for clearing a filter.",
-          "suggestion": "Пробајте другачији или очистите филтер (Probajte drugačiji ili očistite filter)"
+          "description": "The phrase \"Пробајте другачији или обришите филтер\" is grammatically correct but sounds less natural.  'Clear the filter' is typically phrased differently.",
+          "suggestion": "Изаберите други филтер или исчистите филтер."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The final phrase \"да бисте видели све датотеке\" is a bit too formal. It can be simplified.",
+          "suggestion": "да видите све датотеке."
         }
       ],
       "approved_at": null
@@ -347,13 +348,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'poklapaju' (match) in the Serbian translation sounds a bit unnatural in this context. A more natural phrasing would be 'odgovaraju'.",
-          "suggestion": "Nijedna datoteka ili folder ne odgovaraju sa ovim filterom."
+          "description": "The phrase \"poklapaju sa\" is not the most natural way to express \"match\" in this context. A more idiomatic translation would be something along the lines of \"odgovaraju\" or \"ispunjavaju\".",
+          "suggestion": "Nijedna datoteka ili folder ne odgovara ovom filteru. Probajte drugačiji ili obrišite filter da biste videli sve datoteke."
         },
         {
           "type": "formatting",
-          "description": "The phrase 'da biste videli sve datoteke' could be improved for better flow. While grammatically correct, it's slightly clunky.",
-          "suggestion": "Nijedna datoteka ili folder ne odgovaraju sa ovim filterom. Probajte drugačiji ili obrišite filter da vidite sve datoteke."
+          "description": "The Serbian translation uses a period after \"ovim filterom\" which is not aligned with the punctuation of the English source.",
+          "suggestion": "Nijedna datoteka ili folder ne odgovara ovom filteru. Probajte drugačiji ili obrišite filter da biste videli sve datoteke."
         }
       ],
       "approved_at": null
@@ -379,13 +380,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"尝试另一个过滤条件\" (Try another filter) is slightly awkward. A more natural phrasing would be \"尝试不同的过滤条件\" (Try different filters).",
-          "suggestion": "没有符合此过滤条件的文件或文件夹。请尝试不同的过滤条件或清除条件以查看所有文件。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

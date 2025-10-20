@@ -48,7 +48,7 @@
       width: 100%;
       width: -moz-available;
       width: -webkit-fill-available;
-      width: fill-available;
+      width: stretch;
       border: none;
       border-radius: 6px 6px 0px 0px;
     }
@@ -121,5 +121,14 @@
     position: fixed;
     bottom: 0;
     inset-inline-start: 0;
+  }
+
+  &.rightAligned {
+    right: 0;
+
+    @include mixins.tablet {
+      right: 0;
+      left: auto;
+    }
   }
 }

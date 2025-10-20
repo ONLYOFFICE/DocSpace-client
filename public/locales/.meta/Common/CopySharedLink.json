@@ -3,7 +3,7 @@
   "content": "Copy shared link",
   "content_en_sha1_hash": "b175bcf3a07a90b8902c84d2fc6a79bcb9f7f620",
   "created_at": "2025-05-19T21:30:43.810Z",
-  "updated_at": "2025-06-02T10:20:51.253Z",
+  "updated_at": "2025-10-16T07:29:35.690Z",
   "comment": {
     "text": "The translation key \"CopySharedLink\" is used to display a button that allows users to copy a shared link in public rooms, typically found on a settings or options page within the application. The label and icon displayed will be localized for each language. It appears as a button with an icon and a tooltip that provides the label when hovered over.",
     "is_auto": true,
@@ -12,50 +12,68 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/LinkRow.tsx",
-      "line_number": 178,
+      "line_number": 142,
       "context": "icon: SettingsReactSvgUrl,\n onClick: onEditLink,\n },\n {\n key: \"copy-link-settings-key\",\n label: t(\"Common:CopySharedLink\"),\n icon: CopyToReactSvgUrl,\n onClick: onCopyExternalLink,\n disabled: isDisabled,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1380,
+      "line_number": 1455,
       "context": "if (this.publicRoomStore.isPublicRoom) {\n return [\n {\n key: \"public-room_share\",\n label: t(\"Common:CopySharedLink\"),\n icon: TabletLinkReactSvgUrl,\n onClick: () => {\n copy(window.location.href);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1380,
+      "line_number": 1455,
       "context": "if (this.publicRoomStore.isPublicRoom) {\n return [\n {\n key: \"public-room_share\",\n label: t(\"Common:CopySharedLink\"),\n icon: TabletLinkReactSvgUrl,\n onClick: () => {\n copy(window.location.href);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1380,
+      "line_number": 1455,
+      "context": "if (this.publicRoomStore.isPublicRoom) {\n return [\n {\n key: \"public-room_share\",\n label: t(\"Common:CopySharedLink\"),\n icon: TabletLinkReactSvgUrl,\n onClick: () => {\n copy(window.location.href);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1455,
       "context": "if (this.publicRoomStore.isPublicRoom) {\n return [\n {\n key: \"public-room_share\",\n label: t(\"Common:CopySharedLink\"),\n icon: TabletLinkReactSvgUrl,\n onClick: () => {\n copy(window.location.href);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 424,
+      "line_number": 485,
       "context": "className={classNames(\n styles.iconBadge,\n \"badge row-copy-link icons-group tablet-badge\",\n )}\n onClick={onCopyPrimaryLink}\n title={t(\"Common:CopySharedLink\")}\n hoverColor=\"accent\"\n />\n ) : null}\n \n {showCopyLinkIcon ? (",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 424,
+      "line_number": 485,
       "context": "className={classNames(\n styles.iconBadge,\n \"badge row-copy-link icons-group tablet-badge\",\n )}\n onClick={onCopyPrimaryLink}\n title={t(\"Common:CopySharedLink\")}\n hoverColor=\"accent\"\n />\n ) : null}\n \n {showCopyLinkIcon ? (",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 221,
-      "context": "size={sizeQuickButton}\n onClick={onCopyPrimaryLink}\n color={colorLock}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CopySharedLink\")}\n />\n ) : null}\n {isAvailableShareFile ? (\n <IconButton\n iconName={LinkReactSvgUrl}",
+      "line_number": 236,
+      "context": "className=\"badge copy-link icons-group\"\n size={sizeQuickButton}\n onClick={onCopyPrimaryLink}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CopySharedLink\")}\n />\n ) : null}\n {isAvailableShareFile && !isAvailableShareForUser ? (\n <IconButton\n iconName={LinkReactSvgUrl}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 221,
-      "context": "size={sizeQuickButton}\n onClick={onCopyPrimaryLink}\n color={colorLock}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CopySharedLink\")}\n />\n ) : null}\n {isAvailableShareFile ? (\n <IconButton\n iconName={LinkReactSvgUrl}",
+      "line_number": 236,
+      "context": "className=\"badge copy-link icons-group\"\n size={sizeQuickButton}\n onClick={onCopyPrimaryLink}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CopySharedLink\")}\n />\n ) : null}\n {isAvailableShareFile && !isAvailableShareForUser ? (\n <IconButton\n iconName={LinkReactSvgUrl}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
+      "line_number": 371,
+      "context": "icon: SettingsReactSvgUrl,\n onClick: () => onEditLink(link),\n },\n {\n key: \"copy-link-settings-key\",\n label: t(\"Common:CopySharedLink\"),\n icon: CopyToReactSvgUrl,\n onClick: () => copyShareLink(infoPanelSelection, link, t),\n },\n {\n key: \"embedding-settings-key\",",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/sub-components/LinkTitle.tsx",
+      "line_number": 71,
+      "context": "className={styles.linkActionsCopyImgIcon}\n src={EmptyIcon}\n alt={shareLink}\n />\n <IconButton\n title={t(\"Common:CopySharedLink\")}\n className={styles.linkActionsCopyIcon}\n size={12}\n iconName={CopyIcon}\n isDisabled={isExpiredLink || isLoaded}\n />",
       "module": "/packages/shared"
     }
   ],
@@ -78,7 +96,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Paylaşılan linki nüsxələyin\" is understandable, a more natural and common translation for \"Copy shared link\" in Azerbaijani would be \"Paylaşma linkini kopyalayın\" or \"Paylaşma keçidini kopyalayın\". \"Nüsxələyin\" is a less frequently used verb in this context.",
+          "description": "The translation 'Paylaşılan linki nüsxələyin' is a literal translation but sounds unnatural. A more idiomatic translation would be preferred.",
           "suggestion": "Paylaşma linkini kopyalayın"
         }
       ],
@@ -96,7 +114,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Kopírování sdíleného odkazu\" is too literal and lengthy. A more natural and concise translation would be preferable.",
+          "description": "The translation 'Kopírování sdíleného odkazu' is a bit literal and clunky. It translates to 'Copying of a shared link'. A more natural translation would be 'Sdílený odkaz' or 'Zkopírovat sdílený odkaz'.",
           "suggestion": "Sdílený odkaz"
         }
       ],
@@ -114,13 +132,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation 'Αντιγραφή κοινόχρηστου συνδέσμου' is a literal translation of 'Copy shared link' but sounds awkward in natural Greek. 'κοινόχρηστου' is grammatically correct but not idiomatic.",
-          "suggestion": "Αντιγραφή συνδέσμου κοινοποίησης"
+          "description": "The translation \"Αντιγραφή κοινόχρηστου συνδέσμου\" is a literal translation and not the most natural or idiomatic way to express 'Copy shared link' in Greek. 'Κοινόχρηστου' is grammatically correct but sounds a bit formal and less user-friendly in this context.",
+          "suggestion": "Αντιγραφή συνδέσμου κοινής χρήσης"
         },
         {
-          "type": "incorrect_translation",
-          "description": "A more natural and idiomatic translation would focus on the sharing aspect. The current translation emphasizes 'shared', which might not be the core meaning desired.",
-          "suggestion": "Μοίρασμα συνδέσμου"
+          "type": "formatting",
+          "description": "While not strictly incorrect, the separation of 'συνδέσμου' and 'κοινής χρήσης' is less common. A slightly more integrated phrasing improves readability.",
+          "suggestion": "Consider 'συνδέσμου κοινής χρήσης' or 'κοινόχρηστου συνδέσμου'."
         }
       ],
       "approved_at": null
@@ -134,7 +152,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Kopioi jaettu linkki' is slightly awkward. A more natural Finnish phrasing would be 'Jaa linkki' or 'Kopioi linkki'. 'Jaettu linkki' emphasizes the sharing aspect which isn't always the focus.",
+          "suggestion": "Jaa linkki"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -149,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Պատճենել ընդհանուր հղումը' while literally translating to 'Copy general link', doesn't fully capture the nuance of 'Copy shared link'. A more accurate translation would focus on the 'sharing' aspect. 'Ընդհանուր' (general) might be misleading.  A better choice would be a word implying 'shared' or 'public'.",
-          "suggestion": "Consider using a translation like 'Համօժենել հղումը' (Hamoženel h'numը) which translates to 'Share link' or 'Copy the sharing link'."
+          "description": "The translation \"Պատճենել ընդհանուր հղումը\" literally translates to \"Copy general link\". While understandable, it doesn't convey the nuance of a 'shared link'. A more accurate translation would emphasize the sharing aspect.",
+          "suggestion": "Consider alternatives like \"Կիսել հղումը\" (Share the link) or \"Պատճենել կիսվող հղումը\" (Copy the shareable link)."
         }
       ],
       "approved_at": null
@@ -197,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Skopiuj link udostępniania\" is a bit literal and less idiomatic. A more natural translation for 'Copy shared link' would be something like 'Kopiuj link do udostępnienia' or 'Skopiuj link współdzielenia'.",
-          "suggestion": "Kopiuj link do udostępnienia"
+          "description": "While technically correct, \"Skopiuj link udostępniania\" is a bit verbose and doesn't quite capture the brevity of \"Copy shared link\". A more natural and concise translation would be preferred.",
+          "suggestion": "Skopiuj link"
         }
       ],
       "approved_at": null
@@ -221,8 +245,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Copiere link partajat' is understandable, a more natural Romanian translation for 'Copy shared link' would be 'Copiere legătură distribuită' or 'Copiere link de distribuire'. 'Partajat' literally means 'shared' as in something is divided, not a shared link.",
-          "suggestion": "Copiere legătură distribuită"
+          "description": "While \"Copiere link partajat\" is understandable, a more natural and idiomatic Romanian translation for 'Copy shared link' would be 'Copiere link comun' or 'Copiere legătură comună'. 'Partajat' implies 'shared' in a more active sense, like 'shared between people', whereas 'comun' is a better fit for a link shared for general access.",
+          "suggestion": "Copiere link comun"
         }
       ],
       "approved_at": null
@@ -239,8 +263,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'බෙදාගත් සබැඳියේ පිටපතක්' (bedagath sabandiyee pitapathak) translates to 'a copy of the shared link' which is a bit more literal than the English 'Copy shared link'. While not incorrect, it's not the most natural phrasing for a UI element.",
-          "suggestion": "Consider a more concise and action-oriented translation like 'සබැඳිය බෙදා ගන්න' (sabandiya beda ganne) - 'Share link' or 'සබැඳිය පිටපත් කරන්න' (sabandiya pitapath kanna) - 'Copy link'."
+          "description": "The translation 'බෙදාගත් සබැඳියේ පිටපතක්' is a literal translation and doesn't convey the intended meaning as naturally as it could. It translates to 'a copy of the shared link'.  'Copy shared link' is more of an action, 'Copy' is the verb.",
+          "suggestion": "Consider 'සබැඳිය බෙදාගන්න' (sabaḍiya bedāgānna) which means 'Share link' or 'Copy link' depending on context."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, the use of 'සබැඳියේ' (sabaḍiyē) could be improved depending on the register.  'සබැඳුම' (sabaḍuma) referring to the link itself might be more suitable in some contexts.",
+          "suggestion": "Consider re-evaluating the phrasing based on the overall tone of the UI."
         }
       ],
       "approved_at": null
@@ -263,8 +292,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Копирај дељени линк\" is understandable, a more natural and precise translation of \"Copy shared link\" would be \"Прекопирај дељени линк\" or \"Копирај линк за дељење\". \"Копирај\" is technically correct, but \"Прекопирај\" better reflects the action of copying something that's already there.",
-          "suggestion": "Прекопирај дељени линк"
+          "description": "While 'Копирај дељени линк' is understandable, a more natural and common phrasing would be 'Копирај сподељени линк'. 'Дељени' can be used, but 'сподељени' is more typical in this context.",
+          "suggestion": "Копирај сподељени линк"
         }
       ],
       "approved_at": null

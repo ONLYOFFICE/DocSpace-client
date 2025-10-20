@@ -3,7 +3,7 @@
   "content": "Import data from a third party service to {{organizationName}} {{productName}}. Data import allows transferring data such as all users, their personal and shared documents.",
   "content_en_sha1_hash": "d3eff090b70a55f1d87037e6d061a57396691184",
   "created_at": "2025-05-19T21:30:51.065Z",
-  "updated_at": "2025-05-24T05:24:40.341Z",
+  "updated_at": "2025-09-29T11:28:56.121Z",
   "comment": {
     "text": "The translation key \"DataImportDescription\" is used to describe the data import feature for transferring data from a third party service to an organization's product. It appears in UI elements related to data import settings, such as portals and workspaces. The translation should provide a clear and concise explanation of this functionality.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/Providers.tsx",
-      "line_number": 97,
-      "context": "if (!areProvidersReady) return <DataImportLoader />;\n return (\n <WorkspacesContainer>\n <Text className=\"data-import-description\">\n {t(\"DataImportDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n </Text>\n <Text className=\"data-import-subtitle\">{t(\"UploadBackupData\")}</Text>",
+      "line_number": 87,
+      "context": "if (showPortalSettingsLoader || !ready) return <DataImportLoader />;\n \n return (\n <WorkspacesContainer>\n <Text className=\"data-import-description\">\n {t(\"DataImportDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n \n {dataImportUrl ? (",
       "module": "/packages/client"
     }
   ],

@@ -32,11 +32,19 @@ import {
   createEditExternalLinkHandler,
 } from "../../__mocks__/storybook/handlers/files/externalLinks";
 
+import { ShareRights } from "../../enums";
+
 import type { ShareProps } from "./Share.types";
 import Share from ".";
 
 const createDefaultProps = (): ShareProps => ({
   selfId: "current-user-id",
+  setEditLinkPanelIsVisible: (value: boolean) => {
+    console.log("Edit link panel visibility:", value);
+  },
+  setLinkParams: (linkParams) => {
+    console.log("Link params set:", linkParams);
+  },
   infoPanelSelection: {
     isFile: false,
     access: 0,
@@ -112,15 +120,11 @@ const createDefaultProps = (): ShareProps => ({
       WebReview: true,
       WebView: true,
     },
-    availableExternalRights: {
-      Editing: true,
-      CustomFilter: true,
-      Review: false,
-      Comment: true,
-      Read: true,
-      FillForms: false,
-      Restrict: true,
-      None: true,
+    availableShareRights: {
+      User: [ShareRights.Read, ShareRights.None],
+      Group: [ShareRights.Read, ShareRights.None],
+      ExternalLink: [ShareRights.Read, ShareRights.None],
+      PrimaryExternalLink: [ShareRights.Read, ShareRights.None],
     },
     viewUrl: "https://example.com/view",
     webUrl: "https://example.com/web",

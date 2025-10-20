@@ -26,7 +26,7 @@
 
 import { ReactElement } from "react";
 
-import { ContextMenuModel } from "@docspace/shared/components/context-menu/ContextMenu.types";
+import { ContextMenuModel } from "../../context-menu/ContextMenu.types";
 
 import type { FileType } from "../../../enums";
 
@@ -128,6 +128,8 @@ export type FileTileProps = {
   /** Flag for edit mode */
   isEdit?: boolean;
   forwardRef?: React.RefObject<HTMLDivElement | null>;
+  /** Data test id for the tile */
+  dataTestId?: string;
 };
 
 export type FileChildProps = {

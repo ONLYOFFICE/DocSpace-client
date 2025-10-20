@@ -53,7 +53,6 @@ const BlockHeader = ({
         tag=""
         as="p"
         color=""
-        textAlign=""
       >
         {header}
         {isRequired ? (
@@ -70,7 +69,12 @@ const BlockHeader = ({
         ) : null}
       </Text>
 
-      {helpButtonText ? <HelpButton tooltipContent={helpButtonText} /> : null}
+      {helpButtonText ? (
+        <HelpButton
+          dataTestId="oauth_header_help_button"
+          tooltipContent={helpButtonText}
+        />
+      ) : null}
     </StyledHeaderRow>
   );
 };

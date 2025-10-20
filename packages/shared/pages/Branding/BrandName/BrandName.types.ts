@@ -34,4 +34,6 @@ export interface IBrandNameProps {
   isBrandNameLoaded: boolean;
   defaultBrandName: string;
   brandName: string;
+  error?: string;
+  onValidate?: (value: string) => string;
 }

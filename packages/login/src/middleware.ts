@@ -51,7 +51,7 @@ export function middleware(request: NextRequest) {
     const searchParams = new URLSearchParams(request.nextUrl.searchParams);
     const queryType = searchParams.get("type") ?? "";
     const posSeparator = request.nextUrl.pathname.lastIndexOf("/");
-    const type = !!posSeparator
+    const type = posSeparator
       ? request.nextUrl.pathname?.slice(posSeparator + 1)
       : queryType;
 

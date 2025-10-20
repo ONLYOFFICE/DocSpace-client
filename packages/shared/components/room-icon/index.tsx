@@ -37,6 +37,7 @@ import { useClickOutside } from "../../utils/useClickOutside";
 import { getTextColor } from "../../utils";
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 import { useTheme } from "../../hooks/useTheme";
+import { ROOM_ACTION_KEYS } from "../../constants";
 import { globalColors } from "../../themes/globalColors";
 
 import { DropDown } from "../drop-down";
@@ -72,6 +73,7 @@ const RoomIcon = ({
   tooltipContent,
   tooltipId,
   isTemplate = false,
+  dataTestId,
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
   const [openEditLogo, setOpenLogoEdit] = React.useState(false);
@@ -118,7 +120,7 @@ const RoomIcon = ({
       {model?.map((option) => {
         const optionOnClickAction = () => {
           setOpenLogoEdit(false);
-          if (option.key === "upload") {
+          if (option.key === ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD) {
             return option.onClick(inputFilesElement);
           }
           option.onClick();
@@ -129,6 +131,7 @@ const RoomIcon = ({
             label={option.label}
             icon={option.icon}
             onClick={optionOnClickAction}
+            testId={option.key}
           />
         );
       })}
@@ -217,7 +220,7 @@ const RoomIcon = ({
             "--room-icon-cover-size": coverSize / 20,
           } as React.CSSProperties
         }
-        data-testid="room-icon"
+        data-testid={dataTestId ?? "room-icon"}
         data-is-archive={isArchive}
         data-has-editing={withEditing}
         data-is-template={isTemplate}

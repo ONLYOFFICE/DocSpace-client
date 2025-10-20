@@ -3,7 +3,7 @@
   "content": "API key copied",
   "content_en_sha1_hash": "7faebff738697e731733d149f55475332d5b9414",
   "created_at": "2025-05-19T21:30:50.498Z",
-  "updated_at": "2025-05-26T07:57:32.559Z",
+  "updated_at": "2025-09-29T11:30:44.313Z",
   "comment": {
     "text": "The \"ApiKeyCopied\" translation key is used to display a confirmation message when an API key is successfully copied in the Create API Key Dialog. The message informs the user that the key has been duplicated. It appears on a button within this dialog.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 528,
-      "context": "iconName={CopyReactSvgUrl}\n iconColor={globalColors.lightGrayDark}\n isIconFill\n onIconClick={() => {\n copy(secretKey?.key || \"\");\n toastr.success(t(\"Settings:ApiKeyCopied\"));\n }}\n />\n </div>\n {lifetimeIsChecked ? (\n <Text fontSize=\"12px\" fontWeight={400}>",
+      "line_number": 489,
+      "context": "iconName={CopyReactSvgUrl}\n iconColor={globalColors.lightGrayDark}\n isIconFill\n onIconClick={() => {\n copy(secretKey?.key || \"\");\n toastr.success(t(\"Settings:ApiKeyCopied\"));\n }}\n testId=\"secret_key_input\"\n />\n </div>\n {lifetimeIsChecked ? (",
       "module": "/packages/client"
     }
   ],
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'تم نسخ مفتاح \"API\"' is a literal translation and doesn't fully convey the intended meaning. While it includes the API designation, it's a bit awkward in Arabic. A more natural phrasing would be preferred.",
-          "suggestion": "تم نسخ مفتاح واجهة برمجة التطبيقات"
+          "description": "The translation \"تم نسخ مفتاح \"API\"\" is a literal translation that doesn't convey the full meaning of \"API key copied.\" While technically correct, it sounds unnatural in Arabic. It's better to convey the action and the object more smoothly.",
+          "suggestion": "مفتاح API تم نسخه"
         },
         {
           "type": "formatting",
-          "description": "The use of quotes around \"API\" is unusual and disrupts the flow of the Arabic text.",
-          "suggestion": "Remove the quotes around 'API'."
+          "description": "The use of \"API\" within the Arabic sentence is unusual. It's preferable to either transliterate the term or avoid it if possible depending on the user's technical understanding.",
+          "suggestion": "مفتاح واجهة برمجة التطبيقات تم نسخه"
         }
       ],
       "approved_at": null
@@ -65,8 +65,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation \"API-Leitfaden\" translates to \"API Guide\" and does not accurately represent \"API key copied\".",
-          "suggestion": "API-Schlüssel kopiert"
+          "description": "The German translation \"API-Leitfaden\" translates to \"API guide\" or \"API manual,\" which is not equivalent to \"API key copied.\" It doesn't reflect the original meaning.",
+          "suggestion": "A more accurate translation would be something like \"API-Schlüssel kopiert\" or \"API-Key kopiert\"."
         }
       ],
       "approved_at": null
@@ -173,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word ' පිටපත්' is a bit awkward in this context. While technically correct, 'බාගත' or 'ගබඩා' might be more natural for 'copied' in the sense of 'saved' or 'downloaded'.",
-          "suggestion": "API යතුර බාගත/ගබඩා කරන ලදී."
+          "description": "The word ' පිටපත් කරන' is a bit awkward. While technically correct, it can be improved for naturalness.",
+          "suggestion": "API යතුරපිටුවලපණි."
         }
       ],
       "approved_at": null

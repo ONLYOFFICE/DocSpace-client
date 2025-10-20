@@ -3,7 +3,7 @@
   "content": "Are you sure you want to continue?",
   "content_en_sha1_hash": "8de6e73ba7b7e7a2c5f18e2bc38d0a44a17be1d3",
   "created_at": "2025-05-19T21:30:49.566Z",
-  "updated_at": "2025-06-02T10:20:51.067Z",
+  "updated_at": "2025-10-13T19:43:33.698Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when the user wants to delete or archive rooms. It asks the user to confirm their intention and appears in dialog boxes (e.g., ArchiveDialog and DeleteDialog) where room deletion or archiving decisions are made.",
     "is_auto": true,
@@ -12,81 +12,69 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ArchiveDialog/index.js",
-      "line_number": 71,
+      "line_number": 81,
       "context": "const getDescription = () => {\n if (restoreAll) return t(\"ArchiveDialog:RestoreAllRooms\");\n \n return items.length > 1\n ? `${t(\"ArchiveDialog:ArchiveRooms\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"ArchiveDialog:ArchiveRoom\")} ${t(\"Common:WantToContinue\")}`;\n };\n \n const description = getDescription();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ArchiveDialog/index.js",
-      "line_number": 71,
+      "line_number": 81,
       "context": "const getDescription = () => {\n if (restoreAll) return t(\"ArchiveDialog:RestoreAllRooms\");\n \n return items.length > 1\n ? `${t(\"ArchiveDialog:ArchiveRooms\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"ArchiveDialog:ArchiveRoom\")} ${t(\"Common:WantToContinue\")}`;\n };\n \n const description = getDescription();",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 192,
-      "context": ");\n }\n \n if (isRoomDelete) {\n return isSingle\n ? `${t(\"DeleteRoom\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"DeleteRooms\")} ${t(\"Common:WantToContinue\")}`;\n }\n \n if (isRecycleBinFolder) {\n return isSingle ? (",
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 97,
+      "context": "<>\n <Trans t={t} i18nKey=\"DeleteRoom\" ns=\"DeleteDialog\">\n The room <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be lost.\n </Trans>{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isRecycleBinFolder) {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 192,
-      "context": ");\n }\n \n if (isRoomDelete) {\n return isSingle\n ? `${t(\"DeleteRoom\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"DeleteRooms\")} ${t(\"Common:WantToContinue\")}`;\n }\n \n if (isRecycleBinFolder) {\n return isSingle ? (",
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 97,
+      "context": "<>\n <Trans t={t} i18nKey=\"DeleteRoom\" ns=\"DeleteDialog\">\n The room <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be lost.\n </Trans>{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isRecycleBinFolder) {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 192,
-      "context": ");\n }\n \n if (isRoomDelete) {\n return isSingle\n ? `${t(\"DeleteRoom\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"DeleteRooms\")} ${t(\"Common:WantToContinue\")}`;\n }\n \n if (isRecycleBinFolder) {\n return isSingle ? (",
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 97,
+      "context": "<>\n <Trans t={t} i18nKey=\"DeleteRoom\" ns=\"DeleteDialog\">\n The room <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be lost.\n </Trans>{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isRecycleBinFolder) {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 192,
-      "context": ");\n }\n \n if (isRoomDelete) {\n return isSingle\n ? `${t(\"DeleteRoom\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"DeleteRooms\")} ${t(\"Common:WantToContinue\")}`;\n }\n \n if (isRecycleBinFolder) {\n return isSingle ? (",
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 97,
+      "context": "<>\n <Trans t={t} i18nKey=\"DeleteRoom\" ns=\"DeleteDialog\">\n The room <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be lost.\n </Trans>{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isRecycleBinFolder) {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 192,
-      "context": ");\n }\n \n if (isRoomDelete) {\n return isSingle\n ? `${t(\"DeleteRoom\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"DeleteRooms\")} ${t(\"Common:WantToContinue\")}`;\n }\n \n if (isRecycleBinFolder) {\n return isSingle ? (",
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 97,
+      "context": "<>\n <Trans t={t} i18nKey=\"DeleteRoom\" ns=\"DeleteDialog\">\n The room <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be lost.\n </Trans>{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isRecycleBinFolder) {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 192,
-      "context": ");\n }\n \n if (isRoomDelete) {\n return isSingle\n ? `${t(\"DeleteRoom\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"DeleteRooms\")} ${t(\"Common:WantToContinue\")}`;\n }\n \n if (isRecycleBinFolder) {\n return isSingle ? (",
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 97,
+      "context": "<>\n <Trans t={t} i18nKey=\"DeleteRoom\" ns=\"DeleteDialog\">\n The room <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be lost.\n </Trans>{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isRecycleBinFolder) {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 192,
-      "context": ");\n }\n \n if (isRoomDelete) {\n return isSingle\n ? `${t(\"DeleteRoom\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"DeleteRooms\")} ${t(\"Common:WantToContinue\")}`;\n }\n \n if (isRecycleBinFolder) {\n return isSingle ? (",
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 97,
+      "context": "<>\n <Trans t={t} i18nKey=\"DeleteRoom\" ns=\"DeleteDialog\">\n The room <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be lost.\n </Trans>{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isRecycleBinFolder) {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 192,
-      "context": ");\n }\n \n if (isRoomDelete) {\n return isSingle\n ? `${t(\"DeleteRoom\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"DeleteRooms\")} ${t(\"Common:WantToContinue\")}`;\n }\n \n if (isRecycleBinFolder) {\n return isSingle ? (",
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 97,
+      "context": "<>\n <Trans t={t} i18nKey=\"DeleteRoom\" ns=\"DeleteDialog\">\n The room <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be lost.\n </Trans>{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isRecycleBinFolder) {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 192,
-      "context": ");\n }\n \n if (isRoomDelete) {\n return isSingle\n ? `${t(\"DeleteRoom\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"DeleteRooms\")} ${t(\"Common:WantToContinue\")}`;\n }\n \n if (isRecycleBinFolder) {\n return isSingle ? (",
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 97,
+      "context": "<>\n <Trans t={t} i18nKey=\"DeleteRoom\" ns=\"DeleteDialog\">\n The room <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be lost.\n </Trans>{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n if (isRecycleBinFolder) {",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 192,
-      "context": ");\n }\n \n if (isRoomDelete) {\n return isSingle\n ? `${t(\"DeleteRoom\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"DeleteRooms\")} ${t(\"Common:WantToContinue\")}`;\n }\n \n if (isRecycleBinFolder) {\n return isSingle ? (",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
-      "line_number": 53,
-      "context": "</ModalDialog.Header>\n <ModalDialog.Body>\n <span>\n <>{t(\"Common:DeleteFile\")} </>\n <>{t(\"Common:FilePermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </span>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-button_submit\"",
-      "module": "/packages/doceditor"
     }
   ],
   "languages": {
@@ -153,7 +141,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Վստա՞հ եք, որ ցանկանում եք շարունակել:' while grammatically correct, is a very literal and slightly formal translation of \"Are you sure you want to continue?\". A more natural and common phrasing in Armenian would convey the same meaning with a slightly more conversational tone.",
+          "suggestion": "Consider alternatives like: 'Պատահաբար շարունակելու եք?' (Patkahabar sharunakelu ek?) which translates to 'Will you accidentally continue?' or 'Ցանկացած շարունակելու եք?' (Tscanqacq sharunakelu ek?) which translates to 'Do you want to continue?'"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'このまま続けますか?' while understandable, is a somewhat formal and direct translation of 'Are you sure you want to continue?'. A more natural and user-friendly phrasing might be preferred depending on the context.",
-          "suggestion": "Consider alternative translations like: 'よろしいですか？' (Yoroshii desu ka?) - 'Is that okay?', or '続行しますか？' (Sukigou shimasu ka?) - 'Will you proceed?'"
+          "description": "The translation \"このまま続けますか?\" is a generally acceptable translation of 'Are you sure you want to continue?', but lacks the nuance of confirmation or certainty. A more direct translation emphasizing certainty might be better.",
+          "suggestion": "このまま続行しますか？ (Kono mama sokyuu shimasu ka?)"
         }
       ],
       "approved_at": null
@@ -234,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ඔබට ඉදිරියට යාමට වුවමනාද?\" while understandable, isn't the most natural way to express \"Are you sure you want to continue?\" in Sinhala. It literally translates to 'Do you want to go forward?' A more natural phrasing would better convey the confirmation/certainty aspect of the original English.",
-          "suggestion": "Consider alternatives like \"ඔබට මෙය කරගෙන යාමට කැමතියි?\" (Obata emata karaganeyamata kamitiya?) which translates to 'Do you want to proceed with this?' or \"ඔබට මෙය තවදුරටත් කරගෙන යන්න කැමතියි?\" (Obata emata thavadurata karaganeynata kamitiya?) which translates to 'Do you want to continue this?'"
+          "description": "The translation 'ඔබට ඉදිරියට යාමට වුවමනාද?' while understandable, isn't the most natural way to express 'Are you sure you want to continue?' in Sinhala. It's a bit literal.",
+          "suggestion": "A more natural translation would be 'ඔබට මේවා ඉදිරියට ගන්න අවශ්යද?' or 'ඔබ මේ ඉදිරියේදී කරගෙන යන්න කැමතිද?'"
         }
       ],
       "approved_at": null
@@ -283,6 +277,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

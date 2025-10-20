@@ -26,7 +26,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -73,6 +73,7 @@ const ClientForm = ({
   setJwtToken,
 }: ClientFormProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isRequestRunning, setIsRequestRunning] =
@@ -120,7 +121,11 @@ const ClientForm = ({
   }, [clientSecretProps, setClientSecretProps]);
 
   const onCancelClick = () => {
-    navigate("/developer-tools/oauth");
+    if (location.pathname.includes("portal-settings")) {
+      navigate("/portal-settings/developer-tools/oauth");
+    } else {
+      navigate("/developer-tools/oauth");
+    }
   };
 
   const onSaveClick = async () => {

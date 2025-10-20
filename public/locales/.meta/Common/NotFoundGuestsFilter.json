@@ -3,7 +3,7 @@
   "content": "No guests found",
   "content_en_sha1_hash": "b91968e9823bf736346896bcc6a5923a94d5c5b3",
   "created_at": "2025-05-19T21:30:46.891Z",
-  "updated_at": "2025-05-26T07:57:32.453Z",
+  "updated_at": "2025-10-01T15:17:48.227Z",
   "comment": {
     "text": "The \"NotFoundGuestsFilter\" translation key is used to display a message when no guests are found in a contacts list. It appears as a header on an empty screen in the Home/ContactsBody section, informing users that there are no guest groups or members.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 645,
+      "line_number": 690,
       "context": ": t(\"Common:GroupsNotFoundDescription\"))\n }\n searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={\n activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuestsFilter\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:NotFoundMembers\")\n : t(\"Common:NotFoundGroups\")\n }\n searchEmptyScreenDescription={",
       "module": "/packages/shared"
     }
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අමුත්තන් හමු නොවීය' is a literal translation of 'guests not found'. A more natural and user-friendly translation for 'No guests found' would be 'මුළුත් නැත' or 'අමුත්තන් කෙනෙකුත් නොවීය'.",
-          "suggestion": "මුළුත් නැත"
+          "description": "The Sinhala translation 'අමුත්තන් හමු නොවීය' literally translates to 'Guests were not found'. While understandable, it's a slightly awkward phrasing. A more natural and idiomatic translation for 'No guests found' would be 'අමුත්තන් නොවීය' or 'අමුත්තන් කීවත් නොවීය'.",
+          "suggestion": "Consider 'අමුත්තන් නොවීය' or 'අමුත්තන් කීවත් නොවීය'."
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"未找到访客\" is a very literal and somewhat stiff translation of \"No guests found.\" It lacks the natural flow of a user-facing message. A more natural translation might convey a sense of absence or unavailability.",
-          "suggestion": "Consider alternatives like \"没有找到任何访客\" (No guests were found) or a more conversational equivalent depending on the overall tone of the application."
+          "description": "While '未找到访客' is technically correct, it sounds a bit formal and stiff for a user-facing message like \"No guests found.\" A more natural and user-friendly translation would be something like \"没有访客\" or \"没有找到任何访客\" (no guests found).",
+          "suggestion": "没有访客"
         }
       ],
       "approved_at": null

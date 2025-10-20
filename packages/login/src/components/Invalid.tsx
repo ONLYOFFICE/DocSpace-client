@@ -71,11 +71,11 @@ const InvalidError = ({ match }: InvalidErrorProps) => {
     match?.oauthMessageKey as OAuth2ErrorKey | undefined,
   );
 
-  const errorTitle = oauthError
-    ? oauthError
-    : match?.messageKey
+  const errorTitle =
+    oauthError ||
+    (match?.messageKey
       ? getMessageKeyTranslate(t, message)
-      : t("Common:ExpiredLink");
+      : t("Common:ExpiredLink"));
 
   return (
     <ErrorContainer headerText={errorTitle}>
@@ -92,6 +92,7 @@ const InvalidError = ({ match }: InvalidErrorProps) => {
                 key="component_key"
                 className="error_description_link"
                 href={proxyHomepageUrl}
+                data-testid="invalid_error_link"
               />
             ),
           }}

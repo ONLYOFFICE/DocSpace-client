@@ -3,7 +3,7 @@
   "content": "New guests will be added here once you invite them to the room.",
   "content_en_sha1_hash": "67fb4d9324338a8ac05bfb73179d010e43aecfd7",
   "created_at": "2025-05-19T21:30:46.881Z",
-  "updated_at": "2025-05-26T07:57:32.454Z",
+  "updated_at": "2025-10-01T15:17:48.229Z",
   "comment": {
     "text": "This translation key describes a message that appears on an empty screen when there are no invited guests to display. It is used in the \"Contacts\" section of the Home page and is displayed as a default message when no guests have been added yet.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 635,
+      "line_number": 680,
       "context": ": t(\"Common:NotFoundGroups\"))\n }\n emptyScreenDescription={\n emptyScreenDescription ??\n (activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:EmptyDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:GroupsNotFoundDescription\"))",
       "module": "/packages/shared"
     }
@@ -54,13 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb tense 'budou přidáni' (future passive) sounds slightly awkward in this context. A more natural phrasing would use a simpler present tense or a slightly different construction to imply future addition.",
+          "description": "The use of 'budou přidáni' (future passive) is grammatically correct but sounds somewhat awkward and less natural in this context. A more natural phrasing would use the active voice.",
           "suggestion": "Noví hosté se sem přidají, jakmile je pozvete do místnosti."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'jakmile je pozvete' can be perceived as a bit formal. A more conversational and natural phrasing could improve the overall feel.",
-          "suggestion": "Až je pozvete do místnosti."
         }
       ],
       "approved_at": null
@@ -101,8 +96,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Նոր հյուրեր կավելացվեն այստեղ, երբ նրանց սենյակ հրավիրեք:' is not a direct and accurate translation of 'New guests will be added here once you invite them to the room.' The phrasing 'երբ նրանց սենյակ հրավիրեք' (when you invite them to the room) is awkward.  It should more accurately convey 'when you invite them'.",
-          "suggestion": "Նոր հյուրեր կավելացվեն այստեղ, երբ դուք նրանց հրավիրեք:"
+          "description": "The phrase 'երբ նրանց սենյակ հրավիրեք' is not a natural way to say 'once you invite them to the room' in Armenian. It's a literal translation that doesn't flow well. The verb 'հրավիրել' requires an object that is directly being invited, and 'սենյակ' (room) shouldn't be treated as that object here.",
+          "suggestion": "Consider phrasing it as 'երբ դուք նրանց հրավիրեք սենյակում լինելու համար' or 'երբ դուք նրանց հրավիրեք սենյակ էլու համար'."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically grammatical, the sentence structure is awkward.  The Armenian translation is quite literal.",
+          "suggestion": "Re-evaluate the sentence structure for better flow in Armenian.  Consider reordering the elements."
         }
       ],
       "approved_at": null
@@ -116,18 +116,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '新しいゲストは、あなたがルームに招待すると、ここに追加されます。' is a literal translation and sounds unnatural in Japanese. A more natural phrasing would emphasize the automatic addition upon invitation.",
-          "suggestion": "新しいゲストは、ルームに招待すると自動的にここに追加されます。"
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, using 'ルーム' for 'room' is slightly less common in this context. '部屋' would be more natural.",
-          "suggestion": "新しいゲストは、あなたが部屋に招待すると自動的にここに追加されます。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -142,13 +131,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation is a bit literal and doesn't flow naturally. 'ຄະນະສະມາຊິກ' (khana samachik) usually refers to a committee or group of members, not just guests. The English implies 'new guests'.",
-          "suggestion": "ຄະນະຜູ້ເຂົ້າແຂກ​ໃໝ່ຈະຖືກເພີ່ມຢູ່ທີ່ນີ້ເມື່ອທ່ານເຊີນພວກເຂົາເຂົ້າຫ້ອງ."
+          "description": "The term 'New guests' is translated as 'ຄະນະສະມາຊິກຜູ້ມາໃໝ່'. While technically correct, 'ຄະນະສະມາຊິກ' often implies a formal group membership. A more natural translation for 'guests' in this context might be 'ແຂກ' or 'ຜູ້ເຂົ້າແຂກ'.",
+          "suggestion": "ຄະນະແຂກຜູ້ມາໃໝ່ຈະຖືກເພີ່ມຢູ່ທີ່ນີ້ເມື່ອທ່ານເຊີນພວກເຂົາເຂົ້າຫ້ອງ."
         },
         {
-          "type": "grammar",
-          "description": "While grammatically correct, the sentence structure 'ຄະນະສະມາຊິກຜູ້ມາໃໝ່ຈະຖືກເພີ່ມ' can be improved for a more natural flow.",
-          "suggestion": "ຜູ້ເຂົ້າແຂກ​ໃໝ່ຈະຖືກເພີ່ມຢູ່ທີ່ນີ້ເມື່ອທ່ານເຊີນພວກເຂົາເຂົ້າຫ້ອງ."
+          "type": "incorrect_translation",
+          "description": "The phrase 'invite them to the room' is translated as 'ເຊີນພວກເຂົາເຂົ້າຫ້ອງ'. 'ເຂົ້າຫ້ອງ' literally translates to 'into the room'. It would be more natural to use a phrase that indicates joining the room. ",
+          "suggestion": "ເຊີນພວກເຂົາເຂົ້າຮ່ວມຫ້ອງ"
         }
       ],
       "approved_at": null
@@ -159,8 +148,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation includes a sentence 'Varat nosūtīt savus viesus un pievienot sarakstam viesus, kurus uzaicinājušas citas personas' which is not directly related to the English content. The English says new guests will be added once invited, it doesn't imply adding guests invited by others.",
-          "suggestion": "Jauni viesi tiks pievienoti šeit, kad viņus aicināsiet pievienoties telpai."
+          "description": "The Latvian translation includes a sentence \"Varat nosūtīt savus viesus un pievienot sarakstam viesus, kurus uzaicinājušas citas personas.\" which adds information not present in the English source. The English states new guests will be added *once invited*. The Latvian implies you can also add guests who were invited by others.",
+          "suggestion": "Jauni viesi tiks pievienoti šeit, tiklīdz jūs viņus aicināsiet pievienoties telpai."
         }
       ],
       "approved_at": null
@@ -174,19 +163,19 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Nowi goście zostaną dodani tutaj, gdy zaprosisz ich do pokoju' is not a perfect equivalent of 'New guests will be added here once you invite them to the room'. The conditional tense ('gdy zaprosisz') implies an action by the user, while the English suggests a system-initiated addition.",
+          "suggestion": "Nowi goście zostaną dodani tutaj, kiedy ich zaprosisz do pokoju. OR Nowi goście zostaną dodani tutaj po zaproszeniu ich do pokoju."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Novos hóspedes serão adicionados aqui assim que você convidá-los para o quarto' is a literal translation that can be improved for naturalness in Portuguese. A more idiomatic translation would be something like 'Novos convidados aparecerão aqui após você convidá-los para a sala.' or 'Os convidados adicionados aparecerão aqui quando você os convidar para a sala.'",
-          "suggestion": "Novos convidados aparecerão aqui após você convidá-los para a sala."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -201,13 +190,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Noii invitați vor fi adăugați aici de îndată ce le invitați la sală' is a bit literal and awkward. The phrase 'le invitați la sală' isn't the most natural way to say 'invite them to the room'. It sounds like you're inviting them *to* the invitation itself.",
-          "suggestion": "Noii invitați vor fi adăugați aici după ce îi invitați în sală."
-        },
-        {
-          "type": "grammar",
-          "description": "While 'de îndată ce' is grammatically correct, 'după ce' flows better in this context.",
-          "suggestion": "Consider using 'după ce' instead of 'de îndată ce' for a more natural feel."
+          "description": "The Romanian translation 'Noii invitați vor fi adăugați aici de îndată ce le invitați la sală' is not a direct or natural translation of 'New guests will be added here once you invite them to the room'.  'Le invitați la sală' is awkward.  'la sală' is also not as natural as alternatives.",
+          "suggestion": "O mai bună traducere ar fi: 'Noi oaspeți vor fi adăugați aici odată ce îi invitați în cameră.' or 'Noii oaspeți vor fi adăugați aici după ce îi invitați în cameră.'"
         }
       ],
       "approved_at": null
@@ -224,8 +208,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'නව ආගන්තුකයින් මෙහි එක්රැස් කරනු ලැබේ, ඔබ ඔවුන්ට පහසුරම් දුන් පසු' is not a direct or natural translation of 'New guests will be added here once you invite them to the room.' The phrase 'ඔබ ඔවුන්ට පහසුරම් දුන් පසු' translates to 'after you pay them' which doesn't align with 'invite them'.",
-          "suggestion": "නව ආගන්තුකයින් ඔබ ඔවුන්ට ආරාධනා කරන විට මෙහි එක්රැස් කරනු ලැබේ."
+          "description": "The translation 'නව ආගන්තුකයින් මෙහි එක්රැස් කරනු ලැබේ, ඔබ ඔවුන්ට පහසුරම් දුන් පසු.' doesn't accurately convey the meaning of 'New guests will be added here once you invite them to the room.' The phrasing 'ඔබ ඔවුන්ට පහසුරම් දුන් පසු' (once you pay them) implies payment, which isn't the intention. It should relate to inviting them.",
+          "suggestion": "නව ආගන්තුකයින් මෙහි එක්වනු ලැබේ, ඔබ ඔවුන්ට ආරාධනා කළ පසු."
         }
       ],
       "approved_at": null
@@ -248,8 +232,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Нови гости ће бити додати овде када их позовете у собу.' is a literal translation but sounds slightly unnatural in Serbian. A more natural phrasing would be 'Нови гости ће бити додати овде након што их позовете у собу.' or 'Нови гости ће бити додати овде када их користите за приступање соби.'",
-          "suggestion": "Нови гости ће бити додати овде након што их позовете у собу."
+          "description": "The Serbian translation 'Нови гости ће бити додати овде када их позовете у собу.' is a literal translation that doesn't flow naturally in Serbian. A more natural phrasing would be something like 'Нови гости се додају овде након што их позовете у собу.' or 'Нове особе се додају овде након позива.'",
+          "suggestion": "Нови гости се додају овде након што их позовете у собу."
         }
       ],
       "approved_at": null
@@ -260,8 +244,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Serbian translation contains a typo. 'pozovete' should be 'pozovete'.",
-          "suggestion": "pozovete"
+          "description": "The Serbian translation contains a typo. \"ovde\" should be \"u sobu\".",
+          "suggestion": "Novi gosti će biti dodati ovde kada ih pozovete u sobu."
         }
       ],
       "approved_at": null

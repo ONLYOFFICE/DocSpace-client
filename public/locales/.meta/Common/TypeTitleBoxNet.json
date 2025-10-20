@@ -3,7 +3,7 @@
   "content": "Box",
   "content_en_sha1_hash": "239ca5767afac9641593464ce02bc454d6ac07a9",
   "created_at": "2025-05-26T07:15:48.949Z",
-  "updated_at": "2025-05-26T08:03:07.337Z",
+  "updated_at": "2025-10-13T23:52:55.544Z",
   "comment": {
     "text": "This translation key \"TypeTitleBoxNet\" represents the English content \"Box\", used to display a connected cloud service type in the UI, particularly in file and dialog boxes.",
     "is_auto": true,
@@ -205,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Trash",
   "content_en_sha1_hash": "e3bf62bb7f5af7ba291b2df1a11d573bdb55d7e9",
   "created_at": "2025-05-19T21:30:49.325Z",
-  "updated_at": "2025-06-08T12:02:32.559Z",
+  "updated_at": "2025-10-16T07:29:35.477Z",
   "comment": {
     "text": "This translation key is used to display \"Trash\" as a label for a section in the file system and in a delete profile dialog. It appears in an empty view container and a body component of a delete profile ever dialog, providing context for users navigating file systems or managing profiles.",
     "is_auto": true,
@@ -11,116 +11,182 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/HOCs/withHotkeys.js",
-      "line_number": 366,
-      "context": "if (confirmDelete) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n deleteAction(translations).catch((err) => toastr.error(err));\n }\n }",
+      "file_path": "/packages/client/src/components/Article/Body/Items.js",
+      "line_number": 277,
+      "context": "isDisabled={isAiAgents}\n withAnimation\n badgeTitle={\n labelBadge\n ? \"\"\n : t(\"EmptySection\", { sectionName: t(\"Common:TrashSection\") })\n }\n badgeComponent={\n isAiAgents ? (\n <Badge\n label={t(\"Soon\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/Article/Body/Items.js",
-      "line_number": 191,
-      "context": "onClickBadge={onBadgeClick}\n iconBadge={iconBadge}\n badgeTitle={\n labelBadge\n ? \"\"\n : t(\"EmptySection\", { sectionName: t(\"Common:TrashSection\") })\n }\n badgeComponent={\n <NewFilesBadge\n newFilesCount={labelBadge}\n folderId={item.id === roomsFolderId ? \"rooms\" : item.id}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/Article/Body/Items.js",
-      "line_number": 191,
-      "context": "onClickBadge={onBadgeClick}\n iconBadge={iconBadge}\n badgeTitle={\n labelBadge\n ? \"\"\n : t(\"EmptySection\", { sectionName: t(\"Common:TrashSection\") })\n }\n badgeComponent={\n <NewFilesBadge\n newFilesCount={labelBadge}\n folderId={item.id === roomsFolderId ? \"rooms\" : item.id}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 104,
-      "context": "const personalDescription = t(\"EmptyFolderDecription\");\n const emptyScreenHeader = t(\"Common:EmptyScreenFolder\");\n const archiveHeader = t(\"ArchiveEmptyScreenHeader\");\n const noFilesHeader = t(\"NoFilesHereYet\");\n const trashDescription = t(\"TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n const favoritesDescription = t(\"FavoritesEmptyContainerDescription\");\n const recentDescription = t(\"RecentViaLinkEmptyContainerDescription\");\n \n const roomsDescription = isPublicRoom ? (",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 209,
-      "context": ".with([FolderType.Archive, ShareAccessRights.DenyAccess], () =>\n t(\"Files:ArchiveEmptyScreenUser\"),\n )\n .with([FolderType.TRASH, P._], () =>\n t(\"Files:TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n )\n .otherwise(() => \"\");\n };",
+      "line_number": 277,
+      "context": "isDisabled={isAiAgents}\n withAnimation\n badgeTitle={\n labelBadge\n ? \"\"\n : t(\"EmptySection\", { sectionName: t(\"Common:TrashSection\") })\n }\n badgeComponent={\n isAiAgents ? (\n <Badge\n label={t(\"Soon\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/FileLifetime.js",
-      "line_number": 80,
-      "context": "const deleteOptions = [\n {\n key: 1,\n label: t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n value: false,\n },\n {\n key: 2,",
+      "line_number": 83,
+      "context": "const deleteOptions = [\n {\n key: 1,\n label: t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n value: false,\n dataTestId: \"virtual_data_room_file_lifetime_delete_move_to_trash\",\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 112,
+      "context": "You are about to delete{\" \"}\n <strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {isFolder\n ? t(\"FolderPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })}{\" \"}\n {t(\"Common:WantToContinue\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 112,
+      "context": "You are about to delete{\" \"}\n <strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {isFolder\n ? t(\"FolderPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })}{\" \"}\n {t(\"Common:WantToContinue\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 112,
+      "context": "You are about to delete{\" \"}\n <strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {isFolder\n ? t(\"FolderPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })}{\" \"}\n {t(\"Common:WantToContinue\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 112,
+      "context": "You are about to delete{\" \"}\n <strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {isFolder\n ? t(\"FolderPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })}{\" \"}\n {t(\"Common:WantToContinue\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 112,
+      "context": "You are about to delete{\" \"}\n <strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {isFolder\n ? t(\"FolderPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })}{\" \"}\n {t(\"Common:WantToContinue\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 112,
+      "context": "You are about to delete{\" \"}\n <strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {isFolder\n ? t(\"FolderPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })}{\" \"}\n {t(\"Common:WantToContinue\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 112,
+      "context": "You are about to delete{\" \"}\n <strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {isFolder\n ? t(\"FolderPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })}{\" \"}\n {t(\"Common:WantToContinue\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 112,
+      "context": "You are about to delete{\" \"}\n <strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {isFolder\n ? t(\"FolderPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })}{\" \"}\n {t(\"Common:WantToContinue\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 112,
+      "context": "You are about to delete{\" \"}\n <strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {isFolder\n ? t(\"FolderPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })}{\" \"}\n {t(\"Common:WantToContinue\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 94,
+      "line_number": 108,
       "context": "setSelected(\"none\");\n onClose();\n \n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n if (!selection.length) return;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 94,
-      "context": "setSelected(\"none\");\n onClose();\n \n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n if (!selection.length) return;",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 94,
+      "line_number": 108,
       "context": "setSelected(\"none\");\n onClose();\n \n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n if (!selection.length) return;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 61,
-      "context": "onlyOneUser,\n onlyGuests,\n }: BodyComponentProps) => {\n const warningMessageMyDocuments = t(\"UserFilesRemovalScope\", {\n sectionNameFirst: t(\"Common:MyFilesSection\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n });\n \n const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {\n userCaption: onlyOneUser",
+      "line_number": 62,
+      "context": "onlyOneUser,\n onlyGuests,\n }: BodyComponentProps) => {\n const warningMessageMyDocuments = t(\"UserFilesRemovalScope\", {\n sectionNameFirst: t(\"Common:MyDocuments\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n });\n \n const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {\n userCaption: onlyOneUser",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 61,
-      "context": "onlyOneUser,\n onlyGuests,\n }: BodyComponentProps) => {\n const warningMessageMyDocuments = t(\"UserFilesRemovalScope\", {\n sectionNameFirst: t(\"Common:MyFilesSection\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n });\n \n const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {\n userCaption: onlyOneUser",
+      "line_number": 62,
+      "context": "onlyOneUser,\n onlyGuests,\n }: BodyComponentProps) => {\n const warningMessageMyDocuments = t(\"UserFilesRemovalScope\", {\n sectionNameFirst: t(\"Common:MyDocuments\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n });\n \n const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {\n userCaption: onlyOneUser",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/EmptyTrashDialog/index.js",
       "line_number": 55,
-      "context": "const sectionName = isArchiveFolder\n ? t(\"Common:Archive\")\n : isPersonalReadOnly\n ? t(\"Common:MyFilesSection\")\n : t(\"Common:TrashSection\");\n \n const onEmptyTrash = () => {\n onClose();\n \n const translations = {",
+      "context": "const sectionName = isArchiveFolder\n ? t(\"Common:Archive\")\n : isPersonalReadOnly\n ? t(\"Common:MyDocuments\")\n : t(\"Common:TrashSection\");\n \n const onEmptyTrash = () => {\n onClose();\n \n const translations = {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
-      "line_number": 333,
-      "context": "}),\n )\n : text(\n this.t(\"Files:ScheduledTrashMove\", {\n date: parseAndFormatDate(this.item.expired, this.culture),\n sectionName: this.t(\"Common:TrashSection\"),\n }),\n );\n };\n \n getItemVersions = () => {",
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 223,
+      "context": ".with([FolderType.Archive, ShareAccessRights.DenyAccess], () =>\n t(\"Files:ArchiveEmptyScreenUser\"),\n )\n .with([FolderType.TRASH, P._], () =>\n t(\"Files:TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n )\n .otherwise(() => \"\");\n };",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 70,
+      "file_path": "/packages/client/src/HOCs/withHotkeys.js",
+      "line_number": 387,
+      "context": "if (confirmDelete) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n deleteAction(translations).catch((err) => toastr.error(err));\n }\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
+      "line_number": 372,
+      "context": "}),\n )\n : text(\n this.t(\"Files:ScheduledTrashMove\", {\n date: getCorrectDate(this.culture, this.item.expired as string),\n sectionName: this.t(\"Common:TrashSection\"),\n }),\n );\n };\n \n getItemVersions = () => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 79,
+      "context": "return t(\"InfoPanel:FileMoved\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 79,
+      "context": "return t(\"InfoPanel:FileMoved\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 79,
+      "context": "return t(\"InfoPanel:FileMoved\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 79,
       "context": "return t(\"InfoPanel:FileMoved\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 70,
+      "line_number": 73,
       "context": "return t(\"InfoPanel:FileMoved\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 70,
+      "line_number": 73,
       "context": "return t(\"InfoPanel:FileMoved\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 70,
+      "line_number": 73,
+      "context": "return t(\"InfoPanel:FileMoved\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
+      "line_number": 73,
       "context": "return t(\"InfoPanel:FileMoved\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 441,
+      "line_number": 474,
       "context": "period: getLifetimePeriodTranslation(lifetime.period, t),\n })}. ${\n lifetime.deletePermanently\n ? t(\"Files:AfterFilesWillBeDeletedPermanently\")\n : t(\"Files:FilesMovedToTrashNotice\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n }`;\n \n return null;\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 441,
+      "line_number": 474,
       "context": "period: getLifetimePeriodTranslation(lifetime.period, t),\n })}. ${\n lifetime.deletePermanently\n ? t(\"Files:AfterFilesWillBeDeletedPermanently\")\n : t(\"Files:FilesMovedToTrashNotice\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n }`;\n \n return null;\n };",
       "module": "/packages/client"
     },
@@ -131,62 +197,44 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.js",
-      "line_number": 128,
-      "context": "onChange={onChangeDeleteConfirm}\n isChecked={confirmDelete}\n />\n <Text>\n {t(\"TrashMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n </Text>\n </div>\n \n <div className=\"toggle-btn-wrapper\">",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.tsx",
+      "line_number": 141,
+      "context": "isChecked={confirmDelete}\n dataTestId=\"display_notification_toggle_button\"\n />\n <Text>\n {t(\"TrashMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n </Text>\n </div>\n \n <div className={styles.toggleBtnWrapper}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 789,
+      "line_number": 814,
       "context": "toastr.error(err),\n );\n } else {\n translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n deleteAction(translations, [selectedFolder], true).catch((err) =>\n toastr.error(err),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 789,
+      "line_number": 814,
       "context": "toastr.error(err),\n );\n } else {\n translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n deleteAction(translations, [selectedFolder], true).catch((err) =>\n toastr.error(err),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 789,
+      "line_number": 814,
       "context": "toastr.error(err),\n );\n } else {\n translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n deleteAction(translations, [selectedFolder], true).catch((err) =>\n toastr.error(err),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2334,
+      "line_number": 2327,
       "context": "if (this.filesSettingsStore.confirmDelete) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n this.deleteAction(translations).catch((err) => toastr.error(err));\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/TreeFoldersStore.js",
-      "line_number": 76,
-      "context": "break;\n case FolderType.Archive:\n folder.title = i18n.t(\"Common:Archive\");\n break;\n case FolderType.TRASH:\n folder.title = i18n.t(\"Common:TrashSection\");\n break;\n default:\n break;\n }\n });",
+      "line_number": 79,
+      "context": "break;\n case FolderType.Archive:\n folder.title = i18n.t(\"Common:Archive\");\n break;\n case FolderType.TRASH:\n folder.title = i18n.t(\"Common:TrashSection\");\n break;\n case FolderType.Favorites:\n folder.title = i18n.t(\"Common:Favorites\");\n break;\n case FolderType.Recent:",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
-      "line_number": 46,
-      "context": "return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>\n {t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <span>\n <>{t(\"Common:DeleteFile\")} </>",
-      "module": "/packages/doceditor"
-    },
-    {
-      "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
-      "line_number": 46,
-      "context": "return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>\n {t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <span>\n <>{t(\"Common:DeleteFile\")} </>",
-      "module": "/packages/doceditor"
-    },
-    {
-      "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
-      "line_number": 46,
-      "context": "return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>\n {t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <span>\n <>{t(\"Common:DeleteFile\")} </>",
-      "module": "/packages/doceditor"
-    },
-    {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 144,
+      "line_number": 130,
       "context": "const getTooltipContent = () => (\n <Text fontSize=\"12px\" fontWeight={400} noSelect>\n {roomLifetime?.deletePermanently\n ? t(\"Common:FileWillBeDeletedPermanently\", { date: expiredDate || \"\" })\n : t(\"Common:SectionMoveNotification\", {\n sectionName: t(\"Common:TrashSection\"),\n date: expiredDate || \"\",\n })}\n </Text>\n );",
       "module": "/packages/shared"
     }
@@ -234,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation 'Κάδος απορριμάτων' translates to 'Waste Bin' or 'Trash Can'. While acceptable, it's more literal than the concise English term 'Trash'. A more natural and equivalent translation, depending on context, could be something like 'Σκουπίδια'.",
-          "suggestion": "Consider 'Σκουπίδια' for a more natural equivalent, or retain 'Κάδος απορριμάτων' if a more literal translation is required."
+          "description": "The translation \"Κάδος απορριμάτων\" (Kados aporymaton) literally translates to \"Waste bin\" or \"Garbage can.\" While related to \"Trash,\" it's a more specific term. \"Trash\" is a broader term encompassing various discarded items.",
+          "suggestion": "Consider a more general term like \"Απορρίμματα\" (Aporrimmata), which means \"Waste\" or \"Rubbish\", or \"Σκουπίδια\" (Skoupidia), which is a common word for \"Trash\"."
         }
       ],
       "approved_at": null
@@ -246,8 +294,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Papelera de reciclaje' is a literal translation, it's overly verbose and doesn't convey the simple meaning of 'Trash'. It implies a recycling bin, not just a trash receptacle.",
-          "suggestion": "Consider more concise and common translations such as 'Basura', 'Residuos', or 'Vertedero'."
+          "description": "The translation \"Papelera de reciclaje\" (recycling bin) is not a direct translation of \"Trash\". While trash often goes into a recycling bin, the term \"Trash\" refers to waste material, not specifically recyclable material.",
+          "suggestion": "Basura"
         }
       ],
       "approved_at": null
@@ -282,8 +330,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"ごみ箱\" (gomibako) means \"trash can\" or \"garbage box\", not simply \"trash\". While related, it's not a direct translation of \"Trash\".",
-          "suggestion": "Consider a more direct translation such as \"ゴミ\" (gomi) which means 'trash' or 'garbage'."
+          "description": "The Japanese translation \"ごみ箱\" (gomi-bako) literally means \"trash box\" or \"garbage can\". While it conveys the general idea of \"Trash\", it's a more specific translation than the English term. \"Trash\" could also be translated more directly as \"ごみ\" (gomi).",
+          "suggestion": "ごみ"
         }
       ],
       "approved_at": null
@@ -306,8 +354,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Akritne\" does not accurately convey the meaning of \"Trash.\" \"Akritne\" translates to \"ashes\" or \"cinders.\" A more appropriate translation for \"Trash\" would be \"Atkritumi\".",
-          "suggestion": "Atkritumi"
+          "description": "While \"Akritne\" is a valid Latvian word, it doesn't directly translate to \"Trash\". It means \"ash\" or \"cinders\".  A more appropriate translation for \"Trash\" would depend on the specific context (e.g., \"atkritumi\" for general waste, \"atkritumu konteiners\" for trash can).",
+          "suggestion": "Consider using \"atkritumi\" for general waste, or a more specific term depending on the intended meaning of 'Trash'."
         }
       ],
       "approved_at": null
@@ -342,8 +390,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Recycle Bin\" is a functional equivalent, \"Trash\" more accurately represents the English term. \"Recycle Bin\" implies a container for recyclable materials, whereas \"Trash\" refers to general waste.",
-          "suggestion": "Gunoi"
+          "description": "The Romanian translation \"Recycle Bin\" doesn't perfectly align with the English term \"Trash\". While \"Recycle Bin\" is a related concept, \"Trash\" refers to discarded items, not necessarily those intended for recycling.",
+          "suggestion": "Consider \"Gunoi\" or \"Deșeuri\" for a more accurate translation of 'Trash'."
         }
       ],
       "approved_at": null
@@ -360,8 +408,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කුණුකූඩයට' (kunu koodaya) literally translates to 'to the trash bin'. While 'Trash' refers to the concept of refuse or waste, not necessarily a bin. A more accurate translation would depend on the context, but 'ගබර' (gabara) or 'දුල්ල' (dulla) might be more suitable in many situations. 'කුණු' (kunu) is often used, but 'කුණුකූඩයට' is overly specific.",
-          "suggestion": "Consider 'ගබර' (gabara) or 'දුල්ල' (dulla) or 'කුණු' (kunu) depending on the specific context. If referring directly to a trash receptacle, 'කුණුකූඩය' (kunu koodaya) is more precise than 'කුණුකූඩයට'."
+          "description": "The translation 'කුණුකූඩයට' (kunukudayata) literally translates to 'to the garbage bin/dump'. While 'trash' can be associated with garbage, it's not the direct translation. A more appropriate translation for 'Trash' would be 'ජාවාරි' (javari) or 'පල්ලා' (palla), depending on the context (e.g., leftover food vs. general waste). 'කුණුකූඩයට' implies a destination, which 'Trash' as a label doesn't necessarily do.",
+          "suggestion": "ජාවාරි (javari) or පල්ලා (palla)"
         }
       ],
       "approved_at": null
@@ -399,13 +447,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Кошик\" (Koshik) directly translates to \"Basket\", while the English term \"Trash\" refers to a waste container or the act of discarding something. \"Кошик\" doesn't fully capture the intended meaning.",
-          "suggestion": "Consider alternatives like \"Смітник\" (Smittnyk - garbage can) or \"Відходи\" (Vidkhody - waste) to better reflect the meaning of \"Trash\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -414,8 +456,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Thùng rác\" translates to 'Trash Can', the English content is simply \"Trash\".  'Thùng rác' is a more specific term than the English word.",
-          "suggestion": "Consider a more direct translation like \"Rác\" or \"Vật bỏ đi\" to better match the simplicity of the English term."
+          "description": "While \"Thùng rác\" technically means \"Trash Can\", the English content is simply \"Trash\". \"Thùng rác\" is too specific. A more accurate translation would be a direct equivalent.",
+          "suggestion": "Rác"
         }
       ],
       "approved_at": null
@@ -426,10 +468,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '回收站' (Huíshōu zhàn) typically refers to a recycling center, not a trash can or trash section. While recycling is a form of waste management, it's not a direct equivalent of 'Trash'.",
-          "suggestion": "Consider '垃圾' (Lājī) for 'Trash' which directly translates to garbage or waste. Alternatively, '垃圾桶' (Lājī tǒng) could be used if referring to a trash can."
+          "description": "The translation \"回收站\" (Huíshōu zhàn) generally means \"recycling center\" or \"recycling bin\", not simply \"Trash\". While it's related, it's not a direct translation.",
+          "suggestion": "Consider a more direct translation like \"垃圾\" (Lājī), which means \"Trash\"."
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

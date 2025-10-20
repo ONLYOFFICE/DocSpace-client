@@ -3,7 +3,7 @@
   "content": "Website URL",
   "content_en_sha1_hash": "b32233ad8219cf70bb8e31b57e67aa6d45b197d0",
   "created_at": "2025-05-19T21:30:54.067Z",
-  "updated_at": "2025-05-24T07:03:09.566Z",
+  "updated_at": "2025-08-04T07:30:01.424Z",
   "comment": {
     "text": "This translation key \"WebsiteUrl\" is used to display the label for a form input field that requires users to enter a website URL. It appears on a form component in a UI context where users are prompted to provide a valid URL.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 150,
-      "context": "isRequired\n isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n />\n <InputGroup\n label={t(\"WebsiteUrl\")}\n name=\"website_url\"\n placeholder={t(\"EnterURL\")}\n value={websiteUrlValue}\n error={\n isWebsiteError",
+      "line_number": 152,
+      "context": "isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n dataTestId=\"app_name_input_group\"\n />\n <InputGroup\n label={t(\"WebsiteUrl\")}\n name=\"website_url\"\n placeholder={t(\"EnterURL\")}\n value={websiteUrlValue}\n error={\n isWebsiteError",
       "module": "/packages/client"
     }
   ],

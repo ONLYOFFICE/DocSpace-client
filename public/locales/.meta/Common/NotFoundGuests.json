@@ -3,7 +3,7 @@
   "content": "No added guests yet",
   "content_en_sha1_hash": "e98856533c4e928082936c4943b3796791537ac1",
   "created_at": "2025-05-19T21:30:46.873Z",
-  "updated_at": "2025-05-26T07:57:32.454Z",
+  "updated_at": "2025-10-01T15:17:48.228Z",
   "comment": {
     "text": "This translation key is used to display the message \"No added guests yet\" when there are no guests added. It appears on an empty screen in a contacts section of the application and is displayed as a header or title. Translators should provide a corresponding phrase that conveys this same idea in the target language.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 627,
+      "line_number": 672,
       "context": "submitButtonId={submitButtonId}\n emptyScreenImage={emptyScreenImage}\n emptyScreenHeader={\n emptyScreenHeader ??\n (activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuests\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:EmptyHeader\")\n : t(\"Common:NotFoundGroups\"))\n }\n emptyScreenDescription={",
       "module": "/packages/shared"
     }
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Zatím žádní přidaní hosté\" is not the most natural or accurate translation of \"No added guests yet\". It literally translates to \"So far no added guests\". A more natural translation would be \"Ještě nejsou přidáni žádní hosté\" or \"Zatím nebyli přidáni žádní hosté\".",
-          "suggestion": "Ještě nejsou přidáni žádní hosté"
+          "description": "The translation 'Zatím žádní přidaní hosté' is not the most natural or accurate translation of 'No added guests yet'. While technically correct, it sounds a bit clunky in Czech. A more natural phrasing would convey the meaning more effectively.",
+          "suggestion": "Zatím nejsou přidáni žádní hosté"
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vieraita ei ole vielä lisätty ' is a literal translation and doesn't quite capture the natural flow of the English phrase 'No added guests yet'. A more natural Finnish equivalent would be 'Ei ole vielä lisätty vieraita'.",
-          "suggestion": "Ei ole vielä lisätty vieraita"
+          "description": "The translation 'Vieraita ei ole vielä lisätty ' is a literal translation and sounds slightly awkward in Finnish. A more natural phrasing would be preferred.",
+          "suggestion": "Ei ole vielä lisätty vieraita."
         }
       ],
       "approved_at": null
@@ -126,8 +126,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ເທື່ອ​ບໍ​ມີ​ແຂກ​ເພີ່ມ​ອີງ​ເທື່ອ' is a very literal and somewhat awkward translation of 'No added guests yet'. It implies 'not yet' in a repetitive way. A more natural translation would convey the same meaning more elegantly.",
-          "suggestion": "Consider 'ຫາກໍຄິດວ່າ​ກໍ​ຍັງບໍ​ມີ​ແຂກ​ເພີ່ມ' or 'ຍັງບໍ​ມີ​ແຂກ​ເພີ່ມ' to provide a more fluent and natural Lao rendering. This depends on the desired tone, but avoiding the repetition of 'ເທື່ອ' is generally preferable."
+          "description": "The Lao translation 'ເທື່ອ​ບໍ​ມີ​ແຂກ​ເພີ່ມ​ອີງ​ເທື່ອ' is a bit awkward and doesn't convey the meaning of 'No added guests yet' naturally. The word 'ອີງ' is unnecessary and creates a convoluted sentence.",
+          "suggestion": "ອິກ​ບໍ​ມີ​ແຂກ​ເພີ່ມ"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrasing 'ບໍ​ມີ' is acceptable, but could be slightly improved for a more natural flow.",
+          "suggestion": "ບໍ​ມີ​ແຂກ​ເພີ່ມ"
         }
       ],
       "approved_at": null
@@ -168,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Niciun invitat nu a fost deocamdată adăugat' is overly formal and literal. A more natural Romanian phrasing would be preferred.",
-          "suggestion": "Nu ați adăugat încă invitați."
+          "description": "The translation 'Niciun invitat nu a fost deocamdată adăugat' is technically correct but sounds a bit formal and verbose for a user interface. A more natural phrasing would be more appropriate.",
+          "suggestion": "Încă nu a fost adăugat niciun invitat"
         }
       ],
       "approved_at": null

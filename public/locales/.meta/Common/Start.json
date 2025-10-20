@@ -3,7 +3,7 @@
   "content": "Start",
   "content_en_sha1_hash": "952f375412e89ff213a8aca383d18e5691354347",
   "created_at": "2025-05-19T21:30:49.036Z",
-  "updated_at": "2025-05-26T07:57:32.944Z",
+  "updated_at": "2025-10-14T04:20:38.329Z",
   "comment": {
     "text": "This translation key is used to display the text \"Start\" on a button or in a dialog, likely initiating an action or starting a process. It appears on the StartFillingPanel in the /packages/shared/dialogs/ folder and is part of a modal dialog's header.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
-      "line_number": 299,
-      "context": "},\n }}\n />\n ) : null}\n </ModalDialog.Container>\n <ModalDialog.Header>{t(\"Common:StartFilling\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {infoBarVisible ? (\n <>\n <PublicRoomBar\n headerText={t(\"Common:FillingStatusBarTitle\")}",
+      "line_number": 315,
+      "context": "disableSubmitButton={false}\n headerProps={invitePanelSelectorHeader}\n />\n ) : null}\n </ModalDialog.Container>\n <ModalDialog.Header>{t(\"Common:StartFilling\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <section className={styles.container}>\n {infoBarVisible ? (\n <>\n <PublicRoomBar",
       "module": "/packages/shared"
     }
   ],
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word \"Start\" can have multiple translations in Azerbaijani depending on the context. \"Başlayın\" is a command form (imperative) meaning \"Begin!\" or \"Start!\" (to a group or formal singular).  It may not be the most appropriate translation depending on the intended meaning of \"Start\". Other options like \"Başla\" (informal command) or \"Start\" (as a loanword) might be more suitable depending on context. Without further context, it's difficult to determine the correct translation.",
-          "suggestion": "Consider the context to determine if \"Başlayın\", \"Başla\", or the loanword \"Start\" is the most appropriate translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -162,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ආරම්භ කරන්න\" (Aarambha karanna) translates to \"Start it\" or \"Begin it\", rather than simply \"Start\". While contextually it might be acceptable, a more direct translation of \"Start\" would be \"ආරම්භ\" (Aarambha).",
+          "description": "The translation 'ආරම්භ කරන්න' (aarambakaruu) literally means 'to start' or 'begin'. While understandable, 'Start' often functions as an imperative (Start!). A more direct imperative translation would be 'ආරම්භ' (aarambha).",
           "suggestion": "ආරම්භ"
         }
       ],
@@ -211,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

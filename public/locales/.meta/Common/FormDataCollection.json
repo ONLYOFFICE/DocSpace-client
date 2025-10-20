@@ -3,7 +3,7 @@
   "content": "Form data collection",
   "content_en_sha1_hash": "3d5d135c8ecaa49feb2eb2292d2853c68b62d6ea",
   "created_at": "2025-05-19T21:30:45.482Z",
-  "updated_at": "2025-05-28T09:30:02.272Z",
+  "updated_at": "2025-09-23T07:24:24.112Z",
   "comment": {
     "text": "This translation key is used to display the title and description of a \"Form data collection\" option, which likely refers to sharing or exporting form data in various UI contexts such as dialogues, panels, and dialogs. The text appears in button labels, titles, and descriptions, typically related to sharing or collaboration features.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 165,
-      "context": "icon: <ShareSvg />,\n disabled: !file.canShare,\n },\n {\n id: \"form-room\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },",
+      "line_number": 193,
+      "context": "// HACK: Hide share option for rooms — remove after implementation is ready\n disabled: !file.canShare || file.rootFolderType === FolderType.Rooms,\n },\n {\n id: \"form-room\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },",
       "module": "/packages/doceditor"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Select date",
   "content_en_sha1_hash": "b84a6ecbc04c1f54b6fa504c6441ca78e07db586",
   "created_at": "2025-05-19T21:30:48.374Z",
-  "updated_at": "2025-06-08T12:02:32.660Z",
+  "updated_at": "2025-10-07T15:39:07.462Z",
   "comment": {
     "text": "The \"SelectDate\" translation key is used to display a label for date selection in various UI components, including a toggle block and a filter dialog. Its purpose is to provide users with clear instructions on how to select a date in these interfaces. It appears as part of the labels for date pickers and edit link panels.",
     "is_auto": true,
@@ -11,28 +11,28 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/panels/EditLinkPanel/LimitTimeBlock.js",
-      "line_number": 82,
-      "context": "onChange={onChange}\n minDate={minDate}\n openDate={new Date()}\n hasError={isExpired}\n locale={language}\n selectDateText={t(\"Common:SelectDate\")}\n />\n </ToggleBlock>\n );\n };",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/DeliveryDatePicker.js",
-      "line_number": 260,
-      "context": ") : (\n <DatePicker\n outerDate={filters.deliveryDate}\n isMobile={isMobile()}\n onChange={onDateSet}\n selectDateText={t(\"Common:SelectDate\")}\n showCalendarIcon={false}\n locale={i18n.language}\n />\n )}\n {filters.deliveryDate !== null && isDefaultTime ? (",
+      "line_number": 261,
+      "context": ") : (\n <DatePicker\n outerDate={filters.deliveryDate}\n isMobile={isMobile()}\n onChange={onDateSet}\n selectDateText={t(\"Common:SelectDate\")}\n showCalendarIcon={false}\n locale={i18n.language}\n dataTestId=\"delivery_date_picker\"\n />\n )}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 221,
-      "context": "components={{\n 1: (\n <DatePicker\n initialDate={startDate}\n onChange={onStartDateChange}\n selectDateText={t(\"Common:SelectDate\")}\n locale={moment.locale()}\n openDate={startDate}\n minDate={undefined}\n maxDate={endDate}\n outerDate={startDate}",
+      "line_number": 507,
+      "context": "key=\"start-date-picker\"\n initialDate={\n isFilterDialogVisible ? mobileFilterState.startDate : startDate\n }\n onChange={onStartDateChange}\n selectDateText={t(\"Common:SelectDate\")}\n locale={moment.locale()}\n openDate={\n isFilterDialogVisible ? mobileFilterState.startDate : startDate\n }\n minDate={undefined}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 221,
-      "context": "components={{\n 1: (\n <DatePicker\n initialDate={startDate}\n onChange={onStartDateChange}\n selectDateText={t(\"Common:SelectDate\")}\n locale={moment.locale()}\n openDate={startDate}\n minDate={undefined}\n maxDate={endDate}\n outerDate={startDate}",
+      "line_number": 507,
+      "context": "key=\"start-date-picker\"\n initialDate={\n isFilterDialogVisible ? mobileFilterState.startDate : startDate\n }\n onChange={onStartDateChange}\n selectDateText={t(\"Common:SelectDate\")}\n locale={moment.locale()}\n openDate={\n isFilterDialogVisible ? mobileFilterState.startDate : startDate\n }\n minDate={undefined}",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/EditLinkPanel/LimitTimeBlock.tsx",
+      "line_number": 88,
+      "context": "hasError={isExpired}\n onChange={onChange}\n openDate={new Date()}\n initialDate={expirationDate}\n className=\"public-room_date-picker\"\n selectDateText={t(\"Common:SelectDate\")}\n dataTestId=\"edit_link_panel_date_time_picker\"\n />\n </ToggleBlock>\n );\n };",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Selectare dată' is not the most natural Romanian phrasing for 'Select date'. While technically correct, it's overly literal.",
-          "suggestion": "A more natural translation would be 'Alege dată' or 'Selectează dată'."
+          "description": "The Romanian translation 'Selectare dată' is not the most natural or accurate translation of 'Select date'. 'Selectare' implies a process of selection, whereas 'Select date' refers to choosing a date. A more suitable translation would be 'Alegere dată' or simply 'Data selectată'.",
+          "suggestion": "Alegere dată"
         }
       ],
       "approved_at": null
@@ -197,9 +197,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation 'Одабери датум' has a minor typo. The word 'датум' is the correct spelling, but 'датум' is used. While understandable, it's technically incorrect.",
-          "suggestion": "Одабери датум"
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Одабери датум' while understandable, isn't the most natural or common way to say 'Select date' in Serbian. A more idiomatic translation would be 'Избери датум'.",
+          "suggestion": "Избери датум"
         }
       ],
       "approved_at": null
@@ -216,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Tarih seç' is understandable, it's a slightly informal and less accurate translation of 'Select date'. A more accurate and common translation would be 'Tarih seçin'.",
+          "description": "While 'Tarih seç' is understandable, a more natural and complete translation of 'Select date' in Turkish would be 'Tarih seçin'. The addition of '-in' makes it a more polite and complete command/request.",
           "suggestion": "Tarih seçin"
         }
       ],

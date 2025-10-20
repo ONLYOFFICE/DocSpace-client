@@ -26,8 +26,8 @@
 
 import React, { useLayoutEffect, useRef, useState } from "react";
 import InfiniteLoader from "react-window-infinite-loader";
-import { FixedSizeList as List } from "react-window";
-import { classNames } from "@docspace/shared/utils";
+import { VariableSizeList as List } from "react-window";
+import { classNames } from "../../../utils";
 import { RoomsType } from "../../../enums";
 import { Nullable } from "../../../types";
 import styles from "../Selector.module.scss";
@@ -51,6 +51,7 @@ import { Item } from "./Item";
 import { Info } from "./Info";
 import { VirtualScroll } from "./VirtualScroll";
 import { Tabs } from "../../tabs";
+import InputItem from "./InputItem";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
@@ -103,7 +104,8 @@ const Body = ({
   const isSearch = React.use(SearchValueContext);
   const { withInfoBar } = React.use(InfoBarContext);
 
-  const { withBreadCrumbs } = React.use(BreadCrumbsContext);
+  const { withBreadCrumbs, isBreadCrumbsLoading } =
+    React.useContext(BreadCrumbsContext);
 
   const { withTabs, tabsData, activeTabId } = React.use(TabsContext);
 
@@ -129,6 +131,15 @@ const Body = ({
       : isEmptyInput
         ? 1
         : items.length;
+
+  const isShareFormEmpty =
+    itemsCount === 0 &&
+    !isSearch &&
+    Boolean(items?.[0]?.isRoomsOnly) &&
+    (Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom) ||
+      Boolean(items?.[0]?.createDefineRoomType === RoomsType.VirtualDataRoom));
+
+  const visibleInfoBar = !isShareFormEmpty && !isBreadCrumbsLoading;
 
   const resetCache = React.useCallback(() => {
     if (listOptionsRef && listOptionsRef.current) {
@@ -206,7 +217,7 @@ const Body = ({
         setInfoBarHeight(height + CONTAINER_PADDING);
       }
     }
-  }, [withInfoBar, itemsCount]);
+  }, [withInfoBar, itemsCount, visibleInfoBar]);
   useLayoutEffect(() => {
     if (injectedElement) {
       const element = injectedElementRef.current;
@@ -245,14 +256,6 @@ const Body = ({
 
   if (descriptionText) listHeight -= BODY_DESCRIPTION_TEXT_HEIGHT;
 
-  const isShareFormEmpty =
-    itemsCount === 0 &&
-    Boolean(items?.[0]?.isRoomsOnly) &&
-    (Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom) ||
-      Boolean(items?.[0]?.createDefineRoomType === RoomsType.VirtualDataRoom));
-
-  const cloneProps = { ref: injectedElementRef };
-
   const getFooterHeight = () => {
     if (withFooterCheckbox) return FOOTER_WITH_CHECKBOX_HEIGHT;
     if (withFooterInput) return FOOTER_WITH_NEW_NAME_HEIGHT;
@@ -262,6 +265,16 @@ const Body = ({
   const getHeaderHeight = () => {
     if (withTabs) return HEADER_HEIGHT;
     return HEADER_HEIGHT + CONTAINER_PADDING;
+  };
+
+  const cloneProps = { ref: injectedElementRef };
+
+  const getItemSize = (index: number): number => {
+    if (items[index]?.isSeparator) {
+      return 16;
+    }
+
+    return 48;
   };
 
   return (
@@ -286,9 +299,9 @@ const Body = ({
       }
     >
       <InfoBar
-        className={styles.selectorInfoBar}
         ref={infoBarRef}
-        visible={itemsCount !== 0}
+        visible={visibleInfoBar}
+        className={styles.selectorInfoBar}
       />
       <BreadCrumbs visible={!isShareFormEmpty} />
 
@@ -374,6 +387,20 @@ const Body = ({
                 </div>
               ))}
             </Scrollbar>
+          ) : items.length === 2 && items[1]?.isInputItem ? (
+            <InputItem
+              defaultInputValue={savedInputValue ?? items[1].defaultInputValue}
+              onAcceptInput={items[1].onAcceptInput}
+              onCancelInput={items[1].onCancelInput}
+              style={{}}
+              color={items[1].color}
+              roomType={items[1].roomType}
+              cover={items[1].cover}
+              icon={items[1].icon}
+              setInputItemVisible={setInputItemVisible}
+              setSavedInputValue={setSavedInputValue}
+              placeholder={items[1].placeholder}
+            />
           ) : (
             <InfiniteLoader
               ref={listOptionsRef}
@@ -400,7 +427,7 @@ const Body = ({
                     setSavedInputValue,
                     listHeight,
                   }}
-                  itemSize={48}
+                  itemSize={getItemSize}
                   onItemsRendered={onItemsRendered}
                   ref={ref}
                   outerElementType={VirtualScroll}

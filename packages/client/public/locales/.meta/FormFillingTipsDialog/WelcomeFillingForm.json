@@ -3,7 +3,7 @@
   "content": "Welcome to the Form Filling Room!",
   "content_en_sha1_hash": "0df6f06ac784f688e2513f68c38cbed7fdc580f5",
   "created_at": "2025-05-19T21:30:55.153Z",
-  "updated_at": "2025-05-24T10:51:54.860Z",
+  "updated_at": "2025-08-21T11:22:39.817Z",
   "comment": {
     "text": "This translation key is used for a header text in a dialog box that welcomes users to a form filling interface. The text appears as a modal dialog's header. Translators should provide a warm and inclusive greeting for this context.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/FormFillingTipsDialog/index.tsx",
       "line_number": 115,
-      "context": "fontWeight=\"700\"\n fontSize=\"16px\"\n lineHeight=\"22px\"\n truncate\n >\n {t(\"WelcomeFillingForm\")}\n </Text>\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div>\n <Text",
+      "context": "className=\"welcome-tips-header\"\n fontWeight=\"700\"\n fontSize=\"16px\"\n lineHeight=\"22px\"\n >\n {t(\"WelcomeFillingForm\")}\n </Text>\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div>\n <Text",
       "module": "/packages/client"
     }
   ],

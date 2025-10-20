@@ -12,8 +12,6 @@
   "FolderTitleSkyDrive": "වන්ඩ්‍රයිව් නාමාවලිය",
   "FolderTitleWebDav": "WebDAV නාමාවලිය",
   "FolderTitleYandex": "යාන්ඩෙක්ස් නාමාවලිය",
-  "GuestReleaseTipLink": "පරිශීලක වර්ග ගැන වැඩිදුර තොරතුරු දැනගන්න.",
-  "LinkHasExpiredAndHasBeenDisabled": "සබැඳිය කල් ඉකුත් වී අබල කර ඇත",
   "LinkValidTime": "මෙම සබැඳිය දවස් {{days_count}}කට වලංගුය.",
   "NewForm": "ආකෘතිපත්‍ර අච්චුව",
   "OwnerChange": "හිමිකරු සංශෝධනය",
@@ -25,5 +23,6 @@
   "ThirdPartyInfo": "තෙවන පාර්ශ්වයේ තොරතුරු සංශෝධනය",
   "ThirdPartyTitle": "තෙවන පාර්ශ්ව සේවා",
   "TitleShowActions": "ගොනුවේ ක්‍රියාමාර්ග පෙන්වන්න",
-  "TitleShowFolderActions": "බහාලුමේ ක්‍රියාමාර්ග පෙන්වන්න"
+  "TitleShowFolderActions": "බහාලුමේ ක්‍රියාමාර්ග පෙන්වන්න",
+  "TrashItemsDeleteSuccess": "තෝරාගත් අංග {{sectionName}} වෙතින් සාර්ථකව මකා දමන ලදී."
 }

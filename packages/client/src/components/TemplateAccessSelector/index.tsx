@@ -79,7 +79,7 @@ const TemplateAccessSelector = ({
     );
   };
 
-  const infoText = getInfoText();
+  const infoText = getInfoText() as unknown as string;
 
   const filter = Filter.getDefault();
   filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
@@ -87,7 +87,7 @@ const TemplateAccessSelector = ({
   return (
     <PeopleSelector
       useAside
-      onClose={onClose}
+      onClose={onClose!}
       onSubmit={onSubmit}
       submitButtonLabel={t("Common:AddButton")}
       disableSubmitButton={false}

@@ -33,7 +33,7 @@ export const DEFAULT_PORTAL_TEXT =
 export const DEFAULT_GUEST_TEXT =
   "<strong>{{displayName}}</strong> wants to share with you the contact of the guest.";
 
-  export const TFA_ANDROID_APP_URL =
+export const TFA_ANDROID_APP_URL =
   "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2";
 export const TFA_IOS_APP_URL =
   "https://apps.apple.com/app/google-authenticator/id388497605";

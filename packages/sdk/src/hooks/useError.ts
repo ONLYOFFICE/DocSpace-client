@@ -63,7 +63,7 @@ const useError = ({ error }: UseErrorProps) => {
     if (error?.status === 402) {
       const portalUrl = window.location.origin;
 
-      history.pushState({}, "false", portalUrl);
+      window.history.pushState({}, "false", portalUrl);
       document.location.reload();
     } else {
       const tempElm = document.getElementById("loader");

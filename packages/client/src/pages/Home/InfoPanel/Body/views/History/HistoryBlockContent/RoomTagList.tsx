@@ -25,38 +25,56 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Tag } from "@docspace/shared/components/tag";
-import { StyledHistoryBlockTagList } from "../../../styles/history";
-import { ActionByTarget } from "../FeedInfo";
-import { Feed } from "./HistoryBlockContent.types";
 
-interface HistoryRoomTagListProps {
-  feed: Feed;
-  actionType: ActionByTarget<"roomTag">;
-}
+import {
+  FeedAction,
+  TFeedAction,
+  TFeedData,
+} from "@docspace/shared/api/rooms/types";
+
+import styles from "../History.module.scss";
+
+type HistoryRoomTagListProps = {
+  feed: TFeedAction<TFeedData>;
+  actionType: FeedAction;
+};
 
 const HistoryRoomTagList = ({ feed, actionType }: HistoryRoomTagListProps) => {
   if (actionType === "create")
     return (
-      <StyledHistoryBlockTagList>
-        {feed.data?.tags.map((tag: string) => (
-          <Tag className="history-tag" key={tag} label={tag} tag={tag} />
+      <div
+        className={styles.historyBlockTagList}
+        data-testid="history_tag_list_create"
+      >
+        {feed.data?.tags?.map((tag: string, index: number) => (
+          <Tag
+            className="history-tag"
+            key={tag}
+            label={tag}
+            tag={tag}
+            dataTestId={`history_tag_create_${index}`}
+          />
         ))}
-      </StyledHistoryBlockTagList>
+      </div>
     );
 
   if (actionType === "delete") {
     return (
-      <StyledHistoryBlockTagList>
-        {feed.data?.tags.map((tag: string) => (
+      <div
+        className={styles.historyBlockTagList}
+        data-testid="history_tag_list_delete"
+      >
+        {feed.data?.tags?.map((tag: string, index: number) => (
           <Tag
             className="history-tag deleted-tag"
             key={tag}
             label={tag}
             tag={tag}
             isDeleted
+            dataTestId={`history_tag_delete_${index}`}
           />
         ))}
-      </StyledHistoryBlockTagList>
+      </div>
     );
   }
 };

@@ -3,7 +3,7 @@
   "content": "No file will be copied. The original file will be retained in the destination folder.",
   "content_en_sha1_hash": "d031adeeb4ad91e6a7490531b401915486d79266",
   "created_at": "2025-05-19T21:30:48.907Z",
-  "updated_at": "2025-05-26T07:57:32.245Z",
+  "updated_at": "2025-10-14T05:15:34.013Z",
   "comment": {
     "text": "This translation key provides a message to be displayed when skipping file copy operations, indicating that the original file will remain in the destination folder. It appears in UI elements where users can choose to skip copying files, such as a conflict resolution dialog.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ConflictResolveDialog/ConflictResolveDialog.tsx",
-      "line_number": 66,
+      "line_number": 67,
       "context": "overwriteTitle={t(\"OverwriteTitle\")}\n overwriteDescription={t(\"OverwriteDescription\")}\n duplicateTitle={t(\"Common:CreateFileCopy\")}\n duplicateDescription={t(\"CreateDescription\")}\n skipTitle={t(\"SkipTitle\")}\n skipDescription={t(\"SkipDescription\")}\n headerLabel={t(\"ActionRequired\")}\n />\n );\n }",
       "module": "/packages/doceditor"
     }
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Heç bir fayl köçürülmədi. Orijinal fayl köçürülən yerdə dəyişikliksiz qaldı.\" doesn't fully capture the meaning of \"No file will be copied. The original file will be retained in the destination folder.\" While 'Heç bir fayl köçürülmədi' is correct for 'No file will be copied,' 'Orijinal fayl köçürülən yerdə dəyişikliksiz qaldı' translates to 'The original file remained unchanged in the place it was copied to.' This is a bit confusing - it implies a prior copying action. The intended meaning is that it remains in the *destination* folder.",
-          "suggestion": "Heç bir fayl köçürülmədi. Orijinal fayl son məqsəd yerində olduğu kimi qaldı."
+          "description": "The translation \"Heç bir fayl köçürülmədi. Orijinal fayl köçürülən yerdə dəyişiksiz qaldı.\" doesn't fully capture the nuance of 'retained in the destination folder'. 'dəyişiksiz qaldı' implies unchanged, which is correct, but doesn't specifically convey the file is *in* the destination folder. A better phrasing would clarify this.",
+          "suggestion": "Heç bir fayl köçürülmədi. Orijinal fayl köçürülən qovşunda olduğu kimi qaldı."
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "There is an unnecessary space before the colon after \"Ոչ մի ֆայլ չի պատճենվի\".",
-          "suggestion": "Ոչ մի ֆայլ չի պատճենվի։"
+          "description": "There is an unnecessary space before the colon after 'չի պատճենվի'.",
+          "suggestion": "Ոչ մի ֆայլ չի պատճենվի։Բնօրինակ ֆայլը կպահվի նպատակակետի պանակում "
         }
       ],
       "approved_at": null
@@ -126,8 +126,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ໂຟນເດີ້' seems to be a misspelling of 'ໂຟນເດີ'.",
-          "suggestion": "ໄຟລ໌ຈະບໍ່ຖືກສຳເນົາ ໄຟລ໌ຕົ້ນສະບັບຈະຖືກເກັບໄວ້ໃນໂຟນເດີ."
+          "description": "The word 'ໄຟລ໌' (file) is repeated unnecessarily. While not technically incorrect, it's stylistically awkward.",
+          "suggestion": "ໄຟລ໌ຈະບໍ່ຖືກສຳເນົາ ໄຟລ໌ຕົ້ນສະບັບຈະຖືກເກັບໄວ້ໃນໂຟນເດີ້."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically passable, the sentence structure is slightly awkward for Lao. The verb 'ເກັບໄວ້' (kept/retained) could be improved for flow.",
+          "suggestion": "ໄຟລ໌ຈະບໍ່ຖືກສຳເນົາ ໄຟລ໌ຕົ້ນສະບັບຈະຍັງຢູ່ໃນໂຟນເດີ້."
         }
       ],
       "approved_at": null
@@ -138,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation 'Fails tiks pievienots failam ar tādu pašu nosaukumu kā versijai' does not accurately convey the meaning of 'No file will be copied. The original file will be retained in the destination folder.' It translates to something like 'A file will be added to the file with the same name as the version'. This implies a versioning process, which is not indicated in the English content.",
-          "suggestion": "A more accurate translation would be something along the lines of 'Atteiks fails. Oriģinālais fails tiks saglabāts galamērķa mapē.' (No file will be skipped. The original file will be retained in the destination folder.)"
+          "description": "The Latvian translation 'Fails tiks pievienots failam ar tādu pašu nosaukumu kā versijai.' does not accurately reflect the meaning of the English content 'No file will be copied. The original file will be retained in the destination folder.'. The Latvian translation implies a versioned file is being added, which is not what the original text conveys. It suggests a new file is being created instead of the original being kept.",
+          "suggestion": "A more accurate translation could be something like: 'Fails netiks kopēts. Oriģinālais fails paliks saglabāts galamērķa mapē.' or 'Fails nav jākopē. Oriģinālais fails paliks galamērķa mapē.'"
         }
       ],
       "approved_at": null
@@ -174,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb tense 'o să fie' (will be) can sound slightly awkward in this context. While grammatically correct, a more natural phrasing would be 'va fi'.",
-          "suggestion": "Niciun fișier nu va fi copiat. Fișierul de origine rămâne în dosarul de destinație."
+          "description": "The verb tense 'o să fie' (future simple) isn't the most natural choice here. 'Va fi' (future simple) would sound more fluent in Romanian, especially in technical documentation.",
+          "suggestion": "Niciun fișier nu va fi copiat."
         }
       ],
       "approved_at": null
@@ -192,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ගමනාන්ත' (gamanantha) is a formal term for 'destination'. While technically correct, a more common and accessible term might be preferred. Consider using 'නිෂ්පාදන ස්ථානය' (nispadana sthanaya) or a similar equivalent.",
-          "suggestion": "කිසිදු ගොනුවක් පිටපත් නොකෙරේ. මුල් ගොනුව නිෂ්පාදන ස්ථානයේ රඳවා තැබෙනු ඇත."
+          "description": "The word 'බහාලුමේ' (bahalume) is not the most natural way to say 'folder' in this context. While technically correct, 'විභාගයක්' (vibhagayak) or simply 'මතලේ' (mathale) would be more common and understandable.",
+          "suggestion": "කිසිදු ගොනුවක් පිටපත් නොකෙරේ. මුල් ගොනුව ගමනාන්ත විභාගය/මතලේ රඳවා තැබෙනු ඇත."
         }
       ],
       "approved_at": null
@@ -207,13 +212,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'shranjena' (saved) isn't the most accurate translation of 'retained' in this context. 'Ohranjena' would be a better fit to convey the meaning of keeping the original file.",
-          "suggestion": "Nobena datoteka ne bo kopirana. Izvirna datoteka bo ohranjena v ciljni mapi."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -222,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'folder' is transliterated as 'фолдер'. The Serbian word for folder is 'папка'.",
-          "suggestion": "Заменити 'фолдер' са 'папка'."
+          "description": "The word 'фолдеру' is a less common and potentially informal transliteration of 'folder'.",
+          "suggestion": "фолдеру can be replaced with 'фасцикли'."
         }
       ],
       "approved_at": null
@@ -253,6 +252,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Failed to update tariff plan. Try again later or contact the sales department.",
   "content_en_sha1_hash": "bc9b4b305a68ff27847f763ef309786faf03e5d0",
   "created_at": "2025-05-19T21:30:53.686Z",
-  "updated_at": "2025-06-08T12:02:32.815Z",
+  "updated_at": "2025-08-26T11:14:27.708Z",
   "comment": {
     "text": "This translation key is used to display an error message when a tariff plan update fails, prompting the user to try again later or contact the sales department. It appears as an error notification in a UI component that handles payment updates, such as a button click event handler.",
     "is_auto": true,
@@ -13,43 +13,37 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/ButtonContainer.js",
       "line_number": 53,
-      "context": "accountLink,\n }) => {\n const goToStripeAccount = () => {\n accountLink\n ? window.open(accountLink, \"_blank\")\n : toastr.error(t(\"ErrorNotification\"));\n };\n \n return (\n <StyledBody>\n {isNotPaidPeriod || isGracePeriod ? (",
+      "context": "paymentLink,\n }) => {\n const goToStripePortal = () => {\n paymentLink\n ? window.open(paymentLink, \"_blank\")\n : toastr.error(t(\"ErrorNotification\"));\n };\n \n return (\n <StyledBody>\n {isNotPaidPeriod || isGracePeriod ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
-      "line_number": 100,
+      "line_number": 106,
       "context": "intervalId = setInterval(async () => {\n try {\n if (requestsCount === 30) {\n setIsLoading(false);\n \n intervalId && toastr.error(t(\"ErrorNotification\"));\n clearInterval(intervalId);\n intervalId = null;\n \n return;\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
-      "line_number": 100,
+      "line_number": 106,
       "context": "intervalId = setInterval(async () => {\n try {\n if (requestsCount === 30) {\n setIsLoading(false);\n \n intervalId && toastr.error(t(\"ErrorNotification\"));\n clearInterval(intervalId);\n intervalId = null;\n \n return;\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
-      "line_number": 100,
+      "line_number": 106,
       "context": "intervalId = setInterval(async () => {\n try {\n if (requestsCount === 30) {\n setIsLoading(false);\n \n intervalId && toastr.error(t(\"ErrorNotification\"));\n clearInterval(intervalId);\n intervalId = null;\n \n return;\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
-      "line_number": 100,
+      "line_number": 106,
       "context": "intervalId = setInterval(async () => {\n try {\n if (requestsCount === 30) {\n setIsLoading(false);\n \n intervalId && toastr.error(t(\"ErrorNotification\"));\n clearInterval(intervalId);\n intervalId = null;\n \n return;\n }",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/PaymentMethod.tsx",
-      "line_number": 54,
-      "context": "const { t } = useTranslation(\"Payments\");\n \n const goLinkCard = () => {\n cardLinked\n ? window.open(cardLinked, \"_self\")\n : toastr.error(t(\"ErrorNotification\"));\n };\n \n const goStripeAccount = () => {\n accountLink\n ? window.open(accountLink, \"_blank\")",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/PaymentMethod.tsx",
-      "line_number": 54,
-      "context": "const { t } = useTranslation(\"Payments\");\n \n const goLinkCard = () => {\n cardLinked\n ? window.open(cardLinked, \"_self\")\n : toastr.error(t(\"ErrorNotification\"));\n };\n \n const goStripeAccount = () => {\n accountLink\n ? window.open(accountLink, \"_blank\")",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/StoragePlanUpgrade.tsx",
+      "line_number": 192,
+      "context": "intervalRef.current = setInterval(async () => {\n try {\n if (requestsCount === MAX_ATTEMPTS) {\n setIsLoading(false);\n toastr.error(t(\"ErrorNotification\"));\n clearInterval(intervalRef.current!);\n intervalRef.current = null;\n return;\n }",
       "module": "/packages/client"
     }
   ],
@@ -120,8 +114,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Try again later\" is translated literally, but a more natural Armenian equivalent would be \"Փորձեք նորից հետո\" or \"Դիտեք այն կրկնակի հետո\". The current translation \"Փորձեք ավելի ուշ\" sounds slightly awkward.",
-          "suggestion": "Փորձեք նորից հետո"
+          "description": "The phrase \"Try again later\" is translated as \"Փորձեք ավելի ուշ\". While technically correct, it lacks the nuance of urgency or helpfulness found in the English original. A more empathetic translation might be preferable.",
+          "suggestion": "Փորձեք կրկնակի փորձել ավելին կամ կապվեք վաճառքի բաժնին."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'contact the sales department' is translated as 'կապվեք վաճառքի բաժնին'. While accurate, it might sound overly formal. A less formal option could improve user experience.",
+          "suggestion": "կապվեք վաճառքի բաժնի հետ"
         }
       ],
       "approved_at": null
@@ -135,13 +134,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Try again later' is translated as '後でもう一度試すか' which is overly literal and slightly awkward in Japanese. A more natural phrasing would convey the meaning of 'Please try again later'.",
-          "suggestion": "後で再度お試しください (Atarashiku o-tarashite kudasai)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -171,7 +164,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'tariff plan' is best translated as 'plan taryfowy' or 'plan cenowy' in Polish, not just 'plan subskrypcji'. While 'plan subskrypcji' isn't *wrong*, it's a narrower interpretation and less accurate to the original meaning.",
+          "suggestion": "Nie udało się zaktualizować planu taryfowego/planu cenowego. Spróbuj ponownie później lub skontaktuj się z działem sprzedaży."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -180,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'tariff plan' is translated as 'plano de tarifário'. While understandable, 'plano tarifário' or 'plano de tarifas' would be more natural in Portuguese. 'Tarifário' is an adjective and sounds awkward when directly translated in this context.",
-          "suggestion": "Não foi possível atualizar o plano tarifário. Tente de novo mais tarde ou contacte o departamento de vendas."
+          "description": "The term 'tariff plan' is not accurately translated. 'Tarifário' is a less common and slightly awkward term in this context. 'Plano tarifário' is more natural in Portuguese.",
+          "suggestion": "Plano tarifário"
         }
       ],
       "approved_at": null
@@ -192,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"contact the sales department\" is not accurately translated. \"Entre em contato\" is too generic and doesn't convey the specificity of contacting the sales department.",
-          "suggestion": "Entre em contato com o departamento de vendas."
+          "description": "The English phrase 'contact the sales department' is not accurately translated. 'Entre em contato' is a general 'contact' and doesn't specify the sales department.",
+          "suggestion": "Falha ao atualizar plano tarifário. Tente novamente mais tarde ou entre em contato com o departamento de vendas."
         }
       ],
       "approved_at": null
@@ -207,7 +206,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'tariff plan' is translated as 'тариф'. While 'тариф' can mean 'tariff', it loses the specificity of a 'tariff plan'. A more accurate translation would be 'план тарификации' or 'тарифный план'.",
+          "suggestion": "Не удалось обновить тарифный план. Попробуйте позже или свяжитесь с отделом продаж."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -216,18 +221,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අය ක්‍රමය යාවත්කාල කිරීමට අසමත් විය' doesn't accurately reflect 'Failed to update tariff plan'. 'අය ක්‍රමය' translates to 'payment system' or 'income system,' which isn't the intended meaning. It should refer to the tariff plan itself.",
-          "suggestion": "අතරාමුළු ගෙවුම් සැලසුම යාවත්කාල කිරීමට අසමත් විය."
+          "description": "The translation 'අය ක්‍රමය යාවත්කාල කිරීමට අසමත් විය' is a bit too literal. 'අය ක්‍රමය' (aya kramaya) translates to 'payment system' which isn't quite what the English 'tariff plan' means. It should reflect the concept of a pricing structure or plan.",
+          "suggestion": "අයකට්ටිය යාවත්කාල කිරීමට අසමත් විය. (ayakattiya yavatkaalakarimaata asamaatha viya.) - This translates to 'Failed to update the pricing plan.'"
         },
         {
-          "type": "spelling",
-          "description": "The word 'අතරාමුළු' is uncommon and may be misinterpreted. Although it broadly means 'tariff', it's not the standard term. Consider a more commonly used term related to plans or rates.",
-          "suggestion": "තීරු සැලසුම"
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the sentence structure could be slightly improved for natural flow. Adding a particle or reordering phrases can enhance readability.",
-          "suggestion": "තීරු සැලසුම යාවත්කාල කිරීමට අපට නොහැකි විය. නැවත උත්සාහ කරන්න හෝ අලෙවි ක්‍රියාංශය අමතන්න."
+          "type": "incorrect_translation",
+          "description": "The word 'ක්‍රියාංශය' (kriyashanaya) while meaning 'department' sounds formal and bureaucratic. For a user-facing error message, a more approachable term might be better.",
+          "suggestion": "වෙළඳ දෙපාර්තමේන්තුව අමතන්න. (veladadeppaarthamenduwa amathan) - This translates to 'Contact the sales department' and is slightly more conversational."
         }
       ],
       "approved_at": null
@@ -256,13 +256,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Ažuriranje tarifnog plana nije uspelo' directly translates to 'Updating the tariff plan failed'. While understandable, a more natural and idiomatic Serbian phrasing would be 'Nije uspelo ažuriranje tarifnog plana' or 'Došlo je do greške pri ažuriranju tarifnog plana'.",
+          "description": "The Serbian translation uses \"Ažuriranje\" which translates to 'Updating' instead of 'Failed to update'. The original English clearly states a failure.",
           "suggestion": "Nije uspelo ažuriranje tarifnog plana."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The Serbian word 'odeljenje prodaje' translates to 'sales department', but a more common and user-friendly term would be 'prodajni odeljenje' or simply 'prodaja'.",
-          "suggestion": "prodaja"
+          "type": "spelling",
+          "description": "The word 'odelenje' is likely a typo and should be 'odsek'. While 'odelenje' exists, in this context 'odsek' (department/section) is more appropriate.",
+          "suggestion": "Kontaktirajte odsek prodaje."
         }
       ],
       "approved_at": null
@@ -282,7 +282,18 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'tariff plan' is not accurately translated. 'Bảng phí cho gói dịch vụ' is too literal and doesn't convey the intended meaning of a service plan or subscription.",
+          "suggestion": "Không thể cập nhật gói cước. Hãy thử lại sau hoặc liên hệ với bộ phận kinh doanh."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the phrasing 'bảng phí cho gói dịch vụ' is a bit clunky. Simplifying it improves readability.",
+          "suggestion": "See suggestion above for improved translation."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

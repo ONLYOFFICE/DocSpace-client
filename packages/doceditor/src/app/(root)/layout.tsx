@@ -50,7 +50,7 @@ export default async function RootLayout({
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
     logger.info("get health check and return empty layout");
-    return <></>;
+    return null;
   }
 
   const [user, settings, colorTheme] = await Promise.all([
@@ -80,7 +80,12 @@ export default async function RootLayout({
     (typeof settings === "object" && settings.culture) ||
     "en";
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  const baseURL = await getBaseUrl();
+
+  if (settings === "access-restricted") {
+    logger.info("Root layout access-restricted");
+    redirect(`${baseURL}/${settings}`);
+  }
 
   return (
     <html lang="en" translate="no">

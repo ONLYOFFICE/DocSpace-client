@@ -73,9 +73,9 @@ describe("<Avatar />", () => {
     expect(img).toHaveAttribute("src", source);
   });
 
-  test("shows edit button when editing is true", () => {
-    render(<Avatar {...baseProps} editing />);
-    const editButton = screen.getByTestId("icon-button");
+  test("shows edit button when editing and hasAvatar are true", () => {
+    render(<Avatar {...baseProps} editing hasAvatar />);
+    const editButton = screen.getByTestId("edit_avatar_icon_button");
     expect(editButton).toBeInTheDocument();
   });
 

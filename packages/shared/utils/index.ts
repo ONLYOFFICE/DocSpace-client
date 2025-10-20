@@ -70,9 +70,8 @@ import commonIconsStyles, {
 } from "./common-icons-style";
 import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
-import { NoUserSelect, TextUserSelect } from "./commonStyles";
+import { NoUserSelect } from "./commonStyles";
 import { commonInputStyles } from "./commonInputStyles";
-import { commonTextStyles } from "./commonTextStyles";
 import {
   RoomsTypeValues,
   RoomsTypes,
@@ -99,6 +98,8 @@ import { getFromLocalStorage } from "./getFromLocalStorage";
 import { fakeFormFillingList } from "./formFillingTourData";
 import { getCountTilesInRow } from "./getCountTilesInRow";
 import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
+import * as userFilterUtils from "./userFilterUtils";
+import * as filterConstants from "./filterConstants";
 
 export {
   isBetaLanguage,
@@ -110,9 +111,7 @@ export {
   parseAddresses,
   getParts,
   NoUserSelect,
-  TextUserSelect,
   commonInputStyles,
-  commonTextStyles,
   INFO_PANEL_WIDTH,
   EmailSettings,
   parseAddress,
@@ -162,6 +161,8 @@ export {
   fakeFormFillingList,
   getCountTilesInRow,
   getSelectFormatTranslation,
+  userFilterUtils,
+  filterConstants,
 };
 
 export const getModalType = () => {
@@ -243,7 +244,9 @@ export const getLastColumn = (
 export const isLockedSharedRoom = (item?: TRoom) => {
   if (!item) return false;
 
-  return Boolean(item.external && item.passwordProtected && !item.expired);
+  return Boolean(
+    item.external && item.passwordProtected && !item.isLinkExpired,
+  );
 };
 
 export const addLog = (log: string, category: "socket") => {
@@ -310,6 +313,8 @@ export const getCheckboxItemId = (key: string | FilterType | RoomsType) => {
       return "selected-only-presentations";
     case FilterType.SpreadsheetsOnly:
       return "selected-only-spreadsheets";
+    case FilterType.DiagramsOnly:
+      return "selected-only-diagrams";
     case FilterType.ImagesOnly:
       return "selected-only-images";
     case FilterType.MediaOnly:
@@ -357,6 +362,8 @@ export const getCheckboxItemLabel = (
       return t("Common:Archives");
     case FilterType.FilesOnly:
       return t("Common:Files");
+    case FilterType.DiagramsOnly:
+      return t("Common:Diagrams");
 
     case `room-${RoomsType.CustomRoom}`:
       return t("Common:CustomRooms");

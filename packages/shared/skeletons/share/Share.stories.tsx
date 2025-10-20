@@ -1,20 +1,21 @@
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
+import { useTranslation } from "react-i18next";
 import ShareSkeleton from "./index";
+import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
+
+const ShareSkeletonWithTranslation = (props: object) => {
+  const { t } = useTranslation();
+  return <ShareSkeleton t={t} {...props} />;
+};
 
 export default {
   title: "Skeletons/Share",
-  component: ShareSkeleton,
+  component: ShareSkeletonWithTranslation,
+  decorators: [i18nextStoryDecorator],
 } as Meta;
 
-const mockT = (key: string) => key;
-
-const Template: Story = (args) => <ShareSkeleton t={mockT} {...args} />;
+const Template: StoryFn = (args) => <ShareSkeletonWithTranslation {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};
-
-export const WithCustomTranslation = Template.bind({});
-WithCustomTranslation.args = {
-  t: (key: string) => `Translated: ${key}`,
-};

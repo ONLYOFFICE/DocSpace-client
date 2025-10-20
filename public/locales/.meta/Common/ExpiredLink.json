@@ -3,7 +3,7 @@
   "content": "Expired link",
   "content_en_sha1_hash": "64873d8427cf66e82df64753bb4377d01d15210e",
   "created_at": "2025-05-19T21:30:45.224Z",
-  "updated_at": "2025-05-26T07:57:32.874Z",
+  "updated_at": "2025-06-30T12:20:31.673Z",
   "comment": {
     "text": "The \"ExpiredLink\" translation key is used to display a message indicating that a link has expired. It appears in error contexts, such as an invalid or non-existent link dialog or component, and serves as a clear indication of the issue to users.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/components/Invalid.tsx",
       "line_number": 78,
-      "context": "const errorTitle = oauthError\n ? oauthError\n : match?.messageKey\n ? getMessageKeyTranslate(t, message)\n : t(\"Common:ExpiredLink\");\n \n return (\n <ErrorContainer headerText={errorTitle}>\n <Text fontSize=\"13px\" fontWeight=\"600\">\n <Trans",
+      "context": "const errorTitle =\n oauthError ||\n (match?.messageKey\n ? getMessageKeyTranslate(t, message)\n : t(\"Common:ExpiredLink\"));\n \n return (\n <ErrorContainer headerText={errorTitle}>\n <Text fontSize=\"13px\" fontWeight=\"600\">\n <Trans",
       "module": "/packages/login"
     },
     {

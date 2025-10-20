@@ -3,7 +3,7 @@
   "content": "Get code",
   "content_en_sha1_hash": "9d786e26d08cc3316fa683814fca23320c25a54b",
   "created_at": "2025-05-19T21:30:57.368Z",
-  "updated_at": "2025-05-24T15:27:24.608Z",
+  "updated_at": "2025-08-21T11:22:39.930Z",
   "comment": {
     "text": "The translation key \"GetCode\" is used to display a button label that triggers code generation for phone verification. In the UI, this label appears on a confirm page as part of a phone activation workflow.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PhoneActivation/page.client.tsx",
       "line_number": 77,
-      "context": "<Button\n primary\n scale\n size={ButtonSize.medium}\n label={t(\"GetCode\")}\n tabIndex={2}\n isDisabled={false}\n />\n </>\n );",
+      "context": "<Button\n primary\n scale\n size={ButtonSize.medium}\n label={t(\"GetCode\")}\n tabIndex={2}\n isDisabled={false}\n testId=\"get_code_button\"\n />\n </>",
       "module": "/packages/login"
     }
   ],

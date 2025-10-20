@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 
 import { createFile, deleteFile } from "../../api/files";
 
-import { FolderType, RoomsType, DeviceType } from "../../enums";
+import { FolderType, RoomsType, DeviceType, RoomSearchArea } from "../../enums";
 
 import { TSelectorItem } from "../../components/selector";
 import { Aside } from "../../components/aside";
@@ -63,6 +63,9 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     filterParam,
 
     treeFolders,
+    withRecentTreeFolder,
+    withFavoritesTreeFolder,
+
     onSetBaseFolderPath,
     roomType,
     isUserOnly,
@@ -183,7 +186,20 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     setItems,
     setHasNextPage,
     setIsInit,
+    withRecentTreeFolder,
+    withFavoritesTreeFolder,
   });
+
+  let rootFolderTypeItem;
+  const rootFolderTypeIndex = breadCrumbs.findIndex((tp) => tp.rootFolderType);
+  if (rootFolderTypeIndex > -1) {
+    rootFolderTypeItem = breadCrumbs[rootFolderTypeIndex].rootFolderType;
+  }
+
+  let searchArea;
+  if ((rootFolderType ?? rootFolderTypeItem) === FolderType.RoomTemplates) {
+    searchArea = RoomSearchArea.Templates;
+  }
 
   const { getRoomList } = useRoomsHelper({
     setBreadCrumbs,
@@ -205,6 +221,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     withCreate,
     createDefineRoomLabel,
     createDefineRoomType,
+    searchArea,
 
     withInit,
   });
@@ -611,6 +628,8 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     totalItems: total,
 
     isRoot,
+
+    selectedItemType,
   });
 
   const selectorComponent = embedded ? (
@@ -636,7 +655,9 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     </>
   );
 
-  return currentDeviceType === DeviceType.mobile && !embedded ? (
+  return (currentDeviceType === DeviceType.mobile ||
+    currentDeviceType === DeviceType.tablet) &&
+    !embedded ? (
     <Portal visible={isPanelVisible} element={<div>{selectorComponent}</div>} />
   ) : (
     selectorComponent

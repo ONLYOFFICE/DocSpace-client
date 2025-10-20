@@ -1,11 +1,20 @@
 {
-  "ActionsWithFilesDescription": "Žetonus informēs jūs par tādām darbībām kā augšupielāde, izveide un izmaiņas failos.",
+  "ActionsWithFilesDescription": "Badži norādīs uz failu aktivitāti — pievienošanu, rediģēšanu vai kopīgošanu — {{rooms}}, {{shared}} un {{documents}} sadaļās.",
+  "AdminSetupRequired": "Admin iestatīšana nepieciešama",
   "Badges": "Žetoni",
   "DailyFeed": "Ikdienas {{productName}} plūsma",
   "DailyFeedDescription": "Lasiet {{productName}} jaunumus un notikumus ikdienas īssavilkumā.",
-  "ManageNotifications": "Pārvaldīt",
+  "FileActivityNotify": "Faila aktivitātes paziņojumi",
+  "GoToSettings": "Iet uz Iestatījumiem",
+  "IsNotValid": "Nav derīgs",
+  "LdapEmailTooltip": "Šis lietotāja konts tiek ielādēts no LDAP. Lietotāja e-pasta adrese nav norādīta, un pašreizējā tika ģenerēta automātiski un nevar tikt izmantota, lai sūtītu paziņojumus.",
+  "NotConfigured": "Nav konfigurēts",
   "Notifications": "Paziņojumi",
-  "RoomsActivityDescription": "Ik stundu paziņojumi. Esiet informēts par visām aktivitātēm savās telpās",
+  "RoomsActivityDescription": "Saņemiet momentānus e-pastu paziņojumus par jaunām kopīgām mapēm/failiem un aktivitātēm {{sectionName}}.",
+  "RoomUpdateNotify": "Koplietots saturs un {{sectionName}} aktivitāte",
+  "SettingUpNotifications": "Paziņojumu iestatīšana",
+  "SuccessConnected": "{{serviceName}} ir veiksmīgi pievienots kā paziņojumu kanāls. Jūs tagad saņemsiet atjauninājumus tur.",
+  "SuccessDisconnected": "{{serviceName}} ir veiksmīgi atvienots kā paziņojumu kanāls. Tur paziņojumi vairs netiks sūtīti.",
   "UsefulTips": "Noderīgi {{productName}} padomi",
   "UsefulTipsDescription": "Iegūt noderīgus ceļvežus par {{productName}}"
 }

@@ -32,28 +32,47 @@ import { IconButton } from "../../icon-button";
 import { Text } from "../../text";
 import { DeviceType } from "../../../enums";
 
+import { ArticleHeaderLoader } from "../../../skeletons/article";
+
 import styles from "../Article.module.scss";
 
 const BackButton = ({
   showText,
   currentDeviceType,
   onLogoClickAction,
+  isLoading,
+  toggleArticleOpen,
 }: {
   showText: boolean;
   currentDeviceType: DeviceType;
   onLogoClickAction?: () => void;
+  isLoading?: boolean;
+  toggleArticleOpen?: () => void;
 }) => {
   const { t } = useTranslation("Common");
   const navigate = useNavigate();
 
   const onClickBack = () => {
     onLogoClickAction?.();
+
+    if (toggleArticleOpen && currentDeviceType === DeviceType.mobile)
+      toggleArticleOpen();
+
     navigate("/");
   };
 
   const icon =
     currentDeviceType === DeviceType.desktop ? ArrowIcon : ArrowTabletIcon;
 
+  if (isLoading)
+    return (
+      <ArticleHeaderLoader
+        height="18px"
+        width="211px"
+        showText={showText}
+        className={styles.backButton}
+      />
+    );
   return (
     <div
       className={styles.backButton}

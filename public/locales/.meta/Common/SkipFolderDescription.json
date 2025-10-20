@@ -3,7 +3,7 @@
   "content": "No folder will be copied",
   "content_en_sha1_hash": "140e409b50247a5f7ff22b7ce99dfef6e6751f2c",
   "created_at": "2025-05-19T21:30:48.916Z",
-  "updated_at": "2025-05-28T09:30:02.219Z",
+  "updated_at": "2025-10-14T05:10:50.935Z",
   "comment": {
     "text": "This translation key is used to display a message when a user chooses to skip copying a folder. The description will appear in a conflict resolution dialog that prompts users to decide whether to keep or delete conflicting files and folders. Translators should provide a clear and concise message that indicates no folder will be copied as the result of this action.",
     "is_auto": true,
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'No folder will be copied' is better translated as 'Ei kansioita kopioida' to match the passive voice of the English.",
-          "suggestion": "Ei kansioita kopioida"
+          "description": "The translation 'Kansioita ei kopioida' is a literal translation and may not be the most natural phrasing in Finnish. A more idiomatic translation emphasizing that no folders will be copied would be better.",
+          "suggestion": "Ei kopioida kansioita."
         }
       ],
       "approved_at": null
@@ -114,13 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ກ໊ອບີ້' is likely a transliteration of 'copy' and may be misspelled. The correct Lao word for 'copy' is 'ຖ່າຍຮູບ'.",
-          "suggestion": "ຖ່າຍຮູບ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While understandable, 'ບໍ່ມີໂຟນເດີທີ່ຈະຖືກກ໊ອບີ້' is a very literal translation. A more natural Lao phrasing would be 'ບໍ່ມີໂຟນເດີໃດຖືກຖ່າຍຮູບ'.",
-          "suggestion": "ບໍ່ມີໂຟນເດີໃດຖືກຖ່າຍຮູບ"
+          "description": "The word 'ກ໊ອບີ້' is a transliteration and might not be the most natural or accurate term for 'copied' in Lao. While understandable, it's not ideal.",
+          "suggestion": "ປ່ຽນເປັນ 'ຖ່າຍ' (thai) or 'ຜະລິດ' (phalit) for a more natural translation of 'copied'."
         }
       ],
       "approved_at": null
@@ -161,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Romanian translation contains a subject-verb agreement error. 'folder' is singular, but the verb 'vor fi' is in the plural form.",
+          "description": "The Romanian translation uses the plural verb form 'vor fi' (will be) with the singular noun 'folder' (folder). The correct form should agree with the singular subject.",
           "suggestion": "Nici-un folder nu va fi copiat"
         }
       ],
@@ -179,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කිසිදු ෆෝල්ඩරයක් පිටපත් කරනු නොලැබේ.' is a bit literal and sounds slightly awkward in Sinhala. While technically correct, it's not the most natural way to express the meaning.",
-          "suggestion": "A more natural translation would be 'ෆෝල්ඩරයක්වත් පිටපත් නොවනු ඇත.' (foladera vath piṭapat nevunu ata) or 'ෆෝල්ඩර කිසිවක් පිටපත් නොවනු ඇත.' (folder kisivak pitapat nevunu ata)."
+          "description": "The translation 'කිසිදු ෆෝල්ඩරයක් පිටපත් කරනු නොලැබේ.' is a bit too formal and literal. A more natural and concise translation would be better.",
+          "suggestion": "කිසි ෆෝල්ඩරයක් පිටපත් නොවනු ඇත."
         }
       ],
       "approved_at": null
@@ -188,7 +183,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Nebude skopírovaný žiadny priečinok' is technically correct, but sounds overly formal and slightly awkward in common usage. A more natural Slovak equivalent would be 'Žiadny priečinok nebude skopírovaný' or 'Nebude sa kopírovať žiaden priečinok'.",
+          "suggestion": "Žiadny priečinok nebude skopírovaný"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -203,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ниједан фолдер неће бити копиран' is technically correct but sounds unnatural in Serbian. 'Ниједан' is quite formal and rarely used in everyday speech. A more natural phrasing would be 'Нимало фолдери неће бити копирани' or 'Фолдери неће бити копирани'.",
-          "suggestion": "Фолдери неће бити копирани"
+          "description": "The translation 'Ниједан фолдер неће бити копиран' is technically correct but sounds slightly unnatural in modern Serbian. 'Ниједан' implies 'not a single' and is a bit formal/archaic in this context. A more natural phrasing would be 'Фолдер неће бити копиран' or 'Никакав фолдер неће бити копиран'.",
+          "suggestion": "Фолдер неће бити копиран"
         }
       ],
       "approved_at": null
@@ -212,25 +213,31 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Nijedan folder neće biti kopiran' is a literal translation and while grammatically correct, it sounds unnatural in Serbian. A more natural phrasing would be 'Niti jedan folder neće biti kopiran' or 'Folderi neće biti kopirani'.",
+          "suggestion": "Niti jedan folder neće biti kopiran"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'kopyalanmayacak' is misspelled. The correct spelling is 'kopyalanmayacak'.",
+          "suggestion": "kopyalanmayacak"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Не буде скопійовано жодної папки' is a literal translation but sounds slightly awkward in Ukrainian. A more natural phrasing would emphasize the absence of folder copying.",
-          "suggestion": "Не буде скопійовано жодних папок."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -245,15 +252,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '没有文件夹将会被复制' is technically correct but sounds overly formal and passive in Chinese. It doesn't convey the directness of 'No folder will be copied.'",
-          "suggestion": "没有文件夹会被复制 (Méiyǒu fòjiàn huì bèi fùzhì)"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "A more natural and concise translation would be preferred for user interface text.",
-          "suggestion": "不会复制任何文件夹 (Bù huì fùzhì rènhé fòjiàn)"
+          "description": "The translation '没有文件夹将会被复制' is technically correct but sounds overly formal and slightly awkward in Chinese. It uses a passive voice construction ('将会被复制') that isn't as common or natural for this type of message.",
+          "suggestion": "没有文件夹会被复制"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

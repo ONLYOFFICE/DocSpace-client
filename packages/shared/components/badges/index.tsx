@@ -39,15 +39,13 @@ import Mute16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import CustomFilter12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/custom-filter.react.svg?url";
 import CustomFilter16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
+import LockedIconReactSvg from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
+import LockedIconReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
+import FavoriteFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
 
 import { isMobile as isMobileDevice } from "react-device-detect";
 
-import { FILLING_FORM_STATUS_COLORS } from "@docspace/shared/constants";
-import {
-  classNames,
-  getFillingStatusLabel,
-  getFillingStatusTitle,
-} from "@docspace/shared/utils";
+import { FILLING_FORM_STATUS_COLORS } from "../../constants";
 
 import { Tooltip } from "../tooltip";
 import { Text } from "../text";
@@ -57,7 +55,15 @@ import { Badge } from "../badge";
 import { RoomsType, ShareAccessRights } from "../../enums";
 import { globalColors } from "../../themes";
 
-import { IconSizeType, isDesktop, isTablet, size } from "../../utils";
+import {
+  classNames,
+  getFillingStatusLabel,
+  getFillingStatusTitle,
+  IconSizeType,
+  isDesktop,
+  isTablet,
+  size,
+} from "../../utils";
 
 import styles from "./Badges.module.scss";
 import type { BadgesProps, BadgeWrapperProps } from "./Badges.type";
@@ -114,14 +120,15 @@ const Badges = ({
   isArchiveFolderRoot,
   onCopyPrimaryLink,
   isArchiveFolder,
-  isRecentTab,
-  canEditing,
   isTemplatesFolder,
   onCreateRoom,
   newFilesBadge,
   className,
   isExtsCustomFilter,
   customFilterExternalLink,
+  onClickLock,
+  onClickFavorite,
+  isPublicRoom,
 }: BadgesProps) => {
   const {
     id,
@@ -136,6 +143,9 @@ const Badges = ({
     new: newCount,
     hasDraft,
     security,
+    lockedBy,
+    locked,
+    isFavorite,
     // startFilling,
   } = item;
 
@@ -162,6 +172,7 @@ const Badges = ({
   const iconEdit = <FileActionsConvertEditDocReactSvg />;
 
   const iconRefresh = desktopView ? Refresh12ReactSvgUrl : RefreshReactSvgUrl;
+  const iconLock = desktopView ? LockedIconReact12Svg : LockedIconReactSvg;
 
   const iconPin = UnpinReactSvgUrl;
   const iconMute =
@@ -220,6 +231,10 @@ const Badges = ({
     !isArchiveFolder &&
     !isTile;
 
+  const lockedByUser = lockedBy ?? "";
+
+  const canLock = security && "Lock" in security ? security.Lock : undefined;
+
   const onDraftClick = () => {
     if (!isTrashFolder) openLocationFile?.();
   };
@@ -259,8 +274,23 @@ const Badges = ({
     [styles.tileView]: viewAs === "tile",
   });
 
+  const getLockTooltip = () => (
+    <Text fontSize="12px" fontWeight={400} noSelect>
+      {t("Common:LockedBy", { userName: lockedByUser })}
+    </Text>
+  );
+
+  const onIconLockClick = () => {
+    if (!canLock) {
+      return;
+    }
+
+    if (onClickLock) onClickLock();
+  };
+
   return fileExst ? (
     <div
+      data-testid="badges"
       className={classNames(
         wrapperCommonClasses,
         "additional-badges file__badges",
@@ -313,7 +343,7 @@ const Badges = ({
         </BadgeWrapper>
       ) : null}
 
-      {isEditing && !(isRecentTab && !canEditing) ? (
+      {isEditing ? (
         <IconButton
           iconNode={iconEdit}
           className={classNames(
@@ -326,6 +356,35 @@ const Badges = ({
           title={t("Common:EditButton")}
         />
       ) : null}
+
+      {locked && !isTile ? (
+        <>
+          <IconButton
+            iconName={iconLock}
+            className={classNames(
+              styles.iconBadge,
+              "badge tablet-badge icons-group",
+            )}
+            data-id={id}
+            data-locked={!!locked}
+            onClick={onIconLockClick}
+            color={theme.filesQuickButtons.sharedColor}
+            hoverColor="accent"
+            title={t("Common:UnblockFile")}
+            data-tooltip-id={`lockTooltip${item.id}`}
+          />
+          {lockedByUser && !canLock ? (
+            <Tooltip
+              id={`lockTooltip${item.id}`}
+              place="bottom"
+              getContent={getLockTooltip}
+              maxWidth="300px"
+              openOnClick
+            />
+          ) : null}
+        </>
+      ) : null}
+
       {item.viewAccessibility?.MustConvert &&
       security &&
       "Convert" in security &&
@@ -361,6 +420,7 @@ const Badges = ({
           />
         </BadgeWrapper>
       ) : null}
+
       {showNew ? (
         <BadgeWrapper onClick={onBadgeClick} isTile={isTile}>
           <Badge
@@ -408,6 +468,7 @@ const Badges = ({
     </div>
   ) : (
     <div
+      data-testid="badges"
       className={classNames(wrapperCommonClasses, {
         folder__badges: isFolder && !isRoom,
         room__badges: isRoom,
@@ -476,9 +537,21 @@ const Badges = ({
           hoverColor="accent"
         />
       ) : null}
-      {showNew && !isTile && isRoom ? newFilesBadge : null}
+      {showNew && !isTile ? newFilesBadge : null}
       {showNew && isTile && isRoom ? (
         <div className={styles.badgeWrapperNewBadge}>{newFilesBadge}</div>
+      ) : null}
+      {showNew && isTile && !isRoom ? newFilesBadge : null}
+
+      {isFolder && isTile && isFavorite && !isPublicRoom && !isTrashFolder ? (
+        <IconButton
+          iconName={FavoriteFillReactSvgUrl}
+          className={classNames("badge icons-group")}
+          size={IconSizeType.medium}
+          onClick={onClickFavorite}
+          color="accent"
+          title={t("Common:Favorites")}
+        />
       ) : null}
     </div>
   );

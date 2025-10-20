@@ -24,14 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
-import type {
-  FilesSelectorProps,
-  TGetIcon,
-} from "@docspace/shared/selectors/Files/FilesSelector.types";
-import type { TFilesSettings } from "@docspace/shared/api/files/types";
-import type { DeviceType } from "@docspace/shared/enums";
-import type { BackupToPublicRoomOptionType } from "@docspace/shared/types";
+import type { TBreadCrumb } from "../selector/Selector.types";
+import type { FilesSelectorProps } from "../../selectors/Files/FilesSelector.types";
+import type { TGetIcon } from "../../selectors/utils/types";
+import type { TFilesSettings } from "../../api/files/types";
+import type { DeviceType } from "../../enums";
+import type { BackupToPublicRoomOptionType } from "../../types";
 
 export type FileInfoType = {
   id: string | number;
@@ -74,6 +72,7 @@ export type FilesSelectorInputProps = {
   isDocumentIcon?: boolean;
   filesSelectorSettings: FilesSelectorSettings;
   formProps?: FilesSelectorProps["formProps"];
+  dataTestId?: string;
 
   setBasePath: (folders: TBreadCrumb[]) => void;
   toDefault: VoidFunction;
@@ -89,8 +88,4 @@ export type FilesSelectorInputProps = {
     visible: boolean,
     options: BackupToPublicRoomOptionType,
   ) => void;
-};
-
-export type StyledBodyWrapperProps = {
-  maxWidth?: string;
 };

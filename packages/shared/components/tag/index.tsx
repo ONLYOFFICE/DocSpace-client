@@ -59,11 +59,17 @@ const TagPure = ({
   providerType,
   withIcon = false,
   iconClassName,
-  onMouseEnter,
-  onMouseLeave,
   advancedPopup,
   setOpenDropdown,
   openDropdown,
+  dataTestId,
+  onMouseEnter,
+  onMouseLeave,
+  isDefaultMode = true,
+  directionY,
+  fixedDirection,
+  manualY = "4px",
+  manualX,
 }: TagProps) => {
   const tagRef = React.useRef<HTMLDivElement | null>(null);
   const isMountedRef = React.useRef(true);
@@ -163,7 +169,7 @@ const TagPure = ({
           onClick={openDropdownAction}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
-          data-testid="tag"
+          data-testid="tag_container"
         >
           {icon ? <ReactSVG className={styles.createIcon} src={icon} /> : null}
           {label ? (
@@ -180,7 +186,11 @@ const TagPure = ({
             open={openDropdown}
             forwardedRef={tagRef}
             clickOutsideAction={onClickOutside}
-            manualY="4px"
+            isDefaultMode={isDefaultMode}
+            manualY={manualY}
+            manualX={manualX}
+            directionY={directionY}
+            fixedDirection={fixedDirection}
           >
             {advancedOptions.map((t, index) => (
               <DropDownItem
@@ -188,6 +198,7 @@ const TagPure = ({
                 key={`${t}_${index * 50}`}
                 onClick={onClickAction}
                 data-tag={t}
+                testId={dataTestId ?? "tag_item"}
               >
                 <Text
                   className={classNames(styles.dropdownText, {
@@ -251,7 +262,7 @@ const TagPure = ({
         [styles.thirdPartyTag]: icon,
       })}
       data-tag={label}
-      data-testid="tag"
+      data-testid={dataTestId ?? "tag_item"}
       aria-label={label}
       style={commonStyle}
       aria-disabled={isDisabled}

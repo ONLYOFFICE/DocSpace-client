@@ -3,7 +3,7 @@
   "content": "No groups match your search. Please adjust your search parameters or clear the search field to view the full list of groups.",
   "content_en_sha1_hash": "9c3caa1ff1cab6647d8d6b2e9142676a207a5953",
   "created_at": "2025-05-19T21:30:45.677Z",
-  "updated_at": "2025-05-26T07:57:32.456Z",
+  "updated_at": "2025-10-01T15:17:48.231Z",
   "comment": {
     "text": "This translation key is used to display a message when no groups are found based on user search criteria. It typically appears in an empty screen or search results section of a UI component.",
     "is_auto": true,
@@ -18,25 +18,25 @@
     },
     {
       "file_path": "/packages/shared/selectors/Groups/index.tsx",
-      "line_number": 171,
-      "context": "submitButtonLabel={t(\"Common:SelectAction\")}\n onSubmit={onSubmitAction}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n emptyScreenImage={emptyScreenImg}\n emptyScreenHeader={t(\"Common:NotFoundGroups\")}\n emptyScreenDescription={t(\"Common:GroupsNotFoundDescription\")}\n searchEmptyScreenImage={emptyScreenImg}\n searchEmptyScreenHeader={t(\"Common:NotFoundGroups\")}\n searchEmptyScreenDescription={t(\"Common:GroupsNotFoundDescription\")}\n totalItems={totalRef.current}\n hasNextPage={hasNextPage}",
+      "line_number": 170,
+      "context": "items={itemsList}\n submitButtonLabel={t(\"Common:SelectAction\")}\n onSubmit={onSubmitAction}\n emptyScreenImage={emptyScreenImg}\n emptyScreenHeader={t(\"Common:NotFoundGroups\")}\n emptyScreenDescription={t(\"Common:GroupsNotFoundDescription\")}\n searchEmptyScreenImage={emptyScreenImg}\n searchEmptyScreenHeader={t(\"Common:NotFoundGroups\")}\n searchEmptyScreenDescription={t(\"Common:GroupsNotFoundDescription\")}\n totalItems={totalRef.current}\n hasNextPage={hasNextPage}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/Groups/index.tsx",
-      "line_number": 171,
-      "context": "submitButtonLabel={t(\"Common:SelectAction\")}\n onSubmit={onSubmitAction}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n emptyScreenImage={emptyScreenImg}\n emptyScreenHeader={t(\"Common:NotFoundGroups\")}\n emptyScreenDescription={t(\"Common:GroupsNotFoundDescription\")}\n searchEmptyScreenImage={emptyScreenImg}\n searchEmptyScreenHeader={t(\"Common:NotFoundGroups\")}\n searchEmptyScreenDescription={t(\"Common:GroupsNotFoundDescription\")}\n totalItems={totalRef.current}\n hasNextPage={hasNextPage}",
+      "line_number": 170,
+      "context": "items={itemsList}\n submitButtonLabel={t(\"Common:SelectAction\")}\n onSubmit={onSubmitAction}\n emptyScreenImage={emptyScreenImg}\n emptyScreenHeader={t(\"Common:NotFoundGroups\")}\n emptyScreenDescription={t(\"Common:GroupsNotFoundDescription\")}\n searchEmptyScreenImage={emptyScreenImg}\n searchEmptyScreenHeader={t(\"Common:NotFoundGroups\")}\n searchEmptyScreenDescription={t(\"Common:GroupsNotFoundDescription\")}\n totalItems={totalRef.current}\n hasNextPage={hasNextPage}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 640,
+      "line_number": 685,
       "context": "? t(\"Common:NotFoundGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:EmptyDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:GroupsNotFoundDescription\"))\n }\n searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={\n activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuestsFilter\")",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 640,
+      "line_number": 685,
       "context": "? t(\"Common:NotFoundGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:EmptyDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:GroupsNotFoundDescription\"))\n }\n searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={\n activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuestsFilter\")",
       "module": "/packages/shared"
     }
@@ -57,7 +57,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'parametrleriniz' is a minor spelling error. It should be 'parametrlerinizi'.",
+          "suggestion": "parametrlerinizi"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -120,13 +126,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"検索パラメータを調整するか\" is slightly awkward. A more natural phrasing would be \"検索条件を調整するか\" or \"検索の設定を変更するか\".",
-          "suggestion": "検索条件を調整するか"
+          "description": "The phrase \"検索パラメータを調整するか\" is overly formal and doesn't quite capture the casual tone of \"adjust your search parameters.\" A more natural translation would be something like \"検索条件を変更するか\"",
+          "suggestion": "検索条件を変更するか"
         },
         {
-          "type": "formatting",
-          "description": "The sentence structure is a little long and could be broken down for better readability.  Consider splitting it into two sentences.",
-          "suggestion": "検索条件に一致するグループがありません。検索条件を調整するか、検索フィールドをクリアしてグループの全リストを表示してください。"
+          "type": "incorrect_translation",
+          "description": "The phrase \"検索フィールドをクリアしてグループの全リストを表示してください\" is a bit clunky. A more natural way to say it would be \"検索をクリアしてグループの一覧を表示してください\"",
+          "suggestion": "検索をクリアしてグループの一覧を表示してください"
         }
       ],
       "approved_at": null
@@ -137,13 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase '검색 매개변수를 조정하거나' (adjust your search parameters) is a bit too formal and technical for a user-facing message. A more natural phrasing would be '검색 조건을 변경하거나'.",
-          "suggestion": "검색 조건을 변경하거나"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word '삭제하세요' (delete) can be perceived as a strong instruction. It might be more user-friendly to use a softer term like '초기화하세요' (clear) or '지우세요' (erase).",
-          "suggestion": "초기화하거나"
+          "description": "The phrase \"검색 필드를 삭제하세요\" (delete the search field) is not as natural or user-friendly as \"검색 필드를 지우세요\" or \"검색 필드를 초기화하세요.\" It implies a more permanent action than intended.",
+          "suggestion": "검색 필드를 지우세요 or 검색 필드를 초기화하세요"
         }
       ],
       "approved_at": null
@@ -154,13 +155,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ເຫດການໃສ່ຄໍາສर्चຂອງທ່ານ\" is an awkward translation of 'match your search'. A more accurate phrasing would convey the meaning of finding groups based on the search query.",
-          "suggestion": "ບໍ່ມີກຸ່ມໃດທີ່ຄົງຄູ່ກັບຄໍາສर्चຂອງທ່ານ"
+          "description": "The phrase \"ເຫດການໃສ່ຄໍາສर्चຂອງທ່ານ\" is an awkward and inaccurate translation of \"match your search.\" It literally translates to 'incident in your search'.",
+          "suggestion": "Consider alternatives like \"ທີ່ກົງກັບຄໍາສर्चຂອງທ່ານ\" (that matches your search) or \"ຕາມຄໍາສर्चຂອງທ່ານ\" (according to your search)."
         },
         {
           "type": "incorrect_translation",
-          "description": "“ລ້າງຄໍາສर्च” is a literal translation of 'clear the search field' and might be unclear to Lao speakers. A more natural phrasing would be better.",
-          "suggestion": "ລ້າງຄໍາສर्चຂອງທ່ານ"
+          "description": "The word \"ຕາມ\" in \"ຕາມຄໍາສर्चຂອງທ່ານ\" can sound slightly informal in this context. While understandable, it might be better suited for a more casual setting.",
+          "suggestion": "Consider using \"ທີ່ກົງກັບຄໍາສर्चຂອງທ່ານ\" as a more formal and precise alternative."
+        },
+        {
+          "type": "formatting",
+          "description": "The punctuation is acceptable, but ensuring consistent spacing around punctuation marks is recommended for a polished feel.  For example, adding a space after the full stop.",
+          "suggestion": "Review spacing around all punctuation marks for consistency."
         }
       ],
       "approved_at": null
@@ -201,13 +207,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Niciunul dintre grupuri nu se potrivește cu ceea ce căutați' is a bit awkward. A more natural translation would be 'Niciun grup nu se potrivește cu căutarea ta' or 'Niciun grup nu corespunde căutării tale'. The current phrasing implies each individual group isn't matching.",
-          "suggestion": "Niciun grup nu corespunde căutării tale."
+          "description": "The phrase \"Niciunul dintre grupuri\" is slightly awkward. A more natural Romanian phrasing would be \"Niciun grup\" or \"Niciunul dintre grupurile\".",
+          "suggestion": "Niciun grup nu se potrivește cu ceea ce căutați."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Vă rugăm să configurați parametrii de căutare' is not the most natural way to say 'Please adjust your search parameters'.",
-          "suggestion": "Vă rugăm să modificați parametrii de căutare"
+          "description": "The word 'configurați' translates more closely to 'configure' rather than 'adjust'. While understandable, 'adjustați' is a more accurate translation of 'adjust'.",
+          "suggestion": "Vă rugăm să ajustați parametrii de căutare"
         }
       ],
       "approved_at": null
@@ -224,18 +230,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'සමූහ' is a potential misspelling. It should likely be 'මණ්ඩල'. While 'සමූහ' can refer to a group, 'මණ්ඩල' is a more common and precise term in this context.",
-          "suggestion": "Replace 'සමූහ' with 'මණ්ඩල'"
+          "description": "The word 'සමූහ' (samuha) is used consistently. While technically correct, 'මණ්ඩල' (mandalaya) is a more common and natural-sounding term for 'group' in Sinhala, especially in a digital context. Using 'මණ්ඩල' would improve readability.",
+          "suggestion": "Replace 'සමූහ' with 'මණ්ඩල'."
         },
         {
           "type": "grammar",
-          "description": "The sentence structure 'ඔබගේ සෙවුමට ගැළපෙන සමූහ නැත' could be more naturally phrased. It sounds a bit clunky.",
-          "suggestion": "Consider rephrasing to something like 'ඔබගේ සෙවුමට ගැළපෙන මණ්ඩලයක් නොවී' or 'ඔබගේ සෙවුමට ගැළපෙන මණ්ඩල නොමැත'."
+          "description": "The sentence structure 'ඔබගේ සෙවුමට ගැළපෙන සමූහ නැත' could be improved for better flow. A more natural phrasing would be 'ඔබගේ සෙවුමට ගැළපෙන මණ්ඩල නැත' or 'ඔබගේ සෙවුමට ගැළපෙන මණ්ඩලයක් නැත'.",
+          "suggestion": "Rephrase to 'ඔබගේ සෙවුමට ගැළපෙන මණ්ඩලයක් නැත'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ක්ෂේත්‍රය හිස් කරන්න' while technically correct, is a bit formal and less natural in this context. It might be too literal translation of 'clear the search field'.",
-          "suggestion": "Consider using a more natural phrasing like 'ගොඩබෑම ඉවත් කරන්න' or 'ගොඩබෑම වlinieන්න'."
+          "type": "formatting",
+          "description": "The translation is missing punctuation at the end of the first sentence. It should end with a full stop.",
+          "suggestion": "Add a full stop ( . ) at the end of the sentence: 'ඔබගේ සෙවුමට ගැළපෙන මණ්ඩලයක් නැත.'"
         }
       ],
       "approved_at": null

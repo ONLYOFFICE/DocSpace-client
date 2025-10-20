@@ -1,6 +1,5 @@
-/* eslint-disable react/no-array-index-key */
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { SelectionArea } from "./SelectionArea";
 import { SelectionAreaProps } from "./SelectionArea.types";
 import styles from "./SelectionArea.stories.module.scss";
@@ -8,12 +7,10 @@ import styles from "./SelectionArea.stories.module.scss";
 export default {
   title: "Layout components/SelectionArea",
   component: SelectionArea,
+  tags: ["!autodocs"],
   parameters: {
     docs: {
-      description: {
-        component:
-          "A component that allows users to select multiple items by dragging a selection box",
-      },
+      disable: true,
     },
   },
   decorators: [
@@ -25,7 +22,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<SelectionAreaProps> = (args) => {
+const Template: StoryFn<SelectionAreaProps> = (args) => {
   const [selectedItems, setSelectedItems] = React.useState<string[]>([]);
 
   const handleMove = ({
@@ -93,25 +90,4 @@ Default.args = {
     },
   ],
   isRooms: false,
-};
-
-export const WithHeaderHeight = Template.bind({});
-WithHeaderHeight.args = {
-  ...Default.args,
-  folderHeaderHeight: 50,
-  defaultHeaderHeight: 30,
-};
-
-export const ListView = Template.bind({});
-ListView.args = {
-  ...Default.args,
-  viewAs: "row",
-  countTilesInRow: 1,
-  arrayTypes: [
-    {
-      type: "default",
-      itemHeight: 50,
-      rowGap: 8,
-    },
-  ],
 };

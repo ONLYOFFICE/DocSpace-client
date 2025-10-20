@@ -3,7 +3,7 @@
   "content": "ID",
   "content_en_sha1_hash": "89f89c02cf47e091e726a4e07b88af0966806897",
   "created_at": "2025-05-19T21:30:53.908Z",
-  "updated_at": "2025-05-24T07:24:26.622Z",
+  "updated_at": "2025-06-30T12:20:31.469Z",
   "comment": {
     "text": "The \"ID\" translation key is used to display a label for an input field, likely in a form or fields section. It appears as a simple text label, and its purpose is to provide a clear indication of what user input is required (in this case, the ID).",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/ClientBlock.tsx",
-      "line_number": 82,
+      "line_number": 85,
       "context": "return (\n <StyledBlock>\n <BlockHeader header={t(\"Client\")} helpButtonText={helpButtonText} />\n <StyledInputBlock>\n <InputGroup\n label={t(\"ID\")}\n name=\"\"\n value={value.id}\n error=\"\"\n onChange={onChange}\n withCopy",
       "module": "/packages/client"
     }

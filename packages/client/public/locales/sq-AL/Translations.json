@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Zgjidhni nga lista",
-  "ConnectingAccount": "Lidhja e llogarisë",
-  "DeleteFromTrash": "Elementet e zgjedhura u fshinë me sukses nga koshi",
   "FileLocked": "Skedari u kyç",
   "FileProtected": "Skedari është i mbrojtur me fjalëkalim",
   "FileUnlocked": "Skedari u hap",
@@ -14,9 +12,6 @@
   "FolderTitleSkyDrive": "Drejtoria e OneDrive",
   "FolderTitleWebDav": "Drejtori WebDAV",
   "FolderTitleYandex": "Drejtoria Yandex",
-  "GuestReleaseTipDescripton": "Të gjithë përdoruesit e shtuar më parë u bënë të ftuar dhe tani disponohen vetëm në listën e kontakteve të administratorëve të {{productName}}. Të ftuarit nuk janë më pjesë e asnjë grupi. Ju gjithmonë mund të ndryshoni llojin e tyre dhe t'i shtoni ato në një grup, nëse është e nevojshme.",
-  "GuestReleaseTipLink": "Mësoni më shumë rreth llojeve të përdoruesve",
-  "LinkHasExpiredAndHasBeenDisabled": "Lidhja ka skaduar dhe është çaktivizuar",
   "LinkValidTime": "Kjo lidhje është e vlefshme vetëm për {{days_count}} ditë.",
   "NewForm": "Formulari PDF",
   "OwnerChange": "Ndryshoni pronarin",
@@ -29,13 +24,5 @@
   "ThirdPartyTitle": "Shërbime të palëve të treta",
   "TitleShowActions": "Shfaqni veprimet e skedarit",
   "TitleShowFolderActions": "Shfaqni veprimet e dosjeve",
-  "TypeTitleBoxNet": "Kuti",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TrashItemsDeleteSuccess": "Elementet e përzgjedhura u fshinë me sukses nga {{sectionName}}"
 }

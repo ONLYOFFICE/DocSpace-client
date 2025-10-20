@@ -3,7 +3,7 @@
   "content": "Only a room admin or a {{productName}} admin can become the owner of the room",
   "content_en_sha1_hash": "8ede5abe2c677bff3d329bb01b0c44bc63d58938",
   "created_at": "2025-05-19T21:30:56.817Z",
-  "updated_at": "2025-05-26T07:57:32.341Z",
+  "updated_at": "2025-10-07T15:39:07.301Z",
   "comment": {
     "text": "This translation key is used to display a message that explains the permission requirements for becoming the room owner. It appears in a change room owner panel and informs users about the necessary admin permissions. The message aims to clarify the ownership restrictions in the application.",
     "is_auto": true,
@@ -12,14 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 144,
+      "line_number": 142,
       "context": "withOutCurrentAuthorizedUser\n filterUserId={roomOwnerId}\n currentUserId={userId}\n disableDisabledUsers\n withInfo\n infoText={t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n })}\n emptyScreenHeader={t(\"Common:NotFoundMembers\")}\n emptyScreenDescription={t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 144,
+      "line_number": 142,
       "context": "withOutCurrentAuthorizedUser\n filterUserId={roomOwnerId}\n currentUserId={userId}\n disableDisabledUsers\n withInfo\n infoText={t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n })}\n emptyScreenHeader={t(\"Common:NotFoundMembers\")}\n emptyScreenDescription={t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
+      "line_number": 636,
+      "context": "withInfo\n infoText={t(\"OnlyPortalAdminsShown\", {\n productName: t(\"Common:ProductName\"),\n })}\n emptyScreenHeader={t(\"Common:NotFoundMembers\")}\n emptyScreenDescription={t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n })}\n />\n ) : null;",
       "module": "/packages/client"
     }
   ],

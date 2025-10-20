@@ -39,7 +39,11 @@ import {
   getThirdPartyProviders,
   getUserFromConfirm,
   getInvitationSettings,
+  getUserByEmail,
+  checkConfirmLink,
 } from "@/utils/actions";
+import { logger } from "logger.mjs";
+import { TConfirmLinkParams } from "@/types";
 import CreateUserForm from "./page.client";
 
 type LinkInviteProps = {
@@ -48,17 +52,23 @@ type LinkInviteProps = {
 };
 
 async function Page(props: LinkInviteProps) {
-  const params = await props.params;
-  const searchParams = await props.searchParams;
-  if (params.Invite !== "LinkInvite" && params.Invite !== "EmpInvite")
+  logger.info("Invite page");
+  const { searchParams: sp, params: p } = props;
+  const searchParams = (await sp) as TConfirmLinkParams;
+  const params = await p;
+  if (params.Invite !== "LinkInvite" && params.Invite !== "EmpInvite") {
+    logger.info(`Invite page notFound params.Invite: ${params.Invite}`);
     return notFound();
+  }
 
-  const type = searchParams.type;
+  const type = searchParams.type ?? "";
   const uid = searchParams.uid;
   const confirmKey = getStringFromSearchParams(searchParams);
 
   const headersList = await headers();
   const hostName = headersList.get("x-forwarded-host") ?? "";
+
+  const result = await checkConfirmLink(searchParams);
 
   const [
     user,
@@ -68,7 +78,11 @@ async function Page(props: LinkInviteProps) {
     passwordSettings,
     invitationSettings,
   ] = await Promise.all([
-    getUserFromConfirm(uid, confirmKey),
+    uid
+      ? getUserFromConfirm(uid, confirmKey)
+      : result?.email
+        ? getUserByEmail(result?.email, confirmKey)
+        : undefined,
     getSettings(),
     getThirdPartyProviders(true),
     getCapabilities(),
@@ -81,35 +95,31 @@ async function Page(props: LinkInviteProps) {
 
   const culture = (await cookies()).get(LANGUAGE)?.value ?? settingsCulture;
 
-  return (
+  return settings && typeof settings !== "string" ? (
     <>
-      {settings && typeof settings !== "string" && (
-        <>
-          <GreetingCreateUserContainer
-            type={type}
-            displayName={user?.displayName}
-            culture={culture}
-            hostName={hostName}
-          />
-          <FormWrapper id="invite-form">
-            <CreateUserForm
-              userNameRegex={settings.userNameRegex}
-              passwordHash={settings.passwordHash}
-              displayName={user?.displayName}
-              passwordSettings={passwordSettings}
-              capabilities={capabilities}
-              thirdPartyProviders={thirdParty}
-              legalTerms={settings.externalResources.common?.entries.legalterms}
-              licenseUrl={settings.externalResources.common?.entries.license}
-              isStandalone={settings.standalone}
-              logoText={settings.logoText}
-              invitationSettings={invitationSettings}
-            />
-          </FormWrapper>
-        </>
-      )}
+      <GreetingCreateUserContainer
+        type={type}
+        displayName={user?.displayName}
+        culture={culture}
+        hostName={hostName}
+      />
+      <FormWrapper id="invite-form">
+        <CreateUserForm
+          userNameRegex={settings.userNameRegex}
+          passwordHash={settings.passwordHash}
+          displayName={user?.displayName}
+          passwordSettings={passwordSettings}
+          capabilities={capabilities}
+          thirdPartyProviders={thirdParty}
+          legalTerms={settings.externalResources?.common?.entries?.legalterms}
+          licenseUrl={settings.externalResources?.common?.entries?.license}
+          isStandalone={settings.standalone}
+          logoText={settings.logoText}
+          invitationSettings={invitationSettings}
+        />
+      </FormWrapper>
     </>
-  );
+  ) : null;
 }
 
 export default Page;

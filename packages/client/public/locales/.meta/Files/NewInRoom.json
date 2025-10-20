@@ -3,7 +3,7 @@
   "content": "New in room",
   "content_en_sha1_hash": "345bcfe652a535d4a5764eb9e5e43036ffd0cf04",
   "created_at": "2025-05-19T21:30:55.889Z",
-  "updated_at": "2025-05-24T11:50:04.014Z",
+  "updated_at": "2025-06-26T19:00:18.130Z",
   "comment": {
     "text": "The translation key \"NewInRoom\" is used to display a label indicating that there are new files or content in a room. It appears as a header title within a modal dialog, specifically when the content is related to a room, and can be translated to various languages depending on the context (\"New in folder\" if not applicable).",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NewFilesBadge/sub-components/NewFilesPanel.tsx",
-      "line_number": 217,
+      "line_number": 219,
       "context": "displayType={ModalDialogType.aside}\n withFooterBorder\n withBodyScroll\n >\n <ModalDialog.Header>\n {isRooms ? t(\"NewInRooms\") : isRoom ? t(\"NewInRoom\") : t(\"NewInFolder\")}\n </ModalDialog.Header>\n <ModalDialog.Body>{content}</ModalDialog.Body>\n <ModalDialog.Footer>{markAsReadButton}</ModalDialog.Footer>\n </ModalDialog>\n );",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'جديد في المجلد' translates to 'New in the folder,' not 'New in room.' The intended meaning is related to a room, while the translation refers to a folder.",
-          "suggestion": "The correct translation should reflect the context of a 'room.' Possible suggestions include: 'جديد في الغرفة' (Jadeed fil-ghurfa) meaning 'New in the room' or 'أشياء جديدة في الغرفة' (Ashya jadeeda fil-ghurfa) meaning 'New things in the room'."
+          "description": "The translation \"جديد في المجلد\" translates to \"New in the folder\" instead of \"New in room\". The word 'folder' (المجلد) is used where 'room' is intended.",
+          "suggestion": "The correct translation should be something like \"جديد في الغرفة\" (Jadeed fil ghurfa) which means 'New in the room'."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Otaqda yeni\" is understandable, a more natural and accurate translation of \"New in room\" would be \"Zalinda yeni\" or \"Yeni otaqda\". \"Otaqda yeni\" literally translates to 'In the room new,' which sounds awkward.",
-          "suggestion": "Consider using \"Zalinda yeni\" or \"Yeni otaqda\"."
+          "description": "The translation \"Otaqda yeni\" while literally meaning \"New in room\", doesn't quite capture the intended meaning of 'New in room' which usually refers to recent additions or arrivals. A more natural phrasing would be something like 'Yeni gələn' (New arrivals) or 'Yeni əlavə edilmiş' (Newly added).",
+          "suggestion": "Consider 'Yeni gələn' or 'Yeni əlavə edilmiş'"
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Նոր է սենյակում\" (Nor e senyakum) literally translates to 'It is new in the room' or 'New is in the room'.  It doesn't accurately convey the meaning of 'New in room' which implies recent additions or items. A more accurate translation would be something like 'Արդեն սենյակում' (Arden senyakum) which means 'Already in room' suggesting recent addition, or 'Սենյակում նոր ավելացված' (Senyakum nor avelatsod) - 'New additions to the room'.",
-          "suggestion": "Consider 'Արդեն սենյակում' (Arden senyakum) or 'Սենյակում նոր ավելացված' (Senyakum nor avelatsod)"
+          "description": "The translation 'Նոր է սենյակում' literally translates to 'New is in the room'. While understandable, it's not the most natural or idiomatic way to express 'New in room' in Armenian. A more accurate and natural translation would be something like 'սենյակում նոր' (senyakum nor) or 'նոր սենյակում' (nor senyakum).",
+          "suggestion": "Consider 'սենյակում նոր' (senyakum nor) or 'նոր սենյակում' (nor senyakum)"
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ルームに新しい項目\" (Room ni atarashii koumoku) doesn't accurately convey the meaning of \"New in room\". \"新しい項目\" (atarashii koumoku) means 'new items' or 'new entries,' which is more specific than the English phrase.",
-          "suggestion": "ルームの新着情報 (Room no shinchaku jouhou) - meaning 'New information in room' or just 新着 (shinchaku) - 'new arrivals/updates'"
+          "description": "The translation 'ルームに新しい項目' while technically understandable, doesn't accurately convey the meaning of 'New in room'. It translates to 'New items in room'. 'New in room' implies newly added content or features within a room, not necessarily physical items.",
+          "suggestion": "ルームの新機能 (Ruumu no shin kinou) - 'New features in room', or ルームの更新 (Ruumu no koushin) - 'Updates in room' would be more appropriate. Alternatively, ルームの新着 (Ruumu no shinchaku) - 'New additions in room' could work depending on context."
         }
       ],
       "approved_at": null
@@ -126,13 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"룸의 새 항목\" is too literal and doesn't flow naturally in Korean. \"New in room\" usually implies newly added items or features. A better translation would convey that meaning.",
-          "suggestion": "새로 추가된 항목 (Sae-ro chu-ga-doen hang-eum)"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"룸의 새 항목\" sounds unnatural and lacks the nuance of 'new' implying recent addition or introduction.",
-          "suggestion": "새로운 룸 기능 (Sae-ro-un rum gyeong-neung)"
+          "description": "The translation \"룸의 새 항목\" is a literal translation that doesn't convey the intended meaning of \"New in room.\" It translates to 'New items in the room.'  A more natural and contextually accurate translation might be something like \"새로운 기능\" (New features) or \"새로운 추가 사항\" (New additions), depending on what 'New in room' refers to. Without more context, it's difficult to provide the perfect translation.",
+          "suggestion": "Consider translating to \"새로운 기능\" (New features) or \"새로운 추가 사항\" (New additions) depending on context."
         }
       ],
       "approved_at": null
@@ -149,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Jauns telpā\" is technically correct, it doesn't fully capture the nuance of \"New in room.\" It translates to 'New in the room'. A more natural and idiomatic translation would convey the sense of 'What's new in the room' or 'New additions to the room'.",
-          "suggestion": "Consider alternatives like \"Kas jauns telpā\" or \"Jauni pievienojumi telpā\" depending on the intended context."
+          "description": "The translation 'Jauns telpā' is technically correct but lacks the nuance of 'New in room'. It literally translates to 'New in space' which isn't quite the intended meaning. A more suitable translation might convey the sense of 'New arrivals in the room' or 'Recently added to the room'.",
+          "suggestion": "Consider alternatives like 'Jauni ienākuši telpā' (New arrivals in the room) or 'Pievienots telpā' (Added to the room)."
         }
       ],
       "approved_at": null
@@ -185,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nou în sala' is too literal. A more natural Romanian translation would be 'Noi în cameră' or 'Ce e nou în cameră'.",
-          "suggestion": "Consider 'Noi în cameră' or 'Ce e nou în cameră'."
+          "description": "While \"Nou în sala\" is a literal translation, a more natural and idiomatic Romanian translation for \"New in room\" would be \"Ce e nou în cameră\" or \"Noutăți în cameră\". \"Sala\" implies a large room or hall, whereas \"cameră\" is more commonly used for a standard room.",
+          "suggestion": "Consider translating as \"Ce e nou în cameră\" or \"Noutăți în cameră\"."
         }
       ],
       "approved_at": null
@@ -203,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කාමරයට නවතම' while containing correct Sinhala words, doesn't accurately convey the meaning of 'New in room'. 'කාමරයට' (kaamarayaata) means 'to the room' and 'නවතම' (navathama) means 'newest'. A more accurate translation would capture the sense of something being 'newly arrived' or 'new additions' to the room.",
-          "suggestion": "කාමරයට අලුත් (kaamarayaata aluth) - which translates to 'new to the room' or  කාමරයට නව්‍ය (kaamarayaata navya) - which conveys 'new' or 'innovative' in the room depending on the intended nuance."
+          "description": "The translation 'කාමරයට නවතම' (kaamarayaata navatama) is not the most natural or accurate translation of 'New in room'. While it literally means 'Newest to the room', it doesn't convey the intended meaning of recently added or appearing in the room.",
+          "suggestion": "A more accurate translation would be something like 'නව ඇතුළත්' (nava athulaath - new addition/inclusion) or 'මුතුවූවකි' (muthuwuwaki - newly arrived)."
         }
       ],
       "approved_at": null
@@ -227,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Нови у соби' is not the best equivalent of 'New in room'. While it's understandable, a more natural and accurate translation would be 'Ново у соби' or 'Ново у просторији'. The preposition 'у' is more suitable when referring to a room or space.",
-          "suggestion": "Ново у соби"
+          "description": "The translation 'Нови у соби' is not the most natural or accurate translation of 'New in room'. While literally 'New in room', a more common and idiomatic translation would be 'Ново у просторији' or 'Ново у соби'.",
+          "suggestion": "Ново у просторији"
         }
       ],
       "approved_at": null
@@ -245,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Odada yeni\" while technically correct, doesn't fully convey the intended meaning of \"New in room.\" It sounds slightly awkward and could be improved for better flow and naturalness.",
-          "suggestion": "Yeni gelen oda"
+          "description": "The translation \"Odada yeni\" while technically correct, doesn't fully capture the nuance of \"New in room.\" It's a literal translation, but \"New in room\" often refers to items or features newly present in a room. A better translation might convey that sense of novelty or addition.",
+          "suggestion": "Yeni eklenenler odada"
         }
       ],
       "approved_at": null
@@ -269,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"房间中新建\" does not accurately convey the meaning of \"New in room\". It literally translates to \"Newly built in room\", implying a construction activity, not just new items or features.",
-          "suggestion": "Consider translations like \"房间内新增\" (New additions in room), \"房间新内容\" (New content in room), or \"房间新功能\" (New features in room) depending on the context."
+          "description": "The translation '房间中新建' doesn't accurately convey the meaning of 'New in room'. It implies something is being newly created *within* the room, not simply that something is new to the room's contents.",
+          "suggestion": "房间新增 (Fángjiān xīn zēng) - which means 'Newly added to room' or 房间内新增 (Fángjiān nèi xīn zēng) - 'Newly added inside the room'"
         }
       ],
       "approved_at": null

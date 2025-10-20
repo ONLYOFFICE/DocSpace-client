@@ -28,11 +28,12 @@ import React from "react";
 import classNames from "classnames";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 
-import { useTheme } from "styled-components";
+import { useTheme } from "../../hooks/useTheme";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
 import styles from "./SelectorAddButton.module.scss";
 import { SelectorAddButtonProps } from "./SelectorAddButton.types";
+import { Loader, LoaderTypes } from "../loader";
 
 const SelectorAddButton = (props: SelectorAddButtonProps) => {
   const {
@@ -55,6 +56,8 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
     dir,
     truncate,
 
+    testId = "selector-add-button",
+    isLoading = false,
     ...rest
   } = props;
 
@@ -62,14 +65,14 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
   const mainAccentColor = currentColorScheme?.main?.accent;
 
   const onClickAction = (e: React.MouseEvent) => {
-    if (!isDisabled) onClick?.(e);
+    if (!isDisabled && !isLoading) onClick?.(e);
   };
 
   const buttonClassName = classNames(styles.selectorButton, {
     [styles.isAction]: isAction,
     [styles.isDisabled]: isDisabled,
-    [styles.isSize]: !!size,
-    "---selector-add-button-size": size,
+    [styles.isLoading]: isLoading,
+    // [styles.isSize]: !!size,
   });
 
   const containerClassName = classNames(
@@ -85,11 +88,15 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
     ? ({
         ...style,
         "--main-accent-button": `${mainAccentColor}1A`,
+        "--selector-add-button-size": size,
       } as React.CSSProperties)
     : style;
 
   return (
-    <div className={containerClassName}>
+    <div
+      data-testid="selector-add-button-container"
+      className={containerClassName}
+    >
       <div
         {...rest}
         id={id}
@@ -97,15 +104,19 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
         title={title}
         className={buttonClassName}
         onClick={onClickAction}
-        data-testid="selector-add-button"
+        data-testid={testId}
       >
-        <IconButton
-          size={iconSize}
-          iconName={iconName}
-          isFill
-          isDisabled={isDisabled}
-          isClickable={!isDisabled}
-        />
+        {isLoading ? (
+          <Loader color="" size="20px" type={LoaderTypes.track} />
+        ) : (
+          <IconButton
+            size={iconSize}
+            iconName={iconName}
+            isFill
+            isDisabled={isDisabled}
+            isClickable={!isDisabled}
+          />
+        )}
       </div>
 
       {label ? (

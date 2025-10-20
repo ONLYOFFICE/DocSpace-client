@@ -3,7 +3,7 @@
   "content": "New spreadsheet",
   "content_en_sha1_hash": "6bde054ddba34bfc0975daa6211434db38bf5b6f",
   "created_at": "2025-05-19T21:30:46.791Z",
-  "updated_at": "2025-06-08T12:02:32.679Z",
+  "updated_at": "2025-10-16T07:29:35.632Z",
   "comment": {
     "text": "This translation key is used to display the label for a \"Create New Spreadsheet\" button in a user interface. It appears as part of a contextual menu or dialog, allowing users to create a new spreadsheet file when selecting an option from a list.",
     "is_auto": true,
@@ -18,14 +18,14 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2751,
+      "line_number": 3069,
       "context": "};\n \n const createNewSpreadsheet = {\n id: \"personal_new-spreadsheet\",\n key: \"new-spreadsheet\",\n label: t(\"Common:NewSpreadsheet\"),\n onClick: () => this.onCreate(\"xlsx\"),\n icon: SpreadsheetReactSvgUrl,\n };\n \n const createNewPresentation = {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
-      "line_number": 335,
-      "context": "let fileName = t(\"Common:NewDocument\");\n \n switch (fileExt) {\n case \"xlsx\":\n fileName = t(\"Common:NewSpreadsheet\");\n break;\n case \"pptx\":\n fileName = t(\"Common:NewPresentation\");\n break;\n case \"docxf\":",
+      "line_number": 301,
+      "context": "let fileName = t(\"Common:NewDocument\");\n \n switch (fileExt) {\n case \"xlsx\":\n fileName = t(\"Common:NewSpreadsheet\");\n break;\n case \"pptx\":\n fileName = t(\"Common:NewPresentation\");\n break;\n case \"pdf\":",
       "module": "/packages/doceditor"
     }
   ],
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Nový tabulkový procesor\" literally translates to \"New spreadsheet processor.\" The more common and natural Czech translation for \"New spreadsheet\" is \"Nová tabulka\".",
-          "suggestion": "Nová tabulka"
+          "description": "The Czech translation \"Nový tabulkový procesor\" translates to \"New spreadsheet program\" or \"New spreadsheet processor,\" which is more literal and less natural than just \"New spreadsheet.\" It implies the software itself, not just the file.",
+          "suggestion": "Nový list"
         }
       ],
       "approved_at": null
@@ -99,13 +99,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Նոր աղյուսակաթերթ' while technically meaning 'new spreadsheet', sounds unnatural and is not the typical way to refer to a spreadsheet in Armenian. A more natural translation would be 'Նոր թերթ' or 'Նոր տարրալուծարան' depending on the context.",
-          "suggestion": "Consider 'Նոր թերթ' (Nor ter) or 'Նոր տարրալուծարան' (Nor tarralutsaran)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Нова прорачунска табела' is a literal translation that doesn't fully capture the meaning of 'spreadsheet'. It focuses on 'calculating table' rather than the common understanding of a spreadsheet.",
-          "suggestion": "Нова електронска табела"
+          "description": "The Serbian translation 'Нова прорачунска табела' while technically correct, is a very literal and somewhat formal translation of 'New spreadsheet'. A more natural and commonly used translation would be 'Нова рачунска табела'. 'Прорачунска' implies calculation and forecasting which isn't necessarily the primary meaning of 'spreadsheet'.",
+          "suggestion": "Нова рачунска табела"
         }
       ],
       "approved_at": null
@@ -210,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nova proračunska tabela' is not an accurate translation of 'New spreadsheet'. 'Proračunska' implies budget-related, while 'spreadsheet' is a more general term.  A more accurate translation would be 'Novi radni list' or 'Nova tablica'.",
+          "description": "The translation \"Nova proračunska tabela\" is not a direct or natural translation of \"New spreadsheet\". \"Proračunska tabela\" translates more closely to 'budget table' or 'financial table'. A more accurate translation for 'New spreadsheet' would be something like 'Novi radni list' or 'Novi list'.",
           "suggestion": "Novi radni list"
         }
       ],
@@ -219,13 +213,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Yeni elektronik tablo' is a technically correct translation of 'New spreadsheet', it's quite literal and somewhat formal. A more natural and common translation would be 'Yeni çalışma sayfası' or 'Yeni Excel dosyası' depending on the specific context.",
-          "suggestion": "Yeni çalışma sayfası"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -234,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation \"Таблиця\" simply means \"Table\". While a spreadsheet *is* a table, it's not a direct translation of \"New spreadsheet\". A more accurate translation would convey the concept of a new, blank spreadsheet.",
-          "suggestion": "Нова таблиця (Nova tablicia) or Новий електронний документ (Novyi elektronnyi dokument)"
+          "description": "The translation \"Таблиця\" is too generic. While it means \"table\" or \"spreadsheet\", it doesn't specifically convey the concept of a 'new' spreadsheet. It lacks the \"new\" aspect of the English content.",
+          "suggestion": "Нова таблиця"
         }
       ],
       "approved_at": null

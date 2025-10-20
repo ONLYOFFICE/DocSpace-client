@@ -21,10 +21,13 @@
   "CreateSamplePublicRoom": "샘플 공개 방 임베드 생성",
   "CreateSampleRoomSelector": "샘플 방 선택기 임베드 생성",
   "CreateSampleViewer": "샘플 뷰어 임베드 생성",
+  "CSPDescription": "{{organizationName}} {{productName}}을 임베드하거나 연결하려는 서비스 주소를 입력해주세요.",
+  "CSPHeader": "이 {{productName}}에 허용된 도메인을 추가하세요.",
   "CSPHelp": "이 설정은 콘텐츠 주입 공격으로부터 보호하는 데 사용할 수 있는 보안 메커니즘입니다. CSP는 보안 리소스 다운로드 소스를 설명합니다. '화이트리스트'에 포함되지 않은 리소스로부터의 다운로드는 차단됩니다. (프로토콜과 함께) 작동할 도메인을 지정하세요.",
   "CSPInfoBarDescription": "{{productName}}에 대해 HTTPS 프로토콜을 활성화하여 올바른 셋업을 보장하세요.",
   "CSPInfoBarHeader": "HTTPS 필요",
   "CSPInputPlaceholder": "다음과 같이 URL을 입력하세요: https://example.com",
+  "CSPUrlHelp": "제공된 도메인 이름만 제공해주세요.",
   "CustomDescription": "{{productName}} 임베딩을 위한 매개변수를 수동으로 구성하세요.",
   "CustomizingDisplay": "디스플레이 사용자 지정 중",
   "DataDisplay": "데이터 표시 설정",
@@ -113,6 +116,5 @@
   "Subtitle": "부제",
   "SubtitleDescription": "현재 디렉토리에 대한 추가 코멘트나 설명이 포함된 부제를 달으세요.",
   "TabPlugins": "탭 플러그인",
-  "Viewer": "뷰어",
   "ViewerDescription": "사용자가 해당 방에서 파일을 열어 볼 수 있도록 뷰어를 임베드하세요."
 }

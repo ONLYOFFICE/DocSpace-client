@@ -1,13 +1,13 @@
 {
   "ActiveSessions": "Sessions actives",
   "AutoDeleteTitle": "Toutes les sessions datant de plus de 60 jours seront automatiquement supprimées.",
-  "ChangeEmailSuccess": "L'adresse E-mail a été modifiée avec succès.",
   "ChangePasswordAfterLoggingOut": "Modifier le mot de passe après la déconnexion",
   "ConnectSocialNetworks": "Connectez vos réseaux sociaux",
   "DescriptionForSecurity": "Pour plus de sécurité, vous devez modifier votre mot de passe.",
   "DesktopTheme": "Synchroniser avec les paramètres de Desktop Editors",
   "DesktopThemeDescription": "Basculer automatiquement entre les thèmes clair et sombre en fonction du thème actuel de Desktop Editors.",
   "EditPhoto": "Modifier la photo",
+  "EmailChangeSuccess": "Votre adresse e-mail a été modifiée avec succès.",
   "EmailNotVerified": "E-mail non vérifié",
   "ErrorAccountAlreadyUse": "Compte lié déjà utilisé par un autre utilisateur",
   "FileManagement": "Gestion des fichiers",
@@ -18,6 +18,7 @@
   "LogoutDescription": "Remarque : toutes les connexions actives seront désactivées, à l’exception de cette connexion, car elle est en cours d’utilisation.",
   "LogoutFrom": "Se déconnecter de {{platform}} {{browser}} ?",
   "MyProfile": "Mon profil",
+  "NotificationsChannels": "Canaux de notification",
   "ProviderSuccessfullyConnected": "Le fournisseur s'est connecté avec succès",
   "ProviderSuccessfullyDisconnected": "Le fournisseur est déconnecté avec succès",
   "SendAgain": "Renvoyer",
@@ -25,6 +26,10 @@
   "SuccessLogout": "La connexion active a été déconnectée : {{platform}}, {{browser}}",
   "SystemTheme": "Utiliser le thème du système",
   "SystemThemeDescription": "Passage automatique d’un thème clair à un thème sombre lorsque votre système le fait.",
+  "TelegramAccount": "Compte Telegram",
+  "TelegramAccountDescription": "Pour connecter TelegramBot à votre compte, suivez le lien secret et cliquez sur le bouton « Connecter Telegram ».",
+  "TelegramAccountDisconnect": "Déconnecter Telegram",
+  "TelegramAccountDisconnectDescription": "Votre compte @{{username}} est connecté pour les notifications via Telegram. Vous pouvez vous déconnecter de ce compte. Dans ce cas, vous ne recevrez plus de notifications.",
   "TerminateAllSessions": "Terminer toutes les sessions à l'exception de la session en cours",
   "TwoFactorDescription": "L'authentification à deux facteurs via une application générant des codes a été activée pour tous les utilisateurs par l'administrateur."
 }

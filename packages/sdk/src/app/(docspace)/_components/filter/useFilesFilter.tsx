@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import {
   TItem,
@@ -13,7 +13,7 @@ import {
   FilterType,
   SortByFieldName,
 } from "@docspace/shared/enums";
-import { Nullable, TSortBy, type TViewAs } from "@docspace/shared/types";
+import { TSortBy, type TViewAs } from "@docspace/shared/types";
 import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
 import ViewRowsReactSvg from "PUBLIC_DIR/images/view-rows.react.svg";
@@ -36,9 +36,10 @@ export default function useFilesFilter({
 }: useFilesFiltersProps) {
   const { t } = useTranslation(["Common"]);
   const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   const [filter, setFilter] = React.useState<FilesFilter>(
-    FilesFilter.getFilter({ search: `?${filesFilter}` } as Location)!,
+    FilesFilter.getFilter({ search: `?${filesFilter}`, pathname } as Location)!,
   );
 
   React.useEffect(() => {
@@ -163,31 +164,31 @@ export default function useFilesFilter({
         id: "filter_type-folders",
         key: FilterType.FoldersOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Folders").toLowerCase(),
+        label: t("Common:Folders"),
       },
       {
         id: "filter_type-all-files",
         key: FilterType.FilesOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Files").toLowerCase(),
+        label: t("Common:Files"),
       },
       {
         id: "filter_type-documents",
         key: FilterType.DocumentsOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Documents").toLowerCase(),
+        label: t("Common:Documents"),
       },
       {
         id: "filter_type-spreadsheets",
         key: FilterType.SpreadsheetsOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Spreadsheets").toLowerCase(),
+        label: t("Common:Spreadsheets"),
       },
       {
         id: "filter_type-presentations",
         key: FilterType.PresentationsOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Presentations").toLowerCase(),
+        label: t("Common:Presentations"),
       },
       {
         id: "filter_type-forms",
@@ -202,22 +203,28 @@ export default function useFilesFilter({
         label: getManyPDFTitle(t, false),
       },
       {
+        id: "filter_type-diagrams",
+        key: FilterType.DiagramsOnly.toString(),
+        group: FilterGroups.filterType,
+        label: t("Common:Diagrams"),
+      },
+      {
         id: "filter_type-archive",
         key: FilterType.ArchiveOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Archives").toLowerCase(),
+        label: t("Common:Archives"),
       },
       {
         id: "filter_type-images",
         key: FilterType.ImagesOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Images").toLowerCase(),
+        label: t("Common:Images"),
       },
       {
         id: "filter_type-media",
         key: FilterType.MediaOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Media").toLowerCase(),
+        label: t("Common:Media"),
       },
     ];
 
@@ -246,6 +253,9 @@ export default function useFilesFilter({
         case FilterType.PresentationsOnly.toString():
           label = t("Common:Presentations");
           break;
+        case FilterType.DiagramsOnly.toString():
+          label = t("Common:Diagrams");
+          break;
         case FilterType.ImagesOnly.toString():
           label = t("Common:Images");
           break;
@@ -267,7 +277,7 @@ export default function useFilesFilter({
 
       filterValues.push({
         key: `${filter.filterType}`,
-        label: label.toLowerCase(),
+        label,
         group: FilterGroups.filterType,
       });
     }
@@ -277,7 +287,6 @@ export default function useFilesFilter({
 
   const initSelectedFilterData = React.useMemo(
     () => getSelectedFilterData(),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [], // should be calculated once
   );
 
@@ -286,13 +295,13 @@ export default function useFilesFilter({
       {
         id: "view-switch_rows",
         value: "row",
-        label: t("Common:ViewList"),
+        label: t("Files:ViewList"),
         icon: <ViewRowsReactSvg />,
       },
       {
         id: "view-switch_tiles",
         value: "tile",
-        label: t("Common:ViewTiles"),
+        label: t("Files:ViewTiles"),
         icon: <ViewTilesReactSvg />,
       },
     ];
@@ -307,7 +316,7 @@ export default function useFilesFilter({
   }, [setFilesViewAs, filesViewAs]);
 
   const removeSelectedItem = React.useCallback(
-    ({ key, group }: { key: string | number; group?: FilterGroups }) => {
+    ({ group }: { key: string | number; group?: FilterGroups }) => {
       const newFilter = filter.clone();
 
       if (group === FilterGroups.filterType) {

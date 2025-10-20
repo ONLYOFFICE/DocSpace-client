@@ -3,7 +3,7 @@
   "content": "Get free access to enterprise-ready office suite for 30 days",
   "content_en_sha1_hash": "0d8b509f3c64afbf4bf3e8a5ff4ff6e06c6f5653",
   "created_at": "2025-05-26T07:15:49.107Z",
-  "updated_at": "2025-05-26T08:02:44.403Z",
+  "updated_at": "2025-10-13T23:17:41.279Z",
   "comment": {
     "text": "This translation key is used for a 30-day free trial promotion banner header, appearing on a benefits container page. The content should be translated to describe free access to an enterprise office suite, emphasizing it's \"for 30 days\".",
     "is_auto": true,
@@ -11,7 +11,7 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Standalone/BenefitsContainer.tsx",
+      "file_path": "/packages/shared/pages/Payments/common/BenefitsContainer.tsx",
       "line_number": 54,
       "context": "? t(\"ActivateToProBannerHeaderTrial\", {\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })\n : t(\"UpgradeToProBannerHeader\");\n \n const features = () => {\n const techSupport = {\n imag: TechSupportReactSvgUrl,\n title: t(\"UpgradeToProBannerItemSupportHeader\"),",
       "module": "/packages/shared"
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'احصل على وصول مجاني إلى مجموعة المكاتب الجاهزة للمؤسسات لمدة 30 يومًا' is a literal translation that doesn't quite capture the natural flow of English. A more idiomatic translation would better convey the promotional aspect.",
+          "suggestion": "احصل على تجربة مجانية لمدة 30 يومًا للحزمة المكتبية الاحترافية."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -75,13 +81,30 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'enterprise-ready' is not directly translated. 'Prête à l'emploi' implies ready to use, but not necessarily enterprise-ready.",
+          "suggestion": "Consider translating 'enterprise-ready' more specifically, such as 'prête pour les entreprises' or 'de qualité professionnelle' to better convey the intended meaning. A more comprehensive translation might be: 'Obtenez un accès gratuit à la suite bureautique professionnelle pendant 30 jours'."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'кроме sr' is extraneous and doesn't belong in this translation. It seems to be a remnant from a previous editing process or a misunderstanding.",
+          "suggestion": "Remove 'кроме sr' from the translation."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation conveys the general meaning, 'enterprise պատրաստի գրասենյակային փաթեթ' is a somewhat literal translation and could be more naturally phrased. 'Enterprise-ready' could be translated more elegantly.",
+          "suggestion": "Consider alternatives like 'մասնագիտական գրասենյակային փաթեթ' or 'ընկերությունների համար նախատեսված գրասենյակային փաթեթ' to sound more natural."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +128,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ໂອກາດ​ການ​ເຮັດ​ງານ​ບໍ ລິ ຫານ' doesn't accurately convey 'enterprise-ready office suite'. It literally translates to 'opportunity for administrative work'. A better translation would focus on the office suite functionality.",
+          "suggestion": "Consider a phrase like 'ຊຸດໂຮງງານຜະລິດຂະຫນາດໃຫຍ່' (large-scale office suite) or 'ໂປຣແກຣມຊຸດສໍາລັບການບໍ ລິ ຫານ' (software suite for administration)."
+        },
+        {
+          "type": "formatting",
+          "description": "The Lao translation contains inconsistent spacing between words, particularly with the word 'ຂອງ'.",
+          "suggestion": "Ensure consistent spacing between words for improved readability. For example, 'ຂອງ​ການ​ໃຊ້​ງານ' should be 'ຂອງການໃຊ້ງານ'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -135,13 +169,30 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Obtenha' (Obtain) isn't the most natural way to express 'Get' in this context. A more idiomatic translation would be 'Tenha' or 'Aproveite'.",
+          "suggestion": "Tenha acesso gratuito ao pacote de escritório pronto para empresas por 30 dias"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Obțineți 30 zile de acces la suită de birou destinată intreprinderilor \" is a bit literal and could be improved for natural flow. 'Destinată intreprinderilor' isn't the most idiomatic way to say 'enterprise-ready'.",
+          "suggestion": "Obțineți 30 de zile de acces la o suită de birou pentru întreprinderi."
+        },
+        {
+          "type": "formatting",
+          "description": "There's a missing space after 'Obțineți'.",
+          "suggestion": "Obțineți 30 zile de acces la suită de birou destinată intreprinderilor"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +204,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"enterprise-ready\" is not directly translated. While 'ව්‍යවසාය-සූදානම්' is close, it's a slightly literal and potentially less understandable translation for the target audience. A more natural phrasing for 'enterprise-ready' might be something that conveys 'professional' or 'business-level' features.",
+          "suggestion": "Consider alternative phrasing for 'ව්‍යවසාය-සූදානම්' that emphasizes 'professional' or 'business-level' features. For example, 'व्याපාරික-අතරමැදි' or 'වෘත්තීයමය' (vṛttiyāmaya) could be explored, depending on the specific nuance desired."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'kancelárskemu' is misspelled. The correct spelling is 'kancelárskemu'.",
+          "suggestion": "kancelárskemu"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -177,13 +240,30 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Dobijte besplatni pristup naprednih funkcija na 30 dana\" doesn't fully convey the meaning of 'Get free access to enterprise-ready office suite for 30 days'. \"Naprednih funkcija\" translates to 'advanced functions' which is not equivalent to 'enterprise-ready office suite'.",
+          "suggestion": "Dobijte besplatni pristup profesionalnom paketu kancelarijskih aplikacija na 30 dana."
+        },
+        {
+          "type": "formatting",
+          "description": "The Serbian translation lacks a more natural flow. 'Na 30 dana' feels slightly awkward at the end of the sentence.",
+          "suggestion": "Dobijte besplatni pristup profesionalnom paketu kancelarijskih aplikacija za 30 dana."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'elde edin' is a bit formal and less natural in this context. A more conversational and common phrase would be better.",
+          "suggestion": "Kurumsal kullanıma hazır ofis paketine 30 gün boyunca ücretsiz erişimden faydalanın"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,10 +275,27 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Được sử dụng miễn phí bộ phần mềm văn phòng dành cho doanh nghiệp trong 30 ngày\" doesn't fully capture the meaning of 'Get free access'. 'Được sử dụng' implies usage, whereas the English suggests an opportunity to *gain* access. It also sounds a bit formal for marketing copy.",
+          "suggestion": "Hãy trải nghiệm miễn phí bộ phần mềm văn phòng dành cho doanh nghiệp trong 30 ngày"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'dành cho doanh nghiệp' (for businesses) is acceptable, but 'bộ phần mềm văn phòng' is a bit lengthy.  Consider a more concise phrasing.",
+          "suggestion": "Hãy trải nghiệm miễn phí phần mềm văn phòng dành cho doanh nghiệp trong 30 ngày"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

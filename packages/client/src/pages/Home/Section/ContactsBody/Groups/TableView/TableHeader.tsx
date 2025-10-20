@@ -203,7 +203,6 @@ class GroupsTableHeader extends React.Component<
       infoPanelVisible,
       columnStorageName,
       columnInfoPanelStorageName,
-      tableStorageName,
     } = this.props;
 
     const sortBy = filter!.sortBy === "displayname" ? "AZ" : filter!.sortBy;
@@ -217,7 +216,6 @@ class GroupsTableHeader extends React.Component<
         columns={columns as TTableColumn[]}
         columnStorageName={columnStorageName!}
         columnInfoPanelStorageName={columnInfoPanelStorageName!}
-        tableStorageName={tableStorageName!}
         sectionWidth={sectionWidth}
         infoPanelVisible={infoPanelVisible}
         useReactWindow

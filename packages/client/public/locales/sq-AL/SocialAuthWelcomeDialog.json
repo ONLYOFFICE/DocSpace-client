@@ -1,1 +1,8 @@
-{}
+{
+  "ChangeData": "Ndryshoni të dhënat dhe fjalëkalimin",
+  "ClickButtonBelow": "Nëse dëshironi të identifikoheni duke përdorur emailin tuaj, ju lutemi vendosni fjalëkalimin tuaj. <br /> Pasi të jetë gati, ju lutemi klikoni butonin më poshtë.",
+  "ContinueToProduct": "Vazhdoni te {{productName}}",
+  "GeneratedPassword": "Fjalëkalimi i gjeneruar",
+  "ProductNameDetail": "Emri i {{productName}}",
+  "ReviewAccountDetails": "Ju lutemi, merrni një moment për të rishikuar detajet e llogarisë suaj:"
+}

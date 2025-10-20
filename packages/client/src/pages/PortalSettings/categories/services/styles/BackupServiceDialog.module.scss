@@ -1,0 +1,60 @@
+.backupToggleSection {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  width: 100%;
+  margin: 20px 0;
+  align-items: start;
+  background: var(--payment-background-color);
+  padding: 12px;
+  box-sizing: border-box;
+  border-radius: 6px;
+}
+
+.toggleButton {
+  width: 20px;
+}
+
+.textContent {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.servicesList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.serviceContent {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.backupDescription {
+  color: var(--services-text-description);
+}
+.iconContainer {
+  svg {
+    rect {
+      fill: var(--color-scheme-main-buttons);
+    }
+
+    path {
+      fill: var(--color-scheme-main-buttons);
+    }
+  }
+}
+
+.serviceInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}

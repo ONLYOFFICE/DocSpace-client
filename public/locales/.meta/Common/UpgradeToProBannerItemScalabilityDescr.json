@@ -3,7 +3,7 @@
   "content": "Comfortably edit and collaborate on docs no matter what size your team is.",
   "content_en_sha1_hash": "e1913bff71c5bcb9a57aeaa6c2b538f7ac43e9b9",
   "created_at": "2025-05-26T07:15:49.288Z",
-  "updated_at": "2025-05-26T08:02:08.989Z",
+  "updated_at": "2025-10-13T21:36:03.877Z",
   "comment": {
     "text": "The translation key \"UpgradeToProBannerItemScalabilityDescr\" is used to describe the feature of allowing comfortable collaboration on documents regardless of team size. This description appears in a banner item within an enterprise benefits container, providing context for users upgrading to a professional plan.",
     "is_auto": true,
@@ -11,7 +11,7 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Standalone/BenefitsContainer.tsx",
+      "file_path": "/packages/shared/pages/Payments/common/BenefitsContainer.tsx",
       "line_number": 78,
       "context": "};\n \n const scalabilityClustering = {\n imag: ScalabilityReactSvgUrl,\n title: t(\"UpgradeToProBannerItemScalabilityHeader\"),\n description: t(\"UpgradeToProBannerItemScalabilityDescr\"),\n };\n \n const featuresArray = [];\n \n if (isEnterprise) {",
       "module": "/packages/shared"
@@ -75,7 +75,23 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The use of 'Editez' is incorrect. The correct verb conjugation should be 'Modifiez'.",
+          "suggestion": "Modifiez"
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'coéditez' is also an incorrect verb conjugation. The correct verb conjugation should be 'coéditez'.",
+          "suggestion": "coéditez"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'quelle que soit la taille de votre équipe' conveys the general meaning, a more natural and idiomatic French phrasing would be 'peu importe la taille de votre équipe'.",
+          "suggestion": "peu importe la taille de votre équipe"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -129,7 +145,18 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'Edite e colabore confortavelmente documentos' is grammatically awkward. 'Edite' and 'colabore' are verbs in the informal 'tu' form.  It's more appropriate to use the formal 'você' or a more natural phrasing.",
+          "suggestion": "Edite e colabore confortavelmente em documentos, independentemente do tamanho da sua equipa."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'equipa' is a valid translation for 'team', 'time' might be more common and sound more natural in this context.",
+          "suggestion": "Edite e colabore confortavelmente em documentos, independentemente do tamanho da sua time."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -147,13 +174,25 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Редактируйте документы и работайте над ними совместно в команде любого размера' is a bit literal. While technically correct, it doesn't capture the 'comfortably' aspect of the original English. It's a bit clunky.",
+          "suggestion": "Редактируйте документы и сотрудничайте в команде любого размера, не беспокоясь об объеме."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබගේ කණ්ඩායම කෙතරම් වුවත්, පහසුවෙන් සංස්කරණය කරන්න සහ ලේඛනවල සහයෝගයෙන් වැඩ කරන්න.' doesn't fully capture the nuance of 'Comfortably edit and collaborate on docs no matter what size your team is.'.  'Comfortably' is not directly translated. While 'පහසුවෙන්' (pahasuwen) means 'easily/comfortably', the overall flow could be improved to better convey the original meaning.",
+          "suggestion": "ඔබගේ කණ්ඩායම කුඩා වුවත්, විශාල වුවත්, පහසුවෙන් සංස්කරණය කරන්න සහ ලේඛනවල සහයෝගයෙන් වැඩ කරන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +216,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'tima' is grammatically incorrect. It should be 'tima'.",
+          "suggestion": "Udobno uređujte i sarađujte na dokumentima bez obzira na veličinu vašeg tima."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -199,6 +244,18 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"任何规模的团队都可以易于编辑和协作文档\" doesn't fully capture the nuance of 'comfortably'. It implies the team *can* easily edit, but not necessarily *comfortably*.",
+          "suggestion": "任何规模的团队都可以轻松、舒适地编辑和协作文档。"
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

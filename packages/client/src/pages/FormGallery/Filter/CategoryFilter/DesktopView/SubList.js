@@ -56,7 +56,7 @@ const SubList = ({
       marginTop={marginTop}
       id={`category-sub-list-${categoryType}`}
       className={`dropdown-sub sub-by-${categoryType}`}
-      directionX="right"
+      directionX="left"
       directionY="bottom"
       manualY="0px"
       manualX="0px"
@@ -82,6 +82,7 @@ const SubList = ({
             onClick={onCategoryClick}
             onMouseDown={onPreventDefault}
             title={categoryTitle}
+            testId={`category_sub_list_${categoryType}_${category.id}`}
           >
             <div
               className="item-content"

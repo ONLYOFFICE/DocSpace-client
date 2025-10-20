@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import moment from "moment";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
@@ -34,8 +33,9 @@ import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 
+import { getCorrectDate } from "@docspace/shared/utils";
 import styles from "../../styles/TransactionHistory.module.scss";
-import { accountingLedgersFormat } from "../../utils";
+import { accountingLedgersFormat, getServiceQuantity } from "../../utils";
 
 interface TransactionRowProps {
   transaction: TTransactionCollection;
@@ -46,43 +46,45 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
   transaction,
   language = "en",
 }) => {
-  const { credit, withdrawal, currency } = transaction;
+  const { credit, debit, currency } = transaction;
   const { t } = useTranslation("Payments");
   const isCredit = credit > 0;
 
   const formattedAmount = accountingLedgersFormat(
     language,
-    credit || withdrawal,
+    credit || debit,
     isCredit,
     currency,
   );
 
-  const dateFormat = `L ${moment.localeData().longDateFormat("LT")}`;
-
-  const getServiceQuantity = (quantity: number, service: string) => {
-    switch (service) {
-      case "disk-storage":
-        return `${quantity} ${t("Common:Gigabyte")}`;
-      default:
-        return "—";
-    }
-  };
+  const correctDate = getCorrectDate(language, transaction.date);
 
   return (
     <TableRow>
       <TableCell>
-        <Text fontWeight={600} fontSize="11px">
-          {moment(transaction.date).format(dateFormat)}
+        <Text fontWeight={600} fontSize="11px" dataTestId="transaction_date">
+          {correctDate}
         </Text>
       </TableCell>
       <TableCell>
-        <Text fontWeight={600} fontSize="11px">
+        <Text
+          fontWeight={600}
+          fontSize="11px"
+          as="span"
+          className={styles.transactionRowDescription}
+        >
           {transaction.description}
+          {transaction.details ? ` (${transaction.details})` : ""}
         </Text>
       </TableCell>
       <TableCell>
         <Text fontWeight={600} fontSize="11px">
-          {getServiceQuantity(transaction.quantity, transaction.service)}
+          {transaction.participantDisplayName || "—"}
+        </Text>
+      </TableCell>
+      <TableCell>
+        <Text fontWeight={600} fontSize="11px">
+          {getServiceQuantity(t, transaction.quantity, transaction.serviceUnit)}
         </Text>
       </TableCell>
       <TableCell>

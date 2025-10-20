@@ -41,8 +41,9 @@ export const useAmountValue = () => {
 
 export const AmountProvider: React.FC<{
   children: React.ReactNode;
-}> = ({ children }) => {
-  const [amount, setAmount] = useState<string>("");
+  initialAmount?: string;
+}> = ({ children, initialAmount = "" }) => {
+  const [amount, setAmount] = useState<string>(initialAmount);
   const value = useMemo(() => ({ amount, setAmount }), [amount]);
 
   return (

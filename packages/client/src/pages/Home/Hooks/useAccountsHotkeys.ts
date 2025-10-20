@@ -27,6 +27,11 @@
 import { useEffect, useState, useCallback } from "react";
 import { useHotkeys, Options } from "react-hotkeys-hook";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
+import { copySelectedText } from "@docspace/shared/utils/copy";
+import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
+import UsersStore from "SRC_DIR/store/contacts/UsersStore";
+import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 
 interface AccountsHotkeysProps {
   enabledHotkeys: boolean;
@@ -39,6 +44,9 @@ interface AccountsHotkeysProps {
   deselectAll: () => void;
   openItem: () => void;
   onClickBack: (fromHotkeys: boolean) => void;
+  enableSelection: ContactsHotkeysStore["enableSelection"];
+  viewAs: PeopleStore["viewAs"];
+  selection: UsersStore["selection"] | GroupsStore["selection"];
 }
 
 const useAccountsHotkeys = ({
@@ -51,6 +59,9 @@ const useAccountsHotkeys = ({
   deselectAll,
   openItem,
   onClickBack,
+  enableSelection,
+  viewAs,
+  selection,
 }: AccountsHotkeysProps) => {
   const [isEnabled, setIsEnabled] = useState(true);
 
@@ -94,8 +105,16 @@ const useAccountsHotkeys = ({
     "*",
     (e) => {
       const someDialogIsOpen = checkDialogsOpen();
+      if (someDialogIsOpen) return;
 
-      if (e.shiftKey || e.ctrlKey || someDialogIsOpen) return;
+      if (
+        (e.key === "Alt" && (e.ctrlKey || e.metaKey)) ||
+        ((e.key === "Meta" || e.key === "Control") && e.altKey)
+      ) {
+        return enableSelection(e);
+      }
+
+      if (e.shiftKey || e.ctrlKey || e.type === "keyup") return;
 
       switch (e.key) {
         case "ArrowDown":
@@ -112,11 +131,18 @@ const useAccountsHotkeys = ({
           break;
       }
     },
-    hotkeysFilter,
+    { ...hotkeysFilter, keyup: true, keydown: true },
   );
 
   // Select all accounts
-  useHotkeys("shift+a, ctrl+a", selectAll, hotkeysFilter);
+  useHotkeys(
+    "shift+a, ctrl+a, command+a",
+    (e) => {
+      e.preventDefault();
+      selectAll();
+    },
+    hotkeysFilter,
+  );
 
   // Deselect all accounts
   useHotkeys("shift+n, ESC", deselectAll, hotkeysFilter);
@@ -126,6 +152,16 @@ const useAccountsHotkeys = ({
 
   // Back to parent folder
   useHotkeys("Backspace", onClickBackAction, hotkeysFilter);
+
+  const copySelectedTextFn = (e: KeyboardEvent): void => {
+    if (!selection.length) return;
+    e.preventDefault();
+
+    copySelectedText(e, viewAs, selection);
+  };
+
+  // Copy selected items to clipboard
+  useHotkeys("Ctrl+Shift+c", copySelectedTextFn, hotkeysFilter);
 };
 
 export default useAccountsHotkeys;

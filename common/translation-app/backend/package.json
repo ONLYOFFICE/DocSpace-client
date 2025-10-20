@@ -6,20 +6,26 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate-metadata": "node src/scripts/generate-metadata.js",
+    "save-meta-keys-usage": "node src/scripts/save-meta-keys-usage.js",
+    "generate-auto-comments-metadata": "node src/scripts/generate-auto-comments-metadata.js"
   },
   "dependencies": {
-    "@fastify/cors": "^8.3.0",
+    "axios": "1.12.2",
+    "@fastify/cors": "^8.5.0",
+    "@vitalets/google-translate-api": "^9.2.0",
     "app-root-path": "^3.1.0",
-    "dotenv": "^16.5.0",
-    "fastify": "^4.24.0",
-    "fastify-socket.io": "^5.0.0",
-    "fs-extra": "^11.1.1",
-    "glob": "^10.2.7",
-    "node-fetch": "^2.7.0",
-    "ollama": "^0.5.15"
+    "dotenv": "^17.2.2",
+    "fastify": "^4.28.1",
+    "fastify-socket.io": "^5.1.0",
+    "fs-extra": "^11.3.1",
+    "glob": "^11.0.3",
+    "https-proxy-agent": "^7.0.5",
+    "node-fetch": "^3.3.2",
+    "ollama": "^0.5.17"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.1.10"
   }
 }

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ContextMenuModel } from "@docspace/shared/components/context-menu/ContextMenu.types";
+import { ContextMenuModel } from "../../context-menu/ContextMenu.types";
 import { TileItem } from "../tile-container/TileContainer.types";
 
 export interface FolderItem extends TileItem {
@@ -83,6 +83,11 @@ export type FolderTileProps = {
   /** Flag for edit mode */
   isEdit?: boolean;
   forwardRef?: React.RefObject<HTMLDivElement | null>;
+  /** The temporary icon to display when thumbnail is not available */
+  temporaryIcon?: string;
+  isBigFolder?: boolean;
+  /** Data test id for the tile */
+  dataTestId?: string;
 };
 
 export type FolderChildProps = {

@@ -3,7 +3,7 @@
   "content": "{{count}} Free days left",
   "content_en_sha1_hash": "00a662738fd8c9e8f2a747858170f89777247fd7",
   "created_at": "2025-05-26T07:15:43.878Z",
-  "updated_at": "2025-05-26T08:05:25.865Z",
+  "updated_at": "2025-09-19T15:39:23.370Z",
   "comment": {
     "text": "This translation key is used to display a countdown message indicating free trial days remaining. It appears in the UI as a label on a payments component, providing users with a visual representation of their trial period duration.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 61,
-      "context": "<Text\n className=\"payments_subscription-expired\"\n fontWeight={600}\n fontSize=\"14px\"\n >\n {t(\"FreeDaysLeft\", { count: trialDaysLeft })}\n </Text>\n );\n }\n \n return (",
+      "line_number": 77,
+      "context": "<Text\n className={styles.paymentsSubscriptionExpired}\n fontWeight={600}\n fontSize=\"14px\"\n >\n {t(\"FreeDaysLeft\", { count: Number(trialDaysLeft) })}\n </Text>\n );\n }\n \n return (",
       "module": "/packages/shared"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Storage quota",
   "content_en_sha1_hash": "fbd20573f984732d839815359efcd0afd938b995",
   "created_at": "2025-05-19T21:30:49.110Z",
-  "updated_at": "2025-05-28T09:30:02.233Z",
+  "updated_at": "2025-10-14T03:29:10.340Z",
   "comment": {
     "text": "This translation key is used to display the storage quota label. It is displayed on a filter form and in room quota dialogs, indicating that it controls the maximum amount of space allowed for rooms. The goal is to provide clarity about the purpose of this setting, allowing users to make informed decisions when filtering or editing rooms.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 696,
+      "line_number": 787,
       "context": "const getFilterData = React.useCallback(async () => {\n const quotaFilter = [\n {\n key: FilterGroups.filterQuota,\n group: FilterGroups.filterQuota,\n label: t(\"Common:StorageQuota\"),\n isHeader: true,\n withoutSeparator: true,\n withMultiItems: true,\n },\n {",
       "module": "/packages/client"
     }
@@ -66,8 +66,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Ποσόστωση αποθ. χώρου\" is understandable, it's not the most natural or precise translation of \"Storage quota\". \"Ποσόστωση\" primarily means 'quota' or 'allocation', but the addition of \"αποθ. χώρου\" (storage space) feels slightly clunky. A more natural phrasing would be \"Όριο αποθηκευτικού χώρου\" or simply \"Αποθηκευτικός χώρος\" if the context allows.",
-          "suggestion": "Consider \"Όριο αποθηκευτικού χώρου\" or \"Αποθηκευτικός χώρος\""
+          "description": "While 'Ποσόστωση αποθ. χώρου' is understandable, it's not the most natural or common way to translate 'Storage quota' in Greek. 'Ποσόστωση' implies a restriction or limitation, which isn't always the core meaning of a storage quota.  A better translation would emphasize the allocated amount.",
+          "suggestion": "Αποθηκευτικός χώρος"
+        },
+        {
+          "type": "spelling",
+          "description": "The abbreviation 'αποθ. χώρου' is slightly informal and potentially unclear to some readers.",
+          "suggestion": "αποθηκευτικού χώρου"
         }
       ],
       "approved_at": null
@@ -108,8 +113,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ストレージ容量制限\" is a possible translation, it's quite literal and a bit clunky. \"ストレージ容量制限\" directly translates to \"storage capacity limitation\" which is not as natural as alternatives.",
-          "suggestion": "Consider alternatives like \"ストレージ制限\" or \"保存容量制限\" for a more natural and concise translation of \"Storage quota\"."
+          "description": "While \"ストレージ容量制限\" is a possible translation, it's more literally \"storage capacity limit.\" \"Storage quota\" implies a limit imposed, not just the capacity itself. A more accurate translation would convey that aspect.",
+          "suggestion": "ストレージの割り当て制限 (Storage allocation limit)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The current translation, while understandable, sounds somewhat technical and formal. \"Storage quota\" is often presented in a more user-friendly way.",
+          "suggestion": "保存容量制限 (Saved capacity limit)"
         }
       ],
       "approved_at": null
@@ -126,8 +136,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ກຳນົດເຂດນຳໃຊ້ຄັງຂໍ້ມູນ\" is a literal translation, it's quite verbose and doesn't flow naturally in Lao. \"ກຳນົດເຂດນຳໃຊ້ຄັງຂໍ້ມູນ\" translates to 'Defined usage area of data storage'. A more natural translation for 'Storage quota' would be something like 'ໂຕກຳນົດການໃຊ້ຄັງຂໍ້ມູນ' or 'ຂີດນຳໃຊ້ຄັງຂໍ້ມູນ'.",
-          "suggestion": "Consider 'ໂຕກຳນົດການໃຊ້ຄັງຂໍ້ມູນ' or 'ຂີດນຳໃຊ້ຄັງຂໍ້ມູນ'."
+          "description": "The Lao translation 'ກຳນົດເຂດນຳໃຊ້ຄັງຂໍ້ມູນ' while technically conveying a similar concept, is overly literal and verbose for 'Storage quota'. A more natural and concise translation would be preferable.",
+          "suggestion": "ອັດເບິ່ງຄັງຂໍ້ມູນ (At boeng khang khomun) - This conveys the meaning of storage limit or allocated space in a more natural way."
         }
       ],
       "approved_at": null
@@ -150,8 +160,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation 'Limit pamięci' doesn't accurately convey the meaning of 'Storage quota'. 'Limit pamięci' translates to 'Memory limit', which is related but not the same as storage quota. A storage quota refers to the maximum amount of storage space a user or system is allocated.",
-          "suggestion": "Przydział miejsca na dysku"
+          "description": "The translation \"Limit pamięci\" does not accurately convey the meaning of \"Storage quota\". While 'limit' is present, 'pamięci' refers to 'memory', not 'storage'. 'Storage' refers to the capacity for storing data, not just RAM.",
+          "suggestion": "Przestrzeń dyskowa"
         }
       ],
       "approved_at": null
@@ -186,8 +196,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ආචයන සලාකය\" does not accurately convey the meaning of \"Storage quota.\" \"ආචයන\" (aachayana) relates to rites or ceremonies, and \"සලාකය\" (salaakaya) means a mixture or blend. This is a completely unrelated meaning.",
-          "suggestion": "A more appropriate translation for \"Storage quota\" would be something like \"ගබඩාවේ ඉඩ ප්‍රමාණය\" (gabadawe ida pramaṇaya) meaning 'storage space limit' or \"භාරකිරීමේ සීමාව\" (bharakarimē sīmāvā) meaning 'loading limit'."
+          "description": "The Sinhala translation \"ආචයන සලාකය\" does not accurately translate \"Storage quota\". \"ආචයන\" (aachayana) relates to customs or rituals, and \"සලාකය\" (salaakaya) means 'slice' or 'portion.' This is a completely inaccurate translation.",
+          "suggestion": "A more accurate translation would be something like \"ගබඩාවේ ඉඩ ප්‍රමාණය\" (gabadawe ida pramaṇaya) which translates to 'storage space' or \"භාරකිරීමේ සීමාව\" (bhaarakeemeva seemsva) which translates to 'storage limit'."
         }
       ],
       "approved_at": null
@@ -210,8 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Складишна квота\" while containing relevant words, doesn't accurately convey the meaning of 'Storage quota'. 'Складишна' implies warehousing or storage space, but 'квота' is used correctly to mean quota. A more accurate translation would capture the limit imposed on storage.",
-          "suggestion": "Количина складишног простора"
+          "description": "The translation \"Складишна квота\" while containing relevant words, isn't the most natural or standard translation of 'Storage quota' in Serbian. 'Складишна' refers to storage in a warehouse context. A more accurate and common translation would be \"Простор за складиштење\" or \"Дозвољени простор за складиштење\".",
+          "suggestion": "Простор за складиштење"
         }
       ],
       "approved_at": null
@@ -241,6 +251,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

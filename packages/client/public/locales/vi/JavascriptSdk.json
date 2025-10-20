@@ -21,10 +21,13 @@
   "CreateSamplePublicRoom": "Tạo mẫu nhúng Phòng công cộng",
   "CreateSampleRoomSelector": "Tạo mẫu nhúng bộ chọn Phòng",
   "CreateSampleViewer": "Tạo mẫu nhúng Trình xem",
+  "CSPDescription": "Nhập địa chỉ dịch vụ mà bạn muốn nhúng hoặc kết nối {{organizationName}} {{productName}} của bạn.",
+  "CSPHeader": "Thêm các miền được phép cho {{productName}} này.",
   "CSPHelp": "Cài đặt này là một cơ chế bảo mật có thể được sử dụng để bảo vệ chống lại các cuộc tấn công injection. CSP mô tả các nguồn tài nguyên tải xuống an toàn. Việc tải xuống từ các nguồn tài nguyên không có trong “danh sách trắng” sẽ bị chặn. Chỉ định các miền (cùng với giao thức) mà nó sẽ hoạt động.",
   "CSPInfoBarDescription": "Vui lòng bật giao thức HTTPS cho {{productName}} của bạn để đảm bảo thiết lập hoạt động chính xác.",
   "CSPInfoBarHeader": "Yêu cầu HTTPS ",
   "CSPInputPlaceholder": "Nhập URL như thế này: https://example.com",
+  "CSPUrlHelp": "Vui lòng chỉ cung cấp tên miền, tránh các đường dẫn URL hoặc ký tự thừa.",
   "CustomDescription": "Định cấu hình thủ công các tham số để nhúng {{productName}} của bạn.",
   "CustomizingDisplay": "Tùy chỉnh hiển thị",
   "DataDisplay": "Cài đặt hiển thị dữ liệu",
@@ -113,6 +116,5 @@
   "Subtitle": "Phụ đề",
   "SubtitleDescription": "Phụ đề với nhận xét hoặc mô tả bổ sung cho thư mục hiện tại.",
   "TabPlugins": "Tab Plugins",
-  "Viewer": "Trình xem",
   "ViewerDescription": "Nhúng trình xem để cho phép người dùng mở tập tin để xem từ phòng tương ứng."
 }

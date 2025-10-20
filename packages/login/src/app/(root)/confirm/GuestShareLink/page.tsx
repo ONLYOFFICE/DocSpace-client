@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
+  checkConfirmLink,
   getSettings,
-  getUser,
   getUserByEmail,
   getUserFromConfirm,
 } from "@/utils/actions";
@@ -35,23 +35,29 @@ import { cookies } from "next/headers";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getStringFromSearchParams } from "@/utils";
 
-import GuestShareLinkForm from "./page.client";
 import { GreetingGuestContainer } from "@/components/GreetingContainer";
+import { logger } from "logger.mjs";
+import { TConfirmLinkParams } from "@/types";
+import GuestShareLinkForm from "./page.client";
 
 type GuestShareLinkProps = {
   searchParams: Promise<{ [key: string]: string }>;
 };
 
 async function Page(props: GuestShareLinkProps) {
-  const searchParams = await props.searchParams;
+  logger.info("GuestShareLink page");
+
+  const { searchParams: sp } = props;
+  const searchParams = (await sp) as TConfirmLinkParams;
   const uid = searchParams.uid;
-  const email = searchParams.email;
   const confirmKey = getStringFromSearchParams(searchParams);
+
+  const result = await checkConfirmLink(searchParams);
 
   const [settings, initiator, guest] = await Promise.all([
     getSettings(),
-    getUserFromConfirm(uid, confirmKey),
-    getUserByEmail(email, confirmKey),
+    getUserFromConfirm(uid ?? "", confirmKey),
+    getUserByEmail(result?.email ?? "", confirmKey),
   ]);
 
   const settingsCulture =
@@ -65,12 +71,12 @@ async function Page(props: GuestShareLinkProps) {
         displayName={initiator?.displayName}
         culture={culture}
       />
-      {settings && typeof settings !== "string" && (
+      {settings && typeof settings !== "string" ? (
         <GuestShareLinkForm
           guestDisplayName={guest?.displayName}
           guestAvatar={guest?.avatar}
         />
-      )}
+      ) : null}
     </>
   );
 }

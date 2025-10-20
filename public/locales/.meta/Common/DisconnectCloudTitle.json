@@ -3,7 +3,7 @@
   "content": "Disconnect cloud",
   "content_en_sha1_hash": "a5b7688e92dbb7d83b8bac246bf83858ab95995f",
   "created_at": "2025-05-26T07:15:42.574Z",
-  "updated_at": "2025-05-26T08:05:54.714Z",
+  "updated_at": "2025-09-17T13:43:02.018Z",
   "comment": {
     "text": "This translation key is used to display the text \"Disconnect cloud\" in a modal dialog that prompts users to disconnect from a third-party service. The text appears as the header of the dialog and is translated by the key \"Common:DisconnectCloudTitle\".",
     "is_auto": true,

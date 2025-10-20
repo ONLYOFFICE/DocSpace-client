@@ -3,7 +3,7 @@
   "content": "Welcome Page Settings",
   "content_en_sha1_hash": "087c1337487e8e7c3390215fdbb3d1c85858045c",
   "created_at": "2025-05-19T21:30:51.034Z",
-  "updated_at": "2025-06-08T12:02:32.726Z",
+  "updated_at": "2025-10-03T13:19:30.524Z",
   "comment": {
     "text": "The \"CustomTitlesWelcome\" translation key is used to display a welcome message or greeting title on the Portal Settings page. It appears when setting the default greeting title from session storage and needs to be translated to appear as a dynamic and customizable element in the UI.",
     "is_auto": true,
@@ -11,27 +11,27 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 199,
-      "context": "return t(\"Customization\");\n case \"SettingsGeneral\":\n return t(\"SettingsGeneral\");\n case \"StudioTimeLanguageSettings\":\n return t(\"StudioTimeLanguageSettings\");\n case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 147,
-      "context": "greetingTitleDefaultFromSessionStorage = getFromSessionStorage(\n \"greetingTitleDefault\",\n );\n \n setDocumentTitle(t(\"CustomTitlesWelcome\"));\n \n const greetingTitle =\n greetingTitleFromSessionStorage === null ||\n greetingTitleFromSessionStorage === \"none\"\n ? greetingSettings",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 147,
-      "context": "greetingTitleDefaultFromSessionStorage = getFromSessionStorage(\n \"greetingTitleDefault\",\n );\n \n setDocumentTitle(t(\"CustomTitlesWelcome\"));\n \n const greetingTitle =\n greetingTitleFromSessionStorage === null ||\n greetingTitleFromSessionStorage === \"none\"\n ? greetingSettings",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 77,
+      "line_number": 76,
       "context": "subtitle={t(\"LanguageAndTimeZoneSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/language-and-time-zone\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"CustomTitlesWelcome\")}\n subtitle={t(\"CustomTitlesSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/welcome-page-settings\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
+      "line_number": 162,
+      "context": "greetingTitleDefaultFromSessionStorage = getFromSessionStorage(\n \"greetingTitleDefault\",\n );\n \n setDocumentTitle(t(\"CustomTitlesWelcome\"));\n \n const greetingTitle =\n greetingTitleFromSessionStorage === null ||\n greetingTitleFromSessionStorage === \"none\"\n ? greetingSettings",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
+      "line_number": 162,
+      "context": "greetingTitleDefaultFromSessionStorage = getFromSessionStorage(\n \"greetingTitleDefault\",\n );\n \n setDocumentTitle(t(\"CustomTitlesWelcome\"));\n \n const greetingTitle =\n greetingTitleFromSessionStorage === null ||\n greetingTitleFromSessionStorage === \"none\"\n ? greetingSettings",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
+      "line_number": 202,
+      "context": "return t(\"Customization\");\n case \"SettingsGeneral\":\n return t(\"SettingsGeneral\");\n case \"StudioTimeLanguageSettings\":\n return t(\"StudioTimeLanguageSettings\");\n case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });",
       "module": "/packages/client"
     },
     {
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Salamlama ayarları\" while literally meaning \"Greeting settings\" does not accurately convey the meaning of \"Welcome Page Settings\". It misses the 'Page' part of the English content.",
-          "suggestion": "Xüsusi Başlıqlar Xoş Gələn Səhifəsi Ayarları"
+          "description": "The translation 'Salamlama ayarları' doesn't fully convey the meaning of 'Welcome Page Settings'. 'Salamlama' primarily means 'greeting'. A more accurate translation would focus on the 'page settings' aspect.",
+          "suggestion": "Xüsusi səhifə başlığı ayarları"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ρυθμίσεις χαιρετισμού' (Rhythmises chairetismou) translates to 'Greeting Settings'. While related to a welcome page, it doesn't directly convey 'Welcome Page Settings'. It implies settings *for* greetings, rather than settings *of* the welcome page.",
-          "suggestion": "Εναλλακτικές επιλογές: 'Ρυθμίσεις σελίδας καλωσορίσματος' or 'Ρυθμίσεις καλωσορίσματος σελίδας'."
+          "description": "The Greek translation \"Ρυθμίσεις χαιρετισμού\" translates to 'Welcome Greetings Settings'. It doesn't accurately convey 'Welcome Page Settings'. The word 'χαιρετισμού' implies greetings, not a page or welcome screen.",
+          "suggestion": "Ρυθμίσεις σελίδας καλωσορίσματος"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ajustes de bienvenida' doesn't fully capture the meaning of 'Welcome Page Settings'. While 'bienvenida' refers to welcome, 'Ajustes' is more akin to 'settings'. A more accurate translation might include a reference to 'página' (page) or 'configuración' (configuration).",
-          "suggestion": "Consider 'Configuración de página de bienvenida' or 'Ajustes de la página de bienvenida'."
+          "description": "The translation 'Ajustes de bienvenida' is too literal and doesn't fully capture the meaning of 'Welcome Page Settings'. While 'bienvenida' refers to welcome, 'Ajustes' is a more general term for settings. A more accurate translation would incorporate the concept of a page.",
+          "suggestion": "Configuración de página de bienvenida"
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Tervehdysasetukset' is understandable, a more accurate and natural translation of 'Welcome Page Settings' would be something like 'Tervetuliasivun asetukset'. 'Tervehdys' implies a greeting, whereas 'Tervetuliasivu' directly refers to the welcome page.",
-          "suggestion": "Tervetuliasivun asetukset"
+          "description": "While \"Tervehdysasetukset\" is understandable, it's not the most natural or precise translation of \"Welcome Page Settings.\" \"Tervehdys\" literally means 'greeting.' A more suitable translation would emphasize the 'page' aspect of the setting.",
+          "suggestion": "Sivun tervetulotoiminnot"
         }
       ],
       "approved_at": null
@@ -126,7 +126,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Paramètres' is a valid translation for 'Settings', 'Page d'accueil' is a more literal translation of 'Welcome Page.' 'Bienvenue' or a phrase incorporating 'Bienvenue' would be more aligned with the English content's intention of a 'Welcome Page'.  'Page d'accueil' is more accurately 'Homepage'.",
+          "description": "While 'Paramètres' is correct for 'Settings', 'page d'accueil' literally translates to 'home page'. 'Welcome Page' implies a landing page or a welcome screen. A more accurate translation would convey this meaning.",
           "suggestion": "Paramètres de la page de bienvenue"
         }
       ],
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Բարի գալուստ էջի կարգավորումներ\" literally translates to 'Welcome page settings'. While technically correct, it might be too literal and not flow naturally in Armenian. 'Welcome page settings' is generally understood, but a more idiomatic phrasing might be preferable for a user interface.",
-          "suggestion": "Consider alternatives like \"Էջի շնորհանդեսի կարգավորումներ\" (Page greeting settings) or \"Շնորհանդեսի էջի գործունեությունները\" (Page greeting functions) depending on the specific context and desired tone. Further context regarding the application of this setting would help to determine the best phrasing."
+          "description": "The translation \"Բարի գալուստ էջի կարգավորումներ\" literally translates to \"Welcome page settings.\" While not entirely wrong, it's a very literal translation. A more natural Armenian phrasing for \"Welcome Page Settings\" might be something like \"Դիմավորող էջի գործունեությունները\" (Dímavorogh ēji gorcúneutyunnerə) or \"Դիմավորող էջի կարգավարակ\" (Dímavorogh ēji kargavarak).",
+          "suggestion": "Consider alternatives like \"Դիմավորող էջի գործունեությունները\" or \"Դիմավորող էջի կարգավարակ\" for a more natural flow."
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Le impostazioni della pagina di saluto' is not the most natural or accurate rendering of \"Welcome Page Settings\". 'Saluto' implies a greeting, whereas 'Welcome Page' refers to the settings of the page itself.",
-          "suggestion": "Consider 'Impostazioni pagina di benvenuto' or 'Configurazione pagina di benvenuto'."
+          "description": "The translation 'Le impostazioni della pagina di saluto' is not the best equivalent of 'Welcome Page Settings'. 'Saluto' implies a greeting, while 'Welcome Page Settings' refers to configuration options for a welcome page. A more accurate translation would convey the settings aspect.",
+          "suggestion": "Le impostazioni della pagina di benvenuto"
         }
       ],
       "approved_at": null
@@ -162,13 +162,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"「開始ページ」設定\" is not a direct or ideal translation of \"Welcome Page Settings\". While \"開始ページ\" (Kaishi Peji) does mean 'start page,' the phrasing is a bit clunky and doesn't capture the nuance of 'Welcome Page Settings'.",
+          "description": "The translation \"「開始ページ」設定\" is not the most natural or accurate translation of \"Welcome Page Settings\". \"開始ページ\" literally means \"start page\". A more appropriate translation would focus on the 'welcome' aspect.",
           "suggestion": "「ウェルカムページ」設定 or 「ようこそページ」設定"
         },
         {
           "type": "formatting",
-          "description": "The quotation marks 「 」 are unnecessary and create a slightly awkward phrasing in Japanese. They are typically reserved for direct quotes.",
-          "suggestion": "ウェルカムページ設定 or ようこそページ設定"
+          "description": "The Japanese translation includes quotation marks around \"開始ページ\". While not inherently incorrect, it's unusual for UI settings labels and might be better without them.",
+          "suggestion": "開始ページ設定"
         }
       ],
       "approved_at": null
@@ -179,7 +179,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"페이지 설정에 오신 것을 환영합니다\" literally translates to \"Welcome to Page Settings\". While not entirely wrong, it's a bit awkward and redundant.  \"Welcome\" is already implied by the context (a welcome page).  It's better to simply state 'Page Settings'.",
+          "description": "The Korean translation \"페이지 설정에 오신 것을 환영합니다\" literally translates to \"Welcome to page settings.\" While not entirely incorrect, it's overly verbose and doesn't directly convey \"Welcome Page Settings.\" It combines a welcome message with the setting title, which isn't typical for UI elements.",
           "suggestion": "페이지 설정"
         }
       ],
@@ -191,8 +191,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຍິນດີຕ້ອນຮັບ ຫນ້າ ການຕັ້ງຄ່າ\" doesn't accurately convey the meaning of \"Welcome Page Settings.\" While 'ຍິນດີຕ້ອນຮັບ' means 'welcome,' and 'ຫນ້າ' means 'page,' 'ການຕັ້ງຄ່າ' translates to 'settings' but its placement feels unnatural and the overall phrase is not idiomatic. A more natural translation would be something along the lines of \"ໜ້າຕ້ອນຮັບການຕັ້ງຄ່າ\" or \"ການຕັ້ງຄ່າໜ້າຕ້ອນຮັບ\"",
-          "suggestion": "Consider \"ໜ້າຕ້ອນຮັບການຕັ້ງຄ່າ\" or \"ການຕັ້ງຄ່າໜ້າຕ້ອນຮັບ\"."
+          "description": "The Lao translation \"ຍິນດີຕ້ອນຮັບ ຫນ້າ ການຕັ້ງຄ່າ\" doesn't accurately convey the meaning of \"Welcome Page Settings\". While \"ຍິນດີຕ້ອນຮັບ\" means 'welcome' and 'ຫນ້າ' means 'page',  \"ການຕັ້ງຄ່າ\" translates to 'settings' but is placed in an awkward position.  It should describe the *type* of page, not just the settings on it.",
+          "suggestion": "Consider a translation like \"ຫນ້າຕ້ອນຮັບ ແລະການຕັ້ງຄ່າ\" (Welcome Page and Settings) or \"ຫນ້າຕ້ອນຮັບການຕັ້ງຄ່າ\" (Welcome Page Configuration) to more closely reflect the original meaning."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the spacing between words in the Lao translation could be improved for readability.  It is often more common to see smaller spaces between words in Lao.",
+          "suggestion": "Review standard Lao text formatting for appropriate spacing between words."
         }
       ],
       "approved_at": null
@@ -215,7 +220,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ustawienia powitania' while understandable, isn't the most accurate translation of 'Welcome Page Settings'. 'Powitania' refers to greetings, not necessarily the page settings themselves. A more precise translation would reflect the settings *for* the welcome page.",
+          "description": "The translation \"Ustawienia powitania\" is not a precise translation of \"Welcome Page Settings\". \"Powitania\" translates to \"welcoming\" or \"of greetings\" rather than \"welcome page\".",
           "suggestion": "Ustawienia strony powitalnej"
         }
       ],
@@ -227,7 +232,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Configurações de saudação\" doesn't accurately convey the meaning of \"Welcome Page Settings\".  'Saudação' refers to a greeting, while the English refers to the settings *for* a welcome page.",
+          "description": "The translation 'Configurações de saudação' doesn't accurately convey the meaning of 'Welcome Page Settings'. 'Saudação' translates to 'greeting', while the English refers to the settings *of* the welcome page.",
           "suggestion": "Configurações da página de boas-vindas"
         }
       ],
@@ -257,13 +262,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පිළිගැනීමේ' is correctly spelled but could be slightly ambiguous. While it generally means 'welcome' or 'reception', it's important to ensure it conveys the intended meaning of 'Welcome Page' in this context. It's a long word and could be simplified if possible without losing meaning.",
-          "suggestion": "Consider if a shorter alternative exists that still accurately reflects 'Welcome Page'. Possible options, depending on the exact desired nuance, could be explored with a Sinhala language expert."
+          "description": "The word 'පිළිගැනීමේ' (piliganae) could be improved for clarity. While technically correct, 'ආaccueil පිටුවේ' (aakue piluwe) or 'ආගමික පිටුවේ' (aagamika piluwe) might be more natural depending on the context of 'Welcome Page'.",
+          "suggestion": "ආaccueil පිටුවේ"
         },
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'පිළිගැනීමේ පිටුවේ සැකසුම්' literally translates to 'Settings of the reception page'. It doesn't strongly convey the feeling of 'Welcome Page Settings' as intended.  The word 'පිළිගැනීමේ' might be interpreted as a formal reception, not a welcome message on a website.",
-          "suggestion": "Consider translating the phrase with more emphasis on the 'Welcome' aspect. Something like 'ආන්දWelcome පිටුවේ සැකසුම්' (where 'ආන්දWelcome' attempts to directly include the meaning of 'Welcome') might be better, but requires validation by a Sinhala localization expert."
+          "type": "grammatical",
+          "description": "The phrase 'පිළිගැනීමේ පිටුවේ සැකසුම්' sounds slightly awkward. A more natural phrasing would be 'පිළිගැනීමේ පිටුව සඳහා සැකසුම්' or 'පිළිගැනීමේ පිටුවෙහි සැකසුම්'.",
+          "suggestion": "පිළිගැනීමේ පිටුවෙහි සැකසුම්"
         }
       ],
       "approved_at": null
@@ -280,8 +285,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Nastavitve pozdrava' translates to 'Welcome Settings' or 'Greeting Settings,' which isn't as accurate as 'Welcome Page Settings.' It misses the 'Page' aspect.",
-          "suggestion": "Nastavitve dobrodošlice na strani"
+          "description": "The translation 'Nastavitve pozdrava' doesn't accurately convey the meaning of 'Welcome Page Settings'. 'Pozdrav' translates to 'greeting,' which isn't the same as a welcome page. A more appropriate translation would reflect 'Page Settings' or 'Configuration'.",
+          "suggestion": "Nastavitve dobrodošlice (Welcome settings) or Nastavitve uvodne strani (Introductory page settings)"
         }
       ],
       "approved_at": null
@@ -292,12 +297,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Подешавања Добродошли cтранице\" is not the most natural or accurate translation of \"Welcome Page Settings\". \"Добродошли\" is the plural form of 'welcome,' but it should be singular.",
-          "suggestion": "Подешавања cтранице Добродошлице"
+          "description": "The translation \"Подешавања Добродошли cтранице\" is not a natural or accurate translation of \"Welcome Page Settings\".  'Добродошли' is an adjective meaning 'welcome' and should not be used as a noun. 'cтранице' is a genitive plural and needs review.",
+          "suggestion": "Подешавања Прилагођених Наслова Добродошлице"
         },
         {
           "type": "spelling",
-          "description": "The word \"cтранице\" is misspelled. It should be \"странице\".",
+          "description": "The word 'cтранице' appears to be misspelled. The correct form is 'странице'.",
           "suggestion": "странице"
         }
       ],
@@ -309,13 +314,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Podešavanja Dobrodošli stranice' is not the most natural or accurate translation of 'Welcome Page Settings'. While technically correct, it sounds a bit awkward.",
-          "suggestion": "Podešavanja strane za doček"
+          "description": "The translation 'Podešavanja Dobrodošli stranice' is not the most natural or accurate translation of 'Welcome Page Settings'.  'Dobrodošli stranice' literally means 'Welcome pages' which is slightly different. A better translation would convey the idea of 'settings' for a welcome page.",
+          "suggestion": "Podešavanja strane za dobrodošlice"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The use of 'Dobrodošli' (Welcome) feels a bit too literal. 'Strana za doček' conveys the 'Welcome Page' purpose more naturally in Serbian.",
-          "suggestion": "Consider using 'Strana za doček' for a more idiomatic translation."
+          "type": "formatting",
+          "description": "The Serbian phrase 'strane za dobrodošlice' contains a space before the preposition 'za'.",
+          "suggestion": "Podešavanja strane za dobrodošlice"
         }
       ],
       "approved_at": null
@@ -332,7 +337,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Налаштування привітання' is too literal and doesn't fully convey 'Welcome Page Settings'. While 'Налаштування' is correct for 'Settings', 'привітання' (greeting) doesn't accurately represent a 'Welcome Page'.",
+          "description": "The translation \"Налаштування привітання\" (Settings: Greeting) doesn't accurately convey \"Welcome Page Settings\". It misses the 'Page' context.",
           "suggestion": "Налаштування сторінки привітання"
         }
       ],
@@ -341,13 +346,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Thiết Lập Trang Chào Mừng' is a literal translation of 'Welcome Page Settings' but doesn't fully capture the meaning of 'Settings'. It's more like 'Welcome Page Setup'.",
-          "suggestion": "Cài Đặt Trang Chào Mừng"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

@@ -3,7 +3,7 @@
   "content": "{{currency}} per {{amount}}/month",
   "content_en_sha1_hash": "b3e722041cae4be17aabcb1fd49cf3f279e601f0",
   "created_at": "2025-06-03T20:59:26.797Z",
-  "updated_at": "2025-06-03T21:00:37.686Z",
+  "updated_at": "2025-08-21T14:45:44.121Z",
   "comment": {
     "text": "This translation key is used to format a price string displaying storage costs per month. It is displayed as a text element in a UI component, likely an upgrade plan or settings page, and includes placeholders for currency and amount values.",
     "is_auto": true,
@@ -11,15 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/AdditionalStorage.tsx",
-      "line_number": 198,
-      "context": "/>\n </div>\n ) : null}\n <div className={styles.priceContainer}>\n <Text fontSize=\"12px\" fontWeight={600}>\n {t(\"PerStorage\", {\n currency: formatWalletCurrency(storagePriceIncrement),\n amount: getConvertedSize(t, storageSizeIncrement || 0),\n })}\n </Text>\n </div>",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/StoragePlanUpgrade.tsx",
-      "line_number": 230,
-      "context": "showPlusSign\n onChange={onChangeNumber}\n isDisabled={hasScheduledStorageChange || isLoading}\n items={amountTabs()}\n withoutContorls={hasScheduledStorageChange}\n underContorlsTitle={t(\"PerStorage\", {\n currency: formatWalletCurrency(storagePriceIncrement),\n amount: getConvertedSize(t, storageSizeIncrement || 0),\n })}\n {...disableValueProps}\n isLarge",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/ServicesItems.tsx",
+      "line_number": 158,
+      "context": "};\n \n const priceDescription = (id: string, priceValue?: number) => {\n switch (id) {\n case TOTAL_SIZE:\n return t(\"PerStorage\", {\n currency: formatWalletCurrency!(storagePriceIncrement!, 2),\n amount: getConvertedSize(t, storageSizeIncrement || 0),\n });\n case BACKUP_SERVICE:\n return t(\"PerBackup\", {",
       "module": "/packages/client"
     }
   ],

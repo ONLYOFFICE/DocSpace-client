@@ -3,7 +3,7 @@
   "content": "No users match your search. Please adjust your search parameters or clear the search field to view the full list of users.",
   "content_en_sha1_hash": "e38c6445c5ffaacd4c043f8ec2d9a0484e70bae4",
   "created_at": "2025-05-19T21:30:46.936Z",
-  "updated_at": "2025-05-26T07:57:32.305Z",
+  "updated_at": "2025-10-01T15:17:48.222Z",
   "comment": {
     "text": "\"No users are found based on your search criteria. This message is displayed when a user cannot be retrieved due to an empty or invalid search result.\"",
     "is_auto": true,
@@ -11,15 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/EditGroupMembersDialog/EmptyContainer.tsx",
-      "line_number": 53,
-      "context": "return (\n <StyledEmptyScreen\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n />\n );\n };\n \n export default EmptyContainer;",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/EmptyContainer.tsx",
-      "line_number": 53,
-      "context": "return (\n <StyledEmptyScreen\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n />\n );\n };\n \n export default EmptyContainer;",
+      "line_number": 50,
+      "context": "return (\n <EmptyScreenContainer\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n className={styles.emptyScreen}\n />\n );\n };",
       "module": "/packages/client"
     },
     {
@@ -30,43 +24,49 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/index.tsx",
-      "line_number": 143,
-      "context": ") : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
+      "line_number": 150,
+      "context": "imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/index.tsx",
-      "line_number": 136,
-      "context": ") : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
+      "line_number": 146,
+      "context": "imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/RowView/index.tsx",
-      "line_number": 190,
-      "context": ") : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
+      "line_number": 195,
+      "context": "imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/TableView/index.tsx",
-      "line_number": 131,
-      "context": ") : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
+      "line_number": 147,
+      "context": "imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/RowView/index.tsx",
-      "line_number": 199,
-      "context": ") : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
+      "line_number": 208,
+      "context": "imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/index.tsx",
-      "line_number": 199,
-      "context": ") : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
+      "line_number": 206,
+      "context": "imageSrc={\n theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl\n }\n imageAlt={t(\"Common:NotFoundUsers\")}\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/shared/dialogs/edit-group-members-dialog/EmptyContainer.tsx",
+      "line_number": 54,
+      "context": "return (\n <StyledEmptyScreen\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n />\n );\n };\n \n export default EmptyContainer;",
+      "module": "/packages/shared"
+    },
+    {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 654,
+      "line_number": 699,
       "context": "}\n searchEmptyScreenDescription={\n activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundFilterGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:NotFoundUsersDescription\")\n : t(\"Common:GroupsNotFoundDescription\")\n }\n hasNextPage={hasNextPage}\n isNextPageLoading={isNextPageLoading}\n loadNextPage={loadNextPage}",
       "module": "/packages/shared"
     }
@@ -84,18 +84,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"لا يتطابق بحثك مع المستخدمين\" is a bit literal and could be more naturally phrased. A better translation would convey the meaning of 'no users match your search' more smoothly.",
-          "suggestion": "لم يتم العثور على مستخدمين يطابقون بحثك."
+          "description": "The phrase \"لا يتطابق بحثك مع المستخدمين\" is a literal translation of \"No users match your search\" but sounds unnatural in Arabic. A more natural phrasing would be something like \"لم يتم العثور على مستخدمين مطابقين لبحثك\" or \"لا توجد مستخدمين يطابقون بحثك\".",
+          "suggestion": "لا توجد مستخدمين يطابقون بحثك"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"قم بتهيئة حقل البحث\" is a somewhat awkward phrasing for 'clear the search field'. It’s not entirely wrong, but there are more common and natural expressions.",
+          "description": "The phrase \"قم بتهيئة حقل البحث\" is a literal translation of \"clear the search field\" but sounds a little formal and somewhat awkward. A more common and natural way to say it is \"امسح حقل البحث\".",
           "suggestion": "امسح حقل البحث"
         },
         {
           "type": "formatting",
-          "description": "The ending \"معاينة قائمة المستخدمين كاملةً\" can be improved for flow and readability. The word 'معاينة' (preview) isn't entirely necessary.",
-          "suggestion": "لعرض قائمة المستخدمين كاملةً"
+          "description": "The word \"كاملةً\" at the end of the Arabic translation is slightly out of place, while grammatically correct, it can be improved by removing it to create a more natural flow.",
+          "suggestion": "لا توجد مستخدمين يطابقون بحثك، يرجى تعديل معايير البحث الخاصة بك أو امسح حقل البحث لعرض قائمة المستخدمين كاملة."
         }
       ],
       "approved_at": null
@@ -163,7 +163,18 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '検索パラメータを調整するか' is a bit too formal for a typical user interface. A more natural phrasing might be '検索条件を修正するか'.",
+          "suggestion": "検索条件を修正するか"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, '検索フィールドをクリアして全ユーザーリストを表示してください' is a bit verbose and stiff. A more concise and user-friendly option is '検索をクリアして全ユーザーを表示してください'.",
+          "suggestion": "検索をクリアして全ユーザーを表示してください"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -172,13 +183,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"검색 매개변수를 조정하거나 검색란을 삭제하세요\" is a bit clunky and overly formal for this context. A more natural and user-friendly translation for 'adjust your search parameters or clear the search field' would be something like '검색 조건을 변경하거나 검색어를 지우세요' or '검색 설정을 변경하거나 검색창을 비워주세요'.",
-          "suggestion": "검색 조건을 변경하거나 검색어를 지우세요"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly an error, the translation maintains the imperative sentence structure ('adjust', 'clear') which can sound abrupt. A slightly more polite phrasing could be considered.",
-          "suggestion": "검색 조건을 변경하거나 검색어를 지우시면 전체 사용자 목록을 보실 수 있습니다."
+          "description": "The phrase '검색 매개변수를 조정하거나 검색란을 삭제하세요' is a bit clunky. '검색란을 삭제하세요' literally means 'delete the search box' which isn't the intended meaning. It should be 'clear the search field'.",
+          "suggestion": "검색 매개변수를 조정하거나 검색 필드를 지우세요."
         }
       ],
       "approved_at": null
@@ -186,7 +192,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຖືກຕ້ອງ' (tuk tong) in the Lao translation is slightly awkward. While technically correct, it implies 'correct' or 'right' and doesn't quite convey the meaning of 'match' in this context. It makes it sound like the users are incorrect, rather than simply not found.",
+          "suggestion": "Consider replacing 'ຖືກຕ້ອງ' (tuk tong) with 'ເຫັນດີ' (hen dee) which implies 'agree with' or 'satisfy', which more closely aligns with the intended meaning of 'match'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -207,8 +219,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'wyszukanej frazy' is overly literal and doesn't quite capture the nuance of 'search parameters' in this context. It translates to 'searched phrase' rather than 'search parameters'.",
-          "suggestion": "Nie znaleziono użytkownika pasującego do Twoich kryteriów wyszukiwania. Dostosuj kryteria wyszukiwania lub wyczyść pole wyszukiwania, aby zobaczyć pełną listę użytkowników."
+          "description": "The phrase 'pasującego do wyszukiwanej frazy' (matching the search phrase) is a bit awkward. A more natural phrasing would be 'zgodnych z wyszukiwanym zapytaniem' or 'odpowiadających zapytaniu'.",
+          "suggestion": "Nie znaleziono użytkownika zgodnego z wyszukiwanym zapytaniem. Dostosuj parametry lub wyczyść pole wyszukiwania, aby zobaczyć pełną listę użytkowników."
         }
       ],
       "approved_at": null
@@ -231,13 +243,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Niciunul dintre utilizatori nu se potrivește cu ceea ce căutați\" is a slightly awkward and literal translation. A more natural Romanian phrasing would be \"Niciun utilizator nu se potrivește cu căutarea dumneavoastră\" or \"Niciun utilizator nu corespunde căutării dumneavoastră\".",
+          "description": "The translation 'Niciunul dintre utilizatori nu se potrivește cu ceea ce căutați' is a bit literal and sounds unnatural. A more natural phrasing would emphasize the lack of matching users rather than the users not 'fitting' the search.",
           "suggestion": "Niciun utilizator nu corespunde căutării dumneavoastră."
         },
         {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using \"dumneavoastră\" (formal 'you') might feel overly formal for this context. Depending on the intended tone, using \"tău\" (informal 'you') could be more appropriate.",
-          "suggestion": "Niciun utilizator nu corespunde căutării tale."
+          "type": "incorrect_translation",
+          "description": "The phrase 'Vă rugăm să configurați parametrii de căutare' is overly formal. 'Configurați' doesn't quite convey the meaning of 'adjust'.",
+          "suggestion": "Vă rugăm să modificați parametrii de căutare."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The overall tone is slightly too formal and complex for what is likely a user-facing message in a software application. The original English has a more conversational tone.",
+          "suggestion": "Consider simplifying the language to match the English tone. For example: \"Niciun utilizator găsit. Modificați căutarea sau ștergeți termenii pentru a vedea toți utilizatorii.\""
         }
       ],
       "approved_at": null
@@ -254,8 +271,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ඔබගේ සෙවුම් පද වෙනස් කරන්න\" (obage sewum pada venas karanna) translates literally to 'change your search words'. While understandable, a more natural phrasing in Sinhala would be something closer to 'ඔබගේ සෙවුම් පද වෙනස් කරන්න' (obage sewum patha venasa karanna) which means 'change your search criteria/terms'.",
-          "suggestion": "ඔබගේ සෙවුම් පද වෙනස් කරන්න (obage sewum patha venasa karanna)"
+          "description": "The word 'පරිශ්‍රීලකයෙක්' (parashreelayak) is a formal and less common term for 'user'. It sounds overly technical and could be replaced with a more accessible term.",
+          "suggestion": "පරිශ්‍රීලකයෙක් වෙනුවට 'භාවිතරයා' (bhavitaraaya) or simply 'වියක්තෘ' (vyakthara) can be used."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'සියල්ල බැලීමට' (siyalla baalimeeta) could be more naturally translated to 'සියලුම' (siyalluma).",
+          "suggestion": "සියල්ල බැලීමට වෙනුවට 'සියලුම' භාවිතා කරන්න."
         }
       ],
       "approved_at": null
@@ -278,13 +300,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'поклапају' (poklapaju) is technically correct but can sound a bit formal or stiff in this context. A more natural phrasing might improve user experience.",
-          "suggestion": "Consider using 'одговарају' (odgovaraju) instead of 'поклапају' (poklapaju)."
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure is a bit long and could be broken down for better readability. Separating the instructions into two sentences improves flow.",
-          "suggestion": "Change 'Нема корисника који се поклапају са вашом претрагом. Молимо вас подесите ваше параметре претраге или обришите поље претраге да бисте видели пуну листу корисника.' to 'Нема корисника који одговарају вашој претрази. Подесите параметре претраге или обришите поље претраге да бисте видели пуну листу корисника.'"
+          "description": "The word 'поклапају' is slightly awkward. While technically correct, 'одговарају' would be a more natural and common choice in this context.",
+          "suggestion": "Нема корисника који одговарају вашој претраги."
         }
       ],
       "approved_at": null
@@ -292,7 +309,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a colon (:) after 'Common:NotFoundUsersDescription'. This is unnecessary and likely a remnant from the key name. It should be removed.",
+          "suggestion": "Remove the colon after 'Common'."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

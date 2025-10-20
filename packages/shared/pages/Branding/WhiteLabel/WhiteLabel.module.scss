@@ -27,8 +27,6 @@
  */
 
 @use "../../../styles/mixins";
-@use "../../../styles/common-input-styles";
-@use "../../../styles/common-icons-style";
 @use "../../../styles/variables";
 
 .header {
@@ -119,7 +117,7 @@
     display: flex;
   }
 
-  @include common-input-styles.common-input-styles;
+  @include mixins.common-input-styles;
   -webkit-background-clip: unset !important;
 
   &:focus-within {
@@ -128,7 +126,7 @@
 }
 
 .crossIcon {
-  @include common-icons-style.common-icons-style;
+  @include mixins.common-icons-style;
   path {
     fill: var(--files-editing-wrapper-fill) !important;
   }
@@ -208,35 +206,6 @@
     gap: 20px;
   }
 
-  .logosEditorWrapper {
-    display: grid;
-    grid-gap: 16px;
-    margin-bottom: 8px;
-
-    @include mixins.mobile {
-      display: flex;
-      gap: 8px;
-      flex-direction: column;
-    }
-  }
-
-  .logosEditorContainer,
-  .editorHeaderContainer {
-    display: flex;
-    flex-direction: column;
-    width: 310px;
-  }
-
-  .editorLogoHeader {
-    border: none !important;
-    background-color: transparent !important;
-    position: absolute;
-  }
-
-  .editorHeaderContainer {
-    position: relative;
-  }
-
   .logoItem {
     display: flex;
     flex-direction: column;
@@ -245,11 +214,15 @@
   }
 
   .borderImg {
+    @include mixins.no-user-select;
+
     border: var(--settings-common-white-label-border-img);
     box-sizing: content-box;
   }
 
   .logoHeader {
+    @include mixins.no-user-select;
+
     width: 211px;
     height: 24px;
     padding: 22px 20px;
@@ -285,34 +258,9 @@
   }
 
   .logoDocsEditor {
-    width: 86px;
-    height: 20px;
+    width: 172px;
+    height: 40px;
     padding: 0;
-    padding-right: 224px;
-  }
-
-  .logoEmbeddedEditor {
-    width: 86px;
-    height: 20px;
-    left: 0;
-    padding: 0;
-    margin-bottom: 8px;
-  }
-
-  .backgroundGreen {
-    background-color: variables.$editor-green-color;
-  }
-
-  .backgroundBlue {
-    background-color: variables.$editor-blue-color;
-  }
-
-  .backgroundOrange {
-    background-color: variables.$editor-orange-color;
-  }
-
-  .backgroundRed {
-    background-color: variables.$editor-red-color;
   }
 
   .backgroundLight {
@@ -325,6 +273,14 @@
 
   .backgroundWhite {
     background-color: variables.$white;
+  }
+
+  .backgroundLightEditor {
+    background-color: variables.$light-editor-background;
+  }
+
+  .backgroundDarkEditor {
+    background-color: variables.$dark-editor-background;
   }
 
   .hidden {

@@ -3,7 +3,7 @@
   "content": "Your message was successfully sent. You will be contacted by the Sales Department.",
   "content_en_sha1_hash": "98daa82292b84195ac631968a95bf10cadaf23da",
   "created_at": "2025-05-19T21:30:53.283Z",
-  "updated_at": "2025-06-08T12:02:32.852Z",
+  "updated_at": "2025-10-01T08:28:22.183Z",
   "comment": {
     "text": "This translation key is used to display a success message when a payment request is sent successfully. The message informs the user that their payment was processed and will be contacted by the Sales Department. It appears in the PaymentStore's sendPaymentRequest function, likely as part of a confirmation dialog or notification after submitting the form.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 806,
-      "context": "message: string,\n t,\n ) => {\n try {\n await api.portal.sendPaymentRequest(email, userName, message);\n toastr.success(t(\"SuccessfullySentMessage\"));\n } catch (e) {\n toastr.error(e as TData);\n }\n };\n }",
+      "line_number": 1097,
+      "context": "message: string,\n t: TTranslation,\n ) => {\n try {\n await api.portal.sendPaymentRequest(email, userName, message);\n toastr.success(t(\"SuccessfullySentMessage\"));\n } catch (e) {\n toastr.error(e as TData);\n }\n };\n }",
       "module": "/packages/client"
     }
   ],
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The passive voice 'Bude vás kontaktovat obchodní oddělení' (will contact you sales department) is not ideal. It's more natural in Czech to use an active construction or a more general phrase. The English implies the Sales Department *will* contact the user.",
-          "suggestion": "Vaše zprávu obdrželo obchodní oddělení a bude vás kontaktovat. OR Obchodní oddělení vás bude kontaktovat."
+          "description": "The translation 'Bude vás kontaktovat obchodní oddělení' is a literal translation that implies the message itself will contact the user. The English implies the Sales Department will contact the user. This is an inaccurate representation of the original meaning.",
+          "suggestion": "Bude vás kontaktovat obchodní oddělení."
         }
       ],
       "approved_at": null
@@ -159,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ක්‍රියාංශය' (Kriyāśanya) is a formal term for 'department.' While not incorrect, 'අංශය' (aṁsaya) is a more common and natural word choice in this context.",
+          "suggestion": "ඔබගේ අංශය (Obage aṁsaya) ඔබව සම්බන්ධ කර ගනු ඇත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -180,13 +186,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'порука' (poruka) translates to 'message' but in this context, 'захтев' (zahtev) - request - would be a more accurate translation. 'Порука' implies a general message, while 'захтев' specifies it's a request to the sales department.",
-          "suggestion": "Ваш захтев је успешно послат. Бићете контактирани од стране Одељења продаје."
+          "description": "The word 'poruka' (message) is used, but 'захтјев' (request) would be more accurate given the key name 'SalesDepartmentRequestDialog'. 'Poruka' implies a general message, while 'zahtjev' specifically refers to a request.",
+          "suggestion": "Ваш захтјев је успешно послат. Бићете контактирани од стране Одељења продаје."
         },
         {
-          "type": "formatting",
-          "description": "The Serbian translation uses a period (.) at the end of the first sentence. While grammatically correct, it might be more natural and friendly to use a comma (,) for a more conversational tone, especially in a chatbot context.",
-          "suggestion": "Ваш захтев је успешно послат, бићете контактирани од стране Одељења продаје."
+          "type": "grammar",
+          "description": "While not strictly incorrect, the phrasing 'Ваша порука је успешно послата' (or 'Ваш захтјев је успешно послат') could be slightly more natural as 'Успјешно је послат Ваш захтјев' (Your request was successfully sent).",
+          "suggestion": "Успјешно је послат Ваш захтјев. Бићете контактирани од стране Одељења продаје."
         }
       ],
       "approved_at": null
@@ -196,9 +202,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation uses \"Odeljenja prodaje\" which is grammatically correct but can sound formal. A more conversational and common phrasing would be better for a dialog.",
-          "suggestion": "Vaša poruka je uspešno poslata. Kontaktiraće vas iz prodajnog odeljenja."
+          "type": "spelling",
+          "description": "The word 'Odeljenja' is a genitive case, and while grammatically correct in some contexts, it's slightly formal and less common in this type of notification. A more natural phrasing would use the nominative case.",
+          "suggestion": "Prodaja"
         }
       ],
       "approved_at": null
@@ -218,13 +224,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The spacing around the word 'phận' in 'Bộ phận' is slightly off. It should be a single space.",
-          "suggestion": "Bộ phận"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

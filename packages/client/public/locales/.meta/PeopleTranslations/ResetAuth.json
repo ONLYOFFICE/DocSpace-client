@@ -3,7 +3,7 @@
   "content": "Reset authentication",
   "content_en_sha1_hash": "b433426988dd4bcf376fbbd983df57e4b0ffc1f5",
   "created_at": "2025-05-19T21:30:53.508Z",
-  "updated_at": "2025-05-26T07:57:32.844Z",
+  "updated_at": "2025-10-13T13:22:35.926Z",
   "comment": {
     "text": "This translation key is used to display the text \"Reset authentication\" in various contexts, such as button labels or dialog headers. It is likely used when the user needs to reset their authentication settings, and it appears on screens related to account management or security options.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Doğrulamanı sıfırlayın' is too informal. It uses the informal possessive suffix '-ı'. A more formal and appropriate translation would be 'Doğrulamanızı sıfırlayın' or 'Doğrulama sıfırlayın'.",
-          "suggestion": "Doğrulamanızı sıfırlayın"
+          "description": "The translation \"Doğrulamanı sıfırlayın\" is overly familiar. \"Doğrulamanı\" implies speaking directly to one person. A more formal and accurate translation for \"Reset authentication\" would be something like \"Doğrulama sıfırlayın\" or \"Hesabınızın doğrulaması sıfırlayın\".",
+          "suggestion": "Doğrulama sıfırlayın"
         }
       ],
       "approved_at": null
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Վերականգնել նույնականացումը' while technically correct, isn't the most natural or common way to say 'Reset authentication'. A more common and idiomatic translation might be 'դիմել ծառայության հետ վերականգնմանը' or something similar.",
+          "suggestion": "Consider 'դիմել ծառայության հետ վերականգնմանը' or a similar phrasing that feels more natural in Armenian."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຣີເຊັດການພິສູດຢືນຢັນ\" is a literal transliteration of 'Reset authentication.' While understandable, a more natural Lao phrasing would be preferable. \"ຣີເຊັດການຢັ້ງຢືນຕົວຕົນ\" or \"ຣີເຊັດການຮັບຮອງຕົວຕົນ\" would be better.",
-          "suggestion": "ຣີເຊັດການຢັ້ງຢືນຕົວຕົນ"
+          "description": "The Lao translation 'ຣີເຊັດການພິສູດຢືນຢັນ' is a literal translation and may not be the most natural or idiomatic way to express \"Reset authentication\" in Lao. While technically correct, it sounds somewhat stiff.",
+          "suggestion": "Consider 'ຣີເຊັດລະບົບຮັບຮອງຕົວຕົນ' or 'ຣີເຊັດການຢັ້ງຢືນຕົວຕົນ' for a more natural phrasing. The best option would depend on the specific context."
         }
       ],
       "approved_at": null
@@ -153,13 +159,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Reinițializarea autentificării' is understandable, a more natural and common Romanian translation for 'Reset authentication' would be 'Resetează autentificarea' or 'Resetează verificarea de autentificare'. 'Reinițializarea' implies a more complex process than a simple reset.",
-          "suggestion": "Resetează autentificarea"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'තහවුරුව යළි සකසන්න' while containing correct words, doesn't accurately convey the meaning of 'Reset authentication'. 'තහවුරුව' (thaharuwa) relates to confirmation or verification, not authentication. A more accurate translation would involve terms related to passwords or accounts.",
-          "suggestion": "A better translation might be something like 'අauthentikatowan යළි සකසන්න' (aauthentikatowan yali sakasanna) or 'ගිණුම යළි සකසන්න' (ginuma yali sakasanna) which translates to 'reset account'."
+          "description": "The translation 'තහවුරුව යළි සකසන්න' while containing some correct elements (යළි සකසන්න - reset), 'තහවුරුව' (thahawurawa) doesn't perfectly align with 'authentication'. It translates more closely to 'verification'. A more accurate translation would convey the meaning of 'authentication'.",
+          "suggestion": "පහසුරුව ප්‍රතිස්ථාපනය කරන්න (pahasuuruwa pratisthapana karanna) - This translates to 're-establish authentication' or 'reset authentication' and is more accurate."
         }
       ],
       "approved_at": null
@@ -198,8 +198,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Ресетуј аутентификацију\" is understandable, a more natural and accurate translation of \"Reset authentication\" would be \"Вратите аутентификацију\" or \"Повратите аутентификацију\". \"Ресетуј\" is a direct transliteration of \"reset\" and, while used, isn't the most idiomatic Serbian.",
-          "suggestion": "Вратите аутентификацију"
+          "description": "The Serbian translation \"Ресетуј аутентификацију\" is a transliteration of \"Reset authentication\" and doesn't convey the meaning accurately in natural Serbian. \"Reset\" is often translated as \"poništi\" or \"vratiti na početak\".",
+          "suggestion": "Поништи аутентификацију"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"аутентификацију\" is a correct term, it's quite formal.  A more user-friendly alternative, depending on the context, might be preferable.",
+          "suggestion": "Поништи пријаву"
         }
       ],
       "approved_at": null

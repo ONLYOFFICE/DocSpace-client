@@ -3,7 +3,7 @@
   "content": "Rooms pinned: {{count}}",
   "content_en_sha1_hash": "23f56551973ecb4a877fb8be024a9b20d1eeffb5",
   "created_at": "2025-05-19T21:30:56.129Z",
-  "updated_at": "2025-05-24T11:28:06.789Z",
+  "updated_at": "2025-10-13T14:41:03.131Z",
   "comment": {
     "text": "This translation key is used to display a message indicating how many rooms are pinned, typically shown as a count in an UI component displaying a list of files or elements. It appears when multiple items are selected and is often displayed in a success toast notification. Translators should replace the placeholder \"{{count}}\" with the actual number of pinned rooms.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1289,
+      "line_number": 1308,
       "context": "const itemCount = { count: elems.length };\n \n const translationForOneItem = isPin ? t(\"RoomPinned\") : t(\"RoomUnpinned\");\n const translationForSeverals = isPin\n ? t(\"RoomsPinned\", { ...itemCount })\n : t(\"RoomsUnpinned\", { ...itemCount });\n \n toastr.success(\n elems.length > 1 ? translationForSeverals : translationForOneItem,\n );",
       "module": "/packages/client"
     }
@@ -84,8 +84,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ամրացված սենյակներ՝{{count}}\" doesn't perfectly convey the meaning of \"Rooms pinned: {{count}}\". \"Ամրացված\" generally means 'strengthened' or 'fortified', which isn't the intended meaning of 'pinned' in this context (meaning a room is marked or saved for later access).",
-          "suggestion": "Consider alternatives like \"Դիմումված սենյակներ՝ {{count}}\" (Դիմումված meaning 'marked' or 'designated') or \"Պահված սենյակներ՝ {{count}}\" (Պահված meaning 'saved')."
+          "description": "The phrase \"Ամրացված սենյակներ\" literally translates to 'Strengthened Rooms'. 'Pinned' implies a more visual or designated state, not just a reinforced one. A more appropriate translation might be something like \"Մշտական սենյակներ\" (Permanent Rooms) or \"Պինված սենյակներ\" (Pinned Rooms).",
+          "suggestion": "Consider alternatives like \"Մշտական սենյակներ\" or \"Պինված սենյակներ\" to more accurately convey the meaning of 'pinned'."
+        },
+        {
+          "type": "formatting",
+          "description": "The double curly braces '{{count}}' are present in both the English and Armenian strings. This suggests they are placeholders. While correct, it would be good to confirm this is intentional in the context of the Armenian localization system and that it handles placeholders correctly.",
+          "suggestion": "Verify that the localization system correctly interprets and replaces the placeholder '{{count}}'."
         }
       ],
       "approved_at": null
@@ -162,13 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"මුදුනට ඇමිණු කාමර: {{count}}\" doesn't accurately convey the meaning of 'Rooms pinned: {{count}}'.  'මුදුනට' (mudunata) means 'to the top' or 'to the summit'. A more appropriate translation would focus on 'fixed' or 'attached' to rooms.",
-          "suggestion": "කාමර ස්ථාපිත: {{count}}"
-        },
-        {
-          "type": "spelling",
-          "description": "While not strictly incorrect, 'ස්ථාවිත' (sthavitha) for 'pinned' is more formal and perhaps less common.  A simpler word might be more appropriate depending on the overall tone of the app.",
-          "suggestion": "කාමර ඇමිණු: {{count}}"
+          "description": "The translation \"මුදුනට ඇමිණු කාමර: {{count}}\" doesn't accurately convey the meaning of \"Rooms pinned: {{count}}\".  'මුදුනට ඇමිණු' literally translates to 'pinned to the top' or 'attached to the top,' which isn't the intended meaning of 'pinned' in this context.  'Pinned' in the original English implies a feature where rooms are kept in a specific order or highlighted list.",
+          "suggestion": "A more accurate translation would be something like \"තවරාට ඇමිණු කාමර: {{count}}\" (thawarata aminu kamar: {{count}}) where 'thawarata' implies a specific order or importance."
         }
       ],
       "approved_at": null
@@ -191,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Rooms pinned\" doesn't directly translate to \"Закачене собе\". \"Pinned\" in this context likely refers to rooms being fixed or displayed prominently, not literally 'hung' or 'attached'. A more accurate translation would convey the sense of 'featured' or 'saved'.",
-          "suggestion": "Consider alternatives like \"Фиксиране собе\" (Fixed rooms), \"Сачуване собе\" (Saved rooms), or \"Истакнуте собе\" (Featured rooms)."
+          "description": "The Serbian translation \"Закачене собе: {{count}}\" doesn't accurately convey the meaning of \"Rooms pinned: {{count}}\". \"Закачене\" typically means \"hung\" or \"attached,\" not \"pinned.\"  A more appropriate translation for \"pinned\" would be something like \"Приказане\" (Displayed) or \"Закрепљене\" (Fixed/Secured).",
+          "suggestion": "Consider \"Приказане собе: {{count}}\" or \"Закрепљене собе: {{count}}\""
         }
       ],
       "approved_at": null
@@ -203,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Zakačene sobe' literally translates to 'Hooked rooms'. A more natural and accurate translation for 'pinned' in this context (referring to rooms being saved or marked) would be something like 'Sačuvane sobe' or 'Označene sobe'.",
-          "suggestion": "Sačuvane sobe: {{count}}"
+          "description": "The translation 'Zakačene sobe: {{count}}' is not the most natural or accurate translation of 'Rooms pinned: {{count}}'. 'Zakačene' implies physically hooked or attached, which doesn't convey the meaning of 'pinned' in a digital context (like a pinned room in an application). A more accurate translation would convey the idea of 'saved' or 'favorited'.",
+          "suggestion": "Omiljene sobe: {{count}}"
         }
       ],
       "approved_at": null
@@ -230,7 +230,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Pinned' is better translated as '置顶' (zhìdǐng) or '固定' (gùdìng) depending on the context. '已固定' (yǐ gùdìng) implies the rooms have been fixed in place, which isn't the intended meaning.",
+          "suggestion": "Consider using '置顶房间：{{count}}' or '固定房间：{{count}}'"
+        }
+      ],
       "approved_at": null
     }
   }

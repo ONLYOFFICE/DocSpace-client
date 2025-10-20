@@ -23,6 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 "use client";
 
 import Image from "next/image";
@@ -56,7 +57,10 @@ export const CompletedFormEmpty = () => {
   const iconUrl = theme.isBase ? CompletedFormLightIcon : CompletedFormDarkIcon;
 
   return (
-    <ContainerCompletedForm bgPattern={bgPattern}>
+    <ContainerCompletedForm
+      bgPattern={bgPattern}
+      data-testid="completed_form_empty_container"
+    >
       <CompletedFormLayout className="completed-form__default-layout">
         <picture className="completed-form__logo">
           <source media={mobile} srcSet={smallLogoUrl} />
@@ -73,7 +77,7 @@ export const CompletedFormEmpty = () => {
         />
         <TextWrapper className="completed-form__empty">
           <Heading level={HeadingLevel.h1}>{t("CompletedForm:Title")}</Heading>
-          <Text noSelect>{t("CompletedForm:Description")}</Text>
+          <Text>{t("CompletedForm:Description")}</Text>
         </TextWrapper>
       </CompletedFormLayout>
     </ContainerCompletedForm>

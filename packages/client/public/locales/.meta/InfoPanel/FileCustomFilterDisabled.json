@@ -3,7 +3,7 @@
   "content": "Custom filter disabled.",
   "content_en_sha1_hash": "4c388c9f6fa2719cabe63a103613565337ab2e71",
   "created_at": "2025-05-19T21:30:54.801Z",
-  "updated_at": "2025-06-08T12:02:32.706Z",
+  "updated_at": "2025-10-13T13:22:35.736Z",
   "comment": {
     "text": "This translation key displays a message indicating that custom filtering is disabled, likely appearing in a UI element such as a button or toggle switch. Its purpose is to provide users with information about the current state of file filtering, helping them understand what they can and cannot do within the application.",
     "is_auto": true,
@@ -11,8 +11,14 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 363,
+      "context": "case FeedActionKeys.FormOpenedForFilling:\n return t(\"InfoPanel:StartedFillingItOut\");\n case FeedActionKeys.FileCustomFilterEnabled:\n return t(\"InfoPanel:FileCustomFilterEnabled\");\n case FeedActionKeys.FileCustomFilterDisabled:\n return t(\"InfoPanel:FileCustomFilterDisabled\");\n \n case FeedActionKeys.FormStartedToFill:\n return t(\"InfoPanel:FormStartedToFill\");\n \n case FeedActionKeys.FormPartiallyFilled:",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 309,
+      "line_number": 312,
       "context": "case FeedActionKeys.FormOpenedForFilling:\n return t(\"InfoPanel:StartedFillingItOut\");\n case FeedActionKeys.FileCustomFilterEnabled:\n return t(\"InfoPanel:FileCustomFilterEnabled\");\n case FeedActionKeys.FileCustomFilterDisabled:\n return t(\"InfoPanel:FileCustomFilterDisabled\");\n \n case FeedActionKeys.FormStartedToFill:\n return t(\"InfoPanel:FormStartedToFill\");\n \n case FeedActionKeys.FormPartiallyFilled:",
       "module": "/packages/client"
     }

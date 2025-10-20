@@ -139,7 +139,7 @@
 }
 
 .header {
-  &.displayTypeModal {
+  &.displayTypeModal:not(&.withoutHeaderMargin) {
     margin-bottom: 16px;
   }
 }
@@ -152,6 +152,7 @@
   :global(#modal-scroll > .scroll-wrapper > .scroller > .scroll-body) {
     margin-inline-end: 0 !important;
     padding-inline-end: 16px !important;
+    height: 100%;
   }
 
   &.scrollLocked {
@@ -164,7 +165,7 @@
     }
   }
 
-  &.displayTypeModal {
+  &.displayTypeModal:not(&.withoutPadding) {
     padding-bottom: 16px;
 
     &.hasFooter {

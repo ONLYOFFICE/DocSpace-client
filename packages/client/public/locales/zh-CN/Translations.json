@@ -12,8 +12,6 @@
   "FolderTitleSkyDrive": "OneDrive目录",
   "FolderTitleWebDav": "WebDAV目录",
   "FolderTitleYandex": "Yandex目录",
-  "GuestReleaseTipLink": "详细了解用户类型",
-  "LinkHasExpiredAndHasBeenDisabled": "此链接过期，已被禁用",
   "LinkValidTime": "该链接仅在{{days_count}}天内有效。",
   "NewForm": "PDF 表单",
   "OwnerChange": "变更所有者",
@@ -25,5 +23,6 @@
   "ThirdPartyInfo": "更改第三方信息",
   "ThirdPartyTitle": "第三方服务",
   "TitleShowActions": "显示文件相关操作",
-  "TitleShowFolderActions": "显示文件夹相关操作"
+  "TitleShowFolderActions": "显示文件夹相关操作",
+  "TrashItemsDeleteSuccess": "已成功从{{sectionName}}中删除所选元素"
 }

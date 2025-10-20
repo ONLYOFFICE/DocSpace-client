@@ -9,14 +9,15 @@ export default {
     "../**/*.stories.@(js|jsx|ts|tsx|mdx)", //"../**/*.stories.@(js|mdx)",
   ],
 
-  staticDirs: ["../../../public", "../__mocks__/storybook/mockServiceWorker"],
+  staticDirs: [
+    "../../../public",
+    { from: "../../client/public", to: "/client-public" },
+    "../__mocks__/storybook/mockServiceWorker",
+  ],
 
   addons: [
     getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-essentials"),
-    getAbsolutePath("@storybook/addon-actions"),
-    getAbsolutePath("@storybook/addon-controls"),
-    getAbsolutePath("@storybook/addon-viewport"),
     getAbsolutePath("@storybook/addon-designs"),
     {
       name: "@storybook/addon-docs",
@@ -25,7 +26,7 @@ export default {
         babelOptions: {
           plugins: [
             [
-              "@babel/plugin-proposal-private-property-in-object",
+              "@babel/plugin-transform-private-property-in-object",
               {
                 loose: true,
               },

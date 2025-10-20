@@ -3,7 +3,7 @@
   "content": "All shared files created by this contact will be <1>automatically assigned to you in 30 days</1>. To reassign the rooms/shared files to another person, click the corresponding link below.",
   "content_en_sha1_hash": "5642dcb6e8fe712271dd2732bfe1f21692336460",
   "created_at": "2025-05-19T21:30:56.933Z",
-  "updated_at": "2025-06-02T10:20:51.091Z",
+  "updated_at": "2025-09-02T07:59:28.344Z",
   "comment": {
     "text": "This translation key is used to describe a message that informs users about automatic file reassignment and provides instructions on how to manually reassign files when needed. The text appears in a dialog box, specifically within a component that allows users to change their user type.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
-      "line_number": 185,
-      "context": "}}\n />\n &nbsp;\n {needReassignData ? (\n <Trans\n i18nKey=\"DataReassignmentWithFilesDeletion\"\n ns=\"ChangeUserTypeDialog\"\n t={t}\n values={{ sectionName: t(\"Common:MyFilesSection\") }}\n components={{\n 1: <span style={{ fontWeight: 600 }} />,",
+      "line_number": 178,
+      "context": "}}\n />\n &nbsp;\n {needReassignData ? (\n <Trans\n i18nKey=\"DataReassignmentWithFilesDeletion\"\n ns=\"ChangeUserTypeDialog\"\n t={t}\n values={{ sectionName: t(\"Common:MyDocuments\") }}\n components={{\n 1: <span style={{ fontWeight: 600 }} />,",
       "module": "/packages/client"
     }
   ],

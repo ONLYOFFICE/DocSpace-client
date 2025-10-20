@@ -55,6 +55,7 @@ const defaultCompanySettings = {
   site: "www.example.com",
   isDefault: true,
   isLicensor: true,
+  hideAbout: true,
 };
 
 const defaultBuildInfo = {
@@ -65,6 +66,8 @@ const defaultBuildInfo = {
 
 export const Default: Story = {
   args: {
+    displayAbout: false,
+    isBrandingAvailable: true,
     isSettingPaid: true,
     companySettings: defaultCompanySettings,
     onSave: (address, companyName, email, phone, site) =>
@@ -88,6 +91,8 @@ export const Default: Story = {
 
 export const Paid: Story = {
   args: {
+    displayAbout: false,
+    isBrandingAvailable: true,
     isSettingPaid: false,
     companySettings: defaultCompanySettings,
     onSave: (address, companyName, email, phone, site) =>

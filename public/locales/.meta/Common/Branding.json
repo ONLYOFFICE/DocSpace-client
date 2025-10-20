@@ -3,7 +3,7 @@
   "content": "Branding",
   "content_en_sha1_hash": "d17dc3843de8e54fc084f0b952690209018ca128",
   "created_at": "2025-05-26T07:15:40.963Z",
-  "updated_at": "2025-05-26T08:06:56.012Z",
+  "updated_at": "2025-09-17T13:43:01.739Z",
   "comment": {
     "text": "The \"Branding\" translation key is used to display the name of a portal setting category in the UI. It is shown on a settings page and appears as part of the data structure in the /packages/client/src/pages/PortalSettings/categories/common/index.js file. Translators should provide a phrase that describes this concept, commonly found in branding or marketing contexts.",
     "is_auto": true,
@@ -17,21 +17,21 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/index.js",
-      "line_number": 73,
-      "context": "];\n \n if (!isCommunity) {\n data.splice(1, 0, {\n id: \"branding\",\n name: t(\"Common:Branding\"),\n content: <Branding />,\n });\n }\n \n const getCurrentTabId = () => {",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/index.tsx",
+      "line_number": 120,
+      "context": "];\n \n if (!isCommunity) {\n data.splice(1, 0, {\n id: \"branding\",\n name: t(\"Common:Branding\"),\n content: <Branding />,\n onClick: async () => {\n clearAbortControllerArr();\n await getBrandingData();\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 95,
-      "context": "{\n id: \"portal-settings_catalog-branding\",\n key: \"0-1\",\n icon: \"\",\n link: \"branding\",\n tKey: \"Branding\",\n isCategory: true,\n children: [\n {\n id: \"portal-settings_catalog-brand-name\",\n key: \"0-1-0\",",
+      "line_number": 102,
+      "context": "{\n id: \"portal-settings_catalog-branding\",\n key: \"0-1\",\n icon: \"\",\n link: \"branding\",\n tKey: \"Common:Branding\",\n isCategory: true,\n children: [\n {\n id: \"portal-settings_catalog-brand-name\",\n key: \"0-1-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/management/src/app/settings/layout.tsx",
-      "line_number": 31,
-      "context": "const standalone = settings?.standalone;\n \n const data = [\n {\n id: \"branding\",\n name: t(\"Common:Branding\"),\n content: children,\n },\n {\n id: \"data-backup\",\n name: t(\"Common:DataBackup\"),",
+      "line_number": 59,
+      "context": "const standalone = settings?.standalone;\n \n const data = [\n {\n id: \"branding\",\n name: t(\"Common:Branding\"),\n content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,\n },\n {\n id: \"data-backup\",\n name: t(\"Common:DataBackup\"),",
       "module": "/packages/management"
     }
   ],

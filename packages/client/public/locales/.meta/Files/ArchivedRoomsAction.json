@@ -3,7 +3,7 @@
   "content": "The rooms are archived",
   "content_en_sha1_hash": "de470fe0cbfca725b66465dd7aec74208860139c",
   "created_at": "2025-05-19T21:30:55.272Z",
-  "updated_at": "2025-05-24T12:38:21.728Z",
+  "updated_at": "2025-10-13T14:41:03.134Z",
   "comment": {
     "text": "This translation key is used for the action of archiving rooms, appearing in file management actions. It's likely shown as a button label or dialog title, prompting users to archive specific rooms.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1452,
+      "line_number": 1471,
       "context": "})\n \n .then(() => {\n const successTranslation =\n folders.length !== 1 && Array.isArray(folders)\n ? t(\"ArchivedRoomsAction\")\n : Array.isArray(folders)\n ? t(\"Common:ArchivedRoomAction\", { name: folders[0].title })\n : t(\"Common:ArchivedRoomAction\", { name: folders.title });\n \n toastr.success(successTranslation);",
       "module": "/packages/client"
     }
@@ -99,25 +99,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While '방이 아카이브되었습니다' is a possible translation, a more natural and commonly used phrasing would be '방들이 보관되었습니다' or '방들이 저장되었습니다'. '아카이브되었습니다' can sound overly technical in this context.",
-          "suggestion": "방들이 보관되었습니다"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation \"ຫ້ອງຖືກເກັບໄວ້\" while literally meaning \"The rooms are stored/collected\" doesn't quite capture the intended meaning of 'archived'. 'Archived' implies a more formal process of moving data or rooms to long-term storage, often for historical or compliance purposes.",
-          "suggestion": "Consider alternatives like \"ຫ້ອງຖືກເອກະສານບັນທຶກໄວ້\" (hong thuk ekasarn bantuek wai - The rooms are documented/recorded) or \"ຫ້ອງຖືກລຶບຂໍ້ມູນໄວ້\" (hong thuk lup khomun wai - The rooms have their data removed/deleted - if 'archived' means removed). The best translation would depend on the specific context of 'archived'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -183,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Собе су архивиране' is not grammatically correct and doesn't accurately convey the meaning of 'The rooms are archived.' The verb 'архивиране' is an infinitive, not a conjugated form.",
-          "suggestion": "The correct translation should use a conjugated verb form to indicate that the rooms *were* archived. A possible correction is 'Собе су биле архивиране' (Sobe su bile arhivirane) or 'Собе архивиране' (Sobe arhivirane) - although the latter might be ambiguous."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -213,13 +195,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Vietnamese translation 'Các phòng đã được sao lưu' translates to 'The rooms have been backed up'. While related to archiving, it's not the direct equivalent of 'archived'. 'Archived' implies a more permanent removal or closure, while 'backed up' suggests a copy has been made.",
-          "suggestion": "Các phòng đã được lưu trữ (The rooms have been stored)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

@@ -3,7 +3,7 @@
   "content": "Error when changing index. The problem may be caused on the server side. Reload the page or check your Internet connection settings.",
   "content_en_sha1_hash": "9b054804550dbcb34d17ee9af90ca617d5ef96c4",
   "created_at": "2025-05-19T21:30:55.600Z",
-  "updated_at": "2025-06-08T12:02:32.851Z",
+  "updated_at": "2025-10-13T14:41:03.138Z",
   "comment": {
     "text": "Error message displayed when there's a problem changing the index of files, possibly due to server-side issues. It instructs users to reload the page or check their internet connection settings. Appears as an error notification in the application.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3289,
-      "context": ": filesList[newRepIndex - 1];\n \n this.setFilesOrder(current, newReplaceable, indexMovedFromBottom);\n this.filesStore.setSelected(\"none\");\n } catch (e) {\n toastr.error(t(\"Files:ErrorChangeIndex\"));\n }\n };\n \n saveIndexOfFiles = async (t) => {\n const { getIndexingArray } = this.indexingStore;",
+      "line_number": 3333,
+      "context": "this.setFilesOrder(current, newReplaceable, indexMovedFromBottom);\n this.filesStore.setSelected(\"none\");\n } catch (e) {\n console.error(e);\n toastr.error(t(\"Files:ErrorChangeIndex\"));\n }\n };\n \n saveIndexOfFiles = async (t) => {\n const { getIndexingArray } = this.indexingStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3289,
-      "context": ": filesList[newRepIndex - 1];\n \n this.setFilesOrder(current, newReplaceable, indexMovedFromBottom);\n this.filesStore.setSelected(\"none\");\n } catch (e) {\n toastr.error(t(\"Files:ErrorChangeIndex\"));\n }\n };\n \n saveIndexOfFiles = async (t) => {\n const { getIndexingArray } = this.indexingStore;",
+      "line_number": 3333,
+      "context": "this.setFilesOrder(current, newReplaceable, indexMovedFromBottom);\n this.filesStore.setSelected(\"none\");\n } catch (e) {\n console.error(e);\n toastr.error(t(\"Files:ErrorChangeIndex\"));\n }\n };\n \n saveIndexOfFiles = async (t) => {\n const { getIndexingArray } = this.indexingStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3289,
-      "context": ": filesList[newRepIndex - 1];\n \n this.setFilesOrder(current, newReplaceable, indexMovedFromBottom);\n this.filesStore.setSelected(\"none\");\n } catch (e) {\n toastr.error(t(\"Files:ErrorChangeIndex\"));\n }\n };\n \n saveIndexOfFiles = async (t) => {\n const { getIndexingArray } = this.indexingStore;",
+      "line_number": 3333,
+      "context": "this.setFilesOrder(current, newReplaceable, indexMovedFromBottom);\n this.filesStore.setSelected(\"none\");\n } catch (e) {\n console.error(e);\n toastr.error(t(\"Files:ErrorChangeIndex\"));\n }\n };\n \n saveIndexOfFiles = async (t) => {\n const { getIndexingArray } = this.indexingStore;",
       "module": "/packages/client"
     }
   ],
@@ -93,18 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Armenian translation uses a colon after 'Սխալ՝ ինդեքսը փոխելիս:' which feels slightly abrupt. It could be improved with a more natural phrasing.",
-          "suggestion": "Սխալ՝ ինդեքս փոխելու ժամանակ:"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Reload the page' is translated as 'Վերբեռնեք էջը'. While technically correct, a more natural phrasing in Armenian might be more appropriate. 'Վերածնեք էջը' or 'Թարմացրեք էջը' are common alternatives.",
-          "suggestion": "Վերածնեք էջը"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -128,18 +117,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ດັດຊະນີ' (datchanee) is a correct transliteration of 'index' but might be less common or immediately understandable to all Lao speakers. A more common term might improve clarity.",
-          "suggestion": "Consider using a more widely understood term for 'index' if available.  Perhaps 'ລຳດັບ' (lam dap) which means 'sequence' or 'order'."
-        },
-        {
-          "type": "formatting",
-          "description": "While the Lao translation is grammatically correct, the use of full stops (periods) at the end of each sentence might feel a bit formal for an error message. Consider a slightly more conversational tone.",
-          "suggestion": "Consider using a slightly less formal tone, possibly removing some full stops, depending on the desired style. This is subjective."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -187,18 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'පුරණය' (puranaya) in 'පිටුව නැවත පූරණය කරන්න' is a less common or slightly archaic way to say 'reload'. A more standard term would improve clarity.",
-          "suggestion": "පිටුව නැවතින් ආරම්භ කරන්න"
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, the phrase 'සේවාදායක පැත්තෙන්' is a bit clunky. Rephrasing for better flow would be beneficial.",
-          "suggestion": "සේවාදායකයේ ඇතිවිය හැක"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -216,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'проблем' is spelled incorrectly. It should be 'проблема'.",
-          "suggestion": "проблема"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -246,13 +207,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'chỉ mục' is a direct transliteration of 'index' and while understandable, a more natural Vietnamese term for 'index' in this context would be 'vị trí' or 'chỉ số'.",
-          "suggestion": "Lỗi khi thay đổi vị trí. Sự cố có thể do phía máy chủ gây ra. Hãy tải lại trang hoặc kiểm tra cài đặt kết nối Internet của bạn."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

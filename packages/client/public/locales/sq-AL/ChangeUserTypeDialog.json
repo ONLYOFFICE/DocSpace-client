@@ -1,8 +1,17 @@
 {
+  "ChangeContactType": "Ndryshoni llojin e kontaktit",
   "ChangeGuestsTypeMessage": "Mysafiri <strong>{{userName}}</strong> do të transferohet në seksionin {{membersSection}} dhe do të caktohet tipi Përdorues. Përdoruesit kanë seksionin e tyre {{documentsSection}}, mund të krijojnë dhe redaktojnë skedarë, por nuk mund të krijojnë dhoma.",
   "ChangeGuestsTypeMessageMulti": "Mysafiri i zgjedhur do të transferohet në seksionin {{membersSection}} dhe do të caktohet tipi Përdorues. Përdoruesit kanë seksionin e tyre {{documentsSection}}, mund të krijojnë dhe redaktojnë skedar, por nuk mund të krijojnë dhoma.",
+  "ChangeGuestsTypeToAdmin": "Mikëkundër <strong>{{userName}}</strong> do të zhvendoset në seksionin {{membersSection}} dhe do të caktohet tipi <strong>'{{ secondType }}'</strong>. Administratorët e {{productName}} mund të aksesojnë cilësimet e {{productName}}, të menaxhojnë dhe arkivojnë dhoma, të ftojnë përdorues të rinj dhe të caktojnë role nën nivelin e tyre. Administratorët e {{productName}} kanë akses në seksionin {{documentsSection}}.",
+  "ChangeGuestsTypeToAdminMulti": "Pjesëtarët e zgjedhur do të zhvendosen në seksionin {{membersSection}} dhe do të caktohet tipi <strong>'{{ secondType }}'</strong>. Administratorët {{productName}} mund të aksesojnë cilësimet {{productName}}, të menaxhojnë dhe arkivojnë dhoma, të ftojnë përdorues të rinj dhe të caktojnë role nën nivelin e tyre. Administratorët {{productName}} kanë akses në seksionin {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "Mikëkundër <strong>{{userName}}</strong> do të zhvendoset në seksionin {{membersSection}} dhe do të caktohet tipi <strong>'{{ secondType }}'</strong>. Administratorët e dhomës mund të krijojnë dhe menaxhojnë dhomat e ndarë, ftojnë përdorues të rinj dhe caktojnë role Administrator dhome dhe më poshtë. Administratorët e dhomës kanë akses në seksionin {{documentsSection}}.",
+  "ChangeGuestsTypeToManagerMulti": "Pjesëtarët e zgjedhur do të zhvendosen në seksionin {{membersSection}} dhe do të caktohet tipi <strong>'{{ secondType }}'</strong>. Administratorët e dhomës mund të krijojnë dhe menaxhojnë dhomat e ndarë, të ftojnë përdorues të rinj dhe të ndajnë role Administrator dhome dhe më poshtë. Administratorët e dhomës kanë akses në seksionin {{documentsSection}}.",
   "ChangeUserTypeButton": "Nryshoni llojin",
   "ChangeUserTypeMessage": "Përdoruesit me llojin <strong>'{{ firstType }}'</strong> do të transferohen në llojin <strong>'{{ secondType }}'</strong> type.",
+  "ChangeUserTypeNote": "<1>Note:</1> nuk mund të ndryshoni llojin për administratorin e {{productName}} dhe për veten tuaj.",
+  "DataReassignmentInfo": "Dhomat e krijuara nga ky përdorues do të ju caktohen automatikisht juve. Për të i caktuar dhomat një personi tjetër, klikoni lidhjen përkatëse më poshtë.",
+  "DataReassignmentWithFilesDeletion": "Të gjithë skedarët e shpërndarë që janë krijuar nga ky kontakt do të <1>ju caktohen automatikisht juve pas 30 ditësh</1>. Për të i caktuar dhomat/skedarët e shpërndarë një personi tjetër, klikoni lidhjen përkatëse më poshtë.",
+  "PersonalDataDeletion": "Të gjithë skedarët dhe dosjet në seksionin {{sectionName}} të këtij kontakti do të <1>fshihen përgjithmonë pas 30 ditësh</1>.",
   "SuccessChangeGuestType": "Lloji i mysafirit u ndryshua me sukses.",
   "SuccessChangeUserType": "Lloji i përdoruesit u ndryshua me sukses"
 }

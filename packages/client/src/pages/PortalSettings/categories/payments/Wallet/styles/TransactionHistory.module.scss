@@ -29,32 +29,48 @@
 }
 
 .transactionHistoryTitle {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .transactionHistoryCombobox {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 2px;
-  column-gap: 12px;
-  row-gap: 4px;
+  margin-bottom: 8px;
+  gap: 12px;
+  align-items: start;
+  .transactionTypeCombobox {
+    padding: 0;
+  }
 }
 
 .transactionHistoryBody {
   margin-top: 27px;
+
+  :global(.table-container_header) {
+    position: absolute;
+  }
 }
 
 .transactionDates {
   display: flex;
   align-items: center;
   gap: 4px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .downloadWrapper {
   display: flex;
   gap: 12px;
   align-items: center;
-  margin-top: 20px;
+  &.isMobileButton {
+    flex-direction: column;
+  }
+}
+
+.transactionsLimit {
+  margin: 20px 0 10px 0;
+  max-width: 660px;
 }
 
 .tableContainerCaptionHeader {
@@ -87,6 +103,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    margin-top: 20px;
   }
 
   .filterDialogSection {
@@ -99,16 +116,61 @@
   .filterDialogDivider {
     width: 100%;
     height: 1px;
-    background-color: var(--payment-devider-color);
+    border-bottom: 1px solid var(--aside-header-border-color);
   }
 }
 
 .transactionHistoryHeader {
   display: flex;
-
+  margin-top: 24px;
   #filterButton {
     margin-left: auto;
   }
+}
+
+.loaderRow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 12px 0;
+
+  &.headerRow {
+    gap: 12px;
+    margin-bottom: 8px;
+    margin-top: 16px;
+  }
+
+  &.dataRow {
+    max-width: 920px;
+    padding: 12px 0;
+    justify-content: space-between;
+  }
+}
+
+.bodyRow {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding-right: 30px;
+  width: calc(100% - 30px);
+}
+
+.balanceRow {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+  margin-top: 20px;
+
+  .rectangleSkeleton:first-child {
+    margin-bottom: 4px;
+  }
+
+  .rectangleSkeleton:last-child {
+    margin-top: 8px;
+  }
+}
+.selectedContactItem {
+  margin-bottom: 0;
 }
 
 .transactionHistoryLoader {
@@ -116,25 +178,6 @@
   flex-direction: column;
   width: 100%;
   max-width: 920px;
-
-  .loaderRow {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 8px 0;
-
-    &.headerRow {
-      gap: 12px;
-      margin-bottom: 8px;
-      margin-top: 16px;
-    }
-
-    &.dataRow {
-      max-width: 920px;
-      padding: 12px 0;
-      justify-content: space-between;
-    }
-  }
 
   .flexibleLoader {
     max-width: 151px;
@@ -146,29 +189,6 @@
 
   .lastChild {
     padding-right: 30px;
-  }
-
-  .bodyRow {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-    padding-right: 30px;
-    width: calc(100% - 30px);
-  }
-
-  .balanceRow {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 24px;
-    margin-top: 20px;
-
-    .rectangleSkeleton:first-child {
-      margin-bottom: 4px;
-    }
-
-    .rectangleSkeleton:last-child {
-      margin-top: 8px;
-    }
   }
 
   .paymentLoader,
@@ -188,7 +208,7 @@
   display: flex;
   margin-bottom: 16px;
   align-items: center;
-
+  margin-top: 12px;
   .mobileBodyLeft {
     display: flex;
     flex-direction: column;
@@ -243,6 +263,9 @@
   }
 }
 
+.filterIconWrapper {
+  margin-inline-start: auto;
+}
 @keyframes shimmer {
   0% {
     transform: translateX(-100%);
@@ -250,4 +273,16 @@
   100% {
     transform: translateX(100%);
   }
+}
+
+.transactionRowDetails {
+  color: var(--payment-dialog-text);
+}
+
+.transactionRowDescription {
+  margin-inline-end: 4px;
+}
+
+.clearFilter {
+  margin: auto 0;
 }

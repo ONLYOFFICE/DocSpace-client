@@ -130,7 +130,7 @@ const useSDK = ({
           case "createFolder":
             {
               const { parentFolderId, title } = data;
-              res = await createFolder(parentFolderId, title);
+              res = await createFolder(parentFolderId, title.trimEnd());
 
               refreshFiles();
             }

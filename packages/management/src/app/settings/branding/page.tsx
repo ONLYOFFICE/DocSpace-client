@@ -25,6 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
+import { deviceDetect } from "react-device-detect";
+
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 
 import {
@@ -42,8 +45,11 @@ import {
 import { getIsDefaultWhiteLabel } from "@/lib";
 
 import BrandingPage from "./page.client";
+import { logger } from "../../../../logger.mjs";
 
 async function Page() {
+  logger.info("Branding page");
+
   const [
     settings,
     buildInfo,
@@ -68,8 +74,20 @@ async function Page() {
     getCompanyInfo(),
   ]);
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
-  if (!settings || !portalTariff) redirect(`${getBaseUrl()}/login`);
+  if (settings === "access-restricted") {
+    logger.info("Branding page access-restricted");
+
+    const baseURL = await getBaseUrl();
+    redirect(`${baseURL}/${settings}`);
+  }
+  if (!settings || !portalTariff) {
+    logger.info(
+      `Branding page settings: ${settings}, portalTariff: ${portalTariff}`,
+    );
+
+    const baseURL = await getBaseUrl();
+    redirect(`${baseURL}/login`);
+  }
 
   const { displayAbout, standalone, licenseAgreementsUrl, logoText } = settings;
   const { enterprise } = portalTariff;
@@ -77,6 +95,9 @@ async function Page() {
   const showAbout = standalone && displayAbout;
 
   const isDefaultWhiteLabel = getIsDefaultWhiteLabel(whiteLabelIsDefault);
+
+  const ua = (await headers()).get("user-agent") || "";
+  const { isMobile } = deviceDetect(ua);
 
   return (
     <BrandingPage
@@ -90,12 +111,12 @@ async function Page() {
       additionalResources={additionalResources}
       companyInfo={companyInfo}
       buildInfo={buildInfo!}
-      licenseAgreementsUrl={licenseAgreementsUrl}
+      licenseAgreementsUrl={licenseAgreementsUrl!}
       isEnterprise={enterprise}
       logoText={logoText}
+      isMobile={isMobile}
     />
   );
 }
 
 export default Page;
-

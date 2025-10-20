@@ -3,7 +3,7 @@
   "content": "Create new link",
   "content_en_sha1_hash": "cbabb1dbb70de5354d59a16cedbdbd8f52dd52c6",
   "created_at": "2025-05-19T21:30:55.381Z",
-  "updated_at": "2025-05-26T07:57:32.351Z",
+  "updated_at": "2025-10-13T14:41:02.934Z",
   "comment": {
     "text": "\"This translation key is used for the 'Create New Link' button in the Edit Link Panel, which appears in a modal dialog.\"",
     "is_auto": true,
@@ -11,15 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
-      "line_number": 289,
-      "context": "? isPrimary\n ? t(\"Files:EditSharedLink\")\n : isPublic || isFormRoom\n ? t(\"Files:EditAdditionalLink\")\n : t(\"Files:EditLink\")\n : t(\"Files:CreateNewLink\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <StyledEditLinkBodyContent className=\"edit-link_body\">\n {!isFormRoom ? (\n <RoleLinkBlock",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.js",
-      "line_number": 269,
-      "context": "type=\"action\"\n fontSize=\"14px\"\n fontWeight={600}\n className=\"external-row-link\"\n >\n {t(\"Files:CreateNewLink\")}\n </Link>\n </StyledLinkRow>,\n );\n }\n }",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.tsx",
+      "line_number": 266,
+      "context": "fontSize=\"14px\"\n fontWeight={600}\n className=\"external-row-link\"\n dataTestId=\"info_panel_members_create_new_link_text\"\n >\n {t(\"Files:CreateNewLink\")}\n </Link>\n </div>,\n );\n }\n }",
       "module": "/packages/client"
     }
   ],
@@ -39,37 +33,19 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Şifrəni nüsxələyin\" translates to \"Copy the password\". The English content \"Create new link\" has a different meaning. It refers to generating a new hyperlink, not copying a password.",
-          "suggestion": "Consider a translation like \"Yeni link yaradın\" (Create new link) or \"Link düzəldin\" (Fix link/create link)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation \"Копирай парола\" (Copy password) does not accurately reflect the English meaning \"Create new link\".",
-          "suggestion": "A more accurate translation would be something along the lines of \"Създай нов линк\" (Create new link) or \"Добави нов линк\" (Add new link)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation \"Kopírování hesla\" translates to \"Password Copying\" which is not equivalent to \"Create new link\". The meaning is significantly different.",
-          "suggestion": "A more appropriate translation for \"Create new link\" could be something like \"Vytvořit nový odkaz\" or \"Založit nový odkaz\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -81,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation \"Αντιγραφή κωδικού πρόσβασης\" translates to \"Copy access code\", which is not equivalent to the English \"Create new link\".",
-          "suggestion": "A more accurate translation would be something like \"Δημιουργία νέου συνδέσμου\" or \"Δημιουργία νέου link\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -99,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Kopioi salasana' translates to 'Copy password', which is not equivalent to the English 'Create new link'.",
-          "suggestion": "A more accurate translation would be something like 'Luo uusi linkki' or 'Uuden linkin luonti'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {

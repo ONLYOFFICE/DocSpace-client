@@ -3,7 +3,7 @@
   "content": "User",
   "content_en_sha1_hash": "9f8a2389a20ca0752aa9e95093515517e90e194c",
   "created_at": "2025-05-19T21:30:49.454Z",
-  "updated_at": "2025-05-26T07:57:32.302Z",
+  "updated_at": "2025-10-13T20:57:51.814Z",
   "comment": {
     "text": "This translation key \"User\" is used to display the content \"User\" in various UI contexts, such as a warning message and a label in a table. It appears in a dialog box when deleting a profile and in a data import component for selecting users. Translators should provide a translated version of this text that accurately reflects its purpose in these contexts.",
     "is_auto": true,
@@ -12,14 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 91,
-      "context": "? warningMessageReassign\n : warningMessageMyDocuments;\n \n const deleteMessage = (\n <Trans i18nKey=\"DeleteUserMessage\" ns=\"DeleteProfileEverDialog\" t={t}>\n {{ userCaption: onlyGuests ? t(\"Common:Guest\") : t(\"Common:User\") }}\n <strong>{{ user: users[0].displayName }}</strong>\n </Trans>\n );\n \n if (deleteWithoutReassign) {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/GuestReleaseTip/index.tsx",
-      "line_number": 104,
-      "context": "lineHeight=\"22px\"\n noSelect\n truncate\n className=\"main-text\"\n >\n {t(\"Common:User\")}\n </Text>\n <NextStepSvg className=\"next-step-icon\" />\n <Text\n fontSize=\"16px\"\n fontWeight={700}",
+      "line_number": 98,
+      "context": "<Trans\n i18nKey=\"DeleteUserMessage\"\n ns=\"DeleteProfileEverDialog\"\n t={t as TFunction}\n values={{\n userCaption: onlyGuests ? t(\"Common:Guest\") : t(\"Common:User\"),\n user: users[0].displayName,\n }}\n components={{\n 1: <strong />,\n }}",
       "module": "/packages/client"
     },
     {
@@ -48,13 +42,13 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 329,
+      "line_number": 336,
       "context": "productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");\n }\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 329,
+      "line_number": 336,
       "context": "productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");\n }\n };",
       "module": "/packages/shared"
     },
@@ -203,9 +197,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'පරිශ්‍රීලකයා' (parishreelakaya) while meaning 'user' or 'operator', is a more formal and less common translation for 'user' in contemporary Sinhala. A more common and natural translation would be 'භාවිතරයා' (bhavitharakaya) or simply 'පරිශ්‍රීලක' (parishreelak).",
-          "suggestion": "Consider using 'භාවිතරයා' (bhavitharakaya) or 'පරිශ්‍රීලක' (parishreelak) for a more natural and widely understood translation of 'User'."
+          "type": "spelling",
+          "description": "The Sinhala word 'පරිශ්‍රීලකයා' contains a potential spelling error. The generally accepted and more common translation for 'User' in Sinhala is 'භාවිතකරු'.",
+          "suggestion": "භාවිතකරු"
         }
       ],
       "approved_at": null
@@ -258,10 +252,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"普通用户\" (Pǔtōng Yònghù) translates to \"Common User\" or \"General User\". While it conveys a sense of a typical user, it doesn't directly translate \"User\".  A more accurate translation, depending on the specific context, might be just \"用户\" (Yònghù).",
-          "suggestion": "Consider using just \"用户\" (Yònghù) as a more direct translation.  If \"Common\" or \"General\" is specifically intended, the current translation is acceptable, but the distinction should be clearly documented."
+          "description": "The translation '普通用户' (Pǔtōng yònghù) translates to 'Common User' or 'General User,' which is not a direct equivalent of 'User.' While 'Common' adds context, it's an unnecessary addition and may not be the desired meaning.",
+          "suggestion": "Consider '用户' (Yònghù), which is the standard and most direct translation of 'User' in Chinese."
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

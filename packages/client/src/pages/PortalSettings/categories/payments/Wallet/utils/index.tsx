@@ -24,36 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TTranslation } from "@docspace/shared/types";
+import { truncateNumberToFraction } from "@docspace/shared/utils/common";
+
 export const formattedBalanceTokens = (
   language: string,
   amount: number,
   currency: string,
+  maximumFractionDigits: number = 3,
 ) => {
+  const truncatedStr = truncateNumberToFraction(amount, maximumFractionDigits);
+  const truncated = Number(truncatedStr);
+
   const formatter = new Intl.NumberFormat(language, {
     style: "currency",
     currency,
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
-
-  return formatter.formatToParts(amount);
-};
-
-export const formatCurrencyValue = (
-  language: string,
-  amount: number,
-  currency: string,
-  minimumFractionDigits: number = 0,
-  maximumFractionDigits: number = 0,
-) => {
-  const formatter = new Intl.NumberFormat(language, {
-    style: "currency",
-    currency,
-    minimumFractionDigits,
+    minimumFractionDigits: maximumFractionDigits,
     maximumFractionDigits,
   });
 
-  return formatter.format(amount);
+  return formatter.formatToParts(truncated);
 };
 
 export const accountingLedgersFormat = (
@@ -62,10 +52,26 @@ export const accountingLedgersFormat = (
   isCredit: boolean,
   currency: string,
 ) => {
-  return `${isCredit ? "+" : "-"}${new Intl.NumberFormat(language, {
+  const maximumFractionDigits = 2;
+  const truncatedStr = truncateNumberToFraction(amount, maximumFractionDigits);
+  const truncated = Number(truncatedStr);
+
+  const formatter = new Intl.NumberFormat(language, {
     style: "currency",
     currency,
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 7,
-  }).format(amount)}`;
+    minimumFractionDigits: maximumFractionDigits,
+    maximumFractionDigits,
+  });
+
+  const value = formatter.format(truncated);
+  return `${isCredit ? "+" : "-"}${value}`;
+};
+
+export const getServiceQuantity = (
+  t: TTranslation,
+  quantity: number,
+  serviceUnit?: string,
+) => {
+  if (!serviceUnit) return "—";
+  return t("UnitCount", { unit: serviceUnit, count: quantity });
 };

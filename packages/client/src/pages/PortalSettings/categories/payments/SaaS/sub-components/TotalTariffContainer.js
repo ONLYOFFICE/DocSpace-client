@@ -34,6 +34,8 @@ import { mobile } from "@docspace/shared/utils";
 const StyledBody = styled.div`
   max-width: 272px;
   margin: 0 auto;
+  word-break: break-word;
+  text-align: center;
 
   @media ${mobile} {
     max-width: 520px;
@@ -81,15 +83,14 @@ const TotalTariffContainer = ({
   theme,
   totalPrice,
   isNeedRequest,
-  currencySymbol,
   isYearTariff,
+  formatPaymentCurrency,
 }) => {
   return (
     <StyledBody isDisabled={isDisabled} theme={theme}>
       <div className="payment_price_total-price">
         {isNeedRequest ? (
           <Text
-            noSelect
             fontSize="14"
             textAlign="center"
             fontWeight={600}
@@ -106,11 +107,10 @@ const TotalTariffContainer = ({
                 t={t}
                 i18nKey="TotalPricePerYear"
                 ns="Payments"
-                values={{ currencySymbol, price: totalPrice }}
+                values={{ price: formatPaymentCurrency(totalPrice) }}
                 components={{
-                  1: <span className="lagerFontSize" />,
-                  2: <span className="lagerFontSize" />,
-                  3: <span />,
+                  2: <span key="large-font-year" className="lagerFontSize" />,
+                  3: <Text fontWeight={600} as="span" key="bold-text-year" />,
                 }}
               />
             ) : (
@@ -118,11 +118,10 @@ const TotalTariffContainer = ({
                 t={t}
                 i18nKey="TotalPricePerMonth"
                 ns="Payments"
-                values={{ currencySymbol, price: totalPrice }}
+                values={{ price: formatPaymentCurrency(totalPrice) }}
                 components={{
-                  1: <span className="lagerFontSize" />,
-                  2: <span className="lagerFontSize" />,
-                  3: <span />,
+                  2: <span key="large-font-month" className="lagerFontSize" />,
+                  3: <Text fontWeight={600} as="span" key="bold-text-month" />,
                 }}
               />
             )}
@@ -133,23 +132,25 @@ const TotalTariffContainer = ({
   );
 };
 
-export default inject(
-  ({ settingsStore, paymentStore, paymentQuotasStore, currentQuotaStore }) => {
-    const { theme } = settingsStore;
-    const { isLoading, totalPrice, isNeedRequest, maxAvailableManagersCount } =
-      paymentStore;
+export default inject(({ settingsStore, paymentStore, currentQuotaStore }) => {
+  const { theme } = settingsStore;
+  const {
+    isLoading,
+    totalPrice,
+    isNeedRequest,
+    maxAvailableManagersCount,
+    formatPaymentCurrency,
+  } = paymentStore;
 
-    const { planCost } = paymentQuotasStore;
-    const { isYearTariff } = currentQuotaStore;
+  const { isYearTariff } = currentQuotaStore;
 
-    return {
-      theme,
-      totalPrice,
-      isLoading,
-      isNeedRequest,
-      maxAvailableManagersCount,
-      currencySymbol: planCost.currencySymbol,
-      isYearTariff,
-    };
-  },
-)(observer(TotalTariffContainer));
+  return {
+    theme,
+    totalPrice,
+    isLoading,
+    isNeedRequest,
+    maxAvailableManagersCount,
+    isYearTariff,
+    formatPaymentCurrency,
+  };
+})(observer(TotalTariffContainer));

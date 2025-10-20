@@ -3,7 +3,7 @@
   "content": "Move to {{sectionName}}",
   "content_en_sha1_hash": "5d6defb8d637574434a5dbe9189fed399ce413e6",
   "created_at": "2025-06-02T10:19:17.346Z",
-  "updated_at": "2025-06-02T10:21:31.287Z",
+  "updated_at": "2025-10-16T07:29:35.562Z",
   "comment": {
     "text": "This translation key is used to display a button label that allows users to move files to a specified section or category. The section name can be customized through this translation key, typically displayed as \"Move to {{sectionName}}\" in UI elements such as buttons or dialog boxes.",
     "is_auto": true,
@@ -12,27 +12,9 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/FileLifetime.js",
-      "line_number": 79,
-      "context": "];\n \n const deleteOptions = [\n {\n key: 1,\n label: t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n value: false,\n },\n {",
+      "line_number": 82,
+      "context": "];\n \n const deleteOptions = [\n {\n key: 1,\n label: t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n value: false,\n dataTestId: \"virtual_data_room_file_lifetime_delete_move_to_trash\",\n },",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 286,
-      "context": "? t(\"EmptyTrashDialog:DeleteForeverButton\")\n : isPrivacyFolder || selection[0]?.providerKey\n ? t(\"Common:OKButton\")\n : unsubscribe\n ? t(\"UnsubscribeButton\")\n : t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
-      "line_number": 60,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-button_submit\"\n key=\"OkButton\"\n label={t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n size={ButtonSize.normal}\n primary\n scale",
-      "module": "/packages/doceditor"
-    },
-    {
-      "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
-      "line_number": 60,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-button_submit\"\n key=\"OkButton\"\n label={t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n size={ButtonSize.normal}\n primary\n scale",
-      "module": "/packages/doceditor"
     }
   ],
   "languages": {

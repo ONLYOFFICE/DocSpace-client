@@ -3,7 +3,7 @@
   "content": "Downgrade now",
   "content_en_sha1_hash": "55c12a0fa5a68eadb39f9fd457b2c4c867f35765",
   "created_at": "2025-05-19T21:30:53.684Z",
-  "updated_at": "2025-06-08T12:02:32.817Z",
+  "updated_at": "2025-09-07T07:53:15.336Z",
   "comment": {
     "text": "This translation key is used for a button label that displays \"Downgrade now\" and triggers downgrading of a plan. It appears as an active button in a UI element, typically used to initiate downgrades or changes in subscription plans.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
-      "line_number": 230,
-      "context": "return isDowngradePlan ? (\n <DowngradePlanButtonContainer\n onUpdateTariff={onUpdateTariff}\n isDisabled={isDisabled}\n buttonLabel={t(\"DowngradeNow\")}\n />\n ) : (\n <Button\n className=\"upgrade-now-button\"\n label={t(\"UpgradeNow\")}",
+      "line_number": 299,
+      "context": "return isDowngradePlan ? (\n <DowngradePlanButtonContainer\n onDowngradeTariff={onDowngradeTariff}\n isDisabled={isDisabled}\n buttonLabel={t(\"DowngradeNow\")}\n />\n ) : (\n <Button\n className=\"upgrade-now-button\"\n label={t(\"UpgradeNow\")}",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"الرجوع إلى إصدار سابق الآن\" is a literal translation of 'Downgrade Now' and while understandable, it's not the most natural or common way to express this concept in Saudi Arabic.  'Downgrade' often implies reverting to an earlier version or feature set, but 'الرجوع إلى إصدار سابق' focuses solely on the 'previous version' aspect and loses some nuance.",
-          "suggestion": "Consider a more contextually appropriate translation such as:  \"تخفيض المستوى الآن\" (Takhfeed al-mustawa al-aan) – which is closer to 'reduce level now', or a more descriptive phrase that reflects the specific downgrade action based on the application/service."
+          "description": "The Arabic translation \"الرجوع إلى إصدار سابق الآن\" translates to \"Return to a previous version now.\" While conveying a similar concept, it's not a direct or natural translation of \"Downgrade now.\" \"Downgrade\" implies reducing a service or product to a lower tier, not necessarily reverting to a previous version. A more accurate translation might consider the context of the feature, which likely involves reducing a subscription level or feature set.",
+          "suggestion": "Consider a translation that more accurately reflects the meaning of 'downgrade,' such as \"تخفيض الاشتراك الآن\" (Reduce subscription now) or a phrase that specifically conveys a reduction in service level."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'İndi səviyyəni salın' doesn't accurately convey the meaning of 'Downgrade now'. 'Səviyyəni salın' translates to 'set the level', which is not equivalent to downgrading.",
-          "suggestion": "A more accurate translation could be 'Səviyyəni endirin' (meaning 'lower the level') or 'Aşağı səviyyəyə keçin' (meaning 'switch to a lower level')."
+          "description": "The translation \"İndi səviyyəni salın\" doesn't fully convey the meaning of \"Downgrade now\". 'Downgrade' implies a reduction in service or features, which isn't directly communicated by 'səviyyəni salın' (literally 'set the level').",
+          "suggestion": "Consider alternatives like \"Səviyyəni endirin\" (lower the level) or \"Səviyyəni aşağı salın\" (bring the level down). The best option will depend on the specific context of the downgrade."
         }
       ],
       "approved_at": null
@@ -51,13 +51,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Понижаване сега\" is a literal translation of \"Downgrade now\", it's not the most natural or idiomatic way to express this concept in Bulgarian. \"Downgrade\" in a technical context often implies reducing a service level or feature set. A more suitable translation might involve phrases like \"Намалете нивото сега\" (Reduce the level now) or \"Преминете към по-нисък план сега\" (Switch to a lower plan now), depending on the exact context.",
-          "suggestion": "Consider alternative translations like \"Намалете нивото сега\" or \"Преминете към по-нисък план сега\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -66,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Snížit úroveň nyní' is technically correct, it's a bit formal and clunky for a button label like 'Downgrade now'. A more natural and user-friendly translation would be preferred.",
-          "suggestion": "Pokračovat ve snížení úrovně"
+          "description": "While 'Snížit úroveň nyní' is technically correct, it's a rather literal translation of 'Downgrade now'. A more natural and idiomatic Czech translation would be something like 'Zmenšit úroveň nyní' or 'Provést snížení úrovně nyní'. 'Snížit' implies reducing something's size or volume, which isn't the precise meaning of 'downgrade' in a financial context.",
+          "suggestion": "Consider 'Zmenšit úroveň nyní' or 'Provést snížení úrovně nyní'."
         }
       ],
       "approved_at": null
@@ -90,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Cambiar al plan anterior ahora' is not a direct or ideal translation of 'Downgrade now'. While it conveys a similar concept, 'Downgrade' implies a reduction in service level or price, which isn't fully captured by 'Cambiar al plan anterior'.",
-          "suggestion": "Consider alternatives like 'Bajar de plan ahora' or 'Volver al plan anterior ahora' depending on the precise meaning desired in context."
+          "description": "The translation \"Cambiar al plan anterior ahora\" is not the most natural or concise way to express \"Downgrade now.\" While technically accurate, it's a bit verbose.",
+          "suggestion": "Consider a more direct translation like \"Bajar de plan ahora\" or \"Cancelar suscripción ahora\" depending on the specific context of the downgrade process."
         }
       ],
       "approved_at": null
@@ -102,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Alenna ohjelman tasoa nyt\" translates to \"Downgrade the program level now.\" While it conveys a similar meaning, \"Downgrade now\" is more concise and direct.  'Ohjelman tasoa' implies a program level, whereas 'downgrade' can refer to a general reduction in status or feature set.",
-          "suggestion": "Laske taso nyt"
+          "description": "The translation \"Alenna ohjelman tasoa nyt\" implies downgrading a software program's level, which isn't necessarily the intended meaning of \"Downgrade now\". A more literal or contextually appropriate translation might be needed depending on the specific application (e.g., a payment service).",
+          "suggestion": "Consider alternatives like \"Pienennä tasoa nyt\" or \"Vähennä tasoa nyt\", depending on the context of 'downgrade'."
         }
       ],
       "approved_at": null
@@ -114,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Passer à une version antérieure maintenant' while technically correct, isn't the most natural or common way to express 'Downgrade now' in French, especially in a UI context. It's a bit literal and verbose.",
-          "suggestion": "Consider 'Revenir à la version précédente' or 'Restaurer une version antérieure' for a more fluid and user-friendly translation. 'Restaurer' implies a return to a known, previous state, which can be beneficial."
+          "description": "While \"Passer à une version antérieure maintenant\" is understandable, it's a rather literal and clunky translation. A more natural and idiomatic translation of \"Downgrade now\" would be something like \"Revenir à une version précédente maintenant\" or \"Effectuer une rétrogradation maintenant\".",
+          "suggestion": "Revenir à une version précédente maintenant"
         }
       ],
       "approved_at": null
@@ -126,13 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Տարբերակի իջեցում հիմա\" doesn't accurately convey the meaning of 'Downgrade now'. 'Իջեցում' generally refers to a descent or lowering, not a downgrade in the context of payments or services.  A more accurate translation would focus on reducing or lessening a service level.",
-          "suggestion": "Consider alternatives like \"Կրճացրեք մակարդակը հիմա\" (Krjaceq mavarakeq hima - Reduce the level now) or \"Անկացրեք մակարդակը հիմա\" (Ankaceq mavarakeq hima - Lower the level now), depending on the precise nuance desired."
-        },
-        {
-          "type": "spelling",
-          "description": "While the words are spelled correctly in Armenian, the overall phrasing might sound unnatural to a native speaker. A more natural and concise expression is preferred.",
-          "suggestion": "Review the phrasing with a native Armenian speaker specializing in technical or software terminology to ensure natural flow."
+          "description": "The translation 'Տարբերակի իջեցում հիմա' doesn't accurately convey the meaning of \"Downgrade now\". \"Տարբերակի իջեցում\" is more accurately translated as 'Different descent' or 'Modified descent', which isn't the intended meaning. \"Downgrade\" refers to reducing a level or version.",
+          "suggestion": "A better translation would be something like \"Հետադարձվել դեպի ցածր մակարդակ հիմա\" (Hetadarzvel depi tsadzev makardak hima) which translates to 'Downgrade to a lower level now'."
         }
       ],
       "approved_at": null
@@ -143,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Declassa ora\" is grammatically correct, it doesn't accurately convey the meaning of \"Downgrade now.\" \"Downgrade\" in this context refers to reducing a higher level of service to a lower one, not a classification or ranking. \"Declassa\" implies removing a classification.",
-          "suggestion": "Consider alternatives like \"Ricolloca a livello inferiore ora,\" \"Riduci il livello ora,\" or \"Passa a un livello inferiore ora.\" The best option depends on the specific context of the application."
+          "description": "The translation 'Declassa ora' doesn't accurately convey the meaning of 'Downgrade now'. 'Downgrade' implies reducing a service or level, which 'declassa' doesn't directly represent in Italian. A more suitable translation would depend on the specific context of 'downgrade'.",
+          "suggestion": "Consider alternatives such as 'Riduzione ora' (reduce now), 'Passa a un piano inferiore ora' (Switch to a lower plan now), or 'Abbassamento ora' (reduction now), depending on the context."
         }
       ],
       "approved_at": null
@@ -155,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '今すぐダウングレードする' directly translates to 'Downgrade now' but 'ダウングレード' (daungureedo) is a transliteration of 'downgrade' and may sound unnatural to a Japanese speaker. A more natural phrasing might involve using a Japanese equivalent for 'downgrade' or rephrasing the sentence to convey the same meaning in a more idiomatic way.",
-          "suggestion": "Consider a more natural phrasing such as 'ランクを下げる' (ranku o sageru - to lower rank/level) or a similar term depending on the context of 'downgrade'."
+          "description": "While technically correct, '今すぐダウングレードする' (Imasu gu daungureedo suru) is a direct transliteration and sounds unnatural in Japanese.  A more natural phrasing would depend on the context, but a better option would be something like 'より低いプランに切り替える' (yori hikui puran ni kirikaeru) - 'Switch to a lower plan' or 'ランクを下げる' (ranku o sageru) - 'Downgrade rank'.",
+          "suggestion": "より低いプランに切り替える (yori hikui puran ni kirikaeru) or ランクを下げる (ranku o sageru)"
         }
       ],
       "approved_at": null
@@ -164,7 +153,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"지금 다운그레이드\" is a very literal translation and sounds unnatural in Korean. A more natural phrasing would be \"지금으로 다운그레이드하세요\" or \"지금 다운그레이드하세요\".",
+          "suggestion": "지금으로 다운그레이드하세요"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -191,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Zmień plan na tańszy teraz\" is too literal and doesn't convey the meaning of 'Downgrade now' effectively. 'Downgrade' implies reducing a service tier or package, which isn't directly represented by 'zmień plan na tańszy' (change plan to a cheaper one).",
-          "suggestion": "Consider a translation that more accurately reflects the concept of downgrading, such as 'Obniż plan teraz' (Lower the plan now) or 'Przejdź na niższy plan teraz' (Switch to a lower plan now)."
+          "description": "The translation 'Zmień plan na tańszy teraz' is a more verbose translation of 'Downgrade now'. While not incorrect, it doesn't directly convey the brevity of the original English phrase. A more direct translation would be preferable.",
+          "suggestion": "Obniż plan teraz"
         }
       ],
       "approved_at": null
@@ -203,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Downgrade now\" implies a reduction in service level or a decrease in a plan. \"Diminuir agora\" translates to \"decrease now\" which, while technically correct, doesn't fully capture the nuance of a software or service downgrade. A more accurate translation would depend on the specific context but options like 'Rebaixar agora' or 'Descer para um plano inferior agora' might be more appropriate.",
-          "suggestion": "Consider 'Rebaixar agora' or 'Descer para um plano inferior agora' depending on the context."
+          "description": "The translation 'Diminuir agora' doesn't accurately convey the meaning of 'Downgrade now'. 'Downgrade' implies reducing a service level or subscription, not simply 'diminishing' something.",
+          "suggestion": "Consider alternatives like 'Rebaixar agora', 'Desclassificar agora', or 'Alterar para um plano inferior agora' depending on the specific context of the downgrade."
         }
       ],
       "approved_at": null
@@ -221,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Retrogradează acum' is technically a translation of 'Downgrade now,' it's not the most natural or commonly used term in Romanian. 'Downgrade' in a payment context typically implies reverting to a lower-tier service or plan. 'Retrogradează' sounds more like a military retreat or a regression in time, which is not the intended meaning.",
-          "suggestion": "Consider 'Anulează abonamentul' (Cancel subscription), 'Revino la abonamentul mai vechi' (Revert to the older subscription), or 'Coboară la abonamentul de bază' (Downgrade to the basic subscription) depending on the exact context."
+          "description": "The translation 'Retrogradează acum' doesn't accurately convey the meaning of 'Downgrade now'. 'Retrogradează' implies a movement backwards, which isn't the precise meaning of 'downgrade' in a payment context.  'Downgrade' here refers to reducing a payment tier or service level.",
+          "suggestion": "Consider alternatives like 'Reduce nivelul acum', 'Coboară nivelul acum', or 'Schimbă la un nivel inferior acum'. The best option depends on the specific payment system terminology."
         }
       ],
       "approved_at": null
@@ -239,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'පහත හෙළන්න' translates to 'Pull down' or 'Drag down', not 'Downgrade'. 'Downgrade' implies reducing the quality or level of something, which isn't conveyed by 'පහත හෙළන්න'.",
-          "suggestion": "A more accurate translation would depend on the context of 'Downgrade'. Possible alternatives could be 'පෙට්ටිය අඩු කරන්න' (pettiya adu karanna - reduce the package/level) or a phrase describing the specific downgrade action."
+          "description": "'පහත හෙළන්න' translates to 'lower it' or 'bring it down', which doesn't accurately convey the meaning of 'Downgrade now'. 'Downgrade' implies reducing a service or product to a lower level or version.",
+          "suggestion": "A more accurate translation would depend on the specific context of 'Downgrade now'. Possible suggestions include: 'මන්خفض කරන්න දැන්' (Manchchha karanawa den', meaning 'Reduce now'), or 'ප්‍රමාණය අඩු කරන්න දැන්' (Pramaṇaya aḍu karanawa den', meaning 'Decrease the level/version now')."
         }
       ],
       "approved_at": null
@@ -251,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Prejsť na nižšiu verziu' is a literal translation, it doesn't quite capture the nuance of 'Downgrade now'. 'Downgrade' implies reverting to a previous version, and the phrasing 'Prejsť na nižšiu verziu' is more general.",
-          "suggestion": "Consider 'Znížiť verziu' or 'Vrátiť sa k nižšej verzii'. 'Znížiť verziu' is more concise, while 'Vrátiť sa k nižšej verzii' more explicitly conveys reverting to a prior version."
+          "description": "The Slovak translation 'Prejsť na nižšiu verziu' literally translates to 'Switch to a lower version'. While it might be understandable in some contexts, it doesn't accurately convey the meaning of 'Downgrade now' which implies a specific action relating to payment plans or subscriptions. A more accurate translation would depend on the specific product or service context.",
+          "suggestion": "Consider translations like 'Znížiť plán' (Reduce plan), 'Prechod na základný plán' (Switch to basic plan), or 'Vrátiť sa k nižšiemu plánu' (Return to a lower plan). The best option requires more context."
         }
       ],
       "approved_at": null
@@ -269,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Смањи ниво сада\" doesn't accurately convey the meaning of \"Downgrade now.\" While \"Смањи\" (smanji) means 'reduce', 'ниво' (nivo) means 'level'. 'Downgrade' implies reducing a service or subscription to a lower tier or plan, not just reducing a 'level'. A more accurate translation would convey this meaning.",
-          "suggestion": "Consider alternatives like \"Спуштање сад\" (Spustanje sad - meaning 'lower now') or \"Пређи на нижи пакет сад\" (Pređi na niži paket sad - meaning 'Switch to a lower package now')"
+          "description": "The translation 'Смањи ниво сада' is a literal translation of 'Reduce level now'. While understandable, 'Downgrade' carries a specific meaning in the context of payments, implying a reduction in service tier or features. A more accurate translation would convey this nuance.",
+          "suggestion": "Consider alternatives like 'Спуштање нивоа сада' or 'Умањење нивоа сада' which better represent 'Downgrade' in a payment context. Alternatively, if the service tier reduction is purely about reducing features, 'Ограничи сад' could be appropriate, but needs careful consideration in context."
         }
       ],
       "approved_at": null
@@ -281,8 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Smanji nivo sada\" doesn't accurately convey the meaning of \"Downgrade now.\" \"Smanji nivo\" translates more closely to 'reduce level'. Downgrade implies a movement to a lower tier or plan, not simply reducing the level.",
-          "suggestion": "Potencijalno bolji prevod bi bio 'Preuzmi niži paket sada' or 'Prebaci na niži paket sada'."
+          "description": "The translation 'Smanji nivo sada' doesn't accurately convey the meaning of 'Downgrade now'. 'Smanji nivo' translates to 'Reduce level' which isn't the same as downgrading.",
+          "suggestion": "Ništa nije pogrešno u reči, ali je značenje pogrešno. Bolji prevod bi bio 'Ponizi nivo sada' ili 'Odbaci viši nivo sada'."
         }
       ],
       "approved_at": null
@@ -293,8 +288,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation 'Şimdi eski sürüme geç' translates to 'Switch to the old version'. While it conveys a similar concept, 'Downgrade' has a more specific meaning in a software context. A more accurate translation would be 'Sürüm düşürme şimdi'.",
-          "suggestion": "Sürüm düşürme şimdi"
+          "description": "The translation \"Şimdi eski sürüme geç\" literally translates to \"Switch to the old version now.\" While conveying a similar idea of downgrading, it's not a direct or natural translation of \"Downgrade now.\" A more accurate translation might be \"Aşağıya indir\" or \"Sürümü geri al\".",
+          "suggestion": "Aşağıya indir"
         }
       ],
       "approved_at": null

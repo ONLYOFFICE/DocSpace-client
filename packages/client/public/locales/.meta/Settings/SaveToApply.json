@@ -3,7 +3,7 @@
   "content": "Click the <strong>Save</strong> button at the bottom to apply.",
   "content_en_sha1_hash": "7174b893d5a162ea27c6dae6791a9ca97ef72408",
   "created_at": "2025-05-19T21:30:52.481Z",
-  "updated_at": "2025-05-26T07:57:32.772Z",
+  "updated_at": "2025-10-16T07:29:35.899Z",
   "comment": {
     "text": "This translation key is used to display a message encouraging users to click the \"Save\" button at the bottom of a form or section. It appears in a smaller font size below a larger title, and its purpose is to provide a clear call-to-action for users to complete their settings changes.",
     "is_auto": true,
@@ -12,38 +12,38 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
-      "line_number": 170,
+      "line_number": 173,
       "context": "{t(\"AdminsMessageSettingDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\" className=\"learn-subtitle\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>\n \n {administratorMessageSettingsUrl ? (\n <Link\n className=\"link-learn-more\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 91,
-      "context": "<div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"SettingPasswordDescription\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>\n {passwordStrengthSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n target=\"_blank\"",
+      "line_number": 151,
+      "context": "<div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"SettingPasswordDescription\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>\n {passwordStrengthSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n dataTestId=\"password_strength_learn_more\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 91,
-      "context": "<div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"SettingPasswordDescription\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>\n {passwordStrengthSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n target=\"_blank\"",
+      "line_number": 151,
+      "context": "<div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"SettingPasswordDescription\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>\n {passwordStrengthSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n dataTestId=\"password_strength_learn_more\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 91,
-      "context": "<div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"SettingPasswordDescription\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>\n {passwordStrengthSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n target=\"_blank\"",
+      "line_number": 151,
+      "context": "<div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"SettingPasswordDescription\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>\n {passwordStrengthSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n dataTestId=\"password_strength_learn_more\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/passwordStrength.js",
-      "line_number": 253,
-      "context": "<LearnMoreWrapper withoutExternalLink={!passwordStrengthSettingsUrl}>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"SettingPasswordDescription\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\" className=\"learn-subtitle\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>\n {passwordStrengthSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme.main?.accent}",
+      "line_number": 280,
+      "context": "<LearnMoreWrapper withoutExternalLink={!passwordStrengthSettingsUrl}>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"SettingPasswordDescription\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\" className=\"learn-subtitle\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>\n {passwordStrengthSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n dataTestId=\"password_strength_component_learn_more\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 225,
-      "context": "<LearnMoreWrapper withoutExternalLink={!trustedMailDomainSettingsUrl}>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TrustedMailSettingDescription\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\" className=\"learn-subtitle\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>\n {trustedMailDomainSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme.main?.accent}",
+      "line_number": 235,
+      "context": "<LearnMoreWrapper withoutExternalLink={!trustedMailDomainSettingsUrl}>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TrustedMailSettingDescription\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\" className=\"learn-subtitle\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>\n {trustedMailDomainSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n dataTestId=\"trusted_mail_component_learn_more\"",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Shared links",
   "content_en_sha1_hash": "612404b77d15856ff22740b7a6e590df68bbef26",
   "created_at": "2025-05-19T21:30:48.633Z",
-  "updated_at": "2025-06-02T10:20:51.251Z",
+  "updated_at": "2025-10-13T14:41:02.932Z",
   "comment": {
     "text": "The \"SharedLinks\" translation key is used to display a label for shared links, indicating that users can access or share files. It appears in various UI elements, such as info panels and sharing components, where it prompts users to view or interact with shared content.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.js",
-      "line_number": 194,
-      "context": ") {\n if (!isArchiveFolder || primaryLink) {\n publicRoomItems.push(\n <LinksBlock key={GENERAL_LINK_HEADER_KEY}>\n <Text fontSize=\"14px\" fontWeight={600} lineHeight=\"16px\">\n {isFormRoom ? t(\"Common:PublicLink\") : t(\"Common:SharedLinks\")}\n </Text>\n \n {!isArchiveFolder && !isFormRoom ? (\n <div\n data-tooltip-id=\"emailTooltip\"",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.tsx",
+      "line_number": 176,
+      "context": "className={styles.linksBlock}\n key={GENERAL_LINK_HEADER_KEY}\n data-testid=\"info_panel_members_links_block\"\n >\n <Text fontSize=\"14px\" fontWeight={600} lineHeight=\"16px\">\n {isFormRoom ? t(\"Common:PublicLink\") : t(\"Common:SharedLinks\")}\n </Text>\n \n {!isArchiveFolder && canAddLink ? (\n <div\n data-tooltip-id=\"emailTooltip\"",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/shared/components/share/index.tsx",
-      "line_number": 407,
-      "context": "<ShareLoader t={t} />\n ) : (\n <div className={styles.links}>\n <div className={styles.additionalLink}>\n <Text fontSize=\"14px\" fontWeight={600} className={styles.titleLink}>\n {t(\"Common:SharedLinks\")}\n </Text>\n {fileLinks.length > 0 && !onlyOneLink ? (\n <div data-tooltip-id=\"file-links-tooltip\" data-tip=\"tooltip\">\n <IconButton\n className={styles.linkToViewingIcon}",
+      "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
+      "line_number": 445,
+      "context": ") : null;\n \n const header = (\n <ShareHeader\n key=\"share-header\"\n title={t(\"Common:SharedLinks\")}\n options={options}\n isShareTitle\n />\n );",
       "module": "/packages/shared"
     },
     {
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Համօգտագործվող հղումներ\" is technically correct, it's a bit clunky and not the most natural-sounding translation for \"Shared links.\" It emphasizes 'shared use' which isn't the primary meaning.",
-          "suggestion": "Consider alternatives like \"ընդհանուր հղումներ\" (endhanur hghumner - common links) or \"մատուցված հղումներ\" (matuts'vads' hghumner - provided links) or simply \"համօգտագործվող հղումներ\" if shared use is the specific intent, but assess the context first."
+          "description": "The translation \"Համօգտագործվող հղումներ\" while technically meaning 'shared links' lacks the natural flow and common usage of 'shared links' in Armenian. A more natural and accurate translation would better convey the intended meaning.",
+          "suggestion": "Consider alternatives like \"ընդհանուր հղումներ\" (endhanur hghumner - common links) or \"մատուցված հղումներ\" (matuts’vad hghumner - provided links) depending on the specific context."
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຊືອກທີ່ແບ່ງປັນ\" literally translates to \"shared rope.\" \"Shared links\" refers to hyperlinks or shared URLs, not ropes. This is an inaccurate translation.",
-          "suggestion": "A more accurate translation would be something like \"ລິ້ງທີ່ແບ່ງປັນ\" (linking that is shared) or \"ເຊື່ອມຕໍ່ທີ່ແບ່ງປັນ\" (connections that are shared)."
+          "description": "'ເຊືອກ' literally translates to 'rope' or 'string'. While it might be used figuratively, 'shared links' refers to URLs or web links shared between people. A more accurate translation would be something conveying the idea of 'shared URLs' or 'shared connections'.",
+          "suggestion": "Consider alternatives like 'ຄວາມຊັດເຊື້ອທີ່ແບ່ງປັນ' (shared connections) or 'ລິ້ງທີ່ແບ່ງປັນ' (shared links - borrowing the English term)"
         }
       ],
       "approved_at": null
@@ -165,7 +165,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Link-urile partajate\" is understandable, a more natural and accurate translation of 'Shared links' in Romanian would be 'Legături partajate' or 'Link-uri partajate'. 'Link-uri' is more commonly used than 'Link-urile'.",
+          "suggestion": "Legături partajate"
+        }
+      ],
       "approved_at": null
     },
     "ru": {

@@ -21,10 +21,13 @@
   "CreateSamplePublicRoom": "Ustvari vzorec vdelave javne sobe",
   "CreateSampleRoomSelector": "Ustvari vzorec vdelave izbire sobe",
   "CreateSampleViewer": "Ustvari vzorec vdelave pregledovalnika",
+  "CSPDescription": "Vnesite naslov storitve, kjer želite vgraditi ali povezati vašo {{organizationName}} {{productName}}.",
+  "CSPHeader": "Dodajte dovoljene domene za ta {{productName}}.",
   "CSPHelp": "Ta nastavitev je varnostni mehanizem, ki se lahko uporablja za zaščito pred napadi z vnašanjem vsebine. CSP opisuje varne vire za prenos prenos. Prenos iz virov, ki niso na `belem seznamu`, je blokiran. Določite domene (skupaj s protokolom), s katerimi bo delovalo.",
   "CSPInfoBarDescription": "Omogočite protokol HTTPS za vaš {{productName}}, da zagotovite pravilno namestitev.",
   "CSPInfoBarHeader": "Zahtevan je HTTPS",
   "CSPInputPlaceholder": "Vnesite URL kot v primeru: https://example.com",
+  "CSPUrlHelp": "Prosim, navedite samo domensko ime, brez poti URL-ja ali dodatnih znakov.",
   "CustomDescription": "Ročno konfigurirajte parametre za vdelavo vašega {{productName}}.",
   "CustomizingDisplay": "Prilagajanje zaslona",
   "DataDisplay": "Nastavitve prikaza podatkov",
@@ -113,6 +116,5 @@
   "Subtitle": "Podnaslov",
   "SubtitleDescription": "Podnaslov z dodatnimi komentarji ali opisi za trenutni imenik.",
   "TabPlugins": "Vtičniki za zavihke",
-  "Viewer": "Pregledovalnik",
   "ViewerDescription": "Vdelajte pregledovalnik, da uporabnikom omogočite odpiranje datoteke za ogled iz ustrezne sobe."
 }

@@ -57,6 +57,7 @@ const ControlButtons = ({
   getContextOptionsFolder,
   isTrashFolder,
   isMobile,
+  isMobileOnly,
   onContextOptionsClick,
   isPublicRoom,
 
@@ -79,6 +80,9 @@ const ControlButtons = ({
   guidAnimationVisible,
   setGuidAnimationVisible,
   isContextButtonVisible,
+
+  isPlusButtonVisible,
+  contextMenuHeader,
 }: TControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
@@ -134,6 +138,8 @@ const ControlButtons = ({
   };
 
   const renderContextButton = (visible: boolean) => {
+    // console.log(visible);
+
     if (!visible || isFrame) return null;
 
     return (
@@ -142,14 +148,17 @@ const ControlButtons = ({
         className="option-button"
         getData={getContextOptionsFolder}
         withMenu={withMenu}
-        title={titles?.actions}
+        title={title}
         isTrashFolder={isTrashFolder}
         isMobile={isMobile || false}
+        isMobileOnly={isMobileOnly || false}
+        contextMenuHeader={contextMenuHeader}
         onCloseDropBox={onCloseDropBox}
         onContextOptionsClick={onContextOptionsClick}
         contextButtonAnimation={contextButtonAnimation}
         guidAnimationVisible={guidAnimationVisible}
         setGuidAnimationVisible={setGuidAnimationVisible}
+        ignoreChangeView={!!(isMobile && !!contextMenuHeader)}
       />
     );
   };
@@ -179,7 +188,7 @@ const ControlButtons = ({
       data-is-frame={isFrame}
       data-show-title={showTitle}
     >
-      {renderPlusButton()}
+      {isPlusButtonVisible ? renderPlusButton() : null}
       {renderContextButton((isContextButtonVisible && !isPublicRoom) ?? false)}
       {renderToggleInfoPanel()}
       {renderContextButton((isPublicRoom && containVisible) ?? false)}

@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 import { ValidationStatus } from "@docspace/shared/enums";
 
@@ -48,8 +48,10 @@ export async function handlePublicRoomValidation(
     return null;
   }
 
+  const search = request.nextUrl.searchParams;
+
   const { response: validation, anonymousSessionKeyCookie } =
-    await validatePublicRoomKey(shareKey);
+    await validatePublicRoomKey(shareKey, search);
 
   const redirectPath = redirects[validation.status];
   if (!redirectPath) return { anonymousSessionKeyCookie };
@@ -58,7 +60,7 @@ export async function handlePublicRoomValidation(
     validation.status === ValidationStatus.Password &&
     "title" in validation
   ) {
-    requestHeaders.set(PUBLIC_ROOM_TITLE_HEADER, validation.title);
+    requestHeaders.set(PUBLIC_ROOM_TITLE_HEADER, JSON.stringify(validation));
   }
 
   return {

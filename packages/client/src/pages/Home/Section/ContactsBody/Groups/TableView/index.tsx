@@ -36,6 +36,7 @@ import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import TableStore from "SRC_DIR/store/TableStore";
+import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 import { TContactsViewAs } from "SRC_DIR/helpers/contacts";
 
 import EmptyScreenGroups from "../../EmptyScreenGroups";
@@ -66,6 +67,7 @@ type GroupsTableViewProps = {
 
   columnStorageName?: TableStore["columnStorageName"];
   columnInfoPanelStorageName?: TableStore["columnInfoPanelStorageName"];
+  withContentSelection?: ContactsHotkeysStore["withContentSelection"];
 };
 
 const GroupsTableView = ({
@@ -90,8 +92,9 @@ const GroupsTableView = ({
 
   columnStorageName,
   columnInfoPanelStorageName,
+  withContentSelection,
 }: GroupsTableViewProps) => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -105,7 +108,11 @@ const GroupsTableView = ({
   });
 
   return groups?.length ? (
-    <GroupsTableContainer useReactWindow forwardedRef={ref}>
+    <GroupsTableContainer
+      noSelect={!withContentSelection}
+      useReactWindow
+      forwardedRef={ref as React.RefObject<HTMLDivElement>}
+    >
       <GroupsTableHeader
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
@@ -145,7 +152,8 @@ const GroupsTableView = ({
 
 export default inject(
   ({ peopleStore, settingsStore, infoPanelStore, tableStore }: TStore) => {
-    const { groupsStore, viewAs, setViewAs } = peopleStore;
+    const { groupsStore, contactsHotkeysStore, viewAs, setViewAs } =
+      peopleStore;
 
     const {
       groups,
@@ -169,6 +177,8 @@ export default inject(
       columnInfoPanelStorageName,
     } = tableStore;
 
+    const { withContentSelection } = contactsHotkeysStore!;
+
     return {
       groups,
       selection,
@@ -189,6 +199,7 @@ export default inject(
 
       columnStorageName,
       columnInfoPanelStorageName,
+      withContentSelection,
     };
   },
 )(observer(GroupsTableView));

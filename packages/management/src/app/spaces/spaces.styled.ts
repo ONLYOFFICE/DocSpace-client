@@ -35,4 +35,3 @@ export const StyledConfigurationSpaces = styled.div`
     margin-bottom: 8px;
   }
 `;
-

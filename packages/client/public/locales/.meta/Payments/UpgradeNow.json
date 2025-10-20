@@ -3,7 +3,7 @@
   "content": "Upgrade now",
   "content_en_sha1_hash": "09a80c7a63cdefe5e5c7bccdc6bf4b894b15c07c",
   "created_at": "2025-05-19T21:30:53.741Z",
-  "updated_at": "2025-06-08T12:02:32.817Z",
+  "updated_at": "2025-09-07T07:53:15.336Z",
   "comment": {
     "text": "This translation key \"UpgradeNow\" is used to display a button label that encourages users to upgrade their plan. It appears on a payment-related button in the PortalSettings page and should be translated to prompt users to take action, such as paying for an upgraded service.",
     "is_auto": true,
@@ -12,25 +12,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
-      "line_number": 192,
+      "line_number": 259,
       "context": "const payTariffButton = () => {\n return canPayTariff ? (\n <Button\n className=\"upgrade-now-button\"\n label={t(\"UpgradeNow\")}\n size=\"medium\"\n primary\n isDisabled={isLessCountThanAcceptable || isLoading || isDisabled}\n onClick={goToStripePortal}\n isLoading={isLoading}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
-      "line_number": 192,
+      "line_number": 259,
       "context": "const payTariffButton = () => {\n return canPayTariff ? (\n <Button\n className=\"upgrade-now-button\"\n label={t(\"UpgradeNow\")}\n size=\"medium\"\n primary\n isDisabled={isLessCountThanAcceptable || isLoading || isDisabled}\n onClick={goToStripePortal}\n isLoading={isLoading}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
-      "line_number": 192,
+      "line_number": 259,
       "context": "const payTariffButton = () => {\n return canPayTariff ? (\n <Button\n className=\"upgrade-now-button\"\n label={t(\"UpgradeNow\")}\n size=\"medium\"\n primary\n isDisabled={isLessCountThanAcceptable || isLoading || isDisabled}\n onClick={goToStripePortal}\n isLoading={isLoading}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
-      "line_number": 192,
+      "line_number": 259,
       "context": "const payTariffButton = () => {\n return canPayTariff ? (\n <Button\n className=\"upgrade-now-button\"\n label={t(\"UpgradeNow\")}\n size=\"medium\"\n primary\n isDisabled={isLessCountThanAcceptable || isLoading || isDisabled}\n onClick={goToStripePortal}\n isLoading={isLoading}",
       "module": "/packages/client"
     }
@@ -129,7 +129,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Atjaunot' translates to 'Restore' or 'Renew', not 'Upgrade'. While 'Upgrade' can sometimes be understood as 'atjaunot', it's not the most accurate translation in this context.",
+          "suggestion": "Upgrade - Augšupēt"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -150,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Aumentar\" can mean 'to increase' or 'to upgrade', \"Atualizar agora\" would be a more accurate and natural translation of 'Upgrade now' in a context likely referring to software or service updates. 'Aumentar' implies a quantitative increase, whereas 'Atualizar' implies a version upgrade.",
-          "suggestion": "Atualizar agora"
+          "description": "'Aumentar agora' doesn't perfectly convey the meaning of 'Upgrade now'. 'Upgrade' implies an improvement or advancement, while 'aumentar' primarily means 'to increase'.",
+          "suggestion": "Consider 'Atualizar agora' or 'Melhorar agora' to better reflect the meaning of 'Upgrade now'."
         }
       ],
       "approved_at": null
@@ -180,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'උත්ශ්‍රේණි කරන්න' while understandable, isn't the most natural or common way to translate 'Upgrade now' in Sinhala. It's a bit literal.",
-          "suggestion": "A better translation would be 'නැවතාලන්න' (Nāvaṭalānnā) or 'යාවත්ථම කරන්න' (Yāvaṭṭhamakaraṇṇa) - these convey the meaning of 'Upgrade' more accurately in context."
+          "description": "The translation 'උත්ශ්‍රේණි කරන්න' doesn't perfectly convey the meaning of 'Upgrade now'. 'Upgrade' can refer to improving something, not just ranking or classifying.  A more accurate translation might focus on improvement or enhancement.",
+          "suggestion": "Consider alternatives like 'නැග්‍රාදිය යාවත්කාලීකරණය කරන්න' (Nägradiya yāvatkālikaraṇa karanna - Upgrade/Update) or 'වැඩිදියුණු කරන්න' (Vadidiyaḷu karaṇa - Improve)."
         }
       ],
       "approved_at": null
@@ -204,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Надогради сада\" is not a correct translation of \"Upgrade now\". \"Надогради\" means \"re-grade\" or \"re-evaluate\", which doesn't align with the meaning of 'upgrade'.",
-          "suggestion": "A more accurate translation would be \"Ажурирај сада\" (Ažuriraj sada) or \"Побољшај сада\" (Poboljšaj sada)."
+          "description": "The Serbian (Cyrillic) translation 'Надогради сада' is not a correct translation of 'Upgrade now'. It seems to be a combination of words and doesn't accurately convey the meaning of an upgrade.",
+          "suggestion": "The correct translation would be 'Надгради сада' (Nadgradi sada)."
         }
       ],
       "approved_at": null
@@ -216,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nadogradi sada' isn't the most natural or commonly used way to say 'Upgrade now' in Serbian. While technically understandable, it's a bit awkward.",
-          "suggestion": "Azuriraj sada"
+          "description": "The translation \"Nadogradi sada\" while understandable, isn't the most natural or idiomatic translation of \"Upgrade now.\" It implies making something better rather than initiating an upgrade process.",
+          "suggestion": "Consider 'Ažuriraj sada' or 'Nadgradite sada' for a more accurate and common translation, depending on the specific context. 'Ažuriraj sada' is generally the preferred option."
         }
       ],
       "approved_at": null
@@ -228,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Şimdi Yükselt\" doesn't fully convey the meaning of \"Upgrade now\". 'Yükselt' often implies an elevation or increase in value, rather than a software or feature upgrade. A more appropriate translation would depend on the specific context of the upgrade, but options like 'Şimdi yükselt' (more generic) or 'Şimdi güncelle' (for software updates) are better.",
-          "suggestion": "Şimdi güncelle"
+          "description": "The Turkish translation 'Şimdi Yükselt' doesn't perfectly capture the nuance of 'Upgrade now'. 'Yükselt' implies an elevation or increase, while 'Upgrade' refers to a software or product enhancement. A more accurate translation would convey the action of improving or updating.",
+          "suggestion": "Şimdi Güncelle"
         }
       ],
       "approved_at": null
@@ -240,7 +246,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Підвищити зараз\" does not accurately convey the meaning of \"Upgrade now.\" \"Підвищити\" implies an increase or elevation, which isn't the intended meaning of 'upgrade'. The correct translation should convey the sense of advancing to a newer version or level.",
+          "description": "The translation 'Підвищити зараз' doesn't accurately convey the meaning of 'Upgrade now'. 'Підвищити' implies increasing or elevating something, not upgrading.",
           "suggestion": "Оновити зараз"
         }
       ],

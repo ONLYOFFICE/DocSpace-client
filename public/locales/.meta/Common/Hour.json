@@ -3,7 +3,7 @@
   "content": "hour",
   "content_en_sha1_hash": "52ab86a87214a453d9f82538264f190854915247",
   "created_at": "2025-05-19T21:30:45.818Z",
-  "updated_at": "2025-05-26T07:57:32.899Z",
+  "updated_at": "2025-06-30T12:20:31.697Z",
   "comment": {
     "text": "This translation key represents the English word \"hour\" to be used in a specific component displaying cron job schedules, typically found in a scheduling or configuration interface.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/cron/Cron.utils.ts",
-      "line_number": 107,
+      "line_number": 102,
       "context": "}\n if (cronParts[1].length > 0) {\n return \"Day\";\n }\n if (cronParts[0].length > 0) {\n return \"Hour\";\n }\n // return \"minute\";\n return \"Hour\";\n };",
       "module": "/packages/shared"
     }

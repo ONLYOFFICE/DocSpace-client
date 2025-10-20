@@ -3,7 +3,7 @@
   "content": "Invited",
   "content_en_sha1_hash": "53469df1c48ff6abdcf1b528fd8c8ac2baf05099",
   "created_at": "2025-05-19T21:30:45.993Z",
-  "updated_at": "2025-06-08T12:02:32.672Z",
+  "updated_at": "2025-09-23T07:24:24.137Z",
   "comment": {
     "text": "This translation key \"Invited\" is used to display a message indicating that an email invitation has been sent or received. It typically appears in UI elements related to invite functionality, such as input fields or search items, and helps users understand their current status regarding invitations.",
     "is_auto": true,
@@ -12,26 +12,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 396,
+      "line_number": 403,
       "context": "{status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}\n </div>\n <SearchItemText>{email}</SearchItemText>\n </div>\n {shared ? (\n <SearchItemText $info>{t(\"Common:Invited\")}</SearchItemText>\n ) : null}\n {isDisabled ? (\n <SearchItemText info>{t(\"Common:Disabled\")}</SearchItemText>\n ) : null}\n </DropDownItem>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/sub-components/InviteInput.tsx",
-      "line_number": 220,
-      "context": "</SearchItemText>\n </div>\n <SearchItemText>{email}</SearchItemText>\n </div>\n {shared ? (\n <SearchItemText $info>{t(\"Common:Invited\")}</SearchItemText>\n ) : null}\n </DropDownItem>\n );\n },\n [t, inviteItems, setInviteItems],",
+      "line_number": 212,
+      "context": "</SearchItemText>\n </div>\n <SearchItemText>{(item as TUser).email}</SearchItemText>\n </div>\n {shared ? (\n <SearchItemText $info>{t(\"Common:Invited\")}</SearchItemText>\n ) : null}\n </DropDownItem>\n );\n },\n [t, inviteItems, setInviteItems],",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 108,
-      "context": "const isDisabled =\n disableDisabledUsers && status === EmployeeStatus.Disabled;\n \n const disabledText = isInvited\n ? t(\"Common:Invited\")\n : isDisabled\n ? t(\"Common:Disabled\")\n : \"\";\n \n const avatarRole = getUserAvatarRoleByType(role);",
+      "line_number": 111,
+      "context": "const isDisabled =\n disableDisabledUsers && status === EmployeeStatus.Disabled;\n \n const disabledText = isInvited\n ? (disabledInvitedText ?? t(\"Common:Invited\"))\n : isDisabled\n ? t(\"Common:Disabled\")\n : \"\";\n \n const avatarRole = getUserAvatarRoleByType(role);",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 108,
-      "context": "const isDisabled =\n disableDisabledUsers && status === EmployeeStatus.Disabled;\n \n const disabledText = isInvited\n ? t(\"Common:Invited\")\n : isDisabled\n ? t(\"Common:Disabled\")\n : \"\";\n \n const avatarRole = getUserAvatarRoleByType(role);",
+      "line_number": 111,
+      "context": "const isDisabled =\n disableDisabledUsers && status === EmployeeStatus.Disabled;\n \n const disabledText = isInvited\n ? (disabledInvitedText ?? t(\"Common:Invited\"))\n : isDisabled\n ? t(\"Common:Disabled\")\n : \"\";\n \n const avatarRole = getUserAvatarRoleByType(role);",
       "module": "/packages/shared"
     }
   ],
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'Dəvət edildi' translates to 'Was invited,' which is a passive form. The English 'Invited' can function as a noun or adjective without requiring a passive verb form. A more accurate translation would depend on the context, but a simpler option would be 'dəvət' (invitation).",
-          "suggestion": "dəvət"
+          "description": "The Azerbaijani translation \"Dəvət edildi\" translates to \"Was invited\". The English term \"Invited\" represents a broader concept, not just a completed action. It can refer to the act of inviting or the state of being invited. \"Dəvət\" is a more accurate translation as it conveys the noun form of the invitation.",
+          "suggestion": "Dəvət"
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"Pozvánka na\" translates to \"Invitation to\" rather than \"Invited\". It doesn't accurately convey the English meaning.",
-          "suggestion": "Consider \"Pozvaný\" (invited - masculine nominative) or \"Pozvaná\" (invited - feminine nominative) depending on the context, or potentially a more descriptive phrase that reflects the intended meaning of 'Invited'."
+          "description": "The Czech translation \"Pozvánka na\" translates to \"Invitation to\" and doesn't directly represent the English word \"Invited\". It indicates something is being invited *to*, not the state of being invited.",
+          "suggestion": "A more accurate translation might be \"Pozvaný\" (invited, masculine), \"Pozvaná\" (invited, feminine), or \"Pozvaní\" (invited, plural) depending on the context."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"초대 완료\" translates to \"Invitation Completed\" or \"Invitation Done\", which doesn't directly convey the meaning of 'Invited'. It implies an action has been completed, rather than the state of being invited.",
-          "suggestion": "Consider alternatives like \"초대됨\" (invited), \"초대받음\" (received an invitation), or \"초대\" (invitation)."
+          "description": "The Korean translation \"초대 완료\" (cho-dae wan-lyeo) translates to \"Invitation completed\" or \"Invitation finished\" rather than simply \"Invited\". It implies the action of inviting has already taken place.",
+          "suggestion": "Consider a more direct translation like \"초대\" (cho-dae) which means 'Invitation' or a phrase indicating the status of being invited, such as \"초대됨\" (cho-dae-deum) which means 'Being invited'."
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation \"Zaproszono\" translates more closely to \"Was invited\" or \"Have been invited.\"  \"Invited\" suggests an active invitation, while \"Zaproszono\" implies a passive reception of an invitation. A more accurate translation depending on the context could be \"Zaproszenie\" (Invitation) or \"Zaproś\" (Invite).",
-          "suggestion": "Consider \"Zaproszenie\" or \"Zaproś\" depending on the intended meaning."
+          "description": "The Polish translation \"Zaproszono\" (literally 'invited' in the past passive voice) doesn't perfectly align with the English \"Invited\" (present participle). While it conveys a similar meaning, it's a more formal and passive construction. Depending on the context, a more direct translation like \"Zaproszony\" (invited, masculine singular) or \"Zaproszeni\" (invited, plural) might be better.",
+          "suggestion": "Consider \"Zaproszony\" (if referring to a male) or \"Zaproszeni\" (if referring to a group or a general invitation) for a more direct translation, or retain \"Zaproszono\" if the passive voice is appropriate for the context."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Invitat\" is a masculine singular form. The English word \"Invited\" implies a broader meaning that could be masculine, feminine, or plural. A more accurate translation might depend on the context, but \"Invitați\" (masculine plural) or \"Invitați/Invitate\" (mixed or feminine plural) would be more versatile.",
-          "suggestion": "Consider 'Invitați' or 'Invitați/Invitate' for greater accuracy depending on context."
+          "description": "The Romanian translation \"Invitat\" is a masculine singular form. The English word \"Invited\" could refer to a singular or plural, masculine or feminine. The correct translation would depend on the context. Without context, a more neutral translation like \"Invitați\" (plural) or \"Invitat/ă\" (masculine/feminine singular) would be better.",
+          "suggestion": "Consider \"Invitați\" (plural) or \"Invitat/ă\" (masculine/feminine singular), depending on context."
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ආරාධනා කළා\" (aaradanaa kalaa) translates to 'invited' in the sense of 'having done the inviting'.  While technically correct, it's more natural to use a more direct translation of 'invited' as a state of being invited. The word 'ආරාධිත' (aaraditha) is a better fit, signifying 'invited' as an adjective describing a person or object.",
-          "suggestion": "ආරාධිත (aaraditha)"
+          "description": "The translation 'ආරාධනා කළා' while meaning 'invited' in a general sense, is a past tense form. 'Invited' can refer to a present or future invitation. A more accurate translation for the key 'Invited' (as a label or status) would be something like 'ආරාධනය' (Aaradhanya) which means 'invitation'.",
+          "suggestion": "ආරාධනය"
         }
       ],
       "approved_at": null
@@ -219,13 +219,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation \"Povabljeni\" is the plural form of \"invited.\" The English word \"Invited\" is singular and should be translated accordingly.",
-          "suggestion": "Povabljen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -246,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Davet edildi\" translates to \"was invited\" or \"has been invited\", not just \"Invited\". It's a passive voice, while the English is a simple past participle acting as an adjective. This doesn't accurately reflect the original meaning in context.",
-          "suggestion": "Consider \"Davet\" (Invitation) or \"Davetli\" (Invited person) for a more accurate translation, depending on the intended usage."
+          "description": "The translation 'Davet edildi' (was invited) is a passive construction. 'Invited' functions as an adjective or noun in English. A more accurate translation would depend on the context. If it's referring to a list of attendees, a more suitable translation might be 'Davetliler' (The invited ones) or 'Davet edilenler' (Those invited). If describing an action, 'Davet' (Invitation) might be more appropriate.",
+          "suggestion": "Consider 'Davetliler' or 'Davet' depending on context."
         }
       ],
       "approved_at": null
@@ -261,19 +255,19 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Đã mời\" is a valid translation, it carries the meaning 'already invited' or 'having been invited'. The English word 'Invited' is more general and doesn't necessarily imply a past action. A more accurate translation would depend on the context, but a more neutral option would be 'Mời'.",
+          "suggestion": "Mời"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While '已邀请' (Yǐ yāoqǐng) is a valid translation, it implies that the invitation has already happened. 'Invited' can also mean 'invited to do something in the future'. A more nuanced translation might be '受邀' (Shòu yāo) which conveys the invitation aspect without necessarily implying it's already completed.",
-          "suggestion": "Consider '受邀' (Shòu yāo) for a more versatile translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

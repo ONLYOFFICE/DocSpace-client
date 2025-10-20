@@ -91,14 +91,14 @@ describe("BrandName", () => {
 
   it("updates brandNameWhiteLabel when input changes", () => {
     renderComponent();
-    const input = screen.getByTestId("logo-text-input");
+    const input = screen.getByTestId("brand_name_input");
     fireEvent.change(input, { target: { value: "New Brand" } });
     expect(input).toHaveValue("New Brand");
   });
 
   it("calls onSave with correct data when save button is clicked", () => {
     renderComponent();
-    const saveButton = screen.getByTestId("save-button");
+    const saveButton = screen.getByTestId("brand_name_save_button");
     fireEvent.click(saveButton);
     expect(onSave).toHaveBeenCalledWith({
       logoText: "Current Brand",
@@ -108,8 +108,8 @@ describe("BrandName", () => {
 
   it("resets to defaultBrandName when cancel button is clicked", () => {
     renderComponent();
-    const input = screen.getByTestId("logo-text-input");
-    const cancelButton = screen.getByTestId("cancel-button");
+    const input = screen.getByTestId("brand_name_input");
+    const cancelButton = screen.getByTestId("brand_name_cancel_button");
     fireEvent.change(input, { target: { value: "New Brand" } });
     fireEvent.click(cancelButton);
     expect(input).toHaveValue("Default Brand");
@@ -117,20 +117,22 @@ describe("BrandName", () => {
 
   it("disables save button when text is equal to defaultBrandName", () => {
     renderComponent({ brandName: "Default Brand" });
-    const saveButton = screen.getByTestId("save-button");
+    const saveButton = screen.getByTestId("brand_name_save_button");
     expect(saveButton).toHaveClass("isDisabled");
   });
 
   it("shows reminder when text is different from defaultBrandName", () => {
     renderComponent();
-    const input = screen.getByTestId("logo-text-input");
+    const input = screen.getByTestId("brand_name_input");
     fireEvent.change(input, { target: { value: "New Brand" } });
-    expect(screen.getByText("YouHaveUnsavedChanges")).toBeInTheDocument();
+    expect(
+      screen.getByText("Common:YouHaveUnsavedChanges"),
+    ).toBeInTheDocument();
   });
 
   it("disables input when isSettingPaid is false", () => {
     renderComponent({ isSettingPaid: false });
-    const input = screen.getByTestId("logo-text-input");
+    const input = screen.getByTestId("brand_name_input");
     expect(input).toBeDisabled();
   });
 });

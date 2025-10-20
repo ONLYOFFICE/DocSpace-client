@@ -21,10 +21,13 @@
   "CreateSamplePublicRoom": "Luo esimerkki Julkinen huone-upotuksesta",
   "CreateSampleRoomSelector": "Luo esimerkki Huoneen valitsija-upotuksesta",
   "CreateSampleViewer": "Luo esimerkki Katselija-upotuksesta",
+  "CSPDescription": "Syötä palvelun osoite, johon haluat upottaa tai yhdistää {{organizationName}} {{productName}}.",
+  "CSPHeader": "Lisää sallitut verkkotunnukset tälle {{productName}}",
   "CSPHelp": "Tämä asetus on suojausmekanismi, jota voidaan käyttää suojelemaan sisällön lisäyshyökkäyksiltä. CSP kuvaa suojatut resurssien latauslähteet. Lataaminen resursseista, jotka eivät sisälly \"valkoiseen listaan\", on estetty. Määritä toimialueet (yhdessä protokollan kanssa) joiden kanssa se toimii.",
   "CSPInfoBarDescription": "Ole hyvä ja laita HTTTPS protokolla päälle {{productName}}:lle varmistaaksesi oikean asennuksen.",
   "CSPInfoBarHeader": "HTTPS vaaditaan",
   "CSPInputPlaceholder": "Syötä URL näin: https://example.com",
+  "CSPUrlHelp": "Ole hyvä ja anna vain verkkotunnus, vältä polkuja tai ylimääräisiä merkkejä.",
   "CustomDescription": "Määritä parametrit manuaalisesti {{productName}}-n upottamista varten.",
   "CustomizingDisplay": "Näytön mukauttaminen",
   "DataDisplay": "Tietojen näyttöasetukset",
@@ -113,6 +116,5 @@
   "Subtitle": "Tekstitys",
   "SubtitleDescription": "Tekstitys lisäkommenteilla tai kuvauksilla nykyiselle hakemistolle.",
   "TabPlugins": "Laajennukset-välilehti",
-  "Viewer": "Esikatselu",
   "ViewerDescription": "Upota esikatselu salliaksesi käyttäjien avata tiedosto katseltavaksi vastaavasta huoneesta."
 }

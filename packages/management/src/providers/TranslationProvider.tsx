@@ -51,4 +51,3 @@ const TranslationProvider = ({
 };
 
 export default TranslationProvider;
-

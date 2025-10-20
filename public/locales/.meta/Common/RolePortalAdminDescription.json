@@ -3,7 +3,7 @@
   "content": "{{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. All admins have access to the {{sectionName}} section.",
   "content_en_sha1_hash": "87028b550c1a2b07e57da5aa45f8bf2d4dc61013",
   "created_at": "2025-05-19T21:30:48.068Z",
-  "updated_at": "2025-05-26T07:57:32.989Z",
+  "updated_at": "2025-10-03T13:19:30.824Z",
   "comment": {
     "text": "This translation key describes the permissions and access level of a Portal Admin, indicating what they can do in the application, such as managing rooms and users. It appears to be used in UI elements related to user roles and permissions.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1252,
-      "context": "isRoomAdmin: boolean,\n isCollaborator: boolean,\n t: TTranslation,\n ) => {\n if (isPortalAdmin)\n return t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n });\n \n if (isRoomAdmin)",
+      "line_number": 1292,
+      "context": "isRoomAdmin: boolean,\n isCollaborator: boolean,\n t: TTranslation,\n ) => {\n if (isPortalAdmin)\n return t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n });\n \n if (isRoomAdmin)",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 97,
-      "context": "let options: Array<AccessOptionType | SeparatorOptionType> = [];\n const accesses = {\n portalAdmin: {\n key: EmployeeType.Admin,\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,",
+      "line_number": 98,
+      "context": "let options: Array<AccessOptionType | SeparatorOptionType> = [];\n const accesses = {\n portalAdmin: {\n key: EmployeeType.Admin,\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,",
       "module": "/packages/shared"
     }
   ],
@@ -33,18 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Arabic translation uses Arabic numerals and a mix of English terms (productName, sectionName) within the Arabic text. This can affect readability for native Arabic speakers. Consistent use of Arabic numerals and Arabic equivalents for product/section names would improve clarity.",
-          "suggestion": "Consider replacing the English placeholders with their Arabic equivalents where appropriate (if available) and using Arabic numerals consistently."
-        },
-        {
-          "type": "spelling",
-          "description": "While the translation is generally accurate, a more fluid phrasing could be achieved. The direct translation of 'archive' (أرشفتها) might sound clunky.  A more natural phrasing, depending on the intended nuance, could improve readability.",
-          "suggestion": "Consider alternative phrasing for 'archive' (أرشفتها) like 'حذف' (deletion) or 'حفظ' (storage) if a more nuanced meaning is desired."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -53,8 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The use of “ ” (non-breaking space) is unnecessary and disrupts readability. It should be replaced with a regular space.",
-          "suggestion": "Replace “ ” with a regular space."
+          "description": "The use of a non-breaking space ( ) between 'adminləri' and '{{productName}}' appears unnecessary and could be removed for better readability.",
+          "suggestion": "adminləri{{productName}}"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of a non-breaking space ( ) between 'bölməsinə' and 'daxil' is unnecessary and could be removed for better readability.",
+          "suggestion": "bölməsinədaxil"
         }
       ],
       "approved_at": null
@@ -62,7 +56,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'can have access' ('могат да имат достъп') is awkward. A more natural translation would be 'have access' ('могат да имат достъп').",
+          "suggestion": "Администраторите на {{productName}} имат достъп до настройките на {{productName}}, да управляват и архивират стаи, да канят нови потребители и да възлагат роли под тяхното ниво. Всички администратори имат достъп до раздел {{sectionName}}."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -74,13 +74,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The German translation lacks the double curly braces around 'sectionName' as present in the English content.",
-          "suggestion": "Change 'Bereich {{sectionName}}' to 'Bereich {{sectionName}}'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -101,8 +95,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"below their level\" in the English content implies a hierarchical structure of administrator roles. The Finnish translation \"tasojensa alapuolella\" translates this literally but may not convey the intended meaning of assigning roles to those with less authority. A more suitable translation might be \"alemmille tasoille\" or \"vähemmillä oikeuksilla\".",
-          "suggestion": "Consider rephrasing to 'alemmille tasoille' or 'vähemmillä oikeuksilla' to better reflect the intended meaning of assigning roles to those with less authority."
+          "description": "The phrase \"below their level\" is translated as \"tasojensa alapuolella,\" which is grammatically correct but sounds awkward and less natural in Finnish. A more idiomatic translation would be \"alhaisempiin rooleihin\" or \"matalampiin rooleihin\".",
+          "suggestion": "alhaisempiin rooleihin"
+        },
+        {
+          "type": "formatting",
+          "description": "The term 'osioon' is used for 'section'. While technically correct, 'osastoon' would be a more common and natural term in this context, although both are acceptable.",
+          "suggestion": "osastoon"
         }
       ],
       "approved_at": null
@@ -118,9 +117,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Armenian translation uses Armenian numerals. It's recommended to use the same formatting (likely western numerals) as the English source, especially when dealing with technical documentation and interfaces.",
-          "suggestion": "Consider replacing Armenian numerals with Western Arabic numerals throughout the document for consistency."
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles below their level' is not accurately translated. While the Armenian conveys the general idea, a more precise translation would reflect the concept of assigning roles *of lower privilege* or *with lower permissions*. The current wording is slightly awkward and could be misinterpreted.",
+          "suggestion": "Instead of \"իրենց մակարդակից ցածր դերեր հատկացնել\", consider \"իրենցից ցածր կարգի դերեր հատկացնել\" or \"ցածր կարգի դերեր հատկացնել\"."
         }
       ],
       "approved_at": null
@@ -137,8 +136,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Japanese translation uses '〜ことができます' which indicates ability, but the English uses 'can' which implies permission. While not strictly incorrect, a more appropriate phrasing could strengthen the translation.",
-          "suggestion": "{{productName}} 管理者は {{productName}} 設定にアクセスし、ルームを管理およびアーカイブし、新しいユーザーを招待し、彼らのレベル以下の役割を割り当てる権限を持ちます。すべての管理者は {{sectionName}} セクションにアクセスできます。"
+          "description": "The phrase '彼らのレベル以下の役割を割り当てることができます' is slightly awkward. While technically correct, it could be more natural in Japanese.",
+          "suggestion": "彼らのレベル以下の役割を割り当てられます。"
         }
       ],
       "approved_at": null
@@ -155,18 +154,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'invite new users' is translated as 'ເຊີນຜູ້ໃຊ້ບໍານານ'. 'ບໍານານ' means 'old' or 'veteran'. It should be translated to mean 'new' users.",
-          "suggestion": "ເຊີນຜູ້ໃຊ້​ໃໝ່"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'assign roles' is translated as 'ມອບບົດບາດ'. While technically correct, it doesn't fully convey the nuance of assigning roles within a system. A more appropriate term might be used.",
-          "suggestion": "ມອບສິດ"
+          "description": "The phrase 'archive rooms' is translated as 'ສິ້ນສຸດການໃຊ້ງານຫ້ອງ'. While technically correct, a more natural translation might be 'ລົບຫ້ອງ' (lop hohng) or 'ຖິ້ມຫ້ອງ' (thim hohng) depending on the context. 'ສິ້ນສຸດການໃຊ້ງານຫ້ອງ' is more akin to 'decommission rooms'.",
+          "suggestion": "Consider 'ລົບຫ້ອງ' or 'ຖິ້ມຫ້ອງ' instead of 'ສິ້ນສຸດການໃຊ້ງານຫ້ອງ'."
         },
         {
           "type": "formatting",
-          "description": "The sentence 'ຢູ່ລຸ່ມນີ້' (below this) is awkwardly placed and doesn't fit the flow of the sentence. It’s likely referring to the roles listed.  It doesn't make sense in this context.",
-          "suggestion": "Remove 'ຢູ່ລຸ່ມນີ້'."
+          "description": "The Lao translation includes 'ຢູ່ລຸ່ມນີ້' (yu lum ni) which translates to 'below this'. This phrase doesn't have a direct counterpart in the English content and disrupts the flow. It seems to be an attempt to indicate a list following, but it is unnecessary.",
+          "suggestion": "Remove 'ຢູ່ລຸ່ມນີ້' to improve flow."
         }
       ],
       "approved_at": null
@@ -174,7 +168,18 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'telpas' (rooms) is grammatically incorrect in the context of digital spaces/rooms. It implies physical rooms.",
+          "suggestion": "Consider using a term like 'vietas' (places) or a more contextually appropriate term for digital spaces. It might also be best to consult with the product team to define the correct terminology."
+        },
+        {
+          "type": "formatting",
+          "description": "The Latvian translation retains the double curly braces {{ }} for variables like productName and sectionName. Ensure this is consistent with the platform's templating system.",
+          "suggestion": "Verify the platform's templating system and adjust the curly braces accordingly. It might require single curly braces or a different syntax."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -186,13 +191,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Polish translation uses a comma (,) after 'archiwizować je' which feels slightly unnatural in Polish. A semicolon (;) would be more appropriate.",
-          "suggestion": "Administratorzy {{productName}} mogą uzyskać dostęp do ustawień {{productName}}, zarządzać pokojami; archiwizować je, zapraszać nowych użytkowników oraz przypisywać role poniżej swojego poziomu. Wszyscy administratorzy mają dostęp do sekcji {{sectionName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -201,8 +200,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'quem está abaixo do seu nível' is an awkward and slightly inaccurate translation of 'below their level'. A more natural translation would be 'abaixo do seu nível' or 'de nível inferior'.",
-          "suggestion": "Os administradores do {{productName}} podem aceder às configurações do {{productName}}, gerir e arquivar salas, convidar novos utilizadores e atribuir papéis a utilizadores de nível inferior."
+          "description": "The phrase \"quem está abaixo do seu nível\" is an awkward and inaccurate translation of \"below their level\". It implies 'who is below their level' rather than simply 'lower level'.",
+          "suggestion": "Os administradores do {{productName}} podem aceder às configurações do {{productName}}, gerir e arquivar salas, convidar novos utilizadores e atribuir papéis a utilizadores de nível inferior. "
         }
       ],
       "approved_at": null
@@ -219,8 +218,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The use of 'în funcţie de nivelul lor' sounds slightly awkward in Romanian. A more natural phrasing would improve readability.",
-          "suggestion": "Administratorii {{productName}} pot accesa setările {{productName}}, gestiona și arhiva săli, invita noi utilizatori și atribui roluri sub nivelul lor."
+          "description": "The Romanian translation uses a comma before 'gestiona și arhiva săli'. While not strictly incorrect, a semicolon (;) is generally preferred in Romanian for joining independent clauses.",
+          "suggestion": "Administratorii {{productName}} pot accesa setările {{productName}}; gestiona și arhiva săli, invita noi utilizatori și atribui roluri în funcţie de nivelul lor."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"în funcţie de nivelul lor\" could be more naturally phrased as \"inferior nivelului lor\".",
+          "suggestion": "Administratorii {{productName}} pot accesa setările {{productName}}; gestiona și arhiva săli, invita noi utilizatori și atribui roluri inferior nivelului lor. Toţi administratorii pot accesa secţiunea {{sectionName}}."
         }
       ],
       "approved_at": null
@@ -237,8 +241,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation uses Slovenian, not Sinhala. \"Skrbniki\" means \"administrators\" in Slovenian, not Sinhala.  The whole sentence is in Slovenian.",
-          "suggestion": "This translation needs to be completely redone into Sinhala. The sentence should accurately convey the meaning of the English content, which refers to administrators of 'productName' having access to settings, managing rooms, inviting users, assigning roles, and accessing a specific section."
+          "description": "The Sinhala translation uses 'Skrbniki' which translates to 'Guardians' or 'Custodians' in English, not 'admins'. The English content uses 'admins' which refers to system administrators.",
+          "suggestion": "Use a term that more accurately translates to 'admins' or 'administrators' in Sinhala. Consider using 'Prashasanakaru' (ප්‍රාශනකාරු) or a similar term that conveys the meaning of system administrators."
+        },
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation uses unusual word breaks ('Skrbniki {{productName}}').",
+          "suggestion": "Remove the non-breaking space and ensure proper word separation: 'Skrbniki {{productName}}'."
         }
       ],
       "approved_at": null
@@ -249,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'below their level' is translated as 'nižšie ako pozícia administrátora'. This is overly literal and doesn't flow naturally in Slovak.  It's better to convey the meaning of 'having less privilege'.",
-          "suggestion": "Administrátori {{productName}} majú prístup k nastaveniam {{productName}}, môžu spravovať a archivovať miestnosti, pozývať nových používateľov a prideľovať role s menšími právomocami."
+          "description": "The phrase 'below their level' is translated as 'nižšie ako pozícia administrátora'. While understandable, it's a bit clunky. A more natural translation would convey the meaning of 'lower rank' or 'with less administrative privilege'.",
+          "suggestion": "Administrátori {{productName}} majú prístup k nastaveniam {{productName}}, môžu spravovať a archivovať miestnosti, pozývať nových používateľov a prideľovať role s nižšou úrovňou oprávnení."
         }
       ],
       "approved_at": null
@@ -267,13 +276,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "Inconsistent use of hyphenation. The first instance of '{{productName}}-а' is correct, but should be consistent throughout the translation.",
-          "suggestion": "Change '{{productName}}-а' to '{{productName}}-а' consistently throughout."
+          "description": "The Serbian translation uses a hyphenated form of the product name ('{{productName}}-а') which might not be the standard convention for Serbian. Consider checking with a localization expert to ensure it aligns with product naming guidelines.",
+          "suggestion": "Review the product naming convention in Serbian and adjust the translation accordingly. It might be preferable to use a non-hyphenated version or a different declension."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'позивати нове кориснике' sounds a bit awkward in Serbian. A more natural phrasing would be 'додавати нове кориснике'.",
-          "suggestion": "Change 'позивати нове кориснике' to 'додавати нове кориснике'."
+          "description": "The phrase 'позивати нове кориснике' (pozivati nove korisnike) sounds a bit formal. A more natural phrasing could be used.",
+          "suggestion": "Consider using a more natural alternative such as 'додавање нових корисника' (dodavanje novih korisnika) or 'додавање нових чланова' (dodavanje novih clanova)."
         }
       ],
       "approved_at": null
@@ -284,13 +293,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The repetition of '{{productName}}-a' is stylistically awkward in Serbian. It's more natural to just use '{{productName}}' in both instances.",
-          "suggestion": "Administratori {{productName}} mogu pristupiti podešavanjima {{productName}}, upravljati i arhivirati sobe, pozivati nove korisnike i dodeljivati uloge ispod njihovih nivoa. Svi administratori imaju pristup {{sectionName}} odeljku."
+          "description": "The repetition of \"-a\" after {{productName}} in multiple places feels awkward in Serbian. While grammatically possible, it's not the most natural phrasing. It suggests a genitive plural or multiple occurrences, which isn't intended.",
+          "suggestion": "Consider rephrasing to avoid repeated \"-a\" after {{productName}}. For instance: \"Administratori {{productName}} mogu pristupiti podešavanjima {{productName}}, upravljati i arhivirati sobe...\" (using a straightforward genitive singular)"
         },
         {
-          "type": "grammar",
-          "description": "While grammatically correct, 'dodeljivati uloge ispod njihovih nivoa' can be improved for clarity and naturalness. The Serbian phrasing 'uloge nižeg nivoa' or 'uloge nižeg ranga' is preferred.",
-          "suggestion": "Administratori {{productName}} mogu pristupiti podešavanjima {{productName}}, upravljati i arhivirati sobe, pozivati nove korisnike i dodeljivati uloge nižeg nivoa. Svi administratori imaju pristup {{sectionName}} odeljku."
+          "type": "incorrect_translation",
+          "description": "The translation of \"invite new users\" as \"pozivati nove korisnike\" is technically correct, but a more natural phrasing in Serbian might be \"dodat nove korisnike\" or \"uvesti nove korisnike\".",
+          "suggestion": "Replace \"pozivati nove korisnike\" with \"dodat nove korisnike\" or \"uvesti nove korisnike\"."
         }
       ],
       "approved_at": null
@@ -313,13 +322,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Vietnamese translation uses a non-breaking space ( ) between 'Quản trị viên' and '{{productName}}'. While technically not an error, it's unusual and might look odd. A regular space is preferred.",
-          "suggestion": "Quản trị viên {{productName}} có thể truy cập cài đặt..."
+          "description": "The Vietnamese translation uses a non-breaking space ( ) between 'Quản trị viên' and '{{productName}}'. This might not be desired and should be reviewed for consistency with other instances of similar constructs.",
+          "suggestion": "Remove the non-breaking space and use a standard space: 'Quản trị viên {{productName}}'"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"dưới cấp của họ\" (below their level) is a literal translation that can be slightly awkward in Vietnamese. It implies hierarchy, which might not be the intended meaning.",
-          "suggestion": "The suggested alternative is to use something like \"dưới quyền\" (subordinates) or to rephrase the sentence to avoid the direct comparison of levels. A better option depends on the specific product context."
+          "description": "The phrase \"dưới cấp của họ\" is a bit awkward in Vietnamese. It's a literal translation of 'below their level' but might not be the most natural way to express the concept. It implies a hierarchical level. ",
+          "suggestion": "Consider a more natural phrasing like 'dưới quyền' (below authority), 'dưới cấp bậc' (below rank), or even a rephrasing to avoid mentioning level explicitly, like 'có thể chỉ định vai trò cho người dùng có cấp bậc thấp hơn'."
         }
       ],
       "approved_at": null
@@ -330,13 +339,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'assign roles below their level' is not accurately translated. '其级别以下的角色' implies assigning roles lower than the admin's own level, which isn't necessarily the intent. It could mean assigning roles to users of a lower level.",
-          "suggestion": "分配低于管理员级别的角色 (Fenpei di yuán liáojí de juésè)"
+          "description": "The phrase 'assign roles below their level' is not accurately translated. '其级别以下的角色' implies assigning roles *under* their level, which is not the intended meaning. It should convey the ability to assign roles of lower privilege.",
+          "suggestion": "可以分配比自己权限等级低的权限 (kěyǐ fēnpèi bǐ zìjǐ quánxiàn dengjí dī de quánxiàn)"
         },
         {
           "type": "formatting",
-          "description": "The phrase '板块' (ban kuai) used for 'section' sounds a bit too informal. It's generally used for forums or specific modules within a website. A more formal and general term would be more appropriate.",
-          "suggestion": "更改为“区域” (Genggǎi wèi “qūyù”) or “部分” (Bùfèn)"
+          "description": "The original English uses 'sectionName', while the Chinese uses '板块'. While '板块' is a reasonable translation, consistency should be ensured. If 'sectionName' is a variable representing a specific term, it may be better to have a consistent translation across the product.",
+          "suggestion": "Consider using a consistent translation for 'sectionName' throughout the product, or review if '板块' is the optimal choice in all contexts."
         }
       ],
       "approved_at": null

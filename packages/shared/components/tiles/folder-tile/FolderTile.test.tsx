@@ -26,7 +26,7 @@
 
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
-import { ContextMenuRefType } from "@docspace/shared/components/context-menu/ContextMenu.types";
+import { ContextMenuRefType } from "../../context-menu/ContextMenu.types";
 import { FolderTile } from "./FolderTile";
 import { FolderTileProps } from "./FolderTile.types";
 
@@ -93,7 +93,9 @@ jest.mock("@docspace/shared/components/context-menu", () => {
 
     return (
       <div data-testid="context-menu">
-        {model?.map((item) => <div key={item.key}>{item.label}</div>)}
+        {model?.map((item) => (
+          <div key={item.key}>{item.label}</div>
+        ))}
       </div>
     );
   };

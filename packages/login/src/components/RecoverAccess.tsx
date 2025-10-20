@@ -30,10 +30,19 @@ import { useTranslation } from "react-i18next";
 
 import { Link, LinkType } from "@docspace/shared/components/link";
 import RecoverAccessModalDialog from "@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog";
+import { RecaptchaType } from "@docspace/shared/enums";
 
 import useRecoverDialog from "@/hooks/useRecoverDialog";
 
-const RecoverAccess = () => {
+type RecoverAccessProps = {
+  reCaptchaPublicKey?: string;
+  reCaptchaType?: RecaptchaType;
+};
+
+const RecoverAccess = ({
+  reCaptchaPublicKey,
+  reCaptchaType,
+}: RecoverAccessProps) => {
   const { t } = useTranslation(["Login", "Common"]);
 
   const {
@@ -42,7 +51,7 @@ const RecoverAccess = () => {
     recoverDialogTextBody,
     openRecoverDialog,
     closeRecoverDialog,
-  } = useRecoverDialog({});
+  } = useRecoverDialog();
 
   return (
     <>
@@ -53,18 +62,21 @@ const RecoverAccess = () => {
         isHovered
         className="login-link recover-link"
         onClick={openRecoverDialog}
+        dataTestId="recover_access_link"
       >
         {t("RecoverAccess")}
       </Link>
-      {recoverDialogVisible && (
+      {recoverDialogVisible ? (
         <RecoverAccessModalDialog
           visible={recoverDialogVisible}
           onClose={closeRecoverDialog}
           textBody={recoverDialogTextBody}
           emailPlaceholderText={recoverDialogEmailPlaceholder}
           id="recover-access-modal"
+          reCaptchaPublicKey={reCaptchaPublicKey}
+          reCaptchaType={reCaptchaType}
         />
-      )}
+      ) : null}
     </>
   );
 };

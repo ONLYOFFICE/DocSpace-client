@@ -12,8 +12,6 @@
   "FolderTitleSkyDrive": "OneDrive direktorijs",
   "FolderTitleWebDav": "WebDAV direktorijs",
   "FolderTitleYandex": "Yandex direktorijs",
-  "GuestReleaseTipLink": "Uzzināt vairāk par lietotāju tipiem",
-  "LinkHasExpiredAndHasBeenDisabled": "Saitei ir beidzies derīguma termiņš, un tā ir atspējota",
   "LinkValidTime": "Šī saite ir derīga tikai {{days_count}} dienu (-as).",
   "NewForm": "PDF veidlapa",
   "OwnerChange": "Mainīt īpašnieku",
@@ -25,5 +23,6 @@
   "ThirdPartyInfo": "Mainīt trešās puses informāciju",
   "ThirdPartyTitle": "Trešo pušu pakalpojumi",
   "TitleShowActions": "Rādīt failu darbības",
-  "TitleShowFolderActions": "Rādīt mapes darbības"
+  "TitleShowFolderActions": "Rādīt mapes darbības",
+  "TrashItemsDeleteSuccess": "Izvēlētie elementi veiksmīgi dzēsti no {{sectionName}}"
 }

@@ -3,7 +3,7 @@
   "content": "Auto top-up",
   "content_en_sha1_hash": "b9b9f21850a422a621b702b5f395e673f86075a8",
   "created_at": "2025-05-28T09:33:06.636Z",
-  "updated_at": "2025-05-28T09:38:10.498Z",
+  "updated_at": "2025-08-21T14:45:43.961Z",
   "comment": {
     "text": "The translation key \"AutoTopUp\" is used for displaying the content \"Auto top-up\" in a payment settings section of a wallet, where users can toggle an auto-top-up feature.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/AutoPayments.tsx",
+      "file_path": "/packages/client/src/components/panels/TopUpBalance/sub-components/AutoPayments.tsx",
       "line_number": 37,
-      "context": "import { ToggleButton } from \"@docspace/shared/components/toggle-button\";\n import { Text } from \"@docspace/shared/components/text\";\n import { toastr } from \"@docspace/shared/components/toast\";\n import { TextInput, InputType } from \"@docspace/shared/components/text-input\";\n import { Button, ButtonSize } from \"@docspace/shared/components/button\";\n import { TAutoTopUpSettings } from \"@docspace/shared/api/portal/types\";\n import CheckRoundSvg from \"PUBLIC_DIR/images/icons/16/check.round.react.svg\";\n \n import styles from \"../styles/AutoPayments.module.scss\";\n import { formatCurrencyValue } from \"../utils\";",
+      "context": "import { ToggleButton } from \"@docspace/shared/components/toggle-button\";\n import { Text } from \"@docspace/shared/components/text\";\n import { toastr } from \"@docspace/shared/components/toast\";\n import { TextInput, InputType } from \"@docspace/shared/components/text-input\";\n import { Button, ButtonSize } from \"@docspace/shared/components/button\";\n import { TAutoTopUpSettings } from \"@docspace/shared/api/portal/types\";\n \n import CheckRoundSvg from \"PUBLIC_DIR/images/icons/16/check.round.react.svg\";\n \n import styles from \"../styles/AutoPayments.module.scss\";",
       "module": "/packages/client"
     }
   ],

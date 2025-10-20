@@ -227,9 +227,10 @@ const Article = ({
 
   const hideDevTools =
     user?.isVisitor ||
-    (user?.isCollaborator && limitedAccessDevToolsForUsers) ||
+    (!user?.isAdmin && limitedAccessDevToolsForUsers) ||
     window.location.pathname.includes("portal-settings") ||
-    window.location.pathname.includes("management");
+    window.location.pathname.includes("management") ||
+    window.location.pathname.includes("accounts");
 
   const pathDevTools = user?.isAdmin
     ? "/portal-settings/developer-tools"
@@ -277,6 +278,7 @@ const Article = ({
               showText={showText}
               currentDeviceType={currentDeviceType}
               onLogoClickAction={onLogoClickAction}
+              isLoading={isBurgerLoading}
             />
           ) : null}
           {articleBodyContent ? articleBodyContent.props.children : null}

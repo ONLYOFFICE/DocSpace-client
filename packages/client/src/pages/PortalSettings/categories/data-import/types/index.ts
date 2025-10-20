@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { type JSX } from "react";
-import { useTranslation } from "react-i18next";
+
 import {
   TEnhancedMigrationUser,
   TWorkspaceService,
@@ -36,9 +36,10 @@ import { TOption } from "@docspace/shared/components/combobox";
 import { SaveCancelButtonProps } from "@docspace/shared/components/save-cancel-buttons/SaveCancelButton.types";
 import { TTranslation } from "@docspace/shared/types";
 
-export type TFunciton = ReturnType<typeof useTranslation>["t"];
+import type { TFunction } from "i18next";
+import { TUser } from "@docspace/shared/api/people/types";
 
-export interface ProvidersProps {}
+export type ProvidersProps = object;
 
 export interface InjectedProvidersProps extends ProvidersProps {
   theme: TStore["settingsStore"]["theme"];
@@ -47,10 +48,13 @@ export interface InjectedProvidersProps extends ProvidersProps {
   getMigrationList: TStore["importAccountsStore"]["getMigrationList"];
   setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
   logoText: TStore["settingsStore"]["logoText"];
+  showPortalSettingsLoader: TStore["clientLoadingStore"]["showPortalSettingsLoader"];
+  dataImportUrl: TStore["settingsStore"]["dataImportUrl"];
+  currentColorScheme: TStore["settingsStore"]["currentColorScheme"];
 }
 
 export interface SelectFileStepProps {
-  t: TFunciton;
+  t: TFunction;
   isMultipleUpload?: boolean;
   acceptedExtensions: string[];
   migratorName: TWorkspaceService;
@@ -82,7 +86,7 @@ export interface InjectedSelectFileStepProps extends SelectFileStepProps {
   setWarningQuotaDialogVisible: TStore["dialogsStore"]["setWarningQuotaDialogVisible"];
 }
 
-export interface DataImportProps {}
+export type DataImportProps = object;
 
 export interface InjectedDataImportProps extends DataImportProps {
   getMigrationStatus: TStore["importAccountsStore"]["getMigrationStatus"];
@@ -99,7 +103,7 @@ export interface InjectedDataImportProps extends DataImportProps {
   setMigrationPhase: TStore["importAccountsStore"]["setMigrationPhase"];
 }
 
-export interface WorkspaceProps {}
+export type WorkspaceProps = object;
 
 export interface InjectedWorkspaceProps extends WorkspaceProps {
   theme: TStore["settingsStore"]["theme"];
@@ -114,7 +118,7 @@ export interface InjectedWorkspaceProps extends WorkspaceProps {
 }
 
 export interface LayoutProps {
-  t: TFunciton;
+  t: TFunction;
   theme: TStore["settingsStore"]["theme"];
   step: number;
   totalSteps: number;
@@ -156,7 +160,7 @@ export interface InjectedSelectUsersStepProps extends SelectUsersStepProps {
 }
 
 export interface AccountsTableProps {
-  t?: TFunciton;
+  t?: TFunction;
   accountsData: TStore["importAccountsStore"]["withEmailUsers"];
 }
 
@@ -165,7 +169,7 @@ export interface InjectedAccountsTableProps extends AccountsTableProps {
 }
 
 export interface TableViewProps {
-  t: TFunciton;
+  t: TFunction;
   sectionWidth?: number;
   accountsData: TStore["importAccountsStore"]["withEmailUsers"];
 }
@@ -189,7 +193,7 @@ export interface SelectUserTableProps extends InjectedTableViewProps {
 }
 
 export interface UsersTableHeaderProps {
-  t: TFunciton;
+  t: TFunction;
   sectionWidth?: number;
 
   userId?: string;
@@ -198,20 +202,22 @@ export interface UsersTableHeaderProps {
   columnInfoPanelStorageName: string;
   isIndeterminate: boolean;
   isChecked: boolean;
-  toggleAll?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  toggleAll?: (e?: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface UsersTableRowProps {
-  t: TFunciton;
+  t: TFunction;
   displayName: string;
   email: string;
   isDuplicate: boolean;
   isChecked: boolean;
-  toggleAccount: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  toggleAccount: (
+    e: React.MouseEvent<Element> | React.ChangeEvent<HTMLInputElement>,
+  ) => void;
 }
 
 export interface RowViewProps {
-  t: TFunciton;
+  t: TFunction;
   sectionWidth?: number;
   accountsData: TStore["importAccountsStore"]["withEmailUsers"];
 }
@@ -236,7 +242,7 @@ export interface AddEmailRowProps extends RowViewProps {
 }
 
 export interface UsersRowProps {
-  t: TFunciton;
+  t: TFunction;
   data: TEnhancedMigrationUser;
   sectionWidth?: number;
   isChecked: boolean;
@@ -249,7 +255,7 @@ export interface AddEmailUsersRowProps extends UsersRowProps {
 }
 
 export interface UsersRowContentProps {
-  t: TFunciton;
+  t: TFunction;
   data: TEnhancedMigrationUser;
   sectionWidth?: number;
   displayName: string;
@@ -285,7 +291,7 @@ export interface InjectedAddEmailsStepProps extends AddEmailsStepProps {
 }
 
 export interface AddEmailTableRowProps {
-  t: TFunciton;
+  t: TFunction;
   displayName: string;
   email: string;
   isChecked: boolean;
@@ -345,11 +351,11 @@ export interface InjectedTypeSelectTableProps extends AccountsTableProps {
   changeGroupType: TStore["importAccountsStore"]["changeGroupType"];
   UserTypes: TStore["importAccountsStore"]["UserTypes"];
   toggleAllAccounts: TStore["importAccountsStore"]["toggleAllAccounts"];
-  isOwner: TStore["userStore"]["user"]["isOwner"];
+  isOwner: TUser["isOwner"];
 }
 
 export interface TypeSelectTableViewProps {
-  t: TFunciton;
+  t: TFunction;
   sectionWidth?: number;
   accountsData: TEnhancedMigrationUser[];
   typeOptions: TOption[];
@@ -381,7 +387,7 @@ export interface InjectedTypeSelectTableRowProps
 }
 
 export interface TypeSelectRowViewProps {
-  t: TFunciton;
+  t: TFunction;
   sectionWidth?: number;
   accountsData: TEnhancedMigrationUser[];
   typeOptions: TOption[];
@@ -420,7 +426,7 @@ export interface InjectedTypeSelectRowContentProps
 }
 
 export interface AccountsPagingProps {
-  t: TFunciton;
+  t: TFunction;
   numberOfItems: number;
   setDataPortion: (leftBoundary: number, rightBoundary: number) => void;
   pagesPerPage?: number;
@@ -441,24 +447,25 @@ export interface ImportSectionProps {
   description: string;
   exportSection: Omit<ImportItemProps, "isChecked">;
   importSection: Omit<ImportItemProps, "isChecked">;
+  dataTestId?: string;
 }
 
 export interface NoEmailUsersProps {
-  t: TFunciton;
+  t: TFunction;
   users: number;
 }
 
 export interface UsersInfoBlockProps {
-  quota: { max: number };
-  totalUsedUsers: number;
-  numberOfSelectedUsers: number;
-  totalUsers: number;
+  quota?: { max: number };
+  totalUsedUsers?: number;
+  numberOfSelectedUsers?: number;
+  totalUsers?: number;
 }
 
 type TExportDetails = { name: string; icon?: string };
 
 export interface ImportStepProps {
-  t: TFunciton;
+  t: TFunction;
   serviceName: string;
   usersExportDetails: TExportDetails;
   personalExportDetails: TExportDetails;
@@ -487,7 +494,7 @@ export interface InjectedImportStepProps extends ImportStepProps {
 }
 
 export interface ImportProcessingStepProps {
-  t: TFunciton;
+  t: TFunction;
   migratorName: TWorkspaceService;
 }
 
@@ -500,7 +507,7 @@ export interface InjectedImportProcessingStepProps
 }
 
 export interface ImportCompleteStepProps {
-  t: TFunciton;
+  t: TFunction;
 }
 
 export interface InjectedImportCompleteStepProps

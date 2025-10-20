@@ -3,7 +3,7 @@
   "content": "Access settings",
   "content_en_sha1_hash": "7b34b38f3e6a5710c25a3765304dc0c570600dd3",
   "created_at": "2025-05-19T21:30:55.184Z",
-  "updated_at": "2025-06-02T10:20:51.114Z",
+  "updated_at": "2025-10-16T07:29:35.567Z",
   "comment": {
     "text": "This translation key is used for \"Access settings\" content that appears in a link within an edit room dialog and as a header title in a panel. It provides the label for access-related settings or configurations, likely prompting users to review or adjust their access permissions.",
     "is_auto": true,
@@ -12,43 +12,43 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/TemplateAccess/TemplateAccess.tsx",
-      "line_number": 138,
+      "line_number": 140,
       "context": "type={LinkType.action}\n fontWeight={600}\n fontSize=\"13px\"\n onClick={onOpenAccessSettings}\n >\n {t(\"Files:AccessSettings\")}\n </Link>\n </>\n }\n />\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/TemplateAccess/TemplateAccess.tsx",
-      "line_number": 138,
+      "line_number": 140,
       "context": "type={LinkType.action}\n fontWeight={600}\n fontSize=\"13px\"\n onClick={onOpenAccessSettings}\n >\n {t(\"Files:AccessSettings\")}\n </Link>\n </>\n }\n />\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
-      "line_number": 321,
-      "context": "fontSize=\"21px\"\n fontWeight={700}\n className=\"header-component\"\n noSelect\n >\n {t(\"Files:AccessSettings\")}\n </Text>\n <IconButton\n size={17}\n className=\"close-button\"\n iconName={CrossReactSvgUrl}",
+      "line_number": 329,
+      "context": "isFill\n isClickable\n dataTestId=\"template_access_settings_back_button\"\n />\n <Text fontSize=\"21px\" fontWeight={700} className=\"header-component\">\n {t(\"Files:AccessSettings\")}\n </Text>\n <IconButton\n size={17}\n className=\"close-button\"\n iconName={CrossReactSvgUrl}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
-      "line_number": 321,
-      "context": "fontSize=\"21px\"\n fontWeight={700}\n className=\"header-component\"\n noSelect\n >\n {t(\"Files:AccessSettings\")}\n </Text>\n <IconButton\n size={17}\n className=\"close-button\"\n iconName={CrossReactSvgUrl}",
+      "line_number": 329,
+      "context": "isFill\n isClickable\n dataTestId=\"template_access_settings_back_button\"\n />\n <Text fontSize=\"21px\" fontWeight={700} className=\"header-component\">\n {t(\"Files:AccessSettings\")}\n </Text>\n <IconButton\n size={17}\n className=\"close-button\"\n iconName={CrossReactSvgUrl}",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/Rooms/index.js",
-      "line_number": 187,
-      "context": "<IconButton\n id=\"info_add-user\"\n className=\"icon\"\n title={\n isTemplate\n ? t(\"Files:AccessSettings\")\n : t(\"Common:InviteContacts\")\n }\n iconName={PersonPlusReactSvgUrl}\n isFill\n onClick={",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/RoomsItemTitle.tsx",
+      "line_number": 211,
+      "context": "};\n \n const addUserTitle = canShare\n ? t(\"Common:AddUsers\")\n : isTemplate\n ? t(\"Files:AccessSettings\")\n : t(\"Common:InviteContacts\");\n \n const onSearchClick = () => setShowSearchBlock?.(true);\n \n const isRoom = \"isRoom\" in selection && (selection.isRoom as boolean);",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.js",
-      "line_number": 308,
-      "context": "type=\"action\"\n fontWeight={600}\n fontSize=\"13px\"\n onClick={onOpenAccessSettings}\n >\n {t(\"Files:AccessSettings\")}\n </Link>\n ) : null}\n </>\n }\n />",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.tsx",
+      "line_number": 344,
+      "context": "fontWeight={600}\n fontSize=\"13px\"\n onClick={onOpenAccessSettings}\n dataTestId=\"info_panel_members_template_access_settings_link\"\n >\n {t(\"Files:AccessSettings\")}\n </Link>\n ) : null}\n </>\n }\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 928,
+      "line_number": 942,
       "context": "event.item = { ...item, isEdit: true };\n window.dispatchEvent(event);\n };\n \n onOpenTemplateAccessOptions = () => {\n this.dialogsStore.setTemplateAccessSettingsVisible(true);\n };\n \n // onLoadLinks = async (t, item) => {\n //   const promise = new Promise(async (resolve, reject) => {\n //     let linksArray = [];",
       "module": "/packages/client"
     }
@@ -69,13 +69,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Giriş parametrləri\" is understandable, it's not the most natural or precise translation of \"Access settings.\" \"Giriş\" can be interpreted broadly. \"Access\" in this context implies permissions or controls.",
-          "suggestion": "Consider \"Keçid ayarları\" or \"Daxilolma parametrləri\" for a more accurate translation, depending on the specific nuance intended."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -159,13 +153,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Toegang instellingen\" is a literal translation of \"Access settings\" but it's not the most natural phrasing in Dutch. A more common and natural translation would be \"Toegangsinstellingen\".",
-          "suggestion": "Toegangsinstellingen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -201,13 +189,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"පහතපත් කරවු සැකසුම්\" does not accurately convey the meaning of \"Access settings\". \"පහතපත් කරවු\" is a complex construction that doesn't naturally fit the concept of 'access'.",
-          "suggestion": "A more accurate translation would be something like \"ප්‍රවේශ සැකසුම්\" (praveša sækasum) or \"ප්‍රවිෂ්ඨි සැකසුම්\" (praviṣṭhi sækasum)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -231,13 +213,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Podešavanja pristupa\" is understandable, a more precise and commonly used translation of \"Access settings\" in a technical context would be \"Postavke pristupa\". \"Podešavanja\" implies configuration, whereas \"Postavke\" aligns better with 'settings'.",
-          "suggestion": "Postavke pristupa"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

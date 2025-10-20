@@ -38,14 +38,17 @@ import {
   getPortalCultures,
 } from "@/utils/actions";
 
-import WizardForm from "./page.client";
 import WizardGreeting from "@/components/WizardGreeting/index.client";
 import { LoginContainer } from "@/components/LoginContainer";
 
 import { getUserTimezone } from "@docspace/shared/utils/common";
 import { LANGUAGE, TIMEZONE } from "@docspace/shared/constants";
+import { logger } from "logger.mjs";
+import WizardForm from "./page.client";
 
 async function Page() {
+  logger.info("Wizard page");
+
   const settings = await getSettings();
 
   const objectSettings = typeof settings === "string" ? undefined : settings;
@@ -68,8 +71,8 @@ async function Page() {
     getPortalCultures(),
   ]);
 
-  const commonResources = objectSettings?.externalResources.common.entries;
-  const forumLinkUrl = objectSettings?.externalResources.forum.domain;
+  const commonResources = objectSettings?.externalResources?.common?.entries;
+  const forumLinkUrl = objectSettings?.externalResources?.forum?.domain;
 
   const cookieStore = await cookies();
   const timezoneCookie = cookieStore.get(TIMEZONE);

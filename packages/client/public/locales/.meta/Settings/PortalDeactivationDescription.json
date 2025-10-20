@@ -3,7 +3,7 @@
   "content": "Use this option to deactivate your space temporarily.",
   "content_en_sha1_hash": "173ddeb92e310d8df9c3efe67b3c5b32e8a55258",
   "created_at": "2025-05-19T21:30:52.185Z",
-  "updated_at": "2025-05-24T04:37:28.778Z",
+  "updated_at": "2025-09-17T13:43:01.765Z",
   "comment": {
     "text": "This translation key is used to display a temporary deactivation message for a portal. It appears on a page where an owner can temporarily deactivate their space and is part of the UI when activating or deactivating employee status.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeactivation.js",
-      "line_number": 86,
+      "line_number": 80,
       "context": "owner?.activationStatus === EmployeeActivationStatus.NotActivated;\n \n return (\n <MainContainer>\n <Text fontSize=\"13px\" className=\"description\">\n {t(\"PortalDeactivationDescription\")}\n </Text>\n <Text className=\"helper\">\n {t(\"PortalDeactivationHelper\", {\n productName: t(\"Common:ProductName\"),\n })}",
       "module": "/packages/client"
     }

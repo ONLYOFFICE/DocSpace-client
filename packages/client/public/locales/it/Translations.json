@@ -12,18 +12,17 @@
   "FolderTitleSkyDrive": "Cartella di OneDrive",
   "FolderTitleWebDav": "Cartella di WebDAV",
   "FolderTitleYandex": "Cartella di Yandex",
-  "GuestReleaseTipLink": "Scopri di più sui tipi di utente",
-  "LinkHasExpiredAndHasBeenDisabled": "Il link è scaduto ed è stato disattivato",
   "LinkValidTime": "Questo link è valido solo per {{days_count}} giorni.",
   "NewForm": "Modulo PDF",
   "OwnerChange": "Cambiare proprietario",
   "RoleGuestDescriprion": "Gli ospiti possono accedere alle stanze a cui sono stati invitati, nonché creare e modificare documenti se sono stati assegnati loro i ruoli appropriati nella stanza.",
   "SearchByHeadOfGroup": "Ricerca per capogruppo",
   "SearchByOwner": "Ricerca per Proprietario",
-  "SubNewForm": "En blanco",
+  "SubNewForm": "Da zero",
   "SubNewFormFile": "Da file di testo",
   "ThirdPartyInfo": "Cambiare le informazioni di terze parti",
   "ThirdPartyTitle": "Servizi di terze parti",
   "TitleShowActions": "Mostra azioni con file",
-  "TitleShowFolderActions": "Mostra azioni con cartelle"
+  "TitleShowFolderActions": "Mostra azioni con cartelle",
+  "TrashItemsDeleteSuccess": "Gli elementi selezionati sono stati eliminati con successo da {{sectionName}}"
 }

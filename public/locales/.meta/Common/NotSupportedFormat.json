@@ -3,7 +3,7 @@
   "content": "Sorry, this file format isn't supported",
   "content_en_sha1_hash": "44faa0a5086202b59ef30646e8573a659f5c5bc0",
   "created_at": "2025-05-19T21:30:46.955Z",
-  "updated_at": "2025-06-02T10:20:51.498Z",
+  "updated_at": "2025-09-07T07:53:15.376Z",
   "comment": {
     "text": "This translation key is used to display an error message when a file format is not supported, typically appearing as a notification in UI elements such as the Avatar Editor Dialog or File Input component. The intended message informs the user that the selected file cannot be processed due to its unsupported format.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/AvatarEditorDialogStore.js",
-      "line_number": 209,
-      "context": ") {\n toastr.error(t(\"Common:SizeImageLarge\"));\n }\n });\n } catch (error) {\n toastr.error(t(\"Common:NotSupportedFormat\"));\n }\n };\n }\n \n export default AvatarEditorDialogStore;",
+      "line_number": 208,
+      "context": "toastr.error(t(\"Common:SizeImageLarge\"));\n }\n });\n } catch (error) {\n console.error(error);\n toastr.error(t(\"Common:NotSupportedFormat\"));\n }\n };\n }\n \n export default AvatarEditorDialogStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/file-input/FileInput.tsx",
-      "line_number": 75,
+      "line_number": 76,
       "context": "const [fileName, setFileName] = React.useState(\"\");\n \n const onDrop = (acceptedFiles: File[]) => {\n if (acceptedFiles.length === 0) {\n toastr.error(t(\"Common:NotSupportedFormat\"));\n return;\n }\n \n setFileName(\n acceptedFiles.length > 1",
       "module": "/packages/shared"
     }

@@ -29,7 +29,12 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { TFilesSettings, TGetFolder } from "@docspace/shared/api/files/types";
 import type { TViewAs } from "@docspace/shared/types";
 
-import { FILTER_HEADER, PAGE_COUNT, SHARE_KEY_HEADER } from "@/utils/constants";
+import {
+  FILTER_HEADER,
+  PAGE_COUNT,
+  PATHNAME_HEADER,
+  SHARE_KEY_HEADER,
+} from "@/utils/constants";
 import { getFilesSettings, getFolder } from "@/api/files";
 
 import { Layout } from "./_components/layout";
@@ -64,8 +69,11 @@ export default async function DocspaceLayout({
   const actions: unknown[] = [getFilesSettings()];
 
   if (filter) {
+    const pathname = hdrs.get(PATHNAME_HEADER) ?? "";
+
     const filesFilter = FilesFilter.getFilter({
       search: `?${filter}`,
+      pathname,
     } as Location)!;
 
     filesFilter.pageCount = PAGE_COUNT;
@@ -89,7 +97,7 @@ export default async function DocspaceLayout({
             sectionHeaderContent={<Header {...navigationProps} />}
             sectionFilterContent={<Filter {...filterProps} />}
             sectionBodyContent={children}
-            isEmptyPage={folders.length === 0 && files.length === 0}
+            isEmptyPage={folders.length === 0 ? files.length === 0 : false}
             filesFilter={filter!}
           />
           <SelectionArea />

@@ -3,7 +3,7 @@
   "content": "Additional storage ({{storageUnit}})",
   "content_en_sha1_hash": "a727757e8fc179328701e82adfe0ac5cf53e1c1e",
   "created_at": "2025-06-03T20:59:26.734Z",
-  "updated_at": "2025-06-03T21:00:44.890Z",
+  "updated_at": "2025-08-21T14:45:44.125Z",
   "comment": {
     "text": "This translation key is used to display a descriptive text for an \"Extra Storage\" feature in a storage plan upgrade process. It appears as part of a dropdown or radio button selection and provides the user with information about the available extra storage ({{storageUnit}}).",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/StoragePlanUpgrade.tsx",
-      "line_number": 224,
-      "context": "className=\"select-users-count-container\"\n value={amount}\n minValue={0}\n maxValue={maxStorageLimit}\n step={1}\n title={t(\"ExtraStorage\", { storageUnit: t(\"Common:Gigabyte\") })}\n showPlusSign\n onChange={onChangeNumber}\n isDisabled={hasScheduledStorageChange || isLoading}\n items={amountTabs()}\n withoutContorls={hasScheduledStorageChange}",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/SelectionAmount.tsx",
+      "line_number": 154,
+      "context": "<QuantityPicker\n value={amount}\n minValue={100}\n maxValue={maxStorageLimit}\n step={1}\n title={t(\"ExtraStorage\", { storageUnit: t(\"Common:Gigabyte\") })}\n showPlusSign\n onChange={onChangeNumber}\n isDisabled={hasScheduledStorageChange || isLoading}\n items={amountTabs()}\n withoutContorls={hasScheduledStorageChange}",
       "module": "/packages/client"
     }
   ],

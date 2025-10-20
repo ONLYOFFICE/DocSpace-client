@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -33,6 +33,7 @@ import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettings
 import { inject, observer } from "mobx-react";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
+import { isDesktop } from "@docspace/shared/utils/device";
 import { MainContainer } from "../StyledSecurity";
 import { TfaSection } from "./tfa";
 import { PasswordStrengthSection } from "./passwordStrength";
@@ -45,6 +46,10 @@ import { BruteForceProtectionSection } from "./bruteForceProtection";
 import { DevToolsAccessSection } from "./devToolsAccess";
 
 import MobileView from "./mobileView";
+
+const HEADER_HEIGHT_DESKTOP = 69;
+const HEADER_HEIGHT_TABLET = 61;
+const TABS_HEIGHT = 32;
 
 const AccessPortal = (props) => {
   const {
@@ -59,19 +64,74 @@ const AccessPortal = (props) => {
     isMobileView,
     resetIsInit,
     helpCenterDomain,
+    invitationSettingsUrl,
     limitedDevToolsBlockHelpUrl,
+    scrollToSettings,
+    setScrollToSettings,
+    tReady,
   } = props;
+
+  const invitationSettingsRef = useRef(null);
+  const scrollElement = document.getElementsByClassName("section-scroll")[0];
+
+  const [isPasswordStrengthLoaded, setPasswordStrengthLoaded] = useState(false);
+  const [isTfaLoaded, setTfaLoaded] = useState(false);
+  const [isTrustedMailLoaded, setTrustedMailLoaded] = useState(false);
+
+  const onSettingsSkeletonNotShown = (setting) => {
+    if (setting === "PasswordStrength") setPasswordStrengthLoaded(true);
+    if (setting === "Tfa") setTfaLoaded(true);
+    if (setting === "TrustedMail") setTrustedMailLoaded(true);
+  };
 
   useEffect(() => {
     setDocumentTitle(
       t("PortalAccess", { productName: t("Common:ProductName") }),
     );
 
-    return () => resetIsInit();
+    return () => {
+      resetIsInit();
+      setScrollToSettings(false);
+    };
   }, []);
+
+  useEffect(() => {
+    const settingsBeforeInvitationSettings =
+      !isPasswordStrengthLoaded || !isTfaLoaded || !isTrustedMailLoaded;
+
+    if (
+      !scrollToSettings ||
+      !invitationSettingsRef.current ||
+      !scrollElement ||
+      settingsBeforeInvitationSettings ||
+      !tReady
+    )
+      return;
+
+    const coordinateY =
+      invitationSettingsRef.current.offsetTop -
+      (isDesktop() ? HEADER_HEIGHT_DESKTOP : HEADER_HEIGHT_TABLET) -
+      TABS_HEIGHT;
+
+    scrollElement.scrollTo(0, coordinateY);
+    setScrollToSettings(false);
+  }, [
+    invitationSettingsRef.current,
+    scrollElement,
+    scrollToSettings,
+    isPasswordStrengthLoaded,
+    isTfaLoaded,
+    isTrustedMailLoaded,
+    tReady,
+  ]);
+
+  const settingsBeforeInvitationSettingsProps = scrollToSettings
+    ? { onSettingsSkeletonNotShown }
+    : {};
 
   if (isMobileView)
     return <MobileView t={t} withoutExternalLink={!helpCenterDomain} />;
+
   return (
     <MainContainer
       className="desktop-view"
@@ -93,6 +153,7 @@ const AccessPortal = (props) => {
         {passwordStrengthSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="password_strength_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}
@@ -103,7 +164,7 @@ const AccessPortal = (props) => {
         ) : null}
       </div>
 
-      <PasswordStrengthSection />
+      <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />
       <StyledSettingsSeparator />
       <Text fontSize="16px" fontWeight="700">
         {t("TwoFactorAuth")}
@@ -121,6 +182,7 @@ const AccessPortal = (props) => {
         {tfaSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="tfa_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}
@@ -131,7 +193,7 @@ const AccessPortal = (props) => {
         ) : null}
       </div>
 
-      <TfaSection />
+      <TfaSection {...settingsBeforeInvitationSettingsProps} />
       <StyledSettingsSeparator />
 
       <Text fontSize="16px" fontWeight="700">
@@ -147,6 +209,7 @@ const AccessPortal = (props) => {
         {trustedMailDomainSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="trusted_mail_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}
@@ -157,7 +220,7 @@ const AccessPortal = (props) => {
         ) : null}
       </div>
 
-      <TrustedMailSection />
+      <TrustedMailSection {...settingsBeforeInvitationSettingsProps} />
       <StyledSettingsSeparator />
 
       <Text fontSize="16px" fontWeight="700">
@@ -172,6 +235,7 @@ const AccessPortal = (props) => {
         {limitedDevToolsBlockHelpUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="developer_tools_access_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}
@@ -184,7 +248,7 @@ const AccessPortal = (props) => {
       <DevToolsAccessSection />
       <StyledSettingsSeparator />
 
-      <Text fontSize="16px" fontWeight="700">
+      <Text fontSize="16px" fontWeight="700" ref={invitationSettingsRef}>
         {t("InvitationSettings")}
       </Text>
       <div className="category-item-description">
@@ -193,6 +257,20 @@ const AccessPortal = (props) => {
             productName: t("Common:ProductName"),
           })}
         </Text>
+
+        {invitationSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            dataTestId="invitation_settings_learn_more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={invitationSettingsUrl}
+            fontWeight={600}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
       <InvitationSettingsSection />
 
@@ -209,6 +287,7 @@ const AccessPortal = (props) => {
         {ipSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="ip_security_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}
@@ -247,6 +326,7 @@ const AccessPortal = (props) => {
         {administratorMessageSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="administrator_message_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}
@@ -272,6 +352,7 @@ const AccessPortal = (props) => {
         {lifetimeSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="session_lifetime_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}
@@ -299,6 +380,9 @@ export default inject(({ settingsStore, setup }) => {
     currentDeviceType,
     helpCenterDomain,
     limitedDevToolsBlockHelpUrl,
+    scrollToSettings,
+    setScrollToSettings,
+    invitationSettingsUrl,
   } = settingsStore;
   const { resetIsInit } = setup;
 
@@ -316,5 +400,8 @@ export default inject(({ settingsStore, setup }) => {
     resetIsInit,
     helpCenterDomain,
     limitedDevToolsBlockHelpUrl,
+    scrollToSettings,
+    setScrollToSettings,
+    invitationSettingsUrl,
   };
 })(withTranslation(["Settings", "Profile"])(observer(AccessPortal)));

@@ -3,7 +3,7 @@
   "content": "The guest type was successfully changed",
   "content_en_sha1_hash": "0d3cff628acf7c8515ce8ee503931f95e32abc44",
   "created_at": "2025-05-19T21:30:56.937Z",
-  "updated_at": "2025-06-02T10:20:51.042Z",
+  "updated_at": "2025-06-30T12:20:31.139Z",
   "comment": {
     "text": "The translation key \"SuccessChangeGuestType\" is used to display a success message after changing a guest's type in a user interface, typically appearing as a toast notification or dialog. It informs the user that the change was successful and appears when updating a user's type (e.g., from guest to admin) in a specific context within the application.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/GlobalEvents/ChangeUserTypeEvent.tsx",
-      "line_number": 96,
-      "context": "updatePromise\n .then((users) => {\n toastr.success(\n isGuestsDialog\n ? t(\"SuccessChangeGuestType\")\n : t(\"SuccessChangeUserType\"),\n );\n \n successCallback?.(users);\n })",
+      "line_number": 97,
+      "context": "updatePromise\n .then((users) => {\n toastr.success(\n isGuestsDialog\n ? t(\"SuccessChangeGuestType\")\n : t(\"SuccessChangeUserType\"),\n );\n \n successCallback?.(users as TUser[]);\n })",
       "module": "/packages/client"
     }
   ],

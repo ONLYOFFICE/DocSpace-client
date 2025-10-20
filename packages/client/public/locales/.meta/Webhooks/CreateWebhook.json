@@ -3,7 +3,7 @@
   "content": "Create webhook",
   "content_en_sha1_hash": "0c6fc5026d56d964ea66aa3957a3688c0381fd3a",
   "created_at": "2025-05-19T21:30:49.678Z",
-  "updated_at": "2025-06-08T12:02:32.784Z",
+  "updated_at": "2025-09-17T13:43:01.819Z",
   "comment": {
     "text": "\"CreateWebhook\" is used to display a button label on mobile devices, prompting users to create a webhook in developer tools. The translation of this key will be displayed on the main wrapper element within the PortalSettings page's Webhooks component when viewed on smaller screens.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/index.js",
-      "line_number": 148,
-      "context": ") : (\n <>\n {isMobile() ? (\n <ButtonSeating>\n <StyledCreateButton\n label={t(\"CreateWebhook\")}\n primary\n size=\"normal\"\n onClick={openCreateModal}\n isDisabled={isLoading}\n />",
+      "line_number": 137,
+      "context": ") : (\n <>\n {isMobile() ? (\n <ButtonSeating>\n <StyledCreateButton\n label={t(\"CreateWebhook\")}\n primary\n size=\"normal\"\n onClick={openCreateModal}\n testId=\"create_webhook_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/index.js",
-      "line_number": 148,
-      "context": ") : (\n <>\n {isMobile() ? (\n <ButtonSeating>\n <StyledCreateButton\n label={t(\"CreateWebhook\")}\n primary\n size=\"normal\"\n onClick={openCreateModal}\n isDisabled={isLoading}\n />",
+      "line_number": 137,
+      "context": ") : (\n <>\n {isMobile() ? (\n <ButtonSeating>\n <StyledCreateButton\n label={t(\"CreateWebhook\")}\n primary\n size=\"normal\"\n onClick={openCreateModal}\n testId=\"create_webhook_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/index.js",
-      "line_number": 148,
-      "context": ") : (\n <>\n {isMobile() ? (\n <ButtonSeating>\n <StyledCreateButton\n label={t(\"CreateWebhook\")}\n primary\n size=\"normal\"\n onClick={openCreateModal}\n isDisabled={isLoading}\n />",
+      "line_number": 137,
+      "context": ") : (\n <>\n {isMobile() ? (\n <ButtonSeating>\n <StyledCreateButton\n label={t(\"CreateWebhook\")}\n primary\n size=\"normal\"\n onClick={openCreateModal}\n testId=\"create_webhook_button\"\n />",
       "module": "/packages/client"
     }
   ],

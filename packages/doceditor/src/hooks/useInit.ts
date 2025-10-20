@@ -27,12 +27,10 @@
 import React from "react";
 import { isIOS, deviceType } from "react-device-detect";
 
-import { FolderType } from "@docspace/shared/enums";
-
 import { UseInitProps } from "@/types";
 import { setDocumentTitle, showDocEditorMessage } from "@/utils";
 import initDesktop from "@/utils/initDesktop";
-import { IS_DESKTOP_EDITOR, IS_VIEW } from "@/utils/constants";
+import { IS_DESKTOP_EDITOR } from "@/utils/constants";
 
 const useInit = ({
   config,

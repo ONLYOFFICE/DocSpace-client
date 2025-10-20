@@ -3,7 +3,7 @@
   "content": "Add Users or Groups",
   "content_en_sha1_hash": "c56e363f7b55fc60481b36918cd630a7e1d6d0da",
   "created_at": "2025-05-19T21:30:55.223Z",
-  "updated_at": "2025-05-26T07:57:32.379Z",
+  "updated_at": "2025-06-30T12:20:31.306Z",
   "comment": {
     "text": "This translation key is used to display a button label that invites users or groups, appearing in an invite input component where users can add new access permissions. The text \"Add Users or Groups\" appears as a header on this panel and should be translated accordingly for various locales.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/sub-components/InviteInput.tsx",
-      "line_number": 259,
+      "line_number": 251,
       "context": "}, [usersList, inputValue, getItemContent, searchRequestRunning]);\n \n return (\n <>\n <StyledSubHeader className=\"invite-input-text\">\n {t(\"Files:AddUsersOrGroups\")}\n \n <StyledLink\n className=\"link-list invite-input-text\"\n fontWeight=\"600\"\n type={LinkType.action}",
       "module": "/packages/client"
     }

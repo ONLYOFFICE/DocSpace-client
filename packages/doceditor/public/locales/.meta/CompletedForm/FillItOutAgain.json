@@ -3,7 +3,7 @@
   "content": "Fill it out again",
   "content_en_sha1_hash": "49788a2c01cca70ad121915132a13f6d56bf04ec",
   "created_at": "2025-05-19T21:30:57.162Z",
-  "updated_at": "2025-05-26T07:57:32.851Z",
+  "updated_at": "2025-08-12T19:46:26.307Z",
   "comment": {
     "text": "This translation key is used to display a message encouraging users to complete a form again. It is linked to a button in a completed form UI element.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
-      "line_number": 231,
-      "context": "<Link\n className=\"link\"\n href={`/?${fillAgainSearchParams.toString()}`}\n prefetch={false}\n >\n {t(\"CompletedForm:FillItOutAgain\")}\n </Link>\n </CompletedFormLayout>\n </Scrollbar>\n </ContainerCompletedForm>\n );",
+      "line_number": 245,
+      "context": "className=\"link\"\n href={`/?${fillAgainSearchParams.toString()}`}\n prefetch={false}\n data-testid=\"fill_again_link\"\n >\n {t(\"CompletedForm:FillItOutAgain\")}\n </Link>\n </CompletedFormLayout>\n </Scrollbar>\n </ContainerCompletedForm>\n );",
       "module": "/packages/doceditor"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Copy",
   "content_en_sha1_hash": "af74f7c5362aaee985bf8cda3dd75fc80751ce51",
   "created_at": "2025-05-19T21:30:43.729Z",
-  "updated_at": "2025-06-08T12:02:32.584Z",
+  "updated_at": "2025-10-16T07:29:35.508Z",
   "comment": {
     "text": "This translation key is used to display the text \"Copy\" in various UI elements, such as buttons and labels, to provide a clear indication of the action being performed, typically copying files or data. It appears in buttons within the FilesSelector component, EmbeddingPanel, and GetCodeDialog modal dialog, helping users understand the purpose of each button's functionality.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 553,
-      "context": "className=\"send-invitation\"\n scale\n size={ButtonSize.normal}\n primary\n onClick={onCopyAndClose}\n label={t(\"Common:Copy\")}\n isLoading={isLoading}\n />\n <Button\n className=\"cancel-button\"\n scale",
+      "line_number": 575,
+      "context": "className=\"send-invitation\"\n scale\n size={ButtonSize.normal}\n primary\n onClick={onCopyAndClose}\n label={t(\"Common:Copy\")}\n isLoading={isLoading}\n testId=\"embedding_panel_copy_button\"\n />\n <Button\n className=\"cancel-button\"",
       "module": "/packages/client"
     },
     {
@@ -30,31 +30,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
-      "line_number": 241,
+      "line_number": 251,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={\n token\n ? `${t(\"Common:Copy\")} & ${t(\"Common:CloseButton\")}`\n : t(\"Webhooks:Generate\")\n }\n primary\n scale\n onClick={onGenerate}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1380,
+      "line_number": 1455,
       "context": "if (this.publicRoomStore.isPublicRoom) {\n return [\n {\n key: \"public-room_share\",\n label: t(\"Common:CopySharedLink\"),\n icon: TabletLinkReactSvgUrl,\n onClick: () => {\n copy(window.location.href);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1380,
-      "context": "if (this.publicRoomStore.isPublicRoom) {\n return [\n {\n key: \"public-room_share\",\n label: t(\"Common:CopySharedLink\"),\n icon: TabletLinkReactSvgUrl,\n onClick: () => {\n copy(window.location.href);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1380,
+      "line_number": 1455,
       "context": "if (this.publicRoomStore.isPublicRoom) {\n return [\n {\n key: \"public-room_share\",\n label: t(\"Common:CopySharedLink\"),\n icon: TabletLinkReactSvgUrl,\n onClick: () => {\n copy(window.location.href);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2202,
+      "line_number": 2195,
       "context": "};\n case \"copy\":\n if (!this.isAvailableOption(\"copy\")) return null;\n return {\n id: \"menu-copy\",\n label: t(\"Common:Copy\"),\n onClick: () => setCopyPanelVisible(true),\n iconUrl: CopyToReactSvgUrl,\n };\n \n case \"create-room\":",
       "module": "/packages/client"
     },
@@ -93,7 +87,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation \"Копирай\" is the imperative form of the verb \"copy\" (meaning 'copy it'). While potentially usable depending on the context, the English word \"Copy\" usually refers to a duplicate or a copy of something. A more literal or noun-form translation might be preferable, such as \"Копие\" (kopie) or \"Копия\" (kopiya).",
+          "suggestion": "Consider \"Копие\" (kopie) or \"Копия\" (kopiya) for a more literal translation, depending on the desired meaning."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"Zkopírovat\" means \"To copy\" or \"Copy (verb)\", while the English 'Copy' is a noun (a duplicate). A more appropriate translation would be \"Kopie\".",
-          "suggestion": "Kopie"
+          "description": "The Czech translation \"Zkopírovat\" translates to \"to copy\" or \"copying\", not simply \"Copy\". It's an action, not a noun.",
+          "suggestion": "Consider \"Kopie\" or \"Záloha\" depending on the intended meaning. \"Kopie\" means \"copy\" as a noun, and \"Záloha\" means \"backup\"."
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Պատճենել\" means \"to copy\" as a verb, while the English \"Copy\" is a noun (referring to a duplicate).",
-          "suggestion": "Consider alternatives like \"Մասնորոշում\" (selection/excerpt) or \"օրինակ\" (example/copy - in the noun sense) depending on the context."
+          "description": "The English word \"Copy\" has multiple potential translations in Armenian depending on the context. \"Պատճենել\" (Patchenel) primarily means \"to copy\" as in reproduce. However, if \"Copy\" refers to a duplicate or a copied item, a different translation like \"օրինակ\" (orinak) might be more appropriate. Without more context, \"Պատճենել\" is not necessarily the best translation.",
+          "suggestion": "Consider alternative translations like \"օրինակ\" (orinak) if 'copy' refers to a duplicate.  Further context is required to determine the most accurate translation."
         }
       ],
       "approved_at": null
@@ -156,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation \"Copiare\" is the verb 'to copy', not the noun 'copy'. The English word 'Copy' typically refers to a duplicate or a reproduction, or a button to duplicate content. A more appropriate translation would be 'Copia'.",
+          "description": "The Italian translation \"Copiare\" is the verb \"to copy\". The English word \"Copy\" (as a noun, referring to a duplicate) would ideally be translated as \"Copia\". \"Copiare\" implies the action of copying.",
           "suggestion": "Copia"
         }
       ],
@@ -222,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Russian translation \"Копировать\" means \"To Copy\" or \"Copying\" rather than simply \"Copy\". While \"Копировать\" is related to the English \"Copy\", it's a verb, not a noun. The best noun translation would be \"Копия\".",
-          "suggestion": "Копия"
+          "description": "The Russian translation \"Копировать\" is a verb meaning \"to copy\". The English key \"Copy\" is a noun referring to a duplicate.",
+          "suggestion": "Consider using a noun form like \"Копия\" (Kopiya) which means 'copy' as a noun."
         }
       ],
       "approved_at": null
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"පිටපතක්\" (pitapatak) literally translates to 'copy' or 'duplicate' as in a physical copy, but in many UI contexts, \"Copy\" refers to the action of copying data. A more appropriate translation in that context might be \"පිටපත් කිරීම\" (pitapat karima) which means 'to copy'.",
-          "suggestion": "Consider \"පිටපත් කිරීම\" (pitapat karima) for a more accurate translation when referring to the action of copying."
+          "description": "The Sinhala translation \"පිටපතක්\" (pitatak) primarily means 'notebook' or 'copybook'. While it can refer to a copy in some contexts, \"Copy\" in this key likely refers to the action of copying, or a duplicate.",
+          "suggestion": "Consider alternatives like \"පිටපත්\" (pitapat) which means 'copies' or \"නැවත කිරීම\" (naewath kirima) meaning 'repetition/copying'."
         }
       ],
       "approved_at": null
@@ -246,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Kopírovať' means 'to copy', it's an infinitive form.  'Copy' as a label or button text usually requires a noun or imperative form. A more appropriate translation might be 'Kópia' (copy - noun) or 'Skopírovať' (imperative - copy!).",
-          "suggestion": "Consider 'Kópia' or 'Skopírovať' depending on the context."
+          "description": "While 'Kopírovať' is a valid Slovak word meaning 'to copy', it's a verb. 'Copy' is a noun. A more accurate translation would be 'Kópia'.",
+          "suggestion": "Kópia"
         }
       ],
       "approved_at": null
@@ -264,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Копирај\" is an imperative form (command) of \"copy.\" While potentially usable in some contexts, \"Copy\" in English typically refers to a duplicated item or the act of duplication itself, not a direct command to copy. A more accurate translation would be \"Копија\" (Kopija) which means 'copy' as a noun.",
-          "suggestion": "Копија"
+          "description": "The Serbian (Cyrillic) translation \"Копирај\" is a command form (imperative) of the verb \"kopirati\" (to copy).  \"Copy\" in English functions more as a noun representing duplication or a textual label.  A more accurate translation, depending on context, might be \"Копија\" (Copy - noun) or \"Копирање\" (Copying - noun).",
+          "suggestion": "Consider \"Копија\" or \"Копирање\" depending on the intended meaning."
         }
       ],
       "approved_at": null
@@ -288,7 +288,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Копіювати' (Kopyuvaty) means 'to copy'. The key 'Common:Copy' likely refers to the noun 'copy' (e.g., a duplicate). A more accurate translation would be 'Копія' (Kopiya).",
+          "description": "The English word \"Copy\" (as a noun, meaning a reproduction) is translated as \"Копіювати\" (Kopiyuaty), which is the verb \"to copy\".  A more accurate translation would be \"Копія\" (Kopiya), which is the noun 'copy'.",
           "suggestion": "Копія"
         }
       ],

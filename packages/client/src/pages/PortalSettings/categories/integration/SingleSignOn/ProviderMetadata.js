@@ -55,7 +55,7 @@ const StyledWrapper = styled.div`
 `;
 
 const ProviderMetadata = (props) => {
-  const { t } = useTranslation("SingleSignOn");
+  const { t, ready } = useTranslation("SingleSignOn");
   const navigate = useNavigate();
   const location = useLocation();
   const { downloadMetadata, currentDeviceType, isSSOAvailable } = props;
@@ -75,6 +75,8 @@ const ProviderMetadata = (props) => {
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
+  if (!ready) return null;
+
   return (
     <StyledWrapper>
       <MetadataUrlField
@@ -83,6 +85,7 @@ const ProviderMetadata = (props) => {
         placeholder={`${url}/sso/metadata`}
         tooltipContent={<Text fontSize="12px">{t("SPEntityIdTooltip")}</Text>}
         tooltipClass="sp-entity-id-tooltip icon-button"
+        dataTestId="sp_entity_id"
       />
 
       <MetadataUrlField
@@ -93,6 +96,7 @@ const ProviderMetadata = (props) => {
           <Text fontSize="12px">{t("SPAssertionConsumerURLTooltip")}</Text>
         }
         tooltipClass="sp-assertion-consumer-url-tooltip icon-button"
+        dataTestId="sp_assertion_consumer_url"
       />
 
       <MetadataUrlField
@@ -103,6 +107,7 @@ const ProviderMetadata = (props) => {
           <Text fontSize="12px">{t("SPSingleLogoutURLTooltip")}</Text>
         }
         tooltipClass="sp-single-logout-url-tooltip icon-button"
+        dataTestId="sp_single_logout_url"
       />
 
       <div className="button-wrapper">
@@ -115,6 +120,7 @@ const ProviderMetadata = (props) => {
           tabIndex={25}
           onClick={downloadMetadata}
           isDisabled={!isSSOAvailable}
+          testId="download_metadata_xml_button"
         />
       </div>
     </StyledWrapper>

@@ -110,7 +110,7 @@ const TagDropdown = ({
           className="dropdown-item"
           onMouseDown={preventDefault}
           onClick={addNewTag}
-          label={`${createTagLabel}  “${tagInputValue}”`}
+          label={`${createTagLabel}  "${tagInputValue}"`}
           height={32}
           heightTablet={32}
         />,
@@ -146,6 +146,7 @@ const TagDropdown = ({
       withBackdrop={false}
       isDefaultMode={false}
       manualY="54px"
+      directionY="both"
     >
       {dropdownItems.length > MAX_ITEMS_COUNT ? (
         <Scrollbar style={{ height: `${32 * MAX_ITEMS_COUNT}px` }}>

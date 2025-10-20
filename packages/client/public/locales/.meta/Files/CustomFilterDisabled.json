@@ -3,7 +3,7 @@
   "content": "Custom filter for the selected file disabled",
   "content_en_sha1_hash": "1d11469e70e8a29c47e8c754cb7c4fb1a3e30948",
   "created_at": "2025-05-19T21:30:55.395Z",
-  "updated_at": "2025-05-24T12:29:21.277Z",
+  "updated_at": "2025-10-13T14:41:03.129Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a custom filter for a selected file has been disabled. It is typically shown as a success notification in a UI dialog or toast when a user disables a custom filter feature.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1150,
+      "line_number": 1166,
       "context": "return enableCustomFilter(item.id, !item.customFilterEnabled)\n .then((res) => {\n if (res.customFilterEnabled) {\n toastr.success(t(\"CustomFilterEnabled\"));\n } else {\n toastr.success(t(\"CustomFilterDisabled\"));\n }\n })\n .catch((err) => {\n toastr.error(err);\n });",
       "module": "/packages/client"
     }
@@ -27,25 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Arabic text uses a Western-style space before the word 'الفِلتر'. While not technically incorrect, it's more standard to use Arabic spacing conventions.",
-          "suggestion": "Remove the space before 'الفِلتر' to follow standard Arabic spacing.  The correct spacing would be: تم تعطيل الفِلتر المخصص للملف المحدد"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The use of \"-\" (hyphen) within the Azerbaijani sentence looks awkward. It's not a standard practice in Azerbaijani and impacts readability.  A space should be used instead.",
-          "suggestion": "Seçilmiş fayl üçün Xüsusi filtr deaktiv edildi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -75,61 +63,31 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'El Filtro personalizado para el archivo seleccionado se ha deshabilitado' is a bit literal and sounds unnatural in Spanish. A more natural phrasing would be something like 'El filtro personalizado del archivo seleccionado está desactivado' or 'No se puede usar el filtro personalizado para el archivo seleccionado'.",
-          "suggestion": "El filtro personalizado del archivo seleccionado está desactivado"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Mukautettu suodatin valitulle tiedostolle pois käytöstä' is not the most natural or accurate translation of 'Custom filter for the selected file disabled'. A more natural phrasing would be 'Mukautettu suodatin ei ole käytössä valitulle tiedostolle' or 'Valitun tiedoston mukautettu suodatin on poistettu käytöstä'. The use of 'tiedostolle' feels awkward.",
-          "suggestion": "Mukautettu suodatin ei ole käytössä valitulle tiedostolle"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Filtre personnalisé désactivé pour le fichier sélectionné\" is too literal and sounds unnatural in French. A more natural translation would be something like \"Le filtre personnalisé a été désactivé pour ce fichier\" or \"Le filtre personnalisé est désactivé pour le fichier sélectionné\".",
-          "suggestion": "Le filtre personnalisé a été désactivé pour ce fichier"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word \"ֆայլի\" is a possessive form, but should likely be simply \"ֆայլ\" for clarity in this context.  Using the possessive implies the filter *belongs* to the file, which isn't the intended meaning.",
-          "suggestion": "Ընտրված ֆայլի համար անհատական ֆիլտրն անջատված է"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Filtro personalizzato disabilitato per il file selezionato' is a literal translation but lacks the nuance of the English 'Custom filter for the selected file disabled'. A more natural Italian phrasing would be 'Filtro personalizzato disabilitato per il file scelto' or 'Filtro personalizzato disabilitato per il file indicato'.",
-          "suggestion": "Filtro personalizzato disabilitato per il file scelto"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -141,47 +99,19 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Korean translation includes a non-breaking space ( ) which might cause display issues depending on the context. It's generally better to use regular spaces.",
-          "suggestion": "Replace ' ' with a regular space."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ຕົວປ່ຽນແສງຄຳຕັ້ງຕາມຄວາມຕ້ອງການ' is a literal translation of 'Custom filter'. A more natural and understandable Lao phrase would be something along the lines of 'ການກັ່ນຕອງຕາມຄວາມຕ້ອງການ' or 'ການເລືອກຄັ່ນຕອງຕາມໃຈ'.",
-          "suggestion": "ຕົວປ່ຽນແສງຄຳຕັ້ງຕາມຄວາມຕ້ອງການ -> ການກັ່ນຕອງຕາມຄວາມຕ້ອງການ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ຖືກປິດການໃຊ້ງານ' is accurate for 'disabled' but could be slightly more fluent. A more common phrasing might be 'ຖືກປິດ' or 'ບໍ່ສາມາດໃຊ້ໄດ້'.",
-          "suggestion": "ຖືກປິດການໃຊ້ງານ -> ຖືກປິດ"
-        },
-        {
-          "type": "formatting",
-          "description": "The overall phrasing could be improved for readability and flow in Lao. Consider restructuring the sentence for a more natural sound.",
-          "suggestion": "ຕົວປ່ຽນແສງຄຳຕັ້ງຕາມຄວາມຕ້ອງການ ສຳລັບເອກະສານທີ່ເລືອກຖືກປິດການໃຊ້ງານ -> ການກັ່ນຕອງຕາມຄວາມຕ້ອງການ ສຳລັບເອກະສານທີ່ເລືອກຖືກປິດ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Pielāgotais filtrs atlasītajam failam ir deaktivēts\" is a literal translation that doesn't flow naturally in Latvian. \"Deaktivēts\" is correct, but the sentence structure is awkward. A more natural phrasing would be \"Pielāgojums atlasītajam failam ir atslēgts\" or \"Pielāgots filtrs atlasītajam failam ir atslēgts\".",
-          "suggestion": "Pielāgots filtrs atlasītajam failam ir atslēgts"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -211,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Filtru particularizat pentru utilizatorul selectat este dezactivat' is not an accurate translation of 'Custom filter for the selected file disabled'. 'Utilizatorul' means 'user', while the English refers to a 'file'.",
-          "suggestion": "Filtru personalizat pentru fișierul selectat este dezactivat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -229,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"Prilagojen filter za izbrano datoteko onemogočen\" is not Sinhala. It appears to be a mix of Slovenian and possibly Croatian. It does not accurately translate 'Custom filter for the selected file disabled'.",
-          "suggestion": "A correct Sinhala translation would be something like \"හැර පෙනselect කළ ගොනුවේදී අභිරුචි පෙරහද අක්‍රිය කර ඇත\" (Hera pena select kala gonuvedi abhiruchi perahada akriya kara atha)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -247,25 +165,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Slovenian translation uses a non-breaking space (&#x20;) which may cause rendering issues. It should be a regular space.",
-          "suggestion": "Replace ' ' with a regular space: \"Prilagojen filter za izbrano datoteko onemogočen\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'прилагођени' (prilagođeni) is a valid word, but a more natural and common phrasing would be 'направити филтер' or 'користити филтер'. While 'прилагођени' is technically correct, it sounds overly formal and slightly awkward in this context.",
-          "suggestion": "Направити/Користити филтер за изабрану датотеку је онемогућен"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -277,47 +183,19 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "Space before 'devre dışı' is unnecessary and breaks the natural flow of the Turkish sentence.",
-          "suggestion": "Seçili dosya için Özel Filtre devre dışı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Спеціальний фільтр для обраного файлу вимкнено' is a literal translation but sounds slightly unnatural in Ukrainian. A more natural phrasing would emphasize the user's action or the state of the filter.",
-          "suggestion": "Знято фільтр для обраного файлу"
-        },
-        {
-          "type": "formatting",
-          "description": "The word 'обраного' contains an unnecessary space. Ukrainian requires correct hyphenation and spacing.",
-          "suggestion": "обраного"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Bộ lọc tùy chỉnh cho tệp đã chọn đã tắt' while understandable, isn't the most natural way to phrase this in Vietnamese. A more idiomatic translation would emphasize the disabling action.",
-          "suggestion": "Bộ lọc tùy chỉnh cho tệp đã chọn bị vô hiệu hóa"
-        },
-        {
-          "type": "formatting",
-          "description": "The non-breaking space character (&#8201;) in the original Vietnamese translation can cause rendering issues. It should be removed.",
-          "suggestion": "Bộ lọc tùy chỉnh cho tệp đã chọn đã tắt"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

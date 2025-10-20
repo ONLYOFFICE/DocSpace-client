@@ -85,12 +85,10 @@ const StyledModal = styled(ModalDialog)`
 
 export const CreatePortalDialog = observer(
   ({
-    tenantAlias,
     baseDomain,
     domainValidator,
     user,
   }: {
-    tenantAlias: string;
     baseDomain: string;
     domainValidator: TDomainValidator;
     user: TUser;
@@ -120,6 +118,10 @@ export const CreatePortalDialog = observer(
       if (registerError) setRegisterError(null);
     };
 
+    const onClose = () => {
+      setCreatePortalDialogVisible(false);
+    };
+
     const onHandleClick = async () => {
       const firstName = user?.firstName;
       const lastName = user?.lastName;
@@ -134,7 +136,6 @@ export const CreatePortalDialog = observer(
       };
 
       const protocol = window?.location?.protocol;
-      const host = `${tenantAlias}.${baseDomain}`;
 
       const isValidPortalName = validatePortalName(
         name,
@@ -146,8 +147,8 @@ export const CreatePortalDialog = observer(
       if (isValidPortalName) {
         setIsLoading(true);
         await createNewPortal(data)
-          .then(async (data) => {
-            const { tenant } = data as TNewPortalResponse;
+          .then(async (d) => {
+            const { tenant } = d as TNewPortalResponse;
             if (visit) {
               const portalUrl = `${protocol}//${tenant?.domain}/`;
 
@@ -167,10 +168,6 @@ export const CreatePortalDialog = observer(
       }
     };
 
-    const onClose = () => {
-      setCreatePortalDialogVisible(false);
-    };
-
     return (
       <StyledModal
         isLarge
@@ -182,7 +179,7 @@ export const CreatePortalDialog = observer(
           {t("CreatingPortal", { productName: t("Common:ProductName") })}
         </ModalDialog.Header>
         <ModalDialog.Body>
-          <Text noSelect={true}>
+          <Text>
             {t("CreateSpaceDescription", {
               productName: t("Common:ProductName"),
             })}
@@ -193,7 +190,9 @@ export const CreatePortalDialog = observer(
               fontWeight="600"
               style={{ paddingBottom: "5px" }}
             >
-              {t("PortalName")}
+              {t("PortalName", {
+                productName: t("Common:ProductName"),
+              })}
             </Text>
             <TextInput
               type={InputType.text}
@@ -222,7 +221,7 @@ export const CreatePortalDialog = observer(
             <Checkbox
               className="create-portal-checkbox"
               label={t("VisitSpace")}
-              onChange={() => setVisit((visit) => !visit)}
+              onChange={() => setVisit((v) => !v)}
               isChecked={visit}
             />
 
@@ -255,4 +254,3 @@ export const CreatePortalDialog = observer(
     );
   },
 );
-

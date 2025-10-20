@@ -46,7 +46,7 @@ const HeaderItem = ({ children, className, ...rest }) => {
   );
 };
 
-const Card = ({ children, countTilesInRow, ...rest }) => {
+const Card = ({ children, ...rest }) => {
   const getItemSize = (child) => {
     const isFile = child?.props?.className?.includes("file");
     const isFolder = child?.props?.className?.includes("folder");
@@ -99,7 +99,6 @@ const InfiniteGrid = (props) => {
   const {
     children,
     hasMoreFiles,
-    filterTotal,
     fetchMoreFiles,
     filesLength,
     className,

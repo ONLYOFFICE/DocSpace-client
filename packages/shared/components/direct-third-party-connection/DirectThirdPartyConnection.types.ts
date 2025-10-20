@@ -24,28 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type {
   Nullable,
   ThirdPartyAccountType,
   ConnectedThirdPartyAccountType,
   TTranslation,
-} from "@docspace/shared/types";
-import type { ButtonSize } from "@docspace/shared/components/button";
+} from "../../types";
+import type { ButtonSize } from "../button";
 import type {
   FileInfoType,
   FilesSelectorSettings,
-} from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
-import type { TThirdParties } from "@docspace/shared/api/files/types";
-
-export type StyledComboBoxItemProps = {
-  isDisabled?: boolean;
-};
-
-export type StyledBackupProps = {
-  isConnectedAccount?: boolean;
-  isMobileScale?: boolean;
-};
+} from "../files-selector-input/FilesSelectorInput.types";
+import type { TThirdParties } from "../../api/files/types";
+import type { TBreadCrumb } from "../selector/Selector.types";
 
 export type DirectThirdPartyConnectionState = {
   // folderList: {};
@@ -55,6 +46,7 @@ export type DirectThirdPartyConnectionState = {
 };
 
 export interface DirectThirdPartyConnectionProps {
+  className?: string;
   openConnectWindow: (
     serviceName: string,
     modal: Window | null,
@@ -91,6 +83,8 @@ export interface DirectThirdPartyConnectionProps {
   setBasePath: (folders: TBreadCrumb[]) => void;
   toDefault: VoidFunction;
   setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
+
+  setDefaultFolderId?: (id: string | number | null) => void;
   // other
 
   isError?: boolean;
@@ -109,4 +103,5 @@ export interface DirectThirdPartyConnectionProps {
   ) => void;
   onSelectFile?: (fileInfo: FileInfoType, breadCrumbs?: TBreadCrumb[]) => void;
   checkCreating?: boolean;
+  dataTestId?: string;
 }

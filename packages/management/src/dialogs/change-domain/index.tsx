@@ -66,7 +66,7 @@ export const ChangeDomainDialog = observer(() => {
   const router = useRouter();
   const { spacesStore } = useStores();
   const [domainNameError, setDomainNameError] =
-    React.useState<null | Array<object>>(null);
+    React.useState<null | Array<string>>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const {
     setDomainName,
@@ -111,9 +111,7 @@ export const ChangeDomainDialog = observer(() => {
     >
       <ModalDialog.Header>{t("DomainSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect={true} fontSize="13px">
-          {t("ChangeDomainDescription")}
-        </Text>
+        <Text fontSize="13px">{t("ChangeDomainDescription")}</Text>
         <div className="create-portal-input-block">
           <Text
             fontSize="13px"
@@ -132,17 +130,18 @@ export const ChangeDomainDialog = observer(() => {
             className="create-portal-input"
           />
           <div>
-            {domainNameError &&
-              domainNameError.map((err, index) => (
-                <Text
-                  className="error-text"
-                  key={index}
-                  fontSize="12px"
-                  fontWeight="400"
-                >
-                  {err.toString()}
-                </Text>
-              ))}
+            {domainNameError
+              ? domainNameError.map((err) => (
+                  <Text
+                    className="error-text"
+                    key={err.toString()}
+                    fontSize="12px"
+                    fontWeight="400"
+                  >
+                    {err.toString()}
+                  </Text>
+                ))
+              : null}
           </div>
         </div>
       </ModalDialog.Body>
@@ -154,17 +153,16 @@ export const ChangeDomainDialog = observer(() => {
           onClick={onClickDomainChange}
           size={ButtonSize.normal}
           primary
-          scale={true}
+          scale
         />
         <Button
           key="CancelButton"
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           onClick={onClose}
-          scale={true}
+          scale
         />
       </ModalDialog.Footer>
     </StyledModal>
   );
 });
-

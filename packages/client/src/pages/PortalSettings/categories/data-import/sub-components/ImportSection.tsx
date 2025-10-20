@@ -181,14 +181,16 @@ const ImportSection = ({
   description,
   exportSection,
   importSection,
+  dataTestId,
 }: ImportSectionProps) => {
   return (
-    <SectionWrapper isChecked={isChecked}>
+    <SectionWrapper data-testid={dataTestId} isChecked={isChecked}>
       <ToggleButton
         isChecked={isChecked}
         onChange={onChange || (() => {})}
         className="toggleButton"
         isDisabled={isDisabled}
+        dataTestId="enable_import_section_button"
       />
       <div>
         <Text lineHeight="20px" fontWeight={600} className="section-title">

@@ -1,0 +1,268 @@
+{
+  "key_path": "Viewer",
+  "content": "Viewer",
+  "content_en_sha1_hash": "dbad9f126b33570e09839a2d60720898de1a512d",
+  "created_at": "2025-08-26T11:15:03.444Z",
+  "updated_at": "2025-10-13T20:15:04.824Z",
+  "comment": {
+    "text": "This key refers to a user role with viewing permissions. It's used as a label for a share access right, likely displayed in a sharing dialog or settings panel. Translators should consider the meaning of \"viewer\" in the context of accessing and seeing content.",
+    "is_auto": true,
+    "updated_at": "2025-08-26T11:15:57.014Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
+      "line_number": 41,
+      "context": "import PortalImg from \"PUBLIC_DIR/images/sdk-presets_portal.react.svg?url\";\n import PublicRoomImg from \"PUBLIC_DIR/images/sdk-presets_public-room.react.svg?url\";\n import RoomSelectorImg from \"PUBLIC_DIR/images/sdk-presets_room-selector.react.svg?url\";\n import FileSelectorImg from \"PUBLIC_DIR/images/sdk-presets_file-selector.react.svg?url\";\n import EditorImg from \"PUBLIC_DIR/images/sdk-presets_editor.react.svg?url\";\n import ViewerImg from \"PUBLIC_DIR/images/sdk-presets_viewer.react.svg?url\";\n import CustomImg from \"PUBLIC_DIR/images/sdk-presets_custom.react.svg?url\";\n \n import PortalImgDark from \"PUBLIC_DIR/images/sdk-presets_portal_dark.react.svg?url\";\n import PublicRoomImgDark from \"PUBLIC_DIR/images/sdk-presets_public-room_dark.react.svg?url\";\n import RoomSelectorImgDark from \"PUBLIC_DIR/images/sdk-presets_room-selector_dark.react.svg?url\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 516,
+      "context": "{\n id: \"portal-settings_catalog-javascript-sdk_viewer\",\n key: \"7-1-5\",\n icon: \"\",\n link: \"viewer\",\n tKey: \"Common:Viewer\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_portal\",\n key: \"7-1-6\",\n icon: \"\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 190,
+      "context": "},\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n [ShareRights.FillForms]: {\n access: ShareAccessRights.FormFilling,\n description: \"\",",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation \"Πρόγραμμα προβολής\" translates to \"Playback Program\" or \"Viewing Program\". It's a rather literal and technically inaccurate translation of \"Viewer\". A more appropriate translation would depend on the specific context of its use, but a more common or direct translation might be 'θεατής' (theatis) for 'spectator' or 'κοινό' (koinó) for 'audience'.",
+          "suggestion": "Consider 'θεατής' (theatis) or 'κοινό' (koinó) depending on context."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation \"Esikatselu\" translates to \"Preview\" or \"Previewing\", not \"Viewer\".  \"Viewer\" implies someone who is watching something.",
+          "suggestion": "Consider alternatives like \"Katsoja\" (Watcher) or \"Katselija\" (Observer) which more accurately convey the meaning of 'Viewer'."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation \"Przeglądarka\" typically refers to a web browser (like Chrome or Firefox). \"Viewer\" in this context likely means a person who watches something (e.g., a video, a show).",
+          "suggestion": "Oglądacz"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Просмотрщик' while technically meaning 'viewer' or 'viewer device', is not the most natural or common translation for 'Viewer' in most contexts. It sounds somewhat technical and clunky.",
+          "suggestion": "Consider 'Зритель' (Zritel') which more generally means 'viewer' or 'spectator'. Alternatively, 'Просмотр' (Promotr) could be used depending on context; it means 'viewing' or 'watching'."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"නරඹනය\" (narambanaya) primarily means 'viewing' or 'spectating', but isn't a direct equivalent to 'Viewer' which implies the person watching something. A more accurate translation might be 'අක්ෂිගතයා' (akshigataya) for 'the viewer', or a more general term depending on the context.",
+          "suggestion": "Consider 'අක්ෂිගතයා' (akshigataya) or a more contextually appropriate term for 'viewer'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Prehliadač' can mean 'Viewer' in some contexts (like a web browser), it's not the most accurate translation for 'Viewer' in a general sense, particularly if referring to someone watching something (e.g., a video, a play). A more suitable translation would be 'Divák'.",
+          "suggestion": "Divák"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'仅查看' translates to 'View Only'. While it conveys a sense of observation, it doesn't directly represent the English word 'Viewer' which implies a person or device acting as a viewer. A more accurate translation would depend on the context. It's too restrictive.",
+          "suggestion": "Consider alternatives like '观众' (guānzhòng - audience) or '查看者' (chákan zhě - viewer) depending on the context."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

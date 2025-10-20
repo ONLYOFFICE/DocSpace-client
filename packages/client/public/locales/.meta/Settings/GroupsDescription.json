@@ -3,7 +3,7 @@
   "content": "Users which you selected in the previous step will be imported into groups created in {{serviceName}}. Groups will appear in the {{contactsName}} section.",
   "content_en_sha1_hash": "f3a3fd660493cb8d94711a3820e02cbdb83aa44e",
   "created_at": "2025-05-19T21:30:51.596Z",
-  "updated_at": "2025-05-26T07:57:32.525Z",
+  "updated_at": "2025-08-11T09:02:43.946Z",
   "comment": {
     "text": "The translation key \"GroupsDescription\" is used to describe the action of importing selected users into groups created in a service. This text appears in a data import component and helps users understand how their selections will be used.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 120,
+      "line_number": 121,
       "context": "<ImportSection\n isChecked={importOptions.importGroups}\n onChange={(e) => onChange(e, \"importGroups\")}\n sectionName={t(\"Common:Groups\")}\n description={t(\"Settings:GroupsDescription\", {\n serviceName,\n contactsName: t(\"Common:Contacts\"),\n })}\n exportSection={{\n sectionName: t(\"Common:Groups\"),",
       "module": "/packages/client"
     }

@@ -30,10 +30,15 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 
+import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 import { StandalonePage } from "@docspace/shared/pages/Payments/Standalone";
 import { toastr } from "@docspace/shared/components/toast";
 import { setLicense, acceptLicense } from "@docspace/shared/api/settings";
+
+import { useEndAnimation } from "@/hooks/useEndAnimation";
 import { getIsLicenseDateExpired, getPaymentDate, getDaysLeft } from "@/lib";
+import { TLicenseQuota } from "@docspace/shared/api/portal/types";
+import { TFilesSettings } from "@docspace/shared/api/files/types";
 
 const PaymentsPage = ({
   isTrial,
@@ -43,6 +48,9 @@ const PaymentsPage = ({
   dueDate,
   isEnterprise,
   logoText,
+  docspaceFaqUrl,
+  licenseQuota,
+  filesSettings,
 }: {
   isTrial: boolean;
   salesEmail: string;
@@ -51,14 +59,28 @@ const PaymentsPage = ({
   dueDate: Date | string;
   isEnterprise: boolean;
   logoText: string;
+  docspaceFaqUrl: string;
+  licenseQuota: TLicenseQuota;
+  filesSettings: TFilesSettings;
 }) => {
   const { t } = useTranslation("Common");
   const router = useRouter();
+  const isLoading = useEndAnimation();
 
   const [isLicenseDateExpired, setIsLicenseDateExpired] = useState(false);
   const [paymentDate, setPaymentDate] = useState("");
   const [trialDaysLeft, setTrialDaysLeft] = useState(0);
   const [isLicenseCorrect, setIsLicenseCorrect] = useState(false);
+
+  const shouldOpenEditorInNewTab = () => {
+    if (
+      window.navigator.userAgent.includes("ZoomWebKit") ||
+      window.navigator.userAgent.includes("ZoomApps")
+    )
+      return false;
+
+    return !filesSettings.openEditorInSameTab;
+  };
 
   const setPaymentsLicense = async (
     confirmKey: string | null,
@@ -100,22 +122,26 @@ const PaymentsPage = ({
   }, [dueDate]);
 
   return (
-    <StandalonePage
-      isTrial={isTrial}
-      setPaymentsLicense={setPaymentsLicense}
-      acceptPaymentsLicense={acceptPaymentsLicense}
-      isLicenseCorrect={isLicenseCorrect}
-      salesEmail={salesEmail}
-      isLicenseDateExpired={isLicenseDateExpired}
-      isDeveloper={isDeveloper}
-      buyUrl={buyUrl}
-      trialDaysLeft={trialDaysLeft}
-      paymentDate={paymentDate}
-      isEnterprise={isEnterprise}
-      logoText={logoText}
-    />
+    <LoaderWrapper isLoading={isLoading}>
+      <StandalonePage
+        isTrial={isTrial}
+        setPaymentsLicense={setPaymentsLicense}
+        acceptPaymentsLicense={acceptPaymentsLicense}
+        isLicenseCorrect={isLicenseCorrect}
+        salesEmail={salesEmail}
+        isLicenseDateExpired={isLicenseDateExpired}
+        isDeveloper={isDeveloper}
+        buyUrl={buyUrl}
+        trialDaysLeft={trialDaysLeft}
+        paymentDate={paymentDate}
+        isEnterprise={isEnterprise}
+        logoText={logoText}
+        docspaceFaqUrl={docspaceFaqUrl}
+        licenseQuota={licenseQuota}
+        openOnNewPage={shouldOpenEditorInNewTab()}
+      />
+    </LoaderWrapper>
   );
 };
 
 export default PaymentsPage;
-

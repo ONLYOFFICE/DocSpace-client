@@ -3,7 +3,7 @@
   "content": "Please confirm you want to change the {{productName}} owner to {{newOwner}}.",
   "content_en_sha1_hash": "299d4f92a0e0c064c9b4b9ea7b85d72d15f3e4d6",
   "created_at": "2025-05-19T21:30:57.340Z",
-  "updated_at": "2025-05-24T15:36:06.905Z",
+  "updated_at": "2025-06-30T12:20:31.659Z",
   "comment": {
     "text": "This translation key is used to display a message that asks users to confirm changing the owner of a product. It appears as a subtitle in a UI element and provides context through placeholders for the product name and new owner.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalOwnerChange/page.client.tsx",
-      "line_number": 93,
-      "context": "})}\n </Text>\n ) : (\n <>\n <Text className=\"subtitle\">\n {t(\"ConfirmOwnerPortalTitle\", {\n newOwner: newOwner,\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <ButtonsWrapper>",
+      "line_number": 91,
+      "context": "})}\n </Text>\n ) : (\n <>\n <Text className=\"subtitle\">\n {t(\"ConfirmOwnerPortalTitle\", {\n newOwner,\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <ButtonsWrapper>",
       "module": "/packages/login"
     }
   ],

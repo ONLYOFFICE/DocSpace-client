@@ -28,7 +28,7 @@
 
 import React, { useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import {
   setCompanyInfoSettings,
@@ -75,7 +75,6 @@ export const CompanyInfoPage = ({
 }) => {
   const { t } = useTranslation("Common");
   const { currentDeviceType } = useDeviceType();
-  const router = useRouter();
   const pathname = usePathname();
 
   const [companyData, setCompanyData] = useState(companyInfoSettingsData);
@@ -91,14 +90,14 @@ export const CompanyInfoPage = ({
     redirectUrl: "/settings/branding",
     currentLocation: "company-info",
     deviceType: currentDeviceType,
-    pathname: pathname,
+    pathname,
   });
 
   const getCompanyData = async () => {
-    const companyData = await getCompanyInfoSettings();
+    const cd = await getCompanyInfoSettings();
     const settings = (await getSettings()) as TSettings;
     setShowAbout(settings.displayAbout);
-    setCompanyData(companyData);
+    setCompanyData(cd);
   };
 
   const onSave = async (

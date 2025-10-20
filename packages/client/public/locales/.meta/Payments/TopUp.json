@@ -3,7 +3,7 @@
   "content": "Top up",
   "content_en_sha1_hash": "91d42a8b742abdae628f62177ef45374076d645e",
   "created_at": "2025-05-28T09:33:06.820Z",
-  "updated_at": "2025-06-05T23:06:25.311Z",
+  "updated_at": "2025-08-21T14:45:43.963Z",
   "comment": {
     "text": "The translation key \"TopUp\" is used to translate the content \"Top up\", which appears on a button in the Wallet settings page, allowing users to top up their balance. The exact appearance may vary depending on the design implementation of the component.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/TopUpButtons.tsx",
-      "line_number": 34,
-      "context": "import { Button, ButtonSize } from \"@docspace/shared/components/button\";\n import { toastr } from \"@docspace/shared/components/toast\";\n import { saveDeposite } from \"@docspace/shared/api/portal\";\n import { useAmountValue } from \"../context\";\n \n interface TopUpButtonsProps {\n currency: string;\n setIsLoading: (value: boolean) => void;\n isLoading: boolean;\n fetchBalance?: () => Promise<void>;\n fetchTransactionHistory?: () => Promise<void>;",
+      "file_path": "/packages/client/src/components/panels/TopUpBalance/sub-components/TopUpButtons.tsx",
+      "line_number": 36,
+      "context": "import { toastr } from \"@docspace/shared/components/toast\";\n import { saveDeposite } from \"@docspace/shared/api/portal\";\n import { Text } from \"@docspace/shared/components/text\";\n \n import { useAmountValue } from \"../../../../pages/PortalSettings/categories/payments/Wallet/context\";\n import styles from \"../styles/TopUpModal.module.scss\";\n \n interface TopUpButtonsProps {\n currency: string;\n setIsLoading: (value: boolean) => void;\n isLoading: boolean;",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/WalletInfo.tsx",
-      "line_number": 41,
-      "context": "import styles from \"../styles/Wallet.module.scss\";\n \n type WalletInfoProps = {\n balance?: string;\n onTopUp?: () => void;\n };\n \n const WalletInfo = (props: WalletInfoProps) => {\n const { balance, onTopUp } = props;\n const { t } = useTranslation([\"Payments\", \"Common\"]);",
+      "file_path": "/packages/client/src/components/panels/TopUpBalance/sub-components/WalletInfo.tsx",
+      "line_number": 37,
+      "context": "import { Text } from \"@docspace/shared/components/text\";\n import { Link } from \"@docspace/shared/components/link\";\n \n import WalletReactSvgUrl from \"PUBLIC_DIR/images/icons/16/wallet.react.svg?url\";\n \n import styles from \"../styles/TopUpModal.module.scss\";\n \n type WalletInfoProps = {\n balance?: string;\n onTopUp?: () => void;\n isBalanceInsufficient?: boolean;",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "View",
   "content_en_sha1_hash": "69bd4ef9fbd0894a22759c3766b859defbdedbc8",
   "created_at": "2025-05-19T21:30:49.521Z",
-  "updated_at": "2025-06-08T12:02:32.597Z",
+  "updated_at": "2025-10-16T07:29:35.525Z",
   "comment": {
     "text": "This translation key is used to display the text \"View\" as a label for a button or similar UI element. It appears in various contexts, including a Smart Banner component and a filter section on the Home page, where it serves as a placeholder for an action that allows users to view content or settings.",
     "is_auto": true,
@@ -12,21 +12,27 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/SmartBanner/index.js",
-      "line_number": 100,
+      "line_number": 103,
       "context": "<SmartBanner\n title={t(\"SmartBanner:AppName\", {\n organizationName: logoText,\n })}\n author=\"Ascensio System SIA\"\n button={t(\"Common:View\")}\n force={force}\n onClose={() => setIsBannerVisible(false)}\n onInstall={() => setIsBannerVisible(false)}\n storeText={storeText}\n price={priceText}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 809,
+      "line_number": 912,
       "context": "case RoomsType.ReadOnlyRoom:\n return {\n id: \"filter_type-view-only\",\n key: RoomsType.ReadOnlyRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:ViewOnlyRooms\"),\n };\n case RoomsType.FormRoom:\n return {\n id: \"filter_type-form\",\n key: RoomsType.FormRoom,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1788,
+      "line_number": 1851,
       "context": "disabled: false,\n },\n {\n id: \"option_view\",\n key: \"view\",\n label: t(\"Common:View\"),\n icon: EyeReactSvgUrl,\n onClick: (fileId) => this.onMediaFileClick(fileId, item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 190,
+      "context": "},\n [ShareRights.Read]: {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"Common:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n [ShareRights.FillForms]: {\n access: ShareAccessRights.FormFilling,\n description: \"\",",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -48,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Baxın' can mean 'view' in some contexts, it primarily translates to 'look' or 'watch' in Azerbaijani. 'View' in the context of user interface elements (like a 'View' button or section) requires a more accurate translation like 'Görünüş' or 'Rəy'. 'Baxın' implies an action of looking.",
-          "suggestion": "Consider 'Görünüş' or 'Rəy' as more appropriate translations for 'View' in a UI context."
+          "description": "While \"Baxın\" can mean \"View\" in certain contexts, it more commonly translates to \"Look\" or \"Watch.\" \"View\" in the context of a user interface (like a list or gallery) is better conveyed by a more neutral term.",
+          "suggestion": "Consider using \"Görünüş\" or \"Rəy\" depending on the specific UI context. \"Görünüş\" is closer to the concept of \"View\" as a visual representation, while \"Rəy\" can mean 'opinion' or 'view' in a more abstract sense, which might be appropriate if 'View' refers to a display of data."
         }
       ],
       "approved_at": null
@@ -60,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Преглед' can mean 'view' in some contexts, it more commonly translates to 'review' or 'overview'. 'View' in the context of a UI element (like 'View all items') would be better translated as 'Изглед' or 'Преглед на'.",
-          "suggestion": "Consider 'Изглед' or 'Преглед на' depending on the specific context."
+          "description": "While \"Преглед\" can sometimes translate to \"View\", it's more commonly associated with \"Review\" or \"Overview.\" \"View\" in the context of a user interface element (e.g., \"View Profile\") often requires a more specific translation depending on the specific meaning.",
+          "suggestion": "Consider alternatives like \"Гледане\" (gledane) for a more literal 'viewing' or explore context-specific options."
         }
       ],
       "approved_at": null
@@ -75,7 +81,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Anzeigen\" can mean \"View\" in certain contexts (like displaying something), it's not the most accurate or common translation of \"View\" in the general sense, especially when referring to a visual viewpoint or the act of viewing content. A more suitable translation might be \"Betrachten\" or \"Ansehen\".",
+          "suggestion": "Consider \"Betrachten\" or \"Ansehen\" as alternatives to \"Anzeigen\"."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -99,7 +111,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Afficher\" can mean 'to display' or 'to show', it's not the most natural translation of 'View' in this context, which likely refers to a visual perspective or access to information.  A more appropriate translation would depend on the specific context of 'View'.",
+          "suggestion": "Consider alternatives like 'Voir' (to see), 'Consulter' (to consult/view), or 'Présentation' (Presentation) depending on context."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -132,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ມຸມມອງ\" (mum mong) can mean 'view' or 'perspective,' it's not the most common or direct translation of 'View' in the context of, for example, a user interface element or a scenic outlook. A more appropriate translation would be 'ເບິ່ງ' (ber)",
-          "suggestion": "ເບິ່ງ (ber)"
+          "description": "While \"ມຸມມອງ\" (mum mong) can be understood to mean 'view' or 'perspective,' it's a more complex meaning than the English 'View' which often refers to a visual perspective or a way to see something (e.g., 'view a website' or 'view a photo'). A more direct translation for the common meaning of 'View' might be 'ວິວ' (wiw) or 'ການເບິ່ງ' (kan boeng).",
+          "suggestion": "Consider using 'ວິວ' (wiw) or 'ການເບິ່ງ' (kan boeng) for a more direct translation."
         }
       ],
       "approved_at": null
@@ -162,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ver\" for \"View\" is not the most accurate or common translation in Portuguese. \"Ver\" means \"to see.\" The best translation depends on the context. It could be \"Visualizar\", \"Exibir\", \"Vista\", or \"Observar\".",
-          "suggestion": "Consider alternatives like \"Visualizar\", \"Exibir\", \"Vista\", or \"Observar\", depending on the specific context of 'View'."
+          "description": "The Portuguese translation \"Ver\" while literally meaning 'to see' or 'to view', isn't the most natural translation for 'View' in the context of a UI element or a permission. A more appropriate translation would be 'Visualizar' or 'Exibir'.",
+          "suggestion": "Visualizar"
         }
       ],
       "approved_at": null
@@ -192,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"දකින්න\" (dakinnna) means \"see\" or \"look\" but doesn't directly convey the meaning of \"View\" in the context of a user interface element (e.g., a button labeled \"View\"). A more appropriate translation would depend on the intended function. Options include \"පෙන්වීම\" (penvima - showing/display), \"බැලීම\" (baleyima - looking), or \"ප්‍රදර්ශනය\" (pradarshana - presentation/exhibition).",
-          "suggestion": "Consider alternatives such as \"පෙන්වීම\" (penvima), \"බැලීම\" (baleyima), or \"ප්‍රදර්ශනය\" (pradarshana) based on context."
+          "description": "The Sinhala translation \"දකින්න\" (dakinna) primarily means \"to see\" or \"to watch,\" and while it can imply viewing, it's not the most accurate translation of \"View\" in the context of a UI element or a system capability. It carries a more active sense of observation.",
+          "suggestion": "Consider \"පෙනුම්\" (penum) which is closer to \"view\" in the sense of appearance or a visual representation, or \"ලක්ශණය\" (lakshanaya) which can mean \"characteristic\" or \"feature\" depending on the context. The best choice depends on the precise role of 'View' in the application."
         }
       ],
       "approved_at": null
@@ -204,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Vyhliadka\" can mean 'view' in some contexts (like a scenic overlook), it doesn't accurately translate \"View\" in this key, which likely refers to a user interface element (e.g., 'View' button, 'View' details). \"Výhľad\" would be a more accurate translation for a general view or vista.",
-          "suggestion": "Výhľad"
+          "description": "While \"Vyhliadka\" can mean 'view', in the context of a UI element like a 'View' in software, it doesn't quite convey the intended meaning. It suggests a scenic overlook rather than a display or perspective.",
+          "suggestion": "Consider alternatives like \"Zobrazenie\", \"Pohľad\" or \"Perspektíva\" which better capture the UI element sense of 'View'."
         }
       ],
       "approved_at": null
@@ -219,7 +237,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Преглед' while acceptable, isn't the most common or direct translation of 'View' in the context of UI elements or displays. 'Поглед' might be a closer equivalent, depending on the specific application. 'Преглед' often implies a review or overview.",
+          "suggestion": "Consider 'Поглед' as a possible alternative, or further context needed to determine the best fit."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -234,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Görüntüle\" can mean 'view,' it's more accurately translated as 'display' or 'show.' 'View' in the context of user interface elements (like a button or menu option) is often better translated as 'İzleme' (for watching/observing) or, in some cases, kept as 'View' to maintain consistency with English interface.",
-          "suggestion": "Consider 'İzleme' or keeping 'View' depending on the specific context."
+          "description": "While 'Görüntüle' can mean 'View', it's more accurately translated as 'Display' or 'Show'. 'View' in the context of user interface (e.g., 'View Details') is often better translated as 'İzleme' or 'Görünüm' depending on the nuance.",
+          "suggestion": "Consider 'İzleme' or 'Görünüm' as alternatives depending on context."
         }
       ],
       "approved_at": null
@@ -243,13 +267,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Переглянути\" is a possible translation for \"View,\" it carries a stronger connotation of 'review' or 'browse' rather than the simple action of 'viewing.' Depending on the context, a more direct translation like \"Погляд\" (Pohlad) or \"Перегляд\" (Perehliad) might be more accurate. The best translation depends heavily on how 'View' is used.",
-          "suggestion": "Consider alternatives like \"Погляд\" (Pohlad) or \"Перегляд\" (Perehliad) depending on the specific context of 'View'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -259,6 +277,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

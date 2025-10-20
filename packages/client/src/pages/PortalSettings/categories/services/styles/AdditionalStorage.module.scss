@@ -24,21 +24,37 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+.servicesWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 320px);
+  gap: 16px;
+
+  &.servicesWrapperMobile {
+    grid-template-columns: 1fr;
+  }
+}
+
 .serviceContainer {
   display: flex;
   flex-direction: column;
   padding: 16px;
   border: 1px solid var(--border-service-color);
   border-radius: 6px;
-  margin-bottom: 16px;
-  width: 320px;
-  height: 192px;
+
+  min-height: 148px;
   box-sizing: border-box;
   cursor: pointer;
 
   &:not(.disabled):hover {
     background-color: var(--background-service-color);
   }
+}
+
+.middleBlock {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 12px;
 }
 
 .disabled {
@@ -65,12 +81,12 @@
   height: 100%;
 
   rect {
-    fill: var(--payment-accent-color);
+    fill: var(--color-scheme-main-buttons);
     opacity: 0.1;
   }
 
   path {
-    fill: var(--payment-accent-color);
+    fill: var(--color-scheme-main-buttons);
     opacity: 1;
   }
 }
@@ -86,7 +102,6 @@
 
 .priceContainer {
   margin-top: auto;
-  padding-top: 12px;
 }
 
 .iconsContainer {
@@ -105,6 +120,7 @@
 .storageDescription {
   color: var(--payment-text-color);
   margin-bottom: 20px;
+  max-width: 660px;
 }
 .payerContainer {
   margin-bottom: 20px;
@@ -112,13 +128,23 @@
 
 .changeShedule {
   display: flex;
-  gap: 8px;
+  gap: 4px;
   align-items: center;
-  margin-top: 12px;
-  color: var(--payment-warning-color);
-  svg {
-    path {
-      fill: var(--payment-warning-color);
+
+  &.warningColor {
+    color: var(--payment-warning-color);
+    svg {
+      path {
+        fill: var(--payment-warning-color);
+      }
+    }
+  }
+  &.greenColor {
+    color: var(--payment-credit-color);
+    svg {
+      path {
+        fill: var(--payment-credit-color);
+      }
     }
   }
 }

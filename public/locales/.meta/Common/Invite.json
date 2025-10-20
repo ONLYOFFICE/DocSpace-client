@@ -3,7 +3,7 @@
   "content": "Invite",
   "content_en_sha1_hash": "b136609f068403340f94e46a0174da273bfbce30",
   "created_at": "2025-05-19T21:30:45.964Z",
-  "updated_at": "2025-05-26T07:57:32.141Z",
+  "updated_at": "2025-10-13T13:22:35.485Z",
   "comment": {
     "text": "This translation key is used for the label \"Invite\" in UI elements such as buttons and dialogs. It appears on a main button where user actions are displayed, as well as a modal dialog inviting users to join a room. Translators should focus on providing a consistent invite-related message across various contexts.",
     "is_auto": true,
@@ -12,31 +12,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 721,
-      "context": "useEffect(() => {\n setMainButtonVisible(mainButtonVisible);\n }, [mainButtonVisible]);\n \n const mainButtonText =\n isRoomAdmin && isAccountsPage ? t(\"Common:Invite\") : t(\"Common:Actions\");\n \n let isDisabled = false;\n \n if (isSettingsPage) {\n isDisabled = isSettingsPage;",
+      "line_number": 735,
+      "context": "if (!isAccountsPage) return onCreateRoom();\n if (isContactsGroupsPage) return createGroup();\n };\n \n const mainButtonText =\n isRoomAdmin && isAccountsPage ? t(\"Common:Invite\") : t(\"Common:Actions\");\n \n let isDisabled = false;\n \n if (isSettingsPage) {\n isDisabled = isSettingsPage;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 564,
+      "line_number": 570,
       "context": "}}\n />\n </ModalDialog.Container>\n ) : null}\n \n <ModalDialog.Header>{t(\"Common:Invite\")}</ModalDialog.Header>\n <ModalDialog.Body>{bodyInvitePanel}</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"send-invitation\"\n scale",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 470,
-      "context": "onClick: () => setIsVisible(true),\n icon: InfoOutlineReactSvgUrl,\n },\n {\n key: \"cm-invite\",\n label: t(\"Common:Invite\"),\n disabled: !hasUsersToInvite,\n onClick: () => setSendInviteDialogVisible(true),\n icon: InviteAgainReactSvgUrl,\n },\n {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 470,
-      "context": "onClick: () => setIsVisible(true),\n icon: InfoOutlineReactSvgUrl,\n },\n {\n key: \"cm-invite\",\n label: t(\"Common:Invite\"),\n disabled: !hasUsersToInvite,\n onClick: () => setSendInviteDialogVisible(true),\n icon: InviteAgainReactSvgUrl,\n },\n {",
+      "line_number": 716,
+      "context": "const accountsSectionActions = [\n {\n id: \"invite-accounts\",\n icon: PersonInviteReactSvgUrl,\n label: t(\"Common:Invite\"),\n key: \"invite-accounts\",\n items: accountsUserOptions,\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
-      "line_number": 204,
+      "line_number": 181,
       "context": "iconUrl: InfoReactSvgUrl,\n },\n {\n id: \"menu-invite\",\n key: \"invite\",\n label: t(\"Common:Invite\"),\n disabled: !hasUsersToInvite,\n onClick: () => setSendInviteDialogVisible(true),\n iconUrl: InviteAgainReactSvgUrl,\n },\n {",
       "module": "/packages/client"
     }
@@ -60,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Dəvət edin\" translates to \"Invite (imperative)\" rather than simply \"Invite\". It implies a direct command to invite someone. A more neutral translation would be \"Dəvət\" or \"Qeydli\" depending on the context.",
+          "description": "The Azerbaijani translation \"Dəvət edin\" is a command form (\"Invite\" - imperative). The English \"Invite\" can also function as a noun (an invitation). This translation doesn't account for that possibility. A more versatile translation might be \"Dəvət\" (Invitation).",
           "suggestion": "Dəvət"
         }
       ],
@@ -117,13 +111,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation \"Invita\" is the third-person singular present indicative form of the verb 'invitare' (to invite). 'Invite' in English functions as a noun (an invitation) or a verb (to invite). The translation should be a noun form like 'Invito' or a more appropriate verb form depending on the context. Without more context, 'Invito' is the most likely correct translation.",
-          "suggestion": "Invito"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -132,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"招待する\" means \"to invite\" or \"to request attendance\". While related to 'Invite', it's not a direct translation of the English word 'Invite' which functions as a noun.  A more direct noun translation might be \"招待\" (shoutai).",
-          "suggestion": "Consider \"招待\" (shoutai) as a more direct noun translation."
+          "description": "The Japanese translation \"招待する\" (shōtaisu suru) means \"to invite\" (as a verb). The English \"Invite\" is a noun. A more appropriate translation might be \"招待\" (shōtai) which is the noun form of invite.",
+          "suggestion": "招待 (shōtai)"
         }
       ],
       "approved_at": null
@@ -213,7 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Позови\" translates to \"Invite\" but is more accurately \"Call\" or \"Invite (imperative)\". It's a command form. While it can be used in some contexts to mean invite, it's not a direct translation of \"Invite\" as a noun or general term.",
+          "suggestion": "Consider 'Позвати' for a more accurate translation of 'Invite' as a general term, or 'Позови' is acceptable if the intended meaning is an imperative 'Invite!'"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -222,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Pozovi' is a command form (imperative) meaning 'Call'. 'Invite' typically implies a request to join something, not a direct call. A more appropriate translation would depend on the context, but options like 'Poziv' (invite, noun), 'Upozorenje' (invitation, slightly formal), or 'Pozvati' (to invite, infinitive) might be better.",
-          "suggestion": "Consider 'Poziv' or 'Pozvati' depending on the intended meaning."
+          "description": "The Serbian translation 'Pozovi' translates to 'Call' or 'Invite' in an imperative form. While it can be used in the context of inviting someone, it's a more direct and less nuanced translation of 'Invite'. A more appropriate translation might depend on the specific context of 'Invite'.",
+          "suggestion": "Consider alternatives like 'Pozvati' (infinitive - to invite), or a more descriptive phrase depending on the application."
         }
       ],
       "approved_at": null
@@ -234,7 +228,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Davet et\" translates to \"Invite (something/someone)\" or \"Invite (to do something)\", but \"Invite\" as a noun (e.g., an invitation) is not accurately conveyed.  A better translation would be \"Davet\".",
+          "description": "The translation \"Davet et\" is a verb phrase (invite), but the English content is a noun (\"Invite\"). A more accurate translation would be a noun form.",
           "suggestion": "Davet"
         }
       ],

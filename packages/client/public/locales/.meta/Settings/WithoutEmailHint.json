@@ -3,7 +3,7 @@
   "content": "You don’t have users without emails. Please proceed to the next step.",
   "content_en_sha1_hash": "12a3fe47045d798f04cd05aa9c40ce724578493c",
   "created_at": "2025-05-19T21:30:53.237Z",
-  "updated_at": "2025-05-26T07:57:32.520Z",
+  "updated_at": "2025-08-11T09:02:43.944Z",
   "comment": {
     "text": "This translation key is used to display a hint message when users attempt to add emails without having any users. The purpose of this message is to inform users that they need to have at least one user before proceeding. It appears on the \"Add Emails Step\" page in the data import component.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/index.tsx",
-      "line_number": 161,
+      "line_number": 169,
       "context": ") : null}\n </>\n ) : (\n <>\n <Text fontWeight={600} lineHeight=\"20px\" className=\"mb-17\">\n {t(\"Settings:WithoutEmailHint\")}\n </Text>\n {Buttons}\n </>\n )}",
       "module": "/packages/client"
     }

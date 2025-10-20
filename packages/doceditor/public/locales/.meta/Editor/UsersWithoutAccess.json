@@ -3,7 +3,7 @@
   "content": "Some users whom you want to mention don't have access to the room: {{users}}",
   "content_en_sha1_hash": "0e74bc0626bcf6b856447b7dbe024abf390630fa",
   "created_at": "2025-05-19T21:30:57.136Z",
-  "updated_at": "2025-05-26T07:57:32.858Z",
+  "updated_at": "2025-09-07T07:53:15.411Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that some users do not have access to a room. The message appears when users are unable to edit or view content in a specific file (useEditorEvents.ts) and shows a list of non-privileged users who should be mentioned, if any exist.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
-      "line_number": 521,
-      "context": "usersNotFound &&\n usersNotFound.length > 0 &&\n docEditor?.showMessage?.(\n t\n ? t(\"UsersWithoutAccess\", {\n users: usersNotFound,\n })\n : \"\",\n );\n } catch (e) {",
+      "line_number": 494,
+      "context": ");\n \n if (usersNotFound && usersNotFound.length > 0) {\n docEditor?.showMessage?.(\n t\n ? t(\"UsersWithoutAccess\", {\n users: usersNotFound,\n })\n : \"\",\n );\n }",
       "module": "/packages/doceditor"
     }
   ],
@@ -27,42 +27,19 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'whom you want to mention' is translated as 'الذين تريد ذكرهم'. While technically correct, a more natural and idiomatic phrasing in Arabic would be 'الذين ترغب بذكرهم' or 'الذين تود ذكرهم'. The current translation sounds slightly formal and less conversational.",
-          "suggestion": "الذين ترغب بذكرهم"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"mention\" is not accurately translated. \"Qeyd etmək\" implies a note or record, not the act of mentioning someone.",
-          "suggestion": "Consider using a phrase like \"sözügedən\" or \"haqqında danışmaq istəyirsiniz\" to better convey the meaning of 'mention'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English term \"access\" is translated as \"girişi\". While technically correct, a more natural and contextually appropriate translation might be \"hüququ\" (right/permission).",
-          "suggestion": "Consider using \"hüququ\" instead of \"girişi\" to mean 'access'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Някои потребители, които искате да споменете, нямат достъп до стаята: {{users}}' is a literal translation and sounds unnatural in Bulgarian. A more natural phrasing would be 'Има потребители, които искате да споменете, но нямат достъп до стаята: {{users}}' or 'Някои от потребителите, които искате да споменете, нямат достъп до стаята: {{users}}'.",
-          "suggestion": "Някои от потребителите, които искате да споменете, нямат достъп до стаята: {{users}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -92,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Joillakin käyttäjillä, jotka haluat mainita, ei ole pääsyä huoneeseen: {{users}}' is a literal translation but sounds awkward in Finnish. A more natural phrasing would be something like 'Osa käyttäjistä, joita haluat mainita, ei ole huoneessa: {{users}}' or '{{users}} -käyttäjillä ei ole pääsyä huoneeseen.'. The original phrasing 'whom you want to mention' isn't perfectly conveyed.",
-          "suggestion": "Osa käyttäjistä, joita haluat mainita, ei ole huoneessa: {{users}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -110,18 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'whom you want to mention' is not accurately translated. 'Ցանկանում եք նշել' implies a more formal 'you want to indicate' rather than a casual 'you want to mention'.",
-          "suggestion": "Որոշ օգտատերեր, ովքեր ուզում եք հիշատակել, մուտք չունեն սենյակ. {{users}}"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'ովքեր' is more grammatically correct for the relative pronoun referring back to users, especially when 'ցանկանում եք' is used.",
-          "suggestion": "Որոշ օգտատերեր, ովքեր ուզում եք հիշատակել, մուտք չունեն սենյակ. {{users}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -133,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"言及したいユーザー\" (people you want to mention) is a bit awkward in this context. A more natural phrasing would be something like \"招待したいユーザー\" (users you want to invite) or \"共有したいユーザー\" (users you want to share with). The current translation implies you're explicitly mentioning them for a purpose other than access.",
-          "suggestion": "言及したいユーザー -> 招待したいユーザー or 共有したいユーザー"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -151,30 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"whom you want to mention\" is not the most natural or accurate translation of \"you want to mention\". A better phrasing would emphasize the intended meaning of mentioning someone.",
-          "suggestion": "ຜູ້​ໃຊ້​ບາງ​ຄົນ​ທີ່​ທ່ານ​ຢາກ​ຊີ້​ສະ​ແດງ​ຊື່​ບໍ່​ມີ​ການ​ເຂົ້າ​ເຖິງ​ຫ້ອງ: {{users}}"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ກ່າວ​ເຖິງ\" technically means 'to mention', it's somewhat formal and less common in everyday Lao. A more natural phrasing would be 'ຊີ້ສະແດງຊື່' (to indicate the name).",
-          "suggestion": "ປ່ຽນ 'ກ່າວ​ເຖິງ' ເປັນ 'ຊີ້​ສະ​ແດງ​ຊື່'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"whom you want to mention\" is not accurately translated. \"Kurus vēlaties pieminēt\" is grammatically correct, but sounds slightly unnatural. A more natural phrasing would reflect a more active voice and be more direct.",
-          "suggestion": "Daži lietotāji, kurus vēlaties iesaistīt, nevar piekļūt telpai: {{users}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -192,13 +129,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Alguns utilizadores que quer mencionar não têm acesso à sala: {{users}}' is not a perfect translation. 'quer mencionar' is a bit awkward. A more natural phrasing would be 'que pretende mencionar' or 'que você deseja mencionar'.",
-          "suggestion": "Alguns utilizadores que pretende mencionar não têm acesso à sala: {{users}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -210,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The sentence structure is slightly awkward. Using 'pe care doriți să-i menționați' can be improved for better flow.",
-          "suggestion": "Unii utilizatori pe care doriți să-i menționați nu au acces în sală: {{users}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -228,18 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ඔබට සඳහන් කිරීමට වුවමනා ඇතැම් අයට කාමරය වෙත ප්‍රවේශය නැත: {{users}}\" is a bit literal and awkward. A more natural phrasing would convey the meaning more clearly.",
-          "suggestion": "ඔබ සඳහන් කරන සමහර χρήστες කාමරයට ඇතුළුවීමට අවසර නැත: {{users}}"
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ය' is repeated unnecessarily in 'ඔබට සඳහන් කිරීමට වුවමනා ඇතැම්'.",
-          "suggestion": "ඔබට සඳහන් කිරීමට අවශ්‍ය ඇතැම්"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -257,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Неки корисници које желите поменути немају приступ соби: {{users}}' is technically correct but sounds slightly unnatural. A more natural phrasing would be 'Неки од корисника које желите да поменете немају приступ соби: {{users}}' or 'Неки корисници које желите да споменете немају приступ соби: {{users}}'.",
-          "suggestion": "Неки од корисника које желите да поменете немају приступ соби: {{users}} or Неки корисници које желите да споменете немају приступ соби: {{users}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -287,25 +195,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Một số người dùng mà bạn muốn đề cập đến không có quyền truy cập vào phòng: {{users}}' is a literal translation and sounds awkward in Vietnamese. A more natural phrasing would be 'Một số người dùng mà bạn muốn nhắc đến không có quyền truy cập vào phòng: {{users}}' or 'Một số người dùng mà bạn muốn đề cập không có quyền truy cập vào phòng: {{users}}'.",
-          "suggestion": "Một số người dùng mà bạn muốn nhắc đến không có quyền truy cập vào phòng: {{users}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Some users whom you want to mention\" is not perfectly conveyed. A more natural and common phrasing in Chinese would be \"您想提及的用户\". \"部分用户\" implies a subset, which might not be the intended meaning.  The English implies all users you *want* to mention, regardless of whether they are a subset of all users.",
-          "suggestion": "您想提及的用户没有房间访问权限：{{users}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

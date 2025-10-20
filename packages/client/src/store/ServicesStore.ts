@@ -24,145 +24,186 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-console */
 import { makeAutoObservable } from "mobx";
-
-import { getServicesQuotas } from "@docspace/shared/api/portal";
+import axios from "axios";
 
 import { toastr } from "@docspace/shared/components/toast";
 
-import { UserStore } from "@docspace/shared/store/UserStore";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
-import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
-import { PaymentQuotasStore } from "@docspace/shared/store/PaymentQuotasStore";
-import { TTranslation } from "@docspace/shared/types";
-import { TOTAL_SIZE } from "@docspace/shared/constants";
 
-import {
-  TPaymentFeature,
-  TNumericPaymentFeature,
-  TPaymentQuota,
-} from "@docspace/shared/api/portal/types";
+import { TTranslation } from "@docspace/shared/types";
+
 import PaymentStore from "./PaymentStore";
 
 class ServicesStore {
-  userStore: UserStore | null = null;
-
   currentTariffStatusStore: CurrentTariffStatusStore | null = null;
 
-  currentQuotaStore: CurrentQuotasStore | null = null;
+  // servicesQuotasFeatures: Map<string, TPaymentFeature> = new Map();
 
-  paymentQuotasStore: PaymentQuotasStore | null = null;
-
-  servicesQuotasFeatures: Map<string, TPaymentFeature> = new Map();
-
-  servicesQuotas: TPaymentQuota | null = null;
+  // servicesQuotas: TPaymentQuota | null = null;
 
   paymentStore: PaymentStore | null = null;
 
   isInitServicesPage = false;
 
+  isVisibleWalletSettings = false;
+
+  partialUpgradeFee: number = 0;
+
+  reccomendedAmount: number = 0;
+
+  featureCountData: number = 0;
+
+  confirmActionType: string | null = null;
+
   constructor(
-    userStore: UserStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
-    currentQuotaStore: CurrentQuotasStore,
-    paymentQuotasStore: PaymentQuotasStore,
     paymentStore: PaymentStore,
   ) {
-    this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
-    this.currentQuotaStore = currentQuotaStore;
-    this.paymentQuotasStore = paymentQuotasStore;
     this.paymentStore = paymentStore;
 
     makeAutoObservable(this);
   }
 
-  get storageSizeIncrement() {
-    return (
-      (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TNumericPaymentFeature)
-        ?.value || 0
-    );
-  }
+  // get storageSizeIncrement() { // temp in payment store because of storage tariff deeactivation
+  //   return (
+  //     (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TNumericPaymentFeature)
+  //       ?.value || 0
+  //   );
+  // }
 
-  get storageQuotaIncrementPrice() {
-    return (
-      this.servicesQuotas?.price ?? {
-        value: 0,
-        currencySymbol: "",
-        isoCurrencySymbol: "USD",
-      }
-    );
-  }
+  // get storagePriceIncrement() {
+  //   return this.servicesQuotas?.price.value ?? 0;
+  // }
 
-  get storagePriceIncrement() {
-    return this.servicesQuotas?.price.value ?? 0;
-  }
+  // get storageQuotaIncrementPrice() {
+  //   return (
+  //     this.servicesQuotas?.price ?? {
+  //       value: 0,
+  //       currencySymbol: "",
+  //       isoCurrencySymbol: "USD",
+  //     }
+  //   );
+  // }
+
+  setPartialUpgradeFee = (partialUpgradeFee: number) => {
+    this.partialUpgradeFee = partialUpgradeFee;
+  };
+
+  setVisibleWalletSetting = (isVisibleWalletSettings: boolean) => {
+    this.isVisibleWalletSettings = isVisibleWalletSettings;
+  };
 
   setIsInitServicesPage = (isInitServicesPage: boolean) => {
     this.isInitServicesPage = isInitServicesPage;
   };
 
-  handleServicesQuotas = async () => {
-    const res = await getServicesQuotas();
+  // handleServicesQuotas = async () => { // temp in payment store because of storage tariff deeactivation
+  //   const res = await getServicesQuotas();
 
-    if (!res) return;
+  //   if (!res) return;
 
-    const { hasStorageSubscription, hasScheduledStorageChange } =
-      this.currentTariffStatusStore;
+  //   res[0].features.forEach((feature) => {
+  //     this.servicesQuotasFeatures.set(feature.id, feature);
+  //   });
 
-    res[0].features.forEach((feature) => {
-      if (feature.id === TOTAL_SIZE) {
-        const enhancedFeature = feature as TPaymentFeature & {
-          enabled: boolean;
-          cancellation: boolean;
-        };
-        enhancedFeature.enabled = hasStorageSubscription;
-        enhancedFeature.cancellation = hasScheduledStorageChange;
-      }
+  //   this.servicesQuotas = res[0];
 
-      this.servicesQuotasFeatures.set(feature.id, feature);
-    });
+  //   return res;
+  // };
 
-    this.servicesQuotas = res[0];
+  setConfirmActionType = (value: string) => {
+    this.confirmActionType = value;
+  };
 
-    return res;
+  setReccomendedAmount = (amount: number) => {
+    this.reccomendedAmount = amount;
+  };
+
+  setFeatureCountData = (featureCountData: number) => {
+    this.featureCountData = featureCountData;
   };
 
   servicesInit = async (t: TTranslation) => {
     const isRefresh = window.location.href.includes("complete=true");
 
+    if (!isRefresh) {
+      if (this.isVisibleWalletSettings) this.setVisibleWalletSetting(false);
+    }
+
     const {
       fetchAutoPayments,
       fetchCardLinked,
       setPaymentAccount,
-      isAlreadyPaid,
       initWalletPayerAndBalance,
-    } = this.paymentStore;
+      handleServicesQuotas,
+    } = this.paymentStore!;
 
-    const requests = [
-      this.handleServicesQuotas(),
-      initWalletPayerAndBalance(isRefresh),
-    ];
-
-    if (!this.currentTariffStatusStore) return;
+    const { fetchPortalTariff, walletCustomerStatusNotActive } =
+      this.currentTariffStatusStore!;
 
     try {
+      const requests = [
+        handleServicesQuotas(),
+        initWalletPayerAndBalance(isRefresh),
+        fetchPortalTariff(),
+      ];
+
       const [quotas] = await Promise.all(requests);
 
       if (!quotas) throw new Error();
 
-      if (isAlreadyPaid || this.paymentStore.walletCustomerEmail) {
-        if (this.paymentStore.isStripePortalAvailable)
+      if (this.paymentStore!.isAlreadyPaid) {
+        if (this.paymentStore!.isStripePortalAvailable) {
           requests.push(setPaymentAccount());
+
+          if (this.paymentStore!.isPayer && walletCustomerStatusNotActive) {
+            requests.push(fetchCardLinked());
+          }
+
+          if (
+            this.paymentStore!.isShowStorageTariffDeactivated() &&
+            this.paymentStore!.isPayer
+          ) {
+            this.paymentStore!.setIsShowTariffDeactivatedModal(true);
+          }
+        }
         requests.push(fetchAutoPayments());
       } else {
         requests.push(fetchCardLinked());
       }
 
       this.setIsInitServicesPage(true);
+      if (isRefresh) {
+        const url = new URL(window.location.href);
+        const params = url.searchParams;
+
+        const amountParam = params.get("amount");
+        const recommendedAmountParam = params.get("recommendedAmount");
+        const actionTypeParam = params.get("actionType");
+
+        if (amountParam && recommendedAmountParam) {
+          const amount = Number(amountParam);
+          const recommendedAmount = Number(recommendedAmountParam);
+
+          this.setReccomendedAmount(Math.ceil(recommendedAmount));
+          this.setFeatureCountData(amount);
+        }
+
+        if (actionTypeParam) {
+          this.setConfirmActionType(actionTypeParam);
+          this.setVisibleWalletSetting(true);
+        }
+
+        window.history.replaceState(
+          {},
+          document.title,
+          window.location.pathname,
+        );
+      }
     } catch (e) {
+      if (axios.isCancel(e)) return;
       toastr.error(t("Common:UnexpectedError"));
       console.error(e);
     }

@@ -3,7 +3,7 @@
   "content": "Guests can access the rooms they have been invited to, as well as create and edit documents if they have been assigned the appropriate roles in the room.",
   "content_en_sha1_hash": "b91549ed2598a81dcae1328a0ba18a24e2e5e876",
   "created_at": "2025-05-19T21:30:50.001Z",
-  "updated_at": "2025-05-26T07:57:32.991Z",
+  "updated_at": "2025-10-03T13:19:30.831Z",
   "comment": {
     "text": "This translation key is used to describe the role and access rights of a guest user in a collaborative workspace. It appears on a settings or permissions page, where users can view their assigned roles and corresponding access levels. Translators should provide a clear explanation of this role for guests in various languages.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1264,
-      "context": "sectionName: t(\"Common:MyFilesSection\"),\n });\n \n if (isCollaborator) return t(\"Common:RoleNewUserDescription\");\n \n return t(\"Translations:RoleGuestDescriprion\");\n };\n \n export function setLanguageForUnauthorized(culture: string) {\n setCookie(LANGUAGE, culture, {\n \"max-age\": COOKIE_EXPIRATION_YEAR,",
+      "line_number": 1304,
+      "context": "sectionName: t(\"Common:MyDocuments\"),\n });\n \n if (isCollaborator) return t(\"Common:RoleNewUserDescription\");\n \n return t(\"Translations:RoleGuestDescriprion\");\n };\n \n export function setLanguageForUnauthorized(\n culture: string,\n isReload: boolean = true,",
       "module": "/packages/shared"
     }
   ],
@@ -35,14 +35,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'dəvət' (invited) is spelled correctly, but it might be better to use a more formal phrasing depending on the context.",
-          "suggestion": "Consider using 'rəsmi olaraq dəvət' (officially invited) for a more formal tone."
-        },
-        {
           "type": "grammar",
-          "description": "The phrasing 'otaqda müvafiq rollar təyin olunarsa' (if appropriate roles are assigned in the room) is grammatically correct but can be improved for better flow and clarity.",
-          "suggestion": "Consider rephrasing to 'otaqda onlara müvafiq rollar verilərsə' (if appropriate roles are given to them in the room)."
+          "description": "The phrase 'otaqda müvafiq rollar təyin olunarsa' is grammatically awkward. It translates to 'if appropriate roles are assigned in the room'. A more natural phrasing would express the condition more directly.",
+          "suggestion": "Qonaqlar dəvət olunduqları otaqlara daxil ola bilər və eyni zamanda, müvafiq rolları varsa, sənədləri yarada və redaktə edə bilərlər."
         }
       ],
       "approved_at": null
@@ -59,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'assigned the appropriate roles' is not directly translated. While 'příslušné role' conveys the general idea, it lacks the active sense of being assigned. A more accurate translation would reflect the 'assignment' aspect.",
-          "suggestion": "Hosté mají přístup do místností, do kterých byli pozváni, a mohou vytvářet a upravovat dokumenty, pokud jim byly v místnosti přiděleny *příslušné role nebo pokud byly k nim tyto role přiřazeny*."
+          "description": "The phrase 'assigned the appropriate roles' is not perfectly conveyed by 'příslušné role'. A more accurate translation might be 'přiřazeny odpovídající role' or 'přiřazeny správné role'. While 'příslušné role' isn't wrong, it's a less direct translation and might be misinterpreted.",
+          "suggestion": "přiřazeny odpovídající role"
         }
       ],
       "approved_at": null
@@ -74,7 +69,18 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'στα οποία έχουν προσκληθεί' is slightly awkward. It's grammatically correct but could be more fluid.",
+          "suggestion": "στα δωμάτια που έχουν προσκληθεί"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English sentence specifies 'assigned roles.' The Greek translation uses 'εκχωρηθεί οι κατάλληλοι ρόλοι,' which while accurate, doesn't fully capture the nuance of *assignment* of roles. It's more passive.",
+          "suggestion": "εάν τους έχουν ανατεθεί οι κατάλληλοι ρόλοι"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -89,13 +95,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'jonka lisäksi' is slightly awkward and can be improved for better flow. It literally translates to 'whereupon' or 'in addition to which' and doesn't read naturally in this context.",
-          "suggestion": "Voitaisiin korvata esimerkiksi 'sekä' tai poistaa kokonaan ja muuttaa lauseen rakennetta."
+          "description": "The phrase 'jonka lisäksi' is somewhat awkward and could be improved for flow. It translates to 'as well as' but feels clunky in Finnish.",
+          "suggestion": "Vieraat pääsevät huoneisiin, joihin heidät on kutsuttu, ja he voivat luoda ja muokata asiakirjoja, jos heille on lisätty tarvittavat huoneen roolit."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'huoneen roolit' (room roles) is not the most natural way to express 'appropriate roles in the room' in Finnish. It's too literal.",
-          "suggestion": "Muutettava 'huoneen roolit' esimerkiksi 'sopivat oikeudet huoneessa' tai 'oikeudet huoneessa'."
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence structure can be improved for better readability in Finnish. The current structure reads somewhat long and complex.",
+          "suggestion": "Vieraat pääsevät huoneisiin, joihin heidät on kutsuttu. He voivat myös luoda ja muokata asiakirjoja, jos heille on lisätty tarvittavat huoneen roolit."
         }
       ],
       "approved_at": null
@@ -118,8 +124,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'assigned to them' is better translated as 'sono stati assegnati i ruoli' rather than 'sono stati assegnati loro i ruoli'. The latter sounds slightly unnatural in Italian.",
-          "suggestion": "Gli ospiti possono accedere alle stanze a cui sono stati invitati, nonché creare e modificare documenti se sono stati assegnati i ruoli appropriati nella stanza."
+          "description": "The phrase \"assegnati loro i ruoli\" is slightly awkward and not the most natural way to express 'assigned the appropriate roles to them'. A more fluent translation would be 'sono stati assegnati i ruoli appropriati'.",
+          "suggestion": "sono stati assegnati i ruoli appropriati"
         }
       ],
       "approved_at": null
@@ -127,42 +133,19 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'assigned the appropriate roles' is not accurately reflected in the Japanese translation. '適切な役割が割り当てられている' implies a passive assignment, whereas the English implies the guest may have been proactively assigned roles.",
-          "suggestion": "ゲストがルームで適切な役割を持っており、それにより文書の作成や編集が可能になります。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'assigned the appropriate roles' is not accurately reflected in the Korean translation. '할당 받았다면' implies a passive assignment, whereas the English suggests a more active granting of roles. A more accurate translation might convey the intent of being explicitly granted the roles.",
-          "suggestion": "게스트는 룸에서 적절한 역할을 부여받았다면 (Guest is granted appropriate roles in the room)"
-        },
-        {
-          "type": "formatting",
-          "description": "While not a critical error, the sentence structure could be slightly improved for better flow and readability in Korean. The current structure is grammatically correct but a slightly different phrasing might sound more natural.",
-          "suggestion": "게스트는 초대받은 룸에 액세스할 수 있으며, 룸에서 적절한 역할이 부여되면 문서를 생성하고 편집할 수 있습니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'appropriate roles' is not accurately reflected. 'ຖືກມອບບົດບາດທີ່ເຫມາະສົມ' literally translates to 'have been assigned appropriate roles' which isn't a perfect match to the intended meaning. It implies a formal assignment rather than a simple permission.",
-          "suggestion": "Consider rephrasing 'ຖືກມອບບົດບາດທີ່ເຫມາະສົມ' to something like 'ມີສິດໃນການເຮັດ' (have the permission to do) or 'ໄດ້ຮັບອານຸຍາດ' (are authorized)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -171,8 +154,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"uz kurām viņi ir uzaicināti\" is a bit awkward. A more natural translation of 'invited to' would be 'kurā viņus ir uzaicinājuši' or 'uz kurām viņus ir aicinājuši'.",
-          "suggestion": "Viesi var piekļūt telpām, kurā viņus ir uzaicinājuši, kā arī izveidot un rediģēt dokumentus, ja viņiem ir piešķirtas atbilstošas lomas telpā."
+          "description": "The phrase 'invited to' is not accurately reflected in the Latvian translation. 'Uzaicināti' implies a more formal invitation. A more natural phrasing might be 'kuriem viņi ir pievienoti' (to which they are added) or 'uz kuriem viņiem ir piekļuve' (to which they have access).",
+          "suggestion": "Viesi var piekļūt telpām, kurām viņi ir pievienoti, kā arī izveidot un rediģēt dokumentus, ja viņiem ir piešķirtas atbilstošas lomas telpā."
         }
       ],
       "approved_at": null
@@ -189,8 +172,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Polish translation uses a conjunction (\"i\") to connect two clauses where a semicolon or comma might be more appropriate for clarity, especially in formal documentation. While grammatically correct, it makes the sentence slightly less elegant.",
-          "suggestion": "Consider replacing 'i mogą' with a semicolon or comma and adjusting the following verb accordingly. For example: 'Goście mają dostęp do pokoi, do których zostali zaproszeni; mogą tworzyć...'"
+          "description": "The phrase 'role' is consistently lowercase in the Polish translation. 'Role' should be capitalized.",
+          "suggestion": "Goście mają dostęp do pokoi, do których zostali zaproszeni i mogą tworzyć oraz edytować dokumenty, jeśli przypisano im odpowiednie Role w pokoju."
         }
       ],
       "approved_at": null
@@ -207,13 +190,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'atribuídos a eles os papéis' is awkward and not the most natural way to express 'assigned the appropriate roles.' It suggests the roles are being assigned *to them* rather than *they* have the roles assigned.",
-          "suggestion": "Os convidados podem acessar as salas para as quais foram convidados, bem como criar e editar documentos se tiverem os papéis apropriados atribuídos na sala."
-        },
-        {
-          "type": "grammar",
-          "description": "The use of 'bem como' can be slightly formal for this context. While grammatically correct, it's not the most conversational.",
-          "suggestion": "Os convidados podem acessar as salas para as quais foram convidados e criar e editar documentos se tiverem os papéis apropriados atribuídos na sala."
+          "description": "The phrase 'atribuídos a eles os papéis' is awkward and not the most natural way to express 'assigned the appropriate roles' in Portuguese. It implies the roles are assigned *to them* rather than the process of assigning roles.",
+          "suggestion": "atribuídos os papéis apropriados"
         }
       ],
       "approved_at": null
@@ -223,9 +201,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'pot accesa sălile' is grammatically awkward. 'Pot accesa sala' (singular) would be more natural if referring to specific rooms, but the original English uses plural. A better phrasing would consider using 'sălile la care au acces' or 'sălile pe care au acces'.",
-          "suggestion": "Invitații au acces la sălile la care au fost invitați..."
+          "type": "spelling",
+          "description": "The word 'sălile' (rooms) might be more naturally phrased as 'camerele' in this context, though 'sălile' isn't strictly incorrect.",
+          "suggestion": "Consider using 'camerele' instead of 'sălile'."
         }
       ],
       "approved_at": null
@@ -242,18 +220,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ආරාධිත' (aaraditha) appears twice and should consistently refer to 'invited' guests. While technically correct, it could be slightly streamlined.",
-          "suggestion": "Consider rewording to avoid repetition of 'ආරාධිත'.  For example: 'අමුත්තන්ට ඔවුන්ට ලබා දී ඇති කාමරවලට පිවිසිය හැක, මෙන්ම කාමරයේ සුදුසු භූමිකා නියම කර තිබේ නම් ලේඛන නිර්මාණය කිරීම සහ සංස්කරණය කිරීම ද සිදු කළ හැක.'"
+          "description": "The word 'භූමිකා' (bhūmikā) is a more formal term for 'role'. A more common and approachable term like 'කාර‍යාකාරිය' (kāryā kārya) or 'පాత్ర' (pātra) might be more suitable for a user-facing description.",
+          "suggestion": "Consider replacing 'භූමිකා' with 'කාර‍යාකාරිය' or 'පాత్ర'."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'කාමරයේ සුදුසු භූමිකා නියම කර තිබේ නම්' (kaamarayee suddhu bhoomikaa niyama kara thibae naam) is slightly awkward.  It's grammatically correct, but less fluent.",
-          "suggestion": "Consider rewording to 'කාමරයේ සුදුසු භූමිකා ලැබුණු විට' (kaamarayee suddhu bhoomikaa lebaeuna veth) which translates to 'when they receive appropriate roles in the room'."
+          "description": "The phrase 'කාමරයේ සුදුසු භූමිකා නියම කර තිබේ නම්' could be more directly translated to reflect the English meaning. It currently implies 'if the appropriate role has been assigned to the room', rather than 'if the user has been assigned the appropriate role'.",
+          "suggestion": "Consider restructuring the phrase to better reflect the English sentence's meaning; perhaps 'කාමරයේ ඔවුන්ට සුදුසු ක්‍රියාකාරකම් ලබා දී තිබේ නම්'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'create and edit documents' is translated as 'ලේඛන නිර්මාණය කිරීම සහ සංස්කරණය කිරීම' (lekhana nirmaanayakara sama sanskaranaayakara karama). While not technically incorrect, 'create' is often better translated as 'ප්‍රවර්ධනය කිරීම' (prawadhanaayakara karama) in this context which implies generating or producing something new.",
-          "suggestion": "Replace 'නිර්මාණය කිරීම' (nirmanayakara karama) with 'ප්‍රවර්ධනය කිරීම' (prawadhanaayakara karama) for 'create'."
+          "description": "The overall tone and flow of the Sinhala translation sounds somewhat formal and less natural compared to the more conversational English original. It lacks the easy flow of 'Guests can access... as well as create and edit...'.",
+          "suggestion": "Revise the entire translation to achieve a more natural and user-friendly tone, focusing on clarity and directness."
         }
       ],
       "approved_at": null
@@ -264,8 +242,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"assigned the appropriate roles\" is not accurately reflected by \"pridelené príslušné roly.\" While not entirely wrong, it's a bit stiff and could be improved for flow and naturalness in Slovak. A more fluent translation might be 'uvedené roly' or 'prislúčiace roly'.",
-          "suggestion": "Consider using 'uvedené roly' or 'prislúčiace roly' instead of 'pridelené príslušné roly'."
+          "description": "The phrase 'assigned the appropriate roles' is not perfectly translated. 'Pridelené príslušné roly' is technically correct, but it could be more natural in Slovak. 'Mali priradenú zodpovedajúcu úroveň oprávnení' or 'Mali nastavené zodpovedajúce role' would be more idiomatic.",
+          "suggestion": "Hostia majú prístup do miestností, do ktorých boli pozvaní a môžu vytvárať a upravovať dokumenty, ak mali nastavené zodpovedajúce role."
         }
       ],
       "approved_at": null
@@ -282,13 +260,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"приступити собама у које су позвани\" is a literal translation and doesn't flow naturally in Serbian. It implies they are invited *into* the rooms themselves, rather than having access to them. A more natural phrasing would be 'приступити собама у које су позвани' or 'имати приступ собама у које су позвани'.",
-          "suggestion": "имати приступ собама у које су позвани"
+          "description": "The phrase 'access the rooms they have been invited to' is a bit awkward. A more natural translation would be 'могу ући у собе у које су позвани' (can enter the rooms they were invited to).",
+          "suggestion": "Гости могу ући у собе у које су позвани, као и креирати и уређивати документе ако су им додељене одговарајуће улоге у соби."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'соба' (room) is repeated. While not strictly incorrect, using a pronoun or alternative phrasing could improve readability. Perhaps 'у просторије у које су позвани' could be a better alternative.",
-          "suggestion": "у просторије у које су позвани"
+          "description": "The word 'приступити' (pristupiti) can imply accessing data or information, but in this context, 'ући' (ući - to enter) is more suitable for referring to rooms.",
+          "suggestion": "Гости могу ући у собе у које су позвани, као и креирати и уређивати документе ако су им додељене одговарајуће улоге у соби."
         }
       ],
       "approved_at": null
@@ -296,7 +274,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assigned the appropriate roles' is not accurately translated. 'Dodeljene odgovarajuće uloge' is a literal translation but doesn't quite capture the nuance of being granted specific permissions.",
+          "suggestion": "Gosti mogu pristupiti sobama u koje su pozvani, kao i kreirati i uređivati dokumente ako im je dodeljen odgovarajući nivo pristupa u sobi."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -305,13 +289,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'assigned the appropriate roles' is not accurately conveyed. 'Buna uygun roller atanmışsa' implies roles are assigned *to the room*, rather than to the guest.",
-          "suggestion": "Konuklara odada uygun roller verilmişse"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure, while understandable, could be slightly improved for better flow. Specifically the phrase 'odada buna uygun roller atanmışsa'.",
-          "suggestion": "Konuklar, odada kendilerine uygun roller atanmışsa belge oluşturabilir ve düzenleyebilir."
+          "description": "The phrase 'appropriate roles' is not perfectly translated. While 'buna uygun roller' conveys the idea, a more natural and precise translation might be 'ilgili izinler' or 'yetkili roller'. 'Roller' is correct, but 'uygun' might not fully capture the intended meaning of 'appropriate' in this context.",
+          "suggestion": "Konuklar davet edildikleri odalara erişebilir ve odada ilgili izinler atanmışsa belge oluşturabilir ve düzenleyebilir."
         }
       ],
       "approved_at": null
@@ -328,13 +307,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'access the rooms' is translated as 'sử dụng các phòng'. While 'sử dụng' (use) isn't inherently wrong, 'access' implies more of a permission or ability to enter, which is a more accurate representation of the English meaning in this context. A better translation would be something like 'truy cập vào các phòng'.",
-          "suggestion": "truy cập vào các phòng"
+          "description": "The phrase \"use the rooms\" (sử dụng các phòng) is not the best translation for \"access the rooms\". A more accurate translation would be something like \"truy cập vào các phòng\" or \"tham gia vào các phòng\". 'Use' implies a more active role than 'access'.",
+          "suggestion": "Khách có thể truy cập vào các phòng mà họ đã được mời vào, cũng như tạo và chỉnh sửa tài liệu nếu họ đã được chỉ định các vai trò thích hợp trong phòng."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The sentence structure is a bit awkward. The phrasing 'cũng như tạo và chỉnh sửa tài liệu nếu họ đã được chỉ định các vai trò thích hợp trong phòng' could be more fluid. The repetition of 'trong phòng' is also a bit clunky.",
-          "suggestion": "cũng có thể tạo và chỉnh sửa tài liệu nếu được chỉ định các vai trò phù hợp."
+          "type": "formatting",
+          "description": "The Vietnamese translation could benefit from a more natural flow. While technically correct, the sentence structure is slightly clunky.",
+          "suggestion": "Khách có thể truy cập vào các phòng mà họ được mời, và tạo, chỉnh sửa tài liệu nếu được chỉ định vai trò phù hợp trong phòng."
         }
       ],
       "approved_at": null
@@ -345,13 +324,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'as well as' is not naturally translated in this way. It creates an awkward phrasing.",
-          "suggestion": "访客可以访问他们被邀请的房间，并且如果他们被分配了适当的角色，还可以创建和编辑文档。"
+          "description": "The phrase 'access the rooms they have been invited to' is translated as '访问他们被邀请的房间'. While technically correct, it's a bit stiff. A more natural phrasing would be '可以进入他们被邀请的房间' or '可以进入被邀请的房间'.",
+          "suggestion": "可以进入他们被邀请的房间"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word '并且' (bingqie) is a stronger connector than intended. It implies a cause and effect relation that isn't explicitly present in the English text.",
-          "suggestion": "访客可以访问他们被邀请的房间，如果他们被分配了适当的角色，还可以创建和编辑文档。"
+          "description": "The use of '如果' (rúguǒ) creates a slightly awkward construction. It would flow better if combined with the first clause.",
+          "suggestion": "访客可以访问他们被邀请的房间，如果被分配了适当的角色，还可以创建和编辑文档。"
         }
       ],
       "approved_at": null

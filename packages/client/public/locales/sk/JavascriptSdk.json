@@ -21,10 +21,13 @@
   "CreateSamplePublicRoom": "Vytvoriť vzor vloženia pre Verejnú miestnosť",
   "CreateSampleRoomSelector": "Vytvoriť vzor vloženia pre Selektor miestnosti",
   "CreateSampleViewer": "Vytvoriť vzor vloženia pre Viewer",
+  "CSPDescription": "Zadajte adresu služby, do ktorej chcete vložiť alebo pripojiť svoju {{organizationName}} {{productName}}.",
+  "CSPHeader": "Pridajte povolené domény pre tento {{productName}}.",
   "CSPHelp": "Toto nastavenie je bezpečnostný mechanizmus, ktorý sa môže použiť na ochranu pred útokmi formou vstrekovania obsahu. CSP popisuje bezpečné zdroje na sťahovanie obsahu. Sťahovanie zo zdrojov, ktoré nie sú na zozname povolených, je zablokované. Zadajte domény (spolu s protokolom), s ktorými bude pracovať.",
   "CSPInfoBarDescription": "Prosím, povoľte protokol HTTPS pre váš priestor {{productName}}, aby ste zabezpečili korektnú prácu nastavení.",
   "CSPInfoBarHeader": "Vyžaduje sa protokol HTTPS",
   "CSPInputPlaceholder": "URL zadávajte nasledovne: https://example.com",
+  "CSPUrlHelp": "Prosím, uveďte iba doménové meno, bez cestných trás alebo ďalších znakov.",
   "CustomDescription": "Ručne nakonfigurujte parametre pre vloženie vášho {{productName}}.",
   "CustomizingDisplay": "Prispôsobenie zobrazovania",
   "DataDisplay": "Nastavenia zobrazovania údajov",
@@ -113,6 +116,5 @@
   "Subtitle": "Podtitul",
   "SubtitleDescription": "Podtitul s dodatočnými komentármi alebo popismi pre daný priečinok.",
   "TabPlugins": "Tab Pluginy",
-  "Viewer": "Prehliadač",
   "ViewerDescription": "Vložte prehliadač, ktorý používateľom umožní otvoriť súbor na prehliadanie z príslušnej miestnosti."
 }

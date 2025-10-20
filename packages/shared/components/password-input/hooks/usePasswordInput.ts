@@ -1,5 +1,4 @@
-import { useCallback, useState, useRef, useEffect, ChangeEvent } from "react";
-import { TooltipRefProps } from "react-tooltip";
+import { useCallback, useState, useEffect, ChangeEvent } from "react";
 
 import { InputType } from "../../text-input";
 import { TPasswordState } from "../PasswordInput.types";
@@ -18,8 +17,6 @@ export const usePasswordInput = (
   valueInput?: string,
 ) => {
   const [caretPosition, setCaretPosition] = useState<number | null>(null);
-
-  const refTooltip = useRef(null);
 
   const setPasswordSettings = useCallback(
     (newPassword: string) => {
@@ -70,13 +67,6 @@ export const usePasswordInput = (
 
   const onChangeAction = useCallback(
     (e: ChangeEvent<HTMLInputElement>, isGenerated?: boolean) => {
-      if (refTooltip.current) {
-        const tooltip = refTooltip.current as TooltipRefProps;
-        if (tooltip?.isOpen) {
-          tooltip?.close?.();
-        }
-      }
-
       let { value } = e.target;
       if (isSimulateType && !isGenerated) {
         value = setPasswordSettings(e.target.value);
@@ -115,7 +105,6 @@ export const usePasswordInput = (
 
   return {
     caretPosition,
-    refTooltip,
     setCaretPosition,
     setPasswordSettings,
     onChangeAction,

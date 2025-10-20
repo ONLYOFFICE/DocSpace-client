@@ -27,6 +27,7 @@
 import { RefObject } from "react";
 import { DeviceType } from "../../enums";
 import { TGetContextMenuModel } from "../context-menu";
+import type { HeaderType } from "../context-menu/ContextMenu.types";
 
 export type TOnBackToParenFolder = () => void;
 
@@ -43,6 +44,7 @@ export type TContextButtonProps = {
   withMenu?: boolean;
   isTrashFolder?: boolean;
   isMobile: boolean;
+  isMobileOnly?: boolean;
   id: string;
   title?: string;
   onCloseDropBox?: () => void;
@@ -52,6 +54,8 @@ export type TContextButtonProps = {
   ) => () => void;
   guidAnimationVisible?: boolean;
   setGuidAnimationVisible?: (visible: boolean) => void;
+  ignoreChangeView?: boolean;
+  contextMenuHeader?: HeaderType;
 };
 
 export type TPlusButtonProps = {
@@ -76,6 +80,7 @@ export type TToggleInfoPanelButtonProps = {
 
 export type TArrowButtonProps = {
   isRootFolder: boolean;
+  showBackButton?: boolean;
   onBackToParentFolder: TOnBackToParenFolder;
 };
 
@@ -163,10 +168,12 @@ export type TControlButtonProps = Omit<TToggleInfoPanelButtonProps, "id"> &
     isEmptyPage?: boolean;
 
     isMobile?: boolean;
+    isMobileOnly?: boolean;
     /** Used for guidance */
     addButtonRef?: RefObject<HTMLDivElement | null>;
     buttonRef?: React.RefObject<HTMLButtonElement>;
     isContextButtonVisible?: boolean;
+    isPlusButtonVisible?: boolean;
   };
 
 export type TDropBoxProps = TArrowButtonProps &
@@ -191,6 +198,8 @@ export type TDropBoxProps = TArrowButtonProps &
     burgerLogo: string;
     navigationTitleContainerNode: React.ReactNode;
     onCloseDropBox: () => void;
+    /** Controls rendering of title/header inside DropBox; defaults to true */
+    showTitleInDropBox?: boolean;
   };
 
 export type TNavigationProps = Omit<
@@ -225,4 +234,6 @@ export type TNavigationProps = Omit<
     showNavigationButton: boolean;
     titleIconTooltip?: string;
     onLogoClick?: () => void;
+    contextMenuHeader?: HeaderType;
+    showBackButton?: boolean;
   };

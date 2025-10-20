@@ -25,13 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
+import classNames from "classnames";
 
+import { Link } from "../../../../components/link";
 import { Text } from "../../../../components/text";
 
-import { StyledTitleComponent } from "../Payments.styled";
-import { getTwoDotsReplacing } from "../Payments.helpers";
-import { IPaymentsProps } from "../Payments.types";
+import { getTwoDotsReplacing } from "../Standalone.helpers";
+import { IPaymentsProps } from "../Standalone.types";
+import styles from "../Standalone.module.scss";
+import UserStatisticsDialog from "../../../../dialogs/UserStatisticsDialog";
+import { useUserStatisticsDialog } from "./hooks/useUserStatisticsDialog";
 
 export const TariffTitleContainer = ({
   isLicenseDateExpired,
@@ -40,13 +44,25 @@ export const TariffTitleContainer = ({
   paymentDate,
   isDeveloper,
   logoText,
+  docspaceFaqUrl,
+  licenseQuota,
+  openOnNewPage,
 }: Partial<IPaymentsProps>) => {
   const { t } = useTranslation("Common");
+
+  const {
+    isUserStatisticsVisible,
+    openUserStatistics,
+    closeUserStatistics,
+    downloadAndOpenReport,
+    usersStatistics,
+  } = useUserStatisticsDialog({ openOnNewPage, licenseQuota });
+
   const alertComponent = () => {
     if (isTrial) {
       return isLicenseDateExpired ? (
         <Text
-          className="payments_subscription-expired"
+          className={styles.paymentsSubscriptionExpired}
           fontWeight={600}
           fontSize="14px"
         >
@@ -54,18 +70,22 @@ export const TariffTitleContainer = ({
         </Text>
       ) : (
         <Text
-          className="payments_subscription-expired"
+          className={styles.paymentsSubscriptionExpired}
           fontWeight={600}
           fontSize="14px"
         >
-          {t("FreeDaysLeft", { count: trialDaysLeft })}
+          {t("FreeDaysLeft", { count: Number(trialDaysLeft) })}
         </Text>
       );
     }
 
     return (
       isLicenseDateExpired && (
-        <Text className="payments_subscription-expired" isBold fontSize="14px">
+        <Text
+          className={styles.paymentsSubscriptionExpired}
+          isBold
+          fontSize="14px"
+        >
           {t("SubscriptionExpired")}
         </Text>
       )
@@ -89,29 +109,69 @@ export const TariffTitleContainer = ({
   };
 
   return (
-    <StyledTitleComponent
-      limitedWidth={isTrial ? true : isLicenseDateExpired}
-      isLicenseDateExpired={isLicenseDateExpired}
+    <div
+      className={classNames(styles.titleComponent, {
+        [styles.limitedWidth]: isTrial ? true : isLicenseDateExpired,
+        [styles.isLicenseDateExpired]: isLicenseDateExpired,
+      })}
     >
-      <div className="payments_subscription">
-        <div className="title">
-          <Text fontWeight={600} fontSize="14px" as="span">
-            {t("ActivateTariffDescr", {
-              productName: t("Common:ProductName"),
-              organizationName: logoText,
-              license: isDeveloper
-                ? t("Common:DeveloperLicense")
-                : t("Common:EnterpriseLicense"),
-            })}
+      <div className={styles.paymentsSubscription}>
+        <div className={styles.title}>
+          <Text fontWeight={600} fontSize="13px" as="span">
+            {usersStatistics ? (
+              <Trans
+                i18nKey="ActivateTariffDescrUsers"
+                values={{
+                  productName: t("Common:ProductName"),
+                  organizationName: logoText,
+                  license: isDeveloper
+                    ? t("Common:DeveloperLicense")
+                    : t("Common:EnterpriseLicense"),
+                  editingCount: usersStatistics.totalUsers ?? 0,
+                  limit: usersStatistics.limitUsers ?? 0,
+                }}
+                t={t}
+                ns="Common"
+                components={{
+                  1: (
+                    <Link
+                      color="accent"
+                      onClick={openUserStatistics}
+                      fontWeight="600"
+                      dataTestId="open_user_statistics_link"
+                    />
+                  ),
+                }}
+              />
+            ) : (
+              t("ActivateTariffDescrConnections", {
+                productName: t("Common:ProductName"),
+                organizationName: logoText,
+                license: isDeveloper
+                  ? t("Common:DeveloperLicense")
+                  : t("Common:EnterpriseLicense"),
+              })
+            )}
           </Text>{" "}
           {!isLicenseDateExpired ? (
-            <Text fontSize="14px" as="span">
+            <Text
+              fontSize="13px"
+              as="span"
+              dataTestId="license_expires_date_text"
+            >
               {expiresDate()}
             </Text>
           ) : null}
         </div>
         {alertComponent()}
       </div>
-    </StyledTitleComponent>
+      <UserStatisticsDialog
+        docspaceFaqUrl={docspaceFaqUrl}
+        isVisible={isUserStatisticsVisible}
+        statistics={usersStatistics}
+        onClose={closeUserStatistics}
+        onDownloadAndReport={downloadAndOpenReport}
+      />
+    </div>
   );
 };

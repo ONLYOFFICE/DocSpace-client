@@ -77,10 +77,12 @@ $light-toast-warning: #f7cdbe;
 $dark-toast-warning: #e07751;
 
 $loader: rgba(0, 0, 0, 0.05);
-$dnd-color: rgba(229, 228, 138, 0.5);
-$dnd-dark-color: rgba(229, 228, 138, 0.12);
-$dnd-hover-color: rgba(204, 202, 102, 0.5);
-$dnd-dark-hover: rgba(204, 184, 102, 0.2);
+
+$dnd-color: rgba(255, 249, 219, 1);
+$dnd-dark-color: rgba(78, 70, 54, 1);
+$dnd-hover-color: rgba(255, 239, 175, 1);
+$dnd-dark-hover: rgba(168, 143, 86, 1);
+
 $on-white-color: rgba(0, 0, 0, 0.1);
 $on-black-color: rgba(255, 255, 255, 0.1);
 $box-shadow-color: #040f1b14;
@@ -105,8 +107,10 @@ $green-romb: #95c038;
 $dark-romb: #323032;
 $tap-highlight: rgba(0, 0, 0, 0);
 $badge-shadow: rgba(4, 15, 27, 0.16);
+$badge-dark-shadow: rgba(0, 0, 0, 0.3);
 $popup-shadow: rgba(4, 15, 27, 0.08);
 $menu-shadow: rgba(4, 15, 27, 0.04);
+$menu-shadow-dark: rgba(4, 15, 27, 0.12);
 
 $light-scroll: rgba(6, 22, 38, 0.16);
 $light-scroll-hover: rgba(6, 22, 38, 0.32);
@@ -156,3 +160,10 @@ $rombs-loader-blue-colorStep: #bfe8f8;
 $rombs-loader-light-gray-colorStep: #efefef;
 $rombs-loader-green-colorStep: #cbe0ac;
 $rombs-loader-red-bg: rgb(255, 0, 0);
+
+$light-editor-background: #f3f3f3;
+$dark-editor-background: #222222;
+
+$portal-blue: #e3f2fd;
+$portal-purple: #f3e5f5;
+$portal-green: #e8f5e9;

@@ -3,7 +3,7 @@
   "content": "Rooms unpinned: {{count}}",
   "content_en_sha1_hash": "5eb4f28c5d0f49b6b98ea0f7832d0d5a2e74d5eb",
   "created_at": "2025-05-19T21:30:56.138Z",
-  "updated_at": "2025-05-24T11:27:33.501Z",
+  "updated_at": "2025-10-13T14:41:03.131Z",
   "comment": {
     "text": "This translation key displays the number of unpinned rooms. It is used to inform the user about the state change in a list or grid view, likely on a button or dialog related to room management. The count is derived from the length of an array representing the unpinned elements.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1290,
+      "line_number": 1309,
       "context": "const itemCount = { count: elems.length };\n \n const translationForOneItem = isPin ? t(\"RoomPinned\") : t(\"RoomUnpinned\");\n const translationForSeverals = isPin\n ? t(\"RoomsPinned\", { ...itemCount })\n : t(\"RoomsUnpinned\", { ...itemCount });\n \n toastr.success(\n elems.length > 1 ? translationForSeverals : translationForOneItem,\n );\n };",
       "module": "/packages/client"
     }
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Unpinned' implies a state of being detached or not fixed. The Arabic translation 'الغير مثبتة' (al-ghair muthabbata) literally means 'not fixed' or 'not installed,' which is a close but potentially less accurate representation of 'unpinned' in this context. It could imply something was intentionally installed and then uninstalled, whereas 'unpinned' might simply mean it was never pinned.",
-          "suggestion": "Consider 'الغرف غير مُثبتة مكانها' (al-ghuraf ghair muthabbata makaanaha) - 'Rooms not fixed in place' or 'Rooms not pinned' to better reflect the original meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -42,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Otaqlar sabitlənmədən çıxarıldı: {{count}}' is not the most natural or accurate translation of 'Rooms unpinned: {{count}}'. 'Unpinned' implies removing a pin, which doesn't directly translate to 'sabitlənmədən çıxarıldı' (removed from stabilization). A more suitable translation would convey the concept of removing a room from a pinned or important list.",
-          "suggestion": "Consider alternatives like: 'Otaqlar düyünlənməyən siyahıdan silindi: {{count}}' (Rooms removed from pinned list: {{count}}) or 'Otaqlar bağlandı/ləğv edildi: {{count}}' (Rooms unlinked/cancelled: {{count}}), depending on the specific meaning of 'unpinned' in the context."
+          "description": "The translation 'Otaqlar sabitlənmədən çıxarıldı: {{count}}' isn't the most natural way to say 'Rooms unpinned: {{count}}' in Azerbaijani.  'Sabitlənmədən çıxarıldı' implies a deliberate removal of stability, which isn't the intended meaning of 'unpinned' in this context. A better translation would convey the sense of rooms being no longer linked or attached.",
+          "suggestion": "Consider alternatives like 'Otaqlar möhkəmləndirilmədi: {{count}}' or 'Otaqların bağlantısı kəsildi: {{count}}' (Rooms' connection was cut: {{count}})."
         }
       ],
       "approved_at": null
@@ -84,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Huoneita ei ole enää kiinnitetty: {{count}}' is a bit literal and potentially awkward in Finnish. A more natural phrasing would be something along the lines of 'Irrotettuja huoneita: {{count}}' or 'Poistettuja huoneita: {{count}}'.",
-          "suggestion": "Irrotettuja huoneita: {{count}}"
+          "description": "The English phrase 'Rooms unpinned' doesn't perfectly align with 'Huoneita ei ole enää kiinnitetty'. While conveying a similar concept, the Finnish translation is more verbose and emphasizes the *removal* of pinning rather than a simple state of being unpinned. A more literal and concise translation might be 'Irrotettuja huoneita: {{count}}' or 'Poistettuja huoneita: {{count}}'.",
+          "suggestion": "Consider 'Irrotettuja huoneita: {{count}}' or 'Poistettuja huoneita: {{count}}' for a more direct and concise translation."
         }
       ],
       "approved_at": null
@@ -102,8 +96,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation includes a hyphenated continuation of the sentence. The English uses double curly braces for the variable. While the Armenian uses a single set of braces, the continuation after the hyphen creates a formatting inconsistency.",
-          "suggestion": "Consider adjusting the Armenian to match the English formatting: Սենյակներն ապաամրացված են։ {{count}}"
+          "description": "The Armenian translation has an abrupt transition after the text 'են՝'. A more natural phrasing might include a connecting word or phrase.",
+          "suggestion": "Սենյակներն ապաամրացված են, {{count}}"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ապաամրացված են' is a literal translation of 'unpinned', it might sound unnatural in Armenian. A more idiomatic translation might be preferable.",
+          "suggestion": "Սենյակներն հեռացվել են ծնածկայությունից՝ {{count}}"
         }
       ],
       "approved_at": null
@@ -114,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term 'unpinned' doesn't directly translate to 'sbloccate' in Italian. 'Unpinned' implies that rooms were previously pinned and now they are no longer. 'Sbloccate' means 'unlocked'. This is a semantic mismatch.",
-          "suggestion": "Consider a more appropriate translation of 'unpinned' that conveys the meaning of 'no longer pinned,' such as 'stanze non più fissate' or 'stanze non più collegate'."
+          "description": "The English term \"unpinned\" doesn't directly translate to \"sbloccate\" in Italian. \"Unpinned\" implies a removal of a pin or attachment, while \"sbloccate\" means \"unlocked.\" A more accurate translation might be \"Non fissate\" (not fixed) or \"Rimossa fissaggio\" (removed attachment), depending on the precise context.",
+          "suggestion": "Consider alternatives like \"Non fissate: {{count}}\" or \"Rimossa fissaggio: {{count}}\" for a more contextually accurate translation."
         }
       ],
       "approved_at": null
@@ -123,7 +122,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Rooms unpinned\" doesn't directly translate to \"固定されていないルーム\". A more natural translation would be something like \"未固定ルーム\" or \"固定解除されたルーム\". \"固定されていないルーム\" literally means 'rooms that are not fixed,' which is a bit awkward.",
+          "suggestion": "Consider using \"未固定ルーム\" or \"固定解除されたルーム\"."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -132,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '고정 해제 방: {{count}}' is not an accurate translation of 'Rooms unpinned: {{count}}'. '고정 해제' literally means 'fix release'. While it conveys a similar concept, a more natural translation for 'unpinned' would be '해제된 방' (released rooms) or '고정 해제된 방' (rooms unpinned).",
-          "suggestion": "고정 해제된 방: {{count}}"
+          "description": "The Korean translation \"고정 해제 방: {{count}}\" doesn't accurately convey the meaning of \"Rooms unpinned.\" \"고정 해제\" literally means 'fixed release' which is a functional description rather than a descriptive label. A more appropriate translation would convey the idea of 'unpinned rooms' or a similar concept.",
+          "suggestion": "Consider translations like \"해제된 방: {{count}}\" (Released Rooms) or \"핀 해제 방: {{count}}\" (Rooms with Pin Removed)."
         }
       ],
       "approved_at": null
@@ -168,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term 'unpinned' doesn't have a direct equivalent in Portuguese that accurately conveys the intended meaning. 'Liberadas' implies a release or freeing, which might not be the precise action described by 'unpinned' in the original context (e.g., removing a pin or attachment). A more accurate translation would depend on the specific application.",
-          "suggestion": "Consider a more context-specific translation. Examples include: 'Salas sem fixação', 'Salas desvinculadas', or 'Salas não fixadas'. If 'unpinned' refers to rooms that were previously linked or attached, 'Salas desvinculadas' might be suitable.  Without further context, a more general option like 'Salas removidas' could also work."
+          "description": "The English term \"unpinned\" implies that rooms were previously pinned or attached and have now been released. \"Liberadas\" in Portuguese translates more directly to \"released\" or \"freed,\" which doesn't fully capture the original meaning of being unpinned. A more accurate translation might be something along the lines of \"Salas desvinculadas\" (rooms unlinked) or \"Salas sem fixação\" (rooms without pinning).",
+          "suggestion": "Consider \"Salas desvinculadas: {{count}}\" or \"Salas sem fixação: {{count}}\""
         }
       ],
       "approved_at": null
@@ -186,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Fixarea sălilor anulată: {{count}}\" doesn't accurately convey the meaning of \"Rooms unpinned.\" 'Fixarea' implies a fixing or attachment, while 'unpinned' suggests a release or detachment. A more appropriate translation would convey the sense of removal or release.",
-          "suggestion": "Sălile nefixate: {{count}}"
+          "description": "The Romanian translation \"Fixarea sălilor anulată: {{count}}\" doesn't accurately convey the meaning of 'Rooms unpinned'. 'Fixarea' implies a fixing or securing action, while 'unpinned' refers to a removal of a pin or attachment. A more accurate translation would focus on the removal or release aspect.",
+          "suggestion": "Sălile dezasigurate: {{count}}"
         }
       ],
       "approved_at": null
@@ -198,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'комнат' is in the genitive case but should be in the nominative case. 'Комнаты' is the correct form to match the verb 'Откреплено' (unpinned).",
-          "suggestion": "Откреплено комнаты: {{count}}"
+          "description": "The word 'комнат' is in the genitive case, which is required to agree with 'Откреплено' (deprived/unpinned). However, a more natural and idiomatic translation would use the prepositional case 'комнатах'.",
+          "suggestion": "Откреплено комнат: {{count}}"
         }
       ],
       "approved_at": null
@@ -228,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Собе откачене: {{count}}' doesn't accurately convey the meaning of 'Rooms unpinned'. 'Откачене' implies something was detached or unhooked, which isn't necessarily what 'unpinned' means in this context. A more appropriate translation might be 'Обарање фиксације са соба: {{count}}' or 'Удаљено фиксација са соба: {{count}}'.",
-          "suggestion": "Consider 'Обарање фиксације са соба: {{count}}' or 'Удаљено фиксација са соба: {{count}}' to better reflect the meaning of 'Rooms unpinned'."
+          "description": "The Serbian translation 'Собе откачене: {{count}}' is not the most natural or accurate translation of 'Rooms unpinned: {{count}}'. 'Unpinned' implies a removal of a pin or attachment. 'Откачене' generally means 'detached' or 'unlatched' which doesn't quite convey the same meaning in this context.  A better translation would convey the idea of rooms being unattached or no longer pinned.",
+          "suggestion": "Consider 'Неприказане собе: {{count}}' (Unlisted Rooms: {{count}}), or 'Одмрзнуте собе: {{count}}' (Unfrozen rooms: {{count}}), depending on the intended meaning of 'unpinned'."
         }
       ],
       "approved_at": null
@@ -246,8 +251,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sabitlenmesi kaldırılmış odalar' is a literal translation of 'unpinned' and doesn't quite convey the intended meaning in a natural Turkish way. 'Unpinned' in this context means rooms that were previously pinned, but the pin has been removed. A more natural phrasing would be something like 'Sıkıştırması kaldırılmış odalar' or 'Sabitlenmemiş odalar'.",
-          "suggestion": "Consider 'Sıkıştırması kaldırılmış odalar' or 'Sabitlenmemiş odalar'."
+          "description": "The translation 'Sabitlenmesi kaldırılmış odalar' is a literal translation that doesn't convey the intended meaning of 'unpinned' in this context. 'Unpinned' refers to rooms that were previously fixed or highlighted. A more natural Turkish phrasing would be something like 'Kaydırması kaldırılmış odalar' or 'Sabitlenmesi kaldırılan odalar'.",
+          "suggestion": "Kaydırması kaldırılmış odalar"
         }
       ],
       "approved_at": null
@@ -258,8 +263,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Відкріплено кімнат: {{count}}' is not the most natural or accurate translation of 'Rooms unpinned: {{count}}'. 'Відкріплено' implies a deliberate action of unpinning, while 'unpinned' can also refer to a state or result. A better translation would convey the result of rooms no longer being pinned.",
-          "suggestion": "Розблоковано кімнат: {{count}}"
+          "description": "The translation 'Відкріплено кімнат: {{count}}' uses the verb 'відкріплено' (odkreplyeno) which means 'unpinned'. However, a more natural translation for 'Rooms unpinned' would be 'Знято позначки з кімнат: {{count}}' (Znyato poznachky z kimnat: {{count}}).  Alternatively, 'Кімнати відірвано від списку: {{count}}' (Kimnaty vidyrvano vid spysku: {{count}}).",
+          "suggestion": "Знято позначки з кімнат: {{count}}"
         }
       ],
       "approved_at": null
@@ -267,13 +272,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Phòng đã bỏ ghim\" is understandable, a more natural and common phrasing for 'unpinned rooms' in Vietnamese would be \"Phòng không còn được ghim\" or \"Phòng đã bỏ khỏi danh sách ghim\". 'Bỏ ghim' can imply something was deliberately removed, whereas 'unpinned' might simply mean it's no longer in a pinned state.",
-          "suggestion": "Phòng không còn được ghim: {{count}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

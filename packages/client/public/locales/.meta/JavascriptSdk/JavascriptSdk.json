@@ -3,7 +3,7 @@
   "content": "Javascript SDK",
   "content_en_sha1_hash": "e6c94f16090ac34b87010e6e2af5e5e55d93af88",
   "created_at": "2025-05-19T21:30:54.548Z",
-  "updated_at": "2025-05-24T09:12:56.084Z",
+  "updated_at": "2025-09-26T15:21:06.305Z",
   "comment": {
     "text": "\"Javascript SDK\" is a label used to describe presets or settings related to the JavaScript SDK, likely found in developer tools or settings pages, guiding users through configuration options.",
     "is_auto": true,
@@ -19,19 +19,19 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/DocSpace.js",
       "line_number": 62,
-      "context": "} from \"./StyledPresets\";\n \n const DocSpace = (props) => {\n const { t, theme, currentColorScheme } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[200]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
+      "context": "} from \"./StyledPresets\";\n \n const DocSpace = (props) => {\n const { t, theme, currentColorScheme } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[210]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
       "line_number": 71,
-      "context": "} from \"./StyledPresets\";\n \n const Editor = (props) => {\n const { t, theme } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[200]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
+      "context": "} from \"./StyledPresets\";\n \n const Editor = (props) => {\n const { t, theme } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[210]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
       "line_number": 85,
-      "context": "} from \"./StyledPresets\";\n \n const FileSelector = (props) => {\n const { t, fetchExternalLinks, theme, logoText } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const fileTypeDisplay = [\n { value: FilesSelectorFilterTypes.ALL, label: t(\"AllTypes\") },\n {\n value: \"EditorSupportedTypes\",",
+      "context": "} from \"./StyledPresets\";\n \n const FileSelector = (props) => {\n const { t, fetchExternalLinks, theme, logoText } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const fileTypeDisplay = [\n {\n value: FilesSelectorFilterTypes.ALL,\n label: t(\"AllTypes\"),",
       "module": "/packages/client"
     },
     {
@@ -49,19 +49,19 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
       "line_number": 87,
-      "context": "const SimpleRoom = (props) => {\n const { t, fetchExternalLinks, currentColorScheme, theme } = props;\n const navigate = useNavigate();\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[200]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
+      "context": "const SimpleRoom = (props) => {\n const { t, fetchExternalLinks, currentColorScheme, theme } = props;\n const navigate = useNavigate();\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[210]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer.js",
       "line_number": 71,
-      "context": "} from \"./StyledPresets\";\n \n const Viewer = (props) => {\n const { t, theme } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[200]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
+      "context": "} from \"./StyledPresets\";\n \n const Viewer = (props) => {\n const { t, theme } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[210]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/index.js",
-      "line_number": 58,
-      "context": "const [isLoading, setIsLoading] = useState(false);\n const [currentTabId, setCurrentTabId] = useState();\n \n const { t } = useTranslation([\n \"JavascriptSdk\",\n \"Webhooks\",\n \"Settings\",\n \"WebPlugins\",\n \"Common\",\n \"OAuth\",",
+      "line_number": 68,
+      "context": "const location = useLocation();\n \n const [currentTabId, setCurrentTabId] = useState();\n \n const { t, ready } = useTranslation([\n \"JavascriptSdk\",\n \"Webhooks\",\n \"Settings\",\n \"WebPlugins\",\n \"Common\",\n \"OAuth\",",
       "module": "/packages/client"
     }
   ],

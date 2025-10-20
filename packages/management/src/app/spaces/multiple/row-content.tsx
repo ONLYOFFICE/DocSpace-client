@@ -93,7 +93,9 @@ export const RowContent = ({
         </Text>
         {currentDeviceType === DeviceType.mobile ? (
           <ReactSVG src={ArrowIcon} className="arrow-icon" />
-        ) : null}
+        ) : (
+          <div />
+        )}
       </div>
 
       {isCurrentPortal ? (
@@ -114,9 +116,13 @@ export const RowContent = ({
         >
           {t("CompleteSetup")}
         </Text>
-      ) : null}
+      ) : (
+        <div />
+      )}
 
-      {isMobileView ? null : isWizardCompleted ? (
+      {isMobileView ? (
+        <div />
+      ) : isWizardCompleted ? (
         <Text fontSize="12px" as="div" fontWeight={600} truncate>
           {`${t("PortalStats", {
             roomCount: roomsCount,
@@ -137,4 +143,3 @@ export const RowContent = ({
     </StyledRowContent>
   );
 };
-

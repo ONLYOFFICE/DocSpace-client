@@ -3,7 +3,7 @@
   "content": "No backups have been created yet. Create one or more backups for them to appear in this list.",
   "content_en_sha1_hash": "c8e0282d83b01b0512d122cb0201d9e8cdff6a93",
   "created_at": "2025-05-26T07:15:42.873Z",
-  "updated_at": "2025-05-26T08:05:44.581Z",
+  "updated_at": "2025-08-11T09:02:44.098Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that no backups have been created yet, appearing as an empty list in a UI component. It provides context for when a user attempts to view backup information and no data exists.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 255,
-      "context": "<Text\n fontSize=\"12px\"\n textAlign=\"center\"\n className=\"backup-restore_empty-list\"\n >\n {t(\"Common:EmptyBackupList\")}\n </Text>\n )\n ) : (\n <div className=\"loader\" key=\"loader\">\n <ListLoader count={7} />",
+      "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
+      "line_number": 283,
+      "context": "className={classNames(\n styles.backupRestoreEmptyList,\n \"backup-restore_empty-list\",\n )}\n >\n {t(\"Common:EmptyBackupList\")}\n </Text>\n )\n ) : (\n <div className=\"loader\" key=\"loader\">\n <ListLoader count={7} />",
       "module": "/packages/shared"
     }
   ],

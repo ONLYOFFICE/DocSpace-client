@@ -133,7 +133,7 @@ export const ChangeStorageQuotaDialog = ({
           : t("Common:ManageStorageQuota")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>
+        <Text>
           {isDisableQuota
             ? t("Common:TurnOffDiskSpaceLimit", {
                 productName: t("Common:ProductName"),
@@ -149,6 +149,7 @@ export const ChangeStorageQuotaDialog = ({
             isError={isError}
             initialSize={Number(initialSize)}
             isAutoFocussed
+            dataTestId="storage_quota"
           />
         ) : null}
       </ModalDialog.Body>
@@ -161,6 +162,7 @@ export const ChangeStorageQuotaDialog = ({
           isLoading={isLoading}
           isDisabled={!isDisableQuota ? size.trim() === "" : false}
           scale
+          testId="storage_quota_save_button"
         />
         <Button
           label={t("Common:CancelButton")}
@@ -168,6 +170,7 @@ export const ChangeStorageQuotaDialog = ({
           onClick={onCloseClick}
           isDisabled={isLoading}
           scale
+          testId="storage_quota_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

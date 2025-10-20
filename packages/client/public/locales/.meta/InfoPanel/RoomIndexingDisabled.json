@@ -3,7 +3,7 @@
   "content": "Automatic file indexing disabled in the room",
   "content_en_sha1_hash": "02f93b1ebdc68c686754c44ec9bc719c1dcc705a",
   "created_at": "2025-05-19T21:30:54.930Z",
-  "updated_at": "2025-06-08T12:02:32.704Z",
+  "updated_at": "2025-10-13T13:22:35.731Z",
   "comment": {
     "text": "This translation key is used for the UI message that indicates automatic file indexing is disabled in a room. It appears when the user interacts with settings or options related to file management or room features.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 305,
+      "context": "case FeedActionKeys.RoomWatermarkDisabled:\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case FeedActionKeys.RoomIndexingDisabled:\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case FeedActionKeys.RoomLifeTimeSet: {\n const periodLifeTime = (feed.data as TFeedData).lifeTime?.period;\n const value = (feed.data as TFeedData).lifeTime?.value;\n const maxValue = 9999;\n const period =",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 251,
-      "context": "case FeedActionKeys.RoomWatermarkDisabled:\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case FeedActionKeys.RoomIndexingDisabled:\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case FeedActionKeys.RoomLifeTimeSet: {\n const periodLifeTime = feed.data.lifeTime.period;\n const value = feed.data.lifeTime.value;\n const maxValue = 9999;\n const period =",
+      "line_number": 254,
+      "context": "case FeedActionKeys.RoomWatermarkDisabled:\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case FeedActionKeys.RoomIndexingDisabled:\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case FeedActionKeys.RoomLifeTimeSet: {\n const periodLifeTime = feed.data.lifeTime?.period;\n const value = feed.data.lifeTime?.value;\n const maxValue = 9999;\n const period =",
       "module": "/packages/client"
     }
   ],

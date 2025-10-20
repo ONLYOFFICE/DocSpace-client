@@ -3,7 +3,7 @@
   "content": "Room index export is already in progress. Please wait until the current export is completed to start the new one.",
   "content_en_sha1_hash": "b928d51c336243ae9175762494646752b00726e4",
   "created_at": "2025-05-19T21:30:55.662Z",
-  "updated_at": "2025-06-08T12:02:32.852Z",
+  "updated_at": "2025-10-13T14:41:03.139Z",
   "comment": {
     "text": "This translation key is used to display an error message when a room index export is already in progress. The message instructs the user to wait until the current export is completed before starting a new one. It appears as an error toast notification in the application's UI, typically triggered by a button click or action related to file exports.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3388,
+      "line_number": 3434,
       "context": "exportRoomIndex = async (t, roomId) => {\n const previousExportInProgress =\n await this.checkPreviousExportRoomIndexInProgress();\n \n if (previousExportInProgress) {\n return toastr.error(t(\"Files:ExportRoomIndexAlreadyInProgressError\"));\n }\n \n const { setSecondaryProgressBarData } =\n this.uploadDataStore.secondaryProgressDataStore;",
       "module": "/packages/client"
     }
@@ -45,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The phrase \"Se spuštěním nového exportu počkejte\" is grammatically awkward. A more natural phrasing would be \"Počkejte, dokud...\"",
-          "suggestion": "Počkejte, dokud nebude aktuální export dokončen."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -135,30 +129,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses 'A exportação' which is grammatically awkward. It should be 'A exportação do índice de salas'.",
-          "suggestion": "A exportação do índice de salas já está em andamento."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While understandable, 'Aguarde até que a exportação atual seja concluída' is a bit verbose. A more concise phrasing could improve readability.",
-          "suggestion": "Aguarde a conclusão da exportação atual para iniciar uma nova."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'A exportação do índice da sala' is a literal translation and sounds slightly unnatural in Brazilian Portuguese. A more natural phrasing would be 'A exportação do índice das salas' or 'A exportação do índice dos quartos'.  The choice depends on whether the context refers to multiple rooms or a specific room.",
-          "suggestion": "A exportação do índice das salas já está em andamento."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -176,18 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'කරුණාකර' is a polite request form. While not inherently wrong, in this context, a more direct phrasing would improve clarity and readability. It can sound a bit overly formal.",
-          "suggestion": "Remove 'කරුණාකර' for a more concise and direct phrasing. The sentence could read 'වත්මන් අපනයනය අවසන් වනතුරු රැඳී සිටින්න.'"
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the sentence structure could be improved for better flow. The phrase 'නව එකක් ආරම්භ කිරීමට පෙර' is slightly cumbersome.",
-          "suggestion": "Rephrase to 'නව අපනයනය ආරම්භ කිරීමට පෙර' (Before starting a new export)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -205,35 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'собе' (sobe) is incorrect in this context. It means 'rooms' in the plural. The correct word should be 'просторије' (prostorije) which means 'spaces' or 'areas'.",
-          "suggestion": "Извоз индекса просторија је већ у току."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While understandable, 'сачекајте' is a more formal and somewhat less natural way to say 'wait' in this context. A more conversational and appropriate translation would be 'чекај'.",
-          "suggestion": "Чекајте да се тренутни извоз заврши пре него што започнете нови."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'izvoz' is used multiple times and is technically correct but could be perceived as overly formal in this context. A more natural phrasing might use 'izdvajanje indeksa sobe'.",
-          "suggestion": "Consider replacing 'izvoz' with 'izdvajanje' for a more conversational tone."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'pre nego što započnete novi' is grammatically correct but could be slightly more concise.",
-          "suggestion": "Consider using 'pre nego što počnete novi'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -251,23 +195,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Việc xuất chỉ mục phòng đã được tiến hành\" is a bit awkward. While technically correct, it's not the most natural way to express the concept in Vietnamese.  It sounds overly formal.",
-          "suggestion": "Quá trình xuất chỉ mục phòng đang diễn ra."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"xuất hiện tại\" is incorrect and nonsensical. It should refer to the export process itself, not a physical appearance.",
-          "suggestion": "xuất"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word \"mới\" at the end of the sentence feels slightly redundant. While not strictly wrong, it adds little to the meaning.",
-          "suggestion": "Remove 'mới' - \"...để bắt đầu xuất.\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

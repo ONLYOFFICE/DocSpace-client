@@ -3,7 +3,7 @@
   "content": "Check unsupported files",
   "content_en_sha1_hash": "06b1841801242c62e0a1437b18e7a0bce4a0534a",
   "created_at": "2025-05-19T21:30:50.896Z",
-  "updated_at": "2025-05-26T07:57:32.540Z",
+  "updated_at": "2025-09-07T07:53:15.242Z",
   "comment": {
     "text": "The translation key \"CheckUnsupportedFiles\" is used to display a message indicating that a file type is not supported. It appears as a button label in a data import component.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 447,
-      "context": "type={LinkType.action}\n isHovered\n fontWeight={600}\n onClick={onDownloadArchives}\n >\n {t(\"Settings:CheckUnsupportedFiles\")}\n </Link>\n </div>\n ) : null}\n \n {isBackupEmpty ? (",
+      "line_number": 449,
+      "context": "isHovered\n fontWeight={600}\n onClick={onDownloadArchives}\n dataTestId=\"check_unsupported_files_link\"\n >\n {t(\"Settings:CheckUnsupportedFiles\")}\n </Link>\n </div>\n ) : null}\n \n {isBackupEmpty ? (",
       "module": "/packages/client"
     }
   ],

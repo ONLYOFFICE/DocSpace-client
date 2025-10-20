@@ -3,7 +3,7 @@
   "content": "Storage quota disabled.",
   "content_en_sha1_hash": "b6d30ca17df8d425a828140d44b2241bd12d1c5e",
   "created_at": "2025-05-19T21:30:49.119Z",
-  "updated_at": "2025-06-08T12:02:32.598Z",
+  "updated_at": "2025-10-14T03:25:25.020Z",
   "comment": {
     "text": "This translation key is used for a message displayed when storage quota is disabled. It informs users that their storage limit has been removed. This message appears in a success notification dialog and toast notification after certain actions are performed, such as enabling unlimited space or setting custom room quotas.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/SpaceQuota/index.js",
-      "line_number": 136,
+      "line_number": 142,
       "context": "options.forEach((o) => {\n if (o.key === \"no-quota\") o.label = t(\"Common:Unlimited\");\n });\n \n successCallback(items);\n toastr.success(t(\"Common:StorageQuotaDisabled\"));\n } catch (e) {\n abortCallback();\n toastr.error(e);\n }",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2156,
-      "context": "return item?.id ? item.id : item;\n });\n \n try {\n await setCustomRoomQuota(userIDs, -1);\n toastr.success(t(\"Common:StorageQuotaDisabled\"));\n } catch (e) {\n toastr.error(e);\n }\n };",
+      "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
+      "line_number": 103,
+      "context": "});\n \n try {\n await api.people.setCustomUserQuota(userIDs, \"-1\");\n \n toastr.success(t(\"Common:StorageQuotaDisabled\"));\n } catch (e) {\n toastr.error(e as unknown as TData);\n }\n };",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
-      "line_number": 128,
-      "context": "setInfoPanelSelection(getPeopleListItem(items[0]));\n } else {\n setInfoPanelSelection(items);\n }\n \n toastr.success(t(\"Common:StorageQuotaDisabled\"));\n } catch (e) {\n toastr.error(e as unknown as TData);\n }\n };",
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 2149,
+      "context": "return item?.id ? item.id : item;\n });\n \n try {\n await setCustomRoomQuota(userIDs, -1);\n toastr.success(t(\"Common:StorageQuotaDisabled\"));\n } catch (e) {\n toastr.error(e);\n }\n };",
       "module": "/packages/client"
     }
   ],
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"kvota\" is a direct transliteration of \"quota\" and isn't the most natural or clear way to express the concept in Azerbaijani. While understandable, it feels less idiomatic. A more natural phrasing would be \"Saxlanma həddi\" or \"Yaddaş limiti\".",
-          "suggestion": "Consider translating as \"Saxlanma həddi deaktiv edildi\" or \"Yaddaş limiti deaktiv edildi.\""
+          "description": "While \"Yaddaş kvotası deaktiv edildi\" is understandable, a more natural and accurate translation would be \"Saxlanma kvotası deaktivləşdirilib.\" \"Yaddaş\" translates to 'memory', while 'storage' is more accurately represented by \"saxlanma\".  \"Deaktiv edildi\" is correct, but \"deaktivləşdirilib\" is a slightly more formal and common phrasing in this context.",
+          "suggestion": "Saxlanma kvotası deaktivləşdirilib."
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Speicherquote wird deaktiviert\" literally translates to \"Storage quota is being deactivated.\"  While not drastically wrong, it implies an ongoing action. The original English \"Storage quota disabled\" indicates a state of being disabled, not an ongoing process. A more accurate translation would convey this state.",
-          "suggestion": "Speicherquotum deaktiviert."
+          "description": "The translation \"Speicherquote wird deaktiviert\" literally translates to 'Storage quota is being deactivated.' The English 'Storage quota disabled' implies a state of being disabled, not an ongoing process. A more accurate translation would convey a permanent disabled state.",
+          "suggestion": "Speicherquotenumleitung deaktiviert."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ກຳນົດຈຳນວນເກັບຮັກສາຖືກປິດການໃຊ້ງານແລ້ວ' is a literal translation of 'Storage quota disabled' but sounds overly formal and complex for a UI message. A more natural and concise translation would be better.",
-          "suggestion": "Consider a simpler translation like 'ປິດການນຳໃຊ້ຈຳນວນເກັບຮັກສາ' or 'ບໍ່ມີກຳນົດຈຳນວນເກັບຮັກສາ'."
+          "description": "The translation 'ກຳນົດຈຳນວນເກັບຮັກສາຖືກປິດການໃຊ້ງານແລ້ວ' is a literal translation of 'Storage quota disabled' but sounds overly formal and complex for a user-facing message. A more natural and concise translation would be preferred.",
+          "suggestion": "Consider a simpler translation like 'ປິດການໃຊ້ງານກຳນົດຈຳນວນເກັບຮັກສາ' or 'ບໍ່ມີກຳນົດຈຳນວນເກັບຮັກສາ'"
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Limit pamięci został wyłączony' while conveying a similar meaning, isn't the most natural or precise translation of 'Storage quota disabled.' 'Limit' translates more to 'limit' or 'capacity limit' rather than quota itself. A more accurate translation would be something like 'Ograniczenie zużycia pamięci zostało wyłączone' or 'Wyłączono limit pamięci.'",
-          "suggestion": "Ograniczenie zużycia pamięci zostało wyłączone"
+          "description": "The translation 'Limit pamięci został wyłączony' is a literal translation of 'Storage quota disabled' that doesn't fully capture the nuance. 'Quota' refers to an allocated limit, and 'disabled' implies that functionality is turned off. 'Limit pamięci został wyłączony' is understandable, but not the most natural or accurate rendering in Polish.",
+          "suggestion": "A more natural translation would be something like 'Ograniczenie przestrzeni dyskowej zostało wyłączone' or 'Wyłączono limit przestrzeni dyskowej'."
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Cotă de stocare a fost dezactivată\" is understandable, a more natural and idiomatic translation would be \"Cota de stocare este dezactivată.\" Using 'a fost' implies a completed action in the past, which isn't necessarily the intended meaning. It's more likely describing the current state.",
-          "suggestion": "Cota de stocare este dezactivată."
+          "description": "While technically correct, \"Cotă de stocare a fost dezactivată\" sounds a bit formal and stiff for a user-facing message. A more natural phrasing would be preferred.",
+          "suggestion": "Cotă de stocare este dezactivată."
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ආචයන සලාකය අබල කෙරිණි.\" does not accurately convey the meaning of \"Storage quota disabled.\" \"ආචයන සලාකය\" doesn't directly relate to storage or quota. It appears to be a misunderstanding of the original English phrase.",
-          "suggestion": "A more accurate translation might be \"ගබඩාවේ ඡන්දනය අවහිර කෙරිණි\" (Gabadaa vaa chandanaya avahiraa keriñi) or \"ගබඩාවේ ඉඩ ප්රමාණය සීමාව අයින් කර ඇත\" (Gabadaawe idda pramaaṇaya seemaawaa ein kara ath.)"
+          "description": "The translation 'ආචයන සලාකය අබල කෙරිණි' does not accurately convey the meaning of \"Storage quota disabled.\" 'ආචයන සලාකය' doesn't directly relate to storage or quota. It seems to be a random combination of words.",
+          "suggestion": "A more accurate translation would be something like 'ගබඩා ඉඩ ප්‍රමාණය සීමාව අන්‍යය කර ඇත' (Gabada ida pramanaya seemawa aniya kara ath) which translates to 'Storage limit has been disabled' or 'ගබඩා සීමාව නිಷ್ක්‍රිය කර ඇත' (Gabada seemawa nishkriya kara ath) which translates to 'Storage limit has been deactivated'."
         }
       ],
       "approved_at": null
@@ -222,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Складишна квота онемогућена\" is not the most natural or accurate translation of \"Storage quota disabled.\" \"Складишна\" implies storage space, which is understood but slightly awkward. A more common and clearer translation would be something like \"Онемогућена квота за складиштење\" or \"Онемогућена дозвола за складиштење\".",
-          "suggestion": "Онемогућена квота за складиштење"
+          "description": "The translation \"Складишна квота онемогућена.\" is not the most natural or accurate translation of \"Storage quota disabled.\" While technically correct, it sounds awkward. \"Складишна\" is a less common and less direct translation of 'storage'.",
+          "suggestion": "Угашена квота за складиштење."
         }
       ],
       "approved_at": null
@@ -252,13 +252,19 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Storage quota disabled' is more accurately conveyed as 'Tắt hạn mức lưu trữ' or 'Hạn mức lưu trữ đã tắt'. 'Đã vô hiệu hóa' is a more formal phrasing that doesn't quite match the tone of the English original, which implies a simple disabling action.",
+          "description": "While technically correct, \"Đã vô hiệu hóa hạn mức lưu trữ\" is a bit formal and sounds unnatural in most contexts. A more natural and common translation would be 'Tắt hạn mức lưu trữ' or 'Hạn mức lưu trữ đã tắt'.",
           "suggestion": "Tắt hạn mức lưu trữ"
         }
       ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

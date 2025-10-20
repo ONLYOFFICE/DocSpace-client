@@ -54,8 +54,9 @@ const GuestShareLinkForm = ({
   guestDisplayName,
   guestAvatar,
 }: GuestShareLinkFormProps) => {
-  const { linkData } = useContext(ConfirmRouteContext);
-  const { confirmHeader = "", email = "" } = linkData;
+  const { linkData, confirmLinkResult } = useContext(ConfirmRouteContext);
+  const { confirmHeader = "" } = linkData;
+  const { email = "" } = confirmLinkResult;
   const { t } = useTranslation(["Confirm", "Common"]);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -99,47 +100,47 @@ const GuestShareLinkForm = ({
   };
 
   return (
-    <>
-      <FormWrapper>
-        <Avatar
-          className="guest-avatar"
-          role={AvatarRole.guest}
-          source={guestAvatar ?? ""}
-          size={AvatarSize.big}
-          isDefaultSource
-        />
-        <div className="guest-info-wrapper">
-          <Text fontSize="16px" fontWeight="700" className="guest-name">
-            {guestDisplayName}
-          </Text>
-          <Text fontSize="13px" fontWeight="400" className="guest-email">
-            {email}
-          </Text>
-        </div>
-        <ButtonsWrapper className="buttons-guest">
-          <Button
-            primary
-            scale
-            size={ButtonSize.medium}
-            label={t("Common:Approve")}
-            tabIndex={2}
-            isDisabled={isLoading}
-            onClick={onApproveInvite}
-          />
-          <Button
-            scale
-            size={ButtonSize.medium}
-            label={t("Common:Deny")}
-            tabIndex={2}
-            isDisabled={isLoading}
-            onClick={onDenyInvite}
-          />
-        </ButtonsWrapper>
-        <Text fontSize="12px" fontWeight="400" className="guest-info">
-          {t("Common:GuestApprovalNote", { sectionName: t("Common:Contacts") })}
+    <FormWrapper>
+      <Avatar
+        className="guest-avatar"
+        role={AvatarRole.guest}
+        source={guestAvatar ?? ""}
+        size={AvatarSize.big}
+        isDefaultSource
+      />
+      <div className="guest-info-wrapper">
+        <Text fontSize="16px" fontWeight="700" className="guest-name">
+          {guestDisplayName}
         </Text>
-      </FormWrapper>
-    </>
+        <Text fontSize="13px" fontWeight="400" className="guest-email">
+          {email}
+        </Text>
+      </div>
+      <ButtonsWrapper className="buttons-guest">
+        <Button
+          primary
+          scale
+          size={ButtonSize.medium}
+          label={t("Common:Approve")}
+          tabIndex={2}
+          isDisabled={isLoading}
+          onClick={onApproveInvite}
+          testId="approve_button"
+        />
+        <Button
+          scale
+          size={ButtonSize.medium}
+          label={t("Common:Deny")}
+          tabIndex={2}
+          isDisabled={isLoading}
+          onClick={onDenyInvite}
+          testId="deny_button"
+        />
+      </ButtonsWrapper>
+      <Text fontSize="12px" fontWeight="400" className="guest-info">
+        {t("Common:GuestApprovalNote", { sectionName: t("Common:Contacts") })}
+      </Text>
+    </FormWrapper>
   );
 };
 

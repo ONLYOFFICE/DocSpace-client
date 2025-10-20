@@ -123,7 +123,7 @@ export const endpoints: TEndpoints = {
   },
   activationStatus: {
     url: `${BASE_URL}${SELF_PATH_ACTIVATION_STATUS}`,
-    dataHandler: selfHandler,
+    dataHandler: selfHandler.bind(null, null, null, true),
   },
   activationStatusError: {
     url: `${BASE_URL}${SELF_PATH_ACTIVATION_STATUS}`,
@@ -140,6 +140,10 @@ export const endpoints: TEndpoints = {
   login: {
     url: `${BASE_URL}${LOGIN_PATH}`,
     dataHandler: loginHandler,
+  },
+  loginError: {
+    url: `${BASE_URL}${LOGIN_PATH}`,
+    dataHandler: loginHandler.bind(null, 401),
   },
   loginWithTfaCode: {
     url: `${BASE_URL}${LOGIN_PATH_WITH_PARAMS}`,

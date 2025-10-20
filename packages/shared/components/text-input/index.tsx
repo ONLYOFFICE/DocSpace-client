@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { isMobile, isIOS } from "react-device-detect";
 import equal from "fast-deep-equal/react";
 
 import type { TextInputProps } from "./TextInput.types";
@@ -55,7 +54,7 @@ export const TextInputPure = (props: TextInputProps) => {
     isBold,
     fontWeight,
     style,
-    testId = "text-input",
+    testId,
     ...rest
   } = props;
 
@@ -69,10 +68,10 @@ export const TextInputPure = (props: TextInputProps) => {
       {...rest}
       className={`${styles.textInput} ${className || ""}`}
       style={combinedStyle}
-      isAutoFocussed={isMobile && isIOS ? false : isAutoFocussed}
+      isAutoFocussed={isAutoFocussed}
       guide={guide}
       size={size}
-      data-testid={testId}
+      data-testid={testId ?? "text-input"}
       data-size={size}
       data-error={hasError ? "true" : undefined}
       data-warning={hasWarning ? "true" : undefined}

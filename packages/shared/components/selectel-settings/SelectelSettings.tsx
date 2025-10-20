@@ -24,16 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable jsx-a11y/tabindex-no-positive */
-
 import React from "react";
 
-import {
-  InputSize,
-  InputType,
-  TextInput,
-} from "@docspace/shared/components/text-input";
-import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+import { useDidMount } from "../../hooks/useDidMount";
+import { InputSize, InputType, TextInput } from "../text-input";
 
 import {
   FILE_PATH,
@@ -94,6 +88,7 @@ const SelectelSettings = ({
         tabIndex={1}
         type={InputType.text}
         size={InputSize.base}
+        testId="selectel_private_container_input"
       />
       <TextInput
         scale
@@ -108,6 +103,7 @@ const SelectelSettings = ({
         tabIndex={2}
         type={InputType.text}
         size={InputSize.base}
+        testId="selectel_public_container_input"
       />
 
       {isNeedFilePath ? (
@@ -124,6 +120,7 @@ const SelectelSettings = ({
           hasError={isError[FILE_PATH]}
           type={InputType.text}
           size={InputSize.base}
+          testId="selectel_file_path_input"
         />
       ) : null}
     </>

@@ -28,6 +28,7 @@
 
 import React from "react";
 import { I18nextProvider } from "react-i18next";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import { ThemeProvider } from "@docspace/shared/components/theme-provider";
 import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
@@ -41,7 +42,6 @@ import useTheme from "@/hooks/useTheme";
 import pkgFile from "../../package.json";
 
 import ErrorBoundaryWrapper from "./ErrorBoundary";
-import { usePathname, useSearchParams } from "next/navigation";
 
 export const Providers = ({
   children,
@@ -71,13 +71,27 @@ export const Providers = ({
   const expectedPathName = `/${redirectURL}`;
 
   React.useEffect(() => {
-    if (redirectURL && confirmType === "GuestShareLink") {
+    if (
+      redirectURL &&
+      (confirmType === "GuestShareLink" || confirmType === "EmailChange")
+    ) {
       sessionStorage.setItem(
         "referenceUrl",
         `/confirm/${confirmType}?${searchParams?.toString()}`,
       );
     }
   }, [redirectURL, searchParams, confirmType]);
+
+  React.useEffect(() => {
+    // On the first navigation from an email link, the auth cookie is not sent
+    // because it has SameSite=Strict. To access the cookie,
+    // we perform a client-side redirect and set a special flag.
+    if (confirmType === "EmailChange" && !searchParams.get("redirected")) {
+      window.location.replace(
+        `/confirm/${confirmType}?${searchParams?.toString()}&redirected=true`,
+      );
+    }
+  }, [searchParams, confirmType]);
 
   React.useEffect(() => {
     if (shouldRedirect && redirectURL && pathName !== expectedPathName)
@@ -93,7 +107,6 @@ export const Providers = ({
     user,
     colorTheme: value.colorTheme,
     systemTheme: value.systemTheme,
-    i18n,
     lang: locale,
   });
 
@@ -105,11 +118,9 @@ export const Providers = ({
           version={pkgFile.version}
           firebaseHelper={firebaseHelper}
         >
-          {shouldRedirect && redirectURL && expectedPathName !== pathName ? (
-            <></>
-          ) : (
-            children
-          )}
+          {shouldRedirect && redirectURL && expectedPathName !== pathName
+            ? null
+            : children}
         </ErrorBoundaryWrapper>
       </I18nextProvider>
     </ThemeProvider>

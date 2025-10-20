@@ -3,7 +3,7 @@
   "content": "You have appointed a new owner.",
   "content_en_sha1_hash": "bfdff63ec08042212380b8b5ed1aeed73a496e37",
   "created_at": "2025-05-19T21:30:55.262Z",
-  "updated_at": "2025-06-08T12:02:32.851Z",
+  "updated_at": "2025-10-13T14:41:03.137Z",
   "comment": {
     "text": "This translation key is used for notifications that a new owner has been appointed. It displays a success message when a user successfully leaves a room and appoints a new owner in files management.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3095,
+      "line_number": 3138,
       "context": "const isMe = userId === this.userStore.user.id;\n if (isMe) setInRoom(true);\n }\n \n if (isLeaveChecked) await this.onLeaveRoom(t);\n else toastr.success(t(\"Files:AppointNewOwner\"));\n })\n .catch((e) => toastr.error(e))\n .finally(() => {\n setSelected(\"none\");\n });",
       "module": "/packages/client"
     }
@@ -75,25 +75,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Vous avez choisi un nouveau propriétaire' is understandable, 'appointed' implies a formal designation. 'Choisir' (to choose) is less formal. A more accurate translation would convey the formality of the original English.",
-          "suggestion": "Vous avez nommé un nouveau propriétaire."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Դուք նոր սեփականատեր եք նշանակել։' literally translates to 'You are a new owner you have appointed.' It implies the user *is* the new owner, rather than having appointed someone else. The English phrase 'You have appointed a new owner' means the user has designated someone else as the new owner.",
-          "suggestion": "Նշանակվել է նոր սեփականատեր։ (New owner has been appointed.) or Դուք նշանակել եք նոր սեփականատեր։ (You have appointed a new owner.)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -105,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '新しい所有者を任命されました' implies 'you were appointed a new owner,' not 'you appointed a new owner'. It uses the passive voice incorrectly.",
-          "suggestion": "新しい所有者を指名しました。 (Atarashii shoyusha o shimei shimashita.) - 'You designated a new owner.' or 新しい所有者を割り当てました。(Atarashii shoyusha o wariate mashita.) - 'You assigned a new owner.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -171,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ඔබ නව හිමිකරුවෙකු පත් කර ඇත.' while understandable, is a bit literal and slightly awkward in Sinhala. It translates to 'You have appointed a new owner.' but could be improved for natural flow.",
-          "suggestion": "Consider a more natural phrasing like 'ඔබව නව හිමිකරුවා ලෙස පත්කර ඇත' (Obava nava himikaruvawa lesa pathakara ath) or 'ඔබ නව හිමිකරුවෙකු ලෙස පත්කොළුවා' (Obava nava himikaruvawadenak pathakaru wala) depending on the desired tone and context.  The meaning remains 'You have appointed a new owner'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -201,13 +177,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Postavili ste novog vlasnika' is a literal translation and doesn't quite convey the natural flow of the English sentence in a user interface context. While grammatically correct, it sounds a little formal and clunky.",
-          "suggestion": "A more natural-sounding translation might be 'Imenovali ste novog vlasnika.' or 'Postanite novi vlasnik' (depending on the context and desired emphasis)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

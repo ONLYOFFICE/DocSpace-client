@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
+
 import React, { useMemo } from "react";
 import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
@@ -36,14 +37,16 @@ import {
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
-import { getBackUrl, isFormRole } from "@/utils";
+import UserAvatarBaseSvgUrl from "PUBLIC_DIR/images/avatar.editor.base.svg?url";
+import UserAvatarDarkSvgUrl from "PUBLIC_DIR/images/avatar.editor.dark.svg?url";
+
 import { IS_DESKTOP_EDITOR, IS_ZOOM, SHOW_CLOSE } from "@/utils/constants";
 import { EditorProps, TGoBack } from "@/types";
 import {
   onSDKRequestHistoryClose,
   onSDKRequestEditRights,
-  onSDKInfo,
   onSDKWarning,
   onSDKError,
   onSDKRequestRename,
@@ -51,6 +54,7 @@ import {
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
+import { isPDFDocument } from "@/utils";
 
 const Editor = ({
   config,
@@ -83,6 +87,7 @@ const Editor = ({
   onStartFilling,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
+  const { isBase } = useTheme();
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
 
@@ -112,6 +117,7 @@ const Editor = ({
     onRequestStartFilling,
 
     onRequestRefreshFile,
+    onInfo,
   } = useEditorEvents({
     user,
     successAuth,
@@ -155,7 +161,7 @@ const Editor = ({
 
   // if (config) newConfig.editorConfig = { ...config.editorConfig };
 
-  //if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
+  // if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
 
   let goBack: TGoBack = {} as TGoBack;
 
@@ -167,12 +173,13 @@ const Editor = ({
         i18n.getDataByLanguage(i18n.language) as unknown as {
           Editor: { [key: string]: string };
         }
-      )?.["Editor"] as {
+      )?.Editor as {
         [key: string]: string;
       }
-    )?.["FileLocation"]; // t("FileLocation");
+    )?.FileLocation; // t("FileLocation");
 
     if (editorGoBack === false || user?.isVisitor || !user) {
+      console.log("goBack", goBack);
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,
@@ -192,7 +199,7 @@ const Editor = ({
         typeof window !== "undefined" &&
         !window.ClientConfig?.editor?.requestClose
       ) {
-        goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
+        goBack.url = newConfig.editorConfig?.customization?.goback?.url;
       }
     }
   }
@@ -219,20 +226,29 @@ const Editor = ({
     }
   }
 
-  //if (newConfig.document && newConfig.document.info)
-  //  newConfig.document.info.favorite = false;
+  try {
+    if (
+      newConfig.document &&
+      newConfig.document.info &&
+      !fileInfo?.requestToken
+    )
+      newConfig.document.info.favorite = !!fileInfo?.isFavorite;
 
-  // const url = window.location.href;
+    const url = typeof window !== "undefined" ? window.location.href : "";
 
-  // if (url.indexOf("anchor") !== -1) {
-  //   const splitUrl = url.split("anchor=");
-  //   const decodeURI = decodeURIComponent(splitUrl[1]);
-  //   const obj = JSON.parse(decodeURI);
+    if (url.indexOf("anchor") !== -1) {
+      const splitUrl = url.split("anchor=");
+      const decodeURI = decodeURIComponent(splitUrl[1]);
+      const obj = JSON.parse(decodeURI);
 
-  //   config.editorConfig.actionLink = {
-  //     action: obj.action,
-  //   };
-  // }
+      if (newConfig.editorConfig)
+        newConfig.editorConfig.actionLink = {
+          action: obj.action,
+        };
+    }
+  } catch (error) {
+    console.error(error);
+  }
 
   newConfig.events = {
     onDocumentReady,
@@ -240,7 +256,7 @@ const Editor = ({
     onRequestEditRights: () =>
       onSDKRequestEditRights(t, fileInfo, newConfig.documentType),
     onAppReady: onSDKAppReady,
-    onInfo: onSDKInfo,
+    onInfo,
     onWarning: onSDKWarning,
     onError: onSDKError,
     onRequestHistoryData: onSDKRequestHistoryData,
@@ -254,6 +270,18 @@ const Editor = ({
     onRequestRefreshFile,
   };
 
+  if (
+    typeof window !== "undefined" &&
+    newConfig.editorConfig?.user &&
+    newConfig.editorConfig.user.image?.includes(
+      "default_user_photo_size_48-48.png",
+    )
+  ) {
+    newConfig.editorConfig.user.image = isBase
+      ? `${window.location.origin}${UserAvatarBaseSvgUrl}`
+      : `${window.location.origin}${UserAvatarDarkSvgUrl}`;
+  }
+
   if (successAuth) {
     newConfig.events.onRequestUsers = onSDKRequestUsers;
     newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
@@ -261,8 +289,8 @@ const Editor = ({
     if (!user?.isVisitor) {
       newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
       if (
-        IS_DESKTOP_EDITOR ||
-        (typeof window !== "undefined" && !openOnNewPage)
+        !isPDFDocument(fileInfo) &&
+        (IS_DESKTOP_EDITOR || (typeof window !== "undefined" && !openOnNewPage))
       ) {
         newConfig.events.onRequestCreateNew = onSDKRequestCreateNew;
       }

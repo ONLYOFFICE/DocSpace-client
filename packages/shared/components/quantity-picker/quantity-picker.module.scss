@@ -159,7 +159,12 @@
   }
 
   .tabsWrapper {
-    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 13px;
   }
 
   .underContorlsText {
@@ -168,6 +173,10 @@
 
     &.disabled {
       color: var(--quantity-picker-disable-color);
+    }
+
+    &.warningIncrementFromZero {
+      color: var(--quantity-picker-warning-color);
     }
   }
 }

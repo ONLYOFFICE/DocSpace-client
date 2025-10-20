@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 
 import SocketHelper, { SocketEvents, TOptSocket } from "../utils/socket";
@@ -40,6 +39,7 @@ import {
   isAdmin,
   insertDataLayer,
   isPublicRoom,
+  isPublicPreview,
 } from "../utils/common";
 import { getCookie, setCookie } from "../utils/cookie";
 import { TenantStatus } from "../enums";
@@ -147,6 +147,7 @@ class AuthStore {
             return;
           }
 
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { customQuotaFeature, ...updatableObject } = options;
 
           this.currentQuotaStore?.updateTenantCustomQuota(updatableObject);
@@ -163,7 +164,12 @@ class AuthStore {
     this.setIsUpdatingTariff(true);
 
     await this.getPaymentInfo();
-    await this.currentTariffStatusStore?.setPayerInfo();
+
+    const user = this.userStore?.user;
+
+    if (user && user.isAdmin) {
+      await this.currentTariffStatusStore?.fetchPayerInfo();
+    }
 
     this.setIsUpdatingTariff(false);
   };
@@ -196,11 +202,12 @@ class AuthStore {
       !!this.settingsStore?.socketUrl &&
       !isPortalDeactivated &&
       !isPortalEncryption &&
-      !isPublicRoom()
+      !isPublicRoom() &&
+      !isPublicPreview()
     ) {
       requests.push(
         this.userStore?.init(i18n, this.settingsStore.culture).then(() => {
-          if (!isPortalRestore && this.userStore?.isAuthenticated) {
+          if (!isPortalRestore) {
             this.getPaymentInfo();
           } else {
             this.isPortalInfoLoaded = true;
@@ -218,7 +225,7 @@ class AuthStore {
         insertDataLayer(user.id);
       }
 
-      if (this.isAuthenticated && !skipRequest && user) {
+      if (this.isAuthenticated && !skipRequest) {
         if (!isPortalRestore && !isPortalDeactivated)
           requests.push(this.settingsStore?.getAdditionalResources());
 
@@ -474,7 +481,8 @@ class AuthStore {
     return (
       this.settingsStore?.isLoaded &&
       !!this.settingsStore?.socketUrl &&
-      !isPublicRoom()
+      !isPublicRoom() &&
+      !isPublicPreview()
       //  this.userStore?.isAuthenticated
     );
   }

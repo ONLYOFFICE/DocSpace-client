@@ -2,17 +2,17 @@
   "key_path": "ActivatePaidTariffExpiration",
   "content": "Your subscription expires on {{date}}.",
   "content_en_sha1_hash": "d699efba2b0f510f9138980f2ace1fb295fe5c08",
-  "created_at": "2025-05-26T07:15:40.043Z",
-  "updated_at": "2025-05-26T08:09:01.555Z",
+  "created_at": "2025-06-30T12:19:20.908Z",
+  "updated_at": "2025-09-19T15:39:23.371Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating when a paid subscription is about to expire. The message displays the expiration date and appears in a specific UI component related to payment or subscription management.",
+    "text": "This translation key is used to display a message indicating when a paid subscription is about to expire. It appears on a tariff title container in a payment related UI component and will be displayed as \"Your subscription expires on {{date}}.\" The date placeholder should be replaced with the actual expiration date.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:09:01.555Z"
+    "updated_at": "2025-06-30T12:20:44.928Z"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 85,
+      "line_number": 105,
       "context": "}),\n );\n }\n \n return getTwoDotsReplacing(\n t(\"ActivatePaidTariffExpiration\", {\n date: paymentDate,\n }),\n );\n };",
       "module": "/packages/shared"
     }
@@ -163,6 +163,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

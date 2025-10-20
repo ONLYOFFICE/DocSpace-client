@@ -81,4 +81,6 @@ export type TooltipProps = Pick<
   fallbackAxisSideDirection?: TFallbackAxisSideDirection;
   noUserSelect?: boolean;
   ref?: React.RefObject<TooltipRefProps | null>;
+  dataTestId?: string;
+  tooltipStyle?: React.CSSProperties;
 };

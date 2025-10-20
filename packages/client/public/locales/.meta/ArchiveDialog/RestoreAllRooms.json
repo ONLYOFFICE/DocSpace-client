@@ -3,7 +3,7 @@
   "content": "Are you sure you want to restore all rooms?",
   "content_en_sha1_hash": "bacc85ff792307c347c95fa2aedccf9d2c9ee102",
   "created_at": "2025-05-19T21:30:57.060Z",
-  "updated_at": "2025-05-26T07:57:32.206Z",
+  "updated_at": "2025-08-04T07:30:01.044Z",
   "comment": {
     "text": "This translation key is used in a confirmation dialog to ask users if they're sure they want to restore all rooms. It appears on a button within an archive dialog and provides context for users selecting this option.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ArchiveDialog/index.js",
-      "line_number": 68,
+      "line_number": 78,
       "context": "window.addEventListener(\"keydown\", onKeyPress);\n return () => window.removeEventListener(\"keydown\", onKeyPress);\n }, []);\n \n const getDescription = () => {\n if (restoreAll) return t(\"ArchiveDialog:RestoreAllRooms\");\n \n return items.length > 1\n ? `${t(\"ArchiveDialog:ArchiveRooms\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"ArchiveDialog:ArchiveRoom\")} ${t(\"Common:WantToContinue\")}`;\n };",
       "module": "/packages/client"
     },
@@ -99,13 +99,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'このまますべてのルームの復元を続けますか？' is too literal and somewhat awkward in Japanese. While technically correct, it doesn't flow naturally.  'このまま' implies 'as is' or 'in this state', which isn't the most intuitive phrasing for a confirmation prompt.",
-          "suggestion": "Are you sure you want to restore all rooms?  A better translation would be something like: 「すべてのルームを復元しますか？ (Subete no rūmu o fukugen shimasu ka?)」, which is a more standard and natural way to phrase the question."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -117,13 +111,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ຕ້ອງການກູ້ຫ້ອງທັງໝົດຄືນມາ' is a bit literal and can be improved for naturalness. 'Restore' implies bringing something back to a previous state, which isn't perfectly captured by 'ກູ້ຄືນມາ' (bring back).",
-          "suggestion": "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການຟື້ນຟູຫ້ອງທັງໝົດຄືນມາ?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -159,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Sigur doriţi să restaurați toate sălile?' is technically correct but could be improved for naturalness. The use of 'doriţi' (formal 'you') might not be appropriate depending on the target audience and overall tone of the application. 'Vrei' (informal 'you') would be a more common and potentially more user-friendly option.",
-          "suggestion": "Sigur vrei să restaurezi toate sălile?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -177,18 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ඔබට සියළුම කාමර ප්‍රත්‍යර්පණයට වුවමනාද?' doesn't perfectly capture the nuance of 'Are you sure you want to restore all rooms?'. While 'ප්‍රත්‍යර්පණය' (pratyarpanaya) means 'restoration', the sentence structure is a bit awkward and doesn't flow naturally in Sinhala. It's more of a literal translation.",
-          "suggestion": "A more natural and accurate translation might be: 'ඔබ සියළුම කාමරයන් යථා තත්වයට පමුණුවීමට සුභසාදයි?' or 'ඔබ සියළුම කාමරයන් නැවත යථා තත්වයට පමුණුවනවිට කැමතියි?'"
-        },
-        {
-          "type": "spelling",
-          "description": "While not strictly incorrect, 'සියළුම' (siyalum) is commonly used, but 'සියලු' (siyallu) is slightly more formal and might be preferable depending on the tone of the application.",
-          "suggestion": "Consider using 'සියලු කාමර' instead of 'සියළුම කාමර'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -206,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'повратите' (povratite) is not the most natural way to say 'restore' in this context. 'Vratiti' is more commonly used for restoring something.",
-          "suggestion": "Да ли сте сигурни да желите да вратите све собе?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

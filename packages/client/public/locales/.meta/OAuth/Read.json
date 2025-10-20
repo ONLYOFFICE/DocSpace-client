@@ -3,7 +3,7 @@
   "content": "Read",
   "content_en_sha1_hash": "852b438f91ad9eb2cdd84419a675a216d543c687",
   "created_at": "2025-05-19T21:30:53.981Z",
-  "updated_at": "2025-05-26T07:57:32.556Z",
+  "updated_at": "2025-08-04T07:30:01.360Z",
   "comment": {
     "text": "This translation key is used to display the text \"Read\" in the context of API key permissions. It appears in a dialog where users can select scopes for their API keys, indicating that the selected scope allows for read-only access.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 251,
+      "line_number": 203,
       "context": "</Text>\n <Text\n className=\"api-key_permission-container-text separator\"\n fontWeight={600}\n >\n {t(\"OAuth:Read\")}\n </Text>\n <Text\n className=\"api-key_permission-container-text separator\"\n fontWeight={600}\n >",
       "module": "/packages/client"
     },
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"اقرأ\" (iqra'a) translates to \"read\" in the imperative form (command). While technically correct, it doesn't convey the concept of 'Read' as a permission or capability (like in OAuth). A more appropriate translation would be a noun form.",
-          "suggestion": "قراءة (qira'a) - meaning 'reading' or 'the act of reading'."
+          "description": "The Arabic translation \"اقرأ\" (iqra') means \"read\" in the imperative form (command). It doesn't convey the meaning of \"Read\" as a permission or capability, which is the intended meaning in the context of an OAuth scope.",
+          "suggestion": "A more appropriate translation would be something that conveys the ability to read, not a command to read. Consider \"اطلاع\" (ittilaa'), which means 'access' or 'view', or \"قراءة\" (qira'a) in the nominal form, meaning 'reading'."
         }
       ],
       "approved_at": null
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Oxuyun\" generally means 'Read' in the sense of reading a book or text. In the context of an OAuth scope (Read access), a more appropriate translation would convey the meaning of 'access' or 'view'.",
-          "suggestion": "Consider alternatives like \"Oxu\" (read - less formal, more common), \"Başa vurun\" (access), or a more descriptive phrase depending on the specific nuance needed for OAuth scope."
+          "description": "The Azerbaijani translation \"Oxuyun\" primarily means \"Read\" in the sense of reading a book or text. In the context of an OAuth scope, \"Read\" refers to the permission to access data. A more accurate translation would convey the meaning of 'access' or 'view'.",
+          "suggestion": "Consider alternatives like \"Daxilolma\" (Access), \"Görüş\" (View), or \"Oxuma\" (Reading - used in the sense of accessing data)."
         }
       ],
       "approved_at": null
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation \"Прочети\" (Procheti) translates to 'Read' in the sense of 'to read' (an action). However, the English 'Read' in the key name 'OAuth:Read' refers to the *ability* to read, or permission to access read capabilities. A more accurate translation for this context would be something along the lines of 'Четене' (Chetene - Reading, as a noun) or 'Достъп за четене' (Dostup za chetene - Access to Reading).",
-          "suggestion": "Consider using 'Четене' or 'Достъп за четене' for better context."
+          "description": "The Bulgarian translation \"Прочети\" (Procheti) translates to \"Read\" as in the act of reading something. For an OAuth scope named \"Read\", a more appropriate translation would be a noun, signifying the permission to 'read' data, not the act of reading.  'Четене' (Chetene) - meaning 'reading' as a permission/capability, or 'Достъп за четене' (Dostap za chtene) - 'Read Access' are better alternatives.",
+          "suggestion": "Consider alternatives like 'Четене' or 'Достъп за четене'."
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"Přečtěte si\" translates to \"Read\" or \"Read it\" in English. However, for a key like 'OAuth:Read', a more concise and direct translation would be more appropriate. \"Přečtěte si\" implies an action performed by someone.",
-          "suggestion": "Čtení"
+          "description": "The Czech translation \"Přečtěte si\" translates to \"Read it\" or \"Read over it,\" which is an imperative and doesn't accurately reflect the meaning of \"Read\" as a permission or capability (OAuth scope). It implies an action, not a permission.",
+          "suggestion": "A more appropriate translation would be \"Čtení\" (Reading) or \"Zobrazení\" (Viewing) to convey the meaning of read access.  Alternatively, \"Přístup k čtení\" would be a more literal and clearer representation."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Ανάγνωση\" (Anágnosi) is a valid Greek word, it translates more closely to \"reading\" as an action. \"Read\" in the context of an OAuth permission typically refers to the ability to access or view data, which might be better conveyed by a term like \"Πρόσβαση\" (Prosvasi - Access) or \"Επισκόπηση\" (Episkopi - Review/View). \"Ανάγνωση\" emphasizes the *process* of reading, not the ability to *access*.",
-          "suggestion": "Consider using \"Πρόσβαση\" (Prosvasi) or \"Επισκόπηση\" (Episkopi) for a more accurate translation in this context."
+          "description": "While 'Ανάγνωση' (Anágnosi) is a valid Greek word, it's a more formal and verbose translation of 'Read'. 'Διαβάσμα' (Diavásema) or simply 'Ανάγνωση' used in a context more appropriate for a permission or access level.",
+          "suggestion": "Consider 'Διαβάσμα' (Diavásema) or maintaining 'Ανάγνωση' depending on the overall tone and technical context."
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Lue' translates to 'Read' or 'Read it' in English, but in the context of an OAuth permission key like 'OAuth:Read', a more appropriate translation would be something conveying 'Access' or 'View'. 'Lue' is too literal and doesn't accurately represent the intended meaning of permission.",
-          "suggestion": "Consider 'Pääsy' (Access), 'Näytä' (View), or 'Katso' (Look) as alternatives. The best choice would depend on the specific context of the OAuth implementation."
+          "description": "The Finnish translation \"Lue\" directly translates to \"Read\" as a verb, but in the context of an OAuth scope (OAuth:Read), it should represent the *ability* to read, not the action of reading. \"Lue\" implies someone is *doing* the reading, not that they *can* read.",
+          "suggestion": "Consider using \"Lukuoikeus\" (reading right/permission) or \"Luku\" (reading - as in, access to read) or a more contextual term appropriate for OAuth scope descriptions."
         }
       ],
       "approved_at": null
@@ -129,7 +129,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation \"Leggi\" translates to \"Read\" but is the imperative form (command) meaning \"Read!\" While it's a valid verb, it's not the most appropriate translation for a key name like \"OAuth:Read\", which implies a permission or ability. A more suitable translation would be a noun or an action related to reading or viewing data.",
+          "suggestion": "Consider alternatives like \"Lettura\" (Reading), \"Visualizza\" (View), or \"AccessoLettura\" (Read Access)"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -138,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '読む' (yomu) means 'to read', it's not the best translation for a key name like 'OAuth:Read'. It's a verb form. A noun form describing the ability to read data would be more appropriate for a key name.",
-          "suggestion": "Consider using a noun form such as '閲覧' (bōken - viewing/browsing) or '読み取り' (yomitori - reading/extraction)."
+          "description": "The Japanese translation '読む' (yomu) means 'to read' as a verb. It does not directly translate the noun 'Read'. A more appropriate translation would be something like '閲覧' (betsu) or '読み取り' (yomitori), which convey the meaning of 'reading' as a permission or ability.",
+          "suggestion": "Consider '閲覧' (betsu) or '読み取り' (yomitori) for a more accurate translation representing the noun 'Read'."
         }
       ],
       "approved_at": null
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Lasīts\" translates to \"Read\" or \"Read (past participle)\". It doesn't accurately convey the meaning of the English key 'Read' which represents a permission to read data.  A better translation would be something like 'AtļautsLasīt' (Allowed to Read) or 'Lasīšana' (Reading).",
-          "suggestion": "Consider 'AtļautsLasīt' or 'Lasīšana'."
+          "description": "The Latvian translation \"Lasīts\" translates to \"Read (past participle)\" or \"Read (passive)\", not simply \"Read\". It implies something has already been read.",
+          "suggestion": "Izmantojiet \"Lasīšana\" vai \"Atļauja lasīt\""
         }
       ],
       "approved_at": null
@@ -180,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation \"Czytaj\" is the imperative form of 'read'. In the context of an OAuth permission key, it needs to represent the *ability* to read, not a command to read. A better translation would reflect the concept of 'read access' or 'reading' capability.",
-          "suggestion": "Odczyt"
+          "description": "While 'Czytaj' is a valid Polish word meaning 'Read', it's an imperative form (command). For an OAuth permission key like 'OAuth:Read', a more appropriate noun or a participial form would be better. It directly translates as 'Read!' which isn't suitable for a key name.",
+          "suggestion": "Consider alternatives like 'Odczyt' (Reading), 'Wczytywanie' (Loading/Reading), or 'Dostęp_do_odczytu' (Access_to_reading). The best option depends on the specific context of the OAuth scope."
         }
       ],
       "approved_at": null
@@ -210,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Russian translation \"Читать\" (Chitat') is a general verb meaning \"to read.\"  While technically correct, it doesn't convey the nuance of \"Read\" in the context of an OAuth permission. A more suitable translation would be something that implies access or permission to read data, not the act of reading itself.",
-          "suggestion": "Consider a translation like \"Доступ для чтения\" (Dostup dlya chteniya - Access to Read) or \"Просмотр\" (Prosmotr - View)."
+          "description": "The Russian translation \"Читать\" (Chitat') is the infinitive form of the verb \"to read.\" While technically meaning \"read,\" it's not the most appropriate translation for a key name like \"OAuth:Read\". It should be a noun or a more concise term representing the permission to read.",
+          "suggestion": "Consider using a noun form like \"Чтение\" (Chtenie - Reading) or a shorter term like \"Просмотр\" (Prosmotr - View/Browse). The best option depends on the specific meaning intended in the OAuth context."
         }
       ],
       "approved_at": null
@@ -222,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'කියවන්න' (kiya vannā) can mean 'read', it is generally used for reading text. 'Read' in the context of OAuth scope implies access to read data, not necessarily reading text. A more appropriate translation would convey 'access' or 'view'.",
-          "suggestion": "Consider a translation like 'ප්‍රවේශය' (praveśaya) for 'access' or 'ᱧᱮᱞීම' (vēlim) for 'view'."
+          "description": "While \"කියවන්න\" (kiyawanna) can mean \"read,\" it more accurately translates to \"to read\" or \"read it.\"  For a simple permission like 'Read', a more suitable translation might be something like \"කියවීමේ\" (kiyawimē) - meaning 'reading' or 'of reading' or \"ප්‍රවේශය\" (prawēśaya) - meaning 'access', depending on the context of the permission.",
+          "suggestion": "Consider \"කියවීමේ\" (kiyawimē) or \"ප්‍රවේශය\" (prawēśaya) for a more accurate translation of 'Read' as a permission."
         }
       ],
       "approved_at": null
@@ -234,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Čítať' is a valid Slovak word meaning 'to read', it's an infinitive form. In the context of an OAuth permission ('Read' access), a more appropriate translation would be a noun representing 'reading' or 'access'.",
-          "suggestion": "Consider 'Čítanie' (reading) or 'Prístup' (access) depending on the intended meaning and overall OAuth terminology within the Slovak environment."
+          "description": "The Slovak translation 'Čítať' generally means 'to read' as in, to read text. In the context of an OAuth scope ('OAuth:Read'), it should represent the ability to *view* or *access* data, not simply the act of reading. A more appropriate translation would convey the meaning of 'read' in the sense of accessing information.",
+          "suggestion": "Prečítať (to read through/access)"
         }
       ],
       "approved_at": null
@@ -252,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Читај\" translates to 'Read' as an imperative (command). However, 'OAuth:Read' refers to a permission or scope, not an instruction. A noun or a participle would be more appropriate.",
-          "suggestion": "Consider alternatives like 'Читање' (Reading - noun), 'Да се чита' (To be read - infinitive), or a more descriptive term depending on the context of the OAuth scope."
+          "description": "The Serbian translation \"Читај\" translates to \"Read\" in the imperative form (command). The key \"OAuth:Read\" likely refers to the *ability* to read, not the command to read. A noun or a more general term would be more appropriate.",
+          "suggestion": "Читање (Čitanje) - Reading (as a noun)"
         }
       ],
       "approved_at": null
@@ -264,7 +270,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Čitaj\" is the imperative form (command) of the verb 'to read'.  'Read' in the context of an OAuth scope implies permission to read data, not an instruction to read. A more appropriate translation would be a noun indicating 'reading access' or 'read access'.",
+          "description": "The Serbian translation 'Čitaj' translates to 'Read' in the imperative form. The key 'OAuth:Read' likely refers to the permission to read, not to the act of reading. A more appropriate translation would be a noun referring to reading access or permission.",
           "suggestion": "Čitanje"
         }
       ],
@@ -276,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Oku\" is a verb meaning \"read\" (in the imperative form). For an OAuth permission key like 'OAuth:Read', a noun or a phrase conveying the concept of \"reading\" or \"accessing\" data is more appropriate. \"Oku\" implies an action, not a permission.",
-          "suggestion": "Consider alternatives like \"Okuma\", \"VeriOkuma\", \"Erişim\", \"OkumaYetkisi\", or a more descriptive phrase depending on the intended scope of the permission."
+          "description": "While \"Oku\" means \"Read,\" it's a verb form. \"OAuth:Read\" likely refers to a permission or scope, suggesting a noun. A more appropriate translation would be a noun related to reading or access.",
+          "suggestion": "İzin (Permission) or Okuma (Reading)"
         }
       ],
       "approved_at": null

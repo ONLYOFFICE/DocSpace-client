@@ -3,7 +3,7 @@
   "content": "Edit docs, sheets, and slides in mobile browsers.",
   "content_en_sha1_hash": "5744bdbbc2527993b01e534c281aa1b2255ba9e0",
   "created_at": "2025-05-26T07:15:49.265Z",
-  "updated_at": "2025-05-26T08:02:13.012Z",
+  "updated_at": "2025-10-13T21:43:31.140Z",
   "comment": {
     "text": "This translation key describes the text that appears next to a mobile-specific editing feature button. It explains that users can edit docs, sheets, and slides in mobile browsers, providing essential context for translators working on this project.",
     "is_auto": true,
@@ -11,7 +11,7 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Standalone/BenefitsContainer.tsx",
+      "file_path": "/packages/shared/pages/Payments/common/BenefitsContainer.tsx",
       "line_number": 66,
       "context": "};\n \n const mobileEditing = {\n imag: MobileEditingReactSvgUrl,\n title: t(\"UpgradeToProBannerItemMobileHeader\"),\n description: t(\"UpgradeToProBannerItemMobileDescr\"),\n };\n \n const lifetimeLicense = {\n imag: LifetimeLicenseReactSvgUrl,\n title: t(\"UpgradeToProBannerItemLicenseHeader\"),",
       "module": "/packages/shared"
@@ -27,13 +27,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'sheets' is translated as 'الجداول' (al-jawdaul). While technically correct as 'tables', it's more common and accurate to use a term closer to 'spreadsheets' or 'Excel files' in this context. 'الجداول' can be misinterpreted as just general tables.",
+          "suggestion": "تعديل المستندات والجداول (أو جداول بيانات / ملفات إكسل) والعروض التقديمية على متصفحات الهواتف المحمولة."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'veb' is a misspelling of 'veb'.",
+          "suggestion": "Mobil veb brauzerdə"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -75,7 +87,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Edit docs, sheets, and slides' is best translated as 'Modifier les documents, les feuilles de calcul et les présentations'.  'Editez' implies a command, which isn't the intended meaning here. The word 'slides' is better translated as 'présentations' in this context.",
+          "suggestion": "Modifier les documents, les feuilles de calcul et les présentations dans le navigateur web mobile."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -93,7 +111,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content refers to 'docs, sheets, and slides,' which are commonly understood as documents, spreadsheets, and presentations. The Japanese translation uses 'テキスト文書' (text documents), which is too narrow and doesn't fully capture the intended meaning of 'docs'.  'シート' is good for 'sheets,' but 'スライド' is accurate for 'slides'.",
+          "suggestion": "モバイルブラウザで文書、スプレッドシート、プレゼンテーションを編集します。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +129,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'sheets' is translated as 'ຄຳນວນ' which typically means 'calculate'. 'Sheets' refers to spreadsheet documents.",
+          "suggestion": "ແກ້ໄຂ ເອກະສານ, ແຜ່ນຕ່າງໆ, ແລະ ນຳສະເໜີ້ ໃນຕົວທ່ອງເວັບມືຖື."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +171,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'dicumente' is a misspelling of 'documente'.",
+          "suggestion": "documente"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +189,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ජංගම අතිරික්සුවල' (jangama athiriksuwala) is not the best way to convey 'mobile browsers'. A more accurate translation would be 'ජංගම බ්‍රවුසරുകളില്‍' (jangama brausersarukul). 'අතිරික්සුවල' implies something excessive or redundant.",
+          "suggestion": "Replace 'ජංගම අතිරික්සුවල' with 'ජංගම බ්‍රවුසරുകളില്‍'."
+        },
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation uses a conjunction ('හා') between 'sheets' and 'slides'. While grammatically correct, it might read more naturally without it, depending on the overall tone.",
+          "suggestion": "Consider removing 'හා' between 'පත්‍ර' and 'චිත්‍රකාච'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,13 +224,25 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Edit docs, sheets, and slides' is more accurately translated as 'Izmenite dokumente, tabele i prezentacije' rather than 'Uređujte dokumenta, tabele i prezentacije'. 'Izmenite' implies editing, while 'Uređujte' implies general manipulation or management.",
+          "suggestion": "Izmenite dokumente, tabele i prezentacije u mobilnim pregledačima."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Turkish translation lacks the 'can' implied in the English version. It directly states 'edit' instead of suggesting capability.",
+          "suggestion": "Dokümanları, sayfaları ve slaytları mobil tarayıcılarda düzenleyebilirsiniz."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -199,6 +258,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

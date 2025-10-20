@@ -64,7 +64,10 @@ const TableView = ({
   );
 
   return (
-    <TableWrapper forwardedRef={tableRef} useReactWindow>
+    <TableWrapper
+      forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
+      useReactWindow
+    >
       <Header
         sectionWidth={sectionWidth}
         tableRef={tableRef.current}
@@ -81,7 +84,7 @@ const TableView = ({
         itemCount={itemCount || 0}
         isIndexEditingMode={false}
       >
-        {items.map((item) => (
+        {items.map((item, index) => (
           <Row
             key={item.clientId}
             item={item}
@@ -90,6 +93,7 @@ const TableView = ({
             setSelection={setSelection}
             changeClientStatus={changeClientStatus}
             getContextMenuItems={getContextMenuItems}
+            dataTestId={`auth_row_${index}`}
           />
         ))}
       </TableBody>

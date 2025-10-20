@@ -3,7 +3,7 @@
   "content": "You are about to archive a room.",
   "content_en_sha1_hash": "863849fb82a1d7db1673fcb6185bc406346832af",
   "created_at": "2025-05-19T21:30:57.057Z",
-  "updated_at": "2025-05-26T07:57:32.207Z",
+  "updated_at": "2025-08-04T07:30:01.045Z",
   "comment": {
     "text": "You are used to provide a notification message when archiving a single room in an archive dialog. The text appears on a button or similar UI element that confirms the archiving action.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ArchiveDialog/index.js",
-      "line_number": 71,
+      "line_number": 81,
       "context": "const getDescription = () => {\n if (restoreAll) return t(\"ArchiveDialog:RestoreAllRooms\");\n \n return items.length > 1\n ? `${t(\"ArchiveDialog:ArchiveRooms\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"ArchiveDialog:ArchiveRoom\")} ${t(\"Common:WantToContinue\")}`;\n };\n \n const description = getDescription();",
       "module": "/packages/client"
     }
@@ -105,13 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ທ່ານກຳລັງຈະຈັດເກັບຫ້ອງ' translates more literally to 'You are about to organize a room'. While 'archive' and 'organize' can sometimes overlap, 'archive' implies a more permanent and long-term storage or preservation, which isn't necessarily conveyed by 'ຈັດເກັບ'.",
-          "suggestion": "Consider a more nuanced translation that captures the meaning of 'archive' specifically, such as 'ທ່ານກຳລັງຈະເກັບມ້ຽນຫ້ອງ' (You are about to store a room away for long-term) or 'ທ່ານກຳລັງຈະຖິ້ມຫ້ອງໄວ້ໃນບ່ອນເກັບມ້ຽນ' (You are about to put the room in storage)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -159,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ඔබ කාමරයක් සංරක්‍ෂණයට සැරසෙමින් සිටියි' implies 'preparing to archive' rather than stating that the archiving process is about to happen. A more direct translation would better convey the meaning.",
-          "suggestion": "ඔබ කාමරයක් සංරක්‍ෂණය කරමින් සිටී."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -183,25 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"You are about to archive a room\" is not accurately translated. \"Спремате се да архивирате собу\" literally translates to 'You are preparing to archive a room.' While similar, 'about to' implies immediacy or a process beginning, which isn't fully captured. A more accurate translation would convey a sense of starting or initiating the archiving process.",
-          "suggestion": "Спремате се да почнете архивирање собе."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Spremate se da arhivirate sobu.' is not the most natural or accurate translation of 'You are about to archive a room.' A more accurate and natural translation would be 'Pripremaju se da arhivirate sobu.' or 'Uskoro će se arhivirati soba.'",
-          "suggestion": "Pripremaju se da arhivirate sobu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -219,13 +195,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'archive' (to archive) implies preserving data or documents, often involving making copies. 'Sao lưu' literally means 'to back up'. While 'back up' can be a form of archiving, the direct meaning doesn't fully capture the nuance of the English term in this context. A more accurate translation might depend on the specific archiving process in question (e.g., a snapshot, a copy, a migration).",
-          "suggestion": "Consider using a more precise term depending on the archiving process. Possible alternatives: 'Bạn sắp lưu trữ một phòng.' (You are about to store a room) or 'Bạn sắp tạo bản sao lưu của một phòng.' (You are about to create a backup of a room)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

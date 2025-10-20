@@ -3,7 +3,7 @@
   "content": "Filled out part of form.",
   "content_en_sha1_hash": "81da61dbaf75cac294cf4412e69acdf62366abc5",
   "created_at": "2025-05-19T21:30:54.863Z",
-  "updated_at": "2025-06-08T12:02:32.707Z",
+  "updated_at": "2025-10-13T13:22:35.737Z",
   "comment": {
     "text": "\"Used in a UI component to display a notification when the form is partially filled.\"",
     "is_auto": true,
@@ -11,8 +11,14 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 369,
+      "context": "case FeedActionKeys.FormStartedToFill:\n return t(\"InfoPanel:FormStartedToFill\");\n \n case FeedActionKeys.FormPartiallyFilled:\n return t(\"InfoPanel:FormPartiallyFilled\");\n \n case FeedActionKeys.FormCompletelyFilled:\n return t(\"InfoPanel:FormCompletelyFilled\");\n \n case FeedActionKeys.FormStopped:",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 315,
+      "line_number": 318,
       "context": "case FeedActionKeys.FormStartedToFill:\n return t(\"InfoPanel:FormStartedToFill\");\n \n case FeedActionKeys.FormPartiallyFilled:\n return t(\"InfoPanel:FormPartiallyFilled\");\n \n case FeedActionKeys.FormCompletelyFilled:\n return t(\"InfoPanel:FormCompletelyFilled\");\n \n case FeedActionKeys.FormStopped:",
       "module": "/packages/client"
     }

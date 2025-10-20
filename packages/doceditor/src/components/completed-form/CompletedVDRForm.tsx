@@ -23,6 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -50,6 +51,22 @@ import {
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
 import { Text } from "@docspace/shared/components/text";
 
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { InputBlock } from "@docspace/shared/components/input-block";
+import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import {
+  RoleStep,
+  StatusIndicator,
+} from "@docspace/shared/components/filling-role-process";
+import { copyShareLink } from "@docspace/shared/utils/copy";
+import { toastr } from "@docspace/shared/components/toast";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
+import type { TFile } from "@docspace/shared/api/files/types";
+import { getFolderUrl } from "./CompletedForm.helper";
+import type { CompletedVDRFormProps } from "./CompletedForm.types";
 import {
   Box,
   CompletedFormLayout,
@@ -59,22 +76,6 @@ import {
   TextWrapper,
   VDRMainContent,
 } from "./CompletedForm.styled";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { InputBlock } from "@docspace/shared/components/input-block";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
-import {
-  RoleStep,
-  StatusIndicator,
-} from "@docspace/shared/components/filling-role-process";
-import type { CompletedVDRFormProps } from "./CompletedForm.types";
-import { getFolderUrl } from "./CompletedForm.helper";
-import { copyShareLink } from "@docspace/shared/utils/copy";
-import { toastr } from "@docspace/shared/components/toast";
-import SocketHelper, {
-  SocketCommands,
-  SocketEvents,
-} from "@docspace/shared/utils/socket";
-import type { TFile } from "@docspace/shared/api/files/types";
 
 export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
   const { user, file, roomId, isStartFilling, formFillingStatus, settings } =
@@ -102,13 +103,13 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
 
   useEffect(() => {
     if (!isInitSocket.current) {
-      SocketHelper.connect(socketUrl, "");
+      SocketHelper?.connect(socketUrl, "");
     }
 
     const fileSocketPart = `FILE-${formId}`;
 
-    if (!SocketHelper.socketSubscribers.has(fileSocketPart))
-      SocketHelper.emit(SocketCommands.Subscribe, {
+    if (!SocketHelper?.socketSubscribers.has(fileSocketPart))
+      SocketHelper?.emit(SocketCommands.Subscribe, {
         roomParts: [fileSocketPart],
         individual: true,
       });
@@ -122,11 +123,11 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
       }
     };
 
-    SocketHelper.on(SocketEvents.StopEditFile, stopEditFileHandler);
+    SocketHelper?.on(SocketEvents.StopEditFile, stopEditFileHandler);
 
     isInitSocket.current = true;
     return () => {
-      SocketHelper.off(SocketEvents.StopEditFile, stopEditFileHandler);
+      SocketHelper?.off(SocketEvents.StopEditFile, stopEditFileHandler);
     };
   }, [socketUrl, formId]);
 
@@ -151,11 +152,11 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
   const headerDescription = useMemo(() => {
     if (isStartFilling) {
       return isYournTurn
-        ? t("CompletedForm:FormVDRYourTurnDescription")
-        : t("CompletedForm:FormVDRConfirmationOfStartDescription");
+        ? t("CompletedForm:FormVDRYouFirstRecepientDescription")
+        : t("CompletedForm:FormVDRNextRecepientDescription");
     }
 
-    if (completed) return t("CompletedForm:FormVDRCompletedDescription");
+    if (completed) return t("CompletedForm:FormVDRFinalizedDescription");
 
     return t("CompletedForm:FormVDRSectionCompletedDescription");
   }, [t, isStartFilling, completed, isYournTurn]);
@@ -199,11 +200,15 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
             </picture>
             <TextWrapper className="completed-form__text-wrapper">
               <Heading level={HeadingLevel.h1}>{header}</Heading>
-              <Text noSelect>{headerDescription}</Text>
+              <Text>{headerDescription}</Text>
             </TextWrapper>
           </Header>
           <VDRMainContent>
-            <Box className="completed-form__file" onClick={handleClickFile}>
+            <Box
+              className="completed-form__file"
+              onClick={handleClickFile}
+              data-testid="completed_form_file_container"
+            >
               <PDFIcon />
               <h5 className="completed-form__file-name">{title}</h5>
               {isYournTurn ? (
@@ -224,6 +229,7 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
                 iconButtonClassName="input__copy-link-icon"
                 iconName={CopyReactSvgUrl}
                 onIconClick={copyLinkFile}
+                dataTestId="copy_link_input_block"
               />
             </label>
             <Box className="completed-form__roles">
@@ -253,13 +259,14 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
               scale
               primary
               size={ButtonSize.medium}
-              isLoading={isTurnToFill && isEditing}
+              isLoading={isTurnToFill ? isEditing : false}
               label={
                 isTurnToFill
                   ? t("CompletedForm:FillOutForm")
                   : t("Common:CopyLink")
               }
               onClick={isTurnToFill ? handleFillForm : copyLinkFile}
+              testId={isTurnToFill ? "fill_form_button" : "copy_link_button"}
             />
             <Button
               className="secondary-button"
@@ -267,6 +274,7 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
               size={ButtonSize.medium}
               label={isTurnToFill ? t("Common:CopyLink") : t("Common:GoToRoom")}
               onClick={isTurnToFill ? copyLinkFile : handleBackToRoom}
+              testId={isTurnToFill ? "copy_link_button" : "go_to_room_button"}
             />
             {isTurnToFill ? (
               <Link
@@ -274,6 +282,7 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
                 className="link"
                 onClick={handleBackToRoom}
                 prefetch={false}
+                data-testid="go_to_room_link"
               >
                 {t("Common:GoToRoom")}
               </Link>

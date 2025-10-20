@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
@@ -51,7 +50,6 @@ const ArticleApps = React.memo(
     officeforiosUrl,
   }: ArticleAppsProps) => {
     const { t } = useTranslation(["Translations", "Common"]);
-    const theme = useTheme();
 
     if (!showText) return null;
 
@@ -63,62 +61,80 @@ const ArticleApps = React.memo(
           [styles.withDevTools]: withDevTools,
         })}
       >
-        <Text className="download-app-text" fontSize="14px" noSelect>
+        <Text
+          className="download-app-text"
+          fontSize="11px"
+          noSelect
+          lineHeight="12px"
+          fontWeight={600}
+        >
           {t("Common:DownloadApps")}
         </Text>
         <div className="download-app-list">
-          <IconButton
-            onClick={() => window.open(downloaddesktopUrl)}
-            iconName={WindowsReactSvgUrl}
-            size={32}
-            isFill
-            hoverColor={theme.filesArticleBody.downloadAppList.winHoverColor}
-            title={t("Common:MobileWin", {
-              organizationName: logoText,
-            })}
-          />
-          <IconButton
-            onClick={() => window.open(downloaddesktopUrl)}
-            iconName={MacOSReactSvgUrl}
-            size={32}
-            isFill
-            hoverColor={theme.filesArticleBody.downloadAppList.macHoverColor}
-            title={t("Common:MobileMac", {
-              organizationName: logoText,
-            })}
-          />
-          <IconButton
-            onClick={() => window.open(downloaddesktopUrl)}
-            iconName={LinuxReactSvgUrl}
-            size={32}
-            isFill
-            hoverColor={theme.filesArticleBody.downloadAppList.linuxHoverColor}
-            title={t("Common:MobileLinux", {
-              organizationName: logoText,
-            })}
-          />
-          <IconButton
-            onClick={() => window.open(officeforandroidUrl)}
-            iconName={AndroidReactSvgUrl}
-            size={32}
-            isFill
-            hoverColor={
-              theme.filesArticleBody.downloadAppList.androidHoverColor
-            }
-            title={t("Common:MobileAndroid", {
-              organizationName: logoText,
-            })}
-          />
-          <IconButton
-            onClick={() => window.open(officeforiosUrl)}
-            iconName={IOSReactSvgUrl}
-            size={32}
-            isFill
-            hoverColor={theme.filesArticleBody.downloadAppList.iosHoverColor}
-            title={t("Common:MobileIos", {
-              organizationName: logoText,
-            })}
-          />
+          {downloaddesktopUrl ? (
+            <IconButton
+              className={styles.windowsIcon}
+              onClick={() => window.open(downloaddesktopUrl)}
+              iconName={WindowsReactSvgUrl}
+              size={32}
+              isFill
+              title={t("Common:MobileWin", {
+                organizationName: logoText,
+              })}
+            />
+          ) : null}
+
+          {downloaddesktopUrl ? (
+            <IconButton
+              className={styles.macOsIcon}
+              onClick={() => window.open(downloaddesktopUrl)}
+              iconName={MacOSReactSvgUrl}
+              size={32}
+              isFill
+              title={t("Common:MobileMac", {
+                organizationName: logoText,
+              })}
+            />
+          ) : null}
+
+          {downloaddesktopUrl ? (
+            <IconButton
+              className={styles.linuxIcon}
+              onClick={() => window.open(downloaddesktopUrl)}
+              iconName={LinuxReactSvgUrl}
+              size={32}
+              isFill
+              title={t("Common:MobileLinux", {
+                organizationName: logoText,
+              })}
+            />
+          ) : null}
+
+          {officeforandroidUrl ? (
+            <IconButton
+              className={styles.androidIcon}
+              onClick={() => window.open(officeforandroidUrl)}
+              iconName={AndroidReactSvgUrl}
+              size={32}
+              isFill
+              title={t("Common:MobileAndroid", {
+                organizationName: logoText,
+              })}
+            />
+          ) : null}
+
+          {officeforiosUrl ? (
+            <IconButton
+              className={styles.iosIcon}
+              onClick={() => window.open(officeforiosUrl)}
+              iconName={IOSReactSvgUrl}
+              size={32}
+              isFill
+              title={t("Common:MobileIos", {
+                organizationName: logoText,
+              })}
+            />
+          ) : null}
         </div>
       </div>
     );

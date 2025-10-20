@@ -30,8 +30,8 @@ import { useTranslation } from "react-i18next";
 import { ModalDialog, ModalDialogType } from "../modal-dialog";
 
 import { AboutContent } from "./About.content";
-import { StyledBodyContent } from "./About.styled";
 import { IDialogProps } from "./About.types";
+import styles from "./About.module.scss";
 
 export const AboutDialog = ({
   visible,
@@ -56,7 +56,7 @@ export const AboutDialog = ({
     >
       <ModalDialog.Header>{t("AboutHeader")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyContent>
+        <div className={styles.bodyContent}>
           <AboutContent
             buildVersionInfo={buildVersionInfo}
             previewData={previewData}
@@ -66,7 +66,7 @@ export const AboutDialog = ({
             isEnterprise={isEnterprise}
             logoText={logoText}
           />
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
     </ModalDialog>
   );

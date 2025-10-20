@@ -3,7 +3,7 @@
   "content": "Remove from favorites",
   "content_en_sha1_hash": "b6ddf62b5644450062ee5f53a4c326f908f786f2",
   "created_at": "2025-05-19T21:30:56.035Z",
-  "updated_at": "2025-06-08T12:02:32.847Z",
+  "updated_at": "2025-10-16T07:29:35.975Z",
   "comment": {
     "text": "The translation key \"RemoveFromFavorites\" is used to display the text \"Remove from favorites\" in a UI component, likely as an option or action button, where users can remove items from their favorite list. This text appears on various screens, including file management and selection dialogs.",
     "is_auto": true,
@@ -12,26 +12,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2069,
-      "context": "action: \"mark\",\n },\n {\n id: \"option_remove-from-favorites\",\n key: \"remove-from-favorites\",\n label: t(\"RemoveFromFavorites\"),\n icon: FavoritesReactSvgUrl,\n onClick: (e) => this.onClickFavorite(e, item.id, t),\n disabled: false,\n \"data-action\": \"remove\",\n action: \"remove\",",
+      "line_number": 2286,
+      "context": "isSeparator: true,\n },\n {\n id: \"option_remove-from-favorites\",\n key: \"remove-from-favorites\",\n label: t(\"RemoveFromFavorites\"),\n icon: FavoritesFillReactSvgUrl,\n onClick: (e) => this.onClickFavorite(e, [item], t),\n disabled: false,\n \"data-action\": \"remove\",\n action: \"remove\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2069,
-      "context": "action: \"mark\",\n },\n {\n id: \"option_remove-from-favorites\",\n key: \"remove-from-favorites\",\n label: t(\"RemoveFromFavorites\"),\n icon: FavoritesReactSvgUrl,\n onClick: (e) => this.onClickFavorite(e, item.id, t),\n disabled: false,\n \"data-action\": \"remove\",\n action: \"remove\",",
+      "line_number": 2286,
+      "context": "isSeparator: true,\n },\n {\n id: \"option_remove-from-favorites\",\n key: \"remove-from-favorites\",\n label: t(\"RemoveFromFavorites\"),\n icon: FavoritesFillReactSvgUrl,\n onClick: (e) => this.onClickFavorite(e, [item], t),\n disabled: false,\n \"data-action\": \"remove\",\n action: \"remove\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2490,
-      "context": "itemsCollection\n .set(\"download\", download)\n .set(\"downloadAs\", downloadAs)\n .set(\"copy\", copy)\n .set(\"delete\", {\n label: t(\"RemoveFromFavorites\"),\n alt: t(\"RemoveFromFavorites\"),\n iconUrl: FavoritesReactSvgUrl,\n onClick: () => {\n const items = selection.map((item) => item.id);\n this.setFavoriteAction(\"remove\", items)",
+      "line_number": 2485,
+      "context": "itemsCollection\n .set(\"download\", download)\n .set(\"downloadAs\", downloadAs)\n .set(\"copy\", copy)\n /* .set(\"delete\", {\n label: t(\"RemoveFromFavorites\"),\n alt: t(\"RemoveFromFavorites\"),\n iconUrl: FavoritesFillReactSvgUrl,\n onClick: () => {\n this.setFavoriteAction(\"remove\", selection)\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2490,
-      "context": "itemsCollection\n .set(\"download\", download)\n .set(\"downloadAs\", downloadAs)\n .set(\"copy\", copy)\n .set(\"delete\", {\n label: t(\"RemoveFromFavorites\"),\n alt: t(\"RemoveFromFavorites\"),\n iconUrl: FavoritesReactSvgUrl,\n onClick: () => {\n const items = selection.map((item) => item.id);\n this.setFavoriteAction(\"remove\", items)",
+      "line_number": 2485,
+      "context": "itemsCollection\n .set(\"download\", download)\n .set(\"downloadAs\", downloadAs)\n .set(\"copy\", copy)\n /* .set(\"delete\", {\n label: t(\"RemoveFromFavorites\"),\n alt: t(\"RemoveFromFavorites\"),\n iconUrl: FavoritesFillReactSvgUrl,\n onClick: () => {\n this.setFavoriteAction(\"remove\", selection)\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))",
       "module": "/packages/client"
     }
   ],
@@ -45,7 +45,18 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"قم بإزالته من المفضلة\" is a slightly literal translation. A more natural and idiomatic Arabic phrasing would be preferred for user interface elements.",
+          "suggestion": "إخراجه من المفضلة"
+        },
+        {
+          "type": "formatting",
+          "description": "The Arabic text could benefit from ensuring proper right-to-left formatting is applied in the user interface.",
+          "suggestion": "Ensure right-to-left text direction is enabled."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -54,8 +65,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Favoritlərdən sil' is understandable, a more natural and idiomatic translation of 'Remove from favorites' in Azerbaijani might be 'Seçimlərə sil' or 'Ölçülərdən sil'. 'Favoritlərdən sil' literally translates to 'Remove from favorites' which isn't as common phrasing.",
-          "suggestion": "Seçimlərə sil"
+          "description": "While technically correct, \"Favoritlərdən sil\" is a more literal translation. A more natural-sounding and common phrase would be \"Seçilmişlərdən sil\" (Remove from selections) or \"Ölçülülərə əlavə etmək\" (Add to selections).",
+          "suggestion": "Seçilmişlərdən sil"
         }
       ],
       "approved_at": null
@@ -105,7 +116,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Հեռացնել ընտրյալներից\" (Hēracnel’ enkr’yalneric’) literally translates to 'Remove from selections' or 'Remove from chosen ones,' which is not a perfect equivalent of 'Remove from favorites.' While 'ընտրյալներից' can sometimes imply a favorites list, it's not the most common or direct translation.",
+          "suggestion": "A more accurate translation would be something like \"Ցույցից հեռացնել“ (Cuyscic hēracnel’) which translates to “Remove from display/list” or “Հեռացնել հավելյալներից” (Hēracnel’ havvel’yալneric’) which translates to 'Remove from additions/favorites'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -129,7 +146,38 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Lao word 'ລຶບ' (lup) is correctly spelled. No spelling issues found.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The Lao word 'ອອກ' (ok) is correctly spelled. No spelling issues found.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The Lao word 'ຈາກ' (jak) is correctly spelled. No spelling issues found.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The Lao word 'ລາຍການ' (lai gaan) is correctly spelled. No spelling issues found.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The Lao word 'ທີ່ມັກ' (ti mak) is correctly spelled. No spelling issues found.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'ລຶບອອກຈາກລາຍການທີ່ມັກ' is a very literal translation. A more natural and idiomatic Lao translation might be 'ຖອນออกจากรายการโปรด' (thoun ok jak raai gaan prot) or something similar that emphasizes removal from a list of favorites.",
+          "suggestion": "ຖອນອອກຈາກรายการโปรด"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -144,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation 'Verwijderd uit favorieten' uses the past participle ('Verwijderd'), implying the item has already been removed. The English 'Remove from favorites' indicates an action to be performed. A more accurate translation would use the infinitive or imperative form.",
+          "description": "The translation 'Verwijderd uit favorieten' is passive voice. While understandable, 'Remove from favorites' typically implies an active action. A more direct translation would be preferred.",
           "suggestion": "Verwijderen uit favorieten"
         }
       ],
@@ -174,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Eliminare din Preferințe\" is understandable, \"Remove from favorites\" often translates more naturally to \"Ștergere din favorite\". \"Eliminare\" implies a more forceful or complete removal, while \"Ștergere\" is a more common and idiomatic choice for removing something from a list of favorites.",
-          "suggestion": "Ștergere din favorite"
+          "description": "While 'Eliminare' is technically correct for 'Remove', 'Ștergere' is more commonly used in Romanian for actions like removing something from a list or favorites. 'Eliminare' is more often used for complete deletion.",
+          "suggestion": "Ștergere din Preferințe"
         }
       ],
       "approved_at": null
@@ -210,8 +258,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Уклони из омиљеног\" is not the most natural or accurate translation of \"Remove from favorites.\" While technically correct, it sounds somewhat clunky. A more idiomatic and natural translation would be \"Уклони са омиљених\" or \"Избриши из омиљених\".",
-          "suggestion": "Уклони са омиљених"
+          "description": "The translation 'Уклони из омиљеног' is technically correct, but not the most natural or idiomatic way to say 'Remove from favorites' in Serbian (Cyrillic). It sounds a bit formal and awkward.",
+          "suggestion": "Избриши из омиљених"
+        },
+        {
+          "type": "formatting",
+          "description": "The plural form of 'омиљених' is needed to match the English plural 'favorites'.",
+          "suggestion": "The change from 'омиљеног' to 'омиљених' corrects the grammatical number agreement."
         }
       ],
       "approved_at": null
@@ -222,7 +275,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ukloni iz omiljenog' is not the most natural or accurate translation of 'Remove from favorites'. 'Ukloniti' implies a more forceful removal. A more appropriate translation would convey the action of removing something from a list of preferred items.",
+          "description": "The translation 'Ukloni iz omiljenog' is not the most natural or accurate translation of 'Remove from favorites'. 'Ukloni' implies a more forceful removal.",
+          "suggestion": "Izbriši iz omiljenih"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'omiljenog' should be 'omiljenih' to agree with the plural 'favorites'.",
           "suggestion": "Izbriši iz omiljenih"
         }
       ],

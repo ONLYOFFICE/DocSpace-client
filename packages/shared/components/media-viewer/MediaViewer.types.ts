@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { TFunction } from "i18next";
+
 import type { TFile } from "../../api/files/types";
 import type { DeviceType } from "../../enums";
 
@@ -33,7 +35,7 @@ export type OmitSecondArg<F> = F extends (x: infer P, ...arg: never) => infer R
   ? (file: P) => R
   : F;
 
-export type TranslationType = (key: string, opt?: object) => string;
+export type TranslationType = TFunction;
 
 export type NumberOrString = number | string;
 
@@ -83,6 +85,16 @@ export type Point = {
   y: number;
 };
 
+export type PluginContextMenuItem = {
+  key: string;
+  label: string;
+  onClick: (id: number) => Promise<void>;
+  icon: string;
+  fileType?: ["video", "image"];
+  withActiveItem?: boolean;
+  items?: PluginContextMenuItem[];
+};
+
 export type MediaViewerProps = {
   /** Function for translating text. */
   t: TranslationType;
@@ -115,16 +127,7 @@ export type MediaViewerProps = {
   /** ID of the archive room. */
   archiveRoomsId?: number;
   /** Context menu items for plugins. */
-  pluginContextMenuItems?: {
-    key: string;
-    value: {
-      label: string;
-      onClick: (id: number) => Promise<void>;
-      icon: string;
-      fileType?: ["video", "image"];
-      withActiveItem?: boolean;
-    };
-  }[];
+  pluginContextMenuItems?: PluginContextMenuItem[];
   /** Callback function called when the media viewer is closed. */
   onClose?: VoidFunction;
   /** Callback function called when an error occurs. */

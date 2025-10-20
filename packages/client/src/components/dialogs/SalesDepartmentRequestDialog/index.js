@@ -38,6 +38,8 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { EmailInput } from "@docspace/shared/components/email-input";
+import { ErrorKeys } from "@docspace/shared/enums";
 
 const SalesDepartmentRequestDialog = ({
   visible,
@@ -47,13 +49,14 @@ const SalesDepartmentRequestDialog = ({
   const { t, ready } = useTranslation([
     "SalesDepartmentRequestDialog",
     "Common",
+    "SMTPSettings",
   ]);
 
-  // TODO: setIsLoading is useless
-  const [isLoading, setIsLoading] = useState(false); // eslint-disable-line @typescript-eslint/no-unused-vars
+  const [isLoading, setIsLoading] = useState(false);
 
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
+  const [emailError, setEmailError] = useState("");
 
   const [description, setDescription] = useState("");
   const [isValidDescription, setIsValidDescription] = useState(true);
@@ -90,9 +93,54 @@ const SalesDepartmentRequestDialog = ({
       return;
     }
 
+    if (emailError) {
+      setIsValidEmail(false);
+      return;
+    }
+
+    setIsLoading(true);
+
     await sendPaymentRequest(email, name, description, t);
 
     onClose && onClose();
+  };
+
+  const onValidateEmailInput = (result) => {
+    if (result.isValid) {
+      setEmailError("");
+      return;
+    }
+
+    const translatedErrors = result.errors.map((errorKey) => {
+      switch (errorKey) {
+        case ErrorKeys.LocalDomain:
+          return t("Common:LocalDomain");
+        case ErrorKeys.IncorrectDomain:
+          return t("Common:IncorrectDomain");
+        case ErrorKeys.DomainIpAddress:
+          return t("Common:DomainIpAddress");
+        case ErrorKeys.PunycodeDomain:
+          return t("Common:PunycodeDomain");
+        case ErrorKeys.PunycodeLocalPart:
+          return t("Common:PunycodeLocalPart");
+        case ErrorKeys.IncorrectLocalPart:
+          return t("Common:IncorrectLocalPart");
+        case ErrorKeys.SpacesInLocalPart:
+          return t("Common:SpacesInLocalPart");
+        case ErrorKeys.MaxLengthExceeded:
+          return t("Common:MaxLengthExceeded");
+        case ErrorKeys.IncorrectEmail:
+          return t("Common:IncorrectEmail");
+        case ErrorKeys.ManyEmails:
+          return t("Common:ManyEmails");
+        case ErrorKeys.EmptyEmail:
+          return t("Common:EmptyEmail");
+        default:
+          throw new Error("Unknown translation key");
+      }
+    });
+
+    setEmailError(translatedErrors[0]);
   };
 
   return (
@@ -118,6 +166,7 @@ const SalesDepartmentRequestDialog = ({
           {t("YouWillBeContacted")}
         </Text>
 
+        <br />
         <FieldContainer
           className="name_field"
           key="name"
@@ -125,6 +174,7 @@ const SalesDepartmentRequestDialog = ({
           hasError={!isValidName}
           labelVisible={false}
           errorMessage={t("Common:RequiredField")}
+          dataTestId="request_name_field"
         >
           <TextInput
             id="your-name"
@@ -139,6 +189,7 @@ const SalesDepartmentRequestDialog = ({
             isDisabled={isLoading}
             value={name}
             onChange={onChangeName}
+            testId="request_name_input"
           />
         </FieldContainer>
 
@@ -148,20 +199,19 @@ const SalesDepartmentRequestDialog = ({
           isVertical
           labelVisible={false}
           hasError={!isValidEmail}
-          errorMessage={t("Common:RequiredField")}
+          errorMessage={emailError}
+          dataTestId="request_email_field"
         >
-          <TextInput
-            hasError={!isValidEmail}
+          <EmailInput
             id="registration-email"
             name="e-mail"
-            type="text"
-            size="base"
             scale
-            tabIndex={2}
-            placeholder={t("Common:RegistrationEmail")}
-            isDisabled={isLoading}
             value={email}
             onChange={onChangeEmail}
+            onValidateInput={onValidateEmailInput}
+            hasError={!isValidEmail}
+            placeholder={t("SMTPSettings:EnterEmail")}
+            testId="request_email_input"
           />
         </FieldContainer>
 
@@ -172,6 +222,7 @@ const SalesDepartmentRequestDialog = ({
           hasError={!isValidDescription}
           labelVisible={false}
           errorMessage={t("Common:RequiredField")}
+          dataTestId="request_description_field"
         >
           <Textarea
             id="request-details"
@@ -183,6 +234,8 @@ const SalesDepartmentRequestDialog = ({
             onChange={onChangeDescription}
             isDisabled={isLoading}
             heightTextArea={100}
+            maxLength={255}
+            dataTestId="request_description_textarea"
           />
         </FieldContainer>
       </ModalDialog.Body>
@@ -196,6 +249,7 @@ const SalesDepartmentRequestDialog = ({
           isLoading={isLoading}
           isDisabled={isLoading}
           tabIndex={3}
+          testId="send_sales_request_button"
         />
         <Button
           className="cancel-button"
@@ -205,6 +259,7 @@ const SalesDepartmentRequestDialog = ({
           isLoading={isLoading}
           isDisabled={isLoading}
           tabIndex={3}
+          testId="cancel_sales_request_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

@@ -24,27 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable jsx-a11y/tabindex-no-positive */
-
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
-import { toastr } from "@docspace/shared/components/toast";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import {
-  ModalDialog,
-  ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import {
-  InputSize,
-  InputType,
-  TextInput,
-} from "@docspace/shared/components/text-input";
-import { PasswordInput } from "@docspace/shared/components/password-input";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { getOAuthToken } from "@docspace/shared/utils/common";
-import { saveSettingsThirdParty } from "@docspace/shared/api/files";
+import { toastr } from "../../components/toast";
+import { Button, ButtonSize } from "../../components/button";
+import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+import { InputSize, InputType, TextInput } from "../../components/text-input";
+import { PasswordInput } from "../../components/password-input";
+import { FieldContainer } from "../../components/field-container";
+import { getOAuthToken } from "../../utils/common";
+import { saveSettingsThirdParty } from "../../api/files";
 import type { ConnectDialogProps } from "./ConnectDialog.types";
 
 const ConnectDialog = ({
@@ -310,6 +300,7 @@ const ConnectDialog = ({
               onClick={onReconnect}
               scale
               isDisabled={isLoading}
+              testId="connect_dialog_reconnect_button"
             />
           </FieldContainer>
         ) : (
@@ -334,6 +325,7 @@ const ConnectDialog = ({
                   onChange={onChangeUrl}
                   type={InputType.text}
                   size={InputSize.base}
+                  testId="connect_dialog_url_input"
                 />
               </FieldContainer>
             ) : null}
@@ -357,6 +349,7 @@ const ConnectDialog = ({
                 onChange={onChangeLogin}
                 type={InputType.text}
                 size={InputSize.base}
+                testId="connect_dialog_login_input"
               />
             </FieldContainer>
             <FieldContainer
@@ -378,6 +371,7 @@ const ConnectDialog = ({
                 // value={passwordValue}
                 onChange={onChangePassword}
                 size={InputSize.base}
+                testId="connect_dialog_password_input"
               />
             </FieldContainer>
           </>
@@ -399,6 +393,7 @@ const ConnectDialog = ({
               onChange={onChangeFolderName}
               type={InputType.text}
               size={InputSize.base}
+              testId="connect_dialog_folder_title_input"
             />
           </FieldContainer>
         ) : null}
@@ -414,6 +409,7 @@ const ConnectDialog = ({
           onClick={onSave}
           isDisabled={isLoading}
           isLoading={isLoading}
+          testId="connect_dialog_save_button"
         />
         <Button
           id="cancel"
@@ -423,6 +419,7 @@ const ConnectDialog = ({
           scale={isAccount}
           onClick={onClose}
           isDisabled={isLoading}
+          testId="connect_dialog_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

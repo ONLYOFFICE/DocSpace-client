@@ -3,7 +3,7 @@
   "content": "{{operationName}}: Error",
   "content_en_sha1_hash": "fc9d9def89921a1111c4a1f171621e15bb946342",
   "created_at": "2025-05-26T07:15:43.271Z",
-  "updated_at": "2025-06-08T12:02:32.887Z",
+  "updated_at": "2025-09-07T07:53:15.448Z",
   "comment": {
     "text": "This translation key is used to display an error message for a specific operation. It appears on a progress button in the UI and is intended to provide feedback to the user when an operation fails or encounters an error. The message will vary depending on the actual operation name provided in the context.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/operations-progress-button/index.tsx",
-      "line_number": 273,
-      "context": "</Text>\n );\n }\n return (\n <Text fontWeight={600}>\n {t(\"Common:ErrorOperation\", {\n operationName,\n })}\n </Text>\n );\n }",
+      "line_number": 324,
+      "context": ");\n }\n \n return (\n <Text fontWeight={600}>\n {t(\"Common:ErrorOperation\", {\n operationName,\n })}\n </Text>\n );\n }",
       "module": "/packages/shared"
     }
   ],

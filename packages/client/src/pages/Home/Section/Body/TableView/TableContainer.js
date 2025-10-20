@@ -145,6 +145,13 @@ const Table = ({
   isTutorialEnabled,
   setRefMap,
   deleteRefMap,
+  selectedFolderTitle,
+  canCreateSecurity,
+  setDropTargetPreview,
+  disableDrag,
+  withContentSelection,
+  isFavoritesFolder,
+  isSharedWithMeFolderRoot,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -219,6 +226,8 @@ const Table = ({
         isRooms={isRooms}
         isTemplates={isTemplatesFolder}
         isTrashFolder={isTrashFolder}
+        isFavoritesFolder={isFavoritesFolder}
+        isSharedWithMeFolderRoot={isSharedWithMeFolderRoot}
         hideColumns={hideColumns}
         isHighlight={
           highlightFile.id == item.id
@@ -228,6 +237,10 @@ const Table = ({
         isTutorialEnabled={isTutorialEnabled}
         setRefMap={setRefMap}
         deleteRefMap={deleteRefMap}
+        selectedFolderTitle={selectedFolderTitle}
+        canCreateSecurity={canCreateSecurity}
+        setDropTargetPreview={setDropTargetPreview}
+        disableDrag={disableDrag}
       />
     ));
   }, [
@@ -246,10 +259,12 @@ const Table = ({
     isTutorialEnabled,
     setRefMap,
     deleteRefMap,
+    disableDrag,
   ]);
 
   return (
     <StyledTableContainer
+      noSelect={!withContentSelection}
       useReactWindow
       forwardedRef={ref}
       isIndexEditingMode={isIndexEditingMode}
@@ -296,11 +311,19 @@ export default inject(
     indexingStore,
     filesActionsStore,
     selectedFolderStore,
+    uploadDataStore,
+    hotkeyStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isTemplatesFolder } =
-      treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isTrashFolder,
+      isTemplatesFolder,
+      isFavoritesFolder,
+      isSharedWithMeFolderRoot,
+    } = treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
     const { columnStorageName, columnInfoPanelStorageName } = tableStore;
@@ -315,13 +338,24 @@ export default inject(
       roomsFilter,
       highlightFile,
       filter,
+      disableDrag,
     } = filesStore;
 
     const { isIndexEditingMode } = indexingStore;
     const { changeIndex } = filesActionsStore;
-    const { isIndexedFolder } = selectedFolderStore;
+    const {
+      isIndexedFolder,
+      title: selectedFolderTitle,
+      security,
+    } = selectedFolderStore;
     const { theme, currentDeviceType } = settingsStore;
     const { setRefMap, deleteRefMap } = guidanceStore;
+    const { withContentSelection } = hotkeyStore;
+
+    const { primaryProgressDataStore } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
+
+    const canCreateSecurity = security?.Create;
 
     return {
       viewAs,
@@ -346,6 +380,13 @@ export default inject(
       onEditIndex: changeIndex,
       setRefMap,
       deleteRefMap,
+      selectedFolderTitle,
+      canCreateSecurity,
+      setDropTargetPreview,
+      disableDrag,
+      withContentSelection,
+      isFavoritesFolder,
+      isSharedWithMeFolderRoot,
     };
   },
 )(withContainer(observer(Table)));

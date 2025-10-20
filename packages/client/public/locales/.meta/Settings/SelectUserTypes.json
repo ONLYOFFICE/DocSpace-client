@@ -3,7 +3,7 @@
   "content": "Select user types",
   "content_en_sha1_hash": "e927a3a263b9c357799a240f53e6fae4a0f1665a",
   "created_at": "2025-05-19T21:30:52.590Z",
-  "updated_at": "2025-05-26T07:57:32.490Z",
+  "updated_at": "2025-06-30T12:20:31.404Z",
   "comment": {
     "text": "\"Select user types\" is a label used to describe a step or option in a workflow that allows users to select different types of users. This translation key is used in UI elements such as buttons, dialog titles, and descriptions, where it appears in contexts like data import steps for Google Workspace, Nextcloud Workspace, and Onlyoffice Workspace.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 69,
+      "line_number": 68,
       "context": "organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,\n },\n {\n title: t(\"Settings:SelectUserTypes\"),\n description: isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>\n {t(\"Settings:UsersAreRegistered\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 80,
+      "line_number": 79,
       "context": "organizationName: logoText,\n }),\n component: <AddEmailsStep t={t} />,\n },\n {\n title: t(\"Settings:SelectUserTypes\"),\n description: isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>{t(\"Settings:UsersAreRegistered\")}</div>\n </>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 73,
+      "line_number": 72,
       "context": "organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,\n },\n {\n title: t(\"Settings:SelectUserTypes\"),\n description: isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>{t(\"Settings:UsersAreRegistered\")}</div>\n </>",
       "module": "/packages/client"
     },

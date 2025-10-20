@@ -24,13 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { use } from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
-import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt.svg?url";
-import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt_dark.svg?url";
-import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
-import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.svg?url";
+import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.light.svg?url";
+import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.dark.svg?url";
+import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.light.svg?url";
+import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.dark.svg?url";
 
 import { Selector } from "../../../components/selector";
 import {
@@ -48,6 +47,7 @@ import {
   RowLoader,
   SearchLoader,
 } from "../../../skeletons/selector";
+import { useTheme } from "../../../hooks/useTheme";
 
 import { FilesSelectorProps } from "../FilesSelector.types";
 import { LoadersContext } from "../../utils/contexts/Loaders";
@@ -70,7 +70,7 @@ type PickedBreadCrumbsProps = Pick<
 type PickedSelectorBodyProps = Pick<
   SelectorProps,
   "items" | "onSelect" | "hasNextPage" | "totalItems" | "loadNextPage"
-> & { isRoot: boolean };
+> & { isRoot: boolean; selectedItemType?: string };
 
 const useSelectorBody = ({
   // header props
@@ -125,12 +125,14 @@ const useSelectorBody = ({
   withInit,
 
   isMultiSelect,
+
+  selectedItemType,
 }: Omit<FilesSelectorProps, "withSearch" | "onSubmit"> &
   PickedSearchProps &
   PickedSubmitButtonProps &
   PickedBreadCrumbsProps &
   PickedSelectorBodyProps) => {
-  const theme = useTheme();
+  const { isBase } = useTheme();
   const { t } = useTranslation(["Common"]);
 
   const { showBreadCrumbsLoader, isNextPageLoading, showLoader } =
@@ -198,8 +200,17 @@ const useSelectorBody = ({
         isBreadCrumbsLoading: showBreadCrumbsLoader,
         withBreadCrumbs: true,
         onSelectBreadCrumb: onSelectBreadCrumb!,
+        bodyIsLoading: showLoader,
       }
     : {};
+
+  const isEmptyFilesRootScreen = selectedItemType === "files";
+  const emptyScreenHeader = isEmptyFilesRootScreen
+    ? t("Common:SelectorEmptyScreenHeader")
+    : t("Common:EmptyRoomsHeader");
+  const emptyScreenDescription = isEmptyFilesRootScreen
+    ? ""
+    : t("Common:EmptyRoomsDescription");
 
   const SelectorBody = (
     <Selector
@@ -214,14 +225,12 @@ const useSelectorBody = ({
       items={items}
       onSelect={onSelect}
       emptyScreenImage={
-        theme?.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
+        isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
       }
-      emptyScreenHeader={t("Common:SelectorEmptyScreenHeader")}
-      emptyScreenDescription=""
+      emptyScreenHeader={emptyScreenHeader}
+      emptyScreenDescription={emptyScreenDescription}
       searchEmptyScreenImage={
-        theme?.isBase
-          ? EmptyScreenFilterAltSvgUrl
-          : EmptyScreenFilterAltDarkSvgUrl
+        isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl
       }
       searchEmptyScreenHeader={t("Common:NotFoundTitle")}
       searchEmptyScreenDescription={t("Common:EmptyFilterDescriptionText")}

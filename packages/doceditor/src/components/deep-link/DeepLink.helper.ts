@@ -76,8 +76,20 @@ const openDeepLink = (
 
     window.location.href = url;
   } catch (error) {
+    console.error(error);
     options?.onFail?.();
   }
+};
+
+export const redirectToStore = (deepLinkConfig?: TDeepLinkConfig) => {
+  const nav = navigator.userAgent;
+  const isIOS = nav.includes("iPhone;") || nav.includes("iPad;");
+
+  const storeUrl = isIOS
+    ? `https://apps.apple.com/app/id${deepLinkConfig?.iosPackageId}`
+    : `https://play.google.com/store/apps/details?id=${deepLinkConfig?.androidPackageName}`;
+
+  window.location.replace(storeUrl);
 };
 
 export const getDeepLink = (
@@ -86,10 +98,15 @@ export const getDeepLink = (
   file?: TFile,
   deepLinkConfig?: TDeepLinkConfig,
   originalUrl?: string,
+  isOpenOnlyApp?: boolean,
 ) => {
+  if (!deepLinkConfig) {
+    return (window.location.href = "/");
+  }
+
   const jsonData = {
     portal: location,
-    email: email,
+    email,
     file: {
       id: file?.id,
       title: file?.title,
@@ -100,7 +117,7 @@ export const getDeepLink = (
       parentId: file?.rootFolderId,
       rootFolderType: file?.rootFolderType,
     },
-    originalUrl: originalUrl,
+    originalUrl,
   };
   const stringifyData = JSON.stringify(jsonData);
   const deepLinkData = bytesToBase64(
@@ -110,17 +127,6 @@ export const getDeepLink = (
   openDeepLink(`${deepLinkConfig?.url}?data=${deepLinkData}`, {
     onOpen: () =>
       (window.location.href = `${deepLinkConfig?.url}?data=${deepLinkData}`),
-    onFail: () => redirectToStore(deepLinkConfig),
+    onFail: isOpenOnlyApp ? undefined : () => redirectToStore(deepLinkConfig),
   });
-};
-
-const redirectToStore = (deepLinkConfig?: TDeepLinkConfig) => {
-  const nav = navigator.userAgent;
-  const isIOS = nav.includes("iPhone;") || nav.includes("iPad;");
-
-  const storeUrl = isIOS
-    ? `https://apps.apple.com/app/id${deepLinkConfig?.iosPackageId}`
-    : `https://play.google.com/store/apps/details?id=${deepLinkConfig?.androidPackageName}`;
-
-  window.location.replace(storeUrl);
 };

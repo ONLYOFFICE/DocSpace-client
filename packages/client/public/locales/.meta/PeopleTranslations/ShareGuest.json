@@ -3,7 +3,7 @@
   "content": "Share guest",
   "content_en_sha1_hash": "3bc1f18e87e31dceec9010b37ce1ea9d3950e820",
   "created_at": "2025-05-19T21:30:53.513Z",
-  "updated_at": "2025-05-26T07:57:32.845Z",
+  "updated_at": "2025-10-13T13:22:35.926Z",
   "comment": {
     "text": "This translation key is used to display a button label that shares contact information with others, likely found on a contact details page or in a shared contacts list. The translated text appears when the \"Share Guest\" option is clicked. Translators should replace \"ShareGuest\" with the corresponding localized text for their language.",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Сподели гост' doesn't accurately convey the meaning of 'Share guest'. 'Share guest' typically implies allowing a guest to use something (like a login or access). 'Сподели гост' literally translates to 'Share guest' and lacks the nuance of allowing access or sharing something with a guest.",
-          "suggestion": "Позволи на гост"
+          "description": "The Bulgarian translation \"Сподели гост\" literally translates to \"Share guest.\" The intended meaning of 'Share guest' likely refers to sharing a guest's access or inviting a guest to share something. A more accurate translation would convey that meaning.",
+          "suggestion": "Споделяне на гост (Sharing of a guest) or Поканете гост (Invite a guest)"
         }
       ],
       "approved_at": null
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Μοιραστείτε τον επισκέπτη\" is a literal translation and doesn't accurately convey the meaning of 'Share guest' in a user interface context. It implies sharing *a* guest, which is not the intended meaning.  It's likely intended to refer to the functionality of sharing a guest's access or details.",
-          "suggestion": "Consider alternatives such as: \"Κοινή χρήση επισκέπτη\" (Shared guest) or a more context-specific phrase depending on the feature's purpose. Something like \"Πρόσβαση επισκέπτη\" (Guest access) might be more appropriate."
+          "description": "The translation \"Μοιραστείτε τον επισκέπτη\" while literally meaning \"Share the guest\", doesn't accurately convey the meaning of \"Share guest\" in the context of sharing guest access or permissions. A more appropriate translation would focus on the action of sharing rather than just the guest themselves.",
+          "suggestion": "Επιτρέψτε πρόσβαση στον επισκέπτη"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Partager l'invité' is a literal translation of 'Share guest' and doesn't accurately convey the intended meaning. 'Share guest' likely refers to allowing a guest to share something, or to a guest access feature. A more accurate translation would depend on the context, but options include 'Accès invité', 'Partage d'accès invité', or 'Donner l'accès à un invité'.",
-          "suggestion": "Consider 'Accès invité', 'Partage d'accès invité', or 'Donner l'accès à un invité' depending on the context."
+          "description": "The translation 'Partager l'invité' is a literal translation of 'Share guest' but doesn't convey the intended meaning. 'Share guest' likely means 'Allow a guest to share' or 'Guest sharing'.",
+          "suggestion": "Consider 'Autoriser l'accès à l'invité' or 'Partage d'invité' depending on the specific context of the functionality."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Կիսվել հյուրով\" literally translates to \"Share with a guest\". While it conveys a similar idea, \"Share guest\" implies sharing *a guest*, not sharing *with* a guest. A more accurate translation would be something like \"Հյուրերի համօժանդակություն\" (Guest Sharing) or \"Հյուրերի հասանելիություն\" (Guest Access), depending on the intended meaning.",
-          "suggestion": "Consider alternatives like \"Հյուրերի համօժանդակություն\" or \"Հյուրերի հասանելիություն\" for a more precise translation of 'Share guest'."
+          "description": "The Armenian translation \"Կիսվել հյուրով\" literally translates to 'Share with a guest'. While understandable, 'Share guest' implies sharing the *ability* to be a guest, or sharing the guest's information/access. A more accurate translation would depend on the intended meaning, but \"Մասնագումարել հյուրի հետ\" (masnagumarel hyuri het) - 'to share something with a guest' or \"Հրապարակել հյուրի մասին\" (hraparekvel hyuri masin) - 'to publish information about the guest' could be more appropriate depending on the use case.",
+          "suggestion": "Consider alternative translations such as \"Մասնագումարել հյուրի հետ\" or \"Հրապարակել հյուրի մասին\" based on the intended meaning."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ゲストを共有\" (gesuto o kyouyuu) literally translates to 'share a guest'. A more natural and accurate translation for 'Share guest' in a sharing context would be something like \"ゲストを招待する\" (gesuto o shoutai suru - invite a guest) or \"ゲスト共有\" (gesuto kyouyuu - guest sharing). \"ゲストを共有\" implies sharing the guest themselves, which is likely not the intended meaning.",
-          "suggestion": "ゲストを招待する (gesuto o shoutai suru) or ゲスト共有 (gesuto kyouyuu)"
+          "description": "While \"ゲストを共有\" is technically correct, it's not the most natural or common way to express \"Share guest\" in Japanese. It's a very literal translation. A more natural phrasing would depend on the context, but could involve concepts like '招待する' (inviting) or 'ゲストを招待する' (invite a guest).",
+          "suggestion": "Consider alternatives such as 'ゲストを招待する' (Invite a guest) or a phrase that conveys the action of sharing access to a guest."
         }
       ],
       "approved_at": null
@@ -147,7 +147,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Deel gast' is technically correct, it's not the most natural or common way to translate 'Share guest' in Dutch. It sounds a bit clunky.",
+          "suggestion": "A better translation would be 'Gast delen' or 'Deel je gast'.  'Gast delen' is likely more common and understandable."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Partilhar convidado\" isn't the most natural or idiomatic translation for \"Share guest\" in Portuguese. While literally correct, it doesn't convey the common meaning of allowing a guest to use something (e.g., share a room, share access).",
-          "suggestion": "Consider \"Acessar como convidado\" (Access as guest), \"Compartilhar acesso para convidado\" (Share access for guest), or \"Permitir acesso para convidado\" (Allow access for guest), depending on the specific context."
+          "description": "The English phrase 'Share guest' refers to the ability to share guest access or information. 'Partilhar convidado' translates more literally to 'share guest' as a noun phrase, but doesn't convey the intended meaning of sharing access or information. A more appropriate translation would depend on the context.",
+          "suggestion": "Consider translations like 'Permitir acesso de convidado' (Allow guest access) or 'Partilhar informações do convidado' (Share guest information) depending on context."
         }
       ],
       "approved_at": null
@@ -180,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Partajare\" means 'sharing', \"invitat\" translates to 'guest'. The English 'Share guest' implies a feature or permission to allow a guest to share something. A more accurate translation would convey this action. \"Permite acces pentru oaspeți\" (Allow access for guests) or \"Distribuire cu oaspeți\" (Share with guests) would be closer to the intended meaning.",
-          "suggestion": "Distribuire cu oaspeți"
+          "description": "While \"Partajare\" means \"Sharing\", it's not the most natural or idiomatic translation of \"Share guest\" in Romanian. It sounds a bit awkward and doesn't convey the intended meaning as well as alternatives.",
+          "suggestion": "Consider alternatives like \"Invită un oaspete\" (Invite a guest), \"Împărtășește cu un oaspete\" (Share with a guest), or \"Acces pentru oaspete\" (Guest access). The best option depends on the exact context."
         }
       ],
       "approved_at": null
@@ -192,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Поделиться данными гостя' is overly literal and not the most natural way to convey 'Share guest'. While technically correct, it's clunky. A better translation would focus on the functionality - allowing someone else to use the guest's access or information.",
-          "suggestion": "Consider translations like 'Предоставить доступ гостю' (Provide access to the guest), 'Поделиться информацией гостя' (Share the guest's information), or 'Гостевой доступ' (Guest Access) depending on the specific context."
+          "description": "The translation \"Поделиться данными гостя\" is overly literal and doesn't quite capture the nuance of \"Share guest.\" It implies sharing *data* about a guest, which might not be the intended meaning. A more natural translation would convey the action of allowing a guest to share something (e.g., access, privilege).",
+          "suggestion": "Consider alternatives like \"Предоставить доступ гостю\" (Provide guest access) or \"Разрешить гостю\" (Allow the guest)."
         }
       ],
       "approved_at": null
@@ -204,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අමුත්තෙකු බෙදාගන්න' while literally meaning 'share a guest', doesn't accurately convey the intended meaning of 'Share guest' in the context of sharing access or inviting someone. It implies physically sharing a person, which is not the intent.",
-          "suggestion": "A more appropriate translation would depend on the exact context. Possible suggestions include: 'මු Invite කරන්න' (to invite), 'අමුත්තිය අමතන්න' (to refer a guest), or 'අමුත්තිය පంచుන්න' (to share/refer a guest - though less common)."
+          "description": "The Sinhala translation \"අමුත්තෙකු බෙදාගන්න\" literally translates to 'Share a guest'. While understandable, a more natural and accurate translation for \"Share guest\" would be something like \"මු Invite Guest\" or \"Guest Invite කරන්න\" depending on the intended context. \"Share guest\" implies giving someone permission to use a guest's access or privileges, not simply sharing the guest themselves.",
+          "suggestion": "Consider \"මු Invite Guest\" or \"Guest Invite කරන්න\" for a more accurate translation, depending on the context."
         }
       ],
       "approved_at": null
@@ -219,13 +225,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Deli gosta' is technically a literal translation of 'Share guest', it doesn't accurately convey the intended meaning. 'Share guest' in this context likely refers to allowing a guest to share a resource or space, not literally sharing a person. A more accurate translation would depend on the context.",
-          "suggestion": "Possible suggestions: 'Omogoči gostu dostop', 'Gost lahko uporabi', 'Deljenje z gostom' (depending on context)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Подели госту' is not a grammatically correct or natural translation of \"Share guest\". It literally translates to \"Share to guest\" and doesn't convey the intended meaning of allowing a guest to share something.",
-          "suggestion": "A more accurate translation would be something like 'Омогући госту' (Omogući gostu - Allow guest) or 'Подели са гостом' (Podeli sa gostom - Share with guest)."
+          "description": "The Serbian translation \"Подели госту\" is not a correct or natural translation of \"Share guest\". \"Подели\" means 'share' or 'divide', but \"госту\" is not a correct form. It seems to be an attempt to create a dative form from 'гост' (guest), but it's not grammatically sound. The intended meaning is unclear.",
+          "suggestion": "Possible suggestions depending on the context: \"Подели са гостом\" (Share with a guest) or potentially \"Омогући приступ госту\" (Allow guest access)."
         }
       ],
       "approved_at": null
@@ -246,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Podeli gostu' while technically meaning 'Share with guest', doesn't quite capture the nuance of 'Share guest' which implies sharing a guest access or invitation. A more accurate translation would reflect the concept of granting guest access.",
-          "suggestion": "Deli pristup gostu"
+          "description": "While \"Podeli gostu\" is understandable, a more natural and accurate translation of \"Share guest\" in Serbian (Latin) would be \"Deli sa gostom\" or \"Podeli sa gostom\". \"Podeli gostu\" implies sharing *to* a guest, whereas \"Share guest\" generally means sharing *with* a guest.",
+          "suggestion": "Deli sa gostom"
         }
       ],
       "approved_at": null
@@ -258,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Konuk paylaş' is a literal translation but doesn't fully capture the meaning of 'Share guest' in the context of sharing access or inviting a guest. It sounds awkward in Turkish.",
-          "suggestion": "Consider 'Misafir paylaşımı' (Guest sharing) or 'Misafir ekle' (Add guest) depending on the specific functionality."
+          "description": "The translation 'Konuk paylaş' is a literal translation of \"Share guest\" but doesn't convey the intended meaning. 'Share guest' typically means allowing a guest to use your account or access something with you. A more accurate translation would convey this shared access concept.",
+          "suggestion": "Misafir paylaşımı"
         }
       ],
       "approved_at": null
@@ -270,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Поділитися гостем' is not the most natural or accurate translation of 'Share guest'. While literally 'Share with a guest', it's unclear what the English phrase intends. 'Share guest' could refer to allowing a guest to share something, or sharing a guest's details. A better translation depends on the context. Possible alternatives include: 'Надати гостя' (Provide a guest), 'Додати гостя' (Add a guest), or 'Розмістити гостя' (Host a guest).",
-          "suggestion": "The best alternative depends on context. Consider 'Надати гостя', 'Додати гостя', or 'Розмістити гостя'."
+          "description": "The translation \"Поділитися гостем\" literally translates to \"Share with a guest\" and doesn't quite capture the intended meaning of 'Share guest' which implies sharing access for a guest. A more accurate translation would depend on the context, but a possibility would be something along the lines of \"Запросити гостя\" (Invite a guest).",
+          "suggestion": "Consider \"Запросити гостя\" or a similar phrase conveying the idea of granting guest access."
         }
       ],
       "approved_at": null
@@ -279,13 +279,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Chia sẻ khách' is technically correct but lacks nuance. 'Share guest' usually implies sharing access or a booking for a guest. A more natural translation would convey that meaning.",
-          "suggestion": "Phân quyền khách"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

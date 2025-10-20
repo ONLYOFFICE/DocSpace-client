@@ -1,0 +1,28 @@
+{
+  "key_path": "BackupServiceEnabled",
+  "content": "Backup service successfully enabled.",
+  "content_en_sha1_hash": "8433fcfa744945fc664e221df15d13d454b4ab39",
+  "created_at": "2025-08-21T14:45:38.905Z",
+  "updated_at": "2025-10-07T15:39:07.542Z",
+  "comment": {
+    "text": "This key displays a success message in the UI, confirming that the backup service has been successfully enabled. It appears as a toastr notification within the Portal Settings page, specifically when enabling a service. Translators should ensure the message conveys a positive confirmation of the action.",
+    "is_auto": true,
+    "updated_at": "2025-08-21T14:48:52.013Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
+      "line_number": 236,
+      "context": "toastr.error(t(\"Common:UnexpectedError\"));\n changeServiceState(confirmActionType);\n return;\n }\n \n toastr.success(t(\"Services:BackupServiceEnabled\"));\n } catch (error) {\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n changeServiceState(confirmActionType);\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

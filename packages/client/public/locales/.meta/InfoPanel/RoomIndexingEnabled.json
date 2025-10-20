@@ -3,7 +3,7 @@
   "content": "Automatic file indexing enabled in the room",
   "content_en_sha1_hash": "7a847c4f14ff109b1a13c27a8774a3a16f658ac1",
   "created_at": "2025-05-19T21:30:54.932Z",
-  "updated_at": "2025-06-08T12:02:32.704Z",
+  "updated_at": "2025-10-13T13:22:35.730Z",
   "comment": {
     "text": "Automatic file indexing is enabled in the room, allowing users to easily access and manage files within the space. This setting is typically found on a configuration panel or settings screen within the application, where users can toggle its availability.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 303,
+      "context": "case FeedActionKeys.RoomWatermarkSet:\n return t(\"InfoPanel:RoomWatermarkSet\");\n case FeedActionKeys.RoomWatermarkDisabled:\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case FeedActionKeys.RoomIndexingDisabled:\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case FeedActionKeys.RoomLifeTimeSet: {\n const periodLifeTime = (feed.data as TFeedData).lifeTime?.period;\n const value = (feed.data as TFeedData).lifeTime?.value;",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 249,
-      "context": "case FeedActionKeys.RoomWatermarkSet:\n return t(\"InfoPanel:RoomWatermarkSet\");\n case FeedActionKeys.RoomWatermarkDisabled:\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case FeedActionKeys.RoomIndexingDisabled:\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case FeedActionKeys.RoomLifeTimeSet: {\n const periodLifeTime = feed.data.lifeTime.period;\n const value = feed.data.lifeTime.value;",
+      "line_number": 252,
+      "context": "case FeedActionKeys.RoomWatermarkSet:\n return t(\"InfoPanel:RoomWatermarkSet\");\n case FeedActionKeys.RoomWatermarkDisabled:\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case FeedActionKeys.RoomIndexingDisabled:\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case FeedActionKeys.RoomLifeTimeSet: {\n const periodLifeTime = feed.data.lifeTime?.period;\n const value = feed.data.lifeTime?.value;",
       "module": "/packages/client"
     }
   ],

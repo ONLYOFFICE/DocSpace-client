@@ -24,15 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TTranslation } from "@docspace/shared/types";
 import { Trans } from "react-i18next";
+import { TFunction } from "i18next";
 import moment from "moment";
-import { AnyFeedInfo, FeedActionKeys } from "./FeedInfo";
+import { FeedActionKeys } from "@docspace/shared/api/rooms/types";
+import { TTranslation } from "@docspace/shared/types";
+
 import { HistoryText } from "./HistoryText";
+import { Feed } from "./HistoryBlockContent/HistoryBlockContent.types";
 
 export const useFeedTranslation = (
   t: TTranslation,
-  feed: { action: { key: AnyFeedInfo["key"] }; data: any },
+  feed: Feed,
   hasRelatedItems: boolean,
 ) => {
   const count = feed.related.length + 1;
@@ -138,17 +141,17 @@ export const useFeedTranslation = (
     case FeedActionKeys.RoomCreated:
       return (
         <Trans
-          t={t}
+          t={t as TFunction}
           ns="InfoPanel"
           i18nKey="HistoryRoomCreated"
           values={{ roomTitle: feed.data.title }}
-          components={{ 1: <HistoryText title={feed.data.title} /> }}
+          components={{ 1: <HistoryText title={feed.data.title!} /> }}
         />
       );
     case FeedActionKeys.RoomCopied:
       return (
         <Trans
-          t={t}
+          t={t as TFunction}
           ns="InfoPanel"
           i18nKey="HistoryRoomCopied"
           values={{ roomTitle: feed.data.title }}
@@ -158,7 +161,7 @@ export const useFeedTranslation = (
     case FeedActionKeys.RoomRenamed:
       return (
         <Trans
-          t={t}
+          t={t as TFunction}
           ns="InfoPanel"
           i18nKey="RoomRenamed"
           values={{
@@ -166,8 +169,8 @@ export const useFeedTranslation = (
             roomTitle: feed.data.newTitle,
           }}
           components={{
-            1: <HistoryText title={feed.data.oldTitle} />,
-            2: <HistoryText title={feed.data.newTitle} />,
+            1: <HistoryText title={feed.data.oldTitle!} />,
+            2: <HistoryText title={feed.data.newTitle!} />,
           }}
         />
       );
@@ -186,7 +189,7 @@ export const useFeedTranslation = (
     case FeedActionKeys.RoomExternalLinkRenamed:
       return (
         <Trans
-          t={t}
+          t={t as TFunction}
           ns="InfoPanel"
           i18nKey="RoomExternalLinkRenamed"
           values={{
@@ -199,7 +202,7 @@ export const useFeedTranslation = (
     case FeedActionKeys.RoomExternalLinkDeleted:
       return (
         <Trans
-          t={t}
+          t={t as TFunction}
           ns="InfoPanel"
           i18nKey="RoomExternalLinkDeleted"
           values={{
@@ -211,7 +214,7 @@ export const useFeedTranslation = (
     case FeedActionKeys.RoomExternalLinkRevoked:
       return (
         <Trans
-          t={t}
+          t={t as TFunction}
           ns="InfoPanel"
           i18nKey="RoomExternalLinkRevoked"
           values={{
@@ -224,7 +227,7 @@ export const useFeedTranslation = (
       );
     case FeedActionKeys.RoomCreateUser:
       if (hasRelatedItems) return t("InfoPanel:RoomCreateUserCount", { count });
-      return t("InfoPanel:RoomCreateUser");
+      return t("Common:RoomCreateUser");
     case FeedActionKeys.RoomUpdateAccessForUser:
       return t("InfoPanel:RoomUpdateAccess");
     case FeedActionKeys.RoomRemoveUser:
@@ -250,8 +253,8 @@ export const useFeedTranslation = (
     case FeedActionKeys.RoomIndexingDisabled:
       return t("InfoPanel:RoomIndexingDisabled");
     case FeedActionKeys.RoomLifeTimeSet: {
-      const periodLifeTime = feed.data.lifeTime.period;
-      const value = feed.data.lifeTime.value;
+      const periodLifeTime = feed.data.lifeTime?.period;
+      const value = feed.data.lifeTime?.value;
       const maxValue = 9999;
       const period =
         periodLifeTime === 0
@@ -271,7 +274,7 @@ export const useFeedTranslation = (
 
       return (
         <Trans
-          t={t}
+          t={t as TFunction}
           ns="InfoPanel"
           i18nKey="RoomLifeTimeSet"
           values={{ data }}
@@ -297,7 +300,7 @@ export const useFeedTranslation = (
       });
     case FeedActionKeys.RoomIndexExportSaved:
       return t("InfoPanel:RoomIndexExportLocation", {
-        sectionName: t("Common:MyFilesSection"),
+        sectionName: t("Common:MyDocuments"),
       });
     case FeedActionKeys.FormSubmit:
       return t("InfoPanel:FilledOutForm");

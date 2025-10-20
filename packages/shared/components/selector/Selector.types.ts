@@ -491,6 +491,7 @@ type TSelectorItemEmpty = {
   placeholder?: undefined;
   cover?: undefined;
   userType?: undefined;
+  isMCP?: undefined;
 
   isRoomsOnly?: undefined;
   createDefineRoomType?: undefined;
@@ -573,6 +574,14 @@ export type TSelectorItemGroup = MergeTypes<
   }
 >;
 
+export type TSelectorItemMCP = MergeTypes<
+  TSelectorItemEmpty,
+  {
+    isMCP: boolean;
+    icon?: string;
+  }
+>;
+
 export type TSelectorItemNew = MergeTypes<
   TSelectorItemEmpty,
   {
@@ -610,7 +619,8 @@ type TSelectorItemType =
   | TSelectorItemRoom
   | TSelectorItemGroup
   | TSelectorItemNew
-  | TSelectorItemInput;
+  | TSelectorItemInput
+  | TSelectorItemMCP;
 
 export type TSelectorItem = TSelectorItemType & {
   label: string;

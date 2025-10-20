@@ -34,7 +34,7 @@ import { Tooltip } from "@docspace/shared/components/tooltip";
 import styles from "./AiTile.module.scss";
 
 type AiTileProps = {
-  icon: string;
+  icon: string | React.ReactNode;
   children: React.ReactNode;
   tooltipText?: string;
 };
@@ -49,7 +49,11 @@ export const AiTile = ({ icon, children, tooltipText }: AiTileProps) => {
   return (
     <div className={styles.aiTile} {...dataTooltipProps}>
       <div className={styles.icon}>
-        <img src={icon} alt="ai tile icon" />
+        {typeof icon === "string" ? (
+          <img src={icon} alt="ai tile icon" />
+        ) : (
+          icon
+        )}
       </div>
       <div className={styles.content}>{children}</div>
 

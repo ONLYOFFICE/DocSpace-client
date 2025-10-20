@@ -36,6 +36,7 @@ import { TRoomParams } from "@docspace/shared/utils/rooms";
 import { getServersListForRoom } from "@docspace/shared/api/ai";
 import { getServerIcon } from "@docspace/shared/utils";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { MCPIcon, MCPIconSize } from "@docspace/shared/components/mcp-icon";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
@@ -130,7 +131,11 @@ const MCPSettings = ({ roomParams, setRoomParams }: MCPSettingsProps) => {
 
             {selectedServers.map((server) => (
               <div className="ai-mcp-item" key={server.id}>
-                <img src={server.icon} alt="DocSpace" />
+                <MCPIcon
+                  title={server.label}
+                  imgSrc={server.icon}
+                  size={MCPIconSize.Small}
+                />
                 <Text
                   fontSize="12px"
                   fontWeight={600}

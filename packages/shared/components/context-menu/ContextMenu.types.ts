@@ -86,6 +86,7 @@ export type ContextMenuType = {
   preventNewTab?: boolean;
   dataTestId?: string;
   getTooltipContent?: () => React.ReactNode;
+  withMCPIcon?: boolean;
 };
 
 export type SeparatorType = {

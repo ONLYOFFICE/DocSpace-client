@@ -52,6 +52,7 @@ import { globalColors } from "../../../themes";
 import { useTheme } from "../../../hooks/useTheme";
 import { isTouchDevice } from "../../../utils/device";
 import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
+import { MCPIcon, MCPIconSize } from "../../mcp-icon";
 
 import { Tooltip } from "../../tooltip";
 
@@ -517,7 +518,14 @@ const SubMenu = (props: SubMenuProps) => {
     });
     const subMenuIconClassName = "p-submenu-icon";
 
-    const icon =
+    const icon = item.withMCPIcon ? (
+      <MCPIcon
+        title={item.label as string}
+        size={MCPIconSize.Small}
+        imgSrc={item.icon}
+        className={iconClassName || ""}
+      />
+    ) : (
       item.icon &&
       ((!item.icon.includes("images/") && !item.icon.includes(".svg")) ||
       item.icon.includes("webplugins") ? (
@@ -532,7 +540,8 @@ const SubMenu = (props: SubMenuProps) => {
           className={iconClassName || ""}
           src={item.icon}
         />
-      ));
+      ))
+    );
 
     const label = item.label && (
       <span

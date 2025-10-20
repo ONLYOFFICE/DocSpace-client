@@ -35,6 +35,7 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { ServerType } from "@docspace/shared/api/ai/enums";
+import { MCPIcon, MCPIconSize } from "@docspace/shared/components/mcp-icon";
 
 import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
@@ -84,7 +85,9 @@ export const MCPTile = ({
 
   return (
     <AiTile
-      icon={icon}
+      icon={
+        <MCPIcon title={item.name} imgSrc={icon} size={MCPIconSize.Large} />
+      }
       tooltipText={
         disableActions ? t("AISettings:ToUseMCPAddProvider") : undefined
       }

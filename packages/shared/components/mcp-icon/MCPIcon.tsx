@@ -79,7 +79,9 @@ export const MCPIcon = (props: MCPIconProps) => {
           onError={() => setImgError(true)}
         />
       ) : (
-        <Text className={styles.title}>{getFirstChar(title)}</Text>
+        <Text className={styles.title} noSelect>
+          {getFirstChar(title)}
+        </Text>
       )}
     </div>
   );

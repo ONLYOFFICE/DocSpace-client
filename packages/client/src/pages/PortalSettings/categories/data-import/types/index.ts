@@ -464,8 +464,8 @@ export interface UsersInfoBlockProps {
 }
 
 export interface AdminsInfoBlockProps {
-  limitAdmins?: number | null;
-  totalUsedUsers?: number;
+  limitAdmins: number;
+  totalUsedUsers: number;
 }
 
 export const ImportOptionsKeys = {

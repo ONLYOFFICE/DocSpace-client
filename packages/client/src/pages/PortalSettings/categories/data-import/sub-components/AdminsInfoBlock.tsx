@@ -35,8 +35,6 @@ const AdminsInfoBlock = ({
 }: AdminsInfoBlockProps) => {
   const { t } = useTranslation(["Settings"]);
 
-  if (!limitAdmins || !totalUsedUsers) return;
-
   const isLimitReached = totalUsedUsers > limitAdmins;
 
   const limitText = `${totalUsedUsers}/${limitAdmins}`;

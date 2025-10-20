@@ -123,10 +123,12 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
     <Wrapper>
       {Buttons}
 
-      <AdminsInfoBlock
-        limitAdmins={limitAdmins}
-        totalUsedUsers={totalUsedUsers}
-      />
+      {limitAdmins ? (
+        <AdminsInfoBlock
+          limitAdmins={limitAdmins}
+          totalUsedUsers={totalUsedUsers}
+        />
+      ) : null}
 
       {filteredUsers.length > 0 ? (
         <>

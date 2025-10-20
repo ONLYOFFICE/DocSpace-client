@@ -80,6 +80,7 @@ export interface InjectedEmptyViewContainerProps
       | "setSelectFileFormRoomDialogVisible"
       | "setQuotaWarningDialogVisible"
       | "setSelectFileAiKnowledgeDialogVisible"
+      | "setTemplateAccessSettingsVisible"
     >,
     Pick<
       TStore["selectedFolderStore"],
@@ -110,6 +111,7 @@ export type EmptyViewContainerProps = OutEmptyViewContainerProps &
 export type OptionActions = {
   navigate: NavigateFunction;
   inviteUser: VoidFunction;
+  onOpenAccessSettings: VoidFunction;
   onCreate: (
     extension: ExtensionType,
     withoutDialog?: boolean,

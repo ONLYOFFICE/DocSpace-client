@@ -54,7 +54,7 @@ const LDAP = ({
   setScrollToSettings,
   showPortalSettingsLoader,
 }) => {
-  const { t } = useTranslation(["Ldap", "Settings", "Common"]);
+  const { t, ready } = useTranslation(["Ldap", "Settings", "Common"]);
   const [isSmallWindow, setIsSmallWindow] = useState(false);
   const navigate = useNavigate();
 
@@ -73,13 +73,14 @@ const LDAP = ({
 
   useEffect(() => {
     onCheckView();
-    setDocumentTitle(t("Ldap:LdapSettings"));
+    if (ready) setDocumentTitle(t("Ldap:LdapSettings"));
     window.addEventListener("resize", onCheckView);
 
     return () => window.removeEventListener("resize", onCheckView);
-  }, [isLdapAvailable, load, t]);
+  }, [isLdapAvailable, load, t, ready]);
 
-  if (showPortalSettingsLoader && isLdapAvailable) return <LdapLoader />;
+  if ((showPortalSettingsLoader && isLdapAvailable) || !ready)
+    return <LdapLoader />;
 
   const link = `${`${t("Settings:ManagementCategorySecurity")} > ${t("Settings:InvitationSettings")}.`}`;
 
@@ -118,6 +119,7 @@ const LDAP = ({
             target="_blank"
             href={ldapSettingsUrl}
             dataTestId="ldap_settings_link"
+            fontWeight={600}
           >
             {t("Common:LearnMore")}
           </Link>

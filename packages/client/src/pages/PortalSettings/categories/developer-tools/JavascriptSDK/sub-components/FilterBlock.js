@@ -62,7 +62,7 @@ const UserInput = styled.div`
   width: 100%;
   width: -moz-available;
   width: -webkit-fill-available;
-  width: fill-available;
+  width: stretch;
 
   .input-link {
     height: 32px;

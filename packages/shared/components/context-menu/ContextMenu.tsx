@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
-
 import React from "react";
 import { CSSTransition } from "react-transition-group";
 
@@ -49,7 +48,11 @@ import { RoomIcon } from "../room-icon";
 import { SubMenu } from "./sub-components/SubMenu";
 import { MobileSubMenu } from "./sub-components/MobileSubMenu";
 
-import { ContextMenuModel, ContextMenuProps } from "./ContextMenu.types";
+import {
+  ContextMenuModel,
+  ContextMenuProps,
+  TMobileMenuStackItem,
+} from "./ContextMenu.types";
 import styles from "./ContextMenu.module.scss";
 
 const MARGIN_BORDER = 16; // Indentation from the border of the screen
@@ -64,6 +67,9 @@ const ContextMenu = (props: ContextMenuProps) => {
   const [menuHovered, setMenuHovered] = React.useState(false);
   const [mobileSubMenuItems, setMobileSubMenuItems] = React.useState<
     ContextMenuModel[] | undefined
+  >([]);
+  const [mobileMenuStack, setMobileMenuStack] = React.useState<
+    TMobileMenuStackItem[]
   >([]);
   const [mobileHeader, setMobileHeader] = React.useState<string>("");
 
@@ -424,6 +430,7 @@ const ContextMenu = (props: ContextMenuProps) => {
         prevReshow.current = false;
         setChangeView(false);
         setShowMobileMenu(false);
+        setMobileMenuStack([]);
       }
 
       window.removeEventListener("resize", documentResizeListener);
@@ -487,14 +494,17 @@ const ContextMenu = (props: ContextMenuProps) => {
   ) => {
     e.stopPropagation();
 
-    setShowMobileMenu(true);
-
     const res = loadFunc ? await loadFunc() : items;
-    setMobileSubMenuItems(res);
 
+    setMobileSubMenuItems(res);
+    setShowMobileMenu(true);
     setMobileHeader(label);
 
-    if (res && menuRef.current) {
+    if (res && res.length > 0) {
+      setMobileMenuStack((prev) => [...prev, { items: res, header: label }]);
+    }
+
+    if (res && menuRef.current && mobileMenuStack.length === 0) {
       const height =
         menuRef.current && menuRef.current.offsetParent
           ? menuRef.current.offsetHeight
@@ -514,7 +524,18 @@ const ContextMenu = (props: ContextMenuProps) => {
 
   const onBackClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    setShowMobileMenu(false);
+
+    if (mobileMenuStack.length > 1) {
+      const newMobileMenuStack = mobileMenuStack.slice(0, -1);
+      const lastIndex = newMobileMenuStack.length - 1;
+
+      setMobileSubMenuItems(newMobileMenuStack[lastIndex].items);
+      setMobileHeader(newMobileMenuStack[lastIndex].header);
+      setMobileMenuStack(newMobileMenuStack);
+    } else {
+      setMobileMenuStack([]);
+      setShowMobileMenu(false);
+    }
   };
 
   React.useImperativeHandle(ref, () => {
@@ -642,6 +663,7 @@ const ContextMenu = (props: ContextMenuProps) => {
                 root
                 resetMenu={resetMenu}
                 onLeafClick={onLeafClick}
+                onMobileItemClick={onMobileItemClick}
                 mobileSubMenuItems={mobileSubMenuItems}
               />
             ) : (

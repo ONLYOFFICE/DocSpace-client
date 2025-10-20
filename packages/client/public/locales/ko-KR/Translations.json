@@ -23,5 +23,6 @@
   "ThirdPartyInfo": "제3자 정보 변경",
   "ThirdPartyTitle": "제3자 서비스",
   "TitleShowActions": "파일 동작 표시",
-  "TitleShowFolderActions": "폴더 작업 표시"
+  "TitleShowFolderActions": "폴더 작업 표시",
+  "TrashItemsDeleteSuccess": "{{sectionName}}에서 선택한 항목이 성공적으로 삭제되었습니다."
 }

@@ -72,9 +72,7 @@ const RoomsActionsContainer = ({
     <div className="notification-container">
       <div className="row">
         <Text {...textProps} className="subscription-title">
-          {t("FileActivityNotify", {
-            sectionName: t("Common:Rooms"),
-          })}
+          {t("FileActivityNotify")}
         </Text>
         <ToggleButton
           className="rooms-actions"
@@ -83,7 +81,13 @@ const RoomsActionsContainer = ({
           dataTestId="actions_rooms_toggle_button"
         />
       </div>
-      <Text {...textDescriptionsProps}>{t("ActionsWithFilesDescription")}</Text>
+      <Text {...textDescriptionsProps}>
+        {t("ActionsWithFilesDescription", {
+          rooms: t("Common:Rooms"),
+          shared: t("Common:SharedWithMe"),
+          documents: t("Common:MyDocuments"),
+        })}
+      </Text>
     </div>
   );
 };

@@ -63,6 +63,7 @@ type ItemData = {
   vectorizationStatus?: TFile["vectorizationStatus"];
   lockedBy?: string;
   locked?: boolean;
+  isFavorite?: boolean;
 };
 
 export type BadgesProps = {
@@ -93,6 +94,8 @@ export type BadgesProps = {
   isExtsCustomFilter?: boolean;
   customFilterExternalLink?: string;
   onRetryVectorization?: () => void;
+  onClickFavorite?: () => void;
+  isPublicRoom?: boolean;
 };
 
 export type BadgeWrapperProps = {

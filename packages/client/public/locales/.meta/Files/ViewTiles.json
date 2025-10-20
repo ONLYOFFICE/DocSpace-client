@@ -3,7 +3,7 @@
   "content": "Tiles",
   "content_en_sha1_hash": "85f5ca643a1173a67cdaf07bca1715d2defeb309",
   "created_at": "2025-05-19T21:30:56.308Z",
-  "updated_at": "2025-08-27T10:14:35.268Z",
+  "updated_at": "2025-09-23T07:24:24.186Z",
   "comment": {
     "text": "\"Title for a view tile section, used to filter and display room types in a home page.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 74,
+      "line_number": 75,
       "context": "import { getManyPDFTitle } from \"@docspace/shared/utils/getPDFTite\";\n \n import { getRoomTypeName } from \"SRC_DIR/helpers/filesUtils\";\n \n import ViewRowsReactSvgUrl from \"PUBLIC_DIR/images/view-rows.react.svg?url\";\n import ViewTilesReactSvgUrl from \"PUBLIC_DIR/images/view-tiles.react.svg?url\";\n \n import { getRoomInfo } from \"@docspace/shared/api/rooms\";\n import { FilterLoader } from \"@docspace/shared/skeletons/filter\";\n \n import { useContactsFilter } from \"./useContacts\";",
       "module": "/packages/client"
     }

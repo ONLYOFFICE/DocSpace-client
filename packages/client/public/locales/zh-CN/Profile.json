@@ -7,6 +7,7 @@
   "DesktopTheme": "与桌面编辑器的设置同步",
   "DesktopThemeDescription": "根据桌面编辑器的当前主题，自动在浅色和深色主题之间切换。",
   "EditPhoto": "编辑照片",
+  "EmailChangeSuccess": "您的邮箱地址已修改成功。",
   "EmailNotVerified": "邮件未验证",
   "ErrorAccountAlreadyUse": "关联帐户已被其他用户使用",
   "FileManagement": "文件管理",
@@ -17,6 +18,7 @@
   "LogoutDescription": "注意，由于此连接当前正在使用，故除此之外的所有活动连接都将被注销。",
   "LogoutFrom": "从 {{platform}} {{browser}} 中注销？",
   "MyProfile": "我的档案",
+  "NotificationsChannels": "通知渠道",
   "ProviderSuccessfullyConnected": "供应方成功连接",
   "ProviderSuccessfullyDisconnected": "供应方成功断开连接",
   "SendAgain": "再次发送",
@@ -24,6 +26,10 @@
   "SuccessLogout": "活动连接已登出：{{platform}}，{{browser}}",
   "SystemTheme": "使用系统主题",
   "SystemThemeDescription": "根据系统状态切换浅色和深色主题。",
+  "TelegramAccount": "Telegram 帐户",
+  "TelegramAccountDescription": "要将 Telegram 机器人关联到您的帐户，请访问私密链接并点击“连接 Telegram”按钮。",
+  "TelegramAccountDisconnect": "取消 Telegram 关联",
+  "TelegramAccountDisconnectDescription": "您的 @{{username}} 帐户已启用 Telegram 通知。您可以随时取消关联，届时将不再接收通知。",
   "TerminateAllSessions": "终止除当前会话之外的所有会话",
   "TwoFactorDescription": "管理员为所有用户启用了通过代码生成应用进行的双因素身份认证功能。"
 }

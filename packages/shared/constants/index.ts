@@ -49,6 +49,7 @@ export const LOADER_STYLE = Object.freeze({
   animate: true,
 });
 
+export const TOAST_FOLDER_PUBLIC_KEY = "toast_folder_public_key";
 export const MANAGER = "manager";
 export const TOTAL_SIZE = "total_size";
 export const FILE_SIZE = "file_size";
@@ -106,6 +107,7 @@ export const FOLDER_NAMES = Object.freeze({
   13: "privacy",
   14: "shared",
   20: "archive",
+  31: "ai-agents",
 });
 
 export const PROVIDERS_DATA = Object.freeze({
@@ -256,6 +258,28 @@ export const STORAGE_TARIFF_DEACTIVATED = "storageTariffDeactivated";
 export const BRAND_NAME_REGEX =
   /^[^\s-]([^<>\/\\|:*?"'`~!@#$%^&()+={}[\];,.])*[^\s-]$/;
 
+/**
+ * Enum for type of confirm link.
+ * @readonly
+ */
+export const CategoryType = Object.freeze({
+  Personal: 0,
+  Shared: 1,
+  SharedRoom: 2,
+  Archive: 3,
+  ArchivedRoom: 4,
+  Favorite: 5,
+  Recent: 6,
+  Trash: 7,
+  Settings: 8,
+  Accounts: 9,
+  PublicRoom: 10,
+  Chat: 11,
+  SharedWithMe: 12,
+  Groups: 13,
+  Guests: 14,
+});
+
 export const AVATAR_ACTION_KEYS = {
   PROFILE_AVATAR_UPLOAD: "profile_avatar_upload",
   PROFILE_AVATAR_DELETE: "profile_avatar_delete",
@@ -266,3 +290,6 @@ export const ROOM_ACTION_KEYS = {
   CREATE_EDIT_ROOM_DELETE: "create_edit_room_delete",
   CREATE_EDIT_ROOM_CUSTOMIZE_COVER: "create_edit_room_customize_cover",
 } as const;
+
+export const SHARED_MEMBERS_COUNT = 100;
+export const SHARED_WITH_ME_PATH = "shared-with-me";

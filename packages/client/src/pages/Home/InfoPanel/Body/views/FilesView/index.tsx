@@ -81,6 +81,9 @@ const FilesView = ({
 }: FilesViewProps) => {
   const { t } = useTranslation(["Common"]);
   const isThirdParty = "providerId" in selection && selection?.providerId;
+  const currentViewRef = React.useRef<FilesViewProps["currentView"] | null>(
+    null,
+  );
 
   const [value, setValue] = React.useState<string | null>(null);
   const [prevSelectionId, setPrevSelectionId] = React.useState<string | null>(
@@ -126,6 +129,7 @@ const FilesView = ({
 
   const {
     filesLink,
+    shareMembers,
     fetchExternalLinks,
     abortController: shareAbortController,
   } = useShare({
@@ -148,7 +152,7 @@ const FilesView = ({
     fetchMembers,
     fetchMoreMembers,
     changeUserRole,
-    setSearchValue,
+    handleSearchMembers,
     abortController: membersAbortController,
   } = useMembers({
     room: infoPanelRoomSelection!,
@@ -166,6 +170,8 @@ const FilesView = ({
 
   const fetchValue = React.useCallback(
     async (v: FilesViewProps["currentView"]) => {
+      currentViewRef.current = v;
+
       abortController.current?.abort();
       membersAbortController.current?.abort();
       shareAbortController.current?.abort();
@@ -173,6 +179,8 @@ const FilesView = ({
       setIsLoadingSuspense(true);
 
       if (v === InfoPanelView.infoDetails) {
+        if (currentViewRef.current !== v) return undefined;
+
         onEndAnimation();
         setIsLoadingSuspense(false);
         setIsFirstLoadingSuspense(false);
@@ -182,6 +190,8 @@ const FilesView = ({
 
       if (v === InfoPanelView.infoHistory) {
         if (isThirdParty) {
+          if (currentViewRef.current !== v) return undefined;
+
           setIsLoadingSuspense(false);
           setIsFirstLoadingSuspense(false);
           onEndAnimation();
@@ -192,13 +202,17 @@ const FilesView = ({
         try {
           await fetchHistory();
 
+          if (currentViewRef.current !== v) return undefined;
+
           setIsLoadingSuspense(false);
           setIsFirstLoadingSuspense(false);
 
           return v;
         } catch (e) {
+          if (e instanceof Error && e.name === "AbortError") {
+            return undefined;
+          }
           console.log(e);
-
           return undefined;
         }
       }
@@ -206,6 +220,9 @@ const FilesView = ({
       if (v === InfoPanelView.infoMembers) {
         try {
           await fetchMembers();
+
+          if (currentViewRef.current !== v) return undefined;
+
           scrollToTop();
 
           setIsLoadingSuspense(false);
@@ -213,8 +230,10 @@ const FilesView = ({
 
           return v;
         } catch (e) {
+          if (e instanceof Error && e.name === "AbortError") {
+            return undefined;
+          }
           console.log(e);
-
           return undefined;
         }
       }
@@ -223,16 +242,22 @@ const FilesView = ({
         try {
           await fetchExternalLinks();
 
+          if (currentViewRef.current !== v) return undefined;
+
           setIsLoadingSuspense(false);
           setIsFirstLoadingSuspense(false);
 
           return v;
         } catch (e) {
+          if (e instanceof Error && e.name === "AbortError") {
+            return undefined;
+          }
           console.log(e);
-
           return undefined;
         }
       }
+
+      if (currentViewRef.current !== v) return undefined;
 
       setIsFirstLoadingSuspense(false);
       setIsLoadingSuspense(false);
@@ -249,6 +274,7 @@ const FilesView = ({
       fetchExternalLinks,
       scrollToTop,
       onEndAnimation,
+      isThirdParty,
     ],
   );
 
@@ -264,12 +290,12 @@ const FilesView = ({
     }
 
     fetchValue(currentView).then((v) => {
-      if (!v) return;
+      if (!v || currentViewRef.current !== currentView) return;
 
       setPrevSelectionId(selection.id?.toString() || "");
       setValue(v);
     });
-  }, [currentView, fetchValue, selection.id, prevSelectionId]);
+  }, [currentView, fetchValue, selection.id, prevSelectionId, value]);
 
   const getView = () => {
     if (value === InfoPanelView.infoDetails)
@@ -309,7 +335,13 @@ const FilesView = ({
     if (value === InfoPanelView.infoShare) {
       if (isRoom(selection)) return null;
 
-      return <Share infoPanelSelection={selection} fileLinkProps={filesLink} />;
+      return (
+        <Share
+          members={shareMembers}
+          fileLinkProps={filesLink}
+          infoPanelSelection={selection}
+        />
+      );
     }
 
     // @ts-expect-error fixed after rewrite plugin to ts
@@ -319,14 +351,15 @@ const FilesView = ({
   };
 
   const isRoomMembersPanel = value === InfoPanelView.infoMembers;
+  const isShareTab = value === InfoPanelView.infoShare;
 
   const roomMembersProps = isRoomMembersPanel
     ? {
         isRoomMembersPanel,
         searchProps: {
-          setSearchValue,
+          setSearchValue: handleSearchMembers,
           resetSearch: () => {
-            setSearchValue("");
+            handleSearchMembers("");
           },
         },
       }
@@ -341,6 +374,7 @@ const FilesView = ({
             : selection
         }
         {...roomMembersProps}
+        isShareTab={isShareTab}
       />
       <LoaderWrapper
         isLoading={isLoadingSuspense}

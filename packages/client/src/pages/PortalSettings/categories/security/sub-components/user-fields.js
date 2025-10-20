@@ -62,10 +62,10 @@ const StyledInputWrapper = styled.div`
   gap: 10px;
   align-items: center;
   margin-bottom: 8px;
-  width: 350px;
+  width: ${(props) => (props.hideDeleteIcon ? "324px" : "350px")};
 
   @media ${mobile} {
-    width: 100%;
+    width: ${(props) => (props.hideDeleteIcon ? "calc(100% - 26px)" : "100%")};
   }
 `;
 
@@ -100,6 +100,7 @@ const UserFields = (props) => {
     inputDataTestId,
     deleteIconDataTestId,
     addButtonDataTestId,
+    hideDeleteIcon = false,
   } = props;
 
   const [errors, setErrors] = useState(new Array(inputs.length).fill(false));
@@ -148,7 +149,10 @@ const UserFields = (props) => {
               : !regexp.test(input);
 
             return (
-              <StyledInputWrapper key={`user-input-${inputs.length - index}`}>
+              <StyledInputWrapper
+                key={`user-input-${inputs.length - index}`}
+                hideDeleteIcon={hideDeleteIcon}
+              >
                 <TextInput
                   type={InputType.text}
                   size={InputSize.base}
@@ -164,12 +168,14 @@ const UserFields = (props) => {
                   hasError={errors[index] ? error : null}
                   testId={inputDataTestId}
                 />
-                <StyledTrashIcon
-                  className={`${classNameAdditional}-delete-icon`}
-                  size="medium"
-                  onClick={() => onDelete(index)}
-                  data-testid={deleteIconDataTestId}
-                />
+                {hideDeleteIcon ? null : (
+                  <StyledTrashIcon
+                    className={`${classNameAdditional}-delete-icon`}
+                    size="medium"
+                    onClick={() => onDelete(index)}
+                    data-testid={deleteIconDataTestId}
+                  />
+                )}
               </StyledInputWrapper>
             );
           })

@@ -371,7 +371,6 @@ const Root = ({
           getIsDisabled={getIsDisabledSelectFolderDialog}
           filesSettings={filesSettings}
           fileSaveAsExtension={extensionSelectorFolderDialog}
-          organizationName={organizationName}
           selectedFolderId={selectedFolderId}
         />
       ) : null}
@@ -394,6 +393,7 @@ const Root = ({
           fileInfo={fileInfo}
           selfId={user?.id}
           onCancel={onCloseSharingDialog}
+          filesSettings={filesSettings}
           onOpenPanel={openShareFormDialog}
         />
       ) : null}

@@ -3,7 +3,7 @@
   "content": "No results match this filter. Try a different one or clear filter to view all items.",
   "content_en_sha1_hash": "27002996de1d43e168e2639dc22f37e3c277047d",
   "created_at": "2025-05-19T21:30:49.777Z",
-  "updated_at": "2025-05-24T02:20:56.759Z",
+  "updated_at": "2025-09-22T10:04:13.945Z",
   "comment": {
     "text": "This translation key is used to display a message when filtering results do not match any items. It appears as a tooltip or button label on a clear filter button in a UI component, prompting users to try again or remove the filter.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/EmptyFilter.js",
-      "line_number": 105,
-      "context": "fontSize=\"12px\"\n color={\n theme.isBase ? globalColors.grayText : globalColors.grayDarkText\n }\n >\n {t(\"NoResultsMatched\")}\n </Text>\n <span className=\"clearFilter\" onClick={clearFilters}>\n <img\n src={ClearEmptyFilterIcon}\n alt={t(\"ClearFilter\")}",
+      "line_number": 68,
+      "context": "return (\n <EmptyView\n icon={theme.isBase ? <EmptyFilterImg /> : <EmptyFilterDarkImg />}\n title={t(\"Common:NotFoundTitle\")}\n options={options}\n description={t(\"NoResultsMatched\")}\n />\n );\n };\n \n export default inject(({ webhooksStore, settingsStore }) => {",
       "module": "/packages/client"
     }
   ],

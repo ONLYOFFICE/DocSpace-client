@@ -130,14 +130,21 @@ import {
   formRoleMapping,
   getFileLink,
   getFolderLink,
-  removeSharedFolder,
+  removeSharedFolderOrFile,
 } from "@docspace/shared/api/files";
 
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { createLoader } from "@docspace/shared/utils/createLoader";
-import { FILLING_STATUS_ID } from "@docspace/shared/constants";
-import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
+import {
+  FILLING_STATUS_ID,
+  SHARED_WITH_ME_PATH,
+} from "@docspace/shared/constants";
+import {
+  isFile as isFileUtil,
+  isFolder as isFolderUtil,
+  isRoom as isRoomUtil,
+} from "@docspace/shared/utils/typeGuards";
 import {
   getInfoPanelOpen,
   hideInfoPanel,
@@ -251,11 +258,22 @@ class ContextOptionsStore {
   onOpenFolder = async (item, t) => {
     const { isExpiredLinkAsync } = this.filesActionsStore;
 
-    if (item.external && (item.expired || (await isExpiredLinkAsync(item))))
-      return toastr.error(
-        t("Common:RoomLinkExpired"),
-        t("Common:RoomNotAvailable"),
-      );
+    if (
+      item.external &&
+      (item.isLinkExpired || (await isExpiredLinkAsync(item)))
+    ) {
+      const isRoom = isRoomUtil(item);
+
+      const description = isRoom
+        ? t("Common:RoomLinkExpired")
+        : t("Common:FolderLinkExpired");
+
+      const title = isRoom
+        ? t("Common:RoomNotAvailable")
+        : t("Common:FolderNotAvailable");
+
+      return toastr.error(description, title);
+    }
 
     if (isLockedSharedRoom(item))
       return this.dialogsStore.setPasswordEntryDialog(true, item);
@@ -498,11 +516,12 @@ class ContextOptionsStore {
       return toastr.success(t("Common:LinkCopySuccess"));
     }
 
-    if (isShared && !isArchive && !isSystemFolder) {
+    if (isShared && !isArchive && !isSystemFolder && item.canShare) {
       try {
         const itemLink = item.isFolder
           ? await getFolderLink(item.id)
           : await getFileLink(item.id);
+
         copyToBuffer(itemLink.sharedTo.shareLink);
         item.customFilterEnabled
           ? toastr.success(
@@ -565,7 +584,10 @@ class ContextOptionsStore {
   onCreateAndCopySharedLink = async (item, t) => {
     const { isExpiredLinkAsync } = this.filesActionsStore;
 
-    if (item.external && (item.expired || (await isExpiredLinkAsync(item))))
+    if (
+      item.external &&
+      (item.isLinkExpired || (await isExpiredLinkAsync(item)))
+    )
       return toastr.error(
         t("Common:RoomLinkExpired"),
         t("Common:RoomNotAvailable"),
@@ -624,24 +646,37 @@ class ContextOptionsStore {
   //   );
   // };
 
-  onRemoveSharedRooms = async (items) => {
+  onRemoveSharedFilesOrFolder = async (items) => {
     if (!Array.isArray(items) || items.length === 0) return;
 
-    const { setGroupMenuBlocked } = this.filesActionsStore;
     const { addActiveItems } = this.filesStore;
-    const { clearActiveOperations } = this.uploadDataStore;
+    const { setGroupMenuBlocked } = this.filesActionsStore;
+    // const { clearActiveOperations } = this.uploadDataStore;
 
-    const folderIds = items.map((item) => item.id);
+    const { folderIds, fileIds } = items.reduce(
+      (acc, item) => {
+        if (isFolderUtil(item) || isRoomUtil(item)) acc.folderIds.push(item.id);
+        else if (isFileUtil(item)) acc.fileIds.push(item.id);
+
+        return acc;
+      },
+      { folderIds: [], fileIds: [] },
+    );
 
     try {
-      setGroupMenuBlocked(true);
-      addActiveItems(null, folderIds);
-      await removeSharedFolder(folderIds);
+      runInAction(() => {
+        setGroupMenuBlocked(true);
+        addActiveItems(fileIds, folderIds);
+      });
+
+      await removeSharedFolderOrFile(folderIds, fileIds);
     } catch (error) {
       console.error(error);
+      toastr.error(error);
     } finally {
-      setGroupMenuBlocked(false);
-      clearActiveOperations([], folderIds);
+      runInAction(() => {
+        setGroupMenuBlocked(false);
+      });
     }
   };
 
@@ -980,41 +1015,54 @@ class ContextOptionsStore {
 
     if (enablePlugins && this.pluginStore.contextMenuItemsList) {
       this.pluginStore.contextMenuItemsList.forEach((option) => {
-        if (contextOptions.includes(option.key)) {
-          const value = option.value;
+        // Helper function to recursively process context menu items
+        const processOptionValue = (value) => {
+          if (contextOptions.includes(value.key)) {
+            const onClick = async () => {
+              if (value.withActiveItem) {
+                const { setActiveFiles } = this.filesStore;
 
-          const onClick = async () => {
-            if (value.withActiveItem) {
-              const { setActiveFiles } = this.filesStore;
+                setActiveFiles([item.id]);
 
-              setActiveFiles([item.id]);
+                await value.onClick(item.id);
 
-              await value.onClick(item.id);
+                setActiveFiles([]);
+              } else {
+                value.onClick(item.id);
+              }
+            };
 
-              setActiveFiles([]);
-            } else {
-              value.onClick(item.id);
-            }
-          };
-
-          if (value.fileExt) {
-            if (value.fileExt.includes(item.fileExst)) {
-              pluginItems.push({
-                key: option.key,
-                label: value.label,
-                icon: value.icon,
-                onClick,
-              });
-            }
-          } else {
-            pluginItems.push({
-              key: option.key,
+            const processedOptionValue = {
+              key: value.key,
+              id: value.key,
               label: value.label,
               icon: value.icon,
               onClick,
-            });
+            };
+
+            const processedItems = [];
+            // Recursively process nested items if they exist
+            if (value.items && value.items.length > 0) {
+              value.items.forEach((nestedItem) => {
+                const processedItem = processOptionValue(nestedItem);
+                processedItem && processedItems.push(processedItem);
+              });
+
+              if (processedItems.length > 0) {
+                processedOptionValue.items = processedItems;
+              } else {
+                // If we have no processed items, we dont render this option
+                return null;
+              }
+            }
+
+            return processedOptionValue;
           }
-        }
+        };
+
+        const value = processOptionValue(option.value);
+
+        value && pluginItems.push(value);
       });
     }
 
@@ -1161,18 +1209,10 @@ class ContextOptionsStore {
   };
 
   onCreateOform = async (navigate) => {
-    const { oformFromFolderId } = this.oformsStore;
-    const { getFolderInfo } = this.filesStore;
-    const { getPublicKey } = this.filesActionsStore;
-
     hideInfoPanel();
 
     const filesFilter = FilesFilter.getDefault();
     filesFilter.folder = this.oformsStore.oformFromFolderId;
-
-    const currentFolder = await getFolderInfo(oformFromFolderId);
-    const publicKey = await getPublicKey(currentFolder);
-    if (publicKey) filesFilter.key = publicKey;
 
     const filterUrlParams = filesFilter.toUrlParams();
 
@@ -1243,7 +1283,7 @@ class ContextOptionsStore {
         onClick: (e) => this.onClickPin(e, item.id, t),
         disabled:
           this.publicRoomStore.isPublicRoom ||
-          Boolean(item.external && item.expired),
+          Boolean(item.external && item.isLinkExpired),
         "data-action": "pin",
         action: "pin",
       },
@@ -1255,7 +1295,7 @@ class ContextOptionsStore {
         onClick: (e) => this.onClickPin(e, item.id, t),
         disabled:
           this.publicRoomStore.isPublicRoom ||
-          Boolean(item.external && item.expired),
+          Boolean(item.external && item.isLinkExpired),
         "data-action": "unpin",
         action: "unpin",
       },
@@ -1605,7 +1645,11 @@ class ContextOptionsStore {
     const withAI = contextOptions.includes("ask-ai");
 
     // const emailSendIsDisabled = true;
-    const showSeparator0 = hasInfoPanel || !isMedia || withAI; // || !emailSendIsDisabled;
+    const showSeparator0 =
+      hasInfoPanel ||
+      !isMedia ||
+      (item.external && item.isLinkExpired) ||
+      withAI; // || !emailSendIsDisabled;
 
     const separator0 = showSeparator0
       ? {
@@ -1767,7 +1811,7 @@ class ContextOptionsStore {
         label: t("Open"),
         icon: FolderReactSvgUrl,
         onClick: () => this.onOpenFolder(item, t),
-        disabled: Boolean(item.external && item.expired),
+        disabled: Boolean(item.external && item.isLinkExpired),
       },
       {
         id: "option_fill-form",
@@ -1946,7 +1990,6 @@ class ContextOptionsStore {
         label: t("SaveAsTemplate"),
         icon: CreateTemplateSvgUrl,
         onClick: () => this.onSaveAsTemplate(item),
-        badgeLabel: t("Common:New"),
         disabled: !item.security?.Create || item.providerKey,
       },
       {
@@ -1962,7 +2005,7 @@ class ContextOptionsStore {
         },
         disabled:
           (!item.security?.Download && !isLockedSharedRoom(item)) ||
-          Boolean(item.external && item.expired),
+          Boolean(item.external && item.isLinkExpired),
       },
       {
         id: "option_create-duplicate-room",
@@ -1979,16 +2022,6 @@ class ContextOptionsStore {
         icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
         disabled: false,
-      },
-      {
-        id: "option_archive-room",
-        key: "archive-room",
-        label: t("MoveToArchive"),
-        icon: RoomArchiveSvgUrl,
-        onClick: (e) => this.onClickArchive(e),
-        disabled: false,
-        "data-action": "archive",
-        action: "archive",
       },
       {
         id: "option_reconnect-storage",
@@ -2042,7 +2075,7 @@ class ContextOptionsStore {
       {
         id: "option_manage-links",
         key: "manage-links",
-        label: t("Common:ManageLinks"),
+        label: t("Common:ManageShare"),
         icon: SettingsReactSvgUrl,
         onClick: () => this.onClickShare(item),
         disabled: !item.canShare,
@@ -2056,14 +2089,17 @@ class ContextOptionsStore {
         disabled: item.isTemplate
           ? false
           : (isPublicRoomType && hasShareLinkRights) ||
-            Boolean(item.external && (item.expired || item.passwordProtected)),
+            Boolean(
+              item.external && (item.isLinkExpired || item.passwordProtected),
+            ),
       },
       {
         id: "option_copy-external-link",
         key: "external-link",
         label: t("Common:CopySharedLink"),
         icon: TabletLinkReactSvgUrl,
-        disabled: !hasShareLinkRights || Boolean(item.external && item.expired),
+        disabled:
+          !hasShareLinkRights || Boolean(item.external && item.isLinkExpired),
         onClick: () => this.onCreateAndCopySharedLink(item, t),
         // onLoad: () => this.onLoadLinks(t, item),
       },
@@ -2094,7 +2130,7 @@ class ContextOptionsStore {
         label: t("Common:Info"),
         icon: InfoOutlineReactSvgUrl,
         onClick: () => this.onShowInfoPanel(item),
-        disabled: isPublicRoom || Boolean(item.external && item.expired),
+        disabled: isPublicRoom || Boolean(item.external && item.isLinkExpired),
       },
       {
         id: "option_owner-change",
@@ -2197,7 +2233,7 @@ class ContextOptionsStore {
         key: "remove-shared-room",
         label: t("Common:RemoveFromList"),
         icon: CircleCrossSvgUrl,
-        onClick: () => this.onRemoveSharedRooms([item]),
+        onClick: () => this.onRemoveSharedFilesOrFolder([item]),
         disabled: this.userStore?.user?.isAdmin || !item.external,
       },
       {
@@ -2268,6 +2304,16 @@ class ContextOptionsStore {
           isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),
       },
       {
+        id: "option_archive-room",
+        key: "archive-room",
+        label: t("MoveToArchive"),
+        icon: RoomArchiveSvgUrl,
+        onClick: (e) => this.onClickArchive(e),
+        disabled: false,
+        "data-action": "archive",
+        action: "archive",
+      },
+      {
         id: "option_unarchive-room",
         key: "unarchive-room",
         label: t("Common:Restore"),
@@ -2298,8 +2344,10 @@ class ContextOptionsStore {
           ? t("Common:Disconnect")
           : item.isTemplate
             ? t("DeleteTemplate")
-            : t("Common:Delete"),
-        icon: TrashReactSvgUrl,
+            : item.isRoom
+              ? t("Common:DeleteRoom")
+              : t("Common:Delete"),
+        icon: item.isRoom ? RemoveOutlineSvgUrl : TrashReactSvgUrl,
         onClick: () => this.onDelete(item, t),
         disabled: item.isTemplate ? !isTemplateOwner : false,
       },
@@ -2310,6 +2358,21 @@ class ContextOptionsStore {
         icon: RemoveOutlineSvgUrl,
         onClick: () => this.onClickRemoveFromRecent(item),
         disabled: !this.treeFoldersStore.isRecentFolder,
+      },
+      {
+        id: "option_remove-shared-file-or-folder",
+        key: "remove-shared-folder-or-file",
+        label: t("Common:RemoveFromList"),
+        icon: CircleCrossSvgUrl,
+        onClick: () => {
+          this.dialogsStore.setUnsubscribe(true);
+          this.dialogsStore.setDeleteDialogVisible(true);
+        },
+        disabled:
+          // FIXME: temporary hack — backend should expose a flag to disable this
+          typeof window !== "undefined"
+            ? !window?.location?.pathname.includes(SHARED_WITH_ME_PATH)
+            : false,
       },
       {
         key: "separate-stop-filling",
@@ -2331,15 +2394,15 @@ class ContextOptionsStore {
 
     if (pluginItems.length > 0) {
       if (pluginItems.length === 1) {
-        pluginItems.forEach((plugin) => {
-          options.splice(1, 0, {
-            id: `option_${plugin.key}`,
-            key: plugin.key,
-            label: plugin.label,
-            icon: plugin.icon,
-            disabled: false,
-            onClick: plugin.onClick,
-          });
+        const plugin = pluginItems[0];
+        options.splice(1, 0, {
+          id: `option_${plugin.key}`,
+          key: plugin.key,
+          label: plugin.label,
+          icon: plugin.icon,
+          disabled: false,
+          onClick: plugin.onClick,
+          items: plugin.items,
         });
       } else {
         options.splice(1, 0, {
@@ -2348,7 +2411,6 @@ class ContextOptionsStore {
           label: t("Common:Actions"),
           icon: PluginActionsSvgUrl,
           disabled: false,
-
           onLoad: () => this.onLoadPlugins(item),
         });
       }
@@ -2376,7 +2438,6 @@ class ContextOptionsStore {
             { key: "change-room-owner" },
             { key: "reconnect-storage" },
             { key: "export-room-index" },
-            { key: "archive-room" },
           ],
         ],
         needsGrouping: true,
@@ -2504,15 +2565,24 @@ class ContextOptionsStore {
       (option) => option.key === "download",
     );
     const moveIndex = resultOptions.findIndex(
-      (option) => option.key === "move",
+      (option) => option.key === "move" || option.key === "copy-to",
     );
 
     if (item.isFolder && !item.isRoom) {
       const groups = [
         ["select", "open"],
         ["share", "show-info"],
-        ["mark-as-favorite", "download", "move", "copy-to", "rename"],
-        ["remove-from-favorites", "delete"],
+        [
+          "mark-as-favorite",
+          "mark-read",
+          "link-for-room-members",
+          "download",
+          "move",
+          "copy-to",
+          "rename",
+        ],
+        ["restore"],
+        ["remove-from-favorites", "remove-shared-folder-or-file", "delete"],
       ];
 
       const items = resultOptions.filter((opt) => !opt.isSeparator);
@@ -2530,6 +2600,13 @@ class ContextOptionsStore {
           const isDeleteGroup = group.includes("delete");
           const shouldAddSeparator =
             result.length > 0 && (groupItems.length >= 2 || isDeleteGroup);
+
+          if (group.includes("restore")) {
+            result.push({
+              key: `separator${folderSeparatorIndex++}`,
+              isSeparator: true,
+            });
+          }
 
           if (shouldAddSeparator) {
             result.push({
@@ -2583,7 +2660,7 @@ class ContextOptionsStore {
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
       this.treeFoldersStore;
 
-    const { pinRooms, unpinRooms, deleteRooms } = this.filesActionsStore;
+    const { pinRooms, unpinRooms /* deleteRooms */ } = this.filesActionsStore;
 
     if (isRoomsFolder || isArchiveFolder) {
       const isPinOption = selection.filter((item) => !item.pinned).length > 0;
@@ -2659,13 +2736,13 @@ class ContextOptionsStore {
 
       options.push(archiveOptions);
 
-      canDelete &&
+      /* canDelete &&
         options.push({
           key: "delete-rooms",
           label: t("Common:Delete"),
           icon: TrashReactSvgUrl,
           onClick: () => deleteRooms(t),
-        });
+        }); */
 
       return options;
     }

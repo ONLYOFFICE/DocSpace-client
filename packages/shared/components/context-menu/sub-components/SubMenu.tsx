@@ -45,6 +45,7 @@ import {
   ContextMenuModel,
   ContextMenuType,
   SeparatorType,
+  TOnMobileItemClick,
 } from "../ContextMenu.types";
 import { Badge } from "../../badge";
 import { globalColors } from "../../../themes";
@@ -71,12 +72,7 @@ type SubMenuProps = {
   onLeafClick?: (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
   ) => void;
-  onMobileItemClick?: (
-    e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
-    label: string,
-    items?: ContextMenuModel[],
-    loadFunc?: () => Promise<ContextMenuModel[]>,
-  ) => void;
+  onMobileItemClick?: TOnMobileItemClick;
   onLoad?: () => Promise<ContextMenuModel[]>;
   changeView?: boolean;
   withHeader?: boolean;
@@ -275,6 +271,8 @@ const SubMenu = (props: SubMenuProps) => {
       e.preventDefault();
     }
 
+    if (items && !isMobileDevice) return;
+
     onClick?.({ originalEvent: e, action, item });
 
     if ((items || item.onLoad) && isMobileDevice) {
@@ -306,11 +304,16 @@ const SubMenu = (props: SubMenuProps) => {
 
     if (!isMobile() && options) {
       const optionsWidth: number[] = [];
-      Array.from(options).forEach((option) =>
-        optionsWidth.push(Math.ceil(option.getBoundingClientRect().width)),
-      );
+      Array.from(options).forEach((option) => {
+        const isNestedOption =
+          option.closest(".p-submenu-list") !== subMenuRef.current;
+        if (!isNestedOption) {
+          optionsWidth.push(Math.ceil(option.getBoundingClientRect().width));
+        }
+      });
 
-      const widthMaxContent = Math.max(...optionsWidth);
+      const widthMaxContent =
+        optionsWidth.length > 0 ? Math.max(...optionsWidth) : 0;
 
       if (root) subListWidth = subListWidth || widthMaxContent;
       else subListWidth = Math.max(subListWidth, widthMaxContent);
@@ -560,6 +563,12 @@ const SubMenu = (props: SubMenuProps) => {
       onClick(e);
     };
 
+    const onDoubleClick = (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    };
+
     const checked =
       item.checked && "isPortal" in item && item.isPortal ? (
         <IconButton
@@ -608,6 +617,7 @@ const SubMenu = (props: SubMenuProps) => {
     if (item.template) {
       const defaultContentOptions = {
         onClick,
+        onDoubleClick,
         className: linkClassName,
         labelClassName: "p-menuitem-text",
         iconClassName,
@@ -678,6 +688,7 @@ const SubMenu = (props: SubMenuProps) => {
           className={className || ""}
           style={{ ...item.style, ...style }}
           onClick={onClick}
+          onDoubleClick={onDoubleClick}
           onMouseDown={onMouseDown}
           onMouseEnter={(e) => onItemMouseEnter(e, item)}
           onMouseLeave={() => onItemMouseLeave(item)}

@@ -3,7 +3,7 @@
   "content": "Delete template",
   "content_en_sha1_hash": "399bf72aa291de43b5c1c104b4f9d4aacf6ea977",
   "created_at": "2025-05-19T21:30:55.439Z",
-  "updated_at": "2025-06-18T17:11:42.368Z",
+  "updated_at": "2025-10-16T07:29:35.578Z",
   "comment": {
     "text": "This translation key is used for a \"Delete\" button label in a file deletion dialog. It appears on line 265 of the DeleteDialog component and is displayed when the user selects to delete a template. The text confirms the action of deleting a template.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 270,
-      "context": ");\n }\n };\n \n const title = isTemplate\n ? t(\"Files:DeleteTemplate\")\n : isRoomDelete || isRecycleBinFolder\n ? t(\"EmptyTrashDialog:DeleteForeverTitle\")\n : isPrivacyFolder || selection[0]?.providerKey\n ? t(\"Common:Confirmation\")\n : moveToTrashTitle();",
+      "line_number": 206,
+      "context": "return t(\"Common:MoveTo\");\n };\n \n const getDialogTitle = () => {\n if (isTemplate) {\n return `${t(\"Files:DeleteTemplate\")}?`;\n }\n \n if (isRoomDelete) {\n return t(\"DeleteRoomTitle\");\n }",
       "module": "/packages/client"
     }
   ],

@@ -225,8 +225,11 @@ class SsoFormStore {
 
   init = async () => {
     if (this.isInit) return;
-    this.isInit = true;
     await this.load();
+  };
+
+  setIsInit = (isInit) => {
+    this.isInit = isInit;
   };
 
   load = async () => {
@@ -239,6 +242,7 @@ class SsoFormStore {
       this.setSpMetadata(res.enableSso);
       this.setDefaultSettings(res);
       this.setFields(res);
+      this.setIsInit(true);
     } catch (err) {
       if (axios.isCancel(err)) return;
 

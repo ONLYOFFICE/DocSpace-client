@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { toJS } from "mobx";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
@@ -36,6 +37,8 @@ import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
+import { isRoom as isRoomType } from "@docspace/shared/utils/typeGuards";
+import { ShareEventName } from "@docspace/shared/components/share/Share.constants";
 
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 import Camera10ReactSvgUrl from "PUBLIC_DIR/images/icons/10/cover.camera.react.svg?url";
@@ -70,6 +73,7 @@ type RoomsItemHeaderProps = {
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
   getIcon?: FilesSettingsStore["getIcon"];
   isRoomMembersPanel?: boolean;
+  isShareTab?: boolean;
 } & (
   | {
       roomsView: InfoPanelView.infoMembers;
@@ -95,6 +99,7 @@ const RoomsItemHeader = ({
   getIcon,
   searchProps,
   isRoomMembersPanel,
+  isShareTab,
 }: RoomsItemHeaderProps) => {
   const { t } = useTranslation([
     "Files",
@@ -121,6 +126,13 @@ const RoomsItemHeader = ({
   const isTemplate =
     ("isTemplate" in selection && selection.isTemplate) ||
     selection?.rootFolderType === FolderType.RoomTemplates;
+
+  const canShare =
+    !isRoomType(selection) &&
+    selection.canShare &&
+    isShareTab &&
+    // HACK: Hide share option for rooms — remove after implementation is ready
+    selection.rootFolderType !== FolderType.Rooms;
 
   const roomType =
     "roomType" in selection ? selection.roomType : RoomsType.CustomRoom;
@@ -169,6 +181,35 @@ const RoomsItemHeader = ({
   const onOpenTemplateAccessOptions = () => {
     setTemplateAccessSettingsVisible?.(true);
   };
+
+  const openSelectorShareItemToUser = () => {
+    const event = new CustomEvent(ShareEventName, {
+      detail: {
+        open: true,
+        item: toJS(selection),
+      },
+    });
+
+    window.dispatchEvent(event);
+  };
+
+  const onClickAddUser = () => {
+    if (isTemplate) {
+      return onOpenTemplateAccessOptions();
+    }
+
+    if (canShare) {
+      return openSelectorShareItemToUser();
+    }
+
+    onClickInviteUsers();
+  };
+
+  const addUserTitle = canShare
+    ? t("Common:AddUsers")
+    : isTemplate
+      ? t("Files:AccessSettings")
+      : t("Common:InviteContacts");
 
   const onSearchClick = () => setShowSearchBlock?.(true);
 
@@ -251,20 +292,14 @@ const RoomsItemHeader = ({
           />
         ) : null}
 
-        {canInviteUserInRoomAbility && isRoomMembersPanel ? (
+        {(canInviteUserInRoomAbility && isRoomMembersPanel) || canShare ? (
           <IconButton
             id="info_add-user"
             className="icon"
-            title={
-              isTemplate
-                ? t("Files:AccessSettings")
-                : t("Common:InviteContacts")
-            }
+            title={addUserTitle}
             iconName={PersonPlusReactSvgUrl}
             isFill
-            onClick={
-              isTemplate ? onOpenTemplateAccessOptions : onClickInviteUsers
-            }
+            onClick={onClickAddUser}
             size={16}
           />
         ) : null}

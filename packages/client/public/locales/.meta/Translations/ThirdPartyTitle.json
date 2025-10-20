@@ -3,7 +3,7 @@
   "content": "Third-party services",
   "content_en_sha1_hash": "871d2b6d2f4209a2045939948478b5ad9e16f6a2",
   "created_at": "2025-05-19T21:30:50.013Z",
-  "updated_at": "2025-09-17T13:43:01.612Z",
+  "updated_at": "2025-10-07T15:39:07.253Z",
   "comment": {
     "text": "This translation key is used to display \"Third-party services\" as a title in various UI components, such as a link and a category name, often found in settings or configuration pages. It appears on a page that lists integration options for third-party services.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
-      "line_number": 112,
-      "context": "await getSSOData();\n },\n },\n {\n id: \"third-party-services\",\n name: t(\"Translations:ThirdPartyTitle\"),\n content: <ThirdParty openModal={openThirdPartyModal} />,\n onClick: async () => {\n clearAbortControllerArr();\n await getThirdPartyData();\n },",
+      "line_number": 106,
+      "context": "await getSSOData();\n },\n },\n {\n id: \"third-party-services\",\n name: t(\"Translations:ThirdPartyTitle\"),\n content: <ThirdParty />,\n onClick: async () => {\n clearAbortControllerArr();\n await getThirdPartyData();\n },",
       "module": "/packages/client"
     }
   ],

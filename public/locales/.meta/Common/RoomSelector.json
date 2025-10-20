@@ -3,7 +3,7 @@
   "content": "Room selector",
   "content_en_sha1_hash": "19415158fe52171efbd6c6c03e13605aae21b7db",
   "created_at": "2025-05-19T21:30:48.245Z",
-  "updated_at": "2025-09-17T13:43:01.783Z",
+  "updated_at": "2025-09-26T15:21:06.303Z",
   "comment": {
     "text": "The \"RoomSelector\" translation key is used to describe a room selection component in the Portal Settings, likely appearing on buttons or labels within the UI. This description will help users understand the purpose of selecting a room in this context.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 121,
+      "line_number": 114,
       "context": "description: t(\"ViewerDescription\"),\n image: theme.isBase ? ViewerImg : ViewerImgDark,\n handleOnClick: navigateToViewer,\n },\n {\n title: t(\"Common:RoomSelector\"),\n description: t(\"RoomSelectorDescription\"),\n image: theme.isBase ? RoomSelectorImg : RoomSelectorImgDark,\n handleOnClick: navigateToRoomSelector,\n },\n {",
       "module": "/packages/client"
     },

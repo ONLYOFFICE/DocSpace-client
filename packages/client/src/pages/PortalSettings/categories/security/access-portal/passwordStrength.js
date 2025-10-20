@@ -78,6 +78,7 @@ const MainContainer = styled.div`
 const PasswordStrength = (props) => {
   const {
     t,
+    tReady,
     setPortalPasswordSettings,
     passwordSettings,
     currentColorScheme,
@@ -87,6 +88,7 @@ const PasswordStrength = (props) => {
     settingsStore,
     tfaStore,
     setup,
+    isInit,
   } = props;
 
   const navigate = useNavigate();
@@ -156,6 +158,12 @@ const PasswordStrength = (props) => {
   }, [currentDeviceType, onSettingsSkeletonNotShown]);
 
   useEffect(() => {
+    if (isInit) {
+      setIsLoaded(true);
+    }
+  }, [isInit]);
+
+  useEffect(() => {
     if (isMobileDevice()) {
       getSecurityInitialValue();
       setIsLoaded(true);
@@ -170,7 +178,7 @@ const PasswordStrength = (props) => {
   }, []);
 
   useEffect(() => {
-    if (!passwordSettings) return;
+    if (!isLoaded || !passwordSettings) return;
     const currentSettings = getFromSessionStorage("currentPasswordSettings");
     const defaultSettings = getFromSessionStorage("defaultPasswordSettings");
 
@@ -179,9 +187,10 @@ const PasswordStrength = (props) => {
     } else {
       getSettingsFromDefault();
     }
-  }, [passwordSettings]);
+  }, [isLoaded, passwordSettings]);
 
   useEffect(() => {
+    if (!isLoaded) return;
     const defaultSettings = getFromSessionStorage("defaultPasswordSettings");
 
     const newSettings = {
@@ -257,7 +266,7 @@ const PasswordStrength = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType == DeviceType.mobile && !isLoaded) {
+  if ((currentDeviceType === DeviceType.mobile && !isLoaded) || !tReady) {
     return <PasswordLoader />;
   }
 
@@ -359,6 +368,8 @@ export const PasswordStrengthSection = inject(
       currentDeviceType,
     } = settingsStore;
 
+    const { isInit } = setup;
+
     return {
       setPortalPasswordSettings,
       passwordSettings,
@@ -368,6 +379,7 @@ export const PasswordStrengthSection = inject(
       settingsStore,
       tfaStore,
       setup,
+      isInit,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(PasswordStrength)));

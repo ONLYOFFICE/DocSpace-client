@@ -62,6 +62,7 @@ const SCROLL_MARGIN_TOP =
 const TwoFactorAuth = (props) => {
   const {
     t,
+    tReady,
     setIsInit,
     isInit,
     currentColorScheme,
@@ -114,7 +115,6 @@ const TwoFactorAuth = (props) => {
     } else {
       setType(tfaSettings);
     }
-    setIsLoading(true);
   };
 
   useEffect(() => {
@@ -128,7 +128,7 @@ const TwoFactorAuth = (props) => {
     if (isInit) {
       setIsLoading(true);
     }
-  }, []);
+  }, [isInit]);
 
   useEffect(() => {
     if (!onSettingsSkeletonNotShown) return;
@@ -151,6 +151,10 @@ const TwoFactorAuth = (props) => {
   };
 
   useEffect(() => {
+    if (!isInit && !isMobileDevice()) {
+      getSecurityInitialValue();
+    }
+
     if (window.location.hash !== TFA_HASH) return;
     if (!targetRef?.current) {
       // If element is not available yet, try again after a small delay
@@ -167,16 +171,15 @@ const TwoFactorAuth = (props) => {
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
-
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    if (!isLoading || !tfaSettings) return;
+    if (!isLoading || !tfaSettings || isSaving) return;
     const currentSettings = getFromSessionStorage("currentTfaSettings");
     const defaultSettings = getFromSessionStorage("defaultTfaSettings");
 
-    if (isEqual(currentSettings, defaultSettings)) {
+    if (currentSettings === defaultSettings) {
       getSettings();
     } else {
       getSettingsFromDefault();
@@ -232,7 +235,7 @@ const TwoFactorAuth = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType === DeviceType.mobile && !isLoading) {
+  if ((currentDeviceType === DeviceType.mobile && !isLoading) || !tReady) {
     return <TfaLoader />;
   }
 

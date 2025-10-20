@@ -29,6 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 import { DeviceType } from "@docspace/shared/enums";
@@ -53,6 +54,8 @@ const SingleSignOn = (props) => {
     currentDeviceType,
     logoText,
     showPortalSettingsLoader,
+    singleSignOnUrl,
+    currentColorScheme,
   } = props;
   const { t, ready } = useTranslation(["SingleSignOn", "Settings"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
@@ -61,15 +64,29 @@ const SingleSignOn = (props) => {
     if (ready) setDocumentTitle(t("Settings:SingleSignOn"));
   }, [ready]);
 
-  if (showPortalSettingsLoader && !isMobileView && isSSOAvailable)
+  if ((showPortalSettingsLoader && !isMobileView && isSSOAvailable) || !ready)
     return <SSOLoader />;
 
   return (
     <StyledSsoPage
       hideSettings={serviceProviderSettings}
       hideMetadata={spMetadata}
+      withoutExternalLink={!singleSignOnUrl}
     >
       <Text className="intro-text settings_unavailable">{t("SsoIntro")}</Text>
+
+      {singleSignOnUrl ? (
+        <Link
+          className="link-learn-more"
+          color={currentColorScheme.main?.accent}
+          target="_blank"
+          isHovered
+          href={singleSignOnUrl}
+          fontWeight={600}
+        >
+          {t("Common:LearnMore")}
+        </Link>
+      ) : null}
 
       {isMobileView ? (
         <MobileView isSSOAvailable={isSSOAvailable} logoText={logoText} />
@@ -114,7 +131,8 @@ const SingleSignOn = (props) => {
 export default inject(
   ({ settingsStore, ssoStore, currentQuotaStore, clientLoadingStore }) => {
     const { isSSOAvailable } = currentQuotaStore;
-    const { currentDeviceType, logoText } = settingsStore;
+    const { currentDeviceType, logoText, singleSignOnUrl, currentColorScheme } =
+      settingsStore;
 
     const { serviceProviderSettings, spMetadata } = ssoStore;
 
@@ -127,6 +145,8 @@ export default inject(
       currentDeviceType,
       logoText,
       showPortalSettingsLoader,
+      singleSignOnUrl,
+      currentColorScheme,
     };
   },
 )(observer(SingleSignOn));

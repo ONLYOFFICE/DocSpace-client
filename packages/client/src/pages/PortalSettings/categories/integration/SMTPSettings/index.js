@@ -37,12 +37,8 @@ import CustomSettings from "./sub-components/CustomSettings";
 import { StyledComponent } from "./StyledComponent";
 
 const SMTPSettings = (props) => {
-  const {
-    currentColorScheme,
-    integrationSettingsUrl,
-    logoText,
-    showPortalSettingsLoader,
-  } = props;
+  const { currentColorScheme, smtpUrl, logoText, showPortalSettingsLoader } =
+    props;
 
   const { t, ready } = useTranslation([
     "SMTPSettings",
@@ -55,23 +51,23 @@ const SMTPSettings = (props) => {
     if (ready) setDocumentTitle(t("Settings:SMTPSettings"));
   }, [ready]);
 
-  if (showPortalSettingsLoader) return <SettingsSMTPSkeleton />;
+  if (showPortalSettingsLoader || !ready) return <SettingsSMTPSkeleton />;
 
   return (
-    <StyledComponent withoutExternalLink={!integrationSettingsUrl}>
+    <StyledComponent withoutExternalLink={!smtpUrl}>
       <div className="smtp-settings_main-title">
         <Text className="smtp-settings_description">
           {t("Settings:SMTPSettingsDescription", {
             organizationName: logoText,
           })}
         </Text>
-        {integrationSettingsUrl ? (
+        {smtpUrl ? (
           <Link
             className="link-learn-more"
             color={currentColorScheme.main?.accent}
             isHovered
             target="_blank"
-            href={integrationSettingsUrl}
+            href={smtpUrl}
             dataTestId="integration_settings_link"
           >
             {t("Common:LearnMore")}
@@ -85,8 +81,7 @@ const SMTPSettings = (props) => {
 };
 
 export default inject(({ settingsStore, setup, clientLoadingStore }) => {
-  const { currentColorScheme, integrationSettingsUrl, logoText } =
-    settingsStore;
+  const { currentColorScheme, smtpUrl, logoText } = settingsStore;
   const { setInitSMTPSettings } = setup;
 
   const { showPortalSettingsLoader } = clientLoadingStore;
@@ -94,7 +89,7 @@ export default inject(({ settingsStore, setup, clientLoadingStore }) => {
   return {
     setInitSMTPSettings,
     currentColorScheme,
-    integrationSettingsUrl,
+    smtpUrl,
     logoText,
     showPortalSettingsLoader,
   };

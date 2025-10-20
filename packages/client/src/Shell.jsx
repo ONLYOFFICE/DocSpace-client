@@ -64,6 +64,7 @@ import useCreateFileError from "./Hooks/useCreateFileError";
 
 import ReactSmartBanner from "./components/SmartBanner";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Shell = ({ page = "home", ...rest }) => {
   const {
     isLoaded,
@@ -210,17 +211,27 @@ const Shell = ({ page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
-    const callback = (loginEventId) => {
-      console.log(`[WS] "logout-session"`, loginEventId, userLoginEventId);
+    const callback = ({ loginEventId, redirectUrl }) => {
+      console.log(
+        `[WS] "logout-session"`,
+        loginEventId,
+        userLoginEventId,
+        redirectUrl,
+      );
 
-      if (userLoginEventId === loginEventId || loginEventId === 0) {
-        sessionStorage.setItem("referenceUrl", window.location.href);
-        sessionStorage.setItem("loggedOutUserId", userId);
+      if (userLoginEventId !== loginEventId && loginEventId !== 0) return;
 
-        window.location.replace(
-          combineUrl(window.ClientConfig?.proxy?.url, "/login"),
-        );
-      }
+      const { pathname, search, origin } = window.location;
+      const redirectDomain = redirectUrl || origin;
+      const loginUrl = redirectUrl || window.ClientConfig?.proxy?.url;
+
+      sessionStorage.setItem(
+        "referenceUrl",
+        `${redirectDomain}${pathname}${search}`,
+      );
+      sessionStorage.setItem("loggedOutUserId", userId);
+
+      window.location.replace(combineUrl(loginUrl, "/login"));
     };
 
     SocketHelper?.on(SocketEvents.LogoutSession, callback);
@@ -228,7 +239,7 @@ const Shell = ({ page = "home", ...rest }) => {
     return () => {
       SocketHelper?.off(SocketEvents.LogoutSession, callback);
     };
-  }, [userLoginEventId]);
+  }, [userLoginEventId, userId]);
 
   let snackTimer = null;
   let fbInterval = null;
@@ -438,10 +449,6 @@ const Shell = ({ page = "home", ...rest }) => {
       });
     }
   }, []);
-
-  useEffect(() => {
-    console.log("Current page ", page);
-  }, [page]);
 
   useEffect(() => {
     if (userTheme) setTheme(userTheme);

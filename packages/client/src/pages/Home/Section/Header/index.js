@@ -56,7 +56,7 @@ import {
   SearchArea,
 } from "@docspace/shared/enums";
 
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { CategoryType } from "@docspace/shared/constants";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
@@ -166,7 +166,6 @@ const SectionHeaderContent = (props) => {
     revokeFilesOrder,
     saveIndexOfFiles,
     infoPanelRoom,
-    getPublicKey,
     getIndexingArray,
     setCloseEditIndexDialogVisible,
     rootFolderId,
@@ -193,14 +192,17 @@ const SectionHeaderContent = (props) => {
     setChangeNameVisible,
     getIcon,
     contactsTab,
+    isRootRooms,
+    isArchive,
+    isSharedWithMeFolderRoot,
   } = props;
 
   const location = useLocation();
 
   const contactsView = getContactsView(location);
   const isContactsPage = !!contactsView;
-  const isContactsGroupsPage = contactsView === "groups";
-  const isContactsInsideGroupPage = contactsView === "inside_group";
+  const isContactsGroupsPage = contactsTab === "groups";
+  const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isProfile = currentClientView === "profile";
 
   const addButtonRefCallback = React.useCallback(
@@ -371,8 +373,6 @@ const SectionHeaderContent = (props) => {
     const filter = FilesFilter.getDefault();
 
     filter.folder = id;
-    const shareKey = await getPublicKey(selectedFolder);
-    if (shareKey) filter.key = shareKey;
 
     const itemIdx = selectedFolder.navigationPath.findIndex((v) => v.id === id);
 
@@ -451,12 +451,29 @@ const SectionHeaderContent = (props) => {
   };
 
   const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
-  const sharedType = location.state?.isExternal && !isPublicRoom;
+  const sharedType =
+    (location.state?.isExternal || selectedFolder?.external) && !isPublicRoom;
 
   const getTitleIcon = () => {
     if (sharedType) return SharedLinkSvgUrl;
 
-    if (navigationButtonIsVisible && !isPublicRoom) return PublicRoomIconUrl;
+    if (navigationButtonIsVisible && !isPublicRoom) {
+      const roomInPath = (
+        isArchive ? selectedFolder?.navigationPath : navigationPath
+      )?.find((item) => item.isRoom);
+
+      const isInsideRoom = !!roomInPath;
+      const isInPublicRoom = isInsideRoom && roomInPath?.shared;
+      const isShared = roomInPath?.shared || selectedFolder?.shared;
+
+      if (
+        isInPublicRoom ||
+        (isShared && (isArchive ? selectedFolder?.isRoom : isRoom))
+      ) {
+        return PublicRoomIconUrl;
+      } else if (!isRootRooms && !isArchive && !isSharedWithMeFolderRoot)
+        return PublicRoomIconUrl;
+    }
 
     if (isLifetimeEnabled) return LifetimeRoomIconUrl;
 
@@ -649,8 +666,20 @@ const SectionHeaderContent = (props) => {
       categoryType === CategoryType.Archive) &&
     !isCurrentRoom;
 
-  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
-  const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
+  const logo = getLogoUrl(
+    WhiteLabelLogoType.LightSmall,
+    !theme.isBase,
+    false,
+    "",
+    true,
+  );
+  const burgerLogo = getLogoUrl(
+    WhiteLabelLogoType.LeftMenu,
+    !theme.isBase,
+    false,
+    "",
+    true,
+  );
 
   const titleIconTooltip = getTitleIconTooltip();
 
@@ -696,10 +725,10 @@ const SectionHeaderContent = (props) => {
   };
 
   const isPlusButtonVisible = () => {
-    if (!isContactsPage || isContactsInsideGroupPage) return true;
+    if (!isContactsPage || isContactsGroupsPage) return true;
 
     const lengthList = getContextOptionsPlus()?.length;
-    if (lengthList === 0) return false;
+    if (!lengthList || lengthList === 0) return false;
 
     return true;
   };
@@ -712,7 +741,8 @@ const SectionHeaderContent = (props) => {
         <div
           className={classnames(styles.headerContainer, {
             [styles.infoPanelVisible]: isInfoPanelVisible,
-            [styles.isExternalFolder]: location.state?.isExternal,
+            [styles.isExternalFolder]:
+              location.state?.isExternal || selectedFolder?.external,
             [styles.isLifetimeEnabled]: isLifetimeEnabled,
           })}
         >
@@ -918,6 +948,7 @@ export default inject(
       isRoomsFolder,
       isArchiveFolder,
       isPersonalReadOnly,
+      isSharedWithMeFolderRoot,
     } = treeFoldersStore;
 
     const {
@@ -937,7 +968,6 @@ export default inject(
       createFoldersTree,
       revokeFilesOrder,
       saveIndexOfFiles,
-      getPublicKey,
     } = filesActionsStore;
 
     const { setIsVisible, isVisible, infoPanelRoomSelection } = infoPanelStore;
@@ -1035,13 +1065,15 @@ export default inject(
 
     const isArchive = rootFolderType === FolderType.Archive;
     const isTemplate = rootFolderType === FolderType.RoomTemplates;
+    const isRootRooms = rootFolderType === FolderType.Rooms;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
 
-    const showNavigationButton =
-      !security?.CopyLink || isPublicRoom || isArchive
-        ? false
-        : security?.Read && isShared;
+    const showNavigationButton = !!((!security?.CopyLink && !isArchive) ||
+    isPublicRoom ||
+    isSharedWithMeFolderRoot
+      ? false
+      : security?.Read && isShared);
 
     const rootFolderId = navigationPath.length
       ? navigationPath[navigationPath.length - 1]?.id
@@ -1159,7 +1191,6 @@ export default inject(
       rootFolderId,
       displayAbout,
       infoPanelRoom: infoPanelRoomSelection,
-      getPublicKey,
       getIndexingArray,
       setCloseEditIndexDialogVisible,
       welcomeFormFillingTipsVisible,
@@ -1185,6 +1216,10 @@ export default inject(
       setChangeAvatarVisible,
       setChangeNameVisible,
       getIcon: filesStore.filesSettingsStore.getIcon,
+
+      isRootRooms,
+      isArchive,
+      isSharedWithMeFolderRoot,
     };
   },
 )(

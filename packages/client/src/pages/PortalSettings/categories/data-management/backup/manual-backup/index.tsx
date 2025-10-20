@@ -48,9 +48,9 @@ const ManualBackupWrapper = ({
   setIsInited,
   isBackupPaid,
   setDownloadingProgress,
-  setIsEmptyContentBeforeLoader,
   isEmptyContentBeforeLoader,
   isInitialLoading,
+  setIsEmptyContentBeforeLoader,
   ...props
 }: ManualBackupWrapperProps) => {
   const { t } = useTranslation(["Settings", "Common"]);
@@ -86,6 +86,7 @@ const ManualBackupWrapper = ({
       isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
       setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
       setDownloadingProgress={updateDownloadingProgress}
+      isBackupPaid={isBackupPaid}
       {...props}
     />
   );
@@ -102,6 +103,7 @@ export default inject(
     filesSettingsStore,
     currentQuotaStore,
     paymentStore,
+    clientLoadingStore,
   }: TStore) => {
     const {
       accounts,
@@ -143,6 +145,11 @@ export default inject(
       setIsInited,
 
       backupPageEnable,
+      backupsCount,
+
+      isEmptyContentBeforeLoader,
+      setIsEmptyContentBeforeLoader,
+      isInitialError,
     } = backup;
 
     const { isPayer, backupServicePrice } = paymentStore;
@@ -174,9 +181,12 @@ export default inject(
       setThirdPartyProviders,
       openConnectWindow,
     } = thirdPartyStore;
-    const { isBackupPaid, isThirdPartyAvailable } = currentQuotaStore;
+    const { isBackupPaid, isThirdPartyAvailable, maxFreeBackups } =
+      currentQuotaStore;
 
     const { getIcon, filesSettings } = filesSettingsStore;
+
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     const pageIsDisabled = isManagement()
       ? portals?.length === 1 || !backupPageEnable
@@ -195,6 +205,10 @@ export default inject(
         : "";
 
     const colorScheme = currentColorScheme ?? undefined;
+
+    const backupCount = backupsCount ?? 0;
+    const isFreeBackupsLimitReached =
+      maxFreeBackups > 0 ? backupCount >= maxFreeBackups : true;
 
     return {
       // backup
@@ -234,6 +248,10 @@ export default inject(
       setThirdPartyAccountsInfo,
       setSelectedThirdPartyAccount,
       setConnectedThirdPartyAccount,
+
+      isEmptyContentBeforeLoader,
+      setIsEmptyContentBeforeLoader,
+      isInitialError,
 
       // filesSelectorInput
       newPath,
@@ -278,6 +296,10 @@ export default inject(
       isThirdPartyAvailable,
 
       backupServicePrice,
+      isFreeBackupsLimitReached,
+
+      // clientLoadingStore
+      isInitialLoading: showPortalSettingsLoader,
     };
   },
 )(observer(ManualBackupWrapper as React.FC<ExternalManualBackupProps>));

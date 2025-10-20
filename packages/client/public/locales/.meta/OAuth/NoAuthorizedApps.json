@@ -3,7 +3,7 @@
   "content": "No authorized apps",
   "content_en_sha1_hash": "c1f73d4def787f095d112a62e150b77244de4f23",
   "created_at": "2025-05-19T21:30:53.918Z",
-  "updated_at": "2025-05-24T07:23:43.395Z",
+  "updated_at": "2025-09-22T10:04:14.012Z",
   "comment": {
     "text": "\"NoAuthorizedApps\" is used to display a message indicating that there are no authorized apps. It appears in an empty list screen, providing feedback to users about their app settings on the Profile page. Translators should provide a clear and concise equivalent of this message for all languages, using phrases like \"No authorized applications available\" or similar expressions.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/authorized-apps/sub-components/EmptyScreen.tsx",
-      "line_number": 11,
-      "context": "const EmptyScreen = ({ t }: { t: TTranslation }) => {\n return (\n <EmptyScreenContainer\n imageSrc={EmptyScreenPersonsSvgUrl}\n imageAlt=\"Empty apps list\"\n headerText={t(\"NoAuthorizedApps\")}\n descriptionText={t(\"ProfileDescription\")}\n />\n );\n };",
+      "line_number": 15,
+      "context": "return (\n <EmptyScreenContainer\n imageSrc={isBase ? EmptyScreenOauthSvgUrl : EmptyScreenOauthDarkSvgUrl}\n imageAlt=\"Empty apps list\"\n headerText={t(\"NoAuthorizedApps\")}\n descriptionText={t(\"ProfileDescription\")}\n />\n );\n };",
       "module": "/packages/client"
     }
   ],

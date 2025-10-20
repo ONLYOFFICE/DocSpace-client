@@ -121,7 +121,7 @@ const CreateEvent = ({
 
       if (!extension) {
         await api.files
-          .createFolder(parentId, newValue)
+          .createFolder(parentId, newValue.trimEnd())
           .then((folder) => {
             item = folder;
             createdFolderId = folder.id;

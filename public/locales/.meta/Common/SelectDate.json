@@ -3,7 +3,7 @@
   "content": "Select date",
   "content_en_sha1_hash": "b84a6ecbc04c1f54b6fa504c6441ca78e07db586",
   "created_at": "2025-05-19T21:30:48.374Z",
-  "updated_at": "2025-09-01T14:09:50.060Z",
+  "updated_at": "2025-10-07T15:39:07.462Z",
   "comment": {
     "text": "The \"SelectDate\" translation key is used to display a label for date selection in various UI components, including a toggle block and a filter dialog. Its purpose is to provide users with clear instructions on how to select a date in these interfaces. It appears as part of the labels for date pickers and edit link panels.",
     "is_auto": true,
@@ -18,14 +18,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 384,
-      "context": "1: (\n <DatePicker\n key=\"start-date-picker\"\n initialDate={startDate}\n onChange={onStartDateChange}\n selectDateText={t(\"Common:SelectDate\")}\n locale={moment.locale()}\n openDate={startDate}\n minDate={undefined}\n maxDate={endDate}\n outerDate={startDate}",
+      "line_number": 507,
+      "context": "key=\"start-date-picker\"\n initialDate={\n isFilterDialogVisible ? mobileFilterState.startDate : startDate\n }\n onChange={onStartDateChange}\n selectDateText={t(\"Common:SelectDate\")}\n locale={moment.locale()}\n openDate={\n isFilterDialogVisible ? mobileFilterState.startDate : startDate\n }\n minDate={undefined}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 384,
-      "context": "1: (\n <DatePicker\n key=\"start-date-picker\"\n initialDate={startDate}\n onChange={onStartDateChange}\n selectDateText={t(\"Common:SelectDate\")}\n locale={moment.locale()}\n openDate={startDate}\n minDate={undefined}\n maxDate={endDate}\n outerDate={startDate}",
+      "line_number": 507,
+      "context": "key=\"start-date-picker\"\n initialDate={\n isFilterDialogVisible ? mobileFilterState.startDate : startDate\n }\n onChange={onStartDateChange}\n selectDateText={t(\"Common:SelectDate\")}\n locale={moment.locale()}\n openDate={\n isFilterDialogVisible ? mobileFilterState.startDate : startDate\n }\n minDate={undefined}",
       "module": "/packages/client"
     },
     {

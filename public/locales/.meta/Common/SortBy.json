@@ -3,7 +3,7 @@
   "content": "Sort by",
   "content_en_sha1_hash": "a2a5bdeca9391be1e0cdff1c19895bae7fadc2c2",
   "created_at": "2025-05-19T21:30:48.943Z",
-  "updated_at": "2025-08-29T14:33:38.106Z",
+  "updated_at": "2025-10-14T04:54:10.535Z",
   "comment": {
     "text": "The translation key \"SortBy\" is used to display the text \"Sort by\", which serves as a button title in a combobox or dropdown menu, allowing users to sort gallery items or filtered results. This text appears on buttons and labels within various UI components, including filters and sorting options. Its primary purpose is to provide clear instructions for user interaction.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1494,
+      "line_number": 1532,
       "context": "isPersonalRoom={isPersonalRoom}\n isRooms={isRooms}\n removeSelectedItem={removeSelectedItem}\n clearAll={clearAll}\n filterTitle={t(\"Filter\")}\n sortByTitle={t(\"Common:SortBy\")}\n clearSearch={clearSearch}\n setClearSearch={setClearSearch}\n onSortButtonClick={onSortButtonClick}\n currentDeviceType={currentDeviceType}\n userId={userId}",
       "module": "/packages/client"
     },
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Bu qayda ilə sırala\" does not accurately convey the meaning of \"Sort by\". It literally translates to \"Sort by this rule\".",
-          "suggestion": "The correct translation should be something like \"Çeşidlərə görə sırala\" or \"Növə görə sırala\" or simply \"Sırala\" (depending on the context and desired level of formality)."
+          "description": "The translation \"Bu qayda ilə sırala\" does not accurately convey the meaning of \"Sort by\". It literally translates to \"Sort by this rule\".  It's not a standard or understandable way to say 'Sort by' in Azerbaijani.",
+          "suggestion": "Sıralama"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Lajitteluperuste\" is a literal translation, it's a rather formal and technical term. A more common and natural translation of \"Sort by\" in a user interface context might be \"Lajittele\" or \"Järjestä\".",
-          "suggestion": "Consider using \"Lajittele\" or \"Järjestä\" for a more user-friendly translation."
+          "description": "While 'Lajitteluperuste' is a valid Finnish word, it's quite formal and technical for the simple English phrase 'Sort by'. It might be too complex for the intended audience depending on the context. A more common and user-friendly alternative might be better.",
+          "suggestion": "Consider alternatives like 'Lajittelu' (Sorting) or 'Järjestä' (Order by), depending on the specific UI context."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '並べ替え' while technically meaning 'rearrangement' or 'sorting', isn't the most natural or common translation for 'Sort by' in a user interface context. 'Sort by' typically implies a way to organize a list or results, and a more common translation would be something like 'ソート' or '順に並べる'.",
-          "suggestion": "Consider 'ソート' or '順に並べる' for a more natural and accurate translation of 'Sort by'."
+          "description": "'並べ替え' is a general term for 'rearrange' or 'sort'. While it can sometimes be used for 'sort by', it's not the most accurate or natural translation of 'Sort by'. A more suitable translation might be 'ソート順' or '並べ順'.",
+          "suggestion": "Consider using 'ソート順' or '並べ順' for a more accurate translation of 'Sort by'."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"정렬\" can mean \"sort\", it's a more formal term. \"Sort by\" often implies sorting *based on* something, and \"정렬\" doesn't convey that nuance. A more appropriate translation would be something like \"~ 기준 정렬\" (sort by ~) or simply \"정렬 기준\" (sorting criteria).",
-          "suggestion": "정렬 기준 (Jeollyeok Gijun) or ~ 기준 정렬 (~ Gijun Jeollyeok)"
+          "description": "While '정렬' can mean 'sort,' it's a more general term for 'alignment' or 'arrangement.' 'Sort by' implies sorting based on a specific criterion, which '정렬' doesn't explicitly convey. A more precise translation would consider the context, but in isolation, it's not the best fit.",
+          "suggestion": "Consider a translation like '정렬 기준' (jeonglyeul gijun) which means 'sorting criteria,' or '~로 정렬' (~ro jeonglyeol) which means 'sort by ~'."
         }
       ],
       "approved_at": null
@@ -141,7 +141,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ຈັດຮຽງຕາມ' is a possible translation for 'Sort by', it's a bit literal and may not be the most natural phrasing in Lao.  A more idiomatic translation might be 'ລຽງລຳດັບຕາມ' or 'ຈັ່ງນຶ່ງ'.",
+          "suggestion": "Consider 'ລຽງລຳດັບຕາມ' or 'ຈັ່ງນຶ່ງ' for a more natural and common phrasing."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Sortuj\" is a valid Polish word meaning \"Sort\", it's an infinitive form. The context requires a noun or a participle indicating the action of sorting.  'Sort by' implies something is being sorted *by* a criteria. A more accurate translation would incorporate this relationship.",
-          "suggestion": "Sortowanie"
+          "description": "'Sortuj' is a verb (imperative form) meaning 'Sort'. The English 'Sort by' is a phrase describing a sorting action, not just the action itself. A more accurate translation would be 'Sortowanie po' or 'Uporządkuj wg'.",
+          "suggestion": "Uporządkuj wg"
         }
       ],
       "approved_at": null
@@ -198,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"අනුව පෙළගසන්න\" is too literal and doesn't quite capture the meaning of \"Sort by\" in a user interface context. It implies sorting *according to* something, rather than simply sorting.",
-          "suggestion": "Consider \"අවස්ථාවන් අනුව සැකසීම\" or \"පිළිorderBy"
+          "description": "The translation 'අනුව පෙළගසන්න' is not the most natural or accurate translation of 'Sort by'. While technically conveying the meaning of arranging, it's somewhat literal and less idiomatic in Sinhala. A more common and natural translation would be something like 'අන්වූ පිළිවෙලිකරන්න' or ' වර්ග කර'.",
+          "suggestion": "Consider using 'අන්වූ පිළිවෙලිකරන්න' or ' වර්ග කර' for a more natural and idiomatic translation."
         }
       ],
       "approved_at": null
@@ -222,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Сортирај према' is understandable, a more natural and common translation of 'Sort by' in Serbian (Cyrillic) would be 'Нијансирај по' or 'Упореди по'. 'Сортирај према' implies sorting *according to* something specific, which might not be the intended meaning of 'Sort by' in this context.",
-          "suggestion": "Consider 'Нијансирај по' or 'Упореди по'."
+          "description": "While \"Сортирај према\" is understandable, it's not the most natural or idiomatic translation of \"Sort by\" in Serbian (Cyrillic). It's a bit literal.",
+          "suggestion": "Consider \"Упореди по\" or \"Наклапај по\" which are more common ways to express \"Sort by\" in Serbian."
         }
       ],
       "approved_at": null
@@ -240,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Şöyle sırala:\" is not the most natural or accurate translation of \"Sort by\". It's a bit literal and clunky. A more idiomatic translation would be something like \"Sıralama\" or \"Sıralayın\".",
-          "suggestion": "Consider using \"Sıralama\" or \"Sıralayın\"."
+          "description": "The translation \"Şöyle sırala:\" is a literal translation that isn't idiomatic. While understandable, it's not the most natural way to say \"Sort by\" in Turkish. A more appropriate translation would be something like \"Sırala\".",
+          "suggestion": "Sırala"
         }
       ],
       "approved_at": null
@@ -252,7 +258,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Сортування по' is understandable, it's not the most natural or idiomatic translation of 'Sort by'. A more common and accurate translation would be 'Сортувати за'.",
+          "description": "While \"Сортування по\" is a possible translation for \"Sort by\", it's not the most natural or common usage in Ukrainian. It's quite literal. A more idiomatic translation would be \"Сортувати за\".",
           "suggestion": "Сортувати за"
         }
       ],
@@ -270,10 +276,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"排序方式\" (Pai Xu Fang Shi) literally translates to \"Sorting Method\". While conveying the general idea of \"Sort by\", it's a more formal and lengthy phrasing. A more natural and concise translation would be \"排序\" (Pai Xu), which simply means \"Sorting\".",
-          "suggestion": "排序 (Pai Xu)"
+          "description": "While \"排序方式\" is technically correct, it's a bit verbose and formal for a simple \"Sort by\". A more common and natural translation would be \"排序\" or \"按...排序\".",
+          "suggestion": "排序"
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

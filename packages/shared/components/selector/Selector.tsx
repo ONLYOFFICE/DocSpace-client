@@ -627,6 +627,7 @@ const Selector = ({
   const separator = { id: "separator", isSeparator: true };
 
   if (bodyItems.findIndex((x) => x.isSystem) > -1) {
+    bodyItems.sort((el) => (el.isSystem ? -1 : 1));
     bodyItems.splice(1, 0, separator as TSelectorItem);
   }
 

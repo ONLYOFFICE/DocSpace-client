@@ -3,7 +3,7 @@
   "content": "Disabled",
   "content_en_sha1_hash": "f4f4473df8cb59f0a369aebee3d1509adc0151c6",
   "created_at": "2025-05-19T21:30:44.535Z",
-  "updated_at": "2025-09-19T15:39:23.083Z",
+  "updated_at": "2025-10-16T07:29:35.622Z",
   "comment": {
     "text": "This translation key is used to display the text \"Disabled\" when a feature or setting is disabled in the UI. It appears as part of dropdown menus and options lists in various admin settings and configuration pages.",
     "is_auto": true,
@@ -18,44 +18,44 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
-      "line_number": 198,
+      "line_number": 201,
       "context": "spacing=\"8px\"\n dataTestId=\"administrator_message_radio_button_group\"\n options={[\n {\n id: \"admin-message-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"disabled\",\n dataTestId: \"administrator_message_disabled\",\n },\n {\n id: \"admin-message-enable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
-      "line_number": 231,
+      "line_number": 233,
       "context": "spacing=\"8px\"\n dataTestId=\"developer_tools_access_radio_button\"\n options={[\n {\n id: \"dev-tools-access-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"true\",\n dataTestId: \"developer_tools_access_disabled\",\n },\n {\n id: \"dev-tools-access-enable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 285,
+      "line_number": 286,
       "context": "spacing=\"8px\"\n dataTestId=\"ip_security_radio_button_group\"\n options={[\n {\n id: \"ip-security-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"disabled\",\n dataTestId: \"ip_security_disabled\",\n },\n {\n id: \"ip-security-enable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
-      "line_number": 288,
+      "line_number": 289,
       "context": "spacing=\"8px\"\n dataTestId=\"session_lifetime_radio_button_group\"\n options={[\n {\n id: \"session-lifetime-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"disabled\",\n dataTestId: \"session_lifetime_disabled\",\n },\n {\n id: \"session-lifetime-enable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 272,
+      "line_number": 275,
       "context": "spacing=\"8px\"\n dataTestId=\"tfa_radio_button_group\"\n options={[\n {\n id: \"tfa-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"none\",\n dataTestId: \"tfa_radio_button_disabled\",\n },\n // TODO: hide while 2fa by sms is not working\n /* {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 257,
+      "line_number": 261,
       "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"trusted-mail-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"0\",\n dataTestId: \"trusted_mail_disabled\",\n },\n {\n id: \"any-domains\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 112,
-      "context": "disableDisabledUsers && status === EmployeeStatus.Disabled;\n \n const disabledText = isInvited\n ? t(\"Common:Invited\")\n : isDisabled\n ? t(\"Common:Disabled\")\n : \"\";\n \n const avatarRole = getUserAvatarRoleByType(role);\n \n const i: TSelectorItem = {",
+      "line_number": 113,
+      "context": "disableDisabledUsers && status === EmployeeStatus.Disabled;\n \n const disabledText = isInvited\n ? (disabledInvitedText ?? t(\"Common:Invited\"))\n : isDisabled\n ? t(\"Common:Disabled\")\n : \"\";\n \n const avatarRole = getUserAvatarRoleByType(role);\n \n const i: TSelectorItem = {",
       "module": "/packages/shared"
     }
   ],

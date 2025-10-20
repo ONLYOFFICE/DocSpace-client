@@ -239,6 +239,7 @@ const Section = (props: SectionProps) => {
     primaryOperationsArray.some((op) => op.operation === "upload");
 
   const hideFilter = window.location.pathname.includes("chat");
+  const isInfoVisible = canDisplay && isInfoPanelVisible;
 
   return (
     isSectionAvailable && (
@@ -344,7 +345,7 @@ const Section = (props: SectionProps) => {
               onOpenPanel={onOpenUploadPanel}
               mainButtonVisible={mainButtonVisible}
               showCancelButton={showCancelButton}
-              isInfoPanelVisible={isInfoPanelVisible}
+              isInfoPanelVisible={isInfoVisible}
               dropTargetFolderName={dropTargetPreview}
               isDragging={dragging}
             />

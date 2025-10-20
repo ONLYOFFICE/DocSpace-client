@@ -83,4 +83,5 @@ export type TooltipProps = Pick<
   ref?: React.RefObject<TooltipRefProps | null>;
   dataTestId?: string;
   zIndex?: number;
+  tooltipStyle?: React.CSSProperties;
 };

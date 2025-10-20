@@ -63,8 +63,9 @@ type TagInputProps = {
   isDisabled: boolean;
   tooltipLabel?: string;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (e?: React.FocusEvent<HTMLInputElement>) => void;
   dataTestId?: string;
+  isMobile?: () => boolean;
 };
 
 const TagInput = ({
@@ -77,6 +78,7 @@ const TagInput = ({
   onFocus,
   onBlur,
   dataTestId,
+  isMobile,
 }: TagInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [tagInput, setTagInput] = useState("");
@@ -84,7 +86,7 @@ const TagInput = ({
 
   const openDropdown = () => {
     if (isDisabled) return;
-    setIsScrollLocked(true);
+    // setIsScrollLocked(true);
     setIsDropdownOpen(true);
   };
 
@@ -113,9 +115,9 @@ const TagInput = ({
     onFocus && onFocus(event);
   };
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    closeDropdown();
-    onBlur && onBlur(e);
+  const handleBlur = () => {
+    !isMobile?.() && closeDropdown();
+    onBlur && onBlur();
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {

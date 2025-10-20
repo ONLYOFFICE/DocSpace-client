@@ -39,7 +39,7 @@ import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
 
 const PortalDeactivation = (props) => {
-  const { t, owner, currentColorScheme, sendActivationLink } = props;
+  const { t, tReady, owner, currentColorScheme, sendActivationLink } = props;
   const [isDesktopView, setIsDesktopView] = useState(false);
 
   const onCheckView = () => {
@@ -94,7 +94,7 @@ const PortalDeactivation = (props) => {
           isDisabled={notActivatedEmail}
           testId="request_deactivate_portal_button"
         />
-        {notActivatedEmail ? (
+        {notActivatedEmail && tReady ? (
           <Text fontSize="12px" fontWeight="600">
             {t("MainBar:ConfirmEmailHeader", {
               email: owner.email,

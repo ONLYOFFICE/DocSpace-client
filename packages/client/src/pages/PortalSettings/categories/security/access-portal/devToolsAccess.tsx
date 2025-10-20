@@ -64,7 +64,7 @@ const DevToolsAccess = ({
   currentColorScheme: TColorScheme;
   limitedDevToolsBlockHelpUrl: string;
 }) => {
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t, ready } = useTranslation(["Settings", "Common"]);
 
   const [accessEnabled, setAccessEnabled] = useState("false");
   const [showReminder, setShowReminder] = useState(false);
@@ -194,6 +194,8 @@ const DevToolsAccess = ({
     setAccessEnabled(defaultSettings || "disabled");
     setShowReminder(false);
   };
+
+  if (!ready) return null;
 
   return (
     <MainContainer>

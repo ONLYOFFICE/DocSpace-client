@@ -205,8 +205,8 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
             return (
               <ServiceCard
                 key={item.id}
-                isDisabled={isDisabled}
-                eventDisabled={!!eventDisabled}
+                cardDisabled={isDisabled}
+                toggleDisabled={!!eventDisabled}
                 onClick={handleClick}
                 onToggle={handleToggle}
                 serviceTitle={item.title}
@@ -266,7 +266,8 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
           return (
             <ServiceCard
               key={item.id}
-              isDisabled={isDisabled}
+              cardDisabled={isDisabled}
+              toggleDisabled={isDisabled}
               priceTitle={item.priceTitle}
               id={item.id}
               image={item.image}

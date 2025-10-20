@@ -41,9 +41,9 @@ import {
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TTranslation } from "@docspace/shared/types";
+import { CategoryType } from "@docspace/shared/constants";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 
 import {
@@ -173,6 +173,8 @@ export const useOptions = (
     setSelectFileFormRoomDialogVisible,
     setSelectFileAiKnowledgeDialogVisible,
     inviteUser: inviteRootUser,
+    setTemplateAccessSettingsVisible,
+
     isVisitor,
     isFrame,
     logoText,
@@ -303,6 +305,10 @@ export const useOptions = (
     onCreateAndCopySharedLink?.(selectedFolder, t);
   }, [selectedFolder, onCreateAndCopySharedLink, t]);
 
+  const onOpenAccessSettings = () => {
+    setTemplateAccessSettingsVisible(true);
+  };
+
   const options = useMemo(
     () =>
       getOptions(
@@ -329,6 +335,7 @@ export const useOptions = (
           navigate,
           onGoToPersonal,
           onGoToShared,
+          onOpenAccessSettings,
         },
         logoText,
         isVisitor,
@@ -349,6 +356,7 @@ export const useOptions = (
       rootFolderType,
       t,
       inviteUser,
+      onOpenAccessSettings,
       uploadFromDocspace,
       uploadFromDocspaceAiKnowledge,
       onUploadAction,

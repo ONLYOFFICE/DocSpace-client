@@ -155,6 +155,8 @@ class FilesSettingsStore {
 
   extsFilesVectorized = [];
 
+  documentServiceLocation = null;
+
   constructor(
     thirdPartyStore,
     treeFoldersStore,
@@ -337,6 +339,10 @@ class FilesSettingsStore {
 
       throw error;
     }
+  };
+
+  setDocumentServiceLocation = (data) => {
+    this.documentServiceLocation = data;
   };
 
   changeDocumentServiceLocation = (

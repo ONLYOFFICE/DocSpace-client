@@ -7,6 +7,7 @@
   "DesktopTheme": "デスクトップエディタの設定と同期",
   "DesktopThemeDescription": "デスクトップエディタの現在のテーマに応じて、明るいテーマと暗いテーマを自動的に切り替えます。",
   "EditPhoto": "写真を編集する",
+  "EmailChangeSuccess": "あなたのメールは正常に変更されました。",
   "EmailNotVerified": "メールアドレス未確認",
   "ErrorAccountAlreadyUse": "他のユーザーが使用中のリンクアカウント",
   "FileManagement": "ファイル管理",
@@ -17,6 +18,7 @@
   "LogoutDescription": "ご注意：この接続以外の接続は、現在使用中のため、ログアウトされます。",
   "LogoutFrom": "{{platform}} {{browser}} からログアウトしますか？",
   "MyProfile": "私のプロフィール",
+  "NotificationsChannels": "通知チャネル",
   "ProviderSuccessfullyConnected": "プロバイダが正常に接続されました",
   "ProviderSuccessfullyDisconnected": "プロバイダが正常に切断された",
   "SendAgain": "もう一度送信する",
@@ -24,6 +26,10 @@
   "SuccessLogout": "アクティブな接続はログアウトされました：{{platform}}, {{browser}}",
   "SystemTheme": "システムテーマのように",
   "SystemThemeDescription": "システムの動作に合わせて、ライトテーマとダークテーマを自動で切り替えます。",
+  "TelegramAccount": "Telegramアカウント",
+  "TelegramAccountDescription": "TelegramBotをあなたのアカウントに接続するには、シークレットリンクをクリックして「Telegramを接続」ボタンを押してください。",
+  "TelegramAccountDisconnect": "Telegramを切断する",
+  "TelegramAccountDisconnectDescription": "あなたの @{{username}} アカウントは、Telegram 通知に接続されています。このアカウントから切断することができます。この場合、通知は受信されません。",
   "TerminateAllSessions": "現在のセッション以外のすべてのセッションを終了します。",
   "TwoFactorDescription": "管理者がすべてのユーザーに対して、コード生成アプリによる二要素認証を有効にしました。"
 }

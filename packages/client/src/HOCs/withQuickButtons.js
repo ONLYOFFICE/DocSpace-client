@@ -35,7 +35,10 @@ import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
-import { openShareTab } from "SRC_DIR/helpers/info-panel";
+import {
+  openShareTab,
+  forcedShowInfoPanelLoader,
+} from "SRC_DIR/helpers/info-panel";
 
 export default function withQuickButtons(WrappedComponent) {
   class WithQuickButtons extends React.Component {
@@ -141,9 +144,21 @@ export default function withQuickButtons(WrappedComponent) {
     };
 
     openShareTab = () => {
-      const { item, setBufferSelection } = this.props;
-      openShareTab();
+      const {
+        item,
+        setBufferSelection,
+        infoPanelSelection,
+        isShareTabActive,
+        resetSelections,
+      } = this.props;
+
+      if (infoPanelSelection?.id === item.id && isShareTabActive) {
+        forcedShowInfoPanelLoader();
+      }
+
+      resetSelections();
       setBufferSelection(item);
+      openShareTab();
     };
 
     render() {
@@ -237,7 +252,12 @@ export default function withQuickButtons(WrappedComponent) {
 
       const { isPublicRoom } = publicRoomStore;
 
-      const { setShareChanged, infoPanelRoomSelection } = infoPanelStore;
+      const {
+        setShareChanged,
+        infoPanelRoomSelection,
+        infoPanelSelection,
+        isShareTabActive,
+      } = infoPanelStore;
 
       const { getManageLinkOptions } = contextOptionsStore;
 
@@ -259,8 +279,11 @@ export default function withQuickButtons(WrappedComponent) {
         isTemplatesFolder,
         onCreateRoomFromTemplate,
         setBufferSelection: filesStore.setBufferSelection,
+        resetSelections: filesStore.resetSelections,
         lockFileAction,
         isTrashFolder,
+        isShareTabActive,
+        infoPanelSelection,
       };
     },
   )(observer(WithQuickButtons));

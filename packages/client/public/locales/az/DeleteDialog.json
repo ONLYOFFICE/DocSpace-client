@@ -11,6 +11,7 @@
   "DeleteGroupTitle": "Qrupu silin",
   "DeleteItem": "Artıq <strong>{{name}}</strong>ı {{trashSection}} bölməsinə köçürməyə hazırıq.",
   "DeleteItemForever": "Silməyə hazırlaşdığınız obyektdir <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Nəzərə alın ki, əgər onları kiminləsə paylaşmısınızsa, onlar əlçatan olmayacaq.",
   "DeleteRoom": "Otaq <strong>\"{{roomName}}\"</strong> daimi şəkildə silinəcəkdir. Bütün məlumatlar və istifadəçi girişləri itiriləcəkdir.",
   "DeleteRoomTitle": "Bu otağı sil?",
   "DeleteRoomWarning": "Mən nəticələri başa düşürəm və otağı silmək istəyirəm.",

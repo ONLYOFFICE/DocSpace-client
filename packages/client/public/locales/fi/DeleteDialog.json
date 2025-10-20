@@ -11,6 +11,7 @@
   "DeleteGroupTitle": "Poista ryhmä",
   "DeleteItem": "Olet siirtämässä <strong>{{name}}</strong>-kohtaa {{trashSection}}-osioon.",
   "DeleteItemForever": "Olet aikeissa poistaa <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Ole hyvä ja huomioi, että jos olet jakanut tiedot jonkun kanssa, ne tiedot eivät ole enää saatavilla.",
   "DeleteRoom": "Huone <strong>\"{{roomName}}\"</strong> poistetaan pysyvästi. Kaikki tiedot ja käyttäjäoikeudet menetetään.",
   "DeleteRoomTitle": "Poistetaanko tämä huone?",
   "DeleteRoomWarning": "Ymmärrän seuraukset ja haluan poistaa huoneen.",

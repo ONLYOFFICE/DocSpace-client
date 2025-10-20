@@ -342,6 +342,7 @@ const webhooksStore = new WebhooksStore(settingsStore);
 const importAccountsStore = new ImportAccountsStore(
   currentQuotaStore,
   settingsStore,
+  dialogsStore,
 );
 const storageManagement = new StorageManagement(
   filesStore,

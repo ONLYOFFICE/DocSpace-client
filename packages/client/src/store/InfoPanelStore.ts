@@ -366,6 +366,13 @@ class InfoPanelStore {
   setShareChanged = (shareChanged: boolean) => {
     this.shareChanged = shareChanged;
   };
+
+  get isShareTabActive(): boolean {
+    return (
+      this.roomsView === InfoPanelView.infoShare ||
+      this.fileView === InfoPanelView.infoShare
+    );
+  }
 }
 
 export default InfoPanelStore;

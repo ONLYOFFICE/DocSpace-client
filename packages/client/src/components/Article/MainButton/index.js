@@ -526,7 +526,7 @@ const ArticleMainButtonContent = (props) => {
       id: "actions_template_oforms-gallery",
       className: "main-button_drop-down_sub",
       icon: FormGalleryReactSvgUrl,
-      label: t("Common:OFORMsGallery"),
+      label: t("Common:TemplateGallery"),
       onClick: onShowTemplateGallery,
       disabled: isPrivacy,
       key: "form-gallery",
@@ -596,7 +596,7 @@ const ArticleMainButtonContent = (props) => {
         icon: FormReactSvgUrl,
         label: t("Translations:NewForm"),
         key: "new-form",
-        items: [createTemplateBlankDocxf, showSelectorDocx, formGallery],
+        items: [createTemplateBlankDocxf, showSelectorDocx],
       },
     ];
 

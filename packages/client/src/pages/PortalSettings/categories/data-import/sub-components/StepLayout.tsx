@@ -42,7 +42,7 @@ const DescriptionWrapper = styled.div`
   }
 
   .data-import-section-description {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     font-size: 12px;
   }
 `;

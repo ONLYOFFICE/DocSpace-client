@@ -140,6 +140,7 @@ export interface InjectedSelectUsersStepProps extends SelectUsersStepProps {
   incrementStep: TStore["importAccountsStore"]["incrementStep"];
   decrementStep: TStore["importAccountsStore"]["decrementStep"];
   withEmailUsers: TStore["importAccountsStore"]["withEmailUsers"];
+  withoutEmailUsers: TStore["importAccountsStore"]["withoutEmailUsers"];
   searchValue: TStore["importAccountsStore"]["searchValue"];
   setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
   cancelMigration: TStore["importAccountsStore"]["cancelMigration"];
@@ -456,6 +457,7 @@ export interface ImportSectionProps {
 export interface NoEmailUsersProps {
   t: TFunction;
   users: number;
+  isSelectUsersStep?: boolean;
 }
 
 export interface UsersInfoBlockProps {

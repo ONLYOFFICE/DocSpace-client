@@ -116,7 +116,8 @@ export const WorkspacesContainer = styled.div`
 export const Wrapper = styled.div`
   .users-without-email {
     font-size: 12px;
-    margin: 0 0 16px;
+    margin-top: -8px;
+    margin-bottom: 16px;
   }
 
   .upper-buttons {

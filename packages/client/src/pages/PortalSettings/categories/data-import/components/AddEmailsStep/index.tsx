@@ -40,6 +40,7 @@ import { Wrapper } from "../../StyledDataImport";
 import { AddEmailsStepProps, InjectedAddEmailsStepProps } from "../../types";
 import { MigrationButtons } from "../../sub-components/MigrationButtons";
 import UsersInfoBlock from "../../sub-components/UsersInfoBlock";
+import { NoEmailUsersBlock } from "../../sub-components/NoEmailUsersBlock";
 
 const PAGE_SIZE = 25;
 const REFRESH_TIMEOUT = 100;
@@ -123,6 +124,11 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
     <Wrapper>
       {users.withoutEmail.length > 0 ? (
         <>
+          <NoEmailUsersBlock
+            t={t as TFunction}
+            users={users.withoutEmail.length}
+          />
+
           {Buttons}
 
           <UsersInfoBlock
@@ -151,6 +157,8 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
               pagesPerPage={PAGE_SIZE}
             />
           ) : null}
+
+          {filteredAccounts.length > 0 ? Buttons : null}
         </>
       ) : (
         <>
@@ -160,8 +168,6 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
           {Buttons}
         </>
       )}
-
-      {filteredAccounts.length > 0 ? Buttons : null}
 
       {cancelUploadDialogVisible ? (
         <CancelUploadDialog

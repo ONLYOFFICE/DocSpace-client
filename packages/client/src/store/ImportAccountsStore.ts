@@ -149,6 +149,10 @@ class ImportAccountsStore {
     return [...this.users.existing, ...this.users.new];
   }
 
+  get withoutEmailUsers() {
+    return this.users.withoutEmail;
+  }
+
   get finalUsers() {
     return this.users.result;
   }

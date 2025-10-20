@@ -55,6 +55,7 @@ const InfoPanelBodyContent: React.FC<InfoPanelBodyContentProps> = ({
     onSaveRoomLogo,
     onChangeFile,
     setImage,
+    checkIsExpiredLinkAsync,
   } = restProps as Exclude<InfoPanelBodyContentProps, { isGallery: true }>;
 
   return (
@@ -76,6 +77,7 @@ const InfoPanelBodyContent: React.FC<InfoPanelBodyContentProps> = ({
       onSaveRoomLogo={onSaveRoomLogo}
       onChangeFile={onChangeFile}
       setImage={setImage}
+      checkIsExpiredLinkAsync={checkIsExpiredLinkAsync}
     />
   );
 };

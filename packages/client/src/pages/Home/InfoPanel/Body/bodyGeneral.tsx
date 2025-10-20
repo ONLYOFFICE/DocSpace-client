@@ -71,6 +71,7 @@ const InfoPanelBodyGeneral = ({
   onSaveRoomLogo,
   onChangeFile,
   setImage,
+  checkIsExpiredLinkAsync,
 }: BodyProps) => {
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
@@ -91,13 +92,15 @@ const InfoPanelBodyGeneral = ({
   const isSeveralItems = Array.isArray(selection) && selection.length > 1;
   const isNoItem =
     !selection ||
-    (isRoom && selection.expired && selection.external) ||
+    (!Array.isArray(selection) &&
+      selection.isLinkExpired &&
+      selection.external) ||
     isLockedSharedRoom ||
     isRoot;
 
   const currentView = useMemo(() => {
-    return isRoom ? roomsView : fileView;
-  }, [isRoom, roomsView, fileView]);
+    return isRoom || isTemplatesRoom ? roomsView : fileView;
+  }, [isRoom, roomsView, fileView, isTemplatesRoom]);
 
   const deferredCurrentView = React.useDeferredValue(currentView);
 
@@ -106,11 +109,18 @@ const InfoPanelBodyGeneral = ({
       fileView === InfoPanelView.infoShare &&
       selection &&
       isFolderUtil(selection) &&
-      !selection?.canShare
+      !selection?.canShare &&
+      !isTemplatesRoom
     ) {
       setView(InfoPanelView.infoDetails);
     }
-  }, [fileView, selection]);
+  }, [fileView, selection, isTemplatesRoom]);
+
+  React.useEffect(() => {
+    if (!selection) return;
+
+    checkIsExpiredLinkAsync(selection);
+  }, [selection]);
 
   const getView = () => {
     if (isUsers || isGuests) return <Users isGuests={isGuests} />;
@@ -122,13 +132,14 @@ const InfoPanelBodyGeneral = ({
 
     if (isNoItem || !selection) {
       const lockedSharedRoomProps = isLockedSharedRoom
-        ? { isLockedSharedRoom, infoPanelSelection: selection }
+        ? { isLockedSharedRoom }
         : {};
       return (
         <NoItem
           isRooms={isRooms}
           isFiles={isFiles}
           isTemplatesRoom={isTemplatesRoom}
+          infoPanelSelection={selection}
           {...lockedSharedRoomProps}
         />
       );

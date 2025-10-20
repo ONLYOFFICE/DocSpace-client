@@ -53,6 +53,7 @@ export type BodyProps = {
   setImage: AvatarEditorDialogStore["setImage"];
 
   contactsTab: UsersStore["contactsTab"];
+  checkIsExpiredLinkAsync: TStore["filesActionsStore"]["isExpiredLinkAsync"];
 };
 
 export type InfoPanelBodyContentProps =

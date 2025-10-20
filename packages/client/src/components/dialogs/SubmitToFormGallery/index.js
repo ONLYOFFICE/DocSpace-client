@@ -211,7 +211,7 @@ const SubmitToFormGallery = ({
           <Button
             primary
             size="normal"
-            label={t("FormGallery:SelectForm")}
+            label={t("FormGallery:SelectTemplate")}
             onClick={onOpenFormSelector}
             scale
             testId="submit_to_gallery_select_form_button"

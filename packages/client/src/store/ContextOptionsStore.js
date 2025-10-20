@@ -71,6 +71,7 @@ import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url"
 import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
 import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import FormBlankReactSvgUrl from "PUBLIC_DIR/images/form.blank.react.svg?url";
+import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
@@ -2615,6 +2616,19 @@ class ContextOptionsStore {
     return trimSeparator(resultOptions);
   };
 
+  onShowGallery = () => {
+    // if (isMobile) {
+    //   toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
+    //   return;
+    // }
+    // const { oformsFilter, defaultOformLocale } = this.oformsStore;
+    // const initOformFilter = oformsFilter || oformsFilter.getDefault();
+    // if (!initOformFilter.locale) initOformFilter.locale = defaultOformLocale;
+    // window.DocSpace.navigate(
+    //   `/form-gallery/${this.selectedFolderStore.id}/filter?${initOformFilter.toUrlParams()}`,
+    // );
+  };
+
   getGroupContextOptions = (t) => {
     const { selection, allFilesIsEditing, canConvertSelected } =
       this.filesStore;
@@ -2929,6 +2943,15 @@ class ContextOptionsStore {
   };
 
   getContextOptionsPlusFormRoom = (t) => {
+    const showSelectorFormRoomDocx = {
+      id: "actions_form-room_template_from-file",
+      className: "main-button_drop-down_sub",
+      icon: FormGalleryReactSvgUrl,
+      label: t("Common:ChooseFromTemplates"),
+      onClick: () => this.onShowGallery(),
+      key: "form-file",
+    };
+
     const uploadReadyPDFFrom = {
       id: "personal_upload-ready-Pdf-from",
       className: "main-button_drop-down_sub",
@@ -2996,6 +3019,7 @@ class ContextOptionsStore {
 
     return [
       uploadReadyPDFFrom,
+      showSelectorFormRoomDocx,
       // templatePDFForm,
       // {
       //   isSeparator: true,

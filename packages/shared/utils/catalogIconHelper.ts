@@ -37,11 +37,8 @@ import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.re
 import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
 import CatalogGroupsReactSvgUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
 import CatalogGuestsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.guest.react.svg?url";
-<<<<<<< HEAD
 import CatalogSettingsAIReactSvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
-=======
 import CatalogAiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
->>>>>>> develop
 
 import CatalogSettingsCommonReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg?url";
 import CatalogSettingsSecurityReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-security.svg?url";

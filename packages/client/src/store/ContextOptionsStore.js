@@ -2616,19 +2616,6 @@ class ContextOptionsStore {
     return trimSeparator(resultOptions);
   };
 
-  onShowGallery = () => {
-    // if (isMobile) {
-    //   toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
-    //   return;
-    // }
-    // const { oformsFilter, defaultOformLocale } = this.oformsStore;
-    // const initOformFilter = oformsFilter || oformsFilter.getDefault();
-    // if (!initOformFilter.locale) initOformFilter.locale = defaultOformLocale;
-    // window.DocSpace.navigate(
-    //   `/form-gallery/${this.selectedFolderStore.id}/filter?${initOformFilter.toUrlParams()}`,
-    // );
-  };
-
   getGroupContextOptions = (t) => {
     const { selection, allFilesIsEditing, canConvertSelected } =
       this.filesStore;
@@ -2948,7 +2935,7 @@ class ContextOptionsStore {
       className: "main-button_drop-down_sub",
       icon: FormGalleryReactSvgUrl,
       label: t("Common:ChooseFromTemplates"),
-      onClick: () => this.onShowGallery(),
+      onClick: () => this.onShowTemplateGallery(),
       key: "form-file",
     };
 

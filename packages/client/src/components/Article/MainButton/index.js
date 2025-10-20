@@ -418,7 +418,6 @@ const ArticleMainButtonContent = (props) => {
       const mobileMoreActions = null;
       const formRoomActions = [
         // templatePDFForm,
-        formGallery,
         uploadPDFFrom,
         showSelectorFormRoomDocx,
         {
@@ -435,7 +434,6 @@ const ArticleMainButtonContent = (props) => {
 
       const mobileFormRoomActions = [
         // templatePDFForm,
-        formGallery,
         uploadPDFFrom,
         showSelectorFormRoomDocx,
         createNewFolder,

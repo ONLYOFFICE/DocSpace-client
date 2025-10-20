@@ -37,6 +37,7 @@ import {
 } from "@docspace/shared/enums";
 import { FOLDER_NAMES } from "@docspace/shared/constants";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
+import { isTouchDevice } from "@docspace/shared/utils";
 
 import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
@@ -89,7 +90,7 @@ const Item = ({
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
   const isAiAgents = item.rootFolderType === FolderType.AIAgents;
-  const isDesktop = currentDeviceType === DeviceType.desktop;
+  const isMobile = currentDeviceType === DeviceType.mobile;
 
   const isDragging =
     dragging && !isIndexEditingMode ? showDragItems(item) : false;
@@ -153,12 +154,12 @@ const Item = ({
     (e, selectedFolderId) => {
       if (e?.ctrlKey || e?.metaKey || e?.shiftKey || e?.button) return;
 
-      if (!isDesktop && isTooltipOpen) {
+      if ((isTouchDevice || isMobile) && isTooltipOpen) {
         setIsTooltipOpen(false);
         return;
       }
 
-      if (!isDesktop && isAiAgents) {
+      if ((isTouchDevice || isMobile) && isAiAgents) {
         setIsTooltipOpen(true);
         return;
       }
@@ -179,7 +180,8 @@ const Item = ({
       item.rootFolderType,
       isTooltipOpen,
       setIsTooltipOpen,
-      isDesktop,
+      isTouchDevice,
+      isMobile,
       isAiAgents,
     ],
   );
@@ -196,7 +198,7 @@ const Item = ({
   );
 
   useEffect(() => {
-    if (isDesktop) return;
+    if (!isTouchDevice && !isMobile) return;
 
     const handleClickOutside = (event) => {
       if (isTooltipOpen) {
@@ -219,10 +221,10 @@ const Item = ({
       document.removeEventListener("click", handleClickOutside, true);
       document.removeEventListener("touchend", handleClickOutside, true);
     };
-  }, [isTooltipOpen, item.id, isDesktop]);
+  }, [isTooltipOpen, item.id, isTouchDevice, isMobile]);
 
   const onClickAiAgentsBadge = () => {
-    if (!isDesktop) {
+    if (isTouchDevice || isMobile) {
       setIsTooltipOpen(!isTooltipOpen);
     }
   };
@@ -235,6 +237,7 @@ const Item = ({
   );
 
   const droppableClassName = isDragging ? "droppable" : "";
+  const isFloatTooltip = !isTouchDevice && !isMobile;
 
   return (
     <StyledDragAndDrop
@@ -302,8 +305,8 @@ const Item = ({
           place="bottom-start"
           getContent={getTooltipAIAgentContent}
           maxWidth="320px"
-          float={isDesktop}
-          isOpen={!isDesktop ? isTooltipOpen : undefined}
+          float={isFloatTooltip}
+          isOpen={isTouchDevice || isMobile ? isTooltipOpen : undefined}
         />
       ) : null}
     </StyledDragAndDrop>

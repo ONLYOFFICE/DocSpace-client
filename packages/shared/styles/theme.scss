@@ -2951,3 +2951,11 @@
   --more-login-row-hover-color: #{$dark-gray-light};
   --more-login-row-pressed-color: #{$gray-dark-mid};
 }
+
+.light {
+  --mcp-icon-bg-opacity: 1;
+}
+
+.dark {
+  --mcp-icon-bg-opacity: 0.1;
+}

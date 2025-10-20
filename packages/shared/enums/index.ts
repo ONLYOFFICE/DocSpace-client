@@ -270,7 +270,7 @@ export const enum FolderType {
   SubFolderInProgress = 28,
   VirtualDataRoom = 29,
   RoomTemplates = 30,
-  AIRoom = 31,
+  AIAgents = 31,
   Knowledge = 32,
   ResultStorage = 33,
 }

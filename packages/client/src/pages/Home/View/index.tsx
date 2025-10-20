@@ -176,10 +176,6 @@ const View = ({
       return "users";
     }
 
-    if (type === CategoryType.Groups) {
-      return "groups";
-    }
-
     if (isProfilePage) {
       return "profile";
     }

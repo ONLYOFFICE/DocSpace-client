@@ -60,6 +60,8 @@ import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.s
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
+import { CategoryType } from "@docspace/shared/constants";
+
 import type {
   EmptyViewItemType,
   EmptyViewOptionsType,
@@ -67,7 +69,6 @@ import type {
 import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 
 import type { AccessType, OptionActions } from "./EmptyViewContainer.types";
 import { DefaultFolderType } from "./EmptyViewContainer.constants";

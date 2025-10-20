@@ -36,7 +36,7 @@ import { SearchArea } from "@docspace/shared/enums";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import AiRoomStore from "SRC_DIR/store/AiRoomStore";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { CategoryType } from "@docspace/shared/constants";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 

@@ -3,7 +3,7 @@
   "content": "Users",
   "content_en_sha1_hash": "57f2b181d0a5e79a147ea1cdf41457f58dbbb3c9",
   "created_at": "2025-05-19T21:30:54.976Z",
-  "updated_at": "2025-10-13T13:22:35.709Z",
+  "updated_at": "2025-10-17T14:43:53.450Z",
   "comment": {
     "text": "This translation key is used to display the label \"Users\" in the InfoPanelStore.js file. It appears as a title when users are displayed and needs to be translated into different languages, providing a user-friendly interface for various contexts.",
     "is_auto": true,
@@ -14,6 +14,24 @@
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/FilesView/hooks/useMembers.ts",
       "line_number": 109,
       "context": "label: t(\"Common:Groups\"),\n list: groups,\n },\n {\n key: TInfoPanelMemberType.users,\n label: t(\"InfoPanel:Users\"),\n list: users,\n },\n {\n key: TInfoPanelMemberType.guests,\n label: t(\"Common:Guests\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
+      "line_number": 100,
+      "context": "return (\n <Wrapper>\n <ImportSection\n isChecked\n sectionName={t(\"InfoPanel:Users\")}\n description={t(\"Settings:UsersSectionDescription\")}\n exportSection={{\n sectionName: usersExportDetails.name,\n workspace: serviceName,\n sectionIcon: usersExportDetails.icon,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
+      "line_number": 130,
+      "context": "component: (\n <ImportStep\n t={t}\n serviceName=\"Google Workspace\"\n usersExportDetails={{\n name: t(\"InfoPanel:Users\"),\n }}\n personalExportDetails={{\n name: t(\"Settings:GoogleDriveFiles\"),\n }}\n sharedFilesAndFoldersExportDetails={{",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
+      "line_number": 142,
+      "context": "component: (\n <ImportStep\n t={t}\n serviceName=\"Nextcloud\"\n usersExportDetails={{\n name: t(\"InfoPanel:Users\"),\n }}\n personalExportDetails={{\n name: t(\"Settings:UsersFiles\"),\n }}\n sharedFilesAndFoldersExportDetails={{",
       "module": "/packages/client"
     },
     {

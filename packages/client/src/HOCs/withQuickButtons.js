@@ -167,6 +167,7 @@ export default function withQuickButtons(WrappedComponent) {
         roomLifetime,
         isTemplatesFolder,
         isTrashFolder,
+        isRecentFolder,
       } = this.props;
 
       const showLifetimeIcon =
@@ -238,6 +239,7 @@ export default function withQuickButtons(WrappedComponent) {
         isArchiveFolder,
         isTemplatesFolder,
         isTrashFolder,
+        isRecentFolder,
       } = treeFoldersStore;
 
       const { isIndexEditingMode } = indexingStore;

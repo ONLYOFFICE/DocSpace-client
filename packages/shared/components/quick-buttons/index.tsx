@@ -76,7 +76,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     isTemplatesFolder,
     onClickLock,
     onClickFavorite,
-    isRecentFolder,
     onRetryVectorization,
     isTrashFolder,
     openShareTab,

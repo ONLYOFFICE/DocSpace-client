@@ -802,7 +802,7 @@ const ArticleMainButtonContent = (props) => {
           withoutButton={
             isRoomsFolder || isAccountsPage || isChatTab || isResultTab
           }
-          withMenu={!isRoomsFolder}
+          withMenu={withMenu}
           mainButtonMobileVisible={
             mainButtonMobileVisible ? mainButtonVisible : null
           }

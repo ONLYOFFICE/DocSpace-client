@@ -319,7 +319,10 @@ class FilesActionStore {
         continue;
       }
 
-      const folder = await createFolder(parentFolderId, treeNode.name);
+      const folder = await createFolder(
+        parentFolderId,
+        treeNode.name.trimEnd(),
+      );
       const parentId = folder.id;
 
       if (treeNode.children.length == 0) continue;

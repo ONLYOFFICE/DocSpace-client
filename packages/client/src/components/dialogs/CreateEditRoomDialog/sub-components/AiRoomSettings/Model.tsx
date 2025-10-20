@@ -193,7 +193,7 @@ const ModelSettings = ({ roomParams, setRoomParams }: ModelSettingsProps) => {
 
     if (
       prevSelectedModel.current?.modelId === selectedModel?.modelId ||
-      !selectedModel.providerId
+      typeof selectedModel.providerId !== "number"
     )
       return;
 

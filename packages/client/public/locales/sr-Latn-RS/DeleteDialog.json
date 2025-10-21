@@ -11,6 +11,7 @@
   "DeleteGroupTitle": "Obriši grupu",
   "DeleteItem": "Upravo ćeš premestiti <strong>{{name}}</strong> u {{trashSection}}.",
   "DeleteItemForever": "Spremate se da obrišete <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Imajte na umu da ako ih podelite sa nekim, oni će postati nedostupni.",
   "DeleteRoom": "Soba <strong>\"{{roomName}}\"</strong> će biti trajno obrisana. Svi podaci i pristupi korisnika će biti izgubljeni.",
   "DeleteRoomTitle": "Obrisati ovu sobu?",
   "DeleteRoomWarning": "Razumem posledice i želim da obrišem sobu",

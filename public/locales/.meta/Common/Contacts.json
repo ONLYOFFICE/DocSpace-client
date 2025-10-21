@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2025-10-16T07:29:35.528Z",
+  "updated_at": "2025-10-17T14:43:53.347Z",
   "comment": {
     "text": "The translation key \"Contacts\" is used to display a title for a list or directory of contacts, appearing as a header in various UI elements such as articles, template access selectors, and invite panels. This text provides context and helps distinguish this section from others, guiding the user's understanding of what they are viewing.",
     "is_auto": true,
@@ -42,32 +42,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 109,
-      "context": "sectionName: usersExportDetails.name,\n workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Contacts\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: AccountsIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 109,
-      "context": "sectionName: usersExportDetails.name,\n workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Contacts\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: AccountsIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 109,
-      "context": "sectionName: usersExportDetails.name,\n workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Contacts\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: AccountsIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 131,
-      "context": "component: (\n <ImportStep\n t={t}\n serviceName=\"Google Workspace\"\n usersExportDetails={{\n name: t(\"Common:Contacts\"),\n icon: PeopleIcon,\n }}\n personalExportDetails={{\n name: t(\"Settings:GoogleDriveFiles\"),\n }}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 139,
-      "context": "component: (\n <ImportStep\n t={t}\n serviceName=\"Nextcloud\"\n usersExportDetails={{\n name: t(\"Common:Contacts\"),\n icon: PeopleIcon,\n }}\n personalExportDetails={{\n name: t(\"Settings:UsersFiles\"),\n }}",
+      "line_number": 127,
+      "context": "t={t}\n i18nKey=\"GroupsSectionDescription\"\n ns=\"Settings\"\n values={{\n serviceName,\n sectionName: t(\"Common:Contacts\"),\n }}\n components={{\n 1: <span />,\n }}\n />",
       "module": "/packages/client"
     },
     {
@@ -96,7 +72,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 427,
+      "line_number": 428,
       "context": "const accounts =\n !isVisitor && !isCollaborator\n ? {\n key: \"user-menu-accounts\",\n icon: CatalogAccountsReactSvgUrl,\n label: t(\"Common:Contacts\"),\n onClick: (obj) =>\n this.onAccountsClick(PEOPLE_ROUTE_WITH_FILTER, obj),\n url: PEOPLE_ROUTE_WITH_FILTER,\n preventNewTab: true,\n }",
       "module": "/packages/client"
     },

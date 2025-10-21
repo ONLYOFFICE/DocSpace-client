@@ -11,6 +11,7 @@
   "DeleteGroupTitle": "Xoá nhóm",
   "DeleteItem": "Bạn sắp di chuyển <strong>{{name}}</strong> đến {{trashSection}}.",
   "DeleteItemForever": "Bạn sắp xóa <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Xin lưu ý rằng nếu bạn đã chia sẻ chúng với ai đó, chúng sẽ không khả dụng. ",
   "DeleteRoom": "Phòng <strong>\"{{roomName}}\"</strong> sẽ bị xóa vĩnh viễn. Tất cả dữ liệu và quyền truy cập của người dùng sẽ bị mất.",
   "DeleteRoomTitle": "Xóa phòng này?",
   "DeleteRoomWarning": "Tôi hiểu những hậu quả và muốn xóa phòng.",

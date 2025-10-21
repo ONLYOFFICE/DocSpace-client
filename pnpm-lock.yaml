@@ -21,6 +21,9 @@ importers:
       '@types/react-text-mask':
         specifier: 5.4.14
         version: 5.4.14
+      babel-plugin-react-compiler:
+        specifier: ^1.0.0
+        version: 1.0.0
       he:
         specifier: 1.2.0
         version: 1.2.0
@@ -483,7 +486,7 @@ importers:
         version: 0.12.1
       next:
         specifier: 15.5.2
-        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.48.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
+        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.48.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
       react:
         specifier: 19.1.1
         version: 19.1.1
@@ -631,7 +634,7 @@ importers:
         version: 0.12.1
       next:
         specifier: 15.5.2
-        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.48.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
+        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.48.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
       react:
         specifier: 19.1.1
         version: 19.1.1
@@ -806,7 +809,7 @@ importers:
         version: 0.12.1
       next:
         specifier: 15.5.2
-        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.48.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
+        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.48.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
       react:
         specifier: 19.1.1
         version: 19.1.1
@@ -1002,7 +1005,7 @@ importers:
         version: 0.12.1
       next:
         specifier: 15.5.2
-        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.48.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
+        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.48.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
       react:
         specifier: 19.1.1
         version: 19.1.1
@@ -1207,7 +1210,7 @@ importers:
         version: 0.5.46
       next:
         specifier: 15.5.2
-        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.48.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
+        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.48.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
       prop-types:
         specifier: 15.8.1
         version: 15.8.1
@@ -5090,6 +5093,9 @@ packages:
     resolution: {integrity: sha512-ISqQ2frbiNU9vIJkzg7dlPpznPZ4jOiUQ1uSmB0fEHeowtN3COYRsXr/xexn64NpU13P06jc/L5TgiJXOgrbEg==}
     peerDependencies:
       '@babel/core': ^7.4.0 || ^8.0.0-0 <8.0.0
+
+  babel-plugin-react-compiler@1.0.0:
+    resolution: {integrity: sha512-Ixm8tFfoKKIPYdCCKYTsqv+Fd4IJ0DQqMyEimo+pxUOMUR9cVPlwTrFt9Avu+3cb6Zp3mAzl+t1MrG2fxxKsxw==}
 
   babel-plugin-styled-components@2.1.4:
     resolution: {integrity: sha512-Xgp9g+A/cG47sUyRwwYxGM4bR/jDRg5N6it/8+HxCnbT5XNKSKDT9xm4oag/osgqjC2It/vH0yXsomOG6k558g==}
@@ -15229,6 +15235,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  babel-plugin-react-compiler@1.0.0:
+    dependencies:
+      '@babel/types': 7.28.2
+
   babel-plugin-styled-components@2.1.4(@babel/core@7.25.8)(styled-components@5.3.11(@babel/core@7.25.8)(react-dom@19.1.1(react@19.1.1))(react-is@18.3.1)(react@19.1.1))(supports-color@5.5.0):
     dependencies:
       '@babel/helper-annotate-as-pure': 7.27.3
@@ -19389,7 +19399,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  next@15.5.2(@babel/core@7.25.8)(@playwright/test@1.48.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5):
+  next@15.5.2(@babel/core@7.25.8)(@playwright/test@1.48.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5):
     dependencies:
       '@next/env': 15.5.2
       '@swc/helpers': 0.5.15
@@ -19408,6 +19418,7 @@ snapshots:
       '@next/swc-win32-arm64-msvc': 15.5.2
       '@next/swc-win32-x64-msvc': 15.5.2
       '@playwright/test': 1.48.0
+      babel-plugin-react-compiler: 1.0.0
       sass: 1.79.5
       sharp: 0.34.3
     transitivePeerDependencies:

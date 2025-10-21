@@ -228,7 +228,7 @@ const FilesMediaViewer = (props) => {
     }
 
     setMediaViewerData({ visible: false, id: null });
-    const url = await getFirstUrl();
+    const url = getFirstUrl();
 
     if (!url) {
       return;

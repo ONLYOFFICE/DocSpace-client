@@ -51,7 +51,8 @@ import styles from "../Selector.module.scss";
 import { EmptyScreenProps } from "../Selector.types";
 
 const linkStyles = {
-  isHovered: true,
+  noHover: true,
+  isHovered: false,
   type: LinkType.action,
   fontWeight: "600",
   className: "empty-folder_link",

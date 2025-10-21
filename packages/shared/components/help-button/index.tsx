@@ -54,6 +54,7 @@ const HelpButton = (props: HelpButtonProps) => {
     isOpen,
     noUserSelect,
     dataTestId,
+    tooltipStyle,
   } = props;
 
   const currentId = id || uniqueId();
@@ -74,6 +75,7 @@ const HelpButton = (props: HelpButtonProps) => {
     anchorSelect,
     isOpen,
     noUserSelect,
+    tooltipStyle,
   };
 
   return (

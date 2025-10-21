@@ -401,7 +401,10 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
   useEffect(() => {
     const extension = getFileExtension(currentTitle);
 
-    if (!src) return onEmptyPlaylistError?.();
+    if (!src) {
+      onEmptyPlaylistError?.();
+      return;
+    }
 
     if (!isTiff(extension) && !isHeic(extension)) {
       TiffAbortSignalRef.current?.abort();

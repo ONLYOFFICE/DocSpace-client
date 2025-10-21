@@ -152,7 +152,7 @@ class MediaViewerDataStore {
     return combineUrl(MEDIA_VIEW_URL, id);
   };
 
-  getFirstUrl = async () => {
+  getFirstUrl = () => {
     if (this.publicRoomStore.isPublicRoom) {
       const key = this.publicRoomStore.publicRoomKey;
       const filterObj = FilesFilter.getFilter(window.location);
@@ -166,19 +166,7 @@ class MediaViewerDataStore {
       return url;
     }
 
-    const { getPublicKey } = this.filesActionsStore;
-    const { bufferSelection } = this.filesStore;
-
     const filter = this.filesStore.filter;
-
-    const shareKey = await getPublicKey({
-      id: bufferSelection.folderId,
-      shared: bufferSelection.shared,
-      rootFolderType: bufferSelection.rootFolderType,
-      type: bufferSelection.type,
-    });
-
-    filter.key = shareKey;
 
     const queryParams = filter.toUrlParams();
 
@@ -285,9 +273,10 @@ class MediaViewerDataStore {
     if (filesList.length > 0) {
       filesList.forEach((file) => {
         const canOpenPlayer =
-          file.viewAccessibility?.ImageView ||
-          file.viewAccessibility?.MediaView ||
-          (file.fileExst === ".pdf" && window.ClientConfig?.pdfViewer);
+          (file.viewAccessibility?.ImageView ||
+            file.viewAccessibility?.MediaView ||
+            (file.fileExst === ".pdf" && window.ClientConfig?.pdfViewer)) &&
+          !file.isLinkExpired;
 
         if (canOpenPlayer) {
           playlist.push({
@@ -299,7 +288,8 @@ class MediaViewerDataStore {
             fileStatus: file.fileStatus,
             canShare: file.canShare,
             version: file.version,
-            thumbnailUrl: file.thumbnailUrl,
+            thumbnailUrl:
+              !file.providerItem && file.thumbnailUrl ? file.thumbnailUrl : "",
           });
 
           const thumbnailIsNotCreated =
@@ -326,7 +316,10 @@ class MediaViewerDataStore {
         fileId: this.previewFile.id,
         src: this.previewFile.viewUrl,
         version: this.previewFile.version,
-        thumbnailUrl: this.previewFile.thumbnailUrl,
+        thumbnailUrl:
+          !this.previewFile.providerItem && this.previewFile.thumbnailUrl
+            ? this.previewFile.thumbnailUrl
+            : "",
       });
 
       if (this.previewFile.viewAccessibility.ImageView) {

@@ -7,7 +7,7 @@
   "DeleteGuest": "Odstranit hosta",
   "DeleteGuests": "Odstranění hostů",
   "DeletePersonalDataApplicable": "*Platí pro vybrané uživatele, kteří mají takové soubory a složky.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Místnosti vytvořené tímto uživatelem a dokumenty uložené v těchto místnostech budou automaticky přeřazeny na správce provádějícího mazání: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Ruční přeřazení dat pro výběr jiného cílového uživatele pro přeřazení.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Všechny sdílené soubory a místnosti vytvořené tímto kontaktem budou automaticky přeřazeny administrátorovi provádějícímu smazání: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Pro přeřazení dat ručně si vyberte jiného uživatele pro přeřazení.",
   "DeleteReqassignDescriptionGuest": "{{userCaption}} bude smazán ze všech místností, do kterých byl pozván. Dokumenty vytvořené tímto {{userCaption}} v místnostech budou automaticky znovu přiřazeny vlastníkům místností.",
   "DeleteUser": "Smazat uživatele",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> bude smazán. Tuto akci nelze vrátit zpět.",

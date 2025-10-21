@@ -261,21 +261,15 @@
   }
 }
 
-.dropdown {
-  :global(.share-link_calendar) {
-    position: fixed;
-  }
-}
-
 .calendar {
-  position: absolute;
-  inset-inline-end: 32px;
-
   @include mixins.mobile {
     position: fixed;
     bottom: 0;
     inset-inline-start: 0;
   }
+}
+.dropDown {
+  padding: 0px;
 }
 
 .linkTitleContainer {

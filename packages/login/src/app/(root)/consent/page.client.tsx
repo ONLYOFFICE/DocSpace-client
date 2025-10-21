@@ -121,7 +121,7 @@ const Consent = ({
 
   React.useEffect(() => {
     const redirect_url = getCookie("x-redirect-authorization-uri");
-    if (!redirect_url) return;
+    if (!redirect_url || !scopes.length) return;
 
     // Your cookie processing logic here
     const decodedRedirectUrl = window.atob(
@@ -131,16 +131,26 @@ const Consent = ({
     deleteCookie("x-redirect-authorization-uri");
 
     const splitedURL = decodedRedirectUrl.split("&scope=");
+
     if (splitedURL[1]) {
-      const splitedScopes = splitedURL[1]
-        .split("&")?.[0]
-        .split("%20") as string[];
+      const scopesStr = splitedURL[1].split("&")?.[0];
+
+      const decodedScopesStr = window.decodeURIComponent(scopesStr);
+
+      const splitedScopes: string[] = [];
+
+      scopes.forEach((scope) => {
+        if (decodedScopesStr.includes(scope.name)) {
+          splitedScopes.push(scope.name);
+        }
+      });
+
       setCookie("x-scopes", splitedScopes.join(";"));
 
       setCurrentScopes(splitedScopes);
     }
     setCookie("x-url", splitedURL[0]);
-  }, []);
+  }, [scopes]);
 
   React.useEffect(() => {
     const validateToken = async () => {

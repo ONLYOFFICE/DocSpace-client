@@ -3,7 +3,7 @@
   "content": "About",
   "content_en_sha1_hash": "6b21fb791ac05170893860c248401cd24a59b732",
   "created_at": "2025-05-19T21:30:42.789Z",
-  "updated_at": "2025-05-26T07:57:32.194Z",
+  "updated_at": "2025-10-13T13:22:35.645Z",
   "comment": {
     "text": "This translation key is used for the text \"About\" that appears on a navigation menu link in the client-side application. It serves as a label for a header element displaying the link to access information about the app or its features. The text is part of a larger UI component and will be displayed with a style indicating it's a clickable link.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NavMenu/sub-components/header.js",
-      "line_number": 248,
+      "line_number": 254,
       "context": "<StyledLink>\n <LinkWithoutRedirect\n to={combineUrl(window.ClientConfig?.proxy?.url, \"/about\")}\n className=\"nav-menu-header_link\"\n >\n {t(\"Common:About\")}\n </LinkWithoutRedirect>\n </StyledLink>\n </Box>\n </Nav>\n )} */}",
       "module": "/packages/client"
     },

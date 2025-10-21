@@ -56,11 +56,7 @@ const ArticleDevToolsBar = ({
 
     if (openingNewTab(pathDevTools, e)) return;
 
-    navigate(pathDevTools, {
-      state: {
-        fromUrl: `${location.pathname}${location.search}`,
-      },
-    });
+    navigate(pathDevTools);
 
     if (articleOpen && currentDeviceType === DeviceType.mobile)
       toggleArticleOpen();

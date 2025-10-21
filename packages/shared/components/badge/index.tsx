@@ -53,6 +53,7 @@ const Badge = (props: BadgeProps) => {
     isVersionBadge,
     isPaidBadge,
     isMutedBadge,
+    dataTestId,
     ...rest
   } = props;
 
@@ -106,7 +107,7 @@ const Badge = (props: BadgeProps) => {
       aria-label={`${label} ${type || ""}`}
       aria-live="polite"
       aria-atomic="true"
-      data-testid="badge"
+      data-testid={dataTestId ?? "badge"}
       data-hidden={!shouldDisplay}
       data-no-hover={noHover}
       data-is-hovered={isHovered}

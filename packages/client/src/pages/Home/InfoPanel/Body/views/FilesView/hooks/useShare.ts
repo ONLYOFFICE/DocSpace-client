@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import axios from "axios";
 import React from "react";
 
 import {
@@ -92,7 +93,9 @@ export const useShare = ({
       setShareMembers(shareUsers.items);
       setShareMembersTotal(shareUsers.total);
     } catch (error) {
-      console.error("Error fetching external links:", error);
+      if (!axios.isCancel(error))
+        console.error("Error fetching external links:", error);
+
       throw error;
     }
   }, [id, isFolder, generatePrimaryLink]);

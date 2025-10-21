@@ -28,9 +28,11 @@ import { useCallback, type FC } from "react";
 import { inject, observer } from "mobx-react";
 
 import Share from "@docspace/shared/components/share";
+import { ShareEventName } from "@docspace/shared/components/share/Share.constants";
+
 import type { ShareProps } from "@docspace/shared/components/share/Share.types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
-import { ShareEventName } from "@docspace/shared/components/share/Share.constants";
+import type { TGroup } from "@docspace/shared/api/groups/types";
 
 interface ExternalShareProps {
   infoPanelSelection?: ShareProps["infoPanelSelection"];
@@ -38,7 +40,13 @@ interface ExternalShareProps {
   members?: ShareProps["members"];
 }
 
-const WrapperShare: FC<Omit<ShareProps, "onAddUser">> = (props) => {
+interface WrapperShareProps
+  extends Omit<ShareProps, "onAddUser" | "onClickGroup"> {
+  setEditMembersGroup: (group: TGroup) => void;
+  setEditGroupMembersDialogVisible: (visible: boolean) => void;
+}
+
+const WrapperShare: FC<WrapperShareProps> = (props) => {
   const onAddUser = useCallback((item: TFolder | TFile) => {
     const event = new CustomEvent(ShareEventName, {
       detail: {
@@ -50,7 +58,16 @@ const WrapperShare: FC<Omit<ShareProps, "onAddUser">> = (props) => {
     window.dispatchEvent(event);
   }, []);
 
-  return <Share {...props} onAddUser={onAddUser} />;
+  const onClickGroup = useCallback((group: TGroup) => {
+    if (group.isSystem) return;
+
+    const { setEditMembersGroup, setEditGroupMembersDialogVisible } = props;
+
+    setEditMembersGroup(group);
+    setEditGroupMembersDialogVisible(true);
+  }, []);
+
+  return <Share {...props} onAddUser={onAddUser} onClickGroup={onClickGroup} />;
 };
 
 export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
@@ -61,6 +78,9 @@ export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
     setEditLinkPanelIsVisible,
     setEmbeddingPanelData,
     setIsShareFormData,
+
+    setEditMembersGroup,
+    setEditGroupMembersDialogVisible,
   } = dialogsStore;
 
   const {
@@ -82,5 +102,8 @@ export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
     setEditLinkPanelIsVisible,
     setEmbeddingPanelData,
     onOpenPanel: setIsShareFormData,
+
+    setEditMembersGroup,
+    setEditGroupMembersDialogVisible,
   };
 })(observer(WrapperShare as FC<ExternalShareProps>));

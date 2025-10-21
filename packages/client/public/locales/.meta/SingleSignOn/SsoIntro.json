@@ -3,7 +3,7 @@
   "content": "The Single Sign-On section allows you to enable/disable third-party authentication using SAML, thereby providing a quicker, easier and more secure way to access the space for users.",
   "content_en_sha1_hash": "934dd1dc1e384a2a4a53a740d7eba5216ea9f77b",
   "created_at": "2025-05-19T21:30:50.185Z",
-  "updated_at": "2025-09-17T13:43:01.850Z",
+  "updated_at": "2025-09-29T11:28:56.237Z",
   "comment": {
     "text": "The Single Sign-On section allows users to enable or disable third-party authentication using SAML, providing a quicker and more secure way to access the space. This translation key is used in the portal settings page, where it appears as a title for a section explaining the functionality of SSO.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/index.js",
-      "line_number": 72,
-      "context": "return (\n <StyledSsoPage\n hideSettings={serviceProviderSettings}\n hideMetadata={spMetadata}\n >\n <Text className=\"intro-text settings_unavailable\">{t(\"SsoIntro\")}</Text>\n \n {isMobileView ? (\n <MobileView isSSOAvailable={isSSOAvailable} logoText={logoText} />\n ) : (\n <>",
+      "line_number": 76,
+      "context": "<StyledSsoPage\n hideSettings={serviceProviderSettings}\n hideMetadata={spMetadata}\n withoutExternalLink={!singleSignOnUrl}\n >\n <Text className=\"intro-text settings_unavailable\">{t(\"SsoIntro\")}</Text>\n \n {singleSignOnUrl ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme.main?.accent}",
       "module": "/packages/client"
     }
   ],

@@ -2880,8 +2880,8 @@ export const getBaseTheme = () => {
           comboBoxLabelColor: black,
           importSectionBackground: grayLight,
           importSectionTextColor: gray,
-          importItemBackground: grayLightMid,
-          importItemDisableBackground: lightGrayHover,
+          importItemBackground: grayLight,
+          importItemDisableBackground: grayLight,
           importItemTextColor: grayText,
           importItemDisableTextColor: gray,
           importItemDescription: black,
@@ -3077,6 +3077,9 @@ export const getBaseTheme = () => {
       submitToGalleryTile: {
         bodyText: grayText,
         closeIconFill: lightGrayDark,
+        border: `1px solid ${grayLightMid}`,
+        background: lightGraySelected,
+        colorExt: gray,
       },
     },
 

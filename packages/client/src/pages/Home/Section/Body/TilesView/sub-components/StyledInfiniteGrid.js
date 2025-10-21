@@ -49,8 +49,8 @@ const StyledItem = styled.div`
   display: grid;
   grid-template-columns: ${(props) =>
     props.isRoom || props.isTemplate
-      ? "repeat(auto-fill, minmax(275px, 1fr))"
-      : "repeat(auto-fill, minmax(216px, 1fr))"};
+      ? "repeat(auto-fill, minmax(clamp(275px, 13.4vw, 350px), 1fr))"
+      : "repeat(auto-fill, minmax(clamp(216px, 13.4vw, 360px), 1fr))"};
   gap: ${(props) => (props.isRoom ? "16px" : "14px 16px")};
 
   ${paddingCss};

@@ -83,6 +83,17 @@ export const Providers = ({
   }, [redirectURL, searchParams, confirmType]);
 
   React.useEffect(() => {
+    // On the first navigation from an email link, the auth cookie is not sent
+    // because it has SameSite=Strict. To access the cookie,
+    // we perform a client-side redirect and set a special flag.
+    if (confirmType === "EmailChange" && !searchParams.get("redirected")) {
+      window.location.replace(
+        `/confirm/${confirmType}?${searchParams?.toString()}&redirected=true`,
+      );
+    }
+  }, [searchParams, confirmType]);
+
+  React.useEffect(() => {
     if (shouldRedirect && redirectURL && pathName !== expectedPathName)
       window.location.replace(expectedPathName);
   }, [redirectURL, pathName, expectedPathName, shouldRedirect]);

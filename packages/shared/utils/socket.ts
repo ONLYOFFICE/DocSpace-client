@@ -72,6 +72,8 @@ export const enum SocketEvents {
   EncryptionProgress = "s:encryption-progress",
   ChangeMyType = "s:change-my-type",
   UpdateTelegram = "s:update-telegram",
+  SelfRestrictionFile = "s:self-restriction-file",
+  SelfRestrictionFolder = "s:self-restriction-folder",
 }
 
 /**
@@ -229,7 +231,10 @@ export type TOptSocket = {
  * Each callback can have specific parameters and a return type, which are defined for each event.
  */
 export type TListenEventCallbackMap = {
-  [SocketEvents.LogoutSession]: (loginEventId: unknown) => void;
+  [SocketEvents.LogoutSession]: (data: {
+    loginEventId: unknown;
+    redirectUrl: string | null;
+  }) => void;
   [SocketEvents.ModifyFolder]: (data?: TOptSocket) => void;
   [SocketEvents.ModifyRoom]: (data: TOptSocket) => void;
   [SocketEvents.UpdateHistory]: (data: {
@@ -281,6 +286,14 @@ export type TListenEventCallbackMap = {
     hasPersonalFolder: boolean;
   }) => void;
   [SocketEvents.UpdateTelegram]: (data: { username: string }) => void;
+  [SocketEvents.SelfRestrictionFile]: (data: {
+    id: number;
+    data: string;
+  }) => void;
+  [SocketEvents.SelfRestrictionFolder]: (data: {
+    id: number;
+    data: string;
+  }) => void;
 };
 
 /**

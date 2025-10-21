@@ -3,7 +3,7 @@
   "content": "Virtual Data Room",
   "content_en_sha1_hash": "29f2e3affa77388673134388754b5295d908047b",
   "created_at": "2025-05-19T21:30:49.548Z",
-  "updated_at": "2025-09-26T15:21:06.211Z",
+  "updated_at": "2025-10-13T20:00:31.142Z",
   "comment": {
     "text": "The translation key \"VirtualDataRoom\" refers to a virtual data room in a collaborative workspace, used to display a specific type of room on the UI. It appears as a filter option and a room title, guiding users to a secure space for sharing sensitive information. Its context is within the client-side application's file management system.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 930,
+      "line_number": 933,
       "context": "case RoomsType.VirtualDataRoom:\n return {\n id: \"filter_type-virtual-data\",\n key: RoomsType.VirtualDataRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:VirtualDataRoom\"),\n };\n case RoomsType.CustomRoom:\n default:\n return {\n id: \"filter_type-custom\",",
       "module": "/packages/client"
     },
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 377,
+      "line_number": 379,
       "context": "return t(\"Common:FormRoom\");\n \n case `room-${RoomsType.PublicRoom}`:\n return t(\"Common:PublicRoomLabel\");\n case `room-${RoomsType.VirtualDataRoom}`:\n return t(\"Common:VirtualDataRoom\");\n \n default:\n return \"\";\n }\n };",
       "module": "/packages/shared"
     }
@@ -93,13 +93,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Salles de données virtuelle' is not the most natural or accurate translation of 'Virtual Data Room'. While literally correct, it sounds somewhat clunky in French. A better translation would be 'Pièce de données virtuelle' or 'Salle de données virtuelle' (with the article 'La' depending on context).",
-          "suggestion": "Consider 'Pièce de données virtuelle' or 'Salle de données virtuelle'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -180,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"අතථ්‍ය දත්ත කාමරය\" while technically accurate, might not be the most natural or commonly understood translation of \"Virtual Data Room\" in Sinhala. \"Virtual\" can be translated in several ways, and \"අතථ්‍ය\" (athathya) can sometimes imply something unreal or imaginary in a way that might be misleading in this context. A more common and clearer translation might be better.",
-          "suggestion": "Consider alternatives such as \"විචිත්‍රිත දත්ත කාමරය\" (vichitrita data kamaraya) or \"සංඛ්‍යාත්මක දත්ත කාමරය\" (sankhyamatika data kamaraya). Research common usage within the target audience."
+          "description": "While \"අතථ්‍ය දත්ත කාමරය\" is a literal translation, it's not the most natural or commonly used term in Sinhala for 'Virtual Data Room.' The term 'online දත්ත ගබඩාව' (online data repository) or 'විද්යුත් දත්ත ගබඩාව' (electronic data repository) might be more appropriate depending on the context.",
+          "suggestion": "Consider 'online දත්ත ගබඩාව' or 'විද්යුත් දත්ත ගබඩාව' as alternative translations."
         }
       ],
       "approved_at": null
@@ -204,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation \"Виртуелна соба за податке\" has a potential spelling issue. The word \"Виртуелна\" (Virtualna) should ideally be spelled \"Виртуелна\".",
-          "suggestion": "Виртуелна соба за податке"
+          "description": "The Serbian (Cyrillic) translation uses the English word 'Виртуелна' (Virtuelna) instead of a fully Cyrillic equivalent.",
+          "suggestion": "Consider using a fully Cyrillic alternative such as 'Виртуелна просторија за податке' or 'Електронска просторија за податке' depending on the desired level of formality and accuracy."
         }
       ],
       "approved_at": null
@@ -216,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The term 'Virtuelna' is a misspelling. The correct spelling is 'Virtuelna'",
-          "suggestion": "Virtuelna"
+          "description": "The Serbian (Latin) translation contains a spelling error. 'Virtuelna' should be 'Virtuelna'.",
+          "suggestion": "Virtuelna soba za podatke"
         }
       ],
       "approved_at": null
@@ -241,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

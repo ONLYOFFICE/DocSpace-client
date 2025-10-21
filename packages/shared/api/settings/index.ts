@@ -32,6 +32,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { Nullable } from "../../types";
 import { ILogo } from "../../pages/Branding/WhiteLabel/WhiteLabel.types";
 import { request } from "../client";
+import { RecaptchaType } from "../../enums";
 import {
   TCustomSchema,
   TGetCSPSettings,
@@ -529,8 +530,18 @@ export function getCurrentCustomSchema(id) {
   });
 }
 
-export function sendRecoverRequest(email, message) {
-  const data = { email, message };
+export function sendRecoverRequest(
+  email: string,
+  message: string,
+  recaptchaResponse: string | null | undefined = "",
+  recaptchaType?: RecaptchaType,
+) {
+  const data: Record<string, unknown> = { email, message, recaptchaResponse };
+
+  if (typeof recaptchaType !== "undefined") {
+    data.recaptchaType = recaptchaType;
+  }
+
   return request({
     method: "post",
     url: `/settings/sendadmmail`,

@@ -28,7 +28,6 @@ import axios, {
   type AxiosInstance,
   type AxiosRequestConfig,
   type AxiosResponse,
-  type InternalAxiosRequestConfig,
 } from "axios";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
@@ -97,6 +96,12 @@ class AxiosClient {
       };
     }
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const publicRoomKey = urlParams.get("key") || urlParams.get("share");
+    if (publicRoomKey) {
+      headers = { ...headers, "Request-Token": publicRoomKey };
+    }
+
     const apiBaseURL = combineUrl(origin, proxy, prefix);
     const paymentsURL = combineUrl(
       proxy,
@@ -124,22 +129,6 @@ class AxiosClient {
     });
 
     this.client = axios.create(apxiosConfig);
-
-    this.client.interceptors.request.use(
-      (config: InternalAxiosRequestConfig) => {
-        if (typeof window === "undefined") return config;
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const publicRoomKey = urlParams.get("key") || urlParams.get("share");
-
-        if (publicRoomKey) {
-          config.headers = config.headers || {};
-          config.headers["Request-Token"] = publicRoomKey;
-        }
-
-        return config;
-      },
-    );
   };
 
   initSSR = (headersParam: Record<string, string>) => {

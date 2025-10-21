@@ -3,7 +3,7 @@
   "content": "No groups match your search. Please adjust your search parameters or clear the search field to view the full list of groups.",
   "content_en_sha1_hash": "9c3caa1ff1cab6647d8d6b2e9142676a207a5953",
   "created_at": "2025-05-19T21:30:45.677Z",
-  "updated_at": "2025-09-23T07:24:24.181Z",
+  "updated_at": "2025-10-01T15:17:48.231Z",
   "comment": {
     "text": "This translation key is used to display a message when no groups are found based on user search criteria. It typically appears in an empty screen or search results section of a UI component.",
     "is_auto": true,
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 681,
+      "line_number": 685,
       "context": "? t(\"Common:NotFoundGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:EmptyDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:GroupsNotFoundDescription\"))\n }\n searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={\n activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuestsFilter\")",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 681,
+      "line_number": 685,
       "context": "? t(\"Common:NotFoundGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:EmptyDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:GroupsNotFoundDescription\"))\n }\n searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={\n activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuestsFilter\")",
       "module": "/packages/shared"
     }

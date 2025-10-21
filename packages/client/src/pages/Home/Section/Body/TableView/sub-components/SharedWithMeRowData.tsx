@@ -33,8 +33,12 @@ import { TableCell } from "@docspace/shared/components/table";
 import type { TTheme } from "@docspace/shared/themes";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { LinkProps } from "@docspace/shared/utils/plugin-file-utils";
+import { getLastColumn } from "@docspace/shared/utils";
 
-import { StyledBadgesContainer } from "../StyledTable";
+import {
+  StyledBadgesContainer,
+  StyledQuickButtonsContainer,
+} from "../StyledTable";
 
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
@@ -70,8 +74,7 @@ interface SharedWithMeRowDataProps {
   isIndexEditingMode: boolean;
   displayFileExtension: boolean;
   badgesComponent: React.ReactNode;
-  lastColumn: string;
-  lastColumnContent: React.ReactNode;
+  quickButtonsComponent: React.ReactNode;
   fileOwner: string;
 
   create?: unknown;
@@ -86,6 +89,7 @@ interface InjectedSharedWithMeRowDataProps {
   modifiedShareWithMeColumnIsEnabled: boolean;
   sizeShareWithMeColumnIsEnabled: boolean;
   typeShareWithMeColumnIsEnabled: boolean;
+  tableStorageName: string;
 }
 
 const SharedWithMeRowData: FC<
@@ -98,20 +102,28 @@ const SharedWithMeRowData: FC<
     element,
     dragStyles,
     inProgress,
-    lastColumn,
     checkedProps,
     selectionProp,
     showHotkeyBorder,
     onContentFileSelect,
     badgesComponent,
-    lastColumnContent,
+    quickButtonsComponent,
 
     authorShareWithMeColumnIsEnabled,
     accessLevelShareWithMeColumnIsEnabled,
     modifiedShareWithMeColumnIsEnabled,
     sizeShareWithMeColumnIsEnabled,
     typeShareWithMeColumnIsEnabled,
+    tableStorageName,
   } = props;
+
+  const lastColumn = getLastColumn(tableStorageName);
+
+  const lastColumnContent = (
+    <StyledQuickButtonsContainer>
+      {quickButtonsComponent}
+    </StyledQuickButtonsContainer>
+  );
 
   return (
     <>
@@ -135,6 +147,7 @@ const SharedWithMeRowData: FC<
         <StyledBadgesContainer {...{ showHotkeyBorder }}>
           {badgesComponent}
         </StyledBadgesContainer>
+        {lastColumn === "Name" ? lastColumnContent : null}
       </TableCell>
 
       {authorShareWithMeColumnIsEnabled ? (
@@ -179,6 +192,7 @@ const SharedWithMeRowData: FC<
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "AccessLevelShareWithMe" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -227,6 +241,7 @@ const SharedWithMeRowData: FC<
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "SizeShareWithMe" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -250,6 +265,7 @@ const SharedWithMeRowData: FC<
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "TypeShareWithMe" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -269,6 +285,7 @@ export default inject<
     modifiedShareWithMeColumnIsEnabled,
     sizeShareWithMeColumnIsEnabled,
     typeShareWithMeColumnIsEnabled,
+    tableStorageName,
   } = tableStore;
 
   return {
@@ -277,5 +294,6 @@ export default inject<
     modifiedShareWithMeColumnIsEnabled,
     sizeShareWithMeColumnIsEnabled,
     typeShareWithMeColumnIsEnabled,
+    tableStorageName,
   };
 })(observer(SharedWithMeRowData));

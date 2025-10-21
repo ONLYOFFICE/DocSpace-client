@@ -152,11 +152,11 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
   const headerDescription = useMemo(() => {
     if (isStartFilling) {
       return isYournTurn
-        ? t("CompletedForm:FormVDRYourTurnDescription")
-        : t("CompletedForm:FormVDRConfirmationOfStartDescription");
+        ? t("CompletedForm:FormVDRYouFirstRecepientDescription")
+        : t("CompletedForm:FormVDRNextRecepientDescription");
     }
 
-    if (completed) return t("CompletedForm:FormVDRCompletedDescription");
+    if (completed) return t("CompletedForm:FormVDRFinalizedDescription");
 
     return t("CompletedForm:FormVDRSectionCompletedDescription");
   }, [t, isStartFilling, completed, isYournTurn]);

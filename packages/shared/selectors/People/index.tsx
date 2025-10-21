@@ -470,9 +470,13 @@ const PeopleSelector = ({
       setSearchValue(() => {
         return "";
       });
+
+      // Trigger initial load after clearing search
+      loadNextPage(0);
+
       callback?.();
     },
-    [resetSelectorList],
+    [resetSelectorList, loadNextPage],
   );
 
   const emptyScreenImage = isBase

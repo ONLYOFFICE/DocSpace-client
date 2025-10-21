@@ -50,6 +50,7 @@ export const WizardContainer = styled.div`
     align-items: center;
     justify-content: center;
     padding-bottom: 40px;
+    max-width: 386px;
   }
 
   .welcome-text {

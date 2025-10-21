@@ -89,7 +89,7 @@ const PluginSDK = ({
         <div className="plugin-list__item-info">
           <img
             className="plugin-logo"
-            src={`${p.iconUrl}/assets/${p.image}`}
+            src={`${p.iconUrl}/assets/${p.image}?hash=${p.version}`}
             alt="Plugin logo"
           />
           <div className="plugin-info-container">

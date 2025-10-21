@@ -297,7 +297,7 @@
 
   --view-selector-items-count: unset;
 
-  --font-family: "Open Sans", sans-serif, Arial;
+  --font-family: "Open Sans", -apple-system, "Segoe UI", sans-serif, Arial;
 
   --text-input-transition: all 0.2s ease 0s;
   --text-input-box-shadow: inset 0 0 0 30px var(--input-bg);
@@ -340,7 +340,8 @@
   --row-content-font-size: 12px;
   --row-content-font-style: normal;
   --row-content-font-weight: 600;
-  --row-content-font-family: "Open Sans", sans-serif, Arial;
+  --row-content-font-family:
+    "Open Sans", -apple-system, "Segoe UI", sans-serif, Arial;
   --row-content-max-width: 100%;
   --row-content-side-info-min-width: 160px;
   --row-content-side-info-margin: 0 6px;
@@ -646,11 +647,11 @@
 
 .light {
   --beta-badge-tooltip-box-shadow-color: #00000029;
-  --tooltip-text-color: #000000;
+  --tooltip-text-color: #{$dark-black};
 }
 
 .dark {
-  --tooltip-text-color: #ffffff;
+  --tooltip-text-color: #{$white};
 }
 
 .light {
@@ -1021,7 +1022,8 @@
   --row-content-font-size: 12px;
   --row-content-font-style: normal;
   --row-content-font-weight: 600;
-  --row-content-font-family: "Open Sans", sans-serif, Arial;
+  --row-content-font-family:
+    "Open Sans", -apple-system, "Segoe UI", sans-serif, Arial;
   --row-content-max-width: 100%;
   --row-content-side-info-min-width: 160px;
   --row-content-side-info-margin: 0 6px;
@@ -1043,7 +1045,8 @@
   --row-content-font-size: 12px;
   --row-content-font-style: normal;
   --row-content-font-weight: 600;
-  --row-content-font-family: "Open Sans", sans-serif, Arial;
+  --row-content-font-family:
+    "Open Sans", -apple-system, "Segoe UI", sans-serif, Arial;
   --row-content-height: 56px;
   --row-content-max-width: 100%;
 
@@ -1495,7 +1498,7 @@
 
 .light {
   --text-color: #{$black};
-  --font-family: "Open Sans", sans-serif, Arial;
+  --font-family: "Open Sans", -apple-system, "Segoe UI", sans-serif, Arial;
 }
 
 .light {
@@ -2309,6 +2312,8 @@
   --login-help-btn: #{$gray};
   --login-title-color: #{$black};
   --login-text-color: #{$gray};
+  --login-captcha-error-border: 1px solid #{$light-error-status};
+  --login-captcha-error-color: #{$light-error-status};
 }
 
 .dark {
@@ -2318,6 +2323,8 @@
   --login-help-btn: #{$gray-dark};
   --login-title-color: #{$white};
   --login-text-color: #{$gray-dark};
+  --login-captcha-error-border: 1px solid #{$dark-error-status};
+  --login-captcha-error-color: #{$dark-error-status};
 }
 
 .light {
@@ -2399,6 +2406,7 @@
   --settings-common-backup-rectangle-bg-color: #{$gray-light};
   --settings-backup-text-disabled: #{$gray};
   --settings-backup-background: #{$gray-light};
+  --settings-backup-note-color: #{$gray};
 }
 
 .dark {
@@ -2411,6 +2419,7 @@
   --settings-common-backup-rectangle-bg-color: #{$light-dark-gray-hover};
   --settings-backup-text-disabled: #{$gray-dark-text};
   --settings-backup-background: #{$dark-gray-light};
+  --settings-backup-note-color: #{$gray-dark};
 }
 
 .light {
@@ -2857,4 +2866,32 @@
   --plugins-plugin-name-color: #{$gray-dark};
   --plugins-border-color: #{$gray-dark-strong};
   --plugins-error-status-color: #{$dark-error-status};
+}
+
+.light {
+  --more-login-row-hover-color: #{$gray-light};
+  --more-login-row-pressed-color: #{$gray-light-mid};
+}
+
+.dark {
+  --more-login-row-hover-color: #{$dark-gray-light};
+  --more-login-row-pressed-color: #{$gray-dark-mid};
+}
+
+.light {
+  --profile-main-bg-color: #{$gray-light};
+  --profile-description-text-color: #{$gray};
+  --profile-icon-fill: #{$light-gray-dark};
+  --profile-pending-email-text-color: #{$gray};
+  --profile-mobile-row-background: #{$gray-light};
+  --profile-mobile-label: #{$gray};
+}
+
+.dark {
+  --profile-main-bg-color: #{$dark-gray-light};
+  --profile-description-text-color: #{$gray-dark};
+  --profile-icon-fill: #{$dark-gray-dark};
+  --profile-pending-email-text-color: #{$gray-dark};
+  --profile-mobile-row-background: #{$light-dark-gray-hover};
+  --profile-mobile-label: #{$gray-dark};
 }

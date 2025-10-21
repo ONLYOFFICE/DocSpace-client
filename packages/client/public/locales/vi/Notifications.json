@@ -1,8 +1,20 @@
 {
+  "ActionsWithFilesDescription": "Các huy hiệu sẽ làm nổi bật hoạt động của tệp — tải lên, chỉnh sửa hoặc chia sẻ — trong các phần {{rooms}}, {{shared}} và {{documents}}.",
+  "AdminSetupRequired": "Thiết lập quản trị viên cần thiết",
   "Badges": "Danh hiệu",
   "DailyFeed": "Nguồn cấp dữ liệu {{productName}} hàng ngày",
   "DailyFeedDescription": "Đọc tin và sự kiện từ {{productName}} của bạn trong một bản tóm tắt hàng ngày.",
+  "FileActivityNotify": "Thông báo hoạt động tệp",
+  "GoToSettings": "Vào Cài đặt",
+  "IsNotValid": "Không hợp lệ",
+  "LdapEmailTooltip": "Tài khoản người dùng này được tải từ LDAP. Địa chỉ email của người dùng không được chỉ định, và địa chỉ hiện tại được tạo tự động và không thể sử dụng để gửi thông báo.",
+  "NotConfigured": "Chưa được cấu hình",
   "Notifications": "Thông báo",
+  "RoomsActivityDescription": "Nhận thông báo email ngay lập tức về các tệp/thư mục được chia sẻ mới và hoạt động bên trong {{sectionName}} của bạn.",
+  "RoomUpdateNotify": "Nội dung được chia sẻ và hoạt động {{sectionName}}",
+  "SettingUpNotifications": "Thiết lập thông báo",
+  "SuccessConnected": "{{serviceName}} đã được kết nối thành công như một kênh thông báo. Bạn sẽ nhận được thông báo ở đó từ bây giờ.",
+  "SuccessDisconnected": "{{serviceName}} đã được hủy kết nối thành công như một kênh thông báo. Thông báo sẽ không còn được gửi đến đó.",
   "UsefulTips": "Các mẹo hữu ích sử dụng {{productName}}",
   "UsefulTipsDescription": "Nhận hướng dẫn hữu ích về {{productName}}"
 }

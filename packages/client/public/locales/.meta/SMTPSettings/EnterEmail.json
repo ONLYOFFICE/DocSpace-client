@@ -3,7 +3,7 @@
   "content": "Enter email",
   "content_en_sha1_hash": "2561af4e3ae4688b16392bbda30fa27b36cf9e1a",
   "created_at": "2025-05-19T21:30:53.296Z",
-  "updated_at": "2025-09-22T13:39:52.391Z",
+  "updated_at": "2025-09-29T11:28:55.966Z",
   "comment": {
     "text": "\"Used as a placeholder and label for an email input field in various UI components, such as dialogs and tables, to prompt users to enter their email address.\"",
     "is_auto": true,
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/UsersRowContent.tsx",
-      "line_number": 204,
+      "line_number": 235,
       "context": "displayName={displayName}\n />\n ) : (\n <EmailInputWrapper ref={emailInputRef}>\n <EmailInput\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n onValidateInput={onValidateEmail}\n hasError={hasError}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/UsersTableRow.tsx",
-      "line_number": 202,
+      "line_number": 233,
       "context": "<TableCell>\n {isEmailOpen ? (\n <EmailInputWrapper ref={emailInputRef}>\n <EmailInput\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n onValidateInput={onValidateEmail}\n onKeyDown={handleKeyDown}",
       "module": "/packages/client"
     }

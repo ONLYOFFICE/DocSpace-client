@@ -3,7 +3,7 @@
   "content": "Previous link <1>«{{linkTitle}}»</1> revoked <br/> New Link <1>«{{linkTitle}}»</1> created",
   "content_en_sha1_hash": "3ab1d8a367547e80b55b96e3eae8efa81c39da94",
   "created_at": "2025-05-19T21:30:54.918Z",
-  "updated_at": "2025-08-04T07:30:01.242Z",
+  "updated_at": "2025-10-13T13:22:35.725Z",
   "comment": {
     "text": "This translation key is used for a notification message that indicates an external link to a specific room has been revoked and replaced with a new one. The message appears in a UI component, likely a popup or alert box, providing context about the change. Translators should update the existing link description to reflect the new link information.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 226,
-      "context": "components={{\n 1: <strong title={(feed.data as TFeedData).title} />,\n }}\n />\n );\n case FeedActionKeys.RoomExternalLinkRevoked:\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"RoomExternalLinkRevoked\"",
+      "line_number": 251,
+      "context": "/>\n ),\n }}\n />\n );\n case FeedActionKeys.RoomExternalLinkRevoked:\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"RoomExternalLinkRevoked\"",
       "module": "/packages/client"
     },
     {

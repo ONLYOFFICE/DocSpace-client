@@ -1,1 +1,14 @@
-{}
+{
+  "AutomaticBackupDescription": "Richten Sie geplante Backups für kontinuierlichen Datenschutz ohne manuelle Eingriffe ein.",
+  "BackupRoomDescription": "Speichern Sie ein Backup in einem ausgewählten Raum oder im Bereich {{sectionName}}. Nutzen Sie vorhandene Räume oder erstellen Sie einen neuen.",
+  "BackupServiceEnabled": "Backup-Dienst erfolgreich aktiviert.",
+  "ConnectService": "Verbinden Sie den Dienst <1>hier</1>, um die Backup-Funktionen zu aktivieren.",
+  "ContactToPayer": "Kontaktieren Sie den Zahler (<1>{{email}}</1>), um den Backup-Dienst zu verbinden.",
+  "DisableBackupConfirm": "Das Deaktivieren des Backup-Dienstes verhindert, dass {{productName}}-Administratoren Backups erstellen. Wenn Auto Backup aktiviert ist, bleibt es innerhalb der kostenlosen Kontingent aktiv, aber sobald das Kontingent vollständig genutzt ist, wird es dauerhaft deaktiviert. Sind Sie sicher, dass Sie fortfahren möchten?",
+  "DisableBackupConfirmWithoutQuota": "Das Deaktivieren des Backup-Dienstes verhindert, dass {{productName}}-Administratoren Backups erstellen. Wenn Auto Backup aktiviert ist, wird es deaktiviert. Sind Sie sicher, dass Sie fortfahren möchten?",
+  "EnableBackupConfirm": "Durch die Aktivierung des Backup-Dienstes können alle {{productName}}-Administratoren jederzeit Backups erstellen, solange das Guthaben im Wallet ausreicht. Möchten Sie wirklich fortfahren?",
+  "FreeBackupsPerMonth": "Kostenlose Backups: {{value}}/{{maxValue}} pro Monat.",
+  "TemporaryDescription": "Erstellen Sie ein Backup, das im Bereich \"Backup\" gespeichert wird. Es steht innerhalb von 24 Stunden nach der Erstellung zum Download bereit.",
+  "ThirdPartyResourceDescription": "Verbinden und speichern Sie Backups in Cloud-Konten wie Dropbox, Box, OneDrive oder Google Drive.",
+  "ThirdPartyStorageDescription": "Nutzen Sie Drittanbieterdienste zum Speichern Ihrer Backups. Ideal für die Anbindung externer Cloud-Speicherplattformen."
+}

@@ -3,7 +3,7 @@
   "content": "Upload PDF form",
   "content_en_sha1_hash": "b5afa97be11c4d1636475bc3623a9f975f26ebd9",
   "created_at": "2025-05-19T21:30:49.443Z",
-  "updated_at": "2025-09-26T15:21:06.030Z",
+  "updated_at": "2025-10-17T14:43:53.311Z",
   "comment": {
     "text": "UploadPDFForm is used as a label for a main button that allows users to upload a PDF form. It appears in a button component in the article section of a client-side application. The translation key is used to display this text in different languages.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2954,
+      "line_number": 2960,
       "context": "const uploadReadyPDFFrom = {\n id: \"personal_upload-ready-Pdf-from\",\n className: \"main-button_drop-down_sub\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:UploadPDFForm\"),\n key: \"personal_upload-ready-Pdf-from\",\n items: [\n {\n id: \"personal_upload-from-docspace\",\n className: \"main-button_drop-down\",",
       "module": "/packages/client"
     }
@@ -45,7 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'формуляр' (formulyar) is a valid word but 'форма' (forma) is more commonly used and would be a better fit for 'form'.",
+          "suggestion": "Качи PDF форма"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'formulier' is a correct translation for 'form', it's a more formal term. A more natural and commonly used translation in this context would be 'bestand' (file).",
-          "suggestion": "Upload PDF bestand"
+          "description": "While \"formulier\" is a valid translation for 'form', it's not the most natural or common translation in this context. \"PDF form\" is often used as is in Dutch, or 'PDF-formulier' is preferred for clarity.",
+          "suggestion": "PDF-formulier"
         }
       ],
       "approved_at": null
@@ -186,8 +192,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Отпреми PDF формулар' is not the most natural or accurate translation of 'Upload PDF form.' 'Отпреми' is more accurately 'upload' in the sense of 'dispatch' or 'send off'.  A more suitable translation would be 'Уплоад PDF образац' or 'Пошаљи PDF образац'.",
-          "suggestion": "Уплоад PDF образац"
+          "description": "The translation \"Отпреми PDF формулар\" is not the most natural or accurate translation of \"Upload PDF form\". While \"Отпреми\" can mean 'upload,' it's more common to use 'Пошаљи' (Send) or 'Учитај' (Upload) in this context.",
+          "suggestion": "Пошаљи PDF формулар"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'формулар' is a valid word, 'образац' is often preferred when referring to forms in Serbian. 'Формулар' sounds more borrowed or technical.",
+          "suggestion": "Пошаљи PDF образац"
         }
       ],
       "approved_at": null
@@ -198,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Otpremi PDF formular' is not the most natural or accurate translation of 'Upload PDF form'. 'Otpremi' implies sending something, not uploading. A more accurate translation would use a verb that implies uploading, like 'Postovani' or 'Učitaj'.",
-          "suggestion": "Učitaj PDF formular"
+          "description": "The translation 'Otpremi PDF formular' is not the most natural or accurate translation of 'Upload PDF form'. 'Otpremi' implies sending something, not uploading. A better translation would be 'Uploaduj PDF formular' or 'Postavi PDF formular'.",
+          "suggestion": "Uploaduj PDF formular"
         }
       ],
       "approved_at": null
@@ -216,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Передати PDF-форму' is not the most natural or accurate translation of 'Upload PDF form'. While 'Передати' (to transmit/pass) is related to uploading, 'Upload' often implies a more direct action of placing a file somewhere. A better translation would consider options like 'Завантажити PDF-форму' (to download/upload a PDF form) or 'Завантаження PDF-форми' (uploading a PDF form).",
-          "suggestion": "Consider 'Завантажити PDF-форму' or 'Завантаження PDF-форми'."
+          "description": "The translation \"Передати PDF-форму\" doesn't fully capture the meaning of \"Upload PDF form\". \"Передати\" implies handing over or transferring, which isn't exactly what uploading means. A more accurate translation would involve conveying the action of putting a file onto a server or system.",
+          "suggestion": "Завантажити PDF-форму"
         }
       ],
       "approved_at": null
@@ -227,9 +238,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation \"Tải biểu mẫu PDF\" is missing a full stop/period at the end of the sentence.",
-          "suggestion": "Tải biểu mẫu PDF ."
+          "type": "incorrect_translation",
+          "description": "The translation 'Tải biểu mẫu PDF' is a functional translation but a more natural and common phrasing would be 'Tải lên biểu mẫu PDF'. 'Tải' implies downloading, while 'Tải lên' specifically means 'upload'.",
+          "suggestion": "Tải lên biểu mẫu PDF"
         }
       ],
       "approved_at": null
@@ -238,6 +249,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'NgarkoNI formularin PDF' appears to have a typo or incorrect capitalization. The correct prefix for 'Ngarko' should be 'Ngarko' not 'NgarkoNI'. The 'NI' seems unnecessary and incorrect here.",
+          "suggestion": "Ngarko formulën PDF"
+        }
+      ],
       "approved_at": null
     }
   }

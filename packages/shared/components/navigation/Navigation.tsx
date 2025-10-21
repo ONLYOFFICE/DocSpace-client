@@ -327,6 +327,7 @@ const Navigation = ({
               isEmptyPage={isEmptyPage}
               onContextOptionsClick={onContextOptionsClick}
               isMobile={currentDeviceType !== DeviceType.desktop}
+              isMobileOnly={currentDeviceType === DeviceType.mobile}
               contextButtonAnimation={contextButtonAnimation}
               guidAnimationVisible={guidAnimationVisible}
               setGuidAnimationVisible={setGuidAnimationVisible}

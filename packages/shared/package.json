@@ -121,9 +121,9 @@
     "@types/lodash": "4.17.10",
     "@types/luxon": "3.4.2",
     "@types/node": "22.7.5",
-    "@types/react": "19.1.4",
+    "@types/react": "19.2.2",
     "@types/react-avatar-editor": "13.0.3",
-    "@types/react-dom": "19.1.5",
+    "@types/react-dom": "19.2.2",
     "@types/react-google-recaptcha": "2.1.9",
     "@types/react-transition-group": "4.4.11",
     "@types/react-virtualized": "9.21.30",
@@ -159,9 +159,9 @@
     "msw-storybook-addon": "^2.0.4",
     "open-cli": "^8.0.0",
     "prettier": "3.6.2",
-    "react": "19.1.1",
+    "react": "19.2.0",
     "react-docgen-typescript-plugin": "1.0.8",
-    "react-dom": "19.1.1",
+    "react-dom": "19.2.0",
     "react-values": "0.3.3",
     "remark-gfm": "4.0.1",
     "sass": "1.79.5",
@@ -175,8 +175,8 @@
     "typescript": "5.9.2"
   },
   "peerDependencies": {
-    "react": "19.1.1",
-    "react-dom": "19.1.1"
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
   },
   "nx": {
     "targets": {

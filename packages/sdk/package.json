@@ -54,7 +54,7 @@
     "eslint-plugin-jsx-a11y": "6.10.0",
     "eslint-plugin-prettier": "5.2.1",
     "eslint-plugin-react": "7.37.1",
-    "eslint-plugin-react-hooks": "5.1.0",
+    "eslint-plugin-react-hooks": "7.0.0",
     "globals": "^15.0.0",
     "typescript-eslint": "^8.15.0",
     "@aws-sdk/client-cloudwatch-logs": "3.816.0",

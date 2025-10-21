@@ -131,7 +131,7 @@
     "eslint-plugin-jsx-a11y": "6.10.0",
     "eslint-plugin-prettier": "5.2.1",
     "eslint-plugin-react": "7.37.1",
-    "eslint-plugin-react-hooks": "5.1.0",
+    "eslint-plugin-react-hooks": "7.0.0",
     "eslint-plugin-storybook": "0.12.0",
     "external-remotes-plugin": "1.0.0",
     "file-loader": "6.2.0",

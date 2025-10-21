@@ -51,7 +51,7 @@ import {
 import { TAgent, TAgentLogo } from "@docspace/shared/api/ai/types";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { CategoryType } from "@docspace/shared/constants";
 import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
 import { openMembersTab, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 

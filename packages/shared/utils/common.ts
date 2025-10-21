@@ -1602,6 +1602,8 @@ export const getCategoryType = (location: { pathname: string }) => {
     categoryType = CategoryType.Accounts;
   } else if (pathname.startsWith("/shared-with-me")) {
     categoryType = CategoryType.SharedWithMe;
+  } else if (pathname.startsWith("/ai-agents")) {
+    categoryType = CategoryType.AIAgents;
   }
 
   return categoryType;

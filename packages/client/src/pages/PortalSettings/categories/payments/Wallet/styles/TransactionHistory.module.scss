@@ -169,6 +169,9 @@
     margin-top: 8px;
   }
 }
+.selectedContactItem {
+  margin-bottom: 0;
+}
 
 .transactionHistoryLoader {
   display: flex;
@@ -278,4 +281,8 @@
 
 .transactionRowDescription {
   margin-inline-end: 4px;
+}
+
+.clearFilter {
+  margin: auto 0;
 }

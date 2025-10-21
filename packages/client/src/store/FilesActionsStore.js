@@ -77,11 +77,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { toastr } from "@docspace/shared/components/toast";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import {
-  isDesktop,
-  isLockedSharedRoom,
-  isSystemFolder,
-} from "@docspace/shared/utils";
+import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
   isFile as isFileCheck,
@@ -93,12 +89,10 @@ import {
   FILTER_ROOM_DOCUMENTS,
 } from "@docspace/shared/utils/filterConstants";
 import {
-  getCategoryType,
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import UsersFilter from "@docspace/shared/api/people/filter";
 import GroupsFilter from "@docspace/shared/api/groups/filter";
@@ -106,6 +100,7 @@ import {
   frameCallEvent,
   getConvertedSize,
   getObjectByLocation,
+  getCategoryType,
   splitFileAndFolderIds,
 } from "@docspace/shared/utils/common";
 import uniqueid from "lodash/uniqueId";
@@ -124,7 +119,7 @@ import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
 import { hideInfoPanel, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
-import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
 import { checkProtocol } from "../helpers/files-helpers";
 
 class FilesActionStore {
@@ -324,7 +319,10 @@ class FilesActionStore {
         continue;
       }
 
-      const folder = await createFolder(parentFolderId, treeNode.name);
+      const folder = await createFolder(
+        parentFolderId,
+        treeNode.name.trimEnd(),
+      );
       const parentId = folder.id;
 
       if (treeNode.children.length == 0) continue;
@@ -1668,8 +1666,6 @@ class FilesActionStore {
     const filter = FilesFilter.getDefault();
 
     filter.folder = id;
-    const shareKey = await this.getPublicKey(item);
-    if (shareKey) filter.key = shareKey;
 
     if (isRoom || isTemplate) {
       if (this.userStore.user?.id) {
@@ -1702,14 +1698,15 @@ class FilesActionStore {
   };
 
   checkAndOpenLocationAction = async (item) => {
-    const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
-      this.treeFoldersStore;
-    const { setIsSectionBodyLoading } = this.clientLoadingStore;
     const {
-      rootFolderType,
-      shared,
-      id: selectedFolderId,
-    } = this.selectedFolderStore;
+      myRoomsId,
+      myFolderId,
+      archiveRoomsId,
+      recycleBinFolderId,
+      sharedWithMeFolderId,
+    } = this.treeFoldersStore;
+    const { setIsSectionBodyLoading } = this.clientLoadingStore;
+    const { rootFolderType } = this.selectedFolderStore;
 
     const setIsLoading = (param) => {
       setIsSectionBodyLoading(param);
@@ -1725,6 +1722,7 @@ class FilesActionStore {
       myFolderId,
       archiveRoomsId,
       recycleBinFolderId,
+      sharedWithMeFolderId,
     ].includes(parentId);
 
     const state = {
@@ -1745,23 +1743,6 @@ class FilesActionStore {
 
     newFilter.search = title;
     newFilter.folder = parentId;
-
-    let publicKey;
-    if (item.toFolderId || item.folderId || item.parentId) {
-      const newFolder = await this.filesStore.getFolderInfo(parentId);
-      publicKey = await this.getPublicKey({
-        ...newFolder,
-        updatePublicKey: true,
-      });
-    } else {
-      publicKey = await this.getPublicKey({
-        ...item,
-        id: selectedFolderId,
-        shared,
-        rootFolderType,
-      });
-    }
-    if (publicKey) newFilter.key = publicKey;
 
     setIsLoading(
       window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||
@@ -1986,7 +1967,8 @@ class FilesActionStore {
         return canUnArchive;
       }
       case "delete-room": {
-        const canRemove = selection.some((s) => s.security?.Delete);
+        const canRemove =
+          selection.length === 1 && selection[0]?.security?.Delete;
 
         return canRemove;
       }
@@ -2379,13 +2361,16 @@ class FilesActionStore {
     const changeQuota = this.getOption("change-quota", t);
     const disableQuota = this.getOption("disable-quota", t);
     const defaultQuota = this.getOption("default-quota", t);
+    const deleteOption = this.getOption("delete-room", t);
 
     itemsCollection
       .set(pinName, pin)
       .set("archive", archive)
       .set("change-quota", changeQuota)
       .set("default-quota", defaultQuota)
-      .set("disable-quota", disableQuota);
+      .set("disable-quota", disableQuota)
+      .set("delete", deleteOption);
+
     return this.convertToArray(itemsCollection);
   };
 
@@ -2465,6 +2450,7 @@ class FilesActionStore {
           setUnsubscribe(true);
           setDeleteDialogVisible(true);
         },
+        iconUrl: RemoveOutlineSvgUrl,
       })
       .set("showInfo", showInfo);
 
@@ -2541,7 +2527,7 @@ class FilesActionStore {
       isFavoritesFolder,
       isRecycleBinFolder,
       isPrivacyFolder,
-      isShareFolder,
+      isSharedWithMeFolder,
       isRoomsFolder,
       isArchiveFolder,
       isRecentFolder,
@@ -2558,7 +2544,8 @@ class FilesActionStore {
 
     if (isPrivacyFolder) return this.getPrivacyFolderOption(itemsCollection, t);
 
-    if (isShareFolder) return this.getShareFolderOptions(itemsCollection, t);
+    if (isSharedWithMeFolder)
+      return this.getShareFolderOptions(itemsCollection, t);
 
     if (isRecentFolder) return this.getRecentFolderOptions(itemsCollection, t);
 
@@ -2575,30 +2562,54 @@ class FilesActionStore {
 
   onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
 
-  isExpiredLinkAsync = async (item) => {
+  isExpiredLinkAsync = async (item, withLoader = false) => {
+    if (item.isLinkExpired) return true;
+    if (!item.external || !item.requestToken) return false;
+
     const { clearActiveOperations } = this.uploadDataStore;
     const { addActiveItems } = this.filesStore;
 
     const { endLoader, startLoader } = createLoader();
 
     try {
-      startLoader(() =>
-        runInAction(() => {
-          this.setGroupMenuBlocked(true);
-          addActiveItems(null, [item.id]);
-        }),
-      );
+      if (withLoader)
+        startLoader(() =>
+          runInAction(() => {
+            this.setGroupMenuBlocked(true);
+            addActiveItems(null, [item.id]);
+          }),
+        );
 
       const response = await api.rooms.validatePublicRoomKey(item.requestToken);
 
       const isExpired = response.status === ValidationStatus.Expired;
-      if (isExpired) {
-        const foundFolder = this.filesStore.folders.find(
-          (folder) => folder.id === item.id,
-        );
 
-        if (foundFolder && !foundFolder.expired) {
-          foundFolder.expired = true;
+      if (isExpired) {
+        const items = isFileCheck(item)
+          ? this.filesStore.files
+          : this.filesStore.folders;
+
+        const foundItem = items.find((i) => i.id === item.id);
+
+        if (foundItem && !foundItem.isLinkExpired) {
+          foundItem.isLinkExpired = true;
+        }
+
+        const { selection, bufferSelection } = this.filesStore;
+
+        const selectedItem =
+          selection && selection.length === 1
+            ? selection[0]
+            : bufferSelection
+              ? bufferSelection
+              : null;
+
+        if (
+          selectedItem &&
+          selectedItem.id === item.id &&
+          !selectedItem.isLinkExpired
+        ) {
+          selectedItem.isLinkExpired = isExpired;
         }
       }
 
@@ -2607,24 +2618,38 @@ class FilesActionStore {
       console.log(error);
       return false;
     } finally {
-      endLoader(() =>
-        runInAction(() => {
-          this.setGroupMenuBlocked(false);
-          clearActiveOperations([], [item.id]);
-        }),
-      );
+      if (withLoader)
+        endLoader(() =>
+          runInAction(() => {
+            this.setGroupMenuBlocked(false);
+            clearActiveOperations([], [item.id]);
+          }),
+        );
     }
   };
 
   openFileAction = async (item, t, e) => {
     if (
       item.external &&
-      (item.expired || (await this.isExpiredLinkAsync(item)))
-    )
-      return toastr.error(
-        t("Common:RoomLinkExpired"),
-        t("Common:RoomNotAvailable"),
-      );
+      (item.isLinkExpired || (await this.isExpiredLinkAsync(item, true)))
+    ) {
+      const isFile = isFileCheck(item);
+      const isFolder = isFolderCheck(item);
+
+      const description = isFile
+        ? t("Common:FileLinkExpired")
+        : isFolder
+          ? t("Common:FolderLinkExpired")
+          : t("Common:RoomLinkExpired");
+
+      const title = isFile
+        ? t("Common:FileNotAvailable")
+        : isFolder
+          ? t("Common:FolderNotAvailable")
+          : t("Common:RoomNotAvailable");
+
+      return toastr.error(description, title);
+    }
 
     if (isLockedSharedRoom(item))
       return this.dialogsStore.setPasswordEntryDialog(true, item);
@@ -2675,7 +2700,6 @@ class FilesActionStore {
         this.userStore.user?.id,
         roomType,
         currentTitle,
-        this.getPublicKey,
       );
 
       if (openingNewTab(url, e)) return;
@@ -2718,9 +2742,12 @@ class FilesActionStore {
         this.onMarkAsRead(item);
 
       if (canWebEdit || canViewedDocs) {
-        const shareWebUrl = new URL(webUrl);
+        let shareKey = item.requestToken;
 
-        const shareKey = getObjectByLocation(shareWebUrl)?.share;
+        if (webUrl) {
+          const shareWebUrl = new URL(webUrl);
+          shareKey = getObjectByLocation(shareWebUrl)?.share;
+        }
 
         const isPDF = item.fileExst === ".pdf";
 
@@ -2953,12 +2980,6 @@ class FilesActionStore {
     filter.sortOrder = filterObj.sortOrder;
 
     filter.folder = id;
-
-    if (!this.selectedFolderStore.isRootFolder && navigationPath[0]?.shared) {
-      const currentFolder = await this.filesStore.getFolderInfo(id);
-      const shareKey = await this.getPublicKey(currentFolder);
-      if (shareKey) filter.key = shareKey;
-    }
 
     const categoryType = getCategoryType(window.DocSpace.location);
     const path = getCategoryUrl(categoryType, id);
@@ -3471,14 +3492,10 @@ class FilesActionStore {
   };
 
   getPublicKey = async (folder) => {
-    if (
-      folder.shared &&
-      folder?.rootFolderType === FolderType.Rooms &&
-      !isSystemFolder(folder?.type)
-    ) {
+    if (folder.shared) {
       const filterObj = FilesFilter.getFilter(window.location);
 
-      if (filterObj?.key && !folder.updatePublicKey) {
+      if (filterObj?.key) {
         return filterObj.key;
       }
 

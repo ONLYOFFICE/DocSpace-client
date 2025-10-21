@@ -39,6 +39,7 @@ const ContextButton = ({
   withMenu = true,
   isTrashFolder,
   isMobile,
+  isMobileOnly,
   id,
   onCloseDropBox,
   onContextOptionsClick,
@@ -149,7 +150,7 @@ const ContextButton = ({
         ref={menuRef}
         onHide={onHide}
         scaled={false}
-        withBackdrop
+        withBackdrop={isMobileOnly}
         leftOffset={isTrashFolder ? 188 : isMobile ? 150 : 0}
         ignoreChangeView={ignoreChangeView}
         headerOnlyMobile={!!contextMenuHeader}

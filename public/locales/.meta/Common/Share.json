@@ -3,7 +3,7 @@
   "content": "Share",
   "content_en_sha1_hash": "09ca55ca52d207f2cc1d9339e0226a88e9e96e2f",
   "created_at": "2025-05-19T21:30:48.615Z",
-  "updated_at": "2025-09-22T13:39:52.279Z",
+  "updated_at": "2025-10-17T14:43:53.343Z",
   "comment": {
     "text": "The translation key \"Share\" is used to display a button label in the user interface. It appears on a shared form panel and is linked to an icon representing sharing. The purpose of this text is to enable users to share content.",
     "is_auto": true,
@@ -11,44 +11,50 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/SharedButton.js",
-      "line_number": 24,
-      "context": "// Pursuant to Section 7(b) of the License you must retain the original Product logo when\n // distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under\n // trademark law for use of our trademarks.\n //\n // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing\n // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import CatalogShareSmallReactSvgUrl from \"PUBLIC_DIR/images/icons/16/catalog.share.small.react.svg?url\";\n import CatalogSharedReactSvgUrl from \"PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url\";\n import React from \"react\";",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/SharedButton.js",
-      "line_number": 24,
-      "context": "// Pursuant to Section 7(b) of the License you must retain the original Product logo when\n // distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under\n // trademark law for use of our trademarks.\n //\n // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing\n // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import CatalogShareSmallReactSvgUrl from \"PUBLIC_DIR/images/icons/16/catalog.share.small.react.svg?url\";\n import CatalogSharedReactSvgUrl from \"PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url\";\n import React from \"react\";",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/panels/ShareFormPanel/index.js",
       "line_number": 88,
       "context": "const cards = useMemo(\n () => [\n {\n id: \"quick-sharing\",\n title: t(\"Common:QuickSharing\"),\n description: t(\"Common:ShareTheOriginalFormForFillingOut\"),\n buttonLabel: t(\"Common:Share\"),\n onClick: onClickShareFile,\n icon: <ShareSvg />,\n },\n {",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/SharedButton.js",
+      "line_number": 24,
+      "context": "// Pursuant to Section 7(b) of the License you must retain the original Product logo when\n // distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under\n // trademark law for use of our trademarks.\n //\n // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing\n // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import CatalogShareSmallReactSvgUrl from \"PUBLIC_DIR/images/icons/16/catalog.share.small.react.svg?url\";\n import CatalogSharedReactSvgUrl from \"PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url\";\n import React from \"react\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/SharedButton.js",
+      "line_number": 24,
+      "context": "// Pursuant to Section 7(b) of the License you must retain the original Product logo when\n // distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under\n // trademark law for use of our trademarks.\n //\n // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing\n // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import CatalogShareSmallReactSvgUrl from \"PUBLIC_DIR/images/icons/16/catalog.share.small.react.svg?url\";\n import CatalogSharedReactSvgUrl from \"PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url\";\n import React from \"react\";",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/index.tsx",
-      "line_number": 142,
+      "line_number": 145,
       "context": "selection.canShare &&\n !isRoomUtil(selection)\n ) {\n tabsData.unshift({\n id: \"info_share\",\n name: t(\"Common:Share\"),\n onClick: setShare,\n content: null,\n });\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2358,
+      "line_number": 2414,
       "context": "needsGrouping: true,\n minItemsCount: 1,\n },\n {\n groupKey: \"share\",\n groupLabel: t(\"Common:Share\"),\n groupIcon: ShareReactSvgUrl,\n itemKeys: [\n \"invite-users-to-room\",\n \"copy-shared-link\",\n \"manage-links\",",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/doceditor/src/components/ShareDialog.tsx",
-      "line_number": 140,
-      "context": "onClose={onClosePanel}\n />\n ) : null}\n </ModalDialog.Container>\n \n <ModalDialog.Header>{t(\"Common:Share\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledWrapper>\n <div className=\"share-file_body\">\n <Share\n infoPanelSelection={fileInfo}",
+      "file_path": "/packages/doceditor/src/components/ShareDialog/ShareDialog.tsx",
+      "line_number": 186,
+      "context": "/>\n ) : null}\n </>\n </ModalDialog.Container>\n \n <ModalDialog.Header>{t(\"Common:Share\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <section className={styles.shareContainer}>\n <div className=\"share-file_body\">\n <ShareDialogHeader\n file={fileInfo}",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 155,
+      "line_number": 171,
+      "context": "const cards = [\n {\n id: \"quick-sharing\",\n title: t(\"Common:QuickSharing\"),\n description: t(\"Common:ShareTheOriginalFormForFillingOut\"),\n buttonLabel: t(\"Common:Share\"),\n onClick: onClickShareFile,\n icon: <ShareSvg />,\n disabled: !file.canShare,\n },",
+      "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
+      "line_number": 171,
       "context": "const cards = [\n {\n id: \"quick-sharing\",\n title: t(\"Common:QuickSharing\"),\n description: t(\"Common:ShareTheOriginalFormForFillingOut\"),\n buttonLabel: t(\"Common:Share\"),\n onClick: onClickShareFile,\n icon: <ShareSvg />,\n disabled: !file.canShare,\n },",
       "module": "/packages/doceditor"
     }

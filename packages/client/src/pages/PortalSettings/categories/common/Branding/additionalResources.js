@@ -60,8 +60,10 @@ const AdditionalResourcesComponent = (props) => {
     deviceType,
   });
 
-  const { feedbackAndSupportEnabled, helpCenterEnabled } =
-    additionalResourcesData;
+  const feedbackAndSupportEnabled = Boolean(
+    additionalResourcesData?.feedbackAndSupportEnabled,
+  );
+  const helpCenterEnabled = Boolean(additionalResourcesData?.helpCenterEnabled);
 
   useEffect(() => {
     if (!(additionalResourcesData && tReady)) return;

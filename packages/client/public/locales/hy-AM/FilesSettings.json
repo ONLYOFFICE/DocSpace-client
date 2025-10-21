@@ -2,5 +2,6 @@
   "CancellaionNotification": "Նորից չցուցադրել չեղարկման ծանուցումը",
   "DisplayFileExtension": "Ցուցադրել ֆայլի ընդլայնումը ֆայլի անվան կողքին",
   "OpenSameTab": "Նույն ներդիրում բացեք {{organizationName}} խմբագիրը",
-  "OriginalCopy": "Պահպանել ֆայլի պատճենը նաև բնօրինակ ձևաչափով"
+  "OriginalCopy": "Պահպանել ֆայլի պատճենը նաև բնօրինակ ձևաչափով",
+  "TrashMoveConfirmation": "Ցուցադրել ծանուցումը՝ տարրերը {{sectionName}} տեղափոխելիս"
 }

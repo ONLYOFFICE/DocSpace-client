@@ -3,7 +3,7 @@
   "content": "MB",
   "content_en_sha1_hash": "6e979f426b676955f4896002085eb834b93326b1",
   "created_at": "2025-05-19T21:30:46.418Z",
-  "updated_at": "2025-09-09T10:39:52.992Z",
+  "updated_at": "2025-10-17T14:43:53.677Z",
   "comment": {
     "text": "The translation key \"MB\" represents the unit of measurement \"Megabyte\". It is used as a label in a dropdown menu within a quota form component to select file size units.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 699,
+      "line_number": 702,
       "context": "let resultSize = bytes;\n \n const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),\n ];",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "Upload files",
   "content_en_sha1_hash": "41aca16f905ad31d0eec695b710915a4892e116f",
   "created_at": "2025-05-19T21:30:57.048Z",
-  "updated_at": "2025-09-22T13:39:52.231Z",
+  "updated_at": "2025-10-17T14:43:53.314Z",
   "comment": {
     "text": "The \"UploadFiles\" translation key is used to display the label for a button that allows users to upload files in an article component. It appears as part of a dropdown menu and provides a clear indication of its purpose, making it accessible for translators to ensure consistency across different languages.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 564,
+      "line_number": 569,
       "context": "const newUploadActions = [\n {\n id: \"actions_upload-files\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"UploadFiles\"),\n onClick: onUploadFileClick,\n key: \"upload-files\",\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3067,
+      "line_number": 3139,
       "context": "icon: CatalogFolderReactSvgUrl,\n };\n \n const uploadFiles = {\n key: \"upload-files\",\n label: t(\"Article:UploadFiles\"),\n onClick: () => this.onUploadAction(\"file\"),\n icon: ActionsUploadReactSvgUrl,\n };\n \n const uploadFolder = {",
       "module": "/packages/client"
     }

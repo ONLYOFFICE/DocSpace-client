@@ -126,12 +126,6 @@ const TabsCommon = (props: TabsCommonProps) => {
     });
   }
 
-  const getCurrentTabId = () => {
-    const path = location.pathname;
-    const currentTab = data.find((item) => path.includes(item.id));
-    return currentTab && data.length ? currentTab.id : data[0].id;
-  };
-
   useEffect(() => {
     return () => {
       resetSessionStorage();
@@ -141,8 +135,9 @@ const TabsCommon = (props: TabsCommonProps) => {
   useEffect(() => {
     if (tReady) setIsLoadedSubmenu(true);
     if (isLoadedSubmenu) {
-      const tabId = getCurrentTabId();
-      setCurrentTabId(tabId);
+      const path = location.pathname;
+      const currentTab = data.find((item) => path.includes(item.id));
+      if (currentTab && data.length) setCurrentTabId(currentTab.id);
     }
   }, [tReady, isLoadedSubmenu]);
 

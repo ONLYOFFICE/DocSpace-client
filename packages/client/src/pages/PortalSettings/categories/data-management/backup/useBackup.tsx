@@ -90,8 +90,6 @@ const useBackup = ({
 
   setIsInitialError,
   setIsEmptyContentBeforeLoader,
-  isInitialError,
-  isEmptyContentBeforeLoader,
 
   addAbortControllers,
 }: UseBackupProps) => {
@@ -327,10 +325,6 @@ const useBackup = ({
     getAutoBackupData,
     getRestoreBackupData,
     getBackupInitialValue,
-
-    isEmptyContentBeforeLoader,
-    setIsEmptyContentBeforeLoader,
-    isInitialError,
   };
 };
 

@@ -3,7 +3,7 @@
   "content": "Mobile editing.",
   "content_en_sha1_hash": "950b8cee66034eb2754ac6639406c09cff5b454d",
   "created_at": "2025-05-26T07:15:49.276Z",
-  "updated_at": "2025-08-04T07:30:01.743Z",
+  "updated_at": "2025-10-13T21:39:19.059Z",
   "comment": {
     "text": "The \"UpgradeToProBannerItemMobileHeader\" translation key is used to display a mobile-specific header for an upgrade to pro banner. It appears on a payment benefits container page and includes a title and image.",
     "is_auto": true,
@@ -51,7 +51,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Arbeit auf mobilen Geräten' is not the best equivalent for 'Mobile editing.' While it's understandable, it's quite literal and lacks the conciseness of the original. It translates to 'Work on mobile devices.'",
+          "suggestion": "A better translation might be 'Mobile Bearbeitung' or 'Bearbeitung für Mobilgeräte'."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -87,7 +93,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Modifica mobile' is technically correct, it lacks the nuance and impact of a more natural Italian translation for a promotional banner element. 'Modifica su mobile' or 'Editing su mobile' would be more appropriate for conveying 'Mobile editing' in a marketing context.",
+          "suggestion": "Modifica su mobile"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -105,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ການຂຽນແກ້ໄຂມືຖື.\" is too literal and doesn't accurately convey the meaning of \"Mobile editing.\" It translates to something like 'Mobile writing/editing'.  A better translation would emphasize the editing capability on mobile devices.",
+          "suggestion": "Consider \"ການແກ້ໄຂໃນມືຖື\" or \"ແກ້ໄຂມືຖື\" - which translates to 'Mobile editing/edit on mobile'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -159,7 +177,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"Úpravy pomocou mobilných zariadení\" is a bit verbose and doesn't quite capture the concise nature of \"Mobile editing.\" It translates to 'Edits using mobile devices'.",
+          "suggestion": "Consider a more concise translation like \"Mobilná úprava\" (Mobile editing) or \"Mobilné úpravy\" (Mobile edits)."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -202,6 +226,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Redaktimi celular' is technically correct, a more natural and idiomatic translation of 'Mobile editing' in Albanian would be 'Shtrimet me celular' or 'Kërcimi mobil'. 'Redaktimi celular' sounds slightly awkward.",
+          "suggestion": "Shtrimet me celular"
+        }
+      ],
       "approved_at": null
     }
   }

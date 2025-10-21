@@ -45,8 +45,8 @@ import { Portal } from "../../components/portal";
 import { useEventListener } from "../../hooks/useEventListener";
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 import {
-  getAccessRightOptions,
-  getRoomAccessOptions,
+  getLinkAccessRightOptions,
+  getRoomLinkAccessOptions,
   getAccessTypeOptions,
   copyShareLink,
 } from "../../components/share/Share.helpers";
@@ -114,6 +114,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
   const password = link?.sharedTo?.password ?? "";
   const date = link?.sharedTo?.expirationDate ?? null;
   const isDenyDownload = link?.sharedTo?.denyDownload ?? false;
+  const isPrimaryLink = link?.sharedTo?.primary ?? false;
 
   const { isPublic, isFormRoom, isCustomRoom } = useMemo(() => {
     if (!isRoom(item))
@@ -131,13 +132,21 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
   }, [item]);
 
   const accessOptions = useMemo(() => {
-    if (!item.availableExternalRights) return [];
+    if (!item.availableShareRights) return [];
 
     if (isFolderOrRoom(item))
-      return getRoomAccessOptions(t, item.availableExternalRights);
+      return getRoomLinkAccessOptions(
+        t,
+        item.availableShareRights,
+        isPrimaryLink,
+      );
 
-    return getAccessRightOptions(t, item.availableExternalRights);
-  }, [t, item]);
+    return getLinkAccessRightOptions(
+      t,
+      item.availableShareRights,
+      isPrimaryLink,
+    );
+  }, [t, item, isPrimaryLink]);
 
   const linkAccessOptions = useMemo(() => getAccessTypeOptions(t, false), [t]);
   const [unsavedChangesDialogVisible, setUnsavedChangesDialog] =
@@ -282,12 +291,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
         setLinkParams({ link: response, item });
 
         if (isRoom(item)) {
-          setExternalLink?.(
-            response,
-            searchParams,
-            setSearchParams,
-            isCustomRoom,
-          );
+          setExternalLink?.(response);
           copyShareLink(item, response, t);
         } else {
           updateLink?.(response);

@@ -1,1 +1,14 @@
-{}
+{
+  "AutomaticBackupDescription": "设置定时备份，无需手动操作，即可持续保护数据安全。",
+  "BackupRoomDescription": "将备份保存到指定房间或{{sectionName}}板块。使用现有房间或创建新房间。",
+  "BackupServiceEnabled": "备份服务已成功启用。",
+  "ConnectService": "请<1>在此</1>关联服务以启用备份功能。",
+  "ContactToPayer": "请联系付款人 (<1>{{email}}</1>) 关联备份服务。",
+  "DisableBackupConfirm": "禁用备份服务后，{{productName}}管理员将无法创建备份。若已启用自动备份，该功能将在免费额度内继续保持运行，但免费额度用尽后将永久停止服务。确定要继续吗？",
+  "DisableBackupConfirmWithoutQuota": "禁用备份服务后，{{productName}}管理员将无法创建备份。若已启用自动备份，该功能将被立即停用。确定要继续吗？",
+  "EnableBackupConfirm": "启用备份服务后，所有 {{productName}} 管理员均可随时创建备份（需钱包余额充足）。是否确认继续？",
+  "FreeBackupsPerMonth": "免费备份额度：每月 {{value}}/{{maxValue}}。",
+  "TemporaryDescription": "请在“备份”板块创建备份。创建后 24 小时内即可下载。",
+  "ThirdPartyResourceDescription": "连接并保存备份到 Dropbox、Box、OneDrive 或 Google Drive 等云帐户。",
+  "ThirdPartyStorageDescription": "使用第三方服务存储备份。此功能非常适合连接外部云存储平台。"
+}

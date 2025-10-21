@@ -48,7 +48,8 @@ interface AccessSelectorProps {
   isOwner: boolean;
   isAdmin: boolean;
   withRemove?: boolean;
-  filteredAccesses?: AccessOptionType[];
+  filteredAccesses?: any[];
+  setIsOpenItemAccess?: React.Dispatch<React.SetStateAction<boolean>>;
   className: string;
   standalone?: boolean;
   isMobileView: boolean;
@@ -74,6 +75,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   isAdmin,
   withRemove = false,
   filteredAccesses,
+  setIsOpenItemAccess,
   className,
   standalone,
   isMobileView,
@@ -150,6 +152,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           manualWidth={`${width}px`}
           isDefaultMode={false}
           isAside={false}
+          setIsOpenItemAccess={setIsOpenItemAccess}
           isDisabled={isDisabled}
           isSelectionDisabled={isSelectionDisabled}
           selectionErrorText={selectionErrorText}
@@ -175,6 +178,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           manualWidth="auto"
           isDefaultMode
           isAside={isMobileView}
+          setIsOpenItemAccess={setIsOpenItemAccess}
           manualY="0px"
           withBackground={isMobileView}
           withBlur={isMobileView}

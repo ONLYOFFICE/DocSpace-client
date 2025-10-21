@@ -3,7 +3,7 @@
   "content": "Sign in with Microsoft",
   "content_en_sha1_hash": "fd62c61f849bb4cfbfd3a2146d1eff8cd56b5601",
   "created_at": "2025-05-19T21:30:48.781Z",
-  "updated_at": "2025-09-09T10:39:53.047Z",
+  "updated_at": "2025-10-17T14:43:53.738Z",
   "comment": {
     "text": "This translation key is used for \"Sign in with Microsoft\" in various UI contexts, typically as a button or link in sign-up processes. It appears on a login page or registration form and serves as an alternative to other authentication methods like LinkedIn or SSO. The translators should update this text according to the specific UI component it's used in.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 438,
+      "line_number": 441,
       "context": "? t(\"Common:SignUpWithLinkedIn\")\n : t(\"Common:SignInWithLinkedIn\");\n case \"microsoft\":\n return signUp\n ? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n case \"weixin\":",
       "module": "/packages/shared"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'تسجيل الدخول Microsoft' is a literal transliteration of \"Sign in with Microsoft\" and doesn't convey the intended meaning naturally in Arabic. It lacks a preposition connecting 'Sign in' and 'Microsoft'.",
-          "suggestion": "تسجيل الدخول باستخدام Microsoft (تسجيل الدخول عبر Microsoft)"
+          "description": "The Arabic translation 'تسجيل الدخول Microsoft' is a literal transliteration of \"Sign in with Microsoft\" and doesn't convey the intended meaning naturally in Arabic. It's more like saying 'Login Microsoft' which is not idiomatic.",
+          "suggestion": "دخول باستخدام مايكروسوفت (Dukool bi-istikhdaam Microsoft)"
         }
       ],
       "approved_at": null
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Login' is a literal translation of 'Sign in' and while understandable, it's less natural in German. 'Anmelden mit Microsoft' is a more common and idiomatic way to express 'Sign in with Microsoft'.",
-          "suggestion": "Anmelden mit Microsoft"
+          "description": "While \"Login über Microsoft\" is understandable, \"Sign in with Microsoft\" is better translated as \"Mit Microsoft anmelden\" or \"Anmelden mit Microsoft\". \"Login\" is an English loanword and \"über\" isn't the most natural way to express 'with' in this context. \"Anmelden\" is the standard term for signing in.",
+          "suggestion": "Mit Microsoft anmelden"
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Մուտք գործեք Microsoft-ով\" is not the most natural or accurate translation of \"Sign in with Microsoft\". While technically understandable, it's a literal translation that doesn't convey the idiomatic meaning.",
-          "suggestion": "Մուտքագրեք Microsoft-ի միջոցով (Mut'yagreq Microsoft-i mijoc'ov) or Լոգինվեք Microsoft-ով (Loginveq Microsoft-ov) would be more idiomatic and accurate translations."
+          "description": "The translation 'Մուտք գործեք Microsoft-ով' is a literal translation and doesn't convey the natural meaning of 'Sign in with Microsoft' in Armenian. It implies 'Enter with Microsoft' rather than 'Sign in with Microsoft'.",
+          "suggestion": "Մուտքագրեք Microsoft-ի միջոցով (Mut’yagreq Microsoft-i mijov) - 'Sign in through Microsoft' or Դիտարկեք Microsoft-ով (Ditarkeq Microsoft-ov) - 'Login with Microsoft'"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Microsoft으로 로그인\" while understandable, isn't the most natural or preferred way to say \"Sign in with Microsoft\" in Korean. It translates literally to \"Microsoft with login\".",
-          "suggestion": "A better translation would be \"Microsoft 계정으로 로그인\" (Microsoft gyeojeong-eulo login) which means 'Sign in with your Microsoft account'."
+          "description": "The translation 'Microsoft으로 로그인' is technically correct but sounds a bit stiff and unnatural in Korean. A more common and natural phrasing would be 'Microsoft로 로그인'. The '으로' suffix implies motion towards, which isn't the primary meaning here.",
+          "suggestion": "Microsoft로 로그인"
         }
       ],
       "approved_at": null
@@ -159,13 +159,25 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Entrar com Microsoft\" is a very literal translation and doesn't flow naturally in Brazilian Portuguese. A more idiomatic translation would be \"Acessar com Microsoft\" or \"Fazer login com Microsoft\".",
+          "suggestion": "Acessar com Microsoft"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Conectare cu Microsoft' is understandable, a more natural and common Romanian translation for 'Sign in with Microsoft' would be 'Autentificare cu Microsoft' or 'Logare cu Microsoft'. 'Conectare' implies connection, whereas 'Sign in' implies authentication/login.",
+          "suggestion": "Autentificare cu Microsoft"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -180,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Sinhala word 'මයික්‍රොසොෆ්ට්' (Microsoft) is transliterated, but it's generally acceptable to use the English word directly in this context, especially in digital interfaces. While not strictly incorrect, using the English word might be more common and recognizable.",
-          "suggestion": "Consider using the English word 'Microsoft' directly, or a more standardized transliteration."
+          "description": "The Sinhala word 'මයික්‍රොසොෆ්ට්' is a transliteration and might not be the most natural or preferred way to refer to Microsoft in Sinhala. While understandable, it lacks a direct Sinhala equivalent.",
+          "suggestion": "Consider using a more commonly understood phrase or a transliteration that is closer to the pronunciation, if a direct equivalent is not available. The best option would depend on the context and target audience. Consultation with a Sinhala language expert is recommended."
         }
       ],
       "approved_at": null
@@ -192,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Prihlásiť sa pomocou Microsoft\" is a slightly awkward translation. A more natural Slovak phrasing would be \"Prihlásenie cez Microsoft\" or \"Prihlásiť sa cez Microsoft\".",
+          "description": "While technically correct, 'Prihlásiť sa pomocou Microsoft' is a bit clunky. A more natural Slovak phrasing would be 'Prihlásenie cez Microsoft'.",
           "suggestion": "Prihlásenie cez Microsoft"
         }
       ],
@@ -210,13 +222,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Пријави се путем Microsoft-а' is a literal translation but not the most natural or idiomatic way to say \"Sign in with Microsoft\" in Serbian (Cyrillic).  It's a bit clunky.",
-          "suggestion": "Пријава са Microsoft-ом"
+          "description": "The translation \"Пријави се путем Microsoft-а\" is not the most natural or accurate translation of \"Sign in with Microsoft\". While understandable, it's a bit clunky.",
+          "suggestion": "Пријава путем Microsoft-а"
         },
         {
           "type": "formatting",
-          "description": "While not strictly wrong, the use of \"Microsoft-а\" and \"Microsoft-ом\" suggests a genitive case usage, but a more appropriate phrasing would generally omit these extra suffixes.",
-          "suggestion": "Пријава са Microsoft"
+          "description": "The phrase \"Microsoft-а\" uses the genitive case, which is grammatically correct but feels less direct in this context. Consider using a more streamlined phrasing to avoid unnecessary grammatical complexity.",
+          "suggestion": "Пријава путем Microsoft"
         }
       ],
       "approved_at": null
@@ -227,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Prijavi se putem Microsoft-a\" is not the most natural or accurate translation of \"Sign in with Microsoft\". It literally translates to 'Log in via Microsoft'.",
-          "suggestion": "Prijavite se uz Microsoft"
+          "description": "The translation 'Prijavi se putem Microsoft-a' is not the most natural or idiomatic translation of 'Sign in with Microsoft'. While technically correct, it sounds slightly awkward.",
+          "suggestion": "Prijavite se sa Microsoft-om"
         }
       ],
       "approved_at": null
@@ -254,13 +266,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"使用Microsoft登录\" is a very literal translation of \"Sign in with Microsoft.\" A more natural and idiomatic translation would be something like \"通过Microsoft登录\" or \"用Microsoft账号登录\".",
-          "suggestion": "用Microsoft账号登录"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

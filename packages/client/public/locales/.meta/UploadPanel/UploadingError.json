@@ -3,7 +3,7 @@
   "content": "Uploading error",
   "content_en_sha1_hash": "74bbf25ed71d73b3e82807956ea28f7ff3789dd6",
   "created_at": "2025-05-19T21:30:49.954Z",
-  "updated_at": "2025-09-07T07:53:15.038Z",
+  "updated_at": "2025-10-13T13:22:35.647Z",
   "comment": {
     "text": "This translation key is used for displaying an error message related to file uploads. The text \"Uploading Error\" will be shown to users when there's a problem during the upload process in the application.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/UploadDataStore.js",
-      "line_number": 1877,
+      "line_number": 1896,
       "context": "});\n \n console.log(\"Errors: \", totalErrorsCount);\n \n if (totalErrorsCount > 1) {\n toastr.error(t(\"UploadPanel:UploadingError\"));\n return;\n }\n \n const errorItem = filesWithErrors[0];\n const passwordErrorIndex = errorItem.error.indexOf(\"password\");",
       "module": "/packages/client"
     }

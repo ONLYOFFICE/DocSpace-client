@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
-import { DeviceType } from "@docspace/shared/enums";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 const SHOW_LOADER_TIMER = 500;
@@ -280,8 +279,7 @@ class ClientLoadingStore {
   }
 
   get showPortalSettingsLoader(): boolean {
-    const isMobileView = this.settingsStore?.deviceType === DeviceType.mobile;
-    return this.isPortalSettingsLoading && !isMobileView;
+    return this.isPortalSettingsLoading;
   }
 }
 

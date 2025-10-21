@@ -26,6 +26,7 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 import type { RoomMember } from "@docspace/shared/api/rooms/types";
 import {
@@ -187,6 +188,7 @@ export const useMembers = ({
   );
 
   const fetchMembers = React.useCallback(async () => {
+    if (!room) return;
     setIsFirstLoading(true);
 
     abortController.current = new AbortController();
@@ -243,16 +245,20 @@ export const useMembers = ({
       );
     }
 
-    const [data, links] = await Promise.all(requests);
+    try {
+      const [data, links] = await Promise.all(requests);
+      if (links) setExternalLinks(links);
+      else setExternalLinks([]);
 
-    if (links) setExternalLinks(links);
-    else setExternalLinks([]);
+      const convertedMembers = convertMembers(data, true);
 
-    const convertedMembers = convertMembers(data, true);
+      setMembers(convertedMembers);
 
-    setMembers(convertedMembers);
-
-    setIsFirstLoading(false);
+      setIsFirstLoading(false);
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+      console.error(error);
+    }
   }, [room?.id, room?.roomType, room?.isTemplate, room?.security, searchValue]);
 
   const fetchMoreMembers = async () => {
@@ -265,36 +271,47 @@ export const useMembers = ({
       page: newPage,
     });
 
-    const data = await api.rooms.getRoomMembers(room.id, {
-      filterType: 0,
-      startIndex: newStartIndex,
-      count: PAGE_COUNT,
-      filterValue: searchValue,
-    });
+    try {
+      const data = await api.rooms.getRoomMembers(room.id, {
+        filterType: 0,
+        startIndex: newStartIndex,
+        count: PAGE_COUNT,
+        filterValue: searchValue,
+      });
 
-    setTotal(data.total);
+      setTotal(data.total);
 
-    const convertedMembers = convertMembers(data.items, false);
+      const convertedMembers = convertMembers(data.items, false);
 
-    abortController.current = null;
+      abortController.current = null;
 
-    setMembers((value) => {
-      if (!value) return convertedMembers;
+      setMembers((value) => {
+        if (!value) return convertedMembers;
 
-      const mergedMembers = {
-        administrators: [
-          ...value.administrators,
-          ...convertedMembers.administrators,
-        ],
-        users: [...value.users, ...convertedMembers.users],
-        expected: [...value.expected, ...convertedMembers.expected],
-        groups: [...value.groups, ...convertedMembers.groups],
-        guests: [...value.guests, ...convertedMembers.guests],
-      };
+        const mergedMembers = {
+          administrators: [
+            ...value.administrators,
+            ...convertedMembers.administrators,
+          ],
+          users: [...value.users, ...convertedMembers.users],
+          expected: [...value.expected, ...convertedMembers.expected],
+          groups: [...value.groups, ...convertedMembers.groups],
+          guests: [...value.guests, ...convertedMembers.guests],
+        };
 
-      return mergedMembers;
-    });
-    setIsLoading(false);
+        return mergedMembers;
+      });
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSearchMembers = (value: string) => {
+    setSearchValue(value);
+    setIsMembersPanelUpdating(true);
   };
 
   React.useEffect(() => {
@@ -354,36 +371,41 @@ export const useMembers = ({
       setTotal((value) => value - 1);
 
       if (hasNextPage) {
-        const newStartIndex = filter.startIndex + PAGE_COUNT - 1;
-        const newPageCount = 1;
+        try {
+          const newStartIndex = filter.startIndex + PAGE_COUNT - 1;
+          const newPageCount = 1;
 
-        const data = await api.rooms.getRoomMembers(room.id, {
-          filterType: 0,
-          startIndex: newStartIndex,
-          count: newPageCount,
-          filterValue: searchValue,
-        });
+          const data = await api.rooms.getRoomMembers(room.id, {
+            filterType: 0,
+            startIndex: newStartIndex,
+            count: newPageCount,
+            filterValue: searchValue,
+          });
 
-        setTotal(data.total);
+          setTotal(data.total);
 
-        const convertedMembers = convertMembers(data.items, false);
+          const convertedMembers = convertMembers(data.items, false);
 
-        setMembers((value) => {
-          if (!value) return convertedMembers;
+          setMembers((value) => {
+            if (!value) return convertedMembers;
 
-          const mergedMembers = {
-            administrators: [
-              ...value.administrators,
-              ...convertedMembers.administrators,
-            ],
-            users: [...value.users, ...convertedMembers.users],
-            expected: [...value.expected, ...convertedMembers.expected],
-            groups: [...value.groups, ...convertedMembers.groups],
-            guests: [...value.guests, ...convertedMembers.guests],
-          };
+            const mergedMembers = {
+              administrators: [
+                ...value.administrators,
+                ...convertedMembers.administrators,
+              ],
+              users: [...value.users, ...convertedMembers.users],
+              expected: [...value.expected, ...convertedMembers.expected],
+              groups: [...value.groups, ...convertedMembers.groups],
+              guests: [...value.guests, ...convertedMembers.guests],
+            };
 
-          return mergedMembers;
-        });
+            return mergedMembers;
+          });
+        } catch (error) {
+          if (axios.isCancel(error)) return;
+          console.error(error);
+        }
       }
     } else {
       setMembers((value) => {
@@ -412,7 +434,7 @@ export const useMembers = ({
 
   return {
     searchValue,
-    setSearchValue,
+    handleSearchMembers,
     isLoading,
     isFirstLoading,
     members,

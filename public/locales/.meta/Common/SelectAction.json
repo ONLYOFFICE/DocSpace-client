@@ -3,13 +3,19 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2025-09-22T10:04:13.732Z",
+  "updated_at": "2025-10-17T14:43:53.332Z",
   "comment": {
     "text": "This translation key is used to display a label for selecting an action, such as choosing a file or folder, in various UI elements. It appears in a placeholder position within a dialog and on a component that handles file selection. Translators should provide a descriptive text that indicates the user's ability to make a choice.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:34:25.327Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/sub-components/HeadOfGroupParam/index.tsx",
+      "line_number": 57,
+      "context": "{!groupManager ? (\n <Styled.SelectGroupManager onClick={onShowSelectGroupManagerPanel}>\n <SelectorAddButton\n iconName={PlusSvgUrl}\n label={t(\"Common:SelectAction\")}\n testId=\"select_group_manager\"\n />\n </Styled.SelectGroupManager>\n ) : (\n <GroupMemberRow",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
       "line_number": 55,
@@ -26,12 +32,6 @@
       "file_path": "/packages/client/src/components/RoomsSelectorInput/index.js",
       "line_number": 125,
       "context": "isLoading={isLoading}\n isDisabled={isDisabled || isLoading}\n hasError={isError}\n scale\n isDocumentIcon={isDocumentIcon}\n placeholder={t(\"SelectAction\")}\n />\n \n <Backdrop\n visible={isPanelVisible}\n isAside",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/sub-components/HeadOfGroupParam/index.tsx",
-      "line_number": 57,
-      "context": "{!groupManager ? (\n <Styled.SelectGroupManager onClick={onShowSelectGroupManagerPanel}>\n <SelectorAddButton\n iconName={PlusSvgUrl}\n label={t(\"Common:SelectAction\")}\n testId=\"select_group_manager\"\n />\n </Styled.SelectGroupManager>\n ) : (\n <GroupMemberRow",
       "module": "/packages/client"
     },
     {
@@ -84,13 +84,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 470,
+      "line_number": 622,
       "context": "<PeopleSelector\n withCancelButton\n onCancel={onCloseContactSelector}\n cancelButtonLabel=\"\"\n disableSubmitButton={false}\n submitButtonLabel={t(\"Common:SelectAction\")}\n onSubmit={onSubmitContactSelector}\n withHeader\n headerProps={{\n onCloseClick: onCloseContactSelector,\n isCloseable: true,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1753,
+      "line_number": 1794,
       "context": "const optionsModel = [\n {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => this.onSelect(item),\n disabled: false,\n },\n withOpen && {",
       "module": "/packages/client"
     },
@@ -125,6 +125,12 @@
       "module": "/packages/shared"
     },
     {
+      "file_path": "/packages/shared/components/share/selector/index.tsx",
+      "line_number": 136,
+      "context": "filter={filter}\n withBlur={false}\n roomId={item.id}\n withoutBackground={false}\n onClose={onClose}\n submitButtonLabel={t(\"Common:SelectAction\")}\n disableSubmitButton={false}\n onSubmit={handleSubmit}\n targetEntityType={targetEntityType}\n data-test-id=\"share_to_people_selector\"\n disabledInvitedText={t(\"Common:Shared\")}",
+      "module": "/packages/shared"
+    },
+    {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
       "line_number": 276,
       "context": "withCancelButton\n alwaysShowFooter\n onSubmit={onSelectUser}\n onCancel={closeUsersPanel}\n onClose={closeUsersPanel}\n submitButtonLabel={t(\"Common:SelectAction\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n disableDisabledUsers\n disableSubmitButton={false}\n checkIfUserInvited={checkIfUserInvited}\n injectedElement={",
@@ -132,7 +138,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 144,
+      "line_number": 146,
       "context": "const headerSelectorProps: TSelectorHeader = withHeader\n ? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel: headerProps?.headerLabel || t(\"Common:SelectAction\"),\n onCloseClick: onCancel,\n },\n }\n : {};",
       "module": "/packages/shared"
     },
@@ -144,7 +150,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 651,
+      "line_number": 663,
       "context": "renderCustomItem={renderCustomItem}\n aria-label={ariaLabel || \"People Selector\"}\n data-selector-type={dataSelectorType || \"people\"}\n dataTestId={dataTestId || \"people-selector\"}\n items={itemsList}\n submitButtonLabel={submitButtonLabel || t(\"Common:SelectAction\")}\n onSubmit={onSubmit}\n disableSubmitButton={disableSubmitButton || !selectedItems.length}\n selectedItem={isMultiSelect ? null : selectedItems[0]}\n submitButtonId={submitButtonId}\n emptyScreenImage={emptyScreenImage}",
       "module": "/packages/shared"
     },

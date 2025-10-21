@@ -3,7 +3,7 @@
   "content": "ONLYOFFICE",
   "content_en_sha1_hash": "c1cd17a947d45060963b486bba7fd3346227bbee",
   "created_at": "2025-05-19T21:30:47.141Z",
-  "updated_at": "2025-09-12T14:18:49.235Z",
+  "updated_at": "2025-10-17T14:43:53.302Z",
   "comment": {
     "text": "This translation key is used to display the organization's name, such as \"ONLYOFFICE\", when a user needs help or wants to learn more about the product. It appears in various UI elements like dialog boxes and about pages, ensuring accessibility for users who need assistance with the application.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/Shell.jsx",
-      "line_number": 111,
-      "context": "});\n \n const { t, ready } = useTranslation([\"Common\", \"SmartBanner\"]);\n \n useEffect(() => {\n if (!logoText) setLogoText(t(\"Common:OrganizationName\"));\n }, [logoText, setLogoText]);\n \n useEffect(() => {\n try {\n loadBaseInfo();",
+      "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
+      "line_number": 213,
+      "context": "const several = selection.length > 1;\n \n // for backup\n if (!selection.length) return t(\"Common:BackupNotAllowedInFormRoom\");\n \n const option = { organizationName: t(\"Common:OrganizationName\") };\n \n if (isCopy)\n return several\n ? t(\"Files:WarningCopyToFormRoomServal\", option)\n : t(\"Common:WarningCopyToFormRoom\", option);",
       "module": "/packages/client"
     },
     {
@@ -23,9 +23,21 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/Shell.jsx",
+      "line_number": 112,
+      "context": "});\n \n const { t, ready } = useTranslation([\"Common\", \"SmartBanner\"]);\n \n useEffect(() => {\n if (!logoText) setLogoText(t(\"Common:OrganizationName\"));\n }, [logoText, setLogoText]);\n \n useEffect(() => {\n try {\n loadBaseInfo();",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/doceditor/src/components/Root.tsx",
       "line_number": 298,
       "context": "startFillingPanelVisible,\n fillingStatusDialogVisible,\n shareFormDialogVisible,\n ]);\n \n const organizationName = settings?.logoText || t(\"Common:OrganizationName\");\n \n React.useEffect(() => {\n if (user?.isVisitor) return;\n \n const getMy = async () => {",
+      "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/SelectFolderDialog.tsx",
+      "line_number": 66,
+      "context": "fileSaveAsExtension !== \"zip\" && fileInfo.fileExst !== \"fb2\";\n \n const formProps = useMemo(() => {\n return {\n message: t(\"Common:WarningCopyToFormRoom\", {\n organizationName: t(\"Common:OrganizationName\"),\n }),\n isRoomFormAccessible:\n Boolean(fileInfo.isForm) && fileSaveAsExtension === \"pdf\",\n };\n }, [fileInfo.isForm, t, fileSaveAsExtension]);",
       "module": "/packages/doceditor"
     },
     {
@@ -35,16 +47,16 @@
       "module": "/packages/login"
     },
     {
-      "file_path": "/packages/shared/hooks/useDocumentTitle.ts",
-      "line_number": 39,
-      "context": "export const useDocumentTitle = (titleI18nKey: string) => {\n const { t } = useTranslation();\n \n const setDocumentTitle = (t: TTranslation, titleI18nKey: string) => {\n let title;\n const organizationName = t(\"Common:OrganizationName\");\n \n if (titleI18nKey) {\n title = `${t(titleI18nKey)} - ${organizationName}`;\n } else {\n title = organizationName;",
-      "module": "/packages/shared"
-    },
-    {
       "file_path": "/packages/management/src/app/settings/encrypt-data/page.client.tsx",
       "line_number": 90,
       "context": "</div>\n ) : null}\n </div>\n <Text>\n {t(\"EncryptDataDescription\", {\n organizationName: t(\"Common:OrganizationName\"),\n })}\n </Text>\n <div className=\"wrapper-block\">\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:Warning\")}!",
       "module": "/packages/management"
+    },
+    {
+      "file_path": "/packages/shared/hooks/useDocumentTitle.ts",
+      "line_number": 39,
+      "context": "export const useDocumentTitle = (titleI18nKey: string) => {\n const { t } = useTranslation();\n \n const setDocumentTitle = (t: TTranslation, titleI18nKey: string) => {\n let title;\n const organizationName = t(\"Common:OrganizationName\");\n \n if (titleI18nKey) {\n title = `${t(titleI18nKey)} - ${organizationName}`;\n } else {\n title = organizationName;",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

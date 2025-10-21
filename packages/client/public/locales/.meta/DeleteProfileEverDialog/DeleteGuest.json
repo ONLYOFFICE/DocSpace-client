@@ -3,7 +3,7 @@
   "content": "Delete guest",
   "content_en_sha1_hash": "74f9b74ae1d024f81e7e6e366926f86c3246c8f2",
   "created_at": "2025-05-19T21:30:56.657Z",
-  "updated_at": "2025-09-17T13:43:01.624Z",
+  "updated_at": "2025-10-13T13:22:35.575Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when deleting a guest. It is used within a delete profile ever dialog and is intended to be displayed after successful deletion of the guest's information.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 255,
+      "line_number": 257,
       "context": "return {\n id: \"option_delete-user\",\n key: option,\n icon: TrashReactSvgUrl,\n label: item.isVisitor\n ? t(\"DeleteProfileEverDialog:DeleteGuest\")\n : t(\"DeleteProfileEverDialog:DeleteUser\"),\n onClick: () => this.toggleDeleteProfileEverDialog([item]),\n };\n \n case \"details\":",
       "module": "/packages/client"
     }

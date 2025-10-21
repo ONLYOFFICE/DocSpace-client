@@ -68,6 +68,8 @@ const ArticleBodyContent = (props) => {
 
   const location = useLocation();
 
+  const isMobileView = currentDeviceType === DeviceType.mobile;
+
   // React.useEffect(() => {
   //   // prevLocation.current = location;
   // }, [location]);
@@ -184,7 +186,7 @@ const ArticleBodyContent = (props) => {
   };
 
   const onSelect = () => {
-    if (currentDeviceType === DeviceType.mobile) {
+    if (isMobileView) {
       toggleArticleOpen();
     }
   };
@@ -300,9 +302,7 @@ const ArticleBodyContent = (props) => {
       const title = mapKeys(item.tKey);
       const linkData = getLinkData(item.key);
 
-      const style = isLastIndex
-        ? { margin: `${item.key.includes(9) ? "16px 0px" : "0"}` }
-        : { marginTop: `${item.key.includes(9) ? "16px" : "0"}` };
+      const style = { marginTop: `${item.key.includes(9) ? "16px" : "0"}` };
 
       items.push(
         <ArticleItem
@@ -319,7 +319,8 @@ const ArticleBodyContent = (props) => {
           folderId={item.id}
           style={style}
           $currentColorScheme={currentColorScheme}
-          withAnimation
+          withAnimation={!isMobileView}
+          isEndOfBlock={isLastIndex}
         />,
       );
     });
@@ -348,7 +349,7 @@ export default inject(
 
     const { isNotPaidPeriod, isCommunity } = currentTariffStatusStore;
     const { user } = userStore;
-    const { isOwner } = user;
+    const { isOwner } = user || {};
     const {
       standalone,
       showText,

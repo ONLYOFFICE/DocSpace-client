@@ -3,7 +3,7 @@
   "content": "TB",
   "content_en_sha1_hash": "f8a902b067d4344b687920f92c669bffad7b0e0e",
   "created_at": "2025-05-19T21:30:49.270Z",
-  "updated_at": "2025-09-09T10:39:52.933Z",
+  "updated_at": "2025-10-17T14:43:53.602Z",
   "comment": {
     "text": "This translation key is used to display a unit of measurement for file sizes (\"TB\") and is included in a dropdown list within the Quota Form component. The label is part of a common size unit system and is used to help users understand the quantity of data being measured. It appears on the \"Common:Bytes\" option selection screen.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 701,
+      "line_number": 704,
       "context": "const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),\n ];\n \n if (bytes <= 0) return `${`0 ${t(\"Common:Bytes\")}`}`;",
       "module": "/packages/shared"
     }
@@ -42,8 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'تيرابايت ' is a transliteration of 'Terabyte', not a direct translation of 'TB'. The correct translation would be 'تيرا بايت'.",
-          "suggestion": "تيرا بايت"
+          "description": "The Arabic translation 'تيرابايت ' is a transliteration of 'Terabyte' rather than a direct abbreviation like 'TB'. While understandable, it's not the standard way to represent 'TB' in Arabic technical contexts. It doesn't convey the intended meaning of the abbreviation.",
+          "suggestion": "Consider using a more established Arabic abbreviation for Terabyte if one exists within the Saudi Arabian context. Otherwise, a more descriptive term could be preferable to a simple transliteration."
+        },
+        {
+          "type": "formatting",
+          "description": "The Arabic translation has a space before the Arabic character. While not incorrect, it's unusual and might be a minor formatting issue.",
+          "suggestion": "Remove the leading space: تيرابايت"
         }
       ],
       "approved_at": null
@@ -96,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation \"To\" is incorrect for \"TB\". \"TB\" stands for Terabyte, and the correct French translation is \"To\" (pronounced 'toe').",
-          "suggestion": "Replace \"To\" with \"To\"."
+          "description": "The French translation 'To' is incorrect for 'TB'. 'TB' stands for Terabyte, which is typically translated to 'To' in French.",
+          "suggestion": "The correct French translation is 'To'."
         }
       ],
       "approved_at": null
@@ -168,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'TO' is incorrect for 'TB' (Terabyte). The correct translation should be 'TB'.",
-          "suggestion": "TB"
+          "description": "The Romanian translation 'TO' is incorrect for 'TB' (Terabyte). The correct Romanian abbreviation for Terabyte is 'TB'.",
+          "suggestion": "Use 'TB' as the translation."
         }
       ],
       "approved_at": null
@@ -185,9 +190,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Sinhala translation 'ටෙ.බ.' uses periods as separators, which is unconventional for abbreviations in Sinhala. It's more common to use a space or hyphen.",
-          "suggestion": "Consider using 'ටෙ. බ.' or 'ටෙ-බි.'"
+          "type": "spelling",
+          "description": "The translation 'ටෙ.බ.' is a transliteration and not a full translation. While it represents 'TB', it lacks proper Sinhala terminology for 'Terabyte'.",
+          "suggestion": "Ideally, a more formal Sinhala equivalent for 'Terabyte' would be used, if one exists. Otherwise, explain the abbreviation in a footnote or glossary."
         }
       ],
       "approved_at": null
@@ -235,6 +240,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

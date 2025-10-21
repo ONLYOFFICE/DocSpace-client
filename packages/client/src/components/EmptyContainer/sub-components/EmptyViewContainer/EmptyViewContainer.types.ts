@@ -77,7 +77,9 @@ export interface InjectedEmptyViewContainerProps
     Pick<ContactsConextOptionsStore, "inviteUser">,
     Pick<
       TStore["dialogsStore"],
-      "setSelectFileFormRoomDialogVisible" | "setQuotaWarningDialogVisible"
+      | "setSelectFileFormRoomDialogVisible"
+      | "setQuotaWarningDialogVisible"
+      | "setTemplateAccessSettingsVisible"
     >,
     Pick<
       TStore["selectedFolderStore"],
@@ -105,6 +107,7 @@ export type EmptyViewContainerProps = OutEmptyViewContainerProps &
 export type OptionActions = {
   navigate: NavigateFunction;
   inviteUser: VoidFunction;
+  onOpenAccessSettings: VoidFunction;
   onCreate: (
     extension: ExtensionType,
     withoutDialog?: boolean,

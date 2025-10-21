@@ -67,6 +67,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
     item,
     iconNode,
     withAnimation,
+    dataTooltipId,
   } = props;
 
   // Animation hook
@@ -132,6 +133,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
         data-testid="article-item"
         title={tooltipTitle}
         ref={parentElementRef}
+        data-tooltip-id={dataTooltipId}
       >
         <div
           className={classNames(styles.articleItemSibling, {
@@ -165,7 +167,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
           {!showText ? (
             <>
               {showInitial ? (
-                <Text className={styles.articleItemInitialText}>
+                <Text className={classNames(styles.articleItemInitialText)}>
                   {getInitial(text)}
                 </Text>
               ) : null}
@@ -182,7 +184,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
         </div>
         {showText ? (
           <Text
-            className={classNames(styles.articleItemText, {
+            className={classNames(styles.articleItemText, "articleItemText", {
               [styles.active]: isActive,
             })}
             noSelect

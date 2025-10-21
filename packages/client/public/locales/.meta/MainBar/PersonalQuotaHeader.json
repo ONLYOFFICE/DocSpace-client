@@ -3,7 +3,7 @@
   "content": "Your personal storage quota exceeded",
   "content_en_sha1_hash": "baa884cd19f66c0a45febb66fb84ad79ad659338",
   "created_at": "2025-05-19T21:30:54.110Z",
-  "updated_at": "2025-05-24T08:06:15.698Z",
+  "updated_at": "2025-10-01T08:28:21.893Z",
   "comment": {
     "text": "The \"PersonalQuotaHeader\" translation key is used to display an error message indicating that a user's personal storage quota has been exceeded. This text appears in the UI when a user attempts to access a file or resource exceeding their allocated quota.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 176,
+      "line_number": 177,
       "context": "}}\n />\n );\n };\n \n const getPersonalQuotaHeader = () => {\n if (!isAdmin) return t(\"PersonalQuotaHeader\");\n return t(\"PersonalQuotaHeaderForAdmins\");\n };\n \n const getUpgradeTariffDescription = () => {",
       "module": "/packages/client"
     }

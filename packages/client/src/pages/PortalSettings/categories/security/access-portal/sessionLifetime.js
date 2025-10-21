@@ -67,6 +67,7 @@ const MainContainer = styled.div`
 const SessionLifetime = (props) => {
   const {
     t,
+    tReady,
     lifetime,
     enabled,
     setSessionLifetimeSettings,
@@ -250,7 +251,7 @@ const SessionLifetime = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType === DeviceType.mobile && !isLoading) {
+  if ((currentDeviceType === DeviceType.mobile && !isLoading) || !tReady) {
     return <SessionLifetimeLoader />;
   }
 

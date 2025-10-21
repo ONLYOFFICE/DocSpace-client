@@ -3,7 +3,7 @@
   "content": "Spaces",
   "content_en_sha1_hash": "9b584b52b28402594628cea231d8d1cd0eb03d50",
   "created_at": "2025-05-19T21:30:48.971Z",
-  "updated_at": "2025-09-17T13:43:01.941Z",
+  "updated_at": "2025-10-17T14:43:53.641Z",
   "comment": {
     "text": "This translation key is used for the label of a settings section titled \"Spaces\", which appears on a management settings page. It displays the text when the user navigates to this section, serving as a header or title. The translation should accurately convey the concept of spaces in the context of management settings.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 345,
+      "line_number": 340,
       "context": "isAdmin && standalone && !limitedAccessSpace\n ? {\n key: \"spaces-management-settings\",\n id: \"spaces\",\n icon: SpacesReactSvgUrl,\n label: t(\"Common:Spaces\"),\n onClick: this.onSpacesClick,\n url: SPACES_URL,\n preventNewTab: true,\n items:\n baseDomain && baseDomain !== \"localhost\"",
       "module": "/packages/client"
     },
@@ -217,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

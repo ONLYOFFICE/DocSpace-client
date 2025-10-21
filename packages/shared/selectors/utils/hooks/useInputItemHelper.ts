@@ -39,6 +39,12 @@ const useInputItemHelper = ({
   selectedItemId,
   setItems,
 }: TUseInputItemHelper) => {
+  const selectedItemIdRef = React.useRef(selectedItemId);
+
+  React.useEffect(() => {
+    selectedItemIdRef.current = selectedItemId;
+  }, [selectedItemId]);
+
   const onCancelInput = React.useCallback(() => {
     if (!withCreate) return;
 
@@ -59,10 +65,12 @@ const useInputItemHelper = ({
 
   const onAcceptInput = React.useCallback(
     async (value: string, roomType?: RoomsType) => {
-      if (!withCreate || (!selectedItemId && !roomType)) return;
+      const currentSelectedItemId = selectedItemIdRef.current;
+      if (!withCreate || (!currentSelectedItemId && !roomType)) return;
 
       try {
-        if (selectedItemId) await createFolder(selectedItemId, value);
+        if (currentSelectedItemId)
+          await createFolder(currentSelectedItemId, value.trimEnd());
         else if (roomType) {
           await createRoom({ roomType, title: value });
         }
@@ -71,7 +79,7 @@ const useInputItemHelper = ({
         toastr.error(e as string);
       }
     },
-    [withCreate, selectedItemId],
+    [withCreate],
   );
 
   const addInputItem = React.useCallback(

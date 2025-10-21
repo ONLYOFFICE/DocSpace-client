@@ -42,6 +42,9 @@ import EmptyTrashLightIcon from "PUBLIC_DIR/images/emptyview/empty.trash.light.s
 import EmptyFavoritesLightIcon from "PUBLIC_DIR/images/emptyview/empty.favorites.svg";
 import EmptyFavoritesDarkIcon from "PUBLIC_DIR/images/emptyview/empty.favorites.dark.svg";
 
+import EmptyShareLightIcon from "PUBLIC_DIR/images/emptyview/empty.share.svg";
+import EmptyShareDarkIcon from "PUBLIC_DIR/images/emptyview/empty.share.dark.svg";
+
 import EmptyArchiveDarkIcon from "PUBLIC_DIR/images/emptyview/empty.archive.dark.svg";
 import EmptyArchiveLightIcon from "PUBLIC_DIR/images/emptyview/empty.archive.light.svg";
 
@@ -198,6 +201,11 @@ export const getRootDescription = (
     .with([FolderType.USER, P.when(() => security?.Create)], () =>
       t("EmptyView:DefaultFolderDescription"),
     )
+    .with([FolderType.SHARE, P._], () =>
+      t("EmptyView:EmptyShareDescription", {
+        productName: t("Common:ProductName"),
+      }),
+    )
     .with([FolderType.Recent, P._], () => t("EmptyView:EmptyRecentDescription"))
     .with([FolderType.Favorites, P._], () =>
       t("EmptyView:EmptyFavoritesDescription"),
@@ -317,6 +325,7 @@ export const getRootTitle = (
     .with([FolderType.USER, ShareAccessRights.None], () =>
       t("Common:EmptyScreenFolder"),
     )
+    .with([FolderType.SHARE, P._], () => t("EmptyView:EmptyShareTitle"))
     .with([FolderType.Favorites, P._], () => t("EmptyView:EmptyFavoritesTitle"))
     .with([FolderType.Recent, P._], () => t("EmptyView:NoRecentFilesHereYet"))
     .with([FolderType.Archive, P._], () => t("Files:ArchiveEmptyScreenHeader"))
@@ -492,6 +501,9 @@ export const getRootIcon = (
     .with([FolderType.Favorites, P._], () =>
       isBaseTheme ? <EmptyFavoritesLightIcon /> : <EmptyFavoritesDarkIcon />,
     )
+    .with([FolderType.SHARE, P._], () =>
+      isBaseTheme ? <EmptyShareLightIcon /> : <EmptyShareDarkIcon />,
+    )
     .with([FolderType.Archive, ShareAccessRights.None], () =>
       isBaseTheme ? <EmptyArchiveLightIcon /> : <EmptyArchiveDarkIcon />,
     )
@@ -520,6 +532,17 @@ export const helperOptions = (
       icon: <InviteUserFormIcon />,
       key: "invite-users",
       onClick: actions.inviteUser,
+      disabled: !security?.EditAccess || isFrame,
+    };
+  };
+
+  const createTemplateAccessOption = (title: string, description: string) => {
+    return {
+      title,
+      description,
+      icon: <InviteUserFormIcon />,
+      key: "template-access",
+      onClick: actions.onOpenAccessSettings,
       disabled: !security?.EditAccess || isFrame,
     };
   };
@@ -566,6 +589,7 @@ export const helperOptions = (
 
   return {
     createInviteOption,
+    createTemplateAccessOption,
     createCreateFileOption,
     createUploadFromDocSpace,
     createUploadFromDeviceOption,

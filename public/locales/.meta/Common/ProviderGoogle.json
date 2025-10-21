@@ -3,7 +3,7 @@
   "content": "Google",
   "content_en_sha1_hash": "2b681c0a24baff8899d7163cc7f805c75e1f44e4",
   "created_at": "2025-05-19T21:30:47.559Z",
-  "updated_at": "2025-09-09T10:39:53.041Z",
+  "updated_at": "2025-10-17T14:43:53.733Z",
   "comment": {
     "text": "The translation key \"ProviderGoogle\" is used to display the label for a Google provider option in the application. It will appear as a button or option in the UI, allowing users to select Google as their preferred provider.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 382,
+      "line_number": 385,
       "context": "export function getProviderLabel(provider: string, t: (key: string) => string) {\n switch (provider) {\n case \"apple\":\n return t(\"Common:ProviderApple\");\n case \"google\":\n return t(\"Common:ProviderGoogle\");\n case \"facebook\":\n return t(\"Common:ProviderFacebook\");\n case \"twitter\":\n return t(\"Common:ProviderTwitter\");\n case \"linkedin\":",
       "module": "/packages/shared"
     }

@@ -36,6 +36,8 @@ const withLoading = (WrappedComponent) => {
       isLoadedSubmenu,
       isLoadedLngTZSettings,
       isLoadedDNSSettings,
+      isLoadedConfigureDeepLink,
+      isLoadedAdManagement,
       isLoadedCustomizationNavbar,
       isLoadedWelcomePageSettings,
       isBurgerLoading,
@@ -88,42 +90,60 @@ const withLoading = (WrappedComponent) => {
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedLngTZSettings &&
-      !showPortalSettingsLoader;
+      isLoadedLngTZSettings;
 
     const isLoadedCustomizationSettingWelcomePageSettings =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedWelcomePageSettings &&
-      !showPortalSettingsLoader;
+      isLoadedWelcomePageSettings;
 
     const isLoadedCustomizationSettingPortalRenaming =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      loadedPortalRenaming &&
-      !showPortalSettingsLoader;
+      loadedPortalRenaming;
 
     const isLoadedCustomizationSettingDNSSettings =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedDNSSettings &&
-      !showPortalSettingsLoader;
+      isLoadedDNSSettings;
 
-    const isLoadedPage =
-      setting === "language-and-time-zone"
-        ? isLoadedCustomizationSettingLngTZSettings
-        : setting === "welcome-page-settings"
-          ? isLoadedCustomizationSettingWelcomePageSettings
-          : setting === "dns-settings"
-            ? isLoadedCustomizationSettingDNSSettings
-            : setting === "portal-renaming"
-              ? isLoadedCustomizationSettingPortalRenaming
-              : viewMobile
-                ? isLoadedCustomizationNavbarSettings
-                : isLoadedCustomizationSettings;
+    const isLoadedCustomizationConfigureDeepLink =
+      isLoadedArticleBody &&
+      !isBurgerLoading &&
+      isLoadedSectionHeader &&
+      isLoadedConfigureDeepLink;
+
+    const isLoadedCustomizationAdManagement =
+      isLoadedArticleBody &&
+      !isBurgerLoading &&
+      isLoadedSectionHeader &&
+      isLoadedAdManagement;
+
+    const getIsLoadedPage = () => {
+      switch (setting) {
+        case "language-and-time-zone":
+          return isLoadedCustomizationSettingLngTZSettings;
+        case "welcome-page-settings":
+          return isLoadedCustomizationSettingWelcomePageSettings;
+        case "dns-settings":
+          return isLoadedCustomizationSettingDNSSettings;
+        case "portal-renaming":
+          return isLoadedCustomizationSettingPortalRenaming;
+        case "ad-management":
+          return isLoadedCustomizationAdManagement;
+        case "configure-deep-link":
+          return isLoadedCustomizationConfigureDeepLink;
+        default:
+          return viewMobile
+            ? isLoadedCustomizationNavbarSettings
+            : isLoadedCustomizationSettings;
+      }
+    };
+
+    const isLoadedPage = getIsLoadedPage();
 
     return (
       <WrappedComponent
@@ -141,6 +161,8 @@ const withLoading = (WrappedComponent) => {
       isLoadedSubmenu,
       isLoadedLngTZSettings,
       isLoadedDNSSettings,
+      isLoadedConfigureDeepLink,
+      isLoadedAdManagement,
       isLoadedCustomizationNavbar,
       isLoadedWelcomePageSettings,
     } = common;
@@ -160,6 +182,8 @@ const withLoading = (WrappedComponent) => {
       isLoadedSubmenu,
       isLoadedLngTZSettings,
       isLoadedDNSSettings,
+      isLoadedConfigureDeepLink,
+      isLoadedAdManagement,
       isLoadedCustomizationNavbar,
       isLoadedWelcomePageSettings,
       isBurgerLoading,

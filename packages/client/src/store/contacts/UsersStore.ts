@@ -645,8 +645,6 @@ class UsersStore {
         ) {
           if (!isUserLDAP && !isUserSSO) {
             options.push("separator-1");
-
-            options.push("change-name");
             options.push("change-email");
             options.push("change-password");
 

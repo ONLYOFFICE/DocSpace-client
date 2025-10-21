@@ -3,7 +3,7 @@
   "content": "Manage displayed columns",
   "content_en_sha1_hash": "edef33d6c30b6b2dbcd0652de4bbdd3b72cfe10e",
   "created_at": "2025-05-19T21:30:56.214Z",
-  "updated_at": "2025-09-02T07:59:28.450Z",
+  "updated_at": "2025-10-13T14:41:02.943Z",
   "comment": {
     "text": "This translation key is used for the title of a settings panel or modal that allows users to manage displayed table columns. It appears in a UI component, possibly as a button or title, and provides context for users to understand its purpose.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 873,
+      "line_number": 929,
       "context": "isIndexEditingMode={isIndexEditingMode}\n infoPanelVisible={infoPanelVisible}\n useReactWindow\n tagRef={tagRef}\n setHideColumns={setHideColumns}\n settingsTitle={t(\"Files:TableSettingsTitle\")}\n showSettings={isFrame ? showSettings : true}\n />\n );\n }\n }",
       "module": "/packages/client"
     }

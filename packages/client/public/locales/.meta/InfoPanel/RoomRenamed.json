@@ -3,7 +3,7 @@
   "content": "Room <1>«{{oldRoomTitle}}»</1> renamed to <2>«{{roomTitle}}»</2>",
   "content_en_sha1_hash": "6577c913cb505335f78dd2df81da5de99e766f6a",
   "created_at": "2025-05-19T21:30:54.945Z",
-  "updated_at": "2025-08-04T07:30:01.240Z",
+  "updated_at": "2025-10-13T13:22:35.720Z",
   "comment": {
     "text": "This translation key is used to display a message when a room's name changes. It updates an old room title with the new one, indicating the renaming action occurred. This appears in the UI as part of a history or log entry.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 171,
-      "context": "components={{\n 1: <strong title={(feed.data as TFeedData).title} />,\n }}\n />\n );\n case FeedActionKeys.RoomRenamed:\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"RoomRenamed\"",
+      "line_number": 181,
+      "context": "/>\n ),\n }}\n />\n );\n case FeedActionKeys.RoomRenamed:\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"RoomRenamed\"",
       "module": "/packages/client"
     },
     {

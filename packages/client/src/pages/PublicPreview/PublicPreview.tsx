@@ -23,7 +23,7 @@ export const PublicPreview = () => {
     revalidator.revalidate();
   };
 
-  return match(validateData.status)
+  return match(validateData?.status)
     .with(ValidationStatus.Ok, () => (
       <PublicPreviewViewer
         getIcon={(size: number, fileExst: string) => getIcon(fileExst, size)}

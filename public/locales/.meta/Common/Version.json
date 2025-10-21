@@ -3,7 +3,7 @@
   "content": "Version",
   "content_en_sha1_hash": "2da600bf9404843107a9531694f654e5662959e0",
   "created_at": "2025-05-19T21:30:49.494Z",
-  "updated_at": "2025-09-24T13:10:16.915Z",
+  "updated_at": "2025-10-13T20:32:26.685Z",
   "comment": {
     "text": "This translation key is used to display the version number of a software or application. It is typically displayed in a label format, often accompanied by a button or link that provides more information about the version. The translation will be used in various UI contexts, such as a navigation menu header and a plugin settings dialog, where it needs to be rendered with different styles and formatting.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/NavMenu/sub-components/header.js",
-      "line_number": 237,
-      "context": "as=\"a\"\n href={`https://github.com/ONLYOFFICE/Docspace/releases`}\n target=\"_blank\"\n {...versionBadgeProps}\n >\n {t(\"Common:Version\")} {version}\n </Link>\n <Text as=\"span\" {...versionBadgeProps}>\n {\" \"}\n -{\" \"}\n </Text>",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
       "line_number": 73,
       "context": ") : null}\n \n {plugin.version ? (\n <>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\" truncate>\n {t(\"Common:Version\")}\n </Text>\n <div\n className={classNames(styles.version, {\n [styles.incompatible]: !plugin.compatible,\n })}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/NavMenu/sub-components/header.js",
+      "line_number": 243,
+      "context": "as=\"a\"\n href={`https://github.com/ONLYOFFICE/Docspace/releases`}\n target=\"_blank\"\n {...versionBadgeProps}\n >\n {t(\"Common:Version\")} {version}\n </Link>\n <Text as=\"span\" {...versionBadgeProps}>\n {\" \"}\n -{\" \"}\n </Text>",
       "module": "/packages/client"
     },
     {
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"අනුවාදය\" (anuvadaya) means \"translation\" itself, not \"version\". It's translating the word, not conveying the meaning of 'Version' in this context.",
-          "suggestion": "Possible suggestions include:  \"අවස්ථා\" (awastha - stage/version), \"ලේඛනය\" (lekahana - edition/version), or \"පත්තිතිය\" (paththiya - release/version). The most appropriate choice depends on the specific context."
+          "description": "The Sinhala translation \"අනුවාදය\" (anuvadaya) translates to 'translation' or 'interpretation', not 'version'. It doesn't accurately convey the meaning of 'Version' in this context, which typically refers to a specific release or iteration of a software or product.",
+          "suggestion": "Consider alternatives like \"අවස්ථානය\" (awasthana), \"වෙළුම\" (weluma - time/period), or a more descriptive phrase depending on the specific context of 'Version'."
         }
       ],
       "approved_at": null
@@ -217,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

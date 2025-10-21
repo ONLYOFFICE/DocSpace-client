@@ -3,7 +3,7 @@
   "content": "Empty archive",
   "content_en_sha1_hash": "a34ca8c2e425ac975dd4ded311c4e04ac532fd9f",
   "created_at": "2025-05-19T21:30:55.267Z",
-  "updated_at": "2025-09-07T07:53:15.380Z",
+  "updated_at": "2025-10-17T14:43:53.629Z",
   "comment": {
     "text": "The \"Empty archive\" translation key is used to display a message when an archive is emptied. It appears in a restore all dialog and indicates that all archived items have been removed.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1313,
+      "line_number": 1353,
       "context": "if (isExistActiveItems) return;\n \n this.dialogsStore.setRestoreAllPanelVisible(true);\n };\n \n onRestoreAllArchiveAction = () => {\n const { activeFiles, activeFolders } = this.filesStore;\n const {\n setQuotaWarningDialogVisible,\n setRestoreAllArchive,\n setRestoreRoomDialogVisible,",
       "module": "/packages/client"
     }

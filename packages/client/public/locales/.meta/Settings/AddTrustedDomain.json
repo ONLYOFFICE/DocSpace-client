@@ -3,7 +3,7 @@
   "content": "Add trusted domain",
   "content_en_sha1_hash": "4d8d1f52d9615d9c81391e0cd5314c57146e0a06",
   "created_at": "2025-05-19T21:30:50.373Z",
-  "updated_at": "2025-09-17T13:43:01.894Z",
+  "updated_at": "2025-09-26T15:21:06.438Z",
   "comment": {
     "text": "The translation key \"AddTrustedDomain\" is used to display the label \"Add trusted domain\" in a UI element, likely a button or input field, where users can add a trusted mail domain to access secure content. It appears in a category dialog related to security settings for an access portal.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 281,
+      "line_number": 285,
       "context": "/>\n \n {type === \"1\" ? (\n <UserFields\n inputs={domains}\n buttonLabel={t(\"AddTrustedDomain\")}\n onChangeInput={onChangeInput}\n onDeleteInput={onDeleteInput}\n onClickAdd={onClickAdd}\n regexp={regexp}\n classNameAdditional=\"add-trusted-domain\"",
       "module": "/packages/client"
     }

@@ -55,6 +55,37 @@ const EmailInputWrapper = styled.div`
   gap: 8px;
 `;
 
+const IconButtonWrapper = styled.div`
+  width: 32px;
+  height: 32px;
+
+  border: var(--selector-item-input-button-border);
+  border-radius: 3px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  div {
+    height: 16px;
+  }
+
+  &:hover {
+    div {
+      cursor: pointer;
+    }
+    cursor: pointer;
+
+    border-color: var(--selector-item-input-button-border-hover);
+
+    svg path {
+      fill: var(--selector-item-input-button-border-hover);
+    }
+  }
+`;
+
 const StyledRowContent = styled(RowContent)`
   display: flex;
   align-items: center;
@@ -212,24 +243,23 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
               dataTestId="change_email_input"
             />
 
-            <IconButton
-              className="import-check-container-button"
-              size={32}
-              onClick={handleSaveClick}
-              iconName={CheckSvgUrl}
-              isFill
-              isClickable
-              dataTestId="change_email_save_button"
-            />
-            <IconButton
-              className="import-clear-container-button"
-              size={32}
-              onClick={clearEmail}
-              iconName={CrossSvgUrl}
-              isFill
-              isClickable
-              dataTestId="change_email_clear_button"
-            />
+            <IconButtonWrapper onClick={handleSaveClick}>
+              <IconButton
+                className="import-check-container-button"
+                size={16}
+                iconName={CheckSvgUrl}
+                dataTestId="change_email_save_button"
+              />
+            </IconButtonWrapper>
+
+            <IconButtonWrapper onClick={clearEmail}>
+              <IconButton
+                className="import-clear-container-button"
+                size={16}
+                iconName={CrossSvgUrl}
+                dataTestId="change_email_clear_button"
+              />
+            </IconButtonWrapper>
           </EmailInputWrapper>
         )
       ) : (

@@ -44,10 +44,34 @@ export const getDialogContent = (
   isPersonalRoom,
   isRoom,
   isTemplatesFolder,
+  isSharedWithMeFolderRoot,
+  unsubscribe,
 ) => {
+  if (!selection) return null;
+
   const isFolder = selection[0]?.isFolder || !!selection[0]?.parentId;
   const isSingle = selection.length === 1;
   const isThirdParty = selection[0]?.providerKey;
+
+  if (unsubscribe) {
+    return isSingle ? (
+      <Trans
+        i18nKey="removeFromListDescription"
+        ns="DeleteDialog"
+        t={t}
+        values={{ title: selection[0]?.title }}
+        components={{ 1: <Text fontWeight={600} as="span" /> }}
+      />
+    ) : (
+      <Trans
+        i18nKey="removeFromListDescriptionPlural"
+        ns="DeleteDialog"
+        t={t}
+        values={{ count: selection.length }}
+        components={{ 1: <Text fontWeight={600} as="span" /> }}
+      />
+    );
+  }
 
   if (isTemplate) {
     return isSingle ? (
@@ -55,7 +79,7 @@ export const getDialogContent = (
         i18nKey="DeleteTemplate"
         ns="DeleteDialog"
         t={t}
-        values={{ templateName: selection[0].title }}
+        values={{ templateName: selection[0]?.title }}
         components={{ 1: <Text fontWeight={600} as="span" /> }}
       />
     ) : (
@@ -67,7 +91,7 @@ export const getDialogContent = (
     return (
       <>
         <Trans t={t} i18nKey="DeleteRoom" ns="DeleteDialog">
-          The room <strong>\"{{ roomName: selection[0].title }}\"</strong>
+          The room <strong>\"{{ roomName: selection[0]?.title }}\"</strong>
           will be permanently deleted. All data and user accesses will be lost.
         </Trans>{" "}
         {t("Common:WantToContinue")}
@@ -75,18 +99,23 @@ export const getDialogContent = (
     );
   }
 
-  if (isRecycleBinFolder) {
+  if (isRecycleBinFolder || isThirdParty) {
     if (isSingle) {
       return (
         <>
-          <Trans t={t} i18nKey="DeleteItem" ns="DeleteDialog">
-            You are about to move{" "}
-            <strong>{{ name: selection[0].title }}</strong>
-            to Trash.
+          <Trans t={t} i18nKey="DeleteItemForever" ns="DeleteDialog">
+            You are about to delete{" "}
+            <strong>{{ name: selection[0]?.title }}</strong>.
           </Trans>{" "}
-          {isFolder
-            ? t("FolderPermanentlyDeleted")
-            : t("FilePermanentlyDeleted")}{" "}
+          {!isThirdParty
+            ? isFolder
+              ? t("FolderPermanentlyDeleted", {
+                  trashSection: t("Common:TrashSection"),
+                })
+              : t("FilePermanentlyDeleted", {
+                  trashSection: t("Common:TrashSection"),
+                })
+            : t("DeleteItemsSharedNote")}{" "}
           {t("Common:WantToContinue")}
         </>
       );
@@ -98,12 +127,17 @@ export const getDialogContent = (
     if (filesCount && foldersCount) {
       return (
         <>
-          <Trans t={t} i18nKey="DeleteFilesAndFolders" ns="DeleteDialog">
+          <Trans t={t} i18nKey="DeleteFilesAndFoldersForever" ns="DeleteDialog">
             You are about to delete the{" "}
             <strong>files ({{ filesCount }})</strong> and{" "}
-            <strong>folders ({{ foldersCount }})</strong> to Trash.
+            <strong>folders ({{ foldersCount }})</strong>.
           </Trans>{" "}
-          {t("ItemsPermanentlyDeleted")} {t("Common:WantToContinue")}
+          {!isThirdParty
+            ? t("ItemsPermanentlyDeleted", {
+                trashSection: t("Common:TrashSection"),
+              })
+            : t("DeleteItemsSharedNote")}{" "}
+          {t("Common:WantToContinue")}
         </>
       );
     }
@@ -111,11 +145,15 @@ export const getDialogContent = (
     if (filesCount) {
       return (
         <>
-          <Trans t={t} i18nKey="DeleteFiles" ns="DeleteDialog">
-            You are about to move <strong>files ({{ filesCount }})</strong> to
-            Trash.{" "}
+          <Trans t={t} i18nKey="DeleteFilesForever" ns="DeleteDialog">
+            You are about to delete <strong>files ({{ filesCount }})</strong>.
           </Trans>{" "}
-          {t("FilesPermanentlyDeleted")} {t("Common:WantToContinue")}
+          {!isThirdParty
+            ? t("FilesPermanentlyDeleted", {
+                trashSection: t("Common:TrashSection"),
+              })
+            : t("DeleteItemsSharedNote")}{" "}
+          {t("Common:WantToContinue")}
         </>
       );
     }
@@ -123,24 +161,34 @@ export const getDialogContent = (
     if (foldersCount) {
       return (
         <>
-          <Trans t={t} i18nKey="DeleteFolders" ns="DeleteDialog">
-            You are about to move <strong>folders ({{ foldersCount }})</strong>{" "}
-            to Trash.{" "}
+          <Trans t={t} i18nKey="DeleteFoldersForever" ns="DeleteDialog">
+            You are about to delete{" "}
+            <strong>folders ({{ foldersCount }})</strong>.
           </Trans>{" "}
-          {t("FoldersPermanentlyDeleted")} {t("Common:WantToContinue")}
+          {!isThirdParty
+            ? t("FoldersPermanentlyDeleted", {
+                trashSection: t("Common:TrashSection"),
+              })
+            : t("DeleteItemsSharedNote")}{" "}
+          {t("Common:WantToContinue")}
         </>
       );
     }
   }
 
-  if (isPersonalRoom || isRoom || isTemplatesFolder) {
+  if (
+    isPersonalRoom ||
+    isRoom ||
+    isTemplatesFolder ||
+    isSharedWithMeFolderRoot
+  ) {
     if (isSingle) {
       return (
         <>
           <Trans t={t} i18nKey="DeleteItem" ns="DeleteDialog">
             You are about to move{" "}
-            <strong>{{ name: selection[0].title }}</strong>
-            to Trash.
+            <strong>{{ name: selection[0]?.title }}</strong>
+            to {{ trashSection: t("Common:TrashSection") }}.
           </Trans>{" "}
           {!isThirdParty
             ? isFolder
@@ -162,7 +210,8 @@ export const getDialogContent = (
           <Trans t={t} i18nKey="DeleteFilesAndFolders" ns="DeleteDialog">
             You are about to delete the{" "}
             <strong>files ({{ filesCount }})</strong> and{" "}
-            <strong>folders ({{ foldersCount }})</strong> to Trash.
+            <strong>folders ({{ foldersCount }})</strong> to{" "}
+            {{ trashSection: t("Common:TrashSection") }}.
           </Trans>{" "}
           {!isThirdParty ? t("ItemsDeletedAfter") : null}{" "}
           {t("Common:WantToContinue")}
@@ -175,7 +224,7 @@ export const getDialogContent = (
         <>
           <Trans t={t} i18nKey="DeleteFiles" ns="DeleteDialog">
             You are about to move <strong>files ({{ filesCount }})</strong> to
-            Trash.{" "}
+            {{ trashSection: t("Common:TrashSection") }}.{" "}
           </Trans>{" "}
           {!isThirdParty ? t("FilesDeletedAfter") : null}{" "}
           {t("Common:WantToContinue")}
@@ -188,7 +237,7 @@ export const getDialogContent = (
         <>
           <Trans t={t} i18nKey="DeleteFolders" ns="DeleteDialog">
             You are about to move <strong>folders ({{ foldersCount }})</strong>{" "}
-            to Trash.{" "}
+            to {{ trashSection: t("Common:TrashSection") }}.{" "}
           </Trans>{" "}
           {!isThirdParty ? t("FoldersDeletedAfter") : null}{" "}
           {t("Common:WantToContinue")}

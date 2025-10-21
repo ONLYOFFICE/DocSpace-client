@@ -2,6 +2,8 @@
   "AccountWillBeCreated": "Se creará una cuenta de {{productName}} para <1>{{email}}</1>. Por favor, complete su registro:",
   "ConfirmOwnerPortalSuccessMessage": "El propietario de {{productName}} se ha cambiado correctamente. Dentro de 10 segundos será redirigido.",
   "ConfirmOwnerPortalTitle": "Por favor, confirme que desea cambiar el propietario de {{productName}} a {{newOwner}}.",
+  "ConnectApp": "Conecte la aplicación",
+  "ConnectAppDescription": "Escanee el código QR proporcionado con su aplicación de autenticación. Alternativamente, introduzca manualmente la clave secreta proporcionada en su aplicación: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "Su número de teléfono móvil actual",
   "DeleteProfileBtn": "Eliminar mi cuenta",
   "DeleteProfileConfirmation": "¡Atención! Usted va a eliminar su cuenta.",
@@ -16,6 +18,8 @@
   "EnterEmailHeader": "Introducir correo electrónico",
   "EnterPhone": "Introduzca el número de teléfono móvil",
   "GetCode": "Obtener código",
+  "GetSuitableApp": "Obtenga una aplicación adecuada",
+  "GetSuitableAppDescription": "Utilice una aplicación compatible, como Google Authenticator para <1>Android</1> y <4>iOS</4>, o Authenticator para <8>Windows Phone</8>.",
   "LoginRegistryButton": "Unirse",
   "Newsletter": "Quiero suscribirme a la newsletter de {{organizationName}}.",
   "PassworResetTitle": "Ahora puede crear una nueva contraseña.",
@@ -29,5 +33,9 @@
   "SuccessDeactivate": "Su cuenta se ha desactivado correctamente. En 10 segundos será redirigido al <1>sitio</1>.",
   "SuccessReactivate": "Su cuenta se ha reactivado correctamente. En 10 segundos será redirigido al <1>portal</1>.",
   "SuccessRemoved": "Su cuenta ha sido eliminada correctamente. En 10 segundos será redirigido a <1>site</1>.",
-  "TermsAndConditions": "Al continuar, usted entiende y acepta nuestros <1>Términos y condiciones</1> y <2>Declaración de privacidad</2>."
+  "TermsAndConditions": "Al continuar, usted entiende y acepta nuestros <1>Términos y condiciones</1> y <2>Declaración de privacidad</2>.",
+  "TfaSubTitle": "Siga estos sencillos pasos para seguir trabajando en este {{productName}}:",
+  "TfaTitle": "Autenticación de dos factores habilitada para un acceso seguro",
+  "VerifyConnection": "Verifique la conexión",
+  "VerifyConnectionDescription": "Introduzca el código de 6 dígitos generado por su aplicación de autenticación en el campo siguiente para terminar la configuración."
 }

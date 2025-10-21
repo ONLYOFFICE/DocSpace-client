@@ -33,11 +33,7 @@ import type {
 export interface InjectedManualBackupProps
   extends Omit<
     ManualBackupProps,
-    | "maxWidth"
-    | "buttonSize"
-    | "isNeedFilePath"
-    | "isInitialLoading"
-    | "isEmptyContentBeforeLoader"
+    "maxWidth" | "buttonSize" | "isNeedFilePath"
   > {
   resetDownloadingProgress: VoidFunction;
   setConnectedThirdPartyAccount: (
@@ -46,21 +42,13 @@ export interface InjectedManualBackupProps
   setBackupsCount: (count: number) => void;
   setIsInited: (inited: boolean) => void;
   isBackupPaid: boolean;
+  setIsEmptyContentBeforeLoader: (value: boolean) => void;
 }
 
-export interface ExternalManualBackupProps
-  extends Pick<
-    ManualBackupProps,
-    | "maxWidth"
-    | "buttonSize"
-    | "isNeedFilePath"
-    | "isInitialLoading"
-    | "isEmptyContentBeforeLoader"
-  > {
-  setIsEmptyContentBeforeLoader: (
-    value: boolean | ((prev: boolean) => boolean),
-  ) => void;
-}
+export type ExternalManualBackupProps = Pick<
+  ManualBackupProps,
+  "maxWidth" | "buttonSize" | "isNeedFilePath"
+>;
 
 export interface ManualBackupWrapperProps
   extends InjectedManualBackupProps,

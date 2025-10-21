@@ -24,14 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import type { FC } from "react";
 import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.light.svg?url";
 import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.dark.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
-import { isMobile, IconSizeType } from "@docspace/shared/utils";
+import { IconSizeType } from "@docspace/shared/utils";
 import { TTranslation } from "@docspace/shared/types";
 
 import { useTheme } from "styled-components";
@@ -40,23 +40,21 @@ import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { Scrollbar as CustomScrollbar } from "@docspace/shared/components/scrollbar/custom-scrollbar";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { Link, LinkType } from "@docspace/shared/components/link";
-
 import { IconButton } from "@docspace/shared/components/icon-button";
-
+import type OformsFilter from "@docspace/shared/api/oforms/filter";
 import styles from "../TemplateGallery.module.scss";
 import FilterContent from "../Filter";
 import Tiles from "../Tiles";
+import { useMobileDetection } from "../hooks/useMobileDetection";
+import { SCROLL_HEIGHTS, FILE_EXTENSIONS } from "../constants";
 
 interface TilesContainerOwnProps {
   ext: string;
   isShowInitSkeleton: boolean;
 }
 
-interface TilesContainerInjectedProps {
-  hasGalleryFiles: boolean;
-  resetFilters: (ext: string) => Promise<void>;
-  t: TTranslation;
-  oformsFilter: any;
+interface FilterProps {
+  oformsFilter: OformsFilter;
   noLocales: boolean;
   fetchCategoryTypes: () => Promise<any[]>;
   fetchCategoriesOfCategoryType: (categoryId: string) => Promise<any[]>;
@@ -71,150 +69,146 @@ interface TilesContainerInjectedProps {
   filterOformsByLocale: (locale: string) => Promise<void>;
 }
 
+interface TilesContainerInjectedProps extends FilterProps {
+  hasGalleryFiles: boolean;
+  resetFilters: (ext: string) => Promise<void>;
+  t: TTranslation;
+}
+
 interface TilesContainerProps
   extends TilesContainerOwnProps,
     TilesContainerInjectedProps {}
 
-const TilesContainer: FC<TilesContainerProps> = ({
-  ext,
-  isShowInitSkeleton,
-  hasGalleryFiles,
-  resetFilters,
-  t,
-  oformsFilter,
-  noLocales,
-  fetchCategoryTypes,
-  fetchCategoriesOfCategoryType,
-  filterOformsByLocaleIsLoading,
-  setFilterOformsByLocaleIsLoading,
-  setCategoryFilterLoaded,
-  categoryFilterLoaded,
-  languageFilterLoaded,
-  setLanguageFilterLoaded,
-  oformsLocal,
-  oformLocales,
-  filterOformsByLocale,
-}) => {
+const TilesContainer: FC<TilesContainerProps> = (props) => {
+  const {
+    ext,
+    isShowInitSkeleton,
+    hasGalleryFiles,
+    resetFilters,
+    t,
+    ...filterProps
+  } = props;
+
   const { isBase } = useTheme();
+  const isMobileView = useMobileDetection();
 
   const [isShowOneTile, setShowOneTile] = useState(false);
-  const [viewMobile, setViewMobile] = useState(false);
-
   const scrollRef = useRef<CustomScrollbar>(null);
 
   useEffect(() => {
-    if (scrollRef.current) scrollRef.current.scrollToTop();
+    scrollRef.current?.scrollToTop();
   }, [ext]);
 
-  const onCheckView = () => setViewMobile(isMobile());
+  const renderEmptyState = () => (
+    <EmptyScreenContainer
+      imageSrc={
+        isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl
+      }
+      imageAlt="Empty Screen Gallery image"
+      headerText={t("Common:NotFoundTitle")}
+      descriptionText={t("FormGallery:EmptyFormGalleryScreenDescription")}
+      buttons={
+        <div className={styles.links}>
+          <IconButton
+            className={styles.icon}
+            size={IconSizeType.small}
+            onClick={() => resetFilters(ext)}
+            iconName={ClearEmptyFilterSvgUrl}
+            isFill
+          />
+          <Link
+            className={styles.link}
+            onClick={() => resetFilters(ext)}
+            isHovered
+            type={LinkType.action}
+            fontWeight="600"
+            display="flex"
+          >
+            {t("Common:ClearFilter")}
+          </Link>
+        </div>
+      }
+    />
+  );
 
-  useEffect(() => {
-    onCheckView();
-    window.addEventListener("resize", onCheckView);
-    return () => window.removeEventListener("resize", onCheckView);
-  }, [onCheckView]);
+  const renderTilesWithScrollbar = (height: string, showOneTile: boolean) => (
+    <Scrollbar
+      style={{ height, width: "calc(100% + 16px)" }}
+      id="scroll-template-gallery"
+      ref={scrollRef}
+    >
+      <Tiles
+        isShowOneTile={showOneTile}
+        smallPreview={
+          ext === FILE_EXTENSIONS.PPTX || ext === FILE_EXTENSIONS.XLSX
+        }
+        viewMobile={isMobileView}
+        isShowInitSkeleton={isShowInitSkeleton}
+      />
+    </Scrollbar>
+  );
+
+  const renderContent = () => {
+    if (!hasGalleryFiles && !isShowInitSkeleton) {
+      return renderEmptyState();
+    }
+
+    const scrollHeight = isMobileView
+      ? SCROLL_HEIGHTS.MOBILE
+      : SCROLL_HEIGHTS.DESKTOP;
+    const showOneTile = isMobileView ? isShowOneTile : false;
+
+    return renderTilesWithScrollbar(scrollHeight, showOneTile);
+  };
 
   return (
     <div style={{ width: "100%" }}>
       <FilterContent
-        oformsFilter={oformsFilter}
-        noLocales={noLocales}
-        fetchCategoryTypes={fetchCategoryTypes}
-        fetchCategoriesOfCategoryType={fetchCategoriesOfCategoryType}
-        filterOformsByLocaleIsLoading={filterOformsByLocaleIsLoading}
-        setFilterOformsByLocaleIsLoading={setFilterOformsByLocaleIsLoading}
-        setCategoryFilterLoaded={setCategoryFilterLoaded}
-        categoryFilterLoaded={categoryFilterLoaded}
-        languageFilterLoaded={languageFilterLoaded}
+        {...filterProps}
         isShowOneTile={isShowOneTile}
         setShowOneTile={setShowOneTile}
-        viewMobile={viewMobile}
+        viewMobile={isMobileView}
         isShowInitSkeleton={isShowInitSkeleton}
-        setLanguageFilterLoaded={setLanguageFilterLoaded}
-        oformsLocal={oformsLocal}
-        oformLocales={oformLocales}
-        filterOformsByLocale={filterOformsByLocale}
       />
-      {!hasGalleryFiles && !isShowInitSkeleton ? (
-        <EmptyScreenContainer
-          imageSrc={
-            isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl
-          }
-          imageAlt="Empty Screen Gallery image"
-          headerText={t("Common:NotFoundTitle")}
-          descriptionText={t("FormGallery:EmptyFormGalleryScreenDescription")}
-          buttons={
-            <div className={styles.links}>
-              <IconButton
-                className={styles.icon}
-                size={IconSizeType.small}
-                onClick={() => resetFilters(ext)}
-                iconName={ClearEmptyFilterSvgUrl}
-                isFill
-              />
-              <Link
-                className={styles.link}
-                onClick={() => resetFilters(ext)}
-                isHovered
-                type={LinkType.action}
-                fontWeight="600"
-                display="flex"
-              >
-                {t("Common:ClearFilter")}
-              </Link>
-            </div>
-          }
-        />
-      ) : viewMobile ? (
-        <Scrollbar
-          style={{ height: "calc(100vh - 227px)", width: "calc(100% + 16px)" }}
-          id="scroll-template-gallery"
-          ref={scrollRef}
-        >
-          <Tiles
-            isShowOneTile={isShowOneTile}
-            smallPreview={ext === ".pptx" || ext === ".xlsx"}
-            viewMobile={viewMobile}
-            isShowInitSkeleton={isShowInitSkeleton}
-          />
-        </Scrollbar>
-      ) : (
-        <Scrollbar
-          style={{ height: "calc(100vh - 286px)", width: "calc(100% + 16px)" }}
-          id="scroll-template-gallery"
-          ref={scrollRef}
-        >
-          <Tiles
-            isShowOneTile={false}
-            smallPreview={ext === ".pptx" || ext === ".xlsx"}
-            isShowInitSkeleton={isShowInitSkeleton}
-          />
-        </Scrollbar>
-      )}
+      {renderContent()}
     </div>
   );
 };
 
 export default inject<TStore>(({ oformsStore }) => {
+  const {
+    hasGalleryFiles,
+    resetFilters,
+    oformsFilter,
+    fetchCategoryTypes,
+    fetchCategoriesOfCategoryType,
+    setCategoryFilterLoaded,
+    categoryFilterLoaded,
+    filterOformsByLocale,
+    filterOformsByLocaleIsLoading,
+    setFilterOformsByLocaleIsLoading,
+    languageFilterLoaded,
+    setLanguageFilterLoaded,
+  } = oformsStore;
+
   const oformLocales = oformsStore.oformLocales as string[] | null;
 
   return {
-    hasGalleryFiles: oformsStore.hasGalleryFiles,
-    resetFilters: oformsStore.resetFilters,
-    oformsFilter: oformsStore.oformsFilter,
     noLocales: !oformLocales || oformLocales.length === 0,
-    fetchCategoryTypes: oformsStore.fetchCategoryTypes,
-    fetchCategoriesOfCategoryType: oformsStore.fetchCategoriesOfCategoryType,
-    filterOformsByLocaleIsLoading: oformsStore.filterOformsByLocaleIsLoading,
-    setFilterOformsByLocaleIsLoading:
-      oformsStore.setFilterOformsByLocaleIsLoading,
-    setCategoryFilterLoaded: oformsStore.setCategoryFilterLoaded,
-    categoryFilterLoaded: oformsStore.categoryFilterLoaded,
-    languageFilterLoaded: oformsStore.languageFilterLoaded,
-    setLanguageFilterLoaded: oformsStore.setLanguageFilterLoaded,
+    oformLocales,
     oformsLocal: oformsStore.oformsFilter.locale,
-    oformLocales: oformLocales,
-    filterOformsByLocale: oformsStore.filterOformsByLocale,
+    hasGalleryFiles,
+    resetFilters,
+    oformsFilter,
+    fetchCategoryTypes,
+    fetchCategoriesOfCategoryType,
+    setCategoryFilterLoaded,
+    categoryFilterLoaded,
+    filterOformsByLocale,
+    filterOformsByLocaleIsLoading,
+    setFilterOformsByLocaleIsLoading,
+    languageFilterLoaded,
+    setLanguageFilterLoaded,
   };
 })(
   withTranslation("Common")(observer(TilesContainer)),

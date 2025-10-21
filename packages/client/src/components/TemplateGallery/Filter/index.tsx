@@ -24,21 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, FC } from "react";
+import { FC, useCallback } from "react";
 import { ReactSVG } from "react-svg";
 
 import ViewTilesReactSvg from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 import ViewChangeReactUrl from "PUBLIC_DIR/images/view-change.react.svg?url";
-import { isMobile } from "@docspace/shared/utils";
+
 import CategoryFilter from "./CategoryFilter";
 import LanguageFilter from "./LanguageFilter";
 import SearchFilter from "./SearchFilter";
 import SortFilter from "./SortFilter";
+import { useMobileDetection } from "../hooks/useMobileDetection";
 import styles from "./Filter.module.scss";
 import { FilterContentProps } from "./Filter.types";
 
 const FilterContent: FC<FilterContentProps> = (props) => {
   const {
+    setShowOneTile,
+    isShowOneTile,
+    isShowInitSkeleton,
+
+    oformsFilter,
+    noLocales,
+    fetchCategoryTypes,
+    fetchCategoriesOfCategoryType,
+    setCategoryFilterLoaded,
+    categoryFilterLoaded,
+
+    filterOformsByLocaleIsLoading,
+    setFilterOformsByLocaleIsLoading,
+    setLanguageFilterLoaded,
+    languageFilterLoaded,
+    oformsLocal,
+    oformLocales,
+    filterOformsByLocale,
+  } = props;
+
+  const isMobileView = useMobileDetection();
+
+  const handleViewToggle = useCallback(() => {
+    setShowOneTile(!isShowOneTile);
+  }, [setShowOneTile, isShowOneTile]);
+
+  const categoryFilterProps = {
     oformsFilter,
     noLocales,
     fetchCategoryTypes,
@@ -46,71 +74,47 @@ const FilterContent: FC<FilterContentProps> = (props) => {
     filterOformsByLocaleIsLoading,
     setFilterOformsByLocaleIsLoading,
     setCategoryFilterLoaded,
-    setLanguageFilterLoaded,
     categoryFilterLoaded,
     languageFilterLoaded,
-    setShowOneTile,
-    isShowOneTile,
     isShowInitSkeleton,
-    oformsLocal,
+    viewMobile: isMobileView,
+  };
+
+  const languageFilterProps = {
+    filterOformsByLocaleIsLoading,
+    setLanguageFilterLoaded,
+    isShowInitSkeleton,
     oformLocales,
     filterOformsByLocale,
-  } = props;
+    categoryFilterLoaded,
+    languageFilterLoaded,
+    oformsLocal,
+    viewMobile: isMobileView,
+  };
 
-  const [viewMobile, setViewMobile] = useState<boolean>(false);
+  const renderViewToggleButton = () => {
+    if (!isMobileView) return null;
 
-  const onCheckView = () => setViewMobile(isMobile());
-
-  useEffect(() => {
-    onCheckView();
-    window.addEventListener("resize", onCheckView);
-
-    return () => window.removeEventListener("resize", onCheckView);
-  }, [onCheckView]);
-
-  const onClickViewChange = () => {
-    setShowOneTile(!isShowOneTile);
+    return (
+      <div className={styles.viewButton} onClick={handleViewToggle}>
+        <ReactSVG
+          src={isShowOneTile ? ViewTilesReactSvg : ViewChangeReactUrl}
+          className={styles.iconView}
+        />
+      </div>
+    );
   };
 
   return (
     <div className={styles.filter}>
       <div className={styles.formOnlyFilters}>
-        <CategoryFilter
-          oformsFilter={oformsFilter}
-          noLocales={noLocales}
-          fetchCategoryTypes={fetchCategoryTypes}
-          fetchCategoriesOfCategoryType={fetchCategoriesOfCategoryType}
-          filterOformsByLocaleIsLoading={filterOformsByLocaleIsLoading}
-          setFilterOformsByLocaleIsLoading={setFilterOformsByLocaleIsLoading}
-          setCategoryFilterLoaded={setCategoryFilterLoaded}
-          categoryFilterLoaded={categoryFilterLoaded}
-          languageFilterLoaded={languageFilterLoaded}
-          isShowInitSkeleton={isShowInitSkeleton}
-          viewMobile={viewMobile}
-        />
-        <LanguageFilter
-          filterOformsByLocaleIsLoading={filterOformsByLocaleIsLoading}
-          setLanguageFilterLoaded={setLanguageFilterLoaded}
-          isShowInitSkeleton={isShowInitSkeleton}
-          oformLocales={oformLocales}
-          filterOformsByLocale={filterOformsByLocale}
-          categoryFilterLoaded={categoryFilterLoaded}
-          languageFilterLoaded={languageFilterLoaded}
-          oformsLocal={oformsLocal}
-          viewMobile={viewMobile}
-        />
+        <CategoryFilter {...categoryFilterProps} />
+        <LanguageFilter {...languageFilterProps} />
       </div>
       <div className={styles.generalFilters}>
         <SearchFilter />
         <SortFilter />
-        {viewMobile ? (
-          <div className={styles.viewButton} onClick={onClickViewChange}>
-            <ReactSVG
-              src={isShowOneTile ? ViewTilesReactSvg : ViewChangeReactUrl}
-              className={styles.iconView}
-            />
-          </div>
-        ) : null}
+        {renderViewToggleButton()}
       </div>
     </div>
   );

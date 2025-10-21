@@ -33,23 +33,10 @@ import {
 } from "@docspace/shared/components/language-combobox";
 
 import { type LanguageFilterProps } from "./LanguageFilter.types";
-
-const keyedCollections: { [key: string]: string } = {
-  ar: "ar-SA",
-  en: "en-US",
-  el: "el-GR",
-  hy: "hy-AM",
-  ko: "ko-KR",
-  lo: "lo-LA",
-  pt: "pt-BR",
-  uk: "uk-UA",
-  ja: "ja-JP",
-  zh: "zh-CN",
-  sq: "sq-AL",
-};
+import { LANGUAGE_CULTURE_MAP } from "../../constants";
 
 const convertToCulture = (key: string) => {
-  return keyedCollections[key] ?? key;
+  return LANGUAGE_CULTURE_MAP[key] ?? key;
 };
 
 const getOformLocaleByIndex = (index: number, array: string[]) => {

@@ -64,9 +64,7 @@ const SortFilter: FC<SortFilterProps> = ({ t, oformsFilter, sortOforms }) => {
         newSortBy,
         oformsFilter.sortOrder === "ascending" ? "descending" : "ascending",
       );
-    } else {
-      sortOforms(newSortBy, "descending");
-    }
+    } else sortOforms(newSortBy, "descending");
 
     setIsOpen(false);
   };

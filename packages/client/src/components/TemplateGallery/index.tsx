@@ -25,19 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { useState, useEffect, SetStateAction } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { withTranslation } from "react-i18next";
 
 import { Portal } from "@docspace/shared/components/portal";
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Tabs } from "@docspace/shared/components/tabs";
-import { isMobile } from "@docspace/shared/utils";
+import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Button } from "@docspace/shared/components/button";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import { TTranslation } from "@docspace/shared/types";
+
 import TilesContainer from "./TilesContainer";
 import ErrorView from "./ErrorView";
+import { useMobileDetection } from "./hooks/useMobileDetection";
+import { TAB_CONFIG, TAB_IDS, FileExtension, TabId } from "./constants";
+import { getExtensionFromTabId } from "./utils/tabUtils";
 import styles from "./TemplateGallery.module.scss";
 
 const TemplateGallery = (props: {
@@ -66,12 +69,15 @@ const TemplateGallery = (props: {
     categoryFilterLoaded,
     languageFilterLoaded,
   } = props;
-  const [viewMobile, setViewMobile] = useState(false);
-  const [currentTabId, setCurrentTabId] = useState("documents");
+
+  const isMobileView = useMobileDetection();
+  const [currentTabId, setCurrentTabId] = useState<TabId>(TAB_IDS.DOCUMENTS);
   const [isInitLoading, setIsInitLoading] = useState(true);
   const [isShowInitSkeleton, setShowInitSkeleton] = useState(true);
 
-  const getData = async (ext: string) => await resetFilters(ext);
+  const handleTabClick = async (extension: FileExtension) => {
+    await resetFilters(extension);
+  };
 
   useEffect(() => {
     initTemplateGallery().then(() => setIsInitLoading(false));
@@ -92,150 +98,115 @@ const TemplateGallery = (props: {
     languageFilterLoaded,
   ]);
 
-  const tabs = [
-    {
-      id: "documents",
-      name: t("Common:Documents"),
+  const tabs = useMemo(() => {
+    return Object.values(TAB_CONFIG).map((config) => ({
+      id: config.id,
+      name: t(config.translationKey),
       content: (
-        <TilesContainer ext=".docx" isShowInitSkeleton={isShowInitSkeleton} />
+        <TilesContainer
+          ext={config.extension}
+          isShowInitSkeleton={
+            config.id === TAB_IDS.DOCUMENTS ? isShowInitSkeleton : false
+          }
+        />
       ),
-      onClick: async () => await getData(".docx"),
-    },
-    {
-      id: "spreadsheet",
-      name: t("Common:Spreadsheet"),
-      content: <TilesContainer ext=".xlsx" isShowInitSkeleton={false} />,
-      onClick: async () => await getData(".xlsx"),
-    },
-    {
-      id: "presentation",
-      name: t("Common:Presentation"),
-      content: <TilesContainer ext=".pptx" isShowInitSkeleton={false} />,
-      onClick: async () => await getData(".pptx"),
-    },
-    {
-      id: "forms",
-      name: t("Common:Forms"),
-      content: <TilesContainer ext=".pdf" isShowInitSkeleton={false} />,
-      onClick: async () => await getData(".pdf"),
-    },
-  ];
+      onClick: async () => await handleTabClick(config.extension),
+    }));
+  }, [t, isShowInitSkeleton, handleTabClick]);
 
-  const onCheckView = () => setViewMobile(isMobile());
-
-  useEffect(() => {
-    onCheckView();
-    window.addEventListener("resize", onCheckView);
-
-    return () => window.removeEventListener("resize", onCheckView);
-  }, [onCheckView]);
-
-  const onSelect = (e: { id: SetStateAction<string> }) => {
-    setCurrentTabId(e.id);
-    const fileExtension =
-      e.id === "forms"
-        ? ".pdf"
-        : e.id === "documents"
-          ? ".docx"
-          : e.id === "spreadsheet"
-            ? ".xlsx"
-            : e.id === "presentation"
-              ? ".pptx"
-              : "";
+  const onSelect = (element: TTabItem) => {
+    const tabId = element.id as TabId;
+    setCurrentTabId(tabId);
+    const fileExtension = getExtensionFromTabId(tabId);
     setCurrentExtensionGallery(fileExtension);
   };
 
   const onCloseClick = () => setTemplateGalleryVisible(false);
+
   const onOpenSubmitToGalleryDialog = () =>
     setSubmitToGalleryDialogVisible(true);
 
-  const nodeTemplateGallery = (
-    <>
-      <Backdrop visible withBackground zIndex={309} />
-      <div className={styles.container}>
-        <div className={styles.templateGallery}>
-          <div className={styles.header}>
-            <div className={styles.headerContent}>
-              <div className={styles.headerText}>
-                {t("Common:TemplateGallery")}
-              </div>
-              {oformsLoadError ? null : (
-                <Button
-                  className={styles.headerButton}
-                  onClick={onOpenSubmitToGalleryDialog}
-                  label={t("Common:SubmitToTemplateGallery")}
-                />
-              )}
-            </div>
-
-            <IconButton
-              size={17}
-              className={styles.closeButton}
-              iconName={CrossReactSvgUrl}
-              onClick={onCloseClick}
-              isClickable
-              isStroke
+  const renderHeader = useMemo(
+    () => (
+      <div className={styles.header}>
+        <div className={styles.headerContent}>
+          <div className={styles.headerText}>{t("Common:TemplateGallery")}</div>
+          {!oformsLoadError ? (
+            <Button
+              className={styles.headerButton}
+              onClick={onOpenSubmitToGalleryDialog}
+              label={t("Common:SubmitToTemplateGallery")}
             />
-          </div>
-
-          {oformsLoadError ? (
-            <ErrorView onCloseClick={onCloseClick} />
-          ) : (
-            <div className={styles.templateGalleryWrapper}>
-              <Tabs
-                items={tabs}
-                selectedItemId={currentTabId}
-                onSelect={onSelect}
-                withAnimation
-              />
-            </div>
-          )}
+          ) : null}
         </div>
+        <IconButton
+          size={17}
+          className={styles.closeButton}
+          iconName={CrossReactSvgUrl}
+          onClick={onCloseClick}
+          isClickable
+          isStroke
+        />
       </div>
-    </>
+    ),
+    [t, oformsLoadError, onOpenSubmitToGalleryDialog, onCloseClick],
   );
 
-  const nodeTemplateGalleryMobile = (
-    <>
-      <Backdrop visible withBackground />
-      <div className={styles.containerMobile}>
-        <div className={styles.templateGalleryMobile}>
-          <div className={styles.header}>
-            <div className={styles.headerText}>
-              {t("Common:TemplateGallery")}
-            </div>
-            <IconButton
-              size={17}
-              className={styles.closeButton}
-              iconName={CrossReactSvgUrl}
-              onClick={onCloseClick}
-              isClickable
-              isStroke
-            />
-          </div>
+  const renderContent = useMemo(() => {
+    if (oformsLoadError) {
+      return <ErrorView onCloseClick={onCloseClick} />;
+    }
 
-          {oformsLoadError ? (
-            <ErrorView onCloseClick={onCloseClick} />
-          ) : (
-            <div className={styles.templateGalleryWrapper}>
-              <Tabs
-                items={tabs}
-                selectedItemId={currentTabId}
-                onSelect={onSelect}
-                withAnimation
-              />
-            </div>
-          )}
-        </div>
+    return (
+      <div className={styles.templateGalleryWrapper}>
+        <Tabs
+          items={tabs}
+          selectedItemId={currentTabId}
+          onSelect={onSelect}
+          withAnimation
+        />
       </div>
-    </>
-  );
+    );
+  }, [oformsLoadError, onCloseClick, tabs, currentTabId, onSelect]);
+
+  const templateGalleryNode = useMemo(() => {
+    const containerClass = isMobileView
+      ? styles.containerMobile
+      : styles.container;
+    const galleryClass = isMobileView
+      ? styles.templateGalleryMobile
+      : styles.templateGallery;
+    const backdropZIndex = isMobileView ? 203 : 309;
+
+    const mobileHeader = (
+      <div className={styles.header}>
+        <div className={styles.headerText}>{t("Common:TemplateGallery")}</div>
+        <IconButton
+          size={17}
+          className={styles.closeButton}
+          iconName={CrossReactSvgUrl}
+          onClick={onCloseClick}
+          isClickable
+          isStroke
+        />
+      </div>
+    );
+
+    return (
+      <>
+        <Backdrop visible withBackground zIndex={backdropZIndex} />
+        <div className={containerClass}>
+          <div className={galleryClass}>
+            {isMobileView ? mobileHeader : renderHeader}
+            {renderContent}
+          </div>
+        </div>
+      </>
+    );
+  }, [isMobileView, renderHeader, renderContent, t, onCloseClick]);
 
   return (
-    <Portal
-      visible={templateGalleryVisible}
-      element={viewMobile ? nodeTemplateGalleryMobile : nodeTemplateGallery}
-    />
+    <Portal visible={templateGalleryVisible} element={templateGalleryNode} />
   );
 };
 

@@ -11,6 +11,7 @@
   "DeleteGroupTitle": "ප්‍රජාව ඉවත් කරන්න",
   "DeleteItem": "ඔබ <strong>{{name}}</strong> {{trashSection}} වෙත ගෙන යාමට ආසන්නයි.",
   "DeleteItemForever": "ඔබ <strong>{{name}}</strong> මකා දැමීමට ආසන්නයි.",
+  "DeleteItemsSharedNote": "මෙය යමෙක් සමඟ බෙදාගෙන ඇත්නම්, ඔහුට/ඇයට ද අහිමි වන බව කරුණාවෙන් සලකන්න.",
   "DeleteRoom": "<strong>\"{{roomName}}\"</strong> කාමරය ස්ථිරවම මකා දැමෙනු ඇත. සියලුම දත්ත සහ පරිශීලක ප්‍රවේශයන් අහිමි වනු ඇත.",
   "DeleteRoomTitle": "මෙම කාමරය මකන්නද?",
   "DeleteRoomWarning": "මට ප්‍රතිවිපාක තේරෙනවා, ඒ නිසා කාමරය මකා දැමීමට අවශ්‍යයි.",

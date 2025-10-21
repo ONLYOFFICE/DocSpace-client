@@ -11,6 +11,7 @@
   "DeleteGroupTitle": "Excluir grupo",
   "DeleteItem": "Você está prestes a mover <strong>{{name}}</strong> para {{trashSection}}.",
   "DeleteItemForever": "Você está prestes a excluir <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Observe que se você os compartilhou com alguém, eles ficarão indisponíveis.",
   "DeleteRoom": "A sala <strong>{{roomName}}</strong> será excluída permanentemente. Todos os dados e acessos de usuário serão perdidos.",
   "DeleteRoomTitle": "Apagar este quarto?",
   "DeleteRoomWarning": "Eu compreendo as consequências e quero excluir o espaço.",

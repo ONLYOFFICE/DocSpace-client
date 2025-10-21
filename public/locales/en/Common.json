@@ -304,7 +304,6 @@
   "EditUserStatistics": "User statistics",
   "Email": "Email",
   "Embed": "Embed",
-  "Employees": "Employees",
   "EmptyBackupList": "No backups have been created yet. Create one or more backups for them to appear in this list.",
   "EmptyDescription": "The list of users previously invited to {{productName}} or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
   "EmptyEmail": "No email address parsed",

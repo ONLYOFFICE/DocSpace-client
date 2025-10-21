@@ -11,6 +11,7 @@
   "DeleteGroupTitle": "Supprimer le groupe",
   "DeleteItem": "Vous êtes sur le point de déplacer <strong>{{name}}</strong> vers la {{trashSection}}.",
   "DeleteItemForever": "Vous êtes sur le point de supprimer <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Veuillez noter que si vous les avez partagés avec quelqu'un, ils deviendront indisponibles.",
   "DeleteRoom": "La salle <strong>« {{roomName}} »</strong> sera définitivement supprimée. Toutes les données et les accès utilisateurs seront perdus.",
   "DeleteRoomTitle": "Supprimer cette salle ?",
   "DeleteRoomWarning": "Je comprends les conséquences et souhaite supprimer la salle",

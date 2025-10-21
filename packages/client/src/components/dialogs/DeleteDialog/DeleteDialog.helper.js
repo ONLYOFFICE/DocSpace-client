@@ -115,7 +115,7 @@ export const getDialogContent = (
               : t("FilePermanentlyDeleted", {
                   trashSection: t("Common:TrashSection"),
                 })
-            : null}{" "}
+            : t("DeleteItemsSharedNote")}{" "}
           {t("Common:WantToContinue")}
         </>
       );
@@ -136,7 +136,7 @@ export const getDialogContent = (
             ? t("ItemsPermanentlyDeleted", {
                 trashSection: t("Common:TrashSection"),
               })
-            : null}{" "}
+            : t("DeleteItemsSharedNote")}{" "}
           {t("Common:WantToContinue")}
         </>
       );
@@ -152,7 +152,7 @@ export const getDialogContent = (
             ? t("FilesPermanentlyDeleted", {
                 trashSection: t("Common:TrashSection"),
               })
-            : null}{" "}
+            : t("DeleteItemsSharedNote")}{" "}
           {t("Common:WantToContinue")}
         </>
       );
@@ -169,7 +169,7 @@ export const getDialogContent = (
             ? t("FoldersPermanentlyDeleted", {
                 trashSection: t("Common:TrashSection"),
               })
-            : null}{" "}
+            : t("DeleteItemsSharedNote")}{" "}
           {t("Common:WantToContinue")}
         </>
       );

@@ -3,7 +3,7 @@
   "content": "Continue",
   "content_en_sha1_hash": "2e02623966f9391facf6eaefc8b079ed5b630bee",
   "created_at": "2025-05-19T21:30:43.691Z",
-  "updated_at": "2025-09-23T07:24:24.055Z",
+  "updated_at": "2025-10-17T14:43:53.369Z",
   "comment": {
     "text": "This translation key is used as a label for a \"Continue\" button that appears in various dialogs and confirms user actions. It provides a clear and consistent text to be translated, allowing users to proceed after completing a task or operation.",
     "is_auto": true,
@@ -53,15 +53,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/login/src/app/(root)/confirm/TfaAuth/page.client.tsx",
-      "line_number": 177,
-      "context": "size={ButtonSize.medium}\n tabIndex={3}\n label={\n isLoading\n ? t(\"Common:LoadingProcessing\")\n : t(\"Common:ContinueButton\")\n }\n isDisabled={!code.length || isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n testId=\"app_code_continue_button\"",
-      "module": "/packages/login"
-    },
-    {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/EmailInputForm.tsx",
       "line_number": 112,
       "context": "id=\"email-continue\"\n className=\"login-button\"\n primary\n size={ButtonSize.medium}\n scale\n label={t(\"Common:ContinueButton\")}\n tabIndex={1}\n isDisabled={isLoading}\n isLoading={isLoading}\n onClick={onContinue}\n testId=\"email_continue_button\"",
+      "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/TfaAuth/page.client.tsx",
+      "line_number": 177,
+      "context": "size={ButtonSize.medium}\n tabIndex={3}\n label={\n isLoading\n ? t(\"Common:LoadingProcessing\")\n : t(\"Common:ContinueButton\")\n }\n isDisabled={!code.length || isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n testId=\"app_code_continue_button\"",
       "module": "/packages/login"
     },
     {
@@ -80,18 +80,6 @@
       "file_path": "/packages/shared/dialogs/download-dialog/sub-components/OnePasswordRow.tsx",
       "line_number": 192,
       "context": "/>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:ContinueButton\")}\n size={ButtonSize.normal}\n primary\n onClick={onDownloadWithPassword}\n isDisabled={!password.trim().length}\n scale",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/dialogs/more-login-modal/index.tsx",
-      "line_number": 77,
-      "context": "noSelect\n >\n {ssoLabel || getProviderLabel(\"sso-full\", t)}\n </Text>\n <Button\n label={t(\"Common:ContinueButton\")}\n className=\"signin-button\"\n size={ButtonSize.small}\n onClick={() => (window.location.href = ssoUrl)}\n />\n </div>",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/dialogs/more-login-modal/index.tsx",
-      "line_number": 77,
-      "context": "noSelect\n >\n {ssoLabel || getProviderLabel(\"sso-full\", t)}\n </Text>\n <Button\n label={t(\"Common:ContinueButton\")}\n className=\"signin-button\"\n size={ButtonSize.small}\n onClick={() => (window.location.href = ssoUrl)}\n />\n </div>",
       "module": "/packages/shared"
     },
     {

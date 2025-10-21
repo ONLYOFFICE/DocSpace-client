@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable class-methods-use-this */
 import { makeAutoObservable } from "mobx";
+import axios from "axios";
 
 import { setDefaultUserQuota, setDefaultRoomQuota } from "../api/settings";
 
@@ -54,11 +54,13 @@ import {
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
 import { CurrentTariffStatusStore } from "./CurrentTariffStatusStore";
-
+import { SettingsStore } from "./SettingsStore";
 class CurrentQuotasStore {
   currentPortalQuota: Nullable<TPaymentQuota> = null;
 
   userStore: UserStore | null = null;
+
+  settingsStore: SettingsStore | null = null;
 
   currentTariffStatusStore: CurrentTariffStatusStore | null = null;
 
@@ -69,10 +71,12 @@ class CurrentQuotasStore {
   constructor(
     userStoreConst: UserStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
+    settingsStore: SettingsStore,
   ) {
     makeAutoObservable(this);
     this.userStore = userStoreConst;
     this.currentTariffStatusStore = currentTariffStatusStore;
+    this.settingsStore = settingsStore;
   }
 
   setIsLoaded = (isLoaded: boolean) => {
@@ -456,11 +460,21 @@ class CurrentQuotasStore {
   };
 
   fetchPortalQuota = async (refresh?: boolean) => {
-    return api.portal.getPortalQuota(refresh).then((res) => {
-      this.setPortalQuotaValue(res);
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
 
-      this.setIsLoaded(true);
-    });
+    return api.portal
+      .getPortalQuota(refresh, abortController.signal)
+      .then((res) => {
+        this.setPortalQuotaValue(res);
+
+        this.setIsLoaded(true);
+      })
+      .catch((e) => {
+        if (axios.isCancel(e)) return;
+
+        throw e;
+      });
   };
 
   setUserQuota = async (quota: string | number, t: (key: string) => string) => {

@@ -48,7 +48,6 @@ const svgLoader = () => <div style={{ width: "96px" }} />;
 const FileTile = ({
   checked,
   children,
-  contextButtonSpacerWidth,
   contextOptions,
   contentElement,
   inProgress,
@@ -56,7 +55,6 @@ const FileTile = ({
   element,
   onSelect,
   setSelection,
-  sideColor,
   temporaryIcon,
   thumbnail,
   thumbSize,
@@ -211,7 +209,9 @@ const FileTile = ({
       !(e.target as HTMLElement).closest(".badges") &&
       !(e.target as HTMLElement).closest(".item-file-name") &&
       !(e.target as HTMLElement).closest(".tag") &&
-      !(e.target as HTMLElement).closest(`.${styles.checkbox}`)
+      !(e.target as HTMLElement).closest(`.${styles.checkbox}`) &&
+      !(e.target as HTMLElement).closest(".expandButton") &&
+      !(e.target as HTMLElement).closest(".p-contextmenu")
     ) {
       if (
         (e.target as HTMLElement).nodeName !== "IMG" &&

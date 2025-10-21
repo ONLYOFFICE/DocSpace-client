@@ -127,7 +127,7 @@ export const TextBadge: Story = {
 export const InteractiveBadge: Story = {
   args: {
     label: "Click me",
-    // eslint-disable-next-line no-alert
+
     onClick: () => alert("click"),
   },
   parameters: {

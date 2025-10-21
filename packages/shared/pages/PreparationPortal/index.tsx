@@ -43,7 +43,7 @@ let requestsCount = 0;
 export const PreparationPortal = (props: IPreparationPortal) => {
   const { withoutHeader, isDialog, style } = props;
 
-  const { t, ready } = useTranslation(["PreparationPortal", "Common"]);
+  const { t, ready } = useTranslation(["Common"]);
 
   const errorInternalServer = t("Common:ErrorInternalServer");
 
@@ -108,22 +108,25 @@ export const PreparationPortal = (props: IPreparationPortal) => {
   }, [errorInternalServer]);
 
   useEffect(() => {
-    SocketHelper?.on(SocketEvents.RestoreProgress, (opt) => {
-      const { progress, isCompleted, error } = opt;
+    SocketHelper?.on(
+      SocketEvents.RestoreProgress,
+      (opt: { progress: number; isCompleted: boolean; error?: string }) => {
+        const { progress, isCompleted, error } = opt;
 
-      setPercent(progress);
+        setPercent(progress);
 
-      if (isCompleted) {
-        if (error) {
-          setErrorMessage(error);
+        if (isCompleted) {
+          if (error) {
+            setErrorMessage(error);
 
-          return;
+            return;
+          }
+
+          returnToPortal();
+          clearLocalStorage();
         }
-
-        returnToPortal();
-        clearLocalStorage();
-      }
-    });
+      },
+    );
   }, [getRecoveryProgress]);
 
   useEffect(() => {
@@ -140,7 +143,7 @@ export const PreparationPortal = (props: IPreparationPortal) => {
     <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>
   ) : (
     <PreparationPortalProgress
-      text={t("PreparationPortal:PreparationPortalDescription", {
+      text={t("Common:PreparationPortalDescription", {
         productName: t("Common:ProductName"),
       })}
       percent={percent}

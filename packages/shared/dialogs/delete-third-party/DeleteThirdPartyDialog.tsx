@@ -49,6 +49,7 @@ const DeleteThirdPartyDialog = ({
   setThirdPartyProviders,
   setDeleteThirdPartyDialogVisible,
   setConnectedThirdPartyAccount,
+  setDefaultFolderId,
 }: DeleteThirdPartyDialogProps) => {
   const { t, ready } = useTranslation(["Common"]);
 
@@ -67,6 +68,8 @@ const DeleteThirdPartyDialog = ({
         .catch((err) => toastr.error(err))
         .finally(() => {
           setConnectedThirdPartyAccount(null);
+          setDefaultFolderId?.(null);
+
           updateInfo?.();
           setIsLoading(false);
           onClose();
@@ -148,49 +151,3 @@ const DeleteThirdPartyDialog = ({
 };
 
 export default DeleteThirdPartyDialog;
-
-// export default inject(
-//   ({
-//     filesStore,
-//     filesSettingsStore,
-//     dialogsStore,
-//     selectedFolderStore,
-//     backup,
-//   }) => {
-//     const { providers, setThirdPartyProviders, deleteThirdParty } =
-//       filesSettingsStore.thirdPartyStore;
-//     const { setIsLoading } = filesStore;
-//     const {
-//       selectedThirdPartyAccount: backupConnectionItem,
-//       setConnectedThirdPartyAccount,
-//     } = backup;
-//     const {
-//       deleteThirdPartyDialogVisible: visible,
-//       setDeleteThirdPartyDialogVisible,
-//       removeItem: storeItem,
-//     } = dialogsStore;
-
-//     const removeItem = backupConnectionItem ?? storeItem;
-
-//     const { id } = selectedFolderStore;
-
-//     return {
-//       currentFolderId: id,
-
-//       setIsLoadingStore: setIsLoading,
-
-//       providers,
-//       visible,
-//       removeItem,
-
-//       setThirdPartyProviders,
-//       deleteThirdParty,
-//       setDeleteThirdPartyDialogVisible,
-//       setConnectedThirdPartyAccount,
-//     };
-//   },
-// )(
-//   withTranslation(["DeleteThirdPartyDialog", "Common", "Translations"])(
-//     observer(DeleteThirdPartyDialog),
-//   ),
-// );

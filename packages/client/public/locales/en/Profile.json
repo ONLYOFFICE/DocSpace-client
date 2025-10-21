@@ -18,6 +18,7 @@
   "LogoutDescription": "Note. All active connections except this connection will be logged out, as it is currently in use.",
   "LogoutFrom": "Log out from {{platform}} {{browser}}?",
   "MyProfile": "My profile",
+  "NotificationsChannels": "Notification channels",
   "ProviderSuccessfullyConnected": "Provider successfully connected",
   "ProviderSuccessfullyDisconnected": "Provider successfully disconnected",
   "SendAgain": "Send again",
@@ -25,6 +26,10 @@
   "SuccessLogout": "The active connection was logged out: {{platform}}, {{browser}}",
   "SystemTheme": "Use system theme",
   "SystemThemeDescription": "Automatically switch between light and dark themes when your system does.",
+  "TelegramAccount": "Telegram account",
+  "TelegramAccountDescription": "To connect TelegramBot to your account follow secret link click to “Connect Telegram” button.",
+  "TelegramAccountDisconnect": "Disconnect Telegram",
+  "TelegramAccountDisconnectDescription": "Your @{{username}} account is connected for Telegram notifications. You can disconnect from this account. In this case, you will not receive notifications.",
   "TerminateAllSessions": "Terminate all sessions except the current one",
   "TwoFactorDescription": "Two-factor authentication via a code-generating app was enabled for all users by the admin."
 }

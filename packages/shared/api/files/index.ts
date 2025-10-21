@@ -43,8 +43,9 @@ import {
   sortInDisplayOrder,
 } from "../../utils/common";
 
-import { TNewFiles } from "../rooms/types";
+import type { RoomMember, TGetRoomMembers, TNewFiles } from "../rooms/types";
 import { request } from "../client";
+import { SHARED_MEMBERS_COUNT } from "../../constants";
 
 import FilesFilter from "./filter";
 import {
@@ -74,6 +75,7 @@ import {
   TUploadBackup,
   TFormRoleMappingRequest,
   TFileFillingFormStatus,
+  TShareToUser,
 } from "./types";
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
 
@@ -1145,10 +1147,11 @@ export function saveSettingsThirdParty(
 }
 
 // TODO: Need update res type
-export function getSettingsThirdParty() {
+export function getSettingsThirdParty(signal?: AbortSignal) {
   return request<SettingsThirdPartyType>({
     method: "get",
     url: "files/thirdparty/backup",
+    signal,
   });
 }
 
@@ -1438,7 +1441,10 @@ export async function sendEditorNotify(
   return res;
 }
 
-export async function getDocumentServiceLocation(version?: number | string) {
+export async function getDocumentServiceLocation(
+  version?: number | string,
+  signal?: AbortSignal,
+) {
   const params: { version?: string | number } = {};
 
   if (version !== undefined) {
@@ -1449,6 +1455,7 @@ export async function getDocumentServiceLocation(version?: number | string) {
     method: "get",
     url: `/files/docservice`,
     params,
+    signal,
   })) as TDocServiceLocation;
 
   return res;
@@ -1696,10 +1703,11 @@ export function deleteFilesFromRecent(fileIds: number[]) {
   });
 }
 
-export async function getFilesUsedSpace() {
+export async function getFilesUsedSpace(signal?: AbortSignal) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: `/files/filesusedspace`,
+    signal,
   };
 
   const res = (await request(options)) as TFilesUsedSpace;
@@ -1747,12 +1755,16 @@ export async function checkIsPDFForm(fileId: string | number) {
   }) as Promise<boolean>;
 }
 
-export async function removeSharedFolder(folderIds: Array<string | number>) {
+export async function removeSharedFolderOrFile(
+  folderIds: Array<string | number> = [],
+  fileIds: Array<string | number> = [],
+) {
   return request({
     method: "delete",
-    url: `/files/recent`,
+    url: `/files/share`,
     data: {
       folderIds,
+      fileIds,
     },
   });
 }
@@ -1802,6 +1814,70 @@ export async function getFormFillingStatus(
     method: "get",
     url: `/files/file/${formId}/formroles`,
   })) as TFileFillingFormStatus[];
+
+  return res;
+}
+
+export async function getFileSharedUsers(
+  id: string | number,
+  startIndex = 0,
+  count = SHARED_MEMBERS_COUNT,
+  signal?: AbortSignal,
+) {
+  const linkParams = `?startIndex=${startIndex}&count=${count}`;
+
+  const res = (await request({
+    method: "get",
+    url: `/files/file/${id}/share${linkParams}`,
+    signal,
+  })) as TGetRoomMembers;
+
+  return res;
+}
+export async function getFolderSharedUsers(
+  id: string | number,
+  startIndex = 0,
+  count = SHARED_MEMBERS_COUNT,
+  signal?: AbortSignal,
+) {
+  const linkParams = `?startIndex=${startIndex}&count=${count}`;
+
+  const res = (await request({
+    method: "get",
+    url: `/files/folder/${id}/share${linkParams}`,
+    signal,
+  })) as TGetRoomMembers;
+
+  return res;
+}
+
+export async function shareFolderToUsers(
+  folderId: string | number,
+  share: TShareToUser[],
+) {
+  const res = (await request({
+    method: "put",
+    url: `/files/folder/${folderId}/share`,
+    data: {
+      share,
+      notify: true,
+    },
+  })) as RoomMember[];
+
+  return res;
+}
+export async function shareFileToUsers(
+  fileId: string | number,
+  share: TShareToUser[],
+) {
+  const res = (await request({
+    method: "put",
+    url: `/files/file/${fileId}/share`,
+    data: {
+      share,
+      notify: true,
+    },
+  })) as RoomMember[];
 
   return res;
 }

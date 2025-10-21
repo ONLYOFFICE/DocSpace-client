@@ -3,7 +3,7 @@
   "content": "Stopped",
   "content_en_sha1_hash": "51e9111b87116e60566740d13ba1c1eddb042333",
   "created_at": "2025-05-19T21:30:49.083Z",
-  "updated_at": "2025-08-21T11:22:39.952Z",
+  "updated_at": "2025-10-14T03:41:53.105Z",
   "comment": {
     "text": "This translation key displays a message indicating that a file is stopped in a filling process. It appears as part of a status indicator component, used to display the current status of a filing form. The translated content should reflect whether the file is being processed (YourTurn), has started but not completed (InProgress), or has been completely stopped.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 275,
+      "line_number": 277,
       "context": "case FileFillingFormStatus.YourTurn:\n return t(\"Common:YourTurn\");\n case FileFillingFormStatus.InProgress:\n return t(\"Common:InProgress\");\n case FileFillingFormStatus.Stopped:\n return t(\"Common:Stopped\");\n case FileFillingFormStatus.Completed:\n return t(\"Common:Complete\");\n default:\n return \"\";\n }",
       "module": "/packages/shared"
     }
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation \"Abgebrochen\" typically means \"cancelled\" or \"interrupted,\" not \"stopped.\" While it can sometimes imply being stopped, it's not the most accurate or common translation for 'Stopped'.",
-          "suggestion": "Consider using \"Gestoppt\" or \"Angehalten\" for a more accurate translation of 'Stopped'."
+          "description": "The German translation \"Abgebrochen\" typically means \"cancelled\" or \"interrupted,\" not simply \"stopped.\" While it can sometimes be used to convey 'stopped', it's not the most accurate or natural translation for \"Stopped.\" A better translation would depend on the context.",
+          "suggestion": "Consider alternative translations like \"Gestoppt\" (more literal) or a more context-specific term."
         }
       ],
       "approved_at": null
@@ -69,13 +69,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Διακόπηκε\" can mean 'stopped', it more accurately translates to 'interrupted' or 'halted.' 'Stopped' implies a state of being, whereas \"Διακόπηκε\" implies an action that caused something to stop.",
-          "suggestion": "Consider 'Σταμάτησε' which more accurately conveys the meaning of 'stopped' as a state. Alternatively, if the context is specifically about something being interrupted, then 'Διακόπηκε' is acceptable."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -99,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Դադարեցված է\" is a valid Armenian word, it translates more accurately to 'terminated' or 'ceased' rather than 'stopped'. 'Stopped' in English often refers to something being halted temporarily, whereas \"Դադարեցված է\" implies a more permanent cessation.",
-          "suggestion": "Consider alternatives like \"կեցված\" (kecvac) or \"կանգնեցված է\" (kangnecvac) for a more accurate translation of 'stopped' depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -114,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Interrotto\" can sometimes translate to \"Stopped,\" it's more accurately \"Interrupted\" or \"Paused.\" \"Stopped\" in the context of a system or process often implies a permanent cessation, whereas \"Interrotto\" suggests a temporary halt or interruption. A more accurate translation would depend on the specific context. Considering 'Stopped' frequently implies cessation of operation, \"Arrestato\" or \"Fermato\" might be better alternatives.",
-          "suggestion": "Consider 'Arrestato' or 'Fermato' depending on the context."
+          "description": "While 'Interrotto' can sometimes mean 'Stopped', it's more accurately translated as 'Interrupted' or 'Halted'. 'Stopped' in the context of something being inactive or ceased might be better represented with 'Arrestato' or 'Sospeso'.",
+          "suggestion": "Consider 'Arrestato' or 'Sospeso' depending on the specific context."
         }
       ],
       "approved_at": null
@@ -123,13 +111,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"停止中\" (teishi-chuu) can mean 'stopped' or 'in a stopped state', it implies an action that has been stopped and is currently in that state. 'Stopped' as a simple state of being might be better conveyed with a more neutral term.",
-          "suggestion": "検討: 停止 (teishi) - a more direct translation of 'stopped' as a state."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -162,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation 'Zatrzymano' translates to 'Stopped' or 'Halted' in a passive voice. While not inherently wrong, it lacks the directness of the English 'Stopped'. Depending on the context, a more appropriate translation might be 'Zatrzymane' (stopped - neuter) or 'Przerwanie' (Interruption).",
-          "suggestion": "Consider 'Zatrzymane' or 'Przerwanie' depending on context."
+          "description": "While \"Zatrzymano\" can mean 'stopped', it implies a more formal or passive sense of being stopped by an external force. \"Stopped\" is a general term indicating a cessation of activity. A more suitable translation might be \"Zatrzymane\" (neuter form) or \"Wstrzymano\" (halted/suspended) depending on the specific context, but \"Zatrzymano\" is not the most accurate single equivalent.",
+          "suggestion": "Consider \"Zatrzymane\" or \"Wstrzymano\" as alternatives depending on the context."
         }
       ],
       "approved_at": null
@@ -174,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation \"Parou\" translates to \"stopped\" or \"stopped doing something\" but might not be the most accurate translation of \"Stopped\" as a state. A more direct translation for a state (like a stopped process) could be 'Parado'.",
-          "suggestion": "Parado"
+          "description": "The Portuguese translation \"Parou\" while technically meaning 'stopped', is not the most natural or precise translation of 'Stopped' in this context, which likely refers to a state of being stopped (e.g., a process or service). 'Parou' implies an action of stopping something.",
+          "suggestion": "Consider alternatives like 'Interrompido' (Interrupted/Stopped) or 'Desligado' (Switched Off) depending on the context of 'Common:Stopped'."
         }
       ],
       "approved_at": null
@@ -192,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Încetare\" translates to \"cessation\" or \"stop\" in a more formal context. While it conveys the general idea of 'stopped', it's not the most natural or common translation for 'Stopped' in many everyday contexts. A more suitable translation might be \"Oprit\" or \"Stopat\".",
-          "suggestion": "Consider \"Oprit\" or \"Stopat\" as alternatives to \"Încetare\"."
+          "description": "'Încetare' translates to 'termination' or 'cessation' rather than 'stopped'. While related, it's not the most accurate translation of 'Stopped' in this context, which implies a state of being.",
+          "suggestion": "Consider alternatives like 'Oprit' or 'Blocat' depending on the intended meaning of 'Stopped'."
         }
       ],
       "approved_at": null
@@ -210,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'නැවැතී.' does not accurately convey the meaning of 'Stopped'. 'නැවැතී.' translates more closely to 'It is stopped' or 'It has stopped', implying a completed action or a state resulting from a previous action. 'Stopped' as a label or attribute simply means the state of being stopped.",
-          "suggestion": "A more accurate translation would be something like 'ឈប់' (chub), which directly translates to 'stopped' as a state. Alternatively, 'නැවතත්' (naa-wa-th) could also work depending on context, but this means 'restarted' or 'stopped again' "
+          "description": "The translation 'නැවැතී.' while meaning 'stopped' in some contexts, isn't the most natural or common translation for 'Stopped' as a general term. It carries a more emphatic or decisive tone of stopping something. A more suitable translation would be 'ឈប់' (chub) or 'නවත්වීම' (navathwim).",
+          "suggestion": "Consider using 'ឈប់' (chub) or 'නවත්වීම' (navathwim)."
         }
       ],
       "approved_at": null
@@ -219,13 +201,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Ukončené\" can mean 'stopped,' it more accurately translates to 'completed' or 'finished.' 'Stopped' implies a cessation of an ongoing process, whereas 'Ukončené' suggests a completion of a process. The best equivalent for 'Stopped' would likely depend on the specific context.",
-          "suggestion": "Consider alternatives like 'Zastavené' (stopped), 'Pozastavené' (paused), or 'Prestať' (to stop) depending on the nuance needed."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -240,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Заустављено\" is a passive participle (stopped/halted) and doesn't directly translate \"Stopped\" in the sense of a state or condition. While it can be contextually correct, it's not the most natural or accurate translation without more context.",
-          "suggestion": "Consider \"Прекинуто\" (Prekinuto) or \"Остало\" (Ostalo), depending on the intended meaning of 'Stopped'.  Without more context, it's difficult to provide the ideal translation."
+          "description": "The Serbian (Cyrillic) translation \"Заустављено\" while technically meaning 'stopped' or 'halted', doesn't perfectly capture the nuance of the English word 'Stopped' in this context. It implies a more forceful or official stopping.",
+          "suggestion": "Consider alternatives like \"Прекинуто\" (Prekinuto - interrupted) or \"Остало\" (Ostalo - remained, stayed) depending on the specific context. If 'Stopped' refers to a process being paused, 'Паузирано' (Pauzirano - paused) would be more appropriate."
         }
       ],
       "approved_at": null
@@ -258,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Durduruldu\" is a passive voice form meaning \"was stopped\" or \"has been stopped.\"  While understandable, the English term \"Stopped\" is a state and doesn't necessarily imply a prior action. A more direct translation might be \"Durdu\" (stopped, in a state of being stopped) or \"Durakladı\" (halted/paused).",
-          "suggestion": "Consider \"Durdu\" or \"Durakladı\" for a more accurate translation depending on the intended nuance."
+          "description": "The Turkish translation \"Durduruldu\" is a passive form (literally \"was stopped\") and doesn't directly translate \"Stopped\". While it can convey a similar meaning depending on context, a more direct translation might be \"Durdu\".",
+          "suggestion": "Durdu"
         }
       ],
       "approved_at": null
@@ -277,6 +253,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

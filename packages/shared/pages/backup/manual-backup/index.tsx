@@ -63,6 +63,7 @@ import {
 } from "./ManualBackup.constants";
 import styles from "./ManualBackup.module.scss";
 import { combineUrl } from "../../../utils/combineUrl";
+import NoteComponent from "../sub-components/NoteComponent";
 
 const getPaymentError = (
   t: TFunction,
@@ -73,7 +74,7 @@ const getPaymentError = (
   const onClickWalletUrl = () => {
     const walletPageUrl = combineUrl(
       "/portal-settings",
-      `/payments/wallet?open=true&price=${backupPrice.toString()}`,
+      `/payments/wallet?open=true&price=${Math.ceil(backupPrice).toString()}`,
     );
 
     window.DocSpace.navigate(walletPageUrl);
@@ -125,8 +126,8 @@ const ManualBackup = ({
   currentColorScheme,
   downloadingProgress,
   isBackupProgressVisible,
-  isEmptyContentBeforeLoader,
   basePath,
+  isEmptyContentBeforeLoader,
   isErrorPath,
   newPath,
   providers,
@@ -180,6 +181,8 @@ const ManualBackup = ({
   walletCustomerEmail,
   isThirdPartyAvailable,
   backupServicePrice,
+  isBackupPaid = false,
+  isFreeBackupsLimitReached = false,
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -199,6 +202,11 @@ const ManualBackup = ({
     const saveStorageType = getFromLocalStorage<TStorageType>(
       BackupStorageLocalKey.StorageType,
     );
+
+    if (pageIsDisabled) {
+      clearLocalStorage();
+      return;
+    }
 
     if (saveStorageType) setStorageType(saveStorageType);
   });
@@ -225,10 +233,10 @@ const ManualBackup = ({
       if (success) toastr.success(success);
     };
 
-    SocketHelper.on(SocketEvents.BackupProgress, onBackupProgress);
+    SocketHelper?.on(SocketEvents.BackupProgress, onBackupProgress);
 
     return () => {
-      SocketHelper.off(SocketEvents.BackupProgress, onBackupProgress);
+      SocketHelper?.off(SocketEvents.BackupProgress, onBackupProgress);
     };
   }, [setDownloadingProgress, setTemporaryLink, setBackupProgressError, t]);
 
@@ -375,6 +383,9 @@ const ManualBackup = ({
   const mainDisabled = !isMaxProgress || pageIsDisabled;
   const additionalDisabled =
     !isMaxProgress || isNotPaidPeriod || pageIsDisabled;
+  const isDownloadButton =
+    temporaryLink && temporaryLink.length > 0 && isMaxProgress;
+  const isCreateButtonDisabled = mainDisabled && !isDownloadButton;
 
   return (
     <div className={styles.manualBackup}>
@@ -420,7 +431,7 @@ const ManualBackup = ({
             label={t("Common:TemporaryStorage")}
             name={TEMPORARY_STORAGE}
             isChecked={isCheckedTemporaryStorage}
-            isDisabled={mainDisabled}
+            isDisabled={isCreateButtonDisabled}
             {...commonRadioButtonProps}
             testId="temporary_storage_radio_button"
           />
@@ -433,42 +444,47 @@ const ManualBackup = ({
             {t("Common:TemporaryStorageDescription")}
           </Text>
           {isCheckedTemporaryStorage ? (
-            <div
-              className={classNames(
-                styles.manualBackupButtons,
-                "manual-backup_buttons",
-              )}
-            >
-              <Button
-                id="create-button"
-                label={t("Common:Create")}
-                onClick={onMakeTemporaryBackup}
-                primary
-                isDisabled={mainDisabled}
-                size={buttonSize}
-                testId="create_temporary_backup_button"
+            <>
+              <div
+                className={classNames(
+                  styles.manualBackupButtons,
+                  "manual-backup_buttons",
+                )}
+              >
+                <Button
+                  id="create-button"
+                  label={t("Common:Create")}
+                  onClick={onMakeTemporaryBackup}
+                  primary
+                  isDisabled={mainDisabled}
+                  size={buttonSize}
+                  testId="create_temporary_backup_button"
+                />
+                {isDownloadButton ? (
+                  <Button
+                    id="download-copy"
+                    label={t("Common:DownloadCopy")}
+                    onClick={onClickDownloadBackup}
+                    // isDisabled={pageIsDisabled}
+                    size={buttonSize}
+                    style={{ marginInlineStart: "8px" }}
+                    testId="download_temporary_copy_button"
+                  />
+                ) : null}
+                {!isMaxProgress ? (
+                  <Button
+                    label={`${t("Common:CopyOperation")} ...`}
+                    isDisabled
+                    size={buttonSize}
+                    style={{ marginInlineStart: "8px" }}
+                    testId="copy_temporary_operation_button"
+                  />
+                ) : null}
+              </div>
+              <NoteComponent
+                isVisible={Boolean(isBackupPaid && isFreeBackupsLimitReached)}
               />
-              {temporaryLink && temporaryLink.length > 0 && isMaxProgress ? (
-                <Button
-                  id="download-copy"
-                  label={t("Common:DownloadCopy")}
-                  onClick={onClickDownloadBackup}
-                  isDisabled={pageIsDisabled}
-                  size={buttonSize}
-                  style={{ marginInlineStart: "8px" }}
-                  testId="download_temporary_copy_button"
-                />
-              ) : null}
-              {!isMaxProgress ? (
-                <Button
-                  label={`${t("Common:CopyOperation")} ...`}
-                  isDisabled
-                  size={buttonSize}
-                  style={{ marginInlineStart: "8px" }}
-                  testId="copy_temporary_operation_button"
-                />
-              ) : null}
-            </div>
+            </>
           ) : null}
         </div>
       </div>
@@ -510,6 +526,8 @@ const ManualBackup = ({
             {...commonModulesProps}
             currentDeviceType={currentDeviceType}
             maxWidth={maxWidth}
+            isBackupPaid={isBackupPaid}
+            isFreeBackupsLimitReached={isFreeBackupsLimitReached}
           />
         ) : null}
       </div>
@@ -560,6 +578,8 @@ const ManualBackup = ({
             setSelectedThirdPartyAccount={setSelectedThirdPartyAccount}
             setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
             setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
+            isBackupPaid={isBackupPaid}
+            isFreeBackupsLimitReached={isFreeBackupsLimitReached}
             {...commonModulesProps}
           />
         ) : null}
@@ -603,6 +623,8 @@ const ManualBackup = ({
             onMakeCopy={onMakeCopy}
             buttonSize={buttonSize}
             isThirdPartyAvailable={isThirdPartyAvailable ?? true}
+            isBackupPaid={isBackupPaid}
+            isFreeBackupsLimitReached={isFreeBackupsLimitReached}
           />
         ) : null}
       </div>

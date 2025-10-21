@@ -3,7 +3,7 @@
   "content": "Error report was successfully sent",
   "content_en_sha1_hash": "18f1a1caa3e6cd16cb0d42023d3cac9d9165ec52",
   "created_at": "2025-05-19T21:30:45.120Z",
-  "updated_at": "2025-08-21T14:45:44.187Z",
+  "updated_at": "2025-09-07T07:53:15.451Z",
   "comment": {
     "text": "The \"ErrorReportSuccess\" translation key is used to display a success message when an error report is successfully sent in a crash report dialog. It appears as a toast notification when the report is submitted and receives feedback from users.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/report-dialog/index.tsx",
-      "line_number": 93,
+      "line_number": 92,
       "context": "try {\n const reportWithDescription = Object.assign(report, {\n description,\n });\n await firebaseHelper.sendCrashReport(reportWithDescription);\n toastr.success(t(\"ErrorReportSuccess\"));\n onCloseAction();\n } catch (err) {\n toastr.error(err as Error);\n }\n };",
       "module": "/packages/shared"
     }

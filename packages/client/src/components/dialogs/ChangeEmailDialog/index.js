@@ -90,7 +90,7 @@ class ChangeEmailDialogComponent extends React.Component {
     } = this.props;
     const { id } = user;
     const newProfile = user;
-    newProfile.email = email;
+    // newProfile.email = email;
 
     const isSelf = profile?.id === id;
 

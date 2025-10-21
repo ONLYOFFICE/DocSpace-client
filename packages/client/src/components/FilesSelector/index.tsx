@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-restricted-syntax */
 import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -98,7 +97,6 @@ const FilesSelectorWrapper = ({
   checkFileConflicts,
   itemOperationToFolder,
   clearActiveOperations,
-  setMovingInProgress,
   setSelected,
   setMoveToPanelVisible,
   setRestorePanelVisible,
@@ -146,7 +144,6 @@ const FilesSelectorWrapper = ({
   withCreate,
   folderIsShared,
   checkCreating,
-  logoText,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -213,7 +210,7 @@ const FilesSelectorWrapper = ({
       // for backup
       if (!selection.length) return t("Common:BackupNotAllowedInFormRoom");
 
-      const option = { organizationName: logoText };
+      const option = { organizationName: t("Common:OrganizationName") };
 
       if (isCopy)
         return several
@@ -298,8 +295,6 @@ const FilesSelectorWrapper = ({
           } else {
             setIsRequestRunning(false);
             onCloseAndDeselectAction();
-            const move = !isCopy;
-            if (move) setMovingInProgress(move);
             sessionStorage.setItem("filesSelectorPath", `${selectedItemId}`);
 
             try {
@@ -524,13 +519,12 @@ export default inject(
 
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
 
-    const { currentDeviceType, logoText } = settingsStore;
+    const { currentDeviceType } = settingsStore;
 
     const {
       selection,
       bufferSelection,
       filesList,
-      setMovingInProgress,
       setSelected,
       filesSettingsStore,
     } = filesStore;
@@ -628,7 +622,6 @@ export default inject(
       checkFileConflicts,
       itemOperationToFolder,
       clearActiveOperations,
-      setMovingInProgress,
       setSelected,
       setCopyPanelVisible,
       setRestoreAllPanelVisible,
@@ -648,7 +641,6 @@ export default inject(
           : folderId || currentFolderIdProp,
       filesSettings,
       folderIsShared: shared,
-      logoText,
       openRoot,
     };
   },

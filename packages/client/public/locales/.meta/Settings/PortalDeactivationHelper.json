@@ -3,7 +3,7 @@
   "content": "If you wish to deactivate this {{productName}}, your space and all information associated with it will be blocked so that no one has access to it for a particular period. To do that, click the Deactivate button. A link to confirm the operation will be sent to the email address of the space owner.\nIn case you want to come back to the space and continue using it, you will need to use the second link provided in the confirmation email. So, please, keep this email in a safe place.",
   "content_en_sha1_hash": "9a1c4489d8b479bfef9c9f90a924b29e8ecfec2c",
   "created_at": "2025-05-19T21:30:52.193Z",
-  "updated_at": "2025-05-24T04:37:18.763Z",
+  "updated_at": "2025-09-17T13:43:01.766Z",
   "comment": {
     "text": "\"This translation key is used to describe the process of deactivating a portal and blocking access to its associated information. It will appear on the Deactivate button in the Portal Settings page, providing users with instructions and warnings about the impact of deactivation.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeactivation.js",
-      "line_number": 89,
+      "line_number": 83,
       "context": "<MainContainer>\n <Text fontSize=\"13px\" className=\"description\">\n {t(\"PortalDeactivationDescription\")}\n </Text>\n <Text className=\"helper\">\n {t(\"PortalDeactivationHelper\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <ButtonWrapper>\n <Button",
       "module": "/packages/client"
     }

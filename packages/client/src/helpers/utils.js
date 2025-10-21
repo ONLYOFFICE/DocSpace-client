@@ -27,9 +27,13 @@
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { toCommunityHostname } from "@docspace/shared/utils/common";
 import { FolderType } from "@docspace/shared/enums";
-import { CategoryType } from "./constants";
+import { CategoryType } from "@docspace/shared/constants";
 
-import { PEOPLE_ROUTE_WITH_FILTER } from "./contacts";
+import {
+  PEOPLE_ROUTE_WITH_FILTER,
+  GROUPS_ROUTE_WITH_FILTER,
+  GUESTS_ROUTE_WITH_FILTER,
+} from "./contacts";
 
 export const setDocumentTitle = (subTitle = "") => {
   const { isAuthenticated, product: currentModule } = authStore;
@@ -98,39 +102,6 @@ export const onItemClick = (e) => {
   // router.navigate(link);
 };
 
-export const getCategoryType = (location) => {
-  let categoryType = CategoryType.Shared;
-  const { pathname } = location;
-
-  if (pathname.startsWith("/rooms")) {
-    if (pathname.indexOf("personal") > -1) {
-      categoryType = CategoryType.Personal;
-    } else if (pathname.indexOf("shared") > -1) {
-      const regexp = /(rooms)\/shared\/([\d])/;
-
-      categoryType = !regexp.test(location.pathname)
-        ? CategoryType.Shared
-        : CategoryType.SharedRoom;
-    } else if (pathname.indexOf("share") > -1) {
-      categoryType = CategoryType.PublicRoom;
-    } else if (pathname.indexOf("archive") > -1) {
-      categoryType = CategoryType.Archive;
-    }
-  } else if (pathname.startsWith("/files/favorite")) {
-    categoryType = CategoryType.Favorite;
-  } else if (pathname.startsWith("/recent")) {
-    categoryType = CategoryType.Recent;
-  } else if (pathname.startsWith("/files/trash")) {
-    categoryType = CategoryType.Trash;
-  } else if (pathname.startsWith("/settings")) {
-    categoryType = CategoryType.Settings;
-  } else if (pathname.startsWith("/accounts")) {
-    categoryType = CategoryType.Accounts;
-  }
-
-  return categoryType;
-};
-
 export const getCategoryTypeByFolderType = (folderType, parentId) => {
   switch (folderType) {
     case FolderType.Rooms:
@@ -148,6 +119,9 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
 
     case FolderType.TRASH:
       return CategoryType.Trash;
+
+    case FolderType.SHARE:
+      return CategoryType.SharedWithMe;
 
     default:
       return CategoryType.Personal;
@@ -188,8 +162,17 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
     case CategoryType.Accounts:
       return PEOPLE_ROUTE_WITH_FILTER;
 
+    case CategoryType.Groups:
+      return GROUPS_ROUTE_WITH_FILTER;
+
+    case CategoryType.Guests:
+      return GUESTS_ROUTE_WITH_FILTER;
+
     case CategoryType.Settings:
       return "/settings/personal";
+
+    case CategoryType.SharedWithMe:
+      return "/shared-with-me/filter";
 
     default:
       throw new Error("Unknown category type");

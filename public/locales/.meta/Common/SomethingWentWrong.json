@@ -3,7 +3,7 @@
   "content": "Something went wrong.",
   "content_en_sha1_hash": "bee54c9cc30c539ab2ed15c0c936e055cf8ef67e",
   "created_at": "2025-05-19T21:30:48.934Z",
-  "updated_at": "2025-08-21T11:22:39.775Z",
+  "updated_at": "2025-10-14T05:00:14.658Z",
   "comment": {
     "text": "This translation key is used to display an error message when a specific action fails, such as clicking a button or importing data. It appears in the UI as a generic error notification and can be found in a catch block of code that handles errors thrown during certain user interactions. Translators should provide a clear and concise alternative text for this key to help users understand what went wrong.",
     "is_auto": true,
@@ -42,25 +42,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 201,
+      "line_number": 200,
       "context": "navigate(\"/portal-settings/management/disk-space\");\n };\n \n const handleError = useCallback(\n (message?: string) => {\n toastr.error(message || t(\"Common:SomethingWentWrong\"));\n setIsFileError(true);\n setLoadingStatus(\"none\");\n clearInterval(uploadInterval.current);\n },\n [t, setLoadingStatus],",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 201,
+      "line_number": 200,
       "context": "navigate(\"/portal-settings/management/disk-space\");\n };\n \n const handleError = useCallback(\n (message?: string) => {\n toastr.error(message || t(\"Common:SomethingWentWrong\"));\n setIsFileError(true);\n setLoadingStatus(\"none\");\n clearInterval(uploadInterval.current);\n },\n [t, setLoadingStatus],",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 201,
+      "line_number": 200,
       "context": "navigate(\"/portal-settings/management/disk-space\");\n };\n \n const handleError = useCallback(\n (message?: string) => {\n toastr.error(message || t(\"Common:SomethingWentWrong\"));\n setIsFileError(true);\n setLoadingStatus(\"none\");\n clearInterval(uploadInterval.current);\n },\n [t, setLoadingStatus],",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/LdapFormStore.js",
-      "line_number": 250,
+      "line_number": 270,
       "context": "\"Error while loading LDAP settings\",\n settingsRes?.reason,\n cronRes?.reason,\n defaultRes?.reason,\n );\n toastr.error(t(\"Common:SomethingWentWrong\"));\n }\n };\n \n setServer = (server) => {\n this.requiredSettings.server = server;",
       "module": "/packages/client"
     },
@@ -78,19 +78,19 @@
     },
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 121,
+      "line_number": 122,
       "context": "messageKey?: OAuth2ErrorKey,\n ) => {\n if (!messageKey) return;\n switch (messageKey) {\n case OAuth2ErrorKey.asc_retrieval_error:\n return t(\"Common:SomethingWentWrong\");\n case OAuth2ErrorKey.client_disabled_error:\n return t(\"Errors:OAuthApplicationDisabled\");\n case OAuth2ErrorKey.client_not_found_error:\n return t(\"Errors:OAuthApplicationEmpty\");\n case OAuth2ErrorKey.client_permission_denied_error:",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/shared/components/errors/Error520.tsx",
-      "line_number": 93,
+      "line_number": 92,
       "context": "zendeskAPI.addChanges(\"webWidget\", \"show\");\n \n if (!firebaseHelper?.isEnabledDB)\n return (\n <ErrorContainer\n headerText={t(\"SomethingWentWrong\")}\n customizedBodyText={errorLog?.message ?? customErrorLog?.message}\n />\n );\n \n return (",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/errors/Error520.tsx",
-      "line_number": 93,
+      "line_number": 92,
       "context": "zendeskAPI.addChanges(\"webWidget\", \"show\");\n \n if (!firebaseHelper?.isEnabledDB)\n return (\n <ErrorContainer\n headerText={t(\"SomethingWentWrong\")}\n customizedBodyText={errorLog?.message ?? customErrorLog?.message}\n />\n );\n \n return (",
       "module": "/packages/shared"
     }
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Xəta baş Verdi' is understandable, it's a rather literal and slightly awkward translation. 'Something went wrong' is more naturally conveyed with a phrase that implies an unexpected error or problem.",
-          "suggestion": "Consider 'Problem yaranıb' or 'Nə isə xətası oldu' as more natural alternatives. 'Problem yaranıb' is often used in situations where something unexpected has occurred. 'Nə isə xətası oldu' is a bit more general."
+          "description": "While \"Xəta baş Verdi\" is understandable, a more accurate and natural translation of \"Something went wrong\" would be something like \"Bir problem yaranıb\" or \"Nəsə yanlış oldu\". \"Xəta baş Verdi\" implies an error *started*, which isn't the precise meaning of the original.",
+          "suggestion": "Bir problem yaranıb"
         }
       ],
       "approved_at": null
@@ -135,19 +135,37 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Ein Fehler ist aufgetreten' is a valid German sentence, it's a more formal and technical translation of 'Something went wrong.' A more natural and user-friendly translation would be closer to 'Es ist ein Problem aufgetreten' or 'Etwas ist schiefgelaufen'.",
+          "suggestion": "Consider 'Es ist ein Problem aufgetreten' or 'Etwas ist schiefgelaufen' for a more natural feel."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Κάτι πήγε στραβά' while conveying a similar meaning (\"something went wrong\") can be perceived as slightly informal or implying something was done improperly. A more neutral and accurate translation would be 'Παρουσιάστηκε ένα πρόβλημα.'",
+          "suggestion": "Παρουσιάστηκε ένα πρόβλημα."
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Se ha producido un error' is a generally acceptable translation of 'Something went wrong,' but it is a bit formal. A more conversational and common translation could be 'Algo salió mal.'",
+          "suggestion": "Algo salió mal."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -168,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ինչ որ բան այնպես չգնաց.\" is a literal translation that doesn't convey the exact meaning of \"Something went wrong.\" It translates to \"Something didn't go as it should have.\" While close, it lacks the succinctness and general error connotation of the original.",
-          "suggestion": "A more natural and equivalent Armenian translation would be \"Մի բան սխալվեց.\" or \"Ուղի չդուրս եկավ.\" (Ughi ch' durs eka)."
+          "description": "The translation 'Ինչ որ բան այնպես չգնաց' is a literal translation and doesn't convey the idiomatic meaning of \"Something went wrong.\" It translates to 'Something didn't go as planned' which is not exactly the same.",
+          "suggestion": "A more natural and idiomatic Armenian translation would be 'Որեւէ բան սխալվեց' or 'Կարճվել է մի բան' depending on the context, both translating closer to 'Something went wrong'."
         }
       ],
       "approved_at": null
@@ -186,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"何かが間違っていた\" (Nanika ga machigatte ita) is technically correct but sounds unnatural and overly formal for the simple phrase \"Something went wrong.\" A more natural translation would convey a sense of an error or problem occurring.",
-          "suggestion": "考えたこと以外にありました。(Kangaeta koto igai ni arimashita.) - 'Something else happened.' Or, より簡潔に、\"問題が発生しました\" (Mondai ga hassei shimashita) - 'A problem occurred.'"
+          "description": "The Japanese translation \"何かが間違っていた\" (Nanika ga machigatte ita) literally translates to \"Something was wrong.\" While conveying a similar meaning to \"Something went wrong,\" it implies a state of being rather than an event. \"Something went wrong\" suggests an action or process failed.  A more suitable translation would convey the sense of an incident or failure occurring.",
+          "suggestion": "何か問題が発生しました (Nanika mondai ga hassei shimashita) - Something has occurred/Something has happened;  何が起こったのか (Nani ga okotta no ka) - What happened?"
         }
       ],
       "approved_at": null
@@ -295,6 +313,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

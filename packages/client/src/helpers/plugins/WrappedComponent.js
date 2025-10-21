@@ -105,6 +105,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
         isRequestRunning,
         setIsRequestRunning,
         setModalRequestRunning,
+        modalRequestRunning,
       } = React.use(PropsContext);
 
       React.useEffect(() => {
@@ -155,13 +156,15 @@ export const PluginComponent = inject(({ pluginStore }) => {
 
         switch (componentName) {
           case PluginComponents.box: {
-            const childrenComponents = elementProps?.children?.map((item) => (
-              <PluginComponent
-                key={`box-${item.component}`}
-                component={item}
-                pluginName={pluginName}
-              />
-            ));
+            const childrenComponents = elementProps?.children?.map(
+              (item, index) => (
+                <PluginComponent
+                  key={`${pluginName}-box-${item.component}-${index}`}
+                  component={item}
+                  pluginName={pluginName}
+                />
+              ),
+            );
 
             return <div style={elementStyles}>{childrenComponents}</div>;
           }
@@ -283,7 +286,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
               withLoadingAfterClick,
               disableWhileRequestRunning,
               isSaveButton,
-              modalRequestRunning,
+              settingsModalRequestRunning,
               setSettingsModalRequestRunning,
               onCloseAction,
               ...rest
@@ -331,13 +334,14 @@ export const PluginComponent = inject(({ pluginStore }) => {
 
             const isLoading = withLoadingAfterClick
               ? isSaveButton
-                ? modalRequestRunning
-                : isRequestRunning || rest.isLoading
+                ? settingsModalRequestRunning
+                : isRequestRunning || rest.isLoading || modalRequestRunning
               : rest.isLoading;
+
             const isDisabled = disableWhileRequestRunning
               ? isSaveButton
-                ? modalRequestRunning
-                : isRequestRunning || rest.isDisabled
+                ? settingsModalRequestRunning
+                : isRequestRunning || rest.isDisabled || modalRequestRunning
               : rest.isDisabled;
 
             return (
@@ -418,6 +422,7 @@ const WrappedComponent = ({
   setSaveButtonProps,
 
   setModalRequestRunning,
+  modalRequestRunning,
 }) => {
   const [contextProps, setContextProps] = React.useState({});
 
@@ -444,8 +449,14 @@ const WrappedComponent = ({
       isRequestRunning,
       setIsRequestRunning,
       setModalRequestRunning,
+      modalRequestRunning,
     }),
-    [contextProps, isRequestRunning, setModalRequestRunning],
+    [
+      contextProps,
+      isRequestRunning,
+      setModalRequestRunning,
+      modalRequestRunning,
+    ],
   );
 
   return (

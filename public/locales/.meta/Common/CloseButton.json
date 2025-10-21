@@ -3,7 +3,7 @@
   "content": "Close",
   "content_en_sha1_hash": "bbfa773e5a63a5ea58c9b6207e608ca0120e592a",
   "created_at": "2025-05-19T21:30:43.485Z",
-  "updated_at": "2025-08-27T10:14:35.111Z",
+  "updated_at": "2025-09-23T07:24:24.081Z",
   "comment": {
     "text": "This translation key is used for the label \"Close\", which represents a button that closes a dialog or modal window, found in various places such as buttons, dialogs, and modals.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
-      "line_number": 235,
+      "line_number": 236,
       "context": "scale\n onClick={onConvert}\n />\n <Button\n key=\"CloseButton\"\n label={t(\"Common:CloseButton\")}\n size=\"normal\"\n scale\n onClick={onCloseDialog}\n />\n </div>",
       "module": "/packages/client"
     },
@@ -38,12 +38,6 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/Backup/BackupServiceDialog.tsx",
       "line_number": 170,
       "context": "))}\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:CloseButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n scale\n testId=\"service-backup-dialog-close-button\"\n />",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/ConfirmationDialog.tsx",
-      "line_number": 76,
-      "context": "primary\n scale\n testId=\"service-confirmation-dialog-continue-button\"\n />\n <Button\n label={t(\"Common:CloseButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n testId=\"service-confirmation-dialog-close-button\"\n scale\n />",
       "module": "/packages/client"
     },
     {

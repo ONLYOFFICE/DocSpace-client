@@ -50,12 +50,13 @@ import {
   getUserTypeName,
   getUserTypeDescription,
 } from "@docspace/shared/utils/common";
-import { isMobile } from "@docspace/shared/utils";
+import { isMobile, classNames } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 import { TDirectionY } from "@docspace/shared/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TAvatarModel } from "@docspace/shared/components/avatar/Avatar.types";
+import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
 
 import SendClockReactSvgUrl from "PUBLIC_DIR/images/send.clock.react.svg?url";
 import PencilOutlineReactSvgUrl from "PUBLIC_DIR/images/pencil.outline.react.svg?url";
@@ -68,14 +69,18 @@ import BetaBadge from "SRC_DIR/components/BetaBadgeWrapper";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
 import DialogStore from "SRC_DIR/store/contacts/DialogStore";
+import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 
-import {
-  StyledWrapper,
-  StyledInfo,
-  StyledLabel,
-  StyledAvatarWrapper,
-  getDropdownHoverRules,
-} from "./MainProfile.styled";
+import styles from "./Profile.module.scss";
+
+const getDropdownHoverRules = () => [
+  `.drop-down-item:hover:not(.separator) {
+    background-color: var(--drop-down-item-hover-color) !important;
+  }`,
+  `.drop-down-item.activeDescendant {
+    background-color: var(--drop-down-item-hover-color) !important;
+  }`,
+];
 
 const TooltipContent = ({ content }: { content: React.ReactNode }) => (
   <Text fontSize="12px">{content}</Text>
@@ -107,10 +112,11 @@ type MainProfileProps = {
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
   image?: AvatarEditorDialogStore["image"];
   setImage?: AvatarEditorDialogStore["setImage"];
+  fetchTreeFolders?: TreeFoldersStore["fetchTreeFolders"];
 };
 
 const MainProfile = (props: MainProfileProps) => {
-  const { t } = useTranslation(["Profile", "Common", "RoomLogoCover"]);
+  const { t, i18n } = useTranslation(["Profile", "Common", "RoomLogoCover"]);
 
   const {
     profile,
@@ -133,6 +139,7 @@ const MainProfile = (props: MainProfileProps) => {
     onChangeFile,
     image,
     setImage,
+    fetchTreeFolders,
   } = props;
 
   const styleContainerRef = useRef<HTMLDivElement>(null);
@@ -297,304 +304,159 @@ const MainProfile = (props: MainProfileProps) => {
       isBeta: false,
     };
 
-  const onLanguageSelect = (newLanguage: TOption) => {
+  const onLanguageSelect = async (newLanguage: TOption) => {
     if (profile!.cultureName === newLanguage.key) return;
 
-    updateProfileCulture?.(profile!.id, newLanguage.key as string)
-      .then(() => window.location.reload())
-      .catch((error: unknown) => {
-        toastr.error(
-          error && (error as { message: string }).message
-            ? (error as { message: string }).message
-            : (error as string),
-        );
-      });
+    try {
+      TopLoadingIndicator.start();
+      await updateProfileCulture?.(profile!.id, newLanguage.key as string);
+      await i18n.changeLanguage(newLanguage.key?.toString());
+      await fetchTreeFolders?.();
+    } catch (error: unknown) {
+      toastr.error(
+        error && (error as { message: string }).message
+          ? (error as { message: string }).message
+          : (error as string),
+      );
+    } finally {
+      TopLoadingIndicator.end();
+    }
   };
 
   const isBetaLanguage = selectedLanguage?.isBeta;
 
   return (
-    <StyledWrapper ref={styleContainerRef}>
-      <StyledAvatarWrapper className="avatar-wrapper">
-        <Avatar
-          className="avatar"
-          size={AvatarSize.max}
-          role={role as unknown as AvatarRole}
-          source={userAvatar}
-          userName={profile!.displayName}
-          editing={!profile!.isLDAP}
-          hasAvatar={!!profile!.hasAvatar}
-          model={model as unknown as TAvatarModel[]}
-          editAction={() => setChangeAvatarVisible?.(true)}
-          onChangeFile={onChangeFileContext}
-        />
-        {profile!.isSSO ? (
-          <div className="badges-wrapper">
-            <Badge
-              className="sso-badge"
-              label={t("Common:SSO")}
-              color={globalColors.white}
-              backgroundColor={
-                isBase ? globalColors.secondGreen : globalColors.secondGreenDark
-              }
-              fontSize="9px"
-              fontWeight={800}
-              noHover
-            />
-          </div>
-        ) : null}
-        {profile!.isLDAP ? (
-          <div className="badges-wrapper">
-            <Badge
-              className="sso-badge"
-              label={t("Common:LDAP")}
-              color={globalColors.white}
-              backgroundColor={
-                isBase
-                  ? globalColors.secondPurple
-                  : globalColors.secondPurpleDark
-              }
-              fontSize="9px"
-              fontWeight={800}
-              noHover
-            />
-          </div>
-        ) : null}
-      </StyledAvatarWrapper>
-      <StyledInfo withActivationBar={withActivationBar}>
-        <div className="rows-container">
-          <StyledLabel as="div">{t("Common:Name")}</StyledLabel>
-          <div className="profile-block-field">
-            <Text fontWeight={600} truncate title={profile!.displayName}>
-              {profile!.displayName}
-            </Text>
-            {profile!.isSSO ? (
-              <>
-                <Badge
-                  id="sso-badge-profile"
-                  className="sso-badge"
-                  label={t("Common:SSO")}
-                  color={globalColors.white}
-                  backgroundColor={
-                    isBase
-                      ? globalColors.secondGreen
-                      : globalColors.secondGreenDark
-                  }
-                  fontSize="9px"
-                  fontWeight={800}
-                  noHover
-                />
-                <Tooltip anchorSelect={`div[id='sso-badge-profile'] div`}>
-                  {t("PeopleTranslations:SSOAccountTooltip")}
-                </Tooltip>
-              </>
-            ) : null}
-
-            {profile!.isLDAP ? (
-              <>
-                <Badge
-                  id="ldap-badge-profile"
-                  className="ldap-badge"
-                  label={t("Common:LDAP")}
-                  color={globalColors.white}
-                  backgroundColor={
-                    isBase
-                      ? globalColors.secondPurple
-                      : globalColors.secondPurpleDark
-                  }
-                  fontSize="9px"
-                  fontWeight={800}
-                  noHover
-                />
-                <Tooltip anchorSelect={`div[id='ldap-badge-profile'] div`}>
-                  {t("PeopleTranslations:LDAPAccountTooltip")}
-                </Tooltip>
-              </>
-            ) : null}
-
-            {!profile!.isSSO && !profile!.isLDAP ? (
-              <IconButton
-                className="edit-button"
-                iconName={PencilOutlineReactSvgUrl}
-                size={12}
-                onClick={() => setChangeNameVisible?.(true)}
-                dataTestId="name_edit_icon_button"
+    <div className={styles.profileContainer}>
+      <div className={styles.profileWrapper} ref={styleContainerRef}>
+        <div className={styles.avatarWrapper}>
+          <Avatar
+            className={styles.avatar}
+            size={AvatarSize.max}
+            role={role as unknown as AvatarRole}
+            source={userAvatar}
+            userName={profile!.displayName}
+            editing={!profile!.isLDAP}
+            hasAvatar={!!profile!.hasAvatar}
+            model={model as unknown as TAvatarModel[]}
+            editAction={() => setChangeAvatarVisible?.(true)}
+            onChangeFile={onChangeFileContext}
+          />
+          {profile!.isSSO ? (
+            <div className={styles.badgesWrapper}>
+              <Badge
+                className={styles.ssoBadge}
+                label={t("Common:SSO")}
+                color={globalColors.white}
+                backgroundColor={
+                  isBase
+                    ? globalColors.secondGreen
+                    : globalColors.secondGreenDark
+                }
+                fontSize="9px"
+                fontWeight={800}
+                noHover
               />
-            ) : null}
-          </div>
-
-          <StyledLabel as="div">{t("Common:Email")}</StyledLabel>
-          <div className="email-container">
-            <div className="email-edit-container">
-              <Text
-                data-tooltip-id="emailTooltip"
-                data-tooltip-content={t("EmailNotVerified")}
-                as="div"
-                className="email-text-container"
-                fontWeight={600}
-                truncate
-              >
-                {profile!.email}
-              </Text>
-              {withActivationBar ? (
-                <Tooltip
-                  float
-                  id="emailTooltip"
-                  getContent={TooltipContent}
-                  place="bottom"
-                />
-              ) : null}
-              {!profile!.isSSO && !profile!.isLDAP ? (
-                <IconButton
-                  className="edit-button email-edit-button"
-                  iconName={PencilOutlineReactSvgUrl}
-                  size={12}
-                  onClick={onChangeEmailClick}
-                  dataTestId="email_edit_icon_button"
-                />
-              ) : null}
             </div>
-            {withActivationBar ? (
-              <div
-                className="send-again-container"
-                onClick={sendActivationLinkAction}
-                data-testid="send_again_container"
-              >
-                <ReactSVG
-                  className="send-again-icon"
-                  src={SendClockReactSvgUrl}
-                />
-                <Text className="send-again-text" fontWeight={600}>
-                  {t("SendAgain")}
-                </Text>
-              </div>
-            ) : null}
-          </div>
-
-          <StyledLabel as="div">{t("Common:Password")}</StyledLabel>
-          <div className="profile-block-field profile-block-password">
-            <Text fontWeight={600}>********</Text>
-            {!profile!.isSSO && !profile!.isLDAP ? (
-              <IconButton
-                className="edit-button password-edit-button"
-                iconName={PencilOutlineReactSvgUrl}
-                size={12}
-                onClick={onChangePasswordClick}
-                dataTestId="password_edit_icon_button"
+          ) : null}
+          {profile!.isLDAP ? (
+            <div className={styles.badgesWrapper}>
+              <Badge
+                className={styles.ldapBadge}
+                label={t("Common:LDAP")}
+                color={globalColors.white}
+                backgroundColor={
+                  isBase
+                    ? globalColors.secondPurple
+                    : globalColors.secondPurpleDark
+                }
+                fontSize="9px"
+                fontWeight={800}
+                noHover
               />
-            ) : null}
-          </div>
-
-          <StyledLabel as="div" className="profile-language">
-            {t("Common:Language")}
-            {documentationEmail ? (
-              <HelpButton
-                size={12}
-                offsetRight={0}
-                place={dirTooltip}
-                tooltipContent={tooltipLanguage}
-                dataTestId="language_help_button"
-              />
-            ) : null}
-          </StyledLabel>
-          <div className="language-combo-box-wrapper" ref={comboBoxRef}>
-            <ComboBox
-              className="language-combo-box"
-              directionY={
-                isMobileHorizontalOrientation
-                  ? "bottom"
-                  : (directionY as TDirectionY)
-              }
-              options={cultureNames!}
-              selectedOption={selectedLanguage}
-              onSelect={onLanguageSelect}
-              isDisabled={false}
-              scaled={isMobile()}
-              scaledOptions={false}
-              size="content"
-              showDisabledItems
-              dropDownMaxHeight={dropDownMaxHeight}
-              manualWidth="280px"
-              isDefaultMode={isMobileHorizontalOrientation || !isMobile()}
-              withBlur={isMobileHorizontalOrientation ? false : isMobile()}
-              fillIcon={false}
-              modernView={!isMobile()}
-              dataTestId="language_combo_box"
-              dropDownTestId="language_combo_box_dropdown"
-              noSelect={false}
-            />
-            {isBetaLanguage ? <BetaBadge place="bottom-end" /> : null}
-          </div>
-
-          <StyledLabel as="div">{t("Common:Type")}</StyledLabel>
-          <div className="user-type-container">
-            <Text fontWeight={600} truncate title={profile!.displayName}>
-              {getUserTypeName(
-                isOwner,
-                isAdmin,
-                isRoomAdmin,
-                isCollaborator,
-                t,
-              )}
-            </Text>
-
-            {!isOwner ? (
-              <HelpButton
-                size={12}
-                offsetRight={0}
-                place={dirTooltip}
-                tooltipContent={getUserTypeDescription(
-                  isAdmin,
-                  isRoomAdmin,
-                  isCollaborator,
-                  t,
-                )}
-                dataTestId="user_type_help_button"
-              />
-            ) : null}
-          </div>
+            </div>
+          ) : null}
         </div>
-
-        <div className="mobile-profile-block">
-          <div className="mobile-profile-row">
-            <div className="mobile-profile-field">
-              <Text className="mobile-profile-label" as="div">
-                {t("Common:Name")}
-              </Text>
-              <Text
-                className="mobile-profile-label-field"
-                fontWeight={600}
-                truncate
-              >
+        <div className={styles.infoWrapper}>
+          <div className={styles.rowsContainer}>
+            <Text as="div" className={styles.label}>
+              {t("Common:Name")}
+            </Text>
+            <div className={styles.profileBlockField}>
+              <Text fontWeight={600} truncate title={profile!.displayName}>
                 {profile!.displayName}
               </Text>
+              {profile!.isSSO ? (
+                <>
+                  <Badge
+                    id="sso-badge-profile"
+                    className={styles.ssoBadge}
+                    label={t("Common:SSO")}
+                    color={globalColors.white}
+                    backgroundColor={
+                      isBase
+                        ? globalColors.secondGreen
+                        : globalColors.secondGreenDark
+                    }
+                    fontSize="9px"
+                    fontWeight={800}
+                    noHover
+                  />
+                  <Tooltip anchorSelect={`div[id='sso-badge-profile'] div`}>
+                    {t("PeopleTranslations:SSOAccountTooltip")}
+                  </Tooltip>
+                </>
+              ) : null}
+
+              {profile!.isLDAP ? (
+                <>
+                  <Badge
+                    id="ldap-badge-profile"
+                    className={styles.ldapBadge}
+                    label={t("Common:LDAP")}
+                    color={globalColors.white}
+                    backgroundColor={
+                      isBase
+                        ? globalColors.secondPurple
+                        : globalColors.secondPurpleDark
+                    }
+                    fontSize="9px"
+                    fontWeight={800}
+                    noHover
+                  />
+                  <Tooltip anchorSelect={`div[id='ldap-badge-profile'] div`}>
+                    {t("PeopleTranslations:LDAPAccountTooltip")}
+                  </Tooltip>
+                </>
+              ) : null}
+
+              {!profile!.isSSO && !profile!.isLDAP ? (
+                <IconButton
+                  className={styles.editButton}
+                  iconName={PencilOutlineReactSvgUrl}
+                  size={12}
+                  onClick={() => setChangeNameVisible?.(true)}
+                  dataTestId="name_edit_icon_button"
+                />
+              ) : null}
             </div>
-            <IconButton
-              className="edit-button"
-              iconName={PencilOutlineReactSvgUrl}
-              size={12}
-              onClick={() => setChangeNameVisible?.(true)}
-              dataTestId="edit_name_icon_button"
-            />
-          </div>
-          <div className="mobile-profile-row">
-            <div className="mobile-profile-field">
-              <Text className="mobile-profile-label" as="div">
-                {t("Common:Email")}
-              </Text>
-              <div className="email-container">
-                <div className="email-edit-container">
-                  <Text
-                    data-tooltip-id="emailTooltip"
-                    data-tooltip-content={t("EmailNotVerified")}
-                    as="div"
-                    className="email-text-container"
-                    fontWeight={600}
-                    truncate
-                  >
-                    {profile!.email}
-                  </Text>
-                </div>
+
+            <Text as="div" className={styles.label}>
+              {t("Common:Email")}
+            </Text>
+            <div className={styles.emailContainer}>
+              <div className={styles.emailEditContainer}>
+                <Text
+                  data-tooltip-id="emailTooltip"
+                  data-tooltip-content={t("EmailNotVerified")}
+                  as="div"
+                  className={classNames(styles.emailTextContainer, {
+                    pending: withActivationBar,
+                  })}
+                  fontWeight={600}
+                  truncate
+                >
+                  {profile!.email}
+                </Text>
                 {withActivationBar ? (
                   <Tooltip
                     float
@@ -603,97 +465,78 @@ const MainProfile = (props: MainProfileProps) => {
                     place="bottom"
                   />
                 ) : null}
+                {!profile!.isSSO && !profile!.isLDAP ? (
+                  <IconButton
+                    className={classNames(
+                      styles.editButton,
+                      styles.emailEditButton,
+                    )}
+                    iconName={PencilOutlineReactSvgUrl}
+                    size={12}
+                    onClick={onChangeEmailClick}
+                    dataTestId="email_edit_icon_button"
+                  />
+                ) : null}
               </div>
               {withActivationBar ? (
                 <div
-                  className="send-again-container"
+                  className={styles.sendAgainContainer}
                   onClick={sendActivationLinkAction}
                   data-testid="send_again_container"
                 >
                   <ReactSVG
-                    className="send-again-icon"
+                    className={styles.sendAgainIcon}
                     src={SendClockReactSvgUrl}
                   />
-                  <Text className="send-again-text" fontWeight={600}>
+                  <Text className={styles.sendAgainText} fontWeight={600}>
                     {t("SendAgain")}
                   </Text>
                 </div>
               ) : null}
             </div>
-            <IconButton
-              className="edit-button"
-              iconName={PencilOutlineReactSvgUrl}
-              size={12}
-              onClick={onChangeEmailClick}
-            />
-          </div>
-          <div className="mobile-profile-row">
-            <div className="mobile-profile-field">
-              <Text as="div" className="mobile-profile-label">
-                {t("Common:Password")}
-              </Text>
-              <Text className="mobile-profile-password" fontWeight={600}>
-                ********
-              </Text>
-            </div>
-            <IconButton
-              className="edit-button"
-              iconName={PencilOutlineReactSvgUrl}
-              size={12}
-              onClick={onChangePasswordClick}
-              dataTestId="edit_password_icon_button"
-            />
-          </div>
-          <div className="mobile-profile-row">
-            <div className="mobile-profile-field">
-              <Text as="div" className="mobile-profile-label">
-                {t("Common:Type")}
-              </Text>
-              <Text fontWeight={600} truncate title={profile!.displayName}>
-                {getUserTypeName(
-                  isOwner,
-                  isAdmin,
-                  isRoomAdmin,
-                  isCollaborator,
-                  t,
-                )}
-              </Text>
-            </div>
-            {!isOwner ? (
-              <div className="edit-button">
-                <HelpButton
-                  size={12}
-                  offsetRight={0}
-                  place={dirTooltip}
-                  tooltipContent={getUserTypeDescription(
-                    isAdmin,
-                    isRoomAdmin,
-                    isCollaborator,
-                    t,
-                  )}
-                  dataTestId="user_type_help_button"
-                />
-              </div>
-            ) : null}
-          </div>
 
-          <div className="mobile-language">
-            <Text as="div" fontWeight={600} className="mobile-profile-label">
+            <Text as="div" className={styles.label}>
+              {t("Common:Password")}
+            </Text>
+            <div className={styles.profileBlockField}>
+              <Text fontWeight={600}>********</Text>
+              {!profile!.isSSO && !profile!.isLDAP ? (
+                <IconButton
+                  className={classNames(
+                    styles.editButton,
+                    styles.passwordEditButton,
+                  )}
+                  iconName={PencilOutlineReactSvgUrl}
+                  size={12}
+                  onClick={onChangePasswordClick}
+                  dataTestId="password_edit_icon_button"
+                />
+              ) : null}
+            </div>
+
+            <Text
+              as="div"
+              className={classNames(styles.label, styles.profileLanguage)}
+            >
               {t("Common:Language")}
               {documentationEmail ? (
                 <HelpButton
                   size={12}
                   offsetRight={0}
-                  place="right"
+                  place={dirTooltip}
                   tooltipContent={tooltipLanguage}
                   dataTestId="language_help_button"
                 />
               ) : null}
             </Text>
-            <div className="mobile-language__wrapper-combo-box">
+            <div className={styles.languageComboBoxWrapper} ref={comboBoxRef}>
               <ComboBox
-                className="language-combo-box"
-                directionY={isMobileHorizontalOrientation ? "bottom" : "both"}
+                className={styles.languageComboBox}
+                directionY={
+                  isMobileHorizontalOrientation
+                    ? "bottom"
+                    : (directionY as TDirectionY)
+                }
                 options={cultureNames!}
                 selectedOption={selectedLanguage}
                 onSelect={onLanguageSelect}
@@ -710,25 +553,223 @@ const MainProfile = (props: MainProfileProps) => {
                 modernView={!isMobile()}
                 dataTestId="language_combo_box"
                 dropDownTestId="language_combo_box_dropdown"
+                noSelect={false}
               />
               {isBetaLanguage ? <BetaBadge place="bottom-end" /> : null}
             </div>
+
+            <Text as="div" className={styles.label}>
+              {t("Common:Type")}
+            </Text>
+            <div className={styles.userTypeContainer}>
+              <Text fontWeight={600} truncate title={profile!.displayName}>
+                {getUserTypeName(
+                  isOwner,
+                  isAdmin,
+                  isRoomAdmin,
+                  isCollaborator,
+                  t,
+                )}
+              </Text>
+
+              {!isOwner ? (
+                <HelpButton
+                  size={12}
+                  offsetRight={0}
+                  place={dirTooltip}
+                  tooltipContent={getUserTypeDescription(
+                    isAdmin,
+                    isRoomAdmin,
+                    isCollaborator,
+                    t,
+                  )}
+                  dataTestId="user_type_help_button"
+                />
+              ) : null}
+            </div>
+          </div>
+
+          <div className={styles.mobileProfileBlock}>
+            <div className={styles.mobileProfileRow}>
+              <div className={styles.mobileProfileField}>
+                <Text className={styles.mobileProfileLabel} as="div">
+                  {t("Common:Name")}
+                </Text>
+                <Text
+                  className={styles.mobileProfileLabelField}
+                  fontWeight={600}
+                  truncate
+                >
+                  {profile!.displayName}
+                </Text>
+              </div>
+              <IconButton
+                className={styles.editButton}
+                iconName={PencilOutlineReactSvgUrl}
+                size={12}
+                onClick={() => setChangeNameVisible?.(true)}
+                dataTestId="edit_name_icon_button"
+              />
+            </div>
+            <div className={styles.mobileProfileRow}>
+              <div className={styles.mobileProfileField}>
+                <Text className={styles.mobileProfileLabel} as="div">
+                  {t("Common:Email")}
+                </Text>
+                <div className={styles.emailContainer}>
+                  <div className={styles.emailEditContainer}>
+                    <Text
+                      data-tooltip-id="emailTooltip"
+                      data-tooltip-content={t("EmailNotVerified")}
+                      as="div"
+                      className={classNames(styles.emailTextContainer, {
+                        pending: withActivationBar,
+                      })}
+                      fontWeight={600}
+                      truncate
+                    >
+                      {profile!.email}
+                    </Text>
+                  </div>
+                  {withActivationBar ? (
+                    <Tooltip
+                      float
+                      id="emailTooltip"
+                      getContent={TooltipContent}
+                      place="bottom"
+                    />
+                  ) : null}
+                </div>
+                {withActivationBar ? (
+                  <div
+                    className={styles.sendAgainContainer}
+                    onClick={sendActivationLinkAction}
+                    data-testid="send_again_container"
+                  >
+                    <ReactSVG
+                      className={styles.sendAgainIcon}
+                      src={SendClockReactSvgUrl}
+                    />
+                    <Text className={styles.sendAgainText} fontWeight={600}>
+                      {t("SendAgain")}
+                    </Text>
+                  </div>
+                ) : null}
+              </div>
+              <IconButton
+                className={styles.editButton}
+                iconName={PencilOutlineReactSvgUrl}
+                size={12}
+                onClick={onChangeEmailClick}
+              />
+            </div>
+            <div className={styles.mobileProfileRow}>
+              <div className={styles.mobileProfileField}>
+                <Text as="div" className={styles.mobileProfileLabel}>
+                  {t("Common:Password")}
+                </Text>
+                <Text className={styles.mobileProfilePassword} fontWeight={600}>
+                  ********
+                </Text>
+              </div>
+              <IconButton
+                className={styles.editButton}
+                iconName={PencilOutlineReactSvgUrl}
+                size={12}
+                onClick={onChangePasswordClick}
+                dataTestId="edit_password_icon_button"
+              />
+            </div>
+            <div className={styles.mobileProfileRow}>
+              <div className={styles.mobileProfileField}>
+                <Text as="div" className={styles.mobileProfileLabel}>
+                  {t("Common:Type")}
+                </Text>
+                <Text fontWeight={600} truncate title={profile!.displayName}>
+                  {getUserTypeName(
+                    isOwner,
+                    isAdmin,
+                    isRoomAdmin,
+                    isCollaborator,
+                    t,
+                  )}
+                </Text>
+              </div>
+              {!isOwner ? (
+                <div className={styles.editButton}>
+                  <HelpButton
+                    size={12}
+                    offsetRight={0}
+                    place={dirTooltip}
+                    tooltipContent={getUserTypeDescription(
+                      isAdmin,
+                      isRoomAdmin,
+                      isCollaborator,
+                      t,
+                    )}
+                    dataTestId="user_type_help_button"
+                  />
+                </div>
+              ) : null}
+            </div>
+
+            <div className={styles.mobileLanguage}>
+              <Text
+                as="div"
+                fontWeight={600}
+                className={styles.mobileProfileLabel}
+              >
+                {t("Common:Language")}
+                {documentationEmail ? (
+                  <HelpButton
+                    size={12}
+                    offsetRight={0}
+                    place="right"
+                    tooltipContent={tooltipLanguage}
+                    dataTestId="language_help_button"
+                  />
+                ) : null}
+              </Text>
+              <div className="mobile-language__wrapper-combo-box">
+                <ComboBox
+                  className="language-combo-box"
+                  directionY={isMobileHorizontalOrientation ? "bottom" : "both"}
+                  options={cultureNames!}
+                  selectedOption={selectedLanguage}
+                  onSelect={onLanguageSelect}
+                  isDisabled={false}
+                  scaled
+                  scaledOptions={false}
+                  size="content"
+                  showDisabledItems
+                  dropDownMaxHeight={dropDownMaxHeight}
+                  manualWidth="280px"
+                  isDefaultMode={isMobileHorizontalOrientation || !isMobile()}
+                  withBlur={isMobileHorizontalOrientation ? false : isMobile()}
+                  fillIcon={false}
+                  modernView={false}
+                  dataTestId="language_combo_box"
+                  dropDownTestId="language_combo_box_dropdown"
+                />
+                {isBetaLanguage ? <BetaBadge place="bottom-end" /> : null}
+              </div>
+            </div>
           </div>
         </div>
-      </StyledInfo>
 
-      {avatarEditorDialogVisible ? (
-        <AvatarEditorDialog
-          t={t}
-          visible={image?.uploadedFile}
-          image={image}
-          isProfileUpload
-          onChangeImage={onChangeIcon}
-          onChangeFile={onChangeFileContext}
-          onClose={() => setAvatarEditorDialogVisible?.(false)}
-        />
-      ) : null}
-    </StyledWrapper>
+        {avatarEditorDialogVisible ? (
+          <AvatarEditorDialog
+            t={t}
+            visible={image?.uploadedFile}
+            image={image}
+            isProfileUpload
+            onChangeImage={onChangeIcon}
+            onChangeFile={onChangeFileContext}
+            onClose={() => setAvatarEditorDialogVisible?.(false)}
+          />
+        ) : null}
+      </div>
+    </div>
   );
 };
 
@@ -738,6 +779,7 @@ export default inject(
     peopleStore,
     userStore,
     avatarEditorDialogStore,
+    treeFoldersStore,
   }: TStore) => {
     const { withActivationBar, sendActivationLink, user: profile } = userStore;
     const { becometranslatorUrl, culture, documentationEmail } = settingsStore;
@@ -760,6 +802,8 @@ export default inject(
     } = peopleStore.targetUserStore!;
     const { setDialogData, setChangeEmailVisible } = peopleStore.dialogStore!;
 
+    const { fetchTreeFolders } = treeFoldersStore;
+
     return {
       profile,
       culture,
@@ -781,6 +825,7 @@ export default inject(
       image,
       onChangeFile,
       setImage,
+      fetchTreeFolders,
     };
   },
 )(withCultureNames<MainProfileProps>(observer(MainProfile)));

@@ -43,7 +43,6 @@ export const TileSkeleton = ({
   backgroundOpacity,
   foregroundOpacity,
   speed,
-  animate,
   className,
   ...rest
 }: TileSkeletonProps) => {

@@ -24,26 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-
 import { SettingsSMTPSkeleton } from "@docspace/shared/skeletons/settings";
+
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import CustomSettings from "./sub-components/CustomSettings";
 import { StyledComponent } from "./StyledComponent";
 
-let timerId = null;
 const SMTPSettings = (props) => {
-  const {
-    setInitSMTPSettings,
-    currentColorScheme,
-    integrationSettingsUrl,
-    logoText,
-  } = props;
+  const { currentColorScheme, smtpUrl, logoText, showPortalSettingsLoader } =
+    props;
 
   const { t, ready } = useTranslation([
     "SMTPSettings",
@@ -51,53 +46,28 @@ const SMTPSettings = (props) => {
     "Common",
     "UploadPanel",
   ]);
-  const [isInit, setIsInit] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const init = async () => {
-    await setInitSMTPSettings();
-
-    setIsLoading(false);
-    setIsInit(true);
-  };
-  useEffect(() => {
-    timerId = setTimeout(() => {
-      setIsLoading(true);
-    }, 400);
-
-    init();
-
-    () => {
-      clearTimeout(timerId);
-      timerId = null;
-    };
-  }, []);
 
   useEffect(() => {
     if (ready) setDocumentTitle(t("Settings:SMTPSettings"));
   }, [ready]);
 
-  const isLoadingContent = isLoading || !ready;
-
-  if (!isLoading && !isInit) return null;
-
-  if (isLoadingContent && !isInit) return <SettingsSMTPSkeleton />;
+  if (showPortalSettingsLoader || !ready) return <SettingsSMTPSkeleton />;
 
   return (
-    <StyledComponent withoutExternalLink={!integrationSettingsUrl}>
+    <StyledComponent withoutExternalLink={!smtpUrl}>
       <div className="smtp-settings_main-title">
         <Text className="smtp-settings_description">
           {t("Settings:SMTPSettingsDescription", {
             organizationName: logoText,
           })}
         </Text>
-        {integrationSettingsUrl ? (
+        {smtpUrl ? (
           <Link
             className="link-learn-more"
             color={currentColorScheme.main?.accent}
             isHovered
             target="_blank"
-            href={integrationSettingsUrl}
+            href={smtpUrl}
             dataTestId="integration_settings_link"
           >
             {t("Common:LearnMore")}
@@ -110,15 +80,17 @@ const SMTPSettings = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup }) => {
-  const { currentColorScheme, integrationSettingsUrl, logoText } =
-    settingsStore;
+export default inject(({ settingsStore, setup, clientLoadingStore }) => {
+  const { currentColorScheme, smtpUrl, logoText } = settingsStore;
   const { setInitSMTPSettings } = setup;
+
+  const { showPortalSettingsLoader } = clientLoadingStore;
 
   return {
     setInitSMTPSettings,
     currentColorScheme,
-    integrationSettingsUrl,
+    smtpUrl,
     logoText,
+    showPortalSettingsLoader,
   };
 })(observer(SMTPSettings));

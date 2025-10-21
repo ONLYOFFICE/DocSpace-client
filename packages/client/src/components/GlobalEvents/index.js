@@ -240,17 +240,24 @@ const GlobalEvents = ({
       if (!enablePlugins) return;
 
       const { payload } = e;
+
+      const onClose = () => {
+        payload.onClose && payload.onClose();
+        setCreatePluginFileProps({
+          visible: false,
+          onClose: null,
+        });
+      };
+
       setCreatePluginFileProps({
         ...payload,
         visible: true,
-        onClose: () => {
-          payload.onClose && payload.onClose();
-          setCreatePluginFileProps({ visible: false, onClose: null });
-        },
+        onClose,
         updateCreatePluginFileProps: (newProps) => {
           setCreatePluginFileProps((prevProps) => ({
             ...prevProps,
             ...newProps,
+            onClose,
           }));
         },
       });
@@ -274,7 +281,7 @@ const GlobalEvents = ({
           <Trans
             ns="PDFFormDialog"
             i18nKey="PDFFormIsReadyToast"
-            components={{ 1: <strong /> }}
+            components={{ 1: <strong key="create-pdf-form-file-strong" /> }}
             values={{ filename: file.title }}
           />,
         );

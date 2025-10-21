@@ -24,13 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import axios from "axios";
 import React from "react";
 
 import {
   getExternalFolderLinks,
   getExternalLinks,
+  getFileSharedUsers,
+  getFolderSharedUsers,
 } from "@docspace/shared/api/files";
 import { TFileLink } from "@docspace/shared/api/files/types";
+
+import { RoomMember } from "@docspace/shared/api/rooms/types";
+import { SHARED_MEMBERS_COUNT } from "@docspace/shared/constants";
 
 interface UseShareProps {
   id: string;
@@ -44,6 +50,8 @@ export const useShare = ({
   generatePrimaryLink,
 }: UseShareProps) => {
   const [filesLink, setFilesLink] = React.useState<TFileLink[]>([]);
+  const [shareMembers, setShareMembers] = React.useState<RoomMember[]>([]);
+  const [shareMembersTotal, setShareMembersTotal] = React.useState(0);
 
   const abortController = React.useRef<AbortController | null>(null);
 
@@ -58,23 +66,45 @@ export const useShare = ({
         ? getExternalFolderLinks
         : getExternalLinks;
 
-      const response = await getExternalLinksMethod(
+      const getShareUsers = isFolder
+        ? getFolderSharedUsers
+        : getFileSharedUsers;
+
+      const response = getExternalLinksMethod(
         id,
         0,
         50,
         abortController.current.signal,
       );
 
-      setFilesLink(response.items);
+      const sharedToUsersResponse = getShareUsers(
+        id,
+        0,
+        SHARED_MEMBERS_COUNT,
+        abortController.current.signal,
+      );
+
+      const [link, shareUsers] = await Promise.all([
+        response,
+        sharedToUsersResponse,
+      ]);
+
+      setFilesLink(link.items);
+      setShareMembers(shareUsers.items);
+      setShareMembersTotal(shareUsers.total);
     } catch (error) {
-      console.error("Error fetching external links:", error);
+      if (!axios.isCancel(error))
+        console.error("Error fetching external links:", error);
+
       throw error;
     }
   }, [id, isFolder, generatePrimaryLink]);
 
   return {
     filesLink,
+    shareMembers,
     fetchExternalLinks,
     abortController,
+    shareMembersTotal,
   };
 };

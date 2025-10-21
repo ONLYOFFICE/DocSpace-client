@@ -55,11 +55,12 @@ import {
   WhiteLabelLogoType,
 } from "@docspace/shared/enums";
 
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { CategoryType } from "@docspace/shared/constants";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
+import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
@@ -101,6 +102,7 @@ const SectionHeaderContent = (props) => {
     isEmptyArchive,
 
     isRoom,
+    roomType,
     isGroupMenuBlocked,
 
     onClickBack,
@@ -159,7 +161,6 @@ const SectionHeaderContent = (props) => {
     revokeFilesOrder,
     saveIndexOfFiles,
     infoPanelRoom,
-    getPublicKey,
     getIndexingArray,
     setCloseEditIndexDialogVisible,
     rootFolderId,
@@ -170,7 +171,6 @@ const SectionHeaderContent = (props) => {
     isPersonalReadOnly,
     showTemplateBadge,
     allowInvitingMembers,
-    contactsTab,
     currentClientView,
     profile,
     profileClicked,
@@ -181,13 +181,17 @@ const SectionHeaderContent = (props) => {
     setChangePasswordVisible,
     setChangeAvatarVisible,
     setChangeNameVisible,
+    getIcon,
+    contactsTab,
+    isRootRooms,
+    isArchive,
+    isSharedWithMeFolderRoot,
   } = props;
 
   const location = useLocation();
 
-  const contactsView =
-    currentClientView === "users" || currentClientView === "groups";
-  const isContactsPage = contactsView;
+  const contactsView = getContactsView(location);
+  const isContactsPage = !!contactsView;
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isProfile = currentClientView === "profile";
@@ -355,8 +359,6 @@ const SectionHeaderContent = (props) => {
     const filter = FilesFilter.getDefault();
 
     filter.folder = id;
-    const shareKey = await getPublicKey(selectedFolder);
-    if (shareKey) filter.key = shareKey;
 
     const itemIdx = selectedFolder.navigationPath.findIndex((v) => v.id === id);
 
@@ -429,12 +431,29 @@ const SectionHeaderContent = (props) => {
   };
 
   const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
-  const sharedType = location.state?.isExternal && !isPublicRoom;
+  const sharedType =
+    (location.state?.isExternal || selectedFolder?.external) && !isPublicRoom;
 
   const getTitleIcon = () => {
     if (sharedType) return SharedLinkSvgUrl;
 
-    if (navigationButtonIsVisible && !isPublicRoom) return PublicRoomIconUrl;
+    if (navigationButtonIsVisible && !isPublicRoom) {
+      const roomInPath = (
+        isArchive ? selectedFolder?.navigationPath : navigationPath
+      )?.find((item) => item.isRoom);
+
+      const isInsideRoom = !!roomInPath;
+      const isInPublicRoom = isInsideRoom && roomInPath?.shared;
+      const isShared = roomInPath?.shared || selectedFolder?.shared;
+
+      if (
+        isInPublicRoom ||
+        (isShared && (isArchive ? selectedFolder?.isRoom : isRoom))
+      ) {
+        return PublicRoomIconUrl;
+      } else if (!isRootRooms && !isArchive && !isSharedWithMeFolderRoot)
+        return PublicRoomIconUrl;
+    }
 
     if (isLifetimeEnabled) return LifetimeRoomIconUrl;
 
@@ -517,15 +536,82 @@ const SectionHeaderContent = (props) => {
       isIndexEditingMode || isPublicRoom;
   }
 
+  const getAccountsTitle = () => {
+    switch (contactsTab) {
+      case "people":
+        return t("Common:Members");
+      case "groups":
+        return t("Common:Groups");
+      case "inside_group":
+        return getInsideGroupTitle();
+      case "guests":
+        return t("Common:Guests");
+      default:
+        return t("Common:Members");
+    }
+  };
+
   const currentTitle = isProfile
     ? t("Profile:MyProfile")
     : isSettingsPage
       ? t("Common:Settings")
       : isContactsPage
-        ? isContactsInsideGroupPage
-          ? getInsideGroupTitle()
-          : t("Common:Contacts")
+        ? getAccountsTitle()
         : title;
+
+  const titleIcon = getTitleIcon();
+
+  const contextMenuHeader = React.useMemo(() => {
+    const srcLogo = selectedFolder?.logo || null;
+    const title = currentTitle || selectedFolder?.title || "";
+    const headerBadgeUrl = titleIcon.includes("public-room") ? titleIcon : "";
+
+    const iconUrl = getIcon(
+      32,
+      selectedFolder?.fileExst,
+      selectedFolder?.providerKey,
+      selectedFolder?.contentLength,
+      isRoom ? roomType : undefined,
+      selectedFolder?.isArchive,
+      selectedFolder?.type,
+    );
+
+    const normalizedCover =
+      typeof srcLogo?.cover === "string"
+        ? { data: srcLogo?.cover, id: "" }
+        : srcLogo?.cover;
+
+    const normalizedLogo =
+      typeof srcLogo === "object" &&
+      srcLogo &&
+      !srcLogo?.medium &&
+      srcLogo?.original
+        ? { ...srcLogo, medium: srcLogo?.original }
+        : srcLogo;
+
+    return {
+      title,
+      icon: normalizedLogo?.medium || iconUrl,
+      original: normalizedLogo?.original,
+      large: normalizedLogo?.large,
+      medium: normalizedLogo?.medium,
+      small: normalizedLogo?.small,
+      color: normalizedLogo?.color,
+      cover: normalizedCover,
+      badgeUrl: headerBadgeUrl,
+    };
+  }, [
+    selectedFolder?.logo,
+    selectedFolder?.title,
+    currentTitle,
+    isRoom,
+    getIcon,
+    selectedFolder?.fileExst,
+    selectedFolder?.providerKey,
+    selectedFolder?.contentLength,
+    selectedFolder?.isArchive,
+    selectedFolder?.type,
+  ]);
 
   const currentCanCreate = security?.Create;
 
@@ -559,10 +645,20 @@ const SectionHeaderContent = (props) => {
       categoryType === CategoryType.Archive) &&
     !isCurrentRoom;
 
-  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
-  const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
-
-  const titleIcon = getTitleIcon();
+  const logo = getLogoUrl(
+    WhiteLabelLogoType.LightSmall,
+    !theme.isBase,
+    false,
+    "",
+    true,
+  );
+  const burgerLogo = getLogoUrl(
+    WhiteLabelLogoType.LeftMenu,
+    !theme.isBase,
+    false,
+    "",
+    true,
+  );
 
   const titleIconTooltip = getTitleIconTooltip();
 
@@ -602,14 +698,21 @@ const SectionHeaderContent = (props) => {
     return (isRecycleBinFolder && !isEmptyFilesList) || !isRootFolder;
   };
 
+  const onPlusClick = () => {
+    if (!isContactsPage) return onCreateRoom();
+    if (isContactsGroupsPage) return createGroup();
+  };
+
   const isPlusButtonVisible = () => {
-    if (!isContactsPage || isContactsInsideGroupPage) return true;
+    if (!isContactsPage || isContactsGroupsPage) return true;
 
     const lengthList = getContextOptionsPlus()?.length;
-    if (lengthList === 0) return false;
+    if (!lengthList || lengthList === 0) return false;
 
     return true;
   };
+
+  const withMenu = !isRoomsFolder && !isContactsGroupsPage;
 
   return (
     <Consumer key="header">
@@ -617,7 +720,8 @@ const SectionHeaderContent = (props) => {
         <div
           className={classnames(styles.headerContainer, {
             [styles.infoPanelVisible]: isInfoPanelVisible,
-            [styles.isExternalFolder]: location.state?.isExternal,
+            [styles.isExternalFolder]:
+              location.state?.isExternal || selectedFolder?.external,
             [styles.isLifetimeEnabled]: isLifetimeEnabled,
           })}
         >
@@ -674,8 +778,8 @@ const SectionHeaderContent = (props) => {
                   contextMenu: t("Translations:TitleShowFolderActions"),
                   infoPanel: t("Common:InfoPanel"),
                 }}
-                withMenu={!isRoomsFolder}
-                onPlusClick={onCreateRoom}
+                withMenu={withMenu}
+                onPlusClick={onPlusClick}
                 isEmptyPage={isEmptyPage}
                 isRoom={isCurrentRoom || isContactsPage || isProfile}
                 hideInfoPanel={
@@ -715,6 +819,7 @@ const SectionHeaderContent = (props) => {
                   !allowInvitingMembers ? isPlusButtonVisible() : true
                 }
                 showBackButton={isProfile}
+                contextMenuHeader={isProfile ? undefined : contextMenuHeader}
               />
               {showSignInButton ? (
                 <Button
@@ -743,7 +848,7 @@ const SectionHeaderContent = (props) => {
                 id="customFolderInput"
                 className="custom-file-input"
                 webkitdirectory=""
-                mozdirectory="" // eslint-disable-line react/no-unknown-property
+                mozdirectory=""
                 type="file"
                 style={{ display: "none" }}
                 onChange={onFileChange}
@@ -821,6 +926,7 @@ export default inject(
       isRoomsFolder,
       isArchiveFolder,
       isPersonalReadOnly,
+      isSharedWithMeFolderRoot,
     } = treeFoldersStore;
 
     const {
@@ -840,7 +946,6 @@ export default inject(
       createFoldersTree,
       revokeFilesOrder,
       saveIndexOfFiles,
-      getPublicKey,
     } = filesActionsStore;
 
     const { setIsVisible, isVisible, infoPanelRoomSelection } = infoPanelStore;
@@ -937,13 +1042,15 @@ export default inject(
 
     const isArchive = rootFolderType === FolderType.Archive;
     const isTemplate = rootFolderType === FolderType.RoomTemplates;
+    const isRootRooms = rootFolderType === FolderType.Rooms;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
 
-    const showNavigationButton =
-      !security?.CopyLink || isPublicRoom || isArchive
-        ? false
-        : security?.Read && isShared;
+    const showNavigationButton = !!((!security?.CopyLink && !isArchive) ||
+    isPublicRoom ||
+    isSharedWithMeFolderRoot
+      ? false
+      : security?.Read && isShared);
 
     const rootFolderId = navigationPath.length
       ? navigationPath[navigationPath.length - 1]?.id
@@ -973,6 +1080,7 @@ export default inject(
       isRootFolder: isPublicRoom && !folderPath?.length ? true : isRoot,
       title,
       isRoom,
+      roomType,
 
       navigationPath: folderPath,
 
@@ -1059,7 +1167,6 @@ export default inject(
       rootFolderId,
       displayAbout,
       infoPanelRoom: infoPanelRoomSelection,
-      getPublicKey,
       getIndexingArray,
       setCloseEditIndexDialogVisible,
       welcomeFormFillingTipsVisible,
@@ -1069,7 +1176,6 @@ export default inject(
       deleteRefMap,
       showTemplateBadge: isTemplate && !isRoot,
       allowInvitingMembers,
-      contactsTab,
 
       profile: userStore.user,
       profileClicked,
@@ -1081,6 +1187,12 @@ export default inject(
       setChangePasswordVisible,
       setChangeAvatarVisible,
       setChangeNameVisible,
+      getIcon: filesStore.filesSettingsStore.getIcon,
+
+      contactsTab,
+      isRootRooms,
+      isArchive,
+      isSharedWithMeFolderRoot,
     };
   },
 )(

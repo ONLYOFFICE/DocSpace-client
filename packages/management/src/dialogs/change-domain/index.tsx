@@ -66,7 +66,7 @@ export const ChangeDomainDialog = observer(() => {
   const router = useRouter();
   const { spacesStore } = useStores();
   const [domainNameError, setDomainNameError] =
-    React.useState<null | Array<object>>(null);
+    React.useState<null | Array<string>>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const {
     setDomainName,

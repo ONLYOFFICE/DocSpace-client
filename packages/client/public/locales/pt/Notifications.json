@@ -1,10 +1,20 @@
 {
-  "ActionsWithFilesDescription": "Os crachás irão notificá-lo sobre ações tais como carregamentos, criações, e alterações aos ficheiros.",
+  "ActionsWithFilesDescription": "Badges destacarão a atividade dos arquivos — uploads, edições ou compartilhamentos — nas seções {{rooms}}, {{shared}} e {{documents}}.",
+  "AdminSetupRequired": "Configuração de administrador necessária",
   "Badges": "Distintivos",
   "DailyFeed": "Feed diário do {{productName}} ",
   "DailyFeedDescription": "Leia notícias e eventos do seu {{productName}} no resumo diário.",
+  "FileActivityNotify": "Notificações de atividade do arquivo",
+  "GoToSettings": "Vá para as Configurações",
+  "IsNotValid": "Não é válido",
+  "LdapEmailTooltip": "Esta conta de utilizador é carregada a partir do LDAP. O endereço de e-mail do utilizador não foi especificado, e o atual foi gerado automaticamente e não pode ser usado para enviar notificações.",
+  "NotConfigured": "Não configurado",
   "Notifications": "Notificações",
-  "RoomsActivityDescription": "Notificações de hora em hora. Esteja sempre a par de todas as atividades nos seus quartos.",
+  "RoomsActivityDescription": "Receba notificações por e-mail instantâneas sobre novos arquivos/pastas compartilhados e atividades dentro da sua {{sectionName}}.",
+  "RoomUpdateNotify": "Conteúdo compartilhado e atividade de {{sectionName}}",
+  "SettingUpNotifications": "Configurando notificações",
+  "SuccessConnected": "{{serviceName}} foi conectado com sucesso como um canal de notificação. Você agora receberá atualizações lá.",
+  "SuccessDisconnected": "{{serviceName}} foi desconectado com sucesso como canal de notificação. As notificações não serão mais enviadas para lá.",
   "UsefulTips": "Dicas úteis para o {{productName}}",
   "UsefulTipsDescription": "Obtenha guias úteis sobre o {{productName}}"
 }

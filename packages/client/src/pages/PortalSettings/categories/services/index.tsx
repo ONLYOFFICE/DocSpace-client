@@ -31,7 +31,6 @@ import { useLocation, useNavigate } from "react-router";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { BACKUP_SERVICE, TOTAL_SIZE } from "@docspace/shared/constants";
-import { TTranslation } from "@docspace/shared/types";
 import { setServiceState } from "@docspace/shared/api/portal";
 
 import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
@@ -45,41 +44,28 @@ import GracePeriodModal from "./sub-components/AdditionalStorage/GracePeriodModa
 import BackupServiceDialog from "./sub-components/Backup/BackupServiceDialog";
 import ConfirmationDialog from "./sub-components/ConfirmationDialog";
 
-type ServicesProps = {
-  servicesInit: (t: TTranslation) => void;
-  isInitServicesPage: boolean;
-  isVisibleWalletSettings: boolean;
-  isShowStorageTariffDeactivatedModal: boolean;
-  isGracePeriod: boolean;
-  previousStoragePlanSize: number;
-  changeServiceState: (service: string) => void;
-  isCardLinkedToPortal: boolean;
-  setConfirmActionType: (value: string) => void;
-  confirmActionType: string | null;
-  setIsInitServicesPage: (value: boolean) => void;
-  setVisibleWalletSetting: (value: boolean) => void;
-};
-
-let timerId: NodeJS.Timeout | null = null;
-
-const Services: React.FC<ServicesProps> = ({
-  servicesInit,
-  isInitServicesPage,
-  isVisibleWalletSettings,
-  isGracePeriod,
-  previousStoragePlanSize,
-  isShowStorageTariffDeactivatedModal,
-  changeServiceState,
-  isCardLinkedToPortal,
-  setConfirmActionType,
-  confirmActionType,
-  setIsInitServicesPage,
-  setVisibleWalletSetting,
-}) => {
+const Services = (props: InjectedProps) => {
+  const {
+    isInitServicesPage,
+    isVisibleWalletSettings,
+    isGracePeriod,
+    previousStoragePlanSize,
+    isShowStorageTariffDeactivatedModal,
+    changeServiceState,
+    isCardLinkedToPortal,
+    setConfirmActionType,
+    confirmActionType,
+    setIsInitServicesPage,
+    setVisibleWalletSetting,
+    showPortalSettingsLoader,
+    isFreeTariff,
+  } = props;
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
   const [isBackupVisible, setIsBackupVisible] = useState(false);
   const [isConfirmDialogVisible, setIsConfirmDialogVisible] = useState(false);
+  const [isCurrentConfirmDialogVisible, setIsCurrentConfirmDialogVisible] =
+    useState(false);
   const [isStorageCancelattion, setIsStorageCancellation] = useState(false);
   const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
     useState(false);
@@ -87,26 +73,12 @@ const Services: React.FC<ServicesProps> = ({
 
   const [isTopUpBalanceVisible, setIsTopUpBalanceVisible] = useState(false);
 
-  const [showLoader, setShowLoader] = useState(false);
   const shouldShowLoader = !isInitServicesPage || !ready;
   const location = useLocation();
   const navigate = useNavigate();
   const { openDialog } = location.state || {};
 
   const previousDialogRef = useRef<boolean>(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await servicesInit(t);
-      } catch (error) {
-        console.error(error);
-        toastr.error(t("Common:UnexpectedError"));
-      }
-    };
-
-    fetchData();
-  }, [servicesInit]);
 
   useEffect(() => {
     if (!isVisibleWalletSettings || !isInitServicesPage) return;
@@ -127,22 +99,25 @@ const Services: React.FC<ServicesProps> = ({
   }, [openDialog]);
 
   useEffect(() => {
-    timerId = setTimeout(() => {
-      setShowLoader(true);
-    }, 500);
-
     return () => {
-      if (timerId) clearTimeout(timerId);
       setIsInitServicesPage(false);
     };
   }, []);
 
   const confirmationDialogContent = {
     backup: {
-      title: t("Common:Backup"),
-      body: t("Services:EnableBackupConfirm", {
-        productName: t("Common:ProductName"),
-      }),
+      title: t("Common:Confirmation"),
+      body: !isCurrentConfirmDialogVisible
+        ? t("Services:EnableBackupConfirm", {
+            productName: t("Common:ProductName"),
+          })
+        : isFreeTariff
+          ? t("Services:DisableBackupConfirmWithoutQuota", {
+              productName: t("Common:ProductName"),
+            })
+          : t("Services:DisableBackupConfirm", {
+              productName: t("Common:ProductName"),
+            }),
     },
   };
 
@@ -178,6 +153,7 @@ const Services: React.FC<ServicesProps> = ({
 
   const onToggle = async (id: string, currentEnabled: boolean) => {
     setConfirmActionType(id);
+    setIsCurrentConfirmDialogVisible(currentEnabled);
 
     if (id === TOTAL_SIZE) {
       if (currentEnabled) {
@@ -200,7 +176,8 @@ const Services: React.FC<ServicesProps> = ({
       }
     }
 
-    if (!currentEnabled) setIsConfirmDialogVisible(true);
+    if (!currentEnabled || id === BACKUP_SERVICE)
+      setIsConfirmDialogVisible(true);
     else {
       const raw = {
         service: id,
@@ -212,6 +189,7 @@ const Services: React.FC<ServicesProps> = ({
       try {
         await setServiceState(raw);
       } catch (error) {
+        console.error(error);
         toastr.error(t("Common:UnexpectedError"));
         changeServiceState(id);
       }
@@ -240,7 +218,7 @@ const Services: React.FC<ServicesProps> = ({
 
     const raw = {
       service: confirmActionType,
-      enabled: true,
+      enabled: !isCurrentConfirmDialogVisible,
     };
 
     setIsConfirmDialogVisible(false);
@@ -257,6 +235,7 @@ const Services: React.FC<ServicesProps> = ({
 
       toastr.success(t("Services:BackupServiceEnabled"));
     } catch (error) {
+      console.error(error);
       toastr.error(t("Common:UnexpectedError"));
       changeServiceState(confirmActionType);
     }
@@ -270,10 +249,8 @@ const Services: React.FC<ServicesProps> = ({
     }
   };
 
-  return shouldShowLoader ? (
-    showLoader ? (
-      <ServicesLoader />
-    ) : null
+  return shouldShowLoader && showPortalSettingsLoader ? (
+    <ServicesLoader />
   ) : (
     <>
       <ServicesItems onClick={onClick} onToggle={onToggle} />
@@ -327,39 +304,50 @@ const Services: React.FC<ServicesProps> = ({
   );
 };
 
-export const Component = inject(
-  ({ servicesStore, currentTariffStatusStore, paymentStore }: TStore) => {
-    const {
-      servicesInit,
-      isInitServicesPage,
-      isVisibleWalletSettings,
-      setConfirmActionType,
-      confirmActionType,
-      setIsInitServicesPage,
-      setVisibleWalletSetting,
-    } = servicesStore;
-    const { isGracePeriod, previousStoragePlanSize } = currentTariffStatusStore;
-    const {
-      isShowStorageTariffDeactivatedModal,
-      changeServiceState,
-      isCardLinkedToPortal,
-    } = paymentStore;
+const mapStoreToProps = ({
+  servicesStore,
+  currentTariffStatusStore,
+  paymentStore,
+  clientLoadingStore,
+  currentQuotaStore,
+}: TStore) => {
+  const {
+    isInitServicesPage,
+    isVisibleWalletSettings,
+    setConfirmActionType,
+    confirmActionType,
+    setIsInitServicesPage,
+    setVisibleWalletSetting,
+  } = servicesStore;
+  const { isGracePeriod, previousStoragePlanSize } = currentTariffStatusStore;
+  const { isFreeTariff } = currentQuotaStore;
+  const {
+    isShowStorageTariffDeactivatedModal,
+    changeServiceState,
+    isCardLinkedToPortal,
+  } = paymentStore;
 
-    return {
-      servicesInit,
-      isInitServicesPage,
-      isVisibleWalletSettings,
-      isShowStorageTariffDeactivatedModal,
-      isGracePeriod,
-      previousStoragePlanSize,
-      changeServiceState,
-      isCardLinkedToPortal,
-      setConfirmActionType,
-      confirmActionType,
-      setIsInitServicesPage,
-      setVisibleWalletSetting,
-    };
-  },
-)(observer(Services));
+  const { showPortalSettingsLoader } = clientLoadingStore;
 
-export default Component;
+  return {
+    isInitServicesPage,
+    isVisibleWalletSettings,
+    isShowStorageTariffDeactivatedModal,
+    isGracePeriod,
+    previousStoragePlanSize,
+    changeServiceState,
+    isCardLinkedToPortal,
+    setConfirmActionType,
+    confirmActionType,
+    setIsInitServicesPage,
+    setVisibleWalletSetting,
+    showPortalSettingsLoader,
+    isFreeTariff,
+  };
+};
+
+type InjectedProps = ReturnType<typeof mapStoreToProps>;
+
+export const Component = inject(mapStoreToProps)(
+  observer(Services),
+) as unknown as React.ComponentType;

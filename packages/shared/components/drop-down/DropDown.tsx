@@ -207,7 +207,7 @@ const DropDown = ({
       ? {
           toTopCorner: parentRects.top,
           parentHeight: parentRects.height,
-          containerHeight: parentRects.top,
+          containerHeight: container.height,
         }
       : {
           toTopCorner: rects.top,
@@ -245,14 +245,7 @@ const DropDown = ({
       width: dropDownRef.current ? dropDownRef.current.offsetWidth : 240,
       isDropdownReady: true,
     }));
-  }, [
-    fixedDirection,
-    isRTL,
-    forwardedRef,
-    state.directionX,
-    state.directionY,
-    state.manualY,
-  ]);
+  }, [fixedDirection, isRTL, forwardedRef, directionX, directionY, manualY]);
 
   const renderDropDown = () => {
     const directionXStylesDisabled =
@@ -346,7 +339,7 @@ const DropDown = ({
     );
   };
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const resizeListener = () => {
       if (isDefaultMode) {
         checkPositionPortal();

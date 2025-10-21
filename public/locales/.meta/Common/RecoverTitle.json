@@ -3,7 +3,7 @@
   "content": "Access recovery",
   "content_en_sha1_hash": "27cdeed1252a2d59d9bf1278b5eb5a19975f0b4a",
   "created_at": "2025-05-19T21:30:47.772Z",
-  "updated_at": "2025-08-21T11:22:39.959Z",
+  "updated_at": "2025-10-16T07:29:36.082Z",
   "comment": {
     "text": "The \"RecoverTitle\" translation key is used to display the text \"Access recovery\" in a modal dialog that allows users to recover access. This key appears in the header of a modal dialog and provides context for the user's interaction.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog.tsx",
-      "line_number": 129,
-      "context": "onClose={onRecoverModalClose}\n displayType={ModalDialogType.modal}\n aria-labelledby=\"recover-access-modal-title\"\n dataTestId=\"recover_access_modal\"\n >\n <ModalDialog.Header>{t(\"Common:RecoverTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.body}>\n <Text\n key=\"text-body\"\n className={styles.textBody}",
+      "line_number": 249,
+      "context": "onClose={onRecoverModalClose}\n displayType={modalDisplayType}\n aria-labelledby=\"recover-access-modal-title\"\n dataTestId=\"recover_access_modal\"\n >\n <ModalDialog.Header>{t(\"Common:RecoverTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.body}>\n <Text\n key=\"text-body\"\n className={styles.textBody}",
       "module": "/packages/shared"
     }
   ],

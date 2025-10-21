@@ -29,17 +29,21 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { TRoom } from "@docspace/shared/api/rooms/types";
+import { isMobile } from "@docspace/shared/utils";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import {
   ContextMenu,
   ContextMenuRefType,
 } from "@docspace/shared/components/context-menu";
+import { HeaderType } from "@docspace/shared/components/context-menu/ContextMenu.types";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "@docspace/shared/components/context-menu-button";
 
 import ContextOptionsStore from "SRC_DIR/store/ContextOptionsStore";
+import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
 import styles from "./itemTitle.module.scss";
 
@@ -49,12 +53,15 @@ type RoomsContextBtnProps = {
   selection: TSelection;
 
   getItemContextOptionsActions?: ContextOptionsStore["getFilesContextOptions"];
+
+  getIcon?: FilesSettingsStore["getIcon"];
 };
 
 const RoomsContextBtn = ({
   selection,
 
   getItemContextOptionsActions,
+  getIcon,
 }: RoomsContextBtnProps) => {
   const { t } = useTranslation([
     "Files",
@@ -77,6 +84,50 @@ const RoomsContextBtn = ({
 
   const data = useMemo(() => getData(), [selection, t]);
 
+  const contextMenuHeader = useMemo((): HeaderType | undefined => {
+    if (!selection) return undefined;
+
+    const isRoom = "isRoom" in selection && selection.isRoom;
+    const badgeUrl = isRoom ? getRoomBadgeUrl(selection) : null;
+
+    const isFile = "isFile" in selection && selection.isFile;
+
+    const iconUrl = getIcon
+      ? getIcon(
+          32,
+          isFile ? selection.fileExst : undefined,
+          "providerKey" in selection ? selection.providerKey : undefined,
+          isFile ? selection.contentLength : undefined,
+          undefined,
+          "isArchive" in selection ? selection.isArchive : undefined,
+          "type" in selection ? selection.type : undefined,
+        )
+      : "";
+
+    return {
+      title: selection.title || "",
+      icon:
+        "icon" in selection ? (selection.icon as string) || iconUrl || "" : "",
+      original: "logo" in selection ? selection.logo?.original : "",
+      large: "logo" in selection ? selection.logo?.large : "",
+      medium: "logo" in selection ? selection.logo?.medium : "",
+      small: "logo" in selection ? selection.logo?.small : "",
+      color: "logo" in selection ? selection.logo?.color : "",
+      cover:
+        "logo" in selection && selection.logo?.cover
+          ? typeof selection.logo.cover === "string"
+            ? { data: selection.logo.cover, id: "" }
+            : selection.logo.cover
+          : undefined,
+      badgeUrl: badgeUrl ?? undefined,
+    };
+  }, [selection]);
+
+  const onHideContextMenu = () => {
+    // Callback is called when the context menu is closed.
+    // Required for proper cleanup in ContextMenu.
+  };
+
   return (
     <div className={styles.itemContextOptions}>
       <ContextMenuButton
@@ -98,11 +149,19 @@ const RoomsContextBtn = ({
         model={data}
         withBackdrop
         baseZIndex={310}
+        headerOnlyMobile
+        ignoreChangeView={isMobile()}
+        header={contextMenuHeader}
+        badgeUrl={contextMenuHeader?.badgeUrl}
+        onHide={onHideContextMenu}
       />
     </div>
   );
 };
 
-export default inject(({ contextOptionsStore }: TStore) => ({
-  getItemContextOptionsActions: contextOptionsStore.getFilesContextOptions,
-}))(observer(RoomsContextBtn));
+export default inject(
+  ({ contextOptionsStore, filesSettingsStore }: TStore) => ({
+    getItemContextOptionsActions: contextOptionsStore.getFilesContextOptions,
+    getIcon: filesSettingsStore.getIcon,
+  }),
+)(observer(RoomsContextBtn));

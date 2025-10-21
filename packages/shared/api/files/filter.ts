@@ -30,9 +30,14 @@
 import queryString from "query-string";
 
 import { ApplyFilterOption, FilterLocation, FilterType } from "../../enums";
-import { getObjectByLocation, toUrlParams } from "../../utils/common";
-import { TViewAs, TSortOrder, TSortBy } from "../../types";
+import {
+  getObjectByLocation,
+  toUrlParams,
+  getCategoryType,
+} from "../../utils/common";
+import type { TViewAs, TSortOrder, TSortBy, ValueOf } from "../../types";
 import { validateAndFixObject } from "../../utils/filterValidator";
+import { CategoryType } from "../../constants";
 
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 25;
@@ -75,6 +80,7 @@ const KEY = "key";
 const DATE = "date";
 const TAGS = "tags";
 const LOCATION = "location";
+const AREA = "area";
 
 // TODO: add next params
 // subjectGroup bool
@@ -104,6 +110,7 @@ const getOtherSearchParams = () => {
     DATE,
     TAGS,
     LOCATION,
+    AREA,
   ];
 
   filterSearchParams.forEach((param) => {
@@ -179,21 +186,27 @@ class FilesFilter {
     options: {
       pageCount?: number;
       total?: number;
-      isRecentFolder?: boolean;
+      categoryType?: ValueOf<typeof CategoryType>;
     } = {},
   ) {
     const {
       pageCount = DEFAULT_PAGE_COUNT,
       total = DEFAULT_TOTAL,
-      isRecentFolder = false,
+      categoryType = CategoryType.Personal,
     } = options;
 
     const filter = new FilesFilter(DEFAULT_PAGE, pageCount, total);
 
-    if (isRecentFolder) {
-      filter.sortBy = null;
-      filter.sortOrder = null;
-      filter.folder = "@recent";
+    switch (categoryType) {
+      case CategoryType.Recent:
+        filter.sortBy = null;
+        filter.sortOrder = null;
+        filter.folder = "@recent";
+        break;
+      case CategoryType.SharedWithMe:
+        filter.folder = "@share";
+        break;
+      default:
     }
 
     return filter;
@@ -202,11 +215,11 @@ class FilesFilter {
   static getFilter(location: Location): FilesFilter {
     if (!location) return this.getDefault();
 
-    const isRecentFolder = location.pathname?.startsWith("/recent");
+    const categoryType = getCategoryType(location);
 
     const urlFilter = getObjectByLocation(location);
 
-    const defaultFilter = FilesFilter.getDefault({ isRecentFolder });
+    const defaultFilter = FilesFilter.getDefault({ categoryType });
 
     if (!urlFilter) return defaultFilter;
 

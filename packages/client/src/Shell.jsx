@@ -64,6 +64,7 @@ import useCreateFileError from "./Hooks/useCreateFileError";
 
 import ReactSmartBanner from "./components/SmartBanner";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Shell = ({ page = "home", ...rest }) => {
   const {
     isLoaded,
@@ -135,21 +136,21 @@ const Shell = ({ page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
-    SocketHelper.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "restore",
     });
 
     if (standalone) {
-      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+      SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
         roomParts: "restore",
       });
     }
 
-    SocketHelper.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "quota",
     });
 
-    SocketHelper.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "QUOTA",
       individual: true,
     });
@@ -157,18 +158,18 @@ const Shell = ({ page = "home", ...rest }) => {
 
   useEffect(() => {
     if (standalone) {
-      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+      SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
         roomParts: "restore",
       });
 
-      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+      SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
         roomParts: "storage-encryption",
       });
     }
   }, [standalone]);
 
   useEffect(() => {
-    SocketHelper.emit(SocketCommands.Subscribe, { roomParts: userId });
+    SocketHelper?.emit(SocketCommands.Subscribe, { roomParts: userId });
   }, [userId]);
 
   useEffect(() => {
@@ -183,12 +184,12 @@ const Shell = ({ page = "home", ...rest }) => {
   }, [userId]);
 
   useEffect(() => {
-    SocketHelper.on(SocketEvents.RestoreBackup, () => {
+    SocketHelper?.on(SocketEvents.RestoreBackup, () => {
       setPreparationPortalDialogVisible(true);
     });
 
     return () => {
-      SocketHelper.off(SocketEvents.RestoreBackup, () => {
+      SocketHelper?.off(SocketEvents.RestoreBackup, () => {
         setPreparationPortalDialogVisible(false);
       });
     };
@@ -199,10 +200,10 @@ const Shell = ({ page = "home", ...rest }) => {
       window.location.href = "/encryption-portal";
     };
 
-    SocketHelper.on(SocketEvents.StorageEncryption, storageEncryptionHandler);
+    SocketHelper?.on(SocketEvents.StorageEncryption, storageEncryptionHandler);
 
     return () => {
-      SocketHelper.off(
+      SocketHelper?.off(
         SocketEvents.StorageEncryption,
         storageEncryptionHandler,
       );
@@ -210,25 +211,35 @@ const Shell = ({ page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
-    const callback = (loginEventId) => {
-      console.log(`[WS] "logout-session"`, loginEventId, userLoginEventId);
+    const callback = ({ loginEventId, redirectUrl }) => {
+      console.log(
+        `[WS] "logout-session"`,
+        loginEventId,
+        userLoginEventId,
+        redirectUrl,
+      );
 
-      if (userLoginEventId === loginEventId || loginEventId === 0) {
-        sessionStorage.setItem("referenceUrl", window.location.href);
-        sessionStorage.setItem("loggedOutUserId", userId);
+      if (userLoginEventId !== loginEventId && loginEventId !== 0) return;
 
-        window.location.replace(
-          combineUrl(window.ClientConfig?.proxy?.url, "/login"),
-        );
-      }
+      const { pathname, search, origin } = window.location;
+      const redirectDomain = redirectUrl || origin;
+      const loginUrl = redirectUrl || window.ClientConfig?.proxy?.url;
+
+      sessionStorage.setItem(
+        "referenceUrl",
+        `${redirectDomain}${pathname}${search}`,
+      );
+      sessionStorage.setItem("loggedOutUserId", userId);
+
+      window.location.replace(combineUrl(loginUrl, "/login"));
     };
 
-    SocketHelper.on(SocketEvents.LogoutSession, callback);
+    SocketHelper?.on(SocketEvents.LogoutSession, callback);
 
     return () => {
-      SocketHelper.off(SocketEvents.LogoutSession, callback);
+      SocketHelper?.off(SocketEvents.LogoutSession, callback);
     };
-  }, [userLoginEventId]);
+  }, [userLoginEventId, userId]);
 
   let snackTimer = null;
   let fbInterval = null;
@@ -438,10 +449,6 @@ const Shell = ({ page = "home", ...rest }) => {
       });
     }
   }, []);
-
-  useEffect(() => {
-    console.log("Current page ", page);
-  }, [page]);
 
   useEffect(() => {
     if (userTheme) setTheme(userTheme);

@@ -3,7 +3,7 @@
   "content": "LDAP settings",
   "content_en_sha1_hash": "47aabd81090aebfdaf6d1d37da2399019820296f",
   "created_at": "2025-05-19T21:30:54.273Z",
-  "updated_at": "2025-08-04T07:30:01.280Z",
+  "updated_at": "2025-10-17T14:43:53.476Z",
   "comment": {
     "text": "The translation key \"Ldap:LdapSettings\" is used to display the title of LDAP settings in the portal settings page. It appears as the title of a category and is also set as the document title when loading the LDAP integration.",
     "is_auto": true,
@@ -11,15 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 223,
-      "context": "case \"Common:PaymentsTitle\":\n return t(\"Common:PaymentsTitle\");\n case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
-      "line_number": 77,
-      "context": "};\n \n useEffect(() => {\n isLdapAvailable && load(t);\n onCheckView();\n setDocumentTitle(t(\"Ldap:LdapSettings\"));\n window.addEventListener(\"resize\", onCheckView);\n \n return () => window.removeEventListener(\"resize\", onCheckView);\n }, [isLdapAvailable, load, t]);",
+      "line_number": 76,
+      "context": "navigate(`/portal-settings/security/access-portal/invitation-settings`);\n };\n \n useEffect(() => {\n onCheckView();\n if (ready) setDocumentTitle(t(\"Ldap:LdapSettings\"));\n window.addEventListener(\"resize\", onCheckView);\n \n return () => window.removeEventListener(\"resize\", onCheckView);\n }, [isLdapAvailable, load, t, ready]);",
       "module": "/packages/client"
     },
     {
@@ -31,7 +25,13 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/SettingsContainer.js",
       "line_number": 74,
-      "context": "}\n };\n \n useEffect(() => {\n isLdapAvailable && isMobileView && !isLoaded && load();\n isMobileView && setDocumentTitle(t(\"Ldap:LdapSettings\"));\n onCheckView();\n window.addEventListener(\"resize\", onCheckView);\n \n return () => window.removeEventListener(\"resize\", onCheckView);\n }, []);",
+      "context": "}\n };\n \n useEffect(() => {\n isLdapAvailable && isMobileView && !isLoaded && load(t);\n isMobileView && setDocumentTitle(t(\"Ldap:LdapSettings\"));\n onCheckView();\n window.addEventListener(\"resize\", onCheckView);\n \n return () => window.removeEventListener(\"resize\", onCheckView);\n }, []);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
+      "line_number": 225,
+      "context": "case \"Common:PaymentsTitle\":\n return t(\"Common:PaymentsTitle\");\n case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":",
       "module": "/packages/client"
     },
     {

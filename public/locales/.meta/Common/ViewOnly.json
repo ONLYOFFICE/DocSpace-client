@@ -3,7 +3,7 @@
   "content": "view-only",
   "content_en_sha1_hash": "f3ffae92799fc633c5ed01ec695997009a2a4938",
   "created_at": "2025-05-19T21:30:49.530Z",
-  "updated_at": "2025-08-26T11:15:14.220Z",
+  "updated_at": "2025-10-13T20:11:15.771Z",
   "comment": {
     "text": "This translation key is used to display a label for users who have \"view-only\" access, indicating they can only view content without making changes. It appears in the PublicRoomPage and is likely associated with a button or toggle that controls this access level.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
-      "line_number": 94,
+      "line_number": 95,
       "context": "});\n \n const getAccessTranslation = () => {\n switch (access) {\n case ShareAccessRights.ReadOnly:\n return t(\"Common:ViewOnly\");\n case ShareAccessRights.Comment:\n return t(\"Common:Commenting\");\n case ShareAccessRights.Review:\n return t(\"Common:Reviewing\");\n case ShareAccessRights.Editing:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
-      "line_number": 94,
+      "line_number": 95,
       "context": "});\n \n const getAccessTranslation = () => {\n switch (access) {\n case ShareAccessRights.ReadOnly:\n return t(\"Common:ViewOnly\");\n case ShareAccessRights.Comment:\n return t(\"Common:Commenting\");\n case ShareAccessRights.Review:\n return t(\"Common:Reviewing\");\n case ShareAccessRights.Editing:",
       "module": "/packages/client"
     }
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"yalnız baxış üçün\" is a literal translation of 'only for viewing'. While understandable, it's not the most natural or idiomatic way to express 'view-only' in Azerbaijani. A more common and natural phrasing would be something like \"yalnız oxumaq üçün\" or \"yalnız göstərmə üçün\".",
-          "suggestion": "Consider alternatives like \"yalnız oxumaq üçün\" or \"yalnız göstərmə üçün\"."
+          "description": "While \"yalnız baxış üçün\" is a literal translation of 'view-only', it's not the most natural or idiomatic way to express this concept in Azerbaijani. It sounds a bit clunky.",
+          "suggestion": "Consider using \"yalnız oxumaq üçün\" or \"təkcə baxış üçün\" for a more fluent and natural translation.  \"Yalnız oxumaq üçün\" is closer to 'read-only' but conveys a similar restriction. 'Təkcə baxış üçün' is a more concise and common phrasing."
         }
       ],
       "approved_at": null
@@ -57,13 +57,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'pouze pro zobrazení' is understandable, a more common and idiomatic translation for 'view-only' in a technical context (like a setting or permission) would be 'pouze pro čtení'.",
-          "suggestion": "pouze pro čtení"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -72,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Nur-Ansicht\" while understandable, isn't the most natural or idiomatic translation of \"view-only\". A more common and accurate translation would be \"Nur zum Anzeigen\" or \"Ansicht ohne Bearbeitung\". \"Nur-Ansicht\" sounds a bit literal and less fluent.",
-          "suggestion": "Nur zum Anzeigen"
+          "description": "While 'Nur-Ansicht' is understandable, it's not the most natural or idiomatic translation for 'view-only'. It's a literal translation that might sound slightly awkward.",
+          "suggestion": "A more natural translation might be 'Nur zum Lesen' or 'Ansicht ohne Bearbeitung'."
         }
       ],
       "approved_at": null
@@ -87,7 +81,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"solo para ver\" is understandable, a more natural and idiomatic translation of \"view-only\" in Spanish would be \"solo lectura\". \"Solo para ver\" implies a broader scope than just viewing permissions.",
+          "suggestion": "solo lectura"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'katselunäkymä' is technically understandable, it's a rather verbose and uncommon translation for 'view-only'. It literally means 'viewing perspective' or 'viewing view'. A more common and idiomatic translation would be 'vain luku' or 'vain katselu'.",
-          "suggestion": "Consider using 'vain luku' or 'vain katselu'."
+          "description": "The Finnish translation 'katselunäkymä' while technically meaning 'viewing view' or 'viewing perspective', is not a standard or easily understood equivalent of 'view-only'. It's overly literal and verbose.",
+          "suggestion": "Consider alternatives like 'vain luku' (read-only), 'luku vain' (read only), or 'nähtäväksi' (viewable, but implies not editable)."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"միայն դիտելու համար\" (miayn ditel'u hamar) literally translates to 'only for viewing'. While understandable, a more accurate and idiomatic translation for 'view-only' might be something like \"դիտման համար միայն\" (ditman hamar miayn) or a more concise option, depending on the context and desired level of formality.",
-          "suggestion": "Consider \"դիտման համար միայն\" (ditman hamar miayn) or a context-specific alternative for a more precise translation."
+          "description": "The Armenian translation 'միայն դիտելու համար' literally translates to 'only for viewing'. While conveying a similar meaning to 'view-only', it's a bit verbose and not the most natural phrasing in Armenian for a technical context. A more concise and idiomatic translation would be preferable.",
+          "suggestion": "Consider alternatives like 'դիտելու միայն' or 'միայն ընթերցող' (read-only) depending on the specific application."
         }
       ],
       "approved_at": null
@@ -129,13 +129,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"閲覧のみ\" is a literal translation, it might not be the most natural or idiomatic translation for \"view-only\" in a technical context. It can sound a bit stiff. A more natural translation might depend on the specific application (e.g., '只読' (shika yomimasen - read-only) in some software contexts).",
-          "suggestion": "Consider '只読' (shika yomimasen) or a similar phrase depending on the context. If this is meant to denote a read-only permission, consider '閲覧権限のみ' (browsing permission only)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -150,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຊົມສະບຽງເທົ່ານັ້ນ\" does not accurately convey the meaning of \"view-only\". It translates to something like 'just watching the feast/food'.  'View-only' implies access but not modification, which is not reflected in this translation.",
-          "suggestion": "A more accurate translation could be something like \"ຊົມຢ່າງດຽວ\" (chom yang diao), meaning 'view only', or \"ບໍ່ສາມາດແກ້ໄຂໄດ້\" (bok samat kae khai dai), meaning 'cannot be edited', depending on the intended nuance."
+          "description": "The Lao translation \"ຊົມສະບຽງເທົ່ານັ້ນ\" literally translates to \"watch food only\" which doesn't accurately convey the meaning of \"view-only\". It suggests viewing food content, not a read-only access.",
+          "suggestion": "ອ່ານຢ່າງດຽວເທົ່າໂນ້ນ (aan yaang diao thau non) - meaning \"read-only\" or ອ່ານບໍ່ໄດ້ເທົ່ານັ້ນ (aan bor dai thau non) - meaning 'cannot read'."
         }
       ],
       "approved_at": null
@@ -159,13 +153,25 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"tikai skatīšana\" is understandable, it's a somewhat literal and less idiomatic translation of \"view-only.\" A more natural and common Latvian equivalent might be \"lasīšana tikai\" or \"skatīšanās tikai\" depending on the context (reading-only vs. viewing-only).",
+          "suggestion": "Consider \"lasīšana tikai\" or \"skatīšanās tikai\" for a more natural translation."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'alleen bekijken' is understandable, a more accurate and commonly used translation of 'view-only' in a technical context would be 'weergegeven alleen' or 'uitsluitend bekijken'. 'alleen bekijken' is a bit too literal and might not convey the intended meaning of read-only access.",
+          "suggestion": "weergegeven alleen"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -204,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ප්‍රදර්ශන පමණයි\" (pradashana pamānai) while meaning 'display only' or 'viewing only', is not the most accurate or natural translation of 'view-only'. It lacks the nuance of indicating that editing or modification are not permitted.",
-          "suggestion": "A more accurate translation would be \"කෙවෙත් බලන්නයි\" (keweth balannāi) which means 'only to view' or \"බලන්න පමණයි\" (balannā pamānai) which translates to 'only for viewing'."
+          "description": "The Sinhala translation \"ප්‍රදර්ශන පමණයි\" translates to \"exhibition only\" or \"display only,\" which is not the intended meaning of \"view-only.\" \"View-only\" implies a read-only access, where the user can see the content but cannot modify it.",
+          "suggestion": "A more accurate translation would be something along the lines of \"చదవడానికి మాత్రమే\" (Chadawak dannathama), which means 'read-only' or \"සමාන බලන්න පමණයි\" (Samana balanna pemanai) which translates closer to 'only view'. Alternatively, something like \"ප්‍රදර්ශන භාවිතය පමණයි\" (Pradashana vaperaya pemanai) could be considered, meaning 'only for viewing/use'."
         }
       ],
       "approved_at": null
@@ -213,13 +219,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"len na zobrazenie\" is understandable, a more common and accurate translation of \"view-only\" in a technical context would be \"iba na prezeranie\" or \"pouze pro zobrazeni\". \"Len na zobrazenie\" leans more towards 'just for viewing' which has a slightly different connotation.",
-          "suggestion": "iba na prezeranie"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'само за преглед' is understandable, it's a more literal translation of 'only for review'. A more natural and idiomatic translation of 'view-only' in a technical context would be something like 'читање само' (read-only) or 'само за читање' (only for reading).",
-          "suggestion": "само за читање"
+          "description": "While \"само за преглед\" is understandable, it's a slightly literal translation of 'view-only'. A more natural and commonly used Serbian (Cyrillic) equivalent would be 'читање само' or 'преглед само'.",
+          "suggestion": "читање само"
         }
       ],
       "approved_at": null
@@ -246,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'samo za pregled' is understandable, it's not the most idiomatic translation of 'view-only'. It literally means 'only for viewing'. A more natural translation would convey the restriction of read-only access.",
-          "suggestion": "Consider 'videti samo' or 'za informaciju' depending on the context, as more natural alternatives.  Alternatively, 'videti bez mogućnosti izmena' (view without possibility of edits) is very explicit."
+          "description": "While \"samo za pregled\" is understandable, it's a somewhat literal and not the most natural translation of \"view-only.\" A more idiomatic translation would convey the meaning more effectively.",
+          "suggestion": "pregled bez pristupa"
         }
       ],
       "approved_at": null
@@ -258,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"salt görüntüleme\" does not accurately convey the meaning of \"view-only\". \"Salt\" typically means 'salt' in Turkish and doesn't fit the context. \"View-only\" implies read-only access or a non-editable state.",
-          "suggestion": "A more accurate translation would be something like \"sadece görüntüleme\", \"yalnızca görüntüleme\", \"okuma yetkili\", or \"değiştirilemez\" depending on the desired nuance."
+          "description": "The Turkish translation \"salt görüntüleme\" does not accurately convey the meaning of \"view-only.\" \"Salt\" doesn't align with the concept of read-only access. It's likely a mistranslation or a misunderstanding of the intended meaning.",
+          "suggestion": "A more appropriate translation would depend on the specific context, but possible suggestions include: \"sadece görüntüleme\" (view only), \"yalnızca görüntüleme\" (only viewing), \"okuma-yalnızca\" (read-only), or \"sadece okuma\" (read only)."
         }
       ],
       "approved_at": null
@@ -280,6 +280,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"shikoni-vetëm\" is a literal translation, it doesn't fully capture the nuance of \"view-only.\" A more natural and idiomatic Albanian translation would convey the meaning of access only, without the ability to modify or interact.",
+          "suggestion": "Consider alternatives like \"vetëm shikim\", \"shikim vetëm\", or \"shikim pa modifikim\" depending on the exact context."
+        }
+      ],
       "approved_at": null
     }
   }

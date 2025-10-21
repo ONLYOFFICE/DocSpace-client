@@ -29,6 +29,7 @@ import classNames from "classnames";
 
 import { useAnimation, AnimationEvents } from "../../hooks/useAnimation";
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
+import { useEventListener } from "../../hooks/useEventListener";
 
 import { Scrollbar as ScrollbarType } from "../scrollbar/custom-scrollbar";
 import { Scrollbar } from "../scrollbar";
@@ -46,7 +47,6 @@ const PrimaryTabs = (props: TabsProps) => {
     stickyTop,
     onSelect,
     withoutStickyIntend = false,
-    layoutId,
     id,
     withAnimation,
     ...rest
@@ -78,6 +78,10 @@ const PrimaryTabs = (props: TabsProps) => {
     endWidth,
     triggerAnimation,
   } = useAnimation(true); // Always active for tabs
+
+  useEventListener(AnimationEvents.Forced_Animation, () => {
+    triggerAnimation();
+  });
 
   const scrollToTab = useCallback(
     (index: number): void => {

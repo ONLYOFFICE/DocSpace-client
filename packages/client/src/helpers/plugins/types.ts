@@ -135,7 +135,7 @@ export interface IMessage {
   settings?: string;
 }
 
-type TButtonGroup = {
+export type TButtonGroup = {
   component: PluginComponents.button;
   props: ButtonProps;
   contextName?: string;
@@ -158,12 +158,23 @@ export interface IContextMenuItem {
   fileType?: PluginFileType[];
   usersTypes?: PluginUsersType[];
   devices?: PluginDevices[];
-  security?: (
-    | keyof TRoomSecurity
+  itemSecurity?: (
     | keyof TFileSecurity
+    | keyof TRoomSecurity
     | keyof TFolderSecurity
   )[];
+  security?: (keyof TRoomSecurity | keyof TFolderSecurity)[];
   pluginName?: string;
+  items?: IContextMenuItem[];
+}
+
+export interface IContextMenuItemValidation {
+  type?: PluginFileType;
+  fileExst?: string;
+  userRole?: PluginUsersType;
+  device?: PluginDevices;
+  security?: TRoomSecurity | TFolderSecurity;
+  itemSecurity?: TFileSecurity | TRoomSecurity | TFolderSecurity;
 }
 
 export interface IEventListenerItem {
@@ -185,6 +196,8 @@ export interface IFileItem {
   fileTileIcon?: string;
   fileIcon?: string;
   fileIconTile?: string;
+  security?: (keyof TRoomSecurity | keyof TFolderSecurity)[];
+  fileSecurity?: (keyof TFileSecurity)[];
   pluginName?: string;
 }
 
@@ -235,7 +248,9 @@ export interface IframeWindow extends Window {
 export type TPlugin = {
   name: string;
   version: string;
+  minDocSpaceVersion?: string;
   description: string;
+  compatible: boolean;
   license: string;
   author: string;
   homePage: string;

@@ -37,19 +37,20 @@ import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import AccountsFilter from "@docspace/shared/api/people/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
-import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { MEDIA_VIEW_URL, CategoryType } from "@docspace/shared/constants";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
   FILTER_DOCUMENTS,
   FILTER_RECENT,
+  FILTER_SHARE,
   FILTER_FAVORITES,
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
 
 import Banner from "./Banner";
 import Items from "./Items";
+import AccountsItems from "./AccountsItems";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -79,11 +80,13 @@ const ArticleBodyContent = (props) => {
     campaigns,
     userId,
     isFrame,
-    setContactsTab,
 
     displayBanners,
     startDrag,
     setDropTargetPreview,
+    sharedWithMeFolderId,
+    isRoomAdmin,
+    isAccountsArticle,
   } = props;
 
   const location = useLocation();
@@ -108,7 +111,9 @@ const ArticleBodyContent = (props) => {
 
       switch (folderId) {
         case recentFolderId: {
-          const recentFilter = FilesFilter.getDefault({ isRecentFolder: true });
+          const recentFilter = FilesFilter.getDefault({
+            categoryType: CategoryType.Recent,
+          });
           recentFilter.folder = folderId;
 
           if (userId) {
@@ -143,6 +148,27 @@ const ArticleBodyContent = (props) => {
 
           break;
         }
+        case sharedWithMeFolderId: {
+          const shareFilter = FilesFilter.getDefault({
+            categoryType: CategoryType.SharedWithMe,
+          });
+
+          shareFilter.folder = folderId;
+
+          if (userId) {
+            const filterObj = getUserFilter(`${FILTER_SHARE}=${userId}`);
+
+            if (filterObj?.sortBy) shareFilter.sortBy = filterObj.sortBy;
+            if (filterObj?.sortOrder)
+              shareFilter.sortOrder = filterObj.sortOrder;
+          }
+
+          params = shareFilter.toUrlParams();
+          path = getCategoryUrl(CategoryType.SharedWithMe);
+
+          break;
+        }
+
         case favoritesFolderId: {
           const favFilter = FilesFilter.getDefault();
           favFilter.folder = folderId;
@@ -195,6 +221,25 @@ const ArticleBodyContent = (props) => {
 
           break;
         }
+        case "groups": {
+          const accountsFilter = AccountsFilter.getDefault();
+          params = accountsFilter.toUrlParams();
+          path = getCategoryUrl(CategoryType.Groups);
+
+          break;
+        }
+        case "guests": {
+          const accountsFilter = AccountsFilter.getDefault();
+          if (!isRoomAdmin) {
+            accountsFilter.area = "guests";
+            accountsFilter.inviterId = userId;
+          }
+
+          params = accountsFilter.toUrlParams();
+          path = getCategoryUrl(CategoryType.Guests);
+
+          break;
+        }
         default: {
           const newRoomsFilter = RoomsFilter.getDefault(
             userId,
@@ -208,6 +253,7 @@ const ArticleBodyContent = (props) => {
         }
       }
 
+      if (params.at(-1) === "&") params = params.slice(0, -1);
       path += `?${params}&date=${hashDate}`;
 
       return { path, state };
@@ -222,12 +268,17 @@ const ArticleBodyContent = (props) => {
       hashDate,
       roomsFilter,
       recentFolderId,
+      sharedWithMeFolderId,
     ],
   );
 
   const onClick = React.useCallback(
     (e, folderId) => {
       if (e?.ctrlKey || e?.metaKey || e?.shiftKey || e?.button) return;
+
+      if (folderId === "aiAgents") {
+        return;
+      }
 
       const isAccountsClick = folderId === "accounts";
 
@@ -253,7 +304,6 @@ const ArticleBodyContent = (props) => {
       recycleBinFolderId,
       activeItemId,
       selectedFolderId,
-      setContactsTab,
       setSelection,
     ],
   );
@@ -295,7 +345,19 @@ const ArticleBodyContent = (props) => {
     )
       return setActiveItemId(favoritesFolderId);
 
-    if (location.pathname.includes("/accounts") && activeItemId !== "accounts")
+    if (
+      location.pathname.includes("/shared-with-me") &&
+      activeItemId !== sharedWithMeFolderId
+    )
+      return setActiveItemId(sharedWithMeFolderId);
+
+    if (location.pathname.includes("/groups") && activeItemId !== "groups")
+      return setActiveItemId("groups");
+
+    if (location.pathname.includes("/guests") && activeItemId !== "guests")
+      return setActiveItemId("guests");
+
+    if (location.pathname.includes("/people") && activeItemId !== "accounts")
       return setActiveItemId("accounts");
 
     if (location.pathname.includes("/settings") && activeItemId !== "settings")
@@ -349,20 +411,28 @@ const ArticleBodyContent = (props) => {
 
   return (
     <>
-      <Items
-        onClick={onClick}
-        getLinkData={getLinkData}
-        showText={showText}
-        onHide={toggleArticleOpen}
-        activeItemId={activeItemId}
-      />
-
+      {isAccountsArticle ? (
+        <AccountsItems
+          onClick={onClick}
+          getLinkData={getLinkData}
+          activeItemId={activeItemId}
+        />
+      ) : (
+        <Items
+          onClick={onClick}
+          getLinkData={getLinkData}
+          showText={showText}
+          onHide={toggleArticleOpen}
+          activeItemId={activeItemId}
+        />
+      )}
       {!isDesktopClient &&
       showText &&
       !firstLoad &&
       campaigns.length > 0 &&
       !isFrame &&
-      displayBanners ? (
+      displayBanners &&
+      !isAccountsArticle ? (
         <Banner />
       ) : null}
     </>
@@ -378,7 +448,6 @@ export default inject(
     clientLoadingStore,
     userStore,
     campaignsStore,
-    peopleStore,
     uploadDataStore,
   }) => {
     const { clearFiles, setSelection, roomsFilter, startDrag } = filesStore;
@@ -403,13 +472,11 @@ export default inject(
       myFolderId,
       recycleBinFolderId,
       recentFolderId,
+      sharedWithMeFolderId,
       favoritesFolderId,
     } = treeFoldersStore;
-
     const selectedFolderId = selectedFolderStore.id;
-
     const rootFolderId = selectedFolderStore.rootFolderId;
-
     const {
       showText,
 
@@ -432,6 +499,7 @@ export default inject(
       showText,
       showArticleLoader,
       isVisitor: userStore.user.isVisitor,
+      isRoomAdmin: userStore.user.isRoomAdmin,
       userId: userStore.user?.id,
 
       firstLoad,
@@ -446,6 +514,7 @@ export default inject(
       recycleBinFolderId,
       rootFolderId,
       recentFolderId,
+      sharedWithMeFolderId,
 
       setIsLoading,
 
@@ -457,7 +526,6 @@ export default inject(
       currentDeviceType,
       campaigns,
       isFrame,
-      setContactsTab: peopleStore.usersStore.setContactsTab,
 
       displayBanners,
       startDrag,

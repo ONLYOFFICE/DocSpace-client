@@ -59,8 +59,20 @@ const ArticleHeader = ({
     navigate("/");
   };
 
-  const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !isBase);
-  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !isBase);
+  const burgerLogo = getLogoUrl(
+    WhiteLabelLogoType.LeftMenu,
+    !isBase,
+    false,
+    "",
+    true,
+  );
+  const logo = getLogoUrl(
+    WhiteLabelLogoType.LightSmall,
+    !isBase,
+    false,
+    "",
+    true,
+  );
 
   if (currentDeviceType === DeviceType.mobile)
     return (
@@ -74,6 +86,7 @@ const ArticleHeader = ({
             <BackButton
               showText={showText}
               currentDeviceType={currentDeviceType}
+              toggleArticleOpen={onIconClick}
             />
           ) : null
         }

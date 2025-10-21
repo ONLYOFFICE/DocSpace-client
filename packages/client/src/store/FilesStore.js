@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import axios from "axios";
+import { match } from "ts-pattern";
 import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
@@ -59,6 +60,7 @@ import {
   isPublicRoom,
   getDaysRemaining,
   frameCallEvent,
+  getCategoryType,
 } from "@docspace/shared/utils/common";
 
 import { toastr } from "@docspace/shared/components/toast";
@@ -69,17 +71,16 @@ import {
   PDF_FORM_DIALOG_KEY,
   ROOMS_PROVIDER_TYPE_NAME,
   thumbnailStatuses,
+  CategoryType,
 } from "@docspace/shared/constants";
 
 import {
-  getCategoryType,
   getCategoryUrl,
   getCategoryTypeByFolderType,
 } from "SRC_DIR/helpers/utils";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 
-import { CategoryType } from "SRC_DIR/helpers/constants";
 import debounce from "lodash.debounce";
 import Queue from "queue-promise";
 import {
@@ -99,6 +100,7 @@ import {
   FILTER_RECENT,
   FILTER_FAVORITES,
   FILTER_ROOM_DOCUMENTS,
+  FILTER_SHARE,
   FILTER_SHARED_ROOM,
   FILTER_TEMPLATES_ROOM,
   FILTER_TRASH,
@@ -289,7 +291,7 @@ class FilesStore {
     this.settingsStore = settingsStore;
     this.indexingStore = indexingStore;
 
-    SocketHelper.on(SocketEvents.ChangedQuotaUsedValue, (res) => {
+    SocketHelper?.on(SocketEvents.ChangedQuotaUsedValue, (res) => {
       const { isFrame } = this.settingsStore;
 
       if (res && res.featureId === "room" && isFrame) {
@@ -303,7 +305,7 @@ class FilesStore {
       }
     });
 
-    SocketHelper.on(SocketEvents.ModifyFolder, async (opt) => {
+    SocketHelper?.on(SocketEvents.ModifyFolder, async (opt) => {
       const { socketSubscribers } = SocketHelper;
 
       if (opt && opt.data) {
@@ -349,7 +351,7 @@ class FilesStore {
       this.treeFoldersStore.updateTreeFoldersItem(opt);
     });
 
-    SocketHelper.on(SocketEvents.MarkAsNewFolder, ({ folderId, count }) => {
+    SocketHelper?.on(SocketEvents.MarkAsNewFolder, ({ folderId, count }) => {
       const { socketSubscribers } = SocketHelper;
       const pathParts = `DIR-${folderId}`;
 
@@ -372,7 +374,7 @@ class FilesStore {
       });
     });
 
-    SocketHelper.on(SocketEvents.MarkAsNewFile, ({ fileId, count }) => {
+    SocketHelper?.on(SocketEvents.MarkAsNewFile, ({ fileId, count }) => {
       const { socketSubscribers } = SocketHelper;
       const pathParts = `FILE-${fileId}`;
 
@@ -395,7 +397,7 @@ class FilesStore {
     });
 
     // WAIT FOR RESPONSES OF EDITING FILE
-    SocketHelper.on(SocketEvents.StartEditFile, (id) => {
+    SocketHelper?.on(SocketEvents.StartEditFile, (id) => {
       const { socketSubscribers } = SocketHelper;
       const pathParts = `FILE-${id}`;
 
@@ -418,7 +420,7 @@ class FilesStore {
       );
     });
 
-    SocketHelper.on(SocketEvents.ModifyRoom, (option) => {
+    SocketHelper?.on(SocketEvents.ModifyRoom, (option) => {
       switch (option.cmd) {
         case "create-form":
           setTimeout(() => this.wsCreatedPDFForm(option), LOADER_TIMEOUT * 2);
@@ -429,7 +431,7 @@ class FilesStore {
       }
     });
 
-    SocketHelper.on(SocketEvents.StopEditFile, (id) => {
+    SocketHelper?.on(SocketEvents.StopEditFile, (id) => {
       const { socketSubscribers } = SocketHelper;
       const pathParts = `FILE-${id}`;
 
@@ -468,7 +470,8 @@ class FilesStore {
 
     if (
       this.selectedFolderStore.id !== fileInfo.folderId &&
-      this.selectedFolderStore.rootFolderType !== FolderType.Recent
+      this.selectedFolderStore.rootFolderType !== FolderType.Recent &&
+      this.selectedFolderStore.rootFolderType !== FolderType.Favorites
     )
       return;
 
@@ -606,7 +609,7 @@ class FilesStore {
         .getFolderInfo(folder.id)
         .then((response) => {
           const folderInfo = {
-            isFolder: !isRoomUtil(response),
+            isFolder: true,
             isRoom: isRoomUtil(response),
             ...response,
           };
@@ -1070,13 +1073,16 @@ class FilesStore {
     const elementTitle = selectionLength && this.selection[0].title;
     const singleElement = selectionLength === 1;
     const filesCount = singleElement ? elementTitle : selectionLength;
-    const { isShareFolder, isCommonFolder } = this.treeFoldersStore;
+    const { isSharedWithMeFolder, isCommonFolder } = this.treeFoldersStore;
 
     let operationName;
 
-    if (this.authStore.isAdmin && isShareFolder) {
+    if (this.authStore.isAdmin && isSharedWithMeFolder) {
       operationName = "copy";
-    } else if (!this.authStore.isAdmin && (isShareFolder || isCommonFolder)) {
+    } else if (
+      !this.authStore.isAdmin &&
+      (isSharedWithMeFolder || isCommonFolder)
+    ) {
       operationName = "copy";
     } else {
       operationName = "move";
@@ -1181,16 +1187,16 @@ class FilesStore {
       .filter(
         (f) =>
           !files.some((nf) => nf.id === f.id) &&
-          SocketHelper.socketSubscribers.has(`FILE-${f.id}`),
+          SocketHelper?.socketSubscribers.has(`FILE-${f.id}`),
       )
       .map((f) => `FILE-${f.id}`);
 
     const roomPartsToSub = files
       .map((f) => `FILE-${f.id}`)
-      .filter((f) => !SocketHelper.socketSubscribers.has(f));
+      .filter((f) => !SocketHelper?.socketSubscribers.has(f));
 
     if (roomPartsToUnsub.length > 0) {
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
+      SocketHelper?.emit(SocketCommands.Unsubscribe, {
         roomParts: roomPartsToUnsub,
         individual: true,
       });
@@ -1199,7 +1205,7 @@ class FilesStore {
     this.files = files;
 
     if (roomPartsToSub.length > 0) {
-      SocketHelper.emit(SocketCommands.Subscribe, {
+      SocketHelper?.emit(SocketCommands.Subscribe, {
         roomParts: roomPartsToSub,
         individual: true,
       });
@@ -1219,17 +1225,17 @@ class FilesStore {
       .filter(
         (f) =>
           !folders.some((nf) => nf.id === f.id) &&
-          SocketHelper.socketSubscribers.has(`DIR-${f.id}`) &&
+          SocketHelper?.socketSubscribers.has(`DIR-${f.id}`) &&
           this.selectedFolderStore.id !== f.id,
       )
       .map((f) => `DIR-${f.id}`);
 
     const roomPartsToSub = folders
       .map((f) => `DIR-${f.id}`)
-      .filter((f) => !SocketHelper.socketSubscribers.has(f));
+      .filter((f) => !SocketHelper?.socketSubscribers.has(f));
 
     if (roomPartsToUnsub.length > 0) {
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
+      SocketHelper?.emit(SocketCommands.Unsubscribe, {
         roomParts: roomPartsToUnsub,
         individual: true,
       });
@@ -1238,7 +1244,7 @@ class FilesStore {
     this.folders = folders;
 
     if (roomPartsToSub.length > 0) {
-      SocketHelper.emit(SocketCommands.Subscribe, {
+      SocketHelper?.emit(SocketCommands.Subscribe, {
         roomParts: roomPartsToSub,
         individual: true,
       });
@@ -1512,22 +1518,36 @@ class FilesStore {
   };
 
   setFilesFilter = (filter, folderId = null) => {
-    const { recycleBinFolderId } = this.treeFoldersStore;
-
-    const key =
-      this.categoryType === CategoryType.Archive
-        ? `${FILTER_ARCHIVE_DOCUMENTS}=${this.userStore.user?.id}`
-        : this.categoryType === CategoryType.SharedRoom
-          ? `${FILTER_ROOM_DOCUMENTS}=${this.userStore.user?.id}`
-          : this.categoryType === CategoryType.Recent
-            ? `${FILTER_RECENT}=${this.userStore.user?.id}`
-            : this.categoryType === CategoryType.Favorite
-              ? `${FILTER_FAVORITES}=${this.userStore.user?.id}`
-              : +folderId === recycleBinFolderId
-                ? `${FILTER_TRASH}=${this.userStore.user?.id}`
-                : !this.publicRoomStore.isPublicRoom
-                  ? `${FILTER_DOCUMENTS}=${this.userStore.user?.id}`
-                  : null;
+    const key = match(this.categoryType)
+      .with(
+        CategoryType.Archive,
+        () => `${FILTER_ARCHIVE_DOCUMENTS}=${this.userStore.user?.id}`,
+      )
+      .with(
+        CategoryType.SharedRoom,
+        () => `${FILTER_ROOM_DOCUMENTS}=${this.userStore.user?.id}`,
+      )
+      .with(
+        CategoryType.Recent,
+        () => `${FILTER_RECENT}=${this.userStore.user?.id}`,
+      )
+      .with(
+        CategoryType.SharedWithMe,
+        () => `${FILTER_SHARE}=${this.userStore.user?.id}`,
+      )
+      .with(
+        CategoryType.Favorite,
+        () => `${FILTER_FAVORITES}=${this.userStore.user?.id}`,
+      )
+      .when(
+        () => +folderId === this.treeFoldersStore.recycleBinFolderId,
+        () => `${FILTER_TRASH}=${this.userStore.user?.id}`,
+      )
+      .when(
+        () => !this.publicRoomStore.isPublicRoom,
+        () => `${FILTER_DOCUMENTS}=${this.userStore.user?.id}`,
+      )
+      .otherwise(() => null);
 
     if (key) {
       setUserFilter(key, {
@@ -1616,8 +1636,8 @@ class FilesStore {
 
     if (
       folderId === "@my" &&
-      this.userStore.user.isVisitor &&
-      !this.userStore.user.hasPersonalFolder
+      this.userStore.user?.isVisitor &&
+      !this.userStore.user?.hasPersonalFolder
     ) {
       const url = getCategoryUrl(CategoryType.Shared);
       return window.DocSpace.navigate(
@@ -2244,10 +2264,6 @@ class FilesStore {
 
     const { isDesktopClient } = this.settingsStore;
 
-    const pluginAllKeys =
-      enablePlugins &&
-      this.pluginStore.getContextMenuKeysByType(null, null, security);
-
     const canRenameItem = item.security?.Rename;
 
     const canMove = this.accessRightsStore.canMoveItems({
@@ -2287,6 +2303,10 @@ class FilesStore {
       const extsCustomFilter =
         this.filesSettingsStore?.extsWebCustomFilterEditing || [];
       const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
+
+      const isSharedWithMeFolderSection =
+        this.treeFoldersStore.sharedWithMeFolderId === item.rootFolderId &&
+        item.rootFolderType === FolderType.SHARE;
 
       let fileOptions = [
         // "open",
@@ -2341,16 +2361,27 @@ class FilesStore {
         "edit-index",
         "separator2",
         // "unsubscribe",
-        "separator4",
+        "separator5",
         "delete",
         "remove-from-recent",
+        "remove-shared-folder-or-file",
         "copy-general-link",
         "separate-stop-filling",
         "stop-filling",
       ];
 
+      if (item.external && item.isLinkExpired) {
+        fileOptions = ["select", "separator0", "remove-shared-folder-or-file"];
+      }
+
       if (optionsToRemove.length) {
         fileOptions = removeOptions(fileOptions, optionsToRemove);
+      }
+
+      if (!isSharedWithMeFolderSection) {
+        fileOptions = removeOptions(fileOptions, [
+          "remove-shared-folder-or-file",
+        ]);
       }
 
       if (this.publicRoomStore.isPublicRoom) {
@@ -2365,11 +2396,6 @@ class FilesStore {
           "separator2",
           "remove-from-recent",
           "copy-general-link",
-        ]);
-      }
-
-      if (isRecentFolder) {
-        fileOptions = removeOptions(fileOptions, [
           "mark-as-favorite",
           "remove-from-favorites",
         ]);
@@ -2393,7 +2419,7 @@ class FilesStore {
         ]);
       }
 
-      if (!canSetUpCustomFilter || !isExtsCustomFilter || isMyFolder) {
+      if (!canSetUpCustomFilter || !isExtsCustomFilter) {
         fileOptions = removeOptions(fileOptions, ["custom-filter"]);
       }
 
@@ -2532,6 +2558,13 @@ class FilesStore {
         fileOptions = removeOptions(fileOptions, ["delete"]);
       }
 
+      if (isRecycleBinFolder) {
+        fileOptions = removeOptions(fileOptions, [
+          "mark-as-favorite",
+          "remove-from-favorites",
+        ]);
+      }
+
       if (isEncrypted) {
         fileOptions = removeOptions(fileOptions, [
           "open",
@@ -2561,10 +2594,9 @@ class FilesStore {
               PluginFileType.Files,
               item.fileExst,
               security,
+              item.security,
             );
 
-            pluginAllKeys &&
-              pluginAllKeys.forEach((key) => fileOptions.push(key));
             pluginFilesKeys &&
               pluginFilesKeys.forEach((key) => fileOptions.push(key));
           }
@@ -2577,10 +2609,9 @@ class FilesStore {
               PluginFileType.Image,
               item.fileExst,
               security,
+              item.security,
             );
 
-            pluginAllKeys &&
-              pluginAllKeys.forEach((key) => fileOptions.push(key));
             pluginFilesKeys &&
               pluginFilesKeys.forEach((key) => fileOptions.push(key));
           }
@@ -2593,10 +2624,9 @@ class FilesStore {
               PluginFileType.Video,
               item.fileExst,
               security,
+              item.security,
             );
 
-            pluginAllKeys &&
-              pluginAllKeys.forEach((key) => fileOptions.push(key));
             pluginFilesKeys &&
               pluginFilesKeys.forEach((key) => fileOptions.push(key));
           }
@@ -2808,10 +2838,9 @@ class FilesStore {
             PluginFileType.Rooms,
             null,
             security,
+            item.security,
           );
 
-          pluginAllKeys &&
-            pluginAllKeys.forEach((key) => roomOptions.push(key));
           pluginRoomsKeys &&
             pluginRoomsKeys.forEach((key) => roomOptions.push(key));
         }
@@ -2821,6 +2850,11 @@ class FilesStore {
 
       return roomOptions;
     }
+
+    const isSharedWithMeFolderSection =
+      this.treeFoldersStore.sharedWithMeFolderId === item.rootFolderId &&
+      item.rootFolderType === FolderType.SHARE;
+
     let folderOptions = [
       "select",
       "open",
@@ -2850,8 +2884,19 @@ class FilesStore {
       // "change-thirdparty-info",
       "separator2",
       // "unsubscribe",
+      "remove-shared-folder-or-file",
       "delete",
     ];
+
+    if (item.external && item.isLinkExpired) {
+      folderOptions = ["select", "separator0", "remove-shared-folder-or-file"];
+    }
+
+    if (!isSharedWithMeFolderSection) {
+      folderOptions = removeOptions(folderOptions, [
+        "remove-shared-folder-or-file",
+      ]);
+    }
 
     if (optionsToRemove.length) {
       folderOptions = removeOptions(folderOptions, optionsToRemove);
@@ -2866,6 +2911,8 @@ class FilesStore {
         "create-room-separator",
         "separator1",
         "create-room",
+        "mark-as-favorite",
+        "remove-from-favorites",
       ]);
     }
 
@@ -2918,6 +2965,8 @@ class FilesStore {
         "mark-read",
         "separator0",
         "separator1",
+        "mark-as-favorite",
+        "remove-from-favorites",
       ]);
     } else {
       folderOptions = removeOptions(folderOptions, ["restore"]);
@@ -2927,10 +2976,9 @@ class FilesStore {
           PluginFileType.Folders,
           null,
           security,
+          item.security,
         );
 
-        pluginAllKeys &&
-          pluginAllKeys.forEach((key) => folderOptions.push(key));
         pluginFoldersKeys &&
           pluginFoldersKeys.forEach((key) => folderOptions.push(key));
       }
@@ -2950,7 +2998,7 @@ class FilesStore {
 
     // if (isThirdPartyItem) {
 
-    //   if (isShareFolder) {
+    //   if (isSharedWithMeFolder) {
     //     folderOptions = removeOptions(folderOptions, [
     //       "change-thirdparty-info",
     //     ]);
@@ -3091,6 +3139,7 @@ class FilesStore {
         this.setHotkeysClipboard(hotkeysClipboard);
         if (fileIds) this.setTempActionFilesIds([]);
         if (folderIds) this.setTempActionFoldersIds([]);
+        this.clearActiveOperations(fileIds, folderIds);
       });
 
       showToast && showToast();
@@ -3113,6 +3162,7 @@ class FilesStore {
         this.setFolders(folders);
         if (fileIds) this.setTempActionFilesIds([]);
         if (folderIds) this.setTempActionFoldersIds([]);
+        this.clearActiveOperations(fileIds, folderIds);
       });
 
       showToast && showToast();
@@ -3139,6 +3189,7 @@ class FilesStore {
           runInAction(() => {
             this.setRoomsFilter(roomsFilter);
             this.setFolders(newFolders);
+            this.clearActiveOperations(fileIds, folderIds);
           });
 
           showToast && showToast();
@@ -3171,6 +3222,7 @@ class FilesStore {
           this.setFilter(filter);
           this.setFiles(newFiles);
           this.setFolders(newFolders);
+          this.clearActiveOperations(fileIds, folderIds);
         });
 
         showToast && showToast();
@@ -3388,7 +3440,6 @@ class FilesStore {
 
     return items.map((item) => {
       const {
-        availableExternalRights,
         access,
         autoDelete,
         originTitle,
@@ -3553,7 +3604,6 @@ class FilesStore {
       const isForm = fileExst === ".oform";
 
       return {
-        availableExternalRights,
         access,
         daysRemaining: autoDelete && getDaysRemaining(autoDelete),
         originTitle,
@@ -3655,7 +3705,13 @@ class FilesStore {
     const newFolders = [...this.folders];
     const orderItems = [...this.folders, ...this.files].filter((x) => x.order);
 
-    if (orderItems.length > 0) {
+    const { isVDRRoomRoot, isRoot, isSharedWithMeFolderRoot } =
+      this.treeFoldersStore;
+
+    if (
+      (isVDRRoomRoot || (isSharedWithMeFolderRoot && !isRoot)) &&
+      orderItems.length > 0
+    ) {
       this.isEmptyPage && this.setIsEmptyPage(false);
 
       orderItems.sort((a, b) => {
@@ -3966,6 +4022,10 @@ class FilesStore {
     this.setFolders(favoritesFolder.folders);
     this.setFiles(favoritesFolder.files);
 
+    const newFilter = this.filter.clone();
+    newFilter.total = favoritesFolder.total;
+    this.setFilter(newFilter);
+
     this.selectedFolderStore.setSelectedFolder({
       folders: favoritesFolder.folders,
       ...favoritesFolder.current,
@@ -4112,7 +4172,7 @@ class FilesStore {
     //     createdItem.title
     //   );
 
-    //   SocketHelper.emit({
+    //   SocketHelper?.emit({
     //     command: "subscribe",
     //     data: { roomParts: `FILE-${createdItem.id}`, individual: true },
     //   });
@@ -4133,16 +4193,12 @@ class FilesStore {
     this.trashIsEmpty = isEmpty;
   };
 
-  setMovingInProgress = (movingInProgress) => {
-    this.movingInProgress = movingInProgress;
-  };
-
   setMainButtonMobileVisible = (visible) => {
     this.mainButtonMobileVisible = visible;
   };
 
   get indexColumnSize() {
-    if (!this.selectedFolderStore.isIndexedFolder) return;
+    if (!this.selectedFolderStore.isIndexedFolder) return 0;
 
     const minWidth = 33;
     const maxIndexLength = 5;
@@ -4456,6 +4512,18 @@ class FilesStore {
 
   setMainButtonVisible = (mainButtonVisible) => {
     this.mainButtonVisible = mainButtonVisible;
+  };
+
+  clearActiveOperations = (fileIds = [], folderIds = []) => {
+    const newActiveFiles = this.activeFiles.filter(
+      (el) => !fileIds?.includes(el.id),
+    );
+    const newActiveFolders = this.activeFolders.filter(
+      (el) => !folderIds?.includes(el.id),
+    );
+
+    this.setActiveFiles(newActiveFiles);
+    this.setActiveFolders(newActiveFolders);
   };
 }
 

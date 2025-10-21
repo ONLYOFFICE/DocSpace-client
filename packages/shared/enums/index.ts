@@ -234,6 +234,8 @@ export const enum PageType {
   dataImport = "dataImport",
   storageManagement = "storageManagement",
   services = "services",
+  groups = "groups",
+  guests = "guests",
 }
 
 /**
@@ -266,6 +268,7 @@ export const enum FolderType {
   SubFolderInProgress = 28,
   VirtualDataRoom = 29,
   RoomTemplates = 30,
+  AIAgents = 31,
 }
 
 export const enum ShareAccessRights {
@@ -282,6 +285,22 @@ export const enum ShareAccessRights {
   Editing = 10,
   Collaborator = 11,
 }
+
+export const enum ShareRights {
+  None = "None",
+  ReadWrite = "ReadWrite",
+  Read = "Read",
+  Restrict = "Restrict",
+  Varies = "Varies",
+  Review = "Review",
+  Comment = "Comment",
+  FillForms = "FillForms",
+  CustomFilter = "CustomFilter",
+  RoomManager = "RoomManager",
+  Editing = "Editing",
+  ContentCreator = "ContentCreator",
+}
+
 export const enum ConflictResolveType {
   Skip = 0,
   Overwrite = 1,

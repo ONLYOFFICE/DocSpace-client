@@ -29,12 +29,15 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 import CatalogDocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
 import CatalogArchiveReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.archive.react.svg?url";
-import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url";
+import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.outline.svg?url";
 import CatalogPortfolioReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.portfolio.react.svg?url";
 import CatalogFavoritesReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.favorites.react.svg?url";
 import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
-import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
+import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
+import CatalogGroupsReactSvgUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
+import CatalogGuestsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.guest.react.svg?url";
+import CatalogAiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 
 import CatalogSettingsCommonReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg?url";
 import CatalogSettingsSecurityReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-security.svg?url";
@@ -52,12 +55,15 @@ import CatalogFolder20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.folde
 import CatalogDocuments20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.documents.react.svg?url";
 import CatalogRooms20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.rooms.react.svg?url";
 import CatalogArchive20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.archive.react.svg?url";
-import CatalogShared20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.shared.react.svg?url";
+import CatalogShared20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.shared.outline.svg?url";
 import CatalogPortfolio20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.portfolio.react.svg?url";
 import CatalogFavorites20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.favorites.react.svg?url";
 import CatalogPrivate20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.private.react.svg?url";
 import CatalogTrash20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.trash.react.svg?url";
-import CatalogAccounts20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.accounts.react.svg?url";
+import CatalogAccounts20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.user.react.svg?url";
+import CatalogGroups20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.accounts.react.svg?url";
+import CatalogGuests20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.guest.react.svg?url";
+import CatalogAiAgents20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.ai-agents.react.svg?url";
 
 import CatalogSettingsCommon20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-common.svg?url";
 import CatalogSettingsSecurity20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-security.svg?url";
@@ -99,8 +105,11 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [FolderType.Recent]: CatalogSettingsRestoreReactSvgUrl,
     [FolderType.Privacy]: CatalogPrivateReactSvgUrl,
     [FolderType.TRASH]: CatalogTrashReactSvgUrl,
+    [FolderType.AIAgents]: CatalogAiAgentsReactSvgUrl,
 
     [PageType.account]: CatalogAccountsReactSvgUrl,
+    [PageType.groups]: CatalogGroupsReactSvgUrl,
+    [PageType.guests]: CatalogGuestsReactSvgUrl,
     [PageType.customization]: CatalogSettingsCommonReactSvgUrl,
     [PageType.security]: CatalogSettingsSecurityReactSvgUrl,
     [PageType.backup]: CatalogSettingsDataManagementReactSvgUrl,
@@ -124,8 +133,11 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [FolderType.Recent]: CatalogSettingsRestore20ReactSvgUrl,
     [FolderType.Privacy]: CatalogPrivate20ReactSvgUrl,
     [FolderType.TRASH]: CatalogTrash20ReactSvgUrl,
+    [FolderType.AIAgents]: CatalogAiAgents20ReactSvgUrl,
 
     [PageType.account]: CatalogAccounts20ReactSvgUrl,
+    [PageType.groups]: CatalogGroups20ReactSvgUrl,
+    [PageType.guests]: CatalogGuests20ReactSvgUrl,
     [PageType.customization]: CatalogSettingsCommon20ReactSvgUrl,
     [PageType.security]: CatalogSettingsSecurity20ReactSvgUrl,
     [PageType.backup]: CatalogSettingsDataManagement20ReactSvgUrl,

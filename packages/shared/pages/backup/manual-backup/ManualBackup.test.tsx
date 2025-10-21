@@ -415,10 +415,10 @@ describe("ManualBackup", () => {
   it("sets up and cleans up socket listeners", () => {
     const { unmount } = render(<ManualBackup {...defaultProps} />);
 
-    expect(SocketHelper.on).toHaveBeenCalled();
+    expect(SocketHelper?.on).toHaveBeenCalled();
 
     unmount();
 
-    expect(SocketHelper.off).toHaveBeenCalled();
+    expect(SocketHelper?.off).toHaveBeenCalled();
   });
 });

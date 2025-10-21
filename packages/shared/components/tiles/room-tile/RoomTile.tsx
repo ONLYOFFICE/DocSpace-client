@@ -75,7 +75,9 @@ export const RoomTile = ({
         !e.target.closest(".advanced-tag") &&
         !e.target.closest(".badges") &&
         !e.target.closest("#modal-dialog") &&
-        !checkboxContainerRef.current?.contains(e.target as Node))
+        !checkboxContainerRef.current?.contains(e.target as Node) &&
+        !e.target.closest(".expandButton") &&
+        !e.target.closest(".p-contextmenu"))
     ) {
       thumbnailClick?.(e);
     }

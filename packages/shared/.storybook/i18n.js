@@ -9,7 +9,7 @@ newInstance
   .use(initReactI18next)
   .init({
     load: "currentOnly",
-    ns: ["Common", "PreparationPortal"],
+    ns: ["Common"],
     defaultNS: "Common",
     fallbackNS: ["Common"],
     backend: {

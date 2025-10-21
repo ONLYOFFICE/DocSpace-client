@@ -26,6 +26,7 @@
 
 import { TLogo } from "../../api/rooms/types";
 import { Nullable } from "../../types";
+import { ROOM_ACTION_KEYS } from "../../constants";
 
 type RoomIconDefault = {
   title: string;
@@ -44,7 +45,7 @@ export type TModel = { label: string; icon: string } & (
       onClick: () => void;
     }
   | {
-      key: "create_edit_room_upload";
+      key: typeof ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD;
       onClick: (ref?: React.RefObject<Nullable<HTMLInputElement>>) => void;
     }
 );

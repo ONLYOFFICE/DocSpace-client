@@ -113,7 +113,9 @@ const PluginDialog = ({
     if (eventListeners) {
       eventListeners.forEach((e) => {
         const onAction = async (evt) => {
+          setModalRequestRunning(true);
           const message = await e.onAction(evt);
+          setModalRequestRunning(false);
 
           messageActions({
             message,
@@ -171,6 +173,7 @@ const PluginDialog = ({
           props: dialogBodyProps,
         }}
         setModalRequestRunning={setModalRequestRunning}
+        modalRequestRunning={modalRequestRunning}
       />
     </StyledFullScreen>
   ) : (
@@ -190,6 +193,7 @@ const PluginDialog = ({
             props: dialogBodyProps,
           }}
           setModalRequestRunning={setModalRequestRunning}
+          modalRequestRunning={modalRequestRunning}
         />
       </ModalDialog.Body>
       {dialogFooterProps ? (
@@ -201,6 +205,7 @@ const PluginDialog = ({
               props: dialogFooterProps,
             }}
             setModalRequestRunning={setModalRequestRunning}
+            modalRequestRunning={modalRequestRunning}
           />
         </ModalDialog.Footer>
       ) : null}

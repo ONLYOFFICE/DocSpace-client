@@ -24,10 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable react/display-name */
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable func-names */
-
 /* global jest */
 
 const react_i18next: {
@@ -35,7 +31,7 @@ const react_i18next: {
     Component: React.JSXElementConstructor<{
       t: () => string;
     }>,
-  ) => (props: {}) => React.JSX.Element;
+  ) => (props: object) => React.JSX.Element;
   useTranslation: (value: string) => {
     t: (key: string) => string;
     i18n: {
@@ -50,7 +46,7 @@ const react_i18next: {
 
 const translate =
   () => (Component: React.JSXElementConstructor<{ t: () => string }>) =>
-    function (props: {}) {
+    function (props: object) {
       return <Component t={() => ""} {...props} />;
     };
 

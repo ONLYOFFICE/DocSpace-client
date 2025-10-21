@@ -153,6 +153,8 @@ class FilesSettingsStore {
 
   hideConfirmCancelOperation = false;
 
+  documentServiceLocation = null;
+
   constructor(
     thirdPartyStore,
     treeFoldersStore,
@@ -321,7 +323,25 @@ class FilesSettingsStore {
   setForceSave = (data) =>
     api.files.forceSave(data).then((res) => this.setForcesave(res));
 
-  getDocumentServiceLocation = () => api.files.getDocumentServiceLocation();
+  getDocumentServiceLocation = async () => {
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
+    try {
+      return await api.files.getDocumentServiceLocation(
+        null,
+        abortController.signal,
+      );
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+
+      throw error;
+    }
+  };
+
+  setDocumentServiceLocation = (data) => {
+    this.documentServiceLocation = data;
+  };
 
   changeDocumentServiceLocation = (
     docServiceUrl,

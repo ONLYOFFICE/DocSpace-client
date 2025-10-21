@@ -3,7 +3,7 @@
   "content": "Show File Actions",
   "content_en_sha1_hash": "5f4d732bf49f42d2b52ab6682a11f986c01135a6",
   "created_at": "2025-05-19T21:30:50.015Z",
-  "updated_at": "2025-08-29T14:33:38.108Z",
+  "updated_at": "2025-10-03T13:19:30.498Z",
   "comment": {
     "text": "This translation key \"TitleShowActions\" is used to display the text \"Show File Actions\" in various UI elements, including buttons and dialogs. It appears in contexts where file actions are relevant, such as in a context menu or a button title. Translators should ensure the text accurately reflects the functionality of these elements.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/ContextButton.tsx",
-      "line_number": 88,
+      "line_number": 139,
       "context": "id=\"info-options\"\n className=\"expandButton\"\n title={\n \"isFolder\" in selection && selection.isFolder\n ? t(\"Translations:TitleShowFolderActions\")\n : t(\"Translations:TitleShowActions\")\n }\n onClick={onContextMenu}\n getData={getData}\n directionX=\"right\"\n displayType={ContextMenuButtonDisplayType.toggle}",
       "module": "/packages/client"
     },
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableRow.js",
-      "line_number": 273,
+      "line_number": 275,
       "context": "showHotkeyBorder={showHotkeyBorder ? !isTutorialEnabled : false}\n displayFileExtension={displayFileExtension}\n title={\n item.isFolder\n ? t(\"Translations:TitleShowFolderActions\")\n : t(\"Translations:TitleShowActions\")\n }\n isRoom={item.isRoom}\n isHighlight={isHighlight}\n hideColumns={hideColumns}\n badgeUrl={badgeUrl}",
       "module": "/packages/client"
     },
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/shared/components/tiles/folder-tile/FolderTile.tsx",
-      "line_number": 313,
+      "line_number": 315,
       "context": "displayType={ContextMenuButtonDisplayType.toggle}\n onClick={(e) => {\n e.stopPropagation();\n onContextMenu(e);\n }}\n title={t(\"Translations:TitleShowActions\")}\n />\n ) : (\n <div className=\"expandButton\" />\n )}\n <ContextMenu",
       "module": "/packages/shared"
     }

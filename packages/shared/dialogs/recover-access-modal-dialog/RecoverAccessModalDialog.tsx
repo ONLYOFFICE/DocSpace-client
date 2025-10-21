@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable jsx-a11y/tabindex-no-positive */
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import { Text } from "../../components/text";
 import { toastr } from "../../components/toast";
@@ -39,9 +39,27 @@ import { FieldContainer } from "../../components/field-container";
 import { TValidate } from "../../components/email-input/EmailInput.types";
 
 import { sendRecoverRequest } from "../../api/settings";
+import { useCaptcha } from "../../hooks/useCaptcha";
+import Captcha from "../../components/captcha";
+import { checkIsSSR, isMobileDevice } from "../../utils";
 
 import type { RecoverAccessModalDialogProps } from "./RecoverAccessModalDialog.types";
 import styles from "./RecoverAccessModalDialog.module.scss";
+
+type TError =
+  | {
+      response?: {
+        status?: number | string;
+        data?: {
+          error?: {
+            message: string;
+          };
+        };
+      };
+      statusText?: string;
+      message?: string;
+    }
+  | string;
 
 const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
   visible,
@@ -49,6 +67,8 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
   textBody,
   emailPlaceholderText,
   id,
+  reCaptchaPublicKey,
+  reCaptchaType,
 }) => {
   const [loading, setLoading] = useState(false);
 
@@ -61,7 +81,67 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
 
   const [isShowError, setIsShowError] = useState(false);
 
+  const [modalDisplayType, setModalDisplayType] = useState(
+    ModalDialogType.modal,
+  );
+
   const { t } = useTranslation(["Login", "Common"]);
+  const theme = useTheme();
+
+  const captcha = useCaptcha({
+    publicKey: reCaptchaPublicKey,
+    type: reCaptchaType,
+  });
+
+  React.useEffect(() => {
+    if (visible && reCaptchaPublicKey) {
+      captcha.request();
+    } else if (!visible) {
+      captcha.dismiss();
+    }
+  }, [visible, reCaptchaPublicKey, captcha.request, captcha.dismiss]);
+
+  React.useEffect(() => {
+    return () => {
+      captcha.dismiss();
+    };
+  }, [captcha.dismiss]);
+
+  const updateDisplayType = React.useCallback(() => {
+    if (checkIsSSR()) return;
+
+    const isLandscape =
+      (typeof window.matchMedia === "function" &&
+        window.matchMedia("(orientation: landscape)").matches) ||
+      window.innerWidth > window.innerHeight;
+
+    if (isMobileDevice() && isLandscape) {
+      setModalDisplayType(ModalDialogType.aside);
+    } else {
+      setModalDisplayType(ModalDialogType.modal);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (!visible) {
+      setModalDisplayType(ModalDialogType.modal);
+      return undefined;
+    }
+
+    updateDisplayType();
+
+    if (checkIsSSR()) return undefined;
+
+    const handleResize = () => updateDisplayType();
+
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleResize);
+    };
+  }, [visible, updateDisplayType]);
 
   const onRecoverModalClose = () => {
     setEmail("");
@@ -69,6 +149,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
     setDescription("");
     setDescErr(false);
     setIsShowError(false);
+    setModalDisplayType(ModalDialogType.modal);
     onClose?.();
   };
 
@@ -94,7 +175,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
     setDescErr(false);
   };
 
-  const onSendRecoverRequest = () => {
+  const onSendRecoverRequest = async () => {
     if (!email.trim() || emailErr) {
       setIsShowError(true);
       return setEmailErr(true);
@@ -103,17 +184,54 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
       return setDescErr(true);
     }
 
+    const captchaValidation = captcha.validate();
+    if (!captchaValidation.isValid) {
+      return;
+    }
+
+    const captchaToken = captchaValidation.token ?? undefined;
+
     setLoading(true);
-    sendRecoverRequest(email, description)
-      ?.then((res) => {
-        setLoading(false);
-        if (typeof res === "string") toastr.success(res);
-      })
-      ?.catch((error) => {
-        setLoading(false);
-        toastr.error(error);
-      })
-      .finally(onRecoverModalClose);
+
+    try {
+      const res = await sendRecoverRequest(
+        email,
+        description,
+        captchaToken,
+        reCaptchaType,
+      );
+
+      setLoading(false);
+      if (typeof res === "string") toastr.success(res);
+      onRecoverModalClose();
+    } catch (e) {
+      const error = e as TError;
+      setLoading(false);
+
+      let errorMessage = "";
+      if (typeof error === "object") {
+        errorMessage =
+          error?.response?.data?.error?.message ||
+          error?.statusText ||
+          error?.message ||
+          "";
+      } else if (typeof error === "string") {
+        errorMessage = error;
+      }
+
+      if (errorMessage) {
+        toastr.error(errorMessage);
+      }
+
+      const status =
+        typeof error === "object" ? error?.response?.status : undefined;
+
+      if (reCaptchaPublicKey && status === 403) {
+        captcha.request();
+      } else if (captcha.isVisible) {
+        captcha.reset();
+      }
+    }
   };
 
   return (
@@ -121,8 +239,10 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
       id={id}
       isLarge
       visible={visible}
+      autoMaxHeight
+      withBodyScroll
       onClose={onRecoverModalClose}
-      displayType={ModalDialogType.modal}
+      displayType={modalDisplayType}
       aria-labelledby="recover-access-modal-title"
       dataTestId="recover_access_modal"
     >
@@ -198,6 +318,20 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
               dataTestId="recover_access_modal_description_textarea"
             />
           </FieldContainer>
+          {captcha.shouldRender ? (
+            <Captcha
+              key="recover-access-captcha"
+              id="recover-access-captcha-widget"
+              type={captcha.captchaType}
+              publicKey={reCaptchaPublicKey}
+              themeMode={theme.isBase ? "light" : "dark"}
+              visible={captcha.isVisible}
+              hasError={captcha.isError}
+              errorText={t("Errors:LoginWithBruteForceCaptcha")}
+              onTokenChange={captcha.onTokenChange}
+              resetSignal={captcha.resetSignal}
+            />
+          ) : null}
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>

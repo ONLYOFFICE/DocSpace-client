@@ -3,7 +3,7 @@
   "content": "Third-party storage",
   "content_en_sha1_hash": "f9863ef0415f207037f70275c921c5f88e760b2e",
   "created_at": "2025-05-19T21:30:49.279Z",
-  "updated_at": "2025-08-27T10:14:35.123Z",
+  "updated_at": "2025-10-14T01:09:07.125Z",
   "comment": {
     "text": "This translation key is used to display a label for \"Third-party storage\" in various UI components, such as radio buttons and toggle parameters, indicating a storage option for files. It appears in dialog windows and page settings for data management and backup features.",
     "is_auto": true,
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 610,
+      "line_number": 606,
       "context": "</div>\n <div className={styles.modules}>\n <RadioButton\n {...commonRadioButtonProps}\n id=\"third-party-storage\"\n label={t(\"Common:ThirdPartyStorage\")}\n name={`${BackupStorageType.StorageModuleType}`}\n isChecked={isCheckedThirdPartyStorage}\n isDisabled={isLoadingData}\n testId=\"auto_backup_storage_radio_button\"\n />",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 574,
+      "line_number": 594,
       "context": "[styles.isDisabled]: additionalDisabled,\n })}\n >\n <RadioButton\n id=\"third-party-storage\"\n label={t(\"Common:ThirdPartyStorage\")}\n name={THIRD_PARTY_STORAGE}\n key={3}\n isChecked={isCheckedThirdPartyStorage}\n isDisabled={additionalDisabled}\n {...commonRadioButtonProps}",
       "module": "/packages/shared"
     },
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Üçüncü Tərəf Yaddaşı\" is a literal translation, \"Third-party storage\" often refers to services or platforms, not just memory. A more accurate translation would convey this.",
-          "suggestion": "Üçüncü Tərəf Saxlanma (Third-party storage/hosting)"
+          "description": "While \"Üçüncü Tərəf Yaddaşı\" is a literal translation, \"Third-party storage\" often refers to a service or cloud storage solution. A more accurate translation would reflect this context.",
+          "suggestion": "Consider \"Üçüncü Tərəf Saxlanma\" or \"Xarici Saxlanma Xidməti\" depending on the specific context."
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Памет за трети страни\" is technically a literal translation of \"Third-party storage,\" it doesn't convey the same meaning in a natural or idiomatic way in Bulgarian. It sounds overly formal and awkward.",
-          "suggestion": "A more natural and common translation would be something like \"Съхранение от трети страни\" or \"Съхранение при трети страни\"."
+          "description": "While \"Памет за трети страни\" is a literal translation, it doesn't quite capture the nuance of \"Third-party storage.\" It implies storage *belonging* to third parties, rather than storage *provided by* third parties. A more accurate translation might focus on the service aspect.",
+          "suggestion": "Consider alternatives like \"Съхранение от трети страни\" or \"Съхранение при трети страни\" to better convey the meaning of a service provided by a third party."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation \"Drittanbieter\" translates to \"Third-party provider\" or \"Third-party supplier\", not \"Third-party storage\". It doesn't accurately convey the meaning of the English term \"Third-party storage\".",
-          "suggestion": "A more accurate translation would be something like \"Externer Datenspeicher\" (External Data Storage) or \"Speicher von Drittanbietern\" (Storage from Third Parties)."
+          "description": "The translation \"Drittanbieter\" does not accurately convey the meaning of \"Third-party storage\". \"Drittanbieter\" means 'third-party provider'. \"Third-party storage\" refers to storage services provided by a company other than the main service provider.",
+          "suggestion": "A more accurate translation would be something like \"Externer Speicher\" or \"Speicher von Drittanbietern\"."
         }
       ],
       "approved_at": null
@@ -99,7 +99,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Αποθήκευση τρίτων\" is a literal translation of \"Third-party storage,\" it lacks the flow and common phrasing used in Greek when referring to third-party services. A more natural and widely understood translation would be \"Αποθήκευση από τρίτους\" or \"Εναπόθεση σε τρίτους\".",
+          "suggestion": "Consider \"Αποθήκευση από τρίτους\" or \"Εναπόθεση σε τρίτους\"."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Moteur de stockage tiers\" doesn't accurately convey the meaning of \"Third-party storage.\" \"Moteur\" translates to \"engine\" which is not the intended meaning. \"Stockage tiers\" is more appropriate, but a more precise term would be needed based on the context.",
-          "suggestion": "Consider alternatives such as \"Stockage tiers\", \"Solutions de stockage tiers\", or a more context-specific translation like \"Services de stockage tiers\"."
+          "description": "'Moteur de stockage tiers' translates more literally to 'Third-party storage engine'. 'Moteur' implies an engine or system, whereas the English term 'storage' is a more direct description of the functionality.",
+          "suggestion": "Stockage tiers"
         }
       ],
       "approved_at": null
@@ -129,13 +135,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Երրորդ կողմի պահեստավորում\" is a very literal translation and may sound overly formal or technical in Armenian. A more natural phrasing might be considered depending on the context.",
-          "suggestion": "Consider alternatives like \"Երրորդ կողմի ծառայություններ\" (Third-party services) or a more context-specific phrasing if available. Without further context, it's hard to provide a definitive better option."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ພາກສ່ວນທີສາມ\" correctly translates to \"Third-party\", \"ການ​ເກັບ​ຮັກ​ສາ\" is a more literal translation of 'storage' (meaning the act of storing) rather than the noun 'storage'. A more accurate translation for 'storage' would be something like 'ເກັບຮັກສາຂໍ້ມູນ' (data storage) or just 'ເກັບຮັກສາ'.",
-          "suggestion": "Consider revising the Lao translation to 'ພາກສ່ວນທີສາມ ເກັບຮັກສາຂໍ້ມູນ' or 'ພາກສ່ວນທີສາມ ເກັບຮັກສາ'."
+          "description": "The Lao translation \"ພາກສ່ວນທີສາມ ການ​ເກັບ​ຮັກ​ສາ \" is a literal translation of \"third party storage\" but doesn't fully convey the meaning of 'third-party storage' in a technical context. It could be misinterpreted. A more natural and accurate translation might be needed.",
+          "suggestion": "Consider \"ການ​ເກັບ​ຮັກສາ​ຂອງ​ບຸກຄົນ​ທີສາມ\" or \"ບ່ອນ​ເກັບ​ຮັກສາ​ຂອງ​ພາກສ່ວນ​ທີສາມ\" depending on the exact context."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Przechowywanie przez strony trzecie\" is a literal translation, it sounds somewhat clunky and formal in Polish. A more natural translation would be \"Przechowywanie danych przez osoby trzecie\" or simply \"Przechowywanie danych przez strony trzecie\".",
-          "suggestion": "Przechowywanie danych przez osoby trzecie"
+          "description": "While technically correct, \"Przechowywanie przez strony trzecie\" is a rather literal and slightly awkward translation of \"Third-party storage.\" A more natural and commonly used translation would be more concise.",
+          "suggestion": "Magazynowanie przez strony trzecie"
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Armazenamento Proveniente de Terceiros\" is understandable, it's a bit literal and clunky. A more natural and concise translation would be better.",
-          "suggestion": "Consider alternatives like \"Armazenamento de Terceiros\" or \"Serviços de Armazenamento de Terceiros\" depending on the context."
+          "description": "While \"Armazenamento Proveniente de Terceiros\" is technically correct, it's a bit verbose and less natural than other options for 'Third-party storage'. It sounds overly formal.",
+          "suggestion": "Consider \"Armazenamento de Terceiros\" or \"Solução de Armazenamento de Terceiros\" depending on context. \"Armazenamento de Terceiros\" is a more common and concise translation."
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Aplicație de stocare de la terțe\" doesn't accurately reflect the meaning of \"Third-party storage.\"  \"Aplicație\" means 'application,' and the phrase implies an application provides storage, rather than storage being provided by a third party.",
-          "suggestion": "A more accurate translation would be something like \"Stocare de la terți\" or \"Servicii de stocare de la terți\"."
+          "description": "The Romanian translation 'Aplicație de stocare de la terțe' translates to 'Third-party storage application'. It adds 'application' which isn't present in the English term. A more accurate translation would simply be 'Stocare de la terți'.",
+          "suggestion": "Stocare de la terți"
         }
       ],
       "approved_at": null
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"තෙවන පාර්ශ්ව ආචයනය\" is not an accurate translation of \"Third-party storage\". \"ආචයනය\" generally refers to respect or deference, not storage.",
-          "suggestion": "A more accurate translation would depend on the context. Possible alternatives include: \"තෙවන පාර්ශ්ව ගබඩා\" (Third-party storage), \"තෙවන පාර්ශ්වයේ నిల్వ\" (Third-party storage - using a more technical term), or a more descriptive phrase depending on the specific type of storage."
+          "description": "The Sinhala translation \"තෙවන පාර්ශ්ව ආචයනය\" is not the most accurate or natural translation of \"Third-party storage\". \"ආචයනය\" translates more closely to 'storage' or 'warehouse' in a physical sense, while 'third-party storage' refers to a cloud service or external data storage.",
+          "suggestion": "A more appropriate translation might be \"තෙවන පාර්ශ්ව ගබඩාව\" (Third-party warehouse/storage) or \"තෙවන පාර්ශ්ව ගබඩා සేవ\" (Third-party storage service)."
         }
       ],
       "approved_at": null
@@ -249,13 +249,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Shranjevanje pri zunanjem ponudniku\" is a possible translation, it's a bit verbose and formal for 'Third-party storage'. A more concise and common translation would be 'Zunanje shranjevanje'.",
-          "suggestion": "Zunanje shranjevanje"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -264,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Складиште треће стране\" is a literal translation of \"Third-party storage\", it sounds somewhat unnatural and overly formal in Serbian. A more common and natural phrasing would be \"Складиште трећих страна\" or \"Складиште спољашњег добављача\".",
-          "suggestion": "Consider using \"Складиште трећих страна\" or \"Складиште спољашњег добављача\"."
+          "description": "While \"Складиште треће стране\" is technically correct, it sounds a bit formal and clunky in Serbian. A more natural and common translation for \"Third-party storage\" would be \"Додата складиште\" or \"Складиште спољашњег пружаоца услуга\".",
+          "suggestion": "Consider using \"Додата складиште\" or \"Складиште спољашњег пружаоца услуга\"."
         }
       ],
       "approved_at": null
@@ -295,6 +289,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -34,5 +34,6 @@ export interface CreatedPDFFormDialogProps {
   localKey: string;
 }
 
-export interface InjectedCreatedPDFFormDialogProps
-  extends Pick<TStore["contextOptionsStore"], "onCopyLink"> {}
+export interface InjectedCreatedPDFFormDialogProps {
+  getItemUrl: TStore["filesStore"]["getItemUrl"];
+}

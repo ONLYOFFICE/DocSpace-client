@@ -3,7 +3,7 @@
   "content": "Plugins",
   "content_en_sha1_hash": "ab2e26dd8b8868a3969cb3321e0c983c0d9d67d4",
   "created_at": "2025-05-19T21:30:47.398Z",
-  "updated_at": "2025-08-04T07:30:01.493Z",
+  "updated_at": "2025-10-07T15:39:07.485Z",
   "comment": {
     "text": "The translation key \"Plugins\" is used to display the label for a plugin management section in the Portal Settings. It appears as the title of a category and is also used as a button text and dialog header in the UI. The key is likely displayed when the user enables plugins, allowing them to manage plugin settings.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/index.tsx",
-      "line_number": 75,
-      "context": "formData.append(\"file\", files[0]);\n addPlugin(formData);\n };\n \n React.useEffect(() => {\n setDocumentTitle(t(\"Common:Plugins\"));\n }, [t]);\n \n React.useEffect(() => {\n updatePlugins(true);\n }, [updatePlugins]);",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
+      "line_number": 141,
+      "context": "}\n \n if (enablePlugins) {\n const pluginLabel = (\n <div style={{ boxSizing: \"border-box\", display: \"flex\", gap: \"8px\" }}>\n {t(\"Common:Plugins\")}\n </div>\n );\n \n data.splice(2, 0, {\n id: \"plugins\",",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
-      "line_number": 100,
-      "context": "}\n \n if (enablePlugins) {\n const pluginLabel = (\n <div style={{ boxSizing: \"border-box\", display: \"flex\", gap: \"8px\" }}>\n {t(\"Common:Plugins\")}\n </div>\n );\n \n data.splice(2, 0, {\n id: \"plugins\",",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/index.tsx",
+      "line_number": 77,
+      "context": "formData.append(\"file\", files[0]);\n addPlugin(formData, t);\n };\n \n React.useEffect(() => {\n setDocumentTitle(t(\"Common:Plugins\"));\n }, [t]);\n \n return showPortalSettingsLoader ||\n (!isEmptyList && pluginList.length === 0) ||\n !ready ? (",
       "module": "/packages/client"
     },
     {

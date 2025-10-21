@@ -31,21 +31,38 @@ import { useNavigate, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
 
+import withLoading from "SRC_DIR/HOCs/withLoading";
+
 import { Text } from "@docspace/shared/components/text";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
-
+import { TColorScheme } from "@docspace/shared/themes";
 import { DeviceType, DeepLinkType } from "@docspace/shared/enums";
 import { saveDeepLinkSettings } from "@docspace/shared/api/settings";
 
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 
+import CommonStore from "SRC_DIR/store/CommonStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+
+import useCommon from "../useCommon";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
+import LoaderCustomization from "../sub-components/loaderCustomization";
+
 interface Props {
   isMobileView: boolean;
   deepLinkSettings: DeepLinkType;
-  initSettings: (path: string) => Promise<void>;
+  loadBaseInfo: (page: string) => Promise<void>;
+  common: CommonStore;
+  settingsStore: SettingsStore;
+  isLoaded: boolean;
+  isLoadedPage: boolean;
+  setIsLoadedConfigureDeepLink: (value: boolean) => void;
+  configureDeepLinkUrl: string;
+  currentColorScheme: TColorScheme;
 }
 
 const StyledWrapper = styled.div`
@@ -65,15 +82,37 @@ const StyledWrapper = styled.div`
 `;
 
 const ConfigureDeepLinkComponent = (props: Props) => {
-  const { isMobileView, deepLinkSettings, initSettings } = props;
+  const {
+    isMobileView,
+    deepLinkSettings,
+    loadBaseInfo,
+    common,
+    settingsStore,
+    isLoaded,
+    isLoadedPage,
+    setIsLoadedConfigureDeepLink,
+    configureDeepLinkUrl,
+    currentColorScheme,
+  } = props;
 
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t, ready } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const defaultProps = createDefaultHookSettingsProps({
+    loadBaseInfo,
+    isMobileView,
+    settingsStore,
+    common,
+  });
+
+  const { getCommonInitialValue } = useCommon(defaultProps.common);
 
   const [type, setType] = useState(0);
   const [showReminder, setShowReminder] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+
+  const isLoadedSetting = isLoaded && ready;
 
   const getSettings = () => {
     const currentSettings = getFromSessionStorage("currentConfigureDeepLink");
@@ -103,10 +142,17 @@ const ConfigureDeepLinkComponent = (props: Props) => {
   }, [type]);
 
   useEffect(() => {
-    initSettings(isMobileView ? "configure-deep-link" : "general");
     checkWidth();
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
+  }, []);
+
+  useEffect(() => {
+    if (isLoadedSetting) setIsLoadedConfigureDeepLink(isLoadedSetting);
+  }, [isLoadedSetting]);
+
+  useEffect(() => {
+    if (isMobileView) getCommonInitialValue();
   }, []);
 
   useEffect(() => {
@@ -144,6 +190,8 @@ const ConfigureDeepLinkComponent = (props: Props) => {
     setShowReminder(false);
   };
 
+  if (!isLoadedPage) return <LoaderCustomization deepLink />;
+
   return (
     <StyledWrapper>
       {!isMobileView ? (
@@ -152,6 +200,18 @@ const ConfigureDeepLinkComponent = (props: Props) => {
         </Text>
       ) : null}
       <Text>{t("ConfigureDeepLinkDescription")}</Text>
+      {configureDeepLinkUrl ? (
+        <Link
+          className="link-learn-more"
+          color={currentColorScheme.main?.accent}
+          target={LinkTarget.blank}
+          isHovered
+          href={configureDeepLinkUrl}
+          fontWeight={600}
+        >
+          {t("Common:LearnMore")}
+        </Link>
+      ) : null}
       <RadioButtonGroup
         className="radio-button-group"
         fontSize="13px"
@@ -201,11 +261,24 @@ const ConfigureDeepLinkComponent = (props: Props) => {
 };
 
 export const ConfigureDeepLink = inject<TStore>(({ settingsStore, common }) => {
-  const isMobileView = settingsStore.currentDeviceType === DeviceType.mobile;
-  const { deepLinkSettings, initSettings } = common;
+  const isMobileView = settingsStore.deviceType === DeviceType.mobile;
+  const {
+    deepLinkSettings,
+    initSettings,
+    isLoaded,
+    setIsLoadedConfigureDeepLink,
+  } = common;
   return {
     isMobileView,
     deepLinkSettings,
-    initSettings,
+    common,
+    settingsStore,
+    configureDeepLinkUrl: settingsStore.configureDeepLinkUrl,
+    currentColorScheme: settingsStore.currentColorScheme,
+    loadBaseInfo: async (page: string) => {
+      await initSettings(page);
+    },
+    isLoaded,
+    setIsLoadedConfigureDeepLink,
   };
-})(observer(ConfigureDeepLinkComponent));
+})(withLoading(observer(ConfigureDeepLinkComponent)));

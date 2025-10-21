@@ -39,13 +39,15 @@ const ContextButton = ({
   withMenu = true,
   isTrashFolder,
   isMobile,
+  isMobileOnly,
   id,
-  title,
   onCloseDropBox,
   onContextOptionsClick,
   contextButtonAnimation,
   guidAnimationVisible,
   setGuidAnimationVisible,
+  ignoreChangeView,
+  contextMenuHeader,
   ...rest
 }: TContextButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -148,8 +150,12 @@ const ContextButton = ({
         ref={menuRef}
         onHide={onHide}
         scaled={false}
-        withBackdrop
+        withBackdrop={isMobileOnly}
         leftOffset={isTrashFolder ? 188 : isMobile ? 150 : 0}
+        ignoreChangeView={ignoreChangeView}
+        headerOnlyMobile={!!contextMenuHeader}
+        header={contextMenuHeader}
+        badgeUrl={contextMenuHeader?.badgeUrl}
       />
     </div>
   );

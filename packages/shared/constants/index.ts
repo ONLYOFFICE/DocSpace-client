@@ -27,10 +27,11 @@
 import ShareAppleReactSvg from "PUBLIC_DIR/images/share.apple.react.svg";
 import ShareGoogleReactSvg from "PUBLIC_DIR/images/share.google.react.svg";
 import ShareFacebookReactSvg from "PUBLIC_DIR/images/share.facebook.react.svg";
-import ShareTwitterReactSvg from "PUBLIC_DIR/images/thirdparties/twitter.svg";
+import ShareTwitterReactSvg from "PUBLIC_DIR/images/share.twitter.svg";
 import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
 import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
 import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
+import ShareWeixinReactSvg from "PUBLIC_DIR/images/share.weixin.react.svg";
 import { globalColors } from "../themes/globalColors";
 import { FileFillingFormStatus } from "../enums";
 
@@ -48,6 +49,7 @@ export const LOADER_STYLE = Object.freeze({
   animate: true,
 });
 
+export const TOAST_FOLDER_PUBLIC_KEY = "toast_folder_public_key";
 export const MANAGER = "manager";
 export const TOTAL_SIZE = "total_size";
 export const FILE_SIZE = "file_size";
@@ -60,6 +62,7 @@ export const FREE_BACKUP = "free_backup";
 export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
 export const CREATED_FORM_KEY = "created_form_key";
 export const PUBLIC_STORAGE_KEY = "public-auth";
+export const INFO_PANEL_LOADER_EVENT = "info-panel-loader-event";
 
 export const OPEN_BACKUP_CODES_DIALOG = "openBackupCodesDialog";
 
@@ -105,6 +108,7 @@ export const FOLDER_NAMES = Object.freeze({
   13: "privacy",
   14: "shared",
   20: "archive",
+  31: "ai-agents",
 });
 
 export const PROVIDERS_DATA = Object.freeze({
@@ -141,6 +145,11 @@ export const PROVIDERS_DATA = Object.freeze({
   zoom: {
     label: "zoom",
     icon: ShareZoomReactSvg,
+    iconOptions: undefined,
+  },
+  weixin: {
+    label: "weixin",
+    icon: ShareWeixinReactSvg,
     iconOptions: undefined,
   },
 });
@@ -249,3 +258,39 @@ export const STORAGE_TARIFF_DEACTIVATED = "storageTariffDeactivated";
 // any unicode letters are allowed, characters are prohibited
 export const BRAND_NAME_REGEX =
   /^[^\s-]([^<>\/\\|:*?"'`~!@#$%^&()+={}[\];,.])*[^\s-]$/;
+
+/**
+ * Enum for type of confirm link.
+ * @readonly
+ */
+export const CategoryType = Object.freeze({
+  Personal: 0,
+  Shared: 1,
+  SharedRoom: 2,
+  Archive: 3,
+  ArchivedRoom: 4,
+  Favorite: 5,
+  Recent: 6,
+  Trash: 7,
+  Settings: 8,
+  Accounts: 9,
+  PublicRoom: 10,
+  Flows: 11,
+  SharedWithMe: 12,
+  Groups: 13,
+  Guests: 14,
+});
+
+export const AVATAR_ACTION_KEYS = {
+  PROFILE_AVATAR_UPLOAD: "profile_avatar_upload",
+  PROFILE_AVATAR_DELETE: "profile_avatar_delete",
+} as const;
+
+export const ROOM_ACTION_KEYS = {
+  CREATE_EDIT_ROOM_UPLOAD: "create_edit_room_upload",
+  CREATE_EDIT_ROOM_DELETE: "create_edit_room_delete",
+  CREATE_EDIT_ROOM_CUSTOMIZE_COVER: "create_edit_room_customize_cover",
+} as const;
+
+export const SHARED_MEMBERS_COUNT = 100;
+export const SHARED_WITH_ME_PATH = "shared-with-me";

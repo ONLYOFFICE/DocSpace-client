@@ -66,6 +66,9 @@ class TreeFoldersStore {
         case FolderType.USER:
           folder.title = i18n.t("Common:MyDocuments");
           break;
+        case FolderType.SHARE:
+          folder.title = i18n.t("Common:SharedWithMe");
+          break;
         case FolderType.Rooms:
           folder.title = i18n.t("Common:Rooms");
           break;
@@ -86,6 +89,16 @@ class TreeFoldersStore {
       }
     });
 
+    treeFolders.unshift({
+      id: "aiAgents",
+      title: i18n.t("Common:AIAgents"),
+      rootFolderType: FolderType.AIAgents,
+      folderClassName: "ai-agents",
+      security: {
+        Create: false,
+      },
+    });
+
     this.setRootFoldersTitles(treeFolders);
     this.setTreeFolders(treeFolders);
     this.listenTreeFolders(treeFolders);
@@ -98,15 +111,15 @@ class TreeFoldersStore {
         return f.rootFolderType !== FolderType.Recent;
       })
       .map((f) => `DIR-${f.id}`)
-      .filter((f) => !SocketHelper.socketSubscribers.has(f));
+      .filter((f) => !SocketHelper?.socketSubscribers.has(f));
 
     if (roomParts.length > 0) {
-      // SocketHelper.emit(SocketCommands.Unsubscribe, {
+      // SocketHelper?.emit(SocketCommands.Unsubscribe, {
       //   roomParts: treeFolders.map((f) => `DIR-${f.id}`),
       //   individual: true,
       // });
 
-      SocketHelper.emit(SocketCommands.Subscribe, {
+      SocketHelper?.emit(SocketCommands.Subscribe, {
         roomParts,
         individual: true,
       });
@@ -235,7 +248,7 @@ class TreeFoldersStore {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.USER);
   }
 
-  get shareFolder() {
+  get sharedWithMeFolder() {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.SHARE);
   }
 
@@ -310,6 +323,10 @@ class TreeFoldersStore {
     return this.recentFolder ? this.recentFolder.id : null;
   }
 
+  get sharedWithMeFolderId() {
+    return this.sharedWithMeFolder ? this.sharedWithMeFolder.id : null;
+  }
+
   get isPersonalRoom() {
     return (
       this.myFolder &&
@@ -317,10 +334,15 @@ class TreeFoldersStore {
     );
   }
 
-  get isShareFolder() {
+  get isSharedWithMeFolder() {
     return (
-      this.shareFolder && this.shareFolder.id === this.selectedFolderStore.id
+      this.sharedWithMeFolder &&
+      this.sharedWithMeFolder.id === this.selectedFolderStore.id
     );
+  }
+
+  get isSharedWithMeFolderRoot() {
+    return this.selectedFolderStore.rootFolderType === FolderType.SHARE;
   }
 
   get isFavoritesFolder() {
@@ -402,6 +424,12 @@ class TreeFoldersStore {
 
   get isArchiveFolderRoot() {
     return FolderType.Archive === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isVDRRoomRoot() {
+    return (
+      FolderType.VirtualDataRoom === this.selectedFolderStore.parentRoomType
+    );
   }
 
   get isDocumentsFolder() {

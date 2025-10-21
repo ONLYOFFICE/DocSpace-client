@@ -194,7 +194,7 @@ const PayerInformation = ({
   const payerName = () => {
     let emailUnfoundedUser;
 
-    if (email) emailUnfoundedUser = `«${email}»`;
+    if (email) emailUnfoundedUser = `"${email}"`;
 
     return (
       <Text as="span" fontWeight={600} fontSize="14px">

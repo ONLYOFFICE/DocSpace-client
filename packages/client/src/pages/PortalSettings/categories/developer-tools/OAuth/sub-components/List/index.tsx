@@ -49,7 +49,7 @@ interface ListProps {
   currentDeviceType: DeviceType;
   apiOAuthLink: string;
   logoText: string;
-  isLoading: boolean;
+  isLoading?: boolean;
   isError: boolean;
 }
 

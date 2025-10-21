@@ -28,7 +28,6 @@ import EmptyTrashDialog from "./EmptyTrashDialog";
 import DeleteDialog from "./DeleteDialog";
 import DownloadDialog from "./DownloadDialog";
 import ConvertDialog from "./ConvertDialog";
-import DeleteThirdPartyDialog from "./DeleteThirdPartyDialog";
 import ConnectDialog from "./ConnectDialog/ConnectDialogWrapper";
 import ConflictResolveDialog from "./ConflictResolveDialog";
 import ChangeEmailDialog from "./ChangeEmailDialog";
@@ -73,13 +72,14 @@ import FormFillingTipsDialog from "./FormFillingTipsDialog";
 import ReducedRightsDialog from "./ReducedRightsDialog";
 import SocialAuthWelcomeDialog from "./SocialAuthWelcomeDialog";
 import StorageTariffDeactiveted from "./StorageTariffDeactiveted";
+import ConnectAccountDialog from "./ConnectAccountDialog";
+import DisconnectAccountDialog from "./DisconnectAccountDialog";
 
 export {
   EmptyTrashDialog,
   DeleteDialog,
   DownloadDialog,
   ConvertDialog,
-  DeleteThirdPartyDialog,
   ConnectDialog,
   ConflictResolveDialog,
   ChangeEmailDialog,
@@ -124,4 +124,6 @@ export {
   ReducedRightsDialog,
   SocialAuthWelcomeDialog,
   StorageTariffDeactiveted,
+  ConnectAccountDialog,
+  DisconnectAccountDialog,
 };

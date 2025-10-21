@@ -3,7 +3,7 @@
   "content": "Add static text",
   "content_en_sha1_hash": "2f892961284e9d58081dd3ebe12fd860a51d3b74",
   "created_at": "2025-05-19T21:30:56.771Z",
-  "updated_at": "2025-08-11T09:02:43.865Z",
+  "updated_at": "2025-09-12T14:18:49.298Z",
   "comment": {
     "text": "The translation key \"AddStaticText\" is used to display the title \"Add static text\" in a watermark component within a UI dialogue. This text serves as a label for an input field where users can add static text content.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ViewerInfo.js",
-      "line_number": 253,
+      "line_number": 256,
       "context": "<Text\n className=\"watermark-title title-without-top\"\n fontWeight={600}\n lineHeight=\"20px\"\n >\n {t(\"AddStaticText\")}\n </Text>\n <TextInput\n scale\n value={textValue}\n tabIndex={1}",
       "module": "/packages/client"
     }

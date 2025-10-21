@@ -40,12 +40,13 @@ import { isMobileDevice, isBetaLanguage } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import { StyledSettingsComponent } from "./StyledSettings";
 import checkScrollSettingsBlock from "../utils";
+import useCommon from "../useCommon";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 import BetaBadge from "../../../../../components/BetaBadgeWrapper";
 
@@ -81,7 +82,6 @@ const LanguageAndTimeZoneComponent = (props) => {
   const {
     i18n,
     language,
-    cultureNames,
     rawTimezones,
     portalTimeZoneId,
     isLoaded,
@@ -90,16 +90,28 @@ const LanguageAndTimeZoneComponent = (props) => {
     tReady,
     setIsLoadedLngTZSettings,
     t,
-    setIsLoaded,
     timezone,
     languageAndTimeZoneSettingsUrl,
-    initSettings,
     isLoadedPage,
     currentColorScheme,
     deviceType,
+    loadBaseInfo,
+    common,
+    settingsStore,
   } = props;
 
   const isMobileView = deviceType === DeviceType.mobile;
+
+  const defaultProps = createDefaultHookSettingsProps({
+    loadBaseInfo,
+    isMobileView,
+    settingsStore,
+    common,
+  });
+
+  const { getCommonInitialValue, cultureNames } = useCommon(
+    defaultProps.common,
+  );
 
   const navigate = useNavigate();
 
@@ -122,16 +134,9 @@ const LanguageAndTimeZoneComponent = (props) => {
     if (!isMobileDevice()) {
       setState((val) => ({ ...val, isCustomizationView: true }));
 
-      const currentUrl = window.location.href.replace(
-        window.location.origin,
-        "",
-      );
-
-      const newUrl = "/portal-settings/customization/general";
-
-      if (newUrl === currentUrl) return;
-
-      navigate(newUrl);
+      if (location.pathname.includes("language-and-time-zone")) {
+        navigate("/portal-settings/customization/general");
+      }
     } else {
       setState((val) => ({ ...val, isCustomizationView: false }));
     }
@@ -174,12 +179,9 @@ const LanguageAndTimeZoneComponent = (props) => {
     timezoneDefaultFromSessionStorage =
       getFromSessionStorage("timezoneDefault");
 
-    setDocumentTitle(t("StudioTimeLanguageSettings"));
+    if (isMobileView) getCommonInitialValue();
 
-    if (!isLoaded) {
-      const page = isMobileView ? "language-and-time-zone" : "general";
-      initSettings(page).then(() => setIsLoaded(true));
-    }
+    setDocumentTitle(t("StudioTimeLanguageSettings"));
 
     const isLoadedSetting = isLoaded && tReady && timezoneFromSessionStorage;
 
@@ -358,8 +360,6 @@ const LanguageAndTimeZoneComponent = (props) => {
     setIsLoadedLngTZSettings,
 
     timezone,
-
-    initSettings,
   ]);
 
   const onSelectLanguage = (selectedLanguage) => {
@@ -457,7 +457,7 @@ const LanguageAndTimeZoneComponent = (props) => {
 
   const isBetaLang = state?.language?.isBeta;
 
-  const settingsBlock = !(state.language && state.timezone) ? null : (
+  const settingsBlock = (
     <div className="settings-block">
       <FieldContainer
         id="fieldContainerLanguage"
@@ -471,11 +471,12 @@ const LanguageAndTimeZoneComponent = (props) => {
             options={cultureNamesNew}
             selectedOption={state.language}
             onSelect={onSelectLanguage}
-            isDisabled={isLoading}
+            isDisabled={isLoading || !state.language}
             directionY="both"
             noBorder={false}
             scaled
             scaledOptions
+            isDefaultMode={false}
             dropDownMaxHeight={300}
             className="dropdown-item-width combo-box-settings"
             showDisabledItems
@@ -496,10 +497,11 @@ const LanguageAndTimeZoneComponent = (props) => {
           directionY="both"
           selectedOption={state.timezone}
           onSelect={onSelectTimezone}
-          isDisabled={isLoading}
+          isDisabled={isLoading || !state.timezone}
           noBorder={false}
           scaled
           scaledOptions
+          isDefaultMode={false}
           dropDownMaxHeight={300}
           className="dropdown-item-width combo-box-settings"
           showDisabledItems
@@ -576,6 +578,7 @@ export const LanguageAndTimeZoneSettings = inject(
       nameSchemaId,
       greetingSettings,
       cultures,
+      getPortalCultures,
       currentColorScheme,
       languageAndTimeZoneSettingsUrl,
       deviceType,
@@ -598,19 +601,22 @@ export const LanguageAndTimeZoneSettings = inject(
       isLoaded,
       setIsLoadedLngTZSettings,
       cultures,
-      initSettings,
-      setIsLoaded,
+      getPortalCultures,
       currentColorScheme,
       languageAndTimeZoneSettingsUrl,
       deviceType,
+      setIsLoaded,
+      common,
+      settingsStore,
+      loadBaseInfo: async (page) => {
+        await initSettings(page);
+      },
     };
   },
 )(
-  withCultureNames(
-    withLoading(
-      withTranslation(["Settings", "Common"])(
-        observer(LanguageAndTimeZoneComponent),
-      ),
+  withLoading(
+    withTranslation(["Settings", "Common"])(
+      observer(LanguageAndTimeZoneComponent),
     ),
   ),
 );

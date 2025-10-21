@@ -3,7 +3,7 @@
   "content": "Disable",
   "content_en_sha1_hash": "9a7d4e0687b14e2b7cda406900b802782cd50a62",
   "created_at": "2025-05-19T21:30:44.526Z",
-  "updated_at": "2025-08-04T07:30:01.064Z",
+  "updated_at": "2025-09-26T15:21:06.095Z",
   "comment": {
     "text": "This translation key is used to display a label that enables users to disable guest access. In the \"ChangeUserStatusDialog\", it will be displayed as part of a button's label depending on the user type. It appears in a dialog for changing user status.",
     "is_auto": true,
@@ -18,19 +18,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
-      "line_number": 151,
+      "line_number": 188,
       "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"disable\",\n label: t(\"Common:Disable\"),\n value: 0,\n dataTestId: \"ad_management_disable\",\n },\n {\n id: \"enable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 760,
+      "line_number": 791,
       "context": "};\n \n const disableOption = {\n key: \"disable\",\n icon: RemoveReactSvgUrl,\n label: t(\"Common:Disable\"),\n onClick: () => this.onDisable(clientId),\n dataTestId: \"oauth_disable_option\",\n };\n \n const generateDeveloperTokenOption = {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 760,
+      "line_number": 791,
       "context": "};\n \n const disableOption = {\n key: \"disable\",\n icon: RemoveReactSvgUrl,\n label: t(\"Common:Disable\"),\n onClick: () => this.onDisable(clientId),\n dataTestId: \"oauth_disable_option\",\n };\n \n const generateDeveloperTokenOption = {",
       "module": "/packages/client"
     }

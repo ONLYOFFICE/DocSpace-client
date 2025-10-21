@@ -72,10 +72,10 @@ describe("<MoreLoginModal />", () => {
     expect(screen.getByText("Common:ProviderFacebook")).toBeInTheDocument();
   });
 
-  it("calls onSocialLoginClick when provider button is clicked", () => {
+  it("calls onSocialLoginClick when click on provider", () => {
     render(<MoreLoginModal {...baseProps} />);
-    const continueButtons = screen.getAllByText("Common:ContinueButton");
-    fireEvent.click(continueButtons[1]);
+    const provider = screen.getByTestId("more-login-provider-item-google");
+    fireEvent.click(provider);
     expect(baseProps.onSocialLoginClick).toHaveBeenCalled();
   });
 });

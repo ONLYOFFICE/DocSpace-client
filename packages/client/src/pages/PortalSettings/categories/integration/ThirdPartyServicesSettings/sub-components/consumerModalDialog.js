@@ -180,7 +180,7 @@ class ConsumerModalDialog extends React.Component {
 
   mapTokenNameToState = () => {
     const { selectedConsumer } = this.props;
-    selectedConsumer.props.forEach((prop) => {
+    selectedConsumer.props?.forEach((prop) => {
       this.requiredRef.push(prop.name);
 
       this.setState({
@@ -206,6 +206,7 @@ class ConsumerModalDialog extends React.Component {
       smsclUrl,
       firebaseUrl,
       appleIDUrl,
+      weixinUrl,
       telegramUrl,
       wordpressUrl,
       awsUrl,
@@ -243,6 +244,8 @@ class ConsumerModalDialog extends React.Component {
         return firebaseUrl;
       case "appleID":
         return appleIDUrl;
+      case "weixin":
+        return weixinUrl;
       case "telegram":
         return telegramUrl;
       case "wordpress":
@@ -324,11 +327,7 @@ class ConsumerModalDialog extends React.Component {
         <ModalDialog.Header>{selectedConsumer.title}</ModalDialog.Header>
         <ModalDialog.Body>
           <div style={{ padding: "16px 0 16px" }}>{consumerInstruction}</div>
-          <>
-            {selectedConsumer.props.map((prop, i) =>
-              this.inputsRender(prop, i),
-            )}
-          </>
+          {selectedConsumer.props?.map((prop, i) => this.inputsRender(prop, i))}
           {description}
         </ModalDialog.Body>
         <ModalDialog.Footer>
@@ -388,6 +387,7 @@ export default inject(({ setup, settingsStore }) => {
     smsclUrl,
     firebaseUrl,
     appleIDUrl,
+    weixinUrl,
     telegramUrl,
     wordpressUrl,
     awsUrl,
@@ -418,6 +418,7 @@ export default inject(({ setup, settingsStore }) => {
     smsclUrl,
     firebaseUrl,
     appleIDUrl,
+    weixinUrl,
     telegramUrl,
     wordpressUrl,
     awsUrl,

@@ -23,5 +23,6 @@
   "ThirdPartyInfo": "Spremenite podatke tretjih oseb",
   "ThirdPartyTitle": "Storitve tretjih oseb",
   "TitleShowActions": "Pokaži akcije datoteke",
-  "TitleShowFolderActions": "Pokaži akcije mape"
+  "TitleShowFolderActions": "Pokaži akcije mape",
+  "TrashItemsDeleteSuccess": "Izbrani elementi so bili uspešno izbrisani iz {{sectionName}}"
 }

@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2025-08-27T10:14:35.024Z",
+  "updated_at": "2025-10-17T14:43:53.347Z",
   "comment": {
     "text": "The translation key \"Contacts\" is used to display a title for a list or directory of contacts, appearing as a header in various UI elements such as articles, template access selectors, and invite panels. This text provides context and helps distinguish this section from others, guiding the user's understanding of what they are viewing.",
     "is_auto": true,
@@ -11,21 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/Article/Body/AccountsItem.js",
-      "line_number": 53,
-      "context": "[onClick],\n );\n \n const icon = getCatalogIconUrlByType(PageType.account);\n \n const title = t(\"Common:Contacts\");\n \n const linkData = getLinkData(\"accounts\");\n \n return (\n <ArticleItem",
+      "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
+      "line_number": 556,
+      "context": "withGuests={showGuestsTab}\n withHeader\n dataTestId=\"invite_panel_people_selector\"\n headerProps={{\n // Todo: Update groups empty screen texts when they are ready\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/TemplateAccessSelector/index.tsx",
       "line_number": 106,
       "context": "disableInvitedUsers={disableInvitedUsers}\n checkIfUserInvited={checkIfUserInvited}\n withHeader\n filter={filter}\n headerProps={{\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick,\n onCloseClick,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 556,
-      "context": "withGuests={showGuestsTab}\n withHeader\n dataTestId=\"invite_panel_people_selector\"\n headerProps={{\n // Todo: Update groups empty screen texts when they are ready\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/client"
     },
     {
@@ -42,44 +36,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 527,
-      "context": ": isSettingsPage\n ? t(\"Common:Settings\")\n : isContactsPage\n ? isContactsInsideGroupPage\n ? getInsideGroupTitle()\n : t(\"Common:Contacts\")\n : title;\n \n const currentCanCreate = security?.Create;\n \n const currentRootRoomTitle =",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 527,
-      "context": ": isSettingsPage\n ? t(\"Common:Settings\")\n : isContactsPage\n ? isContactsInsideGroupPage\n ? getInsideGroupTitle()\n : t(\"Common:Contacts\")\n : title;\n \n const currentCanCreate = security?.Create;\n \n const currentRootRoomTitle =",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 131,
-      "context": "component: (\n <ImportStep\n t={t}\n serviceName=\"Google Workspace\"\n usersExportDetails={{\n name: t(\"Common:Contacts\"),\n icon: PeopleIcon,\n }}\n personalExportDetails={{\n name: t(\"Settings:GoogleDriveFiles\"),\n }}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 139,
-      "context": "component: (\n <ImportStep\n t={t}\n serviceName=\"Nextcloud\"\n usersExportDetails={{\n name: t(\"Common:Contacts\"),\n icon: PeopleIcon,\n }}\n personalExportDetails={{\n name: t(\"Settings:UsersFiles\"),\n }}",
+      "line_number": 626,
+      "context": "navigationPath[navigationPath.length - 2].title;\n \n const accountsNavigationPath = isContactsInsideGroupPage && [\n {\n id: 0,\n title: t(\"Common:Contacts\"),\n isRoom: false,\n isRootRoom: true,\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 109,
-      "context": "sectionName: usersExportDetails.name,\n workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Contacts\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: AccountsIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 109,
-      "context": "sectionName: usersExportDetails.name,\n workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Contacts\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: AccountsIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 109,
-      "context": "sectionName: usersExportDetails.name,\n workspace: serviceName,\n sectionIcon: usersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Contacts\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: AccountsIcon,\n }}\n isDisabled\n dataTestId=\"import_users_section\"",
+      "line_number": 127,
+      "context": "t={t}\n i18nKey=\"GroupsSectionDescription\"\n ns=\"Settings\"\n values={{\n serviceName,\n sectionName: t(\"Common:Contacts\"),\n }}\n components={{\n 1: <span />,\n }}\n />",
       "module": "/packages/client"
     },
     {
@@ -96,14 +60,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 249,
+      "line_number": 290,
       "context": "onClick={onChangeContacts}\n noSelect\n >\n {t(\"InviteViaContacts\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>\n \n <Text",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 249,
+      "line_number": 290,
       "context": "onClick={onChangeContacts}\n noSelect\n >\n {t(\"InviteViaContacts\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>\n \n <Text",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ProfileActionsStore.js",
+      "line_number": 428,
+      "context": "const accounts =\n !isVisitor && !isCollaborator\n ? {\n key: \"user-menu-accounts\",\n icon: CatalogAccountsReactSvgUrl,\n label: t(\"Common:Contacts\"),\n onClick: (obj) =>\n this.onAccountsClick(PEOPLE_ROUTE_WITH_FILTER, obj),\n url: PEOPLE_ROUTE_WITH_FILTER,\n preventNewTab: true,\n }",
       "module": "/packages/client"
     },
     {
@@ -113,8 +83,14 @@
       "module": "/packages/login"
     },
     {
+      "file_path": "/packages/shared/components/share/selector/index.tsx",
+      "line_number": 144,
+      "context": "targetEntityType={targetEntityType}\n data-test-id=\"share_to_people_selector\"\n disabledInvitedText={t(\"Common:Shared\")}\n {...accessRightsProps}\n headerProps={{\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick,\n onCloseClick,",
+      "module": "/packages/shared"
+    },
+    {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 479,
+      "line_number": 491,
       "context": "const headerSelectorProps: TSelectorHeader = withHeader\n ? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel: headerProps.headerLabel || t(\"Common:Contacts\"),\n },\n }\n : ({} as TSelectorHeader);\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "Info panel",
   "content_en_sha1_hash": "700658d503d6d7ee04433b62d51c26c408f588da",
   "created_at": "2025-05-19T21:30:45.909Z",
-  "updated_at": "2025-08-21T11:22:39.842Z",
+  "updated_at": "2025-10-16T07:29:35.642Z",
   "comment": {
     "text": "The \"InfoPanel\" translation key is used to display a panel's title in various places within the application, such as on toggle buttons and in section headers. It provides information about an info panel component, indicating its purpose as a container for displaying additional details. This translation key appears primarily on header elements.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 675,
-      "context": "warningText,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Translations:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={!isRoomsFolder}\n onPlusClick={onCreateRoom}\n isEmptyPage={isEmptyPage}\n isRoom={isCurrentRoom || isContactsPage || isProfile}",
+      "line_number": 779,
+      "context": "warningText,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Translations:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={withMenu}\n onPlusClick={onPlusClick}\n isEmptyPage={isEmptyPage}\n isRoom={isCurrentRoom || isContactsPage || isProfile}",
       "module": "/packages/client"
     }
   ],

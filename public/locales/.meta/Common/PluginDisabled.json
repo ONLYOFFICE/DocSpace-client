@@ -3,7 +3,7 @@
   "content": "Plugin disabled",
   "content_en_sha1_hash": "8e970c1c58b98cecd2d9a7629625b1d70321a419",
   "created_at": "2025-05-19T21:30:47.380Z",
-  "updated_at": "2025-08-04T07:30:01.618Z",
+  "updated_at": "2025-10-17T14:43:53.640Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a plugin has been disabled. It appears in the UI when a plugin's status is false, typically after clicking a button or deactivating a plugin. Translators should provide a clear and concise phrase that accurately conveys this information.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/PluginStore.ts",
-      "line_number": 438,
+      "line_number": 487,
       "context": "if (status) {\n if (t) toastr.success(t(\"Common:PluginEnabled\"));\n this.activatePlugin(name);\n } else {\n if (t) toastr.success(t(\"Common:PluginDisabled\"));\n this.deactivatePlugin(name);\n }\n \n return plugin;\n } catch (e) {",
       "module": "/packages/client"
     }

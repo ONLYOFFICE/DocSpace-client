@@ -3,7 +3,7 @@
   "content": "Disconnect",
   "content_en_sha1_hash": "ed28e0686e1251ba046f582a3e9ec02470a5e78d",
   "created_at": "2025-05-19T21:30:44.562Z",
-  "updated_at": "2025-09-02T07:59:28.702Z",
+  "updated_at": "2025-10-17T14:43:53.402Z",
   "comment": {
     "text": "This translation key is used to display the label \"Disconnect\" or variations of it, such as \"Sign Up With Apple\", in various UI elements like buttons and icons. It appears on a settings page and is related to data management, file backup, or deletion options. Translators should use this key for localized versions of these labels.",
     "is_auto": true,
@@ -11,21 +11,27 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/dialogs/DisconnectAccountDialog/index.tsx",
+      "line_number": 88,
+      "context": "})}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:Disconnect\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onClickDisconnect}\n />",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2271,
-      "context": "},\n {\n id: \"option_delete\",\n key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),",
+      "line_number": 2310,
+      "context": "},\n {\n id: \"option_delete\",\n key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/direct-third-party-connection/DirectThirdPartyConnection.tsx",
-      "line_number": 241,
+      "line_number": 239,
       "context": "icon: RefreshReactSvgUrl,\n dataTestId: \"connection_settings_option\",\n },\n {\n key: \"Disconnect-settings\",\n label: t(\"Common:Disconnect\"),\n onClick: onDisconnect,\n disabled: false,\n icon: AccessNoneReactSvgUrl,\n dataTestId: \"disconnect_settings_option\",\n },",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 390,
-      "context": "signUp = false,\n ) {\n const capitalizeProvider =\n provider.charAt(0).toUpperCase() + provider.slice(1);\n if (linked) {\n return `${t(\"Common:Disconnect\")} ${capitalizeProvider}`;\n }\n \n switch (provider) {\n case \"apple\":\n return signUp ? t(\"Common:SignUpWithApple\") : t(\"Common:SignInWithApple\");",
+      "line_number": 416,
+      "context": "signUp = false,\n ) {\n const providerLabel = getProviderLabel(provider, t);\n \n if (linked) {\n return `${t(\"Common:Disconnect\")} ${providerLabel}`;\n }\n \n switch (provider) {\n case \"apple\":\n return signUp ? t(\"Common:SignUpWithApple\") : t(\"Common:SignInWithApple\");",
       "module": "/packages/shared"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Templates",
   "content_en_sha1_hash": "f25b700ed9f092123a43acb205a6869342cf9dd6",
   "created_at": "2025-05-19T21:30:49.261Z",
-  "updated_at": "2025-08-11T09:02:43.933Z",
+  "updated_at": "2025-10-14T01:58:40.254Z",
   "comment": {
     "text": "The \"Templates\" translation key is used to display the label for a tabs section that allows users to select templates. This text is typically found on a page or button related to room settings, where it helps users navigate between different template options.",
     "is_auto": true,
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'වෙනස් කළ හැකි ආකෘතීන්' (Venasa kala sakiyata akrutiin) is a bit too literal and doesn't perfectly convey the meaning of 'Templates'.  'ආකෘතීන්' is accurate for 'formats/structures' but 'වෙනස් කළ හැකි' (Venasa kala sakiyata) which means 'changeable' adds an unnecessary qualifier.  'Templates' usually implies pre-designed structures that *can* be modified, but not necessarily must be.",
-          "suggestion": "නිර්මාණ ආකෘතීන් (Nirmanaya Akrutiin) - This more closely aligns with 'Templates' meaning pre-designed structures or designs."
+          "description": "The translation 'වෙනස් කළ හැකි ආකෘතීන්' while technically meaning 'changeable formats/templates', doesn't directly convey the meaning of 'Templates' in the context of a content management system or design resources. It's too verbose and doesn't have the conciseness of the English word.",
+          "suggestion": "වෙනස් කළ හැකි ආකෘතීන් is accurate but lacks conciseness. Consider 'ආකෘතීන්' (Aakruthin) or a more localized term that represents templates within a specific design or CMS context. A direct transliteration might be problematic, but an understanding of the concept in Sinhala is crucial."
         }
       ],
       "approved_at": null
@@ -205,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

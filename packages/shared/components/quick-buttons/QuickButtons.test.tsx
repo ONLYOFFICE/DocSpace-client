@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import type { TFunction } from "i18next";
 import { screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
@@ -34,8 +35,6 @@ import { renderWithTheme } from "../../utils/render-with-theme";
 import { QuickButtons } from ".";
 import type { QuickButtonsProps } from "./QuickButtons.types";
 import { type TFile } from "../../api/files/types";
-
-import type { TTranslation } from "../../types";
 
 // Mock SVG imports
 jest.mock("PUBLIC_DIR/images/icons/16/download.react.svg", () => {
@@ -80,10 +79,7 @@ jest.mock("react-device-detect", () => ({
   isTablet: false,
 }));
 
-const mockT: TTranslation = (
-  key: string,
-  params?: { [key: string]: string | number | string[] },
-) => {
+const mockT = ((key: string, params?: Record<string, string>) => {
   const translations: Record<string, string> = {
     "Common:Download": "Download",
     "Common:CopySharedLink": "Copy Shared Link",
@@ -97,7 +93,7 @@ const mockT: TTranslation = (
   };
 
   return translations[key] || key;
-};
+}) as TFunction;
 
 const baseFileItem: TFile = {
   id: 1,
@@ -335,7 +331,9 @@ describe("<QuickButtons />", () => {
       lockedBy: "John Doe",
     };
 
-    renderWithTheme(<QuickButtons {...baseProps} item={lockedItem} />);
+    renderWithTheme(
+      <QuickButtons {...baseProps} viewAs="tile" item={lockedItem} />,
+    );
 
     const lockButton = screen.getByTitle("Unblock File");
     expect(lockButton).toBeInTheDocument();
@@ -353,8 +351,9 @@ describe("<QuickButtons />", () => {
     renderWithTheme(
       <QuickButtons
         {...baseProps}
-        item={lockedItem}
+        viewAs="tile"
         onClickLock={onClickLock}
+        item={lockedItem}
       />,
     );
 
@@ -368,7 +367,7 @@ describe("<QuickButtons />", () => {
     const onClickLock = jest.fn();
     const lockedItem = {
       ...baseFileItem,
-      locked: true as unknown as boolean,
+      locked: true,
       lockedBy: "John Doe",
       security: {
         ...baseFileItem.security,
@@ -379,6 +378,7 @@ describe("<QuickButtons />", () => {
     renderWithTheme(
       <QuickButtons
         {...baseProps}
+        viewAs="tile"
         item={lockedItem}
         onClickLock={onClickLock}
       />,

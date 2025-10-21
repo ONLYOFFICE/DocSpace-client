@@ -26,11 +26,14 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 import isNil from "lodash/isNil";
+import { Trans } from "react-i18next";
 import { isTablet as isTabletDevice } from "react-device-detect";
 
 import FileActionsDownloadReactSvg from "PUBLIC_DIR/images/icons/16/download.react.svg";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import LifetimeReactSvgUrl from "PUBLIC_DIR/images/lifetime.react.svg?url";
+import ExpirationLinkDateReactSvgUrl from "PUBLIC_DIR/images/icons/12/clock.svg?url";
+import ShareSvgUrl from "PUBLIC_DIR/images/icons/12/share.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import LockedIconReactSvg from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
 import LockedIconReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
@@ -38,11 +41,13 @@ import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
 import FavoriteFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
 
 import { classNames, IconSizeType, isTablet, isDesktop } from "../../utils";
-import { RoomsType, ShareAccessRights } from "../../enums";
+import { FolderType, RoomsType, ShareAccessRights } from "../../enums";
 import { Tooltip } from "../tooltip";
 import { Text } from "../text";
+import { getDate, isExpired } from "../share/Share.helpers";
 import { IconButton } from "../icon-button";
 import { isRoom } from "../../utils/typeGuards";
+import { globalColors } from "../../themes/globalColors";
 
 import type { QuickButtonsProps } from "./QuickButtons.types";
 
@@ -65,7 +70,8 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     isTemplatesFolder,
     onClickLock,
     onClickFavorite,
-    isRecentFolder,
+    isTrashFolder,
+    openShareTab,
   } = props;
 
   const { id, shared, security } = item;
@@ -90,6 +96,12 @@ export const QuickButtons = (props: QuickButtonsProps) => {
 
   const isAvailableShareFile = item.canShare && !isRoom(item);
 
+  const isAvailableShareForUser =
+    item.canShare &&
+    !isRoom(item) &&
+    (item.rootFolderType === FolderType.USER ||
+      item.rootFolderType === FolderType.SHARE);
+
   const isPublicRoomType =
     "roomType" in item &&
     (item.roomType === RoomsType.PublicRoom ||
@@ -107,6 +119,9 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     !isArchiveFolder &&
     !isTile;
 
+  const expirationLinkDate =
+    item && "expirationDate" in item ? item.expirationDate : "";
+
   const getTooltipContent = () => (
     <Text fontSize="12px" fontWeight={400} noSelect>
       {roomLifetime?.deletePermanently
@@ -117,6 +132,35 @@ export const QuickButtons = (props: QuickButtonsProps) => {
           })}
     </Text>
   );
+
+  const getExpirationLinkDateTooltipContent = () => {
+    if (
+      item.external &&
+      (item.isLinkExpired ||
+        (expirationLinkDate && isExpired(expirationLinkDate)))
+    )
+      return (
+        <Text fontSize="12px" fontWeight={400} noSelect>
+          {t("Common:LinkExpired")}
+        </Text>
+      );
+
+    if (!expirationLinkDate) return null;
+
+    const date = getDate(expirationLinkDate);
+
+    return (
+      <Text fontSize="12px" fontWeight={400} noSelect>
+        <Trans
+          t={t}
+          ns="Common"
+          values={{ date }}
+          i18nKey="LinkExpirationDate"
+          components={{ 1: <strong /> }}
+        />
+      </Text>
+    );
+  };
 
   const getLockTooltip = () => (
     <Text fontSize="12px" fontWeight={400} noSelect>
@@ -131,6 +175,9 @@ export const QuickButtons = (props: QuickButtonsProps) => {
 
     if (onClickLock) onClickLock();
   };
+
+  const showFavoriteIcon =
+    !isRoom(item) && item?.isFavorite && !isPublicRoom && !isTrashFolder;
 
   return (
     <div className="badges additional-badges badges__quickButtons">
@@ -189,7 +236,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               title={t("Common:CopySharedLink")}
             />
           ) : null}
-          {isAvailableShareFile ? (
+          {isAvailableShareFile && !isAvailableShareForUser ? (
             <IconButton
               iconName={LinkReactSvgUrl}
               className={classNames("badge copy-link icons-group", {
@@ -204,7 +251,21 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               title={t("Common:CopySharedLink")}
             />
           ) : null}
-          {locked ? (
+          {isAvailableShareForUser ? (
+            <IconButton
+              iconName={ShareSvgUrl}
+              className={classNames("badge copy-link icons-group", {
+                "create-share-link": !item.sharedForUser && !item.shared,
+                "link-shared": item.sharedForUser || item.shared,
+              })}
+              size={sizeQuickButton}
+              onClick={openShareTab}
+              color={item.sharedForUser || item.shared ? "accent" : undefined}
+              isDisabled={isDisabled}
+              hoverColor="accent"
+            />
+          ) : null}
+          {locked && isTile ? (
             <>
               <IconButton
                 iconName={iconLock}
@@ -231,7 +292,28 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             </>
           ) : null}
 
-          {!isRoom(item) && item?.isFavorite && !isRecentFolder ? (
+          {expirationLinkDate ? (
+            <>
+              <IconButton
+                iconName={ExpirationLinkDateReactSvgUrl}
+                className="badge expiration-link-date icons-group"
+                isClickable
+                size={sizeQuickButton}
+                isDisabled={isDisabled}
+                data-tooltip-id={`expirationLinkDateTooltip${item.id}`}
+                color={globalColors.lightErrorStatus}
+              />
+              <Tooltip
+                id={`expirationLinkDateTooltip${item.id}`}
+                place="bottom"
+                getContent={getExpirationLinkDateTooltipContent}
+                maxWidth="300px"
+                openOnClick
+              />
+            </>
+          ) : null}
+
+          {showFavoriteIcon ? (
             <IconButton
               iconName={
                 item?.isFavorite ? FavoriteFillReactSvgUrl : FavoriteReactSvgUrl

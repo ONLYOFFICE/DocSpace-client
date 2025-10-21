@@ -44,6 +44,7 @@ import type { TThirdParties } from "../../../api/files/types";
 
 export interface AutomaticBackupProps {
   isManagement?: boolean;
+  isBackupPaid?: boolean;
 
   isInitialLoading: boolean;
   isEmptyContentBeforeLoader: boolean;
@@ -176,4 +177,6 @@ export interface AutomaticBackupProps {
   setConnectDialogVisible: (visible: boolean) => void;
   setDeleteThirdPartyDialogVisible: (visible: boolean) => void;
   // end dialogsStore
+
+  setDefaultFolderId?: (id: string | number | null) => void;
 }

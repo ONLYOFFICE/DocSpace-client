@@ -3,7 +3,7 @@
   "content": "Hide",
   "content_en_sha1_hash": "34d8b60fe25332f7b98585e82e753eaf502c3e50",
   "created_at": "2025-05-19T21:30:49.949Z",
-  "updated_at": "2025-05-24T02:33:42.524Z",
+  "updated_at": "2025-09-07T07:53:15.039Z",
   "comment": {
     "text": "This translation key is used to display \"Hide\" when a password input field needs to be toggled on or off. It appears as a button text in an error file component and is linked to the visibility of a password input field.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/PanelComponents/ErrorFile.js",
-      "line_number": 61,
-      "context": "maxWidth=\"320px\"\n color={theme.tooltip.backgroundColor}\n />\n {item.needPassword ? (\n <Text className=\"enter-password\" fontWeight=\"600\" onClick={onTextClick}>\n {showPasswordInput ? t(\"HideInput\") : t(\"Common:EnterPassword\")}\n </Text>\n ) : null}\n </div>\n );\n };",
+      "line_number": 77,
+      "context": "{t(\"Retry\")}\n </Text>\n ) : null}\n {item.needPassword ? (\n <Text className=\"enter-password\" fontWeight=\"600\" onClick={onTextClick}>\n {showPasswordInput ? t(\"HideInput\") : t(\"Common:EnterPassword\")}\n </Text>\n ) : null}\n </div>\n );\n };",
       "module": "/packages/client"
     }
   ],

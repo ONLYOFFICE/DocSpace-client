@@ -2871,10 +2871,10 @@ const Dark: TTheme = {
         comboBoxLabelColor: white,
         importSectionBackground: darkGrayLight,
         importSectionTextColor: grayDark,
-        importItemBackground: black,
+        importItemBackground: darkGrayLight,
         importItemDisableBackground: lightDarkGrayHover,
         importItemTextColor: darkGrayDark,
-        importItemDisableTextColor: grayDarkText,
+        importItemDisableTextColor: grayDark,
         importItemDescription: gray,
         importIconColor: darkGrayDark,
         groupMenuBackground: black,
@@ -3067,6 +3067,9 @@ const Dark: TTheme = {
     submitToGalleryTile: {
       bodyText: darkGrayDark,
       closeIconFill: darkGrayDark,
+      border: `1px solid ${grayDarkStrong}`,
+      background: darkGrayLight,
+      colorExt: gray,
     },
   },
 

@@ -3,7 +3,7 @@
   "content": "Select file",
   "content_en_sha1_hash": "63f72dce85635b76fe31d3931ae500471aa30d71",
   "created_at": "2025-05-19T21:30:48.410Z",
-  "updated_at": "2025-08-12T19:46:25.761Z",
+  "updated_at": "2025-10-03T10:07:11.543Z",
   "comment": {
     "text": "This translation key is used to display the label for a file selection action, appearing as \"Select File\" in various UI elements such as buttons or dialogs. It is part of a set of translations related to file management and appears on the FilesSelector component.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 49,
+      "line_number": 48,
       "context": "isTypeSelectEmpty: boolean,\n logoText: string,\n ) => {\n return [\n {\n title: t(\"Common:SelectFile\"),\n description: t(\"Settings:SelectFileDescriptionNextcloud\"),\n component: (\n <SelectFileStep\n t={t}\n isMultipleUpload={false}",
       "module": "/packages/client"
     },

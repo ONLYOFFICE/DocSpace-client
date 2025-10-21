@@ -1,6 +1,6 @@
 {
   "name": "docspace",
-  "version": "3.3.0",
+  "version": "3.5.0",
   "private": true,
   "engines": {
     "node": ">=22",
@@ -25,28 +25,35 @@
     "licenses-audit": "pnpm licenses audit --output-csv=licenses.csv --config=licenses.config.js --summary",
     "check-circular": "pnpm madge --circular ./packages",
     "check-circular:graph": "pnpm madge --circular --image graph.svg ./packages",
-    "lint": "pnpm nx run-many -t lint -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
-    "lint:fix": "pnpm nx run-many -t lint:fix -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
-    "tsc": "pnpm run before-build && pnpm nx run-many -t tsc @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
+    "lint": "pnpm nx run-many -t lint -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
+    "lint:fix": "pnpm nx run-many -t lint:fix -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
+    "tsc": "pnpm run before-build && pnpm nx run-many -t tsc @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
     "prepare": "node -e \"if (!process.env.CI) { try { require('child_process').execSync('git --version', {stdio: 'ignore'}); require('child_process').execSync('lefthook install', {stdio: 'inherit'}); } catch (e) { console.error('Lefthook installation skipped:', e.message); } }\" && npm --prefix ./common/tests ci"
   },
   "devDependencies": {
-    "@types/node": "22.9.3",
+    "@types/node": "24.3.0",
     "@types/react-text-mask": "5.4.14",
+    "babel-plugin-react-compiler": "^1.0.0",
     "he": "1.2.0",
-    "lefthook": "^1.11.14",
-    "madge": "6.1.0",
-    "nx": "21.4.0",
-    "react": "19.1.0",
-    "shx": "0.3.4",
-    "terser": "5.34.1",
+    "lefthook": "^1.13.0",
+    "madge": "8.0.0",
+    "nx": "21.5.2",
+    "react": "19.1.1",
+    "shx": "0.4.0",
+    "terser": "5.43.1",
     "ts-node": "10.9.2",
-    "typescript": "5.6.3"
+    "typescript": "5.9.2"
   },
-  "packageManager": "pnpm@10.15.0",
+  "packageManager": "pnpm@10.15.1",
   "resolutions": {
     "@types/react": "19.1.4",
     "@types/react-dom": "19.1.5",
     "nth-check": "2.1.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "pnpm": "^10.15.1",
+      "on-headers": "^1.1.0"
+    }
   }
 }

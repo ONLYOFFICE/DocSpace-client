@@ -35,9 +35,12 @@ import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
 import { globalColors } from "../../themes";
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 import { useTheme } from "../../hooks/useTheme";
+import { isTouchDevice } from "../../utils/device";
 
 import { ToggleButton } from "../toggle-button";
 import { Badge } from "../badge";
+import { Tooltip } from "../tooltip";
+import { Text } from "../text";
 
 import { DropDownItemProps } from "./DropDownItem.types";
 import styles from "./DropDownItem.module.scss";
@@ -78,6 +81,10 @@ const IconComponent = ({
   );
 };
 
+const TooltipContent = ({ content }: { content: React.ReactNode }) => (
+  <Text fontSize="12px">{content}</Text>
+);
+
 const DropDownItem = ({
   isSeparator = false,
   isHeader = false,
@@ -109,21 +116,24 @@ const DropDownItem = ({
   isModern,
   style,
   isPaidBadge,
-  heightTablet,
   badgeLabel,
   testId,
+  tooltip,
   ...rest
 }: DropDownItemProps) => {
   const { t } = useTranslation(["Common"]);
   const { isRTL } = useInterfaceDirection();
-
   const { isBase } = useTheme();
+
+  const withDisabledTooltip = disabled && tooltip;
 
   const handleClick = (
     e: React.MouseEvent<HTMLElement> | React.ChangeEvent<HTMLInputElement>,
   ) => {
     if (!disabled) onClick?.(e);
     if (isSelected) onClickSelectedItem?.();
+    if (withDisabledTooltip && isTouchDevice) return e.stopPropagation();
+
     setOpen?.(false);
   };
 
@@ -161,6 +171,10 @@ const DropDownItem = ({
       tabIndex={tabIndex}
       data-testid={testId ?? "drop-down-item"}
       data-focused={isActiveDescendant}
+      data-tooltip-id={
+        withDisabledTooltip ? "drop-down-item-tooltip" : undefined
+      }
+      data-tooltip-content={tooltip}
       role={isSeparator ? "separator" : "option"}
       aria-selected={isSelected}
       aria-disabled={disabled}
@@ -250,6 +264,16 @@ const DropDownItem = ({
 
       {additionalElement ? (
         <div className={styles.elementWrapper}>{additionalElement}</div>
+      ) : null}
+
+      {withDisabledTooltip ? (
+        <Tooltip
+          float
+          openOnClick={isTouchDevice}
+          id="drop-down-item-tooltip"
+          getContent={TooltipContent}
+          place="bottom-end"
+        />
       ) : null}
     </div>
   );

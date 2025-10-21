@@ -63,7 +63,6 @@ const Modal = ({
   containerVisible,
   isDoubleFooterLine,
 
-  embedded,
   withForm,
   withoutPadding,
   withoutHeaderMargin,
@@ -74,6 +73,7 @@ const Modal = ({
   withBodyScrollForcibly = false,
   withBorder = false,
   dataTestId,
+  scrollbarCreateContext,
   ...rest
 }: ModalSubComponentsProps) => {
   const contentRef = React.useRef<null | HTMLDivElement>(null);
@@ -260,6 +260,7 @@ const Modal = ({
                           className="modal-scroll"
                           noScrollY={isScrollLocked}
                           paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+                          createContext={scrollbarCreateContext}
                         >
                           {bodyComponent}
                         </Scrollbar>

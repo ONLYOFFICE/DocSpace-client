@@ -1,0 +1,28 @@
+{
+  "key_path": "ItemsDeletedAfter",
+  "content": "These items will be permanently deleted in 30 days.",
+  "content_en_sha1_hash": "79eaa6da991ca2c64d6a11c2cfc134b4342a0af3",
+  "created_at": "2025-09-24T13:10:15.419Z",
+  "updated_at": "2025-10-17T14:43:53.394Z",
+  "comment": {
+    "text": "This text appears in a delete confirmation dialog, informing the user that deleted items will be permanently removed after a 30-day period. It provides reassurance about the deletion process and timeframe. Translators should ensure the timeframe (30 days) is accurately conveyed in the target language.",
+    "is_auto": true,
+    "updated_at": "2025-09-24T13:11:24.554Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 216,
+      "context": "You are about to delete the{\" \"}\n <strong>files ({{ filesCount }})</strong> and{\" \"}\n <strong>folders ({{ foldersCount }})</strong> to{\" \"}\n {{ trashSection: t(\"Common:TrashSection\") }}.\n </Trans>{\" \"}\n {!isThirdParty ? t(\"ItemsDeletedAfter\") : null}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

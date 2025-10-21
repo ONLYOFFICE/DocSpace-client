@@ -109,7 +109,6 @@ export const getNextSynchronization = (
 
     return findDate(cron, date);
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.log(error);
   }
 };

@@ -3,7 +3,7 @@
   "content": "You have unsaved changes",
   "content_en_sha1_hash": "5ea3902f149163da1cf57472568ec3a89d52e790",
   "created_at": "2025-05-19T21:30:53.245Z",
-  "updated_at": "2025-08-26T11:15:14.152Z",
+  "updated_at": "2025-10-16T07:29:35.714Z",
   "comment": {
     "text": "This translation key is used to display a reminder message when unsaved changes are made to a form or settings, prompting the user to save their work before leaving the page. It appears in various UI elements such as save buttons and dialogs, alerting users of potential data loss. The translation should convey a clear warning without being too intrusive.",
     "is_auto": true,
@@ -12,97 +12,97 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
-      "line_number": 170,
+      "line_number": 207,
       "context": "<SaveCancelButtons\n className={styles.saveCancelButtons}\n onSaveClick={onSave}\n onCancelClick={onCancel}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
-      "line_number": 190,
+      "line_number": 250,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSave}\n onCancelClick={onCancel}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 556,
+      "line_number": 558,
       "context": "tabIndex={3}\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={hasScroll}\n additionalClassSaveButton=\"language-time-zone-save\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 391,
+      "line_number": 381,
       "context": "onSaveClick={onOpenModal}\n onCancelClick={onCancelPortalName}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n hasScroll={hasScroll}\n saveButtonDisabled={!!errorValue}\n additionalClassSaveButton=\"portal-renaming-save\"\n additionalClassCancelButton=\"portal-renaming-cancel\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 383,
+      "line_number": 413,
       "context": "id=\"buttonsWelcomePage\"\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveGreetingSettings}\n onCancelClick={onRestoreGreetingSettings}\n showReminder={state.showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll={state.hasScroll}\n disableRestoreToDefault={greetingSettingsIsDefault}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 419,
+      "line_number": 417,
       "context": "<SaveCancelButtons\n onSaveClick={onSubmit}\n onCancelClick={onReset}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Settings:DefaultSettings\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonDisabled={saveButtonDisabled}\n disableRestoreToDefault={\n isDefaultSettings || isSaveLoading || isResetLoading\n }\n displaySettings",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
-      "line_number": 218,
+      "line_number": 221,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"admin-message-save\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
-      "line_number": 251,
+      "line_number": 253,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 304,
+      "line_number": 345,
       "context": "<SaveCancelButtons\n className={styles.saveCancelButtons}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 320,
+      "line_number": 334,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/passwordStrength.js",
-      "line_number": 326,
+      "line_number": 346,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
-      "line_number": 305,
+      "line_number": 328,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"session-lifetime-save\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 242,
+      "line_number": 303,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 299,
+      "line_number": 303,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/sub-components/HistoryMainContent.js",
-      "line_number": 373,
+      "line_number": 277,
       "context": "onSaveClick={setLifeTimeSettings}\n onCancelClick={onCancelLoginLifeTime}\n saveButtonLabel={saveButtonLabel}\n cancelButtonLabel={cancelButtonLabel}\n showReminder={loginLifeTimeReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings={true}\n hasScroll={false}\n isDisabled={isSettingNotPaid}\n />\n </>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/sub-components/HistoryMainContent.js",
-      "line_number": 373,
+      "line_number": 277,
       "context": "onSaveClick={setLifeTimeSettings}\n onCancelClick={onCancelLoginLifeTime}\n saveButtonLabel={saveButtonLabel}\n cancelButtonLabel={cancelButtonLabel}\n showReminder={loginLifeTimeReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings={true}\n hasScroll={false}\n isDisabled={isSettingNotPaid}\n />\n </>",
       "module": "/packages/client"
     },
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"لقد قمت بعدم حفظ التغييرات\" is a literal and somewhat awkward translation of 'You have unsaved changes'. It implies the user *performed* the action of not saving, which is not the intended meaning. A more natural translation would focus on the fact that changes exist and haven't been saved.",
-          "suggestion": "لديك تغييرات لم تحفظ"
+          "description": "The translation \"لقد قمت بعدم حفظ التغييرات\" literally translates to \"You have done not saving the changes.\" It's an awkward and unnatural phrasing in Arabic. A more natural and accurate translation would convey the meaning of 'unsaved changes' more directly.",
+          "suggestion": "لديك تغييرات لم تحفظ (Ladayka taghyyratun lam tahfath)"
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'dəyişiklikləriniz' is missing a hyphen. It should be 'dəyişikliklərinizdir'.",
-          "suggestion": "Yadda saxlanmayan dəyişikliklərinizdir"
+          "description": "The word 'dəyişiklikləriniz' is misspelled. It should be 'dəyişikliklərin var'.",
+          "suggestion": "Yadda saxlanmayan dəyişikliklərin var"
         }
       ],
       "approved_at": null
@@ -216,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation 'Vous avec des modifications non-sauvegardées' contains a grammatical error. The verb 'avoir' (to have) is incorrectly conjugated as 'avec'.",
+          "description": "The French translation 'Vous avec des modifications non-sauvegardées' contains a grammatical error. 'avec' should be 'avez'.",
           "suggestion": "Vous avez des modifications non-sauvegardées"
         }
       ],
@@ -228,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Դուք չպահված փոփոխություններ ունեք' is a literal translation but might sound unnatural in Armenian. While technically correct, a more natural phrasing could be used.",
-          "suggestion": "Consider using a phrasing like 'Ձեր կատարած փոփոխությունները չենպահպանվել' (Your changes haven't been saved) or 'Միչնչպահպանված փոփոխություններ կա' (There are unsaved changes)."
+          "description": "The Armenian translation 'Դուք չպահված փոփոխություններ ունեք' is a literal translation but doesn't flow naturally in Armenian. It can be improved for better readability and user experience. A more natural phrasing would use a more common construction for expressing 'unsaved changes'.",
+          "suggestion": "Consider 'Ձեր փոփոխությունները դեռ չեն պահպանվել' (Dzer popoxut'yunnerner dter chen p'ahpanvel) which translates to 'Your changes have not yet been saved.'"
         }
       ],
       "approved_at": null
@@ -246,7 +246,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"未保存変更はあります。\" is technically correct but sounds somewhat formal and indirect for a UI message like 'You have unsaved changes.' A more natural and concise phrasing would be preferable.",
+          "description": "The translation \"未保存変更はあります。\" while technically correct, sounds somewhat formal and stiff for a user-facing message. A more natural and user-friendly phrasing would be preferred.",
           "suggestion": "変更が保存されていません。"
         }
       ],
@@ -300,13 +300,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Nu ați salvat modificările efectuate de dvs\" is overly formal and verbose for a user interface message like 'You have unsaved changes'. The phrase 'efectuate de dvs' (performed by you) is unnecessary and makes the message sound awkward.",
-          "suggestion": "Nu ai salvat modificările."
+          "description": "The translation 'Nu ați salvat modificările efectuate de dvs' is overly formal and verbose for a typical user interface message like 'You have unsaved changes.' The phrase 'efectuate de dvs' (made by you) is unnecessary and clunky.",
+          "suggestion": "A more natural and concise translation would be 'Aveți modificări nesalvate' or 'Modificări nesalvate'."
         },
         {
           "type": "formatting",
-          "description": "The translated text uses a formal 'dumneavoastră' (dumneavoastră/dumneavoastră) form. For a UI message, the more common and less formal 'tu' form is preferred.",
-          "suggestion": "Use 'ai' instead of 'ați' to match the more common informal 'tu' form."
+          "description": "The translation lacks consistency in capitalization.  While Romanian capitalization rules are different from English, for UI elements, maintaining a lowercase start is often preferable for consistency.",
+          "suggestion": "Consider starting the translation with a lowercase 'a' - 'aveți modificări nesalvate'."
         }
       ],
       "approved_at": null
@@ -320,13 +320,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ඔබ සතුව නොසුරැකි වෙනස්කම් ඇත' is a literal translation that doesn't quite capture the natural flow of the English phrase 'You have unsaved changes'. It sounds a bit formal and less user-friendly.",
-          "suggestion": "A more natural translation might be 'ඔබේ වෙනස්කම් සුරක්ෂිත කර නැති' or 'ඔබ වෙනස්කම් සුරක්ෂිත කර නොමැත'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -347,13 +341,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Имате несачуване промене' is not a correct translation of 'You have unsaved changes'. The word 'несачуване' is not a standard Serbian word and doesn't convey the meaning of 'unsaved'.",
-          "suggestion": "Имате несaчуване измeне / Постоје несaчуване измeне / Имате неизвршене промeне"
+          "description": "The translation 'Имате несачуване промене' is not a correct translation of \"You have unsaved changes.\" The term 'несачуване' is not standard Serbian. It appears to be a combination of words that doesn't convey the intended meaning clearly. 'Промене' is also an unusual construction in this context.",
+          "suggestion": "You have unsaved changes should be translated as 'Имате несaчуване измене' or 'Имате неизвршене измене'."
         },
         {
           "type": "spelling",
-          "description": "While 'несачуване' might be attempting to convey 'unsaved', it's not a recognized word. The suggested corrections provide alternatives with accurate spelling.",
-          "suggestion": "Refer to the 'suggestion' in the incorrect_translation issue."
+          "description": "The word 'промене' is likely a misspelling of 'измене'.",
+          "suggestion": "Correct 'промене' to 'измене'."
         }
       ],
       "approved_at": null
@@ -363,9 +357,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Imate nesačuvane promene' is not the most natural or accurate translation of 'You have unsaved changes.' While understandable, it's a somewhat literal and clunky rendering.",
-          "suggestion": "A more natural and idiomatic translation would be 'Imate nečuvene izmjene' or 'Imate ne sačuvane promjene'."
+          "type": "spelling",
+          "description": "The word 'nesačuvane' is misspelled. The correct spelling is 'nesačuvane'.",
+          "suggestion": "Imate nesačuvane promene"
         }
       ],
       "approved_at": null
@@ -388,13 +382,19 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Bạn có các thay đổi chưa được lưu' is a literal translation and sounds somewhat unnatural in Vietnamese. A more natural phrasing would be 'Bạn có thay đổi chưa lưu' or 'Có thay đổi chưa lưu'.",
-          "suggestion": "Bạn có thay đổi chưa lưu"
+          "description": "While the translation is understandable, 'Bạn có các thay đổi chưa được lưu' is a bit literal and not the most natural way to express 'You have unsaved changes' in Vietnamese. A more idiomatic translation would be more appropriate.",
+          "suggestion": "Bạn có những thay đổi chưa lưu"
         }
       ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

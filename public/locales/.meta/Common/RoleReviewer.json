@@ -3,7 +3,7 @@
   "content": "Reviewer",
   "content_en_sha1_hash": "a74f16c11792da6a36979a58a1ba2b4333632f57",
   "created_at": "2025-05-19T21:30:48.086Z",
-  "updated_at": "2025-08-26T11:15:14.140Z",
+  "updated_at": "2025-09-29T18:22:19.518Z",
   "comment": {
     "text": "This translation key is used to display the role \"Reviewer\" in various contexts within the UI, including information panels and share helpers. It appears as a label or title, likely in buttons, dialogs, or form inputs, where it helps users understand their access level (Review) and role responsibilities.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 77,
+      "line_number": 80,
       "context": "access: ShareAccessRights.FormFilling,\n type: \"user\",\n },\n reviewer: {\n key: \"reviewer\",\n label: this.t(\"Common:RoleReviewer\"),\n access: ShareAccessRights.Review,\n type: \"user\",\n },\n commentator: {\n key: \"commentator\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 160,
-      "context": "label: t(\"Common:Editor\"),\n icon: AccessEditReactSvgUrl,\n },\n available.Review && {\n access: ShareAccessRights.Review,\n description: t(\"Common:RoleReviewerDescription\"),\n key: \"review\",\n label: t(\"Common:RoleReviewer\"),\n icon: AccessReviewReactSvgUrl,\n },\n available.Comment && {",
+      "line_number": 174,
+      "context": "label: t(\"Common:Editor\"),\n icon: AccessEditReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n description: t(\"Common:RoleReviewerDescription\"),\n key: \"review\",\n label: t(\"Common:RoleReviewer\"),\n icon: AccessReviewReactSvgUrl,\n },\n [ShareRights.Comment]: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 163,
+      "line_number": 167,
       "context": "access: ShareAccessRights.FormFilling,\n type: EmployeeType.User,\n },\n reviewer: {\n key: \"reviewer\",\n label: t(\"Common:RoleReviewer\"),\n description: t(\"Common:RoleReviewerDescription\"),\n access: ShareAccessRights.Review,\n type: EmployeeType.User,\n },\n commentator: {",
       "module": "/packages/shared"
     },

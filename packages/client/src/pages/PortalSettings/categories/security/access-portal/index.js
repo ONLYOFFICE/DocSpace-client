@@ -64,6 +64,7 @@ const AccessPortal = (props) => {
     isMobileView,
     resetIsInit,
     helpCenterDomain,
+    invitationSettingsUrl,
     limitedDevToolsBlockHelpUrl,
     scrollToSettings,
     setScrollToSettings,
@@ -130,6 +131,7 @@ const AccessPortal = (props) => {
 
   if (isMobileView)
     return <MobileView t={t} withoutExternalLink={!helpCenterDomain} />;
+
   return (
     <MainContainer
       className="desktop-view"
@@ -255,6 +257,20 @@ const AccessPortal = (props) => {
             productName: t("Common:ProductName"),
           })}
         </Text>
+
+        {invitationSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            dataTestId="invitation_settings_learn_more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={invitationSettingsUrl}
+            fontWeight={600}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
       <InvitationSettingsSection />
 
@@ -366,6 +382,7 @@ export default inject(({ settingsStore, setup }) => {
     limitedDevToolsBlockHelpUrl,
     scrollToSettings,
     setScrollToSettings,
+    invitationSettingsUrl,
   } = settingsStore;
   const { resetIsInit } = setup;
 
@@ -385,5 +402,6 @@ export default inject(({ settingsStore, setup }) => {
     limitedDevToolsBlockHelpUrl,
     scrollToSettings,
     setScrollToSettings,
+    invitationSettingsUrl,
   };
 })(withTranslation(["Settings", "Profile"])(observer(AccessPortal)));

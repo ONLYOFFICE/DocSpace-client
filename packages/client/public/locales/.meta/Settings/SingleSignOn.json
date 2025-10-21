@@ -3,7 +3,7 @@
   "content": "Single Sign-On",
   "content_en_sha1_hash": "9cd5b7eb1680d90f18ef828206965ff742d88dda",
   "created_at": "2025-05-19T21:30:52.736Z",
-  "updated_at": "2025-08-04T07:30:01.502Z",
+  "updated_at": "2025-10-07T15:39:07.494Z",
   "comment": {
     "text": "This translation key is used to display a custom label for a single sign-on entry button. It appears in an IDP settings page and is used as a placeholder until a custom value is set. Translators should provide a clear and concise text that will be displayed on the UI.",
     "is_auto": true,
@@ -11,21 +11,21 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
+      "line_number": 97,
+      "context": "await getLDAPData();\n },\n },\n {\n id: \"sso\",\n name: t(\"Settings:SingleSignOn\"),\n content: <SsoSettings />,\n onClick: async () => {\n clearAbortControllerArr();\n await getSSOData();\n },",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/IdpSettings.js",
-      "line_number": 94,
+      "line_number": 87,
       "context": "<UploadXML />\n \n <SsoFormField\n labelText={t(\"CustomEntryButton\")}\n name=\"spLoginLabel\"\n placeholder={t(\"Settings:SingleSignOn\")}\n tabIndex={4}\n tooltipContent={<Text fontSize=\"12px\">{t(\"CustomEntryTooltip\")}</Text>}\n tooltipClass=\"custom-entry-tooltip icon-button\"\n value={spLoginLabel}\n hasError={spLoginLabelHasError}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/index.js",
-      "line_number": 66,
-      "context": "useEffect(() => {\n isSSOAvailable && !isInit && init();\n }, []);\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"Settings:SingleSignOn\"));\n }, [ready]);\n \n if (!isInit && !isMobileView && isSSOAvailable) return <SSOLoader />;\n \n return (",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
-      "line_number": 37,
-      "context": "import { combineUrl } from \"@docspace/shared/utils/combineUrl\";\n import config from \"PACKAGE_FILE\";\n \n import { SECTION_HEADER_HEIGHT } from \"@docspace/shared/components/section/Section.constants\";\n \n import SSO from \"./SingleSignOn\";\n import LDAP from \"./LDAP\";\n import ThirdParty from \"./ThirdPartyServicesSettings\";\n \n import SMTPSettings from \"./SMTPSettings\";\n import DocumentService from \"./DocumentService\";",
+      "line_number": 64,
+      "context": "} = props;\n const { t, ready } = useTranslation([\"SingleSignOn\", \"Settings\"]);\n const isMobileView = currentDeviceType === DeviceType.mobile;\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"Settings:SingleSignOn\"));\n }, [ready]);\n \n if ((showPortalSettingsLoader && !isMobileView && isSSOAvailable) || !ready)\n return <SSOLoader />;",
       "module": "/packages/client"
     },
     {

@@ -11,6 +11,7 @@
   "DeleteGroupTitle": "グループの削除",
   "DeleteItem": "あなたは<strong>{{name}}</strong>を{{trashSection}}に移動しようとしています。",
   "DeleteItemForever": "削除しようとしています：<strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "誰かと共有している場合は、利用できなくなりますのでご注意ください。",
   "DeleteRoom": "<strong>「{{roomName}}」</strong> ルームは永久に削除されます。すべてのデータとユーザーアクセスが失われます。",
   "DeleteRoomTitle": "このルームを削除しますか？",
   "DeleteRoomWarning": "私は上記の説明を理解しており、ルームを削除したいです",

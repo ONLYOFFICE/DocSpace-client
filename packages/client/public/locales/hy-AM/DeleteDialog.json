@@ -11,6 +11,7 @@
   "DeleteGroupTitle": "Ջնջել խմբերը",
   "DeleteItem": "Դուք պատրաստվում եք տեղափոխել <strong>{{name}}</strong> {{trashSection}}։",
   "DeleteItemForever": "Դուք պատրաստվում եք ջնջել <strong>{{name}}</strong>-ը։",
+  "DeleteItemsSharedNote": "Խնդրում ենք նկատի ունենալ, որ եթե դրանք ինչ-որ մեկի հետ կիսվել եք,նրանք անհասանելի կդառնան:",
   "DeleteRoom": "Սենյակը <strong>\"{{roomName}}\"</strong> կջնջվի անդառնալիորեն։ Բոլոր տվյալները և օգտատերերի մուտքի իրավունքները կկորչեն։",
   "DeleteRoomTitle": "Ջնջե՞լ այս սենյակը։",
   "DeleteRoomWarning": "Ես հասկանում եմ հետևանքները և ցանկանում եմ ջնջել սենյակը",

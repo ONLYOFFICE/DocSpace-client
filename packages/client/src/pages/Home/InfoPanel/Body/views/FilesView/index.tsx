@@ -39,6 +39,8 @@ import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { FolderType } from "@docspace/shared/enums";
 import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
+import { useEventListener } from "@docspace/shared/hooks/useEventListener";
+import { INFO_PANEL_LOADER_EVENT } from "@docspace/shared/constants";
 
 import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
@@ -160,6 +162,10 @@ const FilesView = ({
     setIsMembersPanelUpdating: setIsMembersPanelUpdating!,
     setExternalLinks: setExternalLinks!,
     scrollToTop,
+  });
+
+  useEventListener(INFO_PANEL_LOADER_EVENT, (event: CustomEvent<boolean>) => {
+    setIsLoadingSuspense(event.detail);
   });
 
   const onEndAnimation = React.useCallback(() => {

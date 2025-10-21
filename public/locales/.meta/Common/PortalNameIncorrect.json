@@ -3,7 +3,7 @@
   "content": "Incorrect account name",
   "content_en_sha1_hash": "514e507c4bfba26b6fec61ecedbb846fb1c81756",
   "created_at": "2025-05-19T21:30:52.239Z",
-  "updated_at": "2025-10-13T13:22:35.773Z",
+  "updated_at": "2025-10-17T14:43:53.485Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user attempts to save a portal name that does not meet the required length or format. It appears in the portal renaming dialog and will be displayed if the input value fails validation. Translators should provide a clear indication of this error for users.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 217,
+      "line_number": 218,
       "context": "minLength: nameValidator.minLength.toString(),\n maxLength: nameValidator.maxLength.toString(),\n }),\n );\n case !validName.test(value):\n return setError(t(\"Common:PortalNameIncorrect\"));\n \n default:\n setError(null);\n }\n return validName.test(value);",
       "module": "/packages/shared"
     }

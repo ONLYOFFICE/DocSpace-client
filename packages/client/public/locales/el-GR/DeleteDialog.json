@@ -11,6 +11,7 @@
   "DeleteGroupTitle": "Διαγραφή ομάδας",
   "DeleteItem": "Ετοιμάζεστε να μετακινήσετε <strong>{{name}}</strong> στην {{trashSection}}.",
   "DeleteItemForever": "Ετοιμάζεστε να διαγράψετε τον/την <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Λάβετε υπόψη ότι αν τα έχετε μοιραστεί με κάποιον, δεν θα είναι διαθέσιμα.",
   "DeleteRoom": "Το δωμάτιο <strong>{{roomName}}</strong> θα διαγραφεί οριστικά. Όλα τα δεδομένα και οι πρόσβαση χρήστη θα χαθούν.",
   "DeleteRoomTitle": "Διαγραφή αυτού του δωματίου;",
   "DeleteRoomWarning": "Κατανοώ τις συνέπειες και θέλω να διαγράψω το δωμάτιο",

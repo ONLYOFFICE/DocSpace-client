@@ -3,7 +3,7 @@
   "content": "You can't move the folder to its subfolder",
   "content_en_sha1_hash": "506393764de44f23f65ce73e264a120055299986",
   "created_at": "2025-05-19T21:30:46.641Z",
-  "updated_at": "2025-09-26T15:21:06.048Z",
+  "updated_at": "2025-10-17T14:43:53.329Z",
   "comment": {
     "text": "This translation key is used for displaying an error message when attempting to move a folder into its own subfolder in the FilesSelector component. The message appears as an alert after selecting a file or folder.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
-      "line_number": 258,
+      "line_number": 257,
       "context": "(\"fileExst\" in item && item.fileExst) ||\n (\"contentLength\" in item && item.contentLength)\n ) {\n fileIds.push(item.id);\n } else if (item.id === selectedItemId) {\n toastr.error(t(\"Common:MoveToFolderMessage\"));\n } else {\n folderIds.push(item.id);\n }\n }",
       "module": "/packages/client"
     },

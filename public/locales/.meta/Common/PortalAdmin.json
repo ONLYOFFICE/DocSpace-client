@@ -3,7 +3,7 @@
   "content": "{{productName}} admin",
   "content_en_sha1_hash": "c2ab2049e1e222685c5af15f68e5f6c5b11e8747",
   "created_at": "2025-05-19T21:30:47.411Z",
-  "updated_at": "2025-10-13T13:22:35.786Z",
+  "updated_at": "2025-10-17T14:43:53.506Z",
   "comment": {
     "text": "This translation key is used to display \"PortalAdmin\" as a label for users who have full access, appearing in tooltips and UI elements related to user management. It is likely to be displayed on buttons, dropdowns, or other interactive elements where user permissions are being managed. The key is used consistently with other labels, such as \"Common:PortalOwner\", suggesting it may appear in multiple places throughout the application.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/index.tsx",
-      "line_number": 81,
+      "line_number": 82,
       "context": "];\n \n if (isOwner) {\n typeOptions.unshift({\n key: UserTypes.PortalAdmin,\n label: t(`Common:PortalAdmin`, {\n productName: t(\"Common:ProductName\"),\n }),\n onClick: setTypePortalAdmin,\n });\n }",
       "module": "/packages/client"
     },
@@ -36,13 +36,13 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 330,
+      "line_number": 331,
       "context": "export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {\n switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 330,
+      "line_number": 331,
       "context": "export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {\n switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:",
       "module": "/packages/shared"
     }

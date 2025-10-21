@@ -65,6 +65,7 @@ import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import PluginActionsSvgUrl from "PUBLIC_DIR/images/plugin.actions.react.svg?url";
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
+import CatalogAIAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
@@ -2940,6 +2941,19 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
+  onCreateAgent = () => {
+    // TODO: AI: Add quota if it needed
+
+    // if (this.currentQuotaStore.isWarningRoomsDialog) {
+    //   this.dialogsStore.setQuotaWarningDialogVisible(true);
+    //   return;
+    // }
+
+    const event = new Event(Events.AGENT_CREATE);
+
+    window.dispatchEvent(event);
+  };
+
   onCreate = (format, t) => {
     const event = new Event(Events.CREATE);
 
@@ -3122,7 +3136,7 @@ class ContextOptionsStore {
     if (!canCreate || (isSectionMenu && (isMobile || someDialogIsOpen)))
       return null;
 
-    const { isRoomsFolder, isPrivacyFolder, isFlowsFolder } =
+    const { isRoomsFolder, isPrivacyFolder, isFlowsFolder, isAIAgentsFolder } =
       this.treeFoldersStore;
     const { mainButtonItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
@@ -3264,27 +3278,36 @@ class ContextOptionsStore {
 
     const showUploadFolder = !(isMobile || isTablet);
 
-    const options = isRoomsFolder
-      ? isFlowsFolder
-        ? []
+    const options = isAIAgentsFolder
+      ? [
+          {
+            key: "new-agent",
+            label: t("Common:NewAgent"),
+            onClick: this.onCreateAgent,
+            icon: CatalogAIAgentsReactSvgUrl,
+          },
+        ]
+      : isRoomsFolder
+        ? isFlowsFolder
+          ? []
+          : [
+              {
+                key: "new-room",
+                label: t("Common:NewRoom"),
+                onClick: this.onCreateRoom,
+                icon: CatalogRoomsReactSvgUrl,
+              },
+            ]
         : [
-            {
-              key: "new-room",
-              label: t("Common:NewRoom"),
-              onClick: this.onCreateRoom,
-              icon: CatalogRoomsReactSvgUrl,
-            },
-          ]
-      : [
-          createNewDoc,
-          createNewSpreadsheet,
-          createNewPresentation,
-          ...formActions,
-          createNewFolder,
-          { key: "separator", isSeparator: true },
-          uploadFiles,
-          showUploadFolder ? uploadFolder : null,
-        ];
+            createNewDoc,
+            createNewSpreadsheet,
+            createNewPresentation,
+            ...formActions,
+            createNewFolder,
+            { key: "separator", isSeparator: true },
+            uploadFiles,
+            showUploadFolder ? uploadFolder : null,
+          ];
 
     if (mainButtonItemsList && enablePlugins && !isRoomsFolder) {
       const pluginItems = [];

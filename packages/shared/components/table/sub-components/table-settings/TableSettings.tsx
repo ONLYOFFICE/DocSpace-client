@@ -78,7 +78,7 @@ const TableSettings = ({ columns, disableSettings }: TableSettingsProps) => {
         clickOutsideAction={clickOutsideAction}
         forwardedRef={ref}
         withBackdrop={false}
-        eventTypes={["click"]}
+        eventTypes={["click", "mousedown"]}
       >
         {columns.map((column: TTableColumn) => {
           if (column.isDisabled) return;

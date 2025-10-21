@@ -2,5 +2,6 @@
   "CancellaionNotification": "Nu afișa din nou notificarea de anulare",
   "DisplayFileExtension": "Afișează extensia fișierului de lângă numele fișierului",
   "OpenSameTab": "Deschide editorul {{organizationName}} în aceeași filă",
-  "OriginalCopy": "Salvează copia și în formatul original"
+  "OriginalCopy": "Salvează copia și în formatul original",
+  "TrashMoveConfirmation": "Afișează notificare la mutarea elementelor în {{sectionName}}"
 }

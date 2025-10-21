@@ -61,6 +61,7 @@ type ItemData = {
   customFilterEnabled?: boolean;
   lockedBy?: string;
   locked?: boolean;
+  isFavorite?: boolean;
 };
 
 export type BadgesProps = {
@@ -90,6 +91,8 @@ export type BadgesProps = {
   className?: string;
   isExtsCustomFilter?: boolean;
   customFilterExternalLink?: string;
+  onClickFavorite?: () => void;
+  isPublicRoom?: boolean;
 };
 
 export type BadgeWrapperProps = {

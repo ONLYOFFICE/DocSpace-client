@@ -3,7 +3,7 @@
   "content": "Added to favorites",
   "content_en_sha1_hash": "2f1e3bed43fab05cf7aa088a31554bc16e6d5e5c",
   "created_at": "2025-05-19T21:30:55.819Z",
-  "updated_at": "2025-09-26T15:21:06.018Z",
+  "updated_at": "2025-10-16T07:29:35.475Z",
   "comment": {
     "text": "This translation key \"MarkedAsFavorite\" is used to display a success message when an item has been marked as a favorite in a UI component, likely a button or action within a details page. The context suggests that this phrase appears in response to user interaction with the application's favoriting functionality.",
     "is_auto": true,
@@ -11,14 +11,20 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/HOCs/withBadges.js",
+      "line_number": 185,
+      "context": ".catch((err) => toastr.error(err));\n return;\n }\n \n setFavoriteAction(\"mark\", [item])\n .then(() => toastr.success(t(\"MarkedAsFavorite\")))\n .catch((err) => toastr.error(err));\n };\n \n render() {\n const {",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/HOCs/withQuickButtons.js",
-      "line_number": 75,
+      "line_number": 77,
       "context": ".catch((err) => toastr.error(err));\n return;\n }\n \n setFavoriteAction(\"mark\", [item])\n .then(() => toastr.success(t(\"MarkedAsFavorite\")))\n .catch((err) => toastr.error(err));\n };\n \n onClickShare = async () => {\n const { t, item, setShareChanged, getManageLinkOptions } = this.props;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 454,
+      "line_number": 463,
       "context": "this.filesActionsStore\n .setFavoriteAction(action, items)\n .then(() =>\n action === \"mark\"\n ? toastr.success(t(\"MarkedAsFavorite\"))\n : toastr.success(t(\"RemovedFromFavorites\")),\n )\n .catch((err) => toastr.error(err));\n };",
       "module": "/packages/client"
     }

@@ -39,7 +39,7 @@ import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import LinkRowComponent from "@docspace/shared/components/share/sub-components/LinkRow";
@@ -68,8 +68,6 @@ const LinkRow = (props: LinkRowProps) => {
 
   const availableShareRights = item.availableShareRights;
 
-  const isFormRoom = item.roomType === RoomsType.FormRoom;
-  const isPublicRoomType = item.roomType === RoomsType.PublicRoom;
   const { t } = useTranslation([
     "SharingPanel",
     "Files",
@@ -77,7 +75,7 @@ const LinkRow = (props: LinkRowProps) => {
     "Translations",
   ]);
 
-  const { password, isExpired, primary } = link.sharedTo;
+  const { password, isExpired } = link.sharedTo;
 
   const isLocked = !!password;
   const isDisabled = isExpired;
@@ -166,14 +164,8 @@ const LinkRow = (props: LinkRowProps) => {
       },
       {
         key: "delete-link-key",
-        label:
-          primary && (isPublicRoomType || isFormRoom)
-            ? t("Common:RevokeLink")
-            : t("Common:Delete"),
-        icon:
-          primary && (isPublicRoomType || isFormRoom)
-            ? OutlineReactSvgUrl
-            : TrashReactSvgUrl,
+        label: link.canRevoke ? t("Common:RevokeLink") : t("Common:Delete"),
+        icon: link.canRevoke ? OutlineReactSvgUrl : TrashReactSvgUrl,
         onClick: onDeleteLink,
       },
     ];
@@ -264,20 +256,19 @@ const LinkRow = (props: LinkRowProps) => {
 
   return (
     <LinkRowComponent
-      loadingLinks={loadingLinks}
+      isRoomsLink
       links={[link]}
       getData={getData}
+      onCopyLink={onCopyLink}
+      loadingLinks={loadingLinks}
+      isArchiveFolder={isArchiveFolder!}
+      changeShareOption={changeShareOption}
       onOpenContextMenu={onOpenContextMenu}
       onCloseContextMenu={onCloseContextMenu}
       removedExpiredLink={removedExpiredLink}
-      isRoomsLink
+      availableShareRights={availableShareRights}
       onAccessRightsSelect={onAccessRightsSelect}
       changeExpirationOption={changeExpirationOption}
-      isArchiveFolder={isArchiveFolder!}
-      isPublicRoom={isPublicRoomType}
-      changeShareOption={changeShareOption}
-      availableShareRights={availableShareRights}
-      onCopyLink={onCopyLink}
     />
   );
 };

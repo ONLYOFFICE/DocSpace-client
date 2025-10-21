@@ -66,6 +66,9 @@ class TreeFoldersStore {
         case FolderType.USER:
           folder.title = i18n.t("Common:MyDocuments");
           break;
+        case FolderType.SHARE:
+          folder.title = i18n.t("Common:SharedWithMe");
+          break;
         case FolderType.Rooms:
           folder.title = i18n.t("Common:Rooms");
           break;
@@ -338,6 +341,10 @@ class TreeFoldersStore {
     );
   }
 
+  get isSharedWithMeFolderRoot() {
+    return this.selectedFolderStore.rootFolderType === FolderType.SHARE;
+  }
+
   get isFavoritesFolder() {
     return (
       this.favoritesFolder &&
@@ -417,6 +424,12 @@ class TreeFoldersStore {
 
   get isArchiveFolderRoot() {
     return FolderType.Archive === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isVDRRoomRoot() {
+    return (
+      FolderType.VirtualDataRoom === this.selectedFolderStore.parentRoomType
+    );
   }
 
   get isDocumentsFolder() {

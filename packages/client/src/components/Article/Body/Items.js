@@ -26,7 +26,7 @@
 
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -37,6 +37,7 @@ import {
 } from "@docspace/shared/enums";
 import { FOLDER_NAMES } from "@docspace/shared/constants";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
+import { isTouchDevice } from "@docspace/shared/utils";
 
 import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
@@ -83,8 +84,13 @@ const Item = ({
   onBadgeClick,
   roomsFolderId,
   setDropTargetPreview,
+  currentDeviceType,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+
+  const isAiAgents = item.rootFolderType === FolderType.AIAgents;
+  const isMobile = currentDeviceType === DeviceType.mobile;
 
   const isDragging =
     dragging && !isIndexEditingMode ? showDragItems(item) : false;
@@ -146,6 +152,18 @@ const Item = ({
 
   const onClickAction = React.useCallback(
     (e, selectedFolderId) => {
+      if (e?.ctrlKey || e?.metaKey || e?.shiftKey || e?.button) return;
+
+      if ((isTouchDevice || isMobile) && isTooltipOpen) {
+        setIsTooltipOpen(false);
+        return;
+      }
+
+      if ((isTouchDevice || isMobile) && isAiAgents) {
+        setIsTooltipOpen(true);
+        return;
+      }
+
       setBufferSelection(null);
 
       onClick?.(
@@ -156,7 +174,16 @@ const Item = ({
         item.security.Create,
       );
     },
-    [onClick, item.title, item.rootFolderType],
+    [
+      onClick,
+      item.title,
+      item.rootFolderType,
+      isTooltipOpen,
+      setIsTooltipOpen,
+      isTouchDevice,
+      isMobile,
+      isAiAgents,
+    ],
   );
 
   const getTooltipAIAgentContent = () => (
@@ -170,6 +197,38 @@ const Item = ({
     </>
   );
 
+  useEffect(() => {
+    if (!isTouchDevice && !isMobile) return;
+
+    const handleClickOutside = (event) => {
+      if (isTooltipOpen) {
+        const aiAgentElement = event.target.closest(
+          `[data-tooltip-id="aiAgentsTooltip${item.id}"]`,
+        );
+
+        if (!aiAgentElement) {
+          event.stopPropagation();
+          event.preventDefault();
+          setIsTooltipOpen(false);
+        }
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside, true);
+    document.addEventListener("touchend", handleClickOutside, true);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+      document.removeEventListener("touchend", handleClickOutside, true);
+    };
+  }, [isTooltipOpen, item.id, isTouchDevice, isMobile]);
+
+  const onClickAiAgentsBadge = () => {
+    if (isTouchDevice || isMobile) {
+      setIsTooltipOpen(!isTooltipOpen);
+    }
+  };
+
   const linkData = getLinkData(
     item.id,
     item.title,
@@ -178,6 +237,7 @@ const Item = ({
   );
 
   const droppableClassName = isDragging ? "droppable" : "";
+  const isFloatTooltip = !isTouchDevice && !isMobile;
 
   return (
     <StyledDragAndDrop
@@ -210,9 +270,9 @@ const Item = ({
         value={value}
         showBadge={showBadge}
         labelBadge={labelBadge}
-        onClickBadge={onBadgeClick}
+        onClickBadge={isAiAgents ? onClickAiAgentsBadge : onBadgeClick}
         iconBadge={iconBadge}
-        isDisabled={item.rootFolderType === FolderType.AIAgents}
+        isDisabled={isAiAgents}
         withAnimation
         badgeTitle={
           labelBadge
@@ -220,7 +280,7 @@ const Item = ({
             : t("EmptySection", { sectionName: t("Common:TrashSection") })
         }
         badgeComponent={
-          item.rootFolderType === FolderType.AIAgents ? (
+          isAiAgents ? (
             <Badge
               label={t("Soon")}
               className={item.folderClassName}
@@ -239,13 +299,14 @@ const Item = ({
         $currentColorScheme={currentColorScheme}
         dataTooltipId={`aiAgentsTooltip${item.id}`}
       />
-      {item.rootFolderType === FolderType.AIAgents ? (
+      {isAiAgents ? (
         <Tooltip
           id={`aiAgentsTooltip${item.id}`}
           place="bottom-start"
           getContent={getTooltipAIAgentContent}
-          maxWidth="296px"
-          openOnClick
+          maxWidth="320px"
+          float={isFloatTooltip}
+          isOpen={isTouchDevice || isMobile ? isTooltipOpen : undefined}
         />
       ) : null}
     </StyledDragAndDrop>
@@ -416,6 +477,7 @@ const Items = ({
             isIndexEditingMode={isIndexEditingMode}
             setDropTargetPreview={setDropTargetPreview}
             isLastItem={isTrash}
+            currentDeviceType={currentDeviceType}
           />
         );
       });

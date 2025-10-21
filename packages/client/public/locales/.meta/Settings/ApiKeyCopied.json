@@ -3,7 +3,7 @@
   "content": "API key copied",
   "content_en_sha1_hash": "7faebff738697e731733d149f55475332d5b9414",
   "created_at": "2025-05-19T21:30:50.498Z",
-  "updated_at": "2025-08-12T19:46:26.100Z",
+  "updated_at": "2025-09-29T11:30:44.313Z",
   "comment": {
     "text": "The \"ApiKeyCopied\" translation key is used to display a confirmation message when an API key is successfully copied in the Create API Key Dialog. The message informs the user that the key has been duplicated. It appears on a button within this dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 483,
+      "line_number": 489,
       "context": "iconName={CopyReactSvgUrl}\n iconColor={globalColors.lightGrayDark}\n isIconFill\n onIconClick={() => {\n copy(secretKey?.key || \"\");\n toastr.success(t(\"Settings:ApiKeyCopied\"));\n }}\n testId=\"secret_key_input\"\n />\n </div>\n {lifetimeIsChecked ? (",
       "module": "/packages/client"
     }

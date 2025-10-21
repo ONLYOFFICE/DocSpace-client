@@ -99,7 +99,6 @@ const ViewerWrapper = memo(
         <DropDown
           className={styles.dropDown}
           open={isOpen}
-          fixedDirection
           directionY="top"
           withBackdrop={false}
           isDefaultMode={false}

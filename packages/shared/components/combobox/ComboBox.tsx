@@ -265,17 +265,16 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     setIsOpen(false);
   }, [withLabel]);
 
-  const dropDownMaxHeightProp = React.useMemo(
-    () => (dropDownMaxHeight ? { maxHeight: dropDownMaxHeight } : {}),
-    [dropDownMaxHeight],
-  );
+  const dropDownMaxHeightProp = dropDownMaxHeight
+    ? { maxHeight: dropDownMaxHeight }
+    : {};
 
-  const dropDownManualWidthProp = React.useMemo(() => {
-    if (scaledOptions && !isDefaultMode) return { manualWidth: "100%" };
-    if (scaledOptions && ref.current)
-      return { manualWidth: `${ref.current.clientWidth}px` };
-    return { manualWidth };
-  }, [scaledOptions, isDefaultMode, manualWidth]);
+  const dropDownManualWidthProp =
+    scaledOptions && !isDefaultMode
+      ? { manualWidth: "100%" }
+      : scaledOptions && ref.current
+        ? { manualWidth: `${ref.current.clientWidth}px` }
+        : { manualWidth };
 
   const optionsLength = options.length
     ? options.length

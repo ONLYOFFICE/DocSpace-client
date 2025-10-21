@@ -81,7 +81,7 @@ const FilesTableRow = (props) => {
     badgeUrl,
     isRecentFolder,
     isFavoritesFolder,
-    isSharedWithMeFolder,
+    isSharedWithMeFolderRoot,
     canDrag,
     onEditIndex,
     isIndexUpdated,
@@ -300,7 +300,7 @@ const FilesTableRow = (props) => {
             dragStyles={dragStyles}
             {...props}
           />
-        ) : isSharedWithMeFolder ? (
+        ) : isSharedWithMeFolderRoot ? (
           <SharedWithMeRowDataComponent
             element={element}
             dragStyles={dragStyles}

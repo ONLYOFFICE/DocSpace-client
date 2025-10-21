@@ -3,7 +3,7 @@
   "content": "Move to {{sectionName}}?",
   "content_en_sha1_hash": "ee3b1c51a995b4cd544de5f673d85dd47977b235",
   "created_at": "2025-06-02T10:19:15.915Z",
-  "updated_at": "2025-09-26T15:21:06.074Z",
+  "updated_at": "2025-10-16T07:29:35.529Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when moving a section to another location. It prompts the user to confirm their action and includes the name of the destination section. This key appears in modal dialogs where users are prompted to move sections to archives or trash.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 192,
-      "context": "};\n }, [onKeyUp]);\n \n const moveToTrashTitle = () => {\n if (unsubscribe) return t(\"UnsubscribeTitle\");\n return t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n };\n \n const title = isTemplate",
+      "line_number": 220,
+      "context": "if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:Confirmation\");\n \n if (unsubscribe) return t(\"Common:RemoveFromList\");\n \n return t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n };\n \n const noteText = getDialogContent(",
       "module": "/packages/client"
     }
   ],

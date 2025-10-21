@@ -23,5 +23,6 @@
   "ThirdPartyInfo": "Muuta kolmannen osapuolen tietoja",
   "ThirdPartyTitle": "Kolmannen osapuolen palvelut",
   "TitleShowActions": "Toimenpiteet",
-  "TitleShowFolderActions": "Kansion toiminnot"
+  "TitleShowFolderActions": "Kansion toiminnot",
+  "TrashItemsDeleteSuccess": "Valitut elementit poistettiin onnistuneesti {{sectionName}}-osiosta"
 }

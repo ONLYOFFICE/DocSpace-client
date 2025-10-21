@@ -35,6 +35,11 @@ import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
+import {
+  openShareTab,
+  forcedShowInfoPanelLoader,
+} from "SRC_DIR/helpers/info-panel";
+
 export default function withQuickButtons(WrappedComponent) {
   class WithQuickButtons extends React.Component {
     constructor(props) {
@@ -138,6 +143,24 @@ export default function withQuickButtons(WrappedComponent) {
       onCreateRoomFromTemplate(item);
     };
 
+    openShareTab = () => {
+      const {
+        item,
+        setBufferSelection,
+        infoPanelSelection,
+        isShareTabActive,
+        resetSelections,
+      } = this.props;
+
+      if (infoPanelSelection?.id === item.id && isShareTabActive) {
+        forcedShowInfoPanelLoader();
+      }
+
+      resetSelections();
+      setBufferSelection(item);
+      openShareTab();
+    };
+
     render() {
       const {
         t,
@@ -152,7 +175,7 @@ export default function withQuickButtons(WrappedComponent) {
         isIndexEditingMode,
         roomLifetime,
         isTemplatesFolder,
-        isRecentFolder,
+        isTrashFolder,
       } = this.props;
 
       const showLifetimeIcon =
@@ -182,7 +205,8 @@ export default function withQuickButtons(WrappedComponent) {
           roomLifetime={roomLifetime}
           onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
-          isRecentFolder={isRecentFolder}
+          isTrashFolder={isTrashFolder}
+          openShareTab={this.openShareTab}
         />
       );
 
@@ -219,7 +243,7 @@ export default function withQuickButtons(WrappedComponent) {
         isPersonalRoom,
         isArchiveFolder,
         isTemplatesFolder,
-        isRecentFolder,
+        isTrashFolder,
       } = treeFoldersStore;
 
       const { isIndexEditingMode } = indexingStore;
@@ -228,7 +252,12 @@ export default function withQuickButtons(WrappedComponent) {
 
       const { isPublicRoom } = publicRoomStore;
 
-      const { setShareChanged, infoPanelRoomSelection } = infoPanelStore;
+      const {
+        setShareChanged,
+        infoPanelRoomSelection,
+        infoPanelSelection,
+        isShareTabActive,
+      } = infoPanelStore;
 
       const { getManageLinkOptions } = contextOptionsStore;
 
@@ -250,8 +279,11 @@ export default function withQuickButtons(WrappedComponent) {
         isTemplatesFolder,
         onCreateRoomFromTemplate,
         setBufferSelection: filesStore.setBufferSelection,
+        resetSelections: filesStore.resetSelections,
         lockFileAction,
-        isRecentFolder,
+        isTrashFolder,
+        isShareTabActive,
+        infoPanelSelection,
       };
     },
   )(observer(WithQuickButtons));

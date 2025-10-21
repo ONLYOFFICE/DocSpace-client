@@ -29,7 +29,7 @@
   "TelegramAccount": "Telegram account",
   "TelegramAccountDescription": "To connect TelegramBot to your account follow secret link click to “Connect Telegram” button.",
   "TelegramAccountDisconnect": "Disconnect Telegram",
-  "TelegramAccountDisconnectDescription": "Your @{{username}} account is connected for telegram notifications. You can disconnect from this account. In this case, you will not receive notifications.",
+  "TelegramAccountDisconnectDescription": "Your @{{username}} account is connected for Telegram notifications. You can disconnect from this account. In this case, you will not receive notifications.",
   "TerminateAllSessions": "Terminate all sessions except the current one",
   "TwoFactorDescription": "Two-factor authentication via a code-generating app was enabled for all users by the admin."
 }

@@ -30,6 +30,7 @@ import type { NextRequest } from "next/server";
 import {
   FILTER_HEADER,
   LOCALE_HEADER,
+  PATHNAME_HEADER,
   SHARE_KEY_HEADER,
   THEME_HEADER,
 } from "@/utils/constants";
@@ -43,6 +44,8 @@ export async function middleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
 
   const redirectUrl = `${proto}://${host}`;
+
+  requestHeaders.set(PATHNAME_HEADER, request.nextUrl.pathname);
 
   if (request.nextUrl.pathname === "/health") {
     console.log("Get sdk health check for portal: ", redirectUrl);

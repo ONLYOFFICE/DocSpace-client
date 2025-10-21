@@ -105,7 +105,8 @@ const PublicPreviewViewer: FC<PublicPreviewViewerProps> = ({
         fileStatus: file.fileStatus,
         canShare: file.canShare,
         version: file.version,
-        thumbnailUrl: file.thumbnailUrl ?? "",
+        thumbnailUrl:
+          !file.providerItem && file.thumbnailUrl ? file.thumbnailUrl : "",
       })),
     [files],
   );

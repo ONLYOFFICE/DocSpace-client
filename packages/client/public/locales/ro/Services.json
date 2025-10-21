@@ -1,1 +1,14 @@
-{}
+{
+  "AutomaticBackupDescription": "Configurați copierea de rezervă programată pentru protecția continuă a datelor fără manipulări manuale.",
+  "BackupRoomDescription": "Salvați copia de rezervă într-o sală selectată sau în secțiunea {{sectionName}}. Selectați o sală existentă sau creați o sală nouă.",
+  "BackupServiceEnabled": "Serviciul de copiere de rezervă a fost activat cu succes.",
+  "ConnectService": "Conectați-vă serviciul <1>aici</1> pentru a activa funcțiile de copiere de rezervă.",
+  "ContactToPayer": "Contactați Plătitorul (<1>{{email}}</1>) pentru a conecta serviciul de copiere de rezervă.",
+  "DisableBackupConfirm": "Dezactivarea serviciului de copiere de rezervă nu va permite administratorilor ale {{productName}} să creeze copii de rezervă. Dacă copiera de rezervă automată este activată, aceasta va rămâne activă în limita cotei de stocare disponibile, dar odată ce limita de stocare este atinsă, copiera de rezervă va fi dezactivată permanent. Sigur doriţi să continuați?",
+  "DisableBackupConfirmWithoutQuota": "Dezactivarea serviciului de copiere de rezervă nu va permite administratorilor ale {{productName}} să creeze copii de rezervă. Dacă copiera de rezervă automată este activată, aceasta va fi dezactivată. Sigur doriţi să continuați?",
+  "EnableBackupConfirm": "Activarea serviciului de copiere de rezervă va permite tuturor administratorilor {{productName}} să creeze copii de rezervă oricând, atâta timp cât există soldul portofelului suficient. Sigur doriţi să continuați?",
+  "FreeBackupsPerMonth": "Copii de rezervă gratuite: {{value}}/{{maxValue}} pentru luna curentă.",
+  "TemporaryDescription": "Creați o copie de rezervă în secțiunea „Copiere de rezervă”. Este disponibilă pentru descărcare timp de 24 de ore după creare.",
+  "ThirdPartyResourceDescription": "Conectați-vă și salvați copia de rezervă în contul cloud precum Dropbox, Box, OneDrive sau Google Drive.",
+  "ThirdPartyStorageDescription": "Utilizați servicii externe pentru a vă stoca copii de rezervă. Ideal pentru conectarea platformelor externe de stocare în cloud."
+}

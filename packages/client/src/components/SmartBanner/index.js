@@ -47,7 +47,10 @@ const ReactSmartBanner = (props) => {
     const cookieInstalled = getCookie("smartbanner-installed");
     const path = window.location.pathname.toLowerCase();
     if (
-      (path.includes("rooms") || path.includes("files")) &&
+      (path.includes("rooms") ||
+        path.includes("files") ||
+        path.includes("shared-with-me") ||
+        path.includes("recent")) &&
       !(cookieClosed || cookieInstalled)
     ) {
       setIsBannerVisible(true);

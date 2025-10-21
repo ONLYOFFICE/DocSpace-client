@@ -23,5 +23,6 @@
   "ThirdPartyInfo": "Cambiare le informazioni di terze parti",
   "ThirdPartyTitle": "Servizi di terze parti",
   "TitleShowActions": "Mostra azioni con file",
-  "TitleShowFolderActions": "Mostra azioni con cartelle"
+  "TitleShowFolderActions": "Mostra azioni con cartelle",
+  "TrashItemsDeleteSuccess": "Gli elementi selezionati sono stati eliminati con successo da {{sectionName}}"
 }

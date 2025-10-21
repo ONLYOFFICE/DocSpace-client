@@ -3,7 +3,7 @@
   "content": "User",
   "content_en_sha1_hash": "9f8a2389a20ca0752aa9e95093515517e90e194c",
   "created_at": "2025-05-19T21:30:49.454Z",
-  "updated_at": "2025-09-23T07:24:24.106Z",
+  "updated_at": "2025-10-17T14:43:53.400Z",
   "comment": {
     "text": "This translation key \"User\" is used to display the content \"User\" in various UI contexts, such as a warning message and a label in a table. It appears in a dialog box when deleting a profile and in a data import component for selecting users. Translators should provide a translated version of this text that accurately reflects its purpose in these contexts.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/index.tsx",
-      "line_number": 73,
+      "line_number": 74,
       "context": "label: t(\"Common:RoomAdmin\"),\n onClick: setTypeRoomAdmin,\n },\n {\n key: UserTypes.User,\n label: t(`Common:User`),\n onClick: setTypeUser,\n },\n ];\n \n if (isOwner) {",
       "module": "/packages/client"
     },
@@ -36,19 +36,19 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 689,
+      "line_number": 692,
       "context": "},\n {\n id: \"accounts-add_collaborator\",\n className: \"main-button_drop-down\",\n icon: PersonDefaultReactSvgUrl,\n label: t(\"Common:User\"),\n onClick: () => this.inviteUser(EmployeeType.User),\n \"data-type\": EmployeeType.User,\n action: EmployeeType.User,\n key: \"collaborator\",\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 335,
+      "line_number": 337,
       "context": "productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");\n }\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 335,
+      "line_number": 337,
       "context": "productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");\n }\n };",
       "module": "/packages/shared"
     },
@@ -197,9 +197,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While 'පරිශ්‍රීලකයා' (parishiilakayaa) can be a valid translation for 'user', it's quite formal and less commonly used in contemporary Sri Lankan Sinhala. A more common and natural translation would be 'භාවිතකරු' (bhavitakaru).",
-          "suggestion": "Consider using 'භාවිතකරු' (bhavitakaru) for a more natural and common translation."
+          "type": "spelling",
+          "description": "The Sinhala word 'පරිශ්‍රීලකයා' contains a potential spelling error. The generally accepted and more common translation for 'User' in Sinhala is 'භාවිතකරු'.",
+          "suggestion": "භාවිතකරු"
         }
       ],
       "approved_at": null
@@ -252,10 +252,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '普通用户' (Pǔtōng Yònghù) literally translates to 'Common User', which is not the most accurate or natural rendering of 'User' in many contexts. It implies a distinction from a 'special' or 'premium' user, which may not be intended.",
-          "suggestion": "Consider alternatives like '用户' (Yònghù), which is the standard and most versatile translation for 'User'."
+          "description": "The translation '普通用户' (Pǔtōng yònghù) translates to 'Common User' or 'General User,' which is not a direct equivalent of 'User.' While 'Common' adds context, it's an unnecessary addition and may not be the desired meaning.",
+          "suggestion": "Consider '用户' (Yònghù), which is the standard and most direct translation of 'User' in Chinese."
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

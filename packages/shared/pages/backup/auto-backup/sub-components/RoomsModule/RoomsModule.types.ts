@@ -35,6 +35,9 @@ import type { TBreadCrumb } from "../../../../../components/selector/Selector.ty
 import { type ScheduleComponentProps } from "../ScheduleComponent";
 
 export interface RoomsModuleProps extends ScheduleComponentProps {
+  isBackupPaid?: boolean;
+  isFreeBackupsLimitReached?: boolean;
+
   isError: boolean;
   isLoadingData: boolean;
   settingsFileSelector: FilesSelectorSettings;

@@ -3,7 +3,7 @@
   "content": "Help Center",
   "content_en_sha1_hash": "110158257eb2f2c817d5a9d691e7637cfd12a11a",
   "created_at": "2025-05-19T21:30:45.755Z",
-  "updated_at": "2025-09-23T07:24:24.309Z",
+  "updated_at": "2025-10-17T14:43:53.606Z",
   "comment": {
     "text": "The \"Help Center\" translation key is used to display a link to the help center, providing users with access to support resources. It appears in various UI elements, such as buttons and dropdowns, typically when the user needs assistance or has questions about a specific feature or process. Translators should ensure that the text accurately reflects local language equivalents of \"Help Center\".",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 480,
+      "line_number": 473,
       "context": "key: \"separator1\",\n },\n helpCenterEnabled && {\n key: \"user-menu-help-center\",\n icon: HelpCenterReactSvgUrl,\n label: t(\"Common:HelpCenter\"),\n onClick: this.onHelpCenterClick,\n url: this.settingsStore.helpCenterDomain || \"#\",\n preventNewTab: true,\n },\n /* videoGuidesEnabled && {",
       "module": "/packages/client"
     },

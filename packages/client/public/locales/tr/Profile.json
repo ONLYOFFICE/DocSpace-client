@@ -7,6 +7,7 @@
   "DesktopTheme": "Masaüstü Düzenleyici ayarlarıyla senkronize et",
   "DesktopThemeDescription": "Masaüstü düzenleyicilerin mevcut temasına bağlı olarak açık ve koyu temalar arasında otomatik olarak geçiş yap.",
   "EditPhoto": "Fotoğrafı düzenle",
+  "EmailChangeSuccess": "E-postanız başarıyla değiştirildi.",
   "EmailNotVerified": "E-posta doğrulanmadı",
   "ErrorAccountAlreadyUse": "Bağlı hesap hâlihazırda başka bir kullanıcı tarafından kullanılıyor",
   "FileManagement": "Dosya yönetimi",
@@ -17,6 +18,7 @@
   "LogoutDescription": "Not. Şu anda kullanımda olduğundan, bu bağlantı dışındaki tüm aktif bağlantıların oturumu kapatılacaktır.",
   "LogoutFrom": "{{platform}} {{browser}} oturumu kapatılsın mı?",
   "MyProfile": "Profilim",
+  "NotificationsChannels": "Bildirim kanalları",
   "ProviderSuccessfullyConnected": "Sağlayıcı başarıyla bağlandı",
   "ProviderSuccessfullyDisconnected": "Sağlayıcının bağlantısı başarıyla kesildi",
   "SendAgain": "Tekrar gönder",
@@ -24,6 +26,10 @@
   "SuccessLogout": "Etkin bağlantının oturumu kapatıldı: {{platform}}, {{browser}}",
   "SystemTheme": "Sistem temasını kullan",
   "SystemThemeDescription": "Sisteminiz geçiş yaptığında açık ve koyu temalar arasında otomatik olarak geçiş yapın.",
+  "TelegramAccount": "Telegram hesabı",
+  "TelegramAccountDescription": "TelegramBot'u hesabınıza bağlamak için gizli bağlantıya tıklayın ve “Telegram’ı Bağla” butonuna tıklayın.",
+  "TelegramAccountDisconnect": "Telegram'ı bağlantısını kes",
+  "TelegramAccountDisconnectDescription": "@{{username}} hesabınız telegram bildirimleri için bağlıdır. Bu hesaptan bağlantıyı kesebilirsiniz. Bu durumda, bildirimler almayacaksınız.",
   "TerminateAllSessions": "Geçerli oturum dışındaki tüm oturumları sonlandırın",
   "TwoFactorDescription": "Tüm kullanıcılar için kod üreten bir uygulama aracılığıyla iki faktörlü kimlik doğrulama yönetici tarafından etkinleştirildi."
 }

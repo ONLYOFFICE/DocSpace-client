@@ -3,7 +3,7 @@
   "content": "<1>Click here</1> to upgrade your tariff plan.",
   "content_en_sha1_hash": "05e8679da260d74355c1ac6f0c80db766199b304",
   "created_at": "2025-05-19T21:30:54.102Z",
-  "updated_at": "2025-05-24T08:08:49.396Z",
+  "updated_at": "2025-10-01T08:28:21.894Z",
   "comment": {
     "text": "This translation key is used to display a call-to-action button that encourages users to upgrade their tariff plan. The text will appear as a clickable link within a UI component, likely part of an online quota management system. Translators should provide a clear and actionable message in the user's preferred language.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 190,
+      "line_number": 191,
       "context": "});\n \n return (\n <Trans\n t={t}\n i18nKey=\"ClickToUpgradeTariff\"\n components={{\n 1: (\n <Link\n fontSize=\"12px\"\n fontWeight=\"400\"",
       "module": "/packages/client"
     }

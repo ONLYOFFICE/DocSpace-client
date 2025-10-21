@@ -403,12 +403,9 @@ class UploadDataStore {
 
       updatedFile.fileInfo.fileExst = file.fileInfo.fileExst;
 
-      this.displayedConversionFiles[fileIndex] = {
-        ...updatedFile,
-        action: "convert",
-        error: null,
-        errorShown: false,
-      };
+      this.displayedConversionFiles[fileIndex].action = "convert";
+      this.displayedConversionFiles[fileIndex].error = null;
+      this.displayedConversionFiles[fileIndex].errorShown = false;
     } else {
       this.displayedConversionFiles.push(file);
     }
@@ -1582,6 +1579,27 @@ class UploadDataStore {
         // console.log(`Uploaded chunk ${index}/${length}`, res);
       }
     }
+  };
+
+  retryConvertFiles = (t, fileId) => {
+    const fileIndex = this.files.findIndex((f) => f.fileId === fileId);
+    const fileConversionInxex = this.displayedConversionFiles.findIndex(
+      (f) => f.fileId === fileId,
+    );
+
+    if (fileIndex > -1) {
+      const retryFile = this.files[fileIndex];
+      retryFile.inConversion = false;
+    }
+
+    if (fileConversionInxex === -1) return;
+
+    const retryFileConversion =
+      this.displayedConversionFiles[fileConversionInxex];
+
+    retryFileConversion.inConversion = false;
+
+    this.convertFileFromFiles(retryFileConversion, t);
   };
 
   retryUploadFiles = (t, uniqueId) => {

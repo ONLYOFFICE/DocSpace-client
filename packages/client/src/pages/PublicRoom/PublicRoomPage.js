@@ -37,6 +37,7 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
+import { isPublicRoom } from "@docspace/shared/utils/common";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import SectionHeaderContent from "../Home/Section/Header";
@@ -105,7 +106,7 @@ const PublicRoomPage = (props) => {
 
   useEffect(() => {
     const toastIsDisabled =
-      sessionStorage.getItem(PUBLIC_SIGN_IN_TOAST) === "true";
+      sessionStorage.getItem(PUBLIC_SIGN_IN_TOAST) === access?.toString();
 
     const isFormRoom =
       roomType === RoomsType.FormRoom || parentRoomType === FolderType.FormRoom;
@@ -115,7 +116,7 @@ const PublicRoomPage = (props) => {
 
     const roomMode = getAccessTranslation().toLowerCase();
 
-    sessionStorage.setItem(PUBLIC_SIGN_IN_TOAST, "true");
+    sessionStorage.setItem(PUBLIC_SIGN_IN_TOAST, access?.toString());
 
     const content = isFormRoom ? (
       t("Common:FormAuthorizeToast", { productName: t("Common:ProductName") })
@@ -126,7 +127,14 @@ const PublicRoomPage = (props) => {
         i18nKey="PublicAuthorizeToast"
         values={{ roomMode, productName: t("Common:ProductName") }}
         components={{
-          1: <Text as="span" fontSize="12px" fontWeight={700} />,
+          1: (
+            <Text
+              key="productName"
+              as="span"
+              fontSize="12px"
+              fontWeight={700}
+            />
+          ),
         }}
       />
     );
@@ -235,7 +243,8 @@ export default inject(
     const { fetchPreviewMediaFile } = mediaViewerDataStore;
 
     const isAuthenticated =
-      validationData?.isAuthenticated || authStore.isAuthenticated;
+      (validationData?.isAuthenticated || authStore.isAuthenticated) &&
+      !isPublicRoom();
 
     return {
       isLoaded,

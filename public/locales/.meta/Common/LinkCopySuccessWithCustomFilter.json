@@ -3,7 +3,7 @@
   "content": "The link to the file with the enabled <strong>Custom filter</strong> is successfully copied to the clipboard.",
   "content_en_sha1_hash": "5fb2ad6180a6cc99acbd44e4f13dfba22b809b66",
   "created_at": "2025-05-19T21:30:46.153Z",
-  "updated_at": "2025-09-26T15:21:06.468Z",
+  "updated_at": "2025-10-16T07:29:35.960Z",
   "comment": {
     "text": "This translation key displays a success message when a shared link is copied to the clipboard after applying a custom filter. It appears as an alert notification and is used in the Context Options Store dialog or similar contexts where file sharing options are being accessed.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 515,
-      "context": "? await getFolderLink(item.id)\n : await getFileLink(item.id);\n copyToBuffer(itemLink.sharedTo.shareLink);\n item.customFilterEnabled\n ? toastr.success(\n <Trans t={t} i18nKey=\"Common:LinkCopySuccessWithCustomFilter\" />,\n )\n : toastr.success(t(\"Common:LinkCopySuccess\"));\n } catch (error) {\n toastr.error(error);\n }",
+      "line_number": 525,
+      "context": ": await getFileLink(item.id);\n \n copyToBuffer(itemLink.sharedTo.shareLink);\n item.customFilterEnabled\n ? toastr.success(\n <Trans t={t} i18nKey=\"Common:LinkCopySuccessWithCustomFilter\" />,\n )\n : toastr.success(t(\"Common:LinkCopySuccess\"));\n } catch (error) {\n toastr.error(error);\n }",
       "module": "/packages/client"
     }
   ],

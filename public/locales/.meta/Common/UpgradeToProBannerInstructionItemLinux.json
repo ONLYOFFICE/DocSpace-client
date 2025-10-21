@@ -3,7 +3,7 @@
   "content": "Linux instruction.",
   "content_en_sha1_hash": "4b856283dbe4b6431a050771a1ebbbed5a4f4760",
   "created_at": "2025-05-26T07:15:49.197Z",
-  "updated_at": "2025-08-11T18:11:59.376Z",
+  "updated_at": "2025-10-13T22:12:04.882Z",
   "comment": {
     "text": "This translation key is used for the instruction \"Linux\" that appears on a button, likely as part of an upgrade to pro banner. It provides clarity for users when clicking on this specific item in Linux-related contexts.",
     "is_auto": true,
@@ -81,13 +81,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Linux հրահանգ' is a literal translation of 'Linux instruction'. While technically correct, it's not idiomatic Armenian. A more natural translation would convey the essence of an instruction, not just state that it's a Linux instruction.",
+          "suggestion": "Consider alternatives like 'Linux-ի հրահանգներ' (Linux instructions) or a phrase that emphasizes the guidance provided."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Istruzione per Linux.\" is a literal translation but doesn't quite capture the nuance of an instruction. A more natural phrasing might be 'Guida per Linux' or 'Indicazioni per Linux'.",
+          "suggestion": "Consider 'Guida per Linux' or 'Indicazioni per Linux' for a more idiomatic translation."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -99,13 +111,25 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English \"instruction\" is better translated as '가이드' or '안내' rather than '설명서'. '설명서' implies a detailed explanation, whereas 'instruction' refers to a set of directions or guidance.",
+          "suggestion": "Linux가이드"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຄໍາແນະນໍາສຳລັບ Linux' translates more accurately to 'Instructions for Linux' rather than directly reflecting the English 'Linux instruction'. While not entirely wrong, it's not the most natural or precise translation.",
+          "suggestion": "ຄໍາແນະນໍາ Linux"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -129,7 +153,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Instruções para Linux' is a literal translation of 'Linux instruction' but doesn't fully capture the intended meaning, which is likely 'Instructions for upgrading to Pro on Linux'.",
+          "suggestion": "Consider a more contextually accurate translation, such as 'Instruções para atualização para a versão Pro no Linux' or 'Instruções de atualização para a versão Pro em Linux'."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -159,7 +189,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Návod pre Linux' translates to 'Instructions for Linux' or 'Linux Guide', rather than the intended 'Linux instruction'. The English content is a short phrase, not a full instruction or guide.",
+          "suggestion": "Consider 'Linux pokyn' or 'Linux inštrukcia' to more closely match the brevity of the English content. Alternatively, 'Linux: inštrukcie' might be suitable."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -199,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

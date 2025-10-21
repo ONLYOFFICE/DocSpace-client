@@ -233,6 +233,8 @@ class FilesStore {
 
   filesController = null;
 
+  aiAgentsController = null;
+
   clearSearch = false;
 
   isLoadedEmptyPage = false;
@@ -1697,9 +1699,11 @@ class FilesStore {
 
     this.filesController?.abort();
     this.roomsController?.abort();
+    this.aiAgentsController?.abort();
 
     this.filesController = new AbortController();
     this.roomsController = null;
+    this.aiAgentsController = null;
 
     let room = null;
 
@@ -2109,9 +2113,11 @@ class FilesStore {
 
     this.filesController?.abort();
     this.roomsController?.abort();
+    this.aiAgentsController?.abort();
 
     this.roomsController = new AbortController();
     this.filesController = null;
+    this.aiAgentsController = null;
 
     this.aiRoomStore.setKnowledgeId(null);
     this.aiRoomStore.setResultId(null);
@@ -2137,6 +2143,168 @@ class FilesStore {
                 undefined,
                 undefined,
               );
+            }
+          }
+
+          runInAction(() => {
+            this.categoryType = getCategoryTypeByFolderType(
+              data.current.rootFolderType,
+              data.current.parentId,
+            );
+          });
+
+          this.setRoomsFilter(filterData);
+
+          runInAction(() => {
+            this.selectedFolderStore.setSelectedFolder({
+              folders: data.folders,
+              ...data.current,
+              pathParts: data.pathParts,
+              navigationPath: [],
+              ...{ new: data.new },
+            });
+
+            const isEmptyList = data.folders.length === 0;
+            if (filter && isEmptyList) {
+              const {
+                subjectId,
+                filterValue,
+                type,
+                withSubfolders: withRoomsSubfolders,
+                searchInContent: searchInContentRooms,
+                tags,
+                withoutTags,
+              } = filter;
+
+              const isFiltered =
+                subjectId ||
+                filterValue ||
+                type ||
+                filter.provider ||
+                withRoomsSubfolders ||
+                searchInContentRooms ||
+                tags ||
+                withoutTags ||
+                filter.quotaFilter;
+
+              if (isFiltered) {
+                this.setIsEmptyPage(false);
+              } else {
+                this.setIsEmptyPage(isEmptyList);
+              }
+            } else {
+              this.setIsEmptyPage(isEmptyList);
+            }
+
+            this.setFolders(data.folders);
+            this.setFiles([]);
+          });
+
+          if (clearFilter) {
+            if (clearSelection) {
+              this.setSelected("close");
+            }
+          }
+
+          setInfoPanelSelectedRoom(null);
+
+          const selectedFolder = {
+            selectedFolder: { ...this.selectedFolderStore },
+          };
+
+          if (this.createdItem) {
+            const newItem = this.filesList.find(
+              (item) => item.id === this.createdItem.id,
+            );
+
+            if (newItem) {
+              this.setBufferSelection(newItem);
+              this.setScrollToItem({
+                id: newItem.id,
+                type: this.createdItem.type,
+              });
+            }
+
+            this.setCreatedItem(null);
+          }
+
+          runInAction(() => {
+            this.roomsController = null;
+          });
+
+          this.setIsErrorRoomNotAvailable(false);
+          return Promise.resolve(selectedFolder);
+        })
+        .catch((err) => {
+          if (err?.response?.status === 402)
+            this.currentTariffStatusStore.setPortalTariff();
+
+          if (axios.isCancel(err)) {
+            console.log("Request canceled", err.message);
+            throw err;
+          } else {
+            toastr.error(err);
+          }
+        })
+        .finally(() => {
+          this.clientLoadingStore.setIsSectionHeaderLoading(false);
+          this.clientLoadingStore.setIsSectionFilterLoading(false);
+        });
+
+    return request();
+  };
+
+  fetchAgents = (
+    folderId,
+    filter,
+    clearFilter = true,
+    clearSelection = true,
+  ) => {
+    const { setSelectedNode } = this.treeFoldersStore;
+
+    const filterData = filter
+      ? filter.clone()
+      : RoomsFilter.getDefault(
+          this.userStore.user?.id,
+          RoomSearchArea.AIAgents,
+        );
+
+    const isCustomCountPage =
+      filter && filter.pageCount !== 100 && filter.pageCount !== 25;
+
+    if (!isCustomCountPage) {
+      filterData.page = 0;
+      filterData.pageCount = 100;
+    }
+
+    if (folderId) setSelectedNode([`${folderId}`]);
+
+    this.filesController?.abort();
+    this.roomsController?.abort();
+    this.aiAgentsController?.abort();
+
+    this.roomsController = null;
+    this.filesController = null;
+    this.aiAgentsController = new AbortController();
+
+    this.aiRoomStore.setKnowledgeId(null);
+    this.aiRoomStore.setResultId(null);
+
+    const request = () =>
+      api.ai
+        .getAIAgents(filterData, this.aiAgentsController.signal)
+        .then(async (data) => {
+          if (!folderId) setSelectedNode([`${data.current.id}`]);
+
+          filterData.total = data.total;
+
+          if (data.total > 0) {
+            const lastPage = filterData.getLastPage();
+
+            if (filterData.page > lastPage) {
+              filterData.page = lastPage;
+
+              return this.fetchAgents(folderId, filterData);
             }
           }
 

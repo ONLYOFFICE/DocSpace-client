@@ -794,6 +794,12 @@ export const getFileExtension = (fileTitleParam: string) => {
 export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   const sorted = [];
 
+  const aiAgentsFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.AIAgents,
+  );
+  if (aiAgentsFolder) sorted.push(aiAgentsFolder);
+
   const myFolder = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.USER,
@@ -859,6 +865,8 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
 
 export const getFolderClassNameByType = (folderType: FolderType) => {
   switch (folderType) {
+    case FolderType.AIAgents:
+      return "tree-node-ai-agents";
     case FolderType.USER:
       return "tree-node-my";
     case FolderType.SHARE:

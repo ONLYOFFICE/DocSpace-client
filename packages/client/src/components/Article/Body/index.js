@@ -68,6 +68,7 @@ const ArticleBodyContent = (props) => {
     recycleBinFolderId,
     rootFolderId,
     recentFolderId,
+    aiAgentsFolderId,
 
     isVisitor,
     setIsLoading,
@@ -240,6 +241,17 @@ const ArticleBodyContent = (props) => {
 
           break;
         }
+        case aiAgentsFolderId: {
+          const newRoomsFilter = RoomsFilter.getDefault(
+            userId,
+            RoomSearchArea.AIAgents,
+          );
+          newRoomsFilter.searchArea = RoomSearchArea.AIAgents;
+          params = newRoomsFilter.toUrlParams(userId, true);
+          path = getCategoryUrl(CategoryType.AIAgents);
+
+          break;
+        }
         default: {
           const newRoomsFilter = RoomsFilter.getDefault(
             userId,
@@ -269,6 +281,7 @@ const ArticleBodyContent = (props) => {
       roomsFilter,
       recentFolderId,
       sharedWithMeFolderId,
+      aiAgentsFolderId,
     ],
   );
 
@@ -311,6 +324,12 @@ const ArticleBodyContent = (props) => {
   );
 
   React.useEffect(() => {
+    if (
+      location.pathname.includes("/ai-agents") &&
+      activeItemId !== aiAgentsFolderId
+    )
+      return setActiveItemId(aiAgentsFolderId);
+
     if (
       location.pathname.includes("/recent") &&
       activeItemId !== recentFolderId
@@ -388,6 +407,7 @@ const ArticleBodyContent = (props) => {
     isVisitor,
     rootFolderId,
     recentFolderId,
+    aiAgentsFolderId,
   ]);
 
   React.useEffect(() => {
@@ -480,6 +500,7 @@ export default inject(
       recentFolderId,
       sharedWithMeFolderId,
       favoritesFolderId,
+      aiAgentsFolderId,
     } = treeFoldersStore;
     const selectedFolderId = selectedFolderStore.id;
     const rootFolderId = selectedFolderStore.rootFolderId;
@@ -521,6 +542,7 @@ export default inject(
       rootFolderId,
       recentFolderId,
       sharedWithMeFolderId,
+      aiAgentsFolderId,
 
       setIsLoading,
 

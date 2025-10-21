@@ -58,6 +58,7 @@ import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 export type UseFilesProps = {
   fetchFiles: FilesStore["fetchFiles"];
   fetchRooms: FilesStore["fetchRooms"];
+  fetchAgents: FilesStore["fetchAgents"];
   getFileInfo: FilesStore["getFileInfo"];
   setIsPreview: FilesStore["setIsPreview"];
   setIsUpdatingRowItem: FilesStore["setIsUpdatingRowItem"];
@@ -77,6 +78,7 @@ export type UseFilesProps = {
 const useFiles = ({
   fetchFiles,
   fetchRooms,
+  fetchAgents,
   getFileInfo,
   setIsPreview,
   setIsUpdatingRowItem,
@@ -180,8 +182,6 @@ const useFiles = ({
     if (isAIAgents) {
       filterObj = RoomsFilter.getFilter(window.location);
 
-      isRooms = true;
-
       if (!filterObj) {
         fetchDefaultAgents();
 
@@ -190,8 +190,7 @@ const useFiles = ({
     } else if (
       (categoryType == CategoryType.Shared ||
         categoryType == CategoryType.SharedRoom ||
-        categoryType == CategoryType.Archive ||
-        isAIAgents) &&
+        categoryType == CategoryType.Archive) &&
       !isRoomFolder
     ) {
       filterObj = RoomsFilter.getFilter(window.location);
@@ -264,9 +263,11 @@ const useFiles = ({
     const { filter } = dataObj;
     let newFilter = filter
       ? filter.clone()
-      : isRooms
-        ? RoomsFilter.getDefault(userId, filterObj.searchArea?.toString())
-        : FilesFilter.getDefault({ categoryType });
+      : isAIAgents
+        ? RoomsFilter.getDefault(userId, RoomSearchArea.AIAgents)
+        : isRooms
+          ? RoomsFilter.getDefault(userId, filterObj.searchArea?.toString())
+          : FilesFilter.getDefault({ categoryType });
     const requests = [Promise.resolve(newFilter)];
 
     await axios
@@ -286,6 +287,9 @@ const useFiles = ({
         newFilter = data[0];
 
         if (newFilter) {
+          if (isAIAgents) {
+            return fetchAgents(null, newFilter, false, false);
+          }
           if (isRooms) {
             return fetchRooms(null, newFilter, undefined, undefined, false);
           }
@@ -343,6 +347,7 @@ const useFiles = ({
     location.search,
     fetchFiles,
     fetchRooms,
+    fetchAgents,
     getFileInfo,
     setIsPreview,
     setIsUpdatingRowItem,

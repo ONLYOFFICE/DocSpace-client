@@ -653,11 +653,4 @@
   &.chatButtonOpen {
     background-color: var(--chat-button-open-background-color);
   }
-
-  .chatButtonText {
-    background: linear-gradient(288.66deg, #4781d1 -8.09%, #664fea 93.69%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
 }

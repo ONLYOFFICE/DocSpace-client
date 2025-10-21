@@ -3,7 +3,7 @@
   "content": "He has full access to the room",
   "content_en_sha1_hash": "5539dff97c62fdc09da717399b225a9c3eeaa745",
   "created_at": "2025-05-19T21:30:45.734Z",
-  "updated_at": "2025-09-17T13:43:01.697Z",
+  "updated_at": "2025-09-23T07:24:24.403Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a user has full access to a room. It appears in an info panel on the Home page and is part of a tooltip that shows permissions related to room ownership or admin status.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/User.tsx",
-      "line_number": 191,
+      "file_path": "/packages/shared/components/share/sub-components/User.tsx",
+      "line_number": 129,
       "context": "const tooltipContent = `${\n \"isOwner\" in user && user.isOwner\n ? t(\"Common:PortalOwner\", { productName: t(\"Common:ProductName\") })\n : t(\"Common:PortalAdmin\", { productName: t(\"Common:ProductName\") })\n }. ${t(\"Common:HasFullAccess\")}`;\n \n const itemAvatar = isSystem\n ? EveryoneIconUrl\n : isExpect\n ? AtReactSvgUrl",
-      "module": "/packages/client"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

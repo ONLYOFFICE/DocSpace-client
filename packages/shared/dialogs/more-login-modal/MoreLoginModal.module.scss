@@ -34,6 +34,8 @@
   align-items: center;
   align-content: center;
   padding: 8px 0;
+  padding-inline-start: 16px;
+  cursor: pointer;
 
   display: grid;
   grid-template-columns: 32px minmax(100px, 501px) 100px;
@@ -50,9 +52,30 @@
     }
   }
 
+  &:hover {
+    background-color: var(--more-login-row-hover-color);
+  }
+
+  &:active {
+    background-color: var(--more-login-row-pressed-color);
+  }
+
   .providerName {
     overflow-wrap: break-word;
     padding: 0 12px;
     line-height: 16px;
+  }
+
+  .providerIcon,
+  .providerIcon > div {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+  }
+
+  :global(#modal-scroll > .scroll-wrapper > .scroller > .scroll-body) {
+    margin-inline-end: 0 !important;
+    padding-inline-end: 0 !important;
   }
 }

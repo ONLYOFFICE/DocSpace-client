@@ -43,6 +43,7 @@ import {
   FILTER_ROOM_DOCUMENTS,
   FILTER_ARCHIVE_DOCUMENTS,
   FILTER_GROUPS,
+  FILTER_SHARE,
 } from "./filterConstants";
 import { validateAndFixObject } from "./filterValidator";
 
@@ -75,6 +76,7 @@ const getTypeDefinition = (storageKey: string) => {
     case FILTER_RECENT:
     case FILTER_FAVORITES:
     case FILTER_TRASH:
+    case FILTER_SHARE:
     case FILTER_ROOM_DOCUMENTS:
     case FILTER_ARCHIVE_DOCUMENTS:
       return filesTypeDefinition;

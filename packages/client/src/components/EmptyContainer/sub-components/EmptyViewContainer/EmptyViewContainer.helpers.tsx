@@ -61,6 +61,8 @@ import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.s
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
+import { CategoryType } from "@docspace/shared/constants";
+
 import type {
   EmptyViewItemType,
   EmptyViewOptionsType,
@@ -68,7 +70,6 @@ import type {
 import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 
 import type { AccessType, OptionActions } from "./EmptyViewContainer.types";
 import { DefaultFolderType } from "./EmptyViewContainer.constants";
@@ -207,15 +208,22 @@ export const getOptions = (
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
+  const isTemplateFolder = rootFolderType === FolderType.RoomTemplates;
   const isNotAdmin = isUser(access);
   const canUseChat = !!security && "UseChat" in security && security.UseChat;
 
   const {
     createInviteOption,
+    createTemplateAccessOption,
     // createCreateFileOption,
     createUploadFromDocSpace,
     createUploadFromDeviceOption,
   } = helperOptions(actions, security, isFrame);
+
+  const templateAccess = createTemplateAccessOption(
+    t("EmptyView:ManageAccess"),
+    t("EmptyView:TemplateAccessDescription"),
+  );
 
   const uploadPDFFromDocSpace = createUploadFromDocSpace(
     t("EmptyView:UploadFromPortalTitle", {
@@ -245,12 +253,14 @@ export const getOptions = (
     "pdf",
   );
 
-  const inviteUser = createInviteOption(
+  const inviteUserOption = createInviteOption(
     t("Common:InviteContacts"),
     t("EmptyView:InviteUsersOptionDescription", {
       productName: t("Common:ProductName"),
     }),
   );
+
+  const inviteUser = isTemplateFolder ? templateAccess : inviteUserOption;
 
   const shareFillingRoom = {
     title: t("EmptyView:ShareOptionTitle"),
@@ -530,8 +540,8 @@ export const getOptions = (
     case RoomsType.FormRoom:
       if (isFormFiller) return [];
 
-      if (isCollaborator)
-        return [uploadPDFFromDocSpace, uploadFromDevicePDF, shareFillingRoom];
+      if (isTemplateFolder)
+        return [templateAccess, uploadPDFFromDocSpace, uploadFromDevicePDF];
 
       return [uploadPDFFromDocSpace, uploadFromDevicePDF, shareFillingRoom];
     case RoomsType.EditingRoom:
@@ -551,6 +561,14 @@ export const getOptions = (
 
       if (isCollaborator)
         return [createFile, uploadAllFromDocSpace, uploadFromDeviceAnyFile];
+
+      if (isTemplateFolder)
+        return [
+          createFile,
+          templateAccess,
+          uploadAllFromDocSpace,
+          uploadFromDeviceAnyFile,
+        ];
 
       return [
         createFile,

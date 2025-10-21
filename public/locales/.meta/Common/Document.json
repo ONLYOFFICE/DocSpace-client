@@ -3,7 +3,7 @@
   "content": "Document",
   "content_en_sha1_hash": "e214b8a29923056887b7edf6635d90dcbb2abe88",
   "created_at": "2025-05-19T21:30:44.571Z",
-  "updated_at": "2025-08-04T07:30:00.969Z",
+  "updated_at": "2025-10-13T13:22:35.480Z",
   "comment": {
     "text": "This translation key is used for the label \"Document\" on buttons and links, appearing as part of a file path in `/packages/client/src/components/Article/MainButton/index.js` and a list of options in `/packages/client/src/components/EmptyContainer/sub-components/CommonButtons.js`. The text promotes creating a new document.",
     "is_auto": true,
@@ -12,26 +12,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 524,
+      "line_number": 529,
       "context": "const createNewDocumentDocx = {\n id: \"actions_new-document\",\n className: \"main-button_drop-down\",\n icon: ActionsDocumentsReactSvgUrl,\n label: t(\"Common:Document\"),\n onClick: onCreate,\n action: \"docx\",\n key: \"docx\",\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/CommonButtons.js",
-      "line_number": 62,
-      "context": "onClick={onCreate}\n iconName={PlusSvgUrl}\n isFill\n />\n <Link data-format=\"docx\" onClick={onCreate} {...linkStyles}>\n {t(\"Document\")},\n </Link>\n </div>\n <Link data-format=\"xlsx\" onClick={onCreate} {...linkStyles}>\n {t(\"Spreadsheet\")},\n </Link>",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 348,
-      "context": "key: \"create-form-form\",\n disabled: !security?.Create,\n model: [\n {\n key: \"create-Document\",\n label: t(\"Common:Document\"),\n icon: DocumentsReactSvgUrl,\n onClick: () => actions.onCreate(\"docx\"),\n },\n {\n key: \"create-spreadsheet\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
       "line_number": 83,
       "context": "conversionFiles,\n } = props;\n \n const options = [\n {\n label: t(\"Document\"),\n value: \".docx\",\n },\n {\n label: t(\"Spreadsheet\"),\n value: \".xlsx\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/CommonButtons.js",
+      "line_number": 63,
+      "context": "onClick={onCreate}\n iconName={PlusSvgUrl}\n isFill\n />\n <Link data-format=\"docx\" onClick={onCreate} {...linkStyles}>\n {t(\"Document\")},\n </Link>\n </div>\n <Link data-format=\"xlsx\" onClick={onCreate} {...linkStyles}>\n {t(\"Spreadsheet\")},\n </Link>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 357,
+      "context": "key: \"create-form-form\",\n disabled: !security?.Create,\n model: [\n {\n key: \"create-Document\",\n label: t(\"Common:Document\"),\n icon: DocumentsReactSvgUrl,\n onClick: () => actions.onCreate(\"docx\"),\n },\n {\n key: \"create-spreadsheet\",",
       "module": "/packages/client"
     },
     {

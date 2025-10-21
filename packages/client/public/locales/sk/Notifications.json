@@ -1,10 +1,20 @@
 {
-  "ActionsWithFilesDescription": "Označenia vás budú upozorňovať na akcie, ako je nahrávanie, vytváranie a úprava súborov.",
+  "ActionsWithFilesDescription": "Odznaky zvýraznia aktivitu súborov — nahrávanie, úpravy alebo zdieľanie — v sekciách {{rooms}}, {{shared}} a {{documents}}.",
+  "AdminSetupRequired": "Vyžaduje sa nastavenie administrátora",
   "Badges": "Menovky",
   "DailyFeed": "Denný informačný kanál {{productName}}",
   "DailyFeedDescription": "Prečítajte si správy a udalosti z vášho {{productName}} v dennom prehľade.",
+  "FileActivityNotify": "Notifikácie o aktivite súborov",
+  "GoToSettings": "Prejdite do Nastavení",
+  "IsNotValid": "Nie je platné",
+  "LdapEmailTooltip": "Tento používateľský účet je načítaný z LDAP. Používateľova e-mailová adresa nebola zadaná a aktuálna bola generovaná automaticky a nemožno ju použiť na odosielanie upozornení.",
+  "NotConfigured": "Nakonfigurované",
   "Notifications": "Upozornenia",
-  "RoomsActivityDescription": "Hodinové upozornenia. Buďte informovaní o všetkých aktivitách vo svojich miestnostiach.",
+  "RoomsActivityDescription": "Získajte okamžité upozornenia na e-mail o nových zdieľaných súboroch/zložkách a aktivitách vo vašom {{sectionName}}.",
+  "RoomUpdateNotify": "Zdieľaný obsah a aktivita {{sectionName}}",
+  "SettingUpNotifications": "Nastavenie upozornení",
+  "SuccessConnected": "{{serviceName}} bol úspešne pripojený ako kanál pre upozornenia. Teraz tam budete dostávať aktualizácie.",
+  "SuccessDisconnected": "{{serviceName}} bol úspešne odpojený ako kanál pre upozornenia. Upozornenia tam už nebudú zasielané.",
   "UsefulTips": "Užitočné tipy pre {{productName}}",
   "UsefulTipsDescription": "Získajte užitočných sprievodcov o {{productName}}"
 }

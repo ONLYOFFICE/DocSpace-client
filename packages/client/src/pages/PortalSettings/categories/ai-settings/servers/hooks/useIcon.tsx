@@ -33,6 +33,7 @@ import { SelectorAddButton } from "@docspace/shared/components/selector-add-butt
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
 import { ONE_MEGABYTE } from "@docspace/shared/constants";
+import { Link, LinkType } from "@docspace/shared/components/link";
 
 import styles from "../styles/AddEditDialog.module.scss";
 
@@ -40,7 +41,6 @@ export const useIcon = (initialValue?: string) => {
   const { t } = useTranslation(["AISettings", "OAuth"]);
 
   const [icon, setIcon] = React.useState(initialValue || "");
-  const [error, setError] = React.useState("");
 
   const initFormData = React.useRef({ icon });
 
@@ -72,8 +72,6 @@ export const useIcon = (initialValue?: string) => {
       reader.onloadend = () => {
         if (reader.result && typeof reader.result === "string")
           setIcon(reader.result);
-
-        if (error) setError("");
       };
       reader.readAsDataURL(file);
 
@@ -88,40 +86,48 @@ export const useIcon = (initialValue?: string) => {
       img.onload = () => {
         const data = resizeImage.resize(img, widthProp, heightProp, "png");
         setIcon(data);
-
-        if (error) setError("");
       };
       img.src = URL.createObjectURL(file);
     }
   };
 
   const getIcon = () => {
-    if (!icon) {
-      setError(t("OAuth:ThisRequiredField"));
-      return;
-    }
     return icon;
   };
 
   const hasChanges = !equal(initFormData.current, { icon });
 
+  const onDeleteIcon = () => setIcon("");
+
   const iconComponent = (
     <FieldContainer
       className={styles.iconContainer}
       labelText={t("AISettings:ServiceIcon")}
-      isRequired
       isVertical
       labelVisible
       removeMargin
-      errorMessage={error}
-      hasError={!!error}
     >
       <div className={styles.iconBlock}>
-        {icon ? <img className={styles.icon} alt="img" src={icon} /> : null}
-        <SelectorAddButton
-          label={t("OAuth:SelectNewImage")}
-          onClick={onClick}
-        />
+        {icon ? (
+          <>
+            <img className={styles.icon} alt="img" src={icon} />
+            <Link
+              type={LinkType.action}
+              lineHeight="15px"
+              fontWeight={600}
+              isHovered
+              onClick={onDeleteIcon}
+              className={styles.deleteImageLink}
+            >
+              {t("AISettings:DeleteImage")}
+            </Link>
+          </>
+        ) : (
+          <SelectorAddButton
+            label={t("OAuth:SelectNewImage")}
+            onClick={onClick}
+          />
+        )}
       </div>
       <input
         ref={inputRef}

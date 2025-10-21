@@ -98,6 +98,7 @@ export type TConfirmRouteContext = {
     roomId?: string;
     firstname?: string;
     lastname?: string;
+    redirected?: string;
   };
   roomData: {
     roomId?: string;
@@ -119,6 +120,7 @@ export type TConfirmLinkParams = {
   roomId?: string;
   linkData?: string;
   culture?: string;
+  redirected?: string;
 };
 
 export type TConfirmLinkResult = {
@@ -228,4 +230,6 @@ export type ForgotPasswordModalDialogProps = {
   isVisible: boolean;
   userEmail?: string;
   onDialogClose: () => void;
+  reCaptchaPublicKey?: string;
+  reCaptchaType?: RecaptchaType;
 };

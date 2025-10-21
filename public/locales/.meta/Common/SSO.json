@@ -3,7 +3,7 @@
   "content": "SSO",
   "content_en_sha1_hash": "5fa55a6001cc9852171849c95c4031c7b8464066",
   "created_at": "2025-05-19T21:30:49.017Z",
-  "updated_at": "2025-09-19T15:39:23.110Z",
+  "updated_at": "2025-10-14T04:25:17.326Z",
   "comment": {
     "text": "This translation key is used to display the label \"SSO\" in various places within the application, such as badges and filters, indicating that the account login type is Single Sign-On. It appears on the contacts page, specifically in a filter component, and is also used in an info panel. Translators should provide a translation for this key that describes SSO in their native language.",
     "is_auto": true,
@@ -54,7 +54,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 392,
+      "line_number": 394,
       "context": "case \"linkedin\":\n return t(\"Common:ProviderLinkedIn\");\n case \"microsoft\":\n return t(\"Common:ProviderMicrosoft\");\n case \"sso\":\n return t(\"Common:SSO\");\n case \"zoom\":\n return t(\"Common:ProviderZoom\");\n case \"weixin\":\n return t(\"Common:ProviderWechat\");\n case \"sso-full\":",
       "module": "/packages/shared"
     }
@@ -246,10 +246,16 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '单点登录' correctly translates to 'Single Sign-On', the inclusion of '(SSO)' feels redundant given the English content is already 'SSO'.  It's unnecessary to repeat the acronym in the Chinese translation.",
-          "suggestion": "单点登录"
+          "description": "While \"单点登录 (SSO)\" is a generally accepted translation for 'SSO', it's a more descriptive phrase. For a key name, a more direct and concise translation might be preferable to maintain consistency and reduce verbosity.",
+          "suggestion": "Consider \"SSO\" or a shortened version like \"单点登录\" if space is a concern."
         }
       ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

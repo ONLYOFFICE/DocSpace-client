@@ -57,6 +57,7 @@ const ControlButtons = ({
   getContextOptionsFolder,
   isTrashFolder,
   isMobile,
+  isMobileOnly,
   onContextOptionsClick,
   isPublicRoom,
 
@@ -150,6 +151,7 @@ const ControlButtons = ({
         title={title}
         isTrashFolder={isTrashFolder}
         isMobile={isMobile || false}
+        isMobileOnly={isMobileOnly || false}
         contextMenuHeader={contextMenuHeader}
         onCloseDropBox={onCloseDropBox}
         onContextOptionsClick={onContextOptionsClick}

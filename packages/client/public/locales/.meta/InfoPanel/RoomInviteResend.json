@@ -3,7 +3,7 @@
   "content": "Invitations sent again:",
   "content_en_sha1_hash": "cbf7c99c124eac8971e3b2796ff08f71fe296890",
   "created_at": "2025-05-19T21:30:54.934Z",
-  "updated_at": "2025-08-04T07:30:01.243Z",
+  "updated_at": "2025-10-13T13:22:35.727Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that invitations have been resent again, likely found on a button or in a confirmation dialog in the room update access section of the InfoPanel.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
-      "line_number": 258,
+      "line_number": 287,
       "context": "case FeedActionKeys.RoomUpdateAccessForUser:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"InfoPanel:RoomRemoveUser\");\n case FeedActionKeys.RoomInviteResend:\n return t(\"InfoPanel:RoomInviteResend\");\n case FeedActionKeys.RoomGroupAdded:\n if (hasRelatedItems)\n return t(\"InfoPanel:RoomGroupAddedCount\", {\n count,\n });",
       "module": "/packages/client"
     },

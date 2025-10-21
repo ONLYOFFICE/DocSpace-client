@@ -271,7 +271,7 @@ export const enum FolderType {
   SubFolderInProgress = 28,
   VirtualDataRoom = 29,
   RoomTemplates = 30,
-  AIRoom = 31,
+  AIAgents = 31,
   Knowledge = 32,
   ResultStorage = 33,
   AIAgents = 9999,
@@ -291,6 +291,22 @@ export const enum ShareAccessRights {
   Editing = 10,
   Collaborator = 11,
 }
+
+export const enum ShareRights {
+  None = "None",
+  ReadWrite = "ReadWrite",
+  Read = "Read",
+  Restrict = "Restrict",
+  Varies = "Varies",
+  Review = "Review",
+  Comment = "Comment",
+  FillForms = "FillForms",
+  CustomFilter = "CustomFilter",
+  RoomManager = "RoomManager",
+  Editing = "Editing",
+  ContentCreator = "ContentCreator",
+}
+
 export const enum ConflictResolveType {
   Skip = 0,
   Overwrite = 1,

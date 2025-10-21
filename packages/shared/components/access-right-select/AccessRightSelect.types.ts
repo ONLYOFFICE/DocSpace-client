@@ -51,7 +51,11 @@ type PropsFromCombobox = Pick<
   | "shouldShowBackdrop"
   | "dataTestId"
   | "noSelect"
+  | "isLoading"
   | "showDisabledItems"
+  | "withBackdrop"
+  | "title"
+  | "displaySelectedOption"
 >;
 
 export type AccessRightSelectProps = PropsFromCombobox & {
@@ -69,4 +73,5 @@ export type AccessRightSelectProps = PropsFromCombobox & {
   directionX?: string;
   directionY?: string;
   dataTestId?: string;
+  setIsOpenItemAccess?: React.Dispatch<React.SetStateAction<boolean>>;
 };

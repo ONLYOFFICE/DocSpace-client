@@ -39,6 +39,7 @@ import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 
 export enum TInfoPanelMemberType {
+  owner = "owner",
   users = "users",
   groups = "groups",
   expected = "expected",
@@ -59,10 +60,14 @@ export type TInfoPanelMember = {
   isExpect?: boolean;
 } & (TUser | TGroup);
 
-export type TInfoPanelMembers = Record<
-  TInfoPanelMemberType,
-  TInfoPanelMember[]
->;
+export type TInfoPanelMembers = {
+  [TInfoPanelMemberType.owner]?: TInfoPanelMember[];
+  [TInfoPanelMemberType.users]: TInfoPanelMember[];
+  [TInfoPanelMemberType.groups]: TInfoPanelMember[];
+  [TInfoPanelMemberType.expected]: TInfoPanelMember[];
+  [TInfoPanelMemberType.guests]: TInfoPanelMember[];
+  [TInfoPanelMemberType.administrators]: TInfoPanelMember[];
+};
 
 type TMember = TTitleMember | TInfoPanelMember;
 
@@ -86,7 +91,6 @@ export type MembersProps = {
   additionalLinks?: PublicRoomStore["additionalLinks"];
   setExternalLink?: PublicRoomStore["setExternalLink"];
   setExternalLinks?: PublicRoomStore["setExternalLinks"];
-  setPublicRoomKey?: PublicRoomStore["setPublicRoomKey"];
 
   setAccessSettingsIsVisible?: DialogsStore["setTemplateAccessSettingsVisible"];
 
@@ -133,15 +137,6 @@ export type UserProps = {
   setEditMembersGroup?: DialogsStore["setEditMembersGroup"];
   setEditGroupMembersDialogVisible?: DialogsStore["setEditGroupMembersDialogVisible"];
   setRemoveUserConfirmation?: DialogsStore["setRemoveUserConfirmation"];
-};
-
-export type MembersListProps = {
-  hasNextPage: boolean;
-  itemCount: number;
-  loadNextPage: () => Promise<void>;
-  linksBlockLength: number;
-  withoutTitlesAndLinks: boolean;
-  children: React.ReactNode;
 };
 
 export type LinkRowProps = {

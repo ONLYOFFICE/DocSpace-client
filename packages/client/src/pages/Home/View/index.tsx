@@ -26,9 +26,13 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
+import { Trans, useTranslation } from "react-i18next";
 import { useLocation } from "react-router";
 
 import Chat from "@docspace/shared/components/chat";
+
+import { getCategoryType } from "@docspace/shared/utils/common";
+import { CategoryType } from "@docspace/shared/constants";
 import { Consumer } from "@docspace/shared/utils";
 import { Nullable } from "@docspace/shared/types";
 
@@ -37,12 +41,15 @@ import { clearTextSelection } from "@docspace/shared/utils/copy";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
 import { TUser } from "@docspace/shared/api/people/types";
 import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
+import { toastr } from "@docspace/shared/components/toast";
+import { TOAST_FOLDER_PUBLIC_KEY } from "@docspace/shared/constants";
+import type { TFolder } from "@docspace/shared/api/files/types";
+import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
-import { getCategoryType } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
@@ -153,6 +160,7 @@ const View = ({
   canUseChat,
 }: ViewProps) => {
   const location = useLocation();
+  const { t } = useTranslation(["Files", "Common"]);
 
   const isContactsPage = location.pathname.includes("accounts");
   const isProfilePage = location.pathname.includes("profile");
@@ -166,10 +174,6 @@ const View = ({
 
     if (type === CategoryType.Accounts) {
       return "users";
-    }
-
-    if (type === CategoryType.Groups) {
-      return "groups";
     }
 
     if (isProfilePage) {
@@ -335,6 +339,32 @@ const View = ({
     }
   }, [isLoading, showHeaderLoader]);
 
+  const showToastAccess = useEventCallback(() => {
+    if (
+      selectedFolderStore.isFolder &&
+      sessionStorage.getItem(TOAST_FOLDER_PUBLIC_KEY) ===
+        selectedFolderStore.id?.toString()
+    ) {
+      const access = getAccessLabel(
+        t,
+        selectedFolderStore as unknown as TFolder,
+      );
+
+      toastr.info(
+        <Trans
+          t={t}
+          ns="Files"
+          i18nKey="OpenedViaLink"
+          values={{ access }}
+          components={{
+            strong: <strong />,
+          }}
+        />,
+      );
+      sessionStorage.removeItem(TOAST_FOLDER_PUBLIC_KEY);
+    }
+  });
+
   React.useEffect(() => {
     const getView = async () => {
       try {
@@ -378,6 +408,7 @@ const View = ({
         setIsLoading(false);
 
         clearTextSelection();
+        showToastAccess();
       } catch (error) {
         console.log(error);
         if ((error as Error).message === "canceled") {
@@ -390,7 +421,7 @@ const View = ({
     };
 
     getView();
-  }, [location, isContactsPage, isProfilePage]);
+  }, [location, isContactsPage, isProfilePage, showToastAccess]);
 
   const attachmentFile = React.useMemo(
     () => aiAgentSelectorDialogProps?.file,
@@ -400,6 +431,7 @@ const View = ({
   const onClearAttachmentFile = React.useCallback(() => {
     setAiAgentSelectorDialogProps(false, null);
   }, [setAiAgentSelectorDialogProps]);
+  // console.log("currentView", currentView);
 
   return (
     <LoaderWrapper isLoading={isLoading ? !showHeaderLoader : false}>

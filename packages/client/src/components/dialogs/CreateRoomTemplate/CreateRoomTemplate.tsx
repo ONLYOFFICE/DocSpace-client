@@ -148,7 +148,11 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
   };
 
   const checkIfUserInvited = (user: TUser) => {
-    return inviteItems.findIndex((x) => x.id === user.id) > -1;
+    return (
+      inviteItems.findIndex(
+        (x) => x.id === user.id && x.templateAccess !== ShareAccessRights.None,
+      ) > -1
+    );
   };
 
   const onSubmitItems = (users: TSelectorItem[]) => {

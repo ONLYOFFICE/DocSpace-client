@@ -3,7 +3,7 @@
   "content": "Use third-party services as data storage for this room. You can create a new folder or select the existing one in the connected storage.",
   "content_en_sha1_hash": "8ee654276c6565ec4cf6f3acaa8d7446755d929b",
   "created_at": "2025-05-26T07:15:48.826Z",
-  "updated_at": "2025-09-17T13:43:01.612Z",
+  "updated_at": "2025-10-14T01:04:22.771Z",
   "comment": {
     "text": "This translation key is used to display a description for a toggle button or radio button that allows users to select third-party storage as data storage for a room. The description explains the purpose of using third-party services and provides context for the user's selection. It appears in various UI elements, including dialogs and backup settings.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 615,
+      "line_number": 618,
       "context": "className={classNames(\n styles.backupDescription,\n \"backup-description\",\n )}\n >\n {t(\"Common:ThirdPartyStorageDescription\")}\n </Text>\n \n {isCheckedThirdPartyStorage ? (\n <ThirdPartyStorageModule\n thirdPartyStorage={thirdPartyStorage}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 585,
+      "line_number": 605,
       "context": "testId=\"third_party_storage_radio_button\"\n />\n <Text\n className={classNames(styles.backupDescription, \"backup-description\")}\n >\n {t(\"Common:ThirdPartyStorageDescription\")}\n </Text>\n {isCheckedThirdPartyStorage ? (\n <ThirdPartyStorageModule\n isValidForm={isValidForm}\n formSettings={formSettings}",
       "module": "/packages/shared"
     }
@@ -39,31 +39,76 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Use third-party services as data storage' is not accurately reflected in 'استخدم التحزين عبر طرف ثالث لحفظ بيانات'. A more accurate translation would better convey the purpose of using a third-party service for storage.",
+          "suggestion": "استخدم خدمة تخزين خارجية لهذه الغرفة."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'connected storage' is rendered as 'وحدة التخزين المتصلة'. While understandable, it could be improved for clarity and naturalness. 'وحدة التخزين المتصلة' implies a standalone unit, rather than storage that's connected.",
+          "suggestion": "التخزين المرتبط"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Bu otağın məlumatlarını saxlamaq üçün əlaqələndirilmiş yaddaşda yeni qovluq yaradılacaq\" implies that a new folder *will be created* automatically, which isn't what the English implies. The English states the user *can* create a new folder or select an existing one. The Azerbaijani suggests a pre-determined action.",
+          "suggestion": "Bu otaq üçün məlumat yaddaşı kimi üçüncü tərəf xidmətlərindən istifadə edin. Əlaqələndirilmiş yaddaşda yeni qovluq yarada bilərsiniz və ya mövcud olanı seçə bilərsiniz."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation doesn't fully capture the nuance of 'You can create a new folder or select the existing one'. The Bulgarian phrasing implies a new folder *will* be created, instead of offering the option to use an existing one.",
+          "suggestion": "Използвайте услуги на трети страни за хранилище на данните от тази стая. Можете да създадете нова папка или да изберете съществуваща в свързаното хранилище."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'за хранилище на данните от тази стая' is a bit repetitive. While not strictly incorrect, it can be improved.",
+          "suggestion": "Използвайте услуги на трети страни за хранилище за тази стая. Можете да създадете нова папка или да изберете съществуваща в свързаното хранилище."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is overly literal and doesn't flow naturally in Czech. The phrase \"pro ukládání dat této místnosti\" (for storing data of this room) is redundant and awkward.",
+          "suggestion": "Jako úložiště dat pro tuto místnost použijte služby třetích stran. V připojeném úložišti můžete vytvořit novou složku nebo vybrat stávající."
+        },
+        {
+          "type": "formatting",
+          "description": "The Czech translation uses passive voice in the first sentence which is less direct and sounds more formal than the English original. While not strictly incorrect, it could be improved.",
+          "suggestion": "Použijte služby třetích stran jako úložiště dat pro tuto místnost. V připojeném úložišti můžete vytvořit novou složku nebo vybrat stávající."
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ein neuer Ordner zum Speichern der Daten dieses Raums wird im verbundenen Speicher erstellt' is not a direct or natural equivalent of 'You can create a new folder or select the existing one in the connected storage'. It implies a new folder is *always* created, while the English indicates a choice between creating or selecting.",
+          "suggestion": "Verwenden Sie Drittanbieterdienste als Datenspeicher für diesen Raum. Sie können einen neuen Ordner erstellen oder einen vorhandenen Ordner im verbundenen Speicher auswählen."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -75,19 +120,42 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Spanish translation's phrasing 'Se creará una nueva carpeta para almacenar los datos de esta sala en el almacenamiento conectado' doesn't accurately reflect the English original's flexibility of creating a new folder *or* selecting an existing one. It implies a new folder will *always* be created.",
+          "suggestion": "Utilice servicios de terceros como almacenamiento de datos para esta sala. Puede crear una nueva carpeta o seleccionar una existente en el almacenamiento conectado."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Yhdistettyyn tallennustilaan luodaan uusi kansio tämän huoneen tietojen tallentamista varten\" is overly verbose and doesn't directly convey the meaning of 'You can create a new folder or select the existing one'. It implies the system creates a folder, whereas it allows the user to create or select.",
+          "suggestion": "Käytä kolmannen osapuolen palveluita tallennustilana tälle huoneelle. Voit luoda uuden kansion tai valita olemassa olevan yhdistettyyn tallennustilaan."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Un nouveau dossier pour le stockage des données de cette salle sera créé...\" is not the most natural or accurate translation of \"You can create a new folder...\" It implies that the system will automatically create the folder, which is not what the English suggests.  The English implies the user has the option to create a new folder.",
+          "suggestion": "Utilisez des services tiers pour stocker les données de cette salle. Vous pouvez créer un nouveau dossier ou sélectionner un dossier existant dans l’espace de stockage connecté."
+        },
+        {
+          "type": "formatting",
+          "description": "The French translation could benefit from a slightly more active voice to match the original English tone.",
+          "suggestion": "Utilisez des services tiers pour stocker les données de cette salle. Vous pouvez créer un nouveau dossier ou sélectionner un dossier existant dans l’espace de stockage connecté."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -99,19 +167,47 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Verrà creata una nuova cartella per l&apos;archiviazione dei dati di questa stanza nell&apos;archivio connesso\" is overly literal and awkward.  It implies a new folder will *always* be created, which isn't necessarily the intention of the English original.  The original allows for selecting an existing folder.",
+          "suggestion": "Utilizza servizi di terze parti come archivio dati per questa stanza. Puoi creare una nuova cartella o selezionarne una esistente nell&apos;archivio connesso."
+        },
+        {
+          "type": "formatting",
+          "description": "The ampersand (&) in \"nell&apos;archivio\" indicates an HTML entity.  It should be a standard apostrophe.",
+          "suggestion": "nell'archivio"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'このルームのデータを保存するための新しいフォルダが作成されます' implies a *new* folder will be created, whereas the original English states you can use an existing folder or create a new one.  The translation focuses only on the automatic creation, losing the user's choice.",
+          "suggestion": "このルームのデータ保存先として、サードパーティーのサービスを利用します。接続されたストレージに、新しいフォルダを作成するか、既存のフォルダを選択できます。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation implies the folder is automatically created, which isn't explicitly stated in the English content. The English content allows the user to select an existing folder as well.",
+          "suggestion": "이 방의 데이터 스토리지로 제3자 서비스를 사용합니다. 연결된 스토리지에 새 폴더를 만들거나 기존 폴더를 선택할 수 있습니다."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure '이 방의 데이터를 저장할 새 폴더가 생성됩니다' is somewhat passive and less natural in Korean. It would read better with a more active voice.",
+          "suggestion": "이 방의 데이터를 저장할 새 폴더를 만들거나, 연결된 스토리지에서 기존 폴더를 선택할 수 있습니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,13 +237,25 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Será criada uma pasta para armazenar os dados desta sala no armazenamento conectado' is overly literal and doesn't convey the original meaning effectively. It implies a folder *will be created*, whereas the English suggests the user can create or select an existing one. It also sounds unnatural in Portuguese.",
+          "suggestion": "Utilizar serviços de terceiros para o armazenamento de dados desta sala. Você pode criar uma nova pasta ou selecionar uma existente no armazenamento conectado."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Uma nova pasta para armazenar os dados desta sala será criada no armazenamento conectado' is not a direct or natural translation of 'You can create a new folder or select the existing one in the connected storage.'. It implies a forced creation rather than the option of selection.",
+          "suggestion": "Use serviços de terceiros como armazenamento de dados para esta sala. Você pode criar uma nova pasta ou selecionar uma existente no armazenamento conectado."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -159,7 +267,18 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"В подключенном хранилище будет создана новая папка для хранения данных этой комнаты\" is too literal and doesn't accurately reflect the English meaning. It implies the folder will be *automatically* created, which isn't what the English text conveys.",
+          "suggestion": "Используйте сторонние сервисы в качестве хранилища данных для этой комнаты. Вы можете создать новую папку или выбрать существующую в подключенном хранилище."
+        },
+        {
+          "type": "formatting",
+          "description": "The Russian translation uses a passive voice construction ('будет создана') which can sound less direct than the English original. While not strictly incorrect, it changes the tone.",
+          "suggestion": "Consider more active phrasing to maintain a more direct and user-friendly tone."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -171,7 +290,18 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"V pripojenom úložisku sa vytvorí nový priečinok na uloženie údajov tejto miestnosti\" implies that a new folder *will* be created, which isn't the nuance of the English original. The English allows for selecting an existing folder.",
+          "suggestion": "Použite služby tretích strán ako úložisko dát pre túto miestnosť. Môžete vytvoriť nový priečinok alebo vybrať existujúci v pripojenom úložisku."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'údajov' is used instead of 'dáta' which is more precise and closer to the English word 'data'.",
+          "suggestion": "Replace 'údajov' with 'dáta'."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -195,25 +325,59 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation deviates from the original meaning. The English text implies the user can *choose* a folder, whereas the Turkish suggests a new folder *will be created*. This changes the user's agency.",
+          "suggestion": "Bu oda için veri depolama olarak üçüncü taraf hizmetlerini kullanın. Bağlı depolama alanında yeni bir klasör oluşturabilir veya mevcut birini seçebilirsiniz."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Bu odanın verilerini depolamak için' is a bit awkward and could be more concise.",
+          "suggestion": "Bağlı depolama alanında verileri depolamak için"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'У під’єднаному сховищі буде створено нову папку для зберігання даних цієї кімнати' implies that a *new* folder will be created in the connected storage *for the data of this room*. The English says you can create a new folder *or* select an existing one. The Ukrainian translation doesn't reflect the 'or' option.",
+          "suggestion": "Використовуйте сторонні служби як сховище даних для цієї кімнати. Ви можете створити нову папку або вибрати існуючу в під’єднаному сховищі."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Một thư mục mới để lưu trữ dữ liệu của phòng này sẽ được tạo trong bộ nhớ được kết nối.\" implies a new folder will *always* be created, which isn't what the English suggests. The English offers the option of using an existing folder.",
+          "suggestion": "Sử dụng dịch vụ của bên thứ ba làm nơi lưu trữ dữ liệu cho phòng này. Bạn có thể tạo một thư mục mới hoặc chọn thư mục hiện có trong bộ nhớ được kết nối."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation lacks the conversational tone of the original English. \"Bạn có thể\" reads more formally than it needs to.",
+          "suggestion": "Sử dụng dịch vụ của bên thứ ba làm nơi lưu trữ dữ liệu cho phòng này. Bạn có thể tạo một thư mục mới hoặc chọn thư mục hiện có trong bộ nhớ được kết nối."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"启用后将在已连接的存储空间中创建一个新文件夹\" (After enabling, a new folder will be created in the connected storage space) is not a direct or accurate translation of \"You can create a new folder or select the existing one in the connected storage.\" It introduces the concept of 'enabling' which isn't present in the original English. The original implies the user has a choice.",
+          "suggestion": "使用第三方服务存储此房间的数据。您可以在已连接的存储空间中创建新文件夹或选择现有文件夹。"
+        }
+      ],
       "approved_at": null
     }
   }

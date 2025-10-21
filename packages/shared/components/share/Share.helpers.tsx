@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import moment from "moment";
+import { match, P } from "ts-pattern";
 import { Trans } from "react-i18next";
 import type { TFunction } from "i18next";
 
@@ -34,30 +35,45 @@ import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import FillFormsReactSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
-import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
+import PeopleIcon from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
 import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 // import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 // import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 
 import { globalColors } from "../../themes";
-import { ShareAccessRights } from "../../enums";
+import {
+  EmployeeActivationStatus,
+  FileType,
+  MembersSubjectType,
+  ShareAccessRights,
+  ShareRights,
+} from "../../enums";
 import { copyShareLink as copy } from "../../utils/copy";
-import { isFile, isFolderOrRoom, isRoom } from "../../utils/typeGuards";
+import {
+  isFile,
+  isFolder,
+  isFolderOrRoom,
+  isRoom,
+} from "../../utils/typeGuards";
 
-import type { TRoom } from "../../api/rooms/types";
-import type { TTranslation } from "../../types";
+import type { RoomMember, TRoom } from "../../api/rooms/types";
 import type {
-  TAvailableExternalRights,
-  TFile,
-  TFileLink,
-  TFolder,
-} from "../../api/files/types";
+  TAvailableShareRights,
+  TShareLinkAccessRightOption,
+  TShareToUserAccessRightOption,
+  TTranslation,
+} from "../../types";
+import type { TFile, TFileLink, TFolder } from "../../api/files/types";
 
 import { Link } from "../link";
 import { toastr } from "../toast";
-import { TCopyShareLinkOptions } from "./Share.types";
-
-type ItemValue<T> = T extends false ? never : T;
+import {
+  TCopyShareLinkOptions,
+  TShare,
+  TShareMember,
+  TShareMembers,
+  TTitleShare,
+} from "./Share.types";
 
 export const getAccessTypeOptions = (t: TTranslation, withIcon = true) => {
   return [
@@ -78,105 +94,103 @@ export const getAccessTypeOptions = (t: TTranslation, withIcon = true) => {
   ];
 };
 
-export const getAccessRightOptions = (
+export const getLinkAccessRightOptions = (
   t: TTranslation,
-  available: TAvailableExternalRights,
+  available?: TAvailableShareRights,
+  isPrimary = false,
 ) => {
-  const accessOptions = [
-    available.Editing && {
+  const linkAccess =
+    (isPrimary ? available?.PrimaryExternalLink : available?.ExternalLink) ||
+    [];
+
+  const accessOptions: Partial<
+    Record<ShareRights, TShareLinkAccessRightOption>
+  > = {
+    [ShareRights.Editing]: {
       access: ShareAccessRights.Editing,
       key: "editing",
       label: t("Common:Editing"),
       icon: AccessEditReactSvgUrl,
     },
-    available.CustomFilter && {
+    [ShareRights.CustomFilter]: {
       access: ShareAccessRights.CustomFilter,
       key: "custom-filter",
       label: t("Common:CustomFilter"),
       icon: CustomFilterReactSvgUrl,
     },
-    available.Review && {
+    [ShareRights.Review]: {
       access: ShareAccessRights.Review,
       key: "review",
       label: t("Common:Review"),
       icon: AccessReviewReactSvgUrl,
     },
-    available.Comment && {
+    [ShareRights.Comment]: {
       access: ShareAccessRights.Comment,
       key: "commenting",
       label: t("Common:Comment"),
       icon: AccessCommentReactSvgUrl,
     },
-    available.Read && {
+    [ShareRights.Read]: {
       access: ShareAccessRights.ReadOnly,
       key: "viewing",
       label: t("Common:ReadOnly"),
       icon: EyeReactSvgUrl,
       title: t("Common:ReadOnly"),
     },
-    available.FillForms && {
+    [ShareRights.FillForms]: {
       access: ShareAccessRights.FormFilling,
       key: "filling",
       label: t("Common:Filling"),
       icon: FillFormsReactSvgUrl,
     },
-    // available.Restrict && {
-    //   access: ShareAccessRights.DenyAccess,
-    //   key: "deny-access",
-    //   label: t("Common:DenyAccess"),
-    //   icon: EyeOffReactSvgUrl,
-    // },
-    // {
-    //   key: "separator",
-    //   isSeparator: true,
-    // },
-    // available.None && {
-    //   access: ShareAccessRights.None,
-    //   key: "remove",
-    //   label: t("Common:Remove"),
-    //   icon: RemoveReactSvgUrl,
-    // },
-  ];
+  };
 
-  return accessOptions.filter(
-    (item): item is ItemValue<(typeof accessOptions)[number]> => Boolean(item),
-  );
+  return linkAccess
+    .map((access) => accessOptions[access])
+    .filter((item): item is TShareLinkAccessRightOption => Boolean(item));
 };
 
-export const getRoomAccessOptions = (
+export const getRoomLinkAccessOptions = (
   t: TTranslation,
-  available: TAvailableExternalRights,
+  available?: TAvailableShareRights,
+  isPrimary = false,
 ) => {
-  const accessOptions = [
-    available.Editing && {
+  const roomAccess =
+    (isPrimary ? available?.PrimaryExternalLink : available?.ExternalLink) ||
+    [];
+
+  const accessOptions: Partial<
+    Record<ShareRights, TShareLinkAccessRightOption>
+  > = {
+    [ShareRights.Editing]: {
       access: ShareAccessRights.Editing,
       description: t("Common:RoleEditorDescription"),
       key: "editing",
       label: t("Common:Editor"),
       icon: AccessEditReactSvgUrl,
     },
-    available.Review && {
+    [ShareRights.Review]: {
       access: ShareAccessRights.Review,
       description: t("Common:RoleReviewerDescription"),
       key: "review",
       label: t("Common:RoleReviewer"),
       icon: AccessReviewReactSvgUrl,
     },
-    available.Comment && {
+    [ShareRights.Comment]: {
       access: ShareAccessRights.Comment,
       description: t("Common:RoleCommentatorDescription"),
       key: "commenting",
       label: t("Commentator"),
       icon: AccessCommentReactSvgUrl,
     },
-    available.Read && {
+    [ShareRights.Read]: {
       access: ShareAccessRights.ReadOnly,
       description: t("Common:RoleViewerDescription"),
       key: "viewing",
       label: t("Common:Viewer"),
       icon: EyeReactSvgUrl,
     },
-    available.FillForms && {
+    [ShareRights.FillForms]: {
       access: ShareAccessRights.FormFilling,
       description: "",
       key: "filling",
@@ -184,11 +198,11 @@ export const getRoomAccessOptions = (
       icon: FillFormsReactSvgUrl,
       title: t("Common:FillingOnly"),
     },
-  ];
+  };
 
-  return accessOptions.filter(
-    (item): item is ItemValue<(typeof accessOptions)[number]> => Boolean(item),
-  );
+  return roomAccess
+    .map((access) => accessOptions[access])
+    .filter((item): item is TShareLinkAccessRightOption => Boolean(item));
 };
 
 export const getExpiredOptions = (
@@ -252,6 +266,13 @@ export const getDate = (expirationDate: string) => {
   }
 
   return moment.duration(calculatedDate + 1, "days").humanize();
+};
+
+export const isExpired = (expirationDate: string | Date) => {
+  const currentDare = moment(new Date());
+  const expDate = moment(new Date(expirationDate));
+
+  return currentDare.unix() - expDate.unix() > 0;
 };
 
 export const getPasswordDescription = (t: TFunction, link: TFileLink) => {
@@ -459,4 +480,478 @@ export const copyShareLink = async (
 
 export const evenPrimaryLink = (fileLinks: TFileLink[]) => {
   return fileLinks.some((link) => link?.sharedTo?.primary);
+};
+
+export const convertMembers = (
+  membersList: RoomMember[],
+  t: TFunction,
+): TShareMembers => {
+  const owner: TShare[] = [];
+  const users: TShare[] = [];
+  const administrators: TShare[] = [];
+  const expected: TShare[] = [];
+  const groups: TShare[] = [];
+  const guests: TShare[] = [];
+
+  membersList?.forEach(
+    ({ access, canEditAccess, sharedTo, subjectType, isOwner }) => {
+      const member: TShareMember = {
+        access,
+        canEditAccess,
+        ...sharedTo,
+      };
+
+      if (
+        "activationStatus" in member &&
+        member.activationStatus === EmployeeActivationStatus.Pending
+      ) {
+        if (expected.length === 0) {
+          expected.push({
+            id: "expected",
+            displayName: t("InfoPanel:ExpectUsers"),
+            isTitle: true,
+            isExpect: true,
+          } satisfies TTitleShare);
+        }
+
+        member.isExpect = true;
+        expected.push(member);
+      } else if (isOwner && location.pathname.includes("rooms/personal")) {
+        if (owner.length === 0) {
+          owner.push({
+            id: "owner",
+            displayName: t("Common:Owner"),
+            isTitle: true,
+          } satisfies TTitleShare);
+        }
+
+        owner.push(member);
+      } else if (access === ShareAccessRights.RoomManager || isOwner) {
+        if (administrators.length === 0) {
+          administrators.push({
+            id: "administrators",
+            displayName: t("InfoPanel:Administration"),
+            isTitle: true,
+          } satisfies TTitleShare);
+        }
+
+        administrators.push(member);
+      } else if (
+        ("isGroup" in member && member.isGroup) ||
+        subjectType === MembersSubjectType.Group
+      ) {
+        if (groups.length === 0) {
+          groups.push({
+            id: "groups",
+            displayName: t("Common:Groups"),
+            isTitle: true,
+          } satisfies TTitleShare);
+        }
+
+        groups.push({ ...member, isGroup: true });
+      } else if ("isVisitor" in member && member.isVisitor) {
+        if (guests.length === 0) {
+          guests.push({
+            id: "guests",
+            displayName: t("Common:Guests"),
+            isTitle: true,
+          } satisfies TTitleShare);
+        }
+
+        guests.push(member);
+      } else {
+        if (users.length === 0) {
+          users.push({
+            id: "users",
+            displayName: t("InfoPanel:Users"),
+            isTitle: true,
+          } satisfies TTitleShare);
+        }
+
+        users.push(member);
+      }
+    },
+  );
+
+  return {
+    owner,
+    administrators,
+    users,
+    expected,
+    groups,
+    guests,
+  };
+};
+
+export const getAccessDescription = (
+  file: TFile,
+  access: ShareAccessRights,
+  t: TFunction,
+) => {
+  return (
+    match({ fileType: file.fileType, access, isForm: file.isForm })
+      // Document
+      .with(
+        { fileType: FileType.Document, access: ShareAccessRights.FullAccess },
+        () => t("Common:FullAccessDescriptionDocument"),
+      )
+      .with(
+        { fileType: FileType.Document, access: ShareAccessRights.Editing },
+        () => t("Common:EditingDescriptionDocument"),
+      )
+      .with(
+        { fileType: FileType.Document, access: ShareAccessRights.Review },
+        () => t("Common:ReviewDescriptionDocument"),
+      )
+      .with(
+        { fileType: FileType.Document, access: ShareAccessRights.Comment },
+        () => t("Common:CommentDescriptionDocument"),
+      )
+      .with(
+        { fileType: FileType.Document, access: ShareAccessRights.ReadOnly },
+        () => t("Common:RoleViewerDescription"),
+      )
+      .with(
+        { fileType: FileType.Document, access: ShareAccessRights.DenyAccess },
+        () => t("Common:DenyAccessDescriptionDocument"),
+      )
+      // Spreadsheet | Presentation | PDF Document
+      .with(
+        {
+          fileType: P.union(
+            FileType.Spreadsheet,
+            FileType.Presentation,
+            FileType.PDF,
+          ),
+          access: ShareAccessRights.FullAccess,
+          isForm: P.not(true),
+        },
+        () => t("Common:FullAccessDescriptionSpreadsheet"),
+      )
+      .with(
+        {
+          fileType: P.union(
+            FileType.Spreadsheet,
+            FileType.Presentation,
+            FileType.PDF,
+          ),
+          access: ShareAccessRights.Editing,
+          isForm: P.not(true),
+        },
+        () => {
+          const x = t("Common:EditingDescriptionSpreadsheet");
+          console.log(x);
+          return x;
+        },
+      )
+      .with(
+        {
+          fileType: FileType.Spreadsheet,
+          access: ShareAccessRights.CustomFilter,
+        },
+        () => t("Common:CustomFilterDescriptionSpreadsheet"),
+      )
+      .with(
+        {
+          fileType: P.union(
+            FileType.Spreadsheet,
+            FileType.Presentation,
+            FileType.PDF,
+          ),
+          access: ShareAccessRights.Comment,
+          isForm: P.not(true),
+        },
+        () => t("Common:CommentDescriptionSpreadsheet"),
+      )
+      .with(
+        {
+          fileType: P.union(
+            FileType.Spreadsheet,
+            FileType.Presentation,
+            FileType.PDF,
+          ),
+          access: ShareAccessRights.ReadOnly,
+          isForm: P.not(true),
+        },
+        () => t("Common:RoleViewerDescription"),
+      )
+      .with(
+        {
+          fileType: P.union(
+            FileType.Spreadsheet,
+            FileType.Presentation,
+            FileType.PDF,
+          ),
+          access: ShareAccessRights.DenyAccess,
+          isForm: P.not(true),
+        },
+        () => t("Common:DenyAccessDescriptionDocument"),
+      )
+      // PDF Form
+      .with(
+        {
+          fileType: FileType.PDF,
+          access: ShareAccessRights.FullAccess,
+          isForm: true,
+        },
+        () => t("Common:FullAccessDescriptionPDFForm"),
+      )
+      .with(
+        {
+          fileType: FileType.PDF,
+          access: ShareAccessRights.Editing,
+          isForm: true,
+        },
+        () => t("Common:EditingDescriptionPDFForm"),
+      )
+      .with(
+        {
+          fileType: FileType.PDF,
+          access: ShareAccessRights.FormFilling,
+          isForm: true,
+        },
+        () => t("Common:FillingDescriptionPDFForm"),
+      )
+      .with(
+        {
+          fileType: FileType.PDF,
+          access: ShareAccessRights.DenyAccess,
+          isForm: true,
+        },
+        () => t("Common:DenyAccessDescriptionDocument"),
+      )
+
+      // Other
+      .with(
+        {
+          fileType: P.any,
+          access: ShareAccessRights.FullAccess,
+        },
+        () => t("Common:FullAccessDescriptionOther"),
+      )
+      .with(
+        {
+          fileType: P.any,
+          access: ShareAccessRights.ReadOnly,
+        },
+        () => t("Common:RoleViewerDescription"),
+      )
+      .with(
+        {
+          fileType: P.any,
+          access: ShareAccessRights.DenyAccess,
+        },
+        () => t("Common:DenyAccessDescriptionDocument"),
+      )
+      .otherwise(() => "")
+  );
+};
+
+export const getShareAccessRightOptions = (
+  t: TFunction,
+  infoPanelSelection: TFile | TFolder,
+  withRemove = true,
+  isGroup = false,
+) => {
+  const availableShareRights = infoPanelSelection.availableShareRights;
+
+  const rights =
+    (isGroup ? availableShareRights?.Group : availableShareRights?.User) || [];
+
+  if (isFolder(infoPanelSelection)) {
+    const options: Partial<
+      Record<
+        ShareRights,
+        TShareToUserAccessRightOption | TShareToUserAccessRightOption[]
+      >
+    > = {
+      [ShareRights.ReadWrite]: {
+        access: ShareAccessRights.FullAccess,
+        key: "full-access",
+        label: t("Common:FullAccess"),
+        description: t("Common:FullAccessDescription"),
+      },
+      [ShareRights.Editing]: {
+        access: ShareAccessRights.Editing,
+        key: "editor",
+        label: t("Common:Editing"),
+        description: t("Common:EditorDescription"),
+      },
+      [ShareRights.Review]: {
+        access: ShareAccessRights.Review,
+        key: "review",
+        label: t("Common:Review"),
+        description: t("Common:RoleReviewerDescription"),
+      },
+      [ShareRights.Comment]: {
+        access: ShareAccessRights.Comment,
+        key: "commenting",
+        label: t("Common:Comment"),
+        description: t("Common:RoleCommentatorDescription"),
+      },
+      [ShareRights.Read]: {
+        access: ShareAccessRights.ReadOnly,
+        key: "viewing",
+        label: t("Common:ReadOnly"),
+        description: t("Common:RoleViewerDescription"),
+      },
+      [ShareRights.Restrict]: {
+        access: ShareAccessRights.DenyAccess,
+        key: "deny-access",
+        label: t("Common:DenyAccess"),
+        description: t("Common:DenyAccessDescription"),
+      },
+      [ShareRights.None]: withRemove
+        ? [
+            {
+              key: "separator",
+              isSeparator: true,
+              label: "",
+              access: ShareAccessRights.None,
+            },
+            {
+              access: ShareAccessRights.None,
+              key: "remove",
+              label: t("Common:Remove"),
+            },
+          ]
+        : [],
+    };
+
+    return rights
+      .map((right) => options[right])
+      .flat()
+      .filter((item): item is TShareToUserAccessRightOption => Boolean(item));
+  }
+
+  const accessOptions: Partial<
+    Record<
+      ShareRights,
+      TShareToUserAccessRightOption | TShareToUserAccessRightOption[]
+    >
+  > = {
+    [ShareRights.ReadWrite]: {
+      access: ShareAccessRights.FullAccess,
+      key: "full-access",
+      label: t("Common:FullAccess"),
+      description: getAccessDescription(
+        infoPanelSelection,
+        ShareAccessRights.FullAccess,
+        t,
+      ),
+    },
+    [ShareRights.Editing]: {
+      access: ShareAccessRights.Editing,
+      key: "editing",
+      label: t("Common:Editing"),
+      description: getAccessDescription(
+        infoPanelSelection,
+        ShareAccessRights.Editing,
+        t,
+      ),
+    },
+    [ShareRights.CustomFilter]: {
+      access: ShareAccessRights.CustomFilter,
+      key: "custom-filter",
+      label: t("Common:CustomFilter"),
+      description: getAccessDescription(
+        infoPanelSelection,
+        ShareAccessRights.CustomFilter,
+        t,
+      ),
+    },
+    [ShareRights.Review]: {
+      access: ShareAccessRights.Review,
+      key: "review",
+      label: t("Common:Review"),
+      description: getAccessDescription(
+        infoPanelSelection,
+        ShareAccessRights.Review,
+        t,
+      ),
+    },
+    [ShareRights.Comment]: {
+      access: ShareAccessRights.Comment,
+      key: "commenting",
+      label: t("Common:Comment"),
+      description: getAccessDescription(
+        infoPanelSelection,
+        ShareAccessRights.Comment,
+        t,
+      ),
+    },
+    [ShareRights.Read]: {
+      access: ShareAccessRights.ReadOnly,
+      key: "viewing",
+      label: t("Common:ReadOnly"),
+      description: getAccessDescription(
+        infoPanelSelection,
+        ShareAccessRights.ReadOnly,
+        t,
+      ),
+    },
+    [ShareRights.FillForms]: {
+      access: ShareAccessRights.FormFilling,
+      key: "filling",
+      label: t("Common:Filling"),
+      description: getAccessDescription(
+        infoPanelSelection,
+        ShareAccessRights.FormFilling,
+        t,
+      ),
+    },
+    [ShareRights.Restrict]: {
+      access: ShareAccessRights.DenyAccess,
+      key: "deny-access",
+      label: t("Common:DenyAccess"),
+      description: getAccessDescription(
+        infoPanelSelection,
+        ShareAccessRights.DenyAccess,
+        t,
+      ),
+    },
+    [ShareRights.None]: withRemove
+      ? [
+          {
+            key: "separator",
+            isSeparator: true,
+            label: "",
+            access: ShareAccessRights.None,
+          },
+          {
+            access: ShareAccessRights.None,
+            key: "remove",
+            label: t("Common:Remove"),
+          },
+        ]
+      : [],
+  };
+
+  return rights
+    .map((right) => accessOptions[right])
+    .flat()
+    .filter((item): item is TShareToUserAccessRightOption => Boolean(item));
+};
+
+export const getAccessLabel = (t: TFunction, item: TFolder | TFile) => {
+  switch (item.access) {
+    case ShareAccessRights.FullAccess:
+      return t("Common:FullAccess");
+    case ShareAccessRights.Editing:
+      return t("Common:Editing");
+    case ShareAccessRights.CustomFilter:
+      return t("Common:CustomFilter");
+    case ShareAccessRights.Review:
+      return t("Common:Review");
+    case ShareAccessRights.Comment:
+      return t("Common:Comment");
+    case ShareAccessRights.FormFilling:
+      return t("Common:Filling");
+    case ShareAccessRights.ReadOnly:
+      return t("Common:ReadOnly");
+    case ShareAccessRights.DenyAccess:
+      return t("Common:DenyAccess");
+    default:
+      return "";
+  }
 };

@@ -99,18 +99,29 @@ interface IConsentProps {
   scopes: TScope[];
   user: TUser;
   baseUrl?: string;
+  currentScopesProp?: string[];
 }
 
-const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
+const Consent = ({
+  client,
+  scopes,
+  currentScopesProp,
+  user,
+  baseUrl,
+}: IConsentProps) => {
   const { t } = useTranslation(["Consent", "Common"]);
   const router = useRouter();
 
   const [isAllowRunning, setIsAllowRunning] = React.useState(false);
   const [isDenyRunning, setIsDenyRunning] = React.useState(false);
 
+  const [currentScopes, setCurrentScopes] = React.useState<string[]>(
+    currentScopesProp || [],
+  );
+
   React.useEffect(() => {
     const redirect_url = getCookie("x-redirect-authorization-uri");
-    if (!redirect_url) return;
+    if (!redirect_url || !scopes.length) return;
 
     // Your cookie processing logic here
     const decodedRedirectUrl = window.atob(
@@ -118,11 +129,28 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
     );
 
     deleteCookie("x-redirect-authorization-uri");
+
     const splitedURL = decodedRedirectUrl.split("&scope=");
-    if (splitedURL[1])
-      setCookie("x-scopes", splitedURL[1].split("%20").join(";"));
+
+    if (splitedURL[1]) {
+      const scopesStr = splitedURL[1].split("&")?.[0];
+
+      const decodedScopesStr = window.decodeURIComponent(scopesStr);
+
+      const splitedScopes: string[] = [];
+
+      scopes.forEach((scope) => {
+        if (decodedScopesStr.includes(scope.name)) {
+          splitedScopes.push(scope.name);
+        }
+      });
+
+      setCookie("x-scopes", splitedScopes.join(";"));
+
+      setCurrentScopes(splitedScopes);
+    }
     setCookie("x-url", splitedURL[0]);
-  }, []);
+  }, [scopes]);
 
   React.useEffect(() => {
     const validateToken = async () => {
@@ -157,8 +185,6 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
 
     let clientState = "";
 
-    const scope = client.scopes;
-
     const cookie = document.cookie.split(";");
 
     cookie.forEach((c) => {
@@ -166,7 +192,12 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
         clientState = c.replace("client_state=", "").trim();
     });
 
-    await api.oauth.onOAuthSubmit(clientId, clientState, scope, user.id);
+    await api.oauth.onOAuthSubmit(
+      clientId,
+      clientState,
+      currentScopes,
+      user.id,
+    );
 
     setIsAllowRunning(false);
   };
@@ -219,11 +250,7 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
         isConsentScreen
       />
 
-      <ScopeList
-        t={t}
-        selectedScopes={client.scopes || []}
-        scopes={scopes || []}
-      />
+      <ScopeList t={t} selectedScopes={currentScopes} scopes={scopes || []} />
 
       <StyledButtonContainer>
         <Button

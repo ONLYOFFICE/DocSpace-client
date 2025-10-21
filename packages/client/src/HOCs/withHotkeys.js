@@ -200,7 +200,10 @@ const withHotkeys = (Component) => {
         const someDialogIsOpen = checkDialogsOpen();
         if (someDialogIsOpen) return;
 
-        if ((e.key === "Alt" && e.ctrlKey) || (e.key === "Alt" && e.metaKey)) {
+        if (
+          (e.key === "Alt" && (e.ctrlKey || e.metaKey)) ||
+          ((e.key === "Meta" || e.key === "Control") && e.altKey)
+        ) {
           return enableSelection(e);
         }
 
@@ -261,7 +264,7 @@ const withHotkeys = (Component) => {
 
     // Select all files and folders
     useHotkeys(
-      "shift+a, ctrl+a",
+      "shift+a, ctrl+a, command+a",
       (e) => {
         e.preventDefault();
         selectAll();

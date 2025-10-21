@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -76,13 +75,7 @@ const IdpSettings = (props) => {
     ssoUrlRedirectHasError,
     sloUrlPostHasError,
     sloUrlRedirectHasError,
-    isInit,
-    init,
   } = props;
-
-  useEffect(() => {
-    if (!isInit) init();
-  }, [isInit]);
 
   return (
     <StyledWrapper>
@@ -222,8 +215,6 @@ export default inject(({ ssoStore }) => {
     ssoUrlRedirectHasError,
     sloUrlPostHasError,
     sloUrlRedirectHasError,
-    init,
-    isInit,
   } = ssoStore;
 
   return {
@@ -244,7 +235,5 @@ export default inject(({ ssoStore }) => {
     ssoUrlRedirectHasError,
     sloUrlPostHasError,
     sloUrlRedirectHasError,
-    init,
-    isInit,
   };
 })(observer(IdpSettings));

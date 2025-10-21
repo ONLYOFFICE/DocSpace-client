@@ -26,7 +26,7 @@
 
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -43,6 +43,10 @@ import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import { toastr } from "@docspace/shared/components/toast";
+import { Badge } from "@docspace/shared/components/badge";
+import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Text } from "@docspace/shared/components/text";
+
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import BonusItem from "./BonusItem";
 // import FlowsItem from "./FlowsItem";
@@ -80,8 +84,13 @@ const Item = ({
   onBadgeClick,
   roomsFolderId,
   setDropTargetPreview,
+  currentDeviceType,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+
+  const isAiAgents = item.rootFolderType === FolderType.AIAgents;
+  const isDesktop = currentDeviceType === DeviceType.desktop;
 
   const isDragging =
     dragging && !isIndexEditingMode ? showDragItems(item) : false;
@@ -143,6 +152,18 @@ const Item = ({
 
   const onClickAction = React.useCallback(
     (e, selectedFolderId) => {
+      if (e?.ctrlKey || e?.metaKey || e?.shiftKey || e?.button) return;
+
+      if (!isDesktop && isTooltipOpen) {
+        setIsTooltipOpen(false);
+        return;
+      }
+
+      if (!isDesktop && isAiAgents) {
+        setIsTooltipOpen(true);
+        return;
+      }
+
       setBufferSelection(null);
 
       onClick?.(
@@ -153,14 +174,65 @@ const Item = ({
         item.security.Create,
       );
     },
-    [onClick, item.title, item.rootFolderType],
+    [
+      onClick,
+      item.title,
+      item.rootFolderType,
+      isTooltipOpen,
+      setIsTooltipOpen,
+      isDesktop,
+      isAiAgents,
+    ],
   );
+
+  const getTooltipAIAgentContent = () => (
+    <>
+      <Text fontSize="12px" fontWeight={600} noSelect>
+        {t("Common:AIAgentsComingSoon")}
+      </Text>
+      <Text fontSize="12px" fontWeight={400} noSelect>
+        {t("Common:AIAgentsDescription")}
+      </Text>
+    </>
+  );
+
+  useEffect(() => {
+    if (isDesktop) return;
+
+    const handleClickOutside = (event) => {
+      if (isTooltipOpen) {
+        const aiAgentElement = event.target.closest(
+          `[data-tooltip-id="aiAgentsTooltip${item.id}"]`,
+        );
+
+        if (!aiAgentElement) {
+          event.stopPropagation();
+          event.preventDefault();
+          setIsTooltipOpen(false);
+        }
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside, true);
+    document.addEventListener("touchend", handleClickOutside, true);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+      document.removeEventListener("touchend", handleClickOutside, true);
+    };
+  }, [isTooltipOpen, item.id, isDesktop]);
+
+  const onClickAiAgentsBadge = () => {
+    if (!isDesktop) {
+      setIsTooltipOpen(!isTooltipOpen);
+    }
+  };
 
   const linkData = getLinkData(
     item.id,
     item.title,
     item.rootFolderType,
-    item.security.Create,
+    item.security?.Create,
   );
 
   const droppableClassName = isDragging ? "droppable" : "";
@@ -196,8 +268,9 @@ const Item = ({
         value={value}
         showBadge={showBadge}
         labelBadge={labelBadge}
-        onClickBadge={onBadgeClick}
+        onClickBadge={isAiAgents ? onClickAiAgentsBadge : onBadgeClick}
         iconBadge={iconBadge}
+        isDisabled={isAiAgents}
         withAnimation
         badgeTitle={
           labelBadge
@@ -205,16 +278,35 @@ const Item = ({
             : t("EmptySection", { sectionName: t("Common:TrashSection") })
         }
         badgeComponent={
-          <NewFilesBadge
-            newFilesCount={labelBadge}
-            folderId={item.id === roomsFolderId ? "rooms" : item.id}
-            parentDOMId={folderId}
-            onBadgeClick={onBadgeClick}
-          />
+          isAiAgents ? (
+            <Badge
+              label={t("Soon")}
+              className={item.folderClassName}
+              fontSize="9px"
+            />
+          ) : (
+            <NewFilesBadge
+              newFilesCount={labelBadge}
+              folderId={item.id === roomsFolderId ? "rooms" : item.id}
+              parentDOMId={folderId}
+              onBadgeClick={onBadgeClick}
+            />
+          )
         }
         linkData={linkData}
         $currentColorScheme={currentColorScheme}
+        dataTooltipId={`aiAgentsTooltip${item.id}`}
       />
+      {isAiAgents ? (
+        <Tooltip
+          id={`aiAgentsTooltip${item.id}`}
+          place="bottom-start"
+          getContent={getTooltipAIAgentContent}
+          maxWidth="320px"
+          float={isDesktop}
+          isOpen={!isDesktop ? isTooltipOpen : undefined}
+        />
+      ) : null}
     </StyledDragAndDrop>
   );
 };
@@ -340,12 +432,19 @@ const Items = ({
     (elm) => {
       const items = elm.map((item) => {
         const isTrash = item.rootFolderType === FolderType.TRASH;
+        const isAiAgents = item.rootFolderType === FolderType.AIAgents;
         const showBadge = emptyTrashInProgress
           ? false
           : item.newItems
             ? item.newItems > 0 && true
-            : isTrash && !trashIsEmpty;
-        const labelBadge = showBadge ? item.newItems : null;
+            : (isTrash && !trashIsEmpty) || isAiAgents;
+
+        let labelBadge;
+        if (isAiAgents) {
+          labelBadge = t("Soon");
+        } else {
+          labelBadge = showBadge ? item.newItems : null;
+        }
         const iconBadge = isTrash ? ClearTrashReactSvgUrl : null;
 
         return (
@@ -376,13 +475,16 @@ const Items = ({
             isIndexEditingMode={isIndexEditingMode}
             setDropTargetPreview={setDropTargetPreview}
             isLastItem={isTrash}
+            currentDeviceType={currentDeviceType}
           />
         );
       });
 
-      // items.splice(1, 0, <CatalogDivider key="recent-divider" />);
+      items.splice(1, 0, <CatalogDivider key="ai-agents-divider" />);
 
-      items.splice(3, 0, <CatalogDivider key="other-header" />);
+      items.splice(6, 0, <CatalogDivider key="doc-other-header" />);
+
+      items.splice(9, 0, <CatalogDivider key="trash-divider" />);
 
       if (isCommunity && isPaymentPageAvailable)
         items.push(<BonusItem key="bonus-item" />);

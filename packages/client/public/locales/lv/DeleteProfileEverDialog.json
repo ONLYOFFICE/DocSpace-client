@@ -7,7 +7,7 @@
   "DeleteGuest": "Izdzēst viesi",
   "DeleteGuests": "Izdzēst viesus",
   "DeletePersonalDataApplicable": "*Attiecas uz atlasītajiem lietotājiem, kuriem ir šādi faili un mapes.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Šī lietotāja izveidotās telpas un šajās telpās glabātie dokumenti tiks automātiski piešķirti administratoram, kurš izdzēsīs: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Manuāli atkārtoti piešķiriet datus, lai atkārtotai piešķiršanai izvēlētos citu mērķa lietotāju.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Visi kopīgie faili kā arī istabas, kuras radījis šis kontakts, tiks automātiski pārdalīti administratoram, veicot dzēšanu: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Pārdaliet datus manuāli, lai izvēlētos citu galamērķa lietotāju pārdalei.",
   "DeleteReqassignDescriptionGuest": "{{userCaption}} tiks izdzēsts no visām telpām, uz kurām viņi tika uzaicināti. Telpās izveidotie {{userCaption}} dokumenti tiks automātiski piešķirti telpu īpašniekiem.",
   "DeleteUser": "Dzēst lietotāju",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> tiks izdzēsts. Šo darbību nevar atsaukt.",

@@ -33,6 +33,7 @@ class AiRoomStore {
   roomId: Nullable<number> = null;
 
   knowledgeId: Nullable<number> = null;
+  resultId: Nullable<number> = null;
 
   currentTab: "chat" | "knowledge" | "result" = "chat";
 
@@ -66,6 +67,30 @@ class AiRoomStore {
       if (knowledgeId) {
         SocketHelper?.emit(SocketCommands.Subscribe, {
           roomParts: [`DIR-${knowledgeId}`],
+          individual: true,
+        });
+      }
+    }, 100);
+  };
+
+  setResultId = (resultId: Nullable<number>) => {
+    if (
+      this.resultId &&
+      this.resultId !== resultId &&
+      SocketHelper?.socketSubscribers.has(`DIR-${resultId}`)
+    ) {
+      SocketHelper?.emit(SocketCommands.Unsubscribe, {
+        roomParts: [`DIR-${this.resultId}`],
+        individual: true,
+      });
+    }
+
+    this.resultId = resultId;
+
+    setTimeout(() => {
+      if (resultId) {
+        SocketHelper?.emit(SocketCommands.Subscribe, {
+          roomParts: [`DIR-${resultId}`],
           individual: true,
         });
       }

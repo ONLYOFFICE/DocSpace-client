@@ -3,7 +3,7 @@
   "content": "the form",
   "content_en_sha1_hash": "f056270439da7c25a68f10abf9daafa6ac36ecc5",
   "created_at": "2025-08-26T11:15:00.725Z",
-  "updated_at": "2025-08-26T11:16:50.942Z",
+  "updated_at": "2025-10-13T13:22:36.014Z",
   "comment": {
     "text": "This key displays the label for a form-filling access right. It appears as part of the share options, likely in a list or dialog, indicating that users can fill out a form. Translators should consider phrasing that clearly conveys the ability to complete a form.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 397,
+      "line_number": 418,
       "context": "const accessRights = getNameAccessRoom(link.access, t).toLocaleLowerCase();\n \n const shareContents =\n link.access === ShareAccessRights.FormFilling\n ? t(\"Common:ShareForm\")\n : t(\"Common:ShareContents\");\n \n const shareParent = isRoom(item)\n ? t(\"Common:ShareTheRoom\")\n : t(\"Common:ShareTheFolder\");",
       "module": "/packages/shared"
     }

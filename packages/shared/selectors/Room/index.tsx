@@ -27,8 +27,10 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
-import EmptyScreenCorporateDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate_dark.svg?url";
+import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.light.svg?url";
+import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.dark.svg?url";
+import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.light.svg?url";
+import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.dark.svg?url";
 
 import { Selector, TSelectorItem } from "../../components/selector";
 import {
@@ -93,7 +95,6 @@ const RoomSelectorComponent = ({
   initSearchValue,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
-
   const { isBase } = useTheme();
 
   const { isFirstLoad, isNextPageLoading, setIsFirstLoad } =
@@ -239,14 +240,14 @@ const RoomSelectorComponent = ({
       onSubmit={onSubmit}
       isMultiSelect={isMultiSelect}
       emptyScreenImage={
-        isBase ? EmptyScreenCorporateSvgUrl : EmptyScreenCorporateDarkSvgUrl
+        isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
       }
       emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyRoomsHeader")}
       emptyScreenDescription={
         emptyScreenDescription ?? t("Common:EmptyRoomsDescription")
       }
       searchEmptyScreenImage={
-        isBase ? EmptyScreenCorporateSvgUrl : EmptyScreenCorporateDarkSvgUrl
+        isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl
       }
       searchEmptyScreenHeader={t("Common:NotFoundTitle")}
       searchEmptyScreenDescription={t("Common:SearchEmptyRoomsDescription")}

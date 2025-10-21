@@ -1,25 +1,19 @@
 {
   "key_path": "FolderPermanentlyDeleted",
-  "content": "The folder will be permanently deleted in 30 days.",
-  "content_en_sha1_hash": "bee930c857053441f9edbd43b195e83dd1fae72e",
-  "created_at": "2025-05-19T21:30:56.715Z",
-  "updated_at": "2025-06-18T17:11:42.367Z",
+  "content": "The folder will be permanently removed from the {{trashSection}}.",
+  "content_en_sha1_hash": "f9a5e2503aa7e4653b89b651be7d2cffa1282180",
+  "created_at": "2025-10-01T15:20:12.310Z",
+  "updated_at": "2025-10-01T15:20:19.777Z",
   "comment": {
-    "text": "This translation key is used in a delete dialog to display a message when a folder will be permanently deleted after 30 days. The message informs the user of the permanent deletion action and provides an option to continue.",
+    "text": "This key displays a message within a delete confirmation dialog, informing the user that a folder will be permanently removed from the trash section. It's used when deleting a folder, and the `trashSection` value should be translated separately.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:20.903Z"
+    "updated_at": "2025-10-01T15:20:19.777Z"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 222,
-      "context": "if (isPersonalRoom) {\n return isSingle ? (\n isFolder ? (\n <>\n <>{t(\"DeleteFolder\")} </>\n <>{t(\"FolderPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n ) : (\n <>\n <>{t(\"Common:DeleteFile\")} </>",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 222,
-      "context": "if (isPersonalRoom) {\n return isSingle ? (\n isFolder ? (\n <>\n <>{t(\"DeleteFolder\")} </>\n <>{t(\"FolderPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n ) : (\n <>\n <>{t(\"Common:DeleteFile\")} </>",
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 111,
+      "context": "<Trans t={t} i18nKey=\"DeleteItemForever\" ns=\"DeleteDialog\">\n You are about to delete{\" \"}\n <strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {isFolder\n ? t(\"FolderPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })}{\" \"}",
       "module": "/packages/client"
     }
   ],
@@ -45,13 +39,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'permanently deleted' is better conveyed as 'безвъзвратно изтрита' in Bulgarian to accurately reflect the permanence of the action. 'Завинаги' (zavinagi) translates to 'forever' and doesn't fully capture the technical meaning of permanent deletion in this context.",
-          "suggestion": "Папката ще бъде безвъзвратно изтрита след 30 дни."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -123,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Mape tiks neatgriezeniski izdzēsta 30 dienu laikā' is a bit literal and could be improved for naturalness in Latvian. '30 dienu laikā' is awkward and implies a deadline rather than a period of time. A more natural phrasing would indicate a period of grace.",
-          "suggestion": "Mape tiks neatgriezeniski izdzēsta pēc 30 dienām."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -171,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'මැකෙනු' (maekenu) is a slightly informal way to say 'will be deleted'. While understandable, a more formal option would improve clarity, especially in a deletion confirmation message.",
-          "suggestion": "Consider using 'ඉක්මසක' (ikmasaka) which is more formal and common for indicating deletion. A possible revised translation would be: 'දවස් 30 කින් බහාලුම ඉක්මසක තැකෙයි.' "
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -192,28 +168,22 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'бии' is a typo and should be 'биће'.",
-          "suggestion": "биће"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'bi' is a typo and should be 'biti'.",
-          "suggestion": "Folder će biti trajno obrisan za 30 dana."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

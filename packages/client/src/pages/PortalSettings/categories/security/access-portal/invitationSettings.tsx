@@ -29,7 +29,9 @@ import { useNavigate, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
 import { TTranslation } from "@docspace/shared/types";
+import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
+import { TColorScheme } from "@docspace/shared/themes";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Text } from "@docspace/shared/components/text";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
@@ -57,6 +59,9 @@ const InvitationSettings = ({
   settingsStore,
   tfaStore,
   setup,
+  invitationSettingsUrl,
+  currentColorScheme,
+  isInit,
 }: {
   t: TTranslation;
 
@@ -71,6 +76,9 @@ const InvitationSettings = ({
   settingsStore: SettingsStore;
   tfaStore: TfaStore;
   setup: SettingsSetupStore;
+  invitationSettingsUrl: string;
+  currentColorScheme: TColorScheme;
+  isInit: boolean;
 }) => {
   const [showReminder, setShowReminder] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -134,6 +142,12 @@ const InvitationSettings = ({
   }, [isMobileDevice]);
 
   useEffect(() => {
+    if (isInit) {
+      setIsLoaded(true);
+    }
+  }, [isInit]);
+
+  useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
@@ -143,7 +157,8 @@ const InvitationSettings = ({
   useEffect(() => {
     if (
       typeof allowInvitingMembers !== "boolean" ||
-      typeof allowInvitingGuests !== "boolean"
+      typeof allowInvitingGuests !== "boolean" ||
+      !isLoaded
     )
       return;
 
@@ -155,9 +170,10 @@ const InvitationSettings = ({
     } else {
       getSettingsFromDefault();
     }
-  }, [allowInvitingMembers, allowInvitingGuests]);
+  }, [allowInvitingMembers, allowInvitingGuests, isLoaded]);
 
   useEffect(() => {
+    if (!isLoaded) return;
     const defaultSettings = getFromSessionStorage("defaultInvitationSettings");
 
     const newSettings = {
@@ -232,11 +248,25 @@ const InvitationSettings = ({
   return (
     <>
       <LearnMoreWrapper>
-        <Text fontSize="13px" fontWeight="400">
+        <Text fontSize="13px" fontWeight="400" className={styles.contentText}>
           {t("InvitationSettingsDescription", {
             productName: t("Common:ProductName"),
           })}
         </Text>
+
+        {invitationSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            dataTestId="invitation_settings_learn_more"
+            color={currentColorScheme.main?.accent}
+            target={LinkTarget.blank}
+            isHovered
+            href={invitationSettingsUrl}
+            fontWeight={600}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </LearnMoreWrapper>
 
       <div className={styles.content}>
@@ -332,7 +362,11 @@ export const InvitationSettingsSection = inject(
       allowInvitingMembers,
       allowInvitingGuests,
       currentDeviceType,
+      invitationSettingsUrl,
+      currentColorScheme,
     } = settingsStore;
+
+    const { isInit } = setup;
 
     return {
       setInvitationSettings,
@@ -342,6 +376,9 @@ export const InvitationSettingsSection = inject(
       settingsStore,
       tfaStore,
       setup,
+      invitationSettingsUrl,
+      currentColorScheme,
+      isInit,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(InvitationSettings)));

@@ -3,7 +3,7 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2025-05-19T21:30:49.370Z",
-  "updated_at": "2025-09-17T13:43:01.682Z",
+  "updated_at": "2025-10-13T23:55:05.982Z",
   "comment": {
     "text": "This translation key is used to display a label indicating the type of an item or entity. It appears in various UI elements, such as titles, labels, and field headers, where it provides a brief description of the item's classification (e.g., \"Type\" for a data entry field).",
     "is_auto": true,
@@ -30,61 +30,67 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 294,
+      "line_number": 299,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 294,
+      "line_number": 299,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 294,
+      "line_number": 299,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 294,
+      "line_number": 299,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 294,
+      "line_number": 299,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 294,
+      "line_number": 299,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 294,
+      "line_number": 299,
+      "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
+      "line_number": 299,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 814,
+      "line_number": 880,
       "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...RoomsTypeValues.map((roomType) => {\n switch (roomType) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 814,
+      "line_number": 880,
       "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...RoomsTypeValues.map((roomType) => {\n switch (roomType) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 814,
+      "line_number": 880,
       "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...RoomsTypeValues.map((roomType) => {\n switch (roomType) {",
       "module": "/packages/client"
     },
@@ -132,7 +138,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/FilterPanel.tsx",
-      "line_number": 85,
+      "line_number": 102,
       "context": "<ModalDialog.Header>{t(\"Filter\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.filterDialogContent}>\n <div className={styles.filterDialogSection}>\n <Text fontWeight={600} fontSize=\"15px\">\n {t(\"Common:Type\")}\n </Text>\n <ComboBox\n options={typeOfHistoty}\n selectedOption={selectedType}\n onSelect={onSelectType}",
       "module": "/packages/client"
     },
@@ -180,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation \"Закачи\" (Zakachi) means \"attach\" or \"hang\". It is not an accurate translation of \"Type\".",
-          "suggestion": "A more appropriate translation for \"Type\" in this context could be \"Тип\" (Tip)."
+          "description": "The Bulgarian translation \"Закачи\" (Zakachi) translates to 'attach' or 'hang up,' which does not accurately convey the meaning of \"Type\" in this context. \"Type\" refers to a category or kind.",
+          "suggestion": "A more appropriate translation would be \"Тип\" or \"Вид\"."
         }
       ],
       "approved_at": null
@@ -343,6 +349,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

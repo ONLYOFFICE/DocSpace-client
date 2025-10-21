@@ -78,6 +78,7 @@ const MainContainer = styled.div`
 const IpSecurity = (props) => {
   const {
     t,
+    tReady,
     ipRestrictionEnable,
     ipRestrictions,
     setIpRestrictions,
@@ -247,7 +248,7 @@ const IpSecurity = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType === DeviceType.mobile && !isLoaded) {
+  if ((currentDeviceType === DeviceType.mobile && !isLoaded) || !tReady) {
     return <IpSecurityLoader />;
   }
 

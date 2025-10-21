@@ -3,7 +3,7 @@
   "content": "The page displays the last 25 transactions for the selected period. The full transaction history is available via the  \"{{buttonName}}\" button.",
   "content_en_sha1_hash": "5dde215cb50d04e4d83a84be37833dcede8ba4b8",
   "created_at": "2025-06-18T07:33:54.708Z",
-  "updated_at": "2025-09-02T07:59:28.608Z",
+  "updated_at": "2025-10-07T15:39:07.519Z",
   "comment": {
     "text": "This translation key displays the text for a \"Transactions Limit\" label, informing users that they can view the full transaction history by clicking on a specific button. It appears in a UI element that typically prompts users to download or view more transactions, likely within a transaction history page or dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 516,
+      "line_number": 668,
       "context": ")}\n \n {isTransactionHistoryExist && !isLoading ? (\n <>\n <Text className={styles.transactionsLimit}>\n {t(\"TransactionsLimit\", {\n buttonName: t(\"Settings:DownloadReportBtnText\"),\n })}\n </Text>\n \n <div",
       "module": "/packages/client"
     }

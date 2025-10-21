@@ -82,6 +82,7 @@ export const ApiKeysLifetimeIcon = ({
         size={IconSizeType.medium}
         isClickable
         data-tooltip-id={`lifetimeTooltip${item.id}`}
+        isFill={false}
       />
       <Tooltip
         id={`lifetimeTooltip${item.id}`}

@@ -111,6 +111,9 @@ class TargetUserStore {
   updateProfileCulture = async (id: string, culture: string) => {
     const res = (await api.people.updateUserCulture(id, culture)) as TUser;
 
+    if (!res.theme && this.userStore?.user?.theme)
+      res.theme = this.userStore.user.theme;
+
     this.userStore?.setUser(res);
 
     setCookie(LANGUAGE, culture, {

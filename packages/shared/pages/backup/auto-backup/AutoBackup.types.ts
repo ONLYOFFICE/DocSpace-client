@@ -44,6 +44,7 @@ import type { TThirdParties } from "../../../api/files/types";
 
 export interface AutomaticBackupProps {
   isManagement?: boolean;
+  isBackupPaid?: boolean;
 
   isInitialLoading: boolean;
   isEmptyContentBeforeLoader: boolean;

@@ -821,10 +821,10 @@ class DialogsStore {
   };
 
   setFormItem = (formItem) => {
-    if (formItem && !formItem.exst) {
+    if (formItem && !formItem.fileExst) {
       const splitted = formItem.title.split(".");
       formItem.title = splitted.slice(0, -1).join(".");
-      formItem.exst = splitted.length !== 1 ? `.${splitted.at(-1)}` : null;
+      formItem.fileExst = splitted.length !== 1 ? `.${splitted.at(-1)}` : null;
     }
     this.formItem = formItem;
   };
@@ -879,8 +879,13 @@ class DialogsStore {
   };
 
   /**
+   * @typedef {import("@docspace/shared/api/files/types").TFile} TFile
+   * @typedef {import("@docspace/shared/api/files/types").TFolder} TFolder
+   * @typedef {import("@docspace/shared/api/rooms/types").TRoom} TRoom
+   *
    * @param {boolean =} visible
-   * @param {import("@docspace/shared/api/rooms/types").TRoom =} item
+   * @param { TRoom | TFolder | TFile } [item = null]
+   * @param {boolean} [isDownload = false]
    * @returns {void}
    */
   setPasswordEntryDialog = (

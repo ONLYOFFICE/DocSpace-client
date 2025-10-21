@@ -3,7 +3,7 @@
   "content": "Access to the link has been denied",
   "content_en_sha1_hash": "0a25b1aaa92449e4e0a262c000657f5c44ffb0e1",
   "created_at": "2025-05-19T21:30:46.120Z",
-  "updated_at": "2025-08-26T11:15:14.270Z",
+  "updated_at": "2025-09-23T07:24:24.399Z",
   "comment": {
     "text": "This translation key is used to display a message when access to a link is denied due to a share access right of \"Deny Access\". It appears in the UI as part of an update and success notification process. Translators should focus on conveying a sense of error or restricted access.",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/share/index.tsx",
-      "line_number": 291,
+      "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
+      "line_number": 253,
       "context": "deleteLink(link.sharedTo.id);\n toastr.success(t(\"Common:LinkRemoved\"));\n } else {\n updateLink(link, res);\n if (item.access === ShareAccessRights.DenyAccess) {\n toastr.success(t(\"Common:LinkAccessDenied\"));\n } else {\n copyShareLink(infoPanelSelection, res, t);\n }\n }\n } catch (e) {",
       "module": "/packages/shared"
     }

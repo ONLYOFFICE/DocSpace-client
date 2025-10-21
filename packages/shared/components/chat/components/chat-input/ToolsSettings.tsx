@@ -336,6 +336,7 @@ const ToolsSettings = () => {
         icon:
           (server.icon?.icon16 || getServerIcon(server.serverType, isBase)) ??
           "",
+        withMCPIcon: true,
         items,
       };
     });

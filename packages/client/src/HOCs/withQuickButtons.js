@@ -35,6 +35,8 @@ import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
+import { openShareTab } from "SRC_DIR/helpers/info-panel";
+
 export default function withQuickButtons(WrappedComponent) {
   class WithQuickButtons extends React.Component {
     constructor(props) {
@@ -144,6 +146,12 @@ export default function withQuickButtons(WrappedComponent) {
       retryVectorization([item]);
     };
 
+    openShareTab = () => {
+      const { item, setBufferSelection } = this.props;
+      openShareTab();
+      setBufferSelection(item);
+    };
+
     render() {
       const {
         t,
@@ -158,6 +166,7 @@ export default function withQuickButtons(WrappedComponent) {
         isIndexEditingMode,
         roomLifetime,
         isTemplatesFolder,
+        isTrashFolder,
         isRecentFolder,
       } = this.props;
 
@@ -190,6 +199,8 @@ export default function withQuickButtons(WrappedComponent) {
           isTemplatesFolder={isTemplatesFolder}
           isRecentFolder={isRecentFolder}
           onRetryVectorization={this.onRetryVectorization}
+          isTrashFolder={isTrashFolder}
+          openShareTab={this.openShareTab}
         />
       );
 
@@ -227,6 +238,7 @@ export default function withQuickButtons(WrappedComponent) {
         isPersonalRoom,
         isArchiveFolder,
         isTemplatesFolder,
+        isTrashFolder,
         isRecentFolder,
       } = treeFoldersStore;
 
@@ -261,6 +273,7 @@ export default function withQuickButtons(WrappedComponent) {
         lockFileAction,
         isRecentFolder,
         retryVectorization,
+        isTrashFolder,
       };
     },
   )(observer(WithQuickButtons));

@@ -103,6 +103,7 @@ const InjectedEmptyViewContainer = inject<
       setSelectFileFormRoomDialogVisible,
       setQuotaWarningDialogVisible,
       setSelectFileAiKnowledgeDialogVisible,
+      setTemplateAccessSettingsVisible,
     } = dialogsStore;
 
     const { security, access, rootFolderType } = selectedFolderStore;
@@ -132,6 +133,7 @@ const InjectedEmptyViewContainer = inject<
       setSelectFileFormRoomDialogVisible,
       setQuotaWarningDialogVisible,
       setSelectFileAiKnowledgeDialogVisible,
+      setTemplateAccessSettingsVisible,
       isVisitor: userStore?.user?.isVisitor,
       isFrame,
       logoText,

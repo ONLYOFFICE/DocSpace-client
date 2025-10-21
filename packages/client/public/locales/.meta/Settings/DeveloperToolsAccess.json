@@ -3,7 +3,7 @@
   "content": "Developer Tools section",
   "content_en_sha1_hash": "8e2edfe027bccc66916acfd0ca199bbf466f8f61",
   "created_at": "2025-05-19T21:30:51.166Z",
-  "updated_at": "2025-09-17T13:43:01.876Z",
+  "updated_at": "2025-09-29T11:28:56.264Z",
   "comment": {
     "text": "The \"DeveloperToolsAccess\" translation key is used to display the title and description of a section in the Portal Settings application. This text appears as a category title and brief description within a settings page, providing context about developer tools access.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 226,
+      "line_number": 227,
       "context": "<TrustedMailSection {...settingsBeforeInvitationSettingsProps} />\n <StyledSettingsSeparator />\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"DeveloperToolsAccess\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"DeveloperToolsAccessDescription\", {\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/client"
     },

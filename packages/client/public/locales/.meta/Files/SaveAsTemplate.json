@@ -3,7 +3,7 @@
   "content": "Save as template",
   "content_en_sha1_hash": "e438319cba9a62ebf3bedfae2f7c1d57a2785c0e",
   "created_at": "2025-05-19T21:30:56.166Z",
-  "updated_at": "2025-09-07T07:53:15.086Z",
+  "updated_at": "2025-10-16T07:29:35.572Z",
   "comment": {
     "text": "The translation key \"SaveAsTemplate\" is used to display the label for a button that allows users to save a room as a template. This label appears in a dialog header and is intended to provide visual feedback about the action being performed. The translator should focus on creating a clear and concise phrase that describes the purpose of this action.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateRoomTemplate/CreateRoomTemplate.tsx",
-      "line_number": 219,
+      "line_number": 223,
       "context": ")}\n </ModalDialog.Container>\n \n <ModalDialog.Header>\n <Text fontSize=\"21px\" fontWeight={700}>\n {t(\"Files:SaveAsTemplate\")}\n </Text>\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <SetRoomParams",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 890,
+      "line_number": 925,
       "context": "const event = new Event(Events.ROOM_EDIT);\n event.item = item;\n window.dispatchEvent(event);\n };\n \n onSaveAsTemplate = (item) => {\n const event = new Event(Events.SAVE_AS_TEMPLATE);\n event.item = item;\n window.dispatchEvent(event);\n };",
       "module": "/packages/client"
     }

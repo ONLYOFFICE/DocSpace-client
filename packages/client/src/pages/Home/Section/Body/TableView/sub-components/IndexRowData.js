@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
 import { IndexIconButtons } from "@docspace/shared/components/index-icon-buttons";
@@ -62,32 +61,12 @@ const IndexRowDataComponent = (props) => {
     quickButtonsComponent,
 
     tableStorageName,
-    columnStorageName,
     isIndexEditingMode,
     changeIndex,
-    isIndexedFolder,
     index,
   } = props;
 
-  const [lastColumn, setLastColumn] = useState(
-    getLastColumn(
-      tableStorageName,
-      localStorage.getItem(columnStorageName),
-      isIndexedFolder,
-    ),
-  );
-
-  useEffect(() => {
-    const newLastColumn = getLastColumn(
-      tableStorageName,
-      localStorage.getItem(columnStorageName),
-      isIndexedFolder,
-    );
-
-    if (newLastColumn && newLastColumn !== lastColumn) {
-      setLastColumn(newLastColumn);
-    }
-  });
+  const lastColumn = getLastColumn(tableStorageName);
 
   const quickButtonsComponentNode = (
     <StyledQuickButtonsContainer>
@@ -275,7 +254,7 @@ const IndexRowDataComponent = (props) => {
   );
 };
 
-export default inject(({ tableStore, selectedFolderStore }) => {
+export default inject(({ tableStore }) => {
   const {
     authorVDRColumnIsEnabled,
     modifiedVDRColumnIsEnabled,
@@ -283,10 +262,7 @@ export default inject(({ tableStore, selectedFolderStore }) => {
     sizeVDRColumnIsEnabled,
     typeVDRColumnIsEnabled,
     tableStorageName,
-    columnStorageName,
   } = tableStore;
-
-  const { isIndexedFolder } = selectedFolderStore;
 
   return {
     authorVDRColumnIsEnabled,
@@ -295,8 +271,5 @@ export default inject(({ tableStore, selectedFolderStore }) => {
     sizeVDRColumnIsEnabled,
     typeVDRColumnIsEnabled,
     tableStorageName,
-    columnStorageName,
-
-    isIndexedFolder,
   };
 })(observer(IndexRowDataComponent));

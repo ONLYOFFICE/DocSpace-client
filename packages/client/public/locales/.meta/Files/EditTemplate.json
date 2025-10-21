@@ -3,7 +3,7 @@
   "content": "Edit template",
   "content_en_sha1_hash": "8ebcef59970bb87d7ed8dd90149d3a44e736afba",
   "created_at": "2025-05-19T21:30:55.523Z",
-  "updated_at": "2025-09-07T07:53:15.075Z",
+  "updated_at": "2025-10-16T07:29:35.560Z",
   "comment": {
     "text": "This translation key is used to display \"Edit template\" in a specific dialog context. It appears as part of the header of a Create/Edit Room Dialog and serves to indicate that editing a template option is available.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1907,
+      "line_number": 1935,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-room\",\n key: \"edit-template\",\n label: t(\"EditTemplate\"),\n icon: SettingsReactSvgUrl,\n onClick: () => this.onEditRoomTemplate(item),\n disabled: !isTemplateOwner,\n },\n {",
       "module": "/packages/client"
     }

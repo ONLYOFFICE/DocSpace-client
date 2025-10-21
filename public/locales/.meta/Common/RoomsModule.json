@@ -3,7 +3,7 @@
   "content": "Backup room",
   "content_en_sha1_hash": "d713be356f0517828e717778afb3cc8136c8c476",
   "created_at": "2025-05-26T07:15:47.386Z",
-  "updated_at": "2025-09-17T13:43:01.902Z",
+  "updated_at": "2025-10-03T13:19:30.691Z",
   "comment": {
     "text": "This translation key is used to display the label \"Backup room\" in a radio button group within a backup settings page. It is intended for use by users who need to select a specific type of file or resource to back up. This option appears in various UI contexts, including restore backup and manual backup pages.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 486,
+      "line_number": 487,
       "context": "<div className={styles.modules}>\n <RadioButton\n key={0}\n {...commonRadioButtonProps}\n id=\"backup-room\"\n label={t(\"Common:RoomsModule\")}\n name={`${BackupStorageType.DocumentModuleType}`}\n isChecked={isCheckedDocuments}\n isDisabled={isLoadingData}\n testId=\"auto_backup_room_radio_button\"\n />",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 482,
+      "line_number": 498,
       "context": "[styles.isDisabled]: additionalDisabled,\n })}\n >\n <RadioButton\n id=\"backup-room\"\n label={t(\"Common:RoomsModule\")}\n name={DOCUMENTS}\n key={1}\n isChecked={isCheckedDocuments}\n isDisabled={additionalDisabled}\n {...commonRadioButtonProps}",
       "module": "/packages/shared"
     },

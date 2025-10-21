@@ -362,7 +362,9 @@ const SetRoomParams = ({
                 !selection?.logo?.large) ||
               cover?.color
         }
-        color={cover ? cover.color : selection?.logo?.color}
+        color={
+          cover ? cover.color : (selection?.logo?.color ?? selection?.color)
+        }
         size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
         radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
         withEditing
@@ -478,6 +480,7 @@ const SetRoomParams = ({
         tooltipLabel={
           isTemplateSelected || isTemplate ? t("Files:RoomTagsTooltip") : ""
         }
+        isMobile={isMobile}
       />
 
       {isTemplate ? (

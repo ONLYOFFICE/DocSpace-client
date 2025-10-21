@@ -33,7 +33,8 @@ import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { FolderType, RoomsType, SearchArea } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { CategoryType } from "@docspace/shared/constants";
 import {
   createTemplate,
   getCreateTemplateProgress,
@@ -51,7 +52,6 @@ import {
 } from "@docspace/shared/api/ai";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
 import { openMembersTab, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
@@ -417,9 +417,11 @@ class CreateEditRoomStore {
     roomParams: TRoomParams,
     openCreatedTemplate: Nullable<() => void>,
   ) => {
-    this.filesStore!.setRoomCreated(true);
+    const { setSelection, setRoomCreated } = this.filesStore!;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
     const { cover, clearCoverProps } = this.dialogsStore!;
+
+    setRoomCreated(true);
 
     const {
       title,
@@ -530,6 +532,13 @@ class CreateEditRoomStore {
         roomType,
         rootFolderType: FolderType.RoomTemplates,
       } as unknown as TRoom);
+
+      if (isDesktop()) {
+        const roomInfo = await api.files.getFolderInfo(progressData.templateId);
+        showInfoPanel();
+        openMembersTab();
+        setSelection([{ ...roomInfo, isRoom: true }]);
+      }
     }
 
     clearCoverProps();
@@ -566,7 +575,8 @@ class CreateEditRoomStore {
       preparingDataForCopyingToRoom,
     } = this.filesActionsStore!;
     const { deleteThirdParty } = this.thirdPartyStore!;
-    const { createRoom, selection, bufferSelection } = this.filesStore!;
+    const { createRoom, selection, bufferSelection, setBufferSelection } =
+      this.filesStore!;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
     const { cover, clearCoverProps } = this.dialogsStore!;
 
@@ -709,6 +719,20 @@ class CreateEditRoomStore {
         );
       }
 
+      if (isDesktop()) {
+        let roomInfo = null;
+
+        if (isTemplate) {
+          roomInfo = await api.files.getFolderInfo(room.id);
+        } else {
+          roomInfo = room;
+        }
+
+        showInfoPanel();
+        openMembersTab();
+        setBufferSelection({ ...roomInfo, isRoom: true });
+      }
+
       if (successToast)
         toastr.success(successToast as unknown as React.ReactNode);
     } catch (err) {
@@ -773,9 +797,6 @@ class CreateEditRoomStore {
 
   onOpenNewRoom = async (room: TRoom) => {
     const { setIsSectionBodyLoading } = this.clientLoadingStore!;
-    const { setSelection } = this.filesStore!;
-    const { getPublicKey } = this.filesActionsStore!;
-
     const state = {
       isRoot: false,
       title: room.title,
@@ -787,34 +808,11 @@ class CreateEditRoomStore {
     const newFilter = FilesFilter.getDefault();
     newFilter.folder = room.id.toString();
 
-    if (
-      room.roomType === RoomsType.PublicRoom ||
-      room.roomType === RoomsType.FormRoom
-    ) {
-      const shareKey = await getPublicKey({ ...room, shared: true });
-      if (shareKey) newFilter.key = shareKey;
-    }
-
     setIsSectionBodyLoading(true);
 
-    setSelection && setSelection([]);
+    const path = getCategoryUrl(CategoryType.SharedRoom, room.id);
 
-    if (room.roomType === RoomsType.AIRoom) {
-      const path = getCategoryUrl(CategoryType.Chat, room.id);
-
-      newFilter.searchArea = SearchArea.Any;
-
-      window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
-    } else {
-      const path = getCategoryUrl(CategoryType.SharedRoom, room.id);
-
-      window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
-    }
-
-    if (isDesktop()) {
-      showInfoPanel();
-      openMembersTab();
-    }
+    window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
   };
 }
 

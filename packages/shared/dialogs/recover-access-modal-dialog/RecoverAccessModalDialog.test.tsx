@@ -116,13 +116,13 @@ describe("RecoverAccessModalDialog", () => {
     await userEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(sendRecoverRequest).toHaveBeenCalledWith(
-        "test@email.com",
-        "Test description",
-      );
-      expect(toastr.success).toHaveBeenCalledWith("Success message");
-      expect(defaultProps.onClose).toHaveBeenCalled();
+      expect(sendRecoverRequest).toHaveBeenCalled();
+      const calls = (sendRecoverRequest as jest.Mock).mock.calls;
+      expect(calls[0][0]).toBe("test@email.com");
+      expect(calls[0][1]).toBe("Test description");
     });
+    expect(toastr.success).toHaveBeenCalledWith("Success message");
+    expect(defaultProps.onClose).toHaveBeenCalled();
   });
 
   it("handles form submission error", async () => {
@@ -139,12 +139,12 @@ describe("RecoverAccessModalDialog", () => {
     await userEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(sendRecoverRequest).toHaveBeenCalledWith(
-        "test@email.com",
-        "Test description",
-      );
+      expect(sendRecoverRequest).toHaveBeenCalled();
+      const calls = (sendRecoverRequest as jest.Mock).mock.calls;
+      expect(calls[0][0]).toBe("test@email.com");
+      expect(calls[0][1]).toBe("Test description");
       expect(toastr.error).toHaveBeenCalledWith(errorMessage);
-      expect(defaultProps.onClose).toHaveBeenCalled();
+      expect(defaultProps.onClose).not.toHaveBeenCalled();
     });
   });
 

@@ -86,6 +86,7 @@ export type ContextMenuType = {
   preventNewTab?: boolean;
   dataTestId?: string;
   getTooltipContent?: () => React.ReactNode;
+  withMCPIcon?: boolean;
 };
 
 export type SeparatorType = {
@@ -111,6 +112,18 @@ export type HeaderType =
   | { title: string; icon: string; badgeUrl?: string };
 
 export type ContextMenuModel = ContextMenuType | SeparatorType;
+
+export type TMobileMenuStackItem = {
+  items: ContextMenuModel[];
+  header: string;
+};
+
+export type TOnMobileItemClick = (
+  e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+  label: string,
+  items?: ContextMenuModel[],
+  loadFunc?: () => Promise<ContextMenuModel[]>,
+) => void;
 
 export type TGetContextMenuModel = () => ContextMenuModel[];
 

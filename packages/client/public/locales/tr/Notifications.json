@@ -1,10 +1,20 @@
 {
-  "ActionsWithFilesDescription": "Rozetler, dosya yükleme, oluşturma ve değişiklikler gibi işlemler ile ilgili sizi bilgilendirir.",
+  "ActionsWithFilesDescription": "Rozetler, {{rooms}}, {{shared}} ve {{documents}} bölümlerinde — yüklemeler, düzenlemeler veya paylaşımlar — dosya etkinliğini vurgulayacaktır.",
+  "AdminSetupRequired": "Yönetici kurulumu gerekiyor",
   "Badges": "Rozetler",
   "DailyFeed": "Günlük {{productName}} akışı",
   "DailyFeedDescription": "{{productName}}'inizdeki haberleri ve etkinlikleri günlük bir özet halinde okuyun.",
+  "FileActivityNotify": "Dosya etkinliği bildirimleri",
+  "GoToSettings": "Ayarlara Git",
+  "IsNotValid": "Geçerli değil",
+  "LdapEmailTooltip": "Bu kullanıcı hesabı LDAP'den yüklenmiştir. Kullanıcının e-posta adresi belirtilmedi ve mevcut olan otomatik olarak oluşturuldu, bildirim göndermek için kullanılamaz.",
+  "NotConfigured": "Yapılandırılmadı",
   "Notifications": "Bildirimler",
-  "RoomsActivityDescription": "Saatlik bildirimler. Odalarınızdaki tüm etkinliklerden haberdar olun.",
+  "RoomsActivityDescription": "{{sectionName}} içinde paylaşılan yeni dosya/klasörler ve etkinlik hakkında anında e-posta bildirimleri alın.",
+  "RoomUpdateNotify": "Paylaşılan içerik ve {{sectionName}} etkinliği",
+  "SettingUpNotifications": "Bildirimleri ayarlama",
+  "SuccessConnected": "{{serviceName}} başarıyla bir bildirim kanalı olarak bağlandı. Artık oradan güncellemeler alacaksınız.",
+  "SuccessDisconnected": "{{serviceName}} bildirim kanalı olarak başarıyla bağlantısı kesildi. Orada bildirimler artık gönderilmeyecektir.",
   "UsefulTips": "Faydalı {{productName}} ipuçları",
   "UsefulTipsDescription": "{{productName}} hakkında faydalı kılavuzlar edinin"
 }

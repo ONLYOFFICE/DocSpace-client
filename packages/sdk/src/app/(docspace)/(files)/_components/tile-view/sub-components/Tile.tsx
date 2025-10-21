@@ -194,7 +194,9 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
             {...commonTileProps}
             thumbnailClick={openItem}
             temporaryIcon={temporaryIcon}
-            thumbnail={item.thumbnailUrl}
+            thumbnail={
+              !item.providerItem && item.thumbnailUrl ? item.thumbnailUrl : ""
+            }
             contentElement={quickButtonsComponent}
           />
         )}

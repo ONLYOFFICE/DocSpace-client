@@ -3,7 +3,7 @@
   "content": "Custom",
   "content_en_sha1_hash": "081ae3fdc403609cf6e760849ebb14117b7a50cb",
   "created_at": "2025-05-19T21:30:44.377Z",
-  "updated_at": "2025-08-27T10:14:35.205Z",
+  "updated_at": "2025-10-13T13:22:35.681Z",
   "comment": {
     "text": "This translation key is used to display the text \"Custom\" in various contexts throughout the application, typically appearing on filters or buttons related to custom rooms. The text is rendered using the \"Common:CustomRooms\" translation from the i18n module, which provides a consistent and localized experience for users.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 875,
+      "line_number": 941,
       "context": "default:\n return {\n id: \"filter_type-custom\",\n key: RoomsType.CustomRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:CustomRooms\"),\n };\n }\n }),\n ]\n : [",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 367,
+      "line_number": 369,
       "context": "return t(\"Common:Files\");\n case FilterType.DiagramsOnly:\n return t(\"Common:Diagrams\");\n \n case `room-${RoomsType.CustomRoom}`:\n return t(\"Common:CustomRooms\");\n case `room-${RoomsType.EditingRoom}`:\n return t(\"Common:CollaborationRooms\");\n \n case `room-${RoomsType.FormRoom}`:\n return t(\"Common:FormRoom\");",
       "module": "/packages/shared"
     }

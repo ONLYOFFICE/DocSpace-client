@@ -501,12 +501,16 @@ async function routes(fastify, options) {
       );
 
       // Save the final translations
-      await fsUtils.writeTranslationFile(
+      let ok = await fsUtils.writeTranslationFile(
         projectName,
         targetLanguage,
         namespace,
         targetTranslations
       );
+
+      if (!ok) {
+        throw new Error("Failed to save translated namespace file");
+      }
 
       // Notify clients that batch translation is completed
       fastify.io.emit("batch-translation:completed", {
@@ -709,7 +713,11 @@ async function translateText(text, sourceLanguage, targetLanguage, model) {
 ## Task: Translate from ${sourceInfo.name} to ${targetInfo.name}
 
 ### Rules:
-${targetInfo.isRightToLeft ? "- Note that the target language is written right-to-left." : ""}
+${
+  targetInfo.isRightToLeft
+    ? "- Note that the target language is written right-to-left."
+    : ""
+}
 - Preserve all formatting
 - Keep {{variables}} unchanged
 - Keep HTML tags intact

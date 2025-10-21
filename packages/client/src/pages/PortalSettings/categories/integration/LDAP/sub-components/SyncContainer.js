@@ -54,7 +54,7 @@ const SyncContainer = ({
   isUIDisabled,
   isLdapAvailable,
 }) => {
-  const { t } = useTranslation(["Ldap", "Common", "Settings"]);
+  const { t, ready } = useTranslation(["Ldap", "Common", "Settings"]);
   const navigate = useNavigate();
 
   const onCheckView = () => {
@@ -167,6 +167,8 @@ const SyncContainer = ({
       ) : null}
     </div>
   );
+
+  if (!ready) return null;
 
   if (isMobileView) {
     return (

@@ -7,7 +7,11 @@ import { DomHelpers, classNames } from "../../../utils";
 import { ContextMenuSkeleton } from "../../../skeletons/context-menu";
 import { Scrollbar } from "../../scrollbar";
 import { Badge } from "../../badge";
-import { ContextMenuModel, ContextMenuType } from "../ContextMenu.types";
+import {
+  ContextMenuModel,
+  ContextMenuType,
+  TOnMobileItemClick,
+} from "../ContextMenu.types";
 import { globalColors } from "../../../themes";
 import { useTheme } from "../../../hooks/useTheme";
 
@@ -16,6 +20,7 @@ interface MobileSubMenuProps {
   root?: boolean;
   resetMenu: boolean;
   mobileSubMenuItems?: ContextMenuModel[];
+  onMobileItemClick?: TOnMobileItemClick;
 }
 
 const MenuItem = ({
@@ -127,6 +132,7 @@ export const MobileSubMenu = ({
   root,
   resetMenu,
   mobileSubMenuItems,
+  onMobileItemClick,
 }: MobileSubMenuProps) => {
   const [submenu, setSubmenu] = useState<ContextMenuModel[] | null>(null);
   const subMenuRef = useRef<HTMLUListElement>(null);
@@ -184,11 +190,13 @@ export const MobileSubMenu = ({
 
       item.onClick?.({ originalEvent: e, action: item.action, item });
 
-      if (!item.items) {
+      if (item.items || item.onLoad) {
+        onMobileItemClick?.(e, item.label as string, item.items, item.onLoad);
+      } else {
         onLeafClick(e);
       }
     },
-    [onLeafClick],
+    [onLeafClick, onMobileItemClick],
   );
 
   const renderMenu = useCallback(

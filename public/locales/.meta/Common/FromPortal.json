@@ -3,7 +3,7 @@
   "content": "From {{productName}}",
   "content_en_sha1_hash": "1073fa45036b8ba0fa65e7fd286576670d3c8398",
   "created_at": "2025-05-19T21:30:45.587Z",
-  "updated_at": "2025-09-07T07:53:15.003Z",
+  "updated_at": "2025-10-16T07:29:35.487Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" label on a main button dropdown menu in an article component. The label displays a phrase that includes the product name, indicating where data will be uploaded from a portal.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 378,
+      "line_number": 383,
       "context": "const uploadFromDocSpace = {\n id: \"actions_upload-from-docspace\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:FromPortal\", { productName: t(\"Common:ProductName\") }),\n key: \"actions_upload-from-docspace\",\n disabled: false,\n onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2893,
+      "line_number": 2955,
       "context": "items: [\n {\n id: \"personal_upload-from-docspace\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:FromPortal\", {\n productName: t(\"Common:ProductName\"),\n }),\n key: \"personal_upload-from-docspace\",\n onClick: () =>\n this.onShowFormRoomSelectFileDialog(FilterType.PDFForm),",
       "module": "/packages/client"
     }

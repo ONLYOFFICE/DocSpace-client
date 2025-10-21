@@ -3,7 +3,7 @@
   "content": "Adjust Session Lifetime to define the time period before automatic logoff. After saving, logoff will be performed for all users.",
   "content_en_sha1_hash": "0c6dc2e12543d442f19d41fc7480959c780e4b71",
   "created_at": "2025-05-19T21:30:52.652Z",
-  "updated_at": "2025-09-19T15:39:23.250Z",
+  "updated_at": "2025-09-29T11:28:56.267Z",
   "comment": {
     "text": "Adjust Session Lifetime defines the time period before automatic logoff. This setting will be applied to all users after saving, prompting them to log off. It appears in a portal settings category.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 334,
+      "line_number": 349,
       "context": "{t(\"SessionLifetime\")}\n </Text>\n \n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"SessionLifetimeSettingDescription\")}\n </Text>\n \n {lifetimeSettingsUrl ? (\n <Link\n className=\"link-learn-more\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
-      "line_number": 261,
+      "line_number": 262,
       "context": "return (\n <MainContainer>\n <LearnMoreWrapper withoutExternalLink={!lifetimeSettingsUrl}>\n <Text className=\"learn-subtitle\">\n {t(\"SessionLifetimeSettingDescription\")}\n </Text>\n {lifetimeSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n dataTestId=\"session_lifetime_component_learn_more\"",
       "module": "/packages/client"
     }

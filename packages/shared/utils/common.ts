@@ -74,6 +74,7 @@ import {
   UrlActionType,
 } from "../enums";
 import {
+  CategoryType,
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
   PUBLIC_MEDIA_VIEW_URL,
@@ -81,7 +82,7 @@ import {
   TIMEZONE,
 } from "../constants";
 
-import { TI18n, TTranslation } from "../types";
+import { TI18n, TTranslation, ValueOf } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
@@ -96,6 +97,7 @@ import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie, setCookie } from "./cookie";
 import { checkIsSSR } from "./device";
+
 import { hasOwnProperty } from "./object";
 import { TFrameConfig } from "../types/Frame";
 import { isFile, isFolder } from "./typeGuards";
@@ -146,8 +148,9 @@ export function createPasswordHash(
 
 export const isPublicRoom = () => {
   return (
-    window.location.pathname === "/rooms/share" ||
-    window.location.pathname.includes(PUBLIC_MEDIA_VIEW_URL)
+    typeof window !== "undefined" &&
+    (window.location.pathname === "/rooms/share" ||
+      window.location.pathname.includes(PUBLIC_MEDIA_VIEW_URL))
   );
 };
 
@@ -797,6 +800,12 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   );
   if (myFolder) sorted.push(myFolder);
 
+  const sharedWithMeFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.SHARE,
+  );
+  if (sharedWithMeFolder) sorted.push(sharedWithMeFolder);
+
   const favoritesFolder = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.Favorites,
@@ -820,12 +829,6 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
     (folder) => folder.current.rootFolderType === FolderType.Archive,
   );
   if (archiveRoom) sorted.push(archiveRoom);
-
-  const shareFolder = find(
-    folders,
-    (folder) => folder.current.rootFolderType === FolderType.SHARE,
-  );
-  if (shareFolder) sorted.push(shareFolder);
 
   const privateFolder = find(
     folders,
@@ -1243,8 +1246,22 @@ export function getLogoUrl(
   dark: boolean = false,
   def: boolean = false,
   culture?: string,
+  update: boolean = false,
 ) {
-  return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}${culture ? `&culture=${culture}` : ""}`;
+  let logoTimestamp = "";
+
+  if (update) {
+    const timestamp = window.sessionStorage?.getItem("logoUpdateTimestamp");
+    if (timestamp) logoTimestamp = `&t=${timestamp}`;
+  }
+
+  const url = `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}${culture ? `&culture=${culture}` : ""}${logoTimestamp}`;
+
+  return url;
+}
+
+export function updateLogoTimestamp() {
+  window.sessionStorage?.setItem("logoUpdateTimestamp", Date.now().toString());
 }
 
 export const getUserTypeName = (
@@ -1547,6 +1564,48 @@ export const getErrorInfo = (
   return message ?? t("Common:UnexpectedError");
 };
 
+export const getCategoryType = (location: { pathname: string }) => {
+  let categoryType: ValueOf<typeof CategoryType> = CategoryType.Shared;
+  const { pathname } = location;
+
+  if (pathname.startsWith("/rooms")) {
+    if (pathname.indexOf("personal") > -1) {
+      categoryType = CategoryType.Personal;
+    } else if (pathname.indexOf("shared") > -1) {
+      const regexp = /(rooms)\/shared\/(\d+)/;
+
+      const chatRegexp = /(rooms)\/shared\/(\d+)\/chat/;
+
+      categoryType = !regexp.test(location.pathname)
+        ? CategoryType.Shared
+        : CategoryType.SharedRoom;
+
+      if (chatRegexp.test(location.pathname)) {
+        categoryType = CategoryType.Chat;
+      }
+    } else if (pathname.indexOf("share") > -1) {
+      categoryType = CategoryType.PublicRoom;
+    } else if (pathname.indexOf("archive") > -1) {
+      categoryType = CategoryType.Archive;
+    }
+  } else if (pathname.startsWith("/files/favorite")) {
+    categoryType = CategoryType.Favorite;
+  } else if (pathname.startsWith("/favorite")) {
+    categoryType = CategoryType.Favorite;
+  } else if (pathname.startsWith("/recent")) {
+    categoryType = CategoryType.Recent;
+  } else if (pathname.startsWith("/files/trash")) {
+    categoryType = CategoryType.Trash;
+  } else if (pathname.startsWith("/settings")) {
+    categoryType = CategoryType.Settings;
+  } else if (pathname.startsWith("/accounts")) {
+    categoryType = CategoryType.Accounts;
+  } else if (pathname.startsWith("/shared-with-me")) {
+    categoryType = CategoryType.SharedWithMe;
+  }
+
+  return categoryType;
+};
 export function splitFileAndFolderIds<T extends TFolder | TFile>(items: T[]) {
   const initial = {
     fileIds: [] as Array<string | number>,

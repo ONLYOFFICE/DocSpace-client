@@ -35,6 +35,7 @@ import { getServerIcon } from "../../../../../../../../utils";
 import { ServerType } from "../../../../../../../../api/ai/enums";
 import { Text } from "../../../../../../../text";
 import styles from "../../../../ChatMessageBody.module.scss";
+import { MCPIcon, MCPIconSize } from "../../../../../../../mcp-icon";
 
 export const MCPToolContent = ({ content }: { content: TToolCallContent }) => {
   const { t } = useTranslation(["Common"]);
@@ -45,21 +46,20 @@ export const MCPToolContent = ({ content }: { content: TToolCallContent }) => {
     getServerIcon(
       content.mcpServerInfo?.serverType || ServerType.Custom,
       isBase,
-    );
+    ) ||
+    "";
 
   return (
     <>
       <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
         {t("Common:ToolCallExecuted")}:
       </Text>
-      {serverIcon ? (
-        <img
-          src={serverIcon}
-          width="16px"
-          height="16px"
-          alt="mcp server logo"
-        />
-      ) : null}
+      <MCPIcon
+        title={content.mcpServerInfo?.serverName || ""}
+        imgSrc={serverIcon}
+        size={MCPIconSize.Small}
+      />
+
       <Text
         fontSize="13px"
         lineHeight="15px"

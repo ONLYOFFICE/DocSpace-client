@@ -292,7 +292,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
       window.location.origin,
       window.ClientConfig?.proxy?.url,
       pkg.homepage,
-      "/portal-settings/developer-tools",
+      "/portal-settings/developer-tools/javascript-sdk",
     );
 
     window.open(url, "_blank");
@@ -520,7 +520,9 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                     isChecked={embeddingConfig.showTitle}
                     img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                     title={t("JavascriptSdk:Header")}
-                    description={t("JavascriptSdk:HeaderDescription")}
+                    description={t("JavascriptSdk:HeaderDescription", {
+                      productName: t("Common:ProductName"),
+                    })}
                     dataTestId="show_title"
                   />
                   <CheckboxElement

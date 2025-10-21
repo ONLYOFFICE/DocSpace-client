@@ -3,7 +3,7 @@
   "content": "Preparing backup",
   "content_en_sha1_hash": "f35ddbcec9c65837f3811de3b81fc5dcd00e1d93",
   "created_at": "2025-05-26T07:15:46.295Z",
-  "updated_at": "2025-09-17T13:43:02.041Z",
+  "updated_at": "2025-10-03T13:19:30.810Z",
   "comment": {
     "text": "\"Preparing backup\" is a label used in various UI elements to indicate that a backup operation is in progress. It appears on buttons and dialogues related to manual backups, such as the \"Restore Backup\" button component, where it displays the current progress of the backup operation.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 675,
+      "line_number": 679,
       "context": "operations={[\n {\n label: operationsCompleted\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),\n percent: downloadingProgress,\n operation: OPERATIONS_NAME.backup,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 620,
+      "line_number": 642,
       "context": "{\n label:\n downloadingProgress === 100\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),\n percent: downloadingProgress,\n operation: OPERATIONS_NAME.backup,",
       "module": "/packages/shared"
     },

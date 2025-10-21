@@ -92,7 +92,7 @@ const RootContainer = styled.div`
 
   .request-block {
     margin-bottom: 20px;
-    padding: 46px;
+    padding: 32px 46px;
     display: flex;
     gap: 24px;
     align-items: center;
@@ -130,11 +130,14 @@ class ThirdPartyServices extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { t, tReady, openModal } = this.props;
+    const { t, tReady, openThirdPartyModal } = this.props;
     if (prevProps.tReady !== tReady && tReady)
       setDocumentTitle(t("ThirdPartyAuthorization"));
 
-    if (openModal !== prevProps.openModal && openModal) {
+    if (
+      openThirdPartyModal !== prevProps.openThirdPartyModal &&
+      openThirdPartyModal
+    ) {
       this.onModalOpen();
     }
   }
@@ -176,6 +179,7 @@ class ThirdPartyServices extends React.Component {
       isThirdPartyAvailable,
       supportEmail,
       logoText,
+      tReady,
     } = this.props;
     const { dialogVisible, isLoading } = this.state;
     const { onModalClose, onModalOpen, setConsumer, onChangeLoading } = this;
@@ -193,49 +197,49 @@ class ThirdPartyServices extends React.Component {
 
     return (
       <>
-        <RootContainer className="RootContainer">
-          <Text className="third-party-description">
-            {t("AuthorizationKeysInfo")}
-          </Text>
-          <div className="third-party-box">
-            {integrationSettingsUrl ? (
-              <Link
-                className="third-party-link"
-                color={currentColorScheme.main?.accent}
-                isHovered
-                target="_blank"
-                href={integrationSettingsUrl}
-                dataTestId="integration_settings_link"
-              >
-                {t("Common:LearnMore")}
-              </Link>
-            ) : null}
-          </div>
-          <div className="consumer-item-wrapper request-block">
-            <img
-              className="integration-image"
-              src={imgSrc}
-              alt="integration_icon"
-            />
-            <Text>
-              {t("IntegrationRequest", {
-                productName: t("Common:ProductName"),
-                organizationName: logoText,
-              })}
+        {!consumers.length || !tReady ? (
+          <ThirdPartyLoader />
+        ) : (
+          <RootContainer className="RootContainer">
+            <Text className="third-party-description">
+              {t("AuthorizationKeysInfo")}
             </Text>
-            <Button
-              label={t("Submit")}
-              primary
-              size="normal"
-              minWidth="138px"
-              onClick={submitRequest}
-              scale={isMobile()}
-              testId="submit_request_team_button"
-            />
-          </div>
-          {!consumers.length ? (
-            <ThirdPartyLoader />
-          ) : (
+            <div className="third-party-box">
+              {integrationSettingsUrl ? (
+                <Link
+                  className="third-party-link"
+                  color={currentColorScheme.main?.accent}
+                  isHovered
+                  target="_blank"
+                  href={integrationSettingsUrl}
+                  dataTestId="integration_settings_link"
+                >
+                  {t("Common:LearnMore")}
+                </Link>
+              ) : null}
+            </div>
+            <div className="consumer-item-wrapper request-block">
+              <img
+                className="integration-image"
+                src={imgSrc}
+                alt="integration_icon"
+              />
+              <Text>
+                {t("IntegrationRequest", {
+                  productName: t("Common:ProductName"),
+                  organizationName: logoText,
+                })}
+              </Text>
+              <Button
+                label={t("Submit")}
+                primary
+                size="normal"
+                minWidth="138px"
+                onClick={submitRequest}
+                scale={isMobile()}
+                testId="submit_request_team_button"
+              />
+            </div>
             <div className="consumers-list-container">
               {freeConsumers.map((consumer) => (
                 <div
@@ -296,8 +300,8 @@ class ThirdPartyServices extends React.Component {
                 </div>
               ))}
             </div>
-          )}
-        </RootContainer>
+          </RootContainer>
+        )}
         {dialogVisible ? (
           <ConsumerModalDialog
             t={t}
@@ -321,7 +325,6 @@ ThirdPartyServices.propTypes = {
   integrationSettingsUrl: PropTypes.string,
   updateConsumerProps: PropTypes.func.isRequired,
   setSelectedConsumer: PropTypes.func.isRequired,
-  openModal: PropTypes.bool,
 };
 
 export default inject(({ setup, settingsStore, currentQuotaStore }) => {
@@ -337,6 +340,7 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     updateConsumerProps,
     setSelectedConsumer,
     fetchAndSetConsumers,
+    openThirdPartyModal,
   } = setup;
   const { consumers } = integration;
   const { isThirdPartyAvailable } = currentQuotaStore;
@@ -352,5 +356,6 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     isThirdPartyAvailable,
     supportEmail: companyInfoSettingsData?.email,
     logoText,
+    openThirdPartyModal,
   };
 })(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));

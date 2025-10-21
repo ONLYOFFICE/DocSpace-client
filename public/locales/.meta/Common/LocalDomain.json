@@ -3,7 +3,7 @@
   "content": "Local domains are not supported",
   "content_en_sha1_hash": "2f3c69b6241eaebb3afffd20ba46edbf9cf52247",
   "created_at": "2025-05-19T21:30:46.290Z",
-  "updated_at": "2025-09-07T07:53:15.052Z",
+  "updated_at": "2025-10-13T13:22:35.495Z",
   "comment": {
     "text": "This translation key is used to display an error message when a local domain is not supported, typically appearing in a change email dialog or similar interface. The purpose of this text is to inform users that their chosen domain is not compatible for use in this context. It appears on screen as part of the user experience, prompting the user to select a different domain if necessary.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 169,
+      "line_number": 171,
       "context": "if (parsedDomain?.parseErrors && parsedDomain?.parseErrors.length > 0) {\n const translatedErrors = parsedDomain.parseErrors.map((error) => {\n switch (error.errorKey) {\n case ErrorKeys.LocalDomain:\n return t(\"Common:LocalDomain\");\n case ErrorKeys.IncorrectDomain:\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"Common:DomainIpAddress\");",
       "module": "/packages/shared"
     }

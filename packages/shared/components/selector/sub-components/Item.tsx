@@ -39,8 +39,9 @@ import { Text } from "../../text";
 import { Checkbox } from "../../checkbox";
 import { RoomIcon } from "../../room-icon";
 import { Tooltip } from "../../tooltip";
+import { MCPIcon, MCPIconSize } from "../../mcp-icon";
 
-import { ItemProps, Data, TSelectorItem } from "../Selector.types";
+import { Data, ItemProps, TSelectorItem } from "../Selector.types";
 import { EmployeeType, RoomsType } from "../../../enums";
 import NewItem from "./NewItem";
 import InputItem from "./InputItem";
@@ -131,6 +132,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       disableMultiSelect,
       isSeparator,
       isSystem,
+      isMCP,
     } = item;
 
     if (isSeparator) {
@@ -241,7 +243,9 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
         })}
         data-testid={`selector-item-${index}`}
       >
-        {avatar || isGroup ? (
+        {isMCP ? (
+          <MCPIcon title={label} imgSrc={icon} size={MCPIconSize.Big} />
+        ) : avatar || isGroup ? (
           <Avatar
             className={styles.userAvatar}
             source={itemAvatar}

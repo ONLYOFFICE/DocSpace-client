@@ -248,7 +248,9 @@ export const getLastColumn = (
 export const isLockedSharedRoom = (item?: TRoom) => {
   if (!item) return false;
 
-  return Boolean(item.external && item.passwordProtected && !item.expired);
+  return Boolean(
+    item.external && item.passwordProtected && !item.isLinkExpired,
+  );
 };
 
 export const addLog = (log: string, category: "socket") => {

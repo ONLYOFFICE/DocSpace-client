@@ -2,6 +2,8 @@
   "AccountWillBeCreated": "Účet {{productName}} bude vytvořen pro <1>{{email}}</1>. Dokončete prosím svou registraci:",
   "ConfirmOwnerPortalSuccessMessage": "Vlastník {{productName}} byl úspěšně změněn. Za 10 sekund budete přesměrováni.",
   "ConfirmOwnerPortalTitle": "Potvrďte prosím, že chcete změnit vlastníka {{productName}} na {{newOwner}}.",
+  "ConnectApp": "Připojte aplikaci",
+  "ConnectAppDescription": "Naskenujte poskytnutý QR kód pomocí aplikace pro ověřování. Případně ručně zadejte daný tajný klíč do aplikace: <1>{{ secretKey }}</1>.",
   "CurrentNumber": "Vaše aktuální číslo mobilního telefonu",
   "DeleteProfileBtn": "Smazat můj účet",
   "DeleteProfileConfirmation": "Pozor! Chystáte se smazat svůj účet.",
@@ -16,6 +18,8 @@
   "EnterEmailHeader": "Zadejte e-mail",
   "EnterPhone": "Zadejte telefonní číslo mobilního telefonu",
   "GetCode": "Získat kód",
+  "GetSuitableApp": "Získejte vhodnou aplikaci",
+  "GetSuitableAppDescription": "Použijte kompatibilní aplikaci, jako je Google Authenticator pro <1>Android</1> a <4>iOS</4>, nebo Authenticator pro <8>Windows Phone</8>.",
   "LoginRegistryButton": "Připojit se",
   "Newsletter": "Chci se přihlásit k odběru newsletteru {{organizationName}}",
   "PassworResetTitle": "Nyní si můžete vytvořit nové heslo.",
@@ -29,5 +33,9 @@
   "SuccessDeactivate": "Váš účet byl úspěšně deaktivován. Za 10 sekund budete přesměrováni na <1>stránku</1>.",
   "SuccessReactivate": "Váš účet byl úspěšně reaktivován. Za 10 sekund budete přesměrováni na <1>prostor</1>.",
   "SuccessRemoved": "Váš účet byl úspěšně odstraněn. Za 10 sekund budete přesměrováni na <1>stránku</1>.",
-  "TermsAndConditions": "Pokračováním vyjadřujete porozumění a souhlas s našimi <1>Podmínkami a pravidly</1> a <2>Prohlášením o ochraně osobních údajů</2>."
+  "TermsAndConditions": "Pokračováním vyjadřujete porozumění a souhlas s našimi <1>Podmínkami a pravidly</1> a <2>Prohlášením o ochraně osobních údajů</2>.",
+  "TfaSubTitle": "Postupujte podle jednoduchých kroků pro pokračování práce v tomto {{productName}}:",
+  "TfaTitle": "Dvoufaktorové ověřování povoleno pro zabezpečený přístup",
+  "VerifyConnection": "Ověřte připojení",
+  "VerifyConnectionDescription": "Zadejte do pole níže 6místný kód vygenerovaný vaší autentifikační aplikací pro dokončení nastavení."
 }

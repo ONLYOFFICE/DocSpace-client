@@ -320,7 +320,7 @@ const GlobalEvents = ({
           <Trans
             ns="PDFFormDialog"
             i18nKey="PDFFormIsReadyToast"
-            components={{ 1: <strong /> }}
+            components={{ 1: <strong key="create-pdf-form-file-strong" /> }}
             values={{ filename: file.title }}
           />,
         );

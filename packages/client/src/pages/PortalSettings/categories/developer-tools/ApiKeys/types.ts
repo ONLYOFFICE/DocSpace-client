@@ -38,12 +38,12 @@ export type ApiKeysProps = {
   t: TTranslation;
   viewAs: TStore["setup"]["viewAs"];
   currentColorScheme: TColorScheme;
-  apiKeysLink: string;
+  apiKeysUrl: string;
   isUser: boolean;
   error: Error | null;
-  listItems: TApiKey[];
+  apiKeys: TApiKey[];
   permissions: string[];
-  setListItems: React.Dispatch<React.SetStateAction<TApiKey[]>>;
+  setApiKeys: React.Dispatch<React.SetStateAction<TApiKey[]>>;
 };
 
 export type ApiKeyViewProps = {

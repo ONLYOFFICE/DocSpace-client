@@ -24,12 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type {
-  TAvailableExternalRights,
-  TFile,
-  TFolder,
-  TShareSettings,
-} from "../files/types";
+import type { TFile, TFolder, TShareSettings } from "../files/types";
 import {
   ExportRoomIndexTaskStatus,
   FolderType,
@@ -38,7 +33,11 @@ import {
   ShareAccessRights,
   ValidationStatus,
 } from "../../enums";
-import { TCreatedBy, TPathParts } from "../../types";
+import type {
+  TAvailableShareRights,
+  TCreatedBy,
+  TPathParts,
+} from "../../types";
 import { TUser } from "../people/types";
 import { TGroup } from "../groups/types";
 
@@ -130,7 +129,7 @@ export type TRoom = {
   external?: boolean;
   passwordProtected?: boolean;
   requestToken?: string;
-  expired?: boolean;
+  isLinkExpired?: boolean;
   indexing?: boolean;
   denyDownload?: boolean;
   watermark?: TWatermark;
@@ -141,7 +140,7 @@ export type TRoom = {
   isRoom?: boolean;
   chatSettings?: { prompt: string; providerId: number; modelId: string };
   shareSettings?: TShareSettings;
-  availableExternalRights?: TAvailableExternalRights;
+  availableShareRights?: TAvailableShareRights;
 };
 
 export type TGetRooms = {
@@ -166,14 +165,6 @@ export type TExportRoomIndexTask = {
   resultFileUrl: string;
 };
 
-export type TPublicRoomPassword = {
-  id: string;
-  linkId: string;
-  shared: boolean;
-  status: ValidationStatus;
-  tenantId: string | number;
-};
-
 export type TNewFilesItem = TFile[] | { room: TRoom; items: TFile[] };
 
 export type TNewFiles = {
@@ -186,7 +177,7 @@ export type TValidateShareRoom = {
   isAuthenticated: boolean;
   linkId: string;
   shared: boolean;
-  status: number;
+  status: ValidationStatus;
   tenantId: number;
   title: string;
 
@@ -198,6 +189,8 @@ export type TValidateShareRoom = {
   entityType?: LinkSharingEntityType;
   isRoomMember?: boolean;
 };
+
+export type TPublicRoomPassword = TValidateShareRoom;
 
 export type RoomMember = {
   access: number;

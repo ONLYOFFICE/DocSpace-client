@@ -3,7 +3,7 @@
   "AllDataTransferred": "すべてのデータが転送されました",
   "DataReassignment": "データの再割り当て",
   "DeleteProfileIsFinished": "再割り当てが終了したらプロファイルを削除する",
-  "DescriptionDataReassignment": "ユーザーが作成したルームと、ユーザーのルームに保存されているドキュメントを転送します。",
+  "DescriptionDataReassignment": "連絡先によって作成された共有ファイルとルームを転送します。",
   "Interrupted": "中断され、一部のデータを転送できませんでした",
   "MoreAboutDataTransfer": "データ転送の詳細",
   "NewDataOwner": "新しいデータ所有者",

@@ -42,7 +42,7 @@ import {
 } from "@docspace/shared/utils";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import RoomLogoCover from "./sub-components/RoomLogoCover";
-import { CoverDialogProps, ILogo } from "./RoomLogoCoverDialog.types";
+import { CoverDialogProps, ILogoCover } from "./RoomLogoCoverDialog.types";
 
 const PADDING_HEIGHT = 84;
 const HEIGHT_WITHOUT_BODY = 158;
@@ -299,7 +299,7 @@ const RoomLogoCoverDialog = ({
           generalScroll={!!scrollBodyHeight}
           isScrollLocked={openColorPicker}
           setCover={setCover}
-          cover={roomCoverDialogProps.icon as ILogo}
+          cover={roomCoverDialogProps.icon as unknown as ILogoCover}
           currentColorScheme={theme.currentColorScheme!}
           setRoomCoverDialogProps={setRoomCoverDialogProps}
           roomCoverDialogProps={roomCoverDialogProps}

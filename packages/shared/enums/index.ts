@@ -274,7 +274,6 @@ export const enum FolderType {
   AIAgents = 31,
   Knowledge = 32,
   ResultStorage = 33,
-  AIAgents = 9999,
 }
 
 export const enum ShareAccessRights {

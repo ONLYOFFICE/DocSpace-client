@@ -33,7 +33,7 @@ module.exports = {
   mode: isProduction ? "production" : "development",
   entry: path.resolve(__dirname, "sw/template.ts"),
   output: {
-    path: path.resolve(__dirname, "public"),
+    path: path.resolve(__dirname, "../../web/public"),
     filename: "sw-template.js",
   },
   resolve: {

@@ -26,7 +26,6 @@
 
 import packageJson from "../package.json";
 
-// Version automatically read from package.json
 const APP_VERSION = packageJson.version;
 
 export interface CacheConfig {

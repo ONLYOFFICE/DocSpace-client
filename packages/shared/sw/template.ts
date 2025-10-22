@@ -35,18 +35,35 @@ import { ExpirationPlugin } from "workbox-expiration";
 import { CacheableResponsePlugin } from "workbox-cacheable-response";
 import { SW_CONFIG } from "./config";
 
+interface ExtendableEvent extends Event {
+  waitUntil(fn: Promise<any>): void;
+}
+
+interface ExtendableMessageEvent extends ExtendableEvent {
+  data: any;
+}
+
+interface Clients {
+  claim(): Promise<void>;
+}
+
+interface ServiceWorkerGlobalScope {
+  addEventListener(
+    type: "activate",
+    listener: (event: ExtendableEvent) => void,
+  ): void;
+  addEventListener(
+    type: "message",
+    listener: (event: ExtendableMessageEvent) => void,
+  ): void;
+  skipWaiting(): Promise<void>;
+  clients: Clients;
+  __WB_MANIFEST: any;
+}
+
 declare const self: ServiceWorkerGlobalScope;
 
-// ============================================================================
-// Precaching
-// ============================================================================
-
-// This will be replaced at build time with the list of files to precache
 precacheAndRoute(self.__WB_MANIFEST);
-
-// ============================================================================
-// App Shell - SPA Navigation
-// ============================================================================
 
 const navigationRoute = new NavigationRoute(
   createHandlerBoundToURL("/index.html"),
@@ -57,10 +74,6 @@ const navigationRoute = new NavigationRoute(
 );
 
 registerRoute(navigationRoute);
-
-// ============================================================================
-// Translation Files - Stale While Revalidate
-// ============================================================================
 
 registerRoute(
   ({ url }) =>
@@ -76,10 +89,6 @@ registerRoute(
     ],
   }),
 );
-
-// ============================================================================
-// Static Assets - Cache First
-// ============================================================================
 
 registerRoute(
   ({ request }) =>
@@ -98,10 +107,6 @@ registerRoute(
   }),
 );
 
-// ============================================================================
-// Images - Cache First
-// ============================================================================
-
 registerRoute(
   ({ request }) => request.destination === "image",
   new CacheFirst({
@@ -115,10 +120,6 @@ registerRoute(
     ],
   }),
 );
-
-// ============================================================================
-// API Calls - Network First
-// ============================================================================
 
 registerRoute(
   ({ url }) => url.pathname.startsWith("/api/"),
@@ -134,18 +135,13 @@ registerRoute(
   }),
 );
 
-// ============================================================================
-// Service Worker Lifecycle
-// ============================================================================
-
-self.addEventListener("activate", (event) => {
+self.addEventListener("activate", (event: ExtendableEvent) => {
   if (SW_CONFIG.debug) {
     console.log("[SW] Activating service worker version:", SW_CONFIG.version);
   }
 
   event.waitUntil(
     (async () => {
-      // Clean up old caches
       const cacheNames = await caches.keys();
       const currentCacheName = SW_CONFIG.cacheSuffix;
 
@@ -164,7 +160,6 @@ self.addEventListener("activate", (event) => {
           }),
       );
 
-      // Take control of all clients
       await self.clients.claim();
     })(),
   );
@@ -178,10 +173,6 @@ self.addEventListener("message", (event) => {
     self.skipWaiting();
   }
 });
-
-// ============================================================================
-// Version Logging
-// ============================================================================
 
 if (SW_CONFIG.debug) {
   console.log(`[SW] Service Worker initialized - version ${SW_CONFIG.version}`);

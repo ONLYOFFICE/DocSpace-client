@@ -99,7 +99,6 @@ const View = ({
   paymentStore,
   servicesStore,
   currentTariffStatusStore,
-
   clearAbortControllerArr,
 }: ViewProps) => {
   const location = useLocation();

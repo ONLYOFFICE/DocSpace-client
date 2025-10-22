@@ -50,7 +50,11 @@ import commonStyles from "../../helpers/Common.module.scss";
 import styles from "./Gallery.module.scss";
 
 type ItemTitleProps = {
-  gallerySelected: OformsStore["gallerySelected"] | any;
+  gallerySelected:
+    | OformsStore["gallerySelected"]
+    | {
+        attributes: { name_form: string };
+      };
   getIcon?: FilesSettingsStore["getIcon"];
   currentColorScheme?: SettingsStore["currentColorScheme"];
   getFormGalleryContextOptions?: ContextOptionsStore["getFormGalleryContextOptions"];

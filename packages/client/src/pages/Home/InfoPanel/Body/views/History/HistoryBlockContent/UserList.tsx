@@ -68,16 +68,19 @@ const HistoryUserList = ({
 
   const usersData = [
     feed.data,
-    ...feed.related.map((relatedFeed: any) => relatedFeed.data),
+    ...feed.related.map((relatedFeed) => relatedFeed.data),
   ];
 
   return (
     <>
-      {usersData.map(({ user }, i) => {
+      {usersData.map((member, i) => {
         if (!isExpanded && i > EXPANSION_THRESHOLD - 1) return null;
         const withComma = !isExpanded
           ? i < EXPANSION_THRESHOLD - 1
           : i < usersData.length - 1;
+
+        const user = "displayName" in member.sharedTo ? member.sharedTo : null;
+        if (!user) return null;
 
         const userName = decode(user.displayName);
 

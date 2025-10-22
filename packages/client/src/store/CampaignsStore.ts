@@ -72,7 +72,7 @@ class CampaignsStore {
 
   getBanner = async () => {
     const { standalone } = this.settingsStore;
-    const { userType } = this.userStore;
+    const { stringUserType } = this.userStore;
 
     const lng: string[] | string = getCookie(LANGUAGE) || "en";
     const language = getLanguage(typeof lng === "object" ? lng[0] : lng);
@@ -108,7 +108,7 @@ class CampaignsStore {
       standalone,
     );
 
-    const isHide = isHideBannerForUser(userType as string, config?.hideFor);
+    const isHide = isHideBannerForUser(stringUserType, config?.hideFor);
     if (isHide) {
       this.setClosedCampaigns(currentCampaign);
       this.getBanner();

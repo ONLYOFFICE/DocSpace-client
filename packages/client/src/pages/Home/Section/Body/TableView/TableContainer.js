@@ -152,6 +152,7 @@ const Table = ({
   withContentSelection,
   isFavoritesFolder,
   isSharedWithMeFolderRoot,
+  isAIAgentsFolder,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -228,6 +229,7 @@ const Table = ({
         isTrashFolder={isTrashFolder}
         isFavoritesFolder={isFavoritesFolder}
         isSharedWithMeFolderRoot={isSharedWithMeFolderRoot}
+        isAIAgentsFolder={isAIAgentsFolder}
         hideColumns={hideColumns}
         isHighlight={
           highlightFile.id == item.id
@@ -323,6 +325,7 @@ export default inject(
       isTemplatesFolder,
       isFavoritesFolder,
       isSharedWithMeFolderRoot,
+      isAIAgentsFolder,
     } = treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
@@ -387,6 +390,7 @@ export default inject(
       withContentSelection,
       isFavoritesFolder,
       isSharedWithMeFolderRoot,
+      isAIAgentsFolder,
     };
   },
 )(withContainer(observer(Table)));

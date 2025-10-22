@@ -56,13 +56,13 @@ export default inject(
     infoPanelStore,
     indexingStore,
   }: {
-    settingsStore: any;
-    dialogsStore: any;
-    infoPanelStore: any;
-    indexingStore: any;
-    filesSettingsStore: any;
-    selectedFolderStore: any;
-    userStore: any;
+    settingsStore: TStore["settingsStore"];
+    dialogsStore: TStore["dialogsStore"];
+    infoPanelStore: TStore["infoPanelStore"];
+    indexingStore: TStore["indexingStore"];
+    filesSettingsStore: TStore["filesSettingsStore"];
+    selectedFolderStore: TStore["selectedFolderStore"];
+    userStore: TStore["userStore"];
   }) => {
     const {
       isDesktopClient: isDesktop,

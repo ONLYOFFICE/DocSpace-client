@@ -66,6 +66,7 @@ export const StyledForm = styled.div`
   }
 
   .logo-wrapper {
+    max-width: 386px;
     height: 44px;
     width: auto;
 

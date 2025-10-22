@@ -2519,7 +2519,7 @@ class ContextOptionsStore {
       (option) => option.key === "download",
     );
     const moveIndex = resultOptions.findIndex(
-      (option) => option.key === "move",
+      (option) => option.key === "move" || option.key === "copy-to",
     );
 
     if (item.isFolder && !item.isRoom) {

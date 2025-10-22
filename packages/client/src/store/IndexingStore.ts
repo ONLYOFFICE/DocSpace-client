@@ -30,6 +30,13 @@ import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import SelectedFolderStore from "./SelectedFolderStore";
 
+type IndexingItem = {
+  id: string | number;
+  order?: number;
+  isFolder?: boolean;
+  fileExst?: string;
+};
+
 class IndexingStore {
   selectedFolderStore;
 
@@ -37,16 +44,16 @@ class IndexingStore {
 
   isIndexing: boolean = false;
 
-  updateSelection: any[] = [];
+  updateSelection: IndexingItem[] = [];
 
-  previousFilesList: any[] = [];
+  previousFilesList: IndexingItem[] = [];
 
   constructor(selectedFolderStore: SelectedFolderStore) {
     this.selectedFolderStore = selectedFolderStore;
     makeAutoObservable(this);
   }
 
-  setUpdateSelection = (selection: any[]) => {
+  setUpdateSelection = (selection: IndexingItem[]) => {
     if (this.updateSelection.length === 0) {
       return (this.updateSelection = [...selection]);
     }
@@ -97,7 +104,7 @@ class IndexingStore {
     this.updateSelection = [];
   };
 
-  setPreviousFilesList = (list: any[]) => {
+  setPreviousFilesList = (list: IndexingItem[]) => {
     this.previousFilesList = list;
   };
 
@@ -115,7 +122,13 @@ class IndexingStore {
   };
 
   getIndexingArray = () => {
-    const items = this.updateSelection.reduce((res, item) => {
+    const items = this.updateSelection.reduce<
+      Array<{
+        order: number | undefined;
+        entryId: string | number;
+        entryType: number;
+      }>
+    >((res, item) => {
       return [
         ...res,
         {

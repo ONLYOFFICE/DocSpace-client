@@ -15,7 +15,6 @@ module.exports = [
     rules: {
       "no-fallthrough": "off",
       "react/no-danger": "off",
-      "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-loop-func": "off",
       "@typescript-eslint/no-unused-expressions": "off",
     },

@@ -56,11 +56,9 @@ const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
       isLoading={!ready}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>
-        {t("Common:YouHaveUnsavedChanges")}
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:UnsavedChanges")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text>{t("Common:UnsavedChangesBody")}</Text>
+        <Text>{t("Common:UnsavedChangesDescription")}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -84,21 +82,3 @@ const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
 };
 
 export default UnsavedChangesDialog;
-
-// const UnsavedChangesDialog = withTranslation(["Files", "Settings", "Common"])(
-//   UnsavedChangesDialogComponent,
-// );
-
-// export default inject(({ dialogsStore }) => {
-//   const {
-//     unsavedChangesDialogVisible: visible,
-//     setUnsavedChangesDialog,
-//     setEditLinkPanelIsVisible,
-//   } = dialogsStore;
-
-//   return {
-//     visible,
-//     setUnsavedChangesDialog,
-//     setEditLinkPanelIsVisible,
-//   };
-// })(observer(UnsavedChangesDialog));

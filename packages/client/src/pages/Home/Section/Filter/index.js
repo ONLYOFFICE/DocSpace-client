@@ -133,6 +133,7 @@ const SectionFilterContent = ({
   isDefaultRoomsQuotaSet,
   isTemplatesFolder,
   isSharedWithMeFolder,
+  isAIAgentsFolder,
 
   currentClientView,
 
@@ -807,6 +808,11 @@ const SectionFilterContent = ({
 
     let tags = null;
     let providers = [];
+
+    if (isAIAgentsFolder) {
+      tags = await fetchTags();
+    }
+
     if (!isPublicRoom && isRooms) {
       const res = await Promise.all([fetchTags(), fetchThirdPartyProviders()]);
       tags = res[0];
@@ -1040,6 +1046,7 @@ const SectionFilterContent = ({
         group: FilterGroups.roomFilterOwner,
         isHeader: true,
         withoutHeader: true,
+        isLast: isAIAgentsFolder && !tags?.length,
       },
       {
         id: "filter_author-user",
@@ -1097,7 +1104,7 @@ const SectionFilterContent = ({
 
       filterOptions.push(...typeOptions);
 
-      if (tags.length > 0) {
+      if (tags?.length > 0) {
         const tagsOptions = tags.map((tag) => ({
           key: tag,
           group: FilterGroups.roomFilterTags,
@@ -1147,6 +1154,28 @@ const SectionFilterContent = ({
       showStorageInfo &&
         isDefaultRoomsQuotaSet &&
         filterOptions.push(...quotaFilter);
+    } else if (isAIAgentsFolder) {
+      filterOptions.push(...subjectOptions);
+      filterOptions.push(...ownerOptions);
+
+      if (tags.length > 0) {
+        const tagsOptions = tags.map((tag) => ({
+          key: tag,
+          group: FilterGroups.roomFilterTags,
+          label: tag,
+          isMultiSelect: true,
+        }));
+
+        filterOptions.push({
+          key: FilterGroups.roomFilterTags,
+          group: FilterGroups.roomFilterTags,
+          label: t("Common:Tags"),
+          isHeader: true,
+          isLast: true,
+        });
+
+        filterOptions.push(...tagsOptions);
+      }
     } else {
       const authorOption = getAuthorFilter();
 
@@ -1603,6 +1632,7 @@ export default inject(
       isTrashFolder: isTrash,
       isTemplatesFolder,
       isSharedWithMeFolder,
+      isAIAgentsFolder,
     } = treeFoldersStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
@@ -1649,6 +1679,7 @@ export default inject(
       isIndexing: isIndexedFolder,
       isIndexEditingMode,
       isSharedWithMeFolder,
+      isAIAgentsFolder,
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       showFilterLoader: clientLoadingStore.showFilterLoader,

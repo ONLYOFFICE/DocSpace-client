@@ -77,7 +77,6 @@ const SortFilter: FC<SortFilterProps> = ({ t, oformsFilter, sortOforms }) => {
 
       <div
         className={styles.sortButton}
-        id="oform-sort"
         title={t("Common:SortBy")}
         onClick={onToggleCombobox}
       >

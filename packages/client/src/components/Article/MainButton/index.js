@@ -52,7 +52,7 @@ import { useLocation } from "react-router";
 import { MainButton } from "@docspace/shared/components/main-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
-
+import { isDesktop } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
 import { globalColors } from "@docspace/shared/themes";
@@ -629,20 +629,21 @@ const ArticleMainButtonContent = (props) => {
     }
 
     if (templateGalleryAvailable) {
-      newActions.push(
-        {
+      if (isDesktop()) {
+        newActions.push({
           isSeparator: true,
           key: "separator",
-        },
-        {
-          id: "actions_open-template-gallery",
-          className: "main-button_drop-down",
-          icon: TemplateGalleryReactSvgUrl,
-          label: t("Common:TemplateGallery"),
-          onClick: onShowTemplateGallery,
-          key: "template-gallery",
-        },
-      );
+        });
+      }
+
+      newActions.push({
+        id: "actions_open-template-gallery",
+        className: "main-button_drop-down",
+        icon: TemplateGalleryReactSvgUrl,
+        label: t("Common:TemplateGallery"),
+        onClick: onShowTemplateGallery,
+        key: "template-gallery",
+      });
     }
 
     const menuModel = [...newActions];

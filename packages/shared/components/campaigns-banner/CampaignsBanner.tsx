@@ -124,7 +124,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
           <button
             style={buttonStyle}
             className={styles.button}
-            onClick={() => onAction()}
+            onClick={() => onAction(action?.type, Link)}
             type="button"
           >
             <TextComponent

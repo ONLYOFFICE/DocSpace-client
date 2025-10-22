@@ -28,7 +28,10 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useTheme } from "styled-components";
 
-import { LinkWithTooltip as Link, LinkTarget } from "@docspace/shared/components/link";
+import {
+  LinkWithTooltip as Link,
+  LinkTarget,
+} from "@docspace/shared/components/link";
 import {
   Avatar,
   AvatarRole,

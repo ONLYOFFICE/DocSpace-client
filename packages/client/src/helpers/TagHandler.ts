@@ -94,7 +94,7 @@ class TagHandler {
     this.setTags(newTags);
   }
 
-  deleteTag(id: string) {
+  deleteTag(id: string | number) {
     let newTags = [...this.tags];
     newTags = newTags.filter((tag) => tag.id !== id);
     this.setTags(newTags);

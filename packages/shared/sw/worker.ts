@@ -61,8 +61,28 @@ interface SwUpdateOptions {
   onUpdate?: () => void;
   onInstalled?: () => void;
   onWaiting?: () => void;
-  onError?: (error: Error) => void;
+  onError?: (error: Error, retryCount?: number) => void;
+  onNetworkError?: (error: Error) => void;
+  onRetry?: (attempt: number, maxAttempts: number) => void;
   updateInterval?: number;
+  maxRetries?: number;
+  retryDelay?: number;
+  exponentialBackoff?: boolean;
+}
+
+enum ErrorType {
+  NETWORK = "NETWORK",
+  REGISTRATION = "REGISTRATION",
+  UPDATE = "UPDATE",
+  UNKNOWN = "UNKNOWN",
+}
+
+interface ErrorContext {
+  type: ErrorType;
+  message: string;
+  originalError: Error;
+  timestamp: number;
+  retryCount: number;
 }
 
 export class ServiceWorker {
@@ -70,13 +90,27 @@ export class ServiceWorker {
   private options: SwUpdateOptions;
   private updateTimer?: number;
   private swUrl: string;
+  private retryCount: number = 0;
+  private maxRetries: number;
+  private retryDelay: number;
+  private exponentialBackoff: boolean;
+  private isOnline: boolean = true;
+  private errorHistory: ErrorContext[] = [];
+  private registrationAttempts: number = 0;
 
   constructor(swUrl: string = "/sw.js", options: SwUpdateOptions = {}) {
     this.swUrl = swUrl;
     this.options = {
       updateInterval: 60 * 60 * 1000, // 1 hour
+      maxRetries: 3,
+      retryDelay: 2000, // 2 seconds
+      exponentialBackoff: true,
       ...options,
     };
+    this.maxRetries = this.options.maxRetries!;
+    this.retryDelay = this.options.retryDelay!;
+    this.exponentialBackoff = this.options.exponentialBackoff!;
+    this.setupNetworkListeners();
   }
 
   private ensureWorkbox(): boolean {
@@ -90,6 +124,112 @@ export class ServiceWorker {
     });
     this.setupEventListeners();
     return true;
+  }
+
+  private setupNetworkListeners(): void {
+    if (typeof window === "undefined") return;
+
+    window.addEventListener("online", () => {
+      console.log("[SW] Network connection restored");
+      this.isOnline = true;
+      this.handleNetworkRestore();
+    });
+
+    window.addEventListener("offline", () => {
+      console.log("[SW] Network connection lost");
+      this.isOnline = false;
+    });
+
+    this.isOnline = navigator.onLine;
+  }
+
+  private async handleNetworkRestore(): Promise<void> {
+    if (this.retryCount > 0 && this.retryCount < this.maxRetries) {
+      console.log("[SW] Network restored, attempting to retry registration");
+      await this.delay(1000);
+      await this.register();
+    }
+  }
+
+  private classifyError(error: Error): ErrorType {
+    const message = error.message.toLowerCase();
+
+    if (
+      message.includes("network") ||
+      message.includes("fetch") ||
+      message.includes("offline") ||
+      message.includes("connection")
+    ) {
+      return ErrorType.NETWORK;
+    }
+
+    if (message.includes("registration") || message.includes("register")) {
+      return ErrorType.REGISTRATION;
+    }
+
+    if (message.includes("update")) {
+      return ErrorType.UPDATE;
+    }
+
+    return ErrorType.UNKNOWN;
+  }
+
+  private logError(error: Error, type: ErrorType, retryCount: number): void {
+    const context: ErrorContext = {
+      type,
+      message: error.message,
+      originalError: error,
+      timestamp: Date.now(),
+      retryCount,
+    };
+
+    this.errorHistory.push(context);
+
+    if (this.errorHistory.length > 10) {
+      this.errorHistory.shift();
+    }
+
+    console.error(
+      `[SW Error] Type: ${type}, Retry: ${retryCount}/${this.maxRetries}`,
+      error,
+    );
+  }
+
+  private calculateRetryDelay(attempt: number): number {
+    if (!this.exponentialBackoff) {
+      return this.retryDelay;
+    }
+
+    const exponentialDelay = this.retryDelay * Math.pow(2, attempt);
+    const jitter = Math.random() * 1000;
+    return Math.min(exponentialDelay + jitter, 30000);
+  }
+
+  private delay(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  private shouldRetry(error: Error, retryCount: number): boolean {
+    if (retryCount >= this.maxRetries) {
+      return false;
+    }
+
+    const errorType = this.classifyError(error);
+
+    if (errorType === ErrorType.NETWORK && !this.isOnline) {
+      console.log("[SW] Skipping retry - device is offline");
+      return false;
+    }
+
+    if (errorType === ErrorType.NETWORK || errorType === ErrorType.UPDATE) {
+      return true;
+    }
+
+    if (errorType === ErrorType.REGISTRATION) {
+      return true;
+    }
+
+    return false;
   }
 
   private setupEventListeners(): void {
@@ -180,10 +320,23 @@ export class ServiceWorker {
   private startUpdateTimer(): void {
     if (this.options.updateInterval && this.options.updateInterval > 0) {
       this.updateTimer = window.setInterval(() => {
-        console.log("Checking for service worker updates...");
+        if (!this.isOnline) {
+          console.log("[SW] Skipping update check - device is offline");
+          return;
+        }
+
+        console.log("[SW] Checking for service worker updates...");
         this.wb?.update().catch((error) => {
-          console.error("SW update check failed:", error);
-          this.options.onError?.(error);
+          const errorType = this.classifyError(error);
+          this.logError(error, errorType, 0);
+
+          console.error("[SW] Update check failed:", error);
+
+          if (errorType === ErrorType.UPDATE && this.isOnline) {
+            console.log("[SW] Will retry update check on next interval");
+          }
+
+          this.options.onError?.(error, 0);
         });
       }, this.options.updateInterval);
     }
@@ -215,14 +368,24 @@ export class ServiceWorker {
 
   async register(): Promise<ServiceWorkerRegistration | undefined> {
     if (typeof window === "undefined" || !("serviceWorker" in navigator)) {
-      console.warn("Service worker not supported");
+      console.warn("[SW] Service worker not supported");
       return;
     }
 
+    this.registrationAttempts++;
+
     try {
       if ((window as any).__NEXT_DATA__) {
-        console.info("Skipping service worker on Next.js app page");
+        console.info("[SW] Skipping service worker on Next.js app page");
         return;
+      }
+
+      if (!this.isOnline) {
+        const error = new Error(
+          "Device is offline, cannot register service worker",
+        );
+        this.logError(error, ErrorType.NETWORK, this.retryCount);
+        throw error;
       }
 
       if (!this.ensureWorkbox()) return;
@@ -230,28 +393,81 @@ export class ServiceWorker {
 
       const available = await this.swAvailable();
       if (!available) {
-        console.warn(
-          `Service worker file not found at ${this.swUrl}. Skipping registration.`,
+        const error = new Error(
+          `Service worker file not found at ${this.swUrl}`,
         );
+        this.logError(error, ErrorType.REGISTRATION, this.retryCount);
+        console.warn(`[SW] ${error.message}. Skipping registration.`);
+
+        if (this.shouldRetry(error, this.retryCount)) {
+          return this.retryRegistration(error);
+        }
+
         return;
       }
+
       const registration = await this.wb.register();
-      console.log("Service worker registered successfully:", registration);
+      console.log("[SW] Service worker registered successfully:", registration);
+      console.log(
+        `[SW] Registration succeeded on attempt ${this.registrationAttempts}`,
+      );
+
+      this.retryCount = 0;
+      this.registrationAttempts = 0;
 
       this.startUpdateTimer();
 
       document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "visible") {
-          this.wb?.update().catch(console.error);
+          console.log("[SW] Tab visible, checking for updates...");
+          this.wb?.update().catch((err) => {
+            const errorType = this.classifyError(err);
+            this.logError(err, errorType, 0);
+            console.error("[SW] Update check failed:", err);
+          });
         }
       });
 
       return registration;
     } catch (error) {
-      console.error("Service worker registration failed:", error);
-      this.options.onError?.(error as Error);
-      throw error;
+      const err = error as Error;
+      const errorType = this.classifyError(err);
+      this.logError(err, errorType, this.retryCount);
+
+      console.error(
+        `[SW] Registration failed (attempt ${this.registrationAttempts}):`,
+        err,
+      );
+
+      if (this.shouldRetry(err, this.retryCount)) {
+        return this.retryRegistration(err);
+      }
+
+      this.options.onError?.(err, this.retryCount);
+
+      if (errorType === ErrorType.NETWORK) {
+        this.options.onNetworkError?.(err);
+      }
+
+      throw err;
     }
+  }
+
+  private async retryRegistration(
+    error: Error,
+  ): Promise<ServiceWorkerRegistration | undefined> {
+    this.retryCount++;
+    const delay = this.calculateRetryDelay(this.retryCount);
+
+    console.log(
+      `[SW] Retrying registration (${this.retryCount}/${this.maxRetries}) in ${Math.round(delay)}ms...`,
+    );
+
+    this.options.onRetry?.(this.retryCount, this.maxRetries);
+
+    await this.delay(delay);
+
+    return this.register();
   }
 
   async unregister(): Promise<boolean> {
@@ -274,6 +490,40 @@ export class ServiceWorker {
 
   forceUpdate(): void {
     this.wb?.messageSkipWaiting();
+  }
+
+  getErrorHistory(): ErrorContext[] {
+    return [...this.errorHistory];
+  }
+
+  getHealthStatus(): {
+    isOnline: boolean;
+    retryCount: number;
+    maxRetries: number;
+    registrationAttempts: number;
+    errorCount: number;
+    lastError?: ErrorContext;
+  } {
+    return {
+      isOnline: this.isOnline,
+      retryCount: this.retryCount,
+      maxRetries: this.maxRetries,
+      registrationAttempts: this.registrationAttempts,
+      errorCount: this.errorHistory.length,
+      lastError: this.errorHistory[this.errorHistory.length - 1],
+    };
+  }
+
+  clearErrorHistory(): void {
+    this.errorHistory = [];
+    this.retryCount = 0;
+    this.registrationAttempts = 0;
+  }
+
+  async manualRetry(): Promise<ServiceWorkerRegistration | undefined> {
+    console.log("[SW] Manual retry triggered");
+    this.retryCount = 0;
+    return this.register();
   }
 }
 

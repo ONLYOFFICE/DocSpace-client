@@ -30,7 +30,7 @@ import api from "../api";
 import { TUser } from "../api/people/types";
 import { EmployeeActivationStatus, ThemeKeys } from "../enums";
 import { TI18n } from "../types";
-import { getUserType } from "../utils/common";
+import { getUserType, getStringUserType } from "../utils/common";
 
 class UserStore {
   user: TUser | null = null;
@@ -198,6 +198,10 @@ class UserStore {
 
   get userType() {
     return getUserType(this.user!);
+  }
+
+  get stringUserType() {
+    return getStringUserType(this.user!);
   }
 }
 

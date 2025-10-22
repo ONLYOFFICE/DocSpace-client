@@ -2861,7 +2861,7 @@ class FilesActionStore {
     );
 
     if (roomType === RoomsType.AIRoom) {
-      return this.moveToRoomsPage();
+      return this.moveToAIAgentsPage();
     }
 
     if (this.publicRoomStore.isPublicRoom) {
@@ -2962,7 +2962,6 @@ class FilesActionStore {
           ]?.title) ||
         "",
       isRoot: true,
-      isPublicRoomType: false,
       rootFolderType: this.selectedFolderStore.rootFolderType,
     };
 
@@ -2979,6 +2978,39 @@ class FilesActionStore {
     ) {
       filter.searchArea = RoomSearchArea.Templates;
     }
+
+    if (categoryType === CategoryType.Chat) {
+      this.clientLoadingStore.setIsSectionBodyLoading(true, false);
+    }
+
+    window.DocSpace.navigate(
+      `${path}?${filter.toUrlParams(this.userStore?.user?.id, true)}`,
+      {
+        state,
+        replace: true,
+      },
+    );
+  };
+
+  moveToAIAgentsPage = () => {
+    const categoryType = getCategoryType(window.DocSpace.location);
+
+    const filter = RoomsFilter.getDefault(undefined, RoomSearchArea.AIAgents);
+
+    const path = getCategoryUrl(CategoryType.AIAgents);
+
+    const state = {
+      title:
+        (this.selectedFolderStore?.navigationPath &&
+          this.selectedFolderStore?.navigationPath.length > 0 &&
+          this.selectedFolderStore?.navigationPath[
+            this.selectedFolderStore.navigationPath.length - 1
+          ]?.title) ||
+        "",
+      isRoot: true,
+      isPublicRoomType: false,
+      rootFolderType: this.selectedFolderStore.rootFolderType,
+    };
 
     if (categoryType === CategoryType.Chat) {
       this.clientLoadingStore.setIsSectionBodyLoading(true, false);

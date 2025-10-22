@@ -28,33 +28,130 @@ import { promisify } from "util";
 import { exec as execCallback } from "child_process";
 import { injectManifest } from "workbox-build";
 import * as path from "path";
+import * as fs from "fs";
 
 const exec = promisify(execCallback);
 
-async function buildServiceWorker() {
-  try {
-    console.log("Step 1: Building service worker with Webpack...");
+const PATHS = {
+  scriptDir: __dirname,
+  packageRoot: path.resolve(__dirname, ".."),
+  swTemplate: path.resolve(__dirname, "../sw/template.ts"),
+  swConfig: path.resolve(__dirname, "../sw/config.ts"),
+  webpackConfig: path.resolve(__dirname, "../webpack.sw.config.js"),
+  outputDir: path.resolve(__dirname, "../public"),
+  swTemplateOutput: path.resolve(__dirname, "../public/sw-template.js"),
+  swFinal: path.resolve(__dirname, "../public/sw.js"),
+  globDirectory: path.resolve(__dirname, "../public"),
+} as const;
 
-    // Run webpack to bundle the service worker with Workbox modules
-    const { stdout, stderr } = await exec(
-      "npx webpack --config webpack.sw.config.js",
-      { cwd: path.join(__dirname, "..") },
-    );
+interface PathValidationResult {
+  valid: boolean;
+  missing: string[];
+  errors: string[];
+}
+
+function validatePaths(): PathValidationResult {
+  const result: PathValidationResult = {
+    valid: true,
+    missing: [],
+    errors: [],
+  };
+
+  const requiredFiles = [
+    { path: PATHS.swTemplate, name: "Service Worker template" },
+    { path: PATHS.swConfig, name: "Service Worker config" },
+    { path: PATHS.webpackConfig, name: "Webpack config" },
+  ];
+
+  for (const file of requiredFiles) {
+    if (!fs.existsSync(file.path)) {
+      result.valid = false;
+      result.missing.push(file.name);
+      result.errors.push(`Missing: ${file.name} at ${file.path}`);
+    }
+  }
+
+  if (!fs.existsSync(PATHS.outputDir)) {
+    try {
+      fs.mkdirSync(PATHS.outputDir, { recursive: true });
+    } catch (error) {
+      result.valid = false;
+      result.errors.push(`Failed to create output directory: ${error}`);
+    }
+  }
+
+  return result;
+}
+
+function handleBuildError(stage: string, error: unknown): never {
+  console.error(`\nBuild failed at: ${stage}`);
+
+  if (error instanceof Error) {
+    console.error(`Error: ${error.message}`);
+    if (error.stack) console.error(error.stack);
+  } else {
+    console.error(error);
+  }
+
+  console.error(`\nTroubleshooting:`);
+  if (stage === "Validation") {
+    console.error(`- Check that all source files exist`);
+    console.error(`- Verify project structure`);
+  } else if (stage === "Webpack Build") {
+    console.error(`- Check webpack.sw.config.js`);
+    console.error(`- Run: pnpm tsc --noEmit`);
+  } else if (stage === "Manifest Injection") {
+    console.error(`- Verify webpack output exists`);
+    console.error(`- Check glob directory: ${PATHS.globDirectory}`);
+  }
+
+  process.exit(1);
+}
+
+async function buildServiceWorker() {
+  const buildStartTime = Date.now();
+
+  console.log("\nBuilding Service Worker...\n");
+
+  try {
+    const validation = validatePaths();
+
+    if (!validation.valid) {
+      console.error("Validation failed:");
+      validation.errors.forEach((error) => console.error(`  ${error}`));
+      handleBuildError("Validation", new Error("Missing required files"));
+    }
+
+    const webpackCommand = `npx webpack --config ${path.basename(PATHS.webpackConfig)}`;
+    const { stdout, stderr } = await exec(webpackCommand, {
+      cwd: PATHS.packageRoot,
+      env: { ...process.env, NODE_ENV: process.env.NODE_ENV || "production" },
+    });
 
     if (stdout) console.log(stdout);
-    if (stderr && !stderr.includes("npm warn")) console.error(stderr);
+    if (
+      stderr &&
+      !stderr.includes("npm warn") &&
+      !stderr.includes("deprecated")
+    ) {
+      console.warn("Webpack warnings:", stderr);
+    }
 
-    console.log("Step 2: Injecting precache manifest with workbox-build...");
+    if (!fs.existsSync(PATHS.swTemplateOutput)) {
+      handleBuildError("Webpack Build", new Error("Output file not found"));
+    }
 
-    // Inject the precache manifest into the bundled service worker
-    const { count, size, warnings } = await injectManifest({
-      swSrc: path.resolve(__dirname, "../public/sw-template.js"),
-      swDest: path.resolve(__dirname, "../public/sw.js"),
-      globDirectory: path.resolve(__dirname, "../public"),
+    const webpackStats = fs.statSync(PATHS.swTemplateOutput);
+    console.log(`Webpack: ${(webpackStats.size / 1024).toFixed(2)} KB\n`);
+
+    const manifestResult = await injectManifest({
+      swSrc: PATHS.swTemplateOutput,
+      swDest: PATHS.swFinal,
+      globDirectory: PATHS.globDirectory,
       globPatterns: [
         "**/*.{js,css,html,png,jpg,jpeg,gif,svg,woff,woff2,ttf,eot,json}",
       ],
-      maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5 MB
+      maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
       globIgnores: [
         "**/*.map",
         "**/manifest",
@@ -65,21 +162,36 @@ async function buildServiceWorker() {
       ],
     });
 
-    console.log(`Service worker built successfully!`);
-    console.log(
-      `Precached ${count} files, totaling ${(size / 1024 / 1024).toFixed(3)} MB.`,
-    );
+    const { count, size, warnings } = manifestResult;
 
-    if (warnings.length > 0) {
-      console.warn("Warnings:");
-      warnings.forEach((warning) => console.warn(`   ${warning}`));
+    if (warnings && warnings.length > 0) {
+      console.warn("Workbox warnings:");
+      warnings.forEach((warning) => console.warn(`  - ${warning}`));
     }
 
-    console.log(`Final service worker: packages/shared/public/sw.js`);
+    if (!fs.existsSync(PATHS.swFinal)) {
+      handleBuildError(
+        "Manifest Injection",
+        new Error("Final output not found"),
+      );
+    }
+
+    const finalStats = fs.statSync(PATHS.swFinal);
+    const buildDuration = ((Date.now() - buildStartTime) / 1000).toFixed(2);
+
+    console.log(`Service Worker: ${(finalStats.size / 1024).toFixed(2)} KB`);
+    console.log(
+      `Precached: ${count} files (${(size / 1024 / 1024).toFixed(3)} MB)`,
+    );
+    console.log(`Duration: ${buildDuration}s\n`);
   } catch (error) {
-    console.error("Error building service worker:", error);
-    process.exit(1);
+    handleBuildError("Build Error", error);
   }
 }
 
-buildServiceWorker();
+buildServiceWorker()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error("\nUnexpected error:", error);
+    process.exit(1);
+  });

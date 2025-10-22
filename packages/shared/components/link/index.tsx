@@ -30,6 +30,7 @@ import { Text } from "../text";
 import { LinkProps } from "./Link.types";
 import { LinkType, LinkTarget } from "./Link.enums";
 import styles from "./Link.module.scss";
+import { withTooltip } from "../tooltip/withTooltip";
 
 const Link: React.FC<LinkProps> = ({
   className,
@@ -91,4 +92,6 @@ const Link: React.FC<LinkProps> = ({
   );
 };
 
-export { LinkType, LinkTarget, Link };
+const LinkWithTooltip = withTooltip(Link);
+
+export { LinkType, LinkTarget, Link, LinkWithTooltip };

@@ -28,6 +28,7 @@ import React from "react";
 import classNames from "classnames";
 import styles from "./Text.module.scss";
 import type { TextProps } from "./Text.types";
+import { withTooltip } from "../tooltip/withTooltip";
 
 const TextPure = ({
   ref,
@@ -113,4 +114,6 @@ TextPure.displayName = "TextPure";
 
 const Text = React.memo(TextPure);
 
-export { Text };
+const TextWithTooltip = withTooltip(Text);
+
+export { Text, TextWithTooltip };

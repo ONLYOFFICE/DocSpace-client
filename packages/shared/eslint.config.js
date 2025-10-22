@@ -143,6 +143,11 @@ module.exports = [
       "coverage/**",
       "storybook-static/**",
       "components/scrollbar/custom-scrollbar/**",
+      "public/**/*.js",
+      "scripts/**/*.ts",
+      "scripts/**/*.js",
+      "webpack.*.js",
+      "*.config.js",
     ],
   },
 ];

@@ -303,7 +303,8 @@ export class ServiceWorker {
       </div>
     `;
 
-    (notification as any).updateSw = () => {
+    // Add update handler to notification element
+    (notification as HTMLElement & { updateSw?: () => void }).updateSw = () => {
       this.wb?.messageSkipWaiting();
       notification.remove();
     };
@@ -356,12 +357,12 @@ export class ServiceWorker {
       let res: Response | undefined;
       try {
         res = await fetch(url, { method: "HEAD", cache: "no-store" });
-      } catch (e) {
+      } catch {
         res = await fetch(url, { method: "GET", cache: "no-store" });
       }
       return !!res && res.ok;
-    } catch (e) {
-      console.warn("SW availability check failed:", e);
+    } catch (error) {
+      console.warn("SW availability check failed:", error);
       return false;
     }
   }
@@ -375,7 +376,7 @@ export class ServiceWorker {
     this.registrationAttempts++;
 
     try {
-      if ((window as any).__NEXT_DATA__) {
+      if ((window as Window & { __NEXT_DATA__?: unknown }).__NEXT_DATA__) {
         console.info("[SW] Skipping service worker on Next.js app page");
         return;
       }
@@ -400,7 +401,7 @@ export class ServiceWorker {
         console.warn(`[SW] ${error.message}. Skipping registration.`);
 
         if (this.shouldRetry(error, this.retryCount)) {
-          return this.retryRegistration(error);
+          return this.retryRegistration();
         }
 
         return;
@@ -440,7 +441,7 @@ export class ServiceWorker {
       );
 
       if (this.shouldRetry(err, this.retryCount)) {
-        return this.retryRegistration(err);
+        return this.retryRegistration();
       }
 
       this.options.onError?.(err, this.retryCount);
@@ -453,9 +454,9 @@ export class ServiceWorker {
     }
   }
 
-  private async retryRegistration(
-    error: Error,
-  ): Promise<ServiceWorkerRegistration | undefined> {
+  private async retryRegistration(): Promise<
+    ServiceWorkerRegistration | undefined
+  > {
     this.retryCount++;
     const delay = this.calculateRetryDelay(this.retryCount);
 

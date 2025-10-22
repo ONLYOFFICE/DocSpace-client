@@ -49,6 +49,7 @@ import {
   TAgentParams,
 } from "@docspace/shared/utils/aiAgents";
 import { TAgent, TAgentLogo } from "@docspace/shared/api/ai/types";
+import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "@docspace/shared/constants";
@@ -80,6 +81,8 @@ class CreateEditRoomStore {
 
   settingsStore: Nullable<SettingsStore> = null;
 
+  currentQuotaStore: Nullable<CurrentQuotasStore> = null;
+
   clientLoadingStore: Nullable<ClientLoadingStore> = null;
 
   dialogsStore: Nullable<DialogsStore> = null;
@@ -101,6 +104,7 @@ class CreateEditRoomStore {
     selectedFolderStore: SelectedFolderStore,
     tagsStore: TagsStore,
     settingsStore: SettingsStore,
+    currentQuotaStore: CurrentQuotasStore,
     clientLoadingStore: ClientLoadingStore,
     dialogsStore: DialogsStore,
     avatarEditorDialogStore: AvatarEditorDialogStore,
@@ -112,6 +116,7 @@ class CreateEditRoomStore {
     this.selectedFolderStore = selectedFolderStore;
     this.filesActionsStore = filesActionsStore;
     this.settingsStore = settingsStore;
+    this.currentQuotaStore = currentQuotaStore;
     this.clientLoadingStore = clientLoadingStore;
     this.dialogsStore = dialogsStore;
     this.avatarEditorDialogStore = avatarEditorDialogStore;
@@ -150,13 +155,24 @@ class CreateEditRoomStore {
     newParams: TAgentParams,
     agent: TAgent,
   ) => {
+    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
     const { cover, clearCoverProps } = this.dialogsStore!;
     const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore!;
     const { changeRoomOwner } = this.filesActionsStore!;
 
-    const { title, icon, agentId, prompt, providerId, modelId, agentOwner } =
-      newParams;
+    const {
+      title,
+      icon,
+      agentId,
+      prompt,
+      providerId,
+      modelId,
+      agentOwner,
+      quota,
+    } = newParams;
 
+    const quotaLimit = quota || agent.quotaLimit;
+    const isQuotaChanged = quotaLimit !== agent.quotaLimit;
     const isTitleChanged = !isEqual(title, agent.title);
     const isOwnerChanged = agentOwner && agentOwner.id !== agent.createdBy.id;
 
@@ -173,6 +189,11 @@ class CreateEditRoomStore {
       ...(isTagsChanged && {
         tags,
       }),
+
+      ...(isDefaultRoomsQuotaSet &&
+        isQuotaChanged && {
+          quota: +quotaLimit!,
+        }),
 
       ...((cover as { cover: string; color: string } | null) && {
         cover: (cover as { cover: string; color: string } | null)?.cover,
@@ -275,10 +296,13 @@ class CreateEditRoomStore {
   onCreateAgent = async (t: TFunction, successToast: Element | null = null) => {
     const agentParams = this.agentParams!;
 
+    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
     const { cover, clearCoverProps } = this.dialogsStore!;
 
-    const { tags, title, icon, logo, prompt, providerId, modelId } =
+    const { tags, title, icon, logo, prompt, providerId, modelId, quota } =
       agentParams;
+
+    const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;
 
     const tagsToAddList = tags.map((tag) => tag.name);
 
@@ -296,6 +320,11 @@ class CreateEditRoomStore {
 
     const createAgentData = {
       title: title || t("Common:NewAgent"),
+
+      ...(quotaLimit && {
+        quota: +quotaLimit,
+      }),
+
       ...logoCover,
 
       ...(tagsToAddList.length && {

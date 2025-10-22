@@ -215,6 +215,7 @@ export type TCreateAgentData = {
   tags?: string[];
   logo?: TAgentLogo;
   chatSettings?: TChatSettings;
+  quota?: number;
 };
 
 export type TGetAgents = {

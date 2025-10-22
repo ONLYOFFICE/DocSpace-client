@@ -2437,6 +2437,21 @@ class FilesStore {
     return rooms;
   };
 
+  setCustomAIAgentQuota = async (
+    itemsIDs,
+    quotaSize,
+    inAgent = false,
+    filter = null,
+  ) => {
+    const agents = await api.rooms.setCustomRoomQuota(itemsIDs, +quotaSize);
+
+    if (!inAgent) {
+      await this.fetchAgents(null, filter, false, false);
+    }
+
+    return agents;
+  };
+
   resetRoomQuota = async (itemsIDs, inRoom = false, filter = null) => {
     const rooms = await api.rooms.resetRoomQuota(itemsIDs);
 
@@ -2451,6 +2466,16 @@ class FilesStore {
     }
 
     return rooms;
+  };
+
+  resetAIAgentQuota = async (itemsIDs, inAgent = false, filter = null) => {
+    const agents = await api.rooms.resetRoomQuota(itemsIDs);
+
+    if (!inAgent) {
+      await this.fetchAgents(null, filter, false, false);
+    }
+
+    return agents;
   };
 
   setAlreadyFetchingRooms = (alreadyFetchingRooms) => {

@@ -2149,6 +2149,26 @@ class FilesActionStore {
     window.dispatchEvent(event);
   };
 
+  changeAIAgentQuota = (items, successCallback, abortCallback) => {
+    const event = new Event(Events.CHANGE_QUOTA);
+
+    const itemsIDs = items.map((item) => {
+      return item?.id ? item.id : item;
+    });
+
+    const payload = {
+      visible: true,
+      type: "agent",
+      ids: itemsIDs,
+      successCallback,
+      abortCallback,
+    };
+
+    event.payload = payload;
+
+    window.dispatchEvent(event);
+  };
+
   disableRoomQuota = async (items, t) => {
     const { setCustomRoomQuota } = this.filesStore;
 

@@ -204,7 +204,7 @@ const AIAgentsRowDataComponent = (props: AIAgentsRowDataComponentProps) => {
           >
             <SpaceQuota
               item={item}
-              type="room"
+              type="agent"
               isReadOnly={!item?.security?.EditRoom}
             />
             {lastColumn === "Storage" ? quickButtonsComponentNode : null}

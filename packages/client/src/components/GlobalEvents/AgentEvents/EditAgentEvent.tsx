@@ -33,6 +33,7 @@ import {
   getFetchedAgentParams,
   TAgentParams,
 } from "@docspace/shared/utils/aiAgents";
+import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 
 import EditAgentDialog from "SRC_DIR/components/dialogs/CreateEditAgentDialog/EditAgentDialog";
 import TagsStore from "SRC_DIR/store/TagsStore";
@@ -46,6 +47,7 @@ type EditAgentEventProps = {
   fetchTags: TagsStore["fetchTags"];
   cover: ICover;
   onSaveEditAgent: CreateEditAgentStore["onSaveEditAgent"];
+  isDefaultAgentsQuotaSet: CurrentQuotasStore["isDefaultRoomsQuotaSet"];
 };
 
 const EditAgentEvent = ({
@@ -55,6 +57,7 @@ const EditAgentEvent = ({
   fetchTags,
   cover,
   onSaveEditAgent,
+  isDefaultAgentsQuotaSet,
 }: EditAgentEventProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -62,7 +65,10 @@ const EditAgentEvent = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isInitLoading, setIsInitLoading] = useState(false);
 
-  const fetchedAgentParams = getFetchedAgentParams(item);
+  const fetchedAgentParams = getFetchedAgentParams(
+    item,
+    isDefaultAgentsQuotaSet,
+  );
 
   const onSave = async (agentParams: TAgentParams) => {
     setIsLoading(true);
@@ -102,7 +108,14 @@ const EditAgentEvent = ({
 };
 
 export default inject(
-  ({ tagsStore, dialogsStore, createEditAgentStore }: TStore) => {
+  ({
+    tagsStore,
+    dialogsStore,
+    createEditAgentStore,
+    currentQuotaStore,
+  }: TStore) => {
+    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+
     const { fetchTags } = tagsStore;
 
     const { cover } = dialogsStore;
@@ -110,6 +123,8 @@ export default inject(
     const { onSaveEditAgent } = createEditAgentStore;
 
     return {
+      isDefaultAgentsQuotaSet: isDefaultRoomsQuotaSet,
+
       fetchTags,
 
       cover,

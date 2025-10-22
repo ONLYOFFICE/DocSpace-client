@@ -104,7 +104,7 @@ const EditAgentDialog = ({
         (currentParams.icon.uploadedFile === null ||
           currentParams.icon.uploadedFile === undefined)) ||
         prevParams.icon.uploadedFile === currentParams.icon.uploadedFile) &&
-      // prevParams.quota === currentParams.quota &&
+      prevParams.quota === currentParams.quota &&
       prevParams.modelId === currentParams.modelId &&
       prevParams.providerId === currentParams.providerId &&
       prevParams.prompt === currentParams.prompt &&

@@ -57,6 +57,8 @@ import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 import { TLogo } from "@docspace/shared/api/rooms/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import ChangeRoomOwner from "SRC_DIR/components/ChangeRoomOwner";
+import RoomQuota from "SRC_DIR/components/RoomQuota";
+import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 
 const StyledSetAgentParams = styled.div<{ disableImageRescaling?: boolean }>`
   display: flex;
@@ -154,6 +156,7 @@ type setAgentParamsProps = {
   cover?: Nullable<TClientCover>;
   covers?: Nullable<TServerCover[]>;
   setCover?: DialogsStore["setCover"];
+  isDefaultAgentsQuotaSet?: CurrentQuotasStore["isDefaultRoomsQuotaSet"];
 };
 
 const setAgentParams = ({
@@ -183,6 +186,7 @@ const setAgentParams = ({
   covers,
   setCover,
   onOwnerChange,
+  isDefaultAgentsQuotaSet,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
     "CreateEditRoomDialog",
@@ -469,6 +473,15 @@ const setAgentParams = ({
       {/* <KnowledgeSettings /> */}
       <MCPSettings setAgentParams={setAgentParams} agentParams={agentParams} />
 
+      {isDefaultAgentsQuotaSet ? (
+        <RoomQuota
+          setRoomParams={setAgentParams}
+          roomParams={agentParams}
+          isEdit={isEdit}
+          isLoading={isDisabled}
+        />
+      ) : null}
+
       <div>
         {avatarEditorDialogVisible ? (
           <AvatarEditorDialog
@@ -499,7 +512,9 @@ export default inject(
     filesStore,
     infoPanelStore,
     avatarEditorDialogStore,
+    currentQuotaStore,
   }: TStore) => {
+    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
     const { folderFormValidation, maxImageUploadSize } = settingsStore;
 
     const { bufferSelection } = filesStore;
@@ -539,6 +554,7 @@ export default inject(
       cover,
       covers,
       setCover,
+      isDefaultAgentsQuotaSet: isDefaultRoomsQuotaSet,
     };
   },
 )(observer(setAgentParams));

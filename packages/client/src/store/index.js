@@ -352,6 +352,7 @@ const createEditAgentStore = new CreateEditAgentStore(
   selectedFolderStore,
   tagsStore,
   settingsStore,
+  currentQuotaStore,
   clientLoadingStore,
   dialogsStore,
   avatarEditorDialogStore,

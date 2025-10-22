@@ -30,13 +30,14 @@ import { inject, observer } from "mobx-react";
 
 import { QuotaForm } from "@docspace/shared/components/quota-form";
 import { TRoomParams } from "@docspace/shared/utils/rooms";
+import { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
 type RoomQuotaProps = {
   setRoomParams: (roomParams: any) => void;
-  roomParams: TRoomParams;
+  roomParams: TRoomParams | TAgentParams;
   defaultRoomsQuota?: number;
-  isEdit: boolean;
-  isTemplate: boolean;
+  isEdit?: boolean;
+  isTemplate?: boolean;
   isLoading: boolean;
 };
 
@@ -65,7 +66,11 @@ const RoomQuota = ({
       initialSize={
         isEdit || isTemplate ? defaultValue.current : defaultRoomsQuota!
       }
-      isDisabled={isLoading || roomParams.storageLocation.isThirdparty}
+      isDisabled={
+        isLoading ||
+        ("storageLocation" in roomParams &&
+          roomParams.storageLocation.isThirdparty)
+      }
       isLoading={false}
       isError={false}
     />

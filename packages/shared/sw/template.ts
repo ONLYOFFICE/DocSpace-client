@@ -36,11 +36,11 @@ import { CacheableResponsePlugin } from "workbox-cacheable-response";
 import { SW_CONFIG } from "./config";
 
 interface ExtendableEvent extends Event {
-  waitUntil(fn: Promise<any>): void;
+  waitUntil(fn: Promise<unknown>): void;
 }
 
 interface ExtendableMessageEvent extends ExtendableEvent {
-  data: any;
+  data: unknown;
 }
 
 interface Clients {
@@ -58,7 +58,7 @@ interface ServiceWorkerGlobalScope {
   ): void;
   skipWaiting(): Promise<void>;
   clients: Clients;
-  __WB_MANIFEST: any;
+  __WB_MANIFEST: Array<{ url: string; revision: string | null }>;
 }
 
 declare const self: ServiceWorkerGlobalScope;
@@ -165,8 +165,9 @@ self.addEventListener("activate", (event: ExtendableEvent) => {
   );
 });
 
-self.addEventListener("message", (event) => {
-  if (event.data && event.data.type === "SKIP_WAITING") {
+self.addEventListener("message", (event: ExtendableMessageEvent) => {
+  const data = event.data as { type?: string };
+  if (data && data.type === "SKIP_WAITING") {
     if (SW_CONFIG.debug) {
       console.log("[SW] Skipping waiting phase");
     }

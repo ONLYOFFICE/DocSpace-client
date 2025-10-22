@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "module": "ESNext",
+    "target": "ES2020",
+    "lib": ["ES2020", "WebWorker"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": false
+  },
+  "include": ["sw/template.ts", "sw/config.ts"],
+  "exclude": ["node_modules", "sw/worker.ts", "sw/helper.ts"]
+}

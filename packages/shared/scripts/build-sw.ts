@@ -24,14 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { promisify } from "util";
+import { exec as execCallback } from "child_process";
 import { injectManifest } from "workbox-build";
-import workboxConfig from "../workbox.config";
+import * as path from "path";
+
+const exec = promisify(execCallback);
 
 async function buildServiceWorker() {
   try {
-    console.log("Building service worker with Workbox...");
+    console.log("Step 1: Building service worker with Webpack...");
 
-    const { count, size, warnings } = await injectManifest(workboxConfig);
+    // Run webpack to bundle the service worker with Workbox modules
+    const { stdout, stderr } = await exec(
+      "npx webpack --config webpack.sw.config.js",
+      { cwd: path.join(__dirname, "..") },
+    );
+
+    if (stdout) console.log(stdout);
+    if (stderr && !stderr.includes("npm warn")) console.error(stderr);
+
+    console.log("Step 2: Injecting precache manifest with workbox-build...");
+
+    // Inject the precache manifest into the bundled service worker
+    const { count, size, warnings } = await injectManifest({
+      swSrc: path.resolve(__dirname, "../public/sw-template.js"),
+      swDest: path.resolve(__dirname, "../public/sw.js"),
+      globDirectory: path.resolve(__dirname, "../public"),
+      globPatterns: [
+        "**/*.{js,css,html,png,jpg,jpeg,gif,svg,woff,woff2,ttf,eot,json}",
+      ],
+      maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5 MB
+      globIgnores: [
+        "**/*.map",
+        "**/manifest",
+        "**/.htaccess",
+        "**/service-worker.js",
+        "**/sw.js",
+        "**/sw-template.js",
+      ],
+    });
 
     console.log(`Service worker built successfully!`);
     console.log(
@@ -43,7 +75,7 @@ async function buildServiceWorker() {
       warnings.forEach((warning) => console.warn(`   ${warning}`));
     }
 
-    console.log(`Service worker generated at: ${workboxConfig.swDest}`);
+    console.log(`Final service worker: packages/shared/public/sw.js`);
   } catch (error) {
     console.error("Error building service worker:", error);
     process.exit(1);

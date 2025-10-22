@@ -28,6 +28,7 @@ import React, { useMemo } from "react";
 import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/utils";
 import { FolderType } from "@docspace/shared/enums";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import {
   isRoom as isRoomUtil,
   isFolder as isFolderUtil,
@@ -86,6 +87,7 @@ const InfoPanelBodyGeneral = ({
   const isFolder = selection && "isFolder" in selection && !!selection.isFolder;
 
   const isRoot = isFolder && selection?.id === selection?.rootFolderId;
+  const id = !Array.isArray(selection) ? selection?.id : null;
 
   const isLockedSharedRoom = isRoom && isLockedSharedRoomUtil(selection);
 
@@ -116,11 +118,15 @@ const InfoPanelBodyGeneral = ({
     }
   }, [fileView, selection, isTemplatesRoom]);
 
-  React.useEffect(() => {
-    if (!selection) return;
+  const isExpiredLink = useEventCallback(() =>
+    checkIsExpiredLinkAsync(selection),
+  );
 
-    checkIsExpiredLinkAsync(selection);
-  }, [selection]);
+  React.useEffect(() => {
+    if (!id) return;
+
+    isExpiredLink();
+  }, [id, isExpiredLink]);
 
   const getView = () => {
     if (isUsers || isGuests) return <Users isGuests={isGuests} />;

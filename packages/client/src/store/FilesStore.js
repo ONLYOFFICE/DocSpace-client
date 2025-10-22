@@ -4531,13 +4531,15 @@ class FilesStore {
       isArchiveFolder,
       isTemplatesFolder,
       isRecentFolder,
+      isAIAgentsFolder,
     } = this.treeFoldersStore;
 
     // Only 100 files on recent page should be shown
     if (isRecentFolder) return false;
 
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
-    const filterTotal = isRooms ? this.roomsFilter.total : this.filter.total;
+    const filterTotal =
+      isRooms || isAIAgentsFolder ? this.roomsFilter.total : this.filter.total;
 
     if (this.clientLoadingStore.isLoading) return false;
     return this.filesList.length < filterTotal;
@@ -4555,21 +4557,27 @@ class FilesStore {
     )
       return;
 
-    const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isAIAgentsFolder } =
+      this.treeFoldersStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     this.setFilesIsLoading(true);
     // console.log("fetchMoreFiles");
 
-    const newFilter = isRooms ? this.roomsFilter.clone() : this.filter.clone();
+    const newFilter =
+      isRooms || isAIAgentsFolder
+        ? this.roomsFilter.clone()
+        : this.filter.clone();
     newFilter.page += 1;
-    if (isRooms) this.setRoomsFilter(newFilter);
+    if (isRooms || isAIAgentsFolder) this.setRoomsFilter(newFilter);
     else this.setFilter(newFilter);
 
     const newFilesData = isRooms
       ? await api.rooms.getRooms(newFilter)
-      : await api.files.getFolder(newFilter.folder, newFilter);
+      : isAIAgentsFolder
+        ? await api.ai.getAIAgents(newFilter)
+        : await api.files.getFolder(newFilter.folder, newFilter);
 
     const newFiles = [...this.files, ...newFilesData.files].filter(
       (x, index, self) => index === self.findIndex((i) => i.id === x.id),

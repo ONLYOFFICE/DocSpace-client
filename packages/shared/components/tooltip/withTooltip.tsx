@@ -27,6 +27,7 @@
 import React, { ComponentType, ReactNode } from "react";
 import { Tooltip } from "./index";
 import type { TTooltipPlace } from "./Tooltip.types";
+import { DEFAULT_DELAY_SHOW } from "./Tooltip.constants";
 
 interface WithTooltipProps {
   title?: string;
@@ -64,6 +65,7 @@ export function withTooltip<T extends object>(
             id={uniqueId}
             place={tooltipPlace}
             getContent={() => content}
+            delayShow={DEFAULT_DELAY_SHOW}
           />
         </>
       );

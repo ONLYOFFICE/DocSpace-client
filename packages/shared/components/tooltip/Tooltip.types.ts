@@ -63,6 +63,7 @@ export type TooltipProps = Pick<
   | "noArrow"
   | "opacity"
   | "imperativeModeOnly"
+  | "delayShow"
 > & {
   /** Sets a callback function that generates the tip content dynamically */
   getContent?: ({

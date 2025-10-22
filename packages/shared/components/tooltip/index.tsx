@@ -71,6 +71,7 @@ const Tooltip = ({
   noUserSelect,
   dataTestId,
   tooltipStyle,
+  delayShow,
   ...rest
 }: TooltipProps) => {
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -121,6 +122,7 @@ const Tooltip = ({
           imperativeModeOnly={imperativeModeOnly}
           className="__react_component_tooltip"
           globalCloseEvents={globalCloseEvents}
+          delayShow={delayShow}
           middlewares={[
             offset(rest.offset ?? DEFAULT_OFFSET),
             flip({

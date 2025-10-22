@@ -78,7 +78,7 @@ const InstructionsSettings = ({
         <Textarea
           value={value}
           onChange={handleChange}
-          heightTextArea={72}
+          heightTextArea={144}
           placeholder={t("InstructionsPlaceholder")}
         />
       </div>

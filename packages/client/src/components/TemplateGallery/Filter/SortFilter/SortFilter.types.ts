@@ -26,7 +26,6 @@
 
 import type OformsStore from "../../../../store/OformsStore";
 import type OformsFilter from "@docspace/shared/api/oforms/filter";
-import type { TSortOrder } from "@docspace/shared/types";
 import type { TFunction } from "i18next";
 
 export interface InjectedProps {
@@ -36,7 +35,7 @@ export interface InjectedProps {
 export interface SortFilterProps {
   t: TFunction;
   oformsFilter: OformsFilter;
-  sortOforms: (sortBy: string, sortOrder: TSortOrder) => void;
+  sortOforms: (sortBy: string, sortOrder: "asc" | "desc") => void;
 }
 
 export interface SortData {

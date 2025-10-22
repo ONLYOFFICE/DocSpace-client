@@ -391,7 +391,6 @@
   "FoldersAndFilesWillBeCopied": "Les dossiers et les fichiers seront copiés dans le dossier de destination.",
   "ForcePathStyle": "Force le style de chemin",
   "Form": "Formulaire",
-  "FormAuthorizeToast": "Si vous avez un compte dans ce {{productName}}, nous vous recommandons de vous connecter afin que les formulaires remplis soient enregistrés sous votre compte.",
   "FormDataCollection": "Collecte de données de formulaires",
   "FormDataCollectionDescription": "Collectez les copies des formulaires remplis et les données qu'ils contiennent dans un fichier XLSX pour analyser les réponses dans les salles de remplissage de formulaires.",
   "FormFilingRoomInfo": "Téléchargez des formulaires PDF dans la salle. Invitez les membres et les invités à remplir un formulaire PDF. Examinez les formulaires remplis et analysez les données collectées automatiquement dans une feuille de calcul.",

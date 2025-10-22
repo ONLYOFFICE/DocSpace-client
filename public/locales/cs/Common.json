@@ -391,7 +391,6 @@
   "FoldersAndFilesWillBeCopied": "V cíli budou zkopírovány složky a soubory",
   "ForcePathStyle": "Vynutit styl cesty",
   "Form": "Formulář",
-  "FormAuthorizeToast": "Pokud máte účet v tomto {{productName}}, doporučujeme se přihlásit, aby se vyplněné formuláře zaznamenávaly pod vaším účtem.",
   "FormDataCollection": "Sběr dat formulářů",
   "FormDataCollectionDescription": "Shromážděte vyplněné kopie formulářů a data z nich do souboru XLSX pro analýzu odpovědí v místnostech pro vyplňování formulářů.",
   "FormFilingRoomInfo": "Nahrajte PDF formuláře do místnosti. Vyzvěte členy a hosty, k vyplnění PDF formuláře. Prohlédněte si vyplněné formuláře a analyzujte automaticky shromážděná data v tabulce.",

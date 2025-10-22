@@ -391,7 +391,6 @@
   "FoldersAndFilesWillBeCopied": "Klasörler ve dosyalar hedefe kopyalanacak",
   "ForcePathStyle": "Zorla Yol Stili",
   "Form": "Form",
-  "FormAuthorizeToast": "Bu {{productName}} üzerinde bir hesabınız bulunuyorsa, doldurulan formların hesabınız altında kaydedilebilmesi için oturum açmanızı önermekteyiz.",
   "FormDataCollection": "Form verisi toplama",
   "FormDataCollectionDescription": "Form Doldurma odalarındaki yanıtları analiz etmek için doldurulan form kopyalarını ve verilerini XLSX'te toplayın.",
   "FormFilingRoomInfo": "PDF formlarını odaya yükleyin. Üyeleri ve misafirleri PDF formu doldurmaya davet edin. Doldurulan formları inceleyin ve bir elektronik tabloda otomatik olarak toplanan verileri analiz edin.",

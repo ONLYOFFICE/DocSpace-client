@@ -59,7 +59,7 @@
     "typescript-eslint": "^8.15.0",
     "@aws-sdk/client-cloudwatch-logs": "3.816.0",
     "@babel/core": "7.25.8",
-    "@playwright/test": "1.48.0",
+    "@playwright/test": "1.56.1",
     "@svgr/webpack": "8.1.0",
     "@types/lodash": "4.17.10",
     "@types/node": "22.7.5",

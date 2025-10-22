@@ -30,7 +30,7 @@ import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
-import { Text } from "@docspace/shared/components/text";
+import { TextWithTooltip as Text } from "@docspace/shared/components/text";
 import { globalColors } from "@docspace/shared/themes";
 
 import PluginSettingsIconUrl from "PUBLIC_DIR/images/plugin.settings.react.svg?url";

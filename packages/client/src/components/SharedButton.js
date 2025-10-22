@@ -27,7 +27,7 @@
 import CatalogShareSmallReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.share.small.react.svg?url";
 import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url";
 import React from "react";
-import { Text } from "@docspace/shared/components/text";
+import { TextWithTooltip as Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
 import { inject, observer } from "mobx-react";

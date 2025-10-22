@@ -26,7 +26,7 @@
 
 import React from "react";
 
-import { Text } from "@docspace/shared/components/text";
+import { TextWithTooltip as Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
 
 import { StyledInputGroup } from "../ClientForm.styled";

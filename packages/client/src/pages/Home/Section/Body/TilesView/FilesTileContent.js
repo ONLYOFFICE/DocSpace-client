@@ -29,8 +29,8 @@ import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import { getRoomTypeTitleTranslation } from "@docspace/shared/components/room-type/RoomType.utils";
 
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+import { LinkWithTooltip as Link } from "@docspace/shared/components/link";
+import { TextWithTooltip as Text } from "@docspace/shared/components/text";
 import { createPluginFileHandlers } from "@docspace/shared/utils/plugin-file-utils";
 
 import { DeviceType } from "@docspace/shared/enums";

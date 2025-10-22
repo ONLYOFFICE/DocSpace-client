@@ -36,10 +36,10 @@ import Filter from "@docspace/shared/api/people/filter";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Avatar } from "@docspace/shared/components/avatar";
-import { Text } from "@docspace/shared/components/text";
+import { TextWithTooltip as Text } from "@docspace/shared/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import { Button } from "@docspace/shared/components/button";
-import { Link } from "@docspace/shared/components/link";
+import { LinkWithTooltip as Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
@@ -179,10 +179,20 @@ const ChangePortalOwnerDialog = ({
         </StyledOwnerInfo>
 
         <StyledPeopleSelectorInfo>
-          <Text className="new-owner" title={t("NewPortalOwner")}>
+          <Text
+            className="new-owner"
+            title={t("NewPortalOwner", {
+              productName: t("Common:ProductName"),
+            })}
+          >
             {t("NewPortalOwner", { productName: t("Common:ProductName") })}
           </Text>
-          <Text className="description" title={t("ChangeInstruction")}>
+          <Text
+            className="description"
+            title={t("ChangeInstruction", {
+              productName: t("Common:ProductName"),
+            })}
+          >
             {t("ChangeInstruction", { productName: t("Common:ProductName") })}
           </Text>
         </StyledPeopleSelectorInfo>
@@ -223,7 +233,12 @@ const ChangePortalOwnerDialog = ({
         )}
 
         <StyledAvailableList>
-          <Text className="list-header" title={t("PortalOwnerCan")}>
+          <Text
+            className="list-header"
+            title={t("PortalOwnerCan", {
+              productName: t("Common:ProductName"),
+            })}
+          >
             {t("PortalOwnerCan", { productName: t("Common:ProductName") })}
           </Text>
 

@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 import { TableRow, TableCell } from "@docspace/shared/components/table";
-import { Text } from "@docspace/shared/components/text";
+import { TextWithTooltip as Text } from "@docspace/shared/components/text";
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";

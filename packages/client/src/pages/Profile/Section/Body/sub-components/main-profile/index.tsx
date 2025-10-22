@@ -36,8 +36,8 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkTarget } from "@docspace/shared/components/link";
+import { TextWithTooltip as Text } from "@docspace/shared/components/text";
+import { LinkWithTooltip as Link, LinkTarget } from "@docspace/shared/components/link";
 import { ComboBox, TOption } from "@docspace/shared/components/combobox";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Badge } from "@docspace/shared/components/badge";

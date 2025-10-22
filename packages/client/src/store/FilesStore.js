@@ -2517,6 +2517,9 @@ class FilesStore {
     const isRoom = !!item.roomType;
     const isTemplate =
       item.rootFolderType === FolderType.RoomTemplates && isRoom;
+    const isAIAgent =
+      item.rootFolderType === FolderType.AIAgents &&
+      item.roomType === RoomsType.AIRoom;
 
     const hasNew =
       item.new > 0 || (item.fileStatus & FileStatus.IsNew) === FileStatus.IsNew;
@@ -2979,6 +2982,92 @@ class FilesStore {
       }
 
       return templateOptions;
+    } else if (isAIAgent) {
+      const canInviteUserInAgent = item.security?.EditAccess;
+      const canRemoveAgent = item.security?.Delete;
+
+      const canPinAgent = item.security?.Pin;
+
+      const canEditAgent = item.security?.EditRoom;
+
+      const canViewAgentInfo = item.security?.Read;
+      const canMuteAgent = item.security?.Mute;
+
+      const canChangeOwner = item.security?.ChangeOwner;
+
+      let agentOptions = [
+        "select",
+        "open",
+        "separator0",
+        "edit-agent",
+        "invite-users-to-room",
+        "room-info",
+        "pin-room",
+        "unpin-room",
+        "mute-room",
+        "unmute-room",
+        "separator1",
+        "duplicate-room",
+        "download",
+        "change-room-owner",
+        "leave-room",
+        "delete",
+      ];
+
+      if (optionsToRemove.length) {
+        agentOptions = removeOptions(agentOptions, optionsToRemove);
+      }
+
+      if (!canEditAgent) {
+        agentOptions = removeOptions(agentOptions, ["edit-agent"]);
+      }
+
+      if (!canInviteUserInAgent) {
+        agentOptions = removeOptions(agentOptions, ["invite-users-to-room"]);
+      }
+
+      if (!canChangeOwner) {
+        agentOptions = removeOptions(agentOptions, ["change-room-owner"]);
+      }
+
+      if (!canRemoveAgent) {
+        agentOptions = removeOptions(agentOptions, ["delete"]);
+      }
+
+      if (!canDuplicate) {
+        agentOptions = removeOptions(agentOptions, ["duplicate-room"]);
+      }
+
+      if (!canDownload) {
+        agentOptions = removeOptions(agentOptions, ["download"]);
+      }
+
+      if (!canPinAgent) {
+        agentOptions = removeOptions(agentOptions, ["unpin-room", "pin-room"]);
+      } else {
+        item.pinned
+          ? (agentOptions = removeOptions(agentOptions, ["pin-room"]))
+          : (agentOptions = removeOptions(agentOptions, ["unpin-room"]));
+      }
+
+      if (!canMuteAgent) {
+        agentOptions = removeOptions(agentOptions, [
+          "unmute-room",
+          "mute-room",
+        ]);
+      } else {
+        item.mute
+          ? (agentOptions = removeOptions(agentOptions, ["mute-room"]))
+          : (agentOptions = removeOptions(agentOptions, ["unmute-room"]));
+      }
+
+      if (!canViewAgentInfo) {
+        agentOptions = removeOptions(agentOptions, ["room-info"]);
+      }
+
+      agentOptions = removeSeparator(agentOptions);
+
+      return agentOptions;
     }
     if (isRoom) {
       const canInviteUserInRoom = item.security?.EditAccess;
@@ -3006,8 +3095,6 @@ class FilesStore {
         "link-for-room-members",
         "reconnect-storage",
         "edit-room",
-        "edit-agent",
-        "edit-agent",
         "invite-users-to-room",
         "external-link",
         "embedding-settings",
@@ -3870,6 +3957,9 @@ class FilesStore {
       const isRoom = !!roomType;
       const isTemplate =
         item.rootFolderType === FolderType.RoomTemplates && isRoom;
+      const isAIAgent =
+        item.rootFolderType === FolderType.AIAgents &&
+        item.roomType === RoomsType.AIRoom;
 
       const icon =
         isRoom && logo?.medium
@@ -3970,6 +4060,7 @@ class FilesStore {
         roomType,
         isRoom,
         isTemplate,
+        isAIAgent,
         isArchive,
         tags,
         pinned,

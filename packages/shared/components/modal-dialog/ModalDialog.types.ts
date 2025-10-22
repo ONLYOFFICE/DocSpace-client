@@ -58,7 +58,7 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   /** **`MODAL-ONLY`** Sets max-width: auto */
   autoMaxWidth?: boolean;
   /** Callback function when modal is closed */
-  onClose: () => void;
+  onClose: (e?: React.MouseEvent) => void;
   /** Shows loader in body */
   isLoading?: boolean;
   /** Content for the modal header */

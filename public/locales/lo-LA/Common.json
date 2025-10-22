@@ -935,7 +935,6 @@
   "Unknown": "ບໍ່ຊາບ",
   "UnknownError": "ບໍ່ຊາບຂໍ້ຜິດພາດ",
   "Unlimited": "ບໍ່ມີຂີດຈຳກັດ",
-  "UnsavedChangesBody": "ຖ້າທ່ານປິດເມນູການຕັ້ງຄ່າການເຊື່ອມຕໍ່ໃນປັດຈຸບັນ, ການປ່ຽນແປງຂອງທ່ານຈະບໍ່ຖືກບັນທຶກໄວ້.",
   "UpgradeToProBannerHeader": "ຮັບ​ຟັງ​ຂໍ້​ສະ ເໜີ ນຳ້ ຂອງ​ການ​ໃຊ້​ງານ​ຟຣີ ຂອງ​ໂອກາດ​ການ​ເຮັດ​ງານ​ບໍ ລິ ຫານ​ທີ່​ພ້ອມ​ໃຊ້ງານ​ເປັນ​ເວລາ 30 ມື້",
   "UpgradeToProBannerInformationAboutShort": "ສຶກສາເພີ່ມເຕີມກ່ຽວກັບ {{license}} Edition ຢູ່<1>ໃນເວັບໄຊທ໌ທາງການ</1>",
   "UpgradeToProBannerInformationDemo": "ຮ້ອງຂໍການສາທິດ <1>ທີ່ນີ້</1>",

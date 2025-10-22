@@ -287,8 +287,8 @@ importers:
         specifier: ^9.34.0
         version: 9.38.0
       '@playwright/test':
-        specifier: 1.48.0
-        version: 1.48.0
+        specifier: 1.56.1
+        version: 1.56.1
       '@svgr/webpack':
         specifier: 8.1.0
         version: 8.1.0(typescript@5.9.2)
@@ -483,7 +483,7 @@ importers:
         version: 0.12.1
       next:
         specifier: 15.5.2
-        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.48.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
+        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
       react:
         specifier: 19.1.1
         version: 19.1.1
@@ -631,7 +631,7 @@ importers:
         version: 0.12.1
       next:
         specifier: 15.5.2
-        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.48.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
+        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
       react:
         specifier: 19.1.1
         version: 19.1.1
@@ -679,8 +679,8 @@ importers:
         specifier: ^9.34.0
         version: 9.38.0
       '@playwright/test':
-        specifier: 1.48.0
-        version: 1.48.0
+        specifier: 1.56.1
+        version: 1.56.1
       '@svgr/webpack':
         specifier: 8.1.0
         version: 8.1.0(typescript@5.9.2)
@@ -806,7 +806,7 @@ importers:
         version: 0.12.1
       next:
         specifier: 15.5.2
-        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.48.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
+        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
       react:
         specifier: 19.1.1
         version: 19.1.1
@@ -1002,7 +1002,7 @@ importers:
         version: 0.12.1
       next:
         specifier: 15.5.2
-        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.48.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
+        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
       react:
         specifier: 19.1.1
         version: 19.1.1
@@ -1044,8 +1044,8 @@ importers:
         specifier: ^9.34.0
         version: 9.38.0
       '@playwright/test':
-        specifier: 1.48.0
-        version: 1.48.0
+        specifier: 1.56.1
+        version: 1.56.1
       '@svgr/webpack':
         specifier: 8.1.0
         version: 8.1.0(typescript@5.9.2)
@@ -1207,7 +1207,7 @@ importers:
         version: 0.5.46
       next:
         specifier: 15.5.2
-        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.48.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
+        version: 15.5.2(@babel/core@7.25.8)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5)
       prop-types:
         specifier: 15.8.1
         version: 15.8.1
@@ -1357,8 +1357,8 @@ importers:
         specifier: ^9.34.0
         version: 9.38.0
       '@playwright/test':
-        specifier: 1.48.0
-        version: 1.48.0
+        specifier: 1.56.1
+        version: 1.56.1
       '@storybook/addon-actions':
         specifier: ^8.6.14
         version: 8.6.14(storybook@8.6.14(prettier@3.6.2))
@@ -3544,8 +3544,8 @@ packages:
     resolution: {integrity: sha512-fdDH1LSGfZdTH2sxdpVMw31BanV28K/Gry0cVFxaNP77neJSkd82mM8ErPNYs9e+0O7SdHBLTDzDgwUuy18RnQ==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
 
-  '@playwright/test@1.48.0':
-    resolution: {integrity: sha512-W5lhqPUVPqhtc/ySvZI5Q8X2ztBOUgZ8LbAFy0JQgrXZs2xaILrUcNO3rQjwbLPfGK13+rZsDa1FpG+tqYkT5w==}
+  '@playwright/test@1.56.1':
+    resolution: {integrity: sha512-vSMYtL/zOcFpvJCW71Q/OEGQb7KYBPAdKh35WNSkaZA75JlAO8ED8UN6GUNTm3drWomcbcqRPFqQbLae8yBTdg==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -8866,13 +8866,13 @@ packages:
     resolution: {integrity: sha512-Ie9z/WINcxxLp27BKOCHGde4ITq9UklYKDzVo1nhk5sqGEXU3FpkwP5GM2voTGJkGd9B3Otl+Q4uwSOeSUtOBA==}
     engines: {node: '>=14.16'}
 
-  playwright-core@1.48.0:
-    resolution: {integrity: sha512-RBvzjM9rdpP7UUFrQzRwR8L/xR4HyC1QXMzGYTbf1vjw25/ya9NRAVnXi/0fvFopjebvyPzsmoK58xxeEOaVvA==}
+  playwright-core@1.56.1:
+    resolution: {integrity: sha512-hutraynyn31F+Bifme+Ps9Vq59hKuUCz7H1kDOcBs+2oGguKkWTU50bBWrtz34OUWmIwpBTWDxaRPXrIXkgvmQ==}
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.48.0:
-    resolution: {integrity: sha512-qPqFaMEHuY/ug8o0uteYJSRfMGFikhUysk8ZvAtfKmUK3kc/6oNl/y3EczF8OFGYIi/Ex2HspMfzYArk6+XQSA==}
+  playwright@1.56.1:
+    resolution: {integrity: sha512-aFi5B0WovBHTEvpM3DzXTUaeN6eN0qWnTkKx4NQaH4Wvcmc153PdaY2UBdSYKaGYw+UyWXSVyxDUg5DoPEttjw==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -13580,9 +13580,9 @@ snapshots:
 
   '@pkgr/core@0.1.2': {}
 
-  '@playwright/test@1.48.0':
+  '@playwright/test@1.56.1':
     dependencies:
-      playwright: 1.48.0
+      playwright: 1.56.1
 
   '@polka/url@1.0.0-next.29': {}
 
@@ -19795,7 +19795,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  next@15.5.2(@babel/core@7.25.8)(@playwright/test@1.48.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5):
+  next@15.5.2(@babel/core@7.25.8)(@playwright/test@1.56.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.79.5):
     dependencies:
       '@next/env': 15.5.2
       '@swc/helpers': 0.5.15
@@ -19813,7 +19813,7 @@ snapshots:
       '@next/swc-linux-x64-musl': 15.5.2
       '@next/swc-win32-arm64-msvc': 15.5.2
       '@next/swc-win32-x64-msvc': 15.5.2
-      '@playwright/test': 1.48.0
+      '@playwright/test': 1.56.1
       babel-plugin-react-compiler: 1.0.0
       sass: 1.79.5
       sharp: 0.34.3
@@ -20195,11 +20195,11 @@ snapshots:
     dependencies:
       find-up: 6.3.0
 
-  playwright-core@1.48.0: {}
+  playwright-core@1.56.1: {}
 
-  playwright@1.48.0:
+  playwright@1.56.1:
     dependencies:
-      playwright-core: 1.48.0
+      playwright-core: 1.56.1
     optionalDependencies:
       fsevents: 2.3.2
 

@@ -95,10 +95,13 @@ const ModalDialog = ({
 
   ...rest
 }: ModalDialogProps) => {
-  const onCloseEvent = React.useCallback(() => {
-    if (embedded) return;
-    if (isCloseable) onClose?.();
-  }, [embedded, isCloseable, onClose]);
+  const onCloseEvent = React.useCallback(
+    (e?: React.MouseEvent) => {
+      if (embedded) return;
+      if (isCloseable) onClose?.(e);
+    },
+    [embedded, isCloseable, onClose],
+  );
 
   const [currentDisplayType, setCurrentDisplayType] = useState(
     getCurrentDisplayType(displayType, displayTypeDetailed),

@@ -204,8 +204,8 @@ const Table = ({
   }, []);
 
   React.useEffect(() => {
-    if (!isRooms) setTagCount(0);
-  }, [isRooms]);
+    if (!isRooms && !isAIAgentsFolder) setTagCount(0);
+  }, [isRooms, isAIAgentsFolder]);
 
   const filesListNode = useMemo(() => {
     return list.map((item, index) => (
@@ -252,6 +252,7 @@ const Table = ({
     theme,
     tagCount,
     isRooms,
+    isAIAgentsFolder,
     hideColumns,
     highlightFile.id,
     highlightFile.isExst,
@@ -370,7 +371,8 @@ export default inject(
       infoPanelVisible,
       fetchMoreFiles,
       hasMoreFiles,
-      filterTotal: isRooms ? roomsFilter.total : filter.total,
+      filterTotal:
+        isRooms || isAIAgentsFolder ? roomsFilter.total : filter.total,
       isRooms,
       isTrashFolder,
       isIndexEditingMode,

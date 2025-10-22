@@ -47,10 +47,14 @@ class FilesTableHeader extends React.Component {
       resetColumnsSize,
       columnStorageName: props.columnStorageName,
       columnInfoPanelStorageName: props.columnInfoPanelStorageName,
-      sortBy: props.isRooms ? props.roomsFilter.sortBy : props.filter.sortBy,
-      sortOrder: props.isRooms
-        ? props.roomsFilter.sortOrder
-        : props.filter.sortOrder,
+      sortBy:
+        props.isRooms || props.isAIAgentsFolder
+          ? props.roomsFilter.sortBy
+          : props.filter.sortBy,
+      sortOrder:
+        props.isRooms || props.isAIAgentsFolder
+          ? props.roomsFilter.sortOrder
+          : props.filter.sortOrder,
     };
 
     const tableColumns = columns.map((c) => c.enable && c.key);
@@ -86,8 +90,10 @@ class FilesTableHeader extends React.Component {
       headerBorder,
     } = this.props;
 
-    const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
-    const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
+    const sortBy =
+      isRooms || isAIAgentsFolder ? roomsFilter.sortBy : filter.sortBy;
+    const sortOrder =
+      isRooms || isAIAgentsFolder ? roomsFilter.sortOrder : filter.sortOrder;
 
     const { sortBy: stateSortBy, sortOrder: stateSortOrder } = this.state;
 
@@ -164,6 +170,7 @@ class FilesTableHeader extends React.Component {
   updateTableColumns = () => {
     const {
       isRooms,
+      isAIAgentsFolder,
       getColumns,
       columnStorageName,
       columnInfoPanelStorageName,
@@ -182,8 +189,10 @@ class FilesTableHeader extends React.Component {
 
     const tableColumns = columns.map((c) => c.enable && c.key);
 
-    const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
-    const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
+    const sortBy =
+      isRooms || isAIAgentsFolder ? roomsFilter.sortBy : filter.sortBy;
+    const sortOrder =
+      isRooms || isAIAgentsFolder ? roomsFilter.sortOrder : filter.sortOrder;
 
     this.setTableColumns(tableColumns);
 

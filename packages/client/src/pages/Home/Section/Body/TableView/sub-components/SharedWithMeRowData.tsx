@@ -86,6 +86,7 @@ interface SharedWithMeRowDataProps {
 interface InjectedSharedWithMeRowDataProps {
   authorShareWithMeColumnIsEnabled: boolean;
   accessLevelShareWithMeColumnIsEnabled: boolean;
+  sharedByShareWithMeColumnIsEnabled: boolean;
   modifiedShareWithMeColumnIsEnabled: boolean;
   sizeShareWithMeColumnIsEnabled: boolean;
   typeShareWithMeColumnIsEnabled: boolean;
@@ -111,6 +112,7 @@ const SharedWithMeRowData: FC<
 
     authorShareWithMeColumnIsEnabled,
     accessLevelShareWithMeColumnIsEnabled,
+    sharedByShareWithMeColumnIsEnabled,
     modifiedShareWithMeColumnIsEnabled,
     sizeShareWithMeColumnIsEnabled,
     typeShareWithMeColumnIsEnabled,
@@ -149,6 +151,30 @@ const SharedWithMeRowData: FC<
         </StyledBadgesContainer>
         {lastColumn === "Name" ? lastColumnContent : null}
       </TableCell>
+
+      {sharedByShareWithMeColumnIsEnabled ? (
+        <TableCell
+          dataTestId={`shared-with-me-cell-shared-by-${index}`}
+          style={
+            !sharedByShareWithMeColumnIsEnabled
+              ? { background: "none !important" }
+              : dragStyles.style
+          }
+          {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "SharedByShareWithMe" ? "no-extra-space" : "",
+          )}
+        >
+          <AuthorCell
+            sideColor={theme.filesSection.tableView.row.sideColor}
+            {...props}
+          />
+          {lastColumn === "SharedByShareWithMe" ? lastColumnContent : null}
+        </TableCell>
+      ) : (
+        <div />
+      )}
 
       {authorShareWithMeColumnIsEnabled ? (
         <TableCell
@@ -282,6 +308,7 @@ export default inject<
   const {
     authorShareWithMeColumnIsEnabled,
     accessLevelShareWithMeColumnIsEnabled,
+    sharedByShareWithMeColumnIsEnabled,
     modifiedShareWithMeColumnIsEnabled,
     sizeShareWithMeColumnIsEnabled,
     typeShareWithMeColumnIsEnabled,
@@ -291,6 +318,7 @@ export default inject<
   return {
     authorShareWithMeColumnIsEnabled,
     accessLevelShareWithMeColumnIsEnabled,
+    sharedByShareWithMeColumnIsEnabled,
     modifiedShareWithMeColumnIsEnabled,
     sizeShareWithMeColumnIsEnabled,
     typeShareWithMeColumnIsEnabled,

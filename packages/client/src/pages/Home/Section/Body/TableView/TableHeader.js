@@ -401,6 +401,7 @@ class FilesTableHeader extends React.Component {
       nameColumnIsEnabled,
       authorShareWithMeColumnIsEnabled,
       accessLevelShareWithMeColumnIsEnabled,
+      sharedByShareWithMeColumnIsEnabled,
       modifiedShareWithMeColumnIsEnabled,
       sizeShareWithMeColumnIsEnabled,
       typeShareWithMeColumnIsEnabled,
@@ -416,6 +417,13 @@ class FilesTableHeader extends React.Component {
         enable: nameColumnIsEnabled,
         sortBy: SortByFieldName.Name,
         onClick: this.onFilter,
+      },
+      {
+        key: "SharedByShareWithMe",
+        title: t("SharedBy"),
+        enable: sharedByShareWithMeColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
       },
       {
         key: "AuthorShareWithMe",
@@ -1004,6 +1012,7 @@ export default inject(
 
       authorShareWithMeColumnIsEnabled,
       accessLevelShareWithMeColumnIsEnabled,
+      sharedByShareWithMeColumnIsEnabled,
       modifiedShareWithMeColumnIsEnabled,
       sizeShareWithMeColumnIsEnabled,
       typeShareWithMeColumnIsEnabled,
@@ -1086,6 +1095,7 @@ export default inject(
 
       authorShareWithMeColumnIsEnabled,
       accessLevelShareWithMeColumnIsEnabled,
+      sharedByShareWithMeColumnIsEnabled,
       modifiedShareWithMeColumnIsEnabled,
       sizeShareWithMeColumnIsEnabled,
       typeShareWithMeColumnIsEnabled,

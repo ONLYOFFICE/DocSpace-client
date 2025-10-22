@@ -39,6 +39,7 @@ import type {
   Category,
   InjectedProps,
 } from "../CategoryFilter.types";
+import { Scrollbar as CustomScrollbar } from "@docspace/shared/components/scrollbar/custom-scrollbar";
 
 const CategoryFilterMobile: React.FC<CategoryFilterMobileProps> = ({
   t,
@@ -48,7 +49,7 @@ const CategoryFilterMobile: React.FC<CategoryFilterMobileProps> = ({
   filterOformsByCategory,
   setOformsCurrentCategory,
 }) => {
-  const scrollRef = useRef<any>(null);
+  const scrollRef = useRef<CustomScrollbar>(null);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [openedMenuItem, setOpenedMenuItem] = useState<MenuItem | null>(null);

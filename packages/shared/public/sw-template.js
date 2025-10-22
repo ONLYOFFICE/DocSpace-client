@@ -13,6 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   SW_CONFIG: () => (/* binding */ SW_CONFIG),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _package_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../package.json */ "./package.json");
 // (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
@@ -38,8 +39,9 @@ __webpack_require__.r(__webpack_exports__);
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-// Version is injected at build time
-const APP_VERSION = "3.5.0"; // This will be updated by build script
+
+// Version automatically read from package.json
+const APP_VERSION = _package_json__WEBPACK_IMPORTED_MODULE_0__.version;
 const SW_CONFIG = {
     version: APP_VERSION,
     cachePrefix: "docspace",
@@ -7013,6 +7015,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.js */ "../../node_modules/.pnpm/workbox-strategies@7.3.0/node_modules/workbox-strategies/index.js");
 
+
+/***/ }),
+
+/***/ "./package.json":
+/*!**********************!*\
+  !*** ./package.json ***!
+  \**********************/
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('{"name":"@docspace/shared","version":"3.5.0","private":true,"scripts":{"build":"echo \'skip it\'","clean":"echo \'skip it\'","sw:build":"ts-node ./scripts/build-sw.ts","deploy":"echo \'skip it\'","start":"echo \'skip it\'","start-prod":"echo \'skip it\'","storybook":"storybook dev -p 8082","storybook-build":"storybook build","storybook-serve":"serve storybook-static -p 8082","test":"jest","test:coverage":"jest --coverage","test:watch":"jest --watch","test:open-report":"open-cli ./jest/reports/tests-results.html","lint":"eslint .","lint:fix":"eslint . --fix","tsc":"tsc"},"dependencies":{"@babel/runtime":"7.28.3","@floating-ui/dom":"1.6.13","@hcaptcha/react-hcaptcha":"1.11.0","@react-spring/web":"9.7.5","@socket.io/component-emitter":"3.1.2","@use-gesture/react":"10.3.1","axios":"1.12.2","classnames":"2.5.1","cnbuilder":"3.1.0","copy-to-clipboard":"3.3.3","cross-fetch":"3.1.8","crypto-js":"4.2.0","csvjson-json_beautifier":"5.0.4","email-addresses":"3.1.0","fast-deep-equal":"3.1.3","file-saver":"2.0.5","firebase":"11.2.0","framer-motion":"^12.0.3","he":"1.2.0","heic2any":"0.0.4","hex-rgb":"5.0.0","i18next":"23.7.19","lodash":"4.17.21","luxon":"3.5.0","mobx":"6.13.5","moment":"2.30.1","moment-timezone":"0.5.46","next":"15.5.2","prop-types":"15.8.1","query-string":"7.1.3","react-autosize-textarea":"7.1.0","react-avatar-editor":"14.0.0-beta.6","react-colorful":"5.6.1","react-content-loader":"7.0.2","react-countdown":"2.3.6","react-device-detect":"2.2.3","react-draggable":"4.4.6","react-dropzone":"11.7.1","react-google-recaptcha":"3.1.0","react-hotkeys-hook":"3.4.7","react-i18next":"14.0.1","react-router":"7.5.2","react-svg":"16.1.34","react-text-mask":"5.5.0","react-toastify":"10.0.6","react-tooltip":"5.28.0","react-transition-group":"4.4.5","react-virtualized":"^9.22.6","react-virtualized-auto-sizer":"1.0.24","react-window":"1.8.10","react-window-infinite-loader":"1.0.9","resize-image":"0.1.0","sjcl":"1.0.8","socket.io-client":"4.8.0","styled-components":"5.3.11","ts-pattern":"5.5.0","utif":"3.1.0","windows-iana":"5.1.0","workbox-build":"7.3.0","workbox-cacheable-response":"7.3.0","workbox-core":"7.3.0","workbox-expiration":"7.3.0","workbox-precaching":"7.3.0","workbox-recipes":"7.3.0","workbox-routing":"7.3.0","workbox-strategies":"7.3.0","workbox-window":"7.3.0","zoom-level":"2.5.0"},"devDependencies":{"@babel/core":"7.25.8","@babel/eslint-parser":"7.25.8","@babel/plugin-proposal-export-default-from":"7.25.8","@babel/plugin-transform-class-properties":"7.25.9","@babel/plugin-transform-export-namespace-from":"7.25.9","@babel/plugin-transform-private-property-in-object":"7.25.9","@babel/plugin-transform-runtime":"7.25.7","@babel/preset-env":"7.25.8","@babel/preset-react":"7.25.7","@babel/preset-typescript":"7.25.7","@eslint/js":"^9.34.0","@playwright/test":"1.48.0","@storybook/addon-actions":"^8.6.14","@storybook/addon-controls":"^8.6.14","@storybook/addon-designs":"^8.2.1","@storybook/addon-docs":"^8.6.14","@storybook/addon-essentials":"^8.6.14","@storybook/addon-links":"^8.6.14","@storybook/addon-viewport":"^8.6.14","@storybook/addon-webpack5-compiler-babel":"3.0.6","@storybook/components":"^8.6.14","@storybook/manager-api":"^8.6.14","@storybook/react":"^8.6.14","@storybook/react-webpack5":"^8.6.14","@storybook/test":"^8.6.14","@storybook/theming":"^8.6.14","@svgr/webpack":"8.1.0","@testing-library/jest-dom":"6.6.4","@testing-library/react":"16.3.0","@testing-library/user-event":"14.6.1","@types/crypto-js":"4.2.2","@types/element-resize-detector":"1.1.6","@types/eslint":"8.56.12","@types/file-saver":"2.0.7","@types/he":"1.2.3","@types/identity-obj-proxy":"3.0.2","@types/jest":"29.5.13","@types/lodash":"4.17.10","@types/luxon":"3.4.2","@types/node":"22.7.5","@types/react":"19.1.4","@types/react-avatar-editor":"13.0.3","@types/react-dom":"19.1.5","@types/react-google-recaptcha":"2.1.9","@types/react-transition-group":"4.4.11","@types/react-virtualized":"9.21.30","@types/react-window":"1.8.8","@types/react-window-infinite-loader":"1.0.9","@types/sjcl":"1.0.34","@types/styled-components":"5.1.34","@types/utif":"3.0.5","@types/uuid":"^10.0.0","@typescript-eslint/eslint-plugin":"^8.15.0","@typescript-eslint/parser":"^8.15.0","babel-jest":"29.7.0","copy-webpack-plugin":"9.1.0","css-loader":"6.11.0","eslint":"9.34.0","eslint-config-prettier":"9.1.0","eslint-plugin-import":"2.31.0","eslint-plugin-jsx-a11y":"6.10.0","eslint-plugin-prettier":"5.2.1","eslint-plugin-react":"7.37.1","eslint-plugin-react-hooks":"5.1.0","eslint-plugin-storybook":"0.12.0","globals":"^15.0.0","i18next-http-backend":"2.6.2","identity-obj-proxy":"3.0.0","jest":"29.7.0","jest-environment-jsdom":"29.7.0","jest-html-reporter":"^4.3.0","jest-styled-components":"7.2.0","msw":"^2.11.1","msw-storybook-addon":"^2.0.4","open-cli":"^8.0.0","prettier":"3.6.2","react":"19.1.1","react-docgen-typescript-plugin":"1.0.8","react-dom":"19.1.1","react-values":"0.3.3","remark-gfm":"4.0.1","sass":"1.79.5","sass-loader":"16.0.5","serve":"14.2.4","storybook":"^8.6.14","storybook-dark-mode":"^4.0.2","style-loader":"3.3.4","terser-webpack-plugin":"5.3.10","ts-jest":"29.2.5","ts-loader":"9.5.1","ts-node":"10.9.2","typescript":"5.9.2","typescript-eslint":"^8.15.0","webpack":"5.91.0","webpack-cli":"5.1.4","workbox-webpack-plugin":"7.3.0"},"peerDependencies":{"react":"19.1.1","react-dom":"19.1.1"},"nx":{"targets":{"storybook-serve":{"dependsOn":["storybook-build"]}}},"msw":{"workerDirectory":["__mocks__/storybook/mockServiceWorker"]}}');
 
 /***/ })
 

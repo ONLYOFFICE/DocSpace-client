@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// Version is injected at build time
-const APP_VERSION = "3.5.0"; // This will be updated by build script
+import packageJson from "../package.json";
+
+// Version automatically read from package.json
+const APP_VERSION = packageJson.version;
 
 export interface CacheConfig {
   maxEntries: number;

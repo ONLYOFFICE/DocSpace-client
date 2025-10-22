@@ -135,6 +135,9 @@ export const getCategoryUrl = (categoryType, folderId) => {
     case CategoryType.AIAgents:
       return "/ai-agents/filter";
 
+    case CategoryType.AIAgent:
+      return `/ai-agents/${folderId}/filter`;
+
     case CategoryType.Recent:
       return "/recent/filter";
 
@@ -148,7 +151,7 @@ export const getCategoryUrl = (categoryType, folderId) => {
       return `/rooms/shared/${folderId}/filter`;
 
     case CategoryType.Chat:
-      return `/rooms/shared/${folderId}/chat`;
+      return `/ai-agents/${folderId}/chat`;
 
     case CategoryType.Archive:
       return "/rooms/archived/filter";

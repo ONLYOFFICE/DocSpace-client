@@ -391,7 +391,6 @@
   "FoldersAndFilesWillBeCopied": "Dosjet dhe skedarët do të kopjohen në destinacion",
   "ForcePathStyle": "Stili i rrugës së forcës",
   "Form": "Formular",
-  "FormAuthorizeToast": "Nëse keni një llogari në këtë {{productName}}, ju rekomandojmë që të identifikoheni në mënyrë që formularët e plotësuar të regjistrohen nën llogarinë tuaj.",
   "FormDataCollection": "Mbledhja e të dhënave të formularit",
   "FormDataCollectionDescription": "Mblidhni kopjet e formularëve të plotësuar dhe të dhënat prej tyre nl format XLSX për të analizuar përgjigjet në formular",
   "FormFilingRoomInfo": "Ngarkoni formularët PDF në dhomë. Ftoni anëtarët dhe të ftuarit të plotësojnë një formular PDF. Rishikoni formularët e plotësuar dhe analizoni të dhënat e mbledhura automatikisht në një spreadsheet.",

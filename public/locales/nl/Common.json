@@ -391,7 +391,6 @@
   "FoldersAndFilesWillBeCopied": "Mappen en bestanden worden gekopieerd naar de bestemming",
   "ForcePathStyle": "Forceer Path Style",
   "Form": "Formulier",
-  "FormAuthorizeToast": "Als u een account hebt in deze {{productName}}, raden wij u aan om in te loggen zodat ingevulde formulieren onder uw account worden geregistreerd.",
   "FormDataCollection": "Form data verzameling",
   "FormDataCollectionDescription": "Verzamelen van kopieën van de ingevulde formulieren en de daaruit geëxtraheerde gegevens in XLSX om de antwoorden in de formulierenkamers te analyseren.",
   "FormFilingRoomInfo": "PDF formulieren uploaden naar de kamer. Nodig leden en gasten uit om een PDF formulier in te vullen. Controleer ingevulde formulieren en analyseer automatisch verzamelde gegevens in een spreadsheet.",

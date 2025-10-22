@@ -391,7 +391,6 @@
   "FoldersAndFilesWillBeCopied": "Folderi i datoteke će biti kopirani u destinaciju",
   "ForcePathStyle": "Prisili Stil putanje",
   "Form": "Obrazac",
-  "FormAuthorizeToast": "Ako imate nalog u ovoj aplikaciji {{productName}}, preporučujemo da se prijavite kako bi popunjeni obrasci bili zabeleženi pod vašim nalogom.",
   "FormDataCollection": "Prikupljanje podataka iz obrasca",
   "FormDataCollectionDescription": "Prikupite popunjene kopije obrasca i podatke iz njih u XLSX formatu za analizu odgovora u prostorijama za popunjavanje obrazaca.",
   "FormFilingRoomInfo": "Otpremite PDF obrasce u sobu. Pozovite članove i goste da popune PDF obrazac. Pregledajte popunjene obrasce i analizirajte podatke koji se automatski prikupljaju u tabeli.",

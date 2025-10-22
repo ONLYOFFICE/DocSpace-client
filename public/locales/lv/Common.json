@@ -391,7 +391,6 @@
   "FoldersAndFilesWillBeCopied": "Mapes un faili tiks kopēti galamērķī",
   "ForcePathStyle": "Uzspiest ceļa stilu",
   "Form": "Veidlapa",
-  "FormAuthorizeToast": "Ja jums ir šāds konts {{productName}}, iesakām pieteikties, lai aizpildītās veidlapas tiktu reģistrētas jūsu kontā.",
   "FormDataCollection": "Formu datu savākšana",
   "FormDataCollectionDescription": "Aizpildīto veidlapu kopiju un no tām iegūto datu apkopošana XLSX, lai analizētu atbildes veidlapu aizpildīšanas telpās.",
   "FormFilingRoomInfo": "Augšupielādējiet PDF veidlapas istabā. Uzaiciniet dalībniekus un viesus aizpildīt PDF veidlapu. Pārskatiet aizpildītās veidlapas un analizējiet automātiski apkopotos datus izklājlapā.",

@@ -58,7 +58,7 @@
     "globals": "^15.0.0",
     "typescript-eslint": "^8.15.0",
     "@babel/core": "7.25.8",
-    "@playwright/test": "1.48.0",
+    "@playwright/test": "1.56.1",
     "@svgr/webpack": "8.1.0",
     "@types/crypto-js": "4.2.2",
     "@types/nconf": "0.10.7",

@@ -391,7 +391,6 @@
   "FoldersAndFilesWillBeCopied": "V cieľovej destinácii sa skopírujú priečinky a súbory",
   "ForcePathStyle": "Zapnúť Path-Style",
   "Form": "Formulár",
-  "FormAuthorizeToast": "Ak máte účet v tomto {{productName}}, odporúčame vám prihlásiť sa, aby vyplnené formuláre boli zaevidované pod vaším menom.",
   "FormDataCollection": "Zber údajov z formulárov",
   "FormDataCollectionDescription": "Zozbierajte vyplnené kópie formulárov a dáta z nich do formátu XLSX na analýzu odpovedí v miestnostiach na vyplňovanie formulárov.",
   "FormFilingRoomInfo": "Nahrávanie PDF formulárov do miestnosti. Pozvite členov a hostí, aby vyplnili PDF formulár. Prezrite si vyplnené formuláre a analyzujte údaje automaticky zozbierané v tabuľke.",

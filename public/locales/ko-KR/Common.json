@@ -391,7 +391,6 @@
   "FoldersAndFilesWillBeCopied": "폴더와 파일이 목표에 복사됩니다",
   "ForcePathStyle": "경로 스타일 강제",
   "Form": "양식",
-  "FormAuthorizeToast": "이 {{productName}}에 계정이 있는 경우, 완료한 양식이 계정에 기록되도록 로그인하는 것이 좋습니다.",
   "FormDataCollection": "양식 데이터 수집",
   "FormDataCollectionDescription": "완료된 서식 사본과 데이터를 XLSX 형식으로 수집하여 Form Filling 룸에서 응답을 분석합니다.",
   "FormFilingRoomInfo": "PDF 양식을 룸에 업로드하세요. 멤버와 게스트를 초대하여 PDF 양식을 작성하도록 하세요. 완성된 양식을 검토하고 스프레드시트에서 자동으로 수집된 데이터를 분석하세요.",

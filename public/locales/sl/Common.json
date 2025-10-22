@@ -391,7 +391,6 @@
   "FoldersAndFilesWillBeCopied": "Mape in datoteke bodo kopirane na destinacijo",
   "ForcePathStyle": "Stil vsiljene poti",
   "Form": "Obrazec",
-  "FormAuthorizeToast": "Če imate račun v tem {{productName}}, priporočamo, da se prijavite, da bodo izpolnjeni obrazci zabeleženi pod vašim računom.",
   "FormDataCollection": "Zbiranje podatkov iz obrazcev",
   "FormDataCollectionDescription": "Zberite izpolnjene kopije obrazcev in podatke iz njih v datoteko XLSX za analizo odgovorov v sobah za izpolnjevanje obrazcev.",
   "FormFilingRoomInfo": "Naložite PDF obrazce v sobo. Povabite člane in goste, da izpolnijo PDF obrazec. Pregledujte izpolnjene obrazce in analizirajte samodejno zbrane podatke v preglednici.",

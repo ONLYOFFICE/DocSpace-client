@@ -221,6 +221,7 @@ class SelectedFolderStore {
       pinned: this.pinned,
       isRoom: this.isRoom,
       isTemplate: this.isTemplate,
+      isAIAgent: this.isAIRoom,
       logo: this.logo,
       tags: this.tags,
       rootFolderId: this.rootFolderId,

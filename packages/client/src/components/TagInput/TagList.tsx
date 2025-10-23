@@ -34,7 +34,7 @@ import { TagListProps } from "./TagInput.types";
 const TagList = ({ tagHandler, isDisabled }: TagListProps) => {
   const { tags } = tagHandler;
 
-  const onDeleteAction = (id: string) => {
+  const onDeleteAction = (id: string | number) => {
     if (isDisabled) return;
 
     tagHandler.deleteTag(id);
@@ -55,7 +55,7 @@ const TagList = ({ tagHandler, isDisabled }: TagListProps) => {
           label={tag.name}
           isNewTag
           onDelete={() => {
-            onDeleteAction(tag.id.toString());
+            onDeleteAction(tag.id);
           }}
         />
       ))}

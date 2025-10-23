@@ -43,9 +43,10 @@ import * as Styled from "./index.styled";
 type ChangeRoomOwnerProps = {
   currentUserId?: string;
   roomOwner: TCreatedBy;
-  onOwnerChange: () => void;
+  onOwnerChange?: () => void;
   currentColorScheme?: SettingsStore["currentColorScheme"];
   canChangeOwner: boolean;
+  isAgent?: boolean;
 };
 
 const ChangeRoomOwner = ({
@@ -54,6 +55,7 @@ const ChangeRoomOwner = ({
   onOwnerChange,
   currentColorScheme,
   canChangeOwner,
+  isAgent,
 }: ChangeRoomOwnerProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -65,7 +67,7 @@ const ChangeRoomOwner = ({
   return (
     <Styled.ChangeRoomOwner>
       <Text className="change-owner-label" fontWeight={600} fontSize="13px">
-        {t("Files:RoomOwner")}
+        {isAgent ? t("Common:AgentOwner") : t("Files:RoomOwner")}
       </Text>
 
       <div className="change-owner-display-wrapper">

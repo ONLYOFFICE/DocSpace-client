@@ -31,7 +31,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { TRoomParams } from "@docspace/shared/utils/rooms";
 
-import { StyledParam } from "../Params/StyledParam";
+import { StyledParam } from "SRC_DIR/components/CreateEditDialogParams/StyledParam";
 
 type InstructionsSettingsProps = {
   roomParams: TRoomParams;

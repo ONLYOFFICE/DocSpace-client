@@ -43,6 +43,7 @@ import CreatePDFFormIcon from "PUBLIC_DIR/images/emptyview/create.pdf.form.svg";
 import CreateNewSpreadsheetIcon from "PUBLIC_DIR/images/emptyview/create.new.spreadsheet.svg";
 import CreateNewPresentation from "PUBLIC_DIR/images/emptyview/create.new.presentation.svg";
 import CreateRoom from "PUBLIC_DIR/images/emptyview/create.room.svg";
+import CreateAIAgentIcon from "PUBLIC_DIR/images/emptyview/create.ai-agent.svg";
 import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
 import UploadDevicePDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
 import PersonIcon from "PUBLIC_DIR/images/icons/12/person.svg";
@@ -322,6 +323,15 @@ export const getOptions = (
     disabled: false,
   };
 
+  const createAIAgent = {
+    title: t("EmptyView:CreateAIAgent"),
+    description: t("EmptyView:CreateAIAgentDescription"),
+    icon: <CreateAIAgentIcon />,
+    key: "create-ai-agent",
+    onClick: actions.onCreateAIAgent,
+    disabled: false,
+  };
+
   const inviteRootRoom = {
     title: t("EmptyView:InviteNewUsers"),
     description: t("EmptyView:InviteRootRoomDescription", {
@@ -417,6 +427,9 @@ export const getOptions = (
   if (isRootEmptyPage) {
     return match([rootFolderType, access, isVisitor])
       .returnType<EmptyViewOptionsType>()
+      .with([FolderType.AIAgents, ShareAccessRights.None, P._], () => [
+        createAIAgent,
+      ])
       .with([FolderType.Rooms, ShareAccessRights.None, P._], () => [
         createRoom,
         inviteRootRoom,

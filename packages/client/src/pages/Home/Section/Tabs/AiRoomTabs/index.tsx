@@ -97,7 +97,7 @@ const AiRoomTabs = ({
       setResultId(null);
       setKnowledgeId(null);
 
-      const path = getCategoryUrl(CategoryType.SharedRoom, rootRoomId ?? id);
+      const path = getCategoryUrl(CategoryType.AIAgent, rootRoomId ?? id);
 
       filesFilter.searchArea =
         tab.id === "knowledge"

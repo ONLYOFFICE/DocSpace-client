@@ -82,6 +82,7 @@ type ViewProps = UseContactsProps &
 
     filesAbortController: Nullable<AbortController>;
     roomsAbortController: Nullable<AbortController>;
+    aiAgentsAbortController: Nullable<AbortController>;
 
     showHeaderLoader: ClientLoadingStore["showHeaderLoader"];
 
@@ -110,9 +111,11 @@ const View = ({
 
   filesAbortController,
   roomsAbortController,
+  aiAgentsAbortController,
 
   fetchFiles,
   fetchRooms,
+  fetchAgents,
 
   playlist,
 
@@ -203,6 +206,7 @@ const View = ({
   const { getFiles } = useFiles({
     fetchFiles,
     fetchRooms,
+    fetchAgents,
 
     playlist,
 
@@ -246,6 +250,7 @@ const View = ({
   const abortControllers = React.useRef({
     filesAbortController,
     roomsAbortController,
+    aiAgentsAbortController,
     usersAbortController,
     groupsAbortController,
   });
@@ -269,11 +274,13 @@ const View = ({
   React.useEffect(() => {
     abortControllers.current.filesAbortController = filesAbortController;
     abortControllers.current.roomsAbortController = roomsAbortController;
+    abortControllers.current.aiAgentsAbortController = aiAgentsAbortController;
     abortControllers.current.usersAbortController = usersAbortController;
     abortControllers.current.groupsAbortController = groupsAbortController;
   }, [
     filesAbortController,
     roomsAbortController,
+    aiAgentsAbortController,
     usersAbortController,
     groupsAbortController,
   ]);
@@ -372,6 +379,7 @@ const View = ({
         abortControllers.current.groupsAbortController?.abort();
         abortControllers.current.filesAbortController?.abort();
         abortControllers.current.roomsAbortController?.abort();
+        abortControllers.current.aiAgentsAbortController?.abort();
 
         setIsLoading(true);
         setIsChangePageRequestRunning(true);
@@ -507,6 +515,7 @@ export const ViewComponent = inject(
       scrollToTop,
       fetchFiles,
       fetchRooms,
+      fetchAgents,
       getFileInfo,
       setIsPreview,
       setIsUpdatingRowItem,
@@ -514,6 +523,7 @@ export const ViewComponent = inject(
 
       filesController,
       roomsController,
+      aiAgentsController,
 
       clearFiles,
     } = filesStore;
@@ -564,6 +574,7 @@ export const ViewComponent = inject(
       scrollToTop,
       fetchFiles,
       fetchRooms,
+      fetchAgents,
       getFileInfo,
       setIsPreview,
       setIsUpdatingRowItem,
@@ -577,6 +588,7 @@ export const ViewComponent = inject(
 
       filesAbortController: filesController,
       roomsAbortController: roomsController,
+      aiAgentsAbortController: aiAgentsController,
 
       playlist,
       setToPreviewFile,

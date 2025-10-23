@@ -35,7 +35,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { TRoomParams } from "@docspace/shared/utils/rooms";
 
-import { StyledParam } from "../Params/StyledParam";
+import { StyledParam } from "SRC_DIR/components/CreateEditDialogParams/StyledParam";
 
 type ModelSettingsProps = {
   roomParams: TRoomParams;

@@ -30,6 +30,8 @@ import { getCookie } from "../../utils";
 import { request } from "../client";
 import { TFile } from "../files/types";
 import { ToolsPermission, WebSearchType } from "./enums";
+import RoomsFilter from "../rooms/filter";
+import { checkFilterInstance } from "../../utils/common";
 
 import {
   TCreateAiProvider,
@@ -47,6 +49,10 @@ import {
   type TUpdateServer,
   type WebSearchConfig,
   type TAIConfig,
+  TAgent,
+  TCreateAgentData,
+  TEditAgentData,
+  TGetAgents,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -525,4 +531,51 @@ export const updateWebSearchConfig = async (
     toastr.error(e as string);
     throw e;
   }
+};
+
+export const createAIAgent = async (data: TCreateAgentData) => {
+  const res = await request({ method: "POST", url: `${baseUrl}/agents`, data });
+
+  return res as TAgent;
+};
+
+export const editAIAgent = async (id: TAgent["id"], data: TEditAgentData) => {
+  const res = await request({
+    method: "PUT",
+    url: `${baseUrl}/agents/${id}`,
+    data,
+  });
+
+  return res as TAgent;
+};
+
+export const getAIAgent = async (id: TAgent["id"]) => {
+  const res = await request({ method: "GET", url: `${baseUrl}/agents/${id}` });
+
+  return res as TAgent;
+};
+
+export const getAIAgents = async (
+  filter: RoomsFilter,
+  signal?: AbortSignal,
+) => {
+  let params;
+
+  if (filter) {
+    checkFilterInstance(filter, RoomsFilter);
+
+    params = `?${filter.toApiUrlParams()}`;
+  }
+
+  const res = await request({
+    method: "GET",
+    url: `${baseUrl}/agents${params}`,
+    signal,
+  });
+
+  return res as TGetAgents;
+};
+
+export const deleteAIAgent = async (id: TAgent["id"]) => {
+  await request({ method: "DELETE", url: `${baseUrl}/agents/${id}` });
 };

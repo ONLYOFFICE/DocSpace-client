@@ -240,6 +240,13 @@ export const useOptions = (
     window.dispatchEvent(event);
   }, [isWarningRoomsDialog, setQuotaWarningDialogVisible]);
 
+  const onCreateAIAgent = useCallback(() => {
+    // TODO: AI: Add quota if it needed
+
+    const event = new Event(Events.AGENT_CREATE);
+    window.dispatchEvent(event);
+  }, []);
+
   const openInfoPanel = useCallback(() => {
     if (!isVisibleInfoPanel) setVisibleInfoPanel?.(true);
 
@@ -336,6 +343,7 @@ export const useOptions = (
           onGoToPersonal,
           onGoToShared,
           onOpenAccessSettings,
+          onCreateAIAgent,
         },
         logoText,
         isVisitor,

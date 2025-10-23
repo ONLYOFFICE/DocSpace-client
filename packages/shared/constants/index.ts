@@ -278,6 +278,8 @@ export const CategoryType = Object.freeze({
   SharedWithMe: 12,
   Groups: 13,
   Guests: 14,
+  AIAgents: 15,
+  AIAgent: 16,
 });
 
 export const AVATAR_ACTION_KEYS = {

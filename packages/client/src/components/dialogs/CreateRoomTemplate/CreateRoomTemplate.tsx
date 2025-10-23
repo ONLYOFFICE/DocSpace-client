@@ -39,7 +39,7 @@ import { TSelectorItem } from "@docspace/shared/components/selector";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TRoomParams, TRoomTagsParams } from "@docspace/shared/utils/rooms";
 
-import TagHandler from "../CreateEditRoomDialog/handlers/TagHandler";
+import TagHandler from "../../../helpers/TagHandler";
 import SetRoomParams from "../CreateEditRoomDialog/sub-components/SetRoomParams";
 import { StyledFooter } from "./CreateRoomTemplate.styled";
 import TemplateAccessSettingsPanel from "../../panels/TemplateAccessSettingsPanel";

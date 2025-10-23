@@ -205,6 +205,7 @@ export const enum RoomSearchArea {
   Active = "Active",
   Archive = "Archive",
   Templates = "Templates",
+  AIAgents = "AiAgents",
 }
 /**
  * Enum for file action.
@@ -270,9 +271,9 @@ export const enum FolderType {
   SubFolderInProgress = 28,
   VirtualDataRoom = 29,
   RoomTemplates = 30,
-  AIAgents = 31,
   Knowledge = 32,
   ResultStorage = 33,
+  AIAgents = 34,
 }
 
 export const enum ShareAccessRights {
@@ -406,6 +407,8 @@ export const enum Events {
   CREATE_PDF_FORM_FILE = "create_pdf_form_file",
   SAVE_AS_TEMPLATE = "save_as_template",
   Share_PDF_Form = "share_pdf_form",
+  AGENT_CREATE = "create_agent",
+  AGENT_EDIT = "edit_agent",
 }
 
 /**

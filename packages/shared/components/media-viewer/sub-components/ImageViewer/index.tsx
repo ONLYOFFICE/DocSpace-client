@@ -83,6 +83,7 @@ export const ImageViewer = ({
   // imageId,
   // version,
   isDecodedImage,
+  isAnimatedImage,
   contextModel,
   errorTitle,
   devices,
@@ -998,7 +999,8 @@ export const ImageViewer = ({
               src:
                 window.ClientConfig?.imageThumbnails &&
                 thumbnailSrc &&
-                !showOriginSrc
+                !showOriginSrc &&
+                !isAnimatedImage
                   ? `${thumbnailSrc}&size=3840x2160&view=true`
                   : src,
               ref: imgRef,

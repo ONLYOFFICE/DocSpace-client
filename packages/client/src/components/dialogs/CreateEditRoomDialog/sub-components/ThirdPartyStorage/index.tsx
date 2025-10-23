@@ -40,8 +40,8 @@ import { ThirdPartyStore } from "SRC_DIR/store/ThirdPartyStore";
 import { TRoomStorageLocation } from "@docspace/shared/utils/rooms";
 import { TConnectingStorage } from "@docspace/shared/api/files/types";
 
-import { StyledParam } from "../Params/StyledParam";
-import ToggleParam from "../Params/ToggleParam";
+import { StyledParam } from "SRC_DIR/components/CreateEditDialogParams/StyledParam";
+import ToggleParam from "SRC_DIR/components/CreateEditDialogParams/ToggleParam";
 
 import ThirdPartyComboBox from "./ThirdPartyComboBox";
 import FolderInput from "./FolderInput";

@@ -153,6 +153,7 @@ const SectionHeaderContent = (props) => {
     getContactsModel,
     contactsCanCreate,
     onCreateRoom,
+    onCreateAgent,
     onEmptyTrashAction,
     getHeaderOptions,
     setBufferSelection,
@@ -195,6 +196,7 @@ const SectionHeaderContent = (props) => {
     isRootRooms,
     isArchive,
     isSharedWithMeFolderRoot,
+    isAIAgentsFolder,
   } = props;
 
   const location = useLocation();
@@ -720,6 +722,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const onPlusClick = () => {
+    if (isAIAgentsFolder) return onCreateAgent();
     if (!isContactsPage) return onCreateRoom();
     if (isContactsGroupsPage) return createGroup();
   };
@@ -733,7 +736,7 @@ const SectionHeaderContent = (props) => {
     return true;
   };
 
-  const withMenu = !isRoomsFolder && !isContactsGroupsPage;
+  const withMenu = !isRoomsFolder && !isContactsGroupsPage && !isAIAgentsFolder;
 
   return (
     <Consumer key="header">
@@ -949,6 +952,7 @@ export default inject(
       isArchiveFolder,
       isPersonalReadOnly,
       isSharedWithMeFolderRoot,
+      isAIAgentsFolder,
     } = treeFoldersStore;
 
     const {
@@ -1004,6 +1008,7 @@ export default inject(
       onCreateAndCopySharedLink,
       getFolderModel,
       onCreateRoom,
+      onCreateAgent,
       getHeaderOptions,
       onEmptyTrashAction,
     } = contextOptionsStore;
@@ -1177,6 +1182,7 @@ export default inject(
       startUpload,
       getFolderModel,
       onCreateRoom,
+      onCreateAgent,
       onEmptyTrashAction,
       getHeaderOptions,
       setBufferSelection,
@@ -1220,6 +1226,7 @@ export default inject(
       isRootRooms,
       isArchive,
       isSharedWithMeFolderRoot,
+      isAIAgentsFolder,
     };
   },
 )(

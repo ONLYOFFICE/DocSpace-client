@@ -58,6 +58,7 @@ type BodyProps = {
   fileView: InfoPanelStore["fileView"];
   getIsFiles: InfoPanelStore["getIsFiles"];
   getIsRooms: InfoPanelStore["getIsRooms"];
+  getIsAIAgent: InfoPanelStore["getIsAIAgent"];
   setView: InfoPanelStore["setView"];
 
   maxImageUploadSize: SettingsStore["maxImageUploadSize"];
@@ -86,6 +87,7 @@ const InfoPanelBodyContent = ({
   fileView,
   getIsFiles,
   getIsRooms,
+  getIsAIAgent,
   setView,
 
   maxImageUploadSize,
@@ -105,6 +107,7 @@ const InfoPanelBodyContent = ({
 }: BodyProps) => {
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
+  const isAgents = getIsAIAgent();
   const isGallery = window.location.pathname.includes("form-gallery");
   const isGroups = contactsTab === "groups";
   const isGuests = contactsTab === "guests";
@@ -114,6 +117,12 @@ const InfoPanelBodyContent = ({
     selection?.rootFolderType === FolderType.RoomTemplates;
 
   const isRoom = isRoomUtil(selection);
+  const isAgent =
+    selection &&
+    "rootFolderType" in selection &&
+    "roomType" in selection &&
+    selection.roomType &&
+    selection.rootFolderType === FolderType.AIAgents;
   const isFolder = selection && "isFolder" in selection && !!selection.isFolder;
 
   const isRoot = isFolder && selection?.id === selection?.rootFolderId;
@@ -130,8 +139,8 @@ const InfoPanelBodyContent = ({
     (isRoot && !isGallery);
 
   const currentView = useMemo(() => {
-    return isRoom || isTemplatesRoom ? roomsView : fileView;
-  }, [isRoom, roomsView, fileView, isTemplatesRoom]);
+    return isRoom || isTemplatesRoom || isAgent ? roomsView : fileView;
+  }, [isRoom, roomsView, fileView, isTemplatesRoom, isAgent]);
 
   const deferredCurrentView = React.useDeferredValue(currentView);
 
@@ -141,7 +150,8 @@ const InfoPanelBodyContent = ({
       selection &&
       isFolderUtil(selection) &&
       !selection?.canShare &&
-      !isTemplatesRoom
+      !isTemplatesRoom &&
+      !isAgent
     ) {
       setView(InfoPanelView.infoDetails);
     }
@@ -172,6 +182,7 @@ const InfoPanelBodyContent = ({
           isRooms={isRooms}
           isFiles={isFiles}
           isTemplatesRoom={isTemplatesRoom}
+          isAgents={isAgents}
           infoPanelSelection={selection}
           {...lockedSharedRoomProps}
         />
@@ -254,6 +265,7 @@ export default inject(
 
       getIsFiles,
       getIsRooms,
+      getIsAIAgent,
       setView,
     } = infoPanelStore;
 
@@ -281,6 +293,7 @@ export default inject(
       fileView,
       getIsFiles,
       getIsRooms,
+      getIsAIAgent,
       setView,
 
       maxImageUploadSize: settingsStore.maxImageUploadSize,

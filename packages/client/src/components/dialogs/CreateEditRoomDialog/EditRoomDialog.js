@@ -30,7 +30,7 @@ import cloneDeep from "lodash/cloneDeep";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import TagHandler from "./handlers/TagHandler";
+import TagHandler from "../../../helpers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import TemplateAccessSelector from "../../TemplateAccessSelector";
 import ChangeRoomOwnerPanel from "../../panels/ChangeRoomOwnerPanel";

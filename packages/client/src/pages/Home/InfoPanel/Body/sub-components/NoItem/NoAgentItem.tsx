@@ -24,20 +24,40 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import TagHandler from "../../handlers/TagHandler";
+import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
-export type TagListProps = {
-  tagHandler: TagHandler;
+import { Text } from "@docspace/shared/components/text";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
-  isDisabled: boolean;
+import InfoPanelRoomEmptyScreenSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.info.light.svg?url";
+import InfoPanelRoomEmptyScreenDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.rooms.info.dark.svg?url";
+
+import styles from "./NoItem.module.scss";
+
+const NoRoomItem = () => {
+  const { isBase } = useTheme();
+  const { t } = useTranslation(["InfoPanel"]);
+
+  const imageSrc = isBase
+    ? InfoPanelRoomEmptyScreenSvgUrl
+    : InfoPanelRoomEmptyScreenDarkSvgUrl;
+
+  return (
+    <div
+      className={classNames(
+        styles.noItemContainer,
+        "info-panel_gallery-empty-screen",
+      )}
+    >
+      <div className="no-thumbnail-img-wrapper">
+        <img src={imageSrc} alt="No Room" />
+      </div>
+      <Text className="no-item-text" textAlign="center">
+        {t("RoomsEmptyScreenTent")}
+      </Text>
+    </div>
+  );
 };
 
-export type TagDropDownProps = {
-  tagHandler: TagHandler;
-  open: boolean;
-  tagInputValue: string;
-  setTagInputValue: (value: string) => void;
-  createTagLabel: string;
-  inputRef: React.RefObject<HTMLInputElement | null>;
-  closeDropdown: () => void;
-};
+export default NoRoomItem;

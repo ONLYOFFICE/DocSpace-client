@@ -31,7 +31,6 @@ import InfoIconSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import EmptyScreenAIAgentsSelectorSvgUrl from "PUBLIC_DIR/images/emptyview/ai.agents.selector.light.svg?url";
 import EmptyScreenAIAgentsSelectorSvgUrlDark from "PUBLIC_DIR/images/emptyview/ai.agents.selector.dark.svg?url";
 
-import { RoomsType } from "../../enums";
 import { Selector, TSelectorItem } from "../../components/selector";
 import {
   TSelectorCancelButton,
@@ -44,7 +43,7 @@ import { TTranslation } from "../../types";
 import { useTheme } from "../../hooks/useTheme";
 
 import useSocketHelper from "../utils/hooks/useSocketHelper";
-import useRoomsHelper from "../utils/hooks/useRoomsHelper";
+import useAgentsHelper from "../utils/hooks/useAgentsHelper";
 import {
   LoadersContext,
   LoadersContextProvider,
@@ -158,16 +157,13 @@ const AIAgentSelectorComponent = ({
     [setIsFirstLoad],
   );
 
-  const { getRoomList: onLoadNextPage } = useRoomsHelper({
+  const { getAgentList: onLoadNextPage } = useAgentsHelper({
     withCreate: true,
     isInit: isInitRef.current,
     setIsInit,
-    createDefineRoomLabel: t("Common:CreateAIAgent"),
-    createDefineRoomType: RoomsType.AIRoom,
+    createDefineLabel: t("Common:CreateAIAgent"),
     excludeItems,
-    roomType: RoomsType.AIRoom,
     searchValue,
-    isRoomsOnly: true,
     setHasNextPage,
     setTotal,
     setItems,

@@ -70,6 +70,33 @@ export type UseRoomsHelperProps = TUseInputItemHelper & {
   >;
 };
 
+export type UseAgentsHelperProps = TUseInputItemHelper & {
+  searchValue?: string;
+  // isRoomsOnly: boolean;
+  excludeItems?: (number | string | undefined)[];
+  isInit: boolean;
+  createDefineLabel?: string;
+  onSetBaseFolderPath?: (
+    value: number | string | undefined | TBreadCrumb[],
+  ) => void;
+  getRootData?: () => Promise<void>;
+  subscribe: (id: number) => void;
+  withInit?: boolean;
+  setIsInit: (value: boolean) => void;
+  setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
+  setHasNextPage: (value: boolean) => void;
+  setTotal: (value: number) => void;
+  setIsRoot?: (value: boolean) => void;
+  setSelectedItemType?: React.Dispatch<
+    React.SetStateAction<"rooms" | "files" | undefined>
+  >;
+  setSelectedItemSecurity?: React.Dispatch<
+    React.SetStateAction<
+      TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
+    >
+  >;
+};
+
 export type UseSocketHelperProps = {
   setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
   setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;

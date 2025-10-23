@@ -35,7 +35,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 
-import { StyledParam } from "../Params/StyledParam";
+import { StyledParam } from "SRC_DIR/components/CreateEditDialogParams/StyledParam";
 
 const KnowledgeSettings = () => {
   const { t } = useTranslation(["AIRoom", "Common", "Article"]);

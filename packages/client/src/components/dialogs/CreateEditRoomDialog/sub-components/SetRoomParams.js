@@ -44,10 +44,10 @@ import AvatarEditorDialog from "../../AvatarEditorDialog";
 
 import VirtualDataRoomBlock from "./VirtualDataRoomBlock";
 
-import TagInput from "./TagInput";
-import RoomQuota from "./RoomQuota";
-import InputParam from "./Params/InputParam";
-import ChangeRoomOwner from "./ChangeRoomOwner";
+import TagInput from "../../../TagInput";
+import RoomQuota from "../../../RoomQuota";
+import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
+import ChangeRoomOwner from "../../../ChangeRoomOwner";
 import RoomTypeDropdown from "./RoomTypeDropdown";
 import PermanentSettings from "./PermanentSettings";
 import ThirdPartyStorage from "./ThirdPartyStorage";

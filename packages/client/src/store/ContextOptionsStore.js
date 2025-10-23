@@ -65,6 +65,7 @@ import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import PluginActionsSvgUrl from "PUBLIC_DIR/images/plugin.actions.react.svg?url";
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
+import CatalogAIAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
@@ -922,6 +923,12 @@ class ContextOptionsStore {
 
   onClickEditRoom = (item) => {
     const event = new Event(Events.ROOM_EDIT);
+    event.item = item;
+    window.dispatchEvent(event);
+  };
+
+  onClickEditAgent = (item) => {
+    const event = new Event(Events.AGENT_EDIT);
     event.item = item;
     window.dispatchEvent(event);
   };
@@ -1985,6 +1992,14 @@ class ContextOptionsStore {
         disabled: !isTemplateOwner,
       },
       {
+        id: "option_edit-agent",
+        key: "edit-agent",
+        label: t("Common:EditAgent"),
+        icon: SettingsReactSvgUrl,
+        onClick: () => this.onClickEditAgent(item),
+        disabled: false,
+      },
+      {
         id: "option_save-as-template",
         key: "save-as-template",
         label: t("SaveAsTemplate"),
@@ -2018,7 +2033,9 @@ class ContextOptionsStore {
       {
         id: "option_change-room-owner",
         key: "change-room-owner",
-        label: t("Files:ChangeTheRoomOwner"),
+        label: item.isAIAgent
+          ? t("Translations:OwnerChange")
+          : t("Files:ChangeTheRoomOwner"),
         icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
         disabled: false,
@@ -2297,7 +2314,7 @@ class ContextOptionsStore {
       {
         id: "option_leave-room",
         key: "leave-room",
-        label: t("LeaveTheRoom"),
+        label: item.isAIAgent ? t("LeaveTheAgent") : t("LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
         disabled:
@@ -2342,12 +2359,17 @@ class ContextOptionsStore {
         key: "delete",
         label: isRootThirdPartyFolder
           ? t("Common:Disconnect")
-          : item.isTemplate
-            ? t("DeleteTemplate")
-            : item.isRoom
-              ? t("Common:DeleteRoom")
-              : t("Common:Delete"),
-        icon: item.isRoom ? RemoveOutlineSvgUrl : TrashReactSvgUrl,
+          : item.isAIAgent
+            ? t("DeleteAgent")
+            : item.isTemplate
+              ? t("DeleteTemplate")
+              : item.isRoom
+                ? t("Common:DeleteRoom")
+                : t("Common:Delete"),
+        icon:
+          item.isRoom && !item.isAIAgent
+            ? RemoveOutlineSvgUrl
+            : TrashReactSvgUrl,
         onClick: () => this.onDelete(item, t),
         disabled: item.isTemplate ? !isTemplateOwner : false,
       },
@@ -2432,7 +2454,11 @@ class ContextOptionsStore {
         groupLabel: t("Common:Manage"),
         groupIcon: SettingsReactSvgUrl,
         itemKeys: [
-          [{ key: "edit-room" }, { key: "save-as-template" }],
+          [
+            { key: "edit-room" },
+            { key: "edit-agent" },
+            { key: "save-as-template" },
+          ],
           [{ key: "download" }, { key: "duplicate-room" }],
           [
             { key: "change-room-owner" },
@@ -2926,6 +2952,19 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
+  onCreateAgent = () => {
+    // TODO: AI: Add quota if it needed
+
+    // if (this.currentQuotaStore.isWarningRoomsDialog) {
+    //   this.dialogsStore.setQuotaWarningDialogVisible(true);
+    //   return;
+    // }
+
+    const event = new Event(Events.AGENT_CREATE);
+
+    window.dispatchEvent(event);
+  };
+
   onCreate = (format, t) => {
     const event = new Event(Events.CREATE);
 
@@ -3108,7 +3147,7 @@ class ContextOptionsStore {
     if (!canCreate || (isSectionMenu && (isMobile || someDialogIsOpen)))
       return null;
 
-    const { isRoomsFolder, isPrivacyFolder, isFlowsFolder } =
+    const { isRoomsFolder, isPrivacyFolder, isFlowsFolder, isAIAgentsFolder } =
       this.treeFoldersStore;
     const { mainButtonItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
@@ -3250,27 +3289,36 @@ class ContextOptionsStore {
 
     const showUploadFolder = !(isMobile || isTablet);
 
-    const options = isRoomsFolder
-      ? isFlowsFolder
-        ? []
+    const options = isAIAgentsFolder
+      ? [
+          {
+            key: "new-agent",
+            label: t("Common:NewAgent"),
+            onClick: this.onCreateAgent,
+            icon: CatalogAIAgentsReactSvgUrl,
+          },
+        ]
+      : isRoomsFolder
+        ? isFlowsFolder
+          ? []
+          : [
+              {
+                key: "new-room",
+                label: t("Common:NewRoom"),
+                onClick: this.onCreateRoom,
+                icon: CatalogRoomsReactSvgUrl,
+              },
+            ]
         : [
-            {
-              key: "new-room",
-              label: t("Common:NewRoom"),
-              onClick: this.onCreateRoom,
-              icon: CatalogRoomsReactSvgUrl,
-            },
-          ]
-      : [
-          createNewDoc,
-          createNewSpreadsheet,
-          createNewPresentation,
-          ...formActions,
-          createNewFolder,
-          { key: "separator", isSeparator: true },
-          uploadFiles,
-          showUploadFolder ? uploadFolder : null,
-        ];
+            createNewDoc,
+            createNewSpreadsheet,
+            createNewPresentation,
+            ...formActions,
+            createNewFolder,
+            { key: "separator", isSeparator: true },
+            uploadFiles,
+            showUploadFolder ? uploadFolder : null,
+          ];
 
     if (mainButtonItemsList && enablePlugins && !isRoomsFolder) {
       const pluginItems = [];

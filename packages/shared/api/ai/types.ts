@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TCreatedBy } from "../../types";
+import { TCreatedBy, type TPathParts } from "../../types";
 import {
   ContentType,
   ProviderType,
@@ -32,6 +32,8 @@ import {
   ServerType,
   WebSearchType,
 } from "./enums";
+import { TRoom } from "../rooms/types";
+import type { TFile, TFolder } from "../files/types";
 
 export type TCreateAiProvider = {
   type: ProviderType;
@@ -189,3 +191,42 @@ export type TAIConfig = {
   webSearchToolName: string;
   webCrawlingToolName: string;
 };
+
+export type TAgent = TRoom;
+
+export type TAgentLogo = {
+  tmpFile: string;
+  height: number;
+  width: number;
+  x: number;
+  y: number;
+};
+
+export type TChatSettings = {
+  prompt?: string;
+  providerId?: TAiProvider["id"];
+  modelId?: TModel["modelId"];
+};
+
+export type TCreateAgentData = {
+  title: string;
+  cover?: string;
+  color?: string;
+  tags?: string[];
+  logo?: TAgentLogo;
+  chatSettings?: TChatSettings;
+  quota?: number;
+};
+
+export type TGetAgents = {
+  files: TFile[];
+  folders: TAgent[];
+  current: TFolder;
+  pathParts: TPathParts[];
+  startIndex: number;
+  count: number;
+  total: number;
+  new: number;
+};
+
+export type TEditAgentData = Partial<TCreateAgentData>;

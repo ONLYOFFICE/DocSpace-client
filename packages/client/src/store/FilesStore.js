@@ -1778,7 +1778,7 @@ class FilesStore {
 
         const navigationPath = await Promise.all(
           data.pathParts.map(async (folder, idx) => {
-            const { Rooms, Archive } = FolderType;
+            const { Rooms, Archive, AIAgents } = FolderType;
 
             // if (
             //   data.current.providerKey &&
@@ -1799,7 +1799,8 @@ class FilesStore {
             const isRootRoom =
               idx === 0 &&
               (data.current.rootFolderType === Rooms ||
-                data.current.rootFolderType === Archive);
+                data.current.rootFolderType === Archive ||
+                data.current.rootFolderType === AIAgents);
 
             let shared;
             let quotaLimit;

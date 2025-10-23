@@ -117,6 +117,12 @@ const InfoPanelBodyContent = ({
     selection?.rootFolderType === FolderType.RoomTemplates;
 
   const isRoom = isRoomUtil(selection);
+  const isAgent =
+    selection &&
+    "rootFolderType" in selection &&
+    "roomType" in selection &&
+    selection.roomType &&
+    selection.rootFolderType === FolderType.AIAgents;
   const isFolder = selection && "isFolder" in selection && !!selection.isFolder;
 
   const isRoot = isFolder && selection?.id === selection?.rootFolderId;
@@ -133,8 +139,8 @@ const InfoPanelBodyContent = ({
     (isRoot && !isGallery);
 
   const currentView = useMemo(() => {
-    return isRoom || isTemplatesRoom ? roomsView : fileView;
-  }, [isRoom, roomsView, fileView, isTemplatesRoom]);
+    return isRoom || isTemplatesRoom || isAgent ? roomsView : fileView;
+  }, [isRoom, roomsView, fileView, isTemplatesRoom, isAgent]);
 
   const deferredCurrentView = React.useDeferredValue(currentView);
 
@@ -144,7 +150,8 @@ const InfoPanelBodyContent = ({
       selection &&
       isFolderUtil(selection) &&
       !selection?.canShare &&
-      !isTemplatesRoom
+      !isTemplatesRoom &&
+      !isAgent
     ) {
       setView(InfoPanelView.infoDetails);
     }

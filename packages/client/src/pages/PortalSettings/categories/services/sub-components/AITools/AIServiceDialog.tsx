@@ -110,12 +110,12 @@ const AIServiceDialog: React.FC<BackupServiceDialogProps> = ({
       displayType={ModalDialogType.aside}
       withBodyScroll
     >
-      <ModalDialog.Header>AI</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:Backup")}</ModalDialog.Header>
       <ModalDialog.Body>
         <ServiceToggleSection
           isEnabled={isEnabled}
           onToggle={handleToggleChange}
-          title="AI"
+          title={t("Common:Backup")}
           description={description}
           testId="service-ai-toggle-button"
         />

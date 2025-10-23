@@ -103,7 +103,7 @@ const SessionsTableHeader = (props) => {
 
   useEffect(() => {
     setColumns(getColumns(defaultColumns, userId));
-  }, []);
+  }, [t]);
 
   return (
     <TableHeader

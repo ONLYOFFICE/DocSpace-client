@@ -77,11 +77,6 @@ const StyledBody = styled.div`
         !props.theme.isBase &&
         css`
           svg {
-            path {
-              fill: ${({ theme }) =>
-                theme.client.settings.payment.benefitsContainer
-                  .iconsColor} !important;
-            }
             mask + path {
               fill: none !important;
               stroke: ${({ theme }) =>

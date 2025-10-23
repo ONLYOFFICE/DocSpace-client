@@ -29,6 +29,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import Backend from "i18next-http-backend";
 import { LANGUAGE } from "../constants";
+import { createUpdatePrompt } from "./client/ui/update-prompt";
 
 i18n
   .use(Backend)
@@ -263,59 +264,15 @@ export class ServiceWorker {
   }
 
   private showUpdatePrompt(): void {
-    const notification = document.createElement("div");
-    notification.innerHTML = `
-      <div style="
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        color: white;
-        padding: 16px 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        z-index: 10000;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-size: 14px;
-        max-width: 300px;
-      ">
-        <div style="margin-bottom: 12px;">
-          ${i18n.t("Common:NewVersionAvailable")}
-        </div>
-        <div>
-          <button onclick="this.parentElement.parentElement.parentElement.updateSw()" style="
-            background: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-            margin-right: 8px;
-          ">${i18n.t("Common:Load")}</button>
-          <button onclick="this.parentElement.parentElement.parentElement.remove()" style="
-            background: transparent;
-            color: white;
-            border: 1px solid white;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-          ">Later</button>
-        </div>
-      </div>
-    `;
-
-    // Add update handler to notification element
-    (notification as HTMLElement & { updateSw?: () => void }).updateSw = () => {
-      this.wb?.messageSkipWaiting();
-      notification.remove();
-    };
-
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-      if (notification.parentNode) {
-        notification.remove();
-      }
-    }, 30000);
+    createUpdatePrompt({
+      message: i18n.t("Common:NewVersionAvailable"),
+      updateButtonText: i18n.t("Common:Load"),
+      dismissButtonText: "Later",
+      onUpdate: () => {
+        this.wb?.messageSkipWaiting();
+      },
+      autoHideDelay: 30000,
+    });
   }
 
   private startUpdateTimer(): void {

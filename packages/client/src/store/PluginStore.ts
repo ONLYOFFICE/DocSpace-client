@@ -691,6 +691,7 @@ class PluginStore {
             userRole,
             device,
             security,
+            fileExst,
             itemSecurity,
           });
 

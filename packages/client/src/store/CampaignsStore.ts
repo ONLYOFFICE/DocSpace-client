@@ -70,7 +70,7 @@ class CampaignsStore {
     this.closedCampaignsLS = JSON.stringify(closedCampaigns);
   };
 
-  getBanner = async () => {
+  getBanner = async (updated = false) => {
     const { standalone } = this.settingsStore;
     const { stringUserType } = this.userStore;
 
@@ -87,7 +87,7 @@ class CampaignsStore {
     if (this.campaigns.length < 1 || index + 1 >= this.campaigns.length) {
       index = 0;
     } else {
-      index += 1;
+      if (!updated) index++;
     }
 
     const currentCampaign = this.campaigns[index];

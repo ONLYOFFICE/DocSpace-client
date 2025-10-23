@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { registerRoute } from "workbox-routing";
-import { CacheFirst, StaleWhileRevalidate } from "workbox-strategies";
+import { CacheFirst } from "workbox-strategies";
 import { ExpirationPlugin } from "workbox-expiration";
 import { CacheableResponsePlugin } from "workbox-cacheable-response";
 import type { SWConfig } from "../config";
@@ -50,7 +50,7 @@ export function registerStaticCacheStrategies(config: SWConfig): void {
 
   registerRoute(
     ({ url }) => url.pathname.startsWith("/locales/"),
-    new StaleWhileRevalidate({
+    new CacheFirst({
       cacheName: `${config.cachePrefix}-locales-${config.cacheSuffix}`,
       plugins: [
         new ExpirationPlugin({

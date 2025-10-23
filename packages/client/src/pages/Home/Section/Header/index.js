@@ -323,6 +323,8 @@ const SectionHeaderContent = (props) => {
   };
 
   const getMenuItems = () => {
+    if (isAIAgentsFolder) return null;
+
     const checkboxOptions = isContactsPage ? (
       getContactsMenuItems()
     ) : (

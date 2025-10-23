@@ -83,7 +83,7 @@
     "shx": "0.3.4",
     "style-loader": "3.3.4",
     "terser-webpack-plugin": "5.3.10",
-    "typescript": "5.9.2",
+    "typescript": "5.9.3",
     "webpack": "5.101.3"
   },
   "title": "ONLYOFFICE",

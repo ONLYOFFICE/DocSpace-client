@@ -46,6 +46,7 @@ import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import FileNameCell from "./FileNameCell";
 import AccessLevelCell from "./AccessLevelCell";
+import SharedByCell from "./SharedByCell";
 
 interface SharedWithMeRowDataProps {
   t: TFunction;
@@ -166,7 +167,7 @@ const SharedWithMeRowData: FC<
             lastColumn === "SharedByShareWithMe" ? "no-extra-space" : "",
           )}
         >
-          <AuthorCell
+          <SharedByCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />

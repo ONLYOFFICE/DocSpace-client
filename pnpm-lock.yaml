@@ -8,7 +8,7 @@ overrides:
   '@types/react': 19.2.2
   '@types/react-dom': 19.2.2
   nth-check: 2.1.1
-  pnpm: ^10.15.1
+  pnpm: ^10.19.0
   on-headers: ^1.1.0
   koa: '>=2.16.3'
 
@@ -8806,8 +8806,8 @@ packages:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
     engines: {node: '>=4'}
 
-  pnpm@10.15.1:
-    resolution: {integrity: sha512-NOU4wym1VTAUyo6PRTWZf5YYCh0PYUM5NXRJk1NQ2STiL4YUaCGRJk7DPRRirCFWGv+X9rsYBlNRwWLH6PbeZw==}
+  pnpm@10.19.0:
+    resolution: {integrity: sha512-yfxyNukq31yK9C/VvxYS35nCzrYvJwRwMvRyCzP46s3eMRhl6RxBHyd09hjYLzIICOy1Fxi/qCwGDEunx2oyuA==}
     engines: {node: '>=18.12'}
     hasBin: true
 
@@ -13309,7 +13309,7 @@ snapshots:
 
   '@onlyoffice/docspace-sdk-js@2.0.0':
     dependencies:
-      pnpm: 10.15.1
+      pnpm: 10.19.0
 
   '@onlyoffice/document-editor-react@2.1.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
@@ -20023,7 +20023,7 @@ snapshots:
 
   pluralize@8.0.0: {}
 
-  pnpm@10.15.1: {}
+  pnpm@10.19.0: {}
 
   polished@4.3.1:
     dependencies:

@@ -64,7 +64,9 @@ const InfiniteGrid = (props) => {
     ...rest
   } = props;
 
-  const [countTilesInRow, setCountTilesInRow] = useState(getCountTilesInRow());
+  const [countTilesInRow, setCountTilesInRow] = useState(
+    getCountTilesInRow(false, false, true),
+  );
 
   let cards = [];
   const list = [];
@@ -79,7 +81,7 @@ const InfiniteGrid = (props) => {
   };
 
   const setTilesCount = () => {
-    const newCount = getCountTilesInRow();
+    const newCount = getCountTilesInRow(false, false, true);
     if (countTilesInRow !== newCount) setCountTilesInRow(newCount);
   };
 

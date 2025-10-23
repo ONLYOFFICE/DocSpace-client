@@ -313,6 +313,10 @@ const Bar = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    updateBanner();
+  }, [t]);
+
   const getCurrentBar = () => {
     if (
       isRoomsTariffAlmostLimit &&

@@ -31,8 +31,13 @@ export const isStorybook = (): boolean => {
   return document.querySelector('[class^="sb-"]') !== null;
 };
 
-export const returnToPortal = () => {
+export const returnToPortal = (withoutTimeout = false) => {
   if (isStorybook()) {
+    return;
+  }
+
+  if (withoutTimeout) {
+    window.location.replace("/");
     return;
   }
 

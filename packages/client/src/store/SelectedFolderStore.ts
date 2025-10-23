@@ -221,7 +221,7 @@ class SelectedFolderStore {
       pinned: this.pinned,
       isRoom: this.isRoom,
       isTemplate: this.isTemplate,
-      isAIAgent: this.isAIRoom,
+      isAIAgent: this.isAIAgent,
       logo: this.logo,
       tags: this.tags,
       rootFolderId: this.rootFolderId,
@@ -496,6 +496,10 @@ class SelectedFolderStore {
       this.navigationPath.some((r) => r.roomType === RoomsType.AIRoom) ||
       this.rootRoomType === RoomsType.AIRoom
     );
+  }
+
+  get isAIAgent() {
+    return this.roomType === RoomsType.AIRoom;
   }
 }
 

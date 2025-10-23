@@ -180,6 +180,7 @@ const SectionHeaderContent = (props) => {
     allowInvitingMembers,
 
     isAIRoom,
+    isAIAgent,
     isKnowledgeTab,
     currentClientView,
     profile,
@@ -670,6 +671,8 @@ const SectionHeaderContent = (props) => {
       categoryType === CategoryType.Archive) &&
     !isCurrentRoom;
 
+  const insideTheAgent = categoryType === CategoryType.AIAgent && !isAIAgent;
+
   const logo = getLogoUrl(
     WhiteLabelLogoType.LightSmall,
     !theme.isBase,
@@ -824,7 +827,9 @@ const SectionHeaderContent = (props) => {
                 isPublicRoom={isPublicRoom}
                 titleIcon={titleIcon}
                 titleIconTooltip={titleIconTooltip}
-                showRootFolderTitle={insideTheRoom || isContactsInsideGroupPage}
+                showRootFolderTitle={
+                  insideTheRoom || insideTheAgent || isContactsInsideGroupPage
+                }
                 currentDeviceType={currentDeviceType}
                 isFrame={isFrame}
                 showTitle={isFrame ? showTitle : true}
@@ -987,6 +992,7 @@ export default inject(
       rootFolderType,
       shared,
       isAIRoom,
+      isAIAgent,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -1210,6 +1216,7 @@ export default inject(
       allowInvitingMembers,
 
       isAIRoom,
+      isAIAgent,
       isKnowledgeTab,
       contactsTab,
 

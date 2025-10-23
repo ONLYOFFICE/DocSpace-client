@@ -391,7 +391,6 @@
   "FoldersAndFilesWillBeCopied": "フォルダとファイルはコピー先にコピーされます。",
   "ForcePathStyle": "強制パススタイル",
   "Form": "フォーム",
-  "FormAuthorizeToast": "この{{productName}}にアカウントをお持ちの場合は、ログインしていただくと、完了したフォームがアカウントに記録されます。",
   "FormDataCollection": "フォームデータ収集",
   "FormDataCollectionDescription": "完了したフォームのコピーとそのデータを XLSX 形式で収集し、フォーム記入ルームでの回答を分析します。",
   "FormFilingRoomInfo": "PDFフォームをルームにアップロードします。 メンバーとゲストを招待して、PDFフォームに入力してもらいます。 完了したフォームを確認し、スプレッドシートに自動的に収集されたデータを分析します。",

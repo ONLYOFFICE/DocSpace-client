@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
+
+const MIN_FONT_SIZE = 9;
+const FONT_STEP = 1;
 
 const useFitText = (
   campaignBackground: string,
@@ -32,24 +35,36 @@ const useFitText = (
 ) => {
   const ref: React.RefObject<HTMLDivElement | null> = useRef(null);
   const wrapperRef: React.RefObject<HTMLDivElement | null> = useRef(null);
+  const initialFontSize = parseInt(currentFontSize, 10);
 
-  const [fontSize, setFontSize] = useState(parseInt(currentFontSize, 10));
-
-  useEffect(() => {
-    setFontSize(parseInt(currentFontSize, 10));
-  }, [campaignBackground, currentFontSize]);
+  const [fontSize, setFontSize] = useState(initialFontSize);
+  const [isCalculating, setIsCalculating] = useState(true);
 
   useEffect(() => {
-    const isOverflow =
-      !!ref.current &&
-      !!wrapperRef.current &&
-      ref.current.scrollHeight > wrapperRef.current.offsetHeight;
+    setFontSize(initialFontSize);
+    setIsCalculating(true);
+  }, [campaignBackground, initialFontSize]);
 
-    if (isOverflow) {
-      const newFontSize = fontSize - 2;
-      setFontSize(newFontSize);
+  const checkOverflow = useCallback(() => {
+    if (!ref.current || !wrapperRef.current || !isCalculating) return;
+
+    const contentHeight = ref.current.scrollHeight;
+    const containerHeight = wrapperRef.current.offsetHeight;
+    const isOverflow = contentHeight > containerHeight;
+
+    if (isOverflow && fontSize > MIN_FONT_SIZE) {
+      setFontSize((prev) => Math.max(prev - FONT_STEP, MIN_FONT_SIZE));
+    } else {
+      setIsCalculating(false);
     }
-  }, [fontSize]);
+  }, [fontSize, isCalculating]);
+
+  useEffect(() => {
+    if (isCalculating) {
+      const rafId = requestAnimationFrame(checkOverflow);
+      return () => cancelAnimationFrame(rafId);
+    }
+  }, [checkOverflow, isCalculating]);
 
   return { fontSize: `${fontSize}px`, ref, wrapperRef };
 };

@@ -391,7 +391,6 @@
   "FoldersAndFilesWillBeCopied": "Pliki i katalogi nie zostaną skopiowane do lokalizacji docelowej",
   "ForcePathStyle": "Wymuś styl ścieżki",
   "Form": "Formularz",
-  "FormAuthorizeToast": "Jeśli masz konto w {{productName}}, zalecamy zalogowanie się, aby wypełnione formularze zostały zarejestrowane na Twoim koncie.",
   "FormDataCollection": "Zbieranie danych formularza",
   "FormDataCollectionDescription": "Zbierz skopiowane formularze i dane z nich do formatu XLSX w celu analizy odpowiedzi w pomieszczeniach do wypełniania formularzy.",
   "FormFilingRoomInfo": "Prześlij formularze PDF do pokoju. Zaproś członków i gości do wypełnienia formularza PDF. Sprawdź wypełnione formularze i przeanalizuj dane automatycznie zebrane w arkuszu kalkulacyjnym.",

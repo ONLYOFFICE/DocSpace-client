@@ -33,55 +33,13 @@ import * as fs from "fs";
 const exec = promisify(execCallback);
 
 const PATHS = {
-  scriptDir: __dirname,
   packageRoot: path.resolve(__dirname, ".."),
-  swTemplate: path.resolve(__dirname, "../sw/template.ts"),
-  swConfig: path.resolve(__dirname, "../sw/config.ts"),
   webpackConfig: path.resolve(__dirname, "../webpack.sw.config.js"),
   outputDir: path.resolve(__dirname, "../../../public"),
   swTemplateOutput: path.resolve(__dirname, "../../../public/sw-template.js"),
   swFinal: path.resolve(__dirname, "../../../public/sw.js"),
   globDirectory: path.resolve(__dirname, "../../../public"),
 } as const;
-
-interface PathValidationResult {
-  valid: boolean;
-  missing: string[];
-  errors: string[];
-}
-
-function validatePaths(): PathValidationResult {
-  const result: PathValidationResult = {
-    valid: true,
-    missing: [],
-    errors: [],
-  };
-
-  const requiredFiles = [
-    { path: PATHS.swTemplate, name: "Service Worker template" },
-    { path: PATHS.swConfig, name: "Service Worker config" },
-    { path: PATHS.webpackConfig, name: "Webpack config" },
-  ];
-
-  for (const file of requiredFiles) {
-    if (!fs.existsSync(file.path)) {
-      result.valid = false;
-      result.missing.push(file.name);
-      result.errors.push(`Missing: ${file.name} at ${file.path}`);
-    }
-  }
-
-  if (!fs.existsSync(PATHS.outputDir)) {
-    try {
-      fs.mkdirSync(PATHS.outputDir, { recursive: true });
-    } catch (error) {
-      result.valid = false;
-      result.errors.push(`Failed to create output directory: ${error}`);
-    }
-  }
-
-  return result;
-}
 
 function handleBuildError(stage: string, error: unknown): never {
   console.error(`\nBuild failed at: ${stage}`);
@@ -93,18 +51,6 @@ function handleBuildError(stage: string, error: unknown): never {
     console.error(error);
   }
 
-  console.error(`\nTroubleshooting:`);
-  if (stage === "Validation") {
-    console.error(`- Check that all source files exist`);
-    console.error(`- Verify project structure`);
-  } else if (stage === "Webpack Build") {
-    console.error(`- Check webpack.sw.config.js`);
-    console.error(`- Run: pnpm tsc --noEmit`);
-  } else if (stage === "Manifest Injection") {
-    console.error(`- Verify webpack output exists`);
-    console.error(`- Check glob directory: ${PATHS.globDirectory}`);
-  }
-
   process.exit(1);
 }
 
@@ -114,21 +60,18 @@ async function buildServiceWorker() {
   console.log("\nBuilding Service Worker...\n");
 
   try {
-    const validation = validatePaths();
-
-    if (!validation.valid) {
-      console.error("Validation failed:");
-      validation.errors.forEach((error) => console.error(`  ${error}`));
-      handleBuildError("Validation", new Error("Missing required files"));
+    // Ensure output directory exists
+    if (!fs.existsSync(PATHS.outputDir)) {
+      fs.mkdirSync(PATHS.outputDir, { recursive: true });
     }
 
+    // Build with Webpack
     const webpackCommand = `npx webpack --config ${path.basename(PATHS.webpackConfig)}`;
-    const { stdout, stderr } = await exec(webpackCommand, {
+    const { stderr } = await exec(webpackCommand, {
       cwd: PATHS.packageRoot,
       env: { ...process.env, NODE_ENV: process.env.NODE_ENV || "production" },
     });
 
-    if (stdout) console.log(stdout);
     if (
       stderr &&
       !stderr.includes("npm warn") &&
@@ -138,12 +81,20 @@ async function buildServiceWorker() {
     }
 
     if (!fs.existsSync(PATHS.swTemplateOutput)) {
-      handleBuildError("Webpack Build", new Error("Output file not found"));
+      handleBuildError(
+        "Webpack Build",
+        new Error(
+          `Output file not found at ${PATHS.swTemplateOutput}. Check webpack configuration.`,
+        ),
+      );
     }
 
     const webpackStats = fs.statSync(PATHS.swTemplateOutput);
-    console.log(`Webpack: ${(webpackStats.size / 1024).toFixed(2)} KB\n`);
+    console.log(
+      `Webpack output: ${(webpackStats.size / 1024).toFixed(2)} KB\n`,
+    );
 
+    // Inject precache manifest
     const manifestResult = await injectManifest({
       swSrc: PATHS.swTemplateOutput,
       swDest: PATHS.swFinal,
@@ -186,7 +137,7 @@ async function buildServiceWorker() {
     if (!fs.existsSync(PATHS.swFinal)) {
       handleBuildError(
         "Manifest Injection",
-        new Error("Final output not found"),
+        new Error(`Final output not found at ${PATHS.swFinal}`),
       );
     }
 
@@ -195,11 +146,11 @@ async function buildServiceWorker() {
 
     console.log(`Service Worker: ${(finalStats.size / 1024).toFixed(2)} KB`);
     console.log(
-      `Precached: ${count} files (${(size / 1024 / 1024).toFixed(3)} MB)`,
+      `Precached: ${count} files (${(size / 1024 / 1024).toFixed(2)} MB)`,
     );
     console.log(`Duration: ${buildDuration}s\n`);
   } catch (error) {
-    handleBuildError("Build Error", error);
+    handleBuildError("Build Process", error);
   }
 }
 

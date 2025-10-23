@@ -25,10 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /**
- * Extended Service Worker types
- * Types are already defined by lib.webworker and workbox-precaching
- * This file exists to ensure they're included in compilation
+ * Service Worker Global Scope type augmentation
+ * Extends ServiceWorkerGlobalScope with Workbox-specific properties
  */
 
-// Re-export to ensure types are available
-export type {};
+import type { PrecacheEntry } from "workbox-precaching";
+
+declare global {
+  interface ServiceWorkerGlobalScope {
+    __WB_MANIFEST: Array<string | PrecacheEntry>;
+  }
+}
+
+export {};

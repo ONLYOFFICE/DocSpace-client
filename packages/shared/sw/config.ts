@@ -49,9 +49,8 @@ export interface SWConfig {
   cacheSuffix: string;
   navigation: NavigationConfig;
   cache: {
-    translations: CacheConfig;
     static: CacheConfig;
-    images: CacheConfig;
+    i18n: CacheConfig;
   };
   updateInterval: number;
   debug: boolean;
@@ -96,22 +95,18 @@ export const SW_CONFIG: SWConfig = {
   },
 
   cache: {
-    translations: {
-      maxEntries: 100,
-      maxAgeSeconds: 24 * 60 * 60, // 1 day
-    },
     static: {
-      maxEntries: 200,
+      maxEntries: 60,
       maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
     },
-    images: {
-      maxEntries: 100,
-      maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+    i18n: {
+      maxEntries: 50,
+      maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
     },
   },
 
   updateInterval: 60 * 60 * 1000, // 1 hour
-  debug: false, // Set to true for development
+  debug: false,
 };
 
 export default SW_CONFIG;

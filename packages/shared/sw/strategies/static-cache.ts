@@ -31,6 +31,7 @@ import { CacheableResponsePlugin } from "workbox-cacheable-response";
 import type { SWConfig } from "../config";
 
 export function registerStaticCacheStrategies(config: SWConfig): void {
+  // Cache images and fonts
   registerRoute(
     ({ request }) =>
       request.destination === "image" || request.destination === "font",
@@ -38,22 +39,23 @@ export function registerStaticCacheStrategies(config: SWConfig): void {
       cacheName: `${config.cachePrefix}-static-${config.cacheSuffix}`,
       plugins: [
         new ExpirationPlugin({
-          maxEntries: 60,
-          maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+          maxEntries: config.cache.static.maxEntries,
+          maxAgeSeconds: config.cache.static.maxAgeSeconds,
         }),
         new CacheableResponsePlugin({ statuses: [0, 200] }),
       ],
     }),
   );
 
+  // Cache translations
   registerRoute(
     ({ url }) => url.pathname.startsWith("/locales/"),
     new StaleWhileRevalidate({
       cacheName: `${config.cachePrefix}-i18n-${config.cacheSuffix}`,
       plugins: [
         new ExpirationPlugin({
-          maxEntries: 50,
-          maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
+          maxEntries: config.cache.i18n.maxEntries,
+          maxAgeSeconds: config.cache.i18n.maxAgeSeconds,
         }),
         new CacheableResponsePlugin({ statuses: [0, 200] }),
       ],

@@ -29,13 +29,16 @@ import { registerRoute } from "workbox-routing";
 import SW_CONFIG from "./config";
 import { createNavigationRoute, logNavigationConfig } from "./core/routes";
 import { registerStaticCacheStrategies } from "./strategies/static-cache";
-import "./types"; // Import type extensions
+import "./types";
 
-declare const self: ServiceWorkerGlobalScope;
+declare const self: ServiceWorkerGlobalScope & {
+  skipWaiting(): Promise<void>;
+  addEventListener(type: string, listener: (event: MessageEvent) => void): void;
+};
 
-self.addEventListener("message", (event) => {
+self.addEventListener("message", (event: MessageEvent) => {
   if (event.data && event.data.type === "SKIP_WAITING") {
-    self.skipWaiting();
+    void self.skipWaiting();
   }
 });
 

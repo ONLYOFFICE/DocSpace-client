@@ -20,9 +20,14 @@
     "sw/config.ts",
     "sw/types.ts",
     "sw/core/**/*.ts",
-    "sw/strategies/**/*.ts",
-    "sw/client/**/*.ts",
-    "sw/utils/**/*.ts"
+    "sw/strategies/**/*.ts"
   ],
-  "exclude": ["node_modules", "**/*.test.ts", "**/*.spec.ts"]
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "sw/client/**/*.ts",
+    "sw/worker.ts",
+    "sw/helper.ts"
+  ]
 }

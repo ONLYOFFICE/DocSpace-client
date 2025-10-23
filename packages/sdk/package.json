@@ -13,7 +13,7 @@
     "tsc": "tsc",
     "clean": "shx rm -rf .next",
     "deploy": "shx --silent mkdir -p ../../../publish/web/sdk && shx cp -r .next/standalone/* ../../../publish/web/sdk && shx --silent mkdir -p ../../../publish/web/sdk/packages/sdk/.next/static && shx cp -r .next/static/* ../../../publish/web/sdk/packages/sdk/.next/static && shx cp -f server.prod.js ../../../publish/web/sdk/server.js",
-    "test:build": "cross-env E2E_TEST=true next build",
+    "test:build": "cross-env E2E_TEST=true next build --webpack",
     "test:start": "cross-env PORT=5112 NODE_ENV=production E2E_TEST=true node server.js",
     "test:e2e:docker:build": "docker-compose build",
     "test:e2e:docker:start": "docker-compose run --rm tests-local npx playwright test",

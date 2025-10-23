@@ -1665,16 +1665,18 @@ class FilesActionStore {
     if (this.publicRoomStore.isPublicRoom)
       return this.moveToPublicRoom(item.id);
 
-    const { id, isRoom, isTemplate, title, rootFolderType } = item;
+    const { id, isRoom, isTemplate, isAIAgent, title, rootFolderType } = item;
 
-    const categoryType = getCategoryTypeByFolderType(rootFolderType, id);
+    let categoryType = isAIAgent
+      ? CategoryType.Chat
+      : getCategoryTypeByFolderType(rootFolderType, id);
 
     const state = { title, rootFolderType, isRoot: false, isRoom };
     const filter = FilesFilter.getDefault();
 
     filter.folder = id;
 
-    if (isRoom || isTemplate) {
+    if (!isAIAgent && (isRoom || isTemplate)) {
       if (this.userStore.user?.id) {
         const key =
           categoryType === CategoryType.Archive

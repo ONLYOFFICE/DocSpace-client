@@ -686,22 +686,16 @@ class CreateEditRoomStore {
 
     window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
 
-    const promise = new Promise((resolve) => {
-      if (isDesktop()) {
-        when(
-          () => selectedFolderStore.id === room.id,
-          () => {
-            showInfoPanel();
-            openMembersTab();
-            resolve();
-          },
-        );
-      } else {
-        resolve();
-      }
-    });
+    if (isDesktop()) {
+      await when(() => selectedFolderStore.id === room.id, {
+        timeout: 10000,
+      }).catch((error) => {
+        console.error(error);
+      });
 
-    await promise;
+      showInfoPanel();
+      openMembersTab();
+    }
   };
 }
 

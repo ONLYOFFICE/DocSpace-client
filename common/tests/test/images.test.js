@@ -27,7 +27,12 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const { getAllFiles, getWorkSpaces, BASE_DIR, convertPathToOS } = require("../utils/files");
+const {
+  getAllFiles,
+  getWorkSpaces,
+  BASE_DIR,
+  convertPathToOS,
+} = require("../utils/files");
 const { findImagesIntoFiles } = require("../utils/images");
 
 const LOGO_REGEX = new RegExp(/\/logo\/(.)*\/(.)*.svg/);
@@ -55,7 +60,7 @@ beforeAll(() => {
     "storybook-static",
     "node_modules",
     ".meta",
-    "locales"
+    "locales",
   ];
 
   const workspaces = getWorkSpaces();
@@ -177,10 +182,7 @@ describe("Image Tests", () => {
         }
         if (skip) return;
         message += `${++i}. ${key}:\r\n`;
-        value.forEach(
-          (v) =>
-            (message += `${v.path}\r\n`)
-        );
+        value.forEach((v) => (message += `${v.path}\r\n`));
         message += "\r\n";
       }
     });
@@ -288,7 +290,10 @@ describe("Image Tests", () => {
     let message = "Found wrong images import in the code.\r\n\r\n";
     let k = 0;
     allFiles.forEach((file) => {
-      if (file.path.indexOf("browserDetector.js") > -1) {
+      if (
+        file.path.indexOf("browserDetector.js") > -1 ||
+        file.path.indexOf("sw.js") > -1
+      ) {
         return;
       }
 

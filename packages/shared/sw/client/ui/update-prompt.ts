@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { globalColors } from "../../../themes/globalColors";
+
 export interface UpdatePromptOptions {
   message: string;
   updateButtonText: string;
@@ -37,10 +39,10 @@ const PROMPT_STYLES = `
   position: fixed;
   top: 20px;
   right: 20px;
-  color: white;
+  color: ${globalColors.white};
   padding: 16px 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px ${globalColors.popupShadow};
   z-index: 10000;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 14px;
@@ -73,19 +75,19 @@ const PROMPT_STYLES = `
 }
 
 .sw-update-prompt__button:focus {
-  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline: 2px solid ${globalColors.onWhiteColor};
   outline-offset: 2px;
 }
 
 .sw-update-prompt__button--primary {
-  background: white;
-  color: #333;
+  background: ${globalColors.white};
+  color: ${globalColors.black};
 }
 
 .sw-update-prompt__button--secondary {
   background: transparent;
-  color: white;
-  border: 1px solid white;
+  color: ${globalColors.white};
+  border: 1px solid ${globalColors.white};
 }
 
 @keyframes sw-prompt-slide-in {

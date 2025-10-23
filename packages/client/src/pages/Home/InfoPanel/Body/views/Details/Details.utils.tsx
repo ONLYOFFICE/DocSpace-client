@@ -31,10 +31,13 @@ import { getCorrectDate } from "@docspace/shared/utils";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Tag } from "@docspace/shared/components/tag";
+import { isRoom } from "@docspace/shared/utils/typeGuards";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
-import { TCreatedBy, TTranslation } from "@docspace/shared/types";
-import { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
+
+import type { TCreatedBy, TTranslation } from "@docspace/shared/types";
+import type { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
@@ -169,6 +172,9 @@ class DetailsHelper {
               "Last modified by",
               "Creation date",
               this.item.order && "Index",
+              this.item.createdBy && "Author",
+              this.item.createdBy && "Shared by",
+              this.item.access && "Access level",
             ]
           : [
               "Owner",
@@ -182,6 +188,9 @@ class DetailsHelper {
               "expired" in this.item && this.item.expired && "Lifetime ends",
               "Versions",
               "order" in this.item && this.item.order && "Index",
+              this.item.createdBy && "Author",
+              this.item.createdBy && "Shared by",
+              this.item.access && "Access level",
               "Comments",
             ]
     ).filter((nP) => nP) as string[];
@@ -225,6 +234,14 @@ class DetailsHelper {
         return this.t("Common:Comments");
       case "Tags":
         return this.t("Common:Tags");
+
+      case "Author":
+        return this.t("Files:ByAuthor");
+      case "Shared by":
+        return this.t("Files:SharedBy");
+      case "Access level":
+        return this.t("Files:AccessLevel");
+
       case "Storage":
         if ("usedSpace" in this.item && this.item.usedSpace !== undefined) {
           return this.isDefaultRoomsQuotaSet &&
@@ -281,9 +298,20 @@ class DetailsHelper {
         return this.getItemTags();
       case "Storage":
         return this.getQuotaItem();
+      case "Author":
+        return this.getAuthorDecoration();
+      case "Shared by":
+        return this.getAuthorDecoration("createdBy");
+      case "Access level":
+        return this.getItemAccessLevel();
       default:
         break;
     }
+  };
+
+  getItemAccessLevel = () => {
+    if (!("access" in this.item) || isRoom(this.item)) return null;
+    return text(getAccessLabel(this.t, this.item));
   };
 
   getAuthorDecoration = (byField = "createdBy") => {

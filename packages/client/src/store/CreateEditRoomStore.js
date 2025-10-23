@@ -603,14 +603,15 @@ class CreateEditRoomStore {
       }
 
       await this.onOpenNewRoom(room);
+      if (successToast) toastr.success(successToast);
     } catch (err) {
       toastr.error(err);
     } finally {
-      this.onClose();
       this.setIsLoading(false);
       this.setConfirmDialogIsLoading(false);
+      this.onClose();
       clearCoverProps();
-      if (successToast) toastr.success(successToast);
+
       processCreatingRoomFromData && setProcessCreatingRoomFromData(false);
     }
   };

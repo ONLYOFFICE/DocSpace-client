@@ -25,12 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useRef, useState, useEffect, useCallback } from "react";
+import { ITranslate } from "./CampaignsBanner.types";
 
 const MIN_FONT_SIZE = 9;
 const FONT_STEP = 1;
 
 const useFitText = (
   campaignBackground: string,
+  campaignTranslate: ITranslate,
   currentFontSize: string = "13px",
 ) => {
   const ref: React.RefObject<HTMLDivElement | null> = useRef(null);
@@ -43,7 +45,7 @@ const useFitText = (
   useEffect(() => {
     setFontSize(initialFontSize);
     setIsCalculating(true);
-  }, [campaignBackground, initialFontSize]);
+  }, [campaignBackground, campaignTranslate, initialFontSize]);
 
   const checkOverflow = useCallback(() => {
     if (!ref.current || !wrapperRef.current || !isCalculating) return;

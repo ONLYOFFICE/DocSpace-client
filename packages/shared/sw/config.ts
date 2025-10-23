@@ -50,7 +50,7 @@ export interface SWConfig {
   navigation: NavigationConfig;
   cache: {
     static: CacheConfig;
-    i18n: CacheConfig;
+    locales: CacheConfig;
   };
   updateInterval: number;
   debug: boolean;
@@ -99,7 +99,7 @@ export const SW_CONFIG: SWConfig = {
       maxEntries: 60,
       maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
     },
-    i18n: {
+    locales: {
       maxEntries: 50,
       maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
     },

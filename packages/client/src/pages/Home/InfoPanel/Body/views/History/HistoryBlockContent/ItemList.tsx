@@ -103,7 +103,9 @@ const HistoryItemList = ({
 
   const items = [
     feed.data,
-    ...feed.related.map((relatedFeeds) => relatedFeeds.data),
+    ...feed.related.map(
+      (relatedFeeds: { data: TFeedData }) => relatedFeeds.data,
+    ),
   ].map((item) => {
     const i: TFeedData & {
       title: string;

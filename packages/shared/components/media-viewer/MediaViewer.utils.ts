@@ -284,3 +284,5 @@ export const formatTime = (time: number): string => {
 export const isTiff = (extension: string) =>
   extension === ".tiff" || extension === ".tif";
 export const isHeic = (extension: string) => extension === ".heic";
+export const isGif = (extension: string) => extension === ".gif";
+export const isWebp = (extension: string) => extension === ".webp";

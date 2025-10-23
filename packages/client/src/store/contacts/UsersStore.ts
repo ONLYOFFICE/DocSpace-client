@@ -62,6 +62,7 @@ import {
   reassignmentNecessary,
   terminateReassignment,
 } from "@docspace/shared/api/people";
+import type { TGroup } from "@docspace/shared/api/groups/types";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { getPersonalFolderTree } from "@docspace/shared/api/files";
@@ -298,7 +299,7 @@ class UsersStore {
 
     SocketHelper?.on(
       SocketEvents.UpdateGroup,
-      async (value: { id: string; data: any }) => {
+      async (value: { id: string; data: TGroup }) => {
         console.log(
           `[WS] ${SocketEvents.UpdateGroup}: ${value?.id}:${value?.data}`,
         );

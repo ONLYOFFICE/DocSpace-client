@@ -391,7 +391,6 @@
   "FoldersAndFilesWillBeCopied": "Pastas e arquivos serão copiados no destino",
   "ForcePathStyle": "Forçar a Formatação do Destino",
   "Form": "Formulário",
-  "FormAuthorizeToast": "Se tiver uma conta neste {{productName}}, recomendamos que inicie sessão para registar os formulários preenchidos na sua conta.",
   "FormDataCollection": "Coleta de dados do formulário",
   "FormDataCollectionDescription": "Reúna as cópias preenchidas do formulário e os dados deles em XLSX para analisar as respostas nas salas de preenchimento de formulários.",
   "FormFilingRoomInfo": "Carregue formulários PDF na sala. Convide membros e convidados a preencher um formulário PDF. Revise formulários preenchidos e analise os dados coletados automaticamente em uma planilha.",

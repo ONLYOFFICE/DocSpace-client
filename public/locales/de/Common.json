@@ -391,7 +391,6 @@
   "FoldersAndFilesWillBeCopied": "Ordner und Dateien werden in Zielbereich kopiert.",
   "ForcePathStyle": "Erzwinge Pfad-Stil",
   "Form": "Formular",
-  "FormAuthorizeToast": "Wenn Sie ein Konto bei diesem {{productName}} haben, empfehlen wir Ihnen, sich anzumelden, damit ausgefüllte Formulare unter Ihrem Konto erfasst werden.",
   "FormDataCollection": "Formulardatenerfassung",
   "FormDataCollectionDescription": "Sammeln Sie die ausgefüllten Formularkopien und Daten daraus in XLSX, um die Antworten in Formularausfüllräumen zu analysieren.",
   "FormFilingRoomInfo": "Laden Sie PDF-Formulare in den Raum hoch. Laden Sie Mitglieder und Gäste ein, ein PDF-Formular auszufüllen. Überprüfen Sie ausgefüllte Formulare und analysieren Sie automatisch erfasste Daten in einer Tabelle.",

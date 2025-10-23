@@ -70,9 +70,9 @@ class CampaignsStore {
     this.closedCampaignsLS = JSON.stringify(closedCampaigns);
   };
 
-  getBanner = async () => {
+  getBanner = async (updated = false) => {
     const { standalone } = this.settingsStore;
-    const { userType } = this.userStore;
+    const { stringUserType } = this.userStore;
 
     const lng: string[] | string = getCookie(LANGUAGE) || "en";
     const language = getLanguage(typeof lng === "object" ? lng[0] : lng);
@@ -87,7 +87,7 @@ class CampaignsStore {
     if (this.campaigns.length < 1 || index + 1 >= this.campaigns.length) {
       index = 0;
     } else {
-      index += 1;
+      if (!updated) index++;
     }
 
     const currentCampaign = this.campaigns[index];
@@ -108,7 +108,7 @@ class CampaignsStore {
       standalone,
     );
 
-    const isHide = isHideBannerForUser(userType as string, config?.hideFor);
+    const isHide = isHideBannerForUser(stringUserType, config?.hideFor);
     if (isHide) {
       this.setClosedCampaigns(currentCampaign);
       this.getBanner();

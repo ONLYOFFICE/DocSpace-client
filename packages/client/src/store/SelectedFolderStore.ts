@@ -26,7 +26,7 @@
 
 import { makeAutoObservable } from "mobx";
 
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import {
   FolderType,
@@ -65,7 +65,7 @@ export type TNavigationPath = {
   shared: boolean;
 };
 
-type ExcludeTypes = SettingsStore | ((...args: any[]) => any);
+type ExcludeTypes = SettingsStore | CallableFunction;
 
 export type TSelectedFolder = NonFunctionProperties<
   SelectedFolderStore,

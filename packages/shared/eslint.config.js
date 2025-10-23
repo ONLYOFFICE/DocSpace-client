@@ -41,9 +41,9 @@ module.exports = [
     },
     rules: {
       // Custom rules
+      "@typescript-eslint/no-explicit-any": "error",
       "import/prefer-default-export": "off",
       "import/no-extraneous-dependencies": "off",
-      "@typescript-eslint/ban-types": "off",
       "jsx-a11y/label-has-associated-control": "off",
       "jsx-a11y/no-static-element-interactions": "off",
       "jsx-a11y/anchor-is-valid": "off",
@@ -63,7 +63,7 @@ module.exports = [
       "no-useless-escape": "off",
       "no-param-reassign": "off",
       "prefer-destructuring": "off",
-      "@typescript-eslint/no-duplicate-enum-values": "off",
+      "@typescript-eslint/no-duplicate-enum-values": "error",
       "@typescript-eslint/only-throw-error": ["error"],
       "@typescript-eslint/no-loop-func": "error",
       "@typescript-eslint/no-use-before-define": [

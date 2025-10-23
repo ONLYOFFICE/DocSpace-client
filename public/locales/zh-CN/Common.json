@@ -391,7 +391,6 @@
   "FoldersAndFilesWillBeCopied": "文件夹和文件将被复制到目标位置",
   "ForcePathStyle": "力路风格",
   "Form": "表单",
-  "FormAuthorizeToast": "如果您拥有此{{productName}}的账户，我们建议您登录，以便将完成的表格记录在您的账户下。",
   "FormDataCollection": "表单数据汇总",
   "FormDataCollectionDescription": "将已完成的表单副本及其数据汇总至 XLSX 文件，用于分析表单填写房间的反馈结果。",
   "FormFilingRoomInfo": "将 PDF 表单上传至房间。邀请成员和访客填写 PDF 表单。查看已完成的表单并分析电子表格中自动收集的数据。",

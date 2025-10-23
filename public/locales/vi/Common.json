@@ -391,7 +391,6 @@
   "FoldersAndFilesWillBeCopied": "Thư mục và tập tin sẽ được sao chép vào đích đến",
   "ForcePathStyle": "Kiểu đường dẫn bắt buộc",
   "Form": "Biểu mẫu",
-  "FormAuthorizeToast": "Nếu bạn có tài khoản tại {{productName}}, chúng tôi khuyên bạn nên đăng nhập để các biểu mẫu đã hoàn thành được ghi lại trong tài khoản của bạn.",
   "FormDataCollection": "Thu thập dữ liệu mẫu",
   "FormDataCollectionDescription": "Thu thập các bản sao mẫu đã hoàn thành và dữ liệu từ chúng vào XLSX để phân tích các phản hồi trong phòng Điền Mẫu.",
   "FormFilingRoomInfo": "Tải biểu mẫu PDF lên phòng. Mời thành viên và khách điền vào biểu mẫu PDF. Xem lại các biểu mẫu đã hoàn thành và phân tích dữ liệu được thu thập tự động trong bảng tính.",

@@ -29,5 +29,5 @@
 import { revalidateTag } from "next/cache";
 
 export default async function action(tags: string[]) {
-  tags.forEach((tag) => revalidateTag(tag, "max"));
+  tags.forEach(revalidateTag);
 }

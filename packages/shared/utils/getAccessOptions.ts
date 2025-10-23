@@ -29,7 +29,7 @@ import type { TTranslation } from "../types";
 import { getUserTypeTranslation } from "./common";
 import { RoomsType, EmployeeType, ShareAccessRights } from "../enums";
 
-type AccessOptionType = {
+export type AccessOptionType = {
   key: string | EmployeeType;
   label: string;
   description: string;

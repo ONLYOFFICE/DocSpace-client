@@ -119,6 +119,7 @@ const SectionHeaderContent = (props) => {
     setIsLoading,
 
     moveToRoomsPage,
+    moveToAIAgentsPage,
     // setIsInfoPanelVisible,
 
     getContactsHeaderMenu,
@@ -362,13 +363,17 @@ const SectionHeaderContent = (props) => {
       return moveToPublicRoom(id);
     }
 
+    const rootFolderType = selectedFolder.rootFolderType;
+
+    if (isRootRoom && rootFolderType === FolderType.AIAgents) {
+      return moveToAIAgentsPage();
+    }
+
     if (isRootRoom || isRootTemplates) {
       return moveToRoomsPage();
     }
 
     setSelectedNode(id);
-
-    const rootFolderType = selectedFolder.rootFolderType;
 
     const path = getCategoryUrl(
       getCategoryTypeByFolderType(rootFolderType, id),
@@ -974,6 +979,7 @@ export default inject(
       getHeaderMenu,
       isGroupMenuBlocked,
       moveToRoomsPage,
+      moveToAIAgentsPage,
       onClickBack,
       moveToPublicRoom,
       createFoldersTree,
@@ -1157,6 +1163,7 @@ export default inject(
       isGroupMenuBlocked,
 
       moveToRoomsPage,
+      moveToAIAgentsPage,
       onClickBack,
       isPublicRoom,
 

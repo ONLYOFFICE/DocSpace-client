@@ -70,6 +70,7 @@ import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
 import DialogStore from "SRC_DIR/store/contacts/DialogStore";
 import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
+import CampaignsStore from "SRC_DIR/store/CampaignsStore";
 
 import styles from "./Profile.module.scss";
 
@@ -113,6 +114,7 @@ type MainProfileProps = {
   image?: AvatarEditorDialogStore["image"];
   setImage?: AvatarEditorDialogStore["setImage"];
   fetchTreeFolders?: TreeFoldersStore["fetchTreeFolders"];
+  getBanner?: CampaignsStore["getBanner"];
 };
 
 const MainProfile = (props: MainProfileProps) => {
@@ -140,6 +142,7 @@ const MainProfile = (props: MainProfileProps) => {
     image,
     setImage,
     fetchTreeFolders,
+    getBanner,
   } = props;
 
   const styleContainerRef = useRef<HTMLDivElement>(null);
@@ -312,6 +315,7 @@ const MainProfile = (props: MainProfileProps) => {
       await updateProfileCulture?.(profile!.id, newLanguage.key as string);
       await i18n.changeLanguage(newLanguage.key?.toString());
       await fetchTreeFolders?.();
+      await getBanner?.(true);
     } catch (error: unknown) {
       toastr.error(
         error && (error as { message: string }).message
@@ -780,6 +784,7 @@ export default inject(
     userStore,
     avatarEditorDialogStore,
     treeFoldersStore,
+    campaignsStore,
   }: TStore) => {
     const { withActivationBar, sendActivationLink, user: profile } = userStore;
     const { becometranslatorUrl, culture, documentationEmail } = settingsStore;
@@ -804,6 +809,8 @@ export default inject(
 
     const { fetchTreeFolders } = treeFoldersStore;
 
+    const { getBanner } = campaignsStore;
+
     return {
       profile,
       culture,
@@ -826,6 +833,7 @@ export default inject(
       onChangeFile,
       setImage,
       fetchTreeFolders,
+      getBanner,
     };
   },
 )(withCultureNames<MainProfileProps>(observer(MainProfile)));

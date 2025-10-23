@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, when } from "mobx";
 import isEqual from "lodash/isEqual";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
@@ -364,7 +364,7 @@ class CreateEditRoomStore {
   };
 
   onSaveAsTemplate = async (item, roomParams, openCreatedTemplate) => {
-    const { setSelection, setRoomCreated } = this.filesStore;
+    const { setRoomCreated } = this.filesStore;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
     const { cover, clearCoverProps } = this.dialogsStore;
 
@@ -446,19 +446,12 @@ class CreateEditRoomStore {
     });
 
     if (openCreatedTemplate) {
-      this.onOpenNewRoom({
+      await this.onOpenNewRoom({
         id: progressData.templateId,
         title,
         roomType,
         rootFolderType: FolderType.RoomTemplates,
       });
-
-      if (isDesktop()) {
-        const roomInfo = await api.files.getFolderInfo(progressData.templateId);
-        showInfoPanel();
-        openMembersTab();
-        setSelection([{ ...roomInfo, isRoom: true }]);
-      }
     }
 
     clearCoverProps();
@@ -490,8 +483,7 @@ class CreateEditRoomStore {
       preparingDataForCopyingToRoom,
     } = this.filesActionsStore;
     const { deleteThirdParty } = this.thirdPartyStore;
-    const { createRoom, selection, bufferSelection, setBufferSelection } =
-      this.filesStore;
+    const { createRoom, selection, bufferSelection } = this.filesStore;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
     const { cover, clearCoverProps } = this.dialogsStore;
 
@@ -597,8 +589,6 @@ class CreateEditRoomStore {
       if (!isThirdparty && storageFolderId)
         deleteThirdParty(thirdpartyAccount.providerId);
 
-      this.onOpenNewRoom(room);
-
       if (processCreatingRoomFromData) {
         const selections =
           selection.length > 0 && selection[0] != null
@@ -612,29 +602,15 @@ class CreateEditRoomStore {
         );
       }
 
-      if (isDesktop()) {
-        let roomInfo = null;
-
-        if (isTemplate) {
-          roomInfo = await api.files.getFolderInfo(room.id);
-        } else {
-          roomInfo = room;
-        }
-
-        showInfoPanel();
-        openMembersTab();
-        setBufferSelection({ ...roomInfo, isRoom: true });
-      }
-
-      if (successToast) toastr.success(successToast);
+      await this.onOpenNewRoom(room);
     } catch (err) {
       toastr.error(err);
     } finally {
+      this.onClose();
       this.setIsLoading(false);
       this.setConfirmDialogIsLoading(false);
-      this.onClose();
       clearCoverProps();
-
+      if (successToast) toastr.success(successToast);
       processCreatingRoomFromData && setProcessCreatingRoomFromData(false);
     }
   };
@@ -689,6 +665,7 @@ class CreateEditRoomStore {
 
   onOpenNewRoom = async (room) => {
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
+    const { setSelection, selectedFolderStore } = this.filesStore;
     const state = {
       isRoot: false,
       title: room.title,
@@ -696,6 +673,8 @@ class CreateEditRoomStore {
       isPublicRoomType: room.roomType === RoomsType.PublicRoom,
       rootFolderType: room.rootFolderType,
     };
+
+    setSelection([]);
 
     const newFilter = FilesFilter.getDefault();
     newFilter.folder = room.id;
@@ -705,6 +684,23 @@ class CreateEditRoomStore {
     const path = getCategoryUrl(CategoryType.SharedRoom, room.id);
 
     window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
+
+    const promise = new Promise((resolve) => {
+      if (isDesktop()) {
+        when(
+          () => selectedFolderStore.id === room.id,
+          () => {
+            showInfoPanel();
+            openMembersTab();
+            resolve();
+          },
+        );
+      } else {
+        resolve();
+      }
+    });
+
+    await promise;
   };
 }
 

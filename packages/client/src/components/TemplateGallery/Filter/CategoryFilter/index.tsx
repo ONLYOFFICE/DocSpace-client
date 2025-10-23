@@ -56,15 +56,15 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
   useEffect(() => {
     (async () => {
       if (!oformsFilter.locale) return;
-      let newMenuItems = await fetchCategoryTypes();
-      if (!newMenuItems) {
+      const categoryData = await fetchCategoryTypes();
+      if (!categoryData) {
         filterOformsByLocaleIsLoading &&
           setFilterOformsByLocaleIsLoading(false);
 
         return;
       }
 
-      const categoryPromises = newMenuItems.map(
+      const categoryPromises = categoryData.map(
         (item: Category) =>
           new Promise<Category[]>((resolve) => {
             resolve(fetchCategoriesOfCategoryType(item.attributes.categoryId));
@@ -73,22 +73,25 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
 
       Promise.all(categoryPromises)
         .then((results) => {
-          newMenuItems = newMenuItems.map((item: Category, index: number) => ({
-            key: item.attributes.categoryId,
-            label: item.attributes.name,
-            categories: results[index],
-          }));
+          const menuItems: MenuItem[] = categoryData.map(
+            (item: Category, index: number) => ({
+              key: item.attributes.categoryId,
+              label: item.attributes.name,
+              categories: results[index],
+            }),
+          );
+          setMenuItems(menuItems);
         })
         .catch((err) => {
           console.error(err);
-          newMenuItems = newMenuItems.map((item: Category) => ({
+          const menuItems: MenuItem[] = categoryData.map((item: Category) => ({
             key: item.attributes.categoryId,
             label: item.attributes.name,
             categories: [],
           }));
+          setMenuItems(menuItems);
         })
         .finally(() => {
-          setMenuItems(newMenuItems);
           filterOformsByLocaleIsLoading &&
             setFilterOformsByLocaleIsLoading(false);
         });

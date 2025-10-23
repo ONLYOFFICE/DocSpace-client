@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import uniqueid from "lodash/uniqueId";
-import React, { useEffect, useState, useRef, FC } from "react";
+import React, { isValidElement, useEffect, useState, useRef, FC } from "react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import { getCountTilesInRow } from "@docspace/shared/utils";
@@ -65,7 +65,9 @@ const Card: FC<CardProps> = ({
   className,
   ...rest
 }) => {
-  const isSubmitToGalleryTile = (children as any)?.props?.isSubmitTile === true;
+  const isSubmitToGalleryTile =
+    isValidElement(children) &&
+    (children.props as { isSubmitTile?: boolean })?.isSubmitTile === true;
   const cardClass = classNames(
     styles.card,
     "Card",
@@ -177,7 +179,9 @@ const InfiniteGrid: FC<InfiniteGridInjectedProps> = (props) => {
     React.Children.map(children, (child) => {
       if (child) {
         // Check if this is a SubmitToGalleryTile that will span 2 columns
-        const isSubmitTile = (child as any)?.props?.isSubmitTile === true;
+        const isSubmitTile =
+          isValidElement(child) &&
+          (child.props as { isSubmitTile?: boolean })?.isSubmitTile === true;
         const elementSpan = smallPreview && isSubmitTile ? 2 : 1;
 
         // If adding this element would exceed the row capacity, start a new row

@@ -53,7 +53,7 @@ const CategoryFilterDesktop: React.FC<CategoryFilterDesktopProps> = ({
     setHoveredSub(null);
   };
 
-  const onBackdropClick = (e: any) => {
+  const onBackdropClick = (e: Event) => {
     const target = e?.target as HTMLElement;
     if (
       target?.className !== "item-content" &&

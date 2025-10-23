@@ -55,7 +55,6 @@ type GalleryProps = {
           };
         };
       };
-  getIcon?: FilesSettingsStore["getIcon"];
   culture?: string;
 };
 

@@ -65,7 +65,7 @@ export const SW_CONFIG: SWConfig = {
 
   cache: {
     translations: {
-      maxEntries: 50,
+      maxEntries: 100,
       maxAgeSeconds: 24 * 60 * 60, // 1 day
     },
     static: {
@@ -73,7 +73,7 @@ export const SW_CONFIG: SWConfig = {
       maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
     },
     images: {
-      maxEntries: 60,
+      maxEntries: 100,
       maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
     },
   },

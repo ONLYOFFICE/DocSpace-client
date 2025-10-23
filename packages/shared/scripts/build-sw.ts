@@ -38,13 +38,10 @@ const PATHS = {
   swTemplate: path.resolve(__dirname, "../sw/template.ts"),
   swConfig: path.resolve(__dirname, "../sw/config.ts"),
   webpackConfig: path.resolve(__dirname, "../webpack.sw.config.js"),
-  outputDir: path.resolve(__dirname, "../../../web/public"),
-  swTemplateOutput: path.resolve(
-    __dirname,
-    "../../../web/public/sw-template.js",
-  ),
-  swFinal: path.resolve(__dirname, "../../../web/public/sw.js"),
-  globDirectory: path.resolve(__dirname, "../../../web/public"),
+  outputDir: path.resolve(__dirname, "../../../public"),
+  swTemplateOutput: path.resolve(__dirname, "../../../public/sw-template.js"),
+  swFinal: path.resolve(__dirname, "../../../public/sw.js"),
+  globDirectory: path.resolve(__dirname, "../../../public"),
 } as const;
 
 interface PathValidationResult {

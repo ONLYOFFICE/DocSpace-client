@@ -27,7 +27,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const webPublicSw = path.resolve(__dirname, "../../../web/public/sw.js");
+const webPublicSw = path.resolve(__dirname, "../../../public/sw.js");
 
 const callerDist = path.resolve(process.cwd(), "dist");
 const targetSw = path.join(callerDist, "sw.js");

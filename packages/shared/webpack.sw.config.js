@@ -33,7 +33,7 @@ module.exports = {
   mode: isProduction ? "production" : "development",
   entry: path.resolve(__dirname, "sw/template.ts"),
   output: {
-    path: path.resolve(__dirname, "../../web/public"),
+    path: path.resolve(__dirname, "../../public"),
     filename: "sw-template.js",
   },
   resolve: {
@@ -47,7 +47,7 @@ module.exports = {
           loader: "ts-loader",
           options: {
             configFile: "tsconfig.sw.json",
-            transpileOnly: true, // Skip type checking for faster builds
+            transpileOnly: true,
           },
         },
         exclude: /node_modules/,

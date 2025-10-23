@@ -26,11 +26,7 @@
 
 import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
 import { registerRoute, NavigationRoute } from "workbox-routing";
-import {
-  StaleWhileRevalidate,
-  CacheFirst,
-  NetworkFirst,
-} from "workbox-strategies";
+import { StaleWhileRevalidate, CacheFirst } from "workbox-strategies";
 import { ExpirationPlugin } from "workbox-expiration";
 import { CacheableResponsePlugin } from "workbox-cacheable-response";
 import { SW_CONFIG } from "./config";
@@ -115,20 +111,6 @@ registerRoute(
       new ExpirationPlugin({
         maxEntries: SW_CONFIG.cache.images.maxEntries,
         maxAgeSeconds: SW_CONFIG.cache.images.maxAgeSeconds,
-      }),
-      new CacheableResponsePlugin({ statuses: [0, 200] }),
-    ],
-  }),
-);
-
-registerRoute(
-  ({ url }) => url.pathname.startsWith("/api/"),
-  new NetworkFirst({
-    cacheName: `${SW_CONFIG.cachePrefix}-api-${SW_CONFIG.cacheSuffix}`,
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 50,
-        maxAgeSeconds: 5 * 60, // 5 minutes
       }),
       new CacheableResponsePlugin({ statuses: [0, 200] }),
     ],

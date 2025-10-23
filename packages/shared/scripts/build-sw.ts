@@ -159,6 +159,7 @@ async function buildServiceWorker() {
         "**/service-worker.js",
         "**/sw.js",
         "**/sw-template.js",
+        "**/index.html",
       ],
     });
 

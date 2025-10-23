@@ -24,9 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
+import { precacheAndRoute } from "workbox-precaching";
 import { registerRoute, NavigationRoute } from "workbox-routing";
-import { StaleWhileRevalidate, CacheFirst } from "workbox-strategies";
+import {
+  StaleWhileRevalidate,
+  CacheFirst,
+  NetworkFirst,
+} from "workbox-strategies";
 import { ExpirationPlugin } from "workbox-expiration";
 import { CacheableResponsePlugin } from "workbox-cacheable-response";
 import { SW_CONFIG } from "./config";
@@ -62,7 +66,17 @@ declare const self: ServiceWorkerGlobalScope;
 precacheAndRoute(self.__WB_MANIFEST);
 
 const navigationRoute = new NavigationRoute(
-  createHandlerBoundToURL("/index.html"),
+  new NetworkFirst({
+    cacheName: `${SW_CONFIG.cachePrefix}-html-${SW_CONFIG.cacheSuffix}`,
+    networkTimeoutSeconds: 5,
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 1,
+        maxAgeSeconds: 24 * 60 * 60, // 1 day
+      }),
+      new CacheableResponsePlugin({ statuses: [0, 200] }),
+    ],
+  }),
   {
     allowlist: [/^(?!.*\/(login|management|doceditor|sdk)(\/|$)).*$/],
     denylist: [/^\/__/, /\/[^/?]+\.[^/]+$/],

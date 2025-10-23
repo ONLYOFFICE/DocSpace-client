@@ -42,6 +42,10 @@ import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-c
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import type OformsFilter from "@docspace/shared/api/oforms/filter";
+import type {
+  MenuItem,
+  Category,
+} from "../Filter/CategoryFilter/CategoryFilter.types";
 import styles from "../TemplateGallery.module.scss";
 import FilterContent from "../Filter";
 import Tiles from "../Tiles";
@@ -56,8 +60,8 @@ interface TilesContainerOwnProps {
 interface FilterProps {
   oformsFilter: OformsFilter;
   noLocales: boolean;
-  fetchCategoryTypes: () => Promise<any[]>;
-  fetchCategoriesOfCategoryType: (categoryId: string) => Promise<any[]>;
+  fetchCategoryTypes: () => Promise<MenuItem[]>;
+  fetchCategoriesOfCategoryType: (categoryId: string) => Promise<Category[]>;
   filterOformsByLocaleIsLoading: boolean;
   setFilterOformsByLocaleIsLoading: (isLoading: boolean) => void;
   setCategoryFilterLoaded: (isLoaded: boolean) => void;

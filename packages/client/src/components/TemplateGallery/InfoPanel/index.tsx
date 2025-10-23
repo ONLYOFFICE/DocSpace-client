@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+import type { Key } from "react";
 import InfoPanel from "@docspace/shared/components/section/sub-components/InfoPanel";
 import SubInfoPanelBody from "@docspace/shared/components/section/sub-components/InfoPanelBody";
 import SubInfoPanelHeader from "@docspace/shared/components/section/sub-components/InfoPanelHeader";
@@ -37,7 +38,7 @@ import {
 interface InfoPanelTemplateGalleryProps {
   isVisibleInfoPanelTemplateGallery: boolean;
   setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;
-  setGallerySelected: (selected: any) => void;
+  setGallerySelected: (item: { id: Key | null | undefined } | null) => void;
 }
 
 const InfoPanelTemplateGallery = ({

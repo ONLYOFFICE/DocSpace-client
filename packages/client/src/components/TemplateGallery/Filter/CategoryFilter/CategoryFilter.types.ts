@@ -48,7 +48,7 @@ export interface OformsFilter {
 export interface CategoryFilterProps {
   oformsFilter: OformsFilter;
   noLocales: boolean;
-  fetchCategoryTypes: () => Promise<any[]>;
+  fetchCategoryTypes: () => Promise<MenuItem[]>;
   fetchCategoriesOfCategoryType: (categoryId: string) => Promise<Category[]>;
   filterOformsByLocaleIsLoading: boolean;
   setFilterOformsByLocaleIsLoading: (loading: boolean) => void;

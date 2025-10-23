@@ -531,7 +531,9 @@ class FilesStore {
           true,
         ).catch(() => ({ ...oldFile, ...file }));
 
-        this.checkSelection(newFile);
+        const [fileItem] = this.getFilesListItems([newFile]);
+
+        this.checkSelection(fileItem);
       }
 
       if (foundIndex > -1) return;

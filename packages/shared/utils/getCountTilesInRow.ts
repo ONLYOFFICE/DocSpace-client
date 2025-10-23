@@ -87,6 +87,8 @@ export const getCountTilesInRow = (
   let minTileWidth;
   if (isRooms || isTemplates) {
     minTileWidth = getTileWidth(275, 350) + tileGap;
+  } else if (isTemplateGallery) {
+    minTileWidth = 216 + tileGap;
   } else {
     minTileWidth = getTileWidth(216, 360) + tileGap;
   }

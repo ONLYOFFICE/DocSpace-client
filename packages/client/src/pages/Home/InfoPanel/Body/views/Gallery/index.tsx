@@ -46,12 +46,26 @@ type GalleryProps = {
     | OformsStore["gallerySelected"]
     | {
         attributes: {
+          card_prewiew: {
+            data: {
+              id: number;
+              attributes: {
+                url: string;
+              };
+            };
+          };
           name_form: string;
           template_desc: string;
           description_card: string;
           updatedAt: string;
           template_image: {
             data: { attributes: { formats: { small: { url: string } } } };
+          };
+          file_oform: {
+            data: {
+              id: number;
+              attributes: { size: number };
+            }[];
           };
         };
       };
@@ -69,8 +83,8 @@ const Gallery = ({ gallerySelected, culture }: GalleryProps) => {
   if (!gallerySelected) return <NoItem isGallery />;
 
   const thumbnailUrl =
-    gallerySelected?.attributes.card_prewiew.data?.attributes.url;
-  const formTitle = gallerySelected?.attributes?.name_form;
+    gallerySelected.attributes.card_prewiew.data.attributes.url;
+  const formTitle = gallerySelected.attributes.name_form;
   const size = gallerySelected.attributes.file_oform.data[0].attributes.size;
   const sizeWithExtra =
     size < 1024 ? `${size.toFixed(0)} KB` : `${(size / 1024).toFixed(0)} MB`;
@@ -121,8 +135,8 @@ const Gallery = ({ gallerySelected, culture }: GalleryProps) => {
         lineHeight="20px"
         data-testid="info_panel_gallery_description_text"
       >
-        {gallerySelected?.attributes?.template_desc ||
-          gallerySelected?.attributes?.description_card}
+        {gallerySelected.attributes.template_desc ||
+          gallerySelected.attributes.description_card}
       </Text>
       <div
         className={commonStyles.subtitle}

@@ -33,13 +33,21 @@ export interface CacheConfig {
   maxAgeSeconds: number;
 }
 
+export interface RoutePattern {
+  pattern: RegExp;
+  description: string;
+}
+
+export interface NavigationConfig {
+  ssrApps: RoutePattern[];
+  denylist: RoutePattern[];
+}
+
 export interface SWConfig {
   version: string;
   cachePrefix: string;
   cacheSuffix: string;
-  paths: {
-    ssr: RegExp[];
-  };
+  navigation: NavigationConfig;
   cache: {
     translations: CacheConfig;
     static: CacheConfig;
@@ -54,12 +62,36 @@ export const SW_CONFIG: SWConfig = {
   cachePrefix: "docspace",
   cacheSuffix: `v${APP_VERSION}`,
 
-  paths: {
-    ssr: [
-      /^\/login(\/|$)/,
-      /^\/management(\/|$)/,
-      /^\/doceditor(\/|$)/,
-      /^\/sdk(\/|$)/,
+  navigation: {
+    ssrApps: [
+      {
+        pattern: /^\/login(\/|$)/,
+        description: "Login app - Next.js SSR authentication pages",
+      },
+      {
+        pattern: /^\/management(\/|$)/,
+        description: "Management app - Next.js SSR admin portal",
+      },
+      {
+        pattern: /^\/doceditor(\/|$)/,
+        description: "DocEditor app - Next.js SSR document editor",
+      },
+      {
+        pattern: /^\/sdk(\/|$)/,
+        description: "SDK app - Next.js SSR developer documentation",
+      },
+    ],
+
+    denylist: [
+      {
+        pattern: /^\/__/,
+        description: "Internal paths (Webpack HMR, debug endpoints)",
+      },
+      {
+        pattern: /\/[^/?]+\.[^/]+$/,
+        description:
+          "Direct file access with extensions (bypasses SPA routing)",
+      },
     ],
   },
 

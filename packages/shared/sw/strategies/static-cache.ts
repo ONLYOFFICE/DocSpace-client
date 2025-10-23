@@ -24,31 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { precacheAndRoute, cleanupOutdatedCaches } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
-import SW_CONFIG from "./config";
-import { createNavigationRoute, logNavigationConfig } from "./core/routes";
-import { registerStaticCacheStrategies } from "./strategies/static-cache";
-import "./types"; // Import type extensions
+import { CacheFirst, StaleWhileRevalidate } from "workbox-strategies";
+import { ExpirationPlugin } from "workbox-expiration";
+import { CacheableResponsePlugin } from "workbox-cacheable-response";
+import type { SWConfig } from "../config";
 
-declare const self: ServiceWorkerGlobalScope;
+export function registerStaticCacheStrategies(config: SWConfig): void {
+  registerRoute(
+    ({ request }) =>
+      request.destination === "image" || request.destination === "font",
+    new CacheFirst({
+      cacheName: `${config.cachePrefix}-static-${config.cacheSuffix}`,
+      plugins: [
+        new ExpirationPlugin({
+          maxEntries: 60,
+          maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+        }),
+        new CacheableResponsePlugin({ statuses: [0, 200] }),
+      ],
+    }),
+  );
 
-self.addEventListener("message", (event) => {
-  if (event.data && event.data.type === "SKIP_WAITING") {
-    self.skipWaiting();
-  }
-});
-
-cleanupOutdatedCaches();
-
-precacheAndRoute(self.__WB_MANIFEST);
-
-const navigationRoute = createNavigationRoute(SW_CONFIG);
-registerRoute(navigationRoute);
-
-registerStaticCacheStrategies(SW_CONFIG);
-
-if (SW_CONFIG.debug) {
-  console.log(`[SW] Service Worker initialized - version ${SW_CONFIG.version}`);
-  logNavigationConfig(SW_CONFIG);
+  registerRoute(
+    ({ url }) => url.pathname.startsWith("/locales/"),
+    new StaleWhileRevalidate({
+      cacheName: `${config.cachePrefix}-i18n-${config.cacheSuffix}`,
+      plugins: [
+        new ExpirationPlugin({
+          maxEntries: 50,
+          maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
+        }),
+        new CacheableResponsePlugin({ statuses: [0, 200] }),
+      ],
+    }),
+  );
 }

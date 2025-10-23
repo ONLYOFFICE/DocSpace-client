@@ -24,31 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { precacheAndRoute, cleanupOutdatedCaches } from "workbox-precaching";
-import { registerRoute } from "workbox-routing";
-import SW_CONFIG from "./config";
-import { createNavigationRoute, logNavigationConfig } from "./core/routes";
-import { registerStaticCacheStrategies } from "./strategies/static-cache";
-import "./types"; // Import type extensions
+/**
+ * Extended Service Worker types
+ * Types are already defined by lib.webworker and workbox-precaching
+ * This file exists to ensure they're included in compilation
+ */
 
-declare const self: ServiceWorkerGlobalScope;
-
-self.addEventListener("message", (event) => {
-  if (event.data && event.data.type === "SKIP_WAITING") {
-    self.skipWaiting();
-  }
-});
-
-cleanupOutdatedCaches();
-
-precacheAndRoute(self.__WB_MANIFEST);
-
-const navigationRoute = createNavigationRoute(SW_CONFIG);
-registerRoute(navigationRoute);
-
-registerStaticCacheStrategies(SW_CONFIG);
-
-if (SW_CONFIG.debug) {
-  console.log(`[SW] Service Worker initialized - version ${SW_CONFIG.version}`);
-  logNavigationConfig(SW_CONFIG);
-}
+// Re-export to ensure types are available
+export type {};

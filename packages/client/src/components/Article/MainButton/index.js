@@ -154,6 +154,7 @@ const ArticleMainButtonContent = (props) => {
     currentFolderId,
     currentRoomType,
     isRoomsFolder,
+    isAIAgentsFolder,
     isArchiveFolder,
 
     setOformFromFolderId,
@@ -249,6 +250,23 @@ const ArticleMainButtonContent = (props) => {
     const event = new Event(Events.ROOM_CREATE);
     window.dispatchEvent(event);
   }, [isWarningRoomsDialog]);
+
+  const onCreateAgent = React.useCallback(
+    () => {
+      // TODO: AI: Add quota if it needed
+
+      // if (isWarningRoomsDialog) {
+      //   setQuotaWarningDialogVisible(true);
+      //   return;
+      // }
+
+      const event = new Event(Events.AGENT_CREATE);
+      window.dispatchEvent(event);
+    },
+    [
+      // isWarningRoomsDialog
+    ],
+  );
 
   const onShowSelectFileDialog = React.useCallback(() => {
     if (isMobile) {
@@ -483,7 +501,7 @@ const ArticleMainButtonContent = (props) => {
   );
 
   React.useEffect(() => {
-    if (isRoomsFolder || isSettingsPage) return;
+    if (isRoomsFolder || isAIAgentsFolder || isSettingsPage) return;
 
     if (isAccountsPage) {
       const contactsModel = getContactsModel(t);
@@ -705,6 +723,7 @@ const ArticleMainButtonContent = (props) => {
     mainButtonItemsList,
     currentRoomType,
     isRoomsFolder,
+    isAIAgentsFolder,
     isOwner,
     isAdmin,
     isRoomAdmin,
@@ -789,7 +808,7 @@ const ArticleMainButtonContent = (props) => {
   if (showArticleLoader)
     return isMobileArticle ? null : <ArticleButtonLoader height="32px" />;
 
-  const withMenu = !isRoomsFolder && !isContactsGroupsPage;
+  const withMenu = !isRoomsFolder && !isAIAgentsFolder && !isContactsGroupsPage;
 
   return (
     <>
@@ -800,7 +819,11 @@ const ArticleMainButtonContent = (props) => {
           actionOptions={actions}
           buttonOptions={!isAccountsPage ? uploadActions : null}
           withoutButton={
-            isRoomsFolder || isAccountsPage || isChatTab || isResultTab
+            isRoomsFolder ||
+            isAIAgentsFolder ||
+            isAccountsPage ||
+            isChatTab ||
+            isResultTab
           }
           withMenu={withMenu}
           mainButtonMobileVisible={
@@ -821,6 +844,20 @@ const ArticleMainButtonContent = (props) => {
           scale
           title={t("Common:NewRoom")}
           testId="create_new_room_button"
+        />
+      ) : isAIAgentsFolder ? (
+        <StyledButton
+          className="create-agent-button"
+          id="rooms-shared_create-agent-button"
+          label={t("Common:NewAgent")}
+          onClick={onCreateAgent}
+          $currentColorScheme={currentColorScheme}
+          isDisabled={isDisabled}
+          size="small"
+          primary
+          scale
+          title={t("Common:NewAgent")}
+          testId="create_new_agent_button"
         />
       ) : (
         <MainButton
@@ -904,6 +941,7 @@ export default inject(
       isRecentFolder,
       isRecycleBinFolder,
       isRoomsFolder,
+      isAIAgentsFolder,
       isArchiveFolder,
       selectedTreeNode,
     } = treeFoldersStore;
@@ -963,6 +1001,7 @@ export default inject(
       isRecycleBinFolder,
 
       isRoomsFolder,
+      isAIAgentsFolder,
       isArchiveFolder,
       selectedTreeNode,
 

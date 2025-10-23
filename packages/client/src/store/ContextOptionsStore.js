@@ -2033,7 +2033,9 @@ class ContextOptionsStore {
       {
         id: "option_change-room-owner",
         key: "change-room-owner",
-        label: t("Files:ChangeTheRoomOwner"),
+        label: item.isAIAgent
+          ? t("Translations:OwnerChange")
+          : t("Files:ChangeTheRoomOwner"),
         icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
         disabled: false,
@@ -2312,7 +2314,7 @@ class ContextOptionsStore {
       {
         id: "option_leave-room",
         key: "leave-room",
-        label: t("LeaveTheRoom"),
+        label: item.isAIAgent ? t("LeaveTheAgent") : t("LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
         disabled:
@@ -2357,12 +2359,17 @@ class ContextOptionsStore {
         key: "delete",
         label: isRootThirdPartyFolder
           ? t("Common:Disconnect")
-          : item.isTemplate
-            ? t("DeleteTemplate")
-            : item.isRoom
-              ? t("Common:DeleteRoom")
-              : t("Common:Delete"),
-        icon: item.isRoom ? RemoveOutlineSvgUrl : TrashReactSvgUrl,
+          : item.isAIAgent
+            ? t("DeleteAgent")
+            : item.isTemplate
+              ? t("DeleteTemplate")
+              : item.isRoom
+                ? t("Common:DeleteRoom")
+                : t("Common:Delete"),
+        icon:
+          item.isRoom && !item.isAIAgent
+            ? RemoveOutlineSvgUrl
+            : TrashReactSvgUrl,
         onClick: () => this.onDelete(item, t),
         disabled: item.isTemplate ? !isTemplateOwner : false,
       },
@@ -2447,7 +2454,11 @@ class ContextOptionsStore {
         groupLabel: t("Common:Manage"),
         groupIcon: SettingsReactSvgUrl,
         itemKeys: [
-          [{ key: "edit-room" }, { key: "save-as-template" }],
+          [
+            { key: "edit-room" },
+            { key: "edit-agent" },
+            { key: "save-as-template" },
+          ],
           [{ key: "download" }, { key: "duplicate-room" }],
           [
             { key: "change-room-owner" },

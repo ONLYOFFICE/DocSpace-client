@@ -364,8 +364,7 @@ class CreateEditRoomStore {
         addServersForRoom(agent.id, agentParams.mcpServers);
       }
 
-      // TODO: AI: Add open agent after creating
-      // this.onOpenNewAgent(agent);
+      this.onOpenNewAgent(agent);
 
       if (successToast)
         toastr.success(successToast as unknown as React.ReactNode);
@@ -400,7 +399,6 @@ class CreateEditRoomStore {
       isRoot: false,
       title: agent.title,
       isRoom: true,
-      isPublicRoomType: agent.roomType === RoomsType.PublicRoom,
       rootFolderType: agent.rootFolderType,
     };
 

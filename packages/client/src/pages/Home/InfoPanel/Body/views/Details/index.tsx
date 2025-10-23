@@ -124,7 +124,7 @@ const Details = ({
   });
 
   const createThumbnailAction = useCallback(async () => {
-    const property = detailsHelper.getPropertyList();
+    let property = detailsHelper.getPropertyList();
 
     const isAgent =
       selection &&
@@ -133,7 +133,10 @@ const Details = ({
       selection.roomType &&
       selection.rootFolderType === FolderType.AIAgents;
 
-    if (isAgent) property.filter((item) => item.id !== "Type");
+    if (isAgent)
+      property = property.filter((item) => {
+        return item.id !== "Type";
+      });
 
     setItemProperties(property);
 

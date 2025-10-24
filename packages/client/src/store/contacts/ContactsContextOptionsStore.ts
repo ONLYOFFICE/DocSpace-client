@@ -651,14 +651,14 @@ class ContactsConextOptionsStore {
 
   getContactsModel = (t: TTranslation, isSectionMenu: boolean) => {
     const { isOwner, isAdmin } = this.userStore.user!;
+    const { allowInvitingMembers } = this.settingsStore;
     const isGroups = this.usersStore.contactsTab === "groups";
 
     const someDialogIsOpen = checkDialogsOpen();
 
     if (
       !this.contactsCanCreate ||
-      (isSectionMenu && (isMobile || someDialogIsOpen)) ||
-      !this.settingsStore.allowInvitingMembers
+      (isSectionMenu && (isMobile || someDialogIsOpen))
     )
       return null;
 
@@ -719,11 +719,19 @@ class ContactsConextOptionsStore {
       },
     ];
 
-    return isGroups
-      ? groupsOptions
-      : isSectionMenu
-        ? accountsSectionActions
-        : accountsUserOptions;
+    if (isGroups) {
+      return groupsOptions;
+    }
+
+    if (isSectionMenu && allowInvitingMembers) {
+      return accountsSectionActions;
+    }
+
+    if (allowInvitingMembers) {
+      return accountsUserOptions;
+    }
+
+    return null;
   };
 
   inviteUser = (userType: EmployeeType) => {

@@ -993,5 +993,6 @@
   "YouHaveUnsavedChanges": "Tem alterações que não foram guardadas",
   "YourCurrentDomain": "O seu domínio atual",
   "YourLogo": "O seu logótipo",
-  "YourTurn": "A sua vez"
+  "YourTurn": "A sua vez",
+  "ErrorUnavailableText": "O {{productName}} não está disponível"
 }

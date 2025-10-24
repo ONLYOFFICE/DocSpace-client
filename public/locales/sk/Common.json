@@ -993,5 +993,6 @@
   "YouHaveUnsavedChanges": "Máte neuložené zmeny",
   "YourCurrentDomain": "Vaša aktuálna doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Ste na rade"
+  "YourTurn": "Ste na rade",
+  "ErrorUnavailableText": "{{productName}} je nedostupný"
 }

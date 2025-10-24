@@ -993,5 +993,6 @@
   "YouHaveUnsavedChanges": "Imate nesačuvane promene",
   "YourCurrentDomain": "Vaš trenutni domen",
   "YourLogo": "Vaš logo",
-  "YourTurn": "Vaš red"
+  "YourTurn": "Vaš red",
+  "ErrorUnavailableText": "{{productName}} nedostupan"
 }

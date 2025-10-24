@@ -995,5 +995,6 @@
   "UnsavedChanges": "Unsaved changes",
   "YourCurrentDomain": "Your current domain",
   "YourLogo": "Your logo",
-  "YourTurn": "Your turn"
+  "YourTurn": "Your turn",
+  "ErrorUnavailableText": "{{productName}} unavailable"
 }

@@ -993,5 +993,6 @@
   "YouHaveUnsavedChanges": "У вас є незбережені зміни",
   "YourCurrentDomain": "Ваш поточний домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша черга"
+  "YourTurn": "Ваша черга",
+  "ErrorUnavailableText": "{{productName}} недоступний"
 }

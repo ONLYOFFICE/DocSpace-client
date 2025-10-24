@@ -993,5 +993,6 @@
   "YouHaveUnsavedChanges": "ඔබ සතුව නොසුරැකි වෙනස්කම් ඇත",
   "YourCurrentDomain": "ඔබගේ වත්මන් වසම",
   "YourLogo": "ඔබේ ලාංචනය",
-  "YourTurn": "ඔබේ වාරය."
+  "YourTurn": "ඔබේ වාරය.",
+  "ErrorUnavailableText": "{{productName}} නොතිබේ"
 }

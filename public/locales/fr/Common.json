@@ -993,5 +993,6 @@
   "YouHaveUnsavedChanges": "Vous avec des modifications non-sauvegardées",
   "YourCurrentDomain": "Votre domaine actuel",
   "YourLogo": "Votre logo",
-  "YourTurn": "Votre tour"
+  "YourTurn": "Votre tour",
+  "ErrorUnavailableText": "{{productName}} non disponible"
 }

@@ -67,10 +67,9 @@ type TAiSettingsProps = {
   fetchWebSearch?: AISettingsStore["fetchWebSearch"];
 };
 
-// TODO: add import standalone from store
 const AiSettings = ({
   currentDeviceType,
-  standalone = true,
+  standalone = false,
   fetchAIProviders,
   fetchMCPServers,
   fetchWebSearch,
@@ -81,6 +80,7 @@ const AiSettings = ({
     fetchAIProviders,
     fetchMCPServers,
     fetchWebSearch,
+    standalone,
   });
 
   const navigate = useNavigate();
@@ -150,13 +150,14 @@ const AiSettings = ({
 
 export const Component = inject(
   ({ settingsStore, aiSettingsStore }: TStore) => {
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, standalone } = settingsStore;
 
     const { fetchAIProviders, fetchMCPServers, fetchWebSearch } =
       aiSettingsStore;
 
     return {
       currentDeviceType,
+      standalone,
       fetchAIProviders,
       fetchMCPServers,
       fetchWebSearch,

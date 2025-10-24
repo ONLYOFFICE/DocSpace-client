@@ -108,6 +108,8 @@ const View = ({
   fetchAIProviders,
   fetchMCPServers,
   fetchWebSearch,
+
+  standalone,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation();
@@ -163,6 +165,7 @@ const View = ({
     fetchAIProviders,
     fetchMCPServers,
     fetchWebSearch,
+    standalone,
   });
 
   useEffect(() => {
@@ -351,7 +354,7 @@ export const ViewComponent = inject(
   }: TStore) => {
     const { initSettings: initSettingsCommon } = common;
 
-    const { clearAbortControllerArr } = settingsStore;
+    const { clearAbortControllerArr, standalone } = settingsStore;
 
     const { setIsPortalSettingsLoading } = clientLoadingStore;
 
@@ -398,6 +401,8 @@ export const ViewComponent = inject(
       fetchAIProviders: aiSettingsStore.fetchAIProviders,
       fetchMCPServers: aiSettingsStore.fetchMCPServers,
       fetchWebSearch: aiSettingsStore.fetchWebSearch,
+
+      standalone,
     };
   },
 )(observer(View));

@@ -25,10 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useNavigate } from "react-router";
 
 import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
 type UseAiSettingsProps = {
+  standalone?: boolean;
   fetchAIProviders?: AISettingsStore["fetchAIProviders"];
   fetchMCPServers?: AISettingsStore["fetchMCPServers"];
   fetchWebSearch?: AISettingsStore["fetchWebSearch"];
@@ -38,7 +40,10 @@ const useAISettings = ({
   fetchAIProviders,
   fetchMCPServers,
   fetchWebSearch,
+  standalone,
 }: UseAiSettingsProps) => {
+  const navigate = useNavigate();
+
   const initAIProviders = React.useCallback(async () => {
     await fetchAIProviders?.();
   }, [fetchAIProviders]);
@@ -52,10 +57,21 @@ const useAISettings = ({
   }, [fetchWebSearch]);
 
   const getAiSettingsInitialValue = React.useCallback(async () => {
-    if (window.location.pathname.includes("providers")) await initAIProviders();
-    if (window.location.pathname.includes("servers")) await initMCPServers();
-    if (window.location.pathname.includes("search")) await initWebSearch();
-  }, [initAIProviders, initMCPServers, initWebSearch]);
+    const isProviders = window.location.pathname.includes("providers");
+    const isServers = window.location.pathname.includes("servers");
+    const isSearch = window.location.pathname.includes("search");
+
+    if (!standalone && !isServers) {
+      navigate("/portal-settings/ai-settings/servers");
+      await initMCPServers();
+
+      return;
+    }
+
+    if (isProviders) await initAIProviders();
+    if (isServers) await initMCPServers();
+    if (isSearch) await initWebSearch();
+  }, [initAIProviders, initMCPServers, initWebSearch, navigate]);
 
   return {
     initAIProviders,

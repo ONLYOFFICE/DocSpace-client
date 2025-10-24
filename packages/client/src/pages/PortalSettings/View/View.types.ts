@@ -45,6 +45,7 @@ export type ViewProps = {
   loadBaseInfo: (page: string) => Promise<void>;
   isMobileView: boolean;
   settingsStore: TStore["settingsStore"];
+  standalone: boolean;
   tfaStore: TStore["tfaStore"];
   backupStore: TStore["backup"];
   ssoFormStore: TStore["ssoStore"];

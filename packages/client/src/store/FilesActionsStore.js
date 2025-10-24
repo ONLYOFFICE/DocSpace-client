@@ -225,14 +225,21 @@ class FilesActionStore {
     const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
-    const { fetchFiles, fetchRooms, filter, roomsFilter, scrollToTop } =
-      this.filesStore;
+    const {
+      fetchFiles,
+      fetchRooms,
+      fetchAgents,
+      filter,
+      roomsFilter,
+      scrollToTop,
+    } = this.filesStore;
 
     const {
       isRoomsFolder,
       isArchiveFolder,
       isArchiveFolderRoot,
       isTemplatesFolder,
+      isAIAgentsFolder,
     } = this.treeFoldersStore;
 
     let newFilter;
@@ -246,7 +253,14 @@ class FilesActionStore {
     try {
       if (skipFetch) return;
 
-      if (
+      if (isAIAgentsFolder) {
+        fetchAgents(
+          updatedFolder,
+          newFilter || roomsFilter.clone(),
+          false,
+          false,
+        );
+      } else if (
         isRoomsFolder ||
         isArchiveFolder ||
         isArchiveFolderRoot ||
@@ -1665,16 +1679,18 @@ class FilesActionStore {
     if (this.publicRoomStore.isPublicRoom)
       return this.moveToPublicRoom(item.id);
 
-    const { id, isRoom, isTemplate, title, rootFolderType } = item;
+    const { id, isRoom, isTemplate, isAIAgent, title, rootFolderType } = item;
 
-    const categoryType = getCategoryTypeByFolderType(rootFolderType, id);
+    let categoryType = isAIAgent
+      ? CategoryType.Chat
+      : getCategoryTypeByFolderType(rootFolderType, id);
 
     const state = { title, rootFolderType, isRoot: false, isRoom };
     const filter = FilesFilter.getDefault();
 
     filter.folder = id;
 
-    if (isRoom || isTemplate) {
+    if (!isAIAgent && (isRoom || isTemplate)) {
       if (this.userStore.user?.id) {
         const key =
           categoryType === CategoryType.Archive
@@ -1973,7 +1989,8 @@ class FilesActionStore {
 
         return canUnArchive;
       }
-      case "delete-room": {
+      case "delete-room":
+      case "delete-agent": {
         const canRemove =
           selection.length === 1 && selection[0]?.security?.Delete;
 
@@ -1989,10 +2006,13 @@ class FilesActionStore {
         return canCreateRoom;
       }
       case "change-quota":
+      case "change-agent-quota":
         return hasRoomsToChangeQuota;
       case "disable-quota":
+      case "disable-agent-quota":
         return hasRoomsToDisableQuota;
       case "default-quota":
+      case "default-agent-quota":
         return hasRoomsToResetQuota;
       case "vectorization":
         return selection.some((s) => s.security?.Vectorization);
@@ -2184,6 +2204,21 @@ class FilesActionStore {
     }
   };
 
+  disableAIAgentQuota = async (items, t) => {
+    const { setCustomAIAgentQuota } = this.filesStore;
+
+    const agentIDs = items.map((item) => {
+      return item?.id ? item.id : item;
+    });
+
+    try {
+      await setCustomAIAgentQuota(agentIDs, -1);
+      toastr.success(t("Common:StorageQuotaDisabled"));
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
+
   resetRoomQuota = async (items, t) => {
     const { resetRoomQuota } = this.filesStore;
 
@@ -2193,6 +2228,21 @@ class FilesActionStore {
 
     try {
       await resetRoomQuota(userIDs);
+      toastr.success(t("Common:StorageQuotaReset"));
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
+
+  resetAIAgentQuota = async (items, t) => {
+    const { resetAIAgentQuota } = this.filesStore;
+
+    const userIDs = items.map((item) => {
+      return item?.id ? item.id : item;
+    });
+
+    try {
+      await resetAIAgentQuota(userIDs);
       toastr.success(t("Common:StorageQuotaReset"));
     } catch (e) {
       toastr.error(e);
@@ -2315,6 +2365,16 @@ class FilesActionStore {
           onClick: () => this.changeRoomQuota(selection),
           disabled: !showStorageInfo,
         };
+      case "change-agent-quota":
+        if (!this.isAvailableOption("change-agent-quota")) return null;
+        return {
+          id: "menu-change-agent-quota",
+          key: "change-agent-quota",
+          label: t("Common:ChangeQuota"),
+          iconUrl: ChangQuotaReactSvgUrl,
+          onClick: () => this.changeAIAgentQuota(selection),
+          disabled: !showStorageInfo,
+        };
       case "default-quota":
         if (!this.isAvailableOption("default-quota")) return null;
         return {
@@ -2323,6 +2383,16 @@ class FilesActionStore {
           label: t("Common:SetToDefault"),
           iconUrl: DefaultQuotaReactSvgUrl,
           onClick: () => this.resetRoomQuota(selection, t),
+          disabled: !showStorageInfo,
+        };
+      case "default-agent-quota":
+        if (!this.isAvailableOption("default-agent-quota")) return null;
+        return {
+          id: "menu-default-agent-quota",
+          key: "default-agent-quota",
+          label: t("Common:SetToDefault"),
+          iconUrl: DefaultQuotaReactSvgUrl,
+          onClick: () => this.resetAIAgentQuota(selection, t),
           disabled: !showStorageInfo,
         };
       case "disable-quota":
@@ -2335,11 +2405,30 @@ class FilesActionStore {
           onClick: () => this.disableRoomQuota(selection, t),
           disabled: !showStorageInfo,
         };
+      case "disable-agent-quota":
+        if (!this.isAvailableOption("disable-agent-quota")) return null;
+        return {
+          id: "menu-disable-agent-quota",
+          key: "disable-agent-quota",
+          label: t("Common:DisableQuota"),
+          iconUrl: DisableQuotaReactSvgUrl,
+          onClick: () => this.disableAIAgentQuota(selection, t),
+          disabled: !showStorageInfo,
+        };
 
       case "delete-room":
         if (!this.isAvailableOption("delete-room")) return null;
         return {
           id: "menu-delete-room",
+          label: t("Common:Delete"),
+          onClick: () => this.deleteRooms(t),
+          iconUrl: DeleteReactSvgUrl,
+        };
+
+      case "delete-agent":
+        if (!this.isAvailableOption("delete-agent")) return null;
+        return {
+          id: "menu-delete-agent",
           label: t("Common:Delete"),
           onClick: () => this.deleteRooms(t),
           iconUrl: DeleteReactSvgUrl,
@@ -2406,6 +2495,30 @@ class FilesActionStore {
       .set("change-quota", changeQuota)
       .set("default-quota", defaultQuota)
       .set("disable-quota", disableQuota)
+      .set("delete", deleteOption);
+
+    return this.convertToArray(itemsCollection);
+  };
+
+  getAIAgentsFolderOptions = (itemsCollection, t) => {
+    let pinName = "unpin";
+    const { selection } = this.filesStore;
+
+    selection.forEach((item) => {
+      if (!item.pinned) pinName = "pin";
+    });
+
+    const pin = this.getOption(pinName, t);
+    const changeQuota = this.getOption("change-agent-quota", t);
+    const disableQuota = this.getOption("disable-agent-quota", t);
+    const defaultQuota = this.getOption("default-agent-quota", t);
+    const deleteOption = this.getOption("delete-room", t);
+
+    itemsCollection
+      .set(pinName, pin)
+      .set("change-agent-quota", changeQuota)
+      .set("default-agent-quota", defaultQuota)
+      .set("disable-agent-quota", disableQuota)
       .set("delete", deleteOption);
 
     return this.convertToArray(itemsCollection);
@@ -2571,6 +2684,7 @@ class FilesActionStore {
       isArchiveFolder,
       isRecentFolder,
       isTemplatesFolder,
+      isAIAgentsFolder,
     } = this.treeFoldersStore;
 
     const itemsCollection = new Map();
@@ -2595,6 +2709,9 @@ class FilesActionStore {
 
     if (isTemplatesFolder)
       return this.getTemplatesFolderOptions(itemsCollection, t);
+
+    if (isAIAgentsFolder)
+      return this.getAIAgentsFolderOptions(itemsCollection, t);
 
     return this.getAnotherFolderOptions(itemsCollection, t);
   };

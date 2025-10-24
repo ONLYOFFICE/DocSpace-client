@@ -2683,12 +2683,16 @@ class ContextOptionsStore {
     const { selection, allFilesIsEditing, canConvertSelected } =
       this.filesStore;
     const { setDeleteDialogVisible } = this.dialogsStore;
-    const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
-      this.treeFoldersStore;
+    const {
+      isRecycleBinFolder,
+      isRoomsFolder,
+      isArchiveFolder,
+      isAIAgentsFolder,
+    } = this.treeFoldersStore;
 
     const { pinRooms, unpinRooms /* deleteRooms */ } = this.filesActionsStore;
 
-    if (isRoomsFolder || isArchiveFolder) {
+    if (isRoomsFolder || isArchiveFolder || isAIAgentsFolder) {
       const isPinOption = selection.filter((item) => !item.pinned).length > 0;
 
       let canDelete;

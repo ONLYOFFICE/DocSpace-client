@@ -108,6 +108,9 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
     case FolderType.RoomTemplates:
       return parentId > 0 ? CategoryType.SharedRoom : CategoryType.Shared;
 
+    case FolderType.AIAgents:
+      return parentId > 0 ? CategoryType.AIAgent : CategoryType.AIAgents;
+
     case FolderType.Archive:
       return CategoryType.Archive;
 

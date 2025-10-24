@@ -119,6 +119,7 @@ const SectionHeaderContent = (props) => {
     setIsLoading,
 
     moveToRoomsPage,
+    moveToAIAgentsPage,
     // setIsInfoPanelVisible,
 
     getContactsHeaderMenu,
@@ -180,6 +181,7 @@ const SectionHeaderContent = (props) => {
     allowInvitingMembers,
 
     isAIRoom,
+    isAIAgent,
     isKnowledgeTab,
     currentClientView,
     profile,
@@ -323,6 +325,8 @@ const SectionHeaderContent = (props) => {
   };
 
   const getMenuItems = () => {
+    if (isAIAgentsFolder) return null;
+
     const checkboxOptions = isContactsPage ? (
       getContactsMenuItems()
     ) : (
@@ -359,13 +363,17 @@ const SectionHeaderContent = (props) => {
       return moveToPublicRoom(id);
     }
 
+    const rootFolderType = selectedFolder.rootFolderType;
+
+    if (isRootRoom && rootFolderType === FolderType.AIAgents) {
+      return moveToAIAgentsPage();
+    }
+
     if (isRootRoom || isRootTemplates) {
       return moveToRoomsPage();
     }
 
     setSelectedNode(id);
-
-    const rootFolderType = selectedFolder.rootFolderType;
 
     const path = getCategoryUrl(
       getCategoryTypeByFolderType(rootFolderType, id),
@@ -668,6 +676,8 @@ const SectionHeaderContent = (props) => {
       categoryType === CategoryType.Archive) &&
     !isCurrentRoom;
 
+  const insideTheAgent = categoryType === CategoryType.AIAgent && !isAIAgent;
+
   const logo = getLogoUrl(
     WhiteLabelLogoType.LightSmall,
     !theme.isBase,
@@ -822,7 +832,9 @@ const SectionHeaderContent = (props) => {
                 isPublicRoom={isPublicRoom}
                 titleIcon={titleIcon}
                 titleIconTooltip={titleIconTooltip}
-                showRootFolderTitle={insideTheRoom || isContactsInsideGroupPage}
+                showRootFolderTitle={
+                  insideTheRoom || insideTheAgent || isContactsInsideGroupPage
+                }
                 currentDeviceType={currentDeviceType}
                 isFrame={isFrame}
                 showTitle={isFrame ? showTitle : true}
@@ -967,6 +979,7 @@ export default inject(
       getHeaderMenu,
       isGroupMenuBlocked,
       moveToRoomsPage,
+      moveToAIAgentsPage,
       onClickBack,
       moveToPublicRoom,
       createFoldersTree,
@@ -985,6 +998,7 @@ export default inject(
       rootFolderType,
       shared,
       isAIRoom,
+      isAIAgent,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -1149,6 +1163,7 @@ export default inject(
       isGroupMenuBlocked,
 
       moveToRoomsPage,
+      moveToAIAgentsPage,
       onClickBack,
       isPublicRoom,
 
@@ -1208,6 +1223,7 @@ export default inject(
       allowInvitingMembers,
 
       isAIRoom,
+      isAIAgent,
       isKnowledgeTab,
       contactsTab,
 

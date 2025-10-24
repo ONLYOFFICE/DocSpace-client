@@ -3457,10 +3457,15 @@ class FilesStore {
   };
 
   removeFiles = (fileIds, folderIds, showToast, destFolderId) => {
-    const { isRoomsFolder, isArchiveFolder, isTemplatesFolder } =
-      this.treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isTemplatesFolder,
+      isAIAgentsFolder,
+    } = this.treeFoldersStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
+    const isRooms =
+      isRoomsFolder || isArchiveFolder || isTemplatesFolder || isAIAgentsFolder;
 
     let deleteCount = 0;
 
@@ -3551,8 +3556,8 @@ class FilesStore {
       (newFilter.page + 1) * newFilter.pageCount - deleteCount;
     newFilter.pageCount = deleteCount;
     if (isRooms) {
-      return api.rooms
-        .getRooms(newFilter)
+      const req = isAIAgentsFolder ? api.ai.getAIAgents : api.rooms.getRooms;
+      return req(newFilter)
         .then((res) => {
           const folders = folderIds
             ? this.folders.filter((x) => !folderIds.includes(x.id))

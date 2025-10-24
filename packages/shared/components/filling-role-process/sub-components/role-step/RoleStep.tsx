@@ -33,7 +33,7 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
 import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 import AvatarDarkReactSvgUrl from "PUBLIC_DIR/images/avatar.dark.react.svg?url";
 
-import RoleHistories from "../role-histories/RoleHistories";
+import { RoleHistories } from "../role-histories";
 import { useTheme } from "../../../../hooks/useTheme";
 
 import styles from "./RoleStep.module.scss";

@@ -837,6 +837,16 @@ class FilesStore {
     const userId = this.userStore.user && this.userStore.user.id;
 
     switch (rootFolderType) {
+      case FolderType.AIAgents: {
+        const aiAgentsFilter = RoomsFilter.getDefault(
+          userId,
+          RoomSearchArea.AIAgents,
+        );
+        const params = aiAgentsFilter.toUrlParams(userId, true);
+        const path = getCategoryUrl(CategoryType.AIAgents);
+
+        return window.DocSpace.navigate(`${path}?${params}`);
+      }
       case FolderType.Archive: {
         const archiveFilter = RoomsFilter.getDefault(
           userId,

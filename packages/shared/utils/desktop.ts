@@ -138,20 +138,6 @@ export function regDesktop(
   }
 }
 
-export function relogin() {
-  if (!isSSR)
-    setTimeout(() => {
-      const data = {
-        domain: desktopConstants.domain,
-        onsuccess: "reload",
-      };
-      window.AscDesktopEditor.execCommand(
-        "portal:logout",
-        JSON.stringify(data),
-      );
-    }, 1000);
-}
-
 export function checkPwd() {
   if (!isSSR) {
     const data = {

@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-export const ModalDialogContainer = styled.div`
+const ModalDialogContainer = styled.div`
   display: contents;
 
   .field-body {

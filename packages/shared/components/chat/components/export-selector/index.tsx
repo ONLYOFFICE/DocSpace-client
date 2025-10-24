@@ -95,7 +95,6 @@ const ExportSelector = ({
       withoutBackButton
       withCancelButton
       withCreate={false}
-      initAiRoom
       // TODO: restore when api will be ready
       withFooterCheckbox={false}
       withFooterInput

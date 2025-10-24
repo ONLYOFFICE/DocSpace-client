@@ -140,6 +140,7 @@ const Attachment = ({
       isMultiSelect
       withRecentTreeFolder
       withFavoritesTreeFolder
+      withAIAgentsTreeFolder
       currentDeviceType={
         isDesktop()
           ? DeviceType.desktop

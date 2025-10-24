@@ -27,7 +27,7 @@
 import React, { use } from "react";
 import { useTranslation } from "react-i18next";
 
-import { getRooms } from "../../../api/rooms";
+import { getAIAgents } from "../../../api/ai";
 import RoomsFilter from "../../../api/rooms/filter";
 import { RoomSearchArea } from "../../../enums";
 import { TSelectorItem } from "../../../components/selector";
@@ -61,6 +61,7 @@ const useAgentsHelper = ({
   setSelectedItemType,
   subscribe,
   setSelectedItemSecurity,
+  setSelectedTreeNode,
 }: UseAgentsHelperProps) => {
   const { t } = useTranslation(["Common"]);
   const {
@@ -109,7 +110,7 @@ const useAgentsHelper = ({
       filter.filterValue = filterValue;
       filter.searchArea = RoomSearchArea.AIAgents;
 
-      const roomsFromApi = await getRooms(filter);
+      const roomsFromApi = await getAIAgents(filter);
 
       const { folders, total, count, current } = roomsFromApi;
 
@@ -119,7 +120,9 @@ const useAgentsHelper = ({
         // if (isRoomsOnly) subscribe(id);
         subscribe(id);
 
-        const breadCrumbs: TBreadCrumb[] = [{ label: title, id, isRoom: true }];
+        const breadCrumbs: TBreadCrumb[] = [
+          { label: title, id, isRoom: false, isAgent: true },
+        ];
 
         // if (!isRoomsOnly) breadCrumbs.unshift({ ...getDefaultBreadCrumb(t) });
 
@@ -137,6 +140,8 @@ const useAgentsHelper = ({
       setHasNextPage(count === PAGE_COUNT);
 
       setSelectedItemSecurity?.(current.security);
+
+      setSelectedTreeNode?.({ ...current, path: roomsFromApi.pathParts });
 
       if (firstLoadRef.current || startIndex === 0) {
         const { security } = current;
@@ -208,6 +213,7 @@ const useAgentsHelper = ({
       getRootData,
       addInputItem,
       excludeItems,
+      setSelectedTreeNode,
     ],
   );
 

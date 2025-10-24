@@ -44,6 +44,7 @@ const useRootHelper = ({
   treeFolders,
   withRecentTreeFolder,
   withFavoritesTreeFolder,
+  withAIAgentsTreeFolder,
 
   setTotal,
   setHasNextPage,
@@ -88,7 +89,9 @@ const useRootHelper = ({
         folder.rootFolderType === FolderType.USER ||
         (withRecentTreeFolder && folder.rootFolderType === FolderType.Recent) ||
         (withFavoritesTreeFolder &&
-          folder.rootFolderType === FolderType.Favorites)
+          folder.rootFolderType === FolderType.Favorites) ||
+        (withAIAgentsTreeFolder &&
+          folder.rootFolderType === FolderType.AIAgents)
       ) {
         let title = "";
         switch (folder.rootFolderType) {
@@ -103,6 +106,9 @@ const useRootHelper = ({
             break;
           case FolderType.Recent:
             title = t("Common:Recent");
+            break;
+          case FolderType.AIAgents:
+            title = t("Common:AIAgents");
             break;
           default:
             break;

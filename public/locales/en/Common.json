@@ -1033,7 +1033,7 @@
   "PreparationForAIFailedInfo": "Couldn’t prepare the file for AI — run preparation again.",
   "TryAgain": "Try again",
   "AskAIChat": "Ask AI-Chat",
-  "ChooseAIAgent": "Continue Your AI Chat",
+  "ChooseAIAgent": "Choose an AI agent",
   "ChooseAIAgentDescription": "Select an agent where you want to continue the conversation with AI. You can choose an existing agent or create a new one.",
   "CreateAIAgent": "Create AI agent",
   "NoAIAgents": "No AI agents available",

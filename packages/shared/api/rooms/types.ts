@@ -141,6 +141,7 @@ export type TRoom = {
   chatSettings?: { prompt: string; providerId: number; modelId: string };
   shareSettings?: TShareSettings;
   availableShareRights?: TAvailableShareRights;
+  path?: TPathParts[];
 };
 
 export type TGetRooms = {

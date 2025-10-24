@@ -289,6 +289,7 @@ const Panels = (props) => {
         isCopy={copyPanelVisible}
         isRestore={restorePanelVisible}
         isRestoreAll={restoreAllPanelVisible}
+        withAIAgentsTreeFolder
       />
     ),
     connectDialogVisible && <ConnectDialog key="connect-dialog" />,
@@ -318,6 +319,7 @@ const Panels = (props) => {
         onClose={onClose}
         withRecentTreeFolder
         withFavoritesTreeFolder
+        withAIAgentsTreeFolder
       />
     ),
 
@@ -333,6 +335,7 @@ const Panels = (props) => {
         descriptionText={descriptionTextFileFormRoomDialog}
         withRecentTreeFolder
         withFavoritesTreeFolder
+        withAIAgentsTreeFolder
       />
     ),
 
@@ -349,6 +352,7 @@ const Panels = (props) => {
         isMultiSelect
         withRecentTreeFolder
         withFavoritesTreeFolder
+        withAIAgentsTreeFolder
       />
     ),
 

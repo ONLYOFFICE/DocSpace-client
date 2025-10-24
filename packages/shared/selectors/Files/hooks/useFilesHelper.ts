@@ -32,7 +32,7 @@ import FolderSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
 
 import { getFolder, getFolderInfo } from "../../../api/files";
 import FilesFilter from "../../../api/files/filter";
-import { FolderType, SearchArea } from "../../../enums";
+import { FolderType, RoomsType } from "../../../enums";
 import { toastr } from "../../../components/toast";
 import { TSelectorItem } from "../../../components/selector";
 import { TData } from "../../../components/toast/Toast.type";
@@ -86,7 +86,9 @@ const useFilesHelper = ({
   shareKey,
 
   applyFilterOption,
-  isAIRoom,
+
+  setIsInsideKnowledge,
+  setIsInsideResultStorage,
 }: UseFilesHelpersProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -146,7 +148,6 @@ const useFilesHelper = ({
       filter.search = currentSearch;
       filter.applyFilterOption = null;
       filter.withSubfolders = false;
-      if (isAIRoom) filter.searchArea = SearchArea.ResultStorage;
       if (filterParam) {
         configureFilterByFilterParam(
           filter,
@@ -223,6 +224,16 @@ const useFilesHelper = ({
 
         setSelectedTreeNode?.({ ...current, path: pathParts });
 
+        const isInsideKnowledge = pathParts.some(
+          (x) => x.folderType === FolderType.Knowledge,
+        );
+        const isInsideResultStorage = pathParts.some(
+          (x) => x.folderType === FolderType.ResultStorage,
+        );
+
+        setIsInsideKnowledge(isInsideKnowledge);
+        setIsInsideResultStorage(isInsideResultStorage);
+
         if (initRef.current) {
           let foundParentId = false;
           let currentFolderIndex = -1;
@@ -259,6 +270,10 @@ const useFilesHelper = ({
                 isRoom:
                   roomsFolderId === id ||
                   (index === 0 && typeof nextItem?.roomType !== "undefined"),
+                isAgent:
+                  index === 0 &&
+                  typeof nextItem?.roomType !== "undefined" &&
+                  nextItem.roomType === RoomsType.AIRoom,
                 roomType,
                 rootFolderType: current.rootFolderType,
               };
@@ -389,11 +404,12 @@ const useFilesHelper = ({
       addInputItem,
       setSelectedItemType,
       setSelectedItemId,
+      setIsInsideKnowledge,
+      setIsInsideResultStorage,
       rootThirdPartyId,
       shareKey,
       applyFilterOption,
       includedItems,
-      isAIRoom,
     ],
   );
 

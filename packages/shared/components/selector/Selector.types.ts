@@ -108,6 +108,7 @@ export type TBreadCrumb = {
   id: string | number;
   label: string;
   isRoom?: boolean;
+  isAgent?: boolean;
   minWidth?: string;
   roomType?: RoomsType;
   shared?: boolean;
@@ -121,6 +122,7 @@ export type TDisplayedItem = {
   isArrow: boolean;
   isList: boolean;
   isRoom?: boolean;
+  isAgent?: boolean;
   listItems?: TBreadCrumb[];
 };
 

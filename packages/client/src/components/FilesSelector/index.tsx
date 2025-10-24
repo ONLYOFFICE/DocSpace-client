@@ -93,6 +93,7 @@ const FilesSelectorWrapper = ({
   treeFolders,
   withRecentTreeFolder,
   withFavoritesTreeFolder,
+  withAIAgentsTreeFolder,
 
   selection,
   // disabledItems,
@@ -387,7 +388,7 @@ const FilesSelectorWrapper = ({
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
     selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | undefined,
+    selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
       | TFileSecurity
@@ -396,6 +397,8 @@ const FilesSelectorWrapper = ({
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
     isDisabledFolder?: boolean,
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
   ) => {
     return getIsDisabled(
       isFirstLoad,
@@ -413,6 +416,9 @@ const FilesSelectorWrapper = ({
       includeFolder,
       isRestore,
       isDisabledFolder,
+      isInsideKnowledge,
+      isInsideResultStorage,
+      selectedItemType === "agents",
     );
   };
 
@@ -428,6 +434,7 @@ const FilesSelectorWrapper = ({
       treeFolders={treeFolders}
       withRecentTreeFolder={withRecentTreeFolder}
       withFavoritesTreeFolder={withFavoritesTreeFolder}
+      withAIAgentsTreeFolder={withAIAgentsTreeFolder}
       onSetBaseFolderPath={onSetBaseFolderPath}
       isUserOnly={isUserOnly}
       isRoomsOnly={isRoomsOnly}

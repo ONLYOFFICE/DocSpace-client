@@ -28,10 +28,10 @@ import React from "react";
 
 import { createFolder } from "../../../api/files";
 import { createRoom } from "../../../api/rooms";
+import { createAIAgent } from "../../../api/ai";
 import { RoomsType } from "../../../enums";
 import { TSelectorItem } from "../../../components/selector/Selector.types";
 import { toastr } from "../../../components/toast";
-import { createAIAgent } from "../../../api/ai";
 
 import { TUseInputItemHelper } from "../types";
 

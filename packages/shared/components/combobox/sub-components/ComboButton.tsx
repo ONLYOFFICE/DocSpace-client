@@ -32,7 +32,7 @@ import TriangleDownIcon from "PUBLIC_DIR/images/triangle.down.react.svg";
 
 import { IconSizeType } from "../../../utils";
 import { Loader, LoaderTypes } from "../../loader";
-import { Text } from "../../text";
+import { TextWithTooltip as Text } from "../../text";
 import { Badge } from "../../badge";
 
 import { ComboBoxSize } from "../ComboBox.enums";

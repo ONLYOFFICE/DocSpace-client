@@ -34,6 +34,8 @@ import { useAnimation } from "../../hooks/useAnimation";
 import { Text } from "../text";
 import { Badge } from "../badge";
 
+import { DivWithTooltip } from "../tooltip";
+
 import { ArticleItemProps } from "./ArticleItem.types";
 import styles from "./ArticleItem.module.scss";
 
@@ -121,9 +123,12 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
 
   const tooltipTitle = !showText ? title : undefined;
 
+  const ItemWrapper = tooltipTitle ? DivWithTooltip : "div";
+  const BadgeWrapper = badgeTitle ? DivWithTooltip : "div";
+
   const renderItem = () => {
     return (
-      <div
+      <ItemWrapper
         className={classNames(styles.articleItemContainer, className, {
           [styles.showText]: showText,
           [styles.endOfBlock]: isEndOfBlock,
@@ -172,7 +177,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
                 </Text>
               ) : null}
               {showBadge && !iconBadge ? (
-                <div
+                <BadgeWrapper
                   className={classNames(styles.articleItemBadgeWrapper, {
                     [styles.showText]: showText,
                   })}
@@ -193,7 +198,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
           </Text>
         ) : null}
         {showBadge && showText ? (
-          <div
+          <BadgeWrapper
             className={classNames(styles.articleItemBadgeWrapper, {
               [styles.showText]: showText,
             })}
@@ -207,9 +212,9 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
                 <Badge className={styles.articleItemBadge} label={labelBadge} />
               ))
             )}
-          </div>
+          </BadgeWrapper>
         ) : null}
-      </div>
+      </ItemWrapper>
     );
   };
 

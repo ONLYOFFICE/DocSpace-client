@@ -29,6 +29,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
+import { DivWithTooltip } from "@docspace/shared/components/tooltip";
 
 import FilesSelector from "SRC_DIR/components/FilesSelector";
 import { injectDefaultTheme } from "@docspace/shared/utils";
@@ -180,7 +181,7 @@ const FolderInput = ({
   return (
     <>
       <StyledFolderInput noRoomTitle={!roomTitle} onClick={onOpen}>
-        <div className="folder-path-wrapper" title={title}>
+        <DivWithTooltip className="folder-path-wrapper" title={title}>
           <span className="root_label">
             {createNewFolderIsChecked || path ? "/" : t("RootFolderLabel")}
           </span>
@@ -190,7 +191,7 @@ const FolderInput = ({
               {(path ? "/" : "") + (roomTitle || t("Common:NewRoom"))}
             </span>
           ) : null}
-        </div>
+        </DivWithTooltip>
         <div title={t("Common:SelectFolder")} className="icon-wrapper">
           <IconButton size={16} iconName={FolderReactSvgUrl} isClickable />
         </div>

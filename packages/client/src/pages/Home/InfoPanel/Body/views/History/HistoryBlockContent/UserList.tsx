@@ -32,7 +32,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { decode } from "he";
 import classNames from "classnames";
 
-import { Link } from "@docspace/shared/components/link";
+import { LinkWithTooltip as Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 
 import { RoomMember, TFeedAction } from "@docspace/shared/api/rooms/types";

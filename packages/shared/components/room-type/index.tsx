@@ -34,6 +34,7 @@ import { RoomsType } from "../../enums";
 import { RoomLogo } from "../room-logo";
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
+import { DivWithTooltip } from "../tooltip";
 
 import {
   getRoomTypeDescriptionTranslation,
@@ -99,21 +100,21 @@ const RoomType = ({
   );
 
   return type === "listItem" ? (
-    <div
+    <DivWithTooltip
       className={classNames(styles.roomType, styles.listItem, {
         [styles.isOpen]: isOpen,
       })}
       id={id}
       title={disabled ? "" : t(room.title)}
       onClick={onClick}
-      data-tooltip-id={disabled ? "create-room-tooltip" : ""}
+      data-tooltip-id={disabled ? "create-room-tooltip" : undefined}
       data-testid="room-type-list-item"
       data-selected-id={selectedId}
     >
       {content}
-    </div>
+    </DivWithTooltip>
   ) : type === "dropdownButton" ? (
-    <div
+    <DivWithTooltip
       id={id}
       title={t(room.title)}
       onClick={onClick}
@@ -124,9 +125,9 @@ const RoomType = ({
       data-testid="room-type-dropdown-button"
     >
       {content}
-    </div>
+    </DivWithTooltip>
   ) : type === "dropdownItem" ? (
-    <div
+    <DivWithTooltip
       id={id}
       title={t(room.title)}
       onClick={onClick}
@@ -137,9 +138,9 @@ const RoomType = ({
       data-testid="room-type-dropdown-item"
     >
       {content}
-    </div>
+    </DivWithTooltip>
   ) : (
-    <div
+    <DivWithTooltip
       id={id}
       title={t(room.title)}
       data-selected-id={selectedId}
@@ -148,7 +149,7 @@ const RoomType = ({
       })}
     >
       {content}
-    </div>
+    </DivWithTooltip>
   );
 };
 

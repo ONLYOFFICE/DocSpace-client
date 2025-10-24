@@ -50,7 +50,7 @@ export function withTooltip<T extends object>(
 
     if (title || tooltipContent) {
       const uniqueId =
-        tooltipId || `tooltip-${Math.random().toString(36).substr(2, 9)}`;
+        tooltipId || `tooltip-${Math.random().toString(36).substring(2, 11)}`;
       const content: ReactNode = tooltipContent || title;
 
       return (
@@ -72,5 +72,50 @@ export function withTooltip<T extends object>(
     }
 
     return <WrappedComponent {...(restProps as T)} ref={ref} />;
+  });
+}
+
+export function withTooltipForElement<
+  T extends keyof React.JSX.IntrinsicElements = "div",
+>(Element: T = "div" as T) {
+  return React.forwardRef<
+    React.ComponentRef<T>,
+    React.ComponentPropsWithoutRef<T> & WithTooltipProps
+  >((props, ref) => {
+    const {
+      title,
+      tooltipContent,
+      tooltipId,
+      tooltipPlace = "bottom" as TTooltipPlace,
+      ...restProps
+    } = props;
+
+    if (title || tooltipContent) {
+      const uniqueId =
+        tooltipId || `tooltip-${Math.random().toString(36).substring(2, 11)}`;
+      const content: ReactNode = tooltipContent || title;
+
+      return (
+        <>
+          {React.createElement<React.ComponentPropsWithoutRef<T>>(Element, {
+            ...(restProps as React.ComponentPropsWithoutRef<T>),
+            ref,
+            "data-tooltip-id": uniqueId,
+            "data-tip": "",
+          })}
+          <Tooltip
+            id={uniqueId}
+            place={tooltipPlace}
+            getContent={() => content}
+            delayShow={DEFAULT_DELAY_SHOW}
+          />
+        </>
+      );
+    }
+
+    return React.createElement<React.ComponentPropsWithoutRef<T>>(Element, {
+      ...(restProps as React.ComponentPropsWithoutRef<T>),
+      ref,
+    });
   });
 }

@@ -225,14 +225,21 @@ class FilesActionStore {
     const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
-    const { fetchFiles, fetchRooms, filter, roomsFilter, scrollToTop } =
-      this.filesStore;
+    const {
+      fetchFiles,
+      fetchRooms,
+      fetchAgents,
+      filter,
+      roomsFilter,
+      scrollToTop,
+    } = this.filesStore;
 
     const {
       isRoomsFolder,
       isArchiveFolder,
       isArchiveFolderRoot,
       isTemplatesFolder,
+      isAIAgentsFolder,
     } = this.treeFoldersStore;
 
     let newFilter;
@@ -246,7 +253,14 @@ class FilesActionStore {
     try {
       if (skipFetch) return;
 
-      if (
+      if (isAIAgentsFolder) {
+        fetchAgents(
+          updatedFolder,
+          newFilter || roomsFilter.clone(),
+          false,
+          false,
+        );
+      } else if (
         isRoomsFolder ||
         isArchiveFolder ||
         isArchiveFolderRoot ||

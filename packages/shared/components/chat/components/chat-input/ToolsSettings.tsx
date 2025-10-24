@@ -189,7 +189,8 @@ const ToolsSettings = () => {
       if (
         data.type === "folder" &&
         data.id &&
-        Number(data.id) === Number(roomId)
+        Number(data.id) === Number(roomId) &&
+        data.cmd !== "delete"
       ) {
         fetchTools();
       }

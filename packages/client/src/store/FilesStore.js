@@ -3557,8 +3557,7 @@ class FilesStore {
     newFilter.pageCount = deleteCount;
     if (isRooms) {
       const req = isAIAgentsFolder ? api.ai.getAIAgents : api.rooms.getRooms;
-      return req
-        .getRooms(newFilter)
+      return req(newFilter)
         .then((res) => {
           const folders = folderIds
             ? this.folders.filter((x) => !folderIds.includes(x.id))

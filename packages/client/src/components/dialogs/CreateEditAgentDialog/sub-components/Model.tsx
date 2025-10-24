@@ -116,7 +116,8 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
       }
     };
 
-    if (!selectedProvider?.id || selectedProvider.id === -1) return;
+    if (typeof selectedProvider?.id !== "number" || selectedProvider.id === -1)
+      return;
 
     setSelectedModel(null);
 
@@ -193,7 +194,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
 
     if (
       prevSelectedModel.current?.modelId === selectedModel?.modelId ||
-      !selectedModel.providerId
+      typeof selectedModel.providerId !== "number"
     )
       return;
 

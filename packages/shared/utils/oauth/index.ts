@@ -2,14 +2,8 @@ import crypto from "crypto-js";
 import sha256 from "crypto-js/sha256";
 
 import { TTranslation } from "../../types";
-import { AuthenticationMethod, ScopeGroup, ScopeType } from "../../enums";
-import {
-  IClientResDTO,
-  IClientReqDTO,
-  IClientProps,
-  TScope,
-  TFilteredScopes,
-} from "./types";
+import { ScopeGroup, ScopeType } from "../../enums";
+import { IClientResDTO, IClientProps, TScope, TFilteredScopes } from "./types";
 
 export const transformToClientProps = (
   clientDto: IClientResDTO,
@@ -64,42 +58,6 @@ export const transformToClientProps = (
     creatorAvatar: creator_avatar,
     creatorDisplayName: creator_display_name,
     isPublic: is_public,
-  };
-
-  return client;
-};
-
-export const transformToClientReqDTO = (
-  clientProps: IClientProps,
-): IClientReqDTO => {
-  const {
-    name,
-    description,
-    termsUrl: terms_url,
-    policyUrl: policy_url,
-    logo,
-    authenticationMethods,
-    redirectUris: redirect_uris,
-    logoutRedirectUri: logout_redirect_uri,
-    scopes,
-    websiteUrl,
-    allowedOrigins,
-    isPublic,
-  } = clientProps;
-
-  const client: IClientReqDTO = {
-    name,
-    description,
-    logo,
-    redirect_uris,
-    logout_redirect_uri,
-    terms_url,
-    policy_url,
-    is_public: isPublic,
-    scopes,
-    allow_pkce: authenticationMethods.includes(AuthenticationMethod.none),
-    website_url: websiteUrl,
-    allowed_origins: allowedOrigins,
   };
 
   return client;

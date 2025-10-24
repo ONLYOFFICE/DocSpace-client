@@ -53,7 +53,6 @@
   "LastModified": "Zadnjič spremenjeno",
   "NewApp": "Nova aplikacija",
   "NoAuthorizedApps": "Ni avtoriziranih aplikacij",
-  "NoOAuthAppHeader": "Ni OAuth aplikacij",
   "OAuth": "OAuth 2.0",
   "OAuthAppDescription": "Uporabite OAuth 2.0 za dostop do API-ja {{organizationName}} {{productName}} za avtorizacijo in nadaljnja dejanja, kot je dostop do datotek itd. Tukaj lahko registrirate novo aplikacijo, upravljate ustvarjene aplikacije na seznamu, jih onemogočite ali omogočite.",
   "OAuthHeaderBlock": "OAuth URL-ji",

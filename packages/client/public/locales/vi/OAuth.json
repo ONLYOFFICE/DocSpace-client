@@ -53,7 +53,6 @@
   "LastModified": "Lần sửa đổi cuối",
   "NewApp": "Ứng dụng mới",
   "NoAuthorizedApps": "Không có ứng dụng được ủy quyền",
-  "NoOAuthAppHeader": "Không có ứng dụng OAuth",
   "OAuth": "OAuth 2.0",
   "OAuthAppDescription": "Sử dụng OAuth 2.0 để truy cập API {{productName}} {{organizationName}} để ủy quyền và thực hiện các hành động khác như truy cập tập tin, v.v. Tại đây, bạn có thể đăng ký một ứng dụng mới, quản lý các ứng dụng đã tạo trong danh sách, vô hiệu hóa và kích hoạt chúng.",
   "OAuthHeaderBlock": "URLs OAuth",

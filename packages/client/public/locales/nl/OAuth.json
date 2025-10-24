@@ -53,7 +53,6 @@
   "LastModified": "Laatst gewijzigd",
   "NewApp": "Nieuwe toepassing",
   "NoAuthorizedApps": "Geen geautoriseerde apps",
-  "NoOAuthAppHeader": "Geen OAuth toepassingen",
   "OAuth": "OAuth 2.0",
   "OAuthAppDescription": "Gebruik OAuth 2.0 om toegang te krijgen tot de {{organizationName}} {{productName}} API voor autorisatie en verdere acties zoals toegang tot bestanden, enz. Hier kunt u een nieuwe toepassing registreren, uw gemaakte apps in de lijst beheren, uitschakelen en inschakelen.",
   "OAuthHeaderBlock": "OAuth URLs",

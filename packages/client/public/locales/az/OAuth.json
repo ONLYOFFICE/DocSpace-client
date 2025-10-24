@@ -53,7 +53,6 @@
   "LastModified": "Son dəyişiklik tarixi",
   "NewApp": "Yeni tətbiq",
   "NoAuthorizedApps": "Səlahiyyətli tətbiqlər yoxdur",
-  "NoOAuthAppHeader": "OAuth tətbiqləri yoxdur",
   "OAuth": "OAuth 2.0",
   "OAuthAppDescription": "Avtorizasiya və fayllara giriş kimi digər əməliyyatlar üçün {{organizationName}} {{productName}} API-yə daxil olmaq üçün OAuth 2.0 istifadə edin. Burada yeni tətbiqi qeydiyyatdan keçirə, siyahıda yaratdığınız proqramları idarə edə, söndürə və aktivləşdirə bilərsiniz.",
   "OAuthHeaderBlock": "OAuth URL-ləri",

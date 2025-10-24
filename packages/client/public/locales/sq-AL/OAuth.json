@@ -53,7 +53,6 @@
   "LastModified": "Ndryshuar së fundi",
   "NewApp": "Aplikacion i ri",
   "NoAuthorizedApps": "Nuk ka aplikacione të autorizuara",
-  "NoOAuthAppHeader": "Nuk ka aplikacione OAuth",
   "OAuth": "OAuth 2.0",
   "OAuthAppDescription": "Përdorni OAuth 2.0 për të hyrë në API-në e {{organizationName}} {{productName}} për autorizim dhe veprime të mëtejshme si qasja në skedarë, etj. Këtu mund të regjistroni një aplikacion të ri, të menaxhoni aplikacionet tuaja të krijuara në listë, t'i çaktivizoni dhe aktivizoni ato.",
   "OAuthHeaderBlock": "URL-ët OAuth",

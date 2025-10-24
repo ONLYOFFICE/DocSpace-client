@@ -53,7 +53,6 @@
   "LastModified": "Viimeksi muokattu",
   "NewApp": "Uusi sovellus",
   "NoAuthorizedApps": "Ei valtuutettuja sovelluksia",
-  "NoOAuthAppHeader": "Ei OAuth sovelluksia",
   "OAuth": "OAuth 2.0",
   "OAuthAppDescription": "Käytä OAuth 2.0:aa päästäksesi {{organizationName}} {{productName}} API:n valtuutusta ja jatkotoimintoja kuten tiedostoihin pääsyä jne. varten. Tässä voit rekisteröidä uuden hakemuksen, hallita luomiasi sovelluksia listassa, ottaa ne käyttöön ja poistaa ne käytöstä.",
   "OAuthHeaderBlock": "OAuth urlit",

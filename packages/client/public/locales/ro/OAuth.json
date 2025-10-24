@@ -53,7 +53,6 @@
   "LastModified": "Ultima modificare",
   "NewApp": "Aplicația nouă",
   "NoAuthorizedApps": "Nicio aplicație autorizată",
-  "NoOAuthAppHeader": "Nicio aplicație OAuth ",
   "OAuth": "OAuth 2.0",
   "OAuthAppDescription": "Folosiți autentificarea OAuth 2.0 pentru a accesa API-ul {{organizationName}} {{productName}} și pentru a efectua alte acțiuni, cum ar fi accesarea fișierelor, etc. Aici puteți înregistra o nouă aplicație, gestiona aplicațiile existente din lista, le activa și dezactiva.",
   "OAuthHeaderBlock": "Adrese URL OAuth",

@@ -53,7 +53,6 @@
   "LastModified": "最后一次修改",
   "NewApp": "新应用",
   "NoAuthorizedApps": "无授权应用",
-  "NoOAuthAppHeader": "无 OAuth 应用",
   "OAuth": "OAuth 2.0",
   "OAuthAppDescription": "使用 OAuth 2.0 访问 {{organizationName}} {{productName}} API 进行授权和进一步操作，例如访问文件等。在这里，您可以注册新应用程序、在列表中管理您创建的应用程序、禁用和启用它们。",
   "OAuthHeaderBlock": "OAuth 网址",

@@ -53,7 +53,6 @@
   "LastModified": "Naposledy upraveno",
   "NewApp": "Nová aplikace",
   "NoAuthorizedApps": "Žádné autorizované aplikace",
-  "NoOAuthAppHeader": "Žádné aplikace OAuth",
   "OAuth": "OAuth 2.0",
   "OAuthAppDescription": "Použijte OAuth 2.0 pro přístup k {{organizationName}} {{productName}} API pro autorizaci a další akce, jako je přístup k souborům atd. Zde můžete zaregistrovat novou aplikaci, spravovat vytvořené aplikace v seznamu, zakázat je a povolit.",
   "OAuthHeaderBlock": "URL adresy OAuth",

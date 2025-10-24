@@ -53,7 +53,6 @@
   "LastModified": "最終更新日",
   "NewApp": "新規アプリ",
   "NoAuthorizedApps": "認証済みアプリがありません",
-  "NoOAuthAppHeader": "OAuthアプリがありません",
   "OAuth": "OAuth 2.0",
   "OAuthAppDescription": "OAuth 2.0を使用して {{organizationName}}{{productName}} にアクセスし、APIを使用して、認証やファイルへのアクセスなどのアクションを実行できます。ここでは、新しいアプリケーションを登録したり、作成したアプリケーションをリストで管理したり、無効にしたり有効にしたりすることができます。",
   "OAuthHeaderBlock": "OAuthのURL",

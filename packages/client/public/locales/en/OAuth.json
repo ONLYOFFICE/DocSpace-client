@@ -53,7 +53,6 @@
   "LastModified": "Last modified",
   "NewApp": "New application",
   "NoAuthorizedApps": "No authorized apps",
-  "NoOAuthAppHeader": "No OAuth applications",
   "OAuth": "OAuth 2.0",
   "OAuthAppDescription": "Use OAuth 2.0 to access the {{organizationName}} {{productName}} API for authorization and further actions such as accessing files, etc. Here, you can register a new application, manage your created apps in the list, disable and enable them.",
   "OAuthHeaderBlock": "OAuth URLs",

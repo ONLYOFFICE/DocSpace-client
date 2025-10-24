@@ -53,7 +53,6 @@
   "LastModified": "마지막 수정",
   "NewApp": "새로운 애플리케이션",
   "NoAuthorizedApps": "인증된 앱이 없습니다",
-  "NoOAuthAppHeader": "OAuth 애플리케이션이 없습니다",
   "OAuth": "OAuth 2.0",
   "OAuthAppDescription": "인증 및 추가 작업(파일 액세스 등)을 위해 OAuth 2.0을 사용하여 {{organizationName}} {{productName}} API에 액세스하세요. 여기에서 새 애플리케이션을 등록하고 목록에서 만든 앱을 관리하고 비활성화하고 활성화할 수 있습니다.",
   "OAuthHeaderBlock": "OAuth URL",

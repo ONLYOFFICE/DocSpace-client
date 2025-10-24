@@ -26,7 +26,6 @@
 
 "use client";
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useMemo } from "react";
 
 import { Provider } from "../../utils";

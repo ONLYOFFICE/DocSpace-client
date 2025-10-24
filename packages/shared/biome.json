@@ -101,7 +101,7 @@
                 "noConsole": "off"
             },
             "security": {
-                "noDangerouslySetInnerHtml": "off",
+                "noDangerouslySetInnerHtml": "error",
                 "noDangerouslySetInnerHtmlWithChildren": "error"
             },
             "a11y": {

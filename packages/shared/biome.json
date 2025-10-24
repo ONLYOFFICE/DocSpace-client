@@ -70,7 +70,11 @@
                 "useHookAtTopLevel": "error"
             },
             "nursery": {
-                "noReactForwardRef": "off"
+                "noReactForwardRef": "off",
+                "noDeprecatedImports": "error",
+                "noFloatingPromises": "off",
+                "noImportCycles": "error",
+                "noMisusedPromises": "error"
             },
             "style": {
                 "noNamespace": "error",

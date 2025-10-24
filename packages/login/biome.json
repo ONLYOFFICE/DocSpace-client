@@ -6,7 +6,16 @@
     "linter": {
         "rules": {
             "performance": {
-                "noImgElement": "error"
+                "noImgElement": "error",
+                "useGoogleFontPreconnect": "error",
+                "noUnwantedPolyfillio": "error"
+            },
+            "style": {
+                "noHeadElement": "error"
+            },
+            "suspicious": {
+                "noDocumentImportInPage": "error",
+                "noHeadImportInDocument": "error"
             }
         }
     },

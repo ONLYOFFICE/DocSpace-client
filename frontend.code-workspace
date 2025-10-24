@@ -275,13 +275,13 @@
           },
           {
             "label": "Lint",
-            "task": "Test | ESLint",
-            "tooltip": "🛠️ Start the \"eslint\" task"
+            "task": "Test | Biome",
+            "tooltip": "🛠️ Start the \"biome\" task"
           },
           {
             "label": "Lint:fix",
-            "task": "Test | ESLint:fix",
-            "tooltip": "🛠️ Start the \"eslint (autofix)\" task"
+            "task": "Test | Biome:fix",
+            "tooltip": "🛠️ Start the \"biome (autofix)\" task"
           },
           {
             "label": "Typescript issues (tsc)",

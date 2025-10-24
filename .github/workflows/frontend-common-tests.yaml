@@ -157,18 +157,18 @@ jobs:
         working-directory: ./common/tests
         run: npm ci --prefer-offline
 
-      # Run ESLint (if needed)
-      - name: Run ESLint
+      # Run Biome (if needed)
+      - name: Run Biome
         id: lint
         if: needs.changes.outputs.lint == 'true' || needs.changes.outputs.workflow == 'true'
         run: |
-          echo "🔍 Running ESLint..."
+          echo "🔍 Running Biome..."
           if pnpm lint; then
             echo "result=success" >> $GITHUB_OUTPUT
-            echo "✅ ESLint passed"
+            echo "✅ Biome passed"
           else
             echo "result=failure" >> $GITHUB_OUTPUT
-            echo "❌ ESLint failed"
+            echo "❌ Biome failed"
             exit 1
           fi
         continue-on-error: true
@@ -422,7 +422,7 @@ jobs:
           echo '| Test Category | Test Type | Status | Result |' >> "$REPORT_FILE"
           echo '|---------------|-----------|--------|--------|' >> "$REPORT_FILE"
           echo "| **Setup** | Changes Detection | ${{ needs.changes.result }} | $([ '${{ needs.changes.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
-          echo "| **Static Analysis** | 🔍 ESLint | ${{ needs.static-analysis-and-tests.outputs.lint_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.lint_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **Static Analysis** | 🔍 Biome | ${{ needs.static-analysis-and-tests.outputs.lint_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.lint_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
           echo "| **Static Analysis** | 🔧 TypeScript | ${{ needs.static-analysis-and-tests.outputs.tsc_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.tsc_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
           echo "| **Static Analysis** | 🧪 Unit Tests | ${{ needs.static-analysis-and-tests.outputs.unit_tests_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.unit_tests_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
           echo "| **Static Analysis** | 🖼️ Images | ${{ needs.static-analysis-and-tests.outputs.images_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.images_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"

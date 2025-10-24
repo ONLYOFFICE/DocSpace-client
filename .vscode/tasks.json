@@ -646,7 +646,7 @@
       }
     },
     {
-      "label": "Test | ESLint",
+      "label": "Test | Biome",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm lint",
       "group": {
@@ -661,7 +661,7 @@
       }
     },
     {
-      "label": "Test | ESLint:fix",
+      "label": "Test | Biome:fix",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm lint:fix",
       "group": {

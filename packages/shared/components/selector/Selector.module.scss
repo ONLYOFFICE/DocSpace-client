@@ -498,6 +498,12 @@
     }
   }
 
+  .selectorItemNameMultiSelect {
+    width: calc(100% - 56px);
+
+    margin-inline-end: 8px;
+  }
+
   .titleIcon {
     cursor: pointer;
   }

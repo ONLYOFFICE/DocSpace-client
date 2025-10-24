@@ -287,7 +287,13 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
         {renderCustomItem ? (
           renderCustomItem(label, typeLabel, email, isGroup, status)
         ) : (
-          <div className={styles.selectorItemName}>
+          <div
+            className={
+              isMultiSelect
+                ? styles.selectorItemNameMultiSelect
+                : styles.selectorItemName
+            }
+          >
             <Text
               className={classNames(styles.selectorItemLabel, "label-disabled")}
               fontWeight={600}

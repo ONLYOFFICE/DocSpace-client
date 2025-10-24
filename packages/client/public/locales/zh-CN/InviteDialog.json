@@ -8,7 +8,7 @@
   "InviteMembersSearchPlaceholder": "通过电子邮件邀请成员",
   "InviteToRoomAddPlaceholder": "通过姓名或电子邮件添加用户",
   "InviteToRoomManuallyInfoGuest": "添加现有的{{productName}}联系人，或通过电子邮件亲自邀请新用户。新用户将被添加到您的访客列表中。",
-  "InviteToRoomManuallyInfoMembers": "将现有的{{productName}}成员添加到房间中。",
+  "InviteToRoomManuallyInfoMembers": "将现有的 {{productName}} 成员添加到房间中。",
   "InviteToRoomSearchPlaceholder": "搜索姓名或电子邮件并邀请",
   "InviteViaLink": "通过链接进行邀请",
   "InviteViaLinkDescriptionAccounts": "在{{productName}}中创建用于自我授权的通用链接",

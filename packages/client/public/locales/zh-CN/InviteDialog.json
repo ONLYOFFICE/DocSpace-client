@@ -12,7 +12,7 @@
   "InviteToRoomSearchPlaceholder": "搜索姓名或电子邮件并邀请",
   "InviteViaLink": "通过链接进行邀请",
   "InviteViaLinkDescriptionAccounts": "在{{productName}}中创建用于自我授权的通用链接",
-  "InviteViaLinkDescriptionRoomGuest": "将现有的{{productName}}成员添加到房间中。",
+  "InviteViaLinkDescriptionRoomGuest": "创建通用链接以便访客在房间内进行自我授权。",
   "InviteViaLinkDescriptionRoomMembers": "为{{productName}}成员创建通用链接，以便在房间中进行自我授权。",
   "LinkCopySuccess": "链接已复制",
   "SendInvitation": "发送邀请",

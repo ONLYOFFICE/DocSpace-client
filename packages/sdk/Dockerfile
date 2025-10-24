@@ -8,7 +8,7 @@ RUN apt-get -y update && \
     apt-get install -yq
     
 # Install PNPM
-RUN npm install -g pnpm@10.3.0
+RUN npm install -g pnpm@10.19.0
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     fonts-noto-cjk \

@@ -400,6 +400,7 @@ const Panels = (props) => {
 
     formFillingTipsVisible ? (
       <Guidance
+        key="form-filling-tips-guidance"
         viewAs={viewAs}
         onClose={onCloseGuidance}
         getRefElement={getRefElement}

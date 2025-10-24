@@ -27,8 +27,6 @@
     },
     "linter": {
         "domains": {
-            "react": "recommended",
-            "next": "recommended",
             "test": "recommended"
         },
         "enabled": true,
@@ -65,7 +63,14 @@
                 "useValidForDirection": "error",
                 "useYield": "error",
                 "noInvalidUseBeforeDeclaration": "error",
-                "useJsxKeyInIterable": "error"
+                "useJsxKeyInIterable": "error",
+                "noChildrenProp": "error",
+                "noRenderReturnValue": "error",
+                "useExhaustiveDependencies": "off",
+                "useHookAtTopLevel": "error"
+            },
+            "nursery": {
+                "noReactForwardRef": "off"
             },
             "style": {
                 "noNamespace": "error",
@@ -103,7 +108,8 @@
                 "noUnsafeNegation": "error",
                 "useGetterReturn": "off",
                 "useNamespaceKeyword": "error",
-                "noConsole": "off"
+                "noConsole": "off",
+                "noArrayIndexKey": "off"
             },
             "security": {
                 "noDangerouslySetInnerHtml": "error",

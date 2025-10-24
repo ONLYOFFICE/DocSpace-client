@@ -3,6 +3,13 @@
     "extends": [
         "../shared/biome.json"
     ],
+    "linter": {
+        "rules": {
+            "performance": {
+                "noImgElement": "error"
+            }
+        }
+    },
     "files": {
         "includes": [
             "**",

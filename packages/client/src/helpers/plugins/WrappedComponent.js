@@ -40,7 +40,7 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 
 import { PluginComponents } from "./enums";
 
-import { messageActions } from "./utils";
+import { borderToStyle, messageActions } from "./utils";
 
 const PLUGIN_IFRAME_TITLE = "Plugin iframe";
 
@@ -146,10 +146,10 @@ export const PluginComponent = inject(({ pluginStore }) => {
             padding: paddingProp,
             margin: marginProp,
             display: displayProp,
-            border: borderProp,
             background: backgroundProp,
             flex: flexProp,
             overflow: overflowProp,
+            ...borderToStyle(borderProp),
             ...elementRest,
           };
         }

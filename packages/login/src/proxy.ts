@@ -29,7 +29,7 @@ import type { NextRequest } from "next/server";
 import { OAuth2ErrorKey } from "./utils/enums";
 
 // This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
 
   const host = request.headers.get("x-forwarded-host");

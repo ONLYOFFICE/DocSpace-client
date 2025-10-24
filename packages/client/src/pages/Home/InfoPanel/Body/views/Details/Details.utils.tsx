@@ -26,6 +26,7 @@
 
 import React from "react";
 import { decode } from "he";
+import type { TFunction } from "i18next";
 
 import { getCorrectDate } from "@docspace/shared/utils";
 import { Link } from "@docspace/shared/components/link";
@@ -311,7 +312,7 @@ class DetailsHelper {
 
   getItemAccessLevel = () => {
     if (!("access" in this.item) || isRoom(this.item)) return null;
-    return text(getAccessLabel(this.t, this.item));
+    return text(getAccessLabel(this.t as TFunction, this.item));
   };
 
   getAuthorDecoration = (byField = "createdBy") => {

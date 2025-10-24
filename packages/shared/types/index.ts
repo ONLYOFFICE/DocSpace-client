@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TFunction } from "i18next";
-
 import type { TFile, TFileLink, TFolder } from "../api/files/types";
 import type { TBreadCrumb } from "../components/selector/Selector.types";
 import type { RoomsType, ShareAccessRights, ShareRights } from "../enums";
@@ -95,7 +93,10 @@ export type TSortBy =
   | "usedspace"
   | "Size";
 
-export type TTranslation = TFunction;
+export type TTranslation = (
+  key: string,
+  params?: Record<string, unknown>,
+) => string;
 
 export type Nullable<T> = T | null;
 

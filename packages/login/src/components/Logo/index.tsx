@@ -24,27 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+"use client";
 
-import { injectDefaultTheme } from "@docspace/shared/utils";
+import React from "react";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
+import { getLogoUrl } from "@docspace/shared/utils/common";
 
-export const StyledRegister = styled.div.attrs(injectDefaultTheme)`
-  box-sizing: border-box;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 184;
-  width: 100%;
-  height: 68px;
-  padding: 1.5em;
-  bottom: 0;
+export const Logo = ({ culture }: { culture?: string }) => {
+  const lightLogoUrl = getLogoUrl(
+    WhiteLabelLogoType.LoginPage,
+    false,
+    false,
+    culture,
+  );
 
-  inset-inline-end: 0;
-  background-color: var(--login-register-background-color);
-  cursor: pointer;
+  const darkLogoUrl = getLogoUrl(
+    WhiteLabelLogoType.LoginPage,
+    true,
+    false,
+    culture,
+  );
 
-  .register-text {
-    color: var(--login-register-text-color);
-  }
-`;
+  return (
+    <>
+      <img
+        key="light-logo"
+        id="logo-image-light"
+        src={lightLogoUrl}
+        className="logo-wrapper logo-wrapper--light"
+        alt="greeting-logo"
+      />
+
+      <img
+        key="dark-logo"
+        id="logo-image-dark"
+        src={darkLogoUrl}
+        className="logo-wrapper logo-wrapper--dark"
+        alt="greeting-logo"
+      />
+    </>
+  );
+};

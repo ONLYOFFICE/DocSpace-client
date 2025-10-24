@@ -24,57 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { MessageStoreContextProvider } from "./store/messageStore";
-import { ChatStoreContextProvider } from "./store/chatStore";
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-import { ChatProps } from "./Chat.types";
+import ChatNoAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.dark.svg";
+import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.access.rights.light.svg";
 
-import ChatContainer from "./components/chat-container";
-import ChatHeader from "./components/chat-header";
-import ChatMessageBody from "./components/chat-message-body";
-import ChatInput from "./components/chat-input";
-import { ChatNoAccessScreen } from "./components/chat-no-access-screen";
+import { EmptyView } from "../../../empty-view";
+import { useTheme } from "../../../../hooks/useTheme";
 
-import { CHAT_SUPPORTED_FORMATS } from "./Chat.constants";
+export const ChatNoAccessScreen = () => {
+  const { t } = useTranslation("Common");
+  const { isBase } = useTheme();
 
-export { CHAT_SUPPORTED_FORMATS };
-
-const Chat = ({
-  roomId,
-  userAvatar,
-  selectedModel,
-  isLoading,
-  canUseChat,
-
-  getIcon,
-  attachmentFile,
-  clearAttachmentFile,
-}: ChatProps) => {
-  if (!canUseChat) {
-    return <ChatNoAccessScreen />;
-  }
+  const icon = isBase ? (
+    <ChatNoAccessRightsLightIcon />
+  ) : (
+    <ChatNoAccessRightsDarkIcon />
+  );
 
   return (
-    <ChatStoreContextProvider roomId={roomId}>
-      <MessageStoreContextProvider roomId={roomId}>
-        <ChatContainer>
-          <ChatHeader selectedModel={selectedModel} isLoading={isLoading} />
-          <ChatMessageBody
-            userAvatar={userAvatar}
-            isLoading={isLoading}
-            getIcon={getIcon}
-          />
-          <ChatInput
-            attachmentFile={attachmentFile}
-            clearAttachmentFile={clearAttachmentFile}
-            isLoading={isLoading}
-            getIcon={getIcon}
-            selectedModel={selectedModel}
-          />
-        </ChatContainer>
-      </MessageStoreContextProvider>
-    </ChatStoreContextProvider>
+    <EmptyView
+      title={t("Common:AIChatNoAccessTitle")}
+      description={t("Common:AIChatNoAccessDescription")}
+      icon={icon}
+      options={null}
+    />
   );
 };
-
-export default Chat;

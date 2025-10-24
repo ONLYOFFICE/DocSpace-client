@@ -73,7 +73,7 @@ export type UseRoomsHelperProps = TUseInputItemHelper & {
       TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
     >
   >;
-  setSelectedTreeNode: React.Dispatch<React.SetStateAction<TFolder>>;
+  setSelectedTreeNode?: React.Dispatch<React.SetStateAction<TFolder>>;
 };
 
 export type UseAgentsHelperProps = TUseInputItemHelper & {
@@ -101,7 +101,7 @@ export type UseAgentsHelperProps = TUseInputItemHelper & {
       TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
     >
   >;
-  setSelectedTreeNode: React.Dispatch<React.SetStateAction<TFolder>>;
+  setSelectedTreeNode?: React.Dispatch<React.SetStateAction<TFolder>>;
 };
 
 export type UseSocketHelperProps = {

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import Image from "next/image";
 import styled from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -93,7 +94,7 @@ const OAuthClientInfo = ({
           {t("Common:LoginButton")}
         </Text>
       ) : null}
-      <img src={logo} className="client-logo" alt="client-logo" />
+      <Image src={logo} className="client-logo" alt="client-logo" />
       <Text
         className="row"
         fontWeight={isConsentScreen ? 400 : 600}

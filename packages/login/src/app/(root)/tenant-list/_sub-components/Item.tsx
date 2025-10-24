@@ -26,6 +26,7 @@
 
 "use client";
 
+import Image from "next/image";
 import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
@@ -55,7 +56,7 @@ const Item = ({ portal, baseDomain }: ItemProps) => {
   return (
     <div className="item" onClick={onClick} data-testid={portal}>
       <div className="info">
-        <img className="favicon" alt="Portal favicon" src={DefaultLogoUrl} />
+        <Image className="favicon" alt="Portal favicon" src={DefaultLogoUrl} />
         <Text
           fontWeight={600}
           fontSize="14px"

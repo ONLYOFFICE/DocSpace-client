@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import ErrorContainer from "../error-container/ErrorContainer";
 
 export const ErrorInvalidLink = () => {
-  const { t, ready } = useTranslation(["Errors", "Common"]);
+  const { t, ready } = useTranslation(["Common"]);
 
   return ready ? (
     <ErrorContainer

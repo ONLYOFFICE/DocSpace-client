@@ -35,7 +35,7 @@ import { frameCallCommand, frameCallEvent } from "../../../utils/common";
 import ErrorContainer from "../../../components/error-container/ErrorContainer";
 
 const PublicRoomError = ({ isInvalid }: { isInvalid?: boolean }) => {
-  const { t, ready } = useTranslation(["Errors", "Common"]);
+  const { t, ready } = useTranslation(["Common"]);
   const headerText = isInvalid
     ? t("Common:InvalidLink")
     : t("Common:ExpiredLink");

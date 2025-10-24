@@ -163,7 +163,7 @@ jobs:
         if: needs.changes.outputs.lint == 'true' || needs.changes.outputs.workflow == 'true'
         run: |
           echo "🔍 Running Biome..."
-          if pnpm lint; then
+          if pnpm run lint; then
             echo "result=success" >> $GITHUB_OUTPUT
             echo "✅ Biome passed"
           else
@@ -179,7 +179,7 @@ jobs:
         if: needs.changes.outputs.tsc == 'true' || needs.changes.outputs.workflow == 'true'
         run: |
           echo "🔧 Running TypeScript compilation..."
-          if pnpm tsc; then
+          if pnpm run tsc; then
             echo "result=success" >> $GITHUB_OUTPUT
             echo "✅ TypeScript compilation passed"
           else

@@ -123,5 +123,3 @@ export const OAuthRow = (props: RowProps) => {
     </Row>
   );
 };
-
-export default OAuthRow;

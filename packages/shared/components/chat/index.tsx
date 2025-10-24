@@ -50,6 +50,10 @@ const Chat = ({
   attachmentFile,
   clearAttachmentFile,
 }: ChatProps) => {
+  if (!roomId) {
+    return null;
+  }
+
   if (!canUseChat) {
     return <ChatNoAccessScreen />;
   }

@@ -641,12 +641,13 @@ class ContactsConextOptionsStore {
   get contactsCanCreate() {
     const isInsideGroup = this.usersStore.contactsTab === "inside_group";
     const isGuestView = this.usersStore.contactsTab === "guests";
-
+    const isGroup = this.usersStore.contactsTab === "groups";
     const isCollaborator = this.userStore.user?.isCollaborator;
+    const isRoomAdmin = this.userStore.user?.isRoomAdmin;
 
     const canCreate = !isInsideGroup && !isGuestView && !isCollaborator;
 
-    return canCreate;
+    return isGroup ? !isRoomAdmin : canCreate;
   }
 
   getContactsModel = (t: TTranslation, isSectionMenu: boolean) => {

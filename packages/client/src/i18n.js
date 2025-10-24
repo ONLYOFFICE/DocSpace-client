@@ -74,7 +74,6 @@ newInstance
       "PortalUnavailable",
       "UploadPanel",
       "Files",
-      "Errors",
       "Translations",
       "FormFillingTipsDialog",
     ],

@@ -61,7 +61,7 @@ const StyledBody = styled.div`
 `;
 
 const PortalUnavailable = ({ onLogoutClick }) => {
-  const { t } = useTranslation(["Errors", "PortalUnavailable", "Common"]);
+  const { t } = useTranslation(["PortalUnavailable", "Common"]);
   const [isVisible, setIsVisible] = useState();
 
   const onClick = () => {
@@ -86,7 +86,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
       />
       <ErrorContainer
         className="portal-unavailable_container"
-        headerText={t("ErrorUnavailableText", {
+        headerText={t("Common:ErrorUnavailableText", {
           productName: t("Common:ProductName"),
         })}
       >

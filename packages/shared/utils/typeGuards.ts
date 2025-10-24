@@ -33,10 +33,6 @@ import type {
 } from "../components/context-menu";
 import type { TRoom } from "../api/rooms/types";
 
-export const isNumber = (value: unknown): value is number => {
-  return typeof value === "number";
-};
-
 export const includesMethod = <T extends object, MethodName extends string>(
   obj: T,
   method: MethodName,

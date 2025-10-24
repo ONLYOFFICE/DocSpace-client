@@ -165,10 +165,6 @@ export {
   filterConstants,
 };
 
-export const getModalType = () => {
-  return window.innerWidth < size.desktop ? "aside" : "modal";
-};
-
 export const isValidDate = (date: Date) => {
   return moment(date).tz(window.timezone).year() !== 9999;
 };

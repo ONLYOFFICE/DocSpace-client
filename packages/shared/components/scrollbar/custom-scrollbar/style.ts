@@ -26,7 +26,7 @@
 
 import * as React from "react";
 
-export const style = {
+const style = {
   holder: {
     position: "relative",
     width: "100%",

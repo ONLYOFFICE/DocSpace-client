@@ -284,5 +284,3 @@ export const QuotaForm = ({
     </div>
   );
 };
-
-export default QuotaForm;

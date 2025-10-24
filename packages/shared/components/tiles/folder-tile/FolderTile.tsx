@@ -332,5 +332,3 @@ export const FolderTile = ({
     </div>
   );
 };
-
-export default FolderTile;

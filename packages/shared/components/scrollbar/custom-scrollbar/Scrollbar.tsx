@@ -1553,5 +1553,3 @@ export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
     this.eventEmitter.emit("scrollStop", this.getScrollState());
   };
 }
-
-export default Scrollbar;

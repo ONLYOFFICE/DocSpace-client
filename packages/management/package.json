@@ -8,8 +8,10 @@
     "build:deploy": "cross-env DEPLOY=true next build --webpack",
     "start": "cross-env NODE_ENV=development PORT=5015 next dev --webpack",
     "start-prod": "cross-env NODE_ENV=production node server.js",
-    "lint": "eslint ./src --max-warnings=0",
-    "lint:fix": "eslint ./src --fix",
+    "lint": "biome lint ./src",
+    "lint:fix": "biome lint --write ./src",
+    "format": "biome check ./src",
+    "format:fix": "biome format --write ./src",
     "tsc": "tsc",
     "clean": "shx rm -rf .next",
     "deploy": "shx --silent mkdir -p ../../../publish/web/management && shx cp -r .next/standalone/* ../../../publish/web/management && shx --silent mkdir -p ../../../publish/web/management/packages/management/.next/static && shx cp -r .next/static/* ../../../publish/web/management/packages/management/.next/static && shx cp -f server.prod.js ../../../publish/web/management/server.js"
@@ -46,6 +48,7 @@
     "winston-daily-rotate-file": "5.0.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.3.0",
     "@babel/core": "7.25.8",
     "@babel/plugin-proposal-export-default-from": "7.25.8",
     "@babel/plugin-transform-class-properties": "7.25.9",

@@ -8,8 +8,10 @@
     "build:deploy": "cross-env DEPLOY=true next build --webpack",
     "start": "cross-env NODE_ENV=development PORT=5099 next dev --webpack",
     "start-prod": "cross-env NODE_ENV=production node server.js",
-    "lint": "eslint ./src --max-warnings=0",
-    "lint:fix": "eslint ./src --fix",
+    "lint": "biome lint ./src",
+    "lint:fix": "biome lint --write ./src",
+    "format": "biome check ./src",
+    "format:fix": "biome format --write ./src",
     "tsc": "tsc",
     "clean": "shx rm -rf .next",
     "deploy": "shx --silent mkdir -p ../../../publish/web/sdk && shx cp -r .next/standalone/* ../../../publish/web/sdk && shx --silent mkdir -p ../../../publish/web/sdk/packages/sdk/.next/static && shx cp -r .next/static/* ../../../publish/web/sdk/packages/sdk/.next/static && shx cp -f server.prod.js ../../../publish/web/sdk/server.js",
@@ -45,6 +47,7 @@
     "winston-daily-rotate-file": "5.0.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.3.0",
     "@typescript-eslint/eslint-plugin": "^8.15.0",
     "@typescript-eslint/parser": "^8.15.0",
     "@eslint/js": "^9.34.0",

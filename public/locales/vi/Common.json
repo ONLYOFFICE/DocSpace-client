@@ -312,7 +312,6 @@
   "EmptyFilterRoomsDescription": "Không có phòng nào phù hợp với bộ lọc này. Hãy thử bộ lọc khác hoặc đặt lại bộ lọc để xem tất cả các phòng.",
   "EmptyGroupDescription": "Nhóm này trống",
   "EmptyHeader": "Chưa có tài khoản nào khác ở đây",
-  "EmptyRoomsDescription": "Xin vui lòng tạo phòng đầu tiên trong Phòng của Tôi.",
   "EmptyRoomsHeader": "Chưa có phòng nào ở đây",
   "EmptyRootRoomHeader": "Chào mừng đến {{productName}}!",
   "EmptyScreenFolder": "Chưa có tài liệu nào ở đây",

@@ -312,7 +312,7 @@
   "EmptyFilterRoomsDescription": "No room matches this filter. Try another or reset filter to view all rooms.",
   "EmptyGroupDescription": "This group is empty",
   "EmptyHeader": "No other accounts here yet",
-  "EmptyRoomsDescription": "Please create the first room in My rooms.",
+  "EmptyRoomsDescriptionText": "Please create the first room in {{sectionName}}.",
   "EmptyRoomsHeader": "No rooms here yet",
   "EmptyRootRoomHeader": "Welcome to {{productName}}",
   "EmptyScreenFolder": "No docs here yet",

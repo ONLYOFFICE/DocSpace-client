@@ -72,14 +72,11 @@ export const PERCENTAGE_FOR_SHOWING_BAR = 90;
 export const LANGUAGE = "asc_language";
 export const TIMEZONE = "timezone";
 
-export const MOBILE_FOOTER_HEIGHT = "64px";
 export const ASIDE_PADDING_AFTER_LAST_ITEM = "12px";
 
 export const COOKIE_EXPIRATION_YEAR = 31536000000;
-export const ARTICLE_PINNED_KEY = "asc_article_pinned_key";
 export const LIVE_CHAT_LOCAL_STORAGE_KEY = "live_chat_state";
 export const MAX_FILE_COMMENT_LENGTH = 255;
-export const LINKS_LIMIT_COUNT = 5;
 export const LOADER_TIMEOUT = 300;
 
 export const ROOMS_PROVIDER_TYPE_NAME = Object.freeze({
@@ -153,8 +150,6 @@ export const PROVIDERS_DATA = Object.freeze({
     iconOptions: undefined,
   },
 });
-
-export const PASSWORD_LIMIT_SPECIAL_CHARACTERS = "!@#$%^&*";
 
 export const EDITOR_ID = "portal_editor";
 

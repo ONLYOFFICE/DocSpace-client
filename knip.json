@@ -1,0 +1,123 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "lefthook": false,
+  "workspaces": {
+    "packages/shared": {
+      "entry": ["index.ts"],
+      "project": ["**/*.{js,jsx,ts,tsx}"]
+    },
+    "packages/client": {
+      "entry": ["src/App.js"],
+      "project": ["src/**/*.{js,jsx,ts,tsx}"]
+    },
+    "packages/login": {
+      "entry": ["src/app/**/page.tsx", "src/app/**/layout.tsx"],
+      "project": ["src/**/*.{js,jsx,ts,tsx}"]
+    },
+    "packages/doceditor": {
+      "entry": ["src/app/**/page.tsx", "src/app/**/layout.tsx"],
+      "project": ["src/**/*.{js,jsx,ts,tsx}"]
+    },
+    "packages/management": {
+      "entry": ["src/app/**/page.tsx", "src/app/**/layout.tsx"],
+      "project": ["src/**/*.{js,jsx,ts,tsx}"]
+    },
+    "packages/sdk": {
+      "entry": ["src/app/**/page.tsx", "src/app/**/layout.tsx"],
+      "project": ["src/**/*.{js,jsx,ts,tsx}"]
+    }
+  },
+  "eslint": false,
+  "ignore": [
+    "**/public/**/*",
+    "**/build/**/*",
+    "**/dist/**/*",
+    "**/node_modules/**/*",
+    "**/coverage/**/*",
+    "**/test-results/**/*",
+    "**/output/**/*",
+    "**/screenshots/**/*",
+    "**/*.d.ts",
+    "**/*.stories.{js,jsx,ts,tsx}",
+    "**/*.test.{js,jsx,ts,tsx}",
+    "**/*.spec.{js,jsx,ts,tsx}",
+    "**/.storybook/**/*",
+    "**/eslint.config.js",
+    "**/webpack.config.js",
+    "**/server.js",
+    "**/server.prod.js",
+    "**/analyse.js",
+    "**/playwright.config.ts",
+    "**/.babelrc*",
+    "**/tsconfig*.json",
+    "**/jest.config.*",
+    "**/next.config.js",
+    "**/logger.mjs",
+    "**/compose.yaml",
+    "**/Dockerfile*",
+    "**/.dockerignore",
+    "**/.prettierrc.json",
+    "**/scripts/**/*",
+    "**/config/**/*",
+    "**/.git/**/*",
+    "**/.git/hooks/**",
+    "**/.nx/**/*",
+    "**/common/**/*",
+    "**/i18next/**/*",
+    "**/docker/**/*",
+    "**/eslint-rules/**/*",
+    "licenses.config.js"
+  ],
+  "ignoreDependencies": [
+    "@types/*",
+    "eslint*",
+    "prettier*",
+    "@babel/*",
+    "webpack*",
+    "babel-*",
+    "postcss*",
+    "autoprefixer",
+    "css-loader",
+    "style-loader",
+    "file-loader",
+    "url-loader",
+    "html-webpack-plugin",
+    "mini-css-extract-plugin",
+    "copy-webpack-plugin",
+    "terser-webpack-plugin",
+    "compression-webpack-plugin",
+    "bundle-analyzer",
+    "cross-env",
+    "rimraf",
+    "concurrently",
+    "nodemon",
+    "playwright",
+    "@playwright/test",
+    "knip",
+    "typescript-eslint",
+    "next",
+    "react",
+    "react-dom",
+    "@nx/*",
+    "nx",
+    "shx",
+    "madge",
+    "lefthook",
+    "docker-compose"
+  ],
+  "ignoreExportsUsedInFile": true,
+  "includeEntryExports": false,
+  "rules": {
+    "files": "warn",
+    "dependencies": "off",
+    "devDependencies": "off",
+    "unlisted": "warn",
+    "exports": "warn",
+    "nsExports": "warn",
+    "classMembers": "warn",
+    "types": "off",
+    "nsTypes": "off",
+    "enumMembers": "off",
+    "duplicates": "error"
+  }
+}

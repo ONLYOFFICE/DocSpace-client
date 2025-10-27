@@ -3,7 +3,7 @@
   "content": "Cancel import",
   "content_en_sha1_hash": "a4b5358b5d50407c88f27bef1900ad0b73db2767",
   "created_at": "2025-05-19T21:30:50.865Z",
-  "updated_at": "2025-10-17T14:43:53.498Z",
+  "updated_at": "2025-10-27T16:14:33.490Z",
   "comment": {
     "text": "This translation key is used for a \"Cancel Import\" button in data import steps within the portal settings. It appears as a label on a save button and, when clicked, triggers cancellation of the import process.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/index.tsx",
-      "line_number": 117,
+      "line_number": 118,
       "context": "saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n showReminder\n displaySettings\n saveButtonDisabled={areCheckedUsersEmpty}\n migrationCancelLabel={t(\"Settings:CancelImport\")}\n onMigrationCancelClick={showCancelDialog}\n />\n );\n \n return (",
       "module": "/packages/client"
     },
@@ -24,14 +24,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/index.tsx",
-      "line_number": 128,
+      "line_number": 130,
       "context": "saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n showReminder\n displaySettings\n saveButtonDisabled={canDisable ? areCheckedUsersEmpty : false}\n migrationCancelLabel={t(\"Settings:CancelImport\")}\n onMigrationCancelClick={showCancelDialog}\n />\n );\n \n return (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/index.tsx",
-      "line_number": 114,
-      "context": "onCancelClick={decrementStep}\n showReminder\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n migrationCancelLabel={t(\"Settings:CancelImport\")}\n onMigrationCancelClick={showCancelDialog}\n />\n );\n \n return (",
+      "line_number": 116,
+      "context": "onCancelClick={decrementStep}\n showReminder\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n migrationCancelLabel={t(\"Settings:CancelImport\")}\n onMigrationCancelClick={showCancelDialog}\n saveButtonDisabled={isLimitsReached}\n />\n );",
       "module": "/packages/client"
     }
   ],

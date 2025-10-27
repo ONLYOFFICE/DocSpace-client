@@ -1,0 +1,28 @@
+{
+  "key_path": "NoAIAgentsSearch",
+  "content": "No AI agents found",
+  "content_en_sha1_hash": "a04cb7537c20e1e09cbd3bf933a5182581096399",
+  "created_at": "2025-10-27T16:14:24.562Z",
+  "updated_at": "2025-10-27T16:33:21.349Z",
+  "comment": {
+    "text": "This key displays a message on a screen indicating that no AI agents were found during a search. It appears as a header within an empty search results screen, providing feedback to the user. Translators should ensure the tone aligns with the surrounding UI elements and conveys a neutral and informative message.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:33:21.349Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/selectors/AIAgent/index.tsx",
+      "line_number": 225,
+      "context": "searchEmptyScreenImage={\n isBase\n ? EmptyScreenAIAgentsSelectorSvgUrl\n : EmptyScreenAIAgentsSelectorSvgUrlDark\n }\n searchEmptyScreenHeader={t(\"Common:NoAIAgentsSearch\")}\n searchEmptyScreenDescription={t(\"Common:NoAIAgentsSearchDescription\")}\n totalItems={total}\n hasNextPage={hasNextPage}\n isNextPageLoading={isNextPageLoading}\n loadNextPage={onLoadNextPage}",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

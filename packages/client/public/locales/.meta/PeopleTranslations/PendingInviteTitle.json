@@ -3,7 +3,7 @@
   "content": "Pending invite",
   "content_en_sha1_hash": "4c0cead4ed08558db964b020a52ab1b4c0661e30",
   "created_at": "2025-05-19T21:30:53.487Z",
-  "updated_at": "2025-08-04T07:30:01.184Z",
+  "updated_at": "2025-10-27T16:14:33.341Z",
   "comment": {
     "text": "This translation key is used to display a label for pending invitations. It appears as a button title and will be displayed when an invitation is pending review or approval. The translator should provide a clear and concise phrase that communicates the status of the invitation in a user-friendly manner.",
     "is_auto": true,
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 350,
+      "line_number": 360,
       "context": "switch (key) {\n case EmployeeStatus.Active:\n label = t(\"Common:Active\");\n break;\n case EmployeeStatus.Pending:\n label = t(\"PeopleTranslations:PendingInviteTitle\");\n break;\n case EmployeeStatus.Disabled:\n label = t(\"PeopleTranslations:DisabledEmployeeStatus\");\n break;\n default:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 350,
+      "line_number": 360,
       "context": "switch (key) {\n case EmployeeStatus.Active:\n label = t(\"Common:Active\");\n break;\n case EmployeeStatus.Pending:\n label = t(\"PeopleTranslations:PendingInviteTitle\");\n break;\n case EmployeeStatus.Disabled:\n label = t(\"PeopleTranslations:DisabledEmployeeStatus\");\n break;\n default:",
       "module": "/packages/client"
     }

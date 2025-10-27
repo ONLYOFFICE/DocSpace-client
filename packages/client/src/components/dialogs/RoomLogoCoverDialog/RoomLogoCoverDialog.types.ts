@@ -77,6 +77,8 @@ export type CoverDialogProps = RoomLogoCoverProps & {
   setRoomLogoCoverDialogVisible: (value: boolean) => void;
   createRoomDialogVisible: boolean;
   editRoomDialogPropsVisible: boolean;
+  createAgentDialogVisible: boolean;
+  editAgentDialogVisible: boolean;
   roomLogoCoverDialogVisible: boolean;
   templateEventVisible: boolean;
   setEnabledHotkeys?: FilesStore["setEnabledHotkeys"];

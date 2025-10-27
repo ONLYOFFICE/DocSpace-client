@@ -3,7 +3,7 @@
   "content": "Add watermark elements",
   "content_en_sha1_hash": "94abb53514ef98225a4845be5d8c3af77e687253",
   "created_at": "2025-05-19T21:30:56.773Z",
-  "updated_at": "2025-09-12T14:18:49.297Z",
+  "updated_at": "2025-10-27T16:14:33.239Z",
   "comment": {
     "text": "This translation key is used for the \"Add Watermark Elements\" title in a dialog component, appearing as the header of a watermark viewer section. It provides context for users when adding watermarks to their room.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ViewerInfo.js",
-      "line_number": 228,
-      "context": "Object.values(elements.current).filter((v) => v === true).length === 1;\n \n return (\n <StyledWatermark>\n <Text className=\"watermark-title\" fontWeight={600} lineHeight=\"20px\">\n {t(\"AddWatermarkElements\")}\n </Text>\n \n <div className=\"watermark-tab_items\">\n {initialInfoRef.dataTabs.map((item) => {\n const isActive =",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ViewerInfo.tsx",
+      "line_number": 267,
+      "context": "1;\n \n return (\n <StyledWatermark>\n <Text className=\"watermark-title\" fontWeight={600} lineHeight=\"20px\">\n {t(\"AddWatermarkElements\")}\n </Text>\n \n <div className=\"watermark-tab_items\">\n {initialInfoRef.dataTabs.map((item) => {\n const isActive =",
       "module": "/packages/client"
     }
   ],

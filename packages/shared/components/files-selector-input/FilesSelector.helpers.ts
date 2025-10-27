@@ -67,6 +67,8 @@ export const getIsDisabled = (
   filterParam?: string,
   isFileSelected?: boolean,
   sameId?: boolean,
+  isInsideKnowledge?: boolean,
+  isInsideResultStorage?: boolean,
 ) => {
   if (isFirstLoad) return true;
   if (isSelectedParentFolder) return true;
@@ -74,6 +76,8 @@ export const getIsDisabled = (
   if (isRooms) return true;
   if (isRoot) return true;
   if (filterParam) return !isFileSelected;
+
+  if (isInsideKnowledge || isInsideResultStorage) return true;
 
   return false;
 };

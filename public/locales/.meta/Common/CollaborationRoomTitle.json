@@ -3,7 +3,7 @@
   "content": "Collaboration room",
   "content_en_sha1_hash": "020e5e753e7a2509b4e791bcc1a8abc08bb1e51d",
   "created_at": "2025-05-19T21:30:43.513Z",
-  "updated_at": "2025-08-04T07:30:01.398Z",
+  "updated_at": "2025-10-27T16:14:33.522Z",
   "comment": {
     "text": "The \"CollaborationRoomTitle\" translation key is used to display the label for collaboration rooms in a portal settings interface. This text appears on screens where users select or filter room types, and it provides clarity about the purpose of each room category. Translators should focus on accurately conveying the meaning of this text to support internationalization efforts.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
       "line_number": 13,
-      "context": ") => {\n if (isTemplate) return t(\"Common:FromTemplate\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomTitle\");\n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomTitle\");",
+      "context": ") => {\n if (isTemplate) return t(\"Common:FromTemplate\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomTitle\");\n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomTitle\");\n case RoomsType.AIRoom:",
       "module": "/packages/shared"
     }
   ],

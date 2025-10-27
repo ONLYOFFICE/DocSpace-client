@@ -81,6 +81,7 @@ const file: TFile = {
     CreateRoomFrom: false,
     CopyLink: false,
     Embed: false,
+    Vectorization: false,
   },
   shared: false,
   thumbnailStatus: 1,

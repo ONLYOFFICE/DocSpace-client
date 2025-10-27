@@ -124,6 +124,7 @@ describe("Share component", () => {
         CreateRoomFrom: false,
         CopyLink: false,
         Embed: false,
+        Vectorization: false,
       },
       shared: true,
       thumbnailStatus: 0,

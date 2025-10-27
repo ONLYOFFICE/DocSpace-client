@@ -2,7 +2,7 @@ import React from "react";
 import { RoomsType } from "../../enums/index";
 
 export type RoomTypeProps = {
-  roomType: RoomsType;
+  roomType?: RoomsType;
   isOpen: boolean;
 
   type?: "listItem" | "dropdownButton" | "dropdownItem";

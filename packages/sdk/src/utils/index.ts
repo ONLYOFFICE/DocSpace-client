@@ -24,10 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { match, P } from "ts-pattern";
-
 import { TIconContainer } from "@/types";
-import { RoomsType, ThemeKeys } from "@docspace/shared/enums";
+import { RoomsType } from "@docspace/shared/enums";
 import {
   iconSize24,
   iconSize32,
@@ -97,21 +95,4 @@ export const getRoomsIcon = (
   }
 
   return getIconBySize(path, size);
-};
-
-export const getThemeClass = (
-  theme?: ThemeKeys,
-  systemTheme?: ThemeKeys,
-): "dark" | "light" => {
-  const calculatedTheme = match<(ThemeKeys | undefined)[]>([theme, systemTheme])
-    .returnType<ThemeKeys>()
-    .with([ThemeKeys.DarkStr, P._], () => ThemeKeys.DarkStr)
-    .with([ThemeKeys.BaseStr, P._], () => ThemeKeys.BaseStr)
-    .with([ThemeKeys.SystemStr, ThemeKeys.BaseStr], () => ThemeKeys.BaseStr)
-    .with([ThemeKeys.SystemStr, ThemeKeys.DarkStr], () => ThemeKeys.DarkStr)
-    .with([undefined, ThemeKeys.DarkStr], () => ThemeKeys.DarkStr)
-    .with([undefined, ThemeKeys.BaseStr], () => ThemeKeys.BaseStr)
-    .otherwise(() => ThemeKeys.BaseStr);
-
-  return calculatedTheme === ThemeKeys.DarkStr ? "dark" : "light";
 };

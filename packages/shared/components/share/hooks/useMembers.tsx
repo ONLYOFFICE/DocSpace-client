@@ -29,9 +29,12 @@ import isNil from "lodash/isNil";
 import uniqBy from "lodash/uniqBy";
 import { useTranslation } from "react-i18next";
 import type { IndexRange } from "react-virtualized";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-import { ShareAccessRights } from "../../../enums";
+import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
+
+import { IconButton } from "../../icon-button";
+import { MembersSubjectType, ShareAccessRights } from "../../../enums";
 import { isFile, isFolder } from "../../../utils/typeGuards";
 import { useUnmount } from "../../../hooks/useUnmount";
 import { useDidMount } from "../../../hooks/useDidMount";
@@ -50,8 +53,10 @@ import type {
   TShareMember,
   UseMembersProps,
 } from "../Share.types";
-import { convertMembers, getShareAccessRightOptions } from "../Share.helpers";
+
+import { getShareAccessRightOptions } from "../Share.helpers";
 import { ShareUpdateListEventName } from "../Share.constants";
+import styles from "../Share.module.scss";
 
 import { User } from "../sub-components/User";
 import ShareHeader from "../sub-components/ShareHeader";
@@ -84,11 +89,6 @@ export const useMembers = (props: UseMembersProps) => {
   useUnmount(() => {
     abortController.current.abort();
   });
-
-  const memoMembers = useMemo(
-    () => convertMembers(members ?? [], t),
-    [members, t],
-  );
 
   const updateAccess = useCallback((res: string) => {
     try {
@@ -244,25 +244,16 @@ export const useMembers = (props: UseMembersProps) => {
   const getUsers = useCallback(() => {
     if (props.disabledSharedUser) return { content: [], headersCount: 0 };
 
-    const { owner, users, groups, administrators, expected, guests } =
-      memoMembers;
+    const membersList = members.map((member) => {
+      return {
+        ...member.sharedTo,
+        access: member.access,
+        canEditAccess: member.canEditAccess,
+        isGroup: member.subjectType === MembersSubjectType.Group,
+      };
+    });
 
-    const membersList = [
-      ...owner,
-      ...administrators,
-      ...groups,
-      ...users,
-      ...guests,
-      ...expected,
-    ];
-
-    const [currentMember] = membersList.filter(
-      (member): member is TShareMember => member.id === selfId,
-    );
-
-    const countMembers = members?.length ?? 0;
-
-    const headersCount = membersList.length - countMembers;
+    const currentMember = membersList.find((member) => member.id === selfId);
 
     if (membersList.length === 0) {
       return {
@@ -278,48 +269,71 @@ export const useMembers = (props: UseMembersProps) => {
       };
     }
 
+    const options = (
+      <IconButton
+        size={16}
+        key="add-share-user"
+        onClick={onAdded}
+        iconName={PersonPlusReactSvgUrl}
+        className={styles.linkToViewingIcon}
+        dataTestId="info_panel_share_add_share_user_button"
+      />
+    );
+
+    const header = (
+      <ShareHeader
+        key="share-header-users"
+        title={t("Common:WhoHasAccess")}
+        options={options}
+        isShareTitle
+      />
+    );
+
     return {
-      content: membersList.map((member, index) => {
-        const isGroup = "isGroup" in member && member.isGroup;
+      content: [
+        header,
+        ...membersList.map((member, index) => {
+          const isGroup = "isGroup" in member && member.isGroup;
 
-        const options = getShareAccessRightOptions(
-          t,
-          infoPanelSelection,
-          true,
-          isGroup,
-        );
-        const selectedOption = options.find(
-          (option) => "access" in member && option.access === member.access,
-        );
+          const options = getShareAccessRightOptions(
+            t,
+            infoPanelSelection,
+            true,
+            isGroup,
+          );
+          const selectedOption = options.find(
+            (option) => "access" in member && option.access === member.access,
+          );
 
-        return (
-          <User
-            user={member}
-            key={
-              member.id ||
-              ("email" in member && member.email) ||
-              ("name" in member && member.name) ||
-              ""
-            }
-            options={options}
-            currentUser={currentMember}
-            selectedOption={selectedOption}
-            onSelectOption={(option) => onSelectOption(option, member)}
-            index={index + linksCount}
-            onClickGroup={onClickGroup}
-          />
-        );
-      }),
-      headersCount,
+          return (
+            <User
+              user={member}
+              key={
+                member.id ||
+                ("email" in member && member.email) ||
+                ("name" in member && member.name) ||
+                ""
+              }
+              options={options}
+              currentUser={currentMember as TShareMember}
+              selectedOption={selectedOption}
+              onSelectOption={(option) => onSelectOption(option, member)}
+              index={index + linksCount}
+              onClickGroup={onClickGroup}
+            />
+          );
+        }),
+      ],
+      headersCount: 1,
     };
   }, [
-    memoMembers,
     t,
-    infoPanelSelection,
     selfId,
+    members,
     onAdded,
     linksCount,
     onSelectOption,
+    infoPanelSelection,
     props.disabledSharedUser,
   ]);
 

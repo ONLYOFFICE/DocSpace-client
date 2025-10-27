@@ -17,8 +17,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  gap: 32px;
   padding-bottom: 22px;
 
   .formOnlyFilters {
@@ -27,7 +26,6 @@
     flex-direction: row;
     align-items: center;
     gap: 8px;
-    padding-right: 24px;
 
     &:empty {
       display: none;
@@ -37,7 +35,6 @@
   .generalFilters {
     height: 32px;
     width: 100%;
-    max-width: 693px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -71,6 +68,7 @@
   @include mixins.mobile {
     flex-direction: column-reverse;
     padding-bottom: 16px;
+    gap: 8px;
 
     .formOnlyFilters {
       width: 100%;

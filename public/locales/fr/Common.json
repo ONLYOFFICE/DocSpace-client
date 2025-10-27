@@ -312,7 +312,6 @@
   "EmptyFilterRoomsDescription": "Aucune salle ne correspond à ce filtre. Essayez un autre filtre ou réinitialisez le filtre pour afficher toutes les salles.",
   "EmptyGroupDescription": "Ce groupe est vide",
   "EmptyHeader": "Il n’y a pas encore d’autres comptes ici",
-  "EmptyRoomsDescription": "Veuillez créer la première pièce dans Mes salles.",
   "EmptyRoomsHeader": "Il n’y a pas encore de salles ici",
   "EmptyRootRoomHeader": "Bienvenue dans {{productName}} !",
   "EmptyScreenFolder": "Aucun document ici pour le moment",

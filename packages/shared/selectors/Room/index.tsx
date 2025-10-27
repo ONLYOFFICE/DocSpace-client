@@ -245,7 +245,10 @@ const RoomSelectorComponent = ({
       }
       emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyRoomsHeader")}
       emptyScreenDescription={
-        emptyScreenDescription ?? t("Common:EmptyRoomsDescription")
+        emptyScreenDescription ??
+        t("Common:EmptyRoomsDescriptionText", {
+          sectionName: t("Common:Rooms"),
+        })
       }
       searchEmptyScreenImage={
         isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl

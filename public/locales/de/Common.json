@@ -312,7 +312,6 @@
   "EmptyFilterRoomsDescription": "Kein Raum entspricht diesem Filter. Versuchen Sie es mit einem anderen Filter oder setzen Sie den Filter zurück, um alle Räume anzuzeigen.",
   "EmptyGroupDescription": "Diese Gruppe ist leer",
   "EmptyHeader": "Noch keine anderen Konten hier",
-  "EmptyRoomsDescription": "Bitte erstellen Sie den ersten Raum in Meine Räume.",
   "EmptyRoomsHeader": "Noch keine Räume vorhanden",
   "EmptyRootRoomHeader": "Willkommen in {{productName}}",
   "EmptyScreenFolder": "Keine Dokumente hier",

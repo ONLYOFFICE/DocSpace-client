@@ -37,7 +37,6 @@ import {
 } from "@docspace/shared/enums";
 import { FOLDER_NAMES } from "@docspace/shared/constants";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
-import { isTouchDevice } from "@docspace/shared/utils";
 
 import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
@@ -47,7 +46,6 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import BonusItem from "./BonusItem";
-// import FlowsItem from "./FlowsItem";
 
 const StyledDragAndDrop = styled(DragAndDrop)`
   display: contents;

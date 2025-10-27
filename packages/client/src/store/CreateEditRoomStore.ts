@@ -484,7 +484,7 @@ class CreateEditRoomStore {
         roomId: number;
         title: string;
         logo: TRoom["logo"];
-        share: any;
+        share: unknown;
         tags: TRoom["tags"];
         public: boolean;
         quota: number;

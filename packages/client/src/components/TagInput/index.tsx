@@ -31,6 +31,8 @@ import { TFunction } from "i18next";
 import TagList from "./TagList";
 
 import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
+import TagHandler from "SRC_DIR/helpers/TagHandler";
+
 import TagDropdown from "./TagDropdown";
 
 const StyledTagInput = styled.div<{ hasTags: boolean }>`
@@ -58,7 +60,7 @@ const StyledTagInput = styled.div<{ hasTags: boolean }>`
 type TagInputProps = {
   t: TFunction;
   title: string;
-  tagHandler: any;
+  tagHandler: TagHandler;
   setIsScrollLocked: (value: boolean) => void;
   isDisabled: boolean;
   tooltipLabel?: string;

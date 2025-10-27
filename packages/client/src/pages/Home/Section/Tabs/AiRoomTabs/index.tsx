@@ -82,10 +82,10 @@ const AiRoomTabs = ({
 
     const filesFilter = FilesFilter.getDefault();
 
-    filesFilter.folder = rootRoomId?.toString() ?? id?.toString() ?? "";
+    filesFilter.folder = rootRoomId?.toString() || id?.toString() || "";
 
     if (tab.id === "chat") {
-      const path = getCategoryUrl(CategoryType.Chat, rootRoomId ?? id);
+      const path = getCategoryUrl(CategoryType.Chat, rootRoomId || id);
 
       filesFilter.searchArea = SearchArea.Any;
 
@@ -97,7 +97,7 @@ const AiRoomTabs = ({
       setResultId(null);
       setKnowledgeId(null);
 
-      const path = getCategoryUrl(CategoryType.AIAgent, rootRoomId ?? id);
+      const path = getCategoryUrl(CategoryType.AIAgent, rootRoomId || id);
 
       filesFilter.searchArea =
         tab.id === "knowledge"

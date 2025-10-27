@@ -4877,7 +4877,8 @@ class FilesStore {
   };
 
   get isFiltered() {
-    const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isAIAgentsFolder } =
+      this.treeFoldersStore;
 
     const {
       subjectId,
@@ -4901,7 +4902,7 @@ class FilesStore {
     } = this.filter;
 
     const isFiltered =
-      isRoomsFolder || isArchiveFolder
+      isRoomsFolder || isArchiveFolder || isAIAgentsFolder
         ? filterValue ||
           type ||
           provider ||

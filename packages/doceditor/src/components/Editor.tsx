@@ -50,7 +50,6 @@ import {
   onSDKWarning,
   onSDKError,
   onSDKRequestRename,
-  // onOutdatedVersion,
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
@@ -263,7 +262,6 @@ const Editor = ({
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
-    // onOutdatedVersion,
     onDownloadAs,
     onUserActionRequired,
     onSubmit,

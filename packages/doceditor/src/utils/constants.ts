@@ -34,11 +34,6 @@ export const IS_ZOOM =
 export const IS_DESKTOP_EDITOR =
   typeof window !== "undefined" ? window.AscDesktopEditor !== undefined : false;
 
-export const IS_VIEW =
-  typeof window !== "undefined"
-    ? window.location.search.indexOf("action=view") !== -1
-    : false;
-
 export const REPLACED_URL_PATH = "/web-apps/apps/api/documents/api.js";
 
 export const SHOW_CLOSE =

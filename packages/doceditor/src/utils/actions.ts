@@ -35,7 +35,6 @@ import type {
   TDocServiceLocation,
   TFile,
   TFileFillingFormStatus,
-  TFileLink,
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import type {
@@ -679,44 +678,6 @@ export async function getFileById(fileId: number | string) {
     return null;
   }
 }
-
-export async function getFileLink(fileId: number | string) {
-  logger.debug(`Start GET /files/file/${fileId}/link`);
-
-  try {
-    const [getFileLinkRes] = await createRequest(
-      [`/files/file/${fileId}/link`],
-      [["", ""]],
-      "GET",
-    );
-
-    const response = await fetch(getFileLinkRes);
-
-    if (response.ok) return (await response.json()) as TFileLink;
-
-    const hdrs = await headers();
-
-    const hostname = hdrs.get("x-forwarded-host");
-
-    logger.error(
-      `error: ${response} url: ${hostname} GET /files/file/${fileId}/link failed`,
-    );
-
-    return null;
-  } catch (error) {
-    logger.error(`Error in getFileLink: ${error}`);
-    return null;
-  }
-}
-
-// export async function getFileLink(fileId: number) {
-//   const res = (await request({
-//     method: "get",
-//     url: `/files/file/${fileId}/link`,
-//   })) as TFileLink;
-
-//   return res;
-// }
 
 export async function getData(
   fileId: string,

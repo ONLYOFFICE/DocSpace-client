@@ -27,16 +27,6 @@
 import styled from "styled-components";
 import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
 
-export const StyledSimpleNav = styled.div.attrs(injectDefaultTheme)`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 0;
-  background-color: ${(props) => props.theme?.deepLink?.navBackground};
-  margin-bottom: 32px;
-`;
-
 export const StyledDeepLink = styled.div`
   width: 100%;
   display: flex;

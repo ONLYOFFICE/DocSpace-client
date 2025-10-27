@@ -173,11 +173,6 @@ export const getCurrentDocumentVersion = (
     : fileHistory[historyLength - 1].version;
 };
 
-export const getIsZoom = () =>
-  typeof window !== "undefined" &&
-  (window?.navigator?.userAgent?.includes("ZoomWebKit") ||
-    window?.navigator?.userAgent?.includes("ZoomApps"));
-
 // need for separate window in desktop editors
 export const calculateAsideHeight = (callback?: () => void) => {
   const viewPort = window?.AscDesktopEditor?.getViewportSettings?.();

@@ -78,6 +78,7 @@ import {
   getCategoryUrl,
   getCategoryTypeByFolderType,
 } from "SRC_DIR/helpers/utils";
+import { refreshInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 
@@ -431,6 +432,10 @@ class FilesStore {
       }
     });
 
+    SocketHelper?.on(SocketEvents.ChaneFolderAccessRights, (option) => {
+      this.wsChangeFolderAccessRights(option);
+    });
+
     SocketHelper?.on(SocketEvents.StopEditFile, (id) => {
       const { socketSubscribers } = SocketHelper;
       const pathParts = `FILE-${id}`;
@@ -615,64 +620,70 @@ class FilesStore {
       const folder = JSON.parse(opt?.data);
       if (!folder || !folder.id) return;
 
-      api.files
-        .getFolderInfo(folder.id)
-        .then((response) => {
-          const folderInfo = {
-            isFolder: true,
-            isRoom: isRoomUtil(response),
-            ...response,
-          };
-
-          console.log("[WS] update folder", folderInfo.id, folderInfo.title);
-
-          if (this.selection?.length) {
-            const foundIndex = this.selection?.findIndex(
-              (x) => x.id === folderInfo.id,
-            );
-            if (foundIndex > -1) {
-              runInAction(() => {
-                this.selection[foundIndex] = folderInfo;
-              });
-            }
-          }
-
-          if (this.bufferSelection) {
-            if (
-              this.bufferSelection.id === folderInfo.id &&
-              (this.bufferSelection.isFolder || this.bufferSelection.isRoom)
-            ) {
-              this.setBufferSelection(folderInfo);
-            }
-          }
-
-          const navigationPath = [...this.selectedFolderStore.navigationPath];
-          const pathParts = [...this.selectedFolderStore.pathParts];
-
-          const idx = navigationPath.findIndex((p) => p.id === folderInfo.id);
-
-          if (idx !== -1) {
-            navigationPath[idx].title = folderInfo?.title;
-          }
-
-          if (folderInfo.id === this.selectedFolderStore.id) {
-            this.selectedFolderStore.setSelectedFolder({
-              ...folderInfo,
-              navigationPath,
-              pathParts,
-            });
-
-            const item = this.getFilesListItems([folderInfo])[0];
-
-            setInfoPanelSelectedRoom(item, true);
-          }
-
-          this.setFolder(folderInfo);
-        })
-        .catch(() => {
-          // console.log("Folder deleted")
-        });
+      this.refreshFolder(folder.id);
     }
+  };
+
+  refreshFolder = (id) => {
+    api.files
+      .getFolderInfo(id)
+      .then((response) => {
+        const folderInfo = {
+          isFolder: true,
+          isRoom: isRoomUtil(response),
+          ...response,
+        };
+
+        console.log("[WS] update folder", folderInfo.id, folderInfo.title);
+
+        if (this.selection?.length) {
+          const foundIndex = this.selection?.findIndex(
+            (x) => x.id === folderInfo.id,
+          );
+          if (foundIndex > -1) {
+            runInAction(() => {
+              this.selection[foundIndex] = folderInfo;
+            });
+          }
+        }
+
+        if (this.bufferSelection) {
+          if (
+            this.bufferSelection.id === folderInfo.id &&
+            (this.bufferSelection.isFolder || this.bufferSelection.isRoom)
+          ) {
+            this.setBufferSelection(folderInfo);
+          }
+        }
+
+        const navigationPath = [...this.selectedFolderStore.navigationPath];
+        const pathParts = [...this.selectedFolderStore.pathParts];
+
+        const idx = navigationPath.findIndex((p) => p.id === folderInfo.id);
+
+        if (idx !== -1) {
+          navigationPath[idx].title = folderInfo?.title;
+        }
+
+        if (folderInfo.id === this.selectedFolderStore.id) {
+          this.selectedFolderStore.setSelectedFolder({
+            ...folderInfo,
+            navigationPath,
+            pathParts,
+          });
+
+          const item = this.getFilesListItems([folderInfo])[0];
+
+          setInfoPanelSelectedRoom(item, true);
+        }
+
+        this.setFolder(folderInfo);
+
+        refreshInfoPanel();
+      })
+      .catch(() => {
+        // console.log("Folder deleted")
+      });
   };
 
   wsModifyFolderDelete = (opt) => {
@@ -809,6 +820,24 @@ class FilesStore {
     });
 
     window?.dispatchEvent(event);
+  };
+
+  wsChangeFolderAccessRights = (option) => {
+
+    if (!option.data || !option.id) return;
+
+    const folderId = option.id;
+    const memberAccess = JSON.parse(option.data);
+
+    if (this.selectedFolderStore.id !== folderId) return;
+    if (!memberAccess[this.userStore.user.id]) return;
+
+    console.log("[WS] change folder access rights for current user", {
+      folderId,
+      memberAccess,
+    });
+
+    this.refreshFolder(folderId);
   };
 
   redirectToParent = (opt, pathParts, isRoom, isTemplate, rootFolderType) => {

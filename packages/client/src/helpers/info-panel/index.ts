@@ -60,6 +60,12 @@ export const openShareTab = () => {
   window.dispatchEvent(event);
 };
 
+export const refreshInfoPanel = () => {
+  const event = new CustomEvent(InfoPanelEvents.refreshInfoPanel);
+
+  window.dispatchEvent(event);
+};
+
 export const openMembersTab = () => {
   const event = new CustomEvent(InfoPanelEvents.openMembersTab);
 

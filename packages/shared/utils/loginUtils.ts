@@ -71,23 +71,3 @@ export async function login(
     return Promise.reject(e);
   }
 }
-
-export async function thirdPartyLogin(SerializedProfile: unknown) {
-  try {
-    const response = (await api.user.thirdPartyLogin(SerializedProfile)) as {
-      token?: string;
-    };
-
-    if (!response || !response.token) throw new Error("Empty API response");
-
-    setWithCredentialsStatus(true);
-
-    // this.reset();
-
-    // this.init();
-
-    return await Promise.resolve(response);
-  } catch (e) {
-    return Promise.reject(e);
-  }
-}

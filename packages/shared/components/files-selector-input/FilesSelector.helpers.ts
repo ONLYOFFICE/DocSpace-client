@@ -26,24 +26,6 @@
 import type { TTranslation } from "../../types";
 import { FilesSelectorFilterTypes } from "../../enums";
 
-export const getHeaderLabel = (
-  t: TTranslation,
-  isSelect?: boolean,
-  filterParam?: string,
-  isSelectFolder?: boolean,
-) => {
-  if (isSelectFolder) return t("Common:SelectFolder");
-  if (isSelect) {
-    return filterParam ? t("Common:SelectFile") : t("Common:SelectAction");
-  }
-
-  if (filterParam === FilesSelectorFilterTypes.DOCX)
-    return t("Common:CreateMasterFormFromFile");
-  if (filterParam) return t("Common:SelectFile");
-
-  return t("Common:SaveButton");
-};
-
 export const getAcceptButtonLabel = (
   t: TTranslation,
   isSelect?: boolean,

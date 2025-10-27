@@ -70,7 +70,7 @@ type TAiSettingsProps = {
 // TODO: add standalone flag from store for hide ai providers
 const AiSettings = ({
   currentDeviceType,
-  standalone = false,
+  standalone = true,
   fetchAIProviders,
   fetchMCPServers,
   fetchWebSearch,

@@ -312,6 +312,7 @@ class InfoPanelStore {
   // Routing helpers //
 
   getCanDisplay = () => {
+    const isAIAgent = this.getIsAIAgent();
     const isFiles = this.getIsFiles();
     const isRooms = this.getIsRooms();
     const isAccounts =
@@ -319,7 +320,12 @@ class InfoPanelStore {
       getContactsView(window.location) !== false;
     const isGallery = window.location.pathname.includes("form-gallery");
 
-    return isRooms || isFiles || isGallery || isAccounts;
+    return isRooms || isFiles || isGallery || isAccounts || isAIAgent;
+  };
+
+  getIsAIAgent = () => {
+    const pathname = window.location.pathname.toLowerCase();
+    return pathname.indexOf("ai-agent") !== -1;
   };
 
   getIsFiles = () => {

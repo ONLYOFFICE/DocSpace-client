@@ -210,6 +210,7 @@ const FileTile = ({
       !(e.target as HTMLElement).closest(".item-file-name") &&
       !(e.target as HTMLElement).closest(".tag") &&
       !(e.target as HTMLElement).closest(`.${styles.checkbox}`) &&
+      !(e.target as HTMLElement).closest(".not-selectable") &&
       !(e.target as HTMLElement).closest(".expandButton") &&
       !(e.target as HTMLElement).closest(".p-contextmenu")
     ) {

@@ -3,7 +3,7 @@
   "content": "All users will be added to {{productName}} with the selected type.",
   "content_en_sha1_hash": "bd24725f827ea436cfa30beb57d8b76e208843dc",
   "created_at": "2025-05-19T21:30:54.340Z",
-  "updated_at": "2025-08-11T18:11:59.238Z",
+  "updated_at": "2025-10-27T16:14:33.564Z",
   "comment": {
     "text": "This translation key is used for a tooltip that explains how selecting an LDAP user type will add users to a specific product, in this case {{productName}}. It appears as a hover text or tooltip when the \"LdapUserType\" option is selected, providing context for end-users.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/UsersType.tsx",
-      "line_number": 72,
+      "line_number": 75,
       "context": "{t(\"LdapUsersType\")}\n </Text>\n </div>\n <StyledInputWrapper>\n <Text fontWeight={400} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"LdapUserTypeTooltip\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <AccessSelector\n className=\"access-selector\"",
       "module": "/packages/client"
     }

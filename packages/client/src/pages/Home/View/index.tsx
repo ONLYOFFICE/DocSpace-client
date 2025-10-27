@@ -27,16 +27,19 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
-
 import { useLocation } from "react-router";
 
+import Chat from "@docspace/shared/components/chat";
+
 import { getCategoryType } from "@docspace/shared/utils/common";
+import { CategoryType } from "@docspace/shared/constants";
 import { Consumer } from "@docspace/shared/utils";
 import { Nullable } from "@docspace/shared/types";
 
 import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
 import { clearTextSelection } from "@docspace/shared/utils/copy";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
+import { TUser } from "@docspace/shared/api/people/types";
 import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 import { toastr } from "@docspace/shared/components/toast";
 import { TOAST_FOLDER_PUBLIC_KEY } from "@docspace/shared/constants";
@@ -44,8 +47,12 @@ import type { TFolder } from "@docspace/shared/api/files/types";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
+import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
+import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
+import DialogsStore from "SRC_DIR/store/DialogsStore";
+import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
 import ProfileSectionBodyContent from "../../Profile/Section/Body";
@@ -62,16 +69,27 @@ type ViewProps = UseContactsProps &
     setIsChangePageRequestRunning: ClientLoadingStore["setIsChangePageRequestRunning"];
     setCurrentClientView: ClientLoadingStore["setCurrentClientView"];
     setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
+    showBodyLoader: ClientLoadingStore["showBodyLoader"];
 
     clearFiles: FilesStore["clearFiles"];
+
+    userAvatar: TUser["avatar"];
+    getIcon: FilesSettingsStore["getIcon"];
+    chatSettings: SelectedFolderStore["chatSettings"];
 
     usersAbortController: Nullable<AbortController>;
     groupsAbortController: Nullable<AbortController>;
 
     filesAbortController: Nullable<AbortController>;
     roomsAbortController: Nullable<AbortController>;
+    aiAgentsAbortController: Nullable<AbortController>;
 
     showHeaderLoader: ClientLoadingStore["showHeaderLoader"];
+
+    aiAgentSelectorDialogProps: DialogsStore["aiAgentSelectorDialogProps"];
+    setAiAgentSelectorDialogProps: DialogsStore["setAiAgentSelectorDialogProps"];
+
+    canUseChat: AccessRightsStore["canUseChat"];
   };
 
 const View = ({
@@ -93,9 +111,11 @@ const View = ({
 
   filesAbortController,
   roomsAbortController,
+  aiAgentsAbortController,
 
   fetchFiles,
   fetchRooms,
+  fetchAgents,
 
   playlist,
 
@@ -114,6 +134,10 @@ const View = ({
 
   setIsSectionHeaderLoading,
 
+  userAvatar,
+  getIcon,
+  chatSettings,
+  showBodyLoader,
   showHeaderLoader,
 
   getFilesSettings,
@@ -132,6 +156,11 @@ const View = ({
 
   setNotificationChannels,
   checkTg,
+
+  aiAgentSelectorDialogProps,
+  setAiAgentSelectorDialogProps,
+
+  canUseChat,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation(["Files", "Common"]);
@@ -139,11 +168,27 @@ const View = ({
   const isContactsPage = location.pathname.includes("accounts");
   const isProfilePage = location.pathname.includes("profile");
 
-  const [currentView, setCurrentView] = React.useState("");
+  const [currentView, setCurrentView] = React.useState(() => {
+    const type = getCategoryType(location);
+
+    if (type === CategoryType.Chat) {
+      return "chat";
+    }
+
+    if (type === CategoryType.Accounts) {
+      return "users";
+    }
+
+    if (isProfilePage) {
+      return "profile";
+    }
+
+    return "files";
+  });
   const [isLoading, setIsLoading] = React.useState(false);
 
   const prevCurrentViewRef = React.useRef(currentView);
-  const prevCategoryType = React.useRef(getCategoryType(location));
+  const prevCategoryType = React.useRef<number>(getCategoryType(location));
 
   const { fetchContacts } = useContacts({
     isContactsPage,
@@ -161,6 +206,7 @@ const View = ({
   const { getFiles } = useFiles({
     fetchFiles,
     fetchRooms,
+    fetchAgents,
 
     playlist,
 
@@ -204,6 +250,7 @@ const View = ({
   const abortControllers = React.useRef({
     filesAbortController,
     roomsAbortController,
+    aiAgentsAbortController,
     usersAbortController,
     groupsAbortController,
   });
@@ -227,11 +274,13 @@ const View = ({
   React.useEffect(() => {
     abortControllers.current.filesAbortController = filesAbortController;
     abortControllers.current.roomsAbortController = roomsAbortController;
+    abortControllers.current.aiAgentsAbortController = aiAgentsAbortController;
     abortControllers.current.usersAbortController = usersAbortController;
     abortControllers.current.groupsAbortController = groupsAbortController;
   }, [
     filesAbortController,
     roomsAbortController,
+    aiAgentsAbortController,
     usersAbortController,
     groupsAbortController,
   ]);
@@ -330,10 +379,11 @@ const View = ({
         abortControllers.current.groupsAbortController?.abort();
         abortControllers.current.filesAbortController?.abort();
         abortControllers.current.roomsAbortController?.abort();
+        abortControllers.current.aiAgentsAbortController?.abort();
 
         setIsLoading(true);
         setIsChangePageRequestRunning(true);
-        let view: void | "groups" | "files" | "users" | "profile" =
+        let view: void | "groups" | "files" | "users" | "profile" | "chat" =
           await fetchContactsRef.current();
 
         if (isProfilePage) {
@@ -348,8 +398,10 @@ const View = ({
         } else if (!isContactsPage) {
           await getFilesRef.current();
 
-          view = "files";
           prevCategoryType.current = getCategoryType(location);
+
+          view =
+            prevCategoryType.current === CategoryType.Chat ? "chat" : "files";
           setContactsTab(false);
         } else {
           clearFiles();
@@ -379,6 +431,14 @@ const View = ({
     getView();
   }, [location, isContactsPage, isProfilePage, showToastAccess]);
 
+  const attachmentFile = React.useMemo(
+    () => aiAgentSelectorDialogProps?.file,
+    [aiAgentSelectorDialogProps?.file],
+  );
+
+  const onClearAttachmentFile = React.useCallback(() => {
+    setAiAgentSelectorDialogProps(false, null);
+  }, [setAiAgentSelectorDialogProps]);
   // console.log("currentView", currentView);
 
   return (
@@ -390,6 +450,17 @@ const View = ({
             <ContactsSectionBodyContent
               sectionWidth={context.sectionWidth}
               currentView={currentView}
+            />
+          ) : currentView === "chat" ? (
+            <Chat
+              userAvatar={userAvatar}
+              roomId={selectedFolderStore.id!}
+              getIcon={getIcon}
+              selectedModel={chatSettings?.modelId ?? ""}
+              isLoading={showBodyLoader}
+              attachmentFile={attachmentFile}
+              clearAttachmentFile={onClearAttachmentFile}
+              canUseChat={canUseChat}
             />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
@@ -419,7 +490,11 @@ export const ViewComponent = inject(
     setup,
     authStore,
     telegramStore,
+    dialogsStore,
+    accessRightsStore,
   }: TStore) => {
+    const { canUseChat } = accessRightsStore;
+
     const { usersStore, groupsStore } = peopleStore;
 
     const {
@@ -440,6 +515,7 @@ export const ViewComponent = inject(
       scrollToTop,
       fetchFiles,
       fetchRooms,
+      fetchAgents,
       getFileInfo,
       setIsPreview,
       setIsUpdatingRowItem,
@@ -447,6 +523,7 @@ export const ViewComponent = inject(
 
       filesController,
       roomsController,
+      aiAgentsController,
 
       clearFiles,
     } = filesStore;
@@ -483,6 +560,9 @@ export const ViewComponent = inject(
 
     const { checkTg } = telegramStore;
 
+    const { aiAgentSelectorDialogProps, setAiAgentSelectorDialogProps } =
+      dialogsStore;
+
     return {
       setContactsTab,
       getUsersList,
@@ -494,6 +574,7 @@ export const ViewComponent = inject(
       scrollToTop,
       fetchFiles,
       fetchRooms,
+      fetchAgents,
       getFileInfo,
       setIsPreview,
       setIsUpdatingRowItem,
@@ -507,6 +588,7 @@ export const ViewComponent = inject(
 
       filesAbortController: filesController,
       roomsAbortController: roomsController,
+      aiAgentsAbortController: aiAgentsController,
 
       playlist,
       setToPreviewFile,
@@ -521,6 +603,10 @@ export const ViewComponent = inject(
 
       setIsSectionHeaderLoading,
 
+      userAvatar: userStore.user?.avatar,
+      getIcon: filesSettingsStore.getIcon,
+      chatSettings: selectedFolderStore?.chatSettings,
+      showBodyLoader: clientLoadingStore.showBodyLoader,
       showHeaderLoader,
 
       getFilesSettings,
@@ -538,6 +624,11 @@ export const ViewComponent = inject(
       setIsProfileLoaded,
       setNotificationChannels,
       checkTg,
+
+      aiAgentSelectorDialogProps,
+      setAiAgentSelectorDialogProps,
+
+      canUseChat,
     };
   },
 )(observer(View));

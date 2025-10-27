@@ -55,6 +55,9 @@ export default inject(
     dialogsStore,
     infoPanelStore,
     indexingStore,
+    filesSettingsStore,
+    selectedFolderStore,
+    userStore,
   }: {
     settingsStore: TStore["settingsStore"];
     dialogsStore: TStore["dialogsStore"];
@@ -88,6 +91,12 @@ export default inject(
 
     const { isScrollLocked: isInfoPanelScrollLocked } = infoPanelStore;
 
+    const { getIcon, displayFileExtension } = filesSettingsStore;
+
+    const { id } = selectedFolderStore;
+
+    const { user } = userStore;
+
     return {
       isDesktop,
       currentDeviceType,
@@ -102,6 +111,12 @@ export default inject(
       snackbarExist,
       showText,
       isInfoPanelScrollLocked,
+
+      getIcon,
+      displayFileExtension,
+      aiSelectedFolder: id,
+
+      user,
     };
   },
 )(observer(SectionWrapper));

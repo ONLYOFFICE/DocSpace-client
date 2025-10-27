@@ -85,6 +85,8 @@ export type ContextMenuType = {
   isPaidBadge?: boolean;
   preventNewTab?: boolean;
   dataTestId?: string;
+  getTooltipContent?: () => React.ReactNode;
+  withMCPIcon?: boolean;
 };
 
 export type SeparatorType = {
@@ -181,6 +183,8 @@ export interface ContextMenuProps {
   badgeUrl?: string;
   headerOnlyMobile?: boolean;
   dataTestId?: string;
+  maxHeightLowerSubmenu?: number;
+  showDisabledItems?: boolean;
 }
 
 export type TContextMenuRef = {

@@ -29,6 +29,8 @@ import { DeviceType } from "../../enums";
 import { TViewAs } from "../../types";
 
 import { ContextMenuModel } from "../context-menu";
+import { TFile, TFolder } from "../../api/files/types";
+import { TUser } from "../../api/people/types";
 
 export type SubInfoPanelHeaderProps = {
   children: React.JSX.Element | null;
@@ -70,6 +72,7 @@ export type SectionBodyProps = {
   getContextModel?: () => ContextMenuModel[];
   pathname?: string;
   isIndexEditingMode?: boolean;
+  withoutFooter?: boolean;
   onDragLeaveEmpty?: () => void;
   onDragOverEmpty?: (isDragActive: boolean) => void;
 };
@@ -148,8 +151,20 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     primaryOperationsAlert?: boolean;
     needErrorChecking?: boolean;
     onCancelOperation?: (callback: () => void) => void;
+    chatFiles?: (TFile | TFolder)[];
+    aiChatIsVisible?: boolean;
+    setAiChatIsVisible?: () => void;
     mainBarVisible?: boolean;
+
+    getIcon?: (size: number, fileExst: string) => string;
+    displayFileExtension?: boolean;
+    aiChatID?: string;
+    aiSelectedFolder?: string | number;
+    aiUserId?: string;
+    vectorizedFiles?: TFile[];
+    user?: TUser;
     withTabs?: boolean;
+    withoutFooter?: boolean;
     dragging?: boolean;
     dropTargetPreview?: string;
     clearDropPreviewLocation?: () => void;

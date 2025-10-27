@@ -3,7 +3,7 @@
   "content": "Access level",
   "content_en_sha1_hash": "b125f10821825256f5c288cc1daf7dfe19f6281b",
   "created_at": "2025-09-23T07:24:22.232Z",
-  "updated_at": "2025-09-23T07:28:17.123Z",
+  "updated_at": "2025-10-27T16:14:33.429Z",
   "comment": {
     "text": "This key displays the text \"Access level\" as the title for a column in a table view. It indicates the level of access associated with a particular item and is used to control column visibility. Translators should ensure the translation accurately reflects the concept of access permissions.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 428,
+      "line_number": 441,
       "context": "enable: authorShareWithMeColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"AccessLevelShareWithMe\",\n title: t(\"AccessLevel\"),\n enable: accessLevelShareWithMeColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n },",
       "module": "/packages/client"
     }

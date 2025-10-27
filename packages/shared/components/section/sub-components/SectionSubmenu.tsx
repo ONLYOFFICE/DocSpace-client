@@ -30,7 +30,7 @@ import { SectionSubmenuProps } from "../Section.types";
 import styles from "../Section.module.scss";
 
 const SectionSubmenu = ({ children }: SectionSubmenuProps) => {
-  return <div className={styles.submenu}>{children}</div>;
+  return <div className={`${styles.submenu} section-tabs`}>{children}</div>;
 };
 
 SectionSubmenu.displayName = "SectionSubmenu";

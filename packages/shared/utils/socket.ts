@@ -71,6 +71,8 @@ export const enum SocketEvents {
   RestoreProgress = "s:restore-progress",
   EncryptionProgress = "s:encryption-progress",
   ChangeMyType = "s:change-my-type",
+  ChatMessageId = "s:commit-chat-message",
+  UpdateChat = "s:update-chat",
   UpdateTelegram = "s:update-telegram",
   SelfRestrictionFile = "s:self-restriction-file",
   SelfRestrictionFolder = "s:self-restriction-folder",
@@ -284,6 +286,11 @@ export type TListenEventCallbackMap = {
     data: TUser;
     admin: string;
     hasPersonalFolder: boolean;
+  }) => void;
+  [SocketEvents.ChatMessageId]: (data: { messageId: number }) => void;
+  [SocketEvents.UpdateChat]: (data: {
+    chatId: string;
+    chatTitle: string;
   }) => void;
   [SocketEvents.UpdateTelegram]: (data: { username: string }) => void;
   [SocketEvents.SelfRestrictionFile]: (data: {

@@ -71,6 +71,7 @@ const DeleteDialogComponent = (props) => {
     selection: selectionProps,
     onRemoveSharedFilesOrFolder,
     setUnsubscribe,
+    isAIAgentsFolderRoot,
   } = props;
   const [isChecked, setIsChecked] = useState(false);
 
@@ -83,6 +84,7 @@ const DeleteDialogComponent = (props) => {
   );
 
   const isTemplate = selection[0]?.isTemplate;
+  const isAIAgent = selection[0]?.isAIAgent;
 
   const onClose = () => {
     if (
@@ -125,8 +127,12 @@ const DeleteDialogComponent = (props) => {
 
   const onDeleteRoom = async () => {
     const translations = {
-      successRemoveRoom: t("Files:RoomRemoved"),
-      successRemoveRooms: t("Files:RoomsRemoved"),
+      successRemoveRoom: isAIAgent
+        ? t("Files:AgentRemoved")
+        : t("Files:RoomRemoved"),
+      successRemoveRooms: isAIAgent
+        ? t("Files:AgentsRemoved")
+        : t("Files:RoomsRemoved"),
     };
 
     if (isTemplate) {
@@ -202,6 +208,10 @@ const DeleteDialogComponent = (props) => {
   };
 
   const getDialogTitle = () => {
+    if (isAIAgent) {
+      return t("DeleteDialog:DeleteAIAgentTitle");
+    }
+
     if (isTemplate) {
       return `${t("Files:DeleteTemplate")}?`;
     }
@@ -232,6 +242,8 @@ const DeleteDialogComponent = (props) => {
     isRoom,
     isTemplatesFolder,
     isSharedWithMeFolderRoot,
+    isAIAgent,
+    isAIAgentsFolderRoot,
     unsubscribe,
   );
 
@@ -246,11 +258,15 @@ const DeleteDialogComponent = (props) => {
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{noteText}</Text>
-        {isRoomDelete || isTemplate ? (
+        {isRoomDelete || isTemplate || isAIAgent ? (
           <Checkbox
             style={{ marginTop: "16px" }}
             label={
-              isTemplate ? t("DeleteTemplateWarning") : t("DeleteRoomWarning")
+              isAIAgent
+                ? t("DeleteAIAgentWarning")
+                : isTemplate
+                  ? t("DeleteTemplateWarning")
+                  : t("DeleteRoomWarning")
             }
             isChecked={isChecked}
             onChange={() => setIsChecked(!isChecked)}
@@ -316,6 +332,7 @@ export default inject(
       isRoom,
       isTemplatesFolderRoot,
       isSharedWithMeFolderRoot,
+      isAIAgentsFolderRoot,
     } = treeFoldersStore;
 
     const {
@@ -359,6 +376,7 @@ export default inject(
       isTemplatesFolder: isTemplatesFolderRoot,
       onRemoveSharedFilesOrFolder,
       setUnsubscribe,
+      isAIAgentsFolderRoot,
     };
   },
 )(observer(DeleteDialog));

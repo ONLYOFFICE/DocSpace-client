@@ -46,6 +46,7 @@ import * as oauth from "./oauth";
 import * as debuginfo from "./debuginfo";
 import * as apiKeys from "./api-keys";
 import * as backup from "./backup";
+import * as ai from "./ai";
 
 export default {
   Filter,
@@ -67,4 +68,5 @@ export default {
   management,
   debuginfo,
   apiKeys,
+  ai,
 };

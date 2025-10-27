@@ -55,5 +55,6 @@ export type QuickButtonsProps = {
   onCreateRoom?: VoidFunction;
   onClickLock?: VoidFunction;
   onClickFavorite?: VoidFunction;
+  onRetryVectorization?: VoidFunction;
   openShareTab?: VoidFunction;
 };

@@ -155,6 +155,8 @@ const Selector = ({
   isSSR,
   selectedItem: selectedItemProp,
   dataTestId,
+
+  hideBackButton,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
 
@@ -216,6 +218,8 @@ const Selector = ({
     );
 
     if (isMultiSelect) {
+      if (item.disableMultiSelect) return;
+
       if (item.isSelected) {
         setNewSelectedItems((value) => {
           const newValue = value.filter((x) => x.id !== item.id);
@@ -677,6 +681,7 @@ const Selector = ({
           setInputItemVisible={setInputItemVisible}
           injectedElement={injectedElement}
           isSSR={isSSR}
+          hideBackButton={hideBackButton}
           // info
           {...infoProps}
         />

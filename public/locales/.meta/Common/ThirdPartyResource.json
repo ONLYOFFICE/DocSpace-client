@@ -3,7 +3,7 @@
   "content": "Third-party resource",
   "content_en_sha1_hash": "001907b089c0c5b90b1c10187b7bc68cca254fae",
   "created_at": "2025-05-26T07:15:48.793Z",
-  "updated_at": "2025-10-14T01:32:00.334Z",
+  "updated_at": "2025-10-27T16:14:33.440Z",
   "comment": {
     "text": "This translation key is used as a label for a radio button in a UI component, typically displayed on buttons or dialogs. It represents the term \"Third-party resource\" and appears to be associated with backup options, specifically in contexts related to third-party resources, auto-backup, and manual-backup pages.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1132,
+      "line_number": 1254,
       "context": "});\n \n filterOptions.push({\n key: FilterGroups.roomFilterProviderType,\n group: FilterGroups.roomFilterProviderType,\n label: t(\"Common:ThirdPartyResource\"),\n isHeader: true,\n isLast: true,\n });\n \n filterOptions.push(...thirdPartyOptions);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/Backup/BackupServiceDialog.tsx",
-      "line_number": 101,
+      "line_number": 102,
       "context": "}),\n icon: <ServiceIcon />,\n },\n {\n id: \"third-party-resource\",\n title: t(\"Common:ThirdPartyResource\"),\n description: t(\"ThirdPartyResourceDescription\"),\n icon: <MoveIcon />,\n },\n {\n id: \"third-party-storage\",",
       "module": "/packages/client"
     },

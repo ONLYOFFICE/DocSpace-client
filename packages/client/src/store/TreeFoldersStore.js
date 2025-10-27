@@ -63,6 +63,9 @@ class TreeFoldersStore {
 
     treeFolders.forEach((folder) => {
       switch (folder.rootFolderType) {
+        case FolderType.AIAgents:
+          folder.title = i18n.t("Common:AIAgents");
+          break;
         case FolderType.USER:
           folder.title = i18n.t("Common:MyDocuments");
           break;
@@ -87,16 +90,6 @@ class TreeFoldersStore {
         default:
           break;
       }
-    });
-
-    treeFolders.unshift({
-      id: "aiAgents",
-      title: i18n.t("Common:AIAgents"),
-      rootFolderType: FolderType.AIAgents,
-      folderClassName: "ai-agents",
-      security: {
-        Create: false,
-      },
     });
 
     this.setRootFoldersTitles(treeFolders);
@@ -262,6 +255,12 @@ class TreeFoldersStore {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.Recent);
   }
 
+  get aiAgentsFolder() {
+    return this.treeFolders.find(
+      (x) => x.rootFolderType === FolderType.AIAgents,
+    );
+  }
+
   /**
    * @type {import("@docspace/shared/api/rooms/types").TRoom=}
    */
@@ -321,6 +320,10 @@ class TreeFoldersStore {
 
   get recentFolderId() {
     return this.recentFolder ? this.recentFolder.id : null;
+  }
+
+  get aiAgentsFolderId() {
+    return this.aiAgentsFolder ? this.aiAgentsFolder.id : null;
   }
 
   get sharedWithMeFolderId() {
@@ -386,10 +389,25 @@ class TreeFoldersStore {
     );
   }
 
+  get isFlowsFolder() {
+    return window.location.pathname.includes("/flows");
+  }
+
   get isRoomsFolder() {
     return (
       this.roomsFolder && this.selectedFolderStore.id === this.roomsFolder.id
     );
+  }
+
+  get isAIAgentsFolder() {
+    return (
+      this.aiAgentsFolder &&
+      this.selectedFolderStore.id === this.aiAgentsFolder.id
+    );
+  }
+
+  get isAIAgentsFolderRoot() {
+    return FolderType.AIAgents === this.selectedFolderStore.rootFolderType;
   }
 
   get isRoom() {

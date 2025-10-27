@@ -823,7 +823,6 @@ class FilesStore {
   };
 
   wsChangeFolderAccessRights = (option) => {
-
     if (!option.data || !option.id) return;
 
     const folderId = option.id;
@@ -838,6 +837,7 @@ class FilesStore {
     });
 
     this.refreshFolder(folderId);
+    this.refreshFiles();
   };
 
   redirectToParent = (opt, pathParts, isRoom, isTemplate, rootFolderType) => {

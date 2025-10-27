@@ -492,6 +492,7 @@ export const enum NotificationsType {
 export const enum FilterGroups {
   filterType = "filter-filterType",
   filterAuthor = "filter-author",
+  filterSharedBy = "filter-sharedBy",
   filterFolders = "filter-folders",
   filterRoom = "filter-room",
   filterContent = "filter-withContent",

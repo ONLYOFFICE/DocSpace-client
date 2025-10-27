@@ -51,6 +51,7 @@ import {
   getTags,
   getQuotaFilter,
   getFilterLocation,
+  getSharedByType,
 } from "@docspace/shared/components/filter/Filter.utils";
 
 import {
@@ -251,6 +252,7 @@ const SectionFilterContent = ({
         const filterType = getFilterType(data) || null;
 
         const authorType = getAuthorType(data);
+        const sharedByType = getSharedByType(data);
 
         const withSubfolders = getSearchParams(data);
         const withContent = getFilterContent(data);
@@ -258,6 +260,7 @@ const SectionFilterContent = ({
         const roomId = getRoomId(data);
 
         const newFilter = filter.clone();
+
         newFilter.page = 0;
 
         newFilter.filterType = filterType;
@@ -271,6 +274,8 @@ const SectionFilterContent = ({
           newFilter.authorType = authorType ? `user_${authorType}` : null;
           newFilter.excludeSubject = null;
         }
+
+        newFilter.sharedByType = sharedByType;
 
         newFilter.withSubfolders =
           withSubfolders === FilterKeys.excludeSubfolders ? null : "true";
@@ -674,6 +679,17 @@ const SectionFilterContent = ({
         });
       }
 
+      if (filter.sharedByType) {
+        const user = await getUser(filter.sharedByType);
+        const label = user.displayName;
+
+        filterValues.push({
+          key: filter.sharedByType,
+          group: FilterGroups.filterSharedBy,
+          label,
+        });
+      }
+
       if (filter.roomId) {
         const room = await getRoomInfo(filter.roomId);
         const label = room.title;
@@ -703,6 +719,7 @@ const SectionFilterContent = ({
     return filterValues;
   }, [
     filter.authorType,
+    filter.sharedByType,
     filter.roomId,
     filter.filterType,
     filter.excludeSubject,
@@ -727,6 +744,26 @@ const SectionFilterContent = ({
 
     t,
   ]);
+
+  const getSharedByFilter = React.useCallback(() => {
+    if (!isSharedWithMeFolder) return [];
+
+    return [
+      {
+        key: FilterGroups.filterSharedBy,
+        group: FilterGroups.filterSharedBy,
+        label: t("Files:SharedBy"),
+        isHeader: true,
+      },
+      {
+        id: "filter_author-user-button",
+        key: FilterKeys.user,
+        group: FilterGroups.filterSharedBy,
+        displaySelectorType: "button",
+        label: t("Translations:ChooseFromList"),
+      },
+    ];
+  }, [isSharedWithMeFolder]);
 
   const getAuthorFilter = React.useCallback(() => {
     const selectedFolder = getSelectedFolder();
@@ -1151,7 +1188,11 @@ const SectionFilterContent = ({
     } else {
       const authorOption = getAuthorFilter();
 
+      const sharedByOption = getSharedByFilter();
+
       !isPublicRoom && filterOptions.push(...authorOption);
+
+      filterOptions.push(...sharedByOption);
       filterOptions.push(...typeOptions);
 
       if (isTrash) {
@@ -1254,6 +1295,7 @@ const SectionFilterContent = ({
     isVisitor,
     getContactsFilterData,
     getAuthorFilter,
+    getSharedByFilter,
   ]);
 
   const getViewSettingsData = React.useCallback(() => {
@@ -1447,6 +1489,11 @@ const SectionFilterContent = ({
           newFilter.authorType = null;
           newFilter.excludeSubject = null;
         }
+
+        if (group === FilterGroups.filterSharedBy) {
+          newFilter.sharedByType = null;
+        }
+
         if (group === FilterGroups.filterRoom) {
           newFilter.roomId = null;
         }

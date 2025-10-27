@@ -318,6 +318,7 @@
   "EmptyDescription": "The list of users previously invited to {{productName}} or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
   "EmptyEmail": "No email address parsed",
   "EmptyFieldError": "Empty field",
+  "EmptyFilterAIAgentsDescription": "No agents match this filter. Try another or remove the filter to view all agents.",
   "EmptyFilterDescriptionText": "No files or folders match this filter. Try a different one or clear filter to view all files.",
   "EmptyFilterFilesDescription": "No files or folders match this filter. Try another or remove the filter to view all files.",
   "EmptyFilterRoomsDescription": "No room matches this filter. Try another or reset filter to view all rooms.",

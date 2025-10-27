@@ -28,7 +28,6 @@ export { getKeyByLink } from "./getKeyByLink";
 export { settingsTree } from "./settingsTree";
 export { getTKeyByKey } from "./getTKeyByKey";
 export { getSelectedLinkByKey } from "./getSelectedLinkByKey";
-export { selectKeyOfTreeElement } from "./selectKeyOfTreeElement";
 export { getCurrentSettingsCategory } from "./getCurrentSettingsCategory";
 export { checkPropertyByLink } from "./checkPropertyByLink";
 export { getSettingsIndex } from "./getSettingsIndex";
@@ -36,8 +35,3 @@ export { getFromLocalStorage } from "./getFromLocalStorage";
 export { saveToLocalStorage } from "./saveToLocalStorage";
 export { removeLocalStorage } from "./removeLocalStorage";
 export { resetSessionStorage } from "./resetSessionStorage";
-export { getStepTitle } from "./getStepTitle";
-export {
-  getGoogleStepDescription,
-  getWorkspaceStepDescription,
-} from "./getStepDescription";

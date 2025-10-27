@@ -112,7 +112,3 @@ export const CategoryFilterItemMobile = styled(DropDownItem).attrs(
       `}
   }
 `;
-
-export const StyledSubItemMobile = styled(DropDownItem)`
-  padding-inline-start: 28px;
-`;

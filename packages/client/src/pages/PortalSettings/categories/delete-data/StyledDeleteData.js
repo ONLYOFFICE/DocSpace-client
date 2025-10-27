@@ -27,16 +27,6 @@
 import styled from "styled-components";
 import { mobile } from "@docspace/shared/utils";
 
-export const DeleteDataLayout = styled.div`
-  width: 100%;
-
-  hr {
-    margin: 24px 0;
-    border: none;
-    border-top: ${(props) => props.theme.client.settings.deleteData.borderTop};
-  }
-`;
-
 export const MainContainer = styled.div`
   max-width: 700px;
   white-space: pre-line;

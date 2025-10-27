@@ -71,20 +71,6 @@ export const MainContainer = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
-export const StyledCategoryWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 4px;
-  margin-bottom: 8px;
-  align-items: center;
-`;
-
-export const StyledTooltip = styled.div`
-  .subtitle {
-    margin-bottom: 10px;
-  }
-`;
-
 export const LearnMoreWrapper = styled.div`
   display: none;
 

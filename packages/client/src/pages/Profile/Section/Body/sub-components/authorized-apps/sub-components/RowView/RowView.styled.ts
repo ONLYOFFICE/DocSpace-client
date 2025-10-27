@@ -89,22 +89,6 @@ export const ContentWrapper = styled.div`
   justify-items: center;
 `;
 
-export const ToggleButtonWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-
-  label {
-    margin-top: 1px;
-    position: relative;
-    gap: 0px;
-
-    margin-right: -8px;
-  }
-`;
-
 export const FlexWrapper = styled.div`
   display: flex;
 `;

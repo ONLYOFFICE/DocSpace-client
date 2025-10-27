@@ -82,15 +82,6 @@ const tagList = (
   </div>
 );
 
-// Functional Helpers
-
-export const decodeString = (str: string) => {
-  const regex = /&#([0-9]{1,4});/gi;
-  return str
-    ? str.replace(regex, (_, numStr) => String.fromCharCode(+numStr))
-    : "...";
-};
-
 // InfoHelper Class
 
 type DetailsHelperProps = {

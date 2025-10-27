@@ -36,8 +36,6 @@ export const decryptAlgorithms = {
   "tripledes-cbc": "http://www.w3.org/2001/04/xmlenc#tripledes-cbc",
 };
 
-export const algorithms = { ...verifyAlgorithms, ...decryptAlgorithms };
-
 export const verifyAlgorithmsOptions = Object.keys(verifyAlgorithms).map(
   (key) => ({
     key: verifyAlgorithms[key],

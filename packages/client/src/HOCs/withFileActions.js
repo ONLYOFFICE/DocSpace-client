@@ -424,6 +424,7 @@ export default function withFileActions(WrappedFileItem) {
         isArchiveFolder,
         isTemplatesFolder,
         isRecentFolder,
+        isAIAgentsFolder,
       } = treeFoldersStore;
       const {
         dragging,
@@ -509,7 +510,8 @@ export default function withFileActions(WrappedFileItem) {
         isTemplatesFolder ||
         isRecentFolder ||
         settingsStore.currentDeviceType !== DeviceType.desktop ||
-        inProgress;
+        inProgress ||
+        isAIAgentsFolder;
 
       let isActive = false;
 

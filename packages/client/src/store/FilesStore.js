@@ -4802,6 +4802,7 @@ class FilesStore {
       isArchiveFolder,
       isFavoritesFolder,
       isRecentFolder,
+      isAIAgentsFolder,
     } = this.treeFoldersStore;
 
     return (
@@ -4809,7 +4810,8 @@ class FilesStore {
       isRoomsFolder ||
       isArchiveFolder ||
       isFavoritesFolder ||
-      isRecentFolder
+      isRecentFolder ||
+      isAIAgentsFolder
     );
   }
 

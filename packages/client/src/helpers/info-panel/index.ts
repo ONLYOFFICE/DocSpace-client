@@ -74,22 +74,6 @@ export const setView = (view: string) => {
   window.dispatchEvent(event);
 };
 
-export const setFileView = (view: string) => {
-  const event = new CustomEvent(InfoPanelEvents.setFileView, {
-    detail: { view },
-  });
-
-  window.dispatchEvent(event);
-};
-
-export const setRoomsView = (view: string) => {
-  const event = new CustomEvent(InfoPanelEvents.setRoomsView, {
-    detail: { view },
-  });
-
-  window.dispatchEvent(event);
-};
-
 export const setInfoPanelMobileHidden = (value: boolean) => {
   const event = new CustomEvent(InfoPanelEvents.setInfoPanelMobileHidden, {
     detail: { value },

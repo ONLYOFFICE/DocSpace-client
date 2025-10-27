@@ -108,8 +108,6 @@ const View = ({
   fetchAIProviders,
   fetchMCPServers,
   fetchWebSearch,
-
-  standalone,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation();

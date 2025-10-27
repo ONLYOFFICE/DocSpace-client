@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-
+import classNames from "classnames";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
@@ -121,7 +121,7 @@ const Gallery = ({ gallerySelected, culture }: GalleryProps) => {
         </Link>
       </div>
       <div
-        className={commonStyles.subtitle}
+        className={classNames(styles.select, commonStyles.subtitle)}
         data-testid="info_panel_gallery_description_header"
       >
         <Text fontWeight="600" fontSize="14px">
@@ -139,7 +139,7 @@ const Gallery = ({ gallerySelected, culture }: GalleryProps) => {
           gallerySelected.attributes.description_card}
       </Text>
       <div
-        className={commonStyles.subtitle}
+        className={classNames(styles.select, commonStyles.subtitle)}
         data-testid="info_panel_gallery_properties_header"
       >
         <Text fontWeight="600" fontSize="14px">
@@ -154,10 +154,10 @@ const Gallery = ({ gallerySelected, culture }: GalleryProps) => {
           className="property"
           data-testid="info_panel_gallery_date_modified_property"
         >
-          <Text className="property-title">
+          <Text className={classNames(styles.select, "property-title")}>
             {t("InfoPanel:LastUpdateInfo")}
           </Text>
-          <Text className="property-content">
+          <Text className={classNames(styles.select, "property-content")}>
             {getCorrectDate(
               culture ?? "en",
               gallerySelected.attributes.updatedAt,
@@ -168,8 +168,12 @@ const Gallery = ({ gallerySelected, culture }: GalleryProps) => {
           className="property"
           data-testid="info_panel_gallery_size_property"
         >
-          <Text className="property-title">{t("Common:Size")}</Text>
-          <Text className="property-content">{sizeWithExtra}</Text>
+          <Text className={classNames(styles.select, "property-title")}>
+            {t("Common:Size")}
+          </Text>
+          <Text className={classNames(styles.select, "property-content")}>
+            {sizeWithExtra}
+          </Text>
         </div>
       </div>
     </div>

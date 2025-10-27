@@ -100,7 +100,9 @@ const ItemTitle = ({
         className="icon"
         src={getIcon?.(32, currentExtensionGallery) ?? ""}
       />
-      <Text className="text">{gallerySelected?.attributes?.name_form}</Text>
+      <Text className={classNames(styles.select, "text")}>
+        {gallerySelected?.attributes?.name_form}
+      </Text>
 
       <Text color={currentColorScheme?.main?.accent} className="free-label">
         {t("Common:Free")}

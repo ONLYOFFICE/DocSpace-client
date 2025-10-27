@@ -70,10 +70,15 @@
 .galleryFormDescription {
   color: var(--info-panel-gallery-description-color);
   white-space: pre-line;
+  user-select: text;
 }
 
 .contextOptions {
   height: 16px;
   margin-block: 0;
   margin-inline: 8px 0;
+}
+
+.select {
+  user-select: text;
 }

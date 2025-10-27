@@ -3265,14 +3265,25 @@ class FilesActionStore {
     const { selection, bufferSelection } = this.filesStore;
     const { user } = this.userStore;
 
-    const roomId = selection.length
-      ? selection[0].id
+    const room = selection.length
+      ? selection[0]
       : bufferSelection
-        ? bufferSelection.id
-        : this.selectedFolderStore.id;
+        ? bufferSelection
+        : this.selectedFolderStore;
+
+    const roomId = room.id;
+    const isAIAgent = room.isAIAgent;
 
     const isAdmin = user.isOwner || user.isAdmin;
     const isRoot = this.selectedFolderStore.isRootFolder;
+
+    const roomSuccessText = isOwner
+      ? t("Files:LeftAndAppointNewOwner")
+      : t("Files:YouLeftTheRoom");
+    const agentSuccessText = isOwner
+      ? t("Files:LeftAgentAndAppointNewOwner")
+      : t("Files:YouLeftTheAgent");
+    const successText = isAIAgent ? agentSuccessText : roomSuccessText;
 
     return api.rooms
       .updateRoomMemberRole(roomId, {
@@ -3297,9 +3308,7 @@ class FilesActionStore {
           this.filesStore.setInRoomFolder(roomId, false);
         }
 
-        isOwner
-          ? toastr.success(t("Files:LeftAndAppointNewOwner"))
-          : toastr.success(t("Files:YouLeftTheRoom"));
+        toastr.success(successText);
       });
   };
 

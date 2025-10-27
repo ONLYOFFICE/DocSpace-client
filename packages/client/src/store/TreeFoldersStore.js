@@ -406,6 +406,10 @@ class TreeFoldersStore {
     );
   }
 
+  get isAIAgentsFolderRoot() {
+    return FolderType.AIAgents === this.selectedFolderStore.rootFolderType;
+  }
+
   get isRoom() {
     return (
       this.roomsFolder &&

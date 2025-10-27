@@ -46,6 +46,7 @@ export const getDialogContent = (
   isTemplatesFolder,
   isSharedWithMeFolderRoot,
   isAIAgent,
+  isAIAgentsFolderRoot,
   unsubscribe,
 ) => {
   if (!selection) return null;
@@ -195,7 +196,8 @@ export const getDialogContent = (
     isPersonalRoom ||
     isRoom ||
     isTemplatesFolder ||
-    isSharedWithMeFolderRoot
+    isSharedWithMeFolderRoot ||
+    isAIAgentsFolderRoot
   ) {
     if (isSingle) {
       return (

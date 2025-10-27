@@ -354,7 +354,7 @@ export const ViewComponent = inject(
   }: TStore) => {
     const { initSettings: initSettingsCommon } = common;
 
-    const { clearAbortControllerArr, standalone } = settingsStore;
+    const { clearAbortControllerArr } = settingsStore;
 
     const { setIsPortalSettingsLoading } = clientLoadingStore;
 
@@ -401,8 +401,6 @@ export const ViewComponent = inject(
       fetchAIProviders: aiSettingsStore.fetchAIProviders,
       fetchMCPServers: aiSettingsStore.fetchMCPServers,
       fetchWebSearch: aiSettingsStore.fetchWebSearch,
-
-      standalone,
     };
   },
 )(observer(View));

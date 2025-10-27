@@ -67,6 +67,7 @@ type TAiSettingsProps = {
   fetchWebSearch?: AISettingsStore["fetchWebSearch"];
 };
 
+// TODO: add standalone flag from store for hide ai providers
 const AiSettings = ({
   currentDeviceType,
   standalone = false,
@@ -150,14 +151,13 @@ const AiSettings = ({
 
 export const Component = inject(
   ({ settingsStore, aiSettingsStore }: TStore) => {
-    const { currentDeviceType, standalone } = settingsStore;
+    const { currentDeviceType } = settingsStore;
 
     const { fetchAIProviders, fetchMCPServers, fetchWebSearch } =
       aiSettingsStore;
 
     return {
       currentDeviceType,
-      standalone,
       fetchAIProviders,
       fetchMCPServers,
       fetchWebSearch,

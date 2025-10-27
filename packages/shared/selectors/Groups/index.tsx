@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import EmptyScreenGroupSvgUrl from "PUBLIC_DIR/images/emptyview/empty.groups.light.svg?url";
 import EmptyScreenGroupSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.groups.dark.svg?url";
 
-import api from "../../api";
+import { getGroupsByName } from "../../api/groups";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { Selector, TSelectorItem } from "../../components/selector";
 import { useTheme } from "../../hooks/useTheme";
@@ -110,7 +110,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
       setIsNextPageLoading(true);
 
       // Todo: fix types after TS API will be done
-      const { items, total } = await api.groups.getGroupsByName(
+      const { items, total } = await getGroupsByName(
         searchValue,
         startIndex,
         pageCount,

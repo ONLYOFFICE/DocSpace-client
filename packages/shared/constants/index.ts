@@ -62,6 +62,7 @@ export const FREE_BACKUP = "free_backup";
 export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
 export const CREATED_FORM_KEY = "created_form_key";
 export const PUBLIC_STORAGE_KEY = "public-auth";
+export const INFO_PANEL_LOADER_EVENT = "info-panel-loader-event";
 
 export const OPEN_BACKUP_CODES_DIALOG = "openBackupCodesDialog";
 

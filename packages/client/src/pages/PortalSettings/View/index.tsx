@@ -102,7 +102,6 @@ const View = ({
   paymentStore,
   servicesStore,
   currentTariffStatusStore,
-
   clearAbortControllerArr,
 
   fetchAIProviders,

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,17 +27,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-import {
-  FILTER_HEADER,
-  LOCALE_HEADER,
-  PATHNAME_HEADER,
-  SHARE_KEY_HEADER,
-  THEME_HEADER,
-} from "@/utils/constants";
-import { handlePublicRoomValidation } from "@/utils/middleware/handlePublicRoomValidation";
-
 // This function can be marked `async` if using `await` inside
-export async function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const host = request.headers.get("x-forwarded-host");
   const proto = request.headers.get("x-forwarded-proto");
 
@@ -45,10 +36,8 @@ export async function middleware(request: NextRequest) {
 
   const redirectUrl = `${proto}://${host}`;
 
-  requestHeaders.set(PATHNAME_HEADER, request.nextUrl.pathname);
-
   if (request.nextUrl.pathname === "/health") {
-    console.log("Get sdk health check for portal: ", redirectUrl);
+    console.log("Get management health check for portal: ", redirectUrl);
 
     requestHeaders.set("x-health-check", "true");
 
@@ -58,76 +47,24 @@ export async function middleware(request: NextRequest) {
     );
   }
 
-  if (request.nextUrl.pathname.includes("sdk")) {
-    return NextResponse.redirect(`${redirectUrl}/sdk${request.nextUrl.search}`);
+  const isAuth = !!request.cookies.get("asc_auth_key")?.value;
+
+  if (!isAuth) {
+    return NextResponse.redirect(`${redirectUrl}/login`);
   }
 
-  const searchParams = new URLSearchParams(request.nextUrl.searchParams);
-
-  let theme = searchParams.get("theme");
-  const locale = searchParams.get("locale");
-  const shareKey = searchParams.get("key");
-
-  if (theme) {
-    const firstChar = theme[0].toUpperCase();
-    const rest = theme.slice(1).toLowerCase();
-
-    theme = `${firstChar}${rest}`;
+  if (request.nextUrl.pathname === "/") {
+    return NextResponse.redirect(new URL("/management/spaces", request.url));
   }
 
-  requestHeaders.set(THEME_HEADER, theme ?? "");
-  requestHeaders.set(LOCALE_HEADER, locale ?? "");
-  requestHeaders.set(SHARE_KEY_HEADER, shareKey ?? "");
-
-  if (request.nextUrl.pathname.includes("public-room")) {
-    const validationResult = await handlePublicRoomValidation(
-      request,
-      requestHeaders,
-      shareKey || "",
+  if (request.nextUrl.pathname === "/settings") {
+    return NextResponse.redirect(
+      new URL("/management/settings/branding", request.url),
     );
-
-    if (validationResult?.redirect) {
-      return NextResponse.rewrite(
-        new URL(validationResult.redirect, request.url),
-        {
-          headers: requestHeaders,
-        },
-      );
-    }
-
-    requestHeaders.set(FILTER_HEADER, searchParams.toString());
-
-    const response = NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
-
-    if (validationResult?.anonymousSessionKeyCookie) {
-      response.headers.append(
-        "Set-Cookie",
-        validationResult.anonymousSessionKeyCookie,
-      );
-    }
-
-    return response;
   }
-
-  return NextResponse.next({
-    request: {
-      headers: requestHeaders,
-    },
-  });
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: [
-    "/health",
-    "/sdk",
-    "/room-selector",
-    "/file-selector",
-    "/public-room",
-    "/public-room/password",
-  ],
+  matcher: ["/health", "/", "/settings"],
 };

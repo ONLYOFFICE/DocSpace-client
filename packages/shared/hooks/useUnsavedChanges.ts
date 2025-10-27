@@ -24,47 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { useState, useEffect } from "react";
+import isEqual from "lodash/isEqual";
 
-// This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
-  const host = request.headers.get("x-forwarded-host");
-  const proto = request.headers.get("x-forwarded-proto");
+export const useUnsavedChanges = <T>(
+  initObject: T,
+  currentObject: T,
+): boolean => {
+  const [hasChanges, setHasChanges] = useState(false);
 
-  const requestHeaders = new Headers(request.headers);
+  useEffect(() => {
+    setHasChanges(!isEqual(initObject, currentObject));
+  }, [initObject, currentObject]);
 
-  const redirectUrl = `${proto}://${host}`;
-
-  if (request.nextUrl.pathname === "/health") {
-    console.log("Get management health check for portal: ", redirectUrl);
-
-    requestHeaders.set("x-health-check", "true");
-
-    return NextResponse.json(
-      { status: "healthy" },
-      { status: 200, headers: requestHeaders },
-    );
-  }
-
-  const isAuth = !!request.cookies.get("asc_auth_key")?.value;
-
-  if (!isAuth) {
-    return NextResponse.redirect(`${redirectUrl}/login`);
-  }
-
-  if (request.nextUrl.pathname === "/") {
-    return NextResponse.redirect(new URL("/management/spaces", request.url));
-  }
-
-  if (request.nextUrl.pathname === "/settings") {
-    return NextResponse.redirect(
-      new URL("/management/settings/branding", request.url),
-    );
-  }
-}
-
-// See "Matching Paths" below to learn more
-export const config = {
-  matcher: ["/health", "/", "/settings"],
+  return hasChanges;
 };

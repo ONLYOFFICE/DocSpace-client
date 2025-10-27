@@ -11,6 +11,7 @@
   "DeleteGroupTitle": "Удалить группу",
   "DeleteItem": "Вы собираетесь переместить <strong>{{name}}</strong> в раздел {{trashSection}}.",
   "DeleteItemForever": "Вы собираетесь удалить <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Обратите внимание: если вы поделились ими с кем-либо, они станут недоступны.",
   "DeleteRoom": "Комната <strong>\"{{roomName}}\"</strong> будет удалена без возможности восстановления. Все данные и доступы пользователей будут потеряны.",
   "DeleteRoomTitle": "Удалить эту комнату?",
   "DeleteRoomWarning": "Я понимаю последствия и хочу удалить комнату",

@@ -71,6 +71,7 @@ import {
   ErrorKeys,
   WhiteLabelLogoType,
   EmployeeType,
+  EmployeeTypeString,
   UrlActionType,
 } from "../enums";
 import {
@@ -321,6 +322,15 @@ export const getUserType = (user: TUser) => {
   if (user.isCollaborator) return EmployeeType.User;
   if (user.isVisitor) return EmployeeType.Guest;
   return EmployeeType.Guest;
+};
+
+export const getStringUserType = (user: TUser) => {
+  if (user.isOwner) return EmployeeTypeString.Owner;
+  if (isAdmin(user)) return EmployeeTypeString.Admin;
+  if (user.isRoomAdmin) return EmployeeTypeString.RoomAdmin;
+  if (user.isCollaborator) return EmployeeTypeString.User;
+  if (user.isVisitor) return EmployeeTypeString.Guest;
+  return EmployeeTypeString.Guest;
 };
 
 export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {

@@ -25,15 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
-import { TableVersions } from "SRC_DIR/helpers/constants";
+import {
+  TableVersions,
+  TABLE_ROOMS_COLUMNS,
+  TABLE_PEOPLE_COLUMNS,
+} from "SRC_DIR/helpers/constants";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
-const TABLE_PEOPLE_COLUMNS = `peopleTableColumns_ver-${TableVersions.People}`;
 const TABLE_GUESTS_COLUMNS = `guestsTableColumns_ver-${TableVersions.Guests}`;
 const TABLE_GROUPS_COLUMNS = `groupsTableColumns_ver-${TableVersions.Groups}`;
 const TABLE_INSIDE_GROUP_COLUMNS = `insideGroupTableColumns_ver-${TableVersions.InsideGroup}`;
-const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 const TABLE_AI_AGENTS_COLUMNS = `aiAgentsTableColumns_ver-${TableVersions.AIAgents}`;
 const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
 const TABLE_RECENT_COLUMNS = `recentTableColumns_ver-${TableVersions.Recent}`;

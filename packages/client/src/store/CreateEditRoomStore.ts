@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, when } from "mobx";
 import isEqual from "lodash/isEqual";
 import { TFunction } from "i18next";
 
@@ -417,7 +417,7 @@ class CreateEditRoomStore {
     roomParams: TRoomParams,
     openCreatedTemplate: Nullable<() => void>,
   ) => {
-    const { setSelection, setRoomCreated } = this.filesStore!;
+    const { setRoomCreated } = this.filesStore!;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
     const { cover, clearCoverProps } = this.dialogsStore!;
 
@@ -526,19 +526,12 @@ class CreateEditRoomStore {
     });
 
     if (openCreatedTemplate) {
-      this.onOpenNewRoom({
+      await this.onOpenNewRoom({
         id: progressData.templateId,
         title,
         roomType,
         rootFolderType: FolderType.RoomTemplates,
       } as unknown as TRoom);
-
-      if (isDesktop()) {
-        const roomInfo = await api.files.getFolderInfo(progressData.templateId);
-        showInfoPanel();
-        openMembersTab();
-        setSelection([{ ...roomInfo, isRoom: true }]);
-      }
     }
 
     clearCoverProps();
@@ -575,8 +568,7 @@ class CreateEditRoomStore {
       preparingDataForCopyingToRoom,
     } = this.filesActionsStore!;
     const { deleteThirdParty } = this.thirdPartyStore!;
-    const { createRoom, selection, bufferSelection, setBufferSelection } =
-      this.filesStore!;
+    const { createRoom, selection, bufferSelection } = this.filesStore!;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
     const { cover, clearCoverProps } = this.dialogsStore!;
 
@@ -704,8 +696,6 @@ class CreateEditRoomStore {
         addServersForRoom(room.id, roomParams.mcpServers);
       }
 
-      this.onOpenNewRoom(room);
-
       if (processCreatingRoomFromData) {
         const selections =
           selection.length > 0 && selection[0] != null
@@ -719,20 +709,7 @@ class CreateEditRoomStore {
         );
       }
 
-      if (isDesktop()) {
-        let roomInfo = null;
-
-        if (isTemplate) {
-          roomInfo = await api.files.getFolderInfo(room.id);
-        } else {
-          roomInfo = room;
-        }
-
-        showInfoPanel();
-        openMembersTab();
-        setBufferSelection({ ...roomInfo, isRoom: true });
-      }
-
+      await this.onOpenNewRoom(room);
       if (successToast)
         toastr.success(successToast as unknown as React.ReactNode);
     } catch (err) {
@@ -797,6 +774,7 @@ class CreateEditRoomStore {
 
   onOpenNewRoom = async (room: TRoom) => {
     const { setIsSectionBodyLoading } = this.clientLoadingStore!;
+    const { setSelection, selectedFolderStore } = this.filesStore!;
     const state = {
       isRoot: false,
       title: room.title,
@@ -804,6 +782,8 @@ class CreateEditRoomStore {
       isPublicRoomType: room.roomType === RoomsType.PublicRoom,
       rootFolderType: room.rootFolderType,
     };
+
+    setSelection([]);
 
     const newFilter = FilesFilter.getDefault();
     newFilter.folder = room.id.toString();
@@ -813,6 +793,17 @@ class CreateEditRoomStore {
     const path = getCategoryUrl(CategoryType.SharedRoom, room.id);
 
     window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
+
+    if (isDesktop()) {
+      await when(() => selectedFolderStore.id === room.id, {
+        timeout: 10000,
+      }).catch((error) => {
+        console.error(error);
+      });
+
+      showInfoPanel();
+      openMembersTab();
+    }
   };
 }
 

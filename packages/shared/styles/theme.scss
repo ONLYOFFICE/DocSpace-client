@@ -2967,3 +2967,21 @@
 .dark {
   --delete-image-link-color: #{$white};
 }
+
+.light {
+  --profile-main-bg-color: #{$gray-light};
+  --profile-description-text-color: #{$gray};
+  --profile-icon-fill: #{$light-gray-dark};
+  --profile-pending-email-text-color: #{$gray};
+  --profile-mobile-row-background: #{$gray-light};
+  --profile-mobile-label: #{$gray};
+}
+
+.dark {
+  --profile-main-bg-color: #{$dark-gray-light};
+  --profile-description-text-color: #{$gray-dark};
+  --profile-icon-fill: #{$dark-gray-dark};
+  --profile-pending-email-text-color: #{$gray-dark};
+  --profile-mobile-row-background: #{$light-dark-gray-hover};
+  --profile-mobile-label: #{$gray-dark};
+}

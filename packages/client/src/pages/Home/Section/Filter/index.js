@@ -138,6 +138,10 @@ const SectionFilterContent = ({
   currentClientView,
 
   getSelectedFolder,
+
+  filesStore,
+  groupsStore,
+  usersStore,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -172,6 +176,8 @@ const SectionFilterContent = ({
     standalone,
     showStorageInfo,
     isDefaultRoomsQuotaSet,
+    groupsStore,
+    usersStore,
   });
 
   const onNavigate = (path, newFilter) => {
@@ -406,7 +412,8 @@ const SectionFilterContent = ({
       if (isContactsPage) {
         onContactsSearch(searchValue);
       } else if (isRooms) {
-        const newFilter = roomsFilter.clone();
+        const currentFilter = filesStore.roomsFilter;
+        const newFilter = currentFilter.clone();
 
         newFilter.page = 0;
         newFilter.filterValue = searchValue;
@@ -426,7 +433,8 @@ const SectionFilterContent = ({
 
         navigate(`ai-agents/filter?${newFilter.toUrlParams(userId)}`);
       } else {
-        const newFilter = filter.clone();
+        const currentFilter = filesStore.filter;
+        const newFilter = currentFilter.clone();
         newFilter.page = 0;
         newFilter.search = searchValue;
 
@@ -1860,6 +1868,10 @@ export default inject(
       setRoomsFilter,
       standalone,
       currentDeviceType,
+
+      filesStore,
+      groupsStore,
+      usersStore,
     };
   },
 )(

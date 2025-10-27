@@ -37,6 +37,7 @@ import {
 } from "@docspace/shared/enums";
 import { FOLDER_NAMES } from "@docspace/shared/constants";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
+import { isTouchDevice } from "@docspace/shared/utils";
 
 import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";

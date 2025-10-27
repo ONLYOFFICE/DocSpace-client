@@ -293,6 +293,7 @@ const config = {
                 "@babel/preset-typescript",
               ],
               plugins: [
+                // "babel-plugin-react-compiler", // Switching between tabs breaks
                 "@babel/plugin-transform-runtime",
                 "@babel/plugin-transform-class-properties",
                 "@babel/plugin-proposal-export-default-from",

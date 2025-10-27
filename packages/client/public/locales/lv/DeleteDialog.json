@@ -11,6 +11,7 @@
   "DeleteGroupTitle": "Izdzēst grupu",
   "DeleteItem": "Jūs gatavojaties pārvietot <strong>{{name}}</strong> uz {{trashSection}}.",
   "DeleteItemForever": "Jūs gatavojaties dzēst <strong>{{name}}</strong>.",
+  "DeleteItemsSharedNote": "Ņemiet vērā: ja tos kopīgojāt ar kādu personu, tas kļūs nepieejams.",
   "DeleteRoom": "Istaba <strong>\"{{roomName}}\"</strong> tiks izdzēsta pavisam. Visi dati un lietotāju piekļuves tiks zaudēti.",
   "DeleteRoomTitle": "Dzēst šo istabu?",
   "DeleteRoomWarning": "Es saprotu sekmes un vēlos dzēst istabu.",

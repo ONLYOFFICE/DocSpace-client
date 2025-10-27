@@ -1111,7 +1111,7 @@ class UploadDataStore {
         // toFolderId,
         toFolderId: isAIRoom ? knowledgeId : file.parentFolderId,
         action: "upload",
-        error: file.size ? null : t("Files:EmptyFile"),
+        error: null,
         fileInfo: null,
         cancel: false,
         needConvert,
@@ -1670,7 +1670,7 @@ class UploadDataStore {
 
     const files = this.files;
 
-    if (files.length === 0 || this.filesSize === 0) {
+    if (files.length === 0) {
       return this.finishUploadFiles(t);
     }
 
@@ -1723,7 +1723,10 @@ class UploadDataStore {
     const { chunkUploadSize } = this.filesSettingsStore;
 
     const { file, toFolderId /* , action */ } = item;
-    const chunks = Math.ceil(file.size / chunkUploadSize, chunkUploadSize);
+    const chunks =
+      file.size === 0
+        ? 1
+        : Math.ceil(file.size / chunkUploadSize, chunkUploadSize);
     const fileName = file.name;
     const fileSize = file.size;
 

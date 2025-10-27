@@ -215,10 +215,7 @@ const RoomLogoCoverDialog = ({
     getCovers();
   }, [getCovers]);
 
-  const onCloseRoomLogo = (
-    e?: React.MouseEvent<HTMLButtonElement>,
-    withSelection = true,
-  ) => {
+  const onCloseRoomLogo = (e?: React.MouseEvent, withSelection = true) => {
     if (openColorPicker) return;
     setRoomCoverDialogProps({
       ...roomCoverDialogProps,

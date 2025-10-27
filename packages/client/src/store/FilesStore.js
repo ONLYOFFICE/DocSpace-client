@@ -536,7 +536,17 @@ class FilesStore {
           this.files[foundIndex].version = file.version;
           this.files[foundIndex].versionGroup = file.versionGroup;
         }
-        this.checkSelection(file);
+
+        const oldFile = this.files[foundIndex];
+        const newFile = await this.getFileInfo(
+          file.id,
+          file.requestToken ?? oldFile.requestToken,
+          true,
+        ).catch(() => ({ ...oldFile, ...file }));
+
+        const [fileItem] = this.getFilesListItems([newFile]);
+
+        this.checkSelection(fileItem);
       }
 
       if (foundIndex > -1) return;

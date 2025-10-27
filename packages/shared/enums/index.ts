@@ -75,6 +75,17 @@ export enum EmployeeType {
   Owner = "owner",
 }
 /**
+ * Enum for employee type.
+ * @readonly
+ */
+export enum EmployeeTypeString {
+  RoomAdmin = "roomAdmin",
+  Guest = "guest",
+  Admin = "admin",
+  User = "user",
+  Owner = "owner",
+}
+/**
  * Enum for user payments type.
  * @readonly
  */

@@ -3,7 +3,7 @@
   "content": "Select the Nextcloud backup file to start the data import. Only one file can be selected. Once the data upload and analysis are complete, the next step will be initiated automatically.",
   "content_en_sha1_hash": "fc06e392d6c5103ceb16fdfcca11cd91b7a9faac",
   "created_at": "2025-05-19T21:30:52.528Z",
-  "updated_at": "2025-06-30T12:20:31.408Z",
+  "updated_at": "2025-10-03T10:07:11.714Z",
   "comment": {
     "text": "\"This text is used to describe the selection process for Nextcloud backup files during data import in a step-by-step interface.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 50,
+      "line_number": 49,
       "context": "logoText: string,\n ) => {\n return [\n {\n title: t(\"Common:SelectFile\"),\n description: t(\"Settings:SelectFileDescriptionNextcloud\"),\n component: (\n <SelectFileStep\n t={t}\n isMultipleUpload={false}\n migratorName=\"Nextcloud\"",
       "module": "/packages/client"
     }

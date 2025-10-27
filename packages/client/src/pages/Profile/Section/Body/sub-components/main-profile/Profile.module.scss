@@ -24,28 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+@use "@docspace/shared/styles/mixins";
+@use "@docspace/shared/styles/variables";
 
-import { mobile, tablet } from "@docspace/shared/utils";
-import { Text } from "@docspace/shared/components/text";
-
-export const getDropdownHoverRules = () => [
-  `.drop-down-item:hover:not(.separator) {
-    background-color: var(--drop-down-item-hover-color) !important;
-  }`,
-  `.drop-down-item.activeDescendant {
-    background-color: var(--drop-down-item-hover-color) !important;
-  }`,
-];
-
-export const StyledWrapper = styled.div`
+.profileContainer {
+  container-type: inline-size;
+  container-name: profile;
   width: 100%;
   max-width: 660px;
+}
 
+.profileWrapper {
   display: flex;
   padding: 24px 24px 18px;
   gap: 40px;
-  background: ${(props) => props.theme.profile.main.background};
+  background: var(--profile-main-bg-color);
   border-radius: 12px;
 
   box-sizing: border-box;
@@ -54,39 +47,59 @@ export const StyledWrapper = styled.div`
     min-width: 124px;
   }
 
-  @media ${tablet} {
+  @include mixins.tabletContainer(profile) {
     max-width: 100%;
   }
 
-  @media ${mobile} {
+  @include mixins.mobileContainer(profile) {
     background: none;
     flex-direction: column;
     gap: 24px;
     align-items: center;
     padding: 0;
   }
-`;
+}
 
-export const StyledAvatarWrapper = styled.div`
+.avatarWrapper {
   display: flex;
 
-  @media ${mobile} {
+  @include mixins.mobileContainer(profile) {
     width: 100%;
     justify-content: center;
   }
 
-  .badges-wrapper {
+  .badgesWrapper {
     display: none;
 
-    @media ${mobile} {
+    @include mixins.mobileContainer(profile) {
       display: flex;
       position: absolute;
       inset-inline-end: 16px;
     }
   }
-`;
+}
 
-export const StyledInfo = styled.div<{ withActivationBar?: boolean }>`
+.label {
+  display: block;
+  align-items: center;
+  gap: 4px;
+
+  min-width: 100%;
+  width: 100%;
+  line-height: 20px;
+  white-space: nowrap;
+  color: var(--profile-description-text-color);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ssoBadge,
+.ldapBadge {
+  margin-inline-start: 4px;
+}
+
+.infoWrapper {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
@@ -98,106 +111,97 @@ export const StyledInfo = styled.div<{ withActivationBar?: boolean }>`
   gap: 11px;
   padding-top: 5px;
 
-  @media ${tablet} {
+  :global {
+    .combo-button {
+      padding-inline: 8px 0;
+    }
+
+    .backdrop-active {
+      z-index: 203 !important;
+    }
+  }
+
+  @include mixins.tabletContainer(profile) {
     gap: 7px;
   }
 
-  .rows-container {
+  .rowsContainer {
     display: grid;
     grid-template-columns: minmax(75px, auto) minmax(0, 1fr);
     gap: 24px;
     row-gap: 16px;
     max-width: 100%;
-
-    .profile-block-field {
-      display: flex;
-      gap: 8px;
-      height: 20px;
-      align-items: center;
-      line-height: 20px;
-    }
-
-    .sso-badge,
-    .ldap-badge {
-      margin-inline-start: 4px;
-    }
-
-    .email-container {
-      .send-again-desktop {
-        display: flex;
-      }
-    }
-    .user-type-container {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-    }
-
-    .language-combo-box-wrapper {
-      display: flex;
-      height: 28px;
-      align-items: center;
-      gap: 8px;
-
-      margin-inline-start: -8px;
-
-      .language-combo-box .combo-button {
-        padding-inline: 8px 0;
-      }
-    }
   }
 
-  .mobile-profile-block {
+  .profileBlockField {
+    display: flex;
+    gap: 8px;
+    height: 20px;
+    align-items: center;
+    line-height: 20px;
+  }
+
+  .userTypeContainer {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .languageComboBoxWrapper {
+    display: flex;
+    height: 28px;
+    align-items: center;
+    gap: 8px;
+    margin-inline-start: -8px;
+  }
+
+  .mobileProfileBlock {
     display: none;
   }
 
-  .edit-button {
+  .editButton {
     min-width: 12px;
 
     svg path {
-      fill: ${(props) => props.theme.profile.main.iconFill};
+      fill: var(--profile-icon-fill);
     }
   }
 
-  .email-edit-container {
+  .emailEditContainer {
     display: flex;
     align-items: center;
     padding-inline-end: 16px;
     line-height: 20px;
 
-    .email-text-container {
-      ${(props) =>
-        props.withActivationBar &&
-        css`
-          color: ${props.theme.profile.main.pendingEmailTextColor};
-        `}
+    .emailTextContainer {
+      &.pending {
+        color: var(--profile-pending-email-text-color);
+      }
     }
 
-    .email-edit-button {
+    .emailEditButton {
       display: block;
       padding-inline-start: 8px;
     }
   }
 
-  .send-again-container {
+  .sendAgainContainer {
     display: flex;
     flex-grow: 1;
     max-width: 50%;
     cursor: pointer;
     align-items: center;
-    cursor: pointer;
     height: 18px;
 
-    .send-again-text {
+    .sendAgainText {
       margin-inline-start: 5px;
       line-height: 15px;
-      color: ${(props) => props.theme.currentColorScheme?.main?.accent};
-      border-bottom: 1px solid
-        ${(props) => props.theme.currentColorScheme?.main?.accent};
+      color: var(--accent-main);
+      border-bottom: 1px solid var(--accent-main);
       margin-top: 2px;
     }
 
-    .send-again-icon {
+    .sendAgainIcon {
       display: block;
       width: 12px;
       height: 12px;
@@ -215,30 +219,30 @@ export const StyledInfo = styled.div<{ withActivationBar?: boolean }>`
         height: 12px;
 
         path {
-          fill: ${(props) => props.theme.currentColorScheme?.main?.accent};
+          fill: var(--accent-main);
         }
       }
     }
   }
 
-  .profile-language {
+  .profileLanguage {
     display: flex;
   }
 
-  @media ${mobile} {
-    .rows-container {
+  @include mixins.mobileContainer(profile) {
+    .rowsContainer {
       display: none;
     }
 
-    .mobile-profile-block {
+    .mobileProfileBlock {
       display: flex;
       flex-direction: column;
       gap: 16px;
       max-width: 100%;
 
-      .mobile-profile-row {
+      .mobileProfileRow {
         gap: 8px;
-        background: ${(props) => props.theme.profile.main.mobileRowBackground};
+        background: var(--profile-mobile-row-background);
         padding: 12px 16px;
         border-radius: 6px;
         display: flex;
@@ -246,64 +250,63 @@ export const StyledInfo = styled.div<{ withActivationBar?: boolean }>`
         line-height: 20px;
         max-width: 100%;
 
-        .mobile-profile-field {
+        .mobileProfileField {
           display: flex;
-          align-items: ${({ theme }) =>
-            theme.interfaceDirection === "rtl" ? `flex-start` : `baseline`};
+          align-items: baseline;
           max-width: calc(100% - 28px);
           flex-direction: column;
           gap: 2px;
+
+          [data-dir="rtl"] & {
+            align-items: flex-start;
+          }
         }
 
-        .mobile-profile-label {
+        .mobileProfileLabel {
           min-width: 100%;
           max-width: 100%;
           font-size: 12px !important;
           line-height: 16px !important;
           white-space: nowrap;
-          color: ${(props) => props.theme.profile.main.mobileLabel};
+          color: var(--profile-mobile-label);
         }
 
-        .mobile-profile-label-field {
+        .mobileProfileLabelField {
           padding-inline-start: 0;
           max-width: 100%;
           font-size: 12px !important;
           line-height: 16px;
         }
 
-        .email-container {
+        .emailContainer {
           padding-inline-start: 0;
-
           display: flex;
           flex-wrap: wrap;
           align-items: baseline;
         }
 
-        .edit-button {
+        .editButton {
           margin-inline-start: auto;
           min-width: 12px;
 
           svg path {
-            fill: ${(props) => props.theme.profile.main.iconFill};
+            fill: var(--profile-icon-fill);
           }
         }
 
-        .mobile-profile-password {
+        .mobileProfilePassword {
           max-width: 100%;
           font-size: 12px !important;
           line-height: 16px !important;
         }
       }
 
-      .mobile-language {
+      .mobileLanguage {
         display: flex;
         width: 100%;
         flex-direction: column;
         gap: 4px;
-
-        @media ${mobile} {
-          margin-top: 8px;
-        }
+        margin-top: 8px;
 
         &__wrapper-combo-box {
           display: flex;
@@ -311,7 +314,7 @@ export const StyledInfo = styled.div<{ withActivationBar?: boolean }>`
           gap: 8px;
         }
 
-        .mobile-profile-label {
+        .mobileProfileLabel {
           display: flex;
           align-items: center;
           gap: 4px;
@@ -319,32 +322,11 @@ export const StyledInfo = styled.div<{ withActivationBar?: boolean }>`
           max-width: 75px;
           white-space: nowrap;
         }
-
-        .backdrop-active {
-          z-index: 203 !important;
-        }
       }
 
-      @media ${mobile} {
+      @include mixins.mobileContainer(profile) {
         gap: 8px;
       }
     }
   }
-`;
-
-export const StyledLabel = styled(Text)<{ marginTopProp?: string }>`
-  display: block;
-  align-items: center;
-  gap: 4px;
-
-  min-width: 100%;
-  width: 100%;
-  line-height: 20px;
-  white-space: nowrap;
-  color: ${(props) => props.theme.profile.main.descriptionTextColor};
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  margin-top: ${({ marginTopProp }) => marginTopProp || 0};
-`;
+}

@@ -3,7 +3,7 @@
   "content": "Welcome to the Custom room",
   "content_en_sha1_hash": "379a12deeaaaac11c0e93c393d631508197bdd10",
   "created_at": "2025-05-19T21:30:56.469Z",
-  "updated_at": "2025-09-23T07:24:24.017Z",
+  "updated_at": "2025-10-27T16:14:33.135Z",
   "comment": {
     "text": "This translation key defines a title to be displayed when entering a Custom room in the game. It is used as part of an empty container UI element. The translation key is selected based on the current game type.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 291,
+      "line_number": 297,
       "context": "case RoomsType.PublicRoom:\n return t(\"EmptyView:PublicRoomEmptyTitle\");\n case RoomsType.VirtualDataRoom:\n return t(\"EmptyView:VirtualDataRoomEmptyTitle\");\n case RoomsType.CustomRoom:\n return t(\"EmptyView:CustomRoomEmptyTitle\");\n default:\n return \"\";\n }\n };",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Clear filter",
   "content_en_sha1_hash": "b667d6f9f635decfb59140eb7361aedc90b3b761",
   "created_at": "2025-05-19T21:30:43.475Z",
-  "updated_at": "2025-10-07T15:39:07.185Z",
+  "updated_at": "2025-10-27T16:14:33.110Z",
   "comment": {
     "text": "The translation key \"ClearFilter\" is used to display a clear filter button or link that resets filters in a search or filtering interface. It appears as a prominent action item on pages like Form Gallery and Contacts Body, where it helps users remove existing filters.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyFilterContainer.js",
-      "line_number": 118,
+      "line_number": 132,
       "context": "const options = [\n {\n key: \"empty-view-filter\",\n to: \"\",\n description: t(\"Common:ClearFilter\"),\n icon: <ClearEmptyFilterSvg />,\n onClick: onResetFilter,\n },\n ];",
       "module": "/packages/client"
     },
@@ -78,14 +78,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 598,
+      "line_number": 626,
       "context": "onClick={onClearFilter}\n textDecoration=\"underline dotted\"\n dataTestId=\"clear_filter_button\"\n className={styles.clearFilter}\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n ) : null}\n </div>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/selector/sub-components/EmptyScreen.tsx",
-      "line_number": 169,
-      "context": "size={12}\n iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}\n isFill\n />\n <Link {...linkStyles}>\n {withSearch ? t(\"Common:ClearFilter\") : t(\"Common:Back\")}\n </Link>\n </div>\n </div>\n ) : null}\n </div>",
+      "line_number": 173,
+      "context": "iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}\n isFill\n />\n \n <Link {...linkStyles}>\n {withSearch ? t(\"Common:ClearFilter\") : t(\"Common:Back\")}\n </Link>\n </>\n ) : null}\n </div>\n </div>",
       "module": "/packages/shared"
     }
   ],

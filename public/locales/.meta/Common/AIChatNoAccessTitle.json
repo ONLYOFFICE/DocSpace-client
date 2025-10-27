@@ -1,0 +1,28 @@
+{
+  "key_path": "AIChatNoAccessTitle",
+  "content": "You don’t have access to AI chat",
+  "content_en_sha1_hash": "28ddacf35376494bbb1392285fa913acb92afd55",
+  "created_at": "2025-10-27T16:14:10.257Z",
+  "updated_at": "2025-10-27T16:55:53.145Z",
+  "comment": {
+    "text": "This key displays a title message informing the user that they do not have access to AI chat functionality. It appears within an empty view screen, likely presented when a user attempts to access AI chat without the necessary permissions. Translators should ensure the message clearly conveys the lack of access.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:55:53.145Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-no-access-screen/index.tsx",
+      "line_number": 48,
+      "context": "<ChatNoAccessRightsDarkIcon />\n );\n \n return (\n <EmptyView\n title={t(\"Common:AIChatNoAccessTitle\")}\n description={t(\"Common:AIChatNoAccessDescription\")}\n icon={icon}\n options={null}\n />\n );",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

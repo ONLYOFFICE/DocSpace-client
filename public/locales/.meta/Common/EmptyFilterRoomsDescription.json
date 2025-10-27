@@ -3,7 +3,7 @@
   "content": "No room matches this filter. Try another or reset filter to view all rooms.",
   "content_en_sha1_hash": "903ae72970d5a0064d0416b48ff4bea5fe279cc3",
   "created_at": "2025-05-19T21:30:44.841Z",
-  "updated_at": "2025-08-27T10:14:35.033Z",
+  "updated_at": "2025-10-27T16:14:33.109Z",
   "comment": {
     "text": "This translation key is used for a generic message displayed when no rooms match the filter applied, prompting the user to try another filter or reset it. It appears in an empty container component where filter options are provided. Translators should aim to convey a neutral tone and a call-to-action encouraging users to explore other options.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyFilterContainer.js",
-      "line_number": 64,
-      "context": "}) => {\n const navigate = useNavigate();\n const location = useLocation();\n \n const descriptionText = isRooms\n ? t(\"Common:EmptyFilterRoomsDescription\")\n : t(\"Common:EmptyFilterFilesDescription\");\n \n const getIconURL = () => {\n if (isRooms)\n return theme.isBase ? (",
+      "line_number": 70,
+      "context": "const location = useLocation();\n \n const descriptionText = isAIAgentsFolder\n ? t(\"Common:EmptyFilterAIAgentsDescription\")\n : isRooms\n ? t(\"Common:EmptyFilterRoomsDescription\")\n : t(\"Common:EmptyFilterFilesDescription\");\n \n const getIconURL = () => {\n if (isAIAgentsFolder) {\n return theme.isBase ? (",
       "module": "/packages/client"
     }
   ],

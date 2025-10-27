@@ -1,0 +1,28 @@
+{
+  "key_path": "PreparationForAIFailed",
+  "content": "Preparation failed",
+  "content_en_sha1_hash": "e8539d11aa41a6f8100c2f4d8aa871fe627cfe4e",
+  "created_at": "2025-10-27T16:14:24.427Z",
+  "updated_at": "2025-10-27T16:31:32.855Z",
+  "comment": {
+    "text": "This key displays a failure message indicating that the preparation process for AI processing has failed. It appears within an alert tooltip on a badge, likely associated with a vectorization component. Translators should ensure the translation accurately conveys this failure and its implication for the user.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:31:32.855Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/failed-vectorization-badge/index.tsx",
+      "line_number": 67,
+      "context": "const getAlertTooltipContent = () => {\n return (\n <div>\n <Text fontWeight={600} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:PreparationForAIFailed\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:PreparationForAIFailedInfo\")}\n </Text>\n {withRetryVectorization ? (",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

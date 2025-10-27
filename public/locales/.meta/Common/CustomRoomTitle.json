@@ -3,7 +3,7 @@
   "content": "Custom room",
   "content_en_sha1_hash": "0839c4e1eb680a458fad43d77aa71faffff6d7c4",
   "created_at": "2025-05-19T21:30:44.386Z",
-  "updated_at": "2025-08-04T07:30:01.399Z",
+  "updated_at": "2025-10-27T16:14:33.522Z",
   "comment": {
     "text": "This translation key \"CustomRoomTitle\" is used to display the label for custom rooms in various UI elements. It is likely used as a button title or a room type filter option, and its content should reflect the desired human-readable name for these custom rooms.",
     "is_auto": true,
@@ -13,19 +13,19 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
       "line_number": 101,
-      "context": "roomType: RoomsType.PublicRoom,\n // dataTestId: \"room_type_public_option\",\n },\n {\n key: \"room-type-custom\",\n label: t(\"Common:CustomRoomTitle\"),\n roomType: RoomsType.CustomRoom,\n // dataTestId: \"room_type_custom_option\",\n },\n ];",
+      "context": "roomType: RoomsType.PublicRoom,\n // dataTestId: \"room_type_public_option\",\n },\n {\n key: \"room-type-custom\",\n label: t(\"Common:CustomRoomTitle\"),\n roomType: RoomsType.CustomRoom,\n // dataTestId: \"room_type_custom_option\",\n },\n {\n key: \"room-type-ai\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
       "line_number": 130,
-      "context": "label: t(\"Common:PublicRoom\"),\n roomType: RoomsType.PublicRoom,\n },\n {\n key: \"room-type-custom\",\n label: t(\"Common:CustomRoomTitle\"),\n roomType: RoomsType.CustomRoom,\n },\n ];\n \n const filterOptions = [",
+      "context": "label: t(\"Common:PublicRoom\"),\n roomType: RoomsType.PublicRoom,\n },\n {\n key: \"room-type-custom\",\n label: t(\"Common:CustomRoomTitle\"),\n roomType: RoomsType.CustomRoom,\n },\n {\n key: \"room-type-ai\",\n label: t(\"Common:AIRoomTitle\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
       "line_number": 17,
-      "context": "case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomTitle\");\n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomTitle\");\n \n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");",
+      "context": "case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomTitle\");\n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomTitle\");\n case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:",
       "module": "/packages/shared"
     }
   ],

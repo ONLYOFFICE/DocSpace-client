@@ -1,0 +1,28 @@
+{
+  "key_path": "UnsavedChangesDescription",
+  "content": "You have unsaved changes. If you leave now, your updates will be lost. Are you sure you want to leave?",
+  "content_en_sha1_hash": "bf93e223453b70379fe230b3e48ccbdff6974aef",
+  "created_at": "2025-10-27T16:14:23.077Z",
+  "updated_at": "2025-10-27T16:24:15.569Z",
+  "comment": {
+    "text": "This text appears within a confirmation dialog, warning the user that they have unsaved changes and will lose them if they leave the application. It's used to inform the user about potential data loss and confirm their intention to proceed. The description will appear in the body of the unsaved changes modal.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:24:15.569Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/unsaved-changes-dialog/index.tsx",
+      "line_number": 61,
+      "context": "isLoading={!ready}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"Common:UnsavedChanges\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"Common:UnsavedChangesDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n scale\n primary",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

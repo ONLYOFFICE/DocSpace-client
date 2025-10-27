@@ -1,0 +1,28 @@
+{
+  "key_path": "YouLeftTheAgent",
+  "content": "You have left the agent",
+  "content_en_sha1_hash": "9046d9c834b4b78bdceb1017ec100bcfc353675a",
+  "created_at": "2025-10-27T16:14:30.911Z",
+  "updated_at": "2025-10-27T17:58:07.181Z",
+  "comment": {
+    "text": "This message is displayed to a user when they leave an agent session. It confirms the user has exited the agent and may be used in a confirmation dialog or status update within the application. Translators should ensure the tone aligns with other exit/leave confirmations.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:58:07.181Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 3285,
+      "context": "const roomSuccessText = isOwner\n ? t(\"Files:LeftAndAppointNewOwner\")\n : t(\"Files:YouLeftTheRoom\");\n const agentSuccessText = isOwner\n ? t(\"Files:LeftAgentAndAppointNewOwner\")\n : t(\"Files:YouLeftTheAgent\");\n const successText = isAIAgent ? agentSuccessText : roomSuccessText;\n \n return api.rooms\n .updateRoomMemberRole(roomId, {\n invitations: [{ id: user?.id, access: ShareAccessRights.None }],",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

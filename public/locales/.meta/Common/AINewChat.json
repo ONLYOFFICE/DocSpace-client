@@ -1,0 +1,28 @@
+{
+  "key_path": "AINewChat",
+  "content": "New chat",
+  "content_en_sha1_hash": "009bf6b90cde5e60d74d76edc1421b8284d7d93f",
+  "created_at": "2025-10-27T16:14:10.286Z",
+  "updated_at": "2025-10-27T16:55:23.821Z",
+  "comment": {
+    "text": "This translation key displays the text \"New chat\" on a button that initiates the creation of a new chat. It appears within the chat header component, likely as a call to action for users to start a new conversation.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:55:23.821Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-header/sub-components/CreateChat.tsx",
+      "line_number": 70,
+      "context": "return (\n <div className={styles.createChat} onClick={onClickAction}>\n <PlusReactSvgUrl />\n <Text fontSize=\"14px\" lineHeight=\"16px\" fontWeight={600}>\n {t(\"AINewChat\")}\n </Text>\n </div>\n );\n };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

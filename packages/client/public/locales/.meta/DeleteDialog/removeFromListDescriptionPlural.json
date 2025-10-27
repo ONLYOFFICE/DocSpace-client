@@ -3,7 +3,7 @@
   "content": "You are about to remove <1>items ({{count}})</1> from the list. Are you sure you want to continue? ",
   "content_en_sha1_hash": "a0d451df783e578e3adfdebddd14beed721a5e4b",
   "created_at": "2025-10-01T08:28:18.320Z",
-  "updated_at": "2025-10-01T08:29:06.123Z",
+  "updated_at": "2025-10-27T16:14:33.248Z",
   "comment": {
     "text": "This key displays a confirmation message in a dialog when multiple items are being removed from a list. It informs the user they are about to delete a specified number of items and asks for confirmation. The message includes the number of items being deleted, using the `count` value.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 67,
+      "line_number": 68,
       "context": "values={{ title: selection[0]?.title }}\n components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />\n ) : (\n <Trans\n i18nKey=\"removeFromListDescriptionPlural\"\n ns=\"DeleteDialog\"\n t={t}\n values={{ count: selection.length }}\n components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />",
       "module": "/packages/client"
     }

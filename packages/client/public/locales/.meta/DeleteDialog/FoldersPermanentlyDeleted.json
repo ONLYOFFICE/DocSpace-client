@@ -3,7 +3,7 @@
   "content": "The folders will be permanently removed from the {{trashSection}}.",
   "content_en_sha1_hash": "7ee99c73e52751be1f10fd78b8af7cb84fb4902b",
   "created_at": "2025-10-01T15:20:12.326Z",
-  "updated_at": "2025-10-17T14:43:53.393Z",
+  "updated_at": "2025-10-27T16:14:33.253Z",
   "comment": {
     "text": "This text explains the consequence of deleting folders, confirming they will be permanently removed from the trash section. It appears within a confirmation dialog prompting the user to delete folders. Translators should ensure the \"trash section\" term is accurately localized.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 169,
-      "context": "<Trans t={t} i18nKey=\"DeleteFoldersForever\" ns=\"DeleteDialog\">\n You are about to delete{\" \"}\n <strong>folders ({{ foldersCount }})</strong>.\n </Trans>{\" \"}\n {!isThirdParty\n ? t(\"FoldersPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : null}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>",
+      "line_number": 184,
+      "context": "<Trans t={t} i18nKey=\"DeleteFoldersForever\" ns=\"DeleteDialog\">\n You are about to delete{\" \"}\n <strong>folders ({{ foldersCount }})</strong>.\n </Trans>{\" \"}\n {!isThirdParty\n ? t(\"FoldersPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"DeleteItemsSharedNote\")}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>",
       "module": "/packages/client"
     }
   ],

@@ -1,0 +1,28 @@
+{
+  "key_path": "UploadFilesPortal",
+  "content": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}",
+  "content_en_sha1_hash": "999378b1fec3d96479479987437a554a9464d2ac",
+  "created_at": "2025-10-27T16:14:31.672Z",
+  "updated_at": "2025-10-27T16:57:34.803Z",
+  "comment": {
+    "text": "This text appears as part of a button or link title, prompting the user to upload files. It indicates the user can upload files either from \"My Documents\" or from \"Rooms\". Translators should ensure the terminology aligns with the platform's file management system.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:57:34.803Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 473,
+      "context": "if (isKnowledgeTab) {\n const uploadFilesFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"AIRoom:UploadFilesPortal\", {\n sectionNameFirst: t(\"Common:MyDocuments\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n \"\",\n true,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

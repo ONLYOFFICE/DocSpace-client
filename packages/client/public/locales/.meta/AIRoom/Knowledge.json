@@ -1,0 +1,40 @@
+{
+  "key_path": "Knowledge",
+  "content": "Knowledge",
+  "content_en_sha1_hash": "dec1fccaba73443d77f5cfc48dacf9d496399f53",
+  "created_at": "2025-10-27T16:14:31.668Z",
+  "updated_at": "2025-10-27T17:04:00.229Z",
+  "comment": {
+    "text": "This key refers to the label \"Knowledge,\" likely representing a setting or section related to knowledge management or AI room settings within dialogs and tabs. It appears in UI components like dialogs and tabs, probably used to identify a relevant configuration area. Consider it a general term for knowledge-related functionality.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:04:00.229Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/Knowledge.tsx",
+      "line_number": 40,
+      "context": "import ActionsUploadReactSvgUrl from \"PUBLIC_DIR/images/actions.upload.react.svg?url\";\n import MoveReactSvgUrl from \"PUBLIC_DIR/images/icons/16/move.react.svg?url\";\n \n import { StyledParam } from \"../../../CreateEditDialogParams/StyledParam\";\n \n const KnowledgeSettings = () => {\n const { t } = useTranslation([\"AIRoom\", \"Common\", \"Article\"]);\n \n const onClickAction = () => toastr.info(t(\"Common:WorkInProgress\"));\n \n return (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/AiRoomSettings/Knowledge.tsx",
+      "line_number": 40,
+      "context": "import ActionsUploadReactSvgUrl from \"PUBLIC_DIR/images/actions.upload.react.svg?url\";\n import MoveReactSvgUrl from \"PUBLIC_DIR/images/icons/16/move.react.svg?url\";\n \n import { StyledParam } from \"SRC_DIR/components/CreateEditDialogParams/StyledParam\";\n \n const KnowledgeSettings = () => {\n const { t } = useTranslation([\"AIRoom\", \"Common\", \"Article\"]);\n \n const onClickAction = () => toastr.info(t(\"Common:WorkInProgress\"));\n \n return (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Tabs/AiRoomTabs/index.tsx",
+      "line_number": 54,
+      "context": "showTabsLoader?: ClientLoadingStore[\"showTabsLoader\"];\n setIsSectionBodyLoading?: ClientLoadingStore[\"setIsSectionBodyLoading\"];\n \n currentTab?: AiRoomStore[\"currentTab\"];\n setCurrentTab: AiRoomStore[\"setCurrentTab\"];\n setKnowledgeId: AiRoomStore[\"setKnowledgeId\"];\n setResultId: AiRoomStore[\"setResultId\"];\n };\n \n const AiRoomTabs = ({\n id,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

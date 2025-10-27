@@ -3,7 +3,7 @@
   "content": "Tags will apply to the room that will be created based on this template.",
   "content_en_sha1_hash": "496a0f22260ab35d09561070f794c68a57378e2b",
   "created_at": "2025-05-19T21:30:56.147Z",
-  "updated_at": "2025-10-13T14:41:02.779Z",
+  "updated_at": "2025-10-27T16:14:33.226Z",
   "comment": {
     "text": "This translation key is used to display a tooltip explaining how room tags will be applied when creating or editing a new room based on a template. The tooltip appears in a dialog component and helps users understand the behavior of room tags in this context.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
       "line_number": 481,
-      "context": "isDisabled={isDisabled}\n onFocus={() => setForceHideRoomTypeDropdown(true)}\n onBlur={() => setForceHideRoomTypeDropdown(false)}\n dataTestId=\"create_edit_room_tags_input\"\n tooltipLabel={\n isTemplateSelected || isTemplate ? t(\"Files:RoomTagsTooltip\") : \"\"\n }\n isMobile={isMobile}\n />\n \n {/* //TODO: Uncomment when private rooms are done",
+      "context": "isDisabled={isDisabled}\n onFocus={() => setForceHideRoomTypeDropdown(true)}\n onBlur={() => setForceHideRoomTypeDropdown(false)}\n dataTestId=\"create_edit_room_tags_input\"\n tooltipLabel={\n isTemplateSelected || isTemplate ? t(\"Files:RoomTagsTooltip\") : \"\"\n }\n isMobile={isMobile}\n />\n \n {isTemplate ? (",
       "module": "/packages/client"
     }
   ],

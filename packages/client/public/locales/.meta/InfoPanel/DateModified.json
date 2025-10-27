@@ -3,7 +3,7 @@
   "content": "Date modified",
   "content_en_sha1_hash": "dcef8297cd84445acb4ad6b84e674163d3d9765e",
   "created_at": "2025-05-19T21:30:54.770Z",
-  "updated_at": "2025-08-12T19:46:26.016Z",
+  "updated_at": "2025-10-27T16:14:33.374Z",
   "comment": {
     "text": "This translation key is used to display the label \"Date modified\" in a file's properties section. It appears on the /packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/index.js page and should be translated to provide consistency across different languages.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/index.tsx",
-      "line_number": 155,
+      "line_number": 167,
       "context": ">\n <div\n className=\"property\"\n data-testid=\"info_panel_gallery_date_modified_property\"\n >\n <Text className=\"property-title\">{t(\"InfoPanel:DateModified\")}</Text>\n <Text className=\"property-content\">\n {getCorrectDate(\n culture ?? \"en\",\n gallerySelected.attributes.updatedAt,\n )}",
       "module": "/packages/client"
     }

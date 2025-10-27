@@ -1,0 +1,28 @@
+{
+  "key_path": "Allow",
+  "content": "Allow",
+  "content_en_sha1_hash": "3ad0e3698278f45b2af94445396e9865f213f617",
+  "created_at": "2025-10-27T16:14:24.335Z",
+  "updated_at": "2025-10-27T16:51:05.492Z",
+  "comment": {
+    "text": "This translation key is for a button labeled \"Allow\" that appears within a confirmation dialog (likely related to tool calls). It allows the user to grant permission for a tool call. The text should convey a clear, affirmative action.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:51:05.492Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallConfirmDialog.tsx",
+      "line_number": 114,
+      "context": "label={t(\"Common:AlwaysAllowToolCall\")}\n />\n <div className={styles.buttonsBlockContainer}>\n <Button\n primary\n label={t(\"Common:Allow\")}\n onClick={() => onClickAction(ToolsPermission.Allow)}\n scale={isMobile()}\n size={ButtonSize.normal}\n />\n <Button",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Disabled",
   "content_en_sha1_hash": "f4f4473df8cb59f0a369aebee3d1509adc0151c6",
   "created_at": "2025-05-19T21:30:53.465Z",
-  "updated_at": "2025-08-04T07:30:01.185Z",
+  "updated_at": "2025-10-27T16:14:33.341Z",
   "comment": {
     "text": "This translation key represents the text \"Disabled\" used to describe employee status, appearing in various contexts such as info panels and filter options, where it is displayed next to a user's status.",
     "is_auto": true,
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 353,
+      "line_number": 363,
       "context": "break;\n case EmployeeStatus.Pending:\n label = t(\"PeopleTranslations:PendingInviteTitle\");\n break;\n case EmployeeStatus.Disabled:\n label = t(\"PeopleTranslations:DisabledEmployeeStatus\");\n break;\n default:\n break;\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 353,
+      "line_number": 363,
       "context": "break;\n case EmployeeStatus.Pending:\n label = t(\"PeopleTranslations:PendingInviteTitle\");\n break;\n case EmployeeStatus.Disabled:\n label = t(\"PeopleTranslations:DisabledEmployeeStatus\");\n break;\n default:\n break;\n }",
       "module": "/packages/client"
     }

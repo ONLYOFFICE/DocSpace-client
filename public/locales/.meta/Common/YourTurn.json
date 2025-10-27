@@ -3,7 +3,7 @@
   "content": "Your turn",
   "content_en_sha1_hash": "8a4e60471b34b8af985c6dd2d93792af71788f57",
   "created_at": "2025-05-19T21:30:49.657Z",
-  "updated_at": "2025-10-13T18:35:23.437Z",
+  "updated_at": "2025-10-27T16:14:33.803Z",
   "comment": {
     "text": "\"This translation key displays the message 'Your turn' to indicate whose action is being requested or awaited. It is used in UI elements where a user's input or submission is required.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 273,
+      "line_number": 277,
       "context": ") => {\n switch (status) {\n case FileFillingFormStatus.Draft:\n return t(\"Common:BadgeMyDraftTitle\");\n case FileFillingFormStatus.YourTurn:\n return t(\"Common:YourTurn\");\n case FileFillingFormStatus.InProgress:\n return t(\"Common:InProgress\");\n case FileFillingFormStatus.Stopped:\n return t(\"Common:Stopped\");\n case FileFillingFormStatus.Completed:",
       "module": "/packages/shared"
     }

@@ -24,15 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import CloudServicesGoogleDriveReactSvgUrl from "PUBLIC_DIR/images/cloud.services.google.drive.react.svg?url";
-import CloudServicesBoxReactSvgUrl from "PUBLIC_DIR/images/cloud.services.box.react.svg?url";
-import CloudServicesDropboxReactSvgUrl from "PUBLIC_DIR/images/cloud.services.dropbox.react.svg?url";
-import CloudServicesOnedriveReactSvgUrl from "PUBLIC_DIR/images/cloud.services.onedrive.react.svg?url";
-import CloudServicesKdriveReactSvgUrl from "PUBLIC_DIR/images/cloud.services.kdrive.react.svg?url";
-import CloudServicesYandexReactSvgUrl from "PUBLIC_DIR/images/cloud.services.yandex.react.svg?url";
-import CloudServicesNextcloudReactSvgUrl from "PUBLIC_DIR/images/cloud.services.nextcloud.react.svg?url";
-import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
-import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.webdav.react.svg?url";
 import { RoomsType } from "@docspace/shared/enums";
 
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
@@ -88,42 +79,6 @@ export const getUnexpectedErrorText = () => {
   return i18n.t("Common:UnexpectedError");
 };
 
-export const connectedCloudsTitleTranslation = (key, t) => {
-  switch (key) {
-    case "Box":
-
-    case "BoxNet":
-      return t("Translations:FolderTitleBoxNet");
-
-    case "DropBox":
-    case "DropboxV2":
-      return t("Translations:FolderTitleDropBox");
-
-    case "DocuSign":
-      return t("Translations:FolderTitleDocuSign");
-
-    case "Google":
-    case "GoogleDrive":
-      return t("Translations:FolderTitleGoogle");
-
-    case "OneDrive":
-    case "SkyDrive":
-      return t("Translations:FolderTitleSkyDrive");
-
-    case "SharePoint":
-      return t("Translations:FolderTitleSharePoint");
-    case "WebDav":
-      return t("Translations:FolderTitleWebDav");
-    case "kDrive":
-      return t("Translations:FolderTitlekDrive");
-    case "Yandex":
-      return t("Translations:FolderTitleYandex");
-
-    default:
-      return key;
-  }
-};
-
 export const connectedCloudsTypeTitleTranslation = (key, t) => {
   switch (key) {
     case "Box":
@@ -156,32 +111,6 @@ export const connectedCloudsTypeTitleTranslation = (key, t) => {
 
     default:
       return key;
-  }
-};
-
-export const connectedCloudsTypeIcon = (key) => {
-  switch (key) {
-    case "GoogleDrive":
-      return CloudServicesGoogleDriveReactSvgUrl;
-    case "Box":
-      return CloudServicesBoxReactSvgUrl;
-    case "DropboxV2":
-      return CloudServicesDropboxReactSvgUrl;
-    case "OneDrive":
-      return CloudServicesOnedriveReactSvgUrl;
-    case "SharePoint":
-      return CloudServicesOnedriveReactSvgUrl;
-    case "kDrive":
-      return CloudServicesKdriveReactSvgUrl;
-    case "Yandex":
-      return CloudServicesYandexReactSvgUrl;
-    case "NextCloud":
-      return CloudServicesNextcloudReactSvgUrl;
-    case "OwnCloud":
-      return CatalogFolderReactSvgUrl;
-    case "WebDav":
-      return CloudServicesWebdavReactSvgUrl;
-    default:
   }
 };
 

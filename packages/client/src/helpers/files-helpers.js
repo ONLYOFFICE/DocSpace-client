@@ -24,39 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import CatalogQuestionReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.question.react.svg?url";
-import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
-import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
-import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
-import AccessReviewReactSvgUrl from "PUBLIC_DIR/images/access.review.react.svg?url";
-import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg?url";
-import AccessFormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
-import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/custom.filter.react.svg?url";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { homepage } from "PACKAGE_FILE";
 import { EDITOR_PROTOCOL } from "./filesConstants";
-
-export const getAccessIcon = (access) => {
-  switch (access) {
-    case 1:
-      return AccessEditReactSvgUrl;
-    case 2:
-      return EyeReactSvgUrl;
-    case 3:
-      return AccessNoneReactSvgUrl;
-    case 4:
-      return CatalogQuestionReactSvgUrl;
-    case 5:
-      return AccessReviewReactSvgUrl;
-    case 6:
-      return AccessCommentReactSvgUrl;
-    case 7:
-      return AccessFormReactSvgUrl;
-    case 8:
-      return CustomFilterReactSvgUrl;
-    default:
-  }
-};
 
 export const checkProtocol = (fileId, withRedirect) =>
   new Promise((resolve, reject) => {

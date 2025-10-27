@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const GUID_EMPTY = "00000000-0000-0000-0000-000000000000";
 export const TIMEOUT = 1000;
 export const EDITOR_PROTOCOL = "oo-office";
 

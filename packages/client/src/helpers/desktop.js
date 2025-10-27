@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import api from "@docspace/shared/api";
-import { desktopConstants } from "@docspace/shared/utils/common";
 import store from "../store";
 import { encryptionUploadDialog as encryptionUploadDialogHelper } from "./encryptionUploadDialog";
 
@@ -34,33 +32,4 @@ export function encryptionUploadDialog(callback) {
     store.filesSettingsStore.extsWebEncrypt,
     callback,
   );
-}
-
-export function setEncryptionAccess(file) {
-  return api.files.getEncryptionAccess(file.id).then((keys) => {
-    const promise = new Promise((resolve, reject) => {
-      try {
-        window.AscDesktopEditor.cloudCryptoCommand(
-          "share",
-          {
-            cryptoEngineId: desktopConstants.cryptoEngineId,
-            file: [file.viewUrl],
-            keys,
-          },
-          (obj) => {
-            let newFile = null;
-            if (obj.isCrypto) {
-              const bytes = obj.bytes;
-              const filename = "temp_name";
-              newFile = new File([bytes], filename);
-            }
-            resolve(newFile);
-          },
-        );
-      } catch (e) {
-        reject(e);
-      }
-    });
-    return promise;
-  });
 }

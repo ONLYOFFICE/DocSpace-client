@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { authStore, settingsStore } from "@docspace/shared/store";
-import { toCommunityHostname } from "@docspace/shared/utils/common";
 import { FolderType } from "@docspace/shared/enums";
 import { CategoryType } from "@docspace/shared/constants";
 
@@ -53,53 +52,6 @@ export const setDocumentTitle = (subTitle = "") => {
   }
 
   document.title = title;
-};
-
-export const checkIfModuleOld = (link) => {
-  if (
-    !link ||
-    link.includes("files") ||
-    link.includes("people") ||
-    link.includes("settings")
-  ) {
-    return false;
-  }
-  return true;
-};
-
-export const getLink = (link) => {
-  if (!link) return;
-
-  if (!checkIfModuleOld(link)) {
-    return link;
-  }
-
-  if (link.includes("mail") || link.includes("calendar")) {
-    link = link.replace("products", "addons");
-  } else {
-    link = link.replace("products", "Products");
-    link = link.replace("crm", "CRM");
-    link = link.replace("projects", "Projects");
-  }
-
-  const { protocol, hostname } = window.location;
-
-  const communityHostname = toCommunityHostname(hostname);
-
-  return `${protocol}//${communityHostname}${link}?desktop_view=true`;
-};
-
-export const onItemClick = (e) => {
-  if (!e) return;
-  e.preventDefault();
-
-  const link = e.currentTarget.dataset.link;
-
-  if (checkIfModuleOld(link)) {
-    return window.open(link, "_blank");
-  }
-
-  // router.navigate(link);
 };
 
 export const getCategoryTypeByFolderType = (folderType, parentId) => {

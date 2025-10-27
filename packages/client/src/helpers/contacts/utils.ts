@@ -35,7 +35,6 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { TTranslation } from "@docspace/shared/types";
 import {
   getLinkToShareGuest,
-  resendInvitesAgain,
   resendUserInvites,
 } from "@docspace/shared/api/people";
 import { toastr } from "@docspace/shared/components/toast";
@@ -245,14 +244,6 @@ export const onInviteAgainClick = (
   resendUserInvites([id])
     .then(() => showEmailActivationToast(email, t))
     .catch((error) => toastr.error(error));
-};
-
-export const onInviteMultipleAgain = (t: TTranslation) => {
-  resendInvitesAgain()
-    .then(() =>
-      toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
-    )
-    .catch((err) => toastr.error(err));
 };
 
 export const shareGuest = (

@@ -58,7 +58,6 @@ export {
   changeUserQuota,
   onDeletePersonalDataClick,
   onInviteAgainClick,
-  onInviteMultipleAgain,
   getContactsView,
   getContactsUrl,
   createGroup,

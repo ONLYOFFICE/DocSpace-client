@@ -33,41 +33,6 @@ import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 
-export const getHeaderLabel = (
-  t: TTranslation,
-  isEditorDialog: boolean,
-  isCopy?: boolean,
-  isRestoreAll?: boolean,
-  isMove?: boolean,
-  isSelect?: boolean,
-  filterParam?: string,
-  isRestore?: boolean,
-  isFormRoom?: boolean,
-  isThirdParty?: boolean,
-  isSelectFolder?: boolean,
-) => {
-  if (isRestore) return t("Common:RestoreTo");
-  if (isSelectFolder) return t("Common:SelectFolder");
-  if (isMove) return t("Common:MoveTo");
-  if (isCopy && !isEditorDialog) return t("Common:Copy");
-  if (isRestoreAll) return t("Common:Restore");
-  if (isSelect) {
-    return filterParam ? t("Common:SelectFile") : t("Common:SelectAction");
-  }
-
-  if (isFormRoom) {
-    return t("Common:SelectFromPortal", {
-      productName: t("Common:ProductName"),
-    });
-  }
-
-  if (filterParam === FilesSelectorFilterTypes.DOCX)
-    return t("Common:CreateMasterFormFromFile");
-  if (filterParam) return t("Common:SelectFile");
-
-  return t("Common:SaveButton");
-};
-
 export const getAcceptButtonLabel = (
   t: TTranslation,
   isEditorDialog: boolean,

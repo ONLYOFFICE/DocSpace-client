@@ -154,14 +154,6 @@ export const MainLabelContainer = styled.div.attrs(injectDefaultTheme)`
   ${commonStyle}
 `;
 
-export const LabelContainer = styled.div.attrs(injectDefaultTheme)`
-  font-weight: normal;
-  font-size: 11px;
-  line-height: 16px;
-
-  ${commonStyle}
-`;
-
 class ProfileMenu extends React.Component {
   renderDropDown = () => {
     const {

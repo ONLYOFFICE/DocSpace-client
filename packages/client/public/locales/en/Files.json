@@ -12,6 +12,8 @@
   "AddUsersOrGroupsInfo": "Only <1>{{productName}}</1> and <1>Room admins</1> are shown here",
   "AddUsersOrGroupsInfoGroups": "Only <1>{{productName}}</1> and <1>Room admins</1> from the selected groups will be able to create rooms using this template.",
   "AfterFilesWillBeDeletedPermanently": "After files will be deleted permanently.",
+  "AgentRemoved": "Agent removed",
+  "AgentsRemoved": "Agents removed",
   "AllLinksAreDisabled": "All links are disabled",
   "AppointNewOwner": "You have appointed a new owner.",
   "ArchiveAction": "Empty archive",

@@ -148,20 +148,6 @@ export const getGroupsByName = async (
   return res;
 };
 
-export const getGroupsFull = () => {
-  return request({
-    method: "get",
-    url: `/group/full`,
-  });
-};
-
-export const getGroupsByUserId = (userId: string) => {
-  return request({
-    method: "get",
-    url: `/group/user/${userId}`,
-  });
-};
-
 export const getGroupMembersInRoom = async (
   folderId: string | number,
   groupId: string,
@@ -208,14 +194,6 @@ export const updateGroup = async (
   })) as TGroup;
 
   return decodeGroup(res);
-};
-
-export const addGroupMembers = (groupId: string, members: string) => {
-  return request({
-    method: "put",
-    url: `/group/${groupId}/members`,
-    data: { members },
-  });
 };
 
 export const removeGroupMembers = (groupId: string, membersIds: string[]) => {

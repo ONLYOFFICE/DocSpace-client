@@ -7,7 +7,7 @@
       "project": ["**/*.{js,jsx,ts,tsx}"]
     },
     "packages/client": {
-      "entry": ["src/App.js"],
+      "entry": ["src/App.js", "src/routes/components.ts"],
       "project": ["src/**/*.{js,jsx,ts,tsx}"]
     },
     "packages/login": {
@@ -66,7 +66,8 @@
     "**/i18next/**/*",
     "**/docker/**/*",
     "**/eslint-rules/**/*",
-    "licenses.config.js"
+    "licenses.config.js",
+    "**/api/**/*"
   ],
   "ignoreDependencies": [
     "@types/*",

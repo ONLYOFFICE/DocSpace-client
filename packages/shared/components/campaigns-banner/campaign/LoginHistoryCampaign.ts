@@ -63,5 +63,3 @@ export const getLoginHistoryConfig = (
     },
   };
 };
-
-export const loginHistoryConfig = getLoginHistoryConfig(true);

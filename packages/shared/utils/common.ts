@@ -342,21 +342,6 @@ export function objectToGetParams(obj: object) {
   return params.length > 0 ? `?${params.join("&")}` : "";
 }
 
-export function toCommunityHostname(hostname: string) {
-  let communityHostname;
-  try {
-    communityHostname =
-      hostname.indexOf("m.") > -1
-        ? hostname.substring(2, hostname.length)
-        : hostname;
-  } catch (e) {
-    console.error(e);
-    communityHostname = hostname;
-  }
-
-  return communityHostname;
-}
-
 export function getProviderLabel(provider: string, t: (key: string) => string) {
   switch (provider) {
     case "apple":

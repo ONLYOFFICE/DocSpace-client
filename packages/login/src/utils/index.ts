@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { thirdPartyLogin } from "@docspace/shared/utils/loginUtils";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 
 import { parseURL } from "@docspace/shared/utils/common";
@@ -33,29 +32,6 @@ import { getCookie } from "@docspace/shared/utils";
 import { getAvailablePortals as getAvailablePortalsServer } from "./actions";
 
 import { MessageKey, OAuth2ErrorKey } from "./enums";
-
-export async function oAuthLogin(profile: string) {
-  let isSuccess = false;
-  try {
-    await thirdPartyLogin(profile);
-    isSuccess = true;
-    const redirectPath = localStorage.getItem("redirectPath");
-
-    if (redirectPath) {
-      localStorage.removeItem("redirectPath");
-      window.location.href = redirectPath;
-    }
-  } catch (e) {
-    console.error(e);
-    isSuccess = false;
-    return isSuccess;
-  }
-
-  localStorage.removeItem("profile");
-  localStorage.removeItem("code");
-
-  return isSuccess;
-}
 
 export const getMessageFromKey = (messageKey: number) => {
   return MessageKey[messageKey];
@@ -159,22 +135,6 @@ export const getEmailFromInvitation = (encodeString: Nullable<string>) => {
   if (!queryParams || !queryParams.email) return "";
 
   return queryParams.email;
-};
-
-export const generateOAuth2ReferenceURl = (clientId: string) => {
-  return `/login/consent?clientId=${clientId}`;
-};
-
-export const getConfirmDataFromInvitation = (
-  encodeString: Nullable<string>,
-) => {
-  if (!encodeString) return "";
-
-  const queryParams = getInvitationLinkData(encodeString);
-
-  if (!queryParams || !queryParams.linkData) return {};
-
-  return queryParams.linkData;
 };
 
 export const getStringFromSearchParams = (searchParams: {

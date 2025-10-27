@@ -33,7 +33,6 @@ import {
   getBaseUrl,
 } from "@docspace/shared/utils/next-ssr-helper";
 import { TUser } from "@docspace/shared/api/people/types";
-import { TPortal } from "@docspace/shared/api/portal/types";
 import {
   TCapabilities,
   TCompanyInfo,
@@ -44,7 +43,6 @@ import {
   TSettings,
   TThirdPartyProvider,
   TTimeZone,
-  TVersionBuild,
   TInvitationSettings,
 } from "@docspace/shared/api/settings/types";
 import { Encoder } from "@docspace/shared/utils/encoder";
@@ -79,31 +77,6 @@ import {
 import { logger } from "@/../logger.mjs";
 
 const IS_TEST = process.env.E2E_TEST;
-
-export const checkIsAuthenticated = async () => {
-  logger.debug(`Start GET /authentication`);
-
-  try {
-    const [request] = await createRequest(
-      ["/authentication"],
-      [["", ""]],
-      "GET",
-    );
-
-    const res = await fetch(request);
-
-    if (!res.ok) {
-      logger.error(`GET /authentication failed: ${res.status}`);
-      return;
-    }
-
-    const isAuth = await res.json();
-
-    return isAuth.response as boolean;
-  } catch (error) {
-    logger.error(`Error in checkIsAuthenticated: ${error}`);
-  }
-};
 
 export async function getSettings() {
   logger.debug(`Start GET /settings?withPassword=true`);
@@ -145,31 +118,6 @@ export async function getSettings() {
       throw error;
     }
     logger.error(`Error in getSettings: ${error}`);
-  }
-}
-
-export async function getVersionBuild() {
-  logger.debug(`Start GET /settings/version/build`);
-
-  try {
-    const [getSettingsRes] = await createRequest(
-      [`/settings/version/build`],
-      [["", ""]],
-      "GET",
-    );
-
-    const res = await fetch(getSettingsRes);
-
-    if (!res.ok) {
-      logger.error(`GET /settings/version/build failed: ${res.status}`);
-      return;
-    }
-
-    const versionBuild = await res.json();
-
-    return versionBuild.response as TVersionBuild;
-  } catch (error) {
-    logger.error(`Error in getVersionBuild: ${error}`);
   }
 }
 
@@ -315,37 +263,6 @@ export async function getUser() {
     return user.response as TUser;
   } catch (error) {
     logger.error(`Error in getUser: ${error}`);
-  }
-}
-
-export async function getUserByName() {
-  logger.debug(`Start GET /people/firstname.lastname`);
-
-  try {
-    const hdrs = await headers();
-    const cookie = hdrs.get("cookie");
-
-    const [getUserRes] = await createRequest(
-      [`/people/firstname.lastname`],
-      [["", ""]],
-      "GET",
-    );
-
-    if (!cookie?.includes("asc_auth_key")) return undefined;
-    const userRes = IS_TEST ? selfHandler() : await fetch(getUserRes);
-
-    if (userRes.status === 401) return undefined;
-
-    if (!userRes.ok) {
-      logger.error(`GET /people/firstname.lastname failed: ${userRes.status}`);
-      return;
-    }
-
-    const user = await userRes.json();
-
-    return user.response as TUser;
-  } catch (error) {
-    logger.error(`Error in getUserByName: ${error}`);
   }
 }
 
@@ -648,28 +565,6 @@ export async function getPortalTimeZones(confirmKey: string | null = null) {
     return portalTimeZones.response as TTimeZone[];
   } catch (error) {
     logger.error(`Error in getPortalTimeZones: ${error}`);
-    throw error;
-  }
-}
-
-export async function getPortal() {
-  logger.debug(`Start GET /portal`);
-
-  try {
-    const [getPortalRes] = await createRequest([`/portal`], [["", ""]], "GET");
-
-    const res = IS_TEST ? portalTimeZoneHandler() : await fetch(getPortalRes);
-
-    if (!res.ok) {
-      logger.error(`GET /portal failed: ${res.status}`);
-      throw new Error(res.statusText);
-    }
-
-    const portal = await res.json();
-
-    return { ...portal.response, tenantAlias: portal.links[0].href } as TPortal;
-  } catch (error) {
-    logger.error(`Error in getPortal: ${error}`);
     throw error;
   }
 }

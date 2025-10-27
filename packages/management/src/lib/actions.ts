@@ -50,12 +50,7 @@ import type {
 import type {
   SettingsThirdPartyType,
   TFilesSettings,
-  TFolder,
 } from "@docspace/shared/api/files/types";
-import {
-  getFolderClassNameByType,
-  sortInDisplayOrder,
-} from "@docspace/shared/utils/common";
 import { TError } from "@docspace/shared/utils/axiosClient";
 
 import { logger } from "@/../logger.mjs";
@@ -678,72 +673,6 @@ export async function getBackupProgress(dump = true) {
     }
     logger.error(`Error in getBackupProgress: ${error}`);
     return error as TError;
-  }
-}
-
-export async function getFoldersTree() {
-  logger.debug("Start GET /files/@root?filterType=2&count=1");
-
-  try {
-    const [getFoldersTreeRes] = await createRequest(
-      ["/files/@root?filterType=2&count=1"],
-      [["", ""]],
-      "GET",
-    );
-
-    const foldersTreeRes = await fetch(getFoldersTreeRes);
-
-    if (!foldersTreeRes.ok) {
-      logger.error(
-        `GET /files/@root?filterType=2&count=1 failed: ${foldersTreeRes.status}`,
-      );
-      return [];
-    }
-
-    const foldersTree = await foldersTreeRes.json();
-
-    const folders = sortInDisplayOrder(foldersTree.response);
-
-    return folders.map((data, index) => {
-      const { new: newItems, pathParts, current } = data;
-
-      const {
-        parentId,
-        title,
-        id,
-        rootFolderType,
-        security,
-        foldersCount,
-        filesCount,
-      } = current;
-
-      const type = +rootFolderType;
-
-      const name = getFolderClassNameByType(type);
-
-      return {
-        ...current,
-        id,
-        key: `0-${index}`,
-        parentId,
-        title,
-        rootFolderType: type,
-        folderClassName: name,
-        folders: null,
-        pathParts,
-        foldersCount,
-        filesCount,
-        newItems,
-        security,
-        new: newItems,
-      } as TFolder;
-    });
-  } catch (error) {
-    if (isDynamicServerError(error)) {
-      throw error;
-    }
-    logger.error(`Error in getFoldersTree: ${error}`);
-    return [];
   }
 }
 

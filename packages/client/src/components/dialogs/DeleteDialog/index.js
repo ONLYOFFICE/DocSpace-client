@@ -71,6 +71,7 @@ const DeleteDialogComponent = (props) => {
     selection: selectionProps,
     onRemoveSharedFilesOrFolder,
     setUnsubscribe,
+    isAIAgentsFolderRoot,
   } = props;
   const [isChecked, setIsChecked] = useState(false);
 
@@ -242,6 +243,7 @@ const DeleteDialogComponent = (props) => {
     isTemplatesFolder,
     isSharedWithMeFolderRoot,
     isAIAgent,
+    isAIAgentsFolderRoot,
     unsubscribe,
   );
 
@@ -330,6 +332,7 @@ export default inject(
       isRoom,
       isTemplatesFolderRoot,
       isSharedWithMeFolderRoot,
+      isAIAgentsFolderRoot,
     } = treeFoldersStore;
 
     const {
@@ -373,6 +376,7 @@ export default inject(
       isTemplatesFolder: isTemplatesFolderRoot,
       onRemoveSharedFilesOrFolder,
       setUnsubscribe,
+      isAIAgentsFolderRoot,
     };
   },
 )(observer(DeleteDialog));

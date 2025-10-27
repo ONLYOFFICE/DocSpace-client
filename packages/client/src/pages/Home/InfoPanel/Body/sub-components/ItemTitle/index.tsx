@@ -36,7 +36,6 @@ type ItemTitleProps = {
   isNoItem?: boolean;
   isGallery?: boolean;
   isContacts?: boolean;
-  isShareTab?: boolean;
 } & (
   | {
       isRoomMembersPanel: true;
@@ -58,7 +57,6 @@ const ItemTitle = ({
 
   isRoomMembersPanel,
   searchProps,
-  isShareTab,
 }: ItemTitleProps) => {
   if (!infoPanelSelection) return null;
 
@@ -78,7 +76,6 @@ const ItemTitle = ({
     <RoomsItemHeader
       selection={infoPanelSelection}
       isRoomMembersPanel={isRoomMembersPanel}
-      isShareTab={isShareTab}
     />
   );
 };

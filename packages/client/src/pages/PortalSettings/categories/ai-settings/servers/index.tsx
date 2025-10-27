@@ -249,6 +249,13 @@ const MCPServersComponent = ({
         className={styles.addProviderButton}
         onClick={showAddDialog}
         isDisabled={isMCPActionsDisabled}
+        tooltipText={
+          isMCPActionsDisabled
+            ? t("AISettings:ToUseAddProvider", {
+                value: t("AISettings:MCPServer"),
+              })
+            : undefined
+        }
       />
 
       <MCPList

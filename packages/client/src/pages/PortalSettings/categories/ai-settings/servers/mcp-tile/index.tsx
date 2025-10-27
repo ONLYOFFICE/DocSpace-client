@@ -89,7 +89,11 @@ export const MCPTile = ({
         <MCPIcon title={item.name} imgSrc={icon} size={MCPIconSize.Large} />
       }
       tooltipText={
-        disableActions ? t("AISettings:ToUseMCPAddProvider") : undefined
+        disableActions
+          ? t("AISettings:ToUseAddProvider", {
+              value: t("AISettings:MCPServer"),
+            })
+          : undefined
       }
     >
       <AiTile.Header title={item.name}>

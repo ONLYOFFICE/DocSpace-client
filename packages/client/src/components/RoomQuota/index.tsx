@@ -33,7 +33,7 @@ import { TRoomParams } from "@docspace/shared/utils/rooms";
 import { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
 type RoomQuotaProps = {
-  setRoomParams: (roomParams: TAgentParams | unknown) => void;
+  setRoomParams: (roomParams: TAgentParams | TRoomParams) => void;
   roomParams: TRoomParams | TAgentParams;
   defaultRoomsQuota?: number;
   isEdit?: boolean;
@@ -52,7 +52,7 @@ const RoomQuota = ({
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
 
   const onSetQuotaBytesSize = (size: string) => {
-    setRoomParams({ ...roomParams, quota: size });
+    setRoomParams({ ...roomParams, quota: Number(size) });
   };
 
   const defaultValue = useRef(roomParams.quota!);

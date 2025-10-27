@@ -33,7 +33,7 @@ import { TRoomParams } from "@docspace/shared/utils/rooms";
 import { TAgentParams } from "@docspace/shared/utils/aiAgents";
 
 type RoomQuotaProps = {
-  setRoomParams: (roomParams: unknown) => void;
+  setRoomParams: (roomParams: TAgentParams | unknown) => void;
   roomParams: TRoomParams | TAgentParams;
   defaultRoomsQuota?: number;
   isEdit?: boolean;

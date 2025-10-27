@@ -17,6 +17,7 @@
   "AdminsMessage": "Administrator Message Settings",
   "AdminsMessageMobileDescription": "Administrator Message Settings is a way to contact the portal administrator.",
   "AdminsMessageSettingDescription": "Enable this option to display the {{productName}} administrator contact form on the Sign In page.",
+  "AISettings": "AI settings",
   "AllDomains": "Any domains",
   "Api": "API",
   "APIGuide": "API Guide",
@@ -285,6 +286,5 @@
   "WantToCancelUpload": "Do you want to cancel the upload?",
   "WantToContinue": "Do you want to continue or change the user storage quota?",
   "WhiteLabelSubtitle": "Upload logos with a transparent background (PNG, SVG, JPG) for light and dark themes, or generate one instantly by entering your Your logo below.",
-  "WithoutEmailHint": "You don’t have users without emails. Please proceed to the next step.",
-  "AISettings": "AI settings"
+  "WithoutEmailHint": "You don’t have users without emails. Please proceed to the next step."
 }

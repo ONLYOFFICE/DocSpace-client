@@ -1,12 +1,11 @@
 {
+  "AIChat": "AI-Chat",
   "CreateChat": "Create chat",
   "CreateChatDescription": "Go to the AI-Chat tab to get started.",
-  "EmptyKnowledgeTitle": "No files uploaded yet",
   "EmptyKnowledgeDescription": "Files uploaded here will be indexed and used as context in the AI-Chat tab. Add files to ask AI about them, generate content, or analyze information together.",
-  "EmptyResultsTitle": "No results yet",
+  "EmptyKnowledgeTitle": "No files uploaded yet",
   "EmptyResultsDescription": "Files generated in AI-Chat will appear here automatically. Whenever you generate content, start a chat, or send a message with output, the result will be saved in this section.",
-  "AIChat": "AI-Chat",
-  "ResultStorage": "Result Storage",
+  "EmptyResultsTitle": "No results yet",
   "Instructions": "Instructions",
   "InstructionsDescription": "Define the purpose and behavior of chats within this room. What should they do? How should they function? What should be avoided?",
   "InstructionsPlaceholder": "Example: “Chats in this room are used for discussing project files. Please stay on topic and avoid off-topic conversations or sharing unrelated documents.”",
@@ -17,6 +16,7 @@
   "MCPDescription": "Use MCP tools connected by the administrator to enhance chat experience with AI. These tools can assist with data extraction, summaries, smart suggestions, etc.",
   "Model": "Provider and model",
   "ModelDescription": "Select the AI provider and model to be used in this room’s chats. This setting is mandatory and applies to all participants.",
-  "UploadFilesPortal": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}",
-  "UploadFilesDevice": "Upload files from your personal device"
+  "ResultStorage": "Result Storage",
+  "UploadFilesDevice": "Upload files from your personal device",
+  "UploadFilesPortal": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}"
 }

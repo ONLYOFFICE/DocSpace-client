@@ -154,7 +154,9 @@ const Gallery = ({ gallerySelected, culture }: GalleryProps) => {
           className="property"
           data-testid="info_panel_gallery_date_modified_property"
         >
-          <Text className="property-title">{t("InfoPanel:DateModified")}</Text>
+          <Text className="property-title">
+            {t("InfoPanel:LastUpdateInfo")}
+          </Text>
           <Text className="property-content">
             {getCorrectDate(
               culture ?? "en",

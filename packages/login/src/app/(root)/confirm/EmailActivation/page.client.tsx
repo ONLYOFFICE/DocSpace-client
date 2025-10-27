@@ -51,8 +51,12 @@ const EmailActivationHandler = () => {
           confirmHeader,
         );
 
-        const base64Data = btoa(JSON.stringify(res[0]?.email));
-        sessionStorage.setItem("confirmedData", base64Data);
+        const email = res[0]?.email;
+
+        if (email) {
+          const base64Data = btoa(JSON.stringify(email));
+          sessionStorage.setItem("confirmedData", base64Data);
+        }
 
         window.location.replace("/login");
       } catch (e) {

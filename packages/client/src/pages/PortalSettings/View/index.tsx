@@ -165,7 +165,7 @@ const View = ({
     fetchAIProviders,
     fetchMCPServers,
     fetchWebSearch,
-    standalone,
+    standalone: true,
   });
 
   useEffect(() => {

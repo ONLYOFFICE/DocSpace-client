@@ -11,19 +11,19 @@
       "project": ["src/**/*.{js,jsx,ts,tsx}"]
     },
     "packages/login": {
-      "entry": ["src/app/**/page.tsx", "src/app/**/layout.tsx"],
+      "entry": ["src/app/**/page.tsx", "src/app/**/layout.tsx", "src/proxy.ts"],
       "project": ["src/**/*.{js,jsx,ts,tsx}"]
     },
     "packages/doceditor": {
-      "entry": ["src/app/**/page.tsx", "src/app/**/layout.tsx"],
+      "entry": ["src/app/**/page.tsx", "src/app/**/layout.tsx", "src/proxy.ts"],
       "project": ["src/**/*.{js,jsx,ts,tsx}"]
     },
     "packages/management": {
-      "entry": ["src/app/**/page.tsx", "src/app/**/layout.tsx"],
+      "entry": ["src/app/**/page.tsx", "src/app/**/layout.tsx", "src/proxy.ts"],
       "project": ["src/**/*.{js,jsx,ts,tsx}"]
     },
     "packages/sdk": {
-      "entry": ["src/app/**/page.tsx", "src/app/**/layout.tsx"],
+      "entry": ["src/app/**/page.tsx", "src/app/**/layout.tsx", "src/proxy.ts"],
       "project": ["src/**/*.{js,jsx,ts,tsx}"]
     }
   },

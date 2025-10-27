@@ -53,9 +53,34 @@ class FileRow extends Component {
       showPasswordInput: false,
       password: "",
       passwordValid: true,
+      showFinalProgress: false,
     };
     this.inputRef = React.createRef();
+    this.lastPercentRef = React.createRef();
+    this.lastPercentRef.current = props.item.percent;
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.progressTimeout = null;
+  }
+
+  componentDidUpdate() {
+    const { item } = this.props;
+    const lastPercent = this.lastPercentRef.current;
+
+    if (item.percent === 100 && lastPercent !== 100) {
+      this.setState({ showFinalProgress: true });
+
+      this.progressTimeout = setTimeout(() => {
+        this.setState({ showFinalProgress: false });
+      }, 200);
+    }
+
+    this.lastPercentRef.current = item.percent;
+  }
+
+  componentWillUnmount() {
+    if (this.progressTimeout) {
+      clearTimeout(this.progressTimeout);
+    }
   }
 
   onTextClick = () => {
@@ -237,9 +262,10 @@ class FileRow extends Component {
             </div>
           )}
 
-          {item.fileId && !item.error ? (
+          {item.fileId && !item.error && !this.state.showFinalProgress ? (
             <FileActions item={item} />
-          ) : item.error || (!item.fileId && uploaded) ? (
+          ) : (item.error || (!item.fileId && uploaded)) &&
+            !this.state.showFinalProgress ? (
             <ErrorFile
               t={t}
               item={item}

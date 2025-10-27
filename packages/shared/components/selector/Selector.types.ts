@@ -194,6 +194,8 @@ export type EmptyScreenProps = {
 
   items: TSelectorItem[];
   inputItemVisible: boolean;
+
+  hideBackButton?: boolean;
 };
 
 export type TSelectorEmptyScreen = {
@@ -414,6 +416,8 @@ export type SelectorProps = TSelectorHeader &
     isSSR?: boolean;
     selectedItem?: TSelectorItem | null; // no multiSelect only
     dataTestId?: string;
+
+    hideBackButton?: boolean;
   };
 
 export type BodyProps = TSelectorInfo &
@@ -441,6 +445,7 @@ export type BodyProps = TSelectorInfo &
     injectedElement?: React.ReactElement;
 
     isSSR?: boolean;
+    hideBackButton?: boolean;
   };
 
 export type FooterProps = TSelectorFooterSubmitButton &

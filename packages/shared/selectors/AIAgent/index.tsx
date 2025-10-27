@@ -249,6 +249,7 @@ const AIAgentSelectorComponent = ({
         onClose: () => setWithInfo(!withInfo),
         description: t("Common:ChooseAIAgentDescription"),
       }}
+      hideBackButton
     />
   );
 };

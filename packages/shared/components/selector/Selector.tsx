@@ -155,6 +155,8 @@ const Selector = ({
   isSSR,
   selectedItem: selectedItemProp,
   dataTestId,
+
+  hideBackButton,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
 
@@ -679,6 +681,7 @@ const Selector = ({
           setInputItemVisible={setInputItemVisible}
           injectedElement={injectedElement}
           isSSR={isSSR}
+          hideBackButton={hideBackButton}
           // info
           {...infoProps}
         />

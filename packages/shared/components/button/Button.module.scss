@@ -264,7 +264,7 @@
 
   &.isDisabled {
     cursor: default;
-    pointer-events: none;
+    // pointer-events: none;
     background-color: var(--button-background-base-disabled);
     color: var(--button-color-base-disabled);
     border-color: var(--button-border-base-disabled);

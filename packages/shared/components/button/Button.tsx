@@ -27,6 +27,7 @@
 import React from "react";
 import classNames from "classnames";
 import { Loader, LoaderTypes } from "../loader";
+import { Tooltip } from "../tooltip";
 import { ButtonProps } from "./Button.types";
 import { ButtonSize } from "./Button.enums";
 import styles from "./Button.module.scss";
@@ -51,6 +52,7 @@ export const Button = (props: React.PropsWithChildren<ButtonProps>) => {
     filled,
     filledStroke,
     style,
+    tooltipText,
     ...rest
   } = props;
 
@@ -77,41 +79,50 @@ export const Button = (props: React.PropsWithChildren<ButtonProps>) => {
 
   const buttonStyle = minWidth ? { ...style, minWidth } : style;
 
+  const tooltipId = tooltipText ? (id ?? "button-tooltip") : undefined;
+
   return (
-    <button
-      {...rest}
-      id={id}
-      ref={ref}
-      type={type === "submit" ? "submit" : "button"}
-      className={buttonClasses}
-      disabled={isDisabled || isLoading}
-      data-testid={testId}
-      data-size={size}
-      aria-label={label}
-      aria-disabled={isDisabled ? "true" : undefined}
-      aria-busy={isLoading ? "true" : undefined}
-      style={buttonStyle}
-    >
-      {isLoading ? (
-        <Loader
-          id={id}
-          className={classNames(styles.loader, "loader", {
-            [styles.primary]: primary,
-          })}
-          size="20px"
-          type={LoaderTypes.track}
-          label={label}
-          primary={primary}
-          isDisabled={isDisabled}
-        />
-      ) : null}
-      <div className={contentClasses}>
-        {icon ? (
-          <div className={classNames(styles.icon, "icon")}>{icon}</div>
+    <>
+      <button
+        {...rest}
+        id={id}
+        ref={ref}
+        type={type === "submit" ? "submit" : "button"}
+        className={buttonClasses}
+        disabled={isDisabled || isLoading}
+        data-testid={testId}
+        data-size={size}
+        aria-label={label}
+        aria-disabled={isDisabled ? "true" : undefined}
+        aria-busy={isLoading ? "true" : undefined}
+        style={buttonStyle}
+        data-tooltip-id={tooltipId}
+        data-tooltip-content={tooltipText}
+      >
+        {isLoading ? (
+          <Loader
+            id={id}
+            className={classNames(styles.loader, "loader", {
+              [styles.primary]: primary,
+            })}
+            size="20px"
+            type={LoaderTypes.track}
+            label={label}
+            primary={primary}
+            isDisabled={isDisabled}
+          />
         ) : null}
-        {label}
-      </div>
-    </button>
+        <div className={contentClasses}>
+          {icon ? (
+            <div className={classNames(styles.icon, "icon")}>{icon}</div>
+          ) : null}
+          {label}
+        </div>
+      </button>
+      {tooltipText ? (
+        <Tooltip id={tooltipId} place="bottom" offset={10} float />
+      ) : null}
+    </>
   );
 };
 

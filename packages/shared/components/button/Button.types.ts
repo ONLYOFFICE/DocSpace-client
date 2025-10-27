@@ -79,6 +79,8 @@ export type ButtonProps = BaseButtonProps & {
   "aria-disabled"?: "true" | "false";
   /** ARIA busy state */
   "aria-busy"?: "true" | "false";
+  /** Tooltip text */
+  tooltipText?: string;
 };
 
 /** Props for the styled ButtonTheme component */

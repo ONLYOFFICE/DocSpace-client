@@ -148,7 +148,7 @@ export type ScrollbarState = {
   isRTL?: boolean;
 };
 
-export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
+class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
   // eslint-disable-next-line react/static-property-placement
   static contextType = ScrollbarContext;
 

@@ -30,6 +30,7 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { TGroup } from "@docspace/shared/api/groups/types";
 import Filter from "@docspace/shared/api/people/filter";
 import api from "@docspace/shared/api";
+import { removeGroupMembers } from "@docspace/shared/api/groups";
 
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 
@@ -133,7 +134,7 @@ class EditGroupStore {
 
       // Requires when new group is without manager and old manager moved to members. updateGroup api method doesn't provide possibility to do it without setting new manager
       if (this.manager === null && oldManagerRemovedButRemainsAsMember) {
-        await api.groups.removeGroupMembers(this.group.id, [oldManager.id]);
+        await removeGroupMembers(this.group.id, [oldManager.id]);
         addedIds.push(oldManager.id);
       }
 

@@ -129,6 +129,7 @@ const withHotkeys = (Component) => {
       isArchiveFolder ||
       isRoomsFolder ||
       isVisitor ||
+      isAIAgentsFolder ||
       !security?.Create;
 
     const onCreate = (extension) => {

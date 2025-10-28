@@ -408,13 +408,12 @@ const PureHome = (props) => {
           <SectionWarningContent />
         </Section.SectionWarning>
 
-        {!isChat && shouldShowFilter && !isProfile ? (
+        {!isChat &&
+        shouldShowFilter &&
+        !isProfile &&
+        (!isFrame || showFilter) ? (
           <Section.SectionFilter>
-            {isFrame ? (
-              showFilter && <SectionFilterContent />
-            ) : (
-              <SectionFilterContent />
-            )}
+            <SectionFilterContent />
           </Section.SectionFilter>
         ) : null}
 

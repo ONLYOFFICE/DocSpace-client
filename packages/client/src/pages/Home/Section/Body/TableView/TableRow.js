@@ -24,16 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import equal from "fast-deep-equal";
 import { withTranslation } from "react-i18next";
+import React, { useState, useEffect, memo, useCallback, useMemo } from "react";
+
 import { classNames } from "@docspace/shared/utils";
 import { FolderType } from "@docspace/shared/enums";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
+
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withFileActions from "../../../../../HOCs/withFileActions";
 import ItemIcon from "../../../../../components/ItemIcon";
+
 import RoomsRowDataComponent from "./sub-components/RoomsRowData";
 import AIAgentsRowDataComponent from "./sub-components/AIAgentsRowData";
 import TrashRowDataComponent from "./sub-components/TrashRowData";
@@ -43,9 +48,10 @@ import TemplatesRowData from "./sub-components/TemplatesRowData";
 import RowDataComponent from "./sub-components/RowData";
 import SharedWithMeRowDataComponent from "./sub-components/SharedWithMeRowData";
 import FavoritesRowDataComponent from "./sub-components/FavoritesRowData";
+
 import { StyledTableRow, StyledDragAndDrop } from "./StyledTable";
 
-const FilesTableRow = (props) => {
+const FilesTableRow = memo((props) => {
   const {
     t,
     fileContextClick,
@@ -124,46 +130,60 @@ const FilesTableRow = (props) => {
     />
   );
 
-  const selectionProp = {
-    className: `files-item ${className} ${value}`,
-    value,
-    documentTitle,
-  };
+  const selectionProp = useMemo(() => {
+    return {
+      className: `files-item ${className} ${value}`,
+      value,
+      documentTitle,
+    };
+  }, [className, value, documentTitle]);
 
   const [isDragActive, setIsDragActive] = useState(false);
 
   const isDragDisabled = dragging && !isDragging;
 
-  const dragStyles = {
-    style: {
-      background:
-        dragging && isDragging && !isIndexEditingMode
-          ? isDragActive
-            ? acceptBackground
-            : background
-          : "none",
-      opacity: isDragDisabled ? 0.4 : 1,
+  const dragStyles = useMemo(() => {
+    return {
+      style: {
+        background:
+          dragging && isDragging && !isIndexEditingMode
+            ? isDragActive
+              ? acceptBackground
+              : background
+            : "none",
+        opacity: isDragDisabled ? 0.4 : 1,
+      },
+    };
+  }, [
+    dragging,
+    isDragging,
+    isIndexEditingMode,
+    isDragActive,
+    acceptBackground,
+    background,
+  ]);
+
+  const onChangeIndex = useCallback(
+    (action) => {
+      return onEditIndex(action, item, t);
     },
-  };
+    [onEditIndex, item, t],
+  );
 
-  const onChangeIndex = (action) => {
-    return onEditIndex(action, item, t);
-  };
-
-  const onDragOverEvent = (dragActive, e) => {
+  const onDragOverEvent = useEventCallback((dragActive, e) => {
     onDragOver && onDragOver(e);
 
     if (dragActive !== isDragActive) {
       setIsDragActive(dragActive);
     }
-  };
+  });
 
-  const onDragLeaveEvent = (e) => {
+  const onDragLeaveEvent = useEventCallback((e) => {
     onDragLeave && onDragLeave(e);
 
     setDropTargetPreview(null);
     setIsDragActive(false);
-  };
+  });
 
   useEffect(() => {
     if (index === 0) {
@@ -219,17 +239,22 @@ const FilesTableRow = (props) => {
     ? `${item.id}_${item.fileExst}`
     : (item.id ?? "");
 
-  const contextOptionProps = isIndexEditingMode
-    ? {}
-    : {
-        contextOptions: item.contextOptions,
-        getContextModel,
-      };
+  const contextOptionProps = useMemo(() => {
+    return isIndexEditingMode
+      ? {}
+      : {
+          contextOptions: item.contextOptions,
+          getContextModel,
+        };
+  }, [isIndexEditingMode, item.contextOptions, getContextModel]);
 
-  const changeIndex = (e, action) => {
-    e.stopPropagation();
-    onChangeIndex(action);
-  };
+  const changeIndex = useCallback(
+    (e, action) => {
+      e.stopPropagation();
+      onChangeIndex(action);
+    },
+    [onChangeIndex],
+  );
 
   return (
     <StyledDragAndDrop
@@ -350,7 +375,7 @@ const FilesTableRow = (props) => {
       </StyledTableRow>
     </StyledDragAndDrop>
   );
-};
+}, equal);
 
 export default withTranslation([
   "Files",

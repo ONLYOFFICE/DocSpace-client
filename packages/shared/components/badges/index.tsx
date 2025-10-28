@@ -26,6 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import equal from "fast-deep-equal";
 import React, { useMemo, useState } from "react";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
@@ -620,4 +621,4 @@ const Badges = ({
   );
 };
 
-export default Badges;
+export default React.memo(Badges, equal);

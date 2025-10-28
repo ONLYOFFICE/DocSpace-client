@@ -122,7 +122,13 @@ const InputItem = ({
   }, []);
 
   return (
-    <div key="input-item" className={styles.selectorItem} style={style}>
+    <div
+      key="input-item"
+      className={classNames(styles.selectorItem, {
+        [styles.withIcon]: icon || color || roomType || cover,
+      })}
+      style={style}
+    >
       {cover ? (
         <RoomIcon
           color={color}

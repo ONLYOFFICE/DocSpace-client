@@ -775,7 +775,8 @@ const ArticleMainButtonContent = (props) => {
 
     if (!isMobileArticle) visibilityValue = false;
 
-    if (isChatTab || isResultTab) visibilityValue = false;
+    if (isAIRoom && (isChatTab || isResultTab)) visibilityValue = false;
+
     return visibilityValue;
   };
 

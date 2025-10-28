@@ -150,7 +150,7 @@ const DeleteDialogComponent = (props) => {
   };
 
   const onDeleteAction = useCallback(() => {
-    if (isRoomDelete || isTemplate) {
+    if (isRoomDelete || isTemplate || isAIAgent) {
       if (!isChecked) return;
       onDeleteRoom();
       return;
@@ -164,6 +164,7 @@ const DeleteDialogComponent = (props) => {
     onDelete();
   }, [
     isRoomDelete,
+    isAIAgent,
     isTemplate,
     isChecked,
     onDeleteRoom,
@@ -193,7 +194,7 @@ const DeleteDialogComponent = (props) => {
       return t("Common:Delete");
     }
 
-    if (isRoomDelete) {
+    if (isRoomDelete || isAIAgent) {
       return t("Common:DeletePermanently");
     }
 
@@ -251,7 +252,7 @@ const DeleteDialogComponent = (props) => {
   const accessButtonLabel = getAccessButtonLabel();
 
   const isDisabledAccessButton =
-    isRoomDelete || isTemplate ? !isChecked : !selection.length;
+    isRoomDelete || isTemplate || isAIAgent ? !isChecked : !selection.length;
 
   return (
     <StyledModalWrapper isLoading={!tReady} visible={visible} onClose={onClose}>

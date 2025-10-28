@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useCallback } from "react";
 import { useLocation, Outlet } from "react-router";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
@@ -64,6 +64,7 @@ import {
 import MediaViewer from "./MediaViewer";
 
 import { useSDK, useOperations } from "./Hooks";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 const PureHome = (props) => {
   const {
@@ -182,7 +183,7 @@ const PureHome = (props) => {
     currentClientView === "groups" ? isEmptyGroups : isUsersEmptyView;
   const isChat = currentClientView === "chat";
 
-  const onDrop = (f, uploadToFolder) => {
+  const onDrop = useEventCallback((f, uploadToFolder) => {
     if (isContactsPage || isProfile) return;
 
     if (
@@ -204,7 +205,7 @@ const PureHome = (props) => {
       .catch((err) => {
         toastr.error(err, null, 0, true);
       });
-  };
+  });
 
   useOperations({
     clearUploadData,
@@ -239,21 +240,21 @@ const PureHome = (props) => {
     isLoading,
   });
 
-  const getContextModel = () => {
+  const getContextModel = useCallback(() => {
     if (isFrame || isProfile) return null;
 
     if (isContactsPage) return getContactsModel(t, true);
     return getFolderModel(t, true);
-  };
+  }, [isFrame, isProfile, isContactsPage, getContactsModel, getFolderModel]);
 
-  const onCancelUpload = () => {
+  const onCancelUpload = useCallback(() => {
     if (hideConfirmCancelOperation) {
       cancelUpload(t);
       return;
     }
 
     setOperationCancelVisible(true);
-  };
+  }, [hideConfirmCancelOperation, cancelUpload, setOperationCancelVisible]);
 
   React.useEffect(() => {
     window.addEventListener("popstate", onClickBack);

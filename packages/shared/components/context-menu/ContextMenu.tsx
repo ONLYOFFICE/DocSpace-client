@@ -113,6 +113,8 @@ const ContextMenu = (props: ContextMenuProps) => {
     badgeUrl,
     headerOnlyMobile = false,
     dataTestId,
+    maxHeightLowerSubmenu,
+    showDisabledItems,
   } = props;
 
   const onMenuClick = () => {
@@ -673,7 +675,9 @@ const ContextMenu = (props: ContextMenuProps) => {
                 onMobileItemClick={onMobileItemClick}
                 changeView={changeView}
                 withHeader={withHeader}
+                maxHeightLowerSubmenu={maxHeightLowerSubmenu}
                 menuHovered={menuHovered}
+                showDisabledItems={showDisabledItems}
               />
             )}
           </div>

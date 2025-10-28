@@ -3,7 +3,7 @@
   "content": "Customization",
   "content_en_sha1_hash": "d7f0ac9e007291a6ccc21d036f4711505ad9d0b1",
   "created_at": "2025-05-19T21:30:51.004Z",
-  "updated_at": "2025-10-17T14:43:53.471Z",
+  "updated_at": "2025-10-27T16:14:33.448Z",
   "comment": {
     "text": "This translation key is used to display the label \"Customization\" in the Portal Settings. It appears as a header title and is associated with a customization setting, likely related to user or application settings.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 198,
+      "line_number": 202,
       "context": "const mapKeys = (tKey) => {\n switch (tKey) {\n case \"AccessRights\":\n return t(\"Common:AccessRights\");\n case \"Customization\":\n return t(\"Customization\");\n case \"SettingsGeneral\":\n return t(\"SettingsGeneral\");\n case \"StudioTimeLanguageSettings\":\n return t(\"StudioTimeLanguageSettings\");",
       "module": "/packages/client"
     },

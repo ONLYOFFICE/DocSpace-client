@@ -33,14 +33,15 @@ export const createFolderNavigation = async (
     security,
   } = item;
 
-  const path = getCategoryUrl(
-    getCategoryTypeByFolderType(rootFolderType, id),
-    id,
-  );
+  const isAiRoom = itemRoomType === RoomsType.AIRoom;
+
+  const path = isAiRoom
+    ? getCategoryUrl(CategoryType.Chat, id)
+    : getCategoryUrl(getCategoryTypeByFolderType(rootFolderType, id), id);
   const filter = FilesFilter.getDefault();
   const filterObj = FilesFilter.getFilter(window.location);
 
-  if (isRoom) {
+  if (isRoom && !isAiRoom) {
     if (userId) {
       const key =
         categoryType === CategoryType.Archive
@@ -52,7 +53,7 @@ export const createFolderNavigation = async (
       if (filterObject?.sortBy) filter.sortBy = filterObject.sortBy;
       if (filterObject?.sortOrder) filter.sortOrder = filterObject.sortOrder;
     }
-  } else if (filterObj) {
+  } else if (filterObj && !isAiRoom) {
     // For the document section at all levels there is one sorting
     filter.sortBy = filterObj.sortBy;
     filter.sortOrder = filterObj.sortOrder;
@@ -72,6 +73,7 @@ export const createFolderNavigation = async (
     isRoom,
     rootRoomTitle: roomType ? currentTitle : "",
     isPublicRoomType: itemRoomType === RoomsType.PublicRoom || false,
+    isAiRoomType: isAiRoom,
     isShared,
     isExternal,
     canCreate: security?.canCreate,

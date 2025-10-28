@@ -1,0 +1,28 @@
+{
+  "key_path": "AIWouldLikeToUseThisTool",
+  "content": "AI would like to use this tool",
+  "content_en_sha1_hash": "f77101356e17e7d9ee481ef4ca7e9e8030683af8",
+  "created_at": "2025-10-27T16:14:24.307Z",
+  "updated_at": "2025-10-27T16:53:20.692Z",
+  "comment": {
+    "text": "This text appears in a confirmation dialog, informing the user that the AI intends to utilize a specific tool. It's a brief explanation of the action being requested before the user confirms or declines the tool usage. Translators should maintain the straightforward, explanatory tone.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:53:20.692Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallConfirmDialog.tsx",
+      "line_number": 91,
+      "context": ">\n <ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.toolCallManage}>\n <Text>{t(\"Common:AIWouldLikeToUseThisTool\")}</Text>\n <ToolCall\n content={content}\n status={ToolCallStatus.Confirmation}\n placement={ToolCallPlacement.ConfirmDialog}\n />",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

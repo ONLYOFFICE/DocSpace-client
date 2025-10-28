@@ -3,7 +3,7 @@
   "content": "Location",
   "content_en_sha1_hash": "d219c68101f532de10add2cf42fb9dbeca73d3be",
   "created_at": "2025-05-19T21:30:46.299Z",
-  "updated_at": "2025-10-13T13:22:35.703Z",
+  "updated_at": "2025-10-27T16:14:33.372Z",
   "comment": {
     "text": "This translation key is used to display a generic \"Location\" label in various UI elements, such as input fields and table headers, typically found in settings or configuration pages. Its purpose is to provide a user-friendly and consistent term for this concept across different applications.",
     "is_auto": true,
@@ -18,31 +18,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 493,
+      "line_number": 506,
       "context": "resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"LocationRecent\",\n title: t(\"Common:Location\"),\n enable: locationRecentColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 493,
+      "line_number": 506,
       "context": "resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"LocationRecent\",\n title: t(\"Common:Location\"),\n enable: locationRecentColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 493,
+      "line_number": 506,
       "context": "resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"LocationRecent\",\n title: t(\"Common:Location\"),\n enable: locationRecentColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1177,
+      "line_number": 1321,
       "context": "if (isRecentFolder) {\n const locationOption = [\n {\n key: FilterGroups.filterLocation,\n group: FilterGroups.filterLocation,\n label: t(\"Common:Location\"),\n isHeader: true,\n isLast: true,\n },\n {\n id: \"filter_location-rooms\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1177,
+      "line_number": 1321,
       "context": "if (isRecentFolder) {\n const locationOption = [\n {\n key: FilterGroups.filterLocation,\n group: FilterGroups.filterLocation,\n label: t(\"Common:Location\"),\n isHeader: true,\n isLast: true,\n },\n {\n id: \"filter_location-rooms\",",
       "module": "/packages/client"
     },

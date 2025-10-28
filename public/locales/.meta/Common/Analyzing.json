@@ -1,0 +1,28 @@
+{
+  "key_path": "Analyzing",
+  "content": "Analyzing...",
+  "content_en_sha1_hash": "7fb4834e16a472487aaaf0338e03264eacaf4140",
+  "created_at": "2025-10-27T16:14:24.637Z",
+  "updated_at": "2025-10-27T16:50:13.097Z",
+  "comment": {
+    "text": "This text appears within a loading indicator in the chat message body. It indicates that a request or stream is currently being processed, displaying a \"Analyzing...\" message to the user while the action is in progress. It’s used to provide feedback during data retrieval or processing within a chat.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:50:13.097Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-message-body/index.tsx",
+      "line_number": 233,
+      "context": "ref={chatBodyRef}\n >\n {!isStreamRunning && isRequestRunning ? (\n <div className={styles.chatLoader}>\n <Loader type={LoaderTypes.track} />\n {t(\"Common:Analyzing\")}\n </div>\n ) : null}\n {messages.map((message, index) => {\n return (\n <Message",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

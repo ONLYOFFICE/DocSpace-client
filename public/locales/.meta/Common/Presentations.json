@@ -3,7 +3,7 @@
   "content": "Presentations",
   "content_en_sha1_hash": "25c4116b66b152694c7300d8d3f73ff01eb60a35",
   "created_at": "2025-05-19T21:30:47.458Z",
-  "updated_at": "2025-10-13T13:22:35.754Z",
+  "updated_at": "2025-10-27T16:14:33.437Z",
   "comment": {
     "text": "This translation key is used to display a label for a filter option in a UI component, specifically in a file management system or media library. It indicates which type of files are being filtered (e.g., presentations), and its purpose is to provide context for users navigating the file selection process.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 613,
+      "line_number": 721,
       "context": "break;\n case FilterType.ArchiveOnly.toString():\n label = t(\"Common:Archives\");\n break;\n case FilterType.PresentationsOnly.toString():\n label = t(\"Common:Presentations\");\n break;\n case FilterType.ImagesOnly.toString():\n label = t(\"Common:Images\");\n break;\n case FilterType.MediaOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 613,
+      "line_number": 721,
       "context": "break;\n case FilterType.ArchiveOnly.toString():\n label = t(\"Common:Archives\");\n break;\n case FilterType.PresentationsOnly.toString():\n label = t(\"Common:Presentations\");\n break;\n case FilterType.ImagesOnly.toString():\n label = t(\"Common:Images\");\n break;\n case FilterType.MediaOnly.toString():",
       "module": "/packages/client"
     },
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 158,
+      "line_number": 163,
       "context": "label: t(\"Common:Spreadsheets\"),\n typeKey: FilterType.SpreadsheetsOnly,\n },\n {\n key: \"filter-type-presentations\",\n label: t(\"Common:Presentations\"),\n typeKey: FilterType.PresentationsOnly,\n },\n {\n key: \"filter-type-pdf\",\n label: getManyPDFTitle(t, false),",
       "module": "/packages/client"
     },
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 354,
+      "line_number": 359,
       "context": "case FilterType.FoldersOnly:\n return t(\"Common:Folders\");\n case FilterType.DocumentsOnly:\n return t(\"Common:Documents\");\n case FilterType.PresentationsOnly:\n return t(\"Common:Presentations\");\n case FilterType.SpreadsheetsOnly:\n return t(\"Common:Spreadsheets\");\n case FilterType.ImagesOnly:\n return t(\"Common:Images\");\n case FilterType.MediaOnly:",
       "module": "/packages/shared"
     }

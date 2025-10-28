@@ -3,7 +3,7 @@
   "content": "All",
   "content_en_sha1_hash": "6a72085653e4c5be8c7640c868ef787cbcf063d1",
   "created_at": "2025-05-19T21:30:42.972Z",
-  "updated_at": "2025-10-13T13:22:35.680Z",
+  "updated_at": "2025-10-27T16:14:33.342Z",
   "comment": {
     "text": "This translation key displays the text \"All\" as a category label in a list or dropdown, likely used in settings or permission management screens. It appears when all permissions or options are selected.",
     "is_auto": true,
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 348,
+      "line_number": 353,
       "context": "t: TTranslation,\n key: FilterType | RoomsType | string,\n ) => {\n switch (key) {\n case \"all\":\n return t(\"Common:All\");\n case FilterType.FoldersOnly:\n return t(\"Common:Folders\");\n case FilterType.DocumentsOnly:\n return t(\"Common:Documents\");\n case FilterType.PresentationsOnly:",
       "module": "/packages/shared"
     }

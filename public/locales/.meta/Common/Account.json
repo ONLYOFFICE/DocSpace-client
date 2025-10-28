@@ -3,7 +3,7 @@
   "content": "Account",
   "content_en_sha1_hash": "85dfa32c97d8618d1bea083609e2c8a29845abe5",
   "created_at": "2025-05-19T21:30:56.895Z",
-  "updated_at": "2025-09-07T07:53:15.196Z",
+  "updated_at": "2025-10-27T16:14:33.417Z",
   "comment": {
     "text": "This translation key is used to display the account label in a connect dialog, indicating that the user's account information should be saved. It appears as a title and header in a file upload confirmation dialog. Translators can use this context to ensure the label accurately reflects the UI's purpose.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 595,
+      "line_number": 605,
       "context": "const accountItems = [\n {\n key: \"filter-account\",\n group: \"filter-account\",\n label: t(\"Common:Account\"),\n isHeader: true,\n isLast: false,\n },\n {\n key: PaymentsType.Paid,",
       "module": "/packages/client"
     },

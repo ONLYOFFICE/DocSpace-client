@@ -41,7 +41,12 @@ import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
 import FavoriteFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
 
 import { classNames, IconSizeType, isTablet, isDesktop } from "../../utils";
-import { FolderType, RoomsType, ShareAccessRights } from "../../enums";
+import {
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+  VectorizationStatus,
+} from "../../enums";
 import { Tooltip } from "../tooltip";
 import { Text } from "../text";
 import { getDate, isExpired } from "../share/Share.helpers";
@@ -50,6 +55,7 @@ import { isRoom } from "../../utils/typeGuards";
 import { globalColors } from "../../themes/globalColors";
 
 import type { QuickButtonsProps } from "./QuickButtons.types";
+import { FailedVectorizationBadge } from "../failed-vectorization-badge";
 
 export const QuickButtons = (props: QuickButtonsProps) => {
   const {
@@ -70,6 +76,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     isTemplatesFolder,
     onClickLock,
     onClickFavorite,
+    onRetryVectorization,
     isTrashFolder,
     openShareTab,
   } = props;
@@ -119,6 +126,13 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     !isArchiveFolder &&
     !isTile;
 
+  const showFailedVectorizationBadge =
+    isTile &&
+    "vectorizationStatus" in item &&
+    item.vectorizationStatus === VectorizationStatus.Failed;
+
+  const hasRetryVectorizationAccess =
+    security && "Vectorization" in security && security.Vectorization;
   const expirationLinkDate =
     item && "expirationDate" in item ? item.expirationDate : "";
 
@@ -324,6 +338,15 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               color="accent"
               isDisabled={isDisabled}
               title={t("Common:Favorites")}
+            />
+          ) : null}
+
+          {showFailedVectorizationBadge ? (
+            <FailedVectorizationBadge
+              className={classNames("badge icons-group")}
+              size="medium"
+              onRetryVectorization={onRetryVectorization}
+              withRetryVectorization={hasRetryVectorizationAccess}
             />
           ) : null}
         </>

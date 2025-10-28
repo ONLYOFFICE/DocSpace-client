@@ -81,7 +81,8 @@ class ClientLoadingStore {
 
   isChangePageRequestRunning = false;
 
-  currentClientView: "users" | "groups" | "files" | "profile" | "" = "";
+  currentClientView: "users" | "groups" | "files" | "chat" | "profile" | "" =
+    "";
 
   constructor(settingsStore: SettingsStore) {
     this.settingsStore = settingsStore;
@@ -97,7 +98,7 @@ class ClientLoadingStore {
   };
 
   setCurrentClientView = (
-    currentClientView: "users" | "groups" | "files" | "profile" | "",
+    currentClientView: ClientLoadingStore["currentClientView"],
   ) => {
     this.currentClientView = currentClientView;
   };

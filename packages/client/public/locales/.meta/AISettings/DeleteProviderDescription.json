@@ -1,0 +1,28 @@
+{
+  "key_path": "DeleteProviderDescription",
+  "content": "Deleting this provider will revoke access for all users, and its settings will be permanently erased. To use the provider again, you will need to set it up from scratch.",
+  "content_en_sha1_hash": "11099d1f9a0a9d3c41cdeab509f84bd9505feb27",
+  "created_at": "2025-10-27T16:14:31.657Z",
+  "updated_at": "2025-10-27T17:34:55.384Z",
+  "comment": {
+    "text": "This text explains the consequences of deleting an AI provider, including access revocation and permanent data loss. It appears as a descriptive message within a confirmation dialog prompting the user to delete an AI provider. Translators should convey the finality of the action.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:34:55.384Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/delete/index.tsx",
+      "line_number": 77,
+      "context": "return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>{t(\"AISettings:DeleteProvider\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"AISettings:DeleteProviderDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

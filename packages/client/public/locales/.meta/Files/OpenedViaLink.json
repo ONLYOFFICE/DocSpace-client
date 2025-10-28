@@ -3,7 +3,7 @@
   "content": "Opened via link: access <strong>\"{{access}}\"</strong>.",
   "content_en_sha1_hash": "a67d9419bd8e33248ad0a0da3117d0644c430a56",
   "created_at": "2025-09-26T15:21:04.220Z",
-  "updated_at": "2025-09-26T15:55:29.494Z",
+  "updated_at": "2025-10-27T16:14:33.447Z",
   "comment": {
     "text": "This translation key displays a notification indicating a file was opened through a link, showing the access type. It appears as an informational toast message within the Home page, likely informing the user how they accessed the file. Translators should ensure the `{{access}}` variable is properly integrated.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/View/index.tsx",
-      "line_number": 315,
+      "line_number": 364,
       "context": "toastr.info(\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"OpenedViaLink\"\n values={{ access }}\n components={{\n strong: <strong />,\n }}\n />,",
       "module": "/packages/client"
     }

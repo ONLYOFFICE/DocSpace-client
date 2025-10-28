@@ -1,0 +1,28 @@
+{
+  "key_path": "DeleteProvider",
+  "content": "Delete provider",
+  "content_en_sha1_hash": "5724c7b68af1f10a535fcece13e479f0e2193021",
+  "created_at": "2025-10-27T16:14:31.656Z",
+  "updated_at": "2025-10-27T17:35:23.685Z",
+  "comment": {
+    "text": "This key displays the text \"Delete provider\" as the title of a confirmation dialog. It is used to prompt the user to confirm the deletion of an AI provider within the portal settings. The translation should convey a clear action to remove a provider.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:35:23.685Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/delete/index.tsx",
+      "line_number": 75,
+      "context": "}\n };\n \n return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>{t(\"AISettings:DeleteProvider\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"AISettings:DeleteProviderDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

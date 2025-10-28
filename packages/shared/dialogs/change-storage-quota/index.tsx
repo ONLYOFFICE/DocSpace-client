@@ -147,7 +147,7 @@ export const ChangeStorageQuotaDialog = ({
             onSetQuotaBytesSize={onSetQuotaBytesSize}
             isLoading={isLoading}
             isError={isError}
-            initialSize={Number(initialSize)}
+            initialSize={initialSize ? Number(initialSize) : 0}
             isAutoFocussed
             dataTestId="storage_quota"
           />

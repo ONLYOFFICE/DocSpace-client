@@ -149,7 +149,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     (option: TOption) => {
       const provider = providers.find((p) => p.id === option.key);
 
-      if (!provider) return;
+      if (!provider || provider.id === option.key) return;
 
       setSelectedProvider(provider);
       setSelectedModel(null);

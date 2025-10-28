@@ -75,6 +75,7 @@ export const enum SocketEvents {
   UpdateTelegram = "s:update-telegram",
   SelfRestrictionFile = "s:self-restriction-file",
   SelfRestrictionFolder = "s:self-restriction-folder",
+  ChaneFolderAccessRights = "s:change-access-rights-folder",
 }
 
 /**

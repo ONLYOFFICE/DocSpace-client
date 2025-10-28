@@ -885,6 +885,7 @@ export const enum InfoPanelEvents {
   setRoomsView = "SET_INFO_PANEL_ROOMS_VIEW_EVENT",
 
   setInfoPanelMobileHidden = "SET_INFO_PANEL_MOBILE_HIDDEN_EVENT",
+  refreshInfoPanel = "REFRESH_INFO_PANEL_EVENT",
 }
 
 export const enum SearchArea {

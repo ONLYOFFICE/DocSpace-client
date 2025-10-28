@@ -787,6 +787,7 @@ const ArticleMainButtonContent = (props) => {
   }, [mainButtonVisible]);
 
   const onMainButtonClick = () => {
+    if (isAIAgentsFolder) return onCreateAgent();
     if (!isAccountsPage) return onCreateRoom();
     if (isContactsGroupsPage) return createGroup();
   };

@@ -79,7 +79,10 @@ const HistoryUserList = ({
           ? i < EXPANSION_THRESHOLD - 1
           : i < usersData.length - 1;
 
-        const user = "displayName" in member.sharedTo ? member.sharedTo : null;
+        const user =
+          member?.sharedTo && "displayName" in member.sharedTo
+            ? member.sharedTo
+            : null;
         if (!user) return null;
 
         const userName = decode(user.displayName);

@@ -860,7 +860,7 @@ class FilesActionStore {
         completed: true,
         operationId,
       });
-      const error = err?.error;
+      const error = typeof err === "string" ? err : err?.error;
 
       if (error?.includes("password")) {
         const filesIds = error.match(/\d+/g)?.map(Number) ?? [

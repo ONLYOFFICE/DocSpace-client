@@ -73,6 +73,7 @@ export const TableVersions = Object.freeze({
   Favorites: "1",
   Guests: "1",
   SharedWithMe: "2",
+  AIAgents: "1",
 });
 
 /**

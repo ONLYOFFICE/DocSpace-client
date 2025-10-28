@@ -152,6 +152,7 @@ describe("ViewerWrapper", () => {
       CreateRoomFrom: false,
       CopyLink: false,
       Embed: false,
+      Vectorization: false,
     },
     shared: false,
     thumbnailStatus: 0,

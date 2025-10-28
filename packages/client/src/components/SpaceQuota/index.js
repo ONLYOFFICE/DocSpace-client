@@ -233,11 +233,13 @@ export default inject(
     const { usersStore } = peopleStore;
     const { needResetUserSelection, setSelected: setUsersSelected } =
       usersStore;
-    const { changeRoomQuota } = filesActionsStore;
+    const { changeRoomQuota, changeAIAgentQuota } = filesActionsStore;
     const {
       setCustomRoomQuota,
-      setSelected: setRoomsSelected,
+      setCustomAIAgentQuota,
       resetRoomQuota,
+      resetAIAgentQuota,
+      setSelected: setRoomsSelected,
       needResetFilesSelection,
     } = filesStore;
 
@@ -251,12 +253,26 @@ export default inject(
     const { infoPanelSelection, isVisible: infoPanelVisible } = infoPanelStore;
     const inRoom = !!infoPanelSelection?.navigationPath;
 
-    const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
+    const changeQuota =
+      type === "user"
+        ? changeUserQuota
+        : type === "agent"
+          ? changeAIAgentQuota
+          : changeRoomQuota;
+
     const updateQuota =
-      type === "user" ? api.people.setCustomUserQuota : setCustomRoomQuota;
+      type === "user"
+        ? api.people.setCustomUserQuota
+        : type === "agent"
+          ? setCustomAIAgentQuota
+          : setCustomRoomQuota;
 
     const resetQuota =
-      type === "user" ? api.people.resetUserQuota : resetRoomQuota;
+      type === "user"
+        ? api.people.resetUserQuota
+        : type === "agent"
+          ? resetAIAgentQuota
+          : resetRoomQuota;
 
     const withoutLimitQuota =
       type === "user" ? !isDefaultUsersQuotaSet : !isDefaultRoomsQuotaSet;

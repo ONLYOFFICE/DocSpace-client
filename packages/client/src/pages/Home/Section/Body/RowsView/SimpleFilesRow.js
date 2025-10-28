@@ -70,6 +70,7 @@ const SimpleFilesRow = (props) => {
     showHotkeyBorder,
     id,
     isRooms,
+    isAIAgentsFolder,
     folderCategory,
     isHighlight,
     badgesComponent,
@@ -228,7 +229,9 @@ const SimpleFilesRow = (props) => {
           element={element}
           mode="modern"
           contentElement={
-            isMobileDevice || isRooms ? null : quickButtonsComponent
+            isMobileDevice || isRooms || isAIAgentsFolder
+              ? null
+              : quickButtonsComponent
           }
           badgesComponent={
             !isMobileDevice || item.isTemplate ? badgesComponent : null
@@ -257,6 +260,7 @@ const SimpleFilesRow = (props) => {
           isDragOver={isDragActive}
           isSmallContainer={isSmallContainer}
           isRooms={isRooms}
+          isAIAgentsFolder={isAIAgentsFolder}
           folderCategory={folderCategory}
           withoutBorder
           isHighlight={isHighlight}
@@ -274,9 +278,12 @@ const SimpleFilesRow = (props) => {
               onFilesClick(event);
             }}
             quickButtons={
-              isMobileDevice || isRooms ? quickButtonsComponent : null
+              isMobileDevice || isRooms || isAIAgentsFolder
+                ? quickButtonsComponent
+                : null
             }
             isRooms={isRooms}
+            isAIAgentsFolder={isAIAgentsFolder}
             badgesComponent={
               isMobileDevice && !item.isTemplate ? badgesComponent : null
             }

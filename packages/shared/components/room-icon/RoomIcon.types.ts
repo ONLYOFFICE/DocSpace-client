@@ -33,7 +33,7 @@ type RoomIconDefault = {
   isArchive?: boolean;
   size?: string;
   radius?: string;
-  showDefault: boolean;
+  showDefault?: boolean;
   imgClassName?: string;
   className?: string;
   dataTestId?: string;

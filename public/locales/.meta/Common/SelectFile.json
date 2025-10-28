@@ -3,7 +3,7 @@
   "content": "Select file",
   "content_en_sha1_hash": "63f72dce85635b76fe31d3931ae500471aa30d71",
   "created_at": "2025-05-19T21:30:48.410Z",
-  "updated_at": "2025-10-03T10:07:11.543Z",
+  "updated_at": "2025-10-27T16:14:33.144Z",
   "comment": {
     "text": "This translation key is used to display the label for a file selection action, appearing as \"Select File\" in various UI elements such as buttons or dialogs. It is part of a set of translations related to file management and appears on the FilesSelector component.",
     "is_auto": true,
@@ -63,6 +63,12 @@
       "line_number": 52,
       "context": "const { t } = useTranslation();\n \n // const sessionPath = sessionStorage.getItem(\"filesSelectorPath\");\n \n const headerLabel = fileTypeDetection.filterParam\n ? (t?.(\"Common:SelectFile\") ?? \"\")\n : (t?.(\"Common:SelectAction\") ?? \"\");\n \n const getFileTypeTranslation = React.useCallback(() => {\n switch (fileTypeDetection.filterParam) {\n case FilesSelectorFilterTypes.XLSX:",
       "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-input/Attachment.tsx",
+      "line_number": 116,
+      "context": "toggleAttachment();\n }}\n onSelectItem={onSelectItem}\n withHeader\n headerProps={{\n headerLabel: t(\"Common:SelectFile\"),\n isCloseable: true,\n onCloseClick: toggleAttachment,\n }}\n withSearch\n withBreadCrumbs",
+      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",

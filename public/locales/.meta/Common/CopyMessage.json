@@ -1,0 +1,28 @@
+{
+  "key_path": "CopyMessage",
+  "content": "Copy message",
+  "content_en_sha1_hash": "26902efda37d4a30d3f6fd110ba9cc653bae0c8b",
+  "created_at": "2025-10-27T16:14:24.116Z",
+  "updated_at": "2025-10-27T16:42:45.026Z",
+  "comment": {
+    "text": "This text appears as the tooltip on a button that copies a message. It informs the user that clicking the button will initiate a copy action for the message content. This helps users quickly duplicate and share messages.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:42:45.026Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/Buttons.tsx",
+      "line_number": 147,
+      "context": "<>\n <div className={styles.buttonsBlock}>\n <div\n className={styles.buttonsBlockItem}\n onClick={onCopyAction}\n title={t(\"CopyMessage\")}\n >\n <ReactSVG src={CopyIconUrl} />\n </div>\n \n {/*{isLast ? (*/}",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

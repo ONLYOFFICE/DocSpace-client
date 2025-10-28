@@ -26,7 +26,12 @@
 
 import type { TFile, TFileLink, TFolder } from "../api/files/types";
 import type { TBreadCrumb } from "../components/selector/Selector.types";
-import type { RoomsType, ShareAccessRights, ShareRights } from "../enums";
+import type {
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+  ShareRights,
+} from "../enums";
 import type { TTheme, TColorScheme } from "../themes";
 import type FirebaseHelper from "../utils/firebase";
 import type { TRoom } from "../api/rooms/types";
@@ -128,6 +133,7 @@ export type TPathParts = {
   id: number;
   title: string;
   roomType?: RoomsType;
+  folderType?: FolderType;
 };
 
 export type TCreatedBy = {

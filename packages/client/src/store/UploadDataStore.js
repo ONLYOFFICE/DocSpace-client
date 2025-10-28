@@ -99,6 +99,8 @@ class UploadDataStore {
 
   filesSettingsStore;
 
+  aiRoomStore;
+
   files = [];
 
   uploadedFilesHistory = [];
@@ -162,6 +164,7 @@ class UploadDataStore {
     primaryProgressDataStore,
     dialogsStore,
     filesSettingsStore,
+    aiRoomStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -172,6 +175,7 @@ class UploadDataStore {
     this.primaryProgressDataStore = primaryProgressDataStore;
     this.dialogsStore = dialogsStore;
     this.filesSettingsStore = filesSettingsStore;
+    this.aiRoomStore = aiRoomStore;
   }
 
   removeFiles = (fileIds) => {
@@ -1015,10 +1019,13 @@ class UploadDataStore {
   };
 
   handleUploadConflicts = async (t, toFolderId, uploadData) => {
+    const { isAIRoom } = this.selectedFolderStore;
     const filesArray = uploadData.files.map((fileInfo) => fileInfo.file.name);
 
     try {
-      let conflicts = await checkIsFileExist(toFolderId, filesArray);
+      let conflicts = isAIRoom
+        ? []
+        : await checkIsFileExist(toFolderId, filesArray);
       const folderInfo = await getFolderInfo(toFolderId);
 
       conflicts = conflicts.map((fileTitle) => ({
@@ -1064,6 +1071,10 @@ class UploadDataStore {
   startUpload = (uploadFiles, folderId, t) => {
     const { canConvert } = this.filesSettingsStore;
 
+    const { isAIRoom } = this.selectedFolderStore;
+
+    const { knowledgeId } = this.aiRoomStore;
+
     const toFolderId = folderId || this.selectedFolderStore.id;
 
     if (this.uploaded) {
@@ -1097,7 +1108,8 @@ class UploadDataStore {
         file,
         uniqueId: uniqueid("download_row-key_"),
         fileId: null,
-        toFolderId: file.parentFolderId,
+        // toFolderId,
+        toFolderId: isAIRoom ? knowledgeId : file.parentFolderId,
         action: "upload",
         error: null,
         fileInfo: null,
@@ -1177,7 +1189,8 @@ class UploadDataStore {
       let folderInfo = null;
       const index = path.findIndex((x) => x === this.selectedFolderStore.id);
       const folderId = index !== -1 ? path[index + 1] : null;
-      if (folderId) folderInfo = await getFolderInfo(folderId);
+      // if (folderId && folderId !== this.aiRoomStore.knowledgeId)
+      //   folderInfo = await getFolderInfo(folderId);
 
       const newPath = [];
       if (folderInfo || path[path.length - 1] === this.selectedFolderStore.id) {
@@ -1203,6 +1216,7 @@ class UploadDataStore {
         if (folderInfo) {
           const isFolderExist = newFolders.find((x) => x.id === folderInfo.id);
           if (!isFolderExist && folderInfo) {
+            console.error(this.selectedFolderStore.id);
             newFolders.unshift(folderInfo);
             setFolders(newFolders);
             const newFilter = filter;
@@ -1676,6 +1690,8 @@ class UploadDataStore {
   };
 
   startSessionFunc = (indexOfFile, t, createNewIfExist = true) => {
+    const { isAIRoom } = this.selectedFolderStore;
+    const { knowledgeId } = this.aiRoomStore;
     if (!this.uploaded && this.files.length === 0) {
       this.uploaded = true;
       this.asyncUploadObj = {};
@@ -1715,7 +1731,7 @@ class UploadDataStore {
     const fileSize = file.size;
 
     return startUploadSession(
-      toFolderId,
+      isAIRoom ? knowledgeId : toFolderId,
       fileName,
       fileSize,
       "", // relativePath,
@@ -2213,6 +2229,7 @@ class UploadDataStore {
         getUnexpectedErrorText(),
         true,
       );
+
       operationItem = item;
 
       // progress = item ? item.progress : 100;

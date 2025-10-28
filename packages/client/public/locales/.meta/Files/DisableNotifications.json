@@ -3,7 +3,7 @@
   "content": "Disable notifications",
   "content_en_sha1_hash": "db3ec8bfad4224952386dfedb382aacc48341c19",
   "created_at": "2025-05-19T21:30:55.463Z",
-  "updated_at": "2025-10-17T14:43:53.629Z",
+  "updated_at": "2025-10-27T16:14:33.654Z",
   "comment": {
     "text": "This translation key is used for a notification disablement option. It appears as \"Disable notifications\" and is typically seen in UI elements such as mute or notification settings buttons.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1316,
+      "line_number": 1327,
       "context": "action: \"unmute\",\n },\n {\n id: \"option_mute-room\",\n key: \"mute-room\",\n label: t(\"DisableNotifications\"),\n icon: MuteReactSvgUrl,\n onClick: (e) => this.onClickMute(e, item, t),\n disabled: !canMute,\n \"data-action\": \"mute\",\n action: \"mute\",",
       "module": "/packages/client"
     }

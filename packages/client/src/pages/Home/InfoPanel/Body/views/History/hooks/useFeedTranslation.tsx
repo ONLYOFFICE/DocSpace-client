@@ -149,7 +149,7 @@ export const useFeedTranslation = (
           <Trans
             t={t}
             ns="InfoPanel"
-            i18nKey="HistoryRoomCreated"
+            i18nKey="HistoryAgentCreated"
             values={{ roomTitle: (feed.data as TFeedData).title }}
             components={{
               1: (

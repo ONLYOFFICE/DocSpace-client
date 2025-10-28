@@ -168,6 +168,8 @@ class BackupStore {
 
   backupProgressError = "";
 
+  backupProgressWarning = "";
+
   backupsCount = null;
 
   isInited = false;
@@ -642,9 +644,9 @@ class BackupStore {
       );
 
       if (response) {
-        const { progress, link, error } = response;
+        const { progress, link, error, warning } = response;
 
-        if (!error) {
+        if (!error && !warning) {
           this.setIsBackupProgressVisible(progress !== 100);
           this.downloadingProgress = progress;
 
@@ -655,7 +657,8 @@ class BackupStore {
         } else {
           this.setIsBackupProgressVisible(false);
           this.downloadingProgress = 100;
-          this.setErrorInformation(error);
+          if (warning) this.setBackupProgressWarning(warning);
+          if (error) this.setErrorInformation(error);
         }
       }
     } catch (err) {
@@ -681,6 +684,10 @@ class BackupStore {
 
   setBackupProgressError = (error) => {
     this.backupProgressError = error;
+  };
+
+  setBackupProgressWarning = (warning) => {
+    this.backupProgressWarning = warning;
   };
 
   setDownloadingProgress = (progress) => {

@@ -127,9 +127,10 @@ export default inject<
       connectedThirdPartyAccount,
 
       backupProgressError,
+      backupProgressWarning,
       setIsBackupProgressVisible,
       setBackupProgressError,
-
+      setBackupProgressWarning,
       isFormReady,
       setTemporaryLink,
       getStorageParams,
@@ -234,8 +235,10 @@ export default inject<
 
       removeItem,
       backupProgressError,
+      backupProgressWarning,
       setIsBackupProgressVisible,
       setBackupProgressError,
+      setBackupProgressWarning,
 
       isFormReady,
       setTemporaryLink,

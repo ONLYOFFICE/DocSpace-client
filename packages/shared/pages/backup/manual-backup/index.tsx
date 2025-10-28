@@ -183,6 +183,8 @@ const ManualBackup = ({
   backupServicePrice,
   isBackupPaid = false,
   isFreeBackupsLimitReached = false,
+  setBackupProgressWarning,
+  backupProgressWarning,
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -224,12 +226,17 @@ const ManualBackup = ({
 
       if (!options) return;
 
-      const { error, success } = options;
+      const { error, success, warning } = options;
 
       if (error) {
         toastr.error(error);
         setBackupProgressError(error);
       }
+
+      if (warning) {
+        setBackupProgressWarning(warning);
+      }
+
       if (success) toastr.success(success);
     };
 
@@ -238,7 +245,13 @@ const ManualBackup = ({
     return () => {
       SocketHelper?.off(SocketEvents.BackupProgress, onBackupProgress);
     };
-  }, [setDownloadingProgress, setTemporaryLink, setBackupProgressError, t]);
+  }, [
+    setDownloadingProgress,
+    setTemporaryLink,
+    setBackupProgressError,
+    setBackupProgressWarning,
+    t,
+  ]);
 
   const onMakeTemporaryBackup = async () => {
     setErrorMessage("");
@@ -389,7 +402,10 @@ const ManualBackup = ({
 
   return (
     <div className={styles.manualBackup}>
-      <StatusMessage message={errorMessage || errorInformation} />
+      <StatusMessage
+        message={errorMessage || errorInformation || backupProgressWarning}
+        isWarning={!!backupProgressWarning}
+      />
       <div
         className={classNames(
           styles.backupModulesHeaderWrapper,

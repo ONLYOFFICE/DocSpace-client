@@ -143,6 +143,13 @@ class MembersHelper {
           options.viewer,
           ...deleteOption,
         ];
+      case RoomsType.AIRoom:
+        return [
+          options.roomAdmin,
+          options.collaborator,
+          options.viewer,
+          ...deleteOption,
+        ];
       default:
         return [];
     }

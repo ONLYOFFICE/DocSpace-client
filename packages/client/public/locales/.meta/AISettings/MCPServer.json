@@ -1,0 +1,46 @@
+{
+  "key_path": "MCPServer",
+  "content": "MCP Server",
+  "content_en_sha1_hash": "231652eb3665c808c6c3afc9440be17d0a741a12",
+  "created_at": "2025-10-27T16:14:31.643Z",
+  "updated_at": "2025-10-27T17:26:27.821Z",
+  "comment": {
+    "text": "This key displays \"MCP Server\" as the title of a dialog used for configuring or adding an MCP server connection within the AI settings. It appears in the header of the dialog and as a value in a tooltip on a button. Translators should ensure the meaning is clear to users managing AI server connections.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:26:27.821Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/add/index.tsx",
+      "line_number": 104,
+      "context": "visible\n displayType={ModalDialogType.aside}\n onClose={onClose}\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"AISettings:MCPServer\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.bodyContainer}>\n <div className={styles.connectDocspace}>\n <Text className={styles.connectDocspaceDescription}>\n {t(\"AISettings:ConnectProductToYourDataAndTools\", {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/edit/index.tsx",
+      "line_number": 137,
+      "context": "visible\n displayType={ModalDialogType.aside}\n onClose={onClose}\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"AISettings:MCPServer\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.bodyContainer}>\n <div className={styles.connectDocspace}>\n <Text className={styles.connectDocspaceDescription}>\n {t(\"AISettings:ConnectProductToYourDataAndTools\", {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/index.tsx",
+      "line_number": 255,
+      "context": "onClick={showAddDialog}\n isDisabled={isMCPActionsDisabled}\n tooltipText={\n isMCPActionsDisabled\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"AISettings:MCPServer\"),\n })\n : undefined\n }\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/mcp-tile/index.tsx",
+      "line_number": 94,
+      "context": "<MCPIcon title={item.name} imgSrc={icon} size={MCPIconSize.Large} />\n }\n tooltipText={\n disableActions\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"AISettings:MCPServer\"),\n })\n : undefined\n }\n >\n <AiTile.Header title={item.name}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

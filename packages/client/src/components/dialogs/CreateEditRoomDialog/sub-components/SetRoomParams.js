@@ -44,15 +44,15 @@ import AvatarEditorDialog from "../../AvatarEditorDialog";
 
 import VirtualDataRoomBlock from "./VirtualDataRoomBlock";
 
-import TagInput from "./TagInput";
-import RoomQuota from "./RoomQuota";
-import InputParam from "./Params/InputParam";
-import ChangeRoomOwner from "./ChangeRoomOwner";
+import TagInput from "../../../TagInput";
+import RoomQuota from "../../../RoomQuota";
+import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
+import ChangeRoomOwner from "../../../ChangeRoomOwner";
 import RoomTypeDropdown from "./RoomTypeDropdown";
 import PermanentSettings from "./PermanentSettings";
 import ThirdPartyStorage from "./ThirdPartyStorage";
 import TemplateAccess from "./TemplateAccess/TemplateAccess";
-// import IsPrivateParam from "./IsPrivateParam";
+import AiRoomSettings from "./AiRoomSettings";
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -483,15 +483,6 @@ const SetRoomParams = ({
         isMobile={isMobile}
       />
 
-      {/* //TODO: Uncomment when private rooms are done
-      {!isEdit && (
-        <IsPrivateParam
-          t={t}
-          isPrivate={roomParams.isPrivate}
-          onChangeIsPrivate={onChangeIsPrivate}
-        />
-      )} */}
-
       {isTemplate ? (
         <TemplateAccess
           roomOwner={createdBy ?? roomParams.roomOwner}
@@ -518,6 +509,10 @@ const SetRoomParams = ({
           isEdit={isEdit}
           setLifetimeDialogVisible={setLifetimeDialogVisible}
         />
+      ) : null}
+
+      {roomParams.type === RoomsType.AIRoom ? (
+        <AiRoomSettings roomParams={roomParams} setRoomParams={setRoomParams} />
       ) : null}
 
       {isDefaultRoomsQuotaSet && !roomParams.storageLocation.providerKey ? (

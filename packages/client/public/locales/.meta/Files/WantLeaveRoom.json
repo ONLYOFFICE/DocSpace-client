@@ -3,7 +3,7 @@
   "content": "Do you really want to leave this room? You will be able to join it again via new invitation by a room admin.",
   "content_en_sha1_hash": "13519137916019126edd61d57af7ca5d5cc99ed0",
   "created_at": "2025-05-19T21:30:56.317Z",
-  "updated_at": "2025-08-12T19:46:25.927Z",
+  "updated_at": "2025-10-27T16:14:33.284Z",
   "comment": {
     "text": "This translation key is used for a confirmation message that appears when a user attempts to leave a room. The message informs them they will be able to rejoin via a new invitation by an admin. It is displayed in a dialog box within the Leave Room Dialog component.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
-      "line_number": 83,
-      "context": "<ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text>\n {isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\")}\n </Text>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "line_number": 82,
+      "context": "? t(\"Files:LeaveTheAgent\")\n : t(\"Files:LeaveTheRoom\");\n \n const roomDescription = isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\");\n \n const agentDescription = isRoomOwner\n ? t(\"Files:LeaveAgentDescription\")\n : t(\"Files:WantLeaveAgent\");",
       "module": "/packages/client"
     }
   ],

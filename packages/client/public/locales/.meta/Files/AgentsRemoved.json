@@ -1,0 +1,28 @@
+{
+  "key_path": "AgentsRemoved",
+  "content": "Agents removed",
+  "content_en_sha1_hash": "6ab4676e4d68903c1758c17abb1557370c9205fb",
+  "created_at": "2025-10-27T16:14:29.966Z",
+  "updated_at": "2025-10-27T17:59:46.873Z",
+  "comment": {
+    "text": "Confirmation message displayed in a dialog when multiple agents are successfully removed. This message confirms the removal of agents and appears when the `isAIAgent` flag is true. Translators should consider the context of a successful deletion operation.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:59:46.873Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 133,
+      "context": "const translations = {\n successRemoveRoom: isAIAgent\n ? t(\"Files:AgentRemoved\")\n : t(\"Files:RoomRemoved\"),\n successRemoveRooms: isAIAgent\n ? t(\"Files:AgentsRemoved\")\n : t(\"Files:RoomsRemoved\"),\n };\n \n if (isTemplate) {\n translations.successRemoveTemplate = t(\"Files:TemplateRemoved\");",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

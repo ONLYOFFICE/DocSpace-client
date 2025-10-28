@@ -120,6 +120,7 @@ describe("Viewer", () => {
       CreateRoomFrom: false,
       CopyLink: false,
       Embed: false,
+      Vectorization: false,
     },
     shared: false,
     title: "test.jpg",

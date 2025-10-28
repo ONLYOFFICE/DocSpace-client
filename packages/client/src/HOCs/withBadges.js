@@ -157,6 +157,12 @@ export default function withBadges(WrappedComponent) {
       onCreateRoomFromTemplate(item, true);
     };
 
+    onRetryVectorization = () => {
+      const { item, retryVectorization } = this.props;
+
+      retryVectorization([item]);
+    };
+
     onClickLock = () => {
       const { item, lockFileAction, t } = this.props;
       const { locked, id, security } = item;
@@ -236,6 +242,7 @@ export default function withBadges(WrappedComponent) {
           onBadgeClick={this.onBadgeClick}
           onUnpinClick={this.onUnpinClick}
           onUnmuteClick={this.onUnmuteClick}
+          onRetryVectorization={this.onRetryVectorization}
           openLocationFile={this.openLocationFile}
           setConvertDialogVisible={this.setConvertDialogVisible}
           onClickLock={this.onClickLock}
@@ -299,6 +306,7 @@ export default function withBadges(WrappedComponent) {
         setMuteAction,
         checkAndOpenLocationAction,
         onCreateRoomFromTemplate,
+        retryVectorization,
         setFavoriteAction,
       } = filesActionsStore;
       const {
@@ -347,6 +355,7 @@ export default function withBadges(WrappedComponent) {
         onCreateRoomFromTemplate,
         isExtsCustomFilter,
         docspaceManagingRoomsHelpUrl,
+        retryVectorization,
         setFavoriteAction,
         isRecentFolder,
       };

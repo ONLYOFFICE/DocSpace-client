@@ -3,7 +3,7 @@
   "content": "Upgrade plan",
   "content_en_sha1_hash": "e80fe7c8f56aeba1c9594500c8faf418c36a8fe5",
   "created_at": "2025-05-19T21:30:53.743Z",
-  "updated_at": "2025-10-03T10:07:11.501Z",
+  "updated_at": "2025-10-27T16:14:33.281Z",
   "comment": {
     "text": "This translation key \"UpgradePlan\" is used to describe an upgrade plan option in a UI dialogue. It appears as a button label and prompts the user to initiate an upgrade process.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
-      "line_number": 100,
+      "line_number": 98,
       "context": "}\n \n setIsVisible(false);\n };\n \n const onUpgradePlan = () => {\n onClose();\n \n const paymentPageUrl = \"/portal-settings/payments/portal-payments\";\n \n navigate(paymentPageUrl);",
       "module": "/packages/client"
     }

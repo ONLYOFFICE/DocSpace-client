@@ -29,7 +29,11 @@ import { TBreadCrumb } from "../../../components/selector/Selector.types";
 import { RoomsType } from "../../../enums";
 import { TRoomSecurity } from "../../../api/rooms/types";
 
-import { TFileSecurity, TFolderSecurity } from "../../../api/files/types";
+import {
+  TFileSecurity,
+  TFolder,
+  TFolderSecurity,
+} from "../../../api/files/types";
 
 export type TUseInputItemHelper = {
   withCreate?: boolean;
@@ -40,6 +44,7 @@ export type TUseInputItemHelper = {
 export type TGetIcon = (size: number, fileExst: string) => string;
 
 export type UseRoomsHelperProps = TUseInputItemHelper & {
+  isAgent?: boolean;
   searchValue?: string;
   searchArea?: string;
   disableThirdParty?: boolean;
@@ -61,13 +66,42 @@ export type UseRoomsHelperProps = TUseInputItemHelper & {
   setTotal: (value: number) => void;
   setIsRoot?: (value: boolean) => void;
   setSelectedItemType?: React.Dispatch<
-    React.SetStateAction<"rooms" | "files" | undefined>
+    React.SetStateAction<"rooms" | "files" | "agents" | undefined>
   >;
   setSelectedItemSecurity?: React.Dispatch<
     React.SetStateAction<
       TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
     >
   >;
+  setSelectedTreeNode?: React.Dispatch<React.SetStateAction<TFolder>>;
+};
+
+export type UseAgentsHelperProps = TUseInputItemHelper & {
+  searchValue?: string;
+  // isRoomsOnly: boolean;
+  excludeItems?: (number | string | undefined)[];
+  isInit: boolean;
+  createDefineLabel?: string;
+  onSetBaseFolderPath?: (
+    value: number | string | undefined | TBreadCrumb[],
+  ) => void;
+  getRootData?: () => Promise<void>;
+  subscribe: (id: number) => void;
+  withInit?: boolean;
+  setIsInit: (value: boolean) => void;
+  setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
+  setHasNextPage: (value: boolean) => void;
+  setTotal: (value: number) => void;
+  setIsRoot?: (value: boolean) => void;
+  setSelectedItemType?: React.Dispatch<
+    React.SetStateAction<"rooms" | "files" | "agents" | undefined>
+  >;
+  setSelectedItemSecurity?: React.Dispatch<
+    React.SetStateAction<
+      TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
+    >
+  >;
+  setSelectedTreeNode?: React.Dispatch<React.SetStateAction<TFolder>>;
 };
 
 export type UseSocketHelperProps = {

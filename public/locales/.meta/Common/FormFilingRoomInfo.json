@@ -3,7 +3,7 @@
   "content": "Upload PDF forms into the room. Invite members and guests to fill out a PDF form. Review completed forms and analyze data automatically collected in a spreadsheet.",
   "content_en_sha1_hash": "8cd90c87d377873629df198e4b6e79f66ef220b7",
   "created_at": "2025-05-19T21:30:45.502Z",
-  "updated_at": "2025-06-08T12:02:32.890Z",
+  "updated_at": "2025-10-27T16:14:33.722Z",
   "comment": {
     "text": "This translation key is used to display information about a Form Filing Room. It is likely used on a button or dialog that invites users to upload PDF forms and review completed ones.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
-      "line_number": 46,
-      "context": "return t(\"Common:CustomRoomDescription\");\n \n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoomInfo\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomInfo\");\n default:\n return \"\";\n }\n };",
+      "line_number": 48,
+      "context": "case RoomsType.AIRoom:\n return t(\"Common:AIRoomDescription\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoomInfo\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomInfo\");\n default:\n return \"\";\n }\n };",
       "module": "/packages/shared"
     }
   ],

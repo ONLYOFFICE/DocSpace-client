@@ -1,0 +1,28 @@
+{
+  "key_path": "AIChatHelp",
+  "content": "How can i help?",
+  "content_en_sha1_hash": "0cc6276476b15d08768960e9516e1859095372be",
+  "created_at": "2025-10-27T16:14:10.229Z",
+  "updated_at": "2025-10-27T16:57:07.655Z",
+  "comment": {
+    "text": "A placeholder message displayed in an empty chat window to indicate availability for assistance. Translators should provide a friendly and approachable phrase, as it serves as a greeting in the chat interface.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:57:07.655Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/EmptyScreen.tsx",
+      "line_number": 51,
+      "context": "lineHeight=\"24px\"\n >\n {isLoading ? (\n <RectangleSkeleton height=\"24px\" width=\"140px\" borderRadius=\"3px\" />\n ) : (\n t(\"Common:AIChatHelp\")\n )}\n </Text>\n );\n };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

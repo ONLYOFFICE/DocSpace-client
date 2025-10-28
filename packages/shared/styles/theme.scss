@@ -2187,55 +2187,92 @@
   --chat-button-open-background-color: #{$light-gray-hover};
 
   --chat-header-button-background-color: #{$gray-light};
-  --chat-header-button-svg-color: #{$light-gray-dark};
 
-  --chat-header-select-session-date-color: #{$gray};
-  --chat-header-select-session-border-color: #{$gray-light-mid};
+  --chat-header-model-color: #{$gray};
+  --chat-header-border-color: #{$gray-light-mid};
+  --chat-header-button-svg-color: #{$black};
+  --chat-header-button-hover-background: #{$light-gray-hover};
+  --chat-header-button-active-background: #{$gray-light-mid};
 
   --chat-file-item-border-color: #{$gray-light-mid};
   --chat-file-item-background-color: #{$white};
   --chat-file-item-exst-color: #{$gray};
 
   --chat-input-background-color: #{$gray-light};
-  --chat-input-button-file-border-color: #{$gray-strong};
-  --chat-input-button-file-background-color: unset;
-  --chat-input-button-file-color: #{$light-gray-dark};
-  --chat-input-button-send-color: #{$white};
+  --chat-input-file-border-color: #{$gray-light-mid};
+  --chat-input-file-background-color: #{$white};
+  --chat-input-file-exst-color: #{$gray};
+  --chat-input-tools-button-color: #{$gray-text};
+  --chat-input-tools-button-hover-color: #{$gray-text};
+  --chat-input-tools-button-hover-background: #{$light-gray-hover};
+  --chat-input-tools-button-active-color: #{$black};
+  --chat-input-tools-button-active-background: #{$gray-light-mid};
+  --chat-input-send-button-color: #{$white};
+  --chat-input-send-button-background: var(--accent-main);
 
   --chat-message-color: #{$gray-text};
-  --chat-message-user-background-color: #{$light-gray-hover};
+  --chat-message-user-background-color: var(--accent-main);
   --chat-message-ai-background-color: #{$light-gray-hover};
   --chat-message-error-background-color: #{$light-error-status};
+  --chat-message-file-border-color: #{$gray-light-mid};
   --chat-message-code-block-background-color: #{$white};
+  --chat-message-code-block-border: 1px solid #{$gray-light-mid};
   --chat-message-code-block-separator-color: #{$gray-light-mid};
+  --chat-message-tool-block-color: #{$gray-light};
+  --chat-message-hr-color: #{$gray};
+  --chat-message-table-row-border-color: #{$gray-light-mid};
+  --chat-message-blockquote-bg-color: var(--accent-main);
+  --chat-message-blockquote-color: #{$gray-text};
+  --chat-message-source-url-color: #{$light-gray-dark};
+  --chat-message-source-bg-hover-color: #{$gray-light-mid};
+  --chat-message-source-bg-pressed-color: #{$gray-strong};
+  --chat-message-external-link-icon-color: #{$gray};
 }
 
 .dark {
   --chat-button-open-background-color: #{$dark-gray-light};
 
   --chat-header-button-background-color: #{$light-dark-gray-hover};
-  --chat-header-button-svg-color: #{$dark-gray-dark};
 
-  --chat-header-select-session-date-color: #{$gray-dark};
-  --chat-header-select-session-border-color: #{$gray-dark-strong};
+  --chat-header-model-color: #{$gray-dark};
+  --chat-header-border-color: #{$gray-dark-strong};
+  --chat-header-button-svg-color: #{$white};
+  --chat-header-button-hover-background: #{$light-dark-gray-hover};
+  --chat-header-button-active-background: #{$gray-dark-mid};
 
   --chat-file-item-border-color: #{$gray-dark-strong};
   --chat-file-item-background-color: unset;
   --chat-file-item-exst-color: #{$gray-dark};
 
   --chat-input-background-color: #{$dark-gray-light};
-  --chat-input-button-file-border-color: #{$black};
-  --chat-input-button-file-background-color: #{$black};
-  --chat-input-button-file-color: #{$gray};
-  --chat-input-button-send-color: #{$white};
+  --chat-input-file-border-color: #{$black};
+  --chat-input-file-background-color: #{$black};
+  --chat-input-file-exst-color: #{$gray};
+  --chat-input-tools-button-color: #{$dark-gray-dark};
+  --chat-input-tools-button-hover-color: #{$dark-gray-dark};
+  --chat-input-tools-button-hover-background: #{$light-dark-gray-hover};
+  --chat-input-tools-button-active-color: #{$white};
+  --chat-input-tools-button-active-background: #{$gray-dark-mid};
+  --chat-input-send-button-color: #{$black};
+  --chat-input-send-button-background: #{$active-color-dark};
 
   --chat-message-color: #{$dark-gray-dark};
-  --chat-message-user-background-color: #{$light-dark-gray-hover};
+  --chat-message-user-background-color: #{$white};
   --chat-message-ai-background-color: #{$light-dark-gray-hover};
   --chat-message-error-background-color: #{$dark-error-status};
-
+  --chat-message-file-border-color: #{$gray-dark-strong};
   --chat-message-code-block-background-color: #{$dark-gray-light};
+  --chat-message-code-block-border: none;
   --chat-message-code-block-separator-color: #{$gray-dark-strong};
+  --chat-message-tool-block-color: #{$gray-dark-mid};
+  --chat-message-hr-color: #{$gray-dark};
+  --chat-message-table-row-border-color: #{$gray-dark-strong};
+  --chat-message-blockquote-bg-color: #{$white};
+  --chat-message-blockquote-color: #{$dark-gray-dark};
+  --chat-message-source-url-color: #{$dark-gray-dark};
+  --chat-message-source-bg-hover-color: #{$light-dark-gray-hover};
+  --chat-message-source-bg-pressed-color: #{$black};
+  --chat-message-external-link-icon-color: #{$gray-dark};
 }
 
 .light {
@@ -2735,8 +2772,31 @@
 }
 
 .light {
-  --combobox-background: #{$light-gray-selected};
+  --filled-button-background-color: #{$gray-light-mid};
+  --filled-button-hover-background-color: #{$light-gray-selected};
+  --filled-button-active-background-color: #{$gray-strong};
 
+  --filled-button-icon-color: #{$light-gray-dark};
+  --filled-button-text-color: #{$gray-text};
+
+  --filled-button-icon-color-hover: #{$light-gray-dark};
+  --filled-button-text-color-hover: #{$gray-text};
+}
+
+.dark {
+  --filled-button-background-color: #{$gray-dark-mid};
+  --filled-button-hover-background-color: #{$gray-dark-strong};
+  --filled-button-active-background-color: #{$gray-dark-mid};
+
+  --filled-button-icon-color: #{$dark-gray-dark};
+  --filled-button-text-color: #{$dark-gray-dark};
+
+  --filled-button-icon-color-hover: #{$white};
+  --filled-button-text-color-hover: #{$white};
+  --combobox-background: #{$light-gray-selected};
+}
+
+.light {
   --combobox-button-bg: #{$white};
   --combobox-button-color: #{$black};
   --combobox-button-disabled-color: #{$gray-strong};
@@ -2863,6 +2923,20 @@
 }
 
 .light {
+  --ai-provider-key-hint-bg-color: #{$gray-light};
+  --ai-provider-key-hint-color: #{$gray-text};
+
+  --web-search-hidden-key-description-color: #{$gray};
+}
+
+.dark {
+  --ai-provider-key-hint-bg-color: #{$dark-gray-light};
+  --ai-provider-key-hint-color: #{$dark-gray-dark};
+
+  --web-search-hidden-key-description-color: #{$gray-dark};
+}
+
+.light {
   --plugins-plugin-name-color: #{$gray};
   --plugins-border-color: #{$gray-light-mid};
   --plugins-error-status-color: #{$light-error-status};
@@ -2882,6 +2956,22 @@
 .dark {
   --more-login-row-hover-color: #{$dark-gray-light};
   --more-login-row-pressed-color: #{$gray-dark-mid};
+}
+
+.light {
+  --mcp-icon-bg-opacity: 1;
+}
+
+.dark {
+  --mcp-icon-bg-opacity: 0.1;
+}
+
+.light {
+  --delete-image-link-color: #{$light-gray-dark};
+}
+
+.dark {
+  --delete-image-link-color: #{$white};
 }
 
 .light {

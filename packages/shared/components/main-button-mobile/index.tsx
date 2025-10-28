@@ -233,46 +233,48 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
   const renderItems = () => {
     return (
       <div ref={divRef}>
-        <div className={styles.containerAction}>
-          {actionOptions?.map((option: ActionOption) => {
-            const optionOnClickAction = () => {
-              toggle(false);
-              option.onClick?.({ action: option.action });
-            };
+        {actionOptions?.length ? (
+          <div className={styles.containerAction}>
+            {actionOptions?.map((option: ActionOption) => {
+              const optionOnClickAction = () => {
+                toggle(false);
+                option.onClick?.({ action: option.action });
+              };
 
-            if (option.items)
+              if (option.items)
+                return (
+                  <SubmenuItem
+                    key={option.key}
+                    option={option}
+                    toggle={toggle}
+                    noHover={noHover}
+                    recalculateHeight={recalculateHeight}
+                    openedSubmenuKey={openedSubmenuKey}
+                    setOpenedSubmenuKey={setOpenedSubmenuKey}
+                    openByDefault={option?.openByDefault || false}
+                  />
+                );
+
               return (
-                <SubmenuItem
+                <DropDownItem
+                  id={option.id}
                   key={option.key}
-                  option={option}
-                  toggle={toggle}
+                  label={option.label}
+                  className={
+                    classNames(
+                      styles.dropDownItem,
+                      option.className,
+                      option.isSeparator ? "is-separator" : "",
+                    ) || ""
+                  }
+                  onClick={optionOnClickAction}
+                  icon={option.icon ? option.icon : ""}
                   noHover={noHover}
-                  recalculateHeight={recalculateHeight}
-                  openedSubmenuKey={openedSubmenuKey}
-                  setOpenedSubmenuKey={setOpenedSubmenuKey}
-                  openByDefault={option?.openByDefault || false}
                 />
               );
-
-            return (
-              <DropDownItem
-                id={option.id}
-                key={option.key}
-                label={option.label}
-                className={
-                  classNames(
-                    styles.dropDownItem,
-                    option.className,
-                    option.isSeparator ? "is-separator" : "",
-                  ) || ""
-                }
-                onClick={optionOnClickAction}
-                icon={option.icon ? option.icon : ""}
-                noHover={noHover}
-              />
-            );
-          })}
-        </div>
+            })}
+          </div>
+        ) : null}
 
         {buttonOptions ? (
           <div

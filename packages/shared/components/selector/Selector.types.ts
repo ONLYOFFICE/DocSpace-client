@@ -108,6 +108,7 @@ export type TBreadCrumb = {
   id: string | number;
   label: string;
   isRoom?: boolean;
+  isAgent?: boolean;
   minWidth?: string;
   roomType?: RoomsType;
   shared?: boolean;
@@ -121,6 +122,7 @@ export type TDisplayedItem = {
   isArrow: boolean;
   isList: boolean;
   isRoom?: boolean;
+  isAgent?: boolean;
   listItems?: TBreadCrumb[];
 };
 
@@ -192,6 +194,8 @@ export type EmptyScreenProps = {
 
   items: TSelectorItem[];
   inputItemVisible: boolean;
+
+  hideBackButton?: boolean;
 };
 
 export type TSelectorEmptyScreen = {
@@ -412,6 +416,8 @@ export type SelectorProps = TSelectorHeader &
     isSSR?: boolean;
     selectedItem?: TSelectorItem | null; // no multiSelect only
     dataTestId?: string;
+
+    hideBackButton?: boolean;
   };
 
 export type BodyProps = TSelectorInfo &
@@ -439,6 +445,7 @@ export type BodyProps = TSelectorInfo &
     injectedElement?: React.ReactElement;
 
     isSSR?: boolean;
+    hideBackButton?: boolean;
   };
 
 export type FooterProps = TSelectorFooterSubmitButton &
@@ -491,6 +498,7 @@ type TSelectorItemEmpty = {
   placeholder?: undefined;
   cover?: undefined;
   userType?: undefined;
+  isMCP?: undefined;
 
   isRoomsOnly?: undefined;
   createDefineRoomType?: undefined;
@@ -573,6 +581,14 @@ export type TSelectorItemGroup = MergeTypes<
   }
 >;
 
+export type TSelectorItemMCP = MergeTypes<
+  TSelectorItemEmpty,
+  {
+    isMCP: boolean;
+    icon?: string;
+  }
+>;
+
 export type TSelectorItemNew = MergeTypes<
   TSelectorItemEmpty,
   {
@@ -610,7 +626,8 @@ type TSelectorItemType =
   | TSelectorItemRoom
   | TSelectorItemGroup
   | TSelectorItemNew
-  | TSelectorItemInput;
+  | TSelectorItemInput
+  | TSelectorItemMCP;
 
 export type TSelectorItem = TSelectorItemType & {
   label: string;
@@ -626,6 +643,7 @@ export type TSelectorItem = TSelectorItemType & {
   isTemplate?: boolean;
   templateAccess?: ShareAccessRights;
   templateIsOwner?: boolean;
+  disableMultiSelect?: boolean;
   isSeparator?: boolean;
 };
 

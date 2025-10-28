@@ -3,7 +3,7 @@
   "content": "Guests",
   "content_en_sha1_hash": "3c23a67045a35d8dc1bd02b5088b1f1470636e89",
   "created_at": "2025-05-19T21:30:45.714Z",
-  "updated_at": "2025-10-16T07:29:35.483Z",
+  "updated_at": "2025-10-27T16:14:33.054Z",
   "comment": {
     "text": "This translation key is used to display a descriptive text that indicates guests when interacting with a group or list of users. It appears in various UI contexts, such as tabs and dialogs, where it helps users understand that they are viewing a collection of visitors or unassigned users.",
     "is_auto": true,
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 548,
+      "line_number": 578,
       "context": "case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\":\n return getInsideGroupTitle();\n case \"guests\":\n return t(\"Common:Guests\");\n default:\n return t(\"Common:Members\");\n }\n };",
       "module": "/packages/client"
     },

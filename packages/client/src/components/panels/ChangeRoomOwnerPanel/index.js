@@ -80,6 +80,7 @@ const ChangeRoomOwner = (props) => {
     changeRoomOwner,
     userId,
     useModal = true,
+    isAIAgent,
   } = props;
 
   const handleClosePanel = () => {
@@ -115,6 +116,22 @@ const ChangeRoomOwner = (props) => {
 
   const ownerIsCurrentUser = roomOwnerId === userId;
 
+  const headerLabel = isAIAgent
+    ? t("Files:ChangeTheAgentOwner")
+    : t("Files:ChangeTheRoomOwner");
+
+  const infoText = isAIAgent
+    ? t("Files:ChangeAgentOwnerSelectorInfo", {
+        productName: t("Common:ProductName"),
+      })
+    : t("CreateEditRoomDialog:PeopleSelectorInfo", {
+        productName: t("Common:ProductName"),
+      });
+
+  const footerCheckboxLabel = isAIAgent
+    ? t("Files:LeaveTheAgent")
+    : t("Files:LeaveTheRoom");
+
   const selectorComponent = (
     <PeopleSelector
       withCancelButton
@@ -128,24 +145,20 @@ const ChangeRoomOwner = (props) => {
         onCloseClick: handleClosePanel,
         onBackClick,
         withoutBackButton: !showBackButton,
-        headerLabel: t("Files:ChangeTheRoomOwner"),
+        headerLabel,
       }}
       filter={filter}
       withFooterCheckbox={!showBackButton ? ownerIsCurrentUser : null}
-      footerCheckboxLabel={t("Files:LeaveTheRoom")}
+      footerCheckboxLabel={footerCheckboxLabel}
       isChecked={!showBackButton}
       withOutCurrentAuthorizedUser
       filterUserId={roomOwnerId}
       currentUserId={userId}
       disableDisabledUsers
       withInfo
-      infoText={t("CreateEditRoomDialog:PeopleSelectorInfo", {
-        productName: t("Common:ProductName"),
-      })}
+      infoText={infoText}
       emptyScreenHeader={t("Common:NotFoundMembers")}
-      emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo", {
-        productName: t("Common:ProductName"),
-      })}
+      emptyScreenDescription={infoText}
       className="change-owner_people-selector"
       data-test-id="change_owner_people_selector"
     />
@@ -196,6 +209,7 @@ export default inject(
       roomOwnerId: room?.createdBy?.id,
       changeRoomOwner: filesActionsStore.changeRoomOwner,
       userId: id,
+      isAIAgent: room?.isAIAgent,
     };
   },
 )(

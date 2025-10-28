@@ -1,0 +1,28 @@
+{
+  "key_path": "ResultStorage",
+  "content": "Result Storage",
+  "content_en_sha1_hash": "0afacd729a0aef1e134d6e0597660e93519d64dd",
+  "created_at": "2025-10-27T16:14:31.666Z",
+  "updated_at": "2025-10-27T16:58:30.773Z",
+  "comment": {
+    "text": "This key represents the \"Result Storage\" search area, used to filter results within the AI Room tabs. It determines which data source is used for the search, displayed within the UI as a selection option in the tabs. Translators should consider this refers to a storage location for AI agent results.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:58:30.773Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Tabs/AiRoomTabs/index.tsx",
+      "line_number": 105,
+      "context": "const path = getCategoryUrl(CategoryType.AIAgent, rootRoomId || id);\n \n filesFilter.searchArea =\n tab.id === \"knowledge\"\n ? SearchArea.Knowledge\n : SearchArea.ResultStorage;\n \n setIsSectionBodyLoading?.(true, false);\n \n navigate(`${path}?${filesFilter.toUrlParams()}`);\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

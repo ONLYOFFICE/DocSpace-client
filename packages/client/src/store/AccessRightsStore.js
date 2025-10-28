@@ -56,6 +56,12 @@ class AccessRightsStore {
     return security?.Create;
   }
 
+  get canUseChat() {
+    const { security } = this.selectedFolderStore;
+
+    return !!security && "UseChat" in security && security.UseChat;
+  }
+
   canMoveItems = (item) => {
     const { editing: fileEditing, security, rootFolderType } = item;
 

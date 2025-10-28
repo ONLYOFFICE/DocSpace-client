@@ -24,29 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { observer } from "mobx-react";
-
-import { ChatHeaderProps } from "../../Chat.types";
-
-import styles from "./ChatHeader.module.scss";
-
-import SelectChat from "./sub-components/SelectChat";
-import CreateChat from "./sub-components/CreateChat";
-import SelectModel from "./sub-components/SelectModel";
-
-const ChatHeader = ({
-  selectedModel,
-  isLoading,
-  getIcon,
-  roomId,
-}: ChatHeaderProps) => {
-  return (
-    <div className={`${styles.chatHeader} chat-header`}>
-      <SelectChat isLoadingProp={isLoading} getIcon={getIcon} roomId={roomId} />
-      <CreateChat isLoadingProp={isLoading} />
-      <SelectModel selectedModel={selectedModel} isLoading={isLoading} />
-    </div>
-  );
-};
-
-export default observer(ChatHeader);
+.description {
+  margin-bottom: 8px;
+}

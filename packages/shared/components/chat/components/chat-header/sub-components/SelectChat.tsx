@@ -46,6 +46,8 @@ import { useMessageStore } from "../../../store/messageStore";
 
 import { SelectChatProps } from "../../../Chat.types";
 
+import ExportSelector from "../../export-selector";
+
 import styles from "../ChatHeader.module.scss";
 
 import RenameChat from "./RenameChat";
@@ -56,12 +58,13 @@ import {
 } from "../constants";
 import { ChatList } from "./ChatList";
 
-const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
+const SelectChat = ({ isLoadingProp, roomId, getIcon }: SelectChatProps) => {
   const { t } = useTranslation(["Common"]);
 
   const [isOpen, setIsOpen] = React.useState(false);
   const [hoveredItem, setHoveredItem] = React.useState("");
   const [isRenameOpen, setIsRenameOpen] = React.useState(false);
+  const [isExportOpen, setIsExportOpen] = React.useState(false);
 
   const parentRef = React.useRef<HTMLDivElement>(null);
 
@@ -77,6 +80,8 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
     updateUrlChatId,
   } = useChatStore();
   const { fetchMessages, startNewChat, isRequestRunning } = useMessageStore();
+
+  const closeExportSelector = () => setIsExportOpen(false);
 
   const toggleOpen = () => {
     if (isRequestRunning) return;
@@ -117,6 +122,16 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
 
   const onSaveToFileAction = React.useCallback(async () => {
     if (isRequestRunning) return;
+    setIsExportOpen(true);
+  }, [hoveredItem, chats, isRequestRunning, t]);
+
+  const getFileName = () => {
+    const title = chats.find((chat) => chat.id === hoveredItem)?.title;
+
+    return title ?? "";
+  };
+
+  const onSubmit = React.useCallback(async () => {
     const res = await exportChat(hoveredItem);
 
     const title = chats.find((chat) => chat.id === hoveredItem)?.title;
@@ -140,6 +155,7 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
     );
 
     toastr.success(toastMsg);
+    setIsExportOpen(false);
   }, [hoveredItem, chats, isRequestRunning, t]);
 
   const contextModel = React.useMemo(() => {
@@ -231,6 +247,16 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
           chatId={hoveredItem}
           prevTitle={chats.find((chat) => chat.id === hoveredItem)?.title || ""}
           onRenameToggle={onRenameToggle}
+        />
+      ) : null}
+      {isExportOpen ? (
+        <ExportSelector
+          getIcon={getIcon}
+          showFolderSelector={isExportOpen}
+          onCloseFolderSelector={closeExportSelector}
+          roomId={roomId}
+          getFileName={getFileName}
+          onSubmit={onSubmit}
         />
       ) : null}
     </>

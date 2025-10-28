@@ -62,7 +62,12 @@ const Chat = ({
     <ChatStoreContextProvider roomId={roomId}>
       <MessageStoreContextProvider roomId={roomId}>
         <ChatContainer>
-          <ChatHeader selectedModel={selectedModel} isLoading={isLoading} />
+          <ChatHeader
+            selectedModel={selectedModel}
+            isLoading={isLoading}
+            getIcon={getIcon}
+            roomId={roomId}
+          />
           <ChatMessageBody
             userAvatar={userAvatar}
             isLoading={isLoading}

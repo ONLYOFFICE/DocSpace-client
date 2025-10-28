@@ -5,7 +5,7 @@
     "formatWithErrors": false,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineEnding": "lf",
+    "lineEnding": "crlf",
     "lineWidth": 80
   },
   "javascript": {
@@ -25,11 +25,57 @@
       "trailingCommas": "none"
     }
   },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              ":URL:",
+              ":BLANK_LINE:",
+              ":PACKAGE_WITH_PROTOCOL:",
+              ":BLANK_LINE:",
+              ":NODE:",
+              ":BLANK_LINE:",
+              ":BUN:",
+              ":BLANK_LINE:",
+              [
+                "**",
+                "!@docspace",
+                "!@docspace/**",
+                "!@/**",
+                "!#*",
+                "!~*",
+                "!$*",
+                "!%*",
+                "!./**",
+                "!../**",
+                "!PUBLIC_DIR/**"
+              ],
+              ":BLANK_LINE:",
+              [
+                ":ALIAS:",
+                "PUBLIC_DIR/**"
+              ],
+              ":BLANK_LINE:",
+              [
+                "@docspace",
+                "@docspace/**"
+              ],
+              ":BLANK_LINE:",
+              ":PATH:"
+            ]
+          }
+        }
+      }
+    }
+  },
   "linter": {
+    "enabled": true,
     "domains": {
       "test": "recommended"
     },
-    "enabled": true,
     "rules": {
       "recommended": false,
       "complexity": {

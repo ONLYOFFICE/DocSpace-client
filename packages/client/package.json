@@ -19,7 +19,7 @@
     "lint": "biome lint ./src",
     "lint:fix": "biome lint --write ./src",
     "format": "biome check ./src",
-    "format:fix": "biome format --write ./src",
+    "format:fix": "biome check --write ./src",
     "tsc": "tsc"
   },
   "dependencies": {

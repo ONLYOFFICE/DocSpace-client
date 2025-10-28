@@ -11,7 +11,7 @@
     "lint": "biome lint ./src",
     "lint:fix": "biome lint --write ./src",
     "format": "biome check ./src",
-    "format:fix": "biome format --write ./src",
+    "format:fix": "biome check --write ./src",
     "tsc": "tsc",
     "clean": "shx rm -rf .next",
     "deploy": "shx --silent mkdir -p ../../../publish/web/editor && shx cp -r .next/standalone/* ../../../publish/web/editor && shx --silent mkdir -p ../../../publish/web/editor/packages/doceditor/.next/static && shx cp -r .next/static/* ../../../publish/web/editor/packages/doceditor/.next/static && shx cp -f server.prod.js ../../../publish/web/editor/server.js"

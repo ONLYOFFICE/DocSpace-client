@@ -166,8 +166,7 @@
     "style-loader": "3.3.4",
     "ts-jest": "29.2.5",
     "ts-node": "10.9.2",
-    "typescript": "5.9.3",
-    "typescript-eslint": "^8.15.0"
+    "typescript": "5.9.3"
   },
   "peerDependencies": {
     "react": "19.2.0",

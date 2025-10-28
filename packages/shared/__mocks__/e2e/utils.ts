@@ -70,4 +70,3 @@ export const HEADER_ENABLE_ADM_MESS_SETTINGS =
   "x-test-data-enable-adm-mess-settings";
 
 export const HEADER_HCAPTCHA_SETTINGS = "x-test-data-hcaptcha-settings";
-

@@ -153,12 +153,12 @@ export default function withQuickButtons(WrappedComponent) {
       const {
         item,
         setBufferSelection,
-        infoPanelSelection,
+        infoPanelSelectionId,
         isShareTabActive,
         resetSelections,
       } = this.props;
 
-      if (infoPanelSelection?.id === item.id && isShareTabActive) {
+      if (infoPanelSelectionId === item.id && isShareTabActive) {
         forcedShowInfoPanelLoader();
       }
 
@@ -296,7 +296,7 @@ export default function withQuickButtons(WrappedComponent) {
         retryVectorization,
         isTrashFolder,
         isShareTabActive,
-        infoPanelSelection,
+        infoPanelSelectionId: infoPanelSelection?.id,
       };
     },
   )(observer(WithQuickButtons));

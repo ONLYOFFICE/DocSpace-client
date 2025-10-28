@@ -1,0 +1,34 @@
+{
+  "key_path": "EmptyRoomsDescriptionText",
+  "content": "Please create the first room in {{sectionName}}.",
+  "content_en_sha1_hash": "52d0bc357573a2bc6f7486caa5c8d2793a7f50c7",
+  "created_at": "2025-10-27T16:14:14.285Z",
+  "updated_at": "2025-10-27T16:38:31.234Z",
+  "comment": {
+    "text": "This text is a prompt displayed when a user navigates to a section with no existing rooms. It instructs the user to create the first room within that section (e.g., \"Please create the first room in My Files.\"). The `sectionName` variable is dynamically populated with the name of the section.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:38:31.234Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
+      "line_number": 213,
+      "context": "const emptyScreenHeader = isEmptyFilesRootScreen\n ? t(\"Common:SelectorEmptyScreenHeader\")\n : t(\"Common:EmptyRoomsHeader\");\n const emptyScreenDescription = isEmptyFilesRootScreen\n ? \"\"\n : t(\"Common:EmptyRoomsDescriptionText\", {\n sectionName: t(\"Common:Rooms\"),\n });\n \n const SelectorBody = (\n <Selector",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/selectors/Room/index.tsx",
+      "line_number": 248,
+      "context": "isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl\n }\n emptyScreenHeader={emptyScreenHeader ?? t(\"Common:EmptyRoomsHeader\")}\n emptyScreenDescription={\n emptyScreenDescription ??\n t(\"Common:EmptyRoomsDescriptionText\", {\n sectionName: t(\"Common:Rooms\"),\n })\n }\n searchEmptyScreenImage={\n isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "API keys",
   "content_en_sha1_hash": "94fcf3c2dc0d96560fa470737eb39fb09d17ef08",
   "created_at": "2025-05-19T21:30:50.537Z",
-  "updated_at": "2025-09-26T15:21:06.292Z",
+  "updated_at": "2025-10-27T16:14:33.505Z",
   "comment": {
     "text": "The translation key \"ApiKeys\" refers to the label displayed on the API keys page, typically found in a developer tools section. It is used as the title of the page, and its content should reflect the purpose of this feature in the application. This text appears in the UI as part of the page header or title section.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 556,
-      "context": "{\n id: \"portal-settings_catalog-api-keys\",\n key: \"7-5\",\n icon: \"\",\n link: \"api-keys\",\n tKey: \"Settings:ApiKeys\",\n isCategory: true,\n },\n ],\n },\n {",
+      "line_number": 592,
+      "context": "{\n id: \"portal-settings_catalog-api-keys\",\n key: \"8-5\",\n icon: \"\",\n link: \"api-keys\",\n tKey: \"Settings:ApiKeys\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     }
   ],

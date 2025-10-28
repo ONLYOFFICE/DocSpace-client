@@ -88,6 +88,9 @@ import DefaultFolderLight from "PUBLIC_DIR/images/emptyview/empty.default.folder
 import DefaultFolderUserDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.dark.svg";
 import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.light.svg";
 
+import EmptyAIAgentsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.dark.svg";
+import EmptyAIAgentsLightIcon from "PUBLIC_DIR/images/emptyview/empty.ai-agents.icon.light.svg";
+
 import {
   FilesSelectorFilterTypes,
   FilterType,
@@ -182,6 +185,9 @@ export const getRootDescription = (
   security: Nullable<TFolderSecurity>,
 ) => {
   return match([rootFolderType, access])
+    .with([FolderType.AIAgents, P._], () =>
+      t("EmptyView:EmptyAIAgentsDescription"),
+    )
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       t("Files:RoomEmptyContainerDescription"),
     )
@@ -300,6 +306,7 @@ export const getRootTitle = (
   rootFolderType: Nullable<FolderType>,
 ) => {
   return match([rootFolderType, access])
+    .with([FolderType.AIAgents, P._], () => t("EmptyView:EmptyAIAgentsTitle"))
     .with(
       [
         FolderType.Rooms,
@@ -444,7 +451,57 @@ export const getRoomIcon = (
           <EmptyCustomRoomDarkIcon />
         ),
     )
+    .with(
+      [
+        RoomsType.VirtualDataRoom,
+        P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
+      ],
+      () =>
+        isBaseTheme ? (
+          <EmptyVirtualDataRoomLightIcon />
+        ) : (
+          <EmptyVirtualDataRoomDarkIcon />
+        ),
+    )
+    .with([RoomsType.VirtualDataRoom, ShareAccessRights.Collaborator], () =>
+      isBaseTheme ? (
+        <EmptyVirtualDataRoomCollaboratorLightIcon />
+      ) : (
+        <EmptyVirtualDataRoomCollaboratorDarkIcon />
+      ),
+    )
+    .with(
+      [
+        RoomsType.CustomRoom,
+        P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
+      ],
+      () =>
+        isBaseTheme ? (
+          <EmptyCustomRoomLightIcon />
+        ) : (
+          <EmptyCustomRoomDarkIcon />
+        ),
+    )
     .with([RoomsType.CustomRoom, ShareAccessRights.Collaborator], () =>
+      isBaseTheme ? (
+        <EmptyCustomRoomCollaboratorLightIcon />
+      ) : (
+        <EmptyCustomRoomCollaboratorDarkIcon />
+      ),
+    )
+    .with(
+      [
+        RoomsType.AIRoom,
+        P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
+      ],
+      () =>
+        isBaseTheme ? (
+          <EmptyCustomRoomLightIcon />
+        ) : (
+          <EmptyCustomRoomDarkIcon />
+        ),
+    )
+    .with([RoomsType.AIRoom, ShareAccessRights.Collaborator], () =>
       isBaseTheme ? (
         <EmptyCustomRoomCollaboratorLightIcon />
       ) : (
@@ -463,6 +520,9 @@ export const getRootIcon = (
   isBaseTheme: boolean,
 ) => {
   return match([rootFolderType, access])
+    .with([FolderType.AIAgents, P._], () =>
+      isBaseTheme ? <EmptyAIAgentsLightIcon /> : <EmptyAIAgentsDarkIcon />,
+    )
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       isBaseTheme ? <EmptyRoomsRootLightIcon /> : <EmptyRoomsRootDarkIcon />,
     )
@@ -577,13 +637,17 @@ export const helperOptions = (
   const createUploadFromDocSpace = (
     title: string,
     description: string,
-    filterType: FilesSelectorFilterTypes | FilterType,
+    filterType: FilesSelectorFilterTypes | FilterType | string,
+    isKnowledge?: boolean,
   ) => ({
     title,
     description,
     icon: <UploadPDFFormIcon />,
     key: "upload-pdf-form",
-    onClick: () => actions.uploadFromDocspace(filterType),
+    onClick: () =>
+      isKnowledge
+        ? actions.uploadFromDocspaceAiKnowledge()
+        : actions.uploadFromDocspace(filterType),
     disabled: !security?.Create,
   });
 

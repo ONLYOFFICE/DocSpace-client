@@ -50,7 +50,11 @@ import {
 import { Badge } from "../../badge";
 import { globalColors } from "../../../themes";
 import { useTheme } from "../../../hooks/useTheme";
+import { isTouchDevice } from "../../../utils/device";
 import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
+import { MCPIcon, MCPIconSize } from "../../mcp-icon";
+
+import { Tooltip } from "../../tooltip";
 
 import styles from "../ContextMenu.module.scss";
 
@@ -74,7 +78,11 @@ type SubMenuProps = {
   changeView?: boolean;
   withHeader?: boolean;
   onSubMenuMouseEnter?: () => void;
+
+  isLowerSubmenu?: boolean;
+  maxHeightLowerSubmenu?: number;
   menuHovered?: boolean;
+  showDisabledItems?: boolean;
 };
 
 const SubMenu = (props: SubMenuProps) => {
@@ -89,14 +97,21 @@ const SubMenu = (props: SubMenuProps) => {
     changeView,
     withHeader,
     onSubMenuMouseEnter,
+    isLowerSubmenu,
+    maxHeightLowerSubmenu,
     menuHovered,
+    showDisabledItems,
   } = props;
 
   const [model, setModel] = useState(props?.model);
   const [isLoading, setIsLoading] = useState(false);
   const [activeItem, setActiveItem] = useState<ContextMenuType | null>(null);
+  const [activeItemKey, setActiveItemKey] = useState<string | number | null>(
+    null,
+  );
   const [widthSubMenu, setWidthSubMenu] = useState<null | number>(null);
 
+  const prevWidthSubMenu = useRef<number | null>(null);
   const subMenuRef = useRef<HTMLUListElement>(null);
 
   const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -130,11 +145,13 @@ const SubMenu = (props: SubMenuProps) => {
     keepClosingRef.current = false;
     if (delay === 0) {
       setActiveItem(itm);
+      setActiveItemKey(itm.key);
       return;
     }
     openTimeoutRef.current = setTimeout(() => {
       if (keepClosingRef.current) return;
       setActiveItem(itm);
+      setActiveItemKey(itm.key);
     }, delay);
   };
 
@@ -145,6 +162,7 @@ const SubMenu = (props: SubMenuProps) => {
     hideTimeoutRef.current = setTimeout(() => {
       if (keepClosingRef.current) {
         setActiveItem(null);
+        setActiveItemKey(null);
         keepClosingRef.current = false;
       }
     }, delay);
@@ -179,6 +197,7 @@ const SubMenu = (props: SubMenuProps) => {
       if (root) {
         cancelAll();
         setActiveItem(item);
+        setActiveItemKey(item.key);
         return;
       }
 
@@ -259,12 +278,13 @@ const SubMenu = (props: SubMenuProps) => {
 
     if ((items || item.onLoad) && isMobileDevice) {
       setActiveItem(item);
+      setActiveItemKey(item.key);
 
       e.stopPropagation();
       return;
     }
 
-    onLeafClick?.(e);
+    if (!item.withToggle) onLeafClick?.(e);
   };
 
   const position = () => {
@@ -306,8 +326,11 @@ const SubMenu = (props: SubMenuProps) => {
       let subMenuRefTop = null;
 
       if (!isMobile()) {
-        if (root) subMenuRef.current.style.width = `${subListWidth}px`;
-        else subMenuRef.current.style.width = `${subListWidth}px`;
+        if (!prevWidthSubMenu.current) {
+          prevWidthSubMenu.current = subListWidth;
+        }
+
+        subMenuRef.current.style.width = `${prevWidthSubMenu.current}px`;
       } else {
         setWidthSubMenu(subListWidth);
       }
@@ -443,6 +466,22 @@ const SubMenu = (props: SubMenuProps) => {
   });
 
   useEffect(() => {
+    if (props.model) {
+      setModel(props.model);
+    }
+  }, [props.model]);
+
+  useEffect(() => {
+    if (!activeItemKey) return;
+
+    const item = model.find(
+      (item) => item.key === activeItemKey,
+    ) as ContextMenuType;
+
+    setActiveItem(item || null);
+  }, [model, activeItemKey]);
+
+  useEffect(() => {
     return () => {
       cancelAll();
     };
@@ -462,7 +501,7 @@ const SubMenu = (props: SubMenuProps) => {
     index: number,
     style: React.CSSProperties,
   ) => {
-    if (item.disabled) return;
+    if (showDisabledItems ? false : item.disabled) return;
     // TODO: Not render disabled items
     const active = activeItem === item;
     const className = classNames(
@@ -479,7 +518,14 @@ const SubMenu = (props: SubMenuProps) => {
     });
     const subMenuIconClassName = "p-submenu-icon";
 
-    const icon =
+    const icon = item.withMCPIcon ? (
+      <MCPIcon
+        title={item.label as string}
+        size={MCPIconSize.Small}
+        imgSrc={item.icon}
+        className={iconClassName || ""}
+      />
+    ) : (
       item.icon &&
       ((!item.icon.includes("images/") && !item.icon.includes(".svg")) ||
       item.icon.includes("webplugins") ? (
@@ -494,7 +540,8 @@ const SubMenu = (props: SubMenuProps) => {
           className={iconClassName || ""}
           src={item.icon}
         />
-      ));
+      ))
+    );
 
     const label = item.label && (
       <span
@@ -598,45 +645,79 @@ const SubMenu = (props: SubMenuProps) => {
 
     if (item.withToggle) {
       return (
+        <>
+          <li
+            id={item.id}
+            key={item.key}
+            data-testid={item.dataTestId ?? item.key}
+            role="none"
+            className={classNames(className, styles.subMenuItem, {
+              [styles.noHover]: item.disabled,
+            })}
+            style={{ ...item.style, ...style }}
+            onClick={onClick}
+            onMouseDown={onMouseDown}
+            onMouseEnter={(e) => onItemMouseEnter(e, item)}
+            onMouseLeave={() => onItemMouseLeave(item)}
+            data-tooltip-id={
+              item.disabled
+                ? `context-menu-item-tooltip-${item.key}`
+                : undefined
+            }
+          >
+            {content}
+            <ToggleButton
+              isChecked={item.checked || false}
+              onChange={onClick}
+              noAnimation
+              isDisabled={item?.disabled ?? false}
+            />
+          </li>
+          {item.disabled && item.getTooltipContent ? (
+            <Tooltip
+              float
+              openOnClick={isTouchDevice}
+              id={`context-menu-item-tooltip-${item.key}`}
+              getContent={item.getTooltipContent}
+              place="bottom-end"
+              zIndex={1003}
+            />
+          ) : null}
+        </>
+      );
+    }
+
+    return (
+      <>
         <li
           id={item.id}
           key={item.key}
           data-testid={item.dataTestId ?? item.key}
           role="none"
-          className={classNames(className, styles.subMenuItem)}
+          className={className || ""}
           style={{ ...item.style, ...style }}
           onClick={onClick}
           onDoubleClick={onDoubleClick}
           onMouseDown={onMouseDown}
           onMouseEnter={(e) => onItemMouseEnter(e, item)}
           onMouseLeave={() => onItemMouseLeave(item)}
+          data-tooltip-id={
+            item.disabled ? `context-menu-item-tooltip-${item.key}` : undefined
+          }
         >
           {content}
-          <ToggleButton
-            isChecked={item.checked || false}
-            onChange={onClick}
-            noAnimation
-          />
         </li>
-      );
-    }
-
-    return (
-      <li
-        id={item.id}
-        key={item.key}
-        data-testid={item.dataTestId ?? item.key}
-        role="none"
-        className={className || ""}
-        style={{ ...item.style, ...style }}
-        onClick={onClick}
-        onDoubleClick={onDoubleClick}
-        onMouseDown={onMouseDown}
-        onMouseEnter={(e) => onItemMouseEnter(e, item)}
-        onMouseLeave={() => onItemMouseLeave(item)}
-      >
-        {content}
-      </li>
+        {item.disabled && item.getTooltipContent ? (
+          <Tooltip
+            float
+            openOnClick={isTouchDevice}
+            id={`context-menu-item-tooltip-${item.key}`}
+            getContent={item.getTooltipContent}
+            place="bottom-end"
+            zIndex={1003}
+          />
+        ) : null}
+      </>
     );
   };
 
@@ -677,7 +758,7 @@ const SubMenu = (props: SubMenuProps) => {
     if (!model) return null;
 
     return model.map((item: ContextMenuModel, index: number) => {
-      if (item?.disabled) return null;
+      if (item?.disabled && !showDisabledItems) return null;
       return renderItem(item, index);
     });
   };
@@ -699,7 +780,7 @@ const SubMenu = (props: SubMenuProps) => {
       if (contextMenuTypeItem?.items || contextMenuTypeItem?.onLoad) {
         submenu.push(
           <SubMenu
-            key={`sub-menu_${item.id}`}
+            key={`sub-menu_${item.key}`}
             model={
               contextMenuTypeItem?.onLoad
                 ? [loaderItem]
@@ -709,6 +790,8 @@ const SubMenu = (props: SubMenuProps) => {
             onLeafClick={onLeafClick}
             onLoad={contextMenuTypeItem?.onLoad}
             onSubMenuMouseEnter={handleSubMenuMouseEnter}
+            isLowerSubmenu
+            maxHeightLowerSubmenu={maxHeightLowerSubmenu}
           />,
         );
       }
@@ -723,8 +806,8 @@ const SubMenu = (props: SubMenuProps) => {
   const submenuLower = renderSubMenuLower();
 
   if (model?.length) {
-    const newModel = model.filter(
-      (item: ContextMenuModel) => item && !item.disabled,
+    const newModel = model.filter((item: ContextMenuModel) =>
+      showDisabledItems ? item : item && !item.disabled,
     );
     const rowHeights: number[] = newModel.map((item: ContextMenuModel) => {
       if (!item) return 0;
@@ -739,7 +822,7 @@ const SubMenu = (props: SubMenuProps) => {
     const backdrop = 64;
     const header = 55;
 
-    const listHeight =
+    let listHeight =
       changeView && withHeader
         ? height + paddingList + header > viewport.height
           ? viewport.height - backdrop - header - paddingList
@@ -747,6 +830,10 @@ const SubMenu = (props: SubMenuProps) => {
         : height + paddingList + marginsList > viewport.height
           ? viewport.height - marginsList
           : height + paddingList;
+
+    if (isLowerSubmenu && maxHeightLowerSubmenu) {
+      listHeight = Math.min(listHeight, maxHeightLowerSubmenu);
+    }
 
     return (
       <CSSTransition

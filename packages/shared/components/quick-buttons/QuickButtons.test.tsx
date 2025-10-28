@@ -120,6 +120,7 @@ const baseFileItem: TFile = {
     CreateRoomFrom: true,
     CopyLink: true,
     Embed: true,
+    Vectorization: false,
   },
   canShare: true,
   access: ShareAccessRights.None,

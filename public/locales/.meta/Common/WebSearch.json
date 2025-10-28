@@ -1,0 +1,28 @@
+{
+  "key_path": "WebSearch",
+  "content": "Web search",
+  "content_en_sha1_hash": "381ceddd75a893f19764c7e4cf9cd12c0f6e88c3",
+  "created_at": "2025-10-27T16:14:24.651Z",
+  "updated_at": "2025-10-27T16:23:52.024Z",
+  "comment": {
+    "text": "This key translates the label \"Web search\" displayed next to a search tool icon in a chat message. It appears as part of a header indicating a web search was performed, along with details about the tool used. Translators should ensure the phrasing accurately describes a web search action.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:23:52.024Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallHeader/SearchToolContent.tsx",
+      "line_number": 77,
+      "context": "return (\n <>\n <ReactSVG className={styles.searchToolIcon} src={UniverseIcon} />\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} truncate>\n {t(\"Common:WebSearch\")} | <span title={toolInfo}>{toolInfo}</span>\n </Text>\n </>\n );\n };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

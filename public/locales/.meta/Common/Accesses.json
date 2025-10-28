@@ -3,7 +3,7 @@
   "content": "Accesses",
   "content_en_sha1_hash": "3e2ca80db95767e37d4fe7d8f846aa94cb667515",
   "created_at": "2025-05-19T21:30:42.828Z",
-  "updated_at": "2025-08-27T10:14:35.253Z",
+  "updated_at": "2025-10-27T16:14:33.420Z",
   "comment": {
     "text": "This translation key is used for displaying the title of a tab on a page that lists access details. It appears as the name of a button or tab in an info panel header.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/index.tsx",
-      "line_number": 99,
+      "line_number": 102,
       "context": "const setDetails = () => setView(InfoPanelView.infoDetails);\n const setShare = () => setView(InfoPanelView.infoShare);\n \n const memberTab = {\n id: \"info_members\",\n name: isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\"),\n onClick: setMembers,\n content: null,\n };\n \n const detailsTab = {",
       "module": "/packages/client"
     }

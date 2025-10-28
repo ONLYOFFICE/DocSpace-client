@@ -43,6 +43,7 @@ import StoragePlanCancel from "./sub-components/AdditionalStorage/StoragePlanCan
 import GracePeriodModal from "./sub-components/AdditionalStorage/GracePeriodModal";
 import BackupServiceDialog from "./sub-components/Backup/BackupServiceDialog";
 import ConfirmationDialog from "./sub-components/ConfirmationDialog";
+import AIServiceDialog from "./sub-components/AITools/AIServiceDialog";
 
 const Services = (props: InjectedProps) => {
   const {
@@ -63,6 +64,8 @@ const Services = (props: InjectedProps) => {
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
   const [isBackupVisible, setIsBackupVisible] = useState(false);
+  const [isAIServiceVisible, setIsAIServiceVisible] = useState(false);
+
   const [isConfirmDialogVisible, setIsConfirmDialogVisible] = useState(false);
   const [isCurrentConfirmDialogVisible, setIsCurrentConfirmDialogVisible] =
     useState(false);
@@ -141,6 +144,8 @@ const Services = (props: InjectedProps) => {
     if (id === TOTAL_SIZE) setIsStorageVisible(true);
 
     if (id === BACKUP_SERVICE) setIsBackupVisible(true);
+
+    if (id === "ai") setIsAIServiceVisible(true);
   };
 
   const onClose = () => {
@@ -153,6 +158,7 @@ const Services = (props: InjectedProps) => {
 
   const onToggle = async (id: string, currentEnabled: boolean) => {
     setConfirmActionType(id);
+
     setIsCurrentConfirmDialogVisible(currentEnabled);
 
     if (id === TOTAL_SIZE) {
@@ -172,6 +178,12 @@ const Services = (props: InjectedProps) => {
 
     if (id === BACKUP_SERVICE) {
       if (isBackupVisible) {
+        previousDialogRef.current = true;
+      }
+    }
+
+    if (id === "ai") {
+      if (isAIServiceVisible) {
         previousDialogRef.current = true;
       }
     }
@@ -204,12 +216,20 @@ const Services = (props: InjectedProps) => {
     setIsBackupVisible(false);
   };
 
+  const onCloseAiService = () => {
+    setIsAIServiceVisible(false);
+  };
+
   const onCloseConfirmDialog = () => {
     const isDialogVisible = previousDialogRef.current;
 
     previousDialogRef.current = false;
 
-    if (isDialogVisible) setIsBackupVisible(true);
+    if (isDialogVisible && confirmActionType === BACKUP_SERVICE)
+      setIsBackupVisible(true);
+    if (isDialogVisible && confirmActionType === "ai")
+      setIsAIServiceVisible(true);
+
     setIsConfirmDialogVisible(false);
   };
 
@@ -282,6 +302,13 @@ const Services = (props: InjectedProps) => {
         <BackupServiceDialog
           visible={isBackupVisible}
           onClose={onCloseBackup}
+          onToggle={onToggle}
+        />
+      ) : null}
+      {isAIServiceVisible ? (
+        <AIServiceDialog
+          visible={isAIServiceVisible}
+          onClose={onCloseAiService}
           onToggle={onToggle}
         />
       ) : null}

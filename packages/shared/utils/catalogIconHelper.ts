@@ -37,6 +37,7 @@ import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.re
 import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
 import CatalogGroupsReactSvgUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
 import CatalogGuestsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.guest.react.svg?url";
+import CatalogSettingsAIReactSvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 import CatalogAiAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 
 import CatalogSettingsCommonReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg?url";
@@ -122,6 +123,7 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.services]: CatalogSettingsServicesReactSvgUrl,
     [PageType.bonus]: CatalogSettingsGiftReactSvgUrl,
     [PageType.storageManagement]: CatalogSettingsStorageManagementReactSvgUrl,
+    [PageType.aiSettings]: CatalogSettingsAIReactSvgUrl,
   },
   20: {
     [FolderType.USER]: CatalogDocuments20ReactSvgUrl,
@@ -150,6 +152,7 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.services]: CatalogSettingsServices20ReactSvgUrl,
     [PageType.bonus]: CatalogSettingsGift20ReactSvgUrl,
     [PageType.storageManagement]: CatalogSettingsStorageManagement20ReactSvgUrl,
+    [PageType.aiSettings]: CatalogSettingsAIReactSvgUrl,
   },
 };
 

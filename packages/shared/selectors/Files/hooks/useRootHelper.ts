@@ -44,6 +44,7 @@ const useRootHelper = ({
   treeFolders,
   withRecentTreeFolder,
   withFavoritesTreeFolder,
+  withAIAgentsTreeFolder,
 
   setTotal,
   setHasNextPage,
@@ -74,6 +75,7 @@ const useRootHelper = ({
       currentTree = treeFolders;
     } else {
       const folders = await getFoldersTree();
+
       currentTree = folders;
     }
 
@@ -87,10 +89,32 @@ const useRootHelper = ({
         folder.rootFolderType === FolderType.USER ||
         (withRecentTreeFolder && folder.rootFolderType === FolderType.Recent) ||
         (withFavoritesTreeFolder &&
-          folder.rootFolderType === FolderType.Favorites)
+          folder.rootFolderType === FolderType.Favorites) ||
+        (withAIAgentsTreeFolder &&
+          folder.rootFolderType === FolderType.AIAgents)
       ) {
+        let title = "";
+        switch (folder.rootFolderType) {
+          case FolderType.USER:
+            title = t("Common:MyDocuments");
+            break;
+          case FolderType.Rooms:
+            title = t("Common:Rooms");
+            break;
+          case FolderType.Favorites:
+            title = t("Common:Favorites");
+            break;
+          case FolderType.Recent:
+            title = t("Common:Recent");
+            break;
+          case FolderType.AIAgents:
+            title = t("Common:AIAgents");
+            break;
+          default:
+            break;
+        }
         newItems.push({
-          label: folder.title,
+          label: title,
           id: folder.id,
           parentId: folder.parentId,
           rootFolderType: folder.rootFolderType,
@@ -99,6 +123,7 @@ const useRootHelper = ({
           security: folder.security,
           isFolder: true,
           avatar,
+          disableMultiSelect: true,
         });
       }
     });

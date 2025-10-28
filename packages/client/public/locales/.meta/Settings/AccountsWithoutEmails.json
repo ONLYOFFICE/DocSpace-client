@@ -1,0 +1,28 @@
+{
+  "key_path": "AccountsWithoutEmails",
+  "content": "We found <1>{{users}} users</1> without emails. You can fill their emails or continue without this action.",
+  "content_en_sha1_hash": "d718ba1093dbe90e13bd71f2648b6016e01d6581",
+  "created_at": "2025-10-27T16:14:25.407Z",
+  "updated_at": "2025-10-27T18:00:49.992Z",
+  "comment": {
+    "text": "This text displays a notification to the user indicating the number of accounts missing email addresses. It appears within a block, likely on a data import or settings page, and provides the option to either manually add emails or proceed without doing so. Translators should ensure the message accurately conveys the user's choice to address missing email addresses.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T18:00:49.992Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/NoEmailUsersBlock.tsx",
+      "line_number": 12,
+      "context": "users,\n isSelectUsersStep,\n }: NoEmailUsersProps) => {\n const kepProps = isSelectUsersStep\n ? { tKey: \"AccountsUsersWithoutEmails\" }\n : { tKey: \"AccountsWithoutEmails\" };\n \n return (\n <p className=\"users-without-email\">\n <Trans\n t={t}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

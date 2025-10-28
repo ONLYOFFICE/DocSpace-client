@@ -173,10 +173,10 @@
 
 .fixedSize {
   @include mixins.desktop {
-    .thumbVertical {
+    & > .trackVertical > .thumbVertical {
       width: 8px !important;
     }
-    .thumbHorizontal {
+    & > .trackHorizontal > .thumbHorizontal {
       height: 8px !important;
     }
   }
@@ -206,11 +206,11 @@
   // and there is no another nesting hovered scroll element, dragging thumb or backdrop
   &.scrollVisible:hover:not(
       :has(
-          &:hover:global(.trackYVisible),
-          &:hover:global(.trackXVisible),
-          .thumb:global(.dragging),
-          :global(.backdrop-active)
-        )
+        &:hover:global(.trackYVisible),
+        &:hover:global(.trackXVisible),
+        .thumb:global(.dragging),
+        :global(.backdrop-active)
+      )
     ) {
     > .track {
       opacity: 1;

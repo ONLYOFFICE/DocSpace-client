@@ -102,6 +102,11 @@ const RoomSelector = (props) => {
       roomType: RoomsType.CustomRoom,
       // dataTestId: "room_type_custom_option",
     },
+    {
+      key: "room-type-ai",
+      label: t("Common:AIRoomTitle"),
+      roomType: RoomsType.AIRoom,
+    },
   ];
 
   const [version, onSetVersion] = useState(sdkVersion[210]);

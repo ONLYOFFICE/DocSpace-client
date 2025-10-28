@@ -3,7 +3,7 @@
   "content": "View-only",
   "content_en_sha1_hash": "bd0aae2579470d5e5f8f929445ef59305e61809b",
   "created_at": "2025-05-19T21:30:49.539Z",
-  "updated_at": "2025-10-13T20:06:04.991Z",
+  "updated_at": "2025-10-27T16:14:33.345Z",
   "comment": {
     "text": "This translation key is used to display a label for rooms that can only be viewed, typically in a filtering or search interface. It appears as a filter option on pages like the Home page's Filter section, allowing users to select view-only rooms. Translators should aim for an accurate and descriptive phrase that maintains the intended accessibility and functionality of the UI component.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 57,
+      "line_number": 60,
       "context": "case RoomsType.ReviewRoom:\n return t(\"Common:Review\");\n \n case RoomsType.ReadOnlyRoom:\n return t(\"Common:ViewOnlyRooms\");\n \n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n \n case RoomsType.VirtualDataRoom:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 912,
+      "line_number": 1026,
       "context": "case RoomsType.ReadOnlyRoom:\n return {\n id: \"filter_type-view-only\",\n key: RoomsType.ReadOnlyRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:ViewOnlyRooms\"),\n };\n case RoomsType.FormRoom:\n return {\n id: \"filter_type-form\",\n key: RoomsType.FormRoom,",
       "module": "/packages/client"
     }

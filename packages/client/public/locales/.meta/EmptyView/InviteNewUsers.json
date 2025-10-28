@@ -3,7 +3,7 @@
   "content": "Invite new users",
   "content_en_sha1_hash": "d996e6455c940edb191c294cd00ca3e24b39dd46",
   "created_at": "2025-05-19T21:30:56.518Z",
-  "updated_at": "2025-10-13T13:22:35.626Z",
+  "updated_at": "2025-10-27T16:14:33.122Z",
   "comment": {
     "text": "This translation key is used to display a label for inviting new users in the application. It appears on a button or similar UI element where users can create new rooms or invite others. The label invites users to send invitations to join the room.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 298,
-      "context": "onClick: actions.onCreateRoom,\n disabled: false,\n };\n \n const inviteRootRoom = {\n title: t(\"EmptyView:InviteNewUsers\"),\n description: t(\"EmptyView:InviteRootRoomDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: <InviteUserFormIcon />,\n key: \"invite-root-room\",",
+      "line_number": 336,
+      "context": "onClick: actions.onCreateAIAgent,\n disabled: false,\n };\n \n const inviteRootRoom = {\n title: t(\"EmptyView:InviteNewUsers\"),\n description: t(\"EmptyView:InviteRootRoomDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: <InviteUserFormIcon />,\n key: \"invite-root-room\",",
       "module": "/packages/client"
     },
     {

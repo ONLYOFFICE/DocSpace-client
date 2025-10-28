@@ -1,0 +1,28 @@
+{
+  "key_path": "ChooseAIAgentDescription",
+  "content": "Select an agent where you want to continue the conversation with AI. You can choose an existing agent or create a new one.",
+  "content_en_sha1_hash": "a79f9cf700b3d047ad621cd9251499fc83216a1f",
+  "created_at": "2025-10-27T16:14:24.501Z",
+  "updated_at": "2025-10-27T16:45:52.876Z",
+  "comment": {
+    "text": "This text appears in an info bar within the UI. It explains that users can select an existing AI agent or create a new one to continue the conversation. The description helps users understand the purpose of the agent selection process.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:45:52.876Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/selectors/AIAgent/index.tsx",
+      "line_number": 250,
+      "context": "withInfoBar={withInfo}\n infoBarData={{\n title: t(\"Common:ChooseAIAgent\"),\n icon: InfoIconSvgUrl,\n onClose: () => setWithInfo(!withInfo),\n description: t(\"Common:ChooseAIAgentDescription\"),\n }}\n hideBackButton\n />\n );\n };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

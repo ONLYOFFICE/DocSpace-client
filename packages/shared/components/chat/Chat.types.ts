@@ -46,6 +46,8 @@ export type SelectModelProps = {
 
 export type SelectChatProps = {
   isLoadingProp?: boolean;
+  roomId: string | number;
+  getIcon: TGetIcon;
 };
 
 export type RenameChatProps = {
@@ -54,7 +56,8 @@ export type RenameChatProps = {
   onRenameToggle: VoidFunction;
 };
 
-export type ChatHeaderProps = SelectModelProps;
+export type ChatHeaderProps = SelectModelProps &
+  Omit<SelectChatProps, "isLoadingProp">;
 
 export type MessageProps = {
   message: TMessage;

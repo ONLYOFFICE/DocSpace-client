@@ -171,10 +171,23 @@ const AIAgentSelectorComponent = ({
     subscribe,
   });
 
+  React.useEffect(() => {
+    const withInfo =
+      items.length > 1
+        ? items.length === 2
+          ? items[1].isInputItem
+            ? false
+            : true
+          : true
+        : false;
+
+    setWithInfo(withInfo);
+  }, [items]);
+
   const headerSelectorProps: TSelectorHeader = {
     withHeader: true,
     headerProps: {
-      headerLabel: t("Common:AskAIChat"),
+      headerLabel: t("Common:AIAgents"),
       onCloseClick: onClose,
       isCloseable: true,
     },

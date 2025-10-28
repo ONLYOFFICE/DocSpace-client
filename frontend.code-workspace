@@ -32,14 +32,7 @@
   "settings": {
     "window.zoomLevel": 0,
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "liveServer.settings.multiRootWorkspaceName": "✨ docspace",
-    "cSpell.words": [
-      "docspace",
-      "browserslist",
-      "debuginfo",
-      "doceditor"
-    ],
+    "editor.defaultFormatter": "biomejs.biome",
     "jest.autoRun": {},
     "jest.disabledWorkspaceFolders": [
       "🌐 root",
@@ -49,9 +42,6 @@
       "📦 @docspace/common",
       "🗂 @docspace/management"
     ],
-    "[javascript]": {
-      "editor.defaultFormatter": "biomejs.biome"
-    },
     "VsCodeTaskButtons.tasks": [
       {
         "label": "Server",
@@ -347,6 +337,9 @@
     ],
     "javascript.format.enable": true,
     "typescript.format.enable": true,
+    "[javascript]": {
+      "editor.defaultFormatter": "biomejs.biome"
+    },
     "[typescript]": {
       "editor.defaultFormatter": "biomejs.biome"
     },
@@ -356,6 +349,9 @@
     "editor.codeActionsOnSave": {
       "source.organizeImports.biome": "explicit",
       "source.fixAll.biome": "explicit",
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
     }
   }
 }

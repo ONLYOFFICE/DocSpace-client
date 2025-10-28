@@ -35,6 +35,7 @@ import { QuotaForm } from "../../components/quota-form";
 import { setTenantQuotaSettings } from "../../api/settings";
 
 import { ChangeStorageQuotaDialogProps } from "./ChangeStorageQuotaDialog.types";
+import styles from "./ChangeStorageQuotaDialog.module.scss";
 
 export const ChangeStorageQuotaDialog = ({
   initialSize,
@@ -133,7 +134,7 @@ export const ChangeStorageQuotaDialog = ({
           : t("Common:ManageStorageQuota")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text>
+        <Text className={styles.description}>
           {isDisableQuota
             ? t("Common:TurnOffDiskSpaceLimit", {
                 productName: t("Common:ProductName"),

@@ -34,7 +34,12 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "liveServer.settings.multiRootWorkspaceName": "✨ docspace",
-    "cSpell.words": ["docspace", "browserslist", "debuginfo", "doceditor"],
+    "cSpell.words": [
+      "docspace",
+      "browserslist",
+      "debuginfo",
+      "doceditor"
+    ],
     "jest.autoRun": {},
     "jest.disabledWorkspaceFolders": [
       "🌐 root",
@@ -340,6 +345,18 @@
       "yaml",
       "yml"
     ],
-    "pnpmCatalogLens.enabled": true
+    "javascript.format.enable": true,
+    "typescript.format.enable": true,
+    "[typescript]": {
+      "editor.defaultFormatter": "biomejs.biome"
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "biomejs.biome"
+    },
+    "editor.codeActionsOnSave": {
+      "source.organizeImports.biome": "explicit",
+      "source.fixAll.biome": "explicit"
+    },
+    "editor.fontVariations": false
   }
 }

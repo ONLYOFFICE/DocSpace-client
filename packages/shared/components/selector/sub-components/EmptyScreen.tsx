@@ -63,6 +63,7 @@ const EmptyScreen = ({
   withSearch,
   items,
   inputItemVisible,
+  hideBackButton,
 }: EmptyScreenProps) => {
   const {
     emptyScreenImage,
@@ -159,15 +160,20 @@ const EmptyScreen = ({
                 : createItem.onBackClick
             }
           >
-            <IconButton
-              className="empty-folder_container-icon"
-              size={12}
-              iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}
-              isFill
-            />
-            <Link {...linkStyles}>
-              {withSearch ? t("Common:ClearFilter") : t("Common:Back")}
-            </Link>
+            {!hideBackButton || withSearch ? (
+              <>
+                <IconButton
+                  className="empty-folder_container-icon"
+                  size={12}
+                  iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}
+                  isFill
+                />
+
+                <Link {...linkStyles}>
+                  {withSearch ? t("Common:ClearFilter") : t("Common:Back")}
+                </Link>
+              </>
+            ) : null}
           </div>
         </div>
       ) : null}

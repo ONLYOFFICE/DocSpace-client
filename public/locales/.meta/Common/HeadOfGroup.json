@@ -3,7 +3,7 @@
   "content": "Head of group",
   "content_en_sha1_hash": "b90a369c4ac1fd6c6e346e3e7ad26070e42c2ccc",
   "created_at": "2025-05-19T21:30:45.746Z",
-  "updated_at": "2025-08-11T09:02:43.855Z",
+  "updated_at": "2025-10-27T16:14:33.220Z",
   "comment": {
     "text": "The translation key \"HeadOfGroup\" is used to display the English content \"Head of group\". It appears in a header component within a dialogue window, indicating who the user is managing groups. Translators should provide an equivalent phrase that accurately conveys this meaning in their respective language.",
     "is_auto": true,
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 471,
+      "line_number": 481,
       "context": "label,\n selectedLabel: \"\",\n };\n \n if (groupsFilter.searchByManager) {\n memberFilterValue.selectedLabel = `${t(\"Common:HeadOfGroup\")}: ${label}`;\n }\n \n filterValues.push(memberFilterValue);\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 471,
+      "line_number": 481,
       "context": "label,\n selectedLabel: \"\",\n };\n \n if (groupsFilter.searchByManager) {\n memberFilterValue.selectedLabel = `${t(\"Common:HeadOfGroup\")}: ${label}`;\n }\n \n filterValues.push(memberFilterValue);\n }",
       "module": "/packages/client"
     }

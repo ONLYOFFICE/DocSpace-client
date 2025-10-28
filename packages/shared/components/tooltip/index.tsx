@@ -70,6 +70,7 @@ const Tooltip = ({
   imperativeModeOnly,
   noUserSelect,
   dataTestId,
+  zIndex,
   tooltipStyle,
   ...rest
 }: TooltipProps) => {
@@ -98,7 +99,11 @@ const Tooltip = ({
       <div
         ref={tooltipRef}
         className={tooltipClass}
-        style={containerStyle}
+        style={
+          zIndex
+            ? { ...containerStyle, zIndex, position: "relative" }
+            : containerStyle
+        }
         data-testid={dataTestId ?? "tooltip"}
       >
         <ReactTooltip

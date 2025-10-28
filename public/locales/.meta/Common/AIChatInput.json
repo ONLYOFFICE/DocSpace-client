@@ -1,0 +1,28 @@
+{
+  "key_path": "AIChatInput",
+  "content": "Chat with AI",
+  "content_en_sha1_hash": "e6335eea00dea1247f310ce15474972cf8355514",
+  "created_at": "2025-10-27T16:14:10.243Z",
+  "updated_at": "2025-10-27T16:56:47.094Z",
+  "comment": {
+    "text": "This text appears as the placeholder text within the input field for AI chat. It indicates the user can type in this field to initiate a conversation with the AI. Translators should consider a similar, concise phrase prompting user interaction with the AI chat.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:56:47.094Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-input/index.tsx",
+      "line_number": 196,
+      "context": "wrapperClassName={classNames({\n [styles.chatInputTextAreaWrapper]: true,\n [styles.chatInputTextAreaWrapperFiles]:\n selectedFiles.length > 0,\n })}\n placeholder={t(\"Common:AIChatInput\")}\n isChatMode\n fontSize={15}\n />\n \n <FilesList",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

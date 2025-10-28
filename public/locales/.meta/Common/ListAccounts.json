@@ -3,7 +3,7 @@
   "content": "List accounts",
   "content_en_sha1_hash": "ad8a605e89106c653271b7cbe9d3de44eb64b9ff",
   "created_at": "2025-05-19T21:30:46.226Z",
-  "updated_at": "2025-06-26T19:00:18.306Z",
+  "updated_at": "2025-10-27T16:14:33.756Z",
   "comment": {
     "text": "This translation key is used for \"List accounts\", which appears as the header label for a list of user accounts in a UI component. It is typically displayed on a dialog or panel that allows users to manage or view account information, such as those found in an invite panel or settings menu.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
-      "line_number": 239,
+      "line_number": 258,
       "context": ");\n \n const invitePanelSelectorHeader = useMemo(\n () =>\n ({\n headerLabel: t(\"Common:ListAccounts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeInvitePanel,\n onCloseClick: () => {",
       "module": "/packages/shared"
     }

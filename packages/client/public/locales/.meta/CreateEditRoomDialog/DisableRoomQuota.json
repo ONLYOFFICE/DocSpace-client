@@ -3,7 +3,7 @@
   "content": "Disable quota for this room",
   "content_en_sha1_hash": "5436cd032d1bc297d0b70db7a712281ddfd02ce0",
   "created_at": "2025-05-19T21:30:56.795Z",
-  "updated_at": "2025-05-24T13:51:51.576Z",
+  "updated_at": "2025-10-27T16:14:33.161Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that the quota for a room should be disabled. It appears in a Quota Form component as the label for a checkbox, allowing users to toggle this setting.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomQuota/index.js",
-      "line_number": 55,
-      "context": "return (\n <QuotaForm\n label={t(\"Common:StorageQuota\")}\n description={t(\"StorageDescription\")}\n checkboxLabel={t(\"DisableRoomQuota\")}\n onSetQuotaBytesSize={onSetQuotaBytesSize}\n initialSize={\n isEdit || isTemplate ? defaultValue.current : defaultRoomsQuota\n }\n isDisabled={isLoading || roomParams.storageLocation.isThirdparty}",
+      "file_path": "/packages/client/src/components/RoomQuota/index.tsx",
+      "line_number": 64,
+      "context": "return (\n <QuotaForm\n label={t(\"Common:StorageQuota\")}\n description={t(\"StorageDescription\")}\n checkboxLabel={t(\"DisableRoomQuota\")}\n onSetQuotaBytesSize={onSetQuotaBytesSize}\n initialSize={\n isEdit || isTemplate ? defaultValue.current : defaultRoomsQuota!\n }\n isDisabled={",
       "module": "/packages/client"
     }
   ],

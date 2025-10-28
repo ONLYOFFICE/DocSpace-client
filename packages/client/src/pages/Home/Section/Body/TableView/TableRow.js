@@ -35,6 +35,7 @@ import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withFileActions from "../../../../../HOCs/withFileActions";
 import ItemIcon from "../../../../../components/ItemIcon";
 import RoomsRowDataComponent from "./sub-components/RoomsRowData";
+import AIAgentsRowDataComponent from "./sub-components/AIAgentsRowData";
 import TrashRowDataComponent from "./sub-components/TrashRowData";
 import RecentRowDataComponent from "./sub-components/RecentRowData";
 import IndexRowDataComponent from "./sub-components/IndexRowData";
@@ -82,6 +83,7 @@ const FilesTableRow = (props) => {
     isRecentFolder,
     isFavoritesFolder,
     isSharedWithMeFolderRoot,
+    isAIAgentsFolder,
     canDrag,
     onEditIndex,
     isIndexUpdated,
@@ -290,6 +292,12 @@ const FilesTableRow = (props) => {
           />
         ) : isRooms ? (
           <RoomsRowDataComponent
+            element={element}
+            dragStyles={dragStyles}
+            {...props}
+          />
+        ) : isAIAgentsFolder ? (
+          <AIAgentsRowDataComponent
             element={element}
             dragStyles={dragStyles}
             {...props}

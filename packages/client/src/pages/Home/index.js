@@ -149,6 +149,7 @@ const PureHome = (props) => {
     hideConfirmCancelOperation,
     welcomeFormFillingTipsVisible,
     formFillingTipsVisible,
+    chatFiles,
 
     allowInvitingGuests,
     checkGuests,
@@ -179,6 +180,7 @@ const PureHome = (props) => {
   const isProfile = currentClientView === "profile";
   const isContactsEmptyView =
     currentClientView === "groups" ? isEmptyGroups : isUsersEmptyView;
+  const isChat = currentClientView === "chat";
 
   const onDrop = (f, uploadToFolder) => {
     if (isContactsPage || isProfile) return;
@@ -275,11 +277,12 @@ const PureHome = (props) => {
       isLoaded: !firstLoad,
       viewAs: contactsViewAs,
       isAccounts: isContactsPage,
+      chatFiles,
     };
 
     if (!isContactsPage) {
       sectionProps.dragging = dragging;
-      sectionProps.uploadFiles = true;
+      sectionProps.uploadFiles = !isChat;
       sectionProps.onDrop =
         isRecycleBinFolder || isPrivacyFolder ? null : onDrop;
 
@@ -332,7 +335,7 @@ const PureHome = (props) => {
 
   // sectionProps.onOpenUploadPanel = showUploadPanel;
 
-  sectionProps.getContextModel = getContextModel;
+  sectionProps.getContextModel = isChat ? null : getContextModel;
   sectionProps.isIndexEditingMode = isIndexEditingMode;
 
   sectionProps.secondaryActiveOperations = secondaryActiveOperations;
@@ -386,7 +389,7 @@ const PureHome = (props) => {
         </>
       )}
       <MediaViewer />
-      <SectionWrapper {...sectionProps}>
+      <SectionWrapper {...sectionProps} withoutFooter={isChat}>
         {!isErrorRoomNotAvailable ||
         isContactsPage ||
         isProfile ||
@@ -404,7 +407,7 @@ const PureHome = (props) => {
           <SectionWarningContent />
         </Section.SectionWarning>
 
-        {shouldShowFilter && !isProfile ? (
+        {!isChat && shouldShowFilter && !isProfile ? (
           <Section.SectionFilter>
             {isFrame ? (
               showFilter && <SectionFilterContent />
@@ -513,6 +516,8 @@ export const Component = inject(
       scrollToTop,
       wsCreatedPDFForm,
       mainButtonVisible,
+
+      removeActiveItem,
     } = filesStore;
 
     const { gallerySelected } = oformsStore;
@@ -712,6 +717,7 @@ export const Component = inject(
       setOperationCancelVisible,
       hideConfirmCancelOperation,
 
+      removeActiveItem,
       allowInvitingGuests,
       checkGuests,
       hasGuests,

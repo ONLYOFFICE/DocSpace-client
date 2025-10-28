@@ -3,7 +3,7 @@
   "content": "Search by Head of group",
   "content_en_sha1_hash": "38790b414bc3ff27122ec8675023f26f062c1686",
   "created_at": "2025-05-19T21:30:50.003Z",
-  "updated_at": "2025-05-26T07:57:32.463Z",
+  "updated_at": "2025-10-27T16:14:33.444Z",
   "comment": {
     "text": "This translation key is used for a label that indicates \"Search by Head of group\" and appears as a filter option in a user interface, likely on a contact list or search results page. Translators should focus on conveying this meaning in their target language to ensure accurate user experience.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 716,
+      "line_number": 726,
       "context": "},\n {\n id: \"filter_group-manager\",\n key: FilterKeys.byManager,\n group: FilterGroups.groupsFilterManager,\n label: t(\"Translations:SearchByHeadOfGroup\"),\n isDisabled: true,\n isCheckbox: true,\n },\n ];",
       "module": "/packages/client"
     }

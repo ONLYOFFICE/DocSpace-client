@@ -3,13 +3,19 @@
   "content": "Create",
   "content_en_sha1_hash": "6e157c5da4410b7e9de85f5c93026b9176e69064",
   "created_at": "2025-05-19T21:30:43.828Z",
-  "updated_at": "2025-10-17T14:43:53.334Z",
+  "updated_at": "2025-10-27T16:14:33.147Z",
   "comment": {
     "text": "This translation key is used to display the label \"Create\" in a button within a modal dialog. It appears as the primary action button when creating a new group and is also shown in other contexts where creation is applicable.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:36:53.944Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/CreateAgentDialog.tsx",
+      "line_number": 136,
+      "context": "onClose={onCloseDialog}\n isScrollLocked={isScrollLocked}\n onSubmit={handleSubmit}\n withForm\n >\n <ModalDialog.Header>{t(\"Common:CreateAgent\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <SetAgentParams\n tagHandler={tagHandler}\n agentParams={agentParams}",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/CreateGroupDialog.tsx",
       "line_number": 185,
@@ -42,7 +48,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1247,
+      "line_number": 1258,
       "context": "getFormGalleryContextOptions = (item, t, navigate) => {\n return [\n {\n key: \"create\",\n label: t(\"Common:Create\"),\n onClick: () => this.onCreateOform(navigate),\n },\n {\n key: \"template-info\",\n label: t(\"FormGallery:TemplateInfo\"),",
       "module": "/packages/client"
     },

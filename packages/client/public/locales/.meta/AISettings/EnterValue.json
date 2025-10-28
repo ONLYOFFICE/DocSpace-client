@@ -1,0 +1,28 @@
+{
+  "key_path": "EnterValue",
+  "content": "Enter value",
+  "content_en_sha1_hash": "3b77dd997a74a5df565010153bcadda6eb69018e",
+  "created_at": "2025-10-27T16:14:31.646Z",
+  "updated_at": "2025-10-27T17:30:10.148Z",
+  "comment": {
+    "text": "Placeholder text for an input field requesting a value from the user. This text appears within an input field in the AI settings, specifically within the advanced server settings section. Translators should ensure the meaning of \"value\" is clear in the target language.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:30:10.148Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useAdvancedSettings.tsx",
+      "line_number": 146,
+      "context": "<TextInput\n type={InputType.text}\n size={InputSize.base}\n value={headerValues[index]}\n onChange={(e) => onChangeHeaderValue(index, e.target.value)}\n placeholder={t(\"AISettings:EnterValue\")}\n scale\n />\n </FieldContainer>\n </React.Fragment>\n ))}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

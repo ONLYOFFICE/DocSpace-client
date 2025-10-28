@@ -45,6 +45,8 @@ export const getDialogContent = (
   isRoom,
   isTemplatesFolder,
   isSharedWithMeFolderRoot,
+  isAIAgent,
+  isAIAgentsFolderRoot,
   unsubscribe,
 ) => {
   if (!selection) return null;
@@ -70,6 +72,20 @@ export const getDialogContent = (
         values={{ count: selection.length }}
         components={{ 1: <Text fontWeight={600} as="span" /> }}
       />
+    );
+  }
+
+  if (isAIAgent) {
+    return (
+      <>
+        <Trans
+          t={t}
+          i18nKey="DeleteAIAgentDescription"
+          ns="DeleteDialog"
+          values={{ agentName: selection[0]?.title }}
+        />{" "}
+        {t("Common:WantToContinue")}
+      </>
     );
   }
 
@@ -180,7 +196,8 @@ export const getDialogContent = (
     isPersonalRoom ||
     isRoom ||
     isTemplatesFolder ||
-    isSharedWithMeFolderRoot
+    isSharedWithMeFolderRoot ||
+    isAIAgentsFolderRoot
   ) {
     if (isSingle) {
       return (

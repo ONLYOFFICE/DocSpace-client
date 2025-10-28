@@ -39,7 +39,7 @@ import {
 } from "../../../api/files/types";
 import { TRoom, TRoomSecurity } from "../../../api/rooms/types";
 import { TTranslation } from "../../../types";
-import { FileType } from "../../../enums";
+import { FileType, FolderType } from "../../../enums";
 
 import { FilesSelectorProps, TFilesSelectorInit } from "../FilesSelector.types";
 import {
@@ -136,7 +136,7 @@ const useSelectorState = ({
       : [],
   );
   const [selectedItemType, setSelectedItemType] = React.useState<
-    "rooms" | "files" | undefined
+    "rooms" | "files" | "agents" | undefined
   >(withInit ? initSelectedItemType : undefined);
   const [selectedItemId, setSelectedItemId] = React.useState<
     number | string | undefined
@@ -164,6 +164,27 @@ const useSelectorState = ({
     boolean | undefined
   >(checkCreating);
   const [isInit, setIsInit] = React.useState<boolean>(!withInit);
+  const [isInsideKnowledge, setIsInsideKnowledge] =
+    React.useState<boolean>(false);
+  const [isInsideResultStorage, setIsInsideResultStorage] =
+    React.useState<boolean>(false);
+
+  const [withCreateState, setWithCreateState] =
+    React.useState<boolean>(withCreate);
+
+  React.useEffect(() => {
+    const isInsideKnowledgeState = !!selectedTreeNode?.path?.find(
+      (f) => f.folderType === FolderType.Knowledge,
+    );
+    const isInsideResultStorageState = !!selectedTreeNode?.path?.find(
+      (f) => f.folderType === FolderType.ResultStorage,
+    );
+    setWithCreateState(
+      withCreate && !isInsideKnowledgeState && !isInsideResultStorageState,
+    );
+    setIsInsideKnowledge(isInsideKnowledgeState);
+    setIsInsideResultStorage(isInsideResultStorageState);
+  }, [selectedTreeNode, withCreate]);
 
   return {
     breadCrumbs,
@@ -192,6 +213,11 @@ const useSelectorState = ({
     setIsDisabledFolder,
     isInit,
     setIsInit,
+    isInsideKnowledge,
+    setIsInsideKnowledge,
+    isInsideResultStorage,
+    setIsInsideResultStorage,
+    withCreateState,
   };
 };
 

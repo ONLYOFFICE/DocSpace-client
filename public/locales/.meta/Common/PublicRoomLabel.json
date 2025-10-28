@@ -3,7 +3,7 @@
   "content": "Public",
   "content_en_sha1_hash": "dc5eb704bbcae1aff4efb71c55461d47767dabe7",
   "created_at": "2025-05-19T21:30:47.669Z",
-  "updated_at": "2025-10-13T13:22:36.076Z",
+  "updated_at": "2025-10-27T16:14:33.805Z",
   "comment": {
     "text": "The PublicRoomLabel translation key is used to display the English content \"Public\" in a public room context, likely appearing as a button label or title. This text is used to identify and distinguish public rooms from other types of rooms in an application.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 377,
-      "context": "case `room-${RoomsType.FormRoom}`:\n return t(\"Common:FormRoom\");\n \n case `room-${RoomsType.PublicRoom}`:\n return t(\"Common:PublicRoomLabel\");\n case `room-${RoomsType.VirtualDataRoom}`:\n return t(\"Common:VirtualDataRoom\");\n \n default:\n return \"\";",
+      "line_number": 385,
+      "context": "case `room-${RoomsType.AIRoom}`:\n return \"AI Room\";\n \n case `room-${RoomsType.PublicRoom}`:\n return t(\"Common:PublicRoomLabel\");\n case `room-${RoomsType.VirtualDataRoom}`:\n return t(\"Common:VirtualDataRoom\");\n \n default:\n return \"\";",
       "module": "/packages/shared"
     }
   ],

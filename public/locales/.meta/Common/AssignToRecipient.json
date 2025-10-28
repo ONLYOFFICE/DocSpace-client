@@ -3,7 +3,7 @@
   "content": "Assign to recipient",
   "content_en_sha1_hash": "e3a067738d081fe9791779a3510cc3a0c8f3b0d1",
   "created_at": "2025-10-13T13:21:58.769Z",
-  "updated_at": "2025-10-13T14:26:17.672Z",
+  "updated_at": "2025-10-27T16:14:33.755Z",
   "comment": {
     "text": "This key translates the label for a button or link that assigns a task or record to a recipient. It's used in a dialog panel, likely within a user interface element that allows users to select a recipient. The text guides the user to complete the assignment process.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
-      "line_number": 223,
+      "line_number": 242,
       "context": "const disabledSubmit = roles.some((role) => !role.user);\n \n const headerProps = useMemo(\n () =>\n ({\n headerLabel: t(\"Common:AssignToRecipient\"),\n withoutBackButton: false,\n withoutBorder: false,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/shared"
     }

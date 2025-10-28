@@ -100,6 +100,7 @@ export const files: TDownloadedFile[] = [
       CreateRoomFrom: false,
       EditForm: false,
       Embed: false,
+      Vectorization: false,
     },
     viewAccessibility: {
       ImageView: false,
@@ -185,6 +186,7 @@ export const files: TDownloadedFile[] = [
       CreateRoomFrom: false,
       EditForm: false,
       Embed: false,
+      Vectorization: false,
     },
     viewAccessibility: {
       ImageView: false,
@@ -271,6 +273,7 @@ export const files: TDownloadedFile[] = [
       CreateRoomFrom: false,
       EditForm: false,
       Embed: false,
+      Vectorization: false,
     },
     viewAccessibility: {
       ImageView: false,
@@ -357,6 +360,7 @@ export const files: TDownloadedFile[] = [
       CreateRoomFrom: false,
       EditForm: false,
       Embed: false,
+      Vectorization: false,
     },
     viewAccessibility: {
       ImageView: false,
@@ -449,6 +453,7 @@ export const files: TDownloadedFile[] = [
       CopyLink: true,
       Embed: true,
       EditForm: false,
+      Vectorization: false,
     },
     viewAccessibility: {
       ImageView: false,
@@ -540,6 +545,7 @@ export const files: TDownloadedFile[] = [
       CopyLink: true,
       Embed: true,
       EditForm: false,
+      Vectorization: false,
     },
     viewAccessibility: {
       ImageView: false,

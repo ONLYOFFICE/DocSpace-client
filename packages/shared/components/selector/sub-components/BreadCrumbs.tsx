@@ -260,6 +260,7 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
                 id: item.id,
                 label: item.label,
                 isRoom: item.isRoom,
+                isAgent: item.isAgent,
               });
             }}
           >

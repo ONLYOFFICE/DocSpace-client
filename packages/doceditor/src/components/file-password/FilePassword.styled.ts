@@ -44,7 +44,7 @@ export const StyledPage = styled.div`
   .logo-wrapper {
     max-width: 386px;
     display: block;
-    padding-bottom: 64px;
+    padding-bottom: 40px;
   }
 
   @media ${mobile} {

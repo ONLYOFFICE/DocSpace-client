@@ -3,7 +3,7 @@
   "content": "Rooms pinned: {{count}}",
   "content_en_sha1_hash": "23f56551973ecb4a877fb8be024a9b20d1eeffb5",
   "created_at": "2025-05-19T21:30:56.129Z",
-  "updated_at": "2025-10-13T14:41:03.131Z",
+  "updated_at": "2025-10-27T16:14:33.667Z",
   "comment": {
     "text": "This translation key is used to display a message indicating how many rooms are pinned, typically shown as a count in an UI component displaying a list of files or elements. It appears when multiple items are selected and is often displayed in a success toast notification. Translators should replace the placeholder \"{{count}}\" with the actual number of pinned rooms.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1308,
+      "line_number": 1331,
       "context": "const itemCount = { count: elems.length };\n \n const translationForOneItem = isPin ? t(\"RoomPinned\") : t(\"RoomUnpinned\");\n const translationForSeverals = isPin\n ? t(\"RoomsPinned\", { ...itemCount })\n : t(\"RoomsUnpinned\", { ...itemCount });\n \n toastr.success(\n elems.length > 1 ? translationForSeverals : translationForOneItem,\n );",
       "module": "/packages/client"
     }

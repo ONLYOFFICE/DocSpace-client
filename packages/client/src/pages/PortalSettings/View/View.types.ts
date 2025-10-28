@@ -37,6 +37,7 @@ export type TView =
   | "payments"
   | "bonus"
   | "services"
+  | "ai-settings"
   | "";
 
 export type ViewProps = {
@@ -44,6 +45,7 @@ export type ViewProps = {
   loadBaseInfo: (page: string) => Promise<void>;
   isMobileView: boolean;
   settingsStore: TStore["settingsStore"];
+  standalone: boolean;
   tfaStore: TStore["tfaStore"];
   backupStore: TStore["backup"];
   ssoFormStore: TStore["ssoStore"];
@@ -64,4 +66,7 @@ export type ViewProps = {
   servicesStore: TStore["servicesStore"];
   currentTariffStatusStore: TStore["currentTariffStatusStore"];
   clearAbortControllerArr: TStore["settingsStore"]["clearAbortControllerArr"];
+  fetchAIProviders: TStore["aiSettingsStore"]["fetchAIProviders"];
+  fetchMCPServers: TStore["aiSettingsStore"]["fetchMCPServers"];
+  fetchWebSearch: TStore["aiSettingsStore"]["fetchWebSearch"];
 };

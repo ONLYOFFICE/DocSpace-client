@@ -37,7 +37,6 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import type {
   ExternalManualBackupProps,
-  InjectedManualBackupProps,
   ManualBackupWrapperProps,
 } from "./ManualBackup.types";
 
@@ -93,11 +92,7 @@ const ManualBackupWrapper = ({
   );
 };
 
-export default inject<
-  TStore,
-  ExternalManualBackupProps,
-  InjectedManualBackupProps
->(
+export default inject(
   ({
     backup,
     filesSelectorInput,
@@ -109,7 +104,7 @@ export default inject<
     currentQuotaStore,
     paymentStore,
     clientLoadingStore,
-  }) => {
+  }: TStore) => {
     const {
       accounts,
       isValidForm,

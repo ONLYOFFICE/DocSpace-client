@@ -369,6 +369,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       "ts-jest",
       "ts-node",
       "jest-html-reporter",
+      "linkifyjs"
       "@biomejs/biome",
     ];
 

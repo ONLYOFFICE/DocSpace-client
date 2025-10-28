@@ -715,6 +715,7 @@ export async function startUploadSession(
     method: "post",
     url: `/files/${folderId}/upload/create_session`,
     data,
+    skipForbidden: true,
   })) as TUploadOperation;
 
   return res;

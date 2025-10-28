@@ -105,6 +105,7 @@ const SelectFolderDialog = ({
       getIsDisabled={getIsDisabled}
       withCreate
       formProps={formProps}
+      withAIAgentsTreeFolder
     />
   );
 };

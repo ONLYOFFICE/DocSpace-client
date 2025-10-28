@@ -100,6 +100,7 @@ import { getCountTilesInRow } from "./getCountTilesInRow";
 import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
 import * as userFilterUtils from "./userFilterUtils";
 import * as filterConstants from "./filterConstants";
+import { getAiProviderIcon, getServerIcon, getAiProviderLabel } from "./ai";
 
 export {
   isBetaLanguage,
@@ -163,6 +164,9 @@ export {
   getSelectFormatTranslation,
   userFilterUtils,
   filterConstants,
+  getAiProviderIcon,
+  getServerIcon,
+  getAiProviderLabel,
 };
 
 export const getModalType = () => {
@@ -325,6 +329,7 @@ export const getCheckboxItemId = (key: string | FilterType | RoomsType) => {
       return "selected-only-files";
 
     case `room-${RoomsType.CustomRoom}`:
+    case `room-${RoomsType.AIRoom}`:
       return "selected-only-custom-room";
     case `room-${RoomsType.EditingRoom}`:
       return "selected-only-collaboration-rooms";
@@ -372,6 +377,9 @@ export const getCheckboxItemLabel = (
 
     case `room-${RoomsType.FormRoom}`:
       return t("Common:FormRoom");
+
+    case `room-${RoomsType.AIRoom}`:
+      return "AI Room";
 
     case `room-${RoomsType.PublicRoom}`:
       return t("Common:PublicRoomLabel");

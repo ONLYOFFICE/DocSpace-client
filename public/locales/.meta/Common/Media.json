@@ -3,7 +3,7 @@
   "content": "Media",
   "content_en_sha1_hash": "0c77aeece8c258113148c6fb487946bf97b34672",
   "created_at": "2025-05-19T21:30:46.398Z",
-  "updated_at": "2025-10-13T13:22:35.755Z",
+  "updated_at": "2025-10-27T16:14:33.438Z",
   "comment": {
     "text": "This translation key is used to display the label for a filter option that categorizes files as \"Media\". It appears in a file browser or list view, allowing users to select files based on their media type. Translators should provide an equivalent phrase for common languages.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 619,
+      "line_number": 727,
       "context": "break;\n case FilterType.ImagesOnly.toString():\n label = t(\"Common:Images\");\n break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():\n label = t(\"Common:Files\");\n break;\n case FilterType.PDFForm.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 619,
+      "line_number": 727,
       "context": "break;\n case FilterType.ImagesOnly.toString():\n label = t(\"Common:Images\");\n break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():\n label = t(\"Common:Files\");\n break;\n case FilterType.PDFForm.toString():",
       "module": "/packages/client"
     },
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 188,
+      "line_number": 193,
       "context": "label: t(\"Common:Images\"),\n typeKey: FilterType.ImagesOnly,\n },\n {\n key: \"filter-type-media\",\n label: t(\"Common:Media\"),\n typeKey: FilterType.MediaOnly,\n },\n ];\n \n const [filterBy, setFilterBy] = useState({",
       "module": "/packages/client"
     },
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 360,
+      "line_number": 365,
       "context": "case FilterType.SpreadsheetsOnly:\n return t(\"Common:Spreadsheets\");\n case FilterType.ImagesOnly:\n return t(\"Common:Images\");\n case FilterType.MediaOnly:\n return t(\"Common:Media\");\n case FilterType.ArchiveOnly:\n return t(\"Common:Archives\");\n case FilterType.FilesOnly:\n return t(\"Common:Files\");\n case FilterType.DiagramsOnly:",
       "module": "/packages/shared"
     }

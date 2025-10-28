@@ -3,7 +3,7 @@
   "content": "Sign in",
   "content_en_sha1_hash": "ada2e9e96fa9ce85430225b412068b5b62b79800",
   "created_at": "2025-05-19T21:30:46.309Z",
-  "updated_at": "2025-10-16T07:29:35.706Z",
+  "updated_at": "2025-10-27T16:14:33.447Z",
   "comment": {
     "text": "The \"LoginButton\" translation key is used for the text \"Sign in\", which serves as a label for buttons that trigger user login actions. This text appears in various UI elements, including a header button on the Home page and within a public toast message, inviting users to sign in.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 827,
+      "line_number": 863,
       "context": "contextMenuHeader={isProfile ? undefined : contextMenuHeader}\n />\n {showSignInButton ? (\n <Button\n className=\"header_sign-in-button\"\n label={t(\"Common:LoginButton\")}\n size={ButtonSize.small}\n onClick={onSignInClick}\n isDisabled={signInButtonIsDisabled}\n primary\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
-      "line_number": 153,
+      "line_number": 146,
       "context": "fontSize=\"12px\"\n fontWeight={400}\n className=\"public-toast_link\"\n onClick={onOpenSignInWindow}\n >\n {t(\"Common:LoginButton\")}\n </Link>\n </StyledToast>\n );\n \n toastr.info(toastText);",
       "module": "/packages/client"
     },

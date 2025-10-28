@@ -1,0 +1,28 @@
+{
+  "key_path": "DeleteAgent",
+  "content": "Delete agent",
+  "content_en_sha1_hash": "7a10a4a6f851226bb23c4854cba9f735001c9f1b",
+  "created_at": "2025-10-27T16:14:30.107Z",
+  "updated_at": "2025-10-27T17:59:14.307Z",
+  "comment": {
+    "text": "This key displays the text for a \"Delete\" button or action, specifically used when deleting an agent. It appears within a context menu or similar UI element when managing agents within the application. Translators should ensure this conveys a clear and actionable deletion process.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:59:14.307Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2363,
+      "context": "id: \"option_delete\",\n key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isAIAgent\n ? t(\"DeleteAgent\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -31,7 +31,7 @@ import { useParams } from "react-router";
 
 import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { Text } from "@docspace/shared/components/text";
+import { TextWithTooltip as Text } from "@docspace/shared/components/text";
 
 import { tablet, mobile, injectDefaultTheme } from "@docspace/shared/utils";
 import FilterDialog from "./FilterDialog";

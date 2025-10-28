@@ -27,8 +27,9 @@
 import styled from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
+import { SpanWithTooltip } from "@docspace/shared/components/tooltip";
 
-const StyledHistoryText = styled.span`
+const StyledHistoryText = styled(SpanWithTooltip)`
   overflow: hidden;
 
   .history-text {

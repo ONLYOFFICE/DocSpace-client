@@ -29,7 +29,7 @@ import classNames from "classnames";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 
 import { useTheme } from "../../hooks/useTheme";
-import { Text } from "../text";
+import { TextWithTooltip as Text } from "../text";
 import { IconButton } from "../icon-button";
 import { DivWithTooltip } from "../tooltip";
 import styles from "./SelectorAddButton.module.scss";

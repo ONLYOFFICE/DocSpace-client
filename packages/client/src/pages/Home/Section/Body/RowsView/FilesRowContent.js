@@ -29,7 +29,7 @@ import { withTranslation } from "react-i18next";
 import { isTablet } from "@docspace/shared/utils";
 
 import { LinkWithTooltip as Link } from "@docspace/shared/components/link";
-import { TextWithTooltip as Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { FilesRowContent as SimpleFilesRowContent } from "@docspace/shared/components/files-row";
 import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";

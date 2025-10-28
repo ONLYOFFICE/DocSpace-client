@@ -32,6 +32,7 @@ import { IconButton } from "../../icon-button";
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 import { TPlusButtonProps } from "../Navigation.types";
 import { isMobile } from "../../../utils";
+import { DivWithTooltip } from "../../tooltip";
 
 const PlusButton = ({
   className,
@@ -42,10 +43,13 @@ const PlusButton = ({
   id,
   onCloseDropBox,
   forwardedRef,
+  title,
   ...rest
 }: TPlusButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<ContextMenuRefType>(null);
+
+  const Wrapper = title ? DivWithTooltip : "div";
 
   const toggle = (e: React.MouseEvent<HTMLDivElement>, open: boolean) => {
     if (open) {
@@ -70,9 +74,10 @@ const PlusButton = ({
   const model = getData();
 
   return (
-    <div
+    <Wrapper
       ref={forwardedRef}
       className={className}
+      title={title}
       {...rest}
       data-testid="plus-button"
     >
@@ -94,7 +99,7 @@ const PlusButton = ({
         ignoreChangeView
         withBackdrop={isMobile()}
       />
-    </div>
+    </Wrapper>
   );
 };
 

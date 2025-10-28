@@ -28,6 +28,7 @@ import { useTranslation } from "react-i18next";
 
 import { EmployeeStatus } from "@docspace/shared/enums";
 import { TUser } from "@docspace/shared/api/people/types";
+import { DivWithTooltip } from "@docspace/shared/components/tooltip";
 
 import {
   Avatar,
@@ -68,16 +69,23 @@ const GroupMember = ({ groupMember, isManager }: GroupMemberProps) => {
 
       <div className={styles.mainWrapper}>
         <div className={styles.nameWrapper}>
-          <div className={styles.name} title={groupMember.displayName}>
+          <DivWithTooltip
+            className={styles.name}
+            title={groupMember.displayName}
+          >
             {groupMember.displayName}
-          </div>
+          </DivWithTooltip>
           {groupMember.status === EmployeeStatus.Pending ? (
             <StyledSendClockIcon />
           ) : null}
         </div>
-        <div className={styles.email} title={groupMember.email}>
+        <DivWithTooltip
+          className={styles.email}
+          title={groupMember.email}
+          tooltipFitToContent
+        >
           {groupMember.email}
-        </div>
+        </DivWithTooltip>
       </div>
 
       <div className={styles.contextBtnWrapper}>

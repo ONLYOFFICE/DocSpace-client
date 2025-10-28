@@ -31,6 +31,7 @@ import classNames from "classnames";
 
 import { TViewSelectorOption, ViewSelectorProps } from "./ViewSelector.types";
 import styles from "./ViewSelector.module.scss";
+import { DivWithTooltip } from "../tooltip";
 
 const ViewSelector = ({
   isDisabled,
@@ -69,7 +70,7 @@ const ViewSelector = ({
       const { value, icon, id } = el;
 
       return (
-        <div
+        <DivWithTooltip
           className={classNames(styles.iconWrapper, {
             "view-selector-icon": true,
             [styles.disabled]: isDisabled,
@@ -88,7 +89,7 @@ const ViewSelector = ({
           data-testid="view-selector-icon"
         >
           {typeof icon === "string" ? <ReactSVG src={icon} /> : icon}
-        </div>
+        </DivWithTooltip>
       );
     });
   };
@@ -102,7 +103,7 @@ const ViewSelector = ({
       const { value, icon } = element;
 
       return (
-        <div
+        <DivWithTooltip
           className={classNames(styles.iconWrapper, {
             [styles.disabled]: isDisabled,
             [styles.filter]: isFilter,
@@ -117,7 +118,7 @@ const ViewSelector = ({
           data-testid="view-selector-icon"
         >
           {typeof icon === "string" ? <ReactSVG src={icon} /> : icon}
-        </div>
+        </DivWithTooltip>
       );
     }
 

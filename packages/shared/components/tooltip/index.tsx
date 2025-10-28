@@ -177,3 +177,4 @@ export { withTooltip, withTooltipForElement } from "./withTooltip";
 
 export const DivWithTooltip = withTooltipForElement("div");
 export const SpanWithTooltip = withTooltipForElement("span");
+export const LabelWithTooltip = withTooltipForElement("label");

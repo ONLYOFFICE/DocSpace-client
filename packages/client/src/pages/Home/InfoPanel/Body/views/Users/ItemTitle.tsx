@@ -101,7 +101,7 @@ const ItemTitle = ({
   const contextOptions = getData();
 
   const userAvatar = userSelection.hasAvatar
-    ? userSelection.avatarMax
+    ? userSelection.avatarMax 
     : DefaultUserPhoto;
   const isSSO = userSelection.isSSO || false;
   const isLDAP = userSelection.isLDAP || false;
@@ -135,6 +135,7 @@ const ItemTitle = ({
       <div className={styles.infoText}>
         <div className={styles.infoWrapper}>
           <Text
+            tooltipFitToContent
             className={styles.infoTextName}
             title={displayName}
             truncate
@@ -150,6 +151,7 @@ const ItemTitle = ({
         </div>
         {!isPending && !!displayName ? (
           <Text
+            tooltipFitToContent
             className={styles.infoTextEmail}
             title={userSelection.email}
             fontSize="13px"

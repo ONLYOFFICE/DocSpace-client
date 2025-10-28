@@ -34,6 +34,7 @@ interface WithTooltipProps {
   tooltipContent?: ReactNode;
   tooltipId?: string;
   tooltipPlace?: TTooltipPlace;
+  tooltipFitToContent?: boolean;
 }
 
 export function withTooltip<T extends object>(
@@ -45,6 +46,7 @@ export function withTooltip<T extends object>(
       tooltipContent,
       tooltipId,
       tooltipPlace = "bottom" as TTooltipPlace,
+      tooltipFitToContent = false,
       ...restProps
     } = props;
 
@@ -52,6 +54,26 @@ export function withTooltip<T extends object>(
       const uniqueId =
         tooltipId || `tooltip-${Math.random().toString(36).substring(2, 11)}`;
       const content: ReactNode = tooltipContent || title;
+
+      if (tooltipFitToContent) {
+        return (
+          <>
+            <span
+              data-tooltip-id={uniqueId}
+              data-tip=""
+              style={{ display: "inline-block", width: "fit-content" }}
+            >
+              <WrappedComponent {...(restProps as T)} ref={ref} />
+            </span>
+            <Tooltip
+              id={uniqueId}
+              place={tooltipPlace}
+              getContent={() => content}
+              delayShow={DEFAULT_DELAY_SHOW}
+            />
+          </>
+        );
+      }
 
       return (
         <>
@@ -87,6 +109,7 @@ export function withTooltipForElement<
       tooltipContent,
       tooltipId,
       tooltipPlace = "bottom" as TTooltipPlace,
+      tooltipFitToContent = false,
       ...restProps
     } = props;
 
@@ -94,6 +117,29 @@ export function withTooltipForElement<
       const uniqueId =
         tooltipId || `tooltip-${Math.random().toString(36).substring(2, 11)}`;
       const content: ReactNode = tooltipContent || title;
+
+      if (tooltipFitToContent) {
+        return (
+          <>
+            <span
+              data-tooltip-id={uniqueId}
+              data-tip=""
+              style={{ display: "inline-block", width: "fit-content" }}
+            >
+              {React.createElement<React.ComponentPropsWithoutRef<T>>(Element, {
+                ...(restProps as React.ComponentPropsWithoutRef<T>),
+                ref,
+              })}
+            </span>
+            <Tooltip
+              id={uniqueId}
+              place={tooltipPlace}
+              getContent={() => content}
+              delayShow={DEFAULT_DELAY_SHOW}
+            />
+          </>
+        );
+      }
 
       return (
         <>

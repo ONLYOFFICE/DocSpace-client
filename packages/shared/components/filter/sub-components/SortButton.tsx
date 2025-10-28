@@ -36,6 +36,7 @@ import { DropDownItem } from "../../drop-down-item";
 import { IconButton } from "../../icon-button";
 import { ViewSelector } from "../../view-selector";
 import { Text } from "../../text";
+import { DivWithTooltip } from "../../tooltip";
 
 import { SortButtonProps, TSortDataItem } from "../Filter.types";
 import styles from "../Filter.module.scss";
@@ -57,6 +58,8 @@ const SortButton = ({
   title,
 }: SortButtonProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
+
+  const Wrapper = title ? DivWithTooltip : "div";
 
   const [sortData, setSortData] = React.useState<TSortDataItem[]>([]);
   const [selectedSortData, setSelectedSortData] = React.useState({
@@ -190,7 +193,7 @@ const SortButton = ({
   }
 
   return (
-    <div
+    <Wrapper
       onClick={toggleCombobox}
       id={id}
       title={title}
@@ -223,7 +226,7 @@ const SortButton = ({
       >
         <IconButton iconNode={<SortReactSvg />} size={16} />
       </ComboBox>
-    </div>
+    </Wrapper>
   );
 };
 

@@ -28,8 +28,9 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { mobile } from "@docspace/shared/utils";
 import styled, { css } from "styled-components";
 import { ComboBox } from "@docspace/shared/components/combobox";
+import { DivWithTooltip } from "@docspace/shared/components/tooltip";
 
-export const SortButton = styled.div`
+export const SortButton = styled(DivWithTooltip)`
   .combo-button {
     padding-inline-end: 3px;
     background: ${(props) =>

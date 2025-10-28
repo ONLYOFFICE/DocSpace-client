@@ -31,7 +31,8 @@ import CheckboxIndeterminateIcon from "PUBLIC_DIR/images/checkbox.indeterminate.
 import CheckboxCheckedIcon from "PUBLIC_DIR/images/checkbox.checked.react.svg";
 import CheckboxIcon from "PUBLIC_DIR/images/checkbox.react.svg";
 
-import { Text } from "../text";
+import { TextWithTooltip as Text } from "../text";
+import { LabelWithTooltip } from "../tooltip";
 
 import { CheckboxProps } from "./Checkbox.types";
 import styles from "./Checkbox.module.scss";
@@ -114,7 +115,7 @@ const CheckboxPure = ({
   };
 
   return (
-    <label
+    <LabelWithTooltip
       id={id}
       style={style}
       className={classNames(styles.label, className, {
@@ -164,7 +165,7 @@ const CheckboxPure = ({
           </span>
         ) : null}
       </div>
-    </label>
+    </LabelWithTooltip>
   );
 };
 

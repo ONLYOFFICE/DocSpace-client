@@ -1825,6 +1825,8 @@ class FilesStore {
         const isPrivacyFolder =
           data.current.rootFolderType === FolderType.Privacy;
 
+        let currentFolder = data.current;
+
         const navigationPath = await Promise.all(
           data.pathParts.map(async (folder, idx) => {
             const { Rooms, Archive, AIAgents } = FolderType;
@@ -1912,8 +1914,6 @@ class FilesStore {
             .reverse();
         });
 
-        let currentFolder = data.current;
-
         if (
           currentFolder.type === FolderType.ResultStorage ||
           currentFolder.type === FolderType.Knowledge
@@ -1921,7 +1921,7 @@ class FilesStore {
           if (currentFolder.type === FolderType.Knowledge) {
             this.aiRoomStore.setKnowledgeId(currentFolder.id);
             this.aiRoomStore.setResultId(null);
-          } else {
+          } else if (currentFolder.type === FolderType.ResultStorage) {
             this.aiRoomStore.setKnowledgeId(null);
             this.aiRoomStore.setResultId(currentFolder.id);
           }
@@ -1932,20 +1932,38 @@ class FilesStore {
               : await api.files.getFolderInfo(currentFolder.parentId);
 
           this.aiRoomStore.setCurrentTab(
-            currentFolder.type === FolderType.ResultStorage
-              ? "result"
-              : "knowledge",
+            currentFolder.type === FolderType.Knowledge
+              ? "knowledge"
+              : "result",
           );
 
-          currentFolder = { ...aiRoom, isRoom: true };
+          currentFolder = {
+            ...aiRoom,
+            security: {
+              ...currentFolder.security,
+              UseChat: aiRoom.security.UseChat,
+            },
+            isRoom: true,
+          };
         } else if (currentFolder.roomType === RoomsType.AIRoom) {
           this.aiRoomStore.setCurrentTab("chat");
           this.aiRoomStore.setKnowledgeId(null);
           this.aiRoomStore.setResultId(null);
-        } else if (currentFolder.rootRoomType === RoomsType.AIRoom) {
-          this.aiRoomStore.setCurrentTab("result");
+        } else if (currentFolder.rootFolderType === FolderType.AIAgents) {
+          const parentId = navigationPath.find((item) => item.isRoom);
+          const aiRoom = await api.files.getFolderInfo(parentId.id);
+
+          currentFolder = {
+            ...currentFolder,
+            security: {
+              ...currentFolder.security,
+              UseChat: aiRoom.security.UseChat,
+            },
+          };
+
           this.aiRoomStore.setKnowledgeId(null);
-          this.aiRoomStore.setResultId(currentFolder.id);
+          this.aiRoomStore.setResultId(null);
+          this.aiRoomStore.setCurrentTab("result");
         } else {
           this.aiRoomStore.setKnowledgeId(null);
           this.aiRoomStore.setResultId(null);

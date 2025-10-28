@@ -160,7 +160,7 @@ const FilesRowContent = ({
       </Link>
       <div className="badges">
         {badgesComponent}
-        {(!isRoom && !isRooms) || !isAIAgentsFolder ? quickButtons : null}
+        {!isRoom && !isRooms && !isAIAgentsFolder ? quickButtons : null}
       </div>
 
       {isIndexing ? (

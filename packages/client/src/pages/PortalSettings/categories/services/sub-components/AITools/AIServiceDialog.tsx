@@ -83,6 +83,7 @@ interface BackupServiceDialogProps {
     item: number | null,
     fractionDigits: number,
   ) => string;
+  logoText?: string;
 }
 
 interface ServiceOption {
@@ -99,6 +100,7 @@ const AIServiceDialog: React.FC<BackupServiceDialogProps> = ({
   isEnabled = false,
   aiToolsPrice,
   formatWalletCurrency,
+  logoText,
 }) => {
   const { t } = useTranslation(["Services", "Common", "Payments"]);
 
@@ -179,7 +181,10 @@ const AIServiceDialog: React.FC<BackupServiceDialogProps> = ({
           title={t("Services:EnableAItools", {
             currency: formatWalletCurrency!(aiToolsPrice!, 2),
           })}
-          description={t("Services:EnableAItoolsDescription")}
+          description={t("Services:EnableAItoolsDescription", {
+            organizationName: logoText,
+            productName: t("Common:ProductName"),
+          })}
           testId="service-ai-toggle-button"
         />
         <div className={styles.servicesList}>
@@ -206,14 +211,15 @@ const AIServiceDialog: React.FC<BackupServiceDialogProps> = ({
   );
 };
 
-export default inject(({ paymentStore }: TStore) => {
+export default inject(({ paymentStore, settingsStore }: TStore) => {
   const { servicesQuotasFeatures, aiToolsPrice, formatWalletCurrency } =
     paymentStore;
-
+  const { logoText } = settingsStore;
   const feature = servicesQuotasFeatures.get(AI_TOOLS);
   return {
     isEnabled: feature?.value,
     aiToolsPrice,
     formatWalletCurrency,
+    logoText,
   };
 })(observer(AIServiceDialog));

@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2025-10-13T23:30:49.426Z",
+  "updated_at": "2025-10-27T16:14:33.338Z",
   "comment": {
     "text": "This translation key is used to display an error message when an unexpected issue occurs while performing a specific action, such as opening a link or sending a test email. It appears in a notification dialog, typically triggered by user interaction, and informs the user that they should try again later or contact support for assistance.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 88,
+      "line_number": 91,
       "context": "return i18n.t(\"Common:NewFolder\");\n }\n };\n \n export const getUnexpectedErrorText = () => {\n return i18n.t(\"Common:UnexpectedError\");\n };\n \n export const connectedCloudsTitleTranslation = (key, t) => {\n switch (key) {\n case \"Box\":",
       "module": "/packages/client"
     },
@@ -54,13 +54,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 453,
+      "line_number": 480,
       "context": "const checkStatus = async () => {\n try {\n const response = await checkTransactionHistoryReport();\n \n if (!response) {\n reject(new Error(t(\"Common:UnexpectedError\")));\n return;\n }\n \n if (response.error) {\n reject(new Error(response.error));",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 453,
+      "line_number": 480,
       "context": "const checkStatus = async () => {\n try {\n const response = await checkTransactionHistoryReport();\n \n if (!response) {\n reject(new Error(t(\"Common:UnexpectedError\")));\n return;\n }\n \n if (response.error) {\n reject(new Error(response.error));",
       "module": "/packages/client"
     },
@@ -72,19 +72,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
-      "line_number": 193,
+      "line_number": 205,
       "context": "try {\n await setServiceState(raw);\n } catch (error) {\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n changeServiceState(id);\n }\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
-      "line_number": 193,
+      "line_number": 205,
       "context": "try {\n await setServiceState(raw);\n } catch (error) {\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n changeServiceState(id);\n }\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
-      "line_number": 193,
+      "line_number": 205,
       "context": "try {\n await setServiceState(raw);\n } catch (error) {\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n changeServiceState(id);\n }\n }\n };",
       "module": "/packages/client"
     },
@@ -156,8 +156,8 @@
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 276,
-      "context": "window.location.replace(\n combineUrl(window.ClientConfig?.proxy?.url, ssoLogoutUrl || \"/login\"),\n );\n } catch (e) {\n console.error(e);\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n };\n \n onDebugClick = () => {\n this.setIsDebugDialogVisible(true);",
+      "line_number": 277,
+      "context": "combineUrl(window.ClientConfig?.proxy?.url, ssoLogoutUrl || \"/login\"),\n );\n } catch (e) {\n if (axios.isCancel(e)) return;\n console.error(e);\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n };\n \n onDebugClick = () => {\n this.setIsDebugDialogVisible(true);",
       "module": "/packages/client"
     },
     {
@@ -168,13 +168,13 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1561,
+      "line_number": 1581,
       "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n export const getCategoryType = (location: { pathname: string }) => {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1561,
+      "line_number": 1581,
       "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n export const getCategoryType = (location: { pathname: string }) => {",
       "module": "/packages/shared"
     }

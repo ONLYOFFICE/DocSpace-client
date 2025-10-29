@@ -126,6 +126,8 @@ const RoomLogoCoverDialog = ({
   roomCoverDialogProps,
   roomLogoCoverDialogVisible,
   setEnabledHotkeys,
+  createAgentDialogVisible,
+  editAgentDialogVisible,
 }: CoverDialogProps) => {
   const { t } = useTranslation(["Common", "RoomLogoCover"]);
   const theme = useTheme();
@@ -213,10 +215,7 @@ const RoomLogoCoverDialog = ({
     getCovers();
   }, [getCovers]);
 
-  const onCloseRoomLogo = (
-    e?: React.MouseEvent<HTMLButtonElement>,
-    withSelection = true,
-  ) => {
+  const onCloseRoomLogo = (e?: React.MouseEvent, withSelection = true) => {
     if (openColorPicker) return;
     setRoomCoverDialogProps({
       ...roomCoverDialogProps,
@@ -236,6 +235,8 @@ const RoomLogoCoverDialog = ({
     if (
       createRoomDialogVisible ||
       editRoomDialogPropsVisible ||
+      createAgentDialogVisible ||
+      editAgentDialogVisible ||
       templateEventVisible
     ) {
       onCloseRoomLogo(undefined, false);
@@ -331,6 +332,8 @@ export default inject<TStore>(({ dialogsStore, filesStore }) => {
     getCovers,
     createRoomDialogProps,
     editRoomDialogProps,
+    createAgentDialogProps,
+    editAgentDialogProps,
     setRoomLogoCoverDialogVisible,
     roomLogoCoverDialogVisible,
 
@@ -351,6 +354,8 @@ export default inject<TStore>(({ dialogsStore, filesStore }) => {
     roomCoverDialogProps,
     createRoomDialogVisible: createRoomDialogProps.visible,
     editRoomDialogPropsVisible: editRoomDialogProps.visible,
+    createAgentDialogVisible: createAgentDialogProps.visible,
+    editAgentDialogVisible: editAgentDialogProps.visible,
     templateEventVisible,
     setEnabledHotkeys: filesStore.setEnabledHotkeys,
   };

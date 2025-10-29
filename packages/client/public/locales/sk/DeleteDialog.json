@@ -11,6 +11,7 @@
   "DeleteGroupTitle": "Vymazať skupinu",
   "DeleteItem": "Čoskoro presuniete <strong>{{name}}</strong> do {{trashSection}}.",
   "DeleteItemForever": "Mazanie <strong>{{name}}</strong> bude zahájené.",
+  "DeleteItemsSharedNote": "Upozorňujeme, že ak ste ich s niekým zdieľali, stanú sa nedostupnými.",
   "DeleteRoom": "Miestnosť <strong>\"{{roomName}}\"</strong> bude trvale odstránená. Všetky dáta a prístupy používateľov budú stratené.",
   "DeleteRoomTitle": "Zmazať túto miestnosť?",
   "DeleteRoomWarning": "Rozumiem následky a chcem zmazať miestnosť.",

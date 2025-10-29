@@ -3,7 +3,7 @@
   "content": "The files will be permanently deleted in 30 days.",
   "content_en_sha1_hash": "125c51fbe7fd88dcd5ff6125746eab7bb7819576",
   "created_at": "2025-09-24T13:10:15.414Z",
-  "updated_at": "2025-10-01T15:20:15.668Z",
+  "updated_at": "2025-10-27T16:14:33.254Z",
   "comment": {
     "text": "This text informs the user about the permanent deletion timeline for files moved to the trash. It appears within a delete confirmation dialog, clarifying that files will be permanently removed after 30 days. Translators should ensure the timeframe is accurately conveyed in the target language.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 221,
+      "line_number": 244,
       "context": "<>\n <Trans t={t} i18nKey=\"DeleteFiles\" ns=\"DeleteDialog\">\n You are about to move <strong>files ({{ filesCount }})</strong> to\n {{ trashSection: t(\"Common:TrashSection\") }}.{\" \"}\n </Trans>{\" \"}\n {!isThirdParty ? t(\"FilesDeletedAfter\") : null}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }",
       "module": "/packages/client"
     }

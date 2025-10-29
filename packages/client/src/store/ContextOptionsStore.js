@@ -65,6 +65,7 @@ import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import PluginActionsSvgUrl from "PUBLIC_DIR/images/plugin.actions.react.svg?url";
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
+import CatalogAIAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
 import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
@@ -82,6 +83,8 @@ import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
@@ -502,6 +505,7 @@ class ContextOptionsStore {
     const isArchive = item.rootFolderType === FolderType.Archive;
 
     const { href } = item;
+
     const sharedItem = navigationPath.find((r) => r.shared);
 
     const isShared = shared || sharedItem || item.shared;
@@ -559,6 +563,8 @@ class ContextOptionsStore {
       item.isRoom || item.isFolder,
       needConvert,
       canOpenPlayer,
+      "",
+      item.roomType === RoomsType.AIRoom,
     );
 
     copy(url);
@@ -718,8 +724,7 @@ class ContextOptionsStore {
     this.filesActionsStore.setThirdpartyInfo(providerKey);
   };
 
-  onFillingStatus = (item) => {
-    console.log(item);
+  onFillingStatus = () => {
     this.dialogsStore.setFillingStatusPanelVisible(true);
   };
 
@@ -918,6 +923,12 @@ class ContextOptionsStore {
 
   onClickEditRoom = (item) => {
     const event = new Event(Events.ROOM_EDIT);
+    event.item = item;
+    window.dispatchEvent(event);
+  };
+
+  onClickEditAgent = (item) => {
+    const event = new Event(Events.AGENT_EDIT);
     event.item = item;
     window.dispatchEvent(event);
   };
@@ -1638,9 +1649,14 @@ class ContextOptionsStore {
 
     const hasInfoPanel = contextOptions.includes("show-info");
 
+    const withAI = contextOptions.includes("ask-ai");
+
     // const emailSendIsDisabled = true;
     const showSeparator0 =
-      hasInfoPanel || !isMedia || (item.external && item.isLinkExpired); // || !emailSendIsDisabled;
+      hasInfoPanel ||
+      !isMedia ||
+      (item.external && item.isLinkExpired) ||
+      withAI; // || !emailSendIsDisabled;
 
     const separator0 = showSeparator0
       ? {
@@ -1851,6 +1867,14 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
+        id: "option_vectorization",
+        key: "vectorization",
+        label: t("Files:Vectorization"),
+        icon: RefreshReactSvgUrl,
+        onClick: () => this.filesActionsStore.retryVectorization([item]),
+        disabled: !item.security?.Vectorization,
+      },
+      {
         id: "option_preview",
         key: "preview",
         label: t("Common:Preview"),
@@ -1885,6 +1909,19 @@ class ContextOptionsStore {
       ...pinOptions,
       ...muteOptions,
       separator0,
+      {
+        id: "option_ask-ai",
+        key: "ask-ai",
+        label: t("Common:AskAI"),
+        icon: AISvgUrl,
+        onClick: () =>
+          this.dialogsStore.setAiAgentSelectorDialogProps(true, item),
+        disabled: false,
+      },
+      {
+        key: "separator6",
+        isSeparator: true,
+      },
       {
         id: "option_submit-to-gallery",
         key: "submit-to-gallery",
@@ -1923,8 +1960,12 @@ class ContextOptionsStore {
         isSeparator: true,
       },
       {
-        key: "separator4",
-        isSeparator: true,
+        id: "option_reconnect-storage",
+        key: "reconnect-storage",
+        label: t("Common:ReconnectStorage"),
+        icon: ReconnectSvgUrl,
+        onClick: () => this.onClickReconnectStorage(item, t),
+        disabled: !item.security?.Reconnect || !item.security?.EditRoom,
       },
       {
         id: "option_create-room",
@@ -1949,6 +1990,14 @@ class ContextOptionsStore {
         icon: SettingsReactSvgUrl,
         onClick: () => this.onEditRoomTemplate(item),
         disabled: !isTemplateOwner,
+      },
+      {
+        id: "option_edit-agent",
+        key: "edit-agent",
+        label: t("Common:EditAgent"),
+        icon: SettingsReactSvgUrl,
+        onClick: () => this.onClickEditAgent(item),
+        disabled: false,
       },
       {
         id: "option_save-as-template",
@@ -1984,7 +2033,9 @@ class ContextOptionsStore {
       {
         id: "option_change-room-owner",
         key: "change-room-owner",
-        label: t("Files:ChangeTheRoomOwner"),
+        label: item.isAIAgent
+          ? t("Translations:OwnerChange")
+          : t("Files:ChangeTheRoomOwner"),
         icon: ReconnectSvgUrl,
         onClick: this.onChangeRoomOwner,
         disabled: false,
@@ -2263,7 +2314,7 @@ class ContextOptionsStore {
       {
         id: "option_leave-room",
         key: "leave-room",
-        label: t("LeaveTheRoom"),
+        label: item.isAIAgent ? t("LeaveTheAgent") : t("LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
         disabled:
@@ -2308,12 +2359,17 @@ class ContextOptionsStore {
         key: "delete",
         label: isRootThirdPartyFolder
           ? t("Common:Disconnect")
-          : item.isTemplate
-            ? t("DeleteTemplate")
-            : item.isRoom
-              ? t("Common:DeleteRoom")
-              : t("Common:Delete"),
-        icon: item.isRoom ? RemoveOutlineSvgUrl : TrashReactSvgUrl,
+          : item.isAIAgent
+            ? t("DeleteAgent")
+            : item.isTemplate
+              ? t("DeleteTemplate")
+              : item.isRoom
+                ? t("Common:DeleteRoom")
+                : t("Common:Delete"),
+        icon:
+          item.isRoom && !item.isAIAgent
+            ? RemoveOutlineSvgUrl
+            : TrashReactSvgUrl,
         onClick: () => this.onDelete(item, t),
         disabled: item.isTemplate ? !isTemplateOwner : false,
       },
@@ -2398,7 +2454,11 @@ class ContextOptionsStore {
         groupLabel: t("Common:Manage"),
         groupIcon: SettingsReactSvgUrl,
         itemKeys: [
-          [{ key: "edit-room" }, { key: "save-as-template" }],
+          [
+            { key: "edit-room" },
+            { key: "edit-agent" },
+            { key: "save-as-template" },
+          ],
           [{ key: "download" }, { key: "duplicate-room" }],
           [
             { key: "change-room-owner" },
@@ -2518,8 +2578,8 @@ class ContextOptionsStore {
       (option) => !keysToRemove.includes(option.key),
     );
 
-    const separatorIndex = resultOptions.findIndex(
-      (option) => option.key === "separator0",
+    const separatorIndex = resultOptions.findIndex((option) =>
+      withAI ? option.key === "separator6" : option.key === "separator0",
     );
     const insertIndex = separatorIndex !== -1 ? separatorIndex + 1 : 1;
 
@@ -2623,12 +2683,16 @@ class ContextOptionsStore {
     const { selection, allFilesIsEditing, canConvertSelected } =
       this.filesStore;
     const { setDeleteDialogVisible } = this.dialogsStore;
-    const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
-      this.treeFoldersStore;
+    const {
+      isRecycleBinFolder,
+      isRoomsFolder,
+      isArchiveFolder,
+      isAIAgentsFolder,
+    } = this.treeFoldersStore;
 
     const { pinRooms, unpinRooms /* deleteRooms */ } = this.filesActionsStore;
 
-    if (isRoomsFolder || isArchiveFolder) {
+    if (isRoomsFolder || isArchiveFolder || isAIAgentsFolder) {
       const isPinOption = selection.filter((item) => !item.pinned).length > 0;
 
       let canDelete;
@@ -2732,6 +2796,10 @@ class ContextOptionsStore {
       k.contextOptions.includes("restore"),
     ).length;
 
+    const canRetryVectorization = selection.some(
+      (k) => k.security?.Vectorization,
+    );
+
     /* const removeFromFavoriteItems = selection.filter((k) =>
       k.contextOptions.includes("remove-from-favorites"),
     ); */
@@ -2761,6 +2829,13 @@ class ContextOptionsStore {
         icon: CatalogRoomsReactSvgUrl,
         onClick: () => this.onCreateRoom(null, true),
         disabled: !selection.security?.CreateRoomFrom,
+      },
+      {
+        key: "vectorization",
+        label: t("Files:Vectorization"),
+        icon: RefreshReactSvgUrl,
+        onClick: () => this.filesActionsStore.retryVectorization(selection),
+        disabled: !canRetryVectorization,
       },
       {
         key: "download",
@@ -2881,6 +2956,19 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
+  onCreateAgent = () => {
+    // TODO: AI: Add quota if it needed
+
+    // if (this.currentQuotaStore.isWarningRoomsDialog) {
+    //   this.dialogsStore.setQuotaWarningDialogVisible(true);
+    //   return;
+    // }
+
+    const event = new Event(Events.AGENT_CREATE);
+
+    window.dispatchEvent(event);
+  };
+
   onCreate = (format, t) => {
     const event = new Event(Events.CREATE);
 
@@ -2941,6 +3029,10 @@ class ContextOptionsStore {
 
   onShowFormRoomSelectFileDialog = (filter = FilesSelectorFilterTypes.DOCX) => {
     this.dialogsStore.setSelectFileFormRoomDialogVisible(true, filter, true);
+  };
+
+  onShowAiKnowledgeSelectFileDialog = () => {
+    this.dialogsStore.setSelectFileAiKnowledgeDialogVisible(true);
   };
 
   getContextOptionsPlusFormRoom = (t) => {
@@ -3038,7 +3130,7 @@ class ContextOptionsStore {
 
   getFolderModel = (t, isSectionMenu) => {
     const { isLoading } = this.clientLoadingStore;
-    const { security, roomType, parentRoomType, isFolder } =
+    const { security, roomType, parentRoomType, isFolder, isAIRoom } =
       this.selectedFolderStore;
     const { isPublicRoom } = this.publicRoomStore;
 
@@ -3059,7 +3151,7 @@ class ContextOptionsStore {
     if (!canCreate || (isSectionMenu && (isMobile || someDialogIsOpen)))
       return null;
 
-    const { isRoomsFolder, isPrivacyFolder, isFlowsFolder } =
+    const { isRoomsFolder, isPrivacyFolder, isFlowsFolder, isAIAgentsFolder } =
       this.treeFoldersStore;
     const { mainButtonItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
@@ -3176,29 +3268,61 @@ class ContextOptionsStore {
       },
     ];
 
+    if (isAIRoom) {
+      return [
+        {
+          id: "actions_upload-files-product",
+          className: "main-button_drop-down",
+          icon: MoveReactSvgUrl,
+          label: t("EmptyView:UploadFromPortalTitle", {
+            productName: t("Common:ProductName"),
+          }),
+          onClick: this.onShowAiKnowledgeSelectFileDialog,
+          key: "upload-files-product",
+        },
+        {
+          id: "actions_upload-files",
+          className: "main-button_drop-down",
+          icon: ActionsUploadReactSvgUrl,
+          label: t("EmptyView:UploadDeviceOptionTitle"),
+          onClick: () => this.onUploadAction("file"),
+          key: "upload-files",
+        },
+      ];
+    }
+
     const showUploadFolder = !(isMobile || isTablet);
 
-    const options = isRoomsFolder
-      ? isFlowsFolder
-        ? []
+    const options = isAIAgentsFolder
+      ? [
+          {
+            key: "new-agent",
+            label: t("Common:NewAgent"),
+            onClick: this.onCreateAgent,
+            icon: CatalogAIAgentsReactSvgUrl,
+          },
+        ]
+      : isRoomsFolder
+        ? isFlowsFolder
+          ? []
+          : [
+              {
+                key: "new-room",
+                label: t("Common:NewRoom"),
+                onClick: this.onCreateRoom,
+                icon: CatalogRoomsReactSvgUrl,
+              },
+            ]
         : [
-            {
-              key: "new-room",
-              label: t("Common:NewRoom"),
-              onClick: this.onCreateRoom,
-              icon: CatalogRoomsReactSvgUrl,
-            },
-          ]
-      : [
-          createNewDoc,
-          createNewSpreadsheet,
-          createNewPresentation,
-          ...formActions,
-          createNewFolder,
-          { key: "separator", isSeparator: true },
-          uploadFiles,
-          showUploadFolder ? uploadFolder : null,
-        ];
+            createNewDoc,
+            createNewSpreadsheet,
+            createNewPresentation,
+            ...formActions,
+            createNewFolder,
+            { key: "separator", isSeparator: true },
+            uploadFiles,
+            showUploadFolder ? uploadFolder : null,
+          ];
 
     if (mainButtonItemsList && enablePlugins && !isRoomsFolder) {
       const pluginItems = [];

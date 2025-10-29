@@ -3,7 +3,7 @@
   "content": "This section will display the forms in progress.",
   "content_en_sha1_hash": "9787e97adb0311eb2060676dcb01b86b91b4e08d",
   "created_at": "2025-05-19T21:30:55.561Z",
-  "updated_at": "2025-09-23T07:24:24.004Z",
+  "updated_at": "2025-10-27T16:14:33.125Z",
   "comment": {
     "text": "\"This section will display the forms in progress.\" \n\nThis text is used to describe the content of an empty folder, indicating that there are active or unfinished forms within. It appears on screens displaying a \"Done\" and \"In Progress\" status for folders, providing context for users navigating through the file system.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 136,
+      "line_number": 139,
       "context": "return match([parentRoomType, folderType, access])\n .with([P._, FolderType.Done, P._], () =>\n t(\"Files:EmptyFormFolderDoneDescriptionText\"),\n )\n .with([P._, FolderType.InProgress, P._], () =>\n t(\"Files:EmptyFormFolderProgressDescriptionText\"),\n )\n .with([P._, FolderType.SubFolderDone, P._], () =>\n t(\"Files:EmptyFormSubFolderDoneDescriptionText\"),\n )\n .with([P._, FolderType.SubFolderInProgress, P._], () =>",
       "module": "/packages/client"
     }

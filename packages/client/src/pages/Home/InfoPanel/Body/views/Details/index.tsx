@@ -31,7 +31,7 @@ import classNames from "classnames";
 
 import { isMobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
-import { FileType } from "@docspace/shared/enums";
+import { FileType, FolderType } from "@docspace/shared/enums";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
@@ -124,7 +124,21 @@ const Details = ({
   });
 
   const createThumbnailAction = useCallback(async () => {
-    setItemProperties(detailsHelper.getPropertyList());
+    let property = detailsHelper.getPropertyList();
+
+    const isAgent =
+      selection &&
+      "rootFolderType" in selection &&
+      "roomType" in selection &&
+      selection.roomType &&
+      selection.rootFolderType === FolderType.AIAgents;
+
+    if (isAgent)
+      property = property.filter((item) => {
+        return item.id !== "Type";
+      });
+
+    setItemProperties(property);
 
     if (
       "isFolder" in selection &&

@@ -62,6 +62,7 @@ export const FREE_BACKUP = "free_backup";
 export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
 export const CREATED_FORM_KEY = "created_form_key";
 export const PUBLIC_STORAGE_KEY = "public-auth";
+export const INFO_PANEL_LOADER_EVENT = "info-panel-loader-event";
 
 export const OPEN_BACKUP_CODES_DIALOG = "openBackupCodesDialog";
 
@@ -274,10 +275,12 @@ export const CategoryType = Object.freeze({
   Settings: 8,
   Accounts: 9,
   PublicRoom: 10,
-  Flows: 11,
+  Chat: 11,
   SharedWithMe: 12,
   Groups: 13,
   Guests: 14,
+  AIAgents: 15,
+  AIAgent: 16,
 });
 
 export const AVATAR_ACTION_KEYS = {

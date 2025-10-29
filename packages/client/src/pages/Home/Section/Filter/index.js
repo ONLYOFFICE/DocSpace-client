@@ -133,10 +133,15 @@ const SectionFilterContent = ({
   isDefaultRoomsQuotaSet,
   isTemplatesFolder,
   isSharedWithMeFolder,
+  isAIAgentsFolder,
 
   currentClientView,
 
   getSelectedFolder,
+
+  filesStore,
+  groupsStore,
+  usersStore,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -171,6 +176,8 @@ const SectionFilterContent = ({
     standalone,
     showStorageInfo,
     isDefaultRoomsQuotaSet,
+    groupsStore,
+    usersStore,
   });
 
   const onNavigate = (path, newFilter) => {
@@ -241,6 +248,48 @@ const SectionFilterContent = ({
         navigate(
           `${path}/filter?${newFilter.toUrlParams(userId)}&hash=${new Date().getTime()}`,
         );
+      } else if (isAIAgentsFolder) {
+        const subjectId = getSubjectId(data) || null;
+
+        const subjectFilter = getSubjectFilter(data) || null;
+
+        const tags = getTags(data) || null;
+
+        const newFilter = roomsFilter.clone();
+
+        newFilter.page = 0;
+
+        newFilter.subjectFilter = null;
+        newFilter.subjectId = null;
+
+        if (subjectId) {
+          newFilter.subjectId = subjectId;
+
+          if (subjectId === FilterKeys.me) {
+            newFilter.subjectId = `${userId}`;
+          }
+
+          newFilter.subjectFilter = subjectFilter?.toString()
+            ? subjectFilter.toString()
+            : FilterSubject.Member;
+        }
+
+        if (tags) {
+          if (!tags?.length) {
+            newFilter.tags = null;
+            newFilter.withoutTags = true;
+          } else {
+            newFilter.tags = tags;
+            newFilter.withoutTags = false;
+          }
+        } else {
+          newFilter.tags = null;
+          newFilter.withoutTags = false;
+        }
+
+        navigate(
+          `ai-agents/filter?${newFilter.toUrlParams(userId)}&hash=${new Date().getTime()}`,
+        );
       } else {
         const filterType = getFilterType(data) || null;
 
@@ -281,6 +330,7 @@ const SectionFilterContent = ({
     },
     [
       isRooms,
+      isAIAgentsFolder,
       isTrash,
       setIsLoading,
       roomsFilter,
@@ -309,6 +359,11 @@ const SectionFilterContent = ({
           : "rooms/archived";
 
       navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
+    } else if (isAIAgentsFolder) {
+      const newFilter = RoomsFilter.clean();
+      newFilter.searchArea = RoomSearchArea.AIAgents;
+
+      navigate(`ai-agents/filter?${newFilter.toUrlParams(userId)}`);
     } else {
       const newFilter = filter.clone();
 
@@ -321,6 +376,7 @@ const SectionFilterContent = ({
     }
   }, [
     isRooms,
+    isAIAgentsFolder,
     setIsLoading,
 
     filter,
@@ -356,7 +412,8 @@ const SectionFilterContent = ({
       if (isContactsPage) {
         onContactsSearch(searchValue);
       } else if (isRooms) {
-        const newFilter = roomsFilter.clone();
+        const currentFilter = filesStore.roomsFilter;
+        const newFilter = currentFilter.clone();
 
         newFilter.page = 0;
         newFilter.filterValue = searchValue;
@@ -368,8 +425,16 @@ const SectionFilterContent = ({
             : "rooms/archived";
 
         navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
+      } else if (isAIAgentsFolder) {
+        const newFilter = roomsFilter.clone();
+
+        newFilter.page = 0;
+        newFilter.filterValue = searchValue;
+
+        navigate(`ai-agents/filter?${newFilter.toUrlParams(userId)}`);
       } else {
-        const newFilter = filter.clone();
+        const currentFilter = filesStore.filter;
+        const newFilter = currentFilter.clone();
         newFilter.page = 0;
         newFilter.search = searchValue;
 
@@ -380,6 +445,7 @@ const SectionFilterContent = ({
     },
     [
       isRooms,
+      isAIAgentsFolder,
       isContactsPage,
 
       setIsLoading,
@@ -405,7 +471,7 @@ const SectionFilterContent = ({
 
       let newFilter = null;
 
-      if (isRooms) newFilter = roomsFilter.clone();
+      if (isRooms || isAIAgentsFolder) newFilter = roomsFilter.clone();
       else newFilter = filter.clone();
 
       newFilter.page = 0;
@@ -420,6 +486,9 @@ const SectionFilterContent = ({
             : "rooms/archived";
         setRoomsFilter(newFilter);
         navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
+      } else if (isAIAgentsFolder) {
+        setRoomsFilter(newFilter);
+        navigate(`ai-agents/filter?${newFilter.toUrlParams(userId)}`);
       } else {
         const path = location.pathname.split("/filter")[0];
 
@@ -428,6 +497,7 @@ const SectionFilterContent = ({
     },
     [
       isRooms,
+      isAIAgentsFolder,
 
       isContactsPage,
       setIsLoading,
@@ -460,7 +530,7 @@ const SectionFilterContent = ({
   const getSelectedInputValue = React.useCallback(() => {
     return isContactsPage
       ? getContactsSelectedInputValue()
-      : isRooms
+      : isRooms || isAIAgentsFolder
         ? roomsFilter.filterValue
           ? roomsFilter.filterValue
           : ""
@@ -469,6 +539,7 @@ const SectionFilterContent = ({
           : "";
   }, [
     isRooms,
+    isAIAgentsFolder,
     isContactsPage,
     roomsFilter.filterValue,
     filter.search,
@@ -480,7 +551,7 @@ const SectionFilterContent = ({
   const getSelectedSortData = React.useCallback(() => {
     const currentFilter = isContactsPage
       ? getContactsSelectedSortData()
-      : isRooms
+      : isRooms || isAIAgentsFolder
         ? roomsFilter
         : filter;
     return {
@@ -489,6 +560,7 @@ const SectionFilterContent = ({
     };
   }, [
     isRooms,
+    isAIAgentsFolder,
     isContactsPage,
     filter.sortOrder,
     filter.sortBy,
@@ -590,6 +662,42 @@ const SectionFilterContent = ({
           key: provider,
           label,
           group: FilterGroups.roomFilterProviderType,
+        });
+      }
+    } else if (isAIAgentsFolder) {
+      if (roomsFilter.subjectId) {
+        const user = await getUser(roomsFilter.subjectId);
+        const isMe = userId === roomsFilter.subjectId;
+
+        const label = isMe ? t("Common:MeLabel") : user.displayName;
+
+        const subject = {
+          key: isMe ? FilterKeys.me : roomsFilter.subjectId,
+          group: FilterGroups.roomFilterSubject,
+          label,
+        };
+
+        if (roomsFilter.subjectFilter?.toString()) {
+          if (roomsFilter.subjectFilter.toString() === FilterSubject.Owner) {
+            subject.selectedLabel = `${t("Common:Owner")}: ${label}`;
+          }
+
+          filterValues.push(subject);
+
+          filterValues.push({
+            key: roomsFilter?.subjectFilter?.toString(),
+            group: FilterGroups.roomFilterOwner,
+          });
+        } else {
+          filterValues.push(subject);
+        }
+      }
+
+      if (roomsFilter?.tags?.length > 0) {
+        filterValues.push({
+          key: roomsFilter.tags,
+          group: FilterGroups.roomFilterTags,
+          isMultiSelect: true,
         });
       }
     } else if (!isContactsPage) {
@@ -712,6 +820,7 @@ const SectionFilterContent = ({
     // roomsFilter.searchInContent,
     userId,
     isRooms,
+    isAIAgentsFolder,
 
     isContactsPage,
 
@@ -807,6 +916,11 @@ const SectionFilterContent = ({
 
     let tags = null;
     let providers = [];
+
+    if (isAIAgentsFolder) {
+      tags = await fetchTags();
+    }
+
     if (!isPublicRoom && isRooms) {
       const res = await Promise.all([fetchTags(), fetchThirdPartyProviders()]);
       tags = res[0];
@@ -932,6 +1046,13 @@ const SectionFilterContent = ({
                   group: FilterGroups.roomFilterType,
                   label: t("Common:VirtualDataRoom"),
                 };
+              case RoomsType.AIRoom:
+                return {
+                  id: "filter_type-ai",
+                  key: RoomsType.AIRoom,
+                  group: FilterGroups.roomFilterType,
+                  label: t("Common:AIRoomTitle"),
+                };
               case RoomsType.CustomRoom:
               default:
                 return {
@@ -1033,6 +1154,7 @@ const SectionFilterContent = ({
         group: FilterGroups.roomFilterOwner,
         isHeader: true,
         withoutHeader: true,
+        isLast: isAIAgentsFolder && !tags?.length,
       },
       {
         id: "filter_author-user",
@@ -1090,7 +1212,7 @@ const SectionFilterContent = ({
 
       filterOptions.push(...typeOptions);
 
-      if (tags.length > 0) {
+      if (tags?.length > 0) {
         const tagsOptions = tags.map((tag) => ({
           key: tag,
           group: FilterGroups.roomFilterTags,
@@ -1140,6 +1262,28 @@ const SectionFilterContent = ({
       showStorageInfo &&
         isDefaultRoomsQuotaSet &&
         filterOptions.push(...quotaFilter);
+    } else if (isAIAgentsFolder) {
+      filterOptions.push(...subjectOptions);
+      filterOptions.push(...ownerOptions);
+
+      if (tags.length > 0) {
+        const tagsOptions = tags.map((tag) => ({
+          key: tag,
+          group: FilterGroups.roomFilterTags,
+          label: tag,
+          isMultiSelect: true,
+        }));
+
+        filterOptions.push({
+          key: FilterGroups.roomFilterTags,
+          group: FilterGroups.roomFilterTags,
+          label: t("Common:Tags"),
+          isHeader: true,
+          isLast: true,
+        });
+
+        filterOptions.push(...tagsOptions);
+      }
     } else {
       const authorOption = getAuthorFilter();
 
@@ -1236,6 +1380,7 @@ const SectionFilterContent = ({
     t,
     isPersonalRoom,
     isRooms,
+    isAIAgentsFolder,
     isContactsPage,
     isFavoritesFolder,
     isRecentFolder,
@@ -1339,6 +1484,11 @@ const SectionFilterContent = ({
       commonOptions.push(owner);
       commonOptions.push(activityDate);
       showStorageInfo && commonOptions.push(sortByStorage);
+    } else if (isAIAgentsFolder) {
+      commonOptions.push(tags);
+      commonOptions.push(owner);
+      commonOptions.push(activityDate);
+      showStorageInfo && commonOptions.push(sortByStorage);
     } else if (isTrash) {
       // commonOptions.push(authorOption);
       // commonOptions.push(creationDate);
@@ -1356,6 +1506,7 @@ const SectionFilterContent = ({
     return commonOptions;
   }, [
     isRooms,
+    isAIAgentsFolder,
     isContactsPage,
 
     t,
@@ -1429,6 +1580,37 @@ const SectionFilterContent = ({
             : "rooms/archived";
 
         navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
+      } else if (isAIAgentsFolder) {
+        const newFilter = roomsFilter.clone();
+
+        if (group === FilterGroups.roomFilterSubject) {
+          newFilter.subjectId = null;
+          newFilter.excludeSubject = false;
+          newFilter.filterSubject = null;
+        }
+
+        if (group === FilterGroups.roomFilterTags) {
+          const newTags = newFilter.tags;
+
+          if (newTags?.length > 0) {
+            const idx = newTags.findIndex((tag) => tag === key);
+
+            if (idx > -1) {
+              newTags.splice(idx, 1);
+            }
+
+            newFilter.tags = newTags.length > 0 ? newTags : null;
+
+            newFilter.withoutTags = false;
+          } else {
+            newFilter.tags = null;
+            newFilter.withoutTags = false;
+          }
+        }
+
+        newFilter.page = 0;
+
+        navigate(`ai-agents/filter?${newFilter.toUrlParams(userId)}`);
       } else {
         const newFilter = filter.clone();
 
@@ -1455,6 +1637,7 @@ const SectionFilterContent = ({
     },
     [
       isRooms,
+      isAIAgentsFolder,
       isContactsPage,
       removeContactsSelectedItem,
       setIsLoading,
@@ -1492,6 +1675,11 @@ const SectionFilterContent = ({
           : "rooms/archived";
 
       navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
+    } else if (isAIAgentsFolder) {
+      const newFilter = RoomsFilter.clean();
+      newFilter.searchArea = RoomSearchArea.AIAgents;
+
+      navigate(`ai-agents/filter?${newFilter.toUrlParams(userId)}`);
     } else {
       const newFilter = FilesFilter.getDefault();
 
@@ -1596,6 +1784,7 @@ export default inject(
       isTrashFolder: isTrash,
       isTemplatesFolder,
       isSharedWithMeFolder,
+      isAIAgentsFolder,
     } = treeFoldersStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
@@ -1642,6 +1831,7 @@ export default inject(
       isIndexing: isIndexedFolder,
       isIndexEditingMode,
       isSharedWithMeFolder,
+      isAIAgentsFolder,
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       showFilterLoader: clientLoadingStore.showFilterLoader,
@@ -1678,6 +1868,10 @@ export default inject(
       setRoomsFilter,
       standalone,
       currentDeviceType,
+
+      filesStore,
+      groupsStore,
+      usersStore,
     };
   },
 )(

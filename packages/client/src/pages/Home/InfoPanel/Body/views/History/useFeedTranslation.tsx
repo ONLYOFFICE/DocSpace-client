@@ -138,6 +138,44 @@ export const useFeedTranslation = (
           count,
         });
       return t("InfoPanel:FolderDeleted");
+    case FeedActionKeys.AgentCreated:
+      return (
+        <Trans
+          t={t as TFunction}
+          ns="InfoPanel"
+          i18nKey="HistoryAgentCreated"
+          values={{ roomTitle: feed.data.title }}
+          components={{
+            1: <HistoryText key={feed.data.title!} title={feed.data.title!} />,
+          }}
+        />
+      );
+    case FeedActionKeys.AgentRenamed:
+      return (
+        <Trans
+          t={t as TFunction}
+          ns="InfoPanel"
+          i18nKey="AgentRenamed"
+          values={{
+            oldRoomTitle: feed.data.oldTitle,
+            roomTitle: feed.data.newTitle,
+          }}
+          components={{
+            1: (
+              <HistoryText
+                key={feed.data.oldTitle!}
+                title={feed.data.oldTitle!}
+              />
+            ),
+            2: (
+              <HistoryText
+                key={feed.data.newTitle!}
+                title={feed.data.newTitle!}
+              />
+            ),
+          }}
+        />
+      );
     case FeedActionKeys.RoomCreated:
       return (
         <Trans
@@ -175,14 +213,20 @@ export const useFeedTranslation = (
         />
       );
     case FeedActionKeys.AddedRoomTags:
+    case FeedActionKeys.AddedAgentTags:
       return t("InfoPanel:AddedRoomTags");
     case FeedActionKeys.DeletedRoomTags:
+    case FeedActionKeys.DeletedAgentTags:
       return t("InfoPanel:DeletedRoomTags");
     case FeedActionKeys.RoomLogoCreated:
     case FeedActionKeys.RoomColorChanged:
     case FeedActionKeys.RoomCoverChanged:
+    case FeedActionKeys.AgentLogoCreated:
+    case FeedActionKeys.AgentColorChanged:
+    case FeedActionKeys.AgentCoverChanged:
       return t("InfoPanel:RoomLogoChanged");
     case FeedActionKeys.RoomLogoDeleted:
+    case FeedActionKeys.AgentLogoDeleted:
       return t("InfoPanel:RoomLogoChanged");
     case FeedActionKeys.RoomExternalLinkCreated:
       return t("InfoPanel:RoomExternalLinkCreated");
@@ -226,23 +270,30 @@ export const useFeedTranslation = (
         />
       );
     case FeedActionKeys.RoomCreateUser:
+    case FeedActionKeys.AgentCreateUser:
       if (hasRelatedItems) return t("InfoPanel:RoomCreateUserCount", { count });
       return t("Common:RoomCreateUser");
     case FeedActionKeys.RoomUpdateAccessForUser:
+    case FeedActionKeys.AgentUpdateAccessForUser:
       return t("InfoPanel:RoomUpdateAccess");
     case FeedActionKeys.RoomRemoveUser:
+    case FeedActionKeys.AgentRemoveUser:
       return t("InfoPanel:RoomRemoveUser");
     case FeedActionKeys.RoomInviteResend:
+    case FeedActionKeys.AgentInviteResend:
       return t("InfoPanel:RoomInviteResend");
     case FeedActionKeys.RoomGroupAdded:
+    case FeedActionKeys.AgentGroupAdded:
       if (hasRelatedItems)
         return t("InfoPanel:RoomGroupAddedCount", {
           count,
         });
       return t("InfoPanel:RoomGroupAdded");
     case FeedActionKeys.RoomUpdateAccessForGroup:
+    case FeedActionKeys.AgentUpdateAccessForGroup:
       return t("InfoPanel:RoomUpdateAccess");
     case FeedActionKeys.RoomGroupRemove:
+    case FeedActionKeys.AgentGroupRemove:
       return t("InfoPanel:RoomGroupRemove");
     case FeedActionKeys.RoomWatermarkSet:
       return t("InfoPanel:RoomWatermarkSet");

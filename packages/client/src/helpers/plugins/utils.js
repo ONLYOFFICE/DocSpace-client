@@ -213,3 +213,14 @@ export const getPluginUrl = (url, file) => {
     file,
   );
 };
+
+export function borderToStyle(border = {}) {
+  const { width, style, color, radius } = border;
+
+  const borderValue = [width, style, color].filter(Boolean).join(" ");
+
+  return {
+    ...(borderValue ? { border: borderValue } : {}),
+    ...(radius ? { borderRadius: radius } : {}),
+  };
+}

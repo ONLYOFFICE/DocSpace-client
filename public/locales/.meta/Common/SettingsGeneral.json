@@ -3,7 +3,7 @@
   "content": "General",
   "content_en_sha1_hash": "9239ee2cda84eca4c3440e2a7b50148af67da3d4",
   "created_at": "2025-05-19T21:30:48.597Z",
-  "updated_at": "2025-09-17T13:43:01.715Z",
+  "updated_at": "2025-10-27T16:14:33.449Z",
   "comment": {
     "text": "This translation key is used to display the general settings title in the Portal Settings page. It appears as a label on the top level of the settings tree and is also referenced in a data object that lists categories of settings. Translators should provide a clear and concise translation for this key, which will be displayed in the user interface.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 198,
-      "context": "switch (tKey) {\n case \"AccessRights\":\n return t(\"Common:AccessRights\");\n case \"Customization\":\n return t(\"Customization\");\n case \"SettingsGeneral\":\n return t(\"SettingsGeneral\");\n case \"StudioTimeLanguageSettings\":\n return t(\"StudioTimeLanguageSettings\");\n case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/index.tsx",
       "line_number": 102,
       "context": ");\n \n const data = [\n {\n id: \"general\",\n name: t(\"Common:SettingsGeneral\"),\n content: <Customization />,\n onClick: async () => {\n clearAbortControllerArr();\n await getCustomizationData();\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
+      "line_number": 204,
+      "context": "switch (tKey) {\n case \"AccessRights\":\n return t(\"Common:AccessRights\");\n case \"Customization\":\n return t(\"Customization\");\n case \"SettingsGeneral\":\n return t(\"SettingsGeneral\");\n case \"StudioTimeLanguageSettings\":\n return t(\"StudioTimeLanguageSettings\");\n case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");",
       "module": "/packages/client"
     },
     {

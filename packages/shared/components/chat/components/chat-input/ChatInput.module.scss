@@ -1,0 +1,296 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+.chatInput {
+  width: 100%;
+  max-width: 700px;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+
+  textarea {
+    padding: 0;
+    background-color: var(--chat-input-background-color);
+
+    min-height: 66px;
+  }
+
+  .chatInputTextArea {
+    min-height: 56px !important;
+    max-height: 112px !important;
+  }
+
+  .chatInputTextAreaWrapper {
+    padding: 6px 8px 44px;
+
+    min-height: 116px !important;
+    max-height: 172px !important;
+
+    background-color: var(--chat-input-background-color);
+    border: none;
+  }
+
+  .chatInputTextAreaWrapperFiles {
+    padding: 50px 8px 44px;
+
+    min-height: 160px !important;
+    max-height: 216px !important;
+  }
+}
+
+.chatInputButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  position: absolute;
+
+  bottom: 6px;
+
+  box-sizing: border-box;
+
+  padding: 0 8px;
+}
+
+.chatInputButtonsTools {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 4px;
+
+  .chatInputButton {
+    height: 32px;
+
+    padding: 0 8px;
+
+    box-sizing: border-box;
+
+    border-radius: 3px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+
+    cursor: pointer;
+
+    p {
+      color: var(--chat-input-tools-button-color);
+    }
+
+    svg {
+      cursor: pointer;
+      path {
+        fill: var(--chat-input-tools-button-color);
+      }
+    }
+
+    &:hover {
+      background-color: var(--chat-input-tools-button-hover-background);
+    }
+  }
+
+  .activeChatInputButton {
+    background-color: var(--chat-input-tools-button-active-background);
+
+    p {
+      color: var(--chat-input-tools-button-active-color);
+    }
+
+    svg {
+      path {
+        fill: var(--chat-input-tools-button-active-color);
+      }
+    }
+  }
+}
+
+.chatInputButtonsSend {
+  width: 32px;
+  height: 32px;
+
+  border: none;
+
+  background-color: var(--chat-input-send-button-background);
+
+  border-radius: 3px;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    path {
+      fill: var(--chat-input-send-button-color) !important;
+    }
+  }
+
+  &:not(.disabled):hover {
+    opacity: 0.85;
+  }
+
+  &.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .square {
+    width: 12px;
+    height: 12px;
+
+    background-color: var(--chat-input-send-button-color);
+
+    border-radius: 2px;
+  }
+}
+
+.toolSettingsWrapper {
+  width: calc(100% + 16px);
+  height: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  padding-top: 16px;
+
+  margin-inline-end: -16px;
+
+  box-sizing: border-box;
+
+  .toolSettingsItem {
+    width: 100%;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding: 0 16px;
+
+    box-sizing: border-box;
+
+    .toolSettingsItemInfo {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+
+      gap: 8px;
+
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+}
+
+.filesList {
+  width: 100%;
+
+  position: absolute;
+
+  height: 44px;
+
+  top: 6px;
+
+  padding: 0 8px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  .filesListWrapper {
+    width: fit-content;
+    display: flex;
+    gap: 6px;
+
+    .filesListItem {
+      width: fit-content;
+      min-width: fit-content;
+      height: 32px;
+
+      padding-inline-end: 8px;
+
+      display: flex;
+      align-items: center;
+
+      border: 1px solid var(--chat-input-file-border-color);
+      background-color: var(--chat-input-file-background-color);
+
+      border-radius: 6px;
+
+      .filesListItemIcon {
+        width: 32px;
+        height: 32px;
+
+        div {
+          width: 32px;
+          height: 32px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+
+    .filesListItemInfo {
+      display: flex;
+      align-items: center;
+
+      gap: 8px;
+
+      max-width: 300px;
+
+      .filesListItemInfoText {
+        display: flex;
+        flex-direction: row;
+
+        span {
+          color: var(--chat-file-item-exst-color);
+        }
+      }
+    }
+  }
+}
+
+.chatInputText {
+  margin-top: 4px;
+}

@@ -47,6 +47,7 @@ export const HeadingPure = ({
   as,
   fontSize,
   fontWeight,
+  lineHeight,
   ...rest
 }: HeadingProps) => {
   const Element = (as || `h${level}`) as React.ElementType;
@@ -75,6 +76,7 @@ export const HeadingPure = ({
         color: color || undefined,
         fontSize: fontSize || undefined,
         fontWeight: fontWeight || undefined,
+        lineHeight: lineHeight || undefined,
       }}
       data-testid="heading"
       {...rest}

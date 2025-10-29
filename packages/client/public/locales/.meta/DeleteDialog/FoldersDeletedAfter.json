@@ -3,7 +3,7 @@
   "content": "The folders will be permanently deleted in 30 days.",
   "content_en_sha1_hash": "e6e4ec19e0831226e7fbffb291747e44d34075ec",
   "created_at": "2025-09-24T13:10:15.417Z",
-  "updated_at": "2025-10-01T15:20:15.669Z",
+  "updated_at": "2025-10-27T16:14:33.256Z",
   "comment": {
     "text": "This text informs the user about the timeframe for permanent deletion of moved folders. It appears within a dialog (DeleteDialog) after folders are moved to the trash, indicating they will be permanently deleted after 30 days. This helps users understand the consequences of moving folders to the trash.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 234,
+      "line_number": 257,
       "context": "<>\n <Trans t={t} i18nKey=\"DeleteFolders\" ns=\"DeleteDialog\">\n You are about to move <strong>folders ({{ foldersCount }})</strong>{\" \"}\n to {{ trashSection: t(\"Common:TrashSection\") }}.{\" \"}\n </Trans>{\" \"}\n {!isThirdParty ? t(\"FoldersDeletedAfter\") : null}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n }",
       "module": "/packages/client"
     }

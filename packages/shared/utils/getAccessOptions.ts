@@ -27,9 +27,9 @@
 import { globalColors } from "../themes";
 import type { TTranslation } from "../types";
 import { getUserTypeTranslation } from "./common";
-import { RoomsType, EmployeeType, ShareAccessRights } from "../enums";
+import { EmployeeType, RoomsType, ShareAccessRights } from "../enums";
 
-type AccessOptionType = {
+export type AccessOptionType = {
   key: string | EmployeeType;
   label: string;
   description: string;
@@ -254,6 +254,15 @@ export const getAccessOptions = (
         accesses.editor,
         accesses.viewer,
         accesses.formFiller,
+      ];
+      break;
+
+    case RoomsType.AIRoom:
+      options = [
+        accesses.roomManager,
+        accesses.contentCreator,
+        { key: "s1", isSeparator: withSeparator },
+        accesses.viewer,
       ];
       break;
 

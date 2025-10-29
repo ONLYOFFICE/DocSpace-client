@@ -11,6 +11,7 @@
   "DeleteGroupTitle": "删除群组",
   "DeleteItem": "您即将把<strong>{{name}}</strong>移至{{trashSection}}。",
   "DeleteItemForever": "您将要删除<strong>{{name}}</strong>。",
+  "DeleteItemsSharedNote": "请注意，如果您已将它们分享给他人，它们将不可用。",
   "DeleteRoom": "房间<strong>“{{roomName}}”</strong>将被永久删除，所有数据及用户访问权限都将丢失。",
   "DeleteRoomTitle": "确定删除此房间吗？",
   "DeleteRoomWarning": "我已了解删除的后果，并确认删除此房间。",

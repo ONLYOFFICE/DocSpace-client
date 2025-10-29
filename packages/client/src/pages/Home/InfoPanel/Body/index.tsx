@@ -30,6 +30,7 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/utils";
 import { FolderType } from "@docspace/shared/enums";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import {
   isRoom as isRoomUtil,
   isFolder as isFolderUtil,
@@ -58,6 +59,7 @@ type BodyProps = {
   fileView: InfoPanelStore["fileView"];
   getIsFiles: InfoPanelStore["getIsFiles"];
   getIsRooms: InfoPanelStore["getIsRooms"];
+  getIsAIAgent: InfoPanelStore["getIsAIAgent"];
   setView: InfoPanelStore["setView"];
 
   maxImageUploadSize: SettingsStore["maxImageUploadSize"];
@@ -86,6 +88,7 @@ const InfoPanelBodyContent = ({
   fileView,
   getIsFiles,
   getIsRooms,
+  getIsAIAgent,
   setView,
 
   maxImageUploadSize,
@@ -105,6 +108,7 @@ const InfoPanelBodyContent = ({
 }: BodyProps) => {
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
+  const isAgents = getIsAIAgent();
   const isGallery = window.location.pathname.includes("form-gallery");
   const isGroups = contactsTab === "groups";
   const isGuests = contactsTab === "guests";
@@ -114,9 +118,16 @@ const InfoPanelBodyContent = ({
     selection?.rootFolderType === FolderType.RoomTemplates;
 
   const isRoom = isRoomUtil(selection);
+  const isAgent =
+    selection &&
+    "rootFolderType" in selection &&
+    "roomType" in selection &&
+    selection.roomType &&
+    selection.rootFolderType === FolderType.AIAgents;
   const isFolder = selection && "isFolder" in selection && !!selection.isFolder;
 
   const isRoot = isFolder && selection?.id === selection?.rootFolderId;
+  const id = !Array.isArray(selection) ? selection?.id : null;
 
   const isLockedSharedRoom = isRoom && isLockedSharedRoomUtil(selection);
 
@@ -130,8 +141,8 @@ const InfoPanelBodyContent = ({
     (isRoot && !isGallery);
 
   const currentView = useMemo(() => {
-    return isRoom || isTemplatesRoom ? roomsView : fileView;
-  }, [isRoom, roomsView, fileView, isTemplatesRoom]);
+    return isRoom || isTemplatesRoom || isAgent ? roomsView : fileView;
+  }, [isRoom, roomsView, fileView, isTemplatesRoom, isAgent]);
 
   const deferredCurrentView = React.useDeferredValue(currentView);
 
@@ -141,17 +152,22 @@ const InfoPanelBodyContent = ({
       selection &&
       isFolderUtil(selection) &&
       !selection?.canShare &&
-      !isTemplatesRoom
+      !isTemplatesRoom &&
+      !isAgent
     ) {
       setView(InfoPanelView.infoDetails);
     }
   }, [fileView, selection, isTemplatesRoom]);
 
-  React.useEffect(() => {
-    if (!selection) return;
+  const isExpiredLink = useEventCallback(() =>
+    checkIsExpiredLinkAsync(selection),
+  );
 
-    checkIsExpiredLinkAsync(selection);
-  }, [selection]);
+  React.useEffect(() => {
+    if (!id) return;
+
+    isExpiredLink();
+  }, [id, isExpiredLink]);
 
   const getView = () => {
     if (isUsers || isGuests) return <Users isGuests={isGuests} />;
@@ -172,6 +188,7 @@ const InfoPanelBodyContent = ({
           isRooms={isRooms}
           isFiles={isFiles}
           isTemplatesRoom={isTemplatesRoom}
+          isAgents={isAgents}
           infoPanelSelection={selection}
           {...lockedSharedRoomProps}
         />
@@ -254,6 +271,7 @@ export default inject(
 
       getIsFiles,
       getIsRooms,
+      getIsAIAgent,
       setView,
     } = infoPanelStore;
 
@@ -281,6 +299,7 @@ export default inject(
       fileView,
       getIsFiles,
       getIsRooms,
+      getIsAIAgent,
       setView,
 
       maxImageUploadSize: settingsStore.maxImageUploadSize,

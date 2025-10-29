@@ -11,6 +11,7 @@
   "DeleteGroupTitle": "Groep verwijderen",
   "DeleteItem": "U gaat <strong>{{name}}</strong> naar {{trashSection}} verplaatsen.",
   "DeleteItemForever": "U bent op het punt om <strong>{{name}}</strong> te verwijderen.",
+  "DeleteItemsSharedNote": "Als u ze met iemand heeft gedeeld, zijn ze niet meer beschikbaar.",
   "DeleteRoom": "De kamer <strong>{{roomName}}</strong> wordt permanent verwijderd. Alle data en gebruikersrechten gaan verloren.",
   "DeleteRoomTitle": "Deze kamer verwijderen?",
   "DeleteRoomWarning": "Ik begrijp de gevolgen en wil de kamer verwijderen.",

@@ -38,10 +38,10 @@ interface DeleteVersionDialogProps {
   setIsVisible: (visible: boolean) => void;
   tReady: boolean;
   fileId: string;
-  versionSelectedForDeletion: any;
+  versionSelectedForDeletion: number;
   onDeleteVersionFile: (
     fileId: number,
-    versionSelectedForDeletion: any,
+    versionSelectedForDeletion: number[],
   ) => void;
 }
 

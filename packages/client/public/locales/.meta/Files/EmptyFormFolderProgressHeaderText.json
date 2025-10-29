@@ -3,7 +3,7 @@
   "content": "Nothing here yet",
   "content_en_sha1_hash": "e892255d168b0ccc00b895b653a7ff8d9a7ab4f0",
   "created_at": "2025-05-19T21:30:55.565Z",
-  "updated_at": "2025-09-23T07:24:24.014Z",
+  "updated_at": "2025-10-27T16:14:33.133Z",
   "comment": {
     "text": "This translation key displays a generic message when an empty folder is shown, indicating that there are no files within it. It appears in UI elements displaying folders with no content.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 243,
+      "line_number": 249,
       "context": ".with([P._, FolderType.Done, P._], () =>\n t(\"Files:EmptyFormFolderDoneHeaderText\"),\n )\n \n .with([P._, FolderType.InProgress, P._], () =>\n t(\"Files:EmptyFormFolderProgressHeaderText\"),\n )\n .with(\n [\n P._,\n P.union(FolderType.SubFolderDone, FolderType.SubFolderInProgress),",
       "module": "/packages/client"
     }

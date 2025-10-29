@@ -3,7 +3,7 @@
   "content": "Change the Room Owner",
   "content_en_sha1_hash": "02a0f3d75f6449e5611f36f91216cb8be76a6efe",
   "created_at": "2025-05-19T21:30:55.324Z",
-  "updated_at": "2025-10-16T07:29:35.614Z",
+  "updated_at": "2025-10-27T16:14:33.316Z",
   "comment": {
     "text": "This translation key is used to display the label \"Change the Room Owner\" in a UI element. It will appear as a button or header in a panel, prompting users to update the room owner. Translators should focus on conveying the action of changing the room's ownership.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 131,
-      "context": "withHeader\n headerProps={{\n onCloseClick: handleClosePanel,\n onBackClick,\n withoutBackButton: !showBackButton,\n headerLabel: t(\"Files:ChangeTheRoomOwner\"),\n }}\n filter={filter}\n withFooterCheckbox={!showBackButton ? ownerIsCurrentUser : null}\n footerCheckboxLabel={t(\"Files:LeaveTheRoom\")}\n isChecked={!showBackButton}",
+      "line_number": 121,
+      "context": "const ownerIsCurrentUser = roomOwnerId === userId;\n \n const headerLabel = isAIAgent\n ? t(\"Files:ChangeTheAgentOwner\")\n : t(\"Files:ChangeTheRoomOwner\");\n \n const infoText = isAIAgent\n ? t(\"Files:ChangeAgentOwnerSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n })",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1974,
-      "context": "disabled: !item.security?.Duplicate,\n },\n {\n id: \"option_change-room-owner\",\n key: \"change-room-owner\",\n label: t(\"Files:ChangeTheRoomOwner\"),\n icon: ReconnectSvgUrl,\n onClick: this.onChangeRoomOwner,\n disabled: false,\n },\n {",
+      "line_number": 2038,
+      "context": "{\n id: \"option_change-room-owner\",\n key: \"change-room-owner\",\n label: item.isAIAgent\n ? t(\"Translations:OwnerChange\")\n : t(\"Files:ChangeTheRoomOwner\"),\n icon: ReconnectSvgUrl,\n onClick: this.onChangeRoomOwner,\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }
   ],

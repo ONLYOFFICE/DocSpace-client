@@ -24,8 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TUser } from "@docspace/shared/api/people/types";
+import { TUser, TUserGroup } from "@docspace/shared/api/people/types";
 import { EmployeeStatus, EmployeeType } from "@docspace/shared/enums";
+import { TCreatedBy } from "@docspace/shared/types";
 
 export type TContactsSelected =
   | "all"
@@ -65,7 +66,7 @@ export type TPeopleListItem = {
   userName: string;
   mobilePhone: string | undefined;
   options: string[] | undefined;
-  groups: any[] | undefined;
+  groups: TUserGroup[] | undefined;
   position: string | undefined;
   firstName: string | undefined;
   lastName: string | undefined;
@@ -74,7 +75,7 @@ export type TPeopleListItem = {
   quotaLimit: number | undefined;
   usedSpace: number | undefined;
   isCustomQuota: boolean | string | undefined;
-  createdBy: any;
+  createdBy: TCreatedBy | undefined;
   registrationDate: string | undefined;
   tfaAppEnabled: boolean | undefined;
 };

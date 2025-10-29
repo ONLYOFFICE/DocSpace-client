@@ -3,7 +3,7 @@
   "content": "Scale",
   "content_en_sha1_hash": "a29f0256272e79ca91a1c4e608f09a6264397d12",
   "created_at": "2025-05-19T21:30:54.645Z",
-  "updated_at": "2025-05-24T08:58:05.274Z",
+  "updated_at": "2025-10-27T16:14:33.236Z",
   "comment": {
     "text": "This translation key is used to display a scale value in the Image Watermark component. It appears as a label next to a watermark image, allowing users to select a scale level. Translators should provide a unit of measurement for this value.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ImageWatermark.js",
-      "line_number": 82,
-      "context": "{ key: -30, label: \"30\" },\n { key: -45, label: \"45\" },\n { key: -60, label: \"60\" },\n { key: -90, label: \"90\" },\n ];\n const getInitialScale = (scale, isEdit) => {\n if (!isEdit || !scale) return scaleOptions[0];\n \n return scaleOptions.find((item) => {\n return item.key === scale;\n });",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ImageWatermark.tsx",
+      "line_number": 85,
+      "context": "{ key: -30, label: \"30\" },\n { key: -45, label: \"45\" },\n { key: -60, label: \"60\" },\n { key: -90, label: \"90\" },\n ];\n const getInitialScale = (scale: number, isEdit: boolean) => {\n if (!isEdit || !scale) return scaleOptions[0];\n \n return scaleOptions.find((item) => {\n return item.key === scale;\n });",
       "module": "/packages/client"
     }
   ],

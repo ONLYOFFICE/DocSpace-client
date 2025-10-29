@@ -140,6 +140,7 @@ export interface InjectedSelectUsersStepProps extends SelectUsersStepProps {
   incrementStep: TStore["importAccountsStore"]["incrementStep"];
   decrementStep: TStore["importAccountsStore"]["decrementStep"];
   withEmailUsers: TStore["importAccountsStore"]["withEmailUsers"];
+  withoutEmailUsers: TStore["importAccountsStore"]["withoutEmailUsers"];
   searchValue: TStore["importAccountsStore"]["searchValue"];
   setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
   cancelMigration: TStore["importAccountsStore"]["cancelMigration"];
@@ -155,8 +156,10 @@ export interface InjectedSelectUsersStepProps extends SelectUsersStepProps {
   cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
   setCancelUploadDialogVisible: TStore["dialogsStore"]["setCancelUploadDialogVisible"];
 
+  checkedUsers: TStore["importAccountsStore"]["checkedUsers"];
+  selectedWithEmail: TStore["importAccountsStore"]["selectedWithEmail"];
+
   totalUsedUsers: TStore["importAccountsStore"]["totalUsedUsers"];
-  quota: TStore["importAccountsStore"]["quota"];
 }
 
 export interface AccountsTableProps {
@@ -286,8 +289,7 @@ export interface InjectedAddEmailsStepProps extends AddEmailsStepProps {
   cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
   setCancelUploadDialogVisible: TStore["dialogsStore"]["setCancelUploadDialogVisible"];
 
-  totalUsedUsers: TStore["importAccountsStore"]["totalUsedUsers"];
-  quota: TStore["importAccountsStore"]["quota"];
+  selectedWithoutEmail: TStore["importAccountsStore"]["selectedWithoutEmail"];
 }
 
 export interface AddEmailTableRowProps {
@@ -344,6 +346,8 @@ export interface InjectedTypeSelectProps extends TypeSelectProps {
 
   cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
   setCancelUploadDialogVisible: TStore["dialogsStore"]["setCancelUploadDialogVisible"];
+  totalUsedUsers: TStore["importAccountsStore"]["totalUsedUsers"];
+  limitAdmins: TStore["importAccountsStore"]["limitAdmins"];
 }
 
 export interface InjectedTypeSelectTableProps extends AccountsTableProps {
@@ -444,7 +448,7 @@ export interface ImportSectionProps {
   isChecked: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   sectionName: string;
-  description: string;
+  description: React.ReactNode;
   exportSection: Omit<ImportItemProps, "isChecked">;
   importSection: Omit<ImportItemProps, "isChecked">;
   dataTestId?: string;
@@ -453,14 +457,28 @@ export interface ImportSectionProps {
 export interface NoEmailUsersProps {
   t: TFunction;
   users: number;
+  isSelectUsersStep?: boolean;
 }
 
 export interface UsersInfoBlockProps {
-  quota?: { max: number };
-  totalUsedUsers?: number;
-  numberOfSelectedUsers?: number;
+  selectedUsers?: number;
   totalUsers?: number;
 }
+
+export interface AdminsInfoBlockProps {
+  limitAdmins: number;
+  totalUsedUsers: number;
+}
+
+export const ImportOptionsKeys = {
+  ImportGroups: "importGroups",
+  ImportPersonalFiles: "importPersonalFiles",
+  ImportSharedFilesAndFolders: "importSharedFilesAndFolders",
+  ImportCommonFiles: "importCommonFiles",
+  ImportProjectFiles: "importProjectFiles",
+} as const;
+
+export type ImportOptionsKey = keyof typeof ImportOptionsKeys;
 
 type TExportDetails = { name: string; icon?: string };
 
@@ -469,8 +487,7 @@ export interface ImportStepProps {
   serviceName: string;
   usersExportDetails: TExportDetails;
   personalExportDetails: TExportDetails;
-  sharedFilesExportDetails: TExportDetails;
-  sharedFoldersExportDetails: TExportDetails;
+  sharedFilesAndFoldersExportDetails: TExportDetails;
   hasCommonFiles?: boolean;
   hasProjectFiles?: boolean;
 }
@@ -492,6 +509,8 @@ export interface InjectedImportStepProps extends ImportStepProps {
   cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
   setCancelUploadDialogVisible: TStore["dialogsStore"]["setCancelUploadDialogVisible"];
 }
+
+export type ImportOptions = keyof InjectedImportStepProps["importOptions"];
 
 export interface ImportProcessingStepProps {
   t: TFunction;

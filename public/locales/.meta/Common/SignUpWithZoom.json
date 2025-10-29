@@ -3,7 +3,7 @@
   "content": "Sign up with Zoom",
   "content_en_sha1_hash": "2596473d7776e251c5ee2d75c7cf026af02ce2c9",
   "created_at": "2025-05-19T21:30:48.880Z",
-  "updated_at": "2025-10-14T05:28:01.217Z",
+  "updated_at": "2025-10-27T16:14:33.796Z",
   "comment": {
     "text": "The \"SignUpWithZoom\" translation key is used to display the label for a button that allows users to sign up using Zoom. This text is typically displayed on a sign-up or registration form and may appear in a dialog or modal window. Its purpose is to provide clarity to users about how they can complete the sign-up process with their Zoom account.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 444,
+      "line_number": 455,
       "context": "? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n case \"weixin\":\n return signUp\n ? t(\"Common:SignUpWithWechat\")\n : t(\"Common:SignInWithWechat\");\n default:",
       "module": "/packages/shared"
     }

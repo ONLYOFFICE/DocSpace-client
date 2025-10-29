@@ -71,6 +71,7 @@ import {
   ErrorKeys,
   WhiteLabelLogoType,
   EmployeeType,
+  EmployeeTypeString,
   UrlActionType,
 } from "../enums";
 import {
@@ -321,6 +322,15 @@ export const getUserType = (user: TUser) => {
   if (user.isCollaborator) return EmployeeType.User;
   if (user.isVisitor) return EmployeeType.Guest;
   return EmployeeType.Guest;
+};
+
+export const getStringUserType = (user: TUser) => {
+  if (user.isOwner) return EmployeeTypeString.Owner;
+  if (isAdmin(user)) return EmployeeTypeString.Admin;
+  if (user.isRoomAdmin) return EmployeeTypeString.RoomAdmin;
+  if (user.isCollaborator) return EmployeeTypeString.User;
+  if (user.isVisitor) return EmployeeTypeString.Guest;
+  return EmployeeTypeString.Guest;
 };
 
 export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {
@@ -794,6 +804,12 @@ export const getFileExtension = (fileTitleParam: string) => {
 export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   const sorted = [];
 
+  const aiAgentsFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.AIAgents,
+  );
+  if (aiAgentsFolder) sorted.push(aiAgentsFolder);
+
   const myFolder = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.USER,
@@ -859,6 +875,8 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
 
 export const getFolderClassNameByType = (folderType: FolderType) => {
   switch (folderType) {
+    case FolderType.AIAgents:
+      return "tree-node-ai-agents";
     case FolderType.USER:
       return "tree-node-my";
     case FolderType.SHARE:
@@ -1024,7 +1042,8 @@ export function tryParseArray(str: string) {
 }
 
 export const RoomsTypeValues = Object.values(RoomsType).filter(
-  (item): item is number => typeof item === "number",
+  (item): item is number =>
+    typeof item === "number" && item !== RoomsType.AIRoom,
 );
 
 export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
@@ -1572,7 +1591,7 @@ export const getCategoryType = (location: { pathname: string }) => {
     if (pathname.indexOf("personal") > -1) {
       categoryType = CategoryType.Personal;
     } else if (pathname.indexOf("shared") > -1) {
-      const regexp = /(rooms)\/shared\/([\d])/;
+      const regexp = /(rooms)\/shared\/(\d+)/;
 
       categoryType = !regexp.test(location.pathname)
         ? CategoryType.Shared
@@ -1596,6 +1615,17 @@ export const getCategoryType = (location: { pathname: string }) => {
     categoryType = CategoryType.Accounts;
   } else if (pathname.startsWith("/shared-with-me")) {
     categoryType = CategoryType.SharedWithMe;
+  } else if (pathname.startsWith("/ai-agents")) {
+    const agentRegexp = /(ai-agents)\/(\d+)/;
+    const chatRegexp = /(ai-agents)\/(\d+)\/chat/;
+
+    if (chatRegexp.test(location.pathname)) {
+      categoryType = CategoryType.Chat;
+    } else if (agentRegexp.test(location.pathname)) {
+      categoryType = CategoryType.AIAgent;
+    } else {
+      categoryType = CategoryType.AIAgents;
+    }
   }
 
   return categoryType;

@@ -3,7 +3,7 @@
   "content": "{{productName}} access",
   "content_en_sha1_hash": "47d03f020b562535e6eb17ded31112639c75a4e8",
   "created_at": "2025-05-19T21:30:52.162Z",
-  "updated_at": "2025-10-03T13:19:30.525Z",
+  "updated_at": "2025-10-27T16:14:33.450Z",
   "comment": {
     "text": "The \"PortalAccess\" translation key displays a label indicating access to a portal, typically found on a page or button related to security settings in a software application. The label includes the product name, making it context-specific and user-friendly for end-users. It appears on various pages within the Portal Settings section.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 206,
+      "line_number": 212,
       "context": "return t(\"StudioTimeLanguageSettings\");\n case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");",
       "module": "/packages/client"
     },

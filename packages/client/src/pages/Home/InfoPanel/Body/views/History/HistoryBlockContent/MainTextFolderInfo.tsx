@@ -75,6 +75,8 @@ const HistoryMainTextFolderInfo = ({
   const isSection = parentType === FolderType.USER;
   const isFolder =
     parentType === FolderType.DEFAULT ||
+    parentType === FolderType.Knowledge ||
+    parentType === FolderType.ResultStorage ||
     isSubmitted ||
     isStartedFilling ||
     isReorderFolder;

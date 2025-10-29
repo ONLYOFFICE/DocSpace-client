@@ -210,7 +210,9 @@ const useSelectorBody = ({
     : t("Common:EmptyRoomsHeader");
   const emptyScreenDescription = isEmptyFilesRootScreen
     ? ""
-    : t("Common:EmptyRoomsDescription");
+    : t("Common:EmptyRoomsDescriptionText", {
+        sectionName: t("Common:Rooms"),
+      });
 
   const SelectorBody = (
     <Selector

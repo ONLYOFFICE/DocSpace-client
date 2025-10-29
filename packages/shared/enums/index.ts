@@ -75,6 +75,17 @@ export enum EmployeeType {
   Owner = "owner",
 }
 /**
+ * Enum for employee type.
+ * @readonly
+ */
+export enum EmployeeTypeString {
+  RoomAdmin = "roomAdmin",
+  Guest = "guest",
+  Admin = "admin",
+  User = "user",
+  Owner = "owner",
+}
+/**
  * Enum for user payments type.
  * @readonly
  */
@@ -205,6 +216,7 @@ export const enum RoomSearchArea {
   Active = "Active",
   Archive = "Archive",
   Templates = "Templates",
+  AIAgents = "AiAgents",
 }
 /**
  * Enum for file action.
@@ -233,9 +245,11 @@ export const enum PageType {
   bonus = "bonus",
   dataImport = "dataImport",
   storageManagement = "storageManagement",
+  flows = "flows",
   services = "services",
   groups = "groups",
   guests = "guests",
+  aiSettings = "aiSettings",
 }
 
 /**
@@ -268,7 +282,9 @@ export const enum FolderType {
   SubFolderInProgress = 28,
   VirtualDataRoom = 29,
   RoomTemplates = 30,
-  AIAgents = 31,
+  Knowledge = 32,
+  ResultStorage = 33,
+  AIAgents = 34,
 }
 
 export const enum ShareAccessRights {
@@ -402,6 +418,8 @@ export const enum Events {
   CREATE_PDF_FORM_FILE = "create_pdf_form_file",
   SAVE_AS_TEMPLATE = "save_as_template",
   Share_PDF_Form = "share_pdf_form",
+  AGENT_CREATE = "create_agent",
+  AGENT_EDIT = "edit_agent",
 }
 
 /**
@@ -562,7 +580,7 @@ export const enum ErrorKeys {
 }
 
 export enum RoomsType {
-  // AIRoom = 9, //TODO: Restore when certs will be done
+  AIRoom = 9, // TODO: Restore when certs will be done
   PublicRoom = 6,
   FormRoom = 1,
   // FillingFormsRoom= 1, //TODO: Restore when certs will be done
@@ -650,7 +668,7 @@ export const enum EditorConfigErrorType {
  * Enum for watermarks.
  * @readonly
  */
-export const enum WatermarkAdditions {
+export enum WatermarkAdditions {
   UserName = 1,
   UserEmail = 2,
   UserIpAdress = 4,
@@ -853,6 +871,33 @@ export enum ProvidersType {
   Yandex = "Yandex",
 }
 
+export const enum InfoPanelEvents {
+  showInfoPanel = "SHOW_INFO_PANEL_EVENT",
+  hideInfoPanel = "HIDE_INFO_PANEL_EVENT",
+
+  setInfoPanelSelectedRoom = "SET_INFO_PANEL_SELECTED_ROOM_EVENT",
+
+  openShareTab = "OPEN_INFO_PANEL_SHARE_TAB_EVENT",
+  openMembersTab = "OPEN_INFO_PANEL_MEMBERS_TAB_EVENT",
+
+  setView = "SET_INFO_PANEL_VIEW_EVENT",
+  setFileView = "SET_INFO_PANEL_FILE_VIEW_EVENT",
+  setRoomsView = "SET_INFO_PANEL_ROOMS_VIEW_EVENT",
+
+  setInfoPanelMobileHidden = "SET_INFO_PANEL_MOBILE_HIDDEN_EVENT",
+  refreshInfoPanel = "REFRESH_INFO_PANEL_EVENT",
+}
+
+export const enum SearchArea {
+  Active,
+  Archive,
+  Any,
+  RecentByLinks,
+  Templates,
+  Knowledge,
+  ResultStorage,
+}
+
 export const enum LinkSharingEntityType {
   RoomOrFolder = 1,
   File = 2,
@@ -861,4 +906,10 @@ export const enum LinkSharingEntityType {
 export const enum ShareLinkType {
   Internal = 0,
   External = 1,
+}
+
+export enum VectorizationStatus {
+  InProgress,
+  Completed,
+  Failed,
 }

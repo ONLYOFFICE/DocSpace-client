@@ -138,11 +138,17 @@ export const EncryptionPortal: React.FC<EncryptionPortalProps> = () => {
 
   useEffect(() => {
     if (typeof statusEncryption === "number") return;
-    const asyncFunction = async () => {
-      const encryptionSettings = await getEncryptionSettings();
+    const getSettings = () => {
+      const encryptionSettings = getEncryptionSettings();
+      if (
+        encryptionSettings.status === EncryptionStatus.Encrypted ||
+        encryptionSettings.status === EncryptionStatus.EncryptionStarted
+      ) {
+        returnToPortal(true);
+      }
       setStatusEncryption(encryptionSettings.status);
     };
-    asyncFunction();
+    getSettings();
   }, [statusEncryption]);
 
   const headerText = errorMessage

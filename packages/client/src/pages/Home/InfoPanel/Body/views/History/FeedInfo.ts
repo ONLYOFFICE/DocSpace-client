@@ -189,6 +189,83 @@ export const feedInfo = [
     actionType: FeedAction.Reorder,
   },
   //
+  // AGENTS
+  {
+    key: FeedActionKeys.AgentCreated,
+    targetType: FeedTarget.Agent,
+    actionType: FeedAction.Create,
+  },
+  {
+    key: FeedActionKeys.AgentRenamed,
+    targetType: FeedTarget.Agent,
+    actionType: FeedAction.Rename,
+  },
+  {
+    key: FeedActionKeys.AddedAgentTags,
+    targetType: FeedTarget.AgentTag,
+    actionType: FeedAction.Create,
+  },
+  {
+    key: FeedActionKeys.DeletedAgentTags,
+    targetType: FeedTarget.AgentTag,
+    actionType: FeedAction.Delete,
+  },
+  {
+    key: FeedActionKeys.AgentLogoCreated,
+    targetType: FeedTarget.AgentLogo,
+    actionType: FeedAction.Create,
+  },
+  {
+    key: FeedActionKeys.AgentLogoDeleted,
+    targetType: FeedTarget.AgentLogo,
+    actionType: FeedAction.Delete,
+  },
+  {
+    key: FeedActionKeys.AgentColorChanged,
+    targetType: FeedTarget.AgentLogo,
+    actionType: FeedAction.CHANGE_COLOR,
+  },
+  {
+    key: FeedActionKeys.AgentCoverChanged,
+    targetType: FeedTarget.AgentLogo,
+    actionType: FeedAction.CHANGE_COVER,
+  },
+  {
+    key: FeedActionKeys.AgentCreateUser,
+    targetType: FeedTarget.User,
+    actionType: FeedAction.Create,
+  },
+  {
+    key: FeedActionKeys.AgentUpdateAccessForUser,
+    targetType: FeedTarget.User,
+    actionType: FeedAction.Update,
+  },
+  {
+    key: FeedActionKeys.AgentRemoveUser,
+    targetType: FeedTarget.User,
+    actionType: FeedAction.Delete,
+  },
+  {
+    key: FeedActionKeys.AgentInviteResend,
+    targetType: FeedTarget.User,
+    actionType: FeedAction.Invite,
+  },
+  {
+    key: FeedActionKeys.AgentGroupAdded,
+    targetType: FeedTarget.Group,
+    actionType: FeedAction.Create,
+  },
+  {
+    key: FeedActionKeys.AgentUpdateAccessForGroup,
+    targetType: FeedTarget.Group,
+    actionType: FeedAction.Update,
+  },
+  {
+    key: FeedActionKeys.AgentGroupRemove,
+    targetType: FeedTarget.Group,
+    actionType: FeedAction.Delete,
+  },
+  //
   // ROOM
   {
     key: FeedActionKeys.RoomCreated,

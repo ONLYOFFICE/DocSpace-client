@@ -3,7 +3,7 @@
   "content": "Single sign-on",
   "content_en_sha1_hash": "3d6c0814f69af6fd72d59bafb018d7494b3e0841",
   "created_at": "2025-05-19T21:30:47.604Z",
-  "updated_at": "2025-10-13T13:22:36.062Z",
+  "updated_at": "2025-10-27T16:14:33.788Z",
   "comment": {
     "text": "This translation key is used to display the single sign-on setting. It appears on a provider settings page or in related UI elements, where users can configure their single sign-on options. The content of this key should be translated to describe the purpose and functionality of single sign-on for the specific use case it is displayed in.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 400,
+      "line_number": 411,
       "context": "case \"zoom\":\n return t(\"Common:ProviderZoom\");\n case \"weixin\":\n return t(\"Common:ProviderWechat\");\n case \"sso-full\":\n return t(\"Common:ProviderSsoSetting\");\n default:\n return \"\";\n }\n }",
       "module": "/packages/shared"
     }

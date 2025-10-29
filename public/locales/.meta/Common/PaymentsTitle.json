@@ -3,7 +3,7 @@
   "content": "Payments",
   "content_en_sha1_hash": "44357ae55a217646f4d1c3bb7cb7b437fa838999",
   "created_at": "2025-05-19T21:30:47.315Z",
-  "updated_at": "2025-10-03T13:19:30.397Z",
+  "updated_at": "2025-10-27T16:14:33.158Z",
   "comment": {
     "text": "This translation key is used as a title for payment-related sections and interfaces. It appears in various contexts, including error messages and settings pages, displaying the content \"Payments\" to users.",
     "is_auto": true,
@@ -30,25 +30,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 218,
+      "line_number": 224,
       "context": "return t(\"ThirdPartyAuthorization\");\n case \"Migration\":\n return t(\"Migration\");\n case \"Backup\":\n return t(\"Common:Backup\");\n case \"Common:PaymentsTitle\":\n return t(\"Common:PaymentsTitle\");\n case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 590,
-      "context": "{\n id: \"portal-settings_catalog-payments\",\n key: \"9\",\n type: PageType.payments,\n link: \"payments\",\n tKey: \"Common:PaymentsTitle\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-portal-payments\",\n key: \"9-0\",",
+      "line_number": 626,
+      "context": "{\n id: \"portal-settings_catalog-payments\",\n key: \"10\",\n type: PageType.payments,\n link: \"payments\",\n tKey: \"Common:PaymentsTitle\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-portal-payments\",\n key: \"10-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 590,
-      "context": "{\n id: \"portal-settings_catalog-payments\",\n key: \"9\",\n type: PageType.payments,\n link: \"payments\",\n tKey: \"Common:PaymentsTitle\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-portal-payments\",\n key: \"9-0\",",
+      "line_number": 626,
+      "context": "{\n id: \"portal-settings_catalog-payments\",\n key: \"10\",\n type: PageType.payments,\n link: \"payments\",\n tKey: \"Common:PaymentsTitle\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-portal-payments\",\n key: \"10-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 459,
+      "line_number": 460,
       "context": "management,\n isAdmin &&\n !isCommunity && {\n key: \"user-menu-payments\",\n icon: PaymentsReactSvgUrl,\n label: t(\"Common:PaymentsTitle\"),\n onClick: (obj) => this.onPaymentsClick(obj),\n additionalElement: <TariffBar />,\n url: PAYMENTS_URL,\n preventNewTab: true,\n },",
       "module": "/packages/client"
     },

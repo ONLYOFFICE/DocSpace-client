@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2025-10-16T07:29:35.510Z",
+  "updated_at": "2025-10-27T16:14:33.145Z",
   "comment": {
     "text": "This translation key is used to display a label for selecting an action, such as choosing a file or folder, in various UI elements. It appears in a placeholder position within a dialog and on a component that handles file selection. Translators should provide a descriptive text that indicates the user's ability to make a choice.",
     "is_auto": true,
@@ -35,6 +35,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/search/index.tsx",
+      "line_number": 211,
+      "context": "removeMargin\n >\n <ComboBox\n options={items}\n selectedOption={\n selectedItem ?? ({ label: t(\"Common:SelectAction\") } as TOption)\n }\n scaled\n displayArrow\n onSelect={(option) =>\n setSelectedOption(option.key as WebSearchType)",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
       "line_number": 172,
       "context": "frameId: \"ds-frame\",\n init: true,\n showSelectorCancel: true,\n showSelectorHeader: true,\n withSearch: true,\n acceptButtonLabel: t(\"Common:SelectAction\"),\n cancelButtonLabel: t(\"Common:CancelButton\"),\n withSubtitle: true,\n filterParam: FilesSelectorFilterTypes.ALL,\n isButtonMode: false,\n buttonWithLogo: true,",
@@ -60,7 +66,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 126,
+      "line_number": 131,
       "context": "frameId: \"ds-frame\",\n init: true,\n showSelectorCancel: true,\n showSelectorHeader: true,\n withSearch: true,\n acceptButtonLabel: t(\"Common:SelectAction\"),\n cancelButtonLabel: t(\"Common:CancelButton\"),\n isButtonMode: false,\n buttonWithLogo: true,\n events: {\n onSelectCallback: (items) => {",
       "module": "/packages/client"
     },
@@ -72,7 +78,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 195,
+      "line_number": 200,
       "context": "},\n ];\n \n const [filterBy, setFilterBy] = useState({\n key: \"filter-type-default\",\n label: t(\"Common:SelectAction\"),\n default: true,\n });\n \n const [author, setAuthor] = useState(\"\");\n const searchRef = useRef();",
       "module": "/packages/client"
     },
@@ -84,13 +90,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 622,
+      "line_number": 650,
       "context": "<PeopleSelector\n withCancelButton\n onCancel={onCloseContactSelector}\n cancelButtonLabel=\"\"\n disableSubmitButton={false}\n submitButtonLabel={t(\"Common:SelectAction\")}\n onSubmit={onSubmitContactSelector}\n withHeader\n headerProps={{\n onCloseClick: onCloseContactSelector,\n isCloseable: true,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1781,
+      "line_number": 1810,
       "context": "const optionsModel = [\n {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => this.onSelect(item),\n disabled: false,\n },\n withOpen && {",
       "module": "/packages/client"
     },
@@ -120,7 +126,7 @@
     },
     {
       "file_path": "/packages/shared/components/files-selector-input/FilesSelectorInput.tsx",
-      "line_number": 263,
+      "line_number": 270,
       "context": "isLoading={isLoading}\n path={newPath || basePath}\n isDisabled={isDisabled || isLoading}\n hasError={isError || isErrorPath}\n isDocumentIcon={isDocumentIcon}\n placeholder={t(\"Common:SelectAction\")}\n />\n <Portal element={<div>{selectorComponent}</div>} />\n </div>\n );\n };",
       "module": "/packages/shared"
     },
@@ -132,8 +138,14 @@
     },
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
-      "line_number": 276,
+      "line_number": 308,
       "context": "withCancelButton\n alwaysShowFooter\n onSubmit={onSelectUser}\n onCancel={closeUsersPanel}\n onClose={closeUsersPanel}\n submitButtonLabel={t(\"Common:SelectAction\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n disableDisabledUsers\n disableSubmitButton={false}\n checkIfUserInvited={checkIfUserInvited}\n injectedElement={",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/selectors/AIAgent/index.tsx",
+      "line_number": 210,
+      "context": "{...cancelButtonSelectorProps}\n {...searchSelectorProps}\n withPadding={withPadding}\n onSelect={onSelect}\n items={items}\n submitButtonLabel={t(\"Common:SelectAction\")}\n onSubmit={onSubmit}\n isMultiSelect={false}\n emptyScreenImage={\n isBase\n ? EmptyScreenAIAgentsSelectorSvgUrl",
       "module": "/packages/shared"
     },
     {
@@ -156,7 +168,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/Room/index.tsx",
-      "line_number": 240,
+      "line_number": 239,
       "context": "{...cancelButtonSelectorProps}\n {...searchSelectorProps}\n withPadding={withPadding}\n onSelect={onSelect}\n items={items}\n submitButtonLabel={submitButtonLabel || t(\"Common:SelectAction\")}\n onSubmit={onSubmit}\n isMultiSelect={isMultiSelect}\n emptyScreenImage={\n isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl\n }",
       "module": "/packages/shared"
     }

@@ -1,0 +1,34 @@
+{
+  "key_path": "ManageConnection",
+  "content": "Manage connection",
+  "content_en_sha1_hash": "3ca4794faf5c82e76336e37b70c07375fb9ed946",
+  "created_at": "2025-10-27T16:14:24.262Z",
+  "updated_at": "2025-10-27T16:36:14.080Z",
+  "comment": {
+    "text": "This text likely refers to a button or link that allows users to manage their connection settings or connected accounts within the chat interface. Translators should ensure the translated text accurately conveys the ability to adjust or oversee connection-related configurations.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:36:14.080Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
+      "line_number": 34,
+      "context": "import { observer } from \"mobx-react\";\n import classNames from \"classnames\";\n \n import McpToolReactSvgUrl from \"PUBLIC_DIR/images/mcp.tool.svg?url\";\n import WebSearchIconUrl from \"PUBLIC_DIR/images/web.search.svg?url\";\n import ManageConnectionsReactSvgUrl from \"PUBLIC_DIR/images/manage.connection.react.svg?url\";\n \n import { openConnectWindow } from \"../../../../api/files\";\n import {\n changeMCPToolsForRoom,\n connectServer,",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-input/ToolsSettings.tsx",
+      "line_number": 34,
+      "context": "import { observer } from \"mobx-react\";\n import classNames from \"classnames\";\n \n import McpToolReactSvgUrl from \"PUBLIC_DIR/images/mcp.tool.svg?url\";\n import WebSearchIconUrl from \"PUBLIC_DIR/images/web.search.svg?url\";\n import ManageConnectionsReactSvgUrl from \"PUBLIC_DIR/images/manage.connection.react.svg?url\";\n \n import { openConnectWindow } from \"../../../../api/files\";\n import {\n changeMCPToolsForRoom,\n connectServer,",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

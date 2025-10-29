@@ -132,7 +132,8 @@ const RoomsItemHeader = ({
     selection.canShare &&
     isShareTab &&
     // HACK: Hide share option for rooms — remove after implementation is ready
-    selection.rootFolderType !== FolderType.Rooms;
+    selection.rootFolderType !== FolderType.Rooms &&
+    selection.rootFolderType !== FolderType.AIAgents;
 
   const roomType =
     "roomType" in selection ? selection.roomType : RoomsType.CustomRoom;

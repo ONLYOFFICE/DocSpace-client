@@ -180,6 +180,29 @@ class InfoPanelStore {
     this.infoPanelRoom = infoPanelRoom;
   };
 
+  refreshInfoPanel = () => {
+    const selection = this.infoPanelSelection;
+
+    if (!selection || Array.isArray(selection)) return;
+
+    const isRoomSelection = "isRoom" in selection && Boolean(selection.isRoom);
+
+    if (isRoomSelection) {
+      if (
+        this.roomsView === InfoPanelView.infoMembers &&
+        this.infoPanelRoomSelection?.id === selection.id
+      ) {
+        void this.updateInfoPanelMembers();
+      }
+
+      return;
+    }
+
+    if (this.isShareTabActive) {
+      this.setShareChanged(true);
+    }
+  };
+
   openUser = async (user: TCreatedBy) => {
     if (user.id === this.userStore?.user?.id) {
       this.peopleStore.profileActionsStore.onProfileClick();
@@ -312,6 +335,7 @@ class InfoPanelStore {
   // Routing helpers //
 
   getCanDisplay = () => {
+    const isAIAgent = this.getIsAIAgent();
     const isFiles = this.getIsFiles();
     const isRooms = this.getIsRooms();
     const isAccounts =
@@ -319,7 +343,12 @@ class InfoPanelStore {
       getContactsView(window.location) !== false;
     const isGallery = window.location.pathname.includes("form-gallery");
 
-    return isRooms || isFiles || isGallery || isAccounts;
+    return isRooms || isFiles || isGallery || isAccounts || isAIAgent;
+  };
+
+  getIsAIAgent = () => {
+    const pathname = window.location.pathname.toLowerCase();
+    return pathname.indexOf("ai-agent") !== -1;
   };
 
   getIsFiles = () => {
@@ -366,6 +395,13 @@ class InfoPanelStore {
   setShareChanged = (shareChanged: boolean) => {
     this.shareChanged = shareChanged;
   };
+
+  get isShareTabActive(): boolean {
+    return (
+      this.roomsView === InfoPanelView.infoShare ||
+      this.fileView === InfoPanelView.infoShare
+    );
+  }
 }
 
 export default InfoPanelStore;

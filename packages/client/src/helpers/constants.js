@@ -73,6 +73,7 @@ export const TableVersions = Object.freeze({
   Favorites: "1",
   Guests: "1",
   SharedWithMe: "1",
+  AIAgents: "1",
 });
 
 /**
@@ -165,3 +166,6 @@ export const ThirdPartyServicesUrlName = Object.freeze({
   ownCloud: "owncloud",
   WebDav: "webdav",
 });
+
+export const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
+export const TABLE_PEOPLE_COLUMNS = `peopleTableColumns_ver-${TableVersions.People}`;

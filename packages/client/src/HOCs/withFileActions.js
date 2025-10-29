@@ -144,10 +144,11 @@ export default function withFileActions(WrappedFileItem) {
         setBufferSelection(item);
 
       if (
-        !canDrag ||
-        (!draggable && !isFileName && !isActive) ||
-        notSelectable ||
-        isThirdPartyFolder
+        (!canDrag ||
+          (!draggable && !isFileName && !isActive) ||
+          notSelectable ||
+          isThirdPartyFolder) &&
+        e.button !== 1
       ) {
         return e;
       }
@@ -159,7 +160,13 @@ export default function withFileActions(WrappedFileItem) {
           : false;
       const label = e.currentTarget.getAttribute("label");
       if (mouseButton || e.currentTarget.tagName !== "DIV" || label) {
-        if (item.isPlugin) return this.onFilesClick(e);
+        const canWebEdit = item.viewAccessibility?.WebEdit;
+        const canViewedDocs = item.viewAccessibility?.WebView;
+        if (
+          (item?.isPlugin || !(canWebEdit || canViewedDocs)) &&
+          !item?.isFolder
+        )
+          return this.onFilesClick(e);
         return e;
       }
 
@@ -424,6 +431,7 @@ export default function withFileActions(WrappedFileItem) {
         isArchiveFolder,
         isTemplatesFolder,
         isRecentFolder,
+        isAIAgentsFolder,
       } = treeFoldersStore;
       const {
         dragging,
@@ -509,7 +517,8 @@ export default function withFileActions(WrappedFileItem) {
         isTemplatesFolder ||
         isRecentFolder ||
         settingsStore.currentDeviceType !== DeviceType.desktop ||
-        inProgress;
+        inProgress ||
+        isAIAgentsFolder;
 
       let isActive = false;
 

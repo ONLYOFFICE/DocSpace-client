@@ -1,0 +1,28 @@
+{
+  "key_path": "DeleteServer",
+  "content": "Delete server",
+  "content_en_sha1_hash": "fb695fc6fb9b2ba669f10693f32b6ec0a7dc8918",
+  "created_at": "2025-10-27T16:14:31.652Z",
+  "updated_at": "2025-10-27T17:34:25.330Z",
+  "comment": {
+    "text": "This key displays the text \"Delete server\" in the header of a modal dialog. It's used to confirm the deletion of an AI server within the Portal Settings. The text should convey the action the user is about to perform.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:34:25.330Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/dialogs/delete/index.tsx",
+      "line_number": 72,
+      "context": "}\n };\n \n return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>{t(\"AISettings:DeleteServer\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"AISettings:DeleteServerDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

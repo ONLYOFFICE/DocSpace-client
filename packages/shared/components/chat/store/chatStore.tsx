@@ -109,26 +109,6 @@ export default class ChatStore {
     }
   };
 
-  fetchChats = async () => {
-    if (this.isRequestRunning) return;
-
-    this.setIsLoading(true);
-    this.setIsRequestRunning(true);
-
-    try {
-      const { items, total } = await getChats(this.roomId);
-
-      this.setChats(items);
-      this.setTotalChats(total);
-    } catch (error) {
-      console.error(error);
-      toastr.error(error as string);
-    } finally {
-      this.setIsRequestRunning(false);
-      this.setIsLoading(false);
-    }
-  };
-
   addChats = (chats: TChat[]) => {
     this.chats.push(...chats);
   };
@@ -193,13 +173,20 @@ export const ChatStoreContext = React.createContext<ChatStore>(undefined!);
 
 export const ChatStoreContextProvider = ({
   roomId,
+
+  chats,
+  totalChats,
   children,
 }: TChatStoreProps) => {
   const store = React.useMemo(() => new ChatStore(roomId), [roomId]);
 
   React.useEffect(() => {
-    if (roomId) store.fetchChats();
-  }, [store, roomId]);
+    store.addChats(chats);
+  }, [store, chats]);
+
+  React.useEffect(() => {
+    store.setTotalChats(totalChats);
+  }, [store, totalChats]);
 
   React.useEffect(() => {
     const callback = ({

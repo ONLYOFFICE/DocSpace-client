@@ -24,106 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/variables/devices.scss";
-@import "../../../../styles/mixins";
+import React from "react";
 
-.chatHeader {
-  width: 100%;
+import { getChats } from "../../../api/ai";
+import { TChat } from "../../../api/ai/types";
 
-  padding: 0 0 16px;
+import { toastr } from "../../toast";
 
-  box-sizing: border-box;
+const useInitChats = ({ roomId }: { roomId: string | number }) => {
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isRequestRunning, setIsRequestRunning] = React.useState(false);
+  const [chats, setChats] = React.useState<TChat[]>([]);
+  const [totalChats, setTotalChats] = React.useState<number>(0);
 
-  display: flex;
-  align-items: center;
+  const fetchChats = async () => {
+    if (!roomId) return;
+    if (isRequestRunning) return;
 
-  gap: 16px;
+    setIsLoading(true);
+    setIsRequestRunning(true);
 
-  min-height: 48px;
-}
+    try {
+      const { items, total } = await getChats(roomId);
 
-.createChat {
-  width: fit-content;
-  min-width: fit-content;
-  height: 32px;
-
-  box-sizing: border-box;
-
-  border-radius: 6px;
-
-  padding: 8px;
-
-  display: flex;
-  align-items: center;
-
-  gap: 8px;
-
-  &:hover {
-    background-color: var(--chat-header-button-hover-background);
-  }
-
-  cursor: pointer;
-
-  svg {
-    path {
-      fill: var(--chat-header-button-svg-color);
+      setChats(items);
+      setTotalChats(total);
+    } catch (error) {
+      console.error(error);
+      toastr.error(error as string);
+    } finally {
+      setIsRequestRunning(false);
+      setIsLoading(false);
     }
-  }
-}
+  };
 
-.selectChat {
-  width: 32px;
-  height: 32px;
+  return {
+    isLoading,
+    isRequestRunning,
+    chats,
+    totalChats,
+    fetchChats,
+  };
+};
 
-  min-width: 32px;
-
-  box-sizing: border-box;
-
-  border-radius: 3px;
-
-  &:hover {
-    background-color: var(--chat-header-button-hover-background);
-
-    cursor: pointer;
-  }
-
-  &.open {
-    background-color: var(--chat-header-button-active-background);
-  }
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  cursor: pointer;
-
-  svg {
-    path {
-      fill: var(--chat-header-button-svg-color);
-    }
-  }
-}
-
-.dropdowItemWrapper {
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-
-  .iconButtonWrapper {
-    width: 16px;
-    height: 16px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-.selectModel {
-  color: var(--chat-header-model-color);
-
-  cursor: default;
-}
+export default useInitChats;

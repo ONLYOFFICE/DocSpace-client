@@ -24,12 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useLayoutEffect, useMemo } from "react";
+import React, { useState, useLayoutEffect, useMemo, useCallback } from "react";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/components/selection-area";
 import { getCountTilesInRow } from "@docspace/shared/utils";
-import { useCallback } from "react";
 
 const getCountOfMissingFilesTiles = (itemsLength, countTilesInRow) => {
   const division = itemsLength % countTilesInRow;

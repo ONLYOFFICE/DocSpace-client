@@ -30,6 +30,7 @@ import { isMobile } from "react-device-detect";
 import { withTranslation } from "react-i18next";
 
 import { FolderType } from "@docspace/shared/enums";
+import { EMPTY_OBJECT } from "@docspace/shared/constants";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { isMobile as isMobileUtile, classNames } from "@docspace/shared/utils";
@@ -45,7 +46,6 @@ import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withBadges from "../../../../../HOCs/withBadges";
 import ItemIcon from "../../../../../components/ItemIcon";
-import { EMPTY_OBJECT } from "@docspace/shared/constants";
 
 const SimpleFilesRow = React.memo((props) => {
   const {

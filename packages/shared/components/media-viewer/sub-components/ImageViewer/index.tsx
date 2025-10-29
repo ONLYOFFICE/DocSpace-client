@@ -163,7 +163,6 @@ export const ImageViewer = ({
 
   //     changeSource(blob);
   //   } catch (error) {
-  //     // eslint-disable-next-line no-console
   //     console.log(error);
   //   }
   // }, [src, imageId, version, isTiff, changeSource]);
@@ -928,7 +927,6 @@ export const ImageViewer = ({
 
   //   indexedDBHelper
   //     .getItem(IndexedDBStores.images, imageId)
-  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   //     .then((result: any) => {
   //       if (result && result.version === version) {
   //         changeSource(result.src);

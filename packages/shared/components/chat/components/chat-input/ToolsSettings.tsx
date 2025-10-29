@@ -28,6 +28,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import classNames from "classnames";
+import { useNavigate } from "react-router";
 
 import McpToolReactSvgUrl from "PUBLIC_DIR/images/mcp.tool.svg?url";
 import WebSearchIconUrl from "PUBLIC_DIR/images/web.search.svg?url";
@@ -60,6 +61,7 @@ import { useMessageStore } from "../../store/messageStore";
 import useToolsSettings from "../../hooks/useToolsSettings";
 
 import styles from "./ChatInput.module.scss";
+import { Link, LinkType } from "../../../link";
 
 const ToolsSettings = ({
   servers,
@@ -73,8 +75,10 @@ const ToolsSettings = ({
   setServers,
   setMCPTools,
   setWebSearchEnabled,
-}: ReturnType<typeof useToolsSettings>) => {
-  const { t } = useTranslation(["Common"]);
+  isAdmin,
+}: ReturnType<typeof useToolsSettings> & { isAdmin?: boolean }) => {
+  const { t } = useTranslation(["Common", "Notifications"]);
+  const navigate = useNavigate();
 
   const { roomId } = useChatStore();
   const {
@@ -145,6 +149,10 @@ const ToolsSettings = ({
     },
     [MCPTools, roomId],
   );
+
+  const onGoToWebSearchPage = () => {
+    navigate("/portal-settings/ai-settings/search");
+  };
 
   const openOauthWindow = async (serverId: string, type: string) => {
     const url = await openConnectWindow(type);
@@ -305,11 +313,25 @@ const ToolsSettings = ({
         checked: webSearchEnabled && webSearchPortalEnabled,
         onClick: onWebSearchToggle,
         disabled: !webSearchPortalEnabled,
-        getTooltipContent: () => (
-          <Text>
-            {t("ConnectWebSearch", { productName: t("Common:ProductName") })}
-          </Text>
-        ),
+        getTooltipContent: isAdmin
+          ? () => (
+              <>
+                <Text>
+                  {t("ConnectWebSearch", {
+                    productName: t("Common:ProductName"),
+                  })}
+                </Text>
+                <Link
+                  type={LinkType.action}
+                  isHovered
+                  fontWeight={600}
+                  onClick={onGoToWebSearchPage}
+                >
+                  {t("Notifications:GoToSettings")}
+                </Link>
+              </>
+            )
+          : undefined,
       },
       ...(showManageConnectionItem || serverItems.length > 0
         ? [{ key: "separator-1", isSeparator: true }]

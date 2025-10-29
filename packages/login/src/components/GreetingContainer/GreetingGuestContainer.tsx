@@ -27,6 +27,7 @@
 "use client";
 
 import { Trans, useTranslation } from "react-i18next";
+import Image from "next/image";
 import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
@@ -57,7 +58,13 @@ export const GreetingGuestContainer = ({
 
   return (
     <GreetingContainer>
-      <img src={logoUrl} className="portal-logo guest" alt="greeting-logo" />
+      <Image
+        src={logoUrl}
+        className="portal-logo guest"
+        alt="greeting-logo"
+        width={386}
+        height={44}
+      />
       <div className="tooltip guest">
         <Text fontSize="16px">
           <Trans

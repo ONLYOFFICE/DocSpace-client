@@ -131,6 +131,7 @@ export type ButtonsProps = {
   selectedModel: string;
 
   toolsSettings: ReturnType<typeof useToolsSettings>;
+  isAdmin?: boolean;
 };
 
 export type AttachmentProps = {
@@ -152,6 +153,7 @@ export type ChatInputProps = {
   selectedModel: string;
 
   toolsSettings: ReturnType<typeof useToolsSettings>;
+  isAdmin?: boolean;
 };
 
 export type ChatContainerProps = {
@@ -171,4 +173,5 @@ export type ChatProps = {
 
   toolsSettings: ChatInputProps["toolsSettings"];
   initChats: ReturnType<typeof useInitChats>;
+  isAdmin?: boolean;
 };

@@ -48,6 +48,7 @@ import { TOAST_FOLDER_PUBLIC_KEY } from "@docspace/shared/constants";
 import type { TFolder } from "@docspace/shared/api/files/types";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
+import { AuthStore } from "@docspace/shared/store/AuthStore";
 
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
@@ -92,6 +93,7 @@ type ViewProps = UseContactsProps &
     setAiAgentSelectorDialogProps: DialogsStore["setAiAgentSelectorDialogProps"];
 
     canUseChat: AccessRightsStore["canUseChat"];
+    isAdmin: AuthStore["isAdmin"];
   };
 
 const View = ({
@@ -163,6 +165,7 @@ const View = ({
   setAiAgentSelectorDialogProps,
 
   canUseChat,
+  isAdmin,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation(["Files", "Common"]);
@@ -503,6 +506,7 @@ const View = ({
               canUseChat={canUseChat}
               toolsSettings={toolsSettings}
               initChats={initChats}
+              isAdmin={isAdmin}
             />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
@@ -596,7 +600,7 @@ export const ViewComponent = inject(
     const { tfaSettings, setBackupCodes, getTfaType } = tfaStore;
 
     const { setProviders } = peopleStore.usersStore;
-    const { getCapabilities } = authStore;
+    const { getCapabilities, isAdmin } = authStore;
 
     const { getSessions } = setup;
 
@@ -671,6 +675,7 @@ export const ViewComponent = inject(
       setAiAgentSelectorDialogProps,
 
       canUseChat,
+      isAdmin,
     };
   },
 )(observer(View));

@@ -48,6 +48,7 @@ const Buttons = ({
   value,
   selectedModel,
   toolsSettings,
+  isAdmin,
 }: ButtonsProps) => {
   const { isRequestRunning, stopMessage } = useMessageStore();
 
@@ -83,7 +84,7 @@ const Buttons = ({
             isFill={false}
           />
         </div>
-        <ToolsSettings {...toolsSettings} />
+        <ToolsSettings {...toolsSettings} isAdmin={isAdmin} />
       </div>
       <IconButton
         iconName={SendReactSvgUrl}

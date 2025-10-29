@@ -52,6 +52,9 @@ const Chat = ({
 
   toolsSettings,
   initChats,
+
+    isAdmin,
+
 }: ChatProps) => {
   const isLoadingChat = isLoading || !roomId;
 
@@ -81,6 +84,7 @@ const Chat = ({
             getIcon={getIcon}
             selectedModel={selectedModel}
             toolsSettings={toolsSettings}
+            isAdmin={isAdmin}
           />
         </ChatContainer>
       </MessageStoreContextProvider>

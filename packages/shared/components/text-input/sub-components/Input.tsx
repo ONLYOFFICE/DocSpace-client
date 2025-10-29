@@ -78,7 +78,7 @@ const InputComponent = ({
 
   // MaskedInput expects `size` to be a number, while our TextInput props may use an enum.
   // Omit `size` when rendering MaskedInput and the native input to avoid the type mismatch.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // biome-ignore lint/correctness/noUnusedVariables: TODO fix
   const { size, ...commonPropsForInput } = commonProps;
 
   if (mask) {

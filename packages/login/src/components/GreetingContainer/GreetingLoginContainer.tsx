@@ -27,6 +27,7 @@
 "use client";
 
 import React, { useLayoutEffect, useState } from "react";
+import Image from "next/image";
 import { Trans, useTranslation } from "react-i18next";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useTheme } from "styled-components";
@@ -164,7 +165,13 @@ export const GreetingLoginContainer = ({
 
   return (
     <>
-      <img src={logoUrl} className="logo-wrapper" alt="greeting-logo" />
+      <Image
+        src={logoUrl}
+        className="logo-wrapper"
+        alt="greeting-logo"
+        width={386}
+        height={44}
+      />
       {renderEmailChangeContent()}
       {renderGreetingTitle()}
       {renderInvitationContent()}

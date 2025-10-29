@@ -345,7 +345,8 @@ const ContextMenu = (props: ContextMenuProps) => {
         menuRef.current &&
         !(
           menuRef.current.isSameNode(target) || menuRef.current.contains(target)
-        )
+        ) &&
+        !target.closest(".context-menu-item-tooltip")
       );
     },
     [],

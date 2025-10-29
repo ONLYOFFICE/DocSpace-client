@@ -72,7 +72,7 @@ const TagPure = ({
   const tagRef = React.useRef<HTMLDivElement | null>(null);
   const isMountedRef = React.useRef(true);
 
-  const DivWrapper = title ? DivWithTooltip : "div";
+  const DivWrapper = label ? DivWithTooltip : "div";
 
   const onClickOutside = React.useCallback((e: Event) => {
     const target = e.target as HTMLElement;

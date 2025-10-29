@@ -101,7 +101,7 @@ const ItemTitle = ({
   const contextOptions = getData();
 
   const userAvatar = userSelection.hasAvatar
-    ? userSelection.avatarMax 
+    ? userSelection.avatarMax
     : DefaultUserPhoto;
   const isSSO = userSelection.isSSO || false;
   const isLDAP = userSelection.isLDAP || false;

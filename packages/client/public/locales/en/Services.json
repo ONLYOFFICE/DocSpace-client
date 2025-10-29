@@ -1,6 +1,7 @@
 {
   "AIAgents": "AI agents",
   "AIAgentsDescription": "Set up a personalized assistant for your team by adding a knowledge base, selecting the ideal model, and connecting an MCP server.",
+  "AItoolsConfirm": "Enabling the AI tools service will grant all {{productName}} users access to AI-powered features, provided the wallet has sufficient funds. Are you sure you want to continue?",
   "AndMore": "And more!",
   "AutomaticBackupDescription": "Set up scheduled backups for continuous data protection without manual actions.",
   "BackupRoomDescription": "Save a backup to a selected room or the {{sectionName}} section. Use existing rooms or create a new one.",

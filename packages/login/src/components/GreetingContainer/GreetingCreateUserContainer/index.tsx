@@ -27,6 +27,7 @@
 "use client";
 
 import { useContext } from "react";
+import Image from "next/image";
 import { Trans, useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
@@ -54,12 +55,12 @@ export const GreetingCreateUserContainer = ({
     WhiteLabelLogoType.LoginPage,
     !theme.isBase,
     false,
-    culture,
+    culture
   );
 
   return (
     <GreetingContainer>
-      <img src={logoUrl} className="portal-logo" alt="greeting-logo" />
+      <Image src={logoUrl} className="portal-logo" alt="greeting-logo" />
       {type === "LinkInvite" ? (
         <div className="tooltip">
           <Text fontSize="16px">

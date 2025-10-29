@@ -68,6 +68,7 @@ export type TReqOption = {
   skipUnauthorized?: boolean;
   skipLogout?: boolean;
   withRedirect?: boolean;
+  skipForbidden?: boolean;
 };
 
 class AxiosClient {
@@ -280,6 +281,7 @@ class AxiosClient {
             }
             break;
           case 403: {
+            if (options.skipForbidden) break;
             const { pathname } = window.location;
 
             const isArchived = pathname.indexOf("/rooms/archived") !== -1;

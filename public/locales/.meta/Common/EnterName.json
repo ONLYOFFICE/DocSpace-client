@@ -3,13 +3,19 @@
   "content": "Enter name",
   "content_en_sha1_hash": "5df85959e93e078f85961a413efbd7ba4ef678d2",
   "created_at": "2025-05-19T21:30:44.990Z",
-  "updated_at": "2025-10-13T13:22:35.535Z",
+  "updated_at": "2025-10-27T16:14:33.212Z",
   "comment": {
     "text": "\"Enter name\" is used as a placeholder text in various input fields within the application, prompting users to provide a name. It appears in dialogue boxes, room setting pages, and other forms where user-inputted names are required.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:36:24.775Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/SetAgentParams.tsx",
+      "line_number": 430,
+      "context": "<div className=\"logo-name-container\">\n {element}\n <InputParam\n id=\"shared_agent-name\"\n title={inputTitle}\n placeholder={t(\"Common:EnterName\")}\n value={agentParams.title}\n onChange={onChangeName}\n isDisabled={isDisabled}\n isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/sub-components/GroupNameParam/index.tsx",
       "line_number": 70,
@@ -20,6 +26,12 @@
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
       "line_number": 452,
       "context": "<div className=\"logo-name-container\">\n {element}\n <InputParam\n id=\"shared_room-name\"\n title={inputTitle}\n placeholder={t(\"Common:EnterName\")}\n value={roomParams.title}\n onChange={onChangeName}\n isDisabled={isDisabled}\n isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/hooks/useBaseParams.tsx",
+      "line_number": 122,
+      "context": "<TextInput\n type={InputType.text}\n size={InputSize.base}\n value={name}\n onChange={(e) => onChangeName(e.target.value)}\n placeholder={t(\"Common:EnterName\")}\n scale\n hasError={!!nameError}\n />\n </FieldContainer>\n <FieldContainer",
       "module": "/packages/client"
     },
     {
@@ -42,7 +54,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/utils/hooks/useRoomsHelper.tsx",
-      "line_number": 97,
+      "line_number": 98,
       "context": "}, [isInit]);\n \n const createDropDownItems = React.useMemo(() => {\n return RoomsTypeValues.map((value) => {\n const onClick = () => {\n addInputItem(\"\", \"\", value as RoomsType, t(\"EnterName\"));\n };\n \n return (\n <RoomType\n key={value}",
       "module": "/packages/shared"
     }

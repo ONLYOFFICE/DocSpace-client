@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
@@ -71,9 +70,12 @@ export const enum SocketEvents {
   RestoreProgress = "s:restore-progress",
   EncryptionProgress = "s:encryption-progress",
   ChangeMyType = "s:change-my-type",
+  ChatMessageId = "s:commit-chat-message",
+  UpdateChat = "s:update-chat",
   UpdateTelegram = "s:update-telegram",
   SelfRestrictionFile = "s:self-restriction-file",
   SelfRestrictionFolder = "s:self-restriction-folder",
+  ChaneFolderAccessRights = "s:change-access-rights-folder",
 }
 
 /**
@@ -284,6 +286,11 @@ export type TListenEventCallbackMap = {
     data: TUser;
     admin: string;
     hasPersonalFolder: boolean;
+  }) => void;
+  [SocketEvents.ChatMessageId]: (data: { messageId: number }) => void;
+  [SocketEvents.UpdateChat]: (data: {
+    chatId: string;
+    chatTitle: string;
   }) => void;
   [SocketEvents.UpdateTelegram]: (data: { username: string }) => void;
   [SocketEvents.SelfRestrictionFile]: (data: {

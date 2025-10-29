@@ -3,7 +3,7 @@
   "content": "Save a backup to a selected room or the {{sectionName}} section. Use existing rooms or create a new one.",
   "content_en_sha1_hash": "c33a6ae7e8ec9332703552447fdbafdcea58172c",
   "created_at": "2025-08-21T14:45:38.901Z",
-  "updated_at": "2025-09-02T07:59:28.627Z",
+  "updated_at": "2025-10-27T16:14:33.629Z",
   "comment": {
     "text": "This text describes the option to save a backup to a specific room or a section (like \"My Files\"). It appears within a dialog or menu, likely related to backup settings, and helps users understand where their backup data will be stored.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/Backup/BackupServiceDialog.tsx",
-      "line_number": 94,
+      "line_number": 95,
       "context": "icon: <ClockIcon />,\n },\n {\n id: \"backup-room\",\n title: t(\"Common:RoomsModule\"),\n description: t(\"BackupRoomDescription\", {\n sectionName: t(\"Common:MyDocuments\"),\n }),\n icon: <ServiceIcon />,\n },\n {",
       "module": "/packages/client"
     }

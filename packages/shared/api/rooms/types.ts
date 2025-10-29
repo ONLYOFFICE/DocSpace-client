@@ -77,6 +77,7 @@ export type TRoomSecurity = {
   Duplicate: boolean;
   Download: boolean;
   CopySharedLink: boolean;
+  UseChat: boolean;
 };
 
 export type TRoomLifetime = {
@@ -92,6 +93,10 @@ export type TWatermark = {
   imageWidth: number;
   rotate: number;
   imageUrl?: string;
+  text?: string;
+  scale?: number;
+  image?: File | string;
+  isImage?: boolean;
 };
 export type TRoom = {
   parentId: number;
@@ -133,8 +138,10 @@ export type TRoom = {
   isTemplate?: boolean;
   isAvailable?: boolean;
   isRoom?: boolean;
+  chatSettings?: { prompt: string; providerId: number; modelId: string };
   shareSettings?: TShareSettings;
   availableShareRights?: TAvailableShareRights;
+  path?: TPathParts[];
 };
 
 export type TGetRooms = {
@@ -304,6 +311,7 @@ export enum FeedTarget {
   File = "file",
   Folder = "folder",
   Room = "room",
+  Agent = "agent",
   RoomTag = "roomTag",
   RoomLogo = "roomLogo",
   RoomExternalLink = "roomExternalLink",
@@ -374,6 +382,8 @@ export enum FeedActionKeys {
   RoomGroupAdded = "RoomGroupAdded",
   RoomUpdateAccessForGroup = "RoomUpdateAccessForGroup",
   RoomGroupRemove = "RoomGroupRemove",
+  AgentCreated = "AgentCreated",
+  AgentRenamed = "AgentRenamed",
 }
 
 export type CapitalizedFeedAction = Capitalize<FeedAction>;

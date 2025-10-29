@@ -3,7 +3,7 @@
   "content": "({{currency}} per 1 backup)",
   "content_en_sha1_hash": "995f9b7ce53cca9b8ffe731b7155aea8ff69f25d",
   "created_at": "2025-08-21T14:45:39.480Z",
-  "updated_at": "2025-08-27T10:14:35.444Z",
+  "updated_at": "2025-10-27T16:14:33.629Z",
   "comment": {
     "text": "This key displays the price per backup, formatted with the currency symbol and enclosed in parentheses. It appears within a backup service dialog to show the cost structure to the user. Translators should ensure the currency symbol is handled correctly within the translated string.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/Backup/BackupServiceDialog.tsx",
-      "line_number": 142,
-      "context": "<div>\n <Text fontSize=\"12px\" fontWeight={600} as=\"span\">\n {t(\"Common:Backup\")}\n </Text>{\" \"}\n <Text as=\"span\" fontSize=\"12px\">\n {t(\"Payments:PerBackupWithBracket\", {\n currency: formatWalletCurrency!(backupServicePrice!, 2),\n })}\n </Text>\n </div>\n <Text fontSize=\"12px\" className={styles.backupDescription}>",
+      "line_number": 133,
+      "context": "<ModalDialog.Body>\n <ServiceToggleSection\n isEnabled={isEnabled}\n onToggle={handleToggleChange}\n title={t(\"Common:Backup\")}\n priceText={t(\"Payments:PerBackupWithBracket\", {\n currency: formatWalletCurrency!(backupServicePrice!, 2),\n })}\n description={description}\n testId=\"service-backup-toggle-button\"\n />",
       "module": "/packages/client"
     }
   ],

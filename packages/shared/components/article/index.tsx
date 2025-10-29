@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { isMobile, isMobileOnly, isIOS } from "react-device-detect";
 
@@ -47,6 +46,7 @@ import styles from "./Article.module.scss";
 import { HEADER_NAME, MAIN_BUTTON_NAME, BODY_NAME } from "./Article.constants";
 import { ArticleProps } from "./Article.types";
 
+// biome-ignore-start lint/correctness/noUnusedVariables: TODO fix
 const ArticleHeader = ({ children }: { children: React.ReactNode }) => null;
 ArticleHeader.displayName = HEADER_NAME;
 
@@ -129,6 +129,7 @@ const Article = ({
   const updateSizeRef = React.useRef<null | ReturnType<typeof setTimeout>>(
     null,
   );
+  // biome-ignore-end lint/correctness/noUnusedVariables: TODO fix
 
   const onMobileBack = React.useCallback(() => {
     // close article

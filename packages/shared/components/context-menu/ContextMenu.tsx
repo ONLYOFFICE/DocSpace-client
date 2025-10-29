@@ -113,6 +113,8 @@ const ContextMenu = (props: ContextMenuProps) => {
     badgeUrl,
     headerOnlyMobile = false,
     dataTestId,
+    maxHeightLowerSubmenu,
+    showDisabledItems,
   } = props;
 
   const onMenuClick = () => {
@@ -175,6 +177,7 @@ const ContextMenu = (props: ContextMenuProps) => {
       setReshow(false);
       prevReshow.current = false;
       setChangeView(false);
+      setMobileMenuStack([]);
       setShowMobileMenu(false);
     },
     [onHide],
@@ -342,7 +345,8 @@ const ContextMenu = (props: ContextMenuProps) => {
         menuRef.current &&
         !(
           menuRef.current.isSameNode(target) || menuRef.current.contains(target)
-        )
+        ) &&
+        !target.closest(".context-menu-item-tooltip")
       );
     },
     [],
@@ -673,7 +677,9 @@ const ContextMenu = (props: ContextMenuProps) => {
                 onMobileItemClick={onMobileItemClick}
                 changeView={changeView}
                 withHeader={withHeader}
+                maxHeightLowerSubmenu={maxHeightLowerSubmenu}
                 menuHovered={menuHovered}
+                showDisabledItems={showDisabledItems}
               />
             )}
           </div>

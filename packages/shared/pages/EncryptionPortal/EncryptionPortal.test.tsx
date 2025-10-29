@@ -69,8 +69,7 @@ describe("EncryptionPortal", () => {
     // Mock the useTranslation hook to return ready: false
     jest
 
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
-      .spyOn(require("react-i18next"), "useTranslation")
+            .spyOn(require("react-i18next"), "useTranslation")
       .mockImplementation(() => ({
         t: (key: string) => key,
         ready: false,
@@ -87,8 +86,7 @@ describe("EncryptionPortal", () => {
     // Restore the original mock
     jest
 
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
-      .spyOn(require("react-i18next"), "useTranslation")
+            .spyOn(require("react-i18next"), "useTranslation")
       .mockImplementation(() => ({
         t: (key: string) => key,
         ready: true,

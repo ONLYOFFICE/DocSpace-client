@@ -62,7 +62,8 @@ const Share = (props: ShareProps) => {
 
   // HACK: Hide share option for rooms — remove after implementation is ready
   const disabledSharedUser =
-    infoPanelSelection.rootFolderType === FolderType.Rooms;
+    infoPanelSelection.rootFolderType === FolderType.Rooms ||
+    infoPanelSelection.rootFolderType === FolderType.AIAgents;
 
   const isFolder = infoPanelSelection.isFolder;
   const parentShared = infoPanelSelection.parentShared;

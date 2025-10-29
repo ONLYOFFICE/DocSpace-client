@@ -94,6 +94,8 @@ const Body = ({
   injectedElement,
 
   isSSR,
+
+  hideBackButton,
 }: BodyProps) => {
   const infoBarRef = useRef<HTMLDivElement>(null);
   const injectedElementRef = useRef<HTMLElement>(null);
@@ -332,6 +334,7 @@ const Body = ({
           withSearch={isSearch}
           items={items}
           inputItemVisible={inputItemVisible}
+          hideBackButton={hideBackButton}
         />
       ) : (
         <>

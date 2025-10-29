@@ -143,6 +143,12 @@ export default function withQuickButtons(WrappedComponent) {
       onCreateRoomFromTemplate(item);
     };
 
+    onRetryVectorization = () => {
+      const { item, retryVectorization } = this.props;
+
+      retryVectorization([item]);
+    };
+
     openShareTab = () => {
       const {
         item,
@@ -176,6 +182,7 @@ export default function withQuickButtons(WrappedComponent) {
         roomLifetime,
         isTemplatesFolder,
         isTrashFolder,
+        isRecentFolder,
       } = this.props;
 
       const showLifetimeIcon =
@@ -205,6 +212,8 @@ export default function withQuickButtons(WrappedComponent) {
           roomLifetime={roomLifetime}
           onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
+          isRecentFolder={isRecentFolder}
+          onRetryVectorization={this.onRetryVectorization}
           isTrashFolder={isTrashFolder}
           openShareTab={this.openShareTab}
         />
@@ -238,12 +247,14 @@ export default function withQuickButtons(WrappedComponent) {
         onSelectItem,
         onCreateRoomFromTemplate,
         lockFileAction,
+        retryVectorization,
       } = filesActionsStore;
       const {
         isPersonalRoom,
         isArchiveFolder,
         isTemplatesFolder,
         isTrashFolder,
+        isRecentFolder,
       } = treeFoldersStore;
 
       const { isIndexEditingMode } = indexingStore;
@@ -281,6 +292,8 @@ export default function withQuickButtons(WrappedComponent) {
         setBufferSelection: filesStore.setBufferSelection,
         resetSelections: filesStore.resetSelections,
         lockFileAction,
+        isRecentFolder,
+        retryVectorization,
         isTrashFolder,
         isShareTabActive,
         infoPanelSelection,

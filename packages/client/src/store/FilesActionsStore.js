@@ -71,6 +71,7 @@ import {
   VDRIndexingAction,
   RoomSearchArea,
   UrlActionType,
+  VectorizationStatus,
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 
@@ -118,6 +119,7 @@ import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
 import { hideInfoPanel, showInfoPanel } from "SRC_DIR/helpers/info-panel";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
 import { checkProtocol } from "../helpers/files-helpers";
@@ -150,6 +152,8 @@ class FilesActionStore {
   indexingStore;
 
   versionHistoryStore;
+
+  aiRoomStore;
 
   userStore = null;
 
@@ -188,6 +192,7 @@ class FilesActionStore {
     currentQuotaStore,
     indexingStore,
     versionHistoryStore,
+    aiRoomStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -208,6 +213,7 @@ class FilesActionStore {
     this.currentQuotaStore = currentQuotaStore;
     this.indexingStore = indexingStore;
     this.versionHistoryStore = versionHistoryStore;
+    this.aiRoomStore = aiRoomStore;
   }
 
   updateCurrentFolder = async (
@@ -219,14 +225,21 @@ class FilesActionStore {
     const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
-    const { fetchFiles, fetchRooms, filter, roomsFilter, scrollToTop } =
-      this.filesStore;
+    const {
+      fetchFiles,
+      fetchRooms,
+      fetchAgents,
+      filter,
+      roomsFilter,
+      scrollToTop,
+    } = this.filesStore;
 
     const {
       isRoomsFolder,
       isArchiveFolder,
       isArchiveFolderRoot,
       isTemplatesFolder,
+      isAIAgentsFolder,
     } = this.treeFoldersStore;
 
     let newFilter;
@@ -240,7 +253,14 @@ class FilesActionStore {
     try {
       if (skipFetch) return;
 
-      if (
+      if (isAIAgentsFolder) {
+        fetchAgents(
+          updatedFolder,
+          newFilter || roomsFilter.clone(),
+          false,
+          false,
+        );
+      } else if (
         isRoomsFolder ||
         isArchiveFolder ||
         isArchiveFolderRoot ||
@@ -840,7 +860,7 @@ class FilesActionStore {
         completed: true,
         operationId,
       });
-      const error = err?.error;
+      const error = typeof err === "string" ? err : err?.error;
 
       if (error?.includes("password")) {
         const filesIds = error.match(/\d+/g)?.map(Number) ?? [
@@ -1659,15 +1679,18 @@ class FilesActionStore {
     if (this.publicRoomStore.isPublicRoom)
       return this.moveToPublicRoom(item.id);
 
-    const { id, isRoom, isTemplate, title, rootFolderType } = item;
-    const categoryType = getCategoryTypeByFolderType(rootFolderType, id);
+    const { id, isRoom, isTemplate, isAIAgent, title, rootFolderType } = item;
+
+    const categoryType = isAIAgent
+      ? CategoryType.Chat
+      : getCategoryTypeByFolderType(rootFolderType, id);
 
     const state = { title, rootFolderType, isRoot: false, isRoom };
     const filter = FilesFilter.getDefault();
 
     filter.folder = id;
 
-    if (isRoom || isTemplate) {
+    if (!isAIAgent && (isRoom || isTemplate)) {
       if (this.userStore.user?.id) {
         const key =
           categoryType === CategoryType.Archive
@@ -1966,14 +1989,15 @@ class FilesActionStore {
 
         return canUnArchive;
       }
-      case "delete-room": {
+      case "delete-room":
+      case "delete-agent": {
         const canRemove =
           selection.length === 1 && selection[0]?.security?.Delete;
 
         return canRemove;
       }
       case "delete": {
-        const canDelete = selection.every((s) => s.security?.Delete);
+        const canDelete = selection.some((s) => s.security?.Delete);
 
         return !allFilesIsEditing && canDelete && hasSelection;
       }
@@ -1982,11 +2006,16 @@ class FilesActionStore {
         return canCreateRoom;
       }
       case "change-quota":
+      case "change-agent-quota":
         return hasRoomsToChangeQuota;
       case "disable-quota":
+      case "disable-agent-quota":
         return hasRoomsToDisableQuota;
       case "default-quota":
+      case "default-agent-quota":
         return hasRoomsToResetQuota;
+      case "vectorization":
+        return selection.some((s) => s.security?.Vectorization);
       default:
         return false;
     }
@@ -2140,6 +2169,26 @@ class FilesActionStore {
     window.dispatchEvent(event);
   };
 
+  changeAIAgentQuota = (items, successCallback, abortCallback) => {
+    const event = new Event(Events.CHANGE_QUOTA);
+
+    const itemsIDs = items.map((item) => {
+      return item?.id ? item.id : item;
+    });
+
+    const payload = {
+      visible: true,
+      type: "agent",
+      ids: itemsIDs,
+      successCallback,
+      abortCallback,
+    };
+
+    event.payload = payload;
+
+    window.dispatchEvent(event);
+  };
+
   disableRoomQuota = async (items, t) => {
     const { setCustomRoomQuota } = this.filesStore;
 
@@ -2155,6 +2204,21 @@ class FilesActionStore {
     }
   };
 
+  disableAIAgentQuota = async (items, t) => {
+    const { setCustomAIAgentQuota } = this.filesStore;
+
+    const agentIDs = items.map((item) => {
+      return item?.id ? item.id : item;
+    });
+
+    try {
+      await setCustomAIAgentQuota(agentIDs, -1);
+      toastr.success(t("Common:StorageQuotaDisabled"));
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
+
   resetRoomQuota = async (items, t) => {
     const { resetRoomQuota } = this.filesStore;
 
@@ -2164,6 +2228,21 @@ class FilesActionStore {
 
     try {
       await resetRoomQuota(userIDs);
+      toastr.success(t("Common:StorageQuotaReset"));
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
+
+  resetAIAgentQuota = async (items, t) => {
+    const { resetAIAgentQuota } = this.filesStore;
+
+    const userIDs = items.map((item) => {
+      return item?.id ? item.id : item;
+    });
+
+    try {
+      await resetAIAgentQuota(userIDs);
       toastr.success(t("Common:StorageQuotaReset"));
     } catch (e) {
       toastr.error(e);
@@ -2286,6 +2365,16 @@ class FilesActionStore {
           onClick: () => this.changeRoomQuota(selection),
           disabled: !showStorageInfo,
         };
+      case "change-agent-quota":
+        if (!this.isAvailableOption("change-agent-quota")) return null;
+        return {
+          id: "menu-change-agent-quota",
+          key: "change-agent-quota",
+          label: t("Common:ChangeQuota"),
+          iconUrl: ChangQuotaReactSvgUrl,
+          onClick: () => this.changeAIAgentQuota(selection),
+          disabled: !showStorageInfo,
+        };
       case "default-quota":
         if (!this.isAvailableOption("default-quota")) return null;
         return {
@@ -2294,6 +2383,16 @@ class FilesActionStore {
           label: t("Common:SetToDefault"),
           iconUrl: DefaultQuotaReactSvgUrl,
           onClick: () => this.resetRoomQuota(selection, t),
+          disabled: !showStorageInfo,
+        };
+      case "default-agent-quota":
+        if (!this.isAvailableOption("default-agent-quota")) return null;
+        return {
+          id: "menu-default-agent-quota",
+          key: "default-agent-quota",
+          label: t("Common:SetToDefault"),
+          iconUrl: DefaultQuotaReactSvgUrl,
+          onClick: () => this.resetAIAgentQuota(selection, t),
           disabled: !showStorageInfo,
         };
       case "disable-quota":
@@ -2306,11 +2405,30 @@ class FilesActionStore {
           onClick: () => this.disableRoomQuota(selection, t),
           disabled: !showStorageInfo,
         };
+      case "disable-agent-quota":
+        if (!this.isAvailableOption("disable-agent-quota")) return null;
+        return {
+          id: "menu-disable-agent-quota",
+          key: "disable-agent-quota",
+          label: t("Common:DisableQuota"),
+          iconUrl: DisableQuotaReactSvgUrl,
+          onClick: () => this.disableAIAgentQuota(selection, t),
+          disabled: !showStorageInfo,
+        };
 
       case "delete-room":
         if (!this.isAvailableOption("delete-room")) return null;
         return {
           id: "menu-delete-room",
+          label: t("Common:Delete"),
+          onClick: () => this.deleteRooms(t),
+          iconUrl: DeleteReactSvgUrl,
+        };
+
+      case "delete-agent":
+        if (!this.isAvailableOption("delete-agent")) return null;
+        return {
+          id: "menu-delete-agent",
           label: t("Common:Delete"),
           onClick: () => this.deleteRooms(t),
           iconUrl: DeleteReactSvgUrl,
@@ -2343,6 +2461,14 @@ class FilesActionStore {
           onClick: () => this.onClickRemoveFromRecent(selection),
           iconUrl: RemoveOutlineSvgUrl,
         };
+      case "vectorization":
+        if (!this.isAvailableOption("vectorization")) return null;
+        return {
+          id: "menu-vectorization",
+          label: t("Files:Vectorization"),
+          iconUrl: RefreshReactSvgUrl,
+          onClick: () => this.retryVectorization(selection),
+        };
       default:
         break;
     }
@@ -2369,6 +2495,30 @@ class FilesActionStore {
       .set("change-quota", changeQuota)
       .set("default-quota", defaultQuota)
       .set("disable-quota", disableQuota)
+      .set("delete", deleteOption);
+
+    return this.convertToArray(itemsCollection);
+  };
+
+  getAIAgentsFolderOptions = (itemsCollection, t) => {
+    let pinName = "unpin";
+    const { selection } = this.filesStore;
+
+    selection.forEach((item) => {
+      if (!item.pinned) pinName = "pin";
+    });
+
+    const pin = this.getOption(pinName, t);
+    const changeQuota = this.getOption("change-agent-quota", t);
+    const disableQuota = this.getOption("disable-agent-quota", t);
+    const defaultQuota = this.getOption("default-agent-quota", t);
+    const deleteOption = this.getOption("delete-room", t);
+
+    itemsCollection
+      .set(pinName, pin)
+      .set("change-agent-quota", changeQuota)
+      .set("default-agent-quota", defaultQuota)
+      .set("disable-agent-quota", disableQuota)
       .set("delete", deleteOption);
 
     return this.convertToArray(itemsCollection);
@@ -2403,8 +2553,10 @@ class FilesActionStore {
     const copy = this.getOption("copy", t);
     const deleteOption = this.getOption("delete", t);
     const showInfo = this.getOption("showInfo", t);
+    const vectorization = this.getOption("vectorization", t);
 
     itemsCollection
+      .set("vectorization", vectorization)
       .set("createRoom", createRoom)
       .set("download", download)
       .set("downloadAs", downloadAs)
@@ -2532,6 +2684,7 @@ class FilesActionStore {
       isArchiveFolder,
       isRecentFolder,
       isTemplatesFolder,
+      isAIAgentsFolder,
     } = this.treeFoldersStore;
 
     const itemsCollection = new Map();
@@ -2556,6 +2709,9 @@ class FilesActionStore {
 
     if (isTemplatesFolder)
       return this.getTemplatesFolderOptions(itemsCollection, t);
+
+    if (isAIAgentsFolder)
+      return this.getAIAgentsFolderOptions(itemsCollection, t);
 
     return this.getAnotherFolderOptions(itemsCollection, t);
   };
@@ -2688,12 +2844,13 @@ class FilesActionStore {
     const canWebEdit = item.viewAccessibility?.WebEdit;
     const canViewedDocs = item.viewAccessibility?.WebView;
 
-    const { id, viewUrl, fileStatus, encrypted, isFolder, webUrl } = item;
+    const { id, viewUrl, fileStatus, encrypted, isFolder, webUrl, isRoom } =
+      item;
     if (encrypted && isPrivacyFolder) return checkProtocol(item.id, true);
 
     if (isRecycleBinFolder || isLoading) return;
 
-    if (isFolder) {
+    if (isFolder || isRoom) {
       const { url, state } = await createFolderNavigation(
         item,
         categoryType,
@@ -2820,6 +2977,10 @@ class FilesActionStore {
       CategoryType.Trash !== categoryType && urlFilter?.folder
     );
 
+    if (roomType === RoomsType.AIRoom) {
+      return this.moveToAIAgentsPage();
+    }
+
     if (this.publicRoomStore.isPublicRoom) {
       return this.backToParentFolder();
     }
@@ -2900,7 +3061,8 @@ class FilesActionStore {
     const filter = RoomsFilter.getDefault();
 
     const correctCategoryType =
-      categoryType === CategoryType.SharedRoom
+      categoryType === CategoryType.SharedRoom ||
+      categoryType === CategoryType.Chat
         ? CategoryType.Shared
         : CategoryType.ArchivedRoom === categoryType
           ? CategoryType.Archive
@@ -2917,7 +3079,6 @@ class FilesActionStore {
           ]?.title) ||
         "",
       isRoot: true,
-      isPublicRoomType: false,
       rootFolderType: this.selectedFolderStore.rootFolderType,
     };
 
@@ -2933,6 +3094,43 @@ class FilesActionStore {
       ]?.isTemplatesFolder
     ) {
       filter.searchArea = RoomSearchArea.Templates;
+    }
+
+    if (categoryType === CategoryType.Chat) {
+      this.clientLoadingStore.setIsSectionBodyLoading(true, false);
+    }
+
+    window.DocSpace.navigate(
+      `${path}?${filter.toUrlParams(this.userStore?.user?.id, true)}`,
+      {
+        state,
+        replace: true,
+      },
+    );
+  };
+
+  moveToAIAgentsPage = () => {
+    const categoryType = getCategoryType(window.DocSpace.location);
+
+    const filter = RoomsFilter.getDefault(undefined, RoomSearchArea.AIAgents);
+
+    const path = getCategoryUrl(CategoryType.AIAgents);
+
+    const state = {
+      title:
+        (this.selectedFolderStore?.navigationPath &&
+          this.selectedFolderStore?.navigationPath.length > 0 &&
+          this.selectedFolderStore?.navigationPath[
+            this.selectedFolderStore.navigationPath.length - 1
+          ]?.title) ||
+        "",
+      isRoot: true,
+      isPublicRoomType: false,
+      rootFolderType: this.selectedFolderStore.rootFolderType,
+    };
+
+    if (categoryType === CategoryType.Chat) {
+      this.clientLoadingStore.setIsSectionBodyLoading(true, false);
     }
 
     window.DocSpace.navigate(
@@ -3067,14 +3265,25 @@ class FilesActionStore {
     const { selection, bufferSelection } = this.filesStore;
     const { user } = this.userStore;
 
-    const roomId = selection.length
-      ? selection[0].id
+    const room = selection.length
+      ? selection[0]
       : bufferSelection
-        ? bufferSelection.id
-        : this.selectedFolderStore.id;
+        ? bufferSelection
+        : this.selectedFolderStore;
+
+    const roomId = room.id;
+    const isAIAgent = room.isAIAgent;
 
     const isAdmin = user.isOwner || user.isAdmin;
     const isRoot = this.selectedFolderStore.isRootFolder;
+
+    const roomSuccessText = isOwner
+      ? t("Files:LeftAndAppointNewOwner")
+      : t("Files:YouLeftTheRoom");
+    const agentSuccessText = isOwner
+      ? t("Files:LeftAgentAndAppointNewOwner")
+      : t("Files:YouLeftTheAgent");
+    const successText = isAIAgent ? agentSuccessText : roomSuccessText;
 
     return api.rooms
       .updateRoomMemberRole(roomId, {
@@ -3099,9 +3308,7 @@ class FilesActionStore {
           this.filesStore.setInRoomFolder(roomId, false);
         }
 
-        isOwner
-          ? toastr.success(t("Files:LeftAndAppointNewOwner"))
-          : toastr.success(t("Files:YouLeftTheRoom"));
+        toastr.success(successText);
       });
   };
 
@@ -3190,6 +3397,29 @@ class FilesActionStore {
     if (conflicts.length) {
       return this.setConflictDialogData(conflicts, operationData);
     }
+
+    this.uploadDataStore
+      .itemOperationToFolder(operationData)
+      .catch((error) => toastr.error(error));
+  };
+
+  copyFileToAiKnowledge = async (filesInfo) => {
+    const selectedItemId = this.aiRoomStore.knowledgeId;
+    const fileIds = filesInfo.map((f) => f.id);
+
+    const operationData = {
+      destFolderId: selectedItemId,
+      folderIds: [],
+      fileIds,
+      deleteAfter: false,
+      isCopy: true,
+      isAI: true,
+      folderTitle: this.selectedFolderStore.title,
+    };
+
+    this.uploadDataStore.secondaryProgressDataStore.setItemsSelectionTitle(
+      filesInfo[0].title,
+    );
 
     this.uploadDataStore
       .itemOperationToFolder(operationData)
@@ -3784,6 +4014,31 @@ class FilesActionStore {
     });
 
     return errorMessage || `Started ${operationResults.join(" and ")}`;
+  };
+
+  retryVectorization = async (files) => {
+    const { updateFileVectorizationStatus } = this.filesStore;
+
+    const filteredFiles = files.filter((file) => file.security?.Vectorization);
+
+    if (!filteredFiles.length) return;
+
+    const fileIds = filteredFiles.map((file) => file.id);
+
+    try {
+      fileIds.forEach((fileId) =>
+        updateFileVectorizationStatus(fileId, VectorizationStatus.InProgress),
+      );
+
+      await api.ai.retryVectorization(fileIds);
+    } catch (e) {
+      fileIds.forEach((fileId) =>
+        updateFileVectorizationStatus(fileId, VectorizationStatus.Failed),
+      );
+
+      toastr.error(e);
+      console.error(e);
+    }
   };
 }
 

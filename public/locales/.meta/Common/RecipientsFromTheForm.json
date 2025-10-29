@@ -3,7 +3,7 @@
   "content": "Recipients from the form",
   "content_en_sha1_hash": "83bbf535962d24d5f87410be92858dee26395713",
   "created_at": "2025-10-13T13:22:10.851Z",
-  "updated_at": "2025-10-13T14:23:05.906Z",
+  "updated_at": "2025-10-27T16:14:33.757Z",
   "comment": {
     "text": "This key displays the label \"Recipients from the form\" as a title within a dialog or panel. It indicates the recipients associated with data entered on a form, likely within a user interface element for managing or selecting roles. Translators should ensure the meaning remains clear and accurately reflects the origin of the recipients.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
-      "line_number": 334,
+      "line_number": 366,
       "context": "<p\n className={classNames(styles.title, {\n [styles.titleMargin]: !infoBarVisible,\n })}\n >\n {t(\"Common:RecipientsFromTheForm\")}\n </p>\n <FillingRoleSelector\n roles={roles}\n onSelect={onSelect}\n removeUserFromRole={removeUserFromRole}",
       "module": "/packages/shared"
     }

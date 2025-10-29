@@ -24,18 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import queryString from "query-string";
 
-import { ApplyFilterOption, FilterLocation, FilterType } from "../../enums";
+import {
+  ApplyFilterOption,
+  FilterLocation,
+  FilterType,
+  SearchArea,
+} from "../../enums";
 import {
   getObjectByLocation,
   toUrlParams,
   getCategoryType,
 } from "../../utils/common";
-import type { TViewAs, TSortOrder, TSortBy, ValueOf } from "../../types";
+import { TViewAs, TSortOrder, TSortBy, ValueOf } from "../../types";
 import { validateAndFixObject } from "../../utils/filterValidator";
 import { CategoryType } from "../../constants";
 
@@ -55,7 +59,7 @@ const DEFAULT_SEARCH_IN_CONTENT: boolean | null = null;
 const DEFAULT_EXCLUDE_SUBJECT: boolean | null = null;
 const DEFAULT_APPLY_FILTER_OPTION: ApplyFilterOption | null = null;
 const DEFAULT_EXTENSION: string | null = null;
-const DEFAULT_SEARCH_AREA: number | null = null;
+const DEFAULT_SEARCH_AREA: number | SearchArea | null = null;
 const DEFAULT_KEY: string | null = null;
 const DEFAULT_LOCATION: FilterLocation | null = null;
 

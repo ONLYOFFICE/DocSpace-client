@@ -3,7 +3,7 @@
   "content": "Form Filling Room",
   "content_en_sha1_hash": "ce16b03553997eee69758275d881c1e1971387c2",
   "created_at": "2025-05-19T21:30:45.511Z",
-  "updated_at": "2025-08-04T07:30:01.398Z",
+  "updated_at": "2025-10-27T16:14:33.522Z",
   "comment": {
     "text": "This translation key is used to display the title \"Form Filling Room\" in various UI elements. It is typically displayed on a room type selection filter or as a label in developer tools, and its purpose is to provide a clear indication of the form-filling function.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
-      "line_number": 22,
-      "context": "return t(\"Common:CustomRoomTitle\");\n \n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");\n default:\n return \"\";\n }\n };",
+      "line_number": 23,
+      "context": "case RoomsType.AIRoom:\n return t(\"Common:AIRoomTitle\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");\n default:\n return \"\";\n }\n };",
       "module": "/packages/shared"
     }
   ],

@@ -571,6 +571,21 @@
       }
     },
     {
+      "label": "Test | Jest:ascii",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:ascii ; npm run open-report",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Jest:dependencies",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:dependencies ; npm run open-report",
@@ -646,7 +661,7 @@
       }
     },
     {
-      "label": "Test | ESLint",
+      "label": "Test | Biome",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm lint",
       "group": {
@@ -661,7 +676,7 @@
       }
     },
     {
-      "label": "Test | ESLint:fix",
+      "label": "Test | Biome:fix",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm lint:fix",
       "group": {

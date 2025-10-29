@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2025-10-17T14:43:53.444Z",
+  "updated_at": "2025-10-27T16:14:33.365Z",
   "comment": {
     "text": "This translation key is used to display the label \"Search\" in various UI elements. It appears on a search input field and an icon button, inviting users to find specific items or content. The text should be translated as \"Search\" in English.",
     "is_auto": true,
@@ -18,31 +18,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/RoomsItemTitle.tsx",
-      "line_number": 288,
+      "line_number": 289,
       "context": "<div className=\"info_title-icons\">\n {isRoomMembersPanel ? (\n <IconButton\n id=\"info_search\"\n className=\"icon\"\n title={t(\"Common:Search\")}\n iconName={SearchIconReactSvgUrl}\n onClick={onSearchClick}\n size={16}\n />\n ) : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1524,
+      "line_number": 1712,
       "context": "getViewSettingsData={getViewSettingsData}\n onSearch={onSearch}\n onClearFilter={onClearFilter}\n getSelectedInputValue={getSelectedInputValue}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n isFavoritesFolder={isFavoritesFolder}\n isPersonalRoom={isPersonalRoom}\n isRooms={isRooms}\n removeSelectedItem={removeSelectedItem}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/index.tsx",
-      "line_number": 135,
+      "line_number": 141,
       "context": "totalUsers={users.withoutEmail.length}\n />\n \n <SearchInput\n id=\"search-users-input\"\n placeholder={t(\"Common:Search\")}\n value={searchValue}\n onChange={onChangeInput}\n refreshTimeout={REFRESH_TIMEOUT}\n onClearSearch={onClearSearchInput}\n size={InputSize.base}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/index.tsx",
-      "line_number": 146,
+      "line_number": 155,
       "context": "totalUsers={withEmailUsers.length}\n />\n \n <SearchInput\n id=\"search-users-input\"\n placeholder={t(\"Common:Search\")}\n value={searchValue}\n onChange={onChangeInput}\n refreshTimeout={REFRESH_TIMEOUT}\n onClearSearch={onClearSearchInput}\n size={InputSize.base}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/index.tsx",
-      "line_number": 133,
+      "line_number": 138,
       "context": "{filteredUsers.length > 0 ? (\n <>\n <SearchInput\n id=\"search-checkedUsers-type-input\"\n className=\"importUsersSearch\"\n placeholder={t(\"Common:Search\")}\n value={searchValue}\n onChange={onChangeInput}\n refreshTimeout={REFRESH_TIMEOUT}\n onClearSearch={onClearSearchInput}\n size={InputSize.base}",
       "module": "/packages/client"
     },
@@ -60,7 +60,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 266,
+      "line_number": 271,
       "context": "<ControlsSection>\n <Label className=\"label\">{t(\"InterfaceElements\")}</Label>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Search\")}\n onChange={toggleWithSearch}\n isChecked={config.withSearch}\n dataTestId=\"search_checkbox\"\n />\n <SelectTextInput t={t} config={config} setConfig={setConfig} />",
       "module": "/packages/client"
     },
@@ -69,6 +69,12 @@
       "line_number": 68,
       "context": "<Label className=\"label\" text={t(\"SearchTerm\")} />\n <ColumnContainer>\n <TextInput\n scale\n onChange={onChangeSearch}\n placeholder={t(\"Common:Search\")}\n value={value}\n tabIndex={5}\n testId=\"search_term_text_input\"\n />\n <Checkbox",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/selectors/AIAgent/index.tsx",
+      "line_number": 191,
+      "context": "onCancel: onClose,\n };\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,\n searchPlaceholder: t(\"Common:Search\"),\n searchValue,\n onSearch: onSearchAction,\n onClearSearch: onClearSearchAction,\n searchLoader: <SearchLoader />,\n isSearchLoading: isFirstLoad && !searchValue && !afterSearch.current,",
+      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
@@ -90,7 +96,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/Room/index.tsx",
-      "line_number": 220,
+      "line_number": 219,
       "context": ": {};\n \n const searchSelectorProps: TSelectorSearch = withSearch\n ? {\n withSearch: true,\n searchPlaceholder: t(\"Common:Search\"),\n searchValue,\n onSearch: onSearchAction,\n onClearSearch: onClearSearchAction,\n searchLoader: <SearchLoader />,\n isSearchLoading: isFirstLoad && !searchValue && !afterSearch.current,",
       "module": "/packages/shared"
     }

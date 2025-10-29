@@ -238,6 +238,7 @@ const AmazonSettings = ({
     );
   };
 
+  // biome-ignore-start lint/suspicious/noPrototypeBuiltins: TODO fix
   const selectedEncryption =
     formSettings[SSE] === SSE_KMS || formSettings[SSE] === SSE_S3
       ? availableEncryptions[1].label
@@ -251,6 +252,7 @@ const AmazonSettings = ({
         ? MANAGED_KEYS[1]
         : MANAGED_KEYS[0]
       : MANAGED_KEYS[0];
+  // biome-ignore-end lint/suspicious/noPrototypeBuiltins: TODO fix
 
   return (
     <div

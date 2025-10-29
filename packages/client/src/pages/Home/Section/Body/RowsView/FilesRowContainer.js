@@ -44,6 +44,7 @@ const FilesRowContainer = ({
   fetchMoreFiles,
   hasMoreFiles,
   isRooms,
+  isAIAgentsFolder,
   isTrashFolder,
   highlightFile,
   currentDeviceType,
@@ -77,6 +78,7 @@ const FilesRowContainer = ({
         itemIndex={index}
         sectionWidth={sectionWidth}
         isRooms={isRooms}
+        isAIAgentsFolder={isAIAgentsFolder}
         isTrashFolder={isTrashFolder}
         changeIndex={changeIndex}
         isHighlight={
@@ -98,6 +100,7 @@ const FilesRowContainer = ({
     list,
     sectionWidth,
     isRooms,
+    isAIAgentsFolder,
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
@@ -148,7 +151,8 @@ export default inject(
     const { title: selectedFolderTitle, security } = selectedFolderStore;
     const { setRefMap, deleteRefMap } = guidanceStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isAIAgentsFolder } =
+      treeFoldersStore;
     const { currentDeviceType } = settingsStore;
     const { isIndexEditingMode } = indexingStore;
     const { withContentSelection } = hotkeyStore;
@@ -163,10 +167,12 @@ export default inject(
       viewAs,
       setViewAs,
       infoPanelVisible,
-      filterTotal: isRooms ? roomsFilter.total : filter.total,
+      filterTotal:
+        isRooms || isAIAgentsFolder ? roomsFilter.total : filter.total,
       fetchMoreFiles,
       hasMoreFiles,
       isRooms,
+      isAIAgentsFolder,
       isTrashFolder,
       highlightFile,
       currentDeviceType,

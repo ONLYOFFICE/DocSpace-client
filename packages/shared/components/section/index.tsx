@@ -26,11 +26,12 @@
 
 "use client";
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useMemo } from "react";
 
 import { Provider } from "../../utils";
 import { DeviceType } from "../../enums";
+
+import { FloatingButton } from "../floating-button";
 
 import SectionContainer from "./sub-components/SectionContainer";
 import SubSectionHeader from "./sub-components/SectionHeader";
@@ -120,7 +121,10 @@ const Section = (props: SectionProps) => {
 
     primaryOperationsAlert,
     needErrorChecking,
+
     withTabs,
+
+    withoutFooter = false,
     onDragOverEmpty,
     onDragLeaveEmpty,
     dragging,
@@ -233,6 +237,7 @@ const Section = (props: SectionProps) => {
     !primaryOperationsCompleted &&
     primaryOperationsArray.some((op) => op.operation === "upload");
 
+  const hideFilter = window.location.pathname.includes("chat");
   const isInfoVisible = canDisplay && isInfoPanelVisible;
 
   return (
@@ -262,6 +267,7 @@ const Section = (props: SectionProps) => {
               ) : null}
 
               {isSectionFilterAvailable &&
+              !hideFilter &&
               currentDeviceType === DeviceType.desktop ? (
                 <SubSectionFilter className="section-header_filter">
                   {sectionFilterContent}
@@ -285,6 +291,7 @@ const Section = (props: SectionProps) => {
               getContextModel={getContextModel}
               isIndexEditingMode={isIndexEditingMode}
               pathname={pathname}
+              withoutFooter={withoutFooter}
             >
               {isSectionHeaderAvailable &&
               currentDeviceType === DeviceType.mobile ? (
@@ -303,6 +310,7 @@ const Section = (props: SectionProps) => {
                 <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
               ) : null}
               {isSectionFilterAvailable &&
+              !hideFilter &&
               currentDeviceType !== DeviceType.desktop ? (
                 <SubSectionFilter
                   withTabs={withTabs}
@@ -314,7 +322,9 @@ const Section = (props: SectionProps) => {
               <SubSectionBodyContent>
                 {sectionBodyContent}
               </SubSectionBodyContent>
-              <SubSectionFooter>{sectionFooterContent}</SubSectionFooter>
+              {withoutFooter ? null : (
+                <SubSectionFooter>{sectionFooterContent}</SubSectionFooter>
+              )}
             </SubSectionBody>
           ) : null}
 

@@ -131,6 +131,7 @@ const mockFile = {
     CreateRoomFrom: false,
     CopyLink: false,
     Embed: false,
+    Vectorization: false,
   },
   viewAccessibility: {
     WebEdit: true,

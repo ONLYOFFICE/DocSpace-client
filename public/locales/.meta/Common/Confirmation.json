@@ -3,7 +3,7 @@
   "content": "Confirmation",
   "content_en_sha1_hash": "3424edc2354c7c55f6eb740b673d349b02d27c8d",
   "created_at": "2025-05-19T21:30:43.625Z",
-  "updated_at": "2025-10-16T07:29:35.533Z",
+  "updated_at": "2025-10-27T16:14:33.176Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message in a user interface. It appears as the title of a dialog header, indicating that the application is seeking user confirmation before proceeding with an action such as canceling an operation or deleting a file or room.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 216,
+      "line_number": 225,
       "context": "}\n \n if (isRecycleBinFolder) return t(\"EmptyTrashDialog:DeleteForeverTitle\");\n \n if (isPrivacyFolder || selection[0]?.providerKey)\n return t(\"Common:Confirmation\");\n \n if (unsubscribe) return t(\"Common:RemoveFromList\");\n \n return t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),",
       "module": "/packages/client"
     },
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
-      "line_number": 109,
+      "line_number": 112,
       "context": "};\n }, []);\n \n const confirmationDialogContent = {\n backup: {\n title: t(\"Common:Confirmation\"),\n body: !isCurrentConfirmDialogVisible\n ? t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n })\n : isFreeTariff",
       "module": "/packages/client"
     },
@@ -45,6 +45,12 @@
       "line_number": 77,
       "context": "visible={encryptWarningDialogVisible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {status === EncryptionStatus.Decrypted\n ? t(\"EncryptWarningDialogContent\")\n : t(\"DecryptWarningDialogContent\")}",
       "module": "/packages/management"
+    },
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallConfirmDialog.tsx",
+      "line_number": 87,
+      "context": "displayType={ModalDialogType.modal}\n onClose={onCloseAction}\n isLarge\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.toolCallManage}>\n <Text>{t(\"Common:AIWouldLikeToUseThisTool\")}</Text>\n <ToolCall",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

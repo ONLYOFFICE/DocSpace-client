@@ -47,12 +47,18 @@ export const GreetingContainer = ({
     WhiteLabelLogoType.LoginPage,
     !theme.isBase,
     false,
-    culture
+    culture,
   );
 
   return (
     <>
-      <Image src={logoUrl} className="logo-wrapper" alt="greeting-logo" />
+      <Image
+        src={logoUrl}
+        className="logo-wrapper"
+        alt="greeting-logo"
+        width={386}
+        height={44}
+      />
       {greetingText ? (
         <Text
           fontSize="23px"

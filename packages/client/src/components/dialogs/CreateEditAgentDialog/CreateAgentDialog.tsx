@@ -104,7 +104,7 @@ const CreateAgentDialog = ({
   };
 
   const onKeyUpHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (isWrongTitle) return;
+    if (isWrongTitle || !isModelSelected) return;
     if (e.keyCode === 13) onCreateAgent();
   };
 

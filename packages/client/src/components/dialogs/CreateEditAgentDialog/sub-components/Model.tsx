@@ -251,6 +251,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
             isDefaultMode
             className="ai-combobox"
             displaySelectedOption
+            dropDownClassName="not-selectable"
           />
         )}
       </div>

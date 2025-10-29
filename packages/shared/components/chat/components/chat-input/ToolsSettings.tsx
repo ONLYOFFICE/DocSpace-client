@@ -363,21 +363,27 @@ const ToolsSettings = () => {
           </Text>
         ),
       },
-      { key: "separator-1", isSeparator: true },
+      ...(showManageConnectionItem || serverItems.length > 0
+        ? [{ key: "separator-1", isSeparator: true }]
+        : []),
       ...serverItems,
-      ...(serverItems.length > 0
+      ...(serverItems.length > 0 && showManageConnectionItem
         ? [{ key: "separator-2", isSeparator: true }]
         : []),
-      {
-        key: "manage-connections",
-        label: t("ManageConnection"),
-        onClick: () => {
-          setShowManageConnections(true);
-        },
-        icon: ManageConnectionsReactSvgUrl,
-        disabled: !showManageConnectionItem,
-        getTooltipContent: () => <Text>{t("ConnectMCPServers")}</Text>,
-      },
+      ...(showManageConnectionItem
+        ? [
+            {
+              key: "manage-connections",
+              label: t("ManageConnection"),
+              onClick: () => {
+                setShowManageConnections(true);
+              },
+              icon: ManageConnectionsReactSvgUrl,
+              disabled: !showManageConnectionItem,
+              getTooltipContent: () => <Text>{t("ConnectMCPServers")}</Text>,
+            },
+          ]
+        : []),
     ];
   }, [
     MCPTools,

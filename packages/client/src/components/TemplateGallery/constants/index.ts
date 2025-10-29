@@ -65,7 +65,7 @@ export const TAB_CONFIG = {
   [TAB_IDS.FORMS]: {
     id: TAB_IDS.FORMS,
     extension: FILE_EXTENSIONS.PDF,
-    translationKey: "Common:PDFs",
+    translationKey: "Common:Forms",
     smallPreview: false,
   },
 } as const;

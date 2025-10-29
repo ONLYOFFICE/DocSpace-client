@@ -177,6 +177,7 @@ const ContextMenu = (props: ContextMenuProps) => {
       setReshow(false);
       prevReshow.current = false;
       setChangeView(false);
+      setMobileMenuStack([]);
       setShowMobileMenu(false);
     },
     [onHide],

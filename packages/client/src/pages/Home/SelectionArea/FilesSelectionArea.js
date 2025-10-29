@@ -24,11 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect, useMemo } from "react";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/components/selection-area";
 import { getCountTilesInRow } from "@docspace/shared/utils";
+import { useCallback } from "react";
+
+const getCountOfMissingFilesTiles = (itemsLength, countTilesInRow) => {
+  const division = itemsLength % countTilesInRow;
+  return division ? countTilesInRow - division : 0;
+};
 
 const SelectionArea = (props) => {
   const {
@@ -65,36 +71,49 @@ const SelectionArea = (props) => {
     };
   }, [isInfoPanelVisible, onResize]);
 
-  const onMove = ({ added, removed, clear }) => {
-    setSelections(added, removed, clear);
-  };
+  const onMove = useCallback(
+    ({ added, removed, clear }) => {
+      setSelections(added, removed, clear);
+    },
+    [setSelections],
+  );
+
+  const onMouseDown = useCallback(() => {
+    setWithContentSelection(false);
+  }, [setWithContentSelection]);
 
   const selectableClass = viewAs === "tile" ? "files-item" : "window-item";
 
-  const getCountOfMissingFilesTiles = (itemsLength) => {
-    const division = itemsLength % countTilesInRow;
-    return division ? countTilesInRow - division : 0;
-  };
-
-  const arrayTypes = [
-    {
-      type: "file",
-      rowCount: Math.ceil(filesLength / countTilesInRow),
-      rowGap: 14,
-      countOfMissingTiles: getCountOfMissingFilesTiles(filesLength),
-    },
-    {
-      type: "folder",
-      rowCount: Math.ceil(foldersLength / countTilesInRow),
-      rowGap: isRooms ? 14 : 12,
-      countOfMissingTiles: getCountOfMissingFilesTiles(foldersLength),
-    },
-  ];
+  const arrayTypes = useMemo(
+    () => [
+      {
+        type: "file",
+        rowCount: Math.ceil(filesLength / countTilesInRow),
+        rowGap: 14,
+        countOfMissingTiles: getCountOfMissingFilesTiles(
+          filesLength,
+          countTilesInRow,
+        ),
+      },
+      {
+        type: "folder",
+        rowCount: Math.ceil(foldersLength / countTilesInRow),
+        rowGap: isRooms ? 14 : 12,
+        countOfMissingTiles: getCountOfMissingFilesTiles(
+          foldersLength,
+          countTilesInRow,
+        ),
+      },
+    ],
+    [filesLength, foldersLength, countTilesInRow, isRooms],
+  );
 
   const isEnabled =
     selectionAreaIsEnabled && !isMobile && !dragging && !isIndexEditingMode;
 
-  return isEnabled ? (
+  if (!isEnabled) return null;
+
+  return (
     <SelectionAreaComponent
       containerClass="section-scroll"
       scrollClass="section-scroll"
@@ -108,9 +127,9 @@ const SelectionArea = (props) => {
       folderHeaderHeight={35}
       defaultHeaderHeight={46}
       arrayTypes={arrayTypes}
-      onMouseDown={() => setWithContentSelection(false)}
+      onMouseDown={onMouseDown}
     />
-  ) : null;
+  );
 };
 
 export default inject(

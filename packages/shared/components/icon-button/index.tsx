@@ -238,8 +238,6 @@ const IconButton = ({
     ...style,
   } as React.CSSProperties;
 
-  console.log(title);
-
   const Wrapper = title ? DivWithTooltip : "div";
 
   return (

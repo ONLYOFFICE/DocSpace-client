@@ -110,7 +110,7 @@ const AIServiceDialog: React.FC<BackupServiceDialogProps> = ({
   const serviceOptions: ServiceOption[] = [
     {
       id: "ai-tools",
-      title: t("AIAgents"),
+      title: t("Common:AIAgents"),
       description: t("AIAgentsDescription"),
       icon: <ToolsIcon />,
     },

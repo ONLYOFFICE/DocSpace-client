@@ -34,6 +34,7 @@ import ChatHeader from "./components/chat-header";
 import ChatMessageBody from "./components/chat-message-body";
 import ChatInput from "./components/chat-input";
 import { ChatNoAccessScreen } from "./components/chat-no-access-screen";
+import { ChatInfoBlock } from "./components/chat-info-block";
 
 import { CHAT_SUPPORTED_FORMATS } from "./Chat.constants";
 
@@ -55,6 +56,7 @@ const Chat = ({
 
   isAdmin,
 }: ChatProps) => {
+  const isAIServiceDisabled = false; // TODO: Change to security or something else showing disabled service
   const isLoadingChat = isLoading || !roomId;
 
   if (!canUseChat && !isLoadingChat) {
@@ -76,6 +78,7 @@ const Chat = ({
             isLoading={isLoadingChat}
             getIcon={getIcon}
           />
+          {isAIServiceDisabled ? <ChatInfoBlock /> : null}
           <ChatInput
             attachmentFile={attachmentFile}
             clearAttachmentFile={clearAttachmentFile}

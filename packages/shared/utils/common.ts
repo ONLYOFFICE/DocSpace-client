@@ -1433,16 +1433,16 @@ export const getBackupProgressInfo = (
   if (isCompleted) {
     setBackupProgress(100);
 
+    if (link && link.slice(0, 1) === "/") {
+      setLink(link);
+    }
+
     if (warning) {
       return { warning };
     }
 
     if (error) {
       return { error };
-    }
-
-    if (link && link.slice(0, 1) === "/") {
-      setLink(link);
     }
 
     return { success: t("Common:BackupCreatedSuccess") };

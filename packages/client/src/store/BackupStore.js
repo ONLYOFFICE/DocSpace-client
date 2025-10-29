@@ -646,13 +646,13 @@ class BackupStore {
       if (response) {
         const { progress, link, error, warning } = response;
 
+        if (link && link.slice(0, 1) === "/") {
+          this.temporaryLink = link;
+        }
+
         if (!error && !warning) {
           this.setIsBackupProgressVisible(progress !== 100);
           this.downloadingProgress = progress;
-
-          if (link && link.slice(0, 1) === "/") {
-            this.temporaryLink = link;
-          }
           this.setErrorInformation("");
         } else {
           this.setIsBackupProgressVisible(false);

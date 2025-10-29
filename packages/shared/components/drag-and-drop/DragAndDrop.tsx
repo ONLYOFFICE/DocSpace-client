@@ -87,6 +87,4 @@ const DragAndDrop = (props: DragAndDropProps) => {
   );
 };
 
-export default DragAndDrop;
-
 export default React.memo(DragAndDrop, equal);

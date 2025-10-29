@@ -36,6 +36,7 @@ import AvatarEditor from "react-avatar-editor";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Slider } from "@docspace/shared/components/slider";
+import { DivWithTooltip } from "@docspace/shared/components/tooltip";
 
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
@@ -203,7 +204,7 @@ const IconCropper = ({
         />
       </div>
 
-      <div
+      <DivWithTooltip
         className="icon_cropper-delete_button"
         onClick={handleDeleteImage}
         title={t("Common:Delete")}
@@ -212,7 +213,7 @@ const IconCropper = ({
         <div className="icon_cropper-delete_button-text">
           {t("Common:Delete")}
         </div>
-      </div>
+      </DivWithTooltip>
 
       <div className="icon_cropper-zoom-container">
         <IconButton

@@ -52,7 +52,7 @@ import { getMembersList, getUserList } from "../../api/people";
 import { TUser } from "../../api/people/types";
 import { TGroup } from "../../api/groups/types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
-import { Text } from "../../components/text";
+import { TextWithTooltip as Text } from "../../components/text";
 import { globalColors } from "../../themes";
 import { isNextImage } from "../../utils/typeGuards";
 import { toastr } from "../../components/toast";

@@ -29,7 +29,7 @@ import { isChrome, browserVersion } from "react-device-detect";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
-import { Button, ButtonSize } from "../../../button";
+import { ButtonWithTooltip as Button, ButtonSize } from "../../../button";
 import { DropDown } from "../../../drop-down";
 import { DropDownItem } from "../../../drop-down-item";
 import { TGroupMenuItem } from "../../Table.types";

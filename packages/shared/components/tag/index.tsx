@@ -33,7 +33,8 @@ import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 import { IconButton } from "../icon-button";
-import { Text } from "../text";
+import { TextWithTooltip as Text } from "../text";
+import { DivWithTooltip } from "../tooltip";
 
 import type { TagProps } from "./Tag.types";
 import styles from "./Tag.module.scss";
@@ -70,6 +71,8 @@ const TagPure = ({
 
   const tagRef = React.useRef<HTMLDivElement | null>(null);
   const isMountedRef = React.useRef(true);
+
+  const DivWrapper = title ? DivWithTooltip : "div";
 
   const onClickOutside = React.useCallback((e: Event) => {
     const target = e.target as HTMLElement;
@@ -182,7 +185,7 @@ const TagPure = ({
       </DropDown>
     </>
   ) : (
-    <div
+    <DivWrapper
       title={label}
       onClick={onClickAction}
       className={classNames(styles.tag, "tag", className, {
@@ -227,7 +230,7 @@ const TagPure = ({
           ) : null}
         </>
       )}
-    </div>
+    </DivWrapper>
   );
 };
 

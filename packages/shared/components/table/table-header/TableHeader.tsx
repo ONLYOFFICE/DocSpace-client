@@ -32,6 +32,7 @@ import { TableHeaderProps, TTableColumn } from "../Table.types";
 import styles from "./TableHeader.module.scss";
 import { TableHeaderCell } from "../sub-components/table-header-cell";
 import { TableSettings } from "../sub-components/table-settings";
+import { DivWithTooltip } from "../../tooltip";
 import type { Nullable } from "../../../types";
 import {
   DEFAULT_MIN_COLUMN_SIZE,
@@ -68,6 +69,8 @@ export const TableHeader = (props: TableHeaderProps) => {
     setHideColumns: setHideColumnsProp,
     withoutWideColumn = false,
   } = props;
+
+  const DivWrapper = settingsTitle ? DivWithTooltip : "div";
 
   const isMountedRef = useRef(false);
   const prevHeaderDataRef = useRef<TPrevHeaderData>(null);
@@ -1269,7 +1272,7 @@ export const TableHeader = (props: TableHeaderProps) => {
           })}
 
           {showSettings ? (
-            <div
+            <DivWrapper
               data-testid="settings-block"
               className={styles.tableHeaderSettings}
               title={settingsTitle}
@@ -1281,7 +1284,7 @@ export const TableHeader = (props: TableHeaderProps) => {
                   false
                 }
               />
-            </div>
+            </DivWrapper>
           ) : null}
         </div>
       </div>

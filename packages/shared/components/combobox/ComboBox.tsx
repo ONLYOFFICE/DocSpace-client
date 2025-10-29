@@ -33,6 +33,7 @@ import EmptyIcon from "PUBLIC_DIR/images/empty.svg?url";
 
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
+import { DivWithTooltip } from "../tooltip";
 
 import { ComboButton } from "./sub-components/ComboButton";
 import { ComboBoxSize, ComboBoxDisplayType } from "./ComboBox.enums";
@@ -251,6 +252,8 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     noSelect = true,
     useImageIcon = false,
   } = props;
+
+  const DivWrapper = title ? DivWithTooltip : "div";
 
   React.useEffect(() => {
     setIsOpen(opened || false);
@@ -480,7 +483,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     : {};
 
   return (
-    <div
+    <DivWrapper
       className={comboboxClasses}
       ref={ref}
       onClick={comboBoxClick}
@@ -514,7 +517,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       />
 
       {displayType !== "toggle" ? dropDownElement : null}
-    </div>
+    </DivWrapper>
   );
 };
 

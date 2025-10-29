@@ -29,6 +29,7 @@ import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import { IconButton } from "../icon-button";
 import { SelectedItemProps } from "./SelectedItem.types";
 import styles from "./SelectedItem.module.scss";
+import { DivWithTooltip } from "../tooltip";
 
 export const SelectedItemPure = (props: SelectedItemProps) => {
   const {
@@ -48,6 +49,8 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
     dataTestId,
   } = props;
   if (!label) return null;
+
+  const DivWrapper = title ? DivWithTooltip : "div";
 
   const onCloseClick = (e: React.MouseEvent) => {
     if (!isDisabled) onClose(propKey, label, group || "", e);
@@ -78,7 +81,7 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
     .join(" ");
 
   return (
-    <div
+    <DivWrapper
       onClick={handleOnClick}
       className={selectedItemClassNames}
       id={id}
@@ -97,7 +100,7 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
           isDisabled={isDisabled}
         />
       ) : null}
-    </div>
+    </DivWrapper>
   );
 };
 

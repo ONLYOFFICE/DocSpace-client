@@ -40,7 +40,7 @@ import EyeOffReactSvg from "PUBLIC_DIR/images/eye.off.react.svg";
 
 import { InputBlock } from "../input-block";
 import { Link, LinkType } from "../link";
-import { Text } from "../text";
+import { TextWithTooltip as Text } from "../text";
 import { Tooltip } from "../tooltip";
 import { InputSize, InputType } from "../text-input";
 

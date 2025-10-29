@@ -35,6 +35,7 @@ import AvatarDarkReactSvgUrl from "PUBLIC_DIR/images/avatar.dark.react.svg?url";
 
 import RoleHistories from "../role-histories/RoleHistories";
 import { useTheme } from "../../../../hooks/useTheme";
+import { withTooltipForElement } from "../../../../components/tooltip";
 
 import styles from "./RoleStep.module.scss";
 import type { RoleStepProps } from "./RoleStep.types";
@@ -51,6 +52,8 @@ const RoleStep = ({
   const [collapsed, setCollapsed] = useState(true);
   const { isBase } = useTheme();
   const { t } = useTranslation("Common");
+
+  const SubHeader = withTooltipForElement("h5");
 
   const toggleCollapse = () => {
     setCollapsed(!collapsed);
@@ -87,9 +90,9 @@ const RoleStep = ({
             alt={user.userName}
           />
         </picture>
-        <h5 title={roleName} className={styles.roleTitle}>
+        <SubHeader title={roleName} className={styles.roleTitle}>
           {roleName}
-        </h5>
+        </SubHeader>
         <p className={styles.userName}>
           {userName}{" "}
           {currentUserId === user.id ? `(${t("Common:MeLabel")})` : null}

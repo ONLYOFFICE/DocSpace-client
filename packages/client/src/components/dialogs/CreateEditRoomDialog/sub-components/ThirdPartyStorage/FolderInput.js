@@ -192,9 +192,12 @@ const FolderInput = ({
             </span>
           ) : null}
         </DivWithTooltip>
-        <div title={t("Common:SelectFolder")} className="icon-wrapper">
+        <DivWithTooltip
+          title={t("Common:SelectFolder")}
+          className="icon-wrapper"
+        >
           <IconButton size={16} iconName={FolderReactSvgUrl} isClickable />
-        </div>
+        </DivWithTooltip>
       </StyledFolderInput>
 
       {isDialogOpen ? (

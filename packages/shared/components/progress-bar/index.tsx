@@ -26,7 +26,7 @@
 
 import React from "react";
 
-import { Text } from "../text";
+import { TextWithTooltip as Text } from "../text";
 
 import styles from "./ProgressBar.module.scss";
 

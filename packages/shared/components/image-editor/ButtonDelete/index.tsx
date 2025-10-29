@@ -54,6 +54,7 @@ import { ReactSVG } from "react-svg";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import classNames from "classnames";
 import { TTranslation } from "../../../types";
+import { DivWithTooltip } from "../../tooltip";
 
 import styles from "./ButtonDelete.module.scss";
 
@@ -67,7 +68,7 @@ const ButtonDelete = ({
   className?: string;
 }) => {
   return (
-    <div
+    <DivWithTooltip
       className={classNames(
         "icon_cropper-delete_button",
         styles.buttonDelete,
@@ -83,7 +84,7 @@ const ButtonDelete = ({
       >
         {t("Common:Delete")}
       </div>
-    </div>
+    </DivWithTooltip>
   );
 };
 

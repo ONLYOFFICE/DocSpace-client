@@ -29,6 +29,7 @@ import React from "react";
 import { BadgeProps } from "./Badge.types";
 import styles from "./Badge.module.scss";
 import { Text } from "../text";
+import { DivWithTooltip } from "../tooltip";
 
 const Badge = (props: BadgeProps) => {
   const {
@@ -54,8 +55,11 @@ const Badge = (props: BadgeProps) => {
     isPaidBadge,
     isMutedBadge,
     dataTestId,
+    title,
     ...rest
   } = props;
+
+  const Wrapper = title ? DivWithTooltip : "div";
 
   const onClickAction = React.useCallback(
     (e: React.MouseEvent) => {
@@ -96,7 +100,7 @@ const Badge = (props: BadgeProps) => {
   } as React.CSSProperties;
 
   return (
-    <div
+    <Wrapper
       ref={ref}
       className={`${styles.badge} ${styles.themed} ${className || ""}`}
       style={badgeStyle}
@@ -134,7 +138,7 @@ const Badge = (props: BadgeProps) => {
           {label}
         </Text>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 

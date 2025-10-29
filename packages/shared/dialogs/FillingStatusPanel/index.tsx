@@ -42,7 +42,8 @@ import { FILLING_FORM_STATUS_COLORS } from "../../constants";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { FileFillingFormStatus } from "../../enums";
 
-import { Text } from "../../components/text";
+import { TextWithTooltip as Text } from "../../components/text";
+import { DivWithTooltip } from "../../components/tooltip";
 import { toastr } from "../../components/toast";
 import PublicRoomBar from "../../components/public-room-bar";
 import { Heading, HeadingLevel } from "../../components/heading";
@@ -137,13 +138,13 @@ export const FillingStatusPanel = ({
             {fileName}
           </Text>
           {fillingStatus ? (
-            <div
+            <DivWithTooltip
               title={fileStatusTitle}
               className={styles.fileStatus}
               style={{ backgroundColor: color }}
             >
               <span>{fileStatusLabel}</span>
-            </div>
+            </DivWithTooltip>
           ) : null}
         </div>
         <div className={styles.processContainer}>

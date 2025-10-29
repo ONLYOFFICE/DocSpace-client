@@ -26,6 +26,9 @@
 
 import { memo } from "react";
 import type { HeaderProps } from "./StartFillingPanel.types";
+import { withTooltipForElement } from "../../components/tooltip";
+
+const SubTitle = withTooltipForElement("h3");
 
 export const Header = memo(
   ({
@@ -37,7 +40,7 @@ export const Header = memo(
     canEditRoom,
   }: HeaderProps) => (
     <div className={className} ref={ref}>
-      <h3
+      <SubTitle
         title={t("Common:RecipientFields", {
           recipientName: roleName,
         })}
@@ -45,7 +48,7 @@ export const Header = memo(
         {t("Common:RecipientFields", {
           recipientName: roleName,
         })}
-      </h3>
+      </SubTitle>
       {canEditRoom ? (
         <span onClick={openInvitePanel}>{t("Common:AddUserToRoom")}</span>
       ) : null}

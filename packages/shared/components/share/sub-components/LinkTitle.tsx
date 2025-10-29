@@ -30,7 +30,7 @@ import classNames from "classnames";
 import CopyIcon from "PUBLIC_DIR/images/icons/12/copy.svg?url";
 import EmptyIcon from "PUBLIC_DIR/images/empty.svg?url";
 
-import { Text } from "../../text";
+import { TextWithTooltip as Text } from "../../text";
 import { IconButton } from "../../icon-button";
 
 import styles from "../Share.module.scss";

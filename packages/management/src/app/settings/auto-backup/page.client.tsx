@@ -151,6 +151,8 @@ const AutoBackup = ({
     backupProgressError,
     setBackupProgressError,
     setIsBackupProgressVisible,
+    backupProgressWarning,
+    setBackupProgressWarning,
   } = useBackup({
     account,
     backupScheduleResponse,
@@ -283,6 +285,8 @@ const AutoBackup = ({
       setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
       connectDialogVisible={spacesStore.connectDialogVisible}
       setConnectDialogVisible={spacesStore.setConnectDialogVisible}
+      backupProgressWarning={backupProgressWarning}
+      setBackupProgressWarning={setBackupProgressWarning}
     />
   );
 };

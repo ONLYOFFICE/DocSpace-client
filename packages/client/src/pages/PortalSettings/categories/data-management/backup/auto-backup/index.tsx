@@ -203,6 +203,8 @@ export default inject(
 
       isEmptyContentBeforeLoader,
       isInitialError,
+      backupProgressWarning,
+      setBackupProgressWarning,
     } = backup;
 
     const { showPortalSettingsLoader } = clientLoadingStore;
@@ -322,6 +324,8 @@ export default inject(
 
       // clientLoadingStore
       isInitialLoading: showPortalSettingsLoader,
+      backupProgressWarning,
+      setBackupProgressWarning,
     };
   },
 )(observer(AutoBackupWrapper as React.FC<ExternalAutoBackupWrapperProps>));

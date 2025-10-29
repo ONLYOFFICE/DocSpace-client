@@ -41,7 +41,9 @@ export const ChatInfoBlock = () => {
     <PublicRoomBar
       className={styles.chatInfoBlock}
       headerText={t("Common:AIFeaturesAreCurrentlyDisabled")}
-      bodyText={t("Common:AIDisabledInfoBlockDescription")}
+      bodyText={t("Common:AIDisabledInfoBlockDescription", {
+        productName: t("Common:ProductName"),
+      })}
       iconName={InfoIcon}
     />
   );

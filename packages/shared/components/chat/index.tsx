@@ -53,8 +53,7 @@ const Chat = ({
   toolsSettings,
   initChats,
 
-    isAdmin,
-
+  isAdmin,
 }: ChatProps) => {
   const isLoadingChat = isLoading || !roomId;
 

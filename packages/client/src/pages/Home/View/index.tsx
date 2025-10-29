@@ -251,7 +251,14 @@ const View = ({
     checkTg: checkTg!,
   });
 
-  const roomId = new URLSearchParams(location.search).get("folder");
+  const [roomId, setRoomId] = React.useState(() => {
+    return new URLSearchParams(location.search).get("folder");
+  });
+
+  React.useLayoutEffect(() => {
+    const roomId = new URLSearchParams(location.search).get("folder");
+    setRoomId(roomId);
+  }, [location.search]);
 
   const toolsSettings = useToolsSettings({
     roomId: roomId ?? "",

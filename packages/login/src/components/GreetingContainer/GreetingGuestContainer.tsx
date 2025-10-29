@@ -27,6 +27,7 @@
 "use client";
 
 import { Trans, useTranslation } from "react-i18next";
+import Image from "next/image";
 import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
@@ -52,12 +53,12 @@ export const GreetingGuestContainer = ({
     WhiteLabelLogoType.LoginPage,
     !theme.isBase,
     false,
-    culture,
+    culture
   );
 
   return (
     <GreetingContainer>
-      <img src={logoUrl} className="portal-logo guest" alt="greeting-logo" />
+      <Image src={logoUrl} className="portal-logo guest" alt="greeting-logo" />
       <div className="tooltip guest">
         <Text fontSize="16px">
           <Trans

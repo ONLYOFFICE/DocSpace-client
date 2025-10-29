@@ -40,7 +40,7 @@ describe("PublicRoomBar", () => {
   });
 
   it("does not render close button when onClose is not provided", () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // biome-ignore lint/correctness/noUnusedVariables: TODO fix
     const { onClose, ...propsWithoutClose } = defaultProps;
     render(<PublicRoomBar {...propsWithoutClose} />);
 

@@ -1,6 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-// eslint-disable @typescript-eslint/no-unused-vars
 
 import { TextDecoder, TextEncoder } from "util";
 import React from "react";

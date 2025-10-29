@@ -79,7 +79,7 @@ module.exports = {
       return {};
     }
 
-    // eslint-disable-next-line no-control-regex
+    // biome-ignore lint/suspicious/noControlCharactersInRegex: TODO fix
     const nonAsciiRegex = /[^\x00-\x7F]/g;
 
     function checkText(node, text) {

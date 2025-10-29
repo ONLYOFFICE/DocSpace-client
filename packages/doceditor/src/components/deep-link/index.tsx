@@ -27,6 +27,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
+import Image from "next/image";
 
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -79,7 +80,7 @@ const DeepLink = ({
       fileInfo,
       deepLinkConfig,
       window.location.href,
-      isOpenInAppOnly,
+      isOpenInAppOnly
     );
   };
 
@@ -122,7 +123,7 @@ const DeepLink = ({
               <StyledBodyWrapper>
                 <Text className="title">{t("DeepLink:OpeningDocument")}</Text>
                 <StyledFileTile>
-                  <img src={getFileIcon() ?? ""} alt="portal-logo" />
+                  <Image src={getFileIcon() ?? ""} alt="portal-logo" />
                   <Text fontSize="14px" fontWeight="600" truncate>
                     {getFileTitle()}
                   </Text>

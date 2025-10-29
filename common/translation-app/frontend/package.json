@@ -6,8 +6,6 @@
     "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start -p 3000",
-    "lint": "eslint . --max-warnings=0",
-    "lint:fix": "eslint . --fix",
     "tsc": "tsc"
   },
   "dependencies": {
@@ -25,13 +23,9 @@
     "zustand": "^4.5.7"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.1",
-    "@eslint/js": "^9.35.0",
     "@types/node": "22.18.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
-    "eslint": "^9.35.0",
-    "eslint-config-next": "16.0.0",
     "typescript": "5.9.3"
   }
 }

@@ -38,17 +38,12 @@ import {
   getCookie,
   getTitleWithoutExtension,
 } from "@docspace/shared/utils";
-import { FUNCTION_EMPTY, LANGUAGE } from "@docspace/shared/constants";
+import { LANGUAGE } from "@docspace/shared/constants";
 import config from "PACKAGE_FILE";
 // import EditingWrapperComponent from "../components/EditingWrapperComponent";
 
 // import { getDefaultFileName } from "SRC_DIR/helpers/filesUtils";
 // import ItemIcon from "../components/ItemIcon";
-
-const linkOptions = {
-  onClick: FUNCTION_EMPTY,
-  noHover: false,
-};
 
 export default function withContent(WrappedContent) {
   class WithContent extends React.Component {
@@ -113,12 +108,9 @@ export default function withContent(WrappedContent) {
         access === ShareAccessRights.FullAccess || // only badges?
         access === ShareAccessRights.None; // TODO: fix access type for owner (now - None)
 
-      linkOptions.onClick = FUNCTION_EMPTY;
-      linkOptions.noHover = false;
-
       const linkStyles = isTrashFolder // || window.innerWidth <= 1024
-        ? (linkOptions.noHover = true)
-        : (linkOptions.onClick = onFilesClick);
+        ? { noHover: true }
+        : { onClick: onFilesClick };
 
       if (!isDesktop && !isTrashFolder && !isArchiveFolder) {
         linkStyles.href = isPublicRoom

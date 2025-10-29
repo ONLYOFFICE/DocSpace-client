@@ -53,6 +53,7 @@ const ChatInput = ({
   attachmentFile,
   clearAttachmentFile,
   selectedModel,
+  toolsSettings,
   isAdmin,
 }: ChatInputProps) => {
   const { t } = useTranslation(["Common"]);
@@ -98,7 +99,6 @@ const ChatInput = ({
       setValue("");
       setSelectedFiles([]);
     } catch (e) {
-      console.log("from here");
       console.log(e);
     }
   }, [currentChatId, startChat, sendMessage, value, selectedFiles]);
@@ -212,6 +212,7 @@ const ChatInput = ({
               sendMessageAction={sendMessageAction}
               value={value}
               selectedModel={selectedModel}
+              toolsSettings={toolsSettings}
               isAdmin={isAdmin}
             />
           </>
@@ -225,14 +226,16 @@ const ChatInput = ({
         attachmentFile={attachmentFile}
         clearAttachmentFile={clearAttachmentFile}
       />
-      <Text
-        fontSize="10px"
-        fontWeight={400}
-        className={styles.chatInputText}
-        noSelect
-      >
-        {t("Common:CheckAIInfo")}
-      </Text>
+      {!isLoading ? (
+        <Text
+          fontSize="10px"
+          fontWeight={400}
+          className={styles.chatInputText}
+          noSelect
+        >
+          {t("Common:CheckAIInfo")}
+        </Text>
+      ) : null}
     </>
   );
 };

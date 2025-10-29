@@ -49,37 +49,40 @@ const Chat = ({
   getIcon,
   attachmentFile,
   clearAttachmentFile,
+
+  toolsSettings,
+  initChats,
+
   isAdmin,
 }: ChatProps) => {
-  if (!roomId) {
-    return null;
-  }
+  const isLoadingChat = isLoading || !roomId;
 
-  if (!canUseChat) {
+  if (!canUseChat && !isLoadingChat) {
     return <ChatNoAccessScreen />;
   }
 
   return (
-    <ChatStoreContextProvider roomId={roomId}>
+    <ChatStoreContextProvider roomId={roomId} {...initChats}>
       <MessageStoreContextProvider roomId={roomId}>
         <ChatContainer>
           <ChatHeader
             selectedModel={selectedModel}
-            isLoading={isLoading}
+            isLoading={isLoadingChat}
             getIcon={getIcon}
             roomId={roomId}
           />
           <ChatMessageBody
             userAvatar={userAvatar}
-            isLoading={isLoading}
+            isLoading={isLoadingChat}
             getIcon={getIcon}
           />
           <ChatInput
             attachmentFile={attachmentFile}
             clearAttachmentFile={clearAttachmentFile}
-            isLoading={isLoading}
+            isLoading={isLoadingChat}
             getIcon={getIcon}
             selectedModel={selectedModel}
+            toolsSettings={toolsSettings}
             isAdmin={isAdmin}
           />
         </ChatContainer>

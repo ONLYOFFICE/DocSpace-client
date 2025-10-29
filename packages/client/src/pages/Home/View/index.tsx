@@ -30,6 +30,8 @@ import { Trans, useTranslation } from "react-i18next";
 import { useLocation } from "react-router";
 
 import Chat from "@docspace/shared/components/chat";
+import useToolsSettings from "@docspace/shared/components/chat/hooks/useToolsSettings";
+import useInitChats from "@docspace/shared/components/chat/hooks/useInitChats";
 
 import { getCategoryType } from "@docspace/shared/utils/common";
 import { CategoryType } from "@docspace/shared/constants";
@@ -170,6 +172,9 @@ const View = ({
 
   const isContactsPage = location.pathname.includes("accounts");
   const isProfilePage = location.pathname.includes("profile");
+  const isChatPage =
+    location.pathname.includes("chat") &&
+    location.pathname.includes("ai-agents");
 
   const [currentView, setCurrentView] = React.useState(() => {
     const type = getCategoryType(location);
@@ -188,6 +193,7 @@ const View = ({
 
     return "files";
   });
+
   const [isLoading, setIsLoading] = React.useState(false);
 
   const prevCurrentViewRef = React.useRef(currentView);
@@ -245,8 +251,30 @@ const View = ({
     checkTg: checkTg!,
   });
 
+  const [roomId, setRoomId] = React.useState(() => {
+    return new URLSearchParams(location.search).get("folder");
+  });
+
+  React.useLayoutEffect(() => {
+    const roomId = new URLSearchParams(location.search).get("folder");
+    setRoomId(roomId);
+  }, [location.search]);
+
+  const toolsSettings = useToolsSettings({
+    roomId: roomId ?? "",
+  });
+
+  const initChats = useInitChats({
+    roomId: roomId ?? "",
+  });
+
+  const { initTools } = toolsSettings;
+  const { fetchChats } = initChats;
+
   const getFilesRef = React.useRef(getFiles);
   const fetchContactsRef = React.useRef(fetchContacts);
+  const initChatsRef = React.useRef(fetchChats);
+  const initToolsRef = React.useRef(initTools);
 
   const animationStartedRef = React.useRef(false);
 
@@ -349,6 +377,14 @@ const View = ({
     }
   }, [isLoading, showHeaderLoader]);
 
+  React.useEffect(() => {
+    initChatsRef.current = fetchChats;
+  }, [fetchChats]);
+
+  React.useEffect(() => {
+    initToolsRef.current = initTools;
+  }, [initTools]);
+
   const showToastAccess = useEventCallback(() => {
     if (
       selectedFolderStore.isFolder &&
@@ -398,13 +434,24 @@ const View = ({
           setContactsTab(false);
 
           view = "profile";
+        } else if (isChatPage) {
+          await Promise.all([
+            initToolsRef.current(),
+            initChatsRef.current(),
+            getFilesRef.current(),
+          ]);
+
+          prevCategoryType.current = getCategoryType(location);
+
+          view = "chat";
+
+          setContactsTab(false);
         } else if (!isContactsPage) {
           await getFilesRef.current();
 
           prevCategoryType.current = getCategoryType(location);
 
-          view =
-            prevCategoryType.current === CategoryType.Chat ? "chat" : "files";
+          view = "files";
           setContactsTab(false);
         } else {
           clearFiles();
@@ -432,7 +479,7 @@ const View = ({
     };
 
     getView();
-  }, [location, isContactsPage, isProfilePage, showToastAccess]);
+  }, [location, isContactsPage, isProfilePage, isChatPage, showToastAccess]);
 
   const attachmentFile = React.useMemo(
     () => aiAgentSelectorDialogProps?.file,
@@ -457,13 +504,15 @@ const View = ({
           ) : currentView === "chat" ? (
             <Chat
               userAvatar={userAvatar}
-              roomId={selectedFolderStore.id!}
+              roomId={isLoading && !showHeaderLoader ? "-1" : roomId!}
               getIcon={getIcon}
               selectedModel={chatSettings?.modelId ?? ""}
               isLoading={showBodyLoader}
               attachmentFile={attachmentFile}
               clearAttachmentFile={onClearAttachmentFile}
               canUseChat={canUseChat}
+              toolsSettings={toolsSettings}
+              initChats={initChats}
               isAdmin={isAdmin}
             />
           ) : currentView === "profile" ? (

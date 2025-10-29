@@ -174,7 +174,7 @@ class FilesStore {
 
   folders = EMPTY_ARRAY;
 
-  selection = EMPTY_ARRAY;
+  selection = [];
 
   bufferSelection = null;
 

@@ -28,6 +28,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import classNames from "classnames";
+import { useNavigate } from "react-router";
 
 import McpToolReactSvgUrl from "PUBLIC_DIR/images/mcp.tool.svg?url";
 import WebSearchIconUrl from "PUBLIC_DIR/images/web.search.svg?url";
@@ -39,17 +40,12 @@ import {
   connectServer,
   disconnectServer,
   getMCPToolsForRoom,
-  getServersListForRoom,
-  getAIConfig,
-  getWebSearchInRoom,
   updateWebSearchInRoom,
 } from "../../../../api/ai";
 import { ServerType } from "../../../../api/ai/enums";
-import { TMCPTool, TServer } from "../../../../api/ai/types";
 import { getOAuthToken } from "../../../../utils/common";
 import { getServerIcon } from "../../../../utils";
 import { useTheme } from "../../../../hooks/useTheme";
-import socket, { SocketEvents, TOptSocket } from "../../../../utils/socket";
 
 import { Text } from "../../../text";
 import { ContextMenu, type ContextMenuRefType } from "../../../context-menu";
@@ -62,10 +58,27 @@ import { Portal } from "../../../portal";
 import { useChatStore } from "../../store/chatStore";
 import { useMessageStore } from "../../store/messageStore";
 
-import styles from "./ChatInput.module.scss";
+import useToolsSettings from "../../hooks/useToolsSettings";
 
-const ToolsSettings = () => {
-  const { t } = useTranslation(["Common"]);
+import styles from "./ChatInput.module.scss";
+import { Link, LinkType } from "../../../link";
+
+const ToolsSettings = ({
+  servers,
+  MCPTools,
+  webSearchPortalEnabled,
+  webSearchEnabled,
+  isFetched,
+  knowledgeSearchToolName,
+  webSearchToolName,
+  webCrawlingToolName,
+  setServers,
+  setMCPTools,
+  setWebSearchEnabled,
+  isAdmin,
+}: ReturnType<typeof useToolsSettings> & { isAdmin?: boolean }) => {
+  const { t } = useTranslation(["Common", "Notifications"]);
+  const navigate = useNavigate();
 
   const { roomId } = useChatStore();
   const {
@@ -79,14 +92,7 @@ const ToolsSettings = () => {
     React.useState(false);
 
   const [isMcpToolsVisible, setIsMcpToolsVisible] = React.useState(false);
-  const [servers, setServers] = React.useState<TServer[]>([]);
-  const [MCPTools, setMCPTools] = React.useState<Map<string, TMCPTool[]>>(
-    new Map(),
-  );
-  const [webSearchPortalEnabled, setWebSearchPortalEnabled] =
-    React.useState(false);
-  const [webSearchEnabled, setWebSearchEnabled] = React.useState(false);
-  const [isFetched, setIsFetched] = React.useState(false);
+
   const contextMenuRef = React.useRef<ContextMenuRefType>(null);
 
   const toggleTool = React.useCallback(
@@ -144,71 +150,9 @@ const ToolsSettings = () => {
     [MCPTools, roomId],
   );
 
-  const fetchTools = React.useCallback(async () => {
-    const res = await getServersListForRoom(Number(roomId));
-
-    if (!res) return;
-
-    setServers(res);
-
-    const enabledServers = res.filter((server) => server.connected);
-
-    const actions = await Promise.all(
-      enabledServers.map((server) =>
-        getMCPToolsForRoom(Number(roomId), server.id),
-      ),
-    );
-
-    const serverTools: [string, TMCPTool[]][] = enabledServers.map(
-      (item, index) => [item.id, actions[index] ?? []],
-    );
-
-    setMCPTools(new Map(serverTools));
-    setIsFetched(true);
-  }, [roomId]);
-
-  const initTools = React.useCallback(async () => {
-    const [aiConfig, webSearchInRoom] = await Promise.all([
-      getAIConfig(),
-      getWebSearchInRoom(Number(roomId)),
-      fetchTools(),
-    ]);
-    if (aiConfig) {
-      setKnowledgeSearchToolName(aiConfig.knowledgeSearchToolName);
-      setWebSearchToolName(aiConfig.webSearchToolName);
-      setWebCrawlingToolName(aiConfig.webCrawlingToolName);
-    }
-    setWebSearchPortalEnabled(aiConfig?.webSearchEnabled ?? false);
-    setWebSearchEnabled(webSearchInRoom?.webSearchEnabled ?? false);
-  }, [fetchTools, roomId]);
-
-  const onModifyFolder = React.useCallback(
-    (data?: TOptSocket) => {
-      if (!data) return;
-
-      if (
-        data.type === "folder" &&
-        data.id &&
-        Number(data.id) === Number(roomId) &&
-        data.cmd !== "delete"
-      ) {
-        fetchTools();
-      }
-    },
-    [fetchTools, roomId],
-  );
-
-  React.useEffect(() => {
-    initTools();
-  }, [initTools]);
-
-  React.useEffect(() => {
-    socket?.on(SocketEvents.ModifyFolder, onModifyFolder);
-
-    return () => {
-      socket?.off(SocketEvents.ModifyFolder, onModifyFolder);
-    };
-  }, [onModifyFolder]);
+  const onGoToWebSearchPage = () => {
+    navigate("/portal-settings/ai-settings/search");
+  };
 
   const openOauthWindow = async (serverId: string, type: string) => {
     const url = await openConnectWindow(type);
@@ -294,6 +238,18 @@ const ToolsSettings = () => {
     setWebSearchEnabled(!webSearchEnabled);
   }, [roomId, webSearchEnabled, webSearchPortalEnabled]);
 
+  React.useEffect(() => {
+    setKnowledgeSearchToolName(knowledgeSearchToolName);
+  }, [knowledgeSearchToolName]);
+
+  React.useEffect(() => {
+    setWebSearchToolName(webSearchToolName);
+  }, [webSearchToolName]);
+
+  React.useEffect(() => {
+    setWebCrawlingToolName(webCrawlingToolName);
+  }, [webCrawlingToolName]);
+
   const model = React.useMemo(() => {
     const serverItems = Array.from(MCPTools.entries()).map(([mcpId, tools]) => {
       const server = servers.find((s) => s.id === mcpId);
@@ -357,27 +313,47 @@ const ToolsSettings = () => {
         checked: webSearchEnabled && webSearchPortalEnabled,
         onClick: onWebSearchToggle,
         disabled: !webSearchPortalEnabled,
-        getTooltipContent: () => (
-          <Text>
-            {t("ConnectWebSearch", { productName: t("Common:ProductName") })}
-          </Text>
-        ),
+        getTooltipContent: isAdmin
+          ? () => (
+              <>
+                <Text>
+                  {t("ConnectWebSearch", {
+                    productName: t("Common:ProductName"),
+                  })}
+                </Text>
+                <Link
+                  type={LinkType.action}
+                  isHovered
+                  fontWeight={600}
+                  onClick={onGoToWebSearchPage}
+                >
+                  {t("Notifications:GoToSettings")}
+                </Link>
+              </>
+            )
+          : undefined,
       },
-      { key: "separator-1", isSeparator: true },
+      ...(showManageConnectionItem || serverItems.length > 0
+        ? [{ key: "separator-1", isSeparator: true }]
+        : []),
       ...serverItems,
-      ...(serverItems.length > 0
+      ...(serverItems.length > 0 && showManageConnectionItem
         ? [{ key: "separator-2", isSeparator: true }]
         : []),
-      {
-        key: "manage-connections",
-        label: t("ManageConnection"),
-        onClick: () => {
-          setShowManageConnections(true);
-        },
-        icon: ManageConnectionsReactSvgUrl,
-        disabled: !showManageConnectionItem,
-        getTooltipContent: () => <Text>{t("ConnectMCPServers")}</Text>,
-      },
+      ...(showManageConnectionItem
+        ? [
+            {
+              key: "manage-connections",
+              label: t("ManageConnection"),
+              onClick: () => {
+                setShowManageConnections(true);
+              },
+              icon: ManageConnectionsReactSvgUrl,
+              disabled: !showManageConnectionItem,
+              getTooltipContent: () => <Text>{t("ConnectMCPServers")}</Text>,
+            },
+          ]
+        : []),
     ];
   }, [
     MCPTools,

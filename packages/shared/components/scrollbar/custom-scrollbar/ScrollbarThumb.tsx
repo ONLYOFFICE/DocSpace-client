@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @typescript-eslint/no-useless-constructor */
 import { cnb } from "cnbuilder";
 import React from "react";
 import { DraggableCore, DraggableData, DraggableEvent } from "react-draggable";
@@ -212,27 +211,15 @@ class ScrollbarThumb extends React.Component<ScrollbarThumbProps, unknown> {
     if (isFun(this.props.elementRef)) this.props.elementRef(ref);
     this.element = ref;
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     this.elementRefHack.current = ref;
   };
 
+  // biome-ignore-start lint/correctness/noUnusedVariables: TODO fix
   public render(): React.ReactElement<unknown> | null {
-    const {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      elementRef,
-
-      axis,
-
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      onDrag,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      onDragEnd,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      onDragStart,
-
-      ...props
-    } = this.props as ScrollbarThumbProps;
+    const { elementRef, axis, onDrag, onDragEnd, onDragStart, ...props } = this
+      .props as ScrollbarThumbProps;
+    // biome-ignore-end lint/correctness/noUnusedVariables: TODO fix
 
     props.className = cnb(
       "ScrollbarsCustom-Thumb",

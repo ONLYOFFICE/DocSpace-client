@@ -675,12 +675,13 @@ const SubMenu = (props: SubMenuProps) => {
           </li>
           {item.disabled && item.getTooltipContent ? (
             <Tooltip
-              float
+              className="context-menu-item-tooltip"
               openOnClick={isTouchDevice}
               id={`context-menu-item-tooltip-${item.key}`}
               getContent={item.getTooltipContent}
-              place="bottom-end"
+              place="bottom"
               zIndex={1003}
+              clickable
             />
           ) : null}
         </>

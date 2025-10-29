@@ -30,7 +30,11 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { BACKUP_SERVICE, TOTAL_SIZE } from "@docspace/shared/constants";
+import {
+  AI_TOOLS,
+  BACKUP_SERVICE,
+  TOTAL_SIZE,
+} from "@docspace/shared/constants";
 import { setServiceState } from "@docspace/shared/api/portal";
 
 import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
@@ -122,6 +126,12 @@ const Services = (props: InjectedProps) => {
               productName: t("Common:ProductName"),
             }),
     },
+    [AI_TOOLS]: {
+      title: t("Common:Confirmation"),
+      body: t("Services:AItoolsConfirm", {
+        productName: t("Common:ProductName"),
+      }),
+    },
   };
 
   const getDialogContent = (actionType: string | null) => {
@@ -145,7 +155,7 @@ const Services = (props: InjectedProps) => {
 
     if (id === BACKUP_SERVICE) setIsBackupVisible(true);
 
-    if (id === "ai") setIsAIServiceVisible(true);
+    if (id === AI_TOOLS) setIsAIServiceVisible(true);
   };
 
   const onClose = () => {
@@ -182,7 +192,7 @@ const Services = (props: InjectedProps) => {
       }
     }
 
-    if (id === "ai") {
+    if (id === AI_TOOLS) {
       if (isAIServiceVisible) {
         previousDialogRef.current = true;
       }

@@ -75,6 +75,7 @@ const withHotkeys = (Component) => {
       isTrashFolder,
       isArchiveFolder,
       isRoomsFolder,
+      isAIAgentsFolder,
 
       getSelection,
       setFavoriteAction,
@@ -128,6 +129,7 @@ const withHotkeys = (Component) => {
       isArchiveFolder ||
       isRoomsFolder ||
       isVisitor ||
+      isAIAgentsFolder ||
       !security?.Create;
 
     const onCreate = (extension) => {
@@ -361,6 +363,10 @@ const withHotkeys = (Component) => {
     useHotkeys(
       "delete, shift+3, command+delete, command+Backspace",
       () => {
+        if (isAIAgentsFolder && selection?.length > 1) {
+          return;
+        }
+
         if (isArchiveFolder) {
           isAvailableOption("unarchive") && deleteRooms(t);
           return;
@@ -544,6 +550,7 @@ const withHotkeys = (Component) => {
         isTrashFolder,
         isArchiveFolder,
         isRoomsFolder,
+        isAIAgentsFolder,
       } = treeFoldersStore;
 
       const { isWarningRoomsDialog } = currentQuotaStore;
@@ -593,6 +600,7 @@ const withHotkeys = (Component) => {
         isTrashFolder,
         isArchiveFolder,
         isRoomsFolder,
+        isAIAgentsFolder,
         isIndexEditingMode: indexingStore.isIndexEditingMode,
 
         getSelection,

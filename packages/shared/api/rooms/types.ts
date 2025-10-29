@@ -311,6 +311,7 @@ export enum FeedTarget {
   File = "file",
   Folder = "folder",
   Room = "room",
+  Agent = "agent",
   RoomTag = "roomTag",
   RoomLogo = "roomLogo",
   RoomExternalLink = "roomExternalLink",
@@ -381,6 +382,8 @@ export enum FeedActionKeys {
   RoomGroupAdded = "RoomGroupAdded",
   RoomUpdateAccessForGroup = "RoomUpdateAccessForGroup",
   RoomGroupRemove = "RoomGroupRemove",
+  AgentCreated = "AgentCreated",
+  AgentRenamed = "AgentRenamed",
 }
 
 export type CapitalizedFeedAction = Capitalize<FeedAction>;

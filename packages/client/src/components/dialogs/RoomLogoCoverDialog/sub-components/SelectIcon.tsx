@@ -175,6 +175,7 @@ export const SelectIcon = ({
                   key={icon.id}
                   id={`cover-icon-${icon?.id}`}
                   data-testid={`room_logo_cover_icon_${index}`}
+                  // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
                   dangerouslySetInnerHTML={createMarkup()}
                 />
               );

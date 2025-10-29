@@ -2433,7 +2433,7 @@ class ContextOptionsStore {
           label: t("Common:Actions"),
           icon: PluginActionsSvgUrl,
           disabled: false,
-          onLoad: () => this.onLoadPlugins(item),
+          items: this.onLoadPlugins(item),
         });
       }
     }

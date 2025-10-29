@@ -81,7 +81,10 @@ export const useEmptyView = (
 ) => {
   const theme = useTheme();
 
-  const isAIRoom = selectedFolder?.roomType === RoomsType.AIRoom;
+  const isAIRoom =
+    selectedFolder?.roomType === RoomsType.AIRoom ||
+    isKnowledgeTab ||
+    isResultsTab;
 
   const emptyViewOptions = useMemo(() => {
     const description = getDescription(
@@ -185,7 +188,10 @@ export const useOptions = (
 ) => {
   const navigate = useNavigate();
 
-  const isAIRoom = selectedFolder?.roomType === RoomsType.AIRoom;
+  const isAIRoom =
+    selectedFolder?.roomType === RoomsType.AIRoom ||
+    isKnowledgeTab ||
+    isResultsTab;
 
   const onGoToShared = useCallback(() => {
     const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);

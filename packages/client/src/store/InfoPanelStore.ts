@@ -182,6 +182,29 @@ class InfoPanelStore {
     this.infoPanelRoom = infoPanelRoom;
   };
 
+  refreshInfoPanel = () => {
+    const selection = this.infoPanelSelection;
+
+    if (!selection || Array.isArray(selection)) return;
+
+    const isRoomSelection = "isRoom" in selection && Boolean(selection.isRoom);
+
+    if (isRoomSelection) {
+      if (
+        this.roomsView === InfoPanelView.infoMembers &&
+        this.infoPanelRoomSelection?.id === selection.id
+      ) {
+        void this.updateInfoPanelMembers();
+      }
+
+      return;
+    }
+
+    if (this.isShareTabActive) {
+      this.setShareChanged(true);
+    }
+  };
+
   openUser = async (user: TCreatedBy) => {
     if (user.id === this.userStore?.user?.id) {
       this.peopleStore.profileActionsStore.onProfileClick();

@@ -27,6 +27,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import styled, { useTheme } from "styled-components";
 
 import { TPortalCultures } from "@docspace/shared/api/settings/types";
@@ -89,12 +90,12 @@ const SimpleNav = ({
     WhiteLabelLogoType.LightSmall,
     isDark,
     false,
-    culture,
+    culture
   );
 
   return (
     <StyledSimpleNav id="login-header">
-      <img className="logo" src={logoUrl} alt="logo-url" />
+      <Image className="logo" src={logoUrl} alt="logo-url" />
       {isLanguageComboboxVisible ? (
         <LanguageComboboxWrapper
           className="modile-combobox"

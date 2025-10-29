@@ -177,6 +177,7 @@ const ContextMenu = (props: ContextMenuProps) => {
       setReshow(false);
       prevReshow.current = false;
       setChangeView(false);
+      setMobileMenuStack([]);
       setShowMobileMenu(false);
     },
     [onHide],
@@ -344,7 +345,8 @@ const ContextMenu = (props: ContextMenuProps) => {
         menuRef.current &&
         !(
           menuRef.current.isSameNode(target) || menuRef.current.contains(target)
-        )
+        ) &&
+        !target.closest(".context-menu-item-tooltip")
       );
     },
     [],

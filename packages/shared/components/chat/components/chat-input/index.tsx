@@ -53,6 +53,7 @@ const ChatInput = ({
   attachmentFile,
   clearAttachmentFile,
   selectedModel,
+  isAdmin,
 }: ChatInputProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -211,6 +212,7 @@ const ChatInput = ({
               sendMessageAction={sendMessageAction}
               value={value}
               selectedModel={selectedModel}
+              isAdmin={isAdmin}
             />
           </>
         )}

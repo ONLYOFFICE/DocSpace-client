@@ -49,6 +49,7 @@ const Chat = ({
   getIcon,
   attachmentFile,
   clearAttachmentFile,
+  isAdmin,
 }: ChatProps) => {
   if (!roomId) {
     return null;
@@ -79,6 +80,7 @@ const Chat = ({
             isLoading={isLoading}
             getIcon={getIcon}
             selectedModel={selectedModel}
+            isAdmin={isAdmin}
           />
         </ChatContainer>
       </MessageStoreContextProvider>

@@ -27,6 +27,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
@@ -46,12 +47,12 @@ export const GreetingContainer = ({
     WhiteLabelLogoType.LoginPage,
     !theme.isBase,
     false,
-    culture,
+    culture
   );
 
   return (
     <>
-      <img src={logoUrl} className="logo-wrapper" alt="greeting-logo" />
+      <Image src={logoUrl} className="logo-wrapper" alt="greeting-logo" />
       {greetingText ? (
         <Text
           fontSize="23px"

@@ -24,10 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-bitwise */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/sort-comp */
-
 "use client";
 
 import { cnb } from "cnbuilder";
@@ -149,10 +145,8 @@ export type ScrollbarState = {
 };
 
 export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
-  // eslint-disable-next-line react/static-property-placement
   static contextType = ScrollbarContext;
 
-  // eslint-disable-next-line react/static-property-placement
   static defaultProps = {
     momentum: true,
 
@@ -254,7 +248,6 @@ export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
     this.id = util.uuid();
   }
 
-  // eslint-disable-next-line react/sort-comp
   get scrollTop() {
     if (this.scrollerElement) {
       return this.scrollerElement.scrollTop;
@@ -316,7 +309,6 @@ export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
     return 0;
   }
 
-  // eslint-disable-next-line react/sort-comp
   public static calculateStyles(
     props: ScrollbarProps,
     state: ScrollbarState,
@@ -861,7 +853,7 @@ export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
     return this.scrollValues;
   };
 
-  // eslint-disable-next-line react/sort-comp
+  // biome-ignore-start lint/correctness/noUnusedVariables: TODO fix
   public render(): React.ReactNode {
     const {
       createContext,
@@ -869,18 +861,14 @@ export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
       native,
       mobileNative,
       momentum,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       noDefaultStyles,
 
       disableTracksMousewheelScrolling,
       disableTrackXMousewheelScrolling,
       disableTrackYMousewheelScrolling,
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       disableTracksWidthCompensation,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       disableTrackXWidthCompensation,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       disableTrackYWidthCompensation,
 
       noScrollX,
@@ -895,27 +883,16 @@ export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
       removeTrackYWhenNotUsed,
       removeTrackXWhenNotUsed,
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       minimalThumbSize,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       maximalThumbSize,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       minimalThumbXSize,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       maximalThumbXSize,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       minimalThumbYSize,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       maximalThumbYSize,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       fallbackScrollbarWidth,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       scrollTop,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       scrollLeft,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       trackClickBehavior,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       scrollDetectionThreshold,
 
       wrapperProps: propsWrapperProps,
@@ -928,29 +905,22 @@ export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
 
       scrollbarWidth: propsScrollbarWidth,
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       elementRef,
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onUpdate,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onScroll,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onScrollStart,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onScrollStop,
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       translateContentSizesToHolder,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       translateContentSizeYToHolder,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       translateContentSizeXToHolder,
 
       children,
 
       ...propsHolderProps
     } = this.props as ScrollbarProps;
+    // biome-ignore-end lint/correctness/noUnusedVariables: TODO fix
 
     const scrollbarWidth = !util.isUndef(propsScrollbarWidth)
       ? propsScrollbarWidth
@@ -1027,7 +997,6 @@ export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
       className: cnb("ScrollbarsCustom-Content", propsContentProps!.className),
       style: styles.content,
       children: createContext ? (
-        // eslint-disable-next-line react/jsx-no-constructed-context-values
         <ScrollbarContext value={{ parentScrollbar: this }}>
           {children}
         </ScrollbarContext>
@@ -1152,7 +1121,6 @@ export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
     return renderDivWithRenderer(holderProps, this.elementRefHolder);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   private updaterNative = (): boolean => {
     // just for future
     return true;

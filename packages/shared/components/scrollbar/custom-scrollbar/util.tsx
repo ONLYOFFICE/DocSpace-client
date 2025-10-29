@@ -113,8 +113,7 @@ export const getInnerWidth = (el: HTMLElement): number => {
  * @description Return unique UUID v4
  */
 export const uuid = () => {
-  // eslint-disable-next-line @typescript-eslint/no-shadow
-  let uuid = "";
+    let uuid = "";
 
   for (let i = 0; i < 32; i++) {
     switch (i) {

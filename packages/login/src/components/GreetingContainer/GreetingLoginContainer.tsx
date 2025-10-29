@@ -27,6 +27,7 @@
 "use client";
 
 import React, { useLayoutEffect, useState } from "react";
+import Image from "next/image";
 import { Trans, useTranslation } from "react-i18next";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useTheme } from "styled-components";
@@ -51,7 +52,7 @@ export const GreetingLoginContainer = ({
     WhiteLabelLogoType.LoginPage,
     !theme?.isBase,
     false,
-    culture,
+    culture
   );
   const searchParams = useSearchParams();
   const loginData = searchParams?.get("loginData") || null;
@@ -66,7 +67,7 @@ export const GreetingLoginContainer = ({
       displayName: "",
       type: "",
       spaceAddress: "",
-    },
+    }
   );
 
   useLayoutEffect(() => {
@@ -164,7 +165,7 @@ export const GreetingLoginContainer = ({
 
   return (
     <>
-      <img src={logoUrl} className="logo-wrapper" alt="greeting-logo" />
+      <Image src={logoUrl} className="logo-wrapper" alt="greeting-logo" />
       {renderEmailChangeContent()}
       {renderGreetingTitle()}
       {renderInvitationContent()}

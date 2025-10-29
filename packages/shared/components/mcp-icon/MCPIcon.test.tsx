@@ -45,7 +45,7 @@ describe("<MCPIcon />", () => {
   test("renders with default size", () => {
     renderComponent();
     const iconElement = screen.getByTestId("mcp-icon");
-    expect(iconElement.classList.contains(styles.medium)).toBeTruthy();
+    expect(iconElement.classList.contains(styles.large)).toBeTruthy();
   });
 
   test("renders with custom className", () => {

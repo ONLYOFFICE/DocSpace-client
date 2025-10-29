@@ -229,6 +229,11 @@
             "tooltip": "🛠️ Start the \"Test | Jest:common\" task"
           },
           {
+            "label": "Test ascii",
+            "task": "Test | Jest:ascii",
+            "tooltip": "🛠️ Start the \"Test | Jest:ascii\" task"
+          },
+          {
             "label": "Test translations",
             "task": "Test | Jest:translations",
             "tooltip": "🛠️ Start the \"Test | Jest:translations\" task"

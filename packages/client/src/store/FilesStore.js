@@ -73,6 +73,7 @@ import {
   ROOMS_PROVIDER_TYPE_NAME,
   thumbnailStatuses,
   CategoryType,
+  EMPTY_ARRAY,
 } from "@docspace/shared/constants";
 
 import {
@@ -169,11 +170,11 @@ class FilesStore {
 
   alreadyFetchingRooms = false;
 
-  files = [];
+  files = EMPTY_ARRAY;
 
-  folders = [];
+  folders = EMPTY_ARRAY;
 
-  selection = [];
+  selection = EMPTY_ARRAY;
 
   bufferSelection = null;
 
@@ -191,9 +192,9 @@ class FilesStore {
 
   hotkeyCaretStart = null;
 
-  activeFiles = [];
+  activeFiles = EMPTY_ARRAY;
 
-  activeFolders = [];
+  activeFolders = EMPTY_ARRAY;
 
   firstElemChecked = false;
 
@@ -223,9 +224,9 @@ class FilesStore {
 
   isLoadedFetchFiles = false;
 
-  tempActionFilesIds = [];
+  tempActionFilesIds = EMPTY_ARRAY;
 
-  tempActionFoldersIds = [];
+  tempActionFoldersIds = EMPTY_ARRAY;
 
   isErrorRoomNotAvailable = false;
 
@@ -257,7 +258,7 @@ class FilesStore {
     start: true,
   });
 
-  hotkeysClipboard = [];
+  hotkeysClipboard = EMPTY_ARRAY;
 
   mainButtonVisible = false;
 
@@ -989,7 +990,7 @@ class FilesStore {
 
   removeActiveItem = (file) => {
     this.activeFiles =
-      this.activeFiles?.filter((item) => item.id !== file.id) ?? [];
+      this.activeFiles?.filter((item) => item.id !== file.id) ?? EMPTY_ARRAY;
   };
 
   addActiveItems = (files, folders, destFolderId) => {
@@ -1021,8 +1022,8 @@ class FilesStore {
   };
 
   clearFiles = () => {
-    this.setFolders([]);
-    this.setFiles([]);
+    this.setFolders(EMPTY_ARRAY);
+    this.setFiles(EMPTY_ARRAY);
 
     this.selectedFolderStore.setSelectedFolder(null);
   };
@@ -1069,7 +1070,7 @@ class FilesStore {
       return [this.bufferSelection];
     }
 
-    return [];
+    return EMPTY_ARRAY;
   }
 
   setPageItemsLength = (pageItemsLength) => {
@@ -1086,9 +1087,9 @@ class FilesStore {
   };
 
   setStartDrag = (startDrag) => {
-    this.selection = this.selection.filter(
-      (x) => !x.providerKey || x.id !== x.rootFolderId,
-    ); // removed root thirdparty folders
+    this.setSelection(
+      this.selection.filter((x) => !x.providerKey || x.id !== x.rootFolderId), // removed root thirdparty folders
+    );
     this.startDrag = startDrag;
   };
 
@@ -1201,16 +1202,16 @@ class FilesStore {
 
     this.alreadyFetchingRooms = false;
 
-    this.files = [];
-    this.folders = [];
+    this.files = EMPTY_ARRAY;
+    this.folders = EMPTY_ARRAY;
 
-    this.selection = [];
+    this.selection = EMPTY_ARRAY;
     this.bufferSelection = null;
     this.selected = "close";
   };
 
   resetSelections = () => {
-    this.setSelection([]);
+    this.setSelection(EMPTY_ARRAY);
     this.setBufferSelection(null);
   };
 
@@ -1424,7 +1425,7 @@ class FilesStore {
   };
 
   getFilesBySelected = (files, selected) => {
-    const newSelection = [];
+    const newSelection = EMPTY_ARRAY;
     files.forEach((file) => {
       const checked = this.getFilesChecked(file, selected);
 
@@ -1448,7 +1449,7 @@ class FilesStore {
 
     this.selected = selected;
     const files = this.filesList;
-    this.selection = this.getFilesBySelected(files, selected);
+    this.setSelection(this.getFilesBySelected(files, selected));
   };
 
   setHotkeyCaret = (hotkeyCaret) => {
@@ -1462,7 +1463,8 @@ class FilesStore {
   };
 
   setSelection = (selection) => {
-    this.selection = selection;
+    this.selection = selection.length > 0 ? selection : EMPTY_ARRAY;
+  };
 
   getSelection = () => {
     return this.selection;
@@ -1470,7 +1472,7 @@ class FilesStore {
 
   setSelections = (added, removed, clear = false) => {
     if (clear) {
-      this.selection = [];
+      this.setSelection(EMPTY_ARRAY);
     }
 
     let newSelections = JSON.parse(JSON.stringify(this.selection));
@@ -1965,8 +1967,12 @@ class FilesStore {
             this.setIsEmptyPage(isEmptyList);
           }
 
-          this.setFolders(isPrivacyFolder && !isDesktop() ? [] : data.folders);
-          this.setFiles(isPrivacyFolder && !isDesktop() ? [] : data.files);
+          this.setFolders(
+            isPrivacyFolder && !isDesktop() ? EMPTY_ARRAY : data.folders,
+          );
+          this.setFiles(
+            isPrivacyFolder && !isDesktop() ? EMPTY_ARRAY : data.files,
+          );
         });
 
         if (clearFilter) {
@@ -2184,7 +2190,7 @@ class FilesStore {
               folders: data.folders,
               ...data.current,
               pathParts: data.pathParts,
-              navigationPath: [],
+              navigationPath: EMPTY_ARRAY,
               ...{ new: data.new },
             });
 
@@ -2221,7 +2227,7 @@ class FilesStore {
             }
 
             this.setFolders(data.folders);
-            this.setFiles([]);
+            this.setFiles(EMPTY_ARRAY);
           });
 
           if (clearFilter) {
@@ -2346,7 +2352,7 @@ class FilesStore {
               folders: data.folders,
               ...data.current,
               pathParts: data.pathParts,
-              navigationPath: [],
+              navigationPath: EMPTY_ARRAY,
               ...{ new: data.new },
             });
 
@@ -2383,7 +2389,7 @@ class FilesStore {
             }
 
             this.setFolders(data.folders);
-            this.setFiles([]);
+            this.setFiles(EMPTY_ARRAY);
           });
 
           if (clearFilter) {
@@ -2529,8 +2535,8 @@ class FilesStore {
       );
 
       if (selectionIndex !== -1) {
-        this.selection = this.selection.filter(
-          (x, index) => index !== selectionIndex,
+        this.setSelection(
+          this.selection.filter((x, index) => index !== selectionIndex),
         );
       }
     }
@@ -2608,7 +2614,7 @@ class FilesStore {
       const isPdf = item.fileExst === ".pdf";
 
       const extsCustomFilter =
-        this.filesSettingsStore?.extsWebCustomFilterEditing || [];
+        this.filesSettingsStore?.extsWebCustomFilterEditing || EMPTY_ARRAY;
       const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
 
       const isSharedWithMeFolderSection =
@@ -3542,8 +3548,8 @@ class FilesStore {
         this.setFiles(files);
         this.setFolders(folders);
         this.setHotkeysClipboard(hotkeysClipboard);
-        if (fileIds) this.setTempActionFilesIds([]);
-        if (folderIds) this.setTempActionFoldersIds([]);
+        if (fileIds) this.setTempActionFilesIds(EMPTY_ARRAY);
+        if (folderIds) this.setTempActionFoldersIds(EMPTY_ARRAY);
         this.clearActiveOperations(fileIds, folderIds);
       });
 
@@ -3565,8 +3571,8 @@ class FilesStore {
         isRooms ? this.setRoomsFilter(newFilter) : this.setFilter(newFilter);
         this.setFiles(files);
         this.setFolders(folders);
-        if (fileIds) this.setTempActionFilesIds([]);
-        if (folderIds) this.setTempActionFoldersIds([]);
+        if (fileIds) this.setTempActionFilesIds(EMPTY_ARRAY);
+        if (folderIds) this.setTempActionFoldersIds(EMPTY_ARRAY);
         this.clearActiveOperations(fileIds, folderIds);
       });
 
@@ -3603,8 +3609,8 @@ class FilesStore {
           toastr.error(err);
         })
         .finally(() => {
-          if (fileIds) this.setTempActionFilesIds([]);
-          if (folderIds) this.setTempActionFoldersIds([]);
+          if (fileIds) this.setTempActionFilesIds(EMPTY_ARRAY);
+          if (folderIds) this.setTempActionFoldersIds(EMPTY_ARRAY);
         });
     }
     api.files
@@ -3636,8 +3642,8 @@ class FilesStore {
         toastr.error(err);
       })
       .finally(() => {
-        if (fileIds) this.setTempActionFilesIds([]);
-        if (folderIds) this.setTempActionFoldersIds([]);
+        if (fileIds) this.setTempActionFilesIds(EMPTY_ARRAY);
+        if (folderIds) this.setTempActionFoldersIds(EMPTY_ARRAY);
       });
   };
 
@@ -4251,7 +4257,7 @@ class FilesStore {
       ? this.selection
       : this.bufferSelection
         ? [this.bufferSelection]
-        : [];
+        : EMPTY_ARRAY;
 
     selection = JSON.parse(JSON.stringify(selection));
 
@@ -4325,7 +4331,7 @@ class FilesStore {
       ? this.selection
       : this.bufferSelection
         ? [this.bufferSelection]
-        : [];
+        : EMPTY_ARRAY;
 
     return selection.some((selected) => {
       if (
@@ -4956,7 +4962,7 @@ class FilesStore {
     this.mainButtonVisible = mainButtonVisible;
   };
 
-  clearActiveOperations = (fileIds = [], folderIds = []) => {
+  clearActiveOperations = (fileIds = EMPTY_ARRAY, folderIds = EMPTY_ARRAY) => {
     const newActiveFiles = this.activeFiles.filter(
       (el) => !fileIds?.includes(el.id),
     );

@@ -126,6 +126,8 @@ export type ButtonsProps = {
 
   value: string;
   selectedModel: string;
+
+  isAdmin?: boolean;
 };
 
 export type AttachmentProps = {
@@ -145,6 +147,8 @@ export type ChatInputProps = {
   attachmentFile: AttachmentProps["attachmentFile"];
   clearAttachmentFile: AttachmentProps["clearAttachmentFile"];
   selectedModel: string;
+
+  isAdmin?: boolean;
 };
 
 export type ChatContainerProps = {
@@ -161,4 +165,6 @@ export type ChatProps = {
 
   attachmentFile: ChatInputProps["attachmentFile"];
   clearAttachmentFile: ChatInputProps["clearAttachmentFile"];
+
+  isAdmin?: boolean;
 };

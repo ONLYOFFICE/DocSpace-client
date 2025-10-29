@@ -94,7 +94,13 @@ const OAuthClientInfo = ({
           {t("Common:LoginButton")}
         </Text>
       ) : null}
-      <Image src={logo} className="client-logo" alt="client-logo" />
+      <Image
+        src={logo}
+        className="client-logo"
+        alt="client-logo"
+        width={32}
+        height={32}
+      />
       <Text
         className="row"
         fontWeight={isConsentScreen ? 400 : 600}

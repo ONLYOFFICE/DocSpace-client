@@ -56,7 +56,13 @@ const Item = ({ portal, baseDomain }: ItemProps) => {
   return (
     <div className="item" onClick={onClick} data-testid={portal}>
       <div className="info">
-        <Image className="favicon" alt="Portal favicon" src={DefaultLogoUrl} />
+        <Image
+          className="favicon"
+          alt="Portal favicon"
+          src={DefaultLogoUrl}
+          width={32}
+          height={32}
+        />
         <Text
           fontWeight={600}
           fontSize="14px"

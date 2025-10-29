@@ -79,6 +79,7 @@ import {
   getCategoryUrl,
   getCategoryTypeByFolderType,
 } from "SRC_DIR/helpers/utils";
+import { refreshInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 
@@ -438,6 +439,10 @@ class FilesStore {
       }
     });
 
+    SocketHelper?.on(SocketEvents.ChaneFolderAccessRights, (option) => {
+      this.wsChangeFolderAccessRights(option);
+    });
+
     SocketHelper?.on(SocketEvents.StopEditFile, (id) => {
       const { socketSubscribers } = SocketHelper;
       const pathParts = `FILE-${id}`;
@@ -629,64 +634,70 @@ class FilesStore {
       const folder = JSON.parse(opt?.data);
       if (!folder || !folder.id) return;
 
-      api.files
-        .getFolderInfo(folder.id)
-        .then((response) => {
-          const folderInfo = {
-            isFolder: true,
-            isRoom: isRoomUtil(response),
-            ...response,
-          };
-
-          console.log("[WS] update folder", folderInfo.id, folderInfo.title);
-
-          if (this.selection?.length) {
-            const foundIndex = this.selection?.findIndex(
-              (x) => x.id === folderInfo.id,
-            );
-            if (foundIndex > -1) {
-              runInAction(() => {
-                this.selection[foundIndex] = folderInfo;
-              });
-            }
-          }
-
-          if (this.bufferSelection) {
-            if (
-              this.bufferSelection.id === folderInfo.id &&
-              (this.bufferSelection.isFolder || this.bufferSelection.isRoom)
-            ) {
-              this.setBufferSelection(folderInfo);
-            }
-          }
-
-          const navigationPath = [...this.selectedFolderStore.navigationPath];
-          const pathParts = [...this.selectedFolderStore.pathParts];
-
-          const idx = navigationPath.findIndex((p) => p.id === folderInfo.id);
-
-          if (idx !== -1) {
-            navigationPath[idx].title = folderInfo?.title;
-          }
-
-          if (folderInfo.id === this.selectedFolderStore.id) {
-            this.selectedFolderStore.setSelectedFolder({
-              ...folderInfo,
-              navigationPath,
-              pathParts,
-            });
-
-            const item = this.getFilesListItems([folderInfo])[0];
-
-            setInfoPanelSelectedRoom(item, true);
-          }
-
-          this.setFolder(folderInfo);
-        })
-        .catch(() => {
-          // console.log("Folder deleted")
-        });
+      this.refreshFolder(folder.id);
     }
+  };
+
+  refreshFolder = (id) => {
+    api.files
+      .getFolderInfo(id)
+      .then((response) => {
+        const folderInfo = {
+          isFolder: true,
+          isRoom: isRoomUtil(response),
+          ...response,
+        };
+
+        console.log("[WS] update folder", folderInfo.id, folderInfo.title);
+
+        if (this.selection?.length) {
+          const foundIndex = this.selection?.findIndex(
+            (x) => x.id === folderInfo.id,
+          );
+          if (foundIndex > -1) {
+            runInAction(() => {
+              this.selection[foundIndex] = folderInfo;
+            });
+          }
+        }
+
+        if (this.bufferSelection) {
+          if (
+            this.bufferSelection.id === folderInfo.id &&
+            (this.bufferSelection.isFolder || this.bufferSelection.isRoom)
+          ) {
+            this.setBufferSelection(folderInfo);
+          }
+        }
+
+        const navigationPath = [...this.selectedFolderStore.navigationPath];
+        const pathParts = [...this.selectedFolderStore.pathParts];
+
+        const idx = navigationPath.findIndex((p) => p.id === folderInfo.id);
+
+        if (idx !== -1) {
+          navigationPath[idx].title = folderInfo?.title;
+        }
+
+        if (folderInfo.id === this.selectedFolderStore.id) {
+          this.selectedFolderStore.setSelectedFolder({
+            ...folderInfo,
+            navigationPath,
+            pathParts,
+          });
+
+          const item = this.getFilesListItems([folderInfo])[0];
+
+          setInfoPanelSelectedRoom(item, true);
+        }
+
+        this.setFolder(folderInfo);
+
+        refreshInfoPanel();
+      })
+      .catch(() => {
+        // console.log("Folder deleted")
+      });
   };
 
   wsModifyFolderDelete = (opt) => {
@@ -823,6 +834,24 @@ class FilesStore {
     });
 
     window?.dispatchEvent(event);
+  };
+
+  wsChangeFolderAccessRights = (option) => {
+    if (!option.data || !option.id) return;
+
+    const folderId = option.id;
+    const memberAccess = JSON.parse(option.data);
+
+    if (this.selectedFolderStore.id !== folderId) return;
+    if (!memberAccess[this.userStore.user.id]) return;
+
+    console.log("[WS] change folder access rights for current user", {
+      folderId,
+      memberAccess,
+    });
+
+    this.refreshFolder(folderId);
+    this.refreshFiles();
   };
 
   redirectToParent = (opt, pathParts, isRoom, isTemplate, rootFolderType) => {
@@ -1796,6 +1825,8 @@ class FilesStore {
         const isPrivacyFolder =
           data.current.rootFolderType === FolderType.Privacy;
 
+        let currentFolder = data.current;
+
         const navigationPath = await Promise.all(
           data.pathParts.map(async (folder, idx) => {
             const { Rooms, Archive, AIAgents } = FolderType;
@@ -1883,8 +1914,6 @@ class FilesStore {
             .reverse();
         });
 
-        let currentFolder = data.current;
-
         if (
           currentFolder.type === FolderType.ResultStorage ||
           currentFolder.type === FolderType.Knowledge
@@ -1892,7 +1921,7 @@ class FilesStore {
           if (currentFolder.type === FolderType.Knowledge) {
             this.aiRoomStore.setKnowledgeId(currentFolder.id);
             this.aiRoomStore.setResultId(null);
-          } else {
+          } else if (currentFolder.type === FolderType.ResultStorage) {
             this.aiRoomStore.setKnowledgeId(null);
             this.aiRoomStore.setResultId(currentFolder.id);
           }
@@ -1903,20 +1932,38 @@ class FilesStore {
               : await api.files.getFolderInfo(currentFolder.parentId);
 
           this.aiRoomStore.setCurrentTab(
-            currentFolder.type === FolderType.ResultStorage
-              ? "result"
-              : "knowledge",
+            currentFolder.type === FolderType.Knowledge
+              ? "knowledge"
+              : "result",
           );
 
-          currentFolder = { ...aiRoom, isRoom: true };
+          currentFolder = {
+            ...aiRoom,
+            security: {
+              ...currentFolder.security,
+              UseChat: aiRoom.security.UseChat,
+            },
+            isRoom: true,
+          };
         } else if (currentFolder.roomType === RoomsType.AIRoom) {
           this.aiRoomStore.setCurrentTab("chat");
           this.aiRoomStore.setKnowledgeId(null);
           this.aiRoomStore.setResultId(null);
-        } else if (currentFolder.rootRoomType === RoomsType.AIRoom) {
-          this.aiRoomStore.setCurrentTab("result");
+        } else if (currentFolder.rootFolderType === FolderType.AIAgents) {
+          const parentId = navigationPath.find((item) => item.isRoom);
+          const aiRoom = await api.files.getFolderInfo(parentId.id);
+
+          currentFolder = {
+            ...currentFolder,
+            security: {
+              ...currentFolder.security,
+              UseChat: aiRoom.security.UseChat,
+            },
+          };
+
           this.aiRoomStore.setKnowledgeId(null);
-          this.aiRoomStore.setResultId(currentFolder.id);
+          this.aiRoomStore.setResultId(null);
+          this.aiRoomStore.setCurrentTab("result");
         } else {
           this.aiRoomStore.setKnowledgeId(null);
           this.aiRoomStore.setResultId(null);

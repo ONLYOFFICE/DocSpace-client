@@ -55,12 +55,18 @@ export const GreetingCreateUserContainer = ({
     WhiteLabelLogoType.LoginPage,
     !theme.isBase,
     false,
-    culture
+    culture,
   );
 
   return (
     <GreetingContainer>
-      <Image src={logoUrl} className="portal-logo" alt="greeting-logo" />
+      <Image
+        src={logoUrl}
+        className="portal-logo"
+        alt="greeting-logo"
+        width={386}
+        height={44}
+      />
       {type === "LinkInvite" ? (
         <div className="tooltip">
           <Text fontSize="16px">

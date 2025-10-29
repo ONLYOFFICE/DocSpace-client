@@ -90,12 +90,18 @@ const SimpleNav = ({
     WhiteLabelLogoType.LightSmall,
     isDark,
     false,
-    culture
+    culture,
   );
 
   return (
     <StyledSimpleNav id="login-header">
-      <Image className="logo" src={logoUrl} alt="logo-url" />
+      <Image
+        className="logo"
+        src={logoUrl}
+        alt="logo-url"
+        width={211}
+        height={24}
+      />
       {isLanguageComboboxVisible ? (
         <LanguageComboboxWrapper
           className="modile-combobox"

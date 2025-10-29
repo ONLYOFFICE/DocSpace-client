@@ -52,7 +52,7 @@ export const GreetingLoginContainer = ({
     WhiteLabelLogoType.LoginPage,
     !theme?.isBase,
     false,
-    culture
+    culture,
   );
   const searchParams = useSearchParams();
   const loginData = searchParams?.get("loginData") || null;
@@ -67,7 +67,7 @@ export const GreetingLoginContainer = ({
       displayName: "",
       type: "",
       spaceAddress: "",
-    }
+    },
   );
 
   useLayoutEffect(() => {
@@ -165,7 +165,13 @@ export const GreetingLoginContainer = ({
 
   return (
     <>
-      <Image src={logoUrl} className="logo-wrapper" alt="greeting-logo" />
+      <Image
+        src={logoUrl}
+        className="logo-wrapper"
+        alt="greeting-logo"
+        width={386}
+        height={44}
+      />
       {renderEmailChangeContent()}
       {renderGreetingTitle()}
       {renderInvitationContent()}

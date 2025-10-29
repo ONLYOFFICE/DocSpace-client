@@ -80,7 +80,7 @@ const DeepLink = ({
       fileInfo,
       deepLinkConfig,
       window.location.href,
-      isOpenInAppOnly
+      isOpenInAppOnly,
     );
   };
 
@@ -123,7 +123,12 @@ const DeepLink = ({
               <StyledBodyWrapper>
                 <Text className="title">{t("DeepLink:OpeningDocument")}</Text>
                 <StyledFileTile>
-                  <Image src={getFileIcon() ?? ""} alt="portal-logo" />
+                  <Image
+                    src={getFileIcon() ?? ""}
+                    alt="portal-logo"
+                    width={32}
+                    height={32}
+                  />
                   <Text fontSize="14px" fontWeight="600" truncate>
                     {getFileTitle()}
                   </Text>

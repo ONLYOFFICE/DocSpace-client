@@ -123,6 +123,7 @@ const SelectChat = ({ isLoadingProp, roomId, getIcon }: SelectChatProps) => {
   const onSaveToFileAction = React.useCallback(async () => {
     if (isRequestRunning) return;
     setIsExportOpen(true);
+    setIsOpen(false);
   }, [hoveredItem, chats, isRequestRunning, t]);
 
   const getFileName = () => {

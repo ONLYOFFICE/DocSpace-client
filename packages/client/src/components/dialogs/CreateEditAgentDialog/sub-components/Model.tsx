@@ -49,7 +49,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
   const [models, setModels] = React.useState<TModel[]>([]);
 
   const [selectedProvider, setSelectedProvider] = React.useState<TAiProvider>({
-    id: agentParams.providerId ?? -1,
+    id: agentParams.providerId ?? -2,
   } as TAiProvider);
   const [selectedModel, setSelectedModel] = React.useState<TModel | null>({
     modelId: agentParams.modelId ?? "",
@@ -70,7 +70,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
 
         setIsProvidersFetched(true);
 
-        if (selectedProvider.id === -1) {
+        if (selectedProvider.id === -2) {
           setSelectedProvider(p[0]);
         } else {
           const provider = p.find((pr) => pr.id === selectedProvider.id);
@@ -116,7 +116,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
       }
     };
 
-    if (typeof selectedProvider?.id !== "number" || selectedProvider.id === -1)
+    if (typeof selectedProvider?.id !== "number" || selectedProvider.id === -2)
       return;
 
     setSelectedModel(null);

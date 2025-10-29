@@ -30,6 +30,7 @@ import React, { useState, useEffect, memo, useCallback, useMemo } from "react";
 
 import { classNames } from "@docspace/shared/utils";
 import { FolderType } from "@docspace/shared/enums";
+import { EMPTY_OBJECT, FUNCTION_EMPTY } from "@docspace/shared/constants";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
@@ -241,7 +242,7 @@ const FilesTableRow = memo((props) => {
 
   const contextOptionProps = useMemo(() => {
     return isIndexEditingMode
-      ? {}
+      ? EMPTY_OBJECT
       : {
           contextOptions: item.contextOptions,
           getContextModel,
@@ -282,7 +283,7 @@ const FilesTableRow = memo((props) => {
         dragging={dragging ? isDragging : null}
         selectionProp={selectionProp}
         fileContextClick={fileContextClick}
-        onClick={isIndexEditingMode ? () => {} : onMouseClick}
+        onClick={isIndexEditingMode ? FUNCTION_EMPTY : onMouseClick}
         isActive={isActive}
         isIndexEditingMode={isIndexEditingMode}
         isBlockingOperation={isBlockingOperation}
@@ -290,7 +291,7 @@ const FilesTableRow = memo((props) => {
         isFolder={item.isFolder}
         onHideContextMenu={onHideContextMenu}
         isThirdPartyFolder={item.isThirdPartyFolder}
-        onDoubleClick={isIndexEditingMode ? () => {} : onDoubleClick}
+        onDoubleClick={isIndexEditingMode ? FUNCTION_EMPTY : onDoubleClick}
         checked={checkedProps || isIndexUpdated}
         isIndexing={isIndexing}
         isIndexUpdated={isIndexUpdated}

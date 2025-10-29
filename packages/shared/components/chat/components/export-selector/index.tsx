@@ -72,7 +72,8 @@ const ExportSelector = ({
         isRoot,
         selectedItemSecurity,
       ) => {
-        if (selectedItemType === "rooms") return true;
+        if (selectedItemType === "rooms" || selectedItemType === "agents")
+          return true;
 
         if (
           selectedItemSecurity &&
@@ -110,6 +111,7 @@ const ExportSelector = ({
       currentFooterInputValue={getFileName()}
       descriptionText=""
       getFilesArchiveError={() => ""}
+      withAIAgentsTreeFolder
       currentDeviceType={
         isDesktop()
           ? DeviceType.desktop

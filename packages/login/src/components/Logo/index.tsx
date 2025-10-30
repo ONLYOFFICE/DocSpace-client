@@ -36,7 +36,7 @@ export const Logo = ({
   isMobile = false,
 }: {
   culture?: string;
-  isMobile: boolean;
+  isMobile?: boolean;
 }) => {
   const lightLogoUrl = getLogoUrl(
     WhiteLabelLogoType.LoginPage,

@@ -1074,7 +1074,7 @@ class SettingsStore {
     } catch (error) {
       if (isRequestAborted(error)) return;
 
-      // console.error(error);
+      console.error(error);
     } finally {
       this.setIsLoading(false);
       this.setIsLoaded(true);

@@ -47,7 +47,6 @@ import {
   AccountsSearchArea,
   EmployeeStatus,
   EmployeeType,
-  RoomsType,
 } from "@docspace/shared/enums";
 import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
@@ -111,8 +110,6 @@ const InviteInput = ({
   setUsersList,
   allowInvitingGuests,
 }) => {
-  const isPublicRoomType = roomType === RoomsType.PublicRoom;
-
   const [isChangeLangMail, setIsChangeLangMail] = useState(false);
   const [isAddEmailPanelBlocked, setIsAddEmailPanelBlocked] = useState(true);
 
@@ -262,17 +259,13 @@ const InviteInput = ({
     if (query.length >= minSearchValue) {
       const filter = Filter.getDefault();
 
-      const searchArea = isPublicRoomType
-        ? AccountsSearchArea.People
-        : AccountsSearchArea.Any;
-
       filter.search = query;
       filter.filterSeparator = filterSeparator;
 
       const users =
         roomId === -1
           ? await getUserList(filter)
-          : await getMembersList(searchArea, roomId, filter);
+          : await getMembersList(AccountsSearchArea.Any, roomId, filter);
 
       setUsersList(
         roomId === -1

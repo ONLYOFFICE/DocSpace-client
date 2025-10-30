@@ -233,18 +233,22 @@ const ExternalLinks = ({
   const filteredAccesses =
     roomType === -1 ? accesses : filterPaidRoleOptions(accesses);
 
-  const keyTranslation =
+  const description =
     roomId === -1
-      ? "InviteViaLinkDescriptionAccounts"
+      ? t("InviteViaLinkDescriptionAccounts", {
+          productName: t("Common:ProductName"),
+        })
       : isAIAgentsFolder
       ? allowInvitingGuests
-        ? "InviteViaLinkDescriptionAgentGuest"
-        : "InviteViaLinkDescriptionAgentMembers"
+        ? t("InviteViaLinkDescriptionAgentGuest")
+        : t("InviteViaLinkDescriptionAgentMembers", {
+            productName: t("Common:ProductName"),
+          })
       : allowInvitingGuests
-      ? "InviteViaLinkDescriptionRoomGuest"
-      : "InviteViaLinkDescriptionRoomMembers";
-
-  const description = t(keyTranslation, { productName: t("Common:ProductName") });
+      ? t("InviteViaLinkDescriptionRoomGuest")
+      : t("InviteViaLinkDescriptionRoomMembers", {
+          productName: t("Common:ProductName"),
+        });
 
   return (
     <StyledExternalLink noPadding ref={inputsRef}>

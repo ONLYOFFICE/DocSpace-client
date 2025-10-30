@@ -2351,6 +2351,9 @@
   --login-text-color: #{$gray};
   --login-captcha-error-border: 1px solid #{$light-error-status};
   --login-captcha-error-color: #{$light-error-status};
+  --login-register-background-color: #{$gray-light};
+  --login-simple-nav-background-color: #{$gray-light};
+  --login-register-text-color: var(--accent-main);
 }
 
 .dark {
@@ -2362,6 +2365,9 @@
   --login-text-color: #{$gray-dark};
   --login-captcha-error-border: 1px solid #{$dark-error-status};
   --login-captcha-error-color: #{$dark-error-status};
+  --login-register-background-color: #{$dark-gray-light};
+  --login-simple-nav-background-color: #{$dark-gray-light};
+  --login-register-text-color: var(--accent-main);
 }
 
 .light {

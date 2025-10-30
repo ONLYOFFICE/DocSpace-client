@@ -398,11 +398,16 @@ export const changeMCPToolsForRoom = async (
   return res;
 };
 
-export const exportChat = async (chatId: string) => {
+export const exportChat = async (
+  chatId: string,
+  folderId: string | number,
+  title: string,
+) => {
   try {
     return (await request({
       method: "POST",
       url: `${baseUrl}/chats/${chatId}/messages/export`,
+      data: { folderId, title },
     })) as TFile;
   } catch (e) {
     console.log(e);

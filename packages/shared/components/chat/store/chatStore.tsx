@@ -55,6 +55,10 @@ export default class ChatStore {
     makeAutoObservable(this);
   }
 
+  setRoomId = (value: TChatStoreProps["roomId"]) => {
+    this.roomId = value;
+  };
+
   setTotalChats = (value: number) => {
     this.totalChats = value;
   };
@@ -178,7 +182,11 @@ export const ChatStoreContextProvider = ({
   totalChats,
   children,
 }: TChatStoreProps) => {
-  const store = React.useMemo(() => new ChatStore(roomId), [roomId]);
+  const store = React.useMemo(() => new ChatStore(roomId), []);
+
+  React.useEffect(() => {
+    store.setRoomId(roomId);
+  }, [store, roomId]);
 
   React.useEffect(() => {
     store.addChats(chats);
@@ -208,6 +216,12 @@ export const ChatStoreContextProvider = ({
 
     return () => {
       socket?.off(SocketEvents.UpdateChat, callback);
+    };
+  }, [store]);
+
+  React.useEffect(() => {
+    return () => {
+      store.updateUrlChatId("");
     };
   }, [store]);
 

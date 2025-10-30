@@ -42,6 +42,7 @@ export interface RoomItem extends TileItem {
     color?: string;
     cover?: string;
   };
+  isAIAgent?: boolean;
 }
 
 export interface SelectOption {

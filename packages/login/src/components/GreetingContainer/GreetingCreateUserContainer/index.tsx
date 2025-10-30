@@ -27,6 +27,7 @@
 "use client";
 
 import { useContext } from "react";
+import Image from "next/image";
 import { Trans, useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
@@ -59,7 +60,13 @@ export const GreetingCreateUserContainer = ({
 
   return (
     <GreetingContainer>
-      <img src={logoUrl} className="portal-logo" alt="greeting-logo" />
+      <Image
+        src={logoUrl}
+        className="portal-logo"
+        alt="greeting-logo"
+        width={386}
+        height={44}
+      />
       {type === "LinkInvite" ? (
         <div className="tooltip">
           <Text fontSize="16px">

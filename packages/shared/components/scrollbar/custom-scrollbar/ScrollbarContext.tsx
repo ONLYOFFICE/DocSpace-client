@@ -23,12 +23,10 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-/* eslint-disable no-bitwise */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/sort-comp */
 "use client";
 import * as React from "react";
 
+// biome-ignore lint/suspicious/noExplicitAny: TODO fix
 export type ScrollbarContextValue = { parentScrollbar: any | null };
 
 const ScrollbarContext: React.Context<ScrollbarContextValue> =

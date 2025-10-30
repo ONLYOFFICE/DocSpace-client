@@ -719,6 +719,7 @@ export async function checkConfirmLink(data: TConfirmLinkParams) {
 
     if (!response.ok) {
       logger.error(`POST /authentication/confirm failed: ${response.status}`);
+
       throw new Error(response.statusText);
     }
 

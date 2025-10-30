@@ -29,10 +29,13 @@ import { TContent, TMessage, type TToolCallContent } from "../../api/ai/types";
 import { TGetIcon } from "../../selectors/utils/types";
 import { TFile } from "../../api/files/types";
 
+import useToolsSettings from "./hooks/useToolsSettings";
+import useInitChats from "./hooks/useInitChats";
+
 export type TChatStoreProps = {
   roomId: string | number;
   children: React.ReactNode;
-};
+} & ReturnType<typeof useInitChats>;
 
 export type TMessageStoreProps = {
   roomId: string | number;
@@ -126,6 +129,9 @@ export type ButtonsProps = {
 
   value: string;
   selectedModel: string;
+
+  toolsSettings: ReturnType<typeof useToolsSettings>;
+  isAdmin?: boolean;
 };
 
 export type AttachmentProps = {
@@ -145,6 +151,9 @@ export type ChatInputProps = {
   attachmentFile: AttachmentProps["attachmentFile"];
   clearAttachmentFile: AttachmentProps["clearAttachmentFile"];
   selectedModel: string;
+
+  toolsSettings: ReturnType<typeof useToolsSettings>;
+  isAdmin?: boolean;
 };
 
 export type ChatContainerProps = {
@@ -161,4 +170,8 @@ export type ChatProps = {
 
   attachmentFile: ChatInputProps["attachmentFile"];
   clearAttachmentFile: ChatInputProps["clearAttachmentFile"];
+
+  toolsSettings: ChatInputProps["toolsSettings"];
+  initChats: ReturnType<typeof useInitChats>;
+  isAdmin?: boolean;
 };

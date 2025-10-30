@@ -39,6 +39,7 @@ type RoomQuotaProps = {
   isEdit?: boolean;
   isTemplate?: boolean;
   isLoading: boolean;
+  isAgent?: boolean;
 };
 
 const RoomQuota = ({
@@ -48,6 +49,7 @@ const RoomQuota = ({
   isEdit,
   isTemplate,
   isLoading,
+  isAgent,
 }: RoomQuotaProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
 
@@ -60,8 +62,12 @@ const RoomQuota = ({
   return (
     <QuotaForm
       label={t("Common:StorageQuota")}
-      description={t("StorageDescription")}
-      checkboxLabel={t("DisableRoomQuota")}
+      description={
+        isAgent ? t("StorageDescriptionAgent") : t("StorageDescription")
+      }
+      checkboxLabel={
+        isAgent ? t("DisableRoomQuotaAgent") : t("DisableRoomQuota")
+      }
       onSetQuotaBytesSize={onSetQuotaBytesSize}
       initialSize={
         isEdit || isTemplate ? defaultValue.current : defaultRoomsQuota!

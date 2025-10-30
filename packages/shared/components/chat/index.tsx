@@ -34,6 +34,7 @@ import ChatHeader from "./components/chat-header";
 import ChatMessageBody from "./components/chat-message-body";
 import ChatInput from "./components/chat-input";
 import { ChatNoAccessScreen } from "./components/chat-no-access-screen";
+import { ChatInfoBlock } from "./components/chat-info-block";
 
 import { CHAT_SUPPORTED_FORMATS } from "./Chat.constants";
 
@@ -49,36 +50,43 @@ const Chat = ({
   getIcon,
   attachmentFile,
   clearAttachmentFile,
-}: ChatProps) => {
-  if (!roomId) {
-    return null;
-  }
 
-  if (!canUseChat) {
+  toolsSettings,
+  initChats,
+
+  isAdmin,
+}: ChatProps) => {
+  const isAIServiceDisabled = false; // TODO: Change to security or something else showing disabled service
+  const isLoadingChat = isLoading || !roomId;
+
+  if (!canUseChat && !isLoadingChat) {
     return <ChatNoAccessScreen />;
   }
 
   return (
-    <ChatStoreContextProvider roomId={roomId}>
+    <ChatStoreContextProvider roomId={roomId} {...initChats}>
       <MessageStoreContextProvider roomId={roomId}>
         <ChatContainer>
           <ChatHeader
             selectedModel={selectedModel}
-            isLoading={isLoading}
+            isLoading={isLoadingChat}
             getIcon={getIcon}
             roomId={roomId}
           />
           <ChatMessageBody
             userAvatar={userAvatar}
-            isLoading={isLoading}
+            isLoading={isLoadingChat}
             getIcon={getIcon}
           />
+          {isAIServiceDisabled ? <ChatInfoBlock /> : null}
           <ChatInput
             attachmentFile={attachmentFile}
             clearAttachmentFile={clearAttachmentFile}
-            isLoading={isLoading}
+            isLoading={isLoadingChat}
             getIcon={getIcon}
             selectedModel={selectedModel}
+            toolsSettings={toolsSettings}
+            isAdmin={isAdmin}
           />
         </ChatContainer>
       </MessageStoreContextProvider>

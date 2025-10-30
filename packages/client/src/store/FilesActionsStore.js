@@ -1681,7 +1681,7 @@ class FilesActionStore {
 
     const { id, isRoom, isTemplate, isAIAgent, title, rootFolderType } = item;
 
-    let categoryType = isAIAgent
+    const categoryType = isAIAgent
       ? CategoryType.Chat
       : getCategoryTypeByFolderType(rootFolderType, id);
 

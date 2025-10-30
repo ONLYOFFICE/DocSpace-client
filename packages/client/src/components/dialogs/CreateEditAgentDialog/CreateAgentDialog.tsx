@@ -89,6 +89,8 @@ const CreateAgentDialog = ({
 
   const isAgentTitleChanged = agentParams?.title?.trim() === "";
 
+  const isModelSelected = !!agentParams?.modelId;
+
   const onCreateAgent = async () => {
     if (!agentParams?.title?.trim()) {
       setIsValidTitle(false);
@@ -102,7 +104,7 @@ const CreateAgentDialog = ({
   };
 
   const onKeyUpHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (isWrongTitle) return;
+    if (isWrongTitle || !isModelSelected) return;
     if (e.keyCode === 13) onCreateAgent();
   };
 
@@ -157,7 +159,7 @@ const CreateAgentDialog = ({
           label={t("Common:Create")}
           primary
           scale
-          isDisabled={isAgentTitleChanged || isWrongTitle}
+          isDisabled={isAgentTitleChanged || isWrongTitle || !isModelSelected}
           isLoading={isLoading}
           type="submit"
           onClick={onCreateAgent}

@@ -205,11 +205,18 @@ const useSelectorBody = ({
     : {};
 
   const isEmptyFilesRootScreen = selectedItemType === "files";
+  const isEmptyAgentsRootScreen = selectedItemType === "agents";
   const emptyScreenHeader = isEmptyFilesRootScreen
     ? t("Common:SelectorEmptyScreenHeader")
+    : isEmptyAgentsRootScreen
+    ? t("Common:EmptyRoomsHeaderAgent")
     : t("Common:EmptyRoomsHeader");
   const emptyScreenDescription = isEmptyFilesRootScreen
     ? ""
+    : isEmptyAgentsRootScreen
+    ? t("Common:EmptyRoomsDescriptionTextAgent", {
+        sectionName: t("Common:AIAgents"),
+      })
     : t("Common:EmptyRoomsDescriptionText", {
         sectionName: t("Common:Rooms"),
       });

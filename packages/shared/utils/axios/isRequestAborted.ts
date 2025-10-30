@@ -24,33 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import axios from "axios";
 
-import React from "react";
+const ABORTED_MESSAGE = "Request aborted";
 
-import { Text } from "@docspace/shared/components/text";
-import { Logo } from "../Logo";
-
-export const GreetingContainer = ({
-  greetingText,
-  culture,
-}: {
-  greetingText?: string | undefined;
-  culture?: string;
-}) => {
+/**
+ * Checks if an error is from an aborted Axios request
+ * @param error - The error to check
+ * @returns True if the error is from an aborted request, false otherwise
+ */
+export const isRequestAborted = (error: unknown) => {
   return (
-    <>
-      <Logo culture={culture} />
-      {greetingText ? (
-        <Text
-          fontSize="23px"
-          fontWeight={700}
-          textAlign="center"
-          className="greeting-title"
-        >
-          {greetingText}
-        </Text>
-      ) : null}
-    </>
+    axios.isCancel(error) ||
+    (axios.isAxiosError(error) && error.message === ABORTED_MESSAGE)
   );
 };

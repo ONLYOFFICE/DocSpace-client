@@ -479,6 +479,7 @@ const setAgentParams = ({
           roomParams={agentParams}
           isEdit={isEdit}
           isLoading={isDisabled}
+          isAgent
         />
       ) : null}
 

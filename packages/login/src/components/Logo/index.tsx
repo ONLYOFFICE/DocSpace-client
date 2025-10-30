@@ -27,6 +27,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 
@@ -47,7 +48,7 @@ export const Logo = ({ culture }: { culture?: string }) => {
 
   return (
     <>
-      <img
+      <Image
         key="light-logo"
         id="logo-image-light"
         src={lightLogoUrl}
@@ -55,7 +56,7 @@ export const Logo = ({ culture }: { culture?: string }) => {
         alt="greeting-logo"
       />
 
-      <img
+      <Image
         key="dark-logo"
         id="logo-image-dark"
         src={darkLogoUrl}

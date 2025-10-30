@@ -79,7 +79,7 @@ const Scripts = () => {
           `}
       </Script>
       <script
-        // eslint-disable-next-line react/no-danger
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
         dangerouslySetInnerHTML={{
           __html: `
             (function() {

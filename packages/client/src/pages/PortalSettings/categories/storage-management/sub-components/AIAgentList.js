@@ -24,88 +24,94 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { TABLE_PEOPLE_COLUMNS } from "SRC_DIR/helpers/constants";
+// import { TABLE_ROOMS_COLUMNS } from "SRC_DIR/helpers/constants";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
-import Filter from "@docspace/shared/api/people/filter";
-import { removeUserFilter } from "@docspace/shared/utils/userFilterUtils";
-import { FILTER_PEOPLE } from "@docspace/shared/utils/filterConstants";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
 import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
 
-const StatisticsComponent = (props) => {
+const AIAgentListComponent = (props) => {
   const {
-    accounts,
+    aIAgents,
     iconElement,
     textElement,
     quotaElement,
     buttonProps,
-    peopleListLength,
-    userFilterData,
-    currentUserId,
+
+    roomsListLength,
+    roomFilterData,
+    // id,
   } = props;
   const { t } = useTranslation("Settings");
+
   const navigate = useNavigate();
 
-  const onClickUsers = () => {
-    const defaultFilter = Filter.getDefault();
-    userFilterData.pageCount = defaultFilter.pageCount;
+  const onClickRooms = () => {
+    const defaultFilter = RoomsFilter.getDefault();
+    roomFilterData.pageCount = defaultFilter.pageCount;
+    roomFilterData.provider = defaultFilter.provider;
 
-    const urlFilter = userFilterData.toUrlParams();
+    const urlFilter = roomFilterData.toUrlParams();
 
-    const peopleColumnsKey = `${TABLE_PEOPLE_COLUMNS}=${currentUserId}`;
-    const currentColumns = localStorage.getItem(peopleColumnsKey);
+    // const roomsColumnsKey = `${TABLE_ROOMS_COLUMNS}=${id}`;
+    // const currentColumns = localStorage.getItem(roomsColumnsKey);
 
-    if (currentColumns && !currentColumns.includes("Storage")) {
-      const updatedColumns = `${currentColumns},Storage`;
-      localStorage.setItem(peopleColumnsKey, updatedColumns);
-    }
+    // if (currentColumns && !currentColumns.includes("Storage")) {
+    //   const updatedColumns = `${currentColumns},Storage`;
+    //   localStorage.setItem(roomsColumnsKey, updatedColumns);
+    // }
 
-    if (currentUserId) removeUserFilter(`${FILTER_PEOPLE}=${currentUserId}`);
-    navigate(`/accounts/people/filter?${urlFilter}`);
+    navigate(`/ai-agents/shared/filter?${urlFilter}`);
   };
 
-  const usersList = accounts.map((item, index) => {
-    const { fileExst, avatar, id, displayName, isRoom, defaultRoomIcon } = item;
+  const roomsList = aIAgents.map((item, index) => {
+    const { id, icon, fileExst, defaultRoomIcon, isRoom, title, logo } = item;
+    const color = logo?.color;
 
     if (index === 5) return;
 
     return (
-      <StyledSimpleFilesRow key={id}>
+      <StyledSimpleFilesRow key={item.id}>
         {iconElement(
           id,
-          avatar,
+          icon,
           fileExst,
           isRoom,
           defaultRoomIcon,
-          "user-icon",
-          displayName,
+          null,
+          title,
+          color,
+          logo,
         )}
-        {textElement(displayName)}
-        {quotaElement(item, "user")}
+        {textElement(title)}
+        {quotaElement(item)}
       </StyledSimpleFilesRow>
     );
   });
+
+  if (roomsListLength === 0) return null;
 
   return (
     <StyledStatistics>
       <div className="statistics-container">
         <Text fontWeight={600} className="item-statistic">
-          {t("Top5Users")}
+          {t("Top5AIAgents")}
         </Text>
-        {usersList}
+        {roomsList}
 
-        {peopleListLength > 5 ? (
+        {roomsListLength > 5 ? (
           <Button
             {...buttonProps}
             label={t("Common:ShowMore")}
-            onClick={onClickUsers}
-            testId="show_more_users_button"
+            onClick={onClickRooms}
+            testId="show_more_rooms_button"
           />
         ) : null}
       </div>
@@ -114,14 +120,14 @@ const StatisticsComponent = (props) => {
 };
 
 export default inject(({ userStore, storageManagement }) => {
-  const { accounts, userFilterData } = storageManagement;
-  const peopleListLength = accounts.length;
   const { user } = userStore;
+  const { aIAgents, roomFilterData } = storageManagement;
+  const roomsListLength = aIAgents.length;
 
   return {
-    currentUserId: user?.id,
-    accounts,
-    peopleListLength,
-    userFilterData,
+    id: user?.id,
+    roomsListLength,
+    aIAgents,
+    roomFilterData,
   };
-})(observer(StatisticsComponent));
+})(observer(AIAgentListComponent));

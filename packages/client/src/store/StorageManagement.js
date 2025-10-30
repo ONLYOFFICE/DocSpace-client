@@ -40,6 +40,7 @@ import {
 import { getRooms } from "@docspace/shared/api/rooms";
 import { getUserList } from "@docspace/shared/api/people";
 import { SortByFieldName, RoomsProviderType } from "@docspace/shared/enums";
+import { getAIAgents } from "@docspace/shared/api/ai";
 
 const FILTER_COUNT = 6;
 
@@ -136,6 +137,7 @@ class StorageManagement {
 
       let roomsList;
       let accountsList;
+      let aIAgentsList;
 
       const requests = [
         getPortal(portalAbortRequests.signal),
@@ -147,6 +149,7 @@ class StorageManagement {
         requests.push(
           getUserList(this.userFilterData, userAbortRequests.signal),
           getRooms(this.roomFilterData, roomAbortRequests.signal),
+          getAIAgents(this.roomFilterData, roomAbortRequests.signal),
         );
       }
 
@@ -157,9 +160,13 @@ class StorageManagement {
         this.quotaSettings,
         accountsList,
         roomsList,
+        aIAgentsList,
       ] = await Promise.all(requests);
 
       if (roomsList) this.rooms = getFilesListItems(roomsList?.folders);
+
+      if (aIAgentsList)
+        this.aIAgents = getFilesListItems(aIAgentsList?.folders);
 
       if (accountsList)
         this.accounts = accountsList.items.map((user) =>

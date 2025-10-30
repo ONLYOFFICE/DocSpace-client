@@ -263,6 +263,7 @@
   "TimeZone": "Time zone",
   "Top5rooms": "Top 5 rooms by storage usage:",
   "Top5Users": "Top 5 users by storage usage:",
+  "Top5AIAgents": "Top 5 AI agents by storage usage:",
   "TotalStorage": "Total storage: {{size}}",
   "TrustedMail": "Trusted mail domain settings",
   "TrustedMailMobileDescription": "Trusted Mail Domain Settings is a way to specify the mail servers used for user self-registration.",

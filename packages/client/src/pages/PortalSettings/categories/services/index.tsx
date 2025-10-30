@@ -237,7 +237,7 @@ const Services = (props: InjectedProps) => {
 
     if (isDialogVisible && confirmActionType === BACKUP_SERVICE)
       setIsBackupVisible(true);
-    if (isDialogVisible && confirmActionType === "ai")
+    if (isDialogVisible && confirmActionType === AI_TOOLS)
       setIsAIServiceVisible(true);
 
     setIsConfirmDialogVisible(false);

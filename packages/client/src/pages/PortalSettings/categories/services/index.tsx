@@ -153,9 +153,7 @@ const Services = (props: InjectedProps) => {
     },
     [WEB_SEARCH]: {
       title: t("Common:Confirmation"),
-      body: t("Services:AItoolsConfirm", {
-        productName: t("Common:ProductName"),
-      }),
+      body: "Temp Web Search Description Text",
     },
   };
 

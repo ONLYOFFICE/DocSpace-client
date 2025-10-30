@@ -7,6 +7,7 @@
   "BackupRoomDescription": "Save a backup to a selected room or the {{sectionName}} section. Use existing rooms or create a new one.",
   "BackupServiceEnabled": "Backup service successfully enabled.",
   "AIToolsEnabled": "AI tools service successfully enabled.",
+  "WebSearchEnabled": "AI Web search service successfully enabled.",
   "ChatBot": "ChatBot",
   "ChatBotDescription": "Interact with an AI assistant directly in your editors — ask questions, get suggestions, or speed up your workflow.",
   "ConnectService": "Connect the service <1>here</1> to enable backup features",

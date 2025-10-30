@@ -282,6 +282,9 @@ const Services = (props: InjectedProps) => {
       if (confirmActionType === AI_TOOLS) {
         return t("Services:AIToolsEnabled");
       }
+      if (confirmActionType === WEB_SEARCH) {
+        return t("Services:WebSearchEnabled");
+      }
     };
 
     try {

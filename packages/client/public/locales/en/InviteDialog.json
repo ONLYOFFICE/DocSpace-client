@@ -12,6 +12,8 @@
   "InviteToRoomSearchPlaceholder": "Search and invite by name or email",
   "InviteViaLink": "Invite via link",
   "InviteViaLinkDescriptionAccounts": "Create a universal link for self-authorization in {{productName}}",
+  "InviteViaLinkDescriptionAgentGuest": "Create a universal link for self-authorization in the agent as a guest.",
+  "InviteViaLinkDescriptionAgentMembers": "Create a universal link for {{productName}} members for self-authorization in the agent.",
   "InviteViaLinkDescriptionRoomGuest": "Create a universal link for self-authorization in the room as a guest.",
   "InviteViaLinkDescriptionRoomMembers": "Create a universal link for {{productName}} members for self-authorization in the room.",
   "LinkCopySuccess": "Link has been copied",

@@ -178,6 +178,7 @@ export type TStorageRegion = {
 export type TBackupProgress = {
   progress: number;
   error?: TError;
+  warning?: string;
   link?: string;
   isCompleted: boolean;
 };

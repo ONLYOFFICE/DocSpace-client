@@ -38,7 +38,7 @@ jest.mock("../../../../utils/useClickOutside", () => ({
   useClickOutside: (ref: HTMLElement, callback: () => void) => {
     // Mock implementation that just stores the callback
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: TODO fix
     (window as any).clickOutsideCallback = callback;
   },
 }));

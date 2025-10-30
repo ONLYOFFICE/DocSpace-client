@@ -55,6 +55,10 @@ export default class ChatStore {
     makeAutoObservable(this);
   }
 
+  setRoomId = (value: TChatStoreProps["roomId"]) => {
+    this.roomId = value;
+  };
+
   setTotalChats = (value: number) => {
     this.totalChats = value;
   };
@@ -106,26 +110,6 @@ export default class ChatStore {
     } catch (error) {
       console.error(error);
       toastr.error(error as string);
-    }
-  };
-
-  fetchChats = async () => {
-    if (this.isRequestRunning) return;
-
-    this.setIsLoading(true);
-    this.setIsRequestRunning(true);
-
-    try {
-      const { items, total } = await getChats(this.roomId);
-
-      this.setChats(items);
-      this.setTotalChats(total);
-    } catch (error) {
-      console.error(error);
-      toastr.error(error as string);
-    } finally {
-      this.setIsRequestRunning(false);
-      this.setIsLoading(false);
     }
   };
 
@@ -193,13 +177,24 @@ export const ChatStoreContext = React.createContext<ChatStore>(undefined!);
 
 export const ChatStoreContextProvider = ({
   roomId,
+
+  chats,
+  totalChats,
   children,
 }: TChatStoreProps) => {
-  const store = React.useMemo(() => new ChatStore(roomId), [roomId]);
+  const store = React.useMemo(() => new ChatStore(roomId), []);
 
   React.useEffect(() => {
-    if (roomId) store.fetchChats();
+    store.setRoomId(roomId);
   }, [store, roomId]);
+
+  React.useEffect(() => {
+    store.addChats(chats);
+  }, [store, chats]);
+
+  React.useEffect(() => {
+    store.setTotalChats(totalChats);
+  }, [store, totalChats]);
 
   React.useEffect(() => {
     const callback = ({
@@ -221,6 +216,12 @@ export const ChatStoreContextProvider = ({
 
     return () => {
       socket?.off(SocketEvents.UpdateChat, callback);
+    };
+  }, [store]);
+
+  React.useEffect(() => {
+    return () => {
+      store.updateUrlChatId("");
     };
   }, [store]);
 

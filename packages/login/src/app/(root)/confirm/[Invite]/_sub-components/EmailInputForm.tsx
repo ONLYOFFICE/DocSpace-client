@@ -78,9 +78,7 @@ const EmailInputForm = ({
         labelVisible={false}
         hasError={isEmailErrorShow ? !emailValid : undefined}
         errorMessage={
-          emailErrorText
-            ? t(`Common:${emailErrorText}`)
-            : t("Common:RequiredField")
+          emailErrorText ? emailErrorText : t("Common:RequiredField")
         }
         dataTestId="email_field_container"
       >

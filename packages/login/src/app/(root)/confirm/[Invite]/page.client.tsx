@@ -514,6 +514,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     if (!capabilities?.oauthEnabled) return false;
 
     let existProviders = 0;
+    // biome-ignore-start lint/suspicious/noPrototypeBuiltins: TODO fix
     thirdPartyProviders?.forEach((item) => {
       const key = item.provider as keyof typeof PROVIDERS_DATA;
       if (
@@ -523,6 +524,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         return;
       existProviders++;
     });
+
+    // biome-ignore-end lint/suspicious/noPrototypeBuiltins: TODO fix
 
     return !!existProviders;
   };

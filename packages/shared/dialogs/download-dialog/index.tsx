@@ -538,7 +538,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
     </>
   );
 
-  if (isOnePasswordFile) {
+  if (isOnePasswordFile && sortedPasswordFiles[0]) {
     return (
       <OnePasswordRow
         getItemIcon={getItemIcon}

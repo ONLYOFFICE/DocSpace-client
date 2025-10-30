@@ -53,7 +53,7 @@ const MCPServersSelector = ({ onSubmit, onClose }: MCPServersSelectorProps) => {
   const [selectedServers, setSelectedServers] = React.useState<TSelectorItem[]>(
     [],
   );
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   const startCurrentIndexRef = React.useRef(0);
   const [totalServers, setTotalServers] = React.useState(0);

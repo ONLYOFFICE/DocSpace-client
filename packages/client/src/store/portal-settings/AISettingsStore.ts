@@ -51,6 +51,7 @@ import {
   updateWebSearchConfig,
 } from "@docspace/shared/api/ai";
 import { ServerType, WebSearchType } from "@docspace/shared/api/ai/enums";
+import { toastr } from "@docspace/shared/components/toast";
 
 class AISettingsStore {
   isInit = false;
@@ -125,11 +126,13 @@ class AISettingsStore {
   fetchAIProviders = async () => {
     try {
       const res = await getProviders();
-      this.setAiProvidersInitied(true);
 
       this.setAIProviders(res);
     } catch (e) {
       console.error(e);
+      toastr.error(e as string);
+    } finally {
+      this.setAiProvidersInitied(true);
     }
   };
 

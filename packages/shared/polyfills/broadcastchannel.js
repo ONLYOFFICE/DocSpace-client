@@ -24,13 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @typescript-eslint/no-this-alias */
-
 ((globalScope) => {
   const channels = [];
   const global = globalScope;
 
   function BroadcastChannel(channelParam) {
+    // biome-ignore lint/complexity/noUselessThisAlias: TODO fix
     const $this = this;
     const channel = String(channelParam);
 
@@ -61,6 +60,7 @@
       return this._name;
     },
     postMessage(message) {
+      // biome-ignore lint/complexity/noUselessThisAlias: TODO fix
       const $this = this;
       if (this._closed) {
         const e = new Error();

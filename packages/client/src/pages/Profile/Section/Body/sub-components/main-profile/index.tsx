@@ -454,7 +454,7 @@ const MainProfile = (props: MainProfileProps) => {
                   data-tooltip-content={t("EmailNotVerified")}
                   as="div"
                   className={classNames(styles.emailTextContainer, {
-                    pending: withActivationBar,
+                    [styles.pending]: withActivationBar,
                   })}
                   fontWeight={600}
                   truncate
@@ -627,7 +627,7 @@ const MainProfile = (props: MainProfileProps) => {
                       data-tooltip-content={t("EmailNotVerified")}
                       as="div"
                       className={classNames(styles.emailTextContainer, {
-                        pending: withActivationBar,
+                        [styles.pending]: withActivationBar,
                       })}
                       fontWeight={600}
                       truncate

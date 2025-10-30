@@ -38,6 +38,7 @@ import { RectangleSkeleton } from "../../../../../skeletons";
 import { exportChat } from "../../../../../api/ai";
 
 import { DropDown } from "../../../../drop-down";
+import { TBreadCrumb } from "../../../../selector/Selector.types";
 import { toastr } from "../../../../toast";
 import { Link, LinkType, LinkTarget } from "../../../../link";
 
@@ -123,6 +124,7 @@ const SelectChat = ({ isLoadingProp, roomId, getIcon }: SelectChatProps) => {
   const onSaveToFileAction = React.useCallback(async () => {
     if (isRequestRunning) return;
     setIsExportOpen(true);
+    setIsOpen(false);
   }, [hoveredItem, chats, isRequestRunning, t]);
 
   const getFileName = () => {
@@ -131,32 +133,43 @@ const SelectChat = ({ isLoadingProp, roomId, getIcon }: SelectChatProps) => {
     return title ?? "";
   };
 
-  const onSubmit = React.useCallback(async () => {
-    const res = await exportChat(hoveredItem);
+  const onSubmit = React.useCallback(
+    async (
+      selectedItemId: string | number | undefined,
+      folderTitle: string,
+      isPublic: boolean,
+      breadCrumbs: TBreadCrumb[],
+      fileName: string,
+    ) => {
+      if (!selectedItemId) return;
 
-    const title = chats.find((chat) => chat.id === hoveredItem)?.title;
-    const toastMsg = (
-      <Trans
-        ns="Common"
-        i18nKey="ChatExported"
-        t={t}
-        values={{ fileName: res?.title, title }}
-        components={{
-          1: <b />,
-          2: (
-            <Link
-              type={LinkType.page}
-              target={LinkTarget.blank}
-              href={res?.webUrl}
-            />
-          ),
-        }}
-      />
-    );
+      const res = await exportChat(hoveredItem, selectedItemId, fileName);
 
-    toastr.success(toastMsg);
-    setIsExportOpen(false);
-  }, [hoveredItem, chats, isRequestRunning, t]);
+      const title = chats.find((chat) => chat.id === hoveredItem)?.title;
+      const toastMsg = (
+        <Trans
+          ns="Common"
+          i18nKey="ChatExported"
+          t={t}
+          values={{ fileName, title }}
+          components={{
+            1: <b />,
+            2: (
+              <Link
+                type={LinkType.page}
+                target={LinkTarget.blank}
+                href={res?.webUrl}
+              />
+            ),
+          }}
+        />
+      );
+
+      toastr.success(toastMsg);
+      setIsExportOpen(false);
+    },
+    [hoveredItem, chats, isRequestRunning, t],
+  );
 
   const contextModel = React.useMemo(() => {
     return [

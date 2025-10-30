@@ -75,6 +75,10 @@ export default class MessageStore {
     this.roomId = roomId;
   }
 
+  setRoomId = (roomId: number | string) => {
+    this.roomId = roomId;
+  };
+
   setCurrentChatId = (chatId: string) => {
     this.currentChatId = chatId;
   };
@@ -552,7 +556,11 @@ export const MessageStoreContextProvider = ({
   children,
   roomId,
 }: TMessageStoreProps) => {
-  const store = React.useMemo(() => new MessageStore(roomId), [roomId]);
+  const store = React.useMemo(() => new MessageStore(roomId), []);
+
+  React.useEffect(() => {
+    store.setRoomId(roomId);
+  }, [store, roomId]);
 
   React.useEffect(() => {
     const chatId = new URLSearchParams(window.location.search).get("chat");

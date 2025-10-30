@@ -50,7 +50,7 @@ interface GestureHandlers {
 jest.mock("@use-gesture/react", () => ({
   useGesture: (handlers: GestureHandlers) => {
     // Store handlers for testing
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: TODO fix
     (global as any).gestureHandlers = handlers;
   },
 }));
@@ -106,7 +106,7 @@ describe("MainPanel component", () => {
 
   it("calls onNext when swiping left", () => {
     render(<MainPanel {...mockProps} />);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: TODO fix
     const handlers = (global as any).gestureHandlers as GestureHandlers;
 
     // Simulate drag end with left swipe
@@ -116,7 +116,7 @@ describe("MainPanel component", () => {
 
   it("calls onPrev when swiping right", () => {
     render(<MainPanel {...mockProps} />);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: TODO fix
     const handlers = (global as any).gestureHandlers as GestureHandlers;
 
     // Simulate drag end with right swipe

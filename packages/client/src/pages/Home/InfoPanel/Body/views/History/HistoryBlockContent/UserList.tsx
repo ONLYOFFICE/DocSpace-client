@@ -34,7 +34,7 @@ import classNames from "classnames";
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-
+import { TUser } from "@docspace/shared/api/people/types";
 import { RoomMember, TFeedAction } from "@docspace/shared/api/rooms/types";
 
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
@@ -79,10 +79,12 @@ const HistoryUserList = ({
           ? i < EXPANSION_THRESHOLD - 1
           : i < usersData.length - 1;
 
-        const user = "displayName" in member.sharedTo ? member.sharedTo : null;
-        if (!user) return null;
+        const user: TUser | null =
+          "user" in member ? (member.user as TUser) : null;
 
-        const userName = decode(user.displayName);
+        if (!user) return;
+
+        const userName = decode(user?.displayName);
 
         return (
           <div

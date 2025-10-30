@@ -53,7 +53,7 @@ export const RoomTile = ({
   const childrenArray = React.Children.toArray(children);
   const [RoomsTileContent] = childrenArray;
 
-  const { t } = useTranslation(["Translations"]);
+  const { t } = useTranslation(["Translations", "Common"]);
   const checkboxContainerRef = useRef<HTMLDivElement>(null);
 
   const [isHovered, setIsHovered] = useState(false);
@@ -102,6 +102,11 @@ export const RoomTile = ({
 
   if (item.tags && item?.tags?.length > 0) {
     tags.push(...item.tags);
+  } else if (item.isAIAgent) {
+    tags.push({
+      isDefault: true,
+      label: t("Common:NoTags"),
+    });
   } else {
     tags.push({
       isDefault: true,
@@ -125,6 +130,8 @@ export const RoomTile = ({
   );
 
   const handleTagSelect = (tag?: object | undefined) => {
+    if (item.isAIAgent && !item.tags?.length) return;
+
     if (!tag) {
       selectTag(undefined);
       return;

@@ -87,6 +87,9 @@ export interface ManualBackupProps {
   backupProgressError: string;
   setBackupProgressError: (error: string) => void;
 
+  backupProgressWarning: string;
+  setBackupProgressWarning: (warning: string) => void;
+
   isFormReady: () => boolean;
   clearLocalStorage: VoidFunction;
 

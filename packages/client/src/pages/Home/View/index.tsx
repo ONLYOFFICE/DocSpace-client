@@ -426,9 +426,7 @@ const View = ({
           await fetchContactsRef.current();
 
         if (isProfilePage) {
-          if (prevCurrentViewRef.current !== "profile") {
-            await getProfileInitialValue();
-          }
+          await getProfileInitialValue();
 
           clearFiles();
           setContactsTab(false);

@@ -31,7 +31,7 @@
     "mobx-react": "7.6.0",
     "moment-timezone": "0.5.46",
     "nconf": "0.12.1",
-    "next": "16.0.0",
+    "next": "16.0.1",
     "react": "19.2.0",
     "react-device-detect": "2.2.3",
     "react-dom": "19.2.0",

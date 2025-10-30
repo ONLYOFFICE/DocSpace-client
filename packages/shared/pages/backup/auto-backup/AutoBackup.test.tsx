@@ -172,6 +172,8 @@ describe("AutomaticBackup", () => {
     isManagement: false,
     backupProgressError: "",
     setBackupProgressError: jest.fn(),
+    backupProgressWarning: "",
+    setBackupProgressWarning: jest.fn(),
     setDefaultFolderId: jest.fn(),
   };
 

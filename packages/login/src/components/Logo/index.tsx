@@ -24,54 +24,58 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "../../styles/mixins";
+"use client";
 
-.body {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 1200px;
-  padding: 8px 12px;
-  background: var(--toast-error-bg);
-  box-shadow: var(--toast-box-shadow);
-  border-radius: 6px;
-  border: var(--toast-error-border);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-  color: black;
-  animation: SlideIn 0.3s ease-in-out;
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
+import React from "react";
+import Image from "next/image";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
+import { getLogoUrl } from "@docspace/shared/utils/common";
 
-  p {
-    color: var(--toastr-text-color);
-  }
-  &.hide {
-    opacity: 0;
-  }
+export const Logo = ({
+  culture,
+  isMobile = false,
+}: {
+  culture?: string;
+  isMobile?: boolean;
+}) => {
+  const lightLogoUrl = getLogoUrl(
+    WhiteLabelLogoType.LoginPage,
+    false,
+    false,
+    culture,
+  );
 
-  svg {
-    path {
-      fill: var(--toastr-svg-error-color);
-    }
-  }
-}
+  const darkLogoUrl = getLogoUrl(
+    WhiteLabelLogoType.LoginPage,
+    true,
+    false,
+    culture,
+  );
 
-.warning {
-  background: var(--toast-warning-bg);
-  border: var(--toast-warning-border);
-}
+  const logoHeight = isMobile ? 24 : 44;
+  const logoWidth = isMobile ? 211 : 386;
 
-@keyframes SlideIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
+  return (
+    <>
+      <Image
+        key="light-logo"
+        id="logo-image-light"
+        src={lightLogoUrl}
+        className="logo-wrapper logo-wrapper--light"
+        alt="greeting-logo"
+        width={logoWidth}
+        height={logoHeight}
+      />
 
-.dangerToastIcon {
-  @include mixins.common-icons-style;
-}
+      <Image
+        key="dark-logo"
+        id="logo-image-dark"
+        src={darkLogoUrl}
+        className="logo-wrapper logo-wrapper--dark"
+        alt="greeting-logo"
+        width={logoWidth}
+        height={logoHeight}
+      />
+    </>
+  );
+};

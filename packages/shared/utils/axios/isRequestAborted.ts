@@ -24,54 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "../../styles/mixins";
+import axios from "axios";
 
-.body {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 1200px;
-  padding: 8px 12px;
-  background: var(--toast-error-bg);
-  box-shadow: var(--toast-box-shadow);
-  border-radius: 6px;
-  border: var(--toast-error-border);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-  color: black;
-  animation: SlideIn 0.3s ease-in-out;
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
+const ABORTED_MESSAGE = "Request aborted";
 
-  p {
-    color: var(--toastr-text-color);
-  }
-  &.hide {
-    opacity: 0;
-  }
-
-  svg {
-    path {
-      fill: var(--toastr-svg-error-color);
-    }
-  }
-}
-
-.warning {
-  background: var(--toast-warning-bg);
-  border: var(--toast-warning-border);
-}
-
-@keyframes SlideIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.dangerToastIcon {
-  @include mixins.common-icons-style;
-}
+/**
+ * Checks if an error is from an aborted Axios request
+ * @param error - The error to check
+ * @returns True if the error is from an aborted request, false otherwise
+ */
+export const isRequestAborted = (error: unknown) => {
+  return (
+    axios.isCancel(error) ||
+    (axios.isAxiosError(error) && error.message === ABORTED_MESSAGE)
+  );
+};

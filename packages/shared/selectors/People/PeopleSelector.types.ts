@@ -92,6 +92,7 @@ export type PeopleSelectorProps = TSelectorHeader &
     injectedElement?: React.ReactElement;
     alwaysShowFooter?: boolean;
     onlyRoomMembers?: boolean;
+    isAgent?: boolean;
     // Accessibility attributes
     "aria-label"?: string;
     "data-selector-type"?: string;

@@ -547,6 +547,7 @@ const InvitePanel = ({
             disableDisabledUsers
             withGroups={!isPublicRoomType}
             roomId={roomId}
+            isAgent={roomType === RoomsType.AIRoom}
             disableInvitedUsers={invitedUsersArray}
             withGuests={showGuestsTab}
             withHeader

@@ -48,12 +48,13 @@ import {
   EmployeeStatus,
   EmployeeType,
 } from "@docspace/shared/enums";
+import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
-import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import BackupIcon from "PUBLIC_DIR/images/icons/16/backup.svg?url";
+import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import { getUserType } from "@docspace/shared/utils/common";
@@ -313,7 +314,6 @@ const InviteInput = ({
 
   const getItemContent = (item) => {
     const {
-      avatar,
       displayName,
       name: groupName,
       email,
@@ -321,11 +321,18 @@ const InviteInput = ({
       shared,
       isGroup = false,
       status,
+      isSystem,
     } = item;
 
     const isDisabled = status === EmployeeStatus.Disabled;
 
     item.access = selectedAccess;
+
+    const avatar = item.avatar
+      ? item.avatar
+      : isSystem
+        ? EveryoneIconUrl
+        : null;
 
     const addUser = () => {
       if (isDisabled) {
@@ -374,7 +381,7 @@ const InviteInput = ({
           source={avatar}
           userName={groupName}
           isGroup={isGroup}
-          className={isDisabled ? "avatar-disabled" : ""}
+          className={isDisabled ? "avatar-disabled" : "item-avatar"}
         />
         <div className="list-item_content">
           <div className="list-item_content-box">
@@ -573,13 +580,13 @@ const InviteInput = ({
             type="action"
             isHovered
             onClick={openUsersPanel}
+            dataTestId="invite_panel_choose_from_list_link"
           >
             {t("Translations:ChooseFromList")}
           </StyledLink>
         ) : null}
       </StyledSubHeader>
       <StyledDescription
-        noSelect
         noAllowInvitingGuests={roomId !== -1 ? !allowInvitingGuests : null}
       >
         {roomId === -1
@@ -596,7 +603,7 @@ const InviteInput = ({
       </StyledDescription>
       {roomId === -1 || allowInvitingGuests ? (
         <StyledInviteLanguage>
-          <Text className="invitation-language" noSelect>
+          <Text className="invitation-language">
             {t("InvitationLanguage")}:
           </Text>
           <div className="language-combo-box-wrapper">
@@ -620,6 +627,7 @@ const InviteInput = ({
               withBackdrop={isMobileView}
               withBackground={isMobileView}
               shouldShowBackdrop={isMobileView}
+              dataTestId="invite_panel_language_combobox"
             />
           </div>
           {isChangeLangMail ? (
@@ -628,6 +636,7 @@ const InviteInput = ({
               iconName={BackupIcon}
               onClick={onResetLangMail}
               size={12}
+              dataTestId="invite_panel_reset_language_button"
             />
           ) : null}
         </StyledInviteLanguage>
@@ -650,6 +659,7 @@ const InviteInput = ({
             onKeyDown={onKeyDown}
             type="search"
             withBorder={false}
+            testId="invite_panel_search_input"
           />
 
           <div className="append" onClick={() => onChangeInput("")}>
@@ -684,6 +694,7 @@ const InviteInput = ({
           isOwner={isOwner}
           isAdmin={isAdmin}
           isMobileView={isMobileView}
+          dataTestId="invite_panel_access_selector"
           {...(roomId === -1 && {
             isSelectionDisabled: isUserTariffLimit,
             selectionErrorText: <PaidQuotaLimitError />,

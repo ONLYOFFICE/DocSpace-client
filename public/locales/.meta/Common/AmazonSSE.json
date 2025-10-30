@@ -3,7 +3,7 @@
   "content": "Server-Side Encryption",
   "content_en_sha1_hash": "d1934d0b621ff15e462a56a14f0ce0b75e8ef972",
   "created_at": "2025-05-26T07:15:40.413Z",
-  "updated_at": "2025-06-30T12:20:31.688Z",
+  "updated_at": "2025-09-07T07:53:15.432Z",
   "comment": {
     "text": "This translation key is used to display \"Server-Side Encryption\" in a UI component. It is likely displayed as an option or a placeholder when configuring Amazon Storage settings, such as selecting a storage provider or enabling server-side encryption.",
     "is_auto": true,

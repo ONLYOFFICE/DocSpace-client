@@ -1,0 +1,28 @@
+{
+  "key_path": "EmptyFavoritesDescription",
+  "content": "Star files and folders to keep them easily accessible and within reach.",
+  "content_en_sha1_hash": "93cf58fd17f758b088070b1be787919168c6f809",
+  "created_at": "2025-08-29T14:33:36.168Z",
+  "updated_at": "2025-10-27T16:14:33.131Z",
+  "comment": {
+    "text": "This text explains the purpose of the Favorites folder – to allow users to save files and folders for easy access. It appears within the UI to describe the empty state of the Favorites folder. Translators should focus on conveying the benefit of saving items to Favorites.",
+    "is_auto": true,
+    "updated_at": "2025-08-29T14:34:52.234Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 217,
+      "context": "productName: t(\"Common:ProductName\"),\n }),\n )\n .with([FolderType.Recent, P._], () => t(\"EmptyView:EmptyRecentDescription\"))\n .with([FolderType.Favorites, P._], () =>\n t(\"EmptyView:EmptyFavoritesDescription\"),\n )\n .with([FolderType.Archive, ShareAccessRights.None], () =>\n t(\"Files:ArchiveEmptyScreen\", {\n productName: t(\"Common:ProductName\"),\n }),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

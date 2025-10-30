@@ -84,12 +84,14 @@ export const DeleteWebhookDialog = ({
             size="normal"
             primary
             onClick={handleDeleteClick}
+            testId="delete_webhook_button"
           />
           <Button
             id="cancel-button"
             label={t("Common:CancelButton")}
             size="normal"
             onClick={onClose}
+            testId="delete_webhook_cancel_button"
           />
         </Footer>
       </ModalDialog.Footer>

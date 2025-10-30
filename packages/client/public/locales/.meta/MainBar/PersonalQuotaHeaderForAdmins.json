@@ -3,7 +3,7 @@
   "content": "Storage quota per user exceeded",
   "content_en_sha1_hash": "5edf8dd36f8d473f47c03d870d79181565095a87",
   "created_at": "2025-05-19T21:30:54.112Z",
-  "updated_at": "2025-05-24T08:05:57.795Z",
+  "updated_at": "2025-10-01T08:28:21.893Z",
   "comment": {
     "text": "This translation key is used to display a message when an admin user's personal storage quota has been exceeded. It will appear in a UI component that manages quotas, likely on a settings page or update notice. The exact appearance depends on the specific context of the \"isAdmin\" variable.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 178,
+      "line_number": 179,
       "context": ");\n };\n \n const getPersonalQuotaHeader = () => {\n if (!isAdmin) return t(\"PersonalQuotaHeader\");\n return t(\"PersonalQuotaHeaderForAdmins\");\n };\n \n const getUpgradeTariffDescription = () => {\n if (!isAdmin)\n return t(\"ContactToUpgradeTariff\", {",
       "module": "/packages/client"
     }

@@ -57,8 +57,14 @@ const TagPure = ({
   removeTagIcon,
   roomType,
   providerType,
+  dataTestId,
   onMouseEnter,
   onMouseLeave,
+  isDefaultMode = true,
+  directionY,
+  fixedDirection,
+  manualY = "4px",
+  manualX,
 }: TagProps) => {
   const [openDropdown, setOpenDropdown] = React.useState(false);
 
@@ -137,7 +143,7 @@ const TagPure = ({
         onClick={openDropdownAction}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        data-testid="tag"
+        data-testid="tag_container"
       >
         <Text className={styles.tagText} fontSize="13px" noSelect>
           ...
@@ -147,7 +153,11 @@ const TagPure = ({
         open={openDropdown}
         forwardedRef={tagRef}
         clickOutsideAction={onClickOutside}
-        manualY="4px"
+        isDefaultMode={isDefaultMode}
+        manualY={manualY}
+        manualX={manualX}
+        directionY={directionY}
+        fixedDirection={fixedDirection}
       >
         {advancedOptions.map((t, index) => (
           <DropDownItem
@@ -155,6 +165,7 @@ const TagPure = ({
             key={`${t}_${index * 50}`}
             onClick={onClickAction}
             data-tag={t}
+            testId={dataTestId ?? "tag_item"}
           >
             <Text
               className={classNames(styles.dropdownText, {
@@ -185,7 +196,7 @@ const TagPure = ({
       style={{ ...style, maxWidth: tagMaxWidth }}
       data-tag={label}
       id={id}
-      data-testid="tag"
+      data-testid={dataTestId ?? "tag_item"}
       aria-label={label}
       aria-disabled={isDisabled}
       onMouseEnter={onMouseEnter}

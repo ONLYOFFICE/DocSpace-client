@@ -3,7 +3,7 @@
   "content": "Renew subscription for {{license}}",
   "content_en_sha1_hash": "9c780ecb6808d81ca9d60a1e65629e28af6502a2",
   "created_at": "2025-05-26T07:15:40.113Z",
-  "updated_at": "2025-05-26T08:08:45.821Z",
+  "updated_at": "2025-09-19T15:39:23.368Z",
   "comment": {
     "text": "This translation key is used to display a message prompting users to renew their subscription. It appears on an enterprise container component in a payment page and includes placeholders for different license types. The user's selected license type will be inserted into this string.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Standalone/EnterpriseContainer.tsx",
-      "line_number": 57,
-      "context": "const { t } = useTranslation(\"Common\");\n \n return (\n <StyledEnterpriseComponent>\n <Text fontWeight={700} fontSize=\"16px\">\n {t(\"ActivateRenewSubscriptionHeader\", {\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })}\n </Text>",
+      "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/EnterpriseContainer.tsx",
+      "line_number": 59,
+      "context": "const { t } = useTranslation(\"Common\");\n \n return (\n <div className={styles.enterpriseComponent}>\n <Text fontWeight={700} fontSize=\"16px\">\n {t(\"ActivateRenewSubscriptionHeader\", {\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })}\n </Text>",
       "module": "/packages/shared"
     }
   ],

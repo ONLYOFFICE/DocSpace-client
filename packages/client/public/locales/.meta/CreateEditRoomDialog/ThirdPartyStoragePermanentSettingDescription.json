@@ -3,7 +3,7 @@
   "content": "Files are stored in a third-party {{thirdpartyTitle}} storage in the \"{{thirdpartyFolderName}}\" folder.\n<strong>{{thirdpartyPath}}</strong>",
   "content_en_sha1_hash": "239bfc851724cfc88af2a746c35bbbec17b7aee4",
   "created_at": "2025-05-19T21:30:56.846Z",
-  "updated_at": "2025-05-24T13:41:58.399Z",
+  "updated_at": "2025-10-27T16:14:33.225Z",
   "comment": {
     "text": "This translation key is used to display a description about file storage when using a third-party storage service. It appears in a UI component related to permanent settings or room creation/delivery, guiding users on where files are stored externally.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/PermanentSettings/index.js",
-      "line_number": 56,
-      "context": "isFull={!isPrivate}\n icon={storageLocation.iconSrc}\n title={thirdpartyTitle}\n content={\n <Trans\n i18nKey=\"ThirdPartyStoragePermanentSettingDescription\"\n ns=\"CreateEditRoomDialog\"\n t={t}\n >\n Files are stored in a third-party {{ thirdpartyTitle }} storage in\n the \\\"{{ thirdpartyFolderName }}\\\" folder.{\" \"}",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/PermanentSettings/index.tsx",
+      "line_number": 70,
+      "context": "icon={storageLocation.iconSrc}\n title={thirdpartyTitle}\n isFull={false}\n content={\n <Trans\n i18nKey=\"ThirdPartyStoragePermanentSettingDescription\"\n ns=\"CreateEditRoomDialog\"\n t={t}\n values={{\n thirdpartyTitle,\n thirdpartyFolderName,",
       "module": "/packages/client"
     }
   ],

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
@@ -34,61 +34,103 @@ import config from "PACKAGE_FILE";
 
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
-import SSO from "./SingleSignOn";
-import LDAP from "./LDAP";
+import SsoSettings from "./SingleSignOn";
+import LdapSettings from "./LDAP";
 import ThirdParty from "./ThirdPartyServicesSettings";
-
 import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
+import useIntegration from "./useIntegration";
+
+import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
 
 const IntegrationWrapper = (props) => {
   const {
     t,
     currentDeviceType,
-    toDefault,
-    isSSOAvailable,
     standalone,
     enablePlugins,
+
+    setup,
+    currentQuotaStore,
+    ssoFormStore,
+    pluginStore,
+    filesSettingsStore,
+    ldapStore,
+    clearAbortControllerArr,
   } = props;
   const navigate = useNavigate();
 
-  useEffect(() => {
-    return () => {
-      isSSOAvailable &&
-        !window.location.pathname.includes("sso") &&
-        toDefault();
-    };
-  }, []);
+  const [currentTabId, setCurrentTabId] = useState();
+
+  const defaultProps = createDefaultHookSettingsProps({
+    setup,
+    currentQuotaStore,
+    ssoFormStore,
+    pluginStore,
+    filesSettingsStore,
+    ldapStore,
+  });
+
+  const {
+    getLDAPData,
+    getSSOData,
+    getPluginsData,
+    getThirdPartyData,
+    getSMTPSettingsData,
+    getDocumentServiceData,
+  } = useIntegration({
+    ...defaultProps.integration,
+  });
 
   const data = [
     {
       id: "ldap",
-      name: t("LDAP"),
-      content: <LDAP />,
+      name: t("Settings:LDAP"),
+      content: <LdapSettings />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getLDAPData();
+      },
     },
     {
       id: "sso",
-      name: t("SingleSignOn"),
-      content: <SSO />,
+      name: t("Settings:SingleSignOn"),
+      content: <SsoSettings />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getSSOData();
+      },
     },
     {
       id: "third-party-services",
       name: t("Translations:ThirdPartyTitle"),
       content: <ThirdParty />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getThirdPartyData();
+      },
     },
     {
       id: "smtp-settings",
-      name: t("SMTPSettings"),
+      name: t("Settings:SMTPSettings"),
       content: <SMTPSettings />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getSMTPSettingsData();
+      },
     },
   ];
 
   if (standalone) {
     const documentServiceData = {
       id: "document-service",
-      name: t("DocumentService"),
+      name: t("Settings:DocumentService"),
       content: <DocumentService />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getDocumentServiceData();
+      },
     };
 
     data.push(documentServiceData);
@@ -105,16 +147,18 @@ const IntegrationWrapper = (props) => {
       id: "plugins",
       name: pluginLabel,
       content: <PluginPage />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getPluginsData();
+      },
     });
   }
 
-  const getCurrentTabId = () => {
+  useEffect(() => {
     const path = window.location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
-    return currentTab && data.length ? currentTab.id : data[0].id;
-  };
-
-  const currentTabId = getCurrentTabId();
+    if (currentTab && data.length) setCurrentTabId(currentTab.id);
+  }, [location.pathname]);
 
   const onSelect = (e) => {
     navigate(
@@ -132,27 +176,45 @@ const IntegrationWrapper = (props) => {
       selectedItemId={currentTabId}
       onSelect={onSelect}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      withAnimation
     />
   );
 };
 
 export const Component = inject(
-  ({ settingsStore, ssoStore, currentQuotaStore }) => {
-    const { standalone, enablePlugins, currentDeviceType } = settingsStore;
-    const { load: toDefault } = ssoStore;
-
-    const { isSSOAvailable } = currentQuotaStore;
+  ({
+    settingsStore,
+    ssoStore,
+    currentQuotaStore,
+    pluginStore,
+    setup,
+    filesSettingsStore,
+    ldapStore,
+  }) => {
+    const {
+      standalone,
+      enablePlugins,
+      currentDeviceType,
+      clearAbortControllerArr,
+    } = settingsStore;
 
     return {
-      toDefault,
-      isSSOAvailable,
       standalone,
       currentDeviceType,
       enablePlugins,
+
+      setup,
+      currentQuotaStore,
+      ssoFormStore: ssoStore,
+      pluginStore,
+      filesSettingsStore,
+      ldapStore,
+      clearAbortControllerArr,
     };
   },
 )(
   withTranslation([
+    "SMTPSettings",
     "Settings",
     "SingleSignOn",
     "Translations",

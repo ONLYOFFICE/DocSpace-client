@@ -3,7 +3,7 @@
   "content": "Copy shared link",
   "content_en_sha1_hash": "b175bcf3a07a90b8902c84d2fc6a79bcb9f7f620",
   "created_at": "2025-05-19T21:30:43.810Z",
-  "updated_at": "2025-06-30T12:20:31.365Z",
+  "updated_at": "2025-10-27T16:14:33.410Z",
   "comment": {
     "text": "The translation key \"CopySharedLink\" is used to display a button that allows users to copy a shared link in public rooms, typically found on a settings or options page within the application. The label and icon displayed will be localized for each language. It appears as a button with an icon and a tooltip that provides the label when hovered over.",
     "is_auto": true,
@@ -12,50 +12,68 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/LinkRow.tsx",
-      "line_number": 182,
+      "line_number": 142,
       "context": "icon: SettingsReactSvgUrl,\n onClick: onEditLink,\n },\n {\n key: \"copy-link-settings-key\",\n label: t(\"Common:CopySharedLink\"),\n icon: CopyToReactSvgUrl,\n onClick: onCopyExternalLink,\n disabled: isDisabled,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1380,
+      "line_number": 1479,
       "context": "if (this.publicRoomStore.isPublicRoom) {\n return [\n {\n key: \"public-room_share\",\n label: t(\"Common:CopySharedLink\"),\n icon: TabletLinkReactSvgUrl,\n onClick: () => {\n copy(window.location.href);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1380,
+      "line_number": 1479,
       "context": "if (this.publicRoomStore.isPublicRoom) {\n return [\n {\n key: \"public-room_share\",\n label: t(\"Common:CopySharedLink\"),\n icon: TabletLinkReactSvgUrl,\n onClick: () => {\n copy(window.location.href);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1380,
+      "line_number": 1479,
+      "context": "if (this.publicRoomStore.isPublicRoom) {\n return [\n {\n key: \"public-room_share\",\n label: t(\"Common:CopySharedLink\"),\n icon: TabletLinkReactSvgUrl,\n onClick: () => {\n copy(window.location.href);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1479,
       "context": "if (this.publicRoomStore.isPublicRoom) {\n return [\n {\n key: \"public-room_share\",\n label: t(\"Common:CopySharedLink\"),\n icon: TabletLinkReactSvgUrl,\n onClick: () => {\n copy(window.location.href);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 427,
+      "line_number": 548,
       "context": "className={classNames(\n styles.iconBadge,\n \"badge row-copy-link icons-group tablet-badge\",\n )}\n onClick={onCopyPrimaryLink}\n title={t(\"Common:CopySharedLink\")}\n hoverColor=\"accent\"\n />\n ) : null}\n \n {showCopyLinkIcon ? (",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 427,
+      "line_number": 548,
       "context": "className={classNames(\n styles.iconBadge,\n \"badge row-copy-link icons-group tablet-badge\",\n )}\n onClick={onCopyPrimaryLink}\n title={t(\"Common:CopySharedLink\")}\n hoverColor=\"accent\"\n />\n ) : null}\n \n {showCopyLinkIcon ? (",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 223,
-      "context": "size={sizeQuickButton}\n onClick={onCopyPrimaryLink}\n color={colorLock}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CopySharedLink\")}\n />\n ) : null}\n {isAvailableShareFile ? (\n <IconButton\n iconName={LinkReactSvgUrl}",
+      "line_number": 250,
+      "context": "className=\"badge copy-link icons-group\"\n size={sizeQuickButton}\n onClick={onCopyPrimaryLink}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CopySharedLink\")}\n />\n ) : null}\n {isAvailableShareFile && !isAvailableShareForUser ? (\n <IconButton\n iconName={LinkReactSvgUrl}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 223,
-      "context": "size={sizeQuickButton}\n onClick={onCopyPrimaryLink}\n color={colorLock}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CopySharedLink\")}\n />\n ) : null}\n {isAvailableShareFile ? (\n <IconButton\n iconName={LinkReactSvgUrl}",
+      "line_number": 250,
+      "context": "className=\"badge copy-link icons-group\"\n size={sizeQuickButton}\n onClick={onCopyPrimaryLink}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CopySharedLink\")}\n />\n ) : null}\n {isAvailableShareFile && !isAvailableShareForUser ? (\n <IconButton\n iconName={LinkReactSvgUrl}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/hooks/useShare.tsx",
+      "line_number": 371,
+      "context": "icon: SettingsReactSvgUrl,\n onClick: () => onEditLink(link),\n },\n {\n key: \"copy-link-settings-key\",\n label: t(\"Common:CopySharedLink\"),\n icon: CopyToReactSvgUrl,\n onClick: () => copyShareLink(infoPanelSelection, link, t),\n },\n {\n key: \"embedding-settings-key\",",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/sub-components/LinkTitle.tsx",
+      "line_number": 71,
+      "context": "className={styles.linkActionsCopyImgIcon}\n src={EmptyIcon}\n alt={shareLink}\n />\n <IconButton\n title={t(\"Common:CopySharedLink\")}\n className={styles.linkActionsCopyIcon}\n size={12}\n iconName={CopyIcon}\n isDisabled={isExpiredLink || isLoaded}\n />",
       "module": "/packages/shared"
     }
   ],

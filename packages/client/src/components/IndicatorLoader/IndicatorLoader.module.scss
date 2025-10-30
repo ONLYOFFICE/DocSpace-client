@@ -46,7 +46,8 @@
     }
 
     @include mixins.mobile {
-      top: 48px;
+      position: relative;
+      top: 0;
     }
   }
 }

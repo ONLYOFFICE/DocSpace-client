@@ -47,6 +47,8 @@ import { globalColors } from "@docspace/shared/themes";
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import { StyledSettingsComponent } from "./StyledSettings";
 import checkScrollSettingsBlock from "../utils";
+import useCommon from "../useCommon";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 const toggleStyle = {
   position: "static",
@@ -54,6 +56,7 @@ const toggleStyle = {
 
 const textInputProps = {
   id: "textInputContainerDNSSettings",
+  testId: "customization_dns_settings_text_input",
   className: "dns-textarea",
   scale: true,
   tabIndex: 8,
@@ -62,19 +65,17 @@ const textInputProps = {
 const buttonProps = {
   tabIndex: 9,
   className: "save-cancel-buttons send-request-button",
+  testId: "customization_dns_settings_button",
   primary: true,
 };
 let timerId = null;
 const DNSSettingsComponent = (props) => {
   const {
     t,
-    isMobileView,
     tReady,
     isLoaded,
     setIsLoadedDNSSettings,
     isLoadedPage,
-    initSettings,
-    setIsLoaded,
     isSettingPaid,
     currentColorScheme,
     standalone,
@@ -87,6 +88,10 @@ const DNSSettingsComponent = (props) => {
     dnsSettingsUrl,
     currentDeviceType,
     requestSupportUrl,
+    loadBaseInfo,
+    deviceType,
+    settingsStore,
+    common,
   } = props;
 
   const [hasScroll, setHasScroll] = useState(false);
@@ -97,22 +102,26 @@ const DNSSettingsComponent = (props) => {
   const [isError, setIsError] = useState(false);
   const [errorText, setErrorText] = useState("");
 
+  const isMobileView = deviceType === DeviceType.mobile;
+
+  const defaultProps = createDefaultHookSettingsProps({
+    loadBaseInfo,
+    isMobileView,
+    settingsStore,
+    common,
+  });
+
+  const { getCommonInitialValue } = useCommon(defaultProps.common);
+
   const theme = useTheme();
 
   const checkInnerWidth = useCallback(() => {
     if (!isMobileDevice()) {
       setIsCustomizationView(true);
 
-      const currentUrl = window.location.href.replace(
-        window.location.origin,
-        "",
-      );
-
-      const newUrl = "/portal-settings/customization/general";
-
-      if (newUrl === currentUrl) return;
-
-      navigate(newUrl);
+      if (location.pathname.includes("dns-settings")) {
+        navigate("/portal-settings/customization/general");
+      }
     } else {
       setIsCustomizationView(false);
     }
@@ -120,11 +129,6 @@ const DNSSettingsComponent = (props) => {
 
   useEffect(() => {
     setDocumentTitle(t("DNSSettings"));
-
-    if (!isLoaded)
-      initSettings(isMobileView ? "dns-settings" : "general").then(() =>
-        setIsLoaded(true),
-      );
 
     const checkScroll = checkScrollSettingsBlock();
     checkInnerWidth();
@@ -138,6 +142,10 @@ const DNSSettingsComponent = (props) => {
 
     return () => window.removeEventListener("resize", checkInnerWidth);
   }, []);
+
+  useEffect(() => {
+    if (isMobileView) getCommonInitialValue();
+  }, [isMobileView]);
 
   useEffect(() => {
     if (isLoadedSetting) setIsLoadedDNSSettings(isLoadedSetting);
@@ -197,6 +205,7 @@ const DNSSettingsComponent = (props) => {
         <>
           <ToggleButton
             className="settings-dns_toggle-button"
+            dataTestId="customization_dns_settings_toggle_button"
             label={t("CustomDomainName")}
             onChange={onClickToggle}
             isChecked={enable ?? false}
@@ -243,7 +252,7 @@ const DNSSettingsComponent = (props) => {
           <FieldContainer
             id="fieldContainerDNSSettings"
             className="field-container-width settings_unavailable"
-            labelText={`${t("YourCurrentDomain")}`}
+            labelText={`${t("Common:YourCurrentDomain")}`}
             isVertical
           >
             <TextInput
@@ -312,6 +321,7 @@ const DNSSettingsComponent = (props) => {
           <Link
             className="link-learn-more"
             color={currentColorScheme.main?.accent}
+            dataTestId="customization_dns_settings_learn_more"
             target="_blank"
             isHovered
             href={dnsSettingsUrl}
@@ -338,13 +348,13 @@ export const DNSSettings = inject(
     const {
       isLoaded,
       setIsLoadedDNSSettings,
-      initSettings,
       setIsLoaded,
       dnsSettings,
       setIsEnableDNS,
       setDNSName,
       saveDNSSettings,
       isDefaultDNS,
+      initSettings,
     } = common;
 
     const { isCustomizationAvailable } = currentQuotaStore;
@@ -358,7 +368,6 @@ export const DNSSettings = inject(
       setDNSName,
       isLoaded,
       setIsLoadedDNSSettings,
-      initSettings,
       setIsLoaded,
       isSettingPaid: isCustomizationAvailable,
       currentColorScheme,
@@ -368,6 +377,11 @@ export const DNSSettings = inject(
       dnsSettingsUrl,
       currentDeviceType,
       requestSupportUrl,
+      loadBaseInfo: async (page) => {
+        await initSettings(page);
+      },
+      settingsStore,
+      common,
     };
   },
 )(

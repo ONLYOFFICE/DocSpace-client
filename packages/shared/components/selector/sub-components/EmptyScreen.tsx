@@ -51,7 +51,8 @@ import styles from "../Selector.module.scss";
 import { EmptyScreenProps } from "../Selector.types";
 
 const linkStyles = {
-  isHovered: true,
+  noHover: true,
+  isHovered: false,
   type: LinkType.action,
   fontWeight: "600",
   className: "empty-folder_link",
@@ -62,6 +63,7 @@ const EmptyScreen = ({
   withSearch,
   items,
   inputItemVisible,
+  hideBackButton,
 }: EmptyScreenProps) => {
   const {
     emptyScreenImage,
@@ -128,9 +130,7 @@ const EmptyScreen = ({
         {currentHeader}
       </Heading>
 
-      <Text className="empty-description" noSelect>
-        {currentDescription}
-      </Text>
+      <Text className="empty-description">{currentDescription}</Text>
       {createItem ? (
         <div className="buttons">
           <div
@@ -160,15 +160,20 @@ const EmptyScreen = ({
                 : createItem.onBackClick
             }
           >
-            <IconButton
-              className="empty-folder_container-icon"
-              size={12}
-              iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}
-              isFill
-            />
-            <Link {...linkStyles}>
-              {withSearch ? t("Common:ClearFilter") : t("Common:Back")}
-            </Link>
+            {!hideBackButton || withSearch ? (
+              <>
+                <IconButton
+                  className="empty-folder_container-icon"
+                  size={12}
+                  iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}
+                  isFill
+                />
+
+                <Link {...linkStyles}>
+                  {withSearch ? t("Common:ClearFilter") : t("Common:Back")}
+                </Link>
+              </>
+            ) : null}
           </div>
         </div>
       ) : null}

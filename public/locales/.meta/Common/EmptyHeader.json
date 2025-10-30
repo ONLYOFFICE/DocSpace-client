@@ -3,7 +3,7 @@
   "content": "No other accounts here yet",
   "content_en_sha1_hash": "33d8070e7cd9c9b71e0602b9a8086df2b75c21de",
   "created_at": "2025-05-19T21:30:44.859Z",
-  "updated_at": "2025-06-18T17:09:45.990Z",
+  "updated_at": "2025-10-01T15:17:48.517Z",
   "comment": {
     "text": "This translation key is used for an empty header message displayed when there are no accounts or users to show in a specific tab. It appears on the People tab and is translated from \"Common:EmptyHeader\".",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 649,
+      "line_number": 674,
       "context": "emptyScreenHeader={\n emptyScreenHeader ??\n (activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuests\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:EmptyHeader\")\n : t(\"Common:NotFoundGroups\"))\n }\n emptyScreenDescription={\n emptyScreenDescription ??\n (activeTabId === GUESTS_TAB_ID",
       "module": "/packages/shared"
     }

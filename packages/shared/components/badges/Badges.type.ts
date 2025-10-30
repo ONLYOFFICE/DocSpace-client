@@ -35,6 +35,7 @@ import {
 } from "../../enums";
 import { TRoomSecurity } from "../../api/rooms/types";
 import type {
+  TFile,
   TFileSecurity,
   TFileViewAccessibility,
   TFolderSecurity,
@@ -59,6 +60,10 @@ type ItemData = {
   viewAccessibility?: TFileViewAccessibility;
   formFillingStatus?: FileFillingFormStatus;
   customFilterEnabled?: boolean;
+  vectorizationStatus?: TFile["vectorizationStatus"];
+  lockedBy?: string;
+  locked?: boolean;
+  isFavorite?: boolean;
 };
 
 export type BadgesProps = {
@@ -74,12 +79,13 @@ export type BadgesProps = {
   setConvertDialogVisible?: () => void;
   onUnpinClick?: () => void;
   onUnmuteClick?: () => void;
+  onClickLock?: () => void;
   isMutedBadge?: boolean;
   isTrashFolder?: boolean;
   isArchiveFolderRoot?: boolean;
   onCopyPrimaryLink?: () => void;
   isArchiveFolder?: boolean;
-  isRecentTab?: boolean;
+  isRecentFolder?: boolean;
   canEditing?: boolean;
   isTemplatesFolder?: boolean;
   onCreateRoom?: () => void;
@@ -87,6 +93,9 @@ export type BadgesProps = {
   className?: string;
   isExtsCustomFilter?: boolean;
   customFilterExternalLink?: string;
+  onRetryVectorization?: () => void;
+  onClickFavorite?: () => void;
+  isPublicRoom?: boolean;
 };
 
 export type BadgeWrapperProps = {

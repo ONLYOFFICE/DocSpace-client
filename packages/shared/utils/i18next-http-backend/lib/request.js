@@ -24,10 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable guard-for-in */
-/* eslint-disable no-restricted-syntax */
+
 import { defaults, hasXMLHttpRequest } from "./utils";
 import * as fetchNode from "./getFetch.cjs";
 

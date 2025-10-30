@@ -3,7 +3,7 @@
   "content": "Client-Side Encryption",
   "content_en_sha1_hash": "b8e10276e48f038db512681466dbafb12118bd5c",
   "created_at": "2025-05-26T07:15:40.353Z",
-  "updated_at": "2025-06-30T12:20:31.688Z",
+  "updated_at": "2025-09-07T07:53:15.432Z",
   "comment": {
     "text": "Client-Side Encryption is a setting that allows files to be encrypted locally on the client's device before being sent to Amazon. This option enables users to manage their own encryption keys. It appears in settings related to file uploads and storage.",
     "is_auto": true,

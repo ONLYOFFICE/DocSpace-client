@@ -3,13 +3,19 @@
   "content": "Tags removed.",
   "content_en_sha1_hash": "453b4c78053004eb819254db86b4ee03ae201130",
   "created_at": "2025-05-19T21:30:54.773Z",
-  "updated_at": "2025-06-30T12:20:31.345Z",
+  "updated_at": "2025-10-13T13:22:35.721Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that tags have been removed from a room. It appears in the UI when an action involving room tags has been performed. Translators should provide a neutral or descriptive phrase conveying the removal of tags.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:41:10.515Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 210,
+      "context": "/>\n );\n case FeedActionKeys.AddedRoomTags:\n return t(\"InfoPanel:AddedRoomTags\");\n case FeedActionKeys.DeletedRoomTags:\n return t(\"InfoPanel:DeletedRoomTags\");\n case FeedActionKeys.RoomLogoCreated:\n case FeedActionKeys.RoomColorChanged:\n case FeedActionKeys.RoomCoverChanged:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomLogoDeleted:",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 180,

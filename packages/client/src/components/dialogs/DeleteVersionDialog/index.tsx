@@ -38,10 +38,10 @@ interface DeleteVersionDialogProps {
   setIsVisible: (visible: boolean) => void;
   tReady: boolean;
   fileId: string;
-  versionSelectedForDeletion: any;
+  versionSelectedForDeletion: number;
   onDeleteVersionFile: (
     fileId: number,
-    versionSelectedForDeletion: any,
+    versionSelectedForDeletion: number[],
   ) => void;
 }
 
@@ -87,7 +87,7 @@ const DeleteVersionDialogComponent: React.FC<DeleteVersionDialogProps> = (
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
-          <Text lineHeight="20px" noSelect>
+          <Text lineHeight="20px">
             {t("VersionHistory:DeleteVersionDescription")}
           </Text>
         </div>

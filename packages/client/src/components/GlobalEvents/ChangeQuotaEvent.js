@@ -43,14 +43,11 @@ const ChangeQuotaEvent = (props) => {
     headerTitle,
     onClose,
     setCustomRoomQuota,
+    setCustomAIAgentQuota,
     successCallback,
     abortCallback,
 
     inRoom,
-    setNewInfoPanelSelection,
-    needResetSelection,
-    getPeopleListItem,
-    setInfoPanelSelection,
   } = props;
 
   const { t } = useTranslation("Common");
@@ -65,7 +62,9 @@ const ChangeQuotaEvent = (props) => {
   const updateFunction = () => {
     return type === "user"
       ? api.people.setCustomUserQuota(ids, size)
-      : setCustomRoomQuota(ids, size, inRoom);
+      : type === "agent"
+        ? setCustomAIAgentQuota(ids, size, inRoom)
+        : setCustomRoomQuota(ids, size, inRoom);
   };
 
   const onSaveClick = async () => {
@@ -82,16 +81,6 @@ const ChangeQuotaEvent = (props) => {
       toastr.success(t("Common:StorageQuotaSet"));
 
       successCallback && successCallback(items);
-
-      if (!needResetSelection) {
-        if (type === "user") {
-          const user = getPeopleListItem(items[0]);
-
-          setInfoPanelSelection(user);
-        } else {
-          setNewInfoPanelSelection();
-        }
-      }
     } catch (e) {
       toastr.error(e);
 
@@ -131,28 +120,32 @@ const ChangeQuotaEvent = (props) => {
 };
 
 export default inject(
-  ({ peopleStore, filesStore, infoPanelStore }, { type }) => {
+  (
+    { peopleStore, filesStore, infoPanelStore, selectedFolderStore },
+    { type },
+  ) => {
     const { usersStore } = peopleStore;
     const { getPeopleListItem, needResetUserSelection } = usersStore;
-    const { setCustomRoomQuota, needResetFilesSelection } = filesStore;
-
     const {
-      infoPanelSelection,
-      setNewInfoPanelSelection,
-      setInfoPanelSelection,
-    } = infoPanelStore;
+      setCustomRoomQuota,
+      setCustomAIAgentQuota,
+      needResetFilesSelection,
+    } = filesStore;
 
-    const inRoom = !!infoPanelSelection?.navigationPath;
+    const { isVisible: infoPanelVisible } = infoPanelStore;
+
+    const inRoom = !!selectedFolderStore?.navigationPath;
     const needResetSelection =
-      type === "user" ? needResetUserSelection : needResetFilesSelection;
+      type === "user"
+        ? !infoPanelVisible || needResetUserSelection
+        : needResetFilesSelection;
 
     return {
       setCustomRoomQuota,
+      setCustomAIAgentQuota,
       inRoom,
-      setNewInfoPanelSelection,
       getPeopleListItem,
       needResetSelection,
-      setInfoPanelSelection,
     };
   },
 )(observer(ChangeQuotaEvent));

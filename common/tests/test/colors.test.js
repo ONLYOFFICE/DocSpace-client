@@ -34,42 +34,58 @@ beforeAll(() => {
   console.log(`Base path = ${BASE_DIR}`);
 
   const workspaces = getWorkSpaces();
-  const searchPattern = /\.(js|jsx|ts|tsx)$/;
+
+  const jsPattern = /\.(js|jsx|ts|tsx)$/;
+  const scssPattern = /\.(scss|sass|css)$/;
+
+  const excludeDirs = [
+    ".nx",
+    "e2e",
+    ".yarn",
+    ".github",
+    ".vscode",
+    ".git",
+    "__mocks__",
+    "dist",
+    "test",
+    "tests",
+    ".next",
+    "campaigns",
+    "storybook-static",
+    "node_modules",
+    ".meta",
+  ];
+
+  const excludePatterns = [
+    "themes",
+    ".test.",
+    ".stories.",
+    path.normalize("packages/shared/utils/encoder.ts"),
+    path.normalize(
+      "packages/shared/components/error-container/ErrorContainer.tsx"
+    ),
+    path.normalize("packages/shared/styles/variables/_colors.scss"),
+    path.normalize("packages/client/src/components/SmartBanner/main.css"),
+  ];
+
   const javascripts = workspaces.flatMap((wsPath) => {
     const clientDir = path.resolve(BASE_DIR, wsPath);
-
-    const excludeDirs = [
-      ".nx",
-      "e2e",
-      ".yarn",
-      ".github",
-      ".vscode",
-      ".git",
-      "__mocks__",
-      "dist",
-      "test",
-      "tests",
-      ".next",
-      "campaigns",
-      "storybook-static",
-      "node_modules",
-      ".meta",
-    ];
-
-    const excludePatterns = [
-      "themes",
-      ".test.",
-      ".stories.",
-      path.normalize("packages/shared/utils/encoder.ts"),
-      path.normalize(
-        "packages/shared/components/error-container/ErrorContainer.tsx"
-      ),
-    ];
 
     return getAllFiles(clientDir, excludeDirs).filter(
       (filePath) =>
         filePath &&
-        searchPattern.test(filePath) &&
+        jsPattern.test(filePath) &&
+        !excludePatterns.some((pattern) => filePath.includes(pattern))
+    );
+  });
+
+  const scssFiles = workspaces.flatMap((wsPath) => {
+    const clientDir = path.resolve(BASE_DIR, wsPath);
+
+    return getAllFiles(clientDir, excludeDirs).filter(
+      (filePath) =>
+        filePath &&
+        scssPattern.test(filePath) &&
         !excludePatterns.some((pattern) => filePath.includes(pattern))
     );
   });
@@ -77,10 +93,20 @@ beforeAll(() => {
   console.log(
     `Found javascripts by js(x)|ts(x) filter = ${javascripts.length}.`
   );
+  console.log(`Found styles by scss|sass|css filter = ${scssFiles.length}.`);
 
   const hexColorPattern = /#(?:[0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})\b/g;
 
   javascripts.forEach((filePath) => {
+    const content = fs.readFileSync(filePath, "utf8");
+
+    const matches = content.match(hexColorPattern) || [];
+    if (matches.length > 0) {
+      hexColorIssues[filePath] = matches;
+    }
+  });
+
+  scssFiles.forEach((filePath) => {
     const content = fs.readFileSync(filePath, "utf8");
 
     const matches = content.match(hexColorPattern) || [];

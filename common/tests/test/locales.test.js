@@ -43,6 +43,7 @@ let notTranslatedToasts = [];
 let notTranslatedProps = [];
 let moduleFolders = [];
 let commonTranslations = [];
+let i18nFiles = [];
 
 const BASE_LANGUAGES = [
   "de",
@@ -146,9 +147,14 @@ beforeAll(() => {
         filePath &&
         searchPattern.test(filePath) &&
         !filePath.includes(".test.") &&
+        !filePath.includes("mockData.") &&
         !filePath.includes(".stories.")
     );
   });
+
+  i18nFiles = javascripts.filter(
+    (filePath) => filePath.endsWith("/i18n.js") || filePath.endsWith("/i18n.ts")
+  );
 
   console.log(
     `Found javascripts by js(x)|ts(x) filter = ${javascripts.length}.`
@@ -659,10 +665,12 @@ describe("Locales Tests", () => {
 
       module.availableLanguages.forEach((lng) => {
         const translationItems = lng.translations
-        .filter((elem) => !skipForbiddenKeys.includes(elem.key))
-        .filter((f) =>
-          forbiddenElements.some((elem) => f.value.toUpperCase().includes(elem))
-        );
+          .filter((elem) => !skipForbiddenKeys.includes(elem.key))
+          .filter((f) =>
+            forbiddenElements.some((elem) =>
+              f.value.toUpperCase().includes(elem)
+            )
+          );
 
         if (!translationItems.length) return;
 
@@ -1056,5 +1064,130 @@ describe("Locales Tests", () => {
     }
 
     expect(incorrectUsages.length, message).toBe(0);
+  });
+
+  test("MissingNamespacesTest: i18n namespace files should exist in public/locales", () => {
+    let exists = false;
+    let message = "";
+    let i = 0;
+
+    // // Find all i18n configuration files
+    // const i18nFiles = workspaces.flatMap((wsPath) => {
+    //   const clientDir = path.resolve(BASE_DIR, wsPath);
+
+    //   return getAllFiles(clientDir, [
+    //     ".nx",
+    //     "e2e",
+    //     ".yarn",
+    //     ".github",
+    //     ".vscode",
+    //     ".git",
+    //     "__mocks__",
+    //     "dist",
+    //     "test",
+    //     "tests",
+    //     ".next",
+    //     "campaigns",
+    //     "storybook-static",
+    //     "node_modules",
+    //     ".meta",
+    //   ]).filter(
+    //     (filePath) =>
+    //       filePath &&
+    //       (filePath.endsWith("/i18n.js") || filePath.endsWith("/i18n.ts"))
+    //   );
+    // });
+
+    const missingNamespaces = [];
+
+    i18nFiles.forEach((i18nFile) => {
+      try {
+        const content = fs.readFileSync(i18nFile, "utf8");
+
+        // Extract namespaces from ns array using regex
+        const nsMatch = content.match(/ns:\s*\[([\s\S]*?)\]/);
+        if (!nsMatch) return;
+
+        // Parse the namespace array
+        const nsArrayContent = nsMatch[1];
+        const namespaces = nsArrayContent
+          .split(",")
+          .map((ns) => ns.trim().replace(/['"]/g, ""))
+          .filter((ns) => ns && ns !== "");
+
+        // Find the corresponding public/locales directory for this i18n file
+        const packagePath = i18nFile.replace(/\/src\/.*$/, "");
+        const packageLocalesPath = path.join(
+          packagePath,
+          "public",
+          "locales",
+          "en"
+        );
+
+        // Also check the shared root locales directory
+        const rootLocalesPath = path.join(BASE_DIR, "public", "locales", "en");
+
+        // Check each namespace
+        namespaces.forEach((namespace) => {
+          const packageNamespaceFile = path.join(
+            packageLocalesPath,
+            `${namespace}.json`
+          );
+          const rootNamespaceFile = path.join(
+            rootLocalesPath,
+            `${namespace}.json`
+          );
+
+          // Check if namespace file exists in either package-specific or root locales directory
+          const existsInPackage = fs.existsSync(packageNamespaceFile);
+          const existsInRoot = fs.existsSync(rootNamespaceFile);
+
+          if (!existsInPackage && !existsInRoot) {
+            // Determine which directory to suggest based on what exists
+            let suggestedPath, suggestedDir;
+            if (fs.existsSync(packageLocalesPath)) {
+              suggestedPath = path.relative(BASE_DIR, packageNamespaceFile);
+              suggestedDir = path.relative(BASE_DIR, packageLocalesPath);
+            } else {
+              suggestedPath = path.relative(BASE_DIR, rootNamespaceFile);
+              suggestedDir = path.relative(BASE_DIR, rootLocalesPath);
+            }
+
+            missingNamespaces.push({
+              i18nFile: path.relative(BASE_DIR, i18nFile),
+              namespace,
+              expectedPath: suggestedPath,
+              localesDir: suggestedDir,
+            });
+          }
+        });
+      } catch (error) {
+        console.warn(`Failed to parse i18n file ${i18nFile}: ${error.message}`);
+      }
+    });
+
+    if (missingNamespaces.length > 0) {
+      exists = true;
+      message = `Found ${missingNamespaces.length} missing namespace files referenced in i18n configurations:\n\n`;
+
+      missingNamespaces.forEach((missing) => {
+        message += `${++i}. i18n file: ${missing.i18nFile}\n`;
+        message += `   Missing namespace: "${missing.namespace}"\n`;
+        message += `   Expected file: ${missing.expectedPath}\n`;
+        message += `   Locales directory: ${missing.localesDir}\n\n`;
+      });
+
+      message +=
+        "These namespaces are referenced in i18n configuration but their corresponding JSON files don't exist.\n";
+      message +=
+        "This will cause 404 errors when the application tries to load these translation files.\n\n";
+      message += "To fix this issue:\n";
+      message +=
+        "1. Create the missing JSON files with appropriate translations, OR\n";
+      message +=
+        "2. Remove the unused namespace references from the i18n configuration files\n";
+    }
+
+    expect(exists, message).toBe(false);
   });
 });

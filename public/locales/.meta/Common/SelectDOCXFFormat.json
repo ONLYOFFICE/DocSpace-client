@@ -3,7 +3,7 @@
   "content": "Select .DOCXF file",
   "content_en_sha1_hash": "c87578509cc70195115bab940d290a60e663f6d1",
   "created_at": "2025-05-19T21:30:48.383Z",
-  "updated_at": "2025-05-26T07:57:32.169Z",
+  "updated_at": "2025-10-27T16:14:33.137Z",
   "comment": {
     "text": "The translation key \"SelectDOCXFFormat\" is used to display a label for selecting .DOCXF file formats in a UI component. It appears on a dialog related to file filtering and should be translated to indicate the specific format being selected.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesPanels/index.js",
-      "line_number": 202,
+      "line_number": 214,
       "context": "};\n \n const descriptionTextFileFormRoomDialog = useMemo(() => {\n const text = {\n [FilesSelectorFilterTypes.DOCX]: t(\"Common:SelectDOCXFormat\"),\n // [FilesSelectorFilterTypes.DOCXF]: t(\"Common:SelectDOCXFFormat\"),\n [FilesSelectorFilterTypes.PDF]: t(\"Common:SelectPDFFormat\"),\n [FilterType.PDFForm]: t(\"Common:SelectPDFFormat\"),\n };\n \n return text[selectFileFormRoomFilterParam];",
       "module": "/packages/client"
     }

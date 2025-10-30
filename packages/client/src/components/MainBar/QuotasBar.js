@@ -99,7 +99,8 @@ const QuotasBar = ({
   };
 
   const getUserTariffLimit = () => {
-    if (!isAdmin) return t("UserTariffReached");
+    if (!isAdmin)
+      return t("UserTariffReached", { productName: t("Common:ProductName") });
 
     return (
       <Trans

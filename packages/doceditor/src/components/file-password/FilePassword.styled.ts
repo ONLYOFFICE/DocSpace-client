@@ -42,8 +42,9 @@ export const StyledPage = styled.div`
   background-size: cover;
 
   .logo-wrapper {
+    max-width: 386px;
     display: block;
-    padding-bottom: 64px;
+    padding-bottom: 40px;
   }
 
   @media ${mobile} {
@@ -167,6 +168,7 @@ export const StyledBody = styled.div`
     align-items: center;
     justify-content: center;
     padding-bottom: 64px;
+    max-width: 386px;
   }
 
   .password-field-wrapper {
@@ -188,6 +190,19 @@ export const StyledBody = styled.div`
 
   .phone-title {
     margin-bottom: 8px;
+  }
+`;
+
+export const Container = styled.section`
+  display: flex;
+  flex-direction: column;
+
+  height: fit-content;
+  min-height: 100%;
+
+  & > #public-password-page {
+    flex: 1 0 auto;
+    min-height: 0;
   }
 `;
 

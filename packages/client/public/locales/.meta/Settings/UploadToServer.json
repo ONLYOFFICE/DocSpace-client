@@ -3,7 +3,7 @@
   "content": "Upload to server",
   "content_en_sha1_hash": "64e8bb3b5f86ea7da45c956345a760d2533c5442",
   "created_at": "2025-05-19T21:30:53.077Z",
-  "updated_at": "2025-05-26T07:57:32.541Z",
+  "updated_at": "2025-09-07T07:53:15.243Z",
   "comment": {
     "text": "Upload to server is used as a button label on a save cancel buttons component in the data import process. It is displayed when saving file data and appears in a dialog or modal context.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 470,
-      "context": "{isNetworkError ? (\n <SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onUploadToServer}\n onCancelClick={returnToProviders}\n saveButtonLabel={t(\"Settings:UploadToServer\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n />\n ) : (",
+      "line_number": 472,
+      "context": "{isNetworkError ? (\n <SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onUploadToServer}\n onCancelClick={returnToProviders}\n saveButtonLabel={t(\"Settings:UploadToServer\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n saveButtonDataTestId=\"upload_to_server_button\"\n cancelButtonDataTestId=\"back_to_providers_button\"",
       "module": "/packages/client"
     }
   ],

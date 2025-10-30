@@ -8,11 +8,13 @@
   },
   "scripts": {
     "test": "jest",
+    "test:lefthook": "cross-env SKIP_BASE_LANGUAGES_TEST=true jest",
     "test:only-base-languages": "jest locales.test.js --testNamePattern=\"NotTranslatedOnBaseLanguages\"",
     "test:skip-base-languages": "cross-env SKIP_BASE_LANGUAGES_TEST=true jest locales.test.js",
     "test:locales": "jest locales.test.js",
     "test:images": "jest images.test.js",
     "test:colors": "jest colors.test.js",
+    "test:ascii": "jest ascii.test.js",
     "test:dependencies": "jest dependencies.test.js",
     "open-report": "open-cli reports/tests-results.html"
   },

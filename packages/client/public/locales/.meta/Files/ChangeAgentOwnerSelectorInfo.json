@@ -1,0 +1,28 @@
+{
+  "key_path": "ChangeAgentOwnerSelectorInfo",
+  "content": "Only a room admin or a {{productName}} admin can become the owner of the agent",
+  "content_en_sha1_hash": "6e4764fdcff10de9f511999001911a47f9a55443",
+  "created_at": "2025-10-27T16:14:30.027Z",
+  "updated_at": "2025-10-27T17:59:36.073Z",
+  "comment": {
+    "text": "This text explains who is eligible to become the owner of a Change Agent. It appears within a panel (likely a dialog or selector) used to change ownership, and informs users that only room admins or a {{productName}} admin can assume that role.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T17:59:36.073Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
+      "line_number": 124,
+      "context": "const headerLabel = isAIAgent\n ? t(\"Files:ChangeTheAgentOwner\")\n : t(\"Files:ChangeTheRoomOwner\");\n \n const infoText = isAIAgent\n ? t(\"Files:ChangeAgentOwnerSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n });",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

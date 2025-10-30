@@ -297,6 +297,7 @@ const Bar = (props) => {
       setHtmlLink(htmlUrl);
       setCampaigns(currentBar);
     } catch (e) {
+      console.error(e);
       updateBanner();
     }
 
@@ -311,6 +312,10 @@ const Bar = (props) => {
       clearInterval(updateInterval);
     };
   }, []);
+
+  useEffect(() => {
+    updateBanner();
+  }, [t]);
 
   const getCurrentBar = () => {
     if (

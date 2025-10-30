@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useTheme } from "styled-components";
 import { withTranslation, Trans } from "react-i18next";
+import { Badge } from "@docspace/shared/components/badge";
 import { toastr } from "@docspace/shared/components/toast";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { TextInput } from "@docspace/shared/components/text-input";
@@ -40,6 +42,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import { globalColors } from "@docspace/shared/themes";
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import { StyledSettingsComponent } from "./StyledSettings";
 import checkScrollSettingsBlock from "../utils";
@@ -54,9 +57,9 @@ const PortalRenamingComponent = (props) => {
     setIsLoadedPortalRenaming,
     isLoadedPage,
     tenantAlias,
-    initSettings,
-    setIsLoaded,
     domain,
+    isSettingPaid,
+    standalone,
     currentColorScheme,
     renamingSettingsUrl,
     domainValidator,
@@ -103,19 +106,15 @@ const PortalRenamingComponent = (props) => {
 
   const [isShowModal, setIsShowModal] = useState(false);
 
+  const theme = useTheme();
+
   const checkInnerWidth = useCallback(() => {
     if (!isMobileDevice()) {
       setIsCustomizationView(true);
 
-      const currentUrl = window.location.href.replace(
-        window.location.origin,
-        "",
-      );
-
-      const newUrl = "/portal-settings/customization/general";
-      if (newUrl === currentUrl) return;
-
-      navigate(newUrl);
+      if (location.pathname.includes("portal-renaming")) {
+        navigate("/portal-settings/customization/general");
+      }
     } else {
       setIsCustomizationView(false);
     }
@@ -126,8 +125,6 @@ const PortalRenamingComponent = (props) => {
       t("PortalRenaming", { productName: t("Common:ProductName") }),
     );
     setPortalName(portalNameInitially);
-    const page = isMobileView ? "language-and-time-zone" : "general";
-    if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
 
     const checkScroll = checkScrollSettingsBlock();
     checkInnerWidth();
@@ -307,8 +304,11 @@ const PortalRenamingComponent = (props) => {
           id="textInputContainerPortalRenaming"
           scale
           value={portalName}
+          testId="customization_portal_renaming_text_input"
           onChange={onChangePortalName}
-          isDisabled={isLoadingPortalNameSave}
+          isDisabled={
+            (!isSettingPaid && !standalone) || isLoadingPortalNameSave
+          }
           hasError={hasError}
           placeholder={`${t("Common:EnterName")}`}
         />
@@ -323,6 +323,8 @@ const PortalRenamingComponent = (props) => {
     <StyledSettingsComponent
       hasScroll={hasScroll}
       className="category-item-wrapper"
+      isSettingPaid={isSettingPaid}
+      standalone={standalone}
       withoutExternalLink={!renamingSettingsUrl}
     >
       {isCustomizationView && !isMobileView ? (
@@ -330,8 +332,22 @@ const PortalRenamingComponent = (props) => {
           <div className="category-item-title">
             {t("PortalRenaming", { productName: t("Common:ProductName") })}
           </div>
+          {!isSettingPaid && !standalone ? (
+            <Badge
+              className="paid-badge"
+              fontWeight="700"
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.favoritesStatus
+                  : globalColors.favoriteStatusDark
+              }
+              label={t("Common:Paid")}
+              isPaidBadge
+            />
+          ) : null}
         </div>
       ) : null}
+
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
           {t("PortalRenamingDescriptionText", { domain })}
@@ -346,6 +362,7 @@ const PortalRenamingComponent = (props) => {
             target="_blank"
             isHovered
             href={renamingSettingsUrl}
+            dataTestId="portal_renaming_learn_more"
           >
             {t("Common:LearnMore")}
           </Link>
@@ -361,12 +378,14 @@ const PortalRenamingComponent = (props) => {
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         displaySettings
         hasScroll={hasScroll}
         saveButtonDisabled={!!errorValue}
         additionalClassSaveButton="portal-renaming-save"
         additionalClassCancelButton="portal-renaming-cancel"
+        saveButtonDataTestId="customization_portal_renaming_save_button"
+        cancelButtonDataTestId="customization_portal_renaming_cancel_button"
       />
       <PortalRenamingDialog
         visible={isShowModal}
@@ -378,41 +397,37 @@ const PortalRenamingComponent = (props) => {
   );
 };
 
-export const PortalRenaming = inject(({ settingsStore, setup, common }) => {
-  const {
-    theme,
-    tenantAlias,
-    baseDomain,
-    currentColorScheme,
-    renamingSettingsUrl,
-    domainValidator,
-  } = settingsStore;
-  const { setPortalRename } = setup;
-  const {
-    isLoaded,
-    setIsLoadedPortalRenaming,
-    initSettings,
-    setIsLoaded,
-    setPortalName,
-    portalName,
-  } = common;
+export const PortalRenaming = inject(
+  ({ settingsStore, setup, common, currentQuotaStore }) => {
+    const {
+      tenantAlias,
+      baseDomain,
+      currentColorScheme,
+      standalone,
+      renamingSettingsUrl,
+      domainValidator,
+    } = settingsStore;
+    const { setPortalRename } = setup;
+    const { isLoaded, setIsLoadedPortalRenaming, setPortalName, portalName } =
+      common;
+    const { isCustomizationAvailable } = currentQuotaStore;
 
-  return {
-    theme,
-    setPortalRename,
-    isLoaded,
-    setIsLoadedPortalRenaming,
-    tenantAlias,
-    initSettings,
-    setIsLoaded,
-    domain: baseDomain,
-    currentColorScheme,
-    renamingSettingsUrl,
-    domainValidator,
-    portalName,
-    setPortalName,
-  };
-})(
+    return {
+      setPortalRename,
+      isLoaded,
+      setIsLoadedPortalRenaming,
+      tenantAlias,
+      domain: baseDomain,
+      currentColorScheme,
+      renamingSettingsUrl,
+      domainValidator,
+      portalName,
+      setPortalName,
+      isSettingPaid: isCustomizationAvailable,
+      standalone,
+    };
+  },
+)(
   withLoading(
     withTranslation(["Settings", "Common"])(observer(PortalRenamingComponent)),
   ),

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ThemeProvider } from "@docspace/shared/components/theme-provider";
@@ -38,15 +38,20 @@ const ThemeProviderWrapper = ({
 }: PropsWithChildren<Partial<Omit<ThemeProviderProps, "children">>>) => {
   const { i18n } = useTranslation();
 
+  const currentLang = i18n.language;
+  const interfaceDirection = i18n.dir(currentLang);
+  const fontFamily = getFontFamilyDependingOnLanguage(currentLang);
+
+  const themeWrapper = useMemo(() => {
+    return {
+      ...(theme! ?? {}),
+      interfaceDirection,
+      fontFamily,
+    };
+  }, [theme, interfaceDirection, fontFamily]);
+
   return (
-    <ThemeProvider
-      theme={{
-        ...theme!,
-        interfaceDirection: i18n.dir(),
-        fontFamily: getFontFamilyDependingOnLanguage(i18n.language),
-      }}
-      currentColorScheme={currentColorScheme}
-    >
+    <ThemeProvider theme={themeWrapper} currentColorScheme={currentColorScheme}>
       {children}
     </ThemeProvider>
   );

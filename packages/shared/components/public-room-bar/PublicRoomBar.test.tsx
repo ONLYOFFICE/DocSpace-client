@@ -40,6 +40,7 @@ describe("PublicRoomBar", () => {
   });
 
   it("does not render close button when onClose is not provided", () => {
+    // biome-ignore lint/correctness/noUnusedVariables: TODO fix
     const { onClose, ...propsWithoutClose } = defaultProps;
     render(<PublicRoomBar {...propsWithoutClose} />);
 

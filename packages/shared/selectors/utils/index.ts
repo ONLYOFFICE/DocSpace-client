@@ -53,6 +53,7 @@ export const convertRoomsToItems: (
       rootFolderType,
       shared,
       lifetime,
+      quotaLimit,
     } = room;
 
     const icon = logo?.medium || "";
@@ -81,6 +82,9 @@ export const convertRoomsToItems: (
       shared,
       lifetimeTooltip,
       cover,
+      disableMultiSelect: true,
+
+      quotaLimit,
       ...iconProp,
     };
   });
@@ -181,6 +185,7 @@ export const convertFoldersToItems: (
       rootFolderType,
       isFolder: true,
       isDisabled,
+      disableMultiSelect: true,
     };
   });
 

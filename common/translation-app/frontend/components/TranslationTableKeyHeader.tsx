@@ -10,7 +10,7 @@ interface TranslationTableKeyHeaderProps {
   handleTranslateToAllLanguages: (keyPath: string) => void;
   translating: boolean;
   handleKeyContextMenu: (e: React.MouseEvent, keyPath: string) => void;
-  keyContainerRef: React.RefObject<HTMLDivElement>;
+  keyContainerRef: React.RefObject<HTMLDivElement | null>;
   projectName: string;
   namespace: string;
 }
@@ -118,7 +118,7 @@ const TranslationTableKeyHeader: React.FC<TranslationTableKeyHeaderProps> = ({
       {showKeyInfo && (
         <div className="mt-1 mb-2 pl-7 pr-2 border-l-2 border-gray-200 dark:border-gray-700">
           <TranslationKeyInfo
-            translationKey={currentEntry.path}
+            translationKey={currentEntry?.path}
             namespace={namespace}
             projectName={projectName}
           />

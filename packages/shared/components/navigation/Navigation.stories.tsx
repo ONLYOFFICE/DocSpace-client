@@ -1,9 +1,9 @@
-/* eslint-disable no-console */
 import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
 import Navigation from "./Navigation";
 import { TNavigationProps } from "./Navigation.types";
 import { DeviceType } from "../../enums";
+import "./Navigation.stories.scss";
 
 export default {
   title: "Layout Components/Navigation",
@@ -17,7 +17,15 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<TNavigationProps> = (args) => <Navigation {...args} />;
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
+  <div style={{ height: "240px" }}>{children}</div>
+);
+
+const Template: StoryFn<TNavigationProps> = (args) => (
+  <Wrapper>
+    <Navigation {...args} />
+  </Wrapper>
+);
 
 export const Default = Template.bind({});
 Default.args = {
@@ -66,13 +74,15 @@ Default.args = {
   isPublicRoom: false,
   titleIcon: "folder",
   currentDeviceType: DeviceType.desktop,
-  rootRoomTitle: "Root Room",
+  rootRoomTitle: "",
   showTitle: true,
+  showTitleInDropBox: false,
   navigationButtonLabel: "Navigation",
   onNavigationButtonClick: () => console.log("Navigation button clicked"),
   tariffBar: <div>Tariff information</div>,
   showNavigationButton: true,
   titleIconTooltip: "Folder tooltip",
+  badgeLabel: "Beta",
   onContextOptionsClick: () => console.log("Context options clicked"),
   onLogoClick: () => console.log("Logo clicked"),
 };

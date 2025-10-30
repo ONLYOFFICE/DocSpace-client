@@ -3,7 +3,7 @@
   "content": "Edit application",
   "content_en_sha1_hash": "4e92dd1cb88d493a3194d75e040dc94014a8d4c3",
   "created_at": "2025-05-19T21:30:53.873Z",
-  "updated_at": "2025-05-24T07:30:14.355Z",
+  "updated_at": "2025-08-04T07:30:01.422Z",
   "comment": {
     "text": "The \"EditApp\" translation key is used to display either \"Edit application\" or \"New App\", depending on the UI state, in a header section within the OAuth settings page. It appears as a button and toggle label. The text's purpose is to inform users of their action being performed on an application.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/OAuthSectionHeader/index.tsx",
-      "line_number": 69,
-      "context": "isFill\n onClick={onBack}\n className=\"arrow-button\"\n />\n \n {isEdit ? t(\"EditApp\") : t(\"NewApp\")}\n </div>\n </Heading>\n </HeaderContainer>\n </StyledContainer>\n );",
+      "line_number": 70,
+      "context": "onClick={onBack}\n className=\"arrow-button\"\n dataTestId=\"arrow_back_button\"\n />\n \n {isEdit ? t(\"EditApp\") : t(\"NewApp\")}\n </div>\n </Heading>\n </HeaderContainer>\n </StyledContainer>\n );",
       "module": "/packages/client"
     }
   ],

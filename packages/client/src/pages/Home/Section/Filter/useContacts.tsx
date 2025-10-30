@@ -177,6 +177,9 @@ type UseContactsFilterProps = {
   standalone: boolean;
   showStorageInfo: boolean;
   isDefaultRoomsQuotaSet: boolean;
+
+  groupsStore: GroupsStore;
+  usersStore: UsersStore;
 };
 
 export const useContactsFilter = ({
@@ -196,6 +199,8 @@ export const useContactsFilter = ({
   standalone,
   showStorageInfo,
   isDefaultRoomsQuotaSet,
+  groupsStore,
+  usersStore,
 }: UseContactsFilterProps) => {
   const navigate = useNavigate();
   const { groupId } = useParams();
@@ -274,7 +279,12 @@ export const useContactsFilter = ({
 
   const onContactsSearch = React.useCallback(
     (searchValue: string) => {
-      const newFilter = isGroups ? groupsFilter.clone() : usersFilter.clone();
+      const currentFilterGroups = groupsStore.groupsFilter;
+      const currentFilterUsers = usersStore.filter;
+
+      const newFilter = isGroups
+        ? currentFilterGroups.clone()
+        : currentFilterUsers.clone();
 
       const url = getContactsUrl(contactsTab, usersFilter.group ?? undefined);
 

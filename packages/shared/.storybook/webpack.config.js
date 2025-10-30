@@ -26,7 +26,7 @@ module.exports = ({ config }) => {
   config.output.assetModuleFilename = (pathData) => {
     //console.log({ pathData });
 
-    let result = pathData.filename
+    const result = pathData.filename
       .substr(pathData.filename.indexOf("public/"))
       .split("/")
       .slice(1);
@@ -96,7 +96,17 @@ module.exports = ({ config }) => {
         loader: "@svgr/webpack",
         options: {
           svgoConfig: {
-            plugins: [{ removeViewBox: false }],
+            plugins: [
+              {
+                name: "preset-default",
+                params: {
+                  overrides: {
+                    removeViewBox: false,
+                    cleanupIds: false,
+                  },
+                },
+              },
+            ],
           },
         },
       },

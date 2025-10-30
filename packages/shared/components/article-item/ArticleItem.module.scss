@@ -299,10 +299,28 @@
 
   &.active {
     background-color: var(--article-item-sibling-active-bg-color);
+
+    // Animated progress background when animating
+    &.animatedProgress {
+      height: 100%;
+      width: 10%;
+
+      animation: progressWidth 2s ease-out forwards;
+    }
+
+    &.animatedFinish {
+      width: var(--end-width, 90%);
+      animation: progressWidthFinish 0.4s ease-out forwards;
+    }
+
+    // Show transparent background when ready for animation
+    &.animationReady {
+      background-color: transparent;
+    }
   }
 
   &:not(.mobileDevice) {
-    &:hover {
+    &:hover:not(.animationReady):not(.animatedProgress) {
       background-color: var(--article-item-sibling-hover-bg-color);
     }
   }
@@ -310,7 +328,7 @@
   &.dragging {
     background: var(--article-item-dnd-bg-color) !important;
 
-    &:hover {
+    &:hover:not(.animationReady):not(.animatedProgress) {
       background: var(--article-item-dnd-hover-bg-color) !important;
     }
   }
@@ -318,6 +336,10 @@
   &.dragActive {
     background: var(--article-item-dnd-hover-bg-color) !important;
   }
+}
+
+:global(.ai-agents):has(.articleItemBadgeWrapper:hover) .articleItemSibling {
+  background-color: var(--article-item-sibling-hover-bg-color);
 }
 
 .articleItemContainer {
@@ -339,6 +361,20 @@
   &.showText {
     justify-content: space-between;
     padding: 0 12px;
+  }
+
+  &:global(.ai-agents) {
+    justify-content: flex-start;
+
+    .articleItemText {
+      width: auto !important;
+    }
+  }
+
+  &:global(.ai-agents):not(.showText) {
+    @include mixins.tablet {
+      justify-content: center;
+    }
   }
 
   &.endOfBlock {
@@ -383,4 +419,22 @@
 .storyCatalogWrapper {
   background-color: var(--story-wrapper-bg-color);
   padding: 15px;
+}
+
+@keyframes progressWidth {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 90%;
+  }
+}
+
+@keyframes progressWidthFinish {
+  0% {
+    width: var(--end-width, 90%);
+  }
+  100% {
+    width: 100%;
+  }
 }

@@ -34,6 +34,7 @@ import {
   FilterType,
   FolderType,
   RoomsType,
+  SearchArea,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 
@@ -42,12 +43,13 @@ import CreatePDFFormIcon from "PUBLIC_DIR/images/emptyview/create.pdf.form.svg";
 import CreateNewSpreadsheetIcon from "PUBLIC_DIR/images/emptyview/create.new.spreadsheet.svg";
 import CreateNewPresentation from "PUBLIC_DIR/images/emptyview/create.new.presentation.svg";
 import CreateRoom from "PUBLIC_DIR/images/emptyview/create.room.svg";
+import CreateAIAgentIcon from "PUBLIC_DIR/images/emptyview/create.ai-agent.svg";
 import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
 import UploadDevicePDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
 import PersonIcon from "PUBLIC_DIR/images/icons/12/person.svg";
 import FolderIcon from "PUBLIC_DIR/images/icons/12/folder.svg";
 import FormBlankIcon from "PUBLIC_DIR/images/form.blank.react.svg?url";
-
+import CreateChatIcon from "PUBLIC_DIR/images/emptyview/create.chat.svg";
 import SharedIcon from "PUBLIC_DIR/images/emptyview/share-view.svg";
 
 import DocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
@@ -59,10 +61,15 @@ import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.s
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
+import { CategoryType } from "@docspace/shared/constants";
+
 import type {
   EmptyViewItemType,
   EmptyViewOptionsType,
 } from "@docspace/shared/components/empty-view";
+import FilesFilter from "@docspace/shared/api/files/filter";
+
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 import type { AccessType, OptionActions } from "./EmptyViewContainer.types";
 import { DefaultFolderType } from "./EmptyViewContainer.constants";
@@ -93,8 +100,17 @@ export const getDescription = (
   rootFolderType: Nullable<FolderType>,
   isPublicRoom: boolean,
   security: Nullable<TFolderSecurity>,
+  isKnowledgeTab?: boolean,
+  isResultsTab?: boolean,
+  isAIRoom?: boolean,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
+
+  if (isAIRoom) {
+    if (isKnowledgeTab) return t("AIRoom:EmptyKnowledgeDescription");
+
+    if (isResultsTab) return t("AIRoom:EmptyResultsDescription");
+  }
 
   if (isRootEmptyPage)
     return getRootDescription(
@@ -128,8 +144,17 @@ export const getTitle = (
   isArchiveFolderRoot: boolean,
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
+  isKnowledgeTab?: boolean,
+  isResultsTab?: boolean,
+  isAIRoom?: boolean,
 ): string => {
   const isNotAdmin = isUser(access);
+
+  if (isAIRoom) {
+    if (isKnowledgeTab) return t("AIRoom:EmptyKnowledgeTitle");
+
+    if (isResultsTab) return t("AIRoom:EmptyResultsTitle");
+  }
 
   if (isRootEmptyPage) return getRootTitle(t, access, rootFolderType);
 
@@ -177,17 +202,28 @@ export const getOptions = (
   logoText: string,
   isVisitor: boolean = true,
   isFrame: boolean = false,
+  isKnowledgeTab?: boolean,
+  isResultsTab?: boolean,
+  isAIRoom?: boolean,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
+  const isTemplateFolder = rootFolderType === FolderType.RoomTemplates;
   const isNotAdmin = isUser(access);
+  const canUseChat = !!security && "UseChat" in security && security.UseChat;
 
   const {
     createInviteOption,
+    createTemplateAccessOption,
     // createCreateFileOption,
     createUploadFromDocSpace,
     createUploadFromDeviceOption,
   } = helperOptions(actions, security, isFrame);
+
+  const templateAccess = createTemplateAccessOption(
+    t("EmptyView:ManageAccess"),
+    t("EmptyView:TemplateAccessDescription"),
+  );
 
   const uploadPDFFromDocSpace = createUploadFromDocSpace(
     t("EmptyView:UploadFromPortalTitle", {
@@ -204,7 +240,7 @@ export const getOptions = (
       productName: t("Common:ProductName"),
     }),
     t("EmptyView:SectionsUploadDescription", {
-      sectionNameFirst: t("Common:MyFilesSection"),
+      sectionNameFirst: t("Common:MyDocuments"),
       sectionNameSecond: t("Common:Rooms"),
     }),
     // TODO: need fix selector
@@ -217,12 +253,14 @@ export const getOptions = (
     "pdf",
   );
 
-  const inviteUser = createInviteOption(
+  const inviteUserOption = createInviteOption(
     t("Common:InviteContacts"),
     t("EmptyView:InviteUsersOptionDescription", {
       productName: t("Common:ProductName"),
     }),
   );
+
+  const inviteUser = isTemplateFolder ? templateAccess : inviteUserOption;
 
   const shareFillingRoom = {
     title: t("EmptyView:ShareOptionTitle"),
@@ -282,6 +320,15 @@ export const getOptions = (
     icon: <CreateRoom />,
     key: "create-room",
     onClick: actions.onCreateRoom,
+    disabled: false,
+  };
+
+  const createAIAgent = {
+    title: t("EmptyView:CreateAIAgent"),
+    description: t("EmptyView:CreateAIAgentDescription"),
+    icon: <CreateAIAgentIcon />,
+    key: "create-ai-agent",
+    onClick: actions.onCreateAIAgent,
     disabled: false,
   };
 
@@ -380,6 +427,9 @@ export const getOptions = (
   if (isRootEmptyPage) {
     return match([rootFolderType, access, isVisitor])
       .returnType<EmptyViewOptionsType>()
+      .with([FolderType.AIAgents, ShareAccessRights.None, P._], () => [
+        createAIAgent,
+      ])
       .with([FolderType.Rooms, ShareAccessRights.None, P._], () => [
         createRoom,
         inviteRootRoom,
@@ -390,16 +440,6 @@ export const getOptions = (
         createSpreadsheet,
         createPresentation,
         createForm,
-      ])
-      .with([FolderType.Recent, P._, P._], () => [
-        {
-          ...actions.onGoToPersonal(),
-          icon: <PersonIcon />,
-          description: t("Files:GoToSection", {
-            sectionName: t("Common:MyFilesSection"),
-          }),
-          key: "empty-view-goto-personal",
-        },
       ])
       .with([FolderType.Archive, ShareAccessRights.None, P._], () => [
         {
@@ -414,7 +454,7 @@ export const getOptions = (
           ...actions.onGoToPersonal(),
           icon: <PersonIcon />,
           description: t("Files:GoToSection", {
-            sectionName: t("Common:MyFilesSection"),
+            sectionName: t("Common:MyDocuments"),
           }),
           key: "empty-view-trash-goto-personal",
         },
@@ -423,6 +463,50 @@ export const getOptions = (
   }
 
   if (isArchiveFolderRoot) return [];
+
+  if (isAIRoom) {
+    if (isKnowledgeTab) {
+      const uploadFilesFromDocSpace = createUploadFromDocSpace(
+        t("EmptyView:UploadFromPortalTitle", {
+          productName: t("Common:ProductName"),
+        }),
+        t("AIRoom:UploadFilesPortal", {
+          sectionNameFirst: t("Common:MyDocuments"),
+          sectionNameSecond: t("Common:Rooms"),
+        }),
+        "",
+        true,
+      );
+
+      const uploadFilesFromDevice = createUploadFromDeviceOption(
+        t("EmptyView:UploadDeviceOptionTitle"),
+        t("AIRoom:UploadFilesDevice"),
+        "file",
+      );
+
+      return [uploadFilesFromDocSpace, uploadFilesFromDevice];
+    }
+
+    if (isResultsTab)
+      return [
+        {
+          key: "open-chat",
+          title: t("AIRoom:CreateChat"),
+          icon: <CreateChatIcon />,
+          onClick: () => {
+            const filesFilter = FilesFilter.getFilter(window.location);
+
+            filesFilter.searchArea = SearchArea.ResultStorage;
+
+            const path = getCategoryUrl(CategoryType.Chat, filesFilter.folder);
+
+            window.DocSpace.navigate(`${path}?${filesFilter.toUrlParams()}`);
+          },
+          description: t("AIRoom:CreateChatDescription"),
+          disabled: !canUseChat,
+        },
+      ];
+  }
 
   if (isFolder) {
     return match([parentRoomType, folderType, access])
@@ -456,8 +540,8 @@ export const getOptions = (
     case RoomsType.FormRoom:
       if (isFormFiller) return [];
 
-      if (isCollaborator)
-        return [uploadPDFFromDocSpace, uploadFromDevicePDF, shareFillingRoom];
+      if (isTemplateFolder)
+        return [templateAccess, uploadPDFFromDocSpace, uploadFromDevicePDF];
 
       return [uploadPDFFromDocSpace, uploadFromDevicePDF, shareFillingRoom];
     case RoomsType.EditingRoom:
@@ -477,6 +561,14 @@ export const getOptions = (
 
       if (isCollaborator)
         return [createFile, uploadAllFromDocSpace, uploadFromDeviceAnyFile];
+
+      if (isTemplateFolder)
+        return [
+          createFile,
+          templateAccess,
+          uploadAllFromDocSpace,
+          uploadFromDeviceAnyFile,
+        ];
 
       return [
         createFile,
@@ -499,6 +591,7 @@ export const getOptions = (
       ];
 
     case RoomsType.CustomRoom:
+    case RoomsType.AIRoom:
       if (isNotAdmin) return [];
 
       if (isCollaborator)

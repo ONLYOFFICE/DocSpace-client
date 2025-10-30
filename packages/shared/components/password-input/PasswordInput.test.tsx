@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable class-methods-use-this */
-
 import React from "react";
 import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -117,7 +115,7 @@ describe("<PasswordInput />", () => {
     expect(input).toHaveAttribute("type", "password");
   });
 
-  it("shows tooltip with password requirements on focus", async () => {
+  it("shows tooltip with password requirements", async () => {
     const user = userEvent.setup();
     render(
       <PasswordInput
@@ -133,7 +131,7 @@ describe("<PasswordInput />", () => {
     );
 
     const input = screen.getByTestId("password-input").querySelector("input");
-    await user.click(input!);
+    await user.type(input!, "testpassword");
 
     expect(screen.getByText("Password must contain:")).toBeInTheDocument();
     expect(screen.getByText("from 6 to 30 characters")).toBeInTheDocument();

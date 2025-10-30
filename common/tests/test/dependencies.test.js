@@ -327,11 +327,9 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       "@storybook/addon-webpack5-compiler-babel",
       "@storybook/components",
       "@storybook/react-webpack5",
-      "babel-eslint",
       "babel-jest",
       "babel-plugin-styled-components",
       "@babel/core",
-      "@babel/eslint-parser",
       "@babel/runtime",
       "@babel/preset-env",
       "@babel/preset-react",
@@ -342,32 +340,20 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       "@babel/plugin-transform-class-properties",
       "@babel/plugin-proposal-export-default-from",
       "webpack-dev-server",
-      "eslint-config-airbnb",
-      "eslint-config-airbnb-typescript",
-      "eslint-config-prettier",
-      "eslint-plugin-import",
-      "eslint-plugin-jsx-a11y",
-      "eslint-plugin-prettier",
-      "eslint-plugin-react-hooks",
-      "eslint-plugin-react",
-      "eslint-plugin-storybook",
-      "eslint-config-next",
-      "eslint-import-resolver-webpack",
-      "prettier",
       "resolve-url-loader",
       "typescript",
       "local-web-server",
       "identity-obj-proxy",
       "@types/identity-obj-proxy",
       "@types/element-resize-detector",
-      "@types/eslint",
       "@types/node",
-      "@typescript-eslint/eslint-plugin",
-      "@typescript-eslint/parser",
       "jest-environment-jsdom",
       "jest-styled-components",
       "ts-jest",
       "ts-node",
+      "jest-html-reporter",
+      "linkifyjs",
+      "@biomejs/biome",
     ];
 
     missing = missing.filter((m) => !allowedUnusedDeps.includes(m.name));
@@ -410,4 +396,48 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
   }
 
   expect(unusedDependencies.length, message).toBe(0);
+});
+
+test("DifferentDependencyVersionsTest: Verify that all workspaces use same dependency versions", () => {
+  // List of packages to be ignored
+  const ignoredPackages = new Set([]);
+
+  const dependencyMap = {};
+
+  // Create a Map of dependencies and their versions in all workspaces
+  for (const { workspace, deps } of workspaceDeps) {
+    deps.forEach(({ name, version }) => {
+      if (ignoredPackages.has(name)) return;
+
+      if (!dependencyMap[name]) {
+        dependencyMap[name] = {};
+      }
+
+      dependencyMap[name][workspace] = version;
+    });
+  }
+
+  const mismatchedDeps = [];
+
+  // Check if each dependency has same version in all workspaces
+  for (const [depName, versionsByWorkspace] of Object.entries(dependencyMap)) {
+    const uniqueVersions = new Set(Object.values(versionsByWorkspace));
+
+    if (uniqueVersions.size > 1) {
+      const versionList = Object.entries(versionsByWorkspace)
+        .map(([ws, ver]) => `  - ${ws}: ${ver}`)
+        .join("\n");
+
+      mismatchedDeps.push(
+        `❌ ${depName} has different versions:\n${versionList}`
+      );
+    }
+  }
+
+  if (mismatchedDeps.length > 0) {
+    const report = mismatchedDeps.join("\n\n");
+    throw new Error(
+      `Found ${mismatchedDeps.length} dependencies with version mismatch:\n\n ${report}`
+    );
+  }
 });

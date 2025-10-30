@@ -1,0 +1,14 @@
+{
+  "AutomaticBackupDescription": "Configure backups agendados para proteção contínua de dados sem ações manuais.",
+  "BackupRoomDescription": "Salve um backup em uma sala selecionada ou na seção {{sectionName}}. Use salas existentes ou crie uma nova.",
+  "BackupServiceEnabled": "Serviço de backup habilitado com sucesso.",
+  "ConnectService": "Conecte o serviço <1>aqui</1> para habilitar os recursos de backup",
+  "ContactToPayer": "Entre em contato com o Pagador (<1>{{email}}</1>) para conectar o serviço de backup.",
+  "DisableBackupConfirm": "Desativar o serviço de Backup impedirá que os administradores do {{productName}} criem backups. Se o Backup Automático estiver ativado, ele permanecerá ativo dentro da cota gratuita, mas quando a cota for totalmente utilizada, será desativado permanentemente. Tem certeza de que deseja continuar?",
+  "DisableBackupConfirmWithoutQuota": "Desabilitar o serviço de Backup impedirá que os administradores do {{productName}} criem backups. Se o Backup Automático estiver habilitado, ele será desativado. Tem certeza de que deseja continuar?",
+  "EnableBackupConfirm": "A ativação do serviço de backup permitirá que todos os administradores do {{productName}} criem backups a qualquer momento, desde que o saldo da carteira seja suficiente. Tem certeza de que deseja continuar?",
+  "FreeBackupsPerMonth": "Backups gratuitos: {{value}} /{{maxValue}} por mês atual.",
+  "TemporaryDescription": "Crie um backup armazenado na seção \"Backup\". Disponível para download em até 24 horas após a criação.",
+  "ThirdPartyResourceDescription": "Conecte e salve backups em contas na nuvem como Dropbox, Box, OneDrive ou Google Drive.",
+  "ThirdPartyStorageDescription": "Utilize serviços de terceiros para armazenar seus backups. Ideal para conectar plataformas externas de armazenamento em nuvem."
+}

@@ -47,6 +47,9 @@ const Dialogs = ({
         isPanelVisible={selectFileDialogVisible}
         onSelectFile={() => {}}
         onClose={onCloseSelectFileDialogVisible}
+        withRecentTreeFolder
+        withFavoritesTreeFolder
+        withAIAgentsTreeFolder
       />
     ),
     submitToGalleryDialogVisible && (

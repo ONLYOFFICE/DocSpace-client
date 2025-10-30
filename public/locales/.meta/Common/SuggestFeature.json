@@ -3,7 +3,7 @@
   "content": "Suggest a feature",
   "content_en_sha1_hash": "b77aa8e17acff2e00b94f853f0b677ad7ef00d3d",
   "created_at": "2025-06-18T07:33:49.951Z",
-  "updated_at": "2025-06-18T17:11:42.537Z",
+  "updated_at": "2025-10-17T14:43:53.643Z",
   "comment": {
     "text": "The translation key \"SuggestFeature\" is used to display a suggestion feature option on user menu items. It appears as a button label, prompting users to suggest new features, and its content is translated from \"Suggest a feature\". This translation should be used in contexts where users can provide feedback or request new features.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 462,
+      "line_number": 501,
       "context": "preventNewTab: true,\n },\n feedbackAndSupportEnabled && {\n key: \"user-menu-suggest-feature\",\n icon: LampReactSvgUrl,\n label: t(\"Common:SuggestFeature\"),\n onClick: this.onSuggestFeatureClick,\n url: this.settingsStore.suggestFeatureUrl || \"#\",\n preventNewTab: true,\n },\n bookTraining,",
       "module": "/packages/client"
     }
@@ -63,7 +63,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ehdottaa ominaisuus' is a literal translation and doesn't fully capture the meaning of 'Suggest a feature'. While technically correct, it sounds unnatural in Finnish. A more natural phrasing would be 'Ehdota ominaisuutta' or 'Ominaisuusehdotus'.",
+          "suggestion": "Ehdota ominaisuutta"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -75,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Առաջարկել ֆունկցիաներ\" (Arararkel funktsioner) literally translates to 'Suggest functions'. The English 'Suggest a feature' implies suggesting one specific feature, not a list of functions. A more accurate translation would emphasize the singular nature of the suggestion.",
+          "suggestion": "Առաջարկել մի ֆունկցիա (Arararkel mi funktsia) - Suggest a function"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ສະບັດແນະນໍາຄຸນນະພາບ' translates to something like 'randomly recommend quality'. It doesn't accurately convey the meaning of 'Suggest a feature'. A more accurate translation would focus on the action of suggesting a feature, not recommending quality.",
+          "suggestion": "Consider alternatives like 'ສະເໜີຄຸນນະພາບ' (sa-ner khun-na-phap - propose a feature) or 'ແນະນໍາຄຸນນະພາບ' (nae-nam khun-na-phap - recommend a feature, but more aligned with suggesting)."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ප්‍රතිරූපයක් යෝජනා කරන්න' literally translates to 'Suggest an image'. The intended meaning of 'Suggest a feature' is a request for a new feature idea, not an image suggestion. It is a mistranslation of the English phrase.",
+          "suggestion": "නිර්මාණයක් යෝජනා කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -190,6 +214,41 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"機能のリクエスト\" (Kinou no request) while technically meaning 'request for a feature', doesn't directly translate \"Suggest a feature\". 'Suggest' implies a recommendation or idea, while 'request' implies a demand.  A more accurate translation would convey the suggestion aspect.",
+          "suggestion": "機能の提案 (Kinou no teian) - This means 'feature suggestion' and is closer to the intended meaning."
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Sugjeron' is grammatically correct, 'veçanori' is not the most natural or common translation for 'feature' in this context. 'Feature' typically refers to a specific function or characteristic of a product or service.",
+          "suggestion": "Sugjeron një funksion"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "A more conversational and natural translation might be 'Proponi një veçori'.",
+          "suggestion": "Proponi një veçanori"
+        }
+      ],
       "approved_at": null
     }
   }

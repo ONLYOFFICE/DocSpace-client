@@ -88,6 +88,17 @@ const getFilterType = (filterValues: TGroupItem[] | TItem[]) => {
   return filterType?.toString() ? +filterType : null;
 };
 
+const getFilterLocation = (filterValues: TGroupItem[] | TItem[]) => {
+  const filterType = result(
+    find(filterValues, (value) => {
+      return value.group === FilterGroups.filterLocation;
+    }),
+    "key",
+  );
+
+  return filterType?.toString() ? +filterType : null;
+};
+
 const getSubjectFilter = (filterValues: TGroupItem[] | TItem[]) => {
   const subjectFilter = result(
     find(filterValues, (value) => {
@@ -284,6 +295,7 @@ const replaceEqualFilterValuesWithPrev = (
 
 export {
   getFilterType,
+  getFilterLocation,
   getSubjectFilter,
   getAuthorType,
   getRoomId,

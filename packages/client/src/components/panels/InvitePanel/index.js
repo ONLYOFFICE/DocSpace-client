@@ -44,7 +44,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Link } from "@docspace/shared/components/link";
-import { checkIfAccessPaid } from "SRC_DIR/helpers";
+import { checkIfAccessPaid } from "@docspace/shared/utils/filterPaidRoleOptions";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { fixAccess } from "./utils";
@@ -64,7 +64,6 @@ const InvitePanel = ({
   defaultAccess,
   setInfoPanelIsMobileHidden,
   updateInfoPanelMembers,
-  isRoomMembersPanelOpen,
   setInviteLanguage,
   isRoomAdmin,
   setIsNewUserByCurrentUser,
@@ -111,6 +110,10 @@ const InvitePanel = ({
       defaultAccess: 1,
     });
     setInviteItems([]);
+  };
+
+  const onBackClick = () => {
+    if (!hideSelector && addUsersPanelVisible) setAddUsersPanelVisible(false);
   };
 
   const onCheckHeight = () => {
@@ -349,9 +352,7 @@ const InvitePanel = ({
         toastr.warning(result?.warning);
       }
 
-      if (isRoomMembersPanelOpen) {
-        updateInfoPanelMembers(t);
-      }
+      updateInfoPanelMembers();
     } catch (err) {
       let error = err;
 
@@ -514,11 +515,13 @@ const InvitePanel = ({
     <ModalDialog
       visible={isVisible}
       onClose={onClose}
+      onBackClick={onBackClick}
       displayType={ModalDialogType.aside}
       containerVisible={!hideSelector ? addUsersPanelVisible : null}
       isLoading={invitePanelIsLoding}
       withBodyScroll
       isInvitePanelLoader
+      id="invite_panel_modal"
     >
       {!hideSelector && addUsersPanelVisible ? (
         <ModalDialog.Container>
@@ -539,9 +542,11 @@ const InvitePanel = ({
             disableDisabledUsers
             withGroups
             roomId={roomId}
+            isAgent={roomType === RoomsType.AIRoom}
             disableInvitedUsers={invitedUsersArray}
             withGuests={showGuestsTab}
             withHeader
+            dataTestId="invite_panel_people_selector"
             headerProps={{
               // Todo: Update groups empty screen texts when they are ready
               headerLabel: t("Common:Contacts"),
@@ -570,6 +575,7 @@ const InvitePanel = ({
           onClick={onClickSend}
           label={t("SendInvitation")}
           isLoading={isLoading}
+          testId="invite_panel_send_button"
         />
         <Button
           className="cancel-button"
@@ -578,6 +584,7 @@ const InvitePanel = ({
           onClick={onClose}
           label={t("Common:CancelButton")}
           isDisabled={isLoading}
+          testId="invite_panel_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -600,7 +607,6 @@ export default inject(
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
-      isRoomMembersPanelOpen,
     } = infoPanelStore;
 
     const {
@@ -633,7 +639,6 @@ export default inject(
       getFolderInfo,
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
-      isRoomMembersPanelOpen,
       isRoomAdmin,
 
       setIsNewUserByCurrentUser,

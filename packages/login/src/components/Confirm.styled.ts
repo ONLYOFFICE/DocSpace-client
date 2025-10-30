@@ -71,6 +71,7 @@ export const StyledBody = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    max-width: 386px;
     width: 100%;
     height: 44px;
     padding-bottom: 40px;
@@ -107,6 +108,7 @@ export const StyledBody = styled.div`
     align-items: center;
     justify-content: center;
     padding-bottom: 40px;
+    max-width: 386px;
     width: 100%;
     height: 44px;
 
@@ -192,6 +194,20 @@ export const StyledBody = styled.div`
     text-align: center;
     margin-top: 24px;
     line-height: 16px;
+  }
+
+  .user-info-wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    padding: 8px 0;
+
+    margin-bottom: 8px;
+  }
+
+  .user-email {
+    color: ${(props) => props.theme.login.textColor};
   }
 `;
 

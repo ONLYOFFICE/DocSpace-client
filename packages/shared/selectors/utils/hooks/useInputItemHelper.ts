@@ -26,9 +26,9 @@
 
 import React from "react";
 
-import { getRoomCreationAdditionalParams } from "../../../utils/rooms";
 import { createFolder } from "../../../api/files";
 import { createRoom } from "../../../api/rooms";
+import { createAIAgent } from "../../../api/ai";
 import { RoomsType } from "../../../enums";
 import { TSelectorItem } from "../../../components/selector/Selector.types";
 import { toastr } from "../../../components/toast";
@@ -40,6 +40,12 @@ const useInputItemHelper = ({
   selectedItemId,
   setItems,
 }: TUseInputItemHelper) => {
+  const selectedItemIdRef = React.useRef(selectedItemId);
+
+  React.useEffect(() => {
+    selectedItemIdRef.current = selectedItemId;
+  }, [selectedItemId]);
+
   const onCancelInput = React.useCallback(() => {
     if (!withCreate) return;
 
@@ -59,21 +65,24 @@ const useInputItemHelper = ({
   }, [setItems, withCreate]);
 
   const onAcceptInput = React.useCallback(
-    async (value: string, roomType?: RoomsType) => {
-      if (!withCreate || (!selectedItemId && !roomType)) return;
+    async (value: string, roomType?: RoomsType, isAgent?: boolean) => {
+      const currentSelectedItemId = selectedItemIdRef.current;
+      if (!withCreate || (!currentSelectedItemId && !roomType && !isAgent))
+        return;
 
       try {
-        if (selectedItemId) await createFolder(selectedItemId, value);
+        if (isAgent) await createAIAgent({ title: value });
+        else if (currentSelectedItemId)
+          await createFolder(currentSelectedItemId, value.trimEnd());
         else if (roomType) {
-          const additionalParams = getRoomCreationAdditionalParams(roomType);
-          await createRoom({ roomType, title: value, ...additionalParams });
+          await createRoom({ roomType, title: value });
         }
       } catch (e) {
         console.log(e);
         toastr.error(e as string);
       }
     },
-    [withCreate, selectedItemId],
+    [withCreate],
   );
 
   const addInputItem = React.useCallback(
@@ -82,6 +91,7 @@ const useInputItemHelper = ({
       icon: string,
       roomType?: RoomsType,
       placeholder?: string,
+      isAgent?: boolean,
     ) => {
       if (!withCreate || !setItems) return;
 
@@ -89,7 +99,8 @@ const useInputItemHelper = ({
         label: "",
         id: "new-folder-input",
         isInputItem: true,
-        onAcceptInput: (value: string) => onAcceptInput(value, roomType),
+        onAcceptInput: (value: string) =>
+          onAcceptInput(value, roomType, isAgent),
         onCancelInput,
         defaultInputValue,
         icon,

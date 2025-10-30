@@ -24,8 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
-import { TCreatedBy, TPathParts } from "../../types";
+import type {
+  TAvailableShareRights,
+  TCreatedBy,
+  TPathParts,
+} from "../../types";
 import type {
   EmployeeActivationStatus,
   EmployeeStatus,
@@ -36,8 +39,9 @@ import type {
   FolderType,
   RoomsType,
   ShareAccessRights,
+  VectorizationStatus,
 } from "../../enums";
-import { TUser } from "../people/types";
+import type { TUser } from "../people/types";
 import type { TRoom } from "../rooms/types";
 
 export type TFileViewAccessibility = {
@@ -78,17 +82,13 @@ export type TFileSecurity = {
   CreateRoomFrom: boolean;
   CopyLink: boolean;
   Embed: boolean;
+  Vectorization: boolean;
+  AscAi?: boolean;
 };
 
-export type TAvailableExternalRights = {
-  Comment: boolean;
-  CustomFilter: boolean;
-  Editing: boolean;
-  None: boolean;
-  Read: boolean;
-  Restrict: boolean;
-  Review: boolean;
-  FillForms: boolean;
+export type TShareSettings = {
+  ExternalLink?: number;
+  PrimaryExternalLink?: number;
 };
 
 export type TFile = {
@@ -106,7 +106,10 @@ export type TFile = {
   fileType: FileType;
   folderId: number;
   id: number;
+  parentRoomType?: FolderType;
+  shareSettings?: TShareSettings;
   mute: boolean;
+  parentShared?: boolean;
   pureContentLength: number;
   rootFolderId: number;
   rootFolderType: FolderType;
@@ -122,7 +125,7 @@ export type TFile = {
   viewUrl: string;
   webUrl: string;
   shortWebUrl: string;
-  availableExternalRights?: TAvailableExternalRights;
+  availableShareRights?: TAvailableShareRights;
   providerId?: number;
   providerKey?: string;
   providerItem?: boolean;
@@ -134,6 +137,19 @@ export type TFile = {
   startFilling?: boolean;
   fileEntryType: number;
   hasDraft?: boolean;
+  order?: string;
+  lockedBy?: string;
+  originId?: number;
+  originRoomId?: number;
+  originRoomTitle?: string;
+  originTitle?: string;
+  requestToken?: string;
+  isFavorite?: boolean;
+  vectorizationStatus?: VectorizationStatus;
+  expirationDate?: string;
+  sharedForUser?: boolean;
+  external?: boolean;
+  isLinkExpired?: boolean;
 };
 
 export type TOpenEditRequest = {
@@ -219,7 +235,18 @@ export type TFolder = {
   indexing: boolean;
   denyDownload: boolean;
   fileEntryType: number;
-  parentRoomType?: number;
+  parentShared?: boolean;
+  parentRoomType?: FolderType;
+  order?: string;
+  isRoom?: false;
+  rootRoomType?: RoomsType;
+  shareSettings?: TShareSettings;
+  availableShareRights?: TAvailableShareRights;
+  isFavorite?: boolean;
+  expirationDate?: string;
+  sharedForUser?: boolean;
+  isLinkExpired?: boolean;
+  external?: boolean;
 };
 
 export type TGetFolderPath = TFolder[];
@@ -438,6 +465,10 @@ export type TDocServiceLocation = {
 export type TFileLink = {
   access: ShareAccessRights;
   canEditAccess: boolean;
+  canEditDenyDownload: boolean;
+  canEditInternal: boolean;
+  canRevoke: boolean;
+  canEditExpirationDate: boolean;
   isLocked: boolean;
   isOwner: boolean;
   sharedTo: {
@@ -449,8 +480,8 @@ export type TFileLink = {
     requestToken: string;
     shareLink: string;
     title: string;
-    expirationDate?: moment.Moment | null;
-    internal?: boolean;
+    expirationDate?: string | null;
+    internal: boolean;
     password?: string;
   };
   subjectType: number;
@@ -483,6 +514,12 @@ export type TConnectingStorage = {
   redirectUrl: string;
   clientId?: string;
   requiredConnectionUrl: boolean;
+  providerKey?: string;
+  isConnected?: boolean;
+  id?: string;
+  title?: string;
+  oauthHref?: string;
+  isOauth?: boolean;
 };
 
 export type TIndexItems = {
@@ -526,4 +563,9 @@ export type TFileFillingFormStatus = {
   sequence: number;
   submitted: boolean;
   history?: Record<FillingFormStatusHistory, string>;
+};
+
+export type TShareToUser = {
+  shareTo: string;
+  access: ShareAccessRights;
 };

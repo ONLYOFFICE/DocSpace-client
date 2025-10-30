@@ -40,12 +40,9 @@ export const StyledWrapper = styled.div<{ hideTabs?: boolean }>`
     ${({ hideTabs }) =>
       hideTabs &&
       css`
-        .tabs {
+        .sticky,
+        .sticky-indent {
           display: none;
-        }
-
-        .content {
-          display: flex;
         }
       `}
   }

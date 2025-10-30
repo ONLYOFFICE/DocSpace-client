@@ -35,7 +35,7 @@ import isNil from "lodash/isNil";
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
-import { RestoreBackup } from "@docspace/shared/pages/restore-backup";
+import { RestoreBackup } from "@docspace/shared/pages/backup/restore-backup";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { ButtonSize } from "@docspace/shared/components/button";
@@ -177,7 +177,6 @@ const Restore = ({
 
     const uploadUrl = combineUrl(window.ClientConfig?.proxy?.url, url);
 
-    // eslint-disable-next-line no-restricted-syntax
     for await (const value of uploadBackupFile(requestsDataArray, uploadUrl)) {
       if (!value) return false;
 

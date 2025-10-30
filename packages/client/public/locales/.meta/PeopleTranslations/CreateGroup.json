@@ -3,7 +3,7 @@
   "content": "Create group",
   "content_en_sha1_hash": "5a0b1c170fd55ab07e5656625be963d20baa107a",
   "created_at": "2025-05-19T21:30:53.461Z",
-  "updated_at": "2025-06-30T12:20:31.199Z",
+  "updated_at": "2025-10-27T16:14:33.217Z",
   "comment": {
     "text": "\"This translation key is used to display the text 'Create group' in various UI elements, such as a modal dialog header and a button. It appears when users interact with options related to creating or managing groups, and its purpose is to provide a clear label for this action.\"",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 729,
-      "context": "},\n {\n id: \"create_group\",\n className: \"main-button_drop-down\",\n icon: GroupReactSvgUrl,\n label: t(\"PeopleTranslations:CreateGroup\"),\n onClick: createGroup,\n action: \"group\",\n key: \"group\",\n },\n ];",
+      "line_number": 706,
+      "context": "const groupsOptions = [\n {\n id: \"create_group\",\n className: \"main-button_drop-down\",\n icon: GroupReactSvgUrl,\n label: t(\"PeopleTranslations:CreateGroup\"),\n onClick: createGroup,\n action: \"group\",\n key: \"group\",\n },\n ];",
       "module": "/packages/client"
     }
   ],

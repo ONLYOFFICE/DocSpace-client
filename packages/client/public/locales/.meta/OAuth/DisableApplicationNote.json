@@ -1,13 +1,13 @@
 {
   "key_path": "DisableApplicationNote",
-  "content": "<strong>Note:</strong> That all users all again be required to complete the consent screen",
-  "content_en_sha1_hash": "1c303372ca0d8ed4c8a367080e38ccf644bf0f33",
-  "created_at": "2025-05-19T21:30:53.865Z",
-  "updated_at": "2025-05-24T07:32:34.968Z",
+  "content": "<strong>Note:</strong> All users will be required to complete the consent screen again",
+  "content_en_sha1_hash": "79de04dd4df6dd917e94f59629ef71056115210d",
+  "created_at": "2025-10-27T16:14:28.569Z",
+  "updated_at": "2025-10-27T18:00:09.699Z",
   "comment": {
-    "text": "This translation key is used to describe why an application should be disabled, prompting users to re-enter consent. It appears in a modal dialog, providing feedback to the user on what action led to this request.",
+    "text": "This key displays a note within a dialog informing users that they will need to re-consent after disabling an application. It appears as a helpful reminder to users during the application disabling process. The text clarifies the impact of disabling an OAuth application.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:42:50.596Z"
+    "updated_at": "2025-10-27T18:00:09.699Z"
   },
   "usage": [
     {
@@ -27,476 +27,187 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'all again' is awkward and doesn't accurately convey the intended meaning. It should be translated to reflect that users will be required to complete the consent screen *again*.",
-          "suggestion": "سيتعين على جميع المستخدمين إكمال شاشة الأذونات مرة أخرى."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"all again be required\" is not accurately translated. It implies a repetition of a previous requirement. \"Hələ də\" (still) doesn't fully capture the nuance of 'again'.",
-          "suggestion": "Bütün istifadəçilər yenidən icazə ekranını doldurmalıdırlar"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of strong tags is consistent between source and translation, which is good.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"all users all again\" is awkward and unclear. The translation doesn't accurately reflect the intended meaning. It seems to be trying to convey that all users will need to re-consent.",
-          "suggestion": "Всички потребители ще трябва отново да попълнят екрана за съгласие"
-        },
-        {
-          "type": "formatting",
-          "description": "The English content uses a strong tag to emphasize 'Note:'. This should be preserved in the translation. Although not a critical error, consistency is important.",
-          "suggestion": "The Bulgarian translation should also use a strong tag around 'Забележка:'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'all again' is awkward and doesn't directly translate to a natural Czech equivalent. It implies repetition or re-doing something. A more accurate translation for the intended meaning of requiring users to complete the consent screen is needed.",
-          "suggestion": "Všichni uživatelé budou znovu vyzváni k vyplnění obrazovky souhlasu."
-        },
-        {
-          "type": "formatting",
-          "description": "The English content uses strong tags for emphasis. While the Czech translation maintains the strong tags, it's important to ensure consistent formatting across the application/platform using this text.",
-          "suggestion": "Ensure consistent use of strong tags throughout the application."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'all again be required' is awkward and implies a repeated action. A more accurate translation would reflect that users 'will' be required.",
-          "suggestion": "Alle Benutzer werden den Zustimmungsbildschirm erneut ausfüllen."
-        },
-        {
-          "type": "formatting",
-          "description": "The English original uses strong tags for 'Note:'. The German translation correctly applies it to 'Hinweis:'.  Maintaining consistency is important.",
-          "suggestion": "No change needed, consistency is maintained."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'all again' is awkward and doesn't quite convey the intended meaning. The Greek translation doesn't fully capture this nuance.",
-          "suggestion": "Consider rephrasing the English to 'all users will again' or 'all users will be required again' and adjust the Greek accordingly to 'Όλοι οι χρήστες θα πρέπει ξανά να συμπληρώσουν την οθόνη συγκατάθεσης' or 'Όλοι οι χρήστες θα χρειαστεί να συμπληρώσουν ξανά την οθόνη συγκατάθεσης'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'all again be required' is awkward and doesn't accurately convey the meaning of 'are required'.",
-          "suggestion": "Que todos los usuarios tengan que volver a rellenar"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'rellenar' while technically 'to fill', might be a little formal for this context. A more natural phrasing might be better.",
-          "suggestion": "Que todos los usuarios vuelvan a completar"
-        },
-        {
-          "type": "formatting",
-          "description": "The original English uses a strong tag for 'Note:'. The Spanish translation maintains this. Consider whether this is necessary in the Spanish context.",
-          "suggestion": "Consider removing the strong tag for 'Ojo:' if not essential for emphasis in Spanish."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'all again' is awkward and doesn't translate directly. It implies repetition, but the intended meaning is that users must complete the consent screen again.",
-          "suggestion": "Kaikkien käyttäjien on suoritettava suostumusnäyttö uudelleen"
-        },
-        {
-          "type": "formatting",
-          "description": "The English source has a strong tag. While maintaining the strong tag is acceptable, consider if the Finnish translation would benefit from a similar emphasis. If not, the strong tag could be removed.",
-          "suggestion": "Huomio: Kaikkien käyttäjien on suoritettava suostumusnäyttö uudelleen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"all again be required\" is awkward and doesn't accurately convey the intended meaning. It implies a repeated action being required again. A more natural English phrasing would be 'will again be required' or 'are again required'.",
-          "suggestion": "Tous les utilisateurs devront à nouveau remplir l'écran de consentement"
-        },
-        {
-          "type": "formatting",
-          "description": "The original English uses strong tags to emphasize 'Note:'. The French translation correctly maintains this formatting. No changes needed.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'all users all again' is awkward and likely meant to say 'all users will again'. The Armenian translation, while grammatically correct, doesn't capture the original awkwardness and is more formal. It's unclear if the intention was to convey a sense of unexpected or repeated action.",
-          "suggestion": "Consider if the original awkwardness was intentional. If not, suggest: <strong>Նշում.</strong> Բոլոր օգտատերերից կրկին պահանջվի լրացնել համաձայնության ձևը"
-        },
-        {
-          "type": "formatting",
-          "description": "The strong tag is correctly used for 'Note', but it's important to maintain consistent formatting across the translated content to match the source.",
-          "suggestion": "Ensure all important labels/titles within the translated content are formatted consistently with the English source (e.g., bolding, italics)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"all users all again\" is awkward and likely means \"all users will again\". The Italian translation doesn't fully capture the intended nuance of 'again' in this context. It implies a repetition of a requirement.",
-          "suggestion": "Consider revising the English to \"Note: All users will again be required...\" or \"Note: Users will again be required...\" which would better align with the Italian \"A tutti gli utenti verrà nuovamente richiesto...\""
-        },
-        {
-          "type": "formatting",
-          "description": "The original English uses strong tags for 'Note:'. The Italian translation also uses strong tags for 'Nota:'. Maintaining consistency in formatting is important. While not strictly an error, it should be considered.",
-          "suggestion": "Ensure consistent use of strong tags across both languages to maintain visual presentation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"all again be required\" is awkward and doesn't translate directly to Japanese. It seems to be trying to convey 'will be required again'.",
-          "suggestion": "すべてのユーザーは、再度同意画面を完了しなければなりません (Subarashii yūzā wa, futatabi dōi gamen o kanryō shinakereba narimasen)"
-        },
-        {
-          "type": "formatting",
-          "description": "The Japanese translation follows the English format of using `<strong>` tags for the note. While not inherently wrong, it's more common to simply use bolding in Japanese UI text, or no specific formatting at all.",
-          "suggestion": "すべてのユーザーは、再度同意画面を完了する必要があります"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"all again be required\" is awkward and doesn't translate directly. It implies a repeated requirement. A more natural translation would be 'must' or 'need to'.",
-          "suggestion": "모든 사용자는 다시 동의 화면을 완료해야 합니다"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"all again be required\" is awkward and doesn't accurately convey the meaning of 'again be required'. The Lao translation, while attempting a direct translation, also sounds unnatural.",
-          "suggestion": "Consider rephrasing to something like 'ຜູ້ໃຊ້ທັງໝົດຕ້ອງເຮັດການອະນຸມັດອີງຕາມຂໍ້ກຳນົດຄືນໃໝ່' or 'ຜູ້ໃຊ້ທັງໝົດຕ້ອງເຮັດການອະນຸມັດຄືນອີງຕາມຂໍ້ກຳນົດ'."
-        },
-        {
-          "type": "formatting",
-          "description": "The Lao translation uses strong tags (`<strong>`) just like the English. Ensure this is intentional and consistent with the Lao style guide. If not, consider removing or adjusting.",
-          "suggestion": "Review and adjust formatting based on Lao style guide."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"all again\" is awkward and not quite accurate. It seems intended to convey that users will *again* be required. The Latvian translation, while grammatically correct, doesn't quite capture this nuance and can be improved for clarity.",
-          "suggestion": "<strong>Piezīme</strong> : visiem lietotājiem vēlreiz būs jāaizpilda piekrišanas ekrāns"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The phrase \"all again\" is awkward and grammatically incorrect. It suggests repeated action but isn't clear.",
-          "suggestion": "all users are"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'all users all again' is awkward and unclear. The Polish translation 'wszyscy użytkownicy będą musieli ponownie' accurately reflects the intended meaning, but the original English is a problem. The overall sentiment is that users will need to re-complete the consent screen.",
-          "suggestion": "Consider revising the English to read: 'Note: All users will again be required...' or 'Note: Users will once again be required...'"
-        },
-        {
-          "type": "formatting",
-          "description": "The English content has a strong tag. The Polish translation includes a redundant strong tag since the English one is the defining one.",
-          "suggestion": "Remove the second strong tag in the Polish translation: \"Uwaga: wszyscy użytkownicy będą musieli ponownie wypełnić ekran zgody\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'utilizadors' is misspelled. The correct Portuguese word for 'users' is 'utilizadores'.",
-          "suggestion": "utilizadores"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'sejam novamente obrigados' is grammatically awkward. A more natural phrasing would be 'serão novamente obrigados'.",
-          "suggestion": "serão novamente obrigados"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The original English 'all again' is not accurately translated.  It implies a recurrence. 'novamente' already conveys this, but the phrasing isn't the most elegant.",
-          "suggestion": "A more elegant phrasing might be to rephrase the overall sentence. For example: 'Nota: Todos os utilizadores terão de completar novamente a tela de consentimento.'"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation has an extra '<strong/>' tag.",
-          "suggestion": "Remove the extra '<strong/>' tag. The intended formatting is just for the initial 'Nota:'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'all again be required' is awkward and doesn't accurately convey the intended meaning. It suggests a continuous or repetitive requirement. The current Portuguese translation 'Todos os usuários devem preencher a tela de consentimento novamente' is correct but could be improved for clarity and conciseness.",
-          "suggestion": "Todos os usuários deverão preencher a tela de consentimento novamente."
-        },
-        {
-          "type": "formatting",
-          "description": "The English original uses `<strong>` tags. The Portuguese translation also uses `<strong`. While functional, it's good practice to ensure consistency if the target platform expects specific HTML.  Consider if `<b>` would be more appropriate depending on the design requirements.",
-          "suggestion": "Review and maintain HTML tag consistency with the original.  Check for specific platform requirements."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'all again' is not accurately translated. It implies a repetition of a previous action. 'Din nou' attempts to convey this, but the sentence structure isn't ideal.",
-          "suggestion": "Toți utilizatorii vor trebui să completeze din nou ecranul de consimțământ."
-        },
-        {
-          "type": "formatting",
-          "description": "The original English uses 'strong' tags for 'Note:'. The Romanian translation replicates this, which might be appropriate but consider if a more common heading style is preferred. Consistency across the application is key.",
-          "suggestion": "Consider removing the strong tags or using a more standard heading style to ensure consistency."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"all again\" is awkward and doesn't translate directly to Russian. It implies repeated action. A more natural translation would reflect that.",
-          "suggestion": "Все пользователи снова должны будут заполнить экран согласия."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'all users all again' is awkward and likely means 'all users will again'. The Sinhala translation 'සියලු පරිශීලකයින් නැවතත්' accurately reflects the intended meaning of 'again', but the original English is not ideal.",
-          "suggestion": "The English should be revised to 'All users will again be required...'"
-        },
-        {
-          "type": "formatting",
-          "description": "The Sinhala translation maintains the strong tag which is consistent with the English, which is good. However, ensuring consistency across all similar notes is advisable.",
-          "suggestion": "Maintain consistent use of strong tags for notes."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"all again\" is awkwardly translated as \"znova\". A more natural Slovak translation would be \"opäť\".",
-          "suggestion": "Opätť"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"all again\" is awkward and likely means \"again\". The Slovenian translation doesn't quite capture the intended meaning which is to re-require completion.",
-          "suggestion": "Consider rephrasing the English to \"all users will again be required\" or simply \"users will again be required\" and adjust the Slovenian translation accordingly. A more accurate Slovenian translation could be: \"Vsi uporabniki morajo ponovno izpolniti zaslon za soglasje\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'all users all again' is grammatically incorrect and doesn't convey the intended meaning. The Serbian translation is also slightly awkward.",
-          "suggestion": "Consider rephrasing the English to 'All users will again...' or 'Users will once again...'.  A better Serbian translation might be: '<strong>Напомена:</strong> Сви корисници ће поново морати да попуне екран за пристанак' or '<strong>Напомена:</strong> Корисници ће поново морати да попуне екран за пристанак'."
-        },
-        {
-          "type": "formatting",
-          "description": "The original English content uses a strong tag for 'Note:'. The Serbian translation correctly mirrors this formatting.",
-          "suggestion": "No change needed. The consistency in formatting is good."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"all again\" is awkward and doesn't translate directly to Serbian. It seems to imply users will have to repeat the consent process.",
-          "suggestion": "The phrasing 'će ponovo morati' is accurate, but the English is clunky. A more natural English would be 'all users will again be required'.  A slightly more fluent Serbian could be \"Svi korisnici ponovo treba da popune ekran pristanka\" or \"Svi korisnici ponovo treba da odobri ekran pristanka\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'all users all again' is awkward and likely meant 'all users will again'. The Turkish translation doesn't fully capture this intended meaning. It translates to 'All users must complete the consent screen again', which is a literal but potentially unclear rendering.",
-          "suggestion": "Consider revising the English to 'All users will again be required to complete the consent screen.' The Turkish could then be: '<strong>Not:</strong> Tüm kullanıcıların tekrar izin ekranını tamamlamaları gerekecektir.'"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation keeps the 'Note:' as 'Not:', which is technically correct but less natural in Turkish in this context.  While understandable, it's not ideal.",
-          "suggestion": "Consider translating 'Note:' as 'Lütfen Dikkat Ediniz:' or simply 'Dikkat:'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'all again be required' is awkward and doesn't accurately reflect the intended meaning. It's meant to convey that users will need to re-consent.",
-          "suggestion": "Всі користувачам знову необхідно буде підтвердити згоду."
-        },
-        {
-          "type": "formatting",
-          "description": "The English original uses a strong tag for 'Note'. The Ukrainian translation also uses a strong tag, but consistency in styling should be maintained. Ensure the styling (font weight, size, color) matches the English original in the application.",
-          "suggestion": "Consider the overall styling guide to ensure consistency. If the 'strong' tag is used for emphasis, confirm it's appropriate for the Ukrainian context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"all users all again\" is awkward and doesn't accurately convey the meaning of the English sentence. It implies repetition of a repeated action, which isn't the intent.",
-          "suggestion": "Tất cả người dùng sẽ phải hoàn thành lại màn hình đồng ý"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence \"Tất cả người dùng một lần nữa phải hoàn thành đồng ý cho màn hình\" is grammatically incorrect. 'đồng ý cho màn hình' is not a proper phrasing.",
-          "suggestion": "Tất cả người dùng sẽ phải hoàn thành lại màn hình đồng ý"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'all users all again' is grammatically incorrect and unclear. It seems to mean 'all users will again'. The Chinese translation '所有用户将需要重新完成同意流程' accurately reflects the intended meaning of users needing to re-complete the consent flow.",
-          "suggestion": "While the Chinese translation is accurate given the flawed English source, consider clarifying the English before translation: '<strong>Note:</strong> That all users will again be required to complete the consent screen'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

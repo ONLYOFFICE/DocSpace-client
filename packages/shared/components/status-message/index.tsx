@@ -31,14 +31,21 @@ import styles from "./StatusMessage.module.scss";
 import { Text } from "../text";
 
 interface StatusMessageProps {
-  message: string;
+  message: string | React.ReactNode;
+  isWarning?: boolean;
 }
 
-const StatusMessage: React.FC<StatusMessageProps> = ({ message }) => {
+const StatusMessage: React.FC<StatusMessageProps> = ({
+  message,
+  isWarning,
+}) => {
   const [isVisible, setIsVisible] = React.useState(true);
+
   const [isShowComponent, setIsShowComponent] = React.useState(!!message);
   const messageRef = React.useRef<HTMLDivElement>(null);
-  const prevMessageRef = React.useRef<string | undefined>(message);
+  const prevMessageRef = React.useRef<string | React.ReactNode | undefined>(
+    message,
+  );
   const shouldShowAfterAnimationRef = React.useRef(false);
 
   React.useEffect(() => {
@@ -106,7 +113,7 @@ const StatusMessage: React.FC<StatusMessageProps> = ({ message }) => {
   return (
     <div
       ref={messageRef}
-      className={`${styles.body} ${!isVisible ? styles.hide : ""}`}
+      className={`${styles.body} ${!isVisible ? styles.hide : ""} ${isWarning ? styles.warning : ""}`}
     >
       <DangerToastReactSvg
         className={styles.dangerToastIcon}

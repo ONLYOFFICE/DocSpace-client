@@ -3,7 +3,7 @@
   "content": "Tab Plugins",
   "content_en_sha1_hash": "e55bd87644d60d366a8efd44d8bb849c63a4a8f9",
   "created_at": "2025-05-19T21:30:54.702Z",
-  "updated_at": "2025-05-24T08:44:57.814Z",
+  "updated_at": "2025-10-27T16:14:33.517Z",
   "comment": {
     "text": "The \"TabPlugins\" translation key is used to display the label for a checkbox that enables or disables tab plugins in the portal settings. It appears as a simple label in a UI element and needs to be translated into different languages for consistency.",
     "is_auto": true,

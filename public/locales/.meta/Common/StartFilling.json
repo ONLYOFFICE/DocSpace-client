@@ -3,7 +3,7 @@
   "content": "Start filling",
   "content_en_sha1_hash": "3e49f427774cb5019a379c9d210feb129e86c45e",
   "created_at": "2025-05-19T21:30:49.045Z",
-  "updated_at": "2025-06-30T12:20:31.621Z",
+  "updated_at": "2025-10-27T16:14:33.658Z",
   "comment": {
     "text": "This translation key is used to display the text \"Start filling\" in various UI elements, such as a modal dialog header and a dropdown option, where it serves as an action label or button text.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1822,
+      "line_number": 1937,
       "context": "disabled: !item.security?.SubmitToFormGallery,\n },\n {\n id: \"option_start-filling\",\n key: \"start-filling\",\n label: t(\"Common:StartFilling\"),\n icon: FormFillRectSvgUrl,\n onClick: () => this.onClickStartFilling(item, t),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
-      "line_number": 315,
+      "line_number": 347,
       "context": "disableSubmitButton={false}\n headerProps={invitePanelSelectorHeader}\n />\n ) : null}\n </ModalDialog.Container>\n <ModalDialog.Header>{t(\"Common:StartFilling\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <section className={styles.container}>\n {infoBarVisible ? (\n <>\n <PublicRoomBar",
       "module": "/packages/shared"
     }
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Doldurmağa başlayın' is a valid translation, 'Start filling' is often translated as 'Örtülü düşürün' or 'Bəzi doldurun' depending on the context. 'Doldurmağa başlayın' sounds slightly formal and less natural in many cases.",
-          "suggestion": "Consider 'Örtülü düşürün' or 'Bəzi doldurun' for a more natural-sounding translation depending on the specific context."
+          "description": "The translation 'Doldurmağa başlayın' is technically correct but sounds somewhat formal and less natural for a simple instruction like 'Start filling'. A more common and user-friendly translation would be better.",
+          "suggestion": "Başlamağa doldur"
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Սկսել լրացնելը' while literally meaning 'Start filling' might be too literal and sound awkward in Armenian. A more natural phrasing would be something like 'Լրացնելու համար սկսեք' (To fill, start) or simply 'Սկսեք լրացնել' (Start filling).",
-          "suggestion": "Լրացնելու համար սկսեք or Սկսեք լրացնել"
+          "description": "The translation 'Սկսել լրացնելը' is a bit literal and clunky. While technically correct, it's not the most natural way to say 'Start filling' in Armenian. It emphasizes the *act* of starting to fill, rather than just 'Start filling'.",
+          "suggestion": "Consider a more natural phrasing such as 'Լրացնել սկսել' (Lracnel sksel) or simply 'Սկսեք լրացնել' (Sks'ek lracnel) depending on the context."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"작성 시작\" (jaksyeong sijak) translates to \"Start writing\" or \"Writing start,\" which isn't a direct equivalent to 'Start filling'. While 'writing' can sometimes imply 'filling,' it loses the specific nuance of completing a form or data entry.",
-          "suggestion": "Consider \"정보 입력 시작\" (jeongbo ipnyuk sijak) for 'Start entering information' or \"채우기 시작\" (chaeugi sijak) for 'Start filling' if a more literal translation is desired."
+          "description": "The Korean translation '작성 시작' translates to 'Start writing' or 'Writing start', not directly 'Start filling'. While it could be contextually appropriate, it's not a literal translation.",
+          "suggestion": "Consider '채우기 시작' for a more literal translation of 'Start filling', or evaluate if '작성 시작' fits the intended meaning in context."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເລີ່ມຕື່ນຕົວແລ້ວ\" (roem dton tua laew) translates to 'start waking up' or 'start becoming aware', which isn't an accurate translation of 'Start filling'. It implies a process of awakening, not filling something.",
-          "suggestion": "A more accurate translation for 'Start filling' would depend on the context. Some possibilities include: 'ເລີ່ມຕື່ມ' (roem tuem) - 'start filling', 'ເລີ່ມເຕີມ' (roem tem) - 'start filling', or 'ຕື່ມຂໍ້ມູນ' (tuem khomun) - 'fill in information'."
+          "description": "The Lao translation 'ເລີ່ມຕື່ນຕົວແລ້ວ' (reem dtun dtua laeo) translates to 'Start waking up' or 'Begin to wake up'. It doesn't directly mean 'Start filling' which is the intended meaning of the English phrase. It carries a different connotation of awakening or becoming active.",
+          "suggestion": "A more accurate translation for 'Start filling' would depend on the context. Possible suggestions include: ຕື່ມຂໍ້ມູນເລີ່ມຕົ້ນ (teum khomnum reem ton - start filling in information), ຫຼື ພິມຂໍ້ມູນເລີ່ມຕົ້ນ (phim khomnum reem ton - start typing information)."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ආරම්භ කරන්න පුරනවා.' is not an accurate translation of 'Start filling'. 'ආරම්භ කරන්න' means 'start' or 'begin', but 'පුරනවා' means 'to fill' or 'filling' in a more passive sense (like being filled). A more accurate translation would convey the imperative 'begin to fill' or 'start to fill'.",
-          "suggestion": "Consider alternatives like 'පුරවා ගන්න شروع කරන්න' (purava gan'na suru karanna) which translates to 'begin to fill' or 'start filling', or a simpler 'පුරන්න شروع කරන්න' (puranna suru karanna) which means 'start to fill'."
+          "description": "The Sinhala translation 'ආරම්භ කරන්න පුරනවා.' is not an accurate translation of 'Start filling'. 'ආරම්භ කරන්න' means 'start' or 'begin', but 'පුරනවා' means 'to fill' or 'to complete'. The combination suggests 'start filling' but is awkward and not idiomatic Sinhala. A more natural translation would focus on the action of filling.",
+          "suggestion": "පිරවන්න ගණන් (Pirawanna ganan) or පිරවන්න شروع කරන්න (Pirawanna suruwa karanawa)."
         }
       ],
       "approved_at": null
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Почните са попуњавањем\" is technically correct, it's a bit clunky and not the most natural way to say \"Start filling\" in Serbian. A more idiomatic translation would be \"Почните са уносом\" or \"Испуните\".",
-          "suggestion": "Почните са уносом"
+          "description": "The translation 'Почните са попуњавањем' while technically correct, isn't the most natural or concise way to say 'Start filling' in Serbian. A more common and flowing translation would be 'Почни са попуњавањем' or 'Започни попуњавање'.",
+          "suggestion": "Почни са попуњавањем"
         }
       ],
       "approved_at": null
@@ -219,7 +219,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Počnite sa popunjavanjem\" is understandable, a more natural and concise translation of \"Start filling\" in Serbian (Latin) would be \"Popunite\". \"Počnite sa popunjavanjem\" is a bit too literal and verbose.",
+          "suggestion": "Popunite"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -241,6 +247,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable jsx-a11y/tabindex-no-positive */
-
 import classNames from "classnames";
 import { TFunction } from "i18next";
 import { Trans } from "react-i18next";
@@ -99,10 +97,12 @@ const AmazonSettings = ({
     {
       key: "1",
       label: serverSideEncryption,
+      dataTestId: "server_encryption_option",
     },
     {
       key: "2",
       label: clientSideEncryption,
+      dataTestId: "client_encryption_option",
     },
   ];
 
@@ -233,10 +233,12 @@ const AmazonSettings = ({
             {helpInfo}
           </Trans>
         }
+        dataTestId="amazon_settings_help_button"
       />
     );
   };
 
+  // biome-ignore-start lint/suspicious/noPrototypeBuiltins: TODO fix
   const selectedEncryption =
     formSettings[SSE] === SSE_KMS || formSettings[SSE] === SSE_S3
       ? availableEncryptions[1].label
@@ -250,6 +252,7 @@ const AmazonSettings = ({
         ? MANAGED_KEYS[1]
         : MANAGED_KEYS[0]
       : MANAGED_KEYS[0];
+  // biome-ignore-end lint/suspicious/noPrototypeBuiltins: TODO fix
 
   return (
     <div
@@ -303,10 +306,13 @@ const AmazonSettings = ({
           noBorder={false}
           scaled
           scaledOptions
+          isDefaultMode={false}
           dropDownMaxHeight={300}
           isDisabled={isDisabled}
           tabIndex={2}
           showDisabledItems
+          dataTestId="amazon_settings_region_combobox"
+          dropDownTestId="amazon_settings_region_dropdown"
         />
       </div>
 
@@ -476,6 +482,7 @@ const AmazonSettings = ({
                 isDisabled={isDisabled}
                 tabIndex={8}
                 showDisabledItems
+                dataTestId="amazon_managed_cmk_combobox"
               />
 
               {managedKeys.label === CUSTOMER_MANAGER ? (

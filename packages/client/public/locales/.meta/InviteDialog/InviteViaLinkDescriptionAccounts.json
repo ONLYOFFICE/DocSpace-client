@@ -3,7 +3,7 @@
   "content": "Create a universal link for self-authorization in {{productName}}",
   "content_en_sha1_hash": "533c585d8d2f76cf27cc52d2d1d5266fd4da6892",
   "created_at": "2025-05-19T21:30:54.732Z",
-  "updated_at": "2025-05-26T07:57:32.374Z",
+  "updated_at": "2025-10-13T13:22:35.664Z",
   "comment": {
     "text": "Create a universal link for self-authorization in {{productName}}. This text is used to display an invite message when creating a universal link for user authorization in the application, appearing in the Invite Panel component.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 277,
-      "context": "isDisabled={isLinksToggling}\n />\n </StyledSubHeader>\n <StyledDescription noSelect>\n {roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\", {\n productName: t(\"Common:ProductName\"),\n })\n : !allowInvitingGuests\n ? t(\"InviteViaLinkDescriptionRoomMembers\", {\n productName: t(\"Common:ProductName\"),",
+      "line_number": 276,
+      "context": "dataTestId=\"invite_panel_external_links_toggle\"\n />\n </StyledSubHeader>\n <StyledDescription>\n {roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\", {\n productName: t(\"Common:ProductName\"),\n })\n : !allowInvitingGuests\n ? t(\"InviteViaLinkDescriptionRoomMembers\", {\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/client"
     }
   ],

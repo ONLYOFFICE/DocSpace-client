@@ -30,7 +30,7 @@ import cloneDeep from "lodash/cloneDeep";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import TagHandler from "./handlers/TagHandler";
+import TagHandler from "../../../helpers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import TemplateAccessSelector from "../../TemplateAccessSelector";
 import ChangeRoomOwnerPanel from "../../panels/ChangeRoomOwnerPanel";
@@ -107,7 +107,15 @@ const EditRoomDialog = ({
       isEqual(prevParams.lifetime, currentParams.lifetime) &&
       isEqual(prevParams.watermark, currentParams.watermark) &&
       isEqual(prevInviteItems, currentInviteItems) &&
-      isAvailable === templateIsAvailable
+      isAvailable === templateIsAvailable &&
+      prevParams.modelId === currentParams.modelId &&
+      prevParams.providerId === currentParams.providerId &&
+      prevParams.prompt === currentParams.prompt &&
+      currentParams.mcpServers?.every((id) =>
+        currentParams.mcpServersInitial?.includes(id),
+      ) &&
+      currentParams.mcpServers?.length ===
+        currentParams.mcpServersInitial?.length
     );
   };
 
@@ -174,6 +182,11 @@ const EditRoomDialog = ({
     if (isLoading) return;
 
     onClose && onClose();
+  };
+
+  const onBackClick = () => {
+    if (changeRoomOwnerIsVisible) setChangeRoomOwnerIsVisible(false);
+    if (addUsersPanelVisible) setAddUsersPanelVisible(false);
   };
 
   const onOwnerChange = () => {
@@ -245,6 +258,7 @@ const EditRoomDialog = ({
       withBodyScroll
       visible={visible}
       onClose={onCloseAction}
+      onBackClick={onBackClick}
       isScrollLocked={isScrollLocked}
       isLoading={isInitLoading}
       containerVisible={

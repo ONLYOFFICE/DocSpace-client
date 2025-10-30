@@ -85,14 +85,23 @@ const FileSelector = (props) => {
   setDocumentTitle(t("JavascriptSdk"));
 
   const fileTypeDisplay = [
-    { value: FilesSelectorFilterTypes.ALL, label: t("AllTypes") },
+    {
+      value: FilesSelectorFilterTypes.ALL,
+      label: t("AllTypes"),
+      dataTestId: "all_types_radio_button",
+    },
     {
       value: "EditorSupportedTypes",
       label: t("AllTypesSupportedByEditor", {
         organizationName: logoText,
       }),
+      dataTestId: "editor_radio_button",
     },
-    { value: "SelectorTypes", label: t("SelectTypes") },
+    {
+      value: "SelectorTypes",
+      label: t("SelectTypes"),
+      dataTestId: "selector_radio_button",
+    },
   ];
 
   const fileOptions = [
@@ -142,7 +151,7 @@ const FileSelector = (props) => {
     },
   ];
 
-  const [version, onSetVersion] = useState(sdkVersion[200]);
+  const [version, onSetVersion] = useState(sdkVersion[210]);
 
   const [source, onSetSource] = useState(sdkSource.Package);
 
@@ -314,7 +323,6 @@ const FileSelector = (props) => {
     >
       <Container>
         <PreviewBlock
-          t={t}
           loadCurrentFrame={initFrame}
           preview={preview}
           theme={theme}
@@ -367,6 +375,7 @@ const FileSelector = (props) => {
                 label={t("Subtitle")}
                 onChange={toggleWithSubtitle}
                 isChecked={config.withSubtitle}
+                dataTestId="subtitle_checkbox"
               />
               <HelpButton
                 place="right"
@@ -379,6 +388,7 @@ const FileSelector = (props) => {
                     img={theme.isBase ? SubtitleUrl : SubtitleUrlDark}
                   />
                 }
+                dataTestId="subtitle_help_button"
               />
             </LabelGroup>
             <LabelGroup>
@@ -387,6 +397,7 @@ const FileSelector = (props) => {
                 label={t("Common:Search")}
                 onChange={toggleWithSearch}
                 isChecked={config.withSearch}
+                dataTestId="search_checkbox"
               />
               <HelpButton
                 place="right"
@@ -399,6 +410,7 @@ const FileSelector = (props) => {
                     img={theme.isBase ? SearchUrl : SearchUrlDark}
                   />
                 }
+                dataTestId="search_help_button"
               />
             </LabelGroup>
             <SelectTextInput t={t} config={config} setConfig={setConfig} />
@@ -416,6 +428,7 @@ const FileSelector = (props) => {
                   tooltipContent={
                     <Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
                   }
+                  dataTestId="room_or_folder_help_button"
                 />
               </LabelGroup>
               <FilesSelectorInputWrapper>
@@ -438,6 +451,7 @@ const FileSelector = (props) => {
                     tooltipContent={
                       <Text fontSize="12px">{t("Common:PublicRoomInfo")}</Text>
                     }
+                    dataTestId="external_link_help_button"
                   />
                 </LabelGroup>
                 <ComboBox
@@ -447,6 +461,7 @@ const FileSelector = (props) => {
                   selectedOption={sharedLinks[0]}
                   displaySelectedOption
                   directionY="bottom"
+                  dataTestId="external_link_combobox"
                 />
               </ControlsGroup>
             ) : null}
@@ -462,6 +477,7 @@ const FileSelector = (props) => {
               selected={typeDisplay}
               onClick={changeColumnsOption}
               spacing="8px"
+              dataTestId="file_type_display_radiobutton_group"
             />
             {typeDisplay === "SelectorTypes" ? (
               <ComboBox
@@ -475,6 +491,8 @@ const FileSelector = (props) => {
                 scaled
                 directionY="top"
                 selectedOption={selectedType}
+                dataTestId="file_type_combobox"
+                dropDownTestId="file_type_dropdown"
               />
             ) : null}
           </ControlsSection>

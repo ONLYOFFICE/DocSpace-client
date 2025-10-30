@@ -3,7 +3,7 @@
   "content": "Logo settings",
   "content_en_sha1_hash": "cde0dbbc94f797482701f082adcc8ce183018e62",
   "created_at": "2025-05-26T07:15:49.607Z",
-  "updated_at": "2025-06-30T12:20:31.601Z",
+  "updated_at": "2025-10-13T19:30:25.655Z",
   "comment": {
     "text": "The \"Logo settings\" translation key is used to display a description for a logo-related setting in the portal settings. It appears in the branding section of the portal and might be seen in a header or on a button related to logo customization. Translators should provide a clear and concise text that explains the purpose of logo settings.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 110,
+      "line_number": 117,
       "context": "{\n id: \"portal-settings_catalog-white-label\",\n key: \"0-1-1\",\n icon: \"\",\n link: \"white-label\",\n tKey: \"Common:WhiteLabel\",\n },\n {\n id: \"portal-settings_catalog-company-info-settings\",\n key: \"0-1-2\",\n icon: \"\",",
       "module": "/packages/client"
     },
@@ -69,7 +69,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Logo Einstellungen' is too literal. A more natural German translation would be 'Logoeinstellungen' or 'Logo-Einstellungen'. The direct translation doesn't flow well in German.",
+          "suggestion": "Logoeinstellungen"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -147,7 +153,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation \"Definições de login\" translates to \"Login settings\" which is not the same as \"Logo settings\". It implies login configurations instead of logo customization.",
+          "suggestion": "Configurações de logotipo"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -171,7 +183,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ලාංඡනය' (Laanchchhana) is the correct spelling for 'Logo'.",
+          "suggestion": "No change needed. The spelling is correct."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'ලාංඡනයේ සැකසුම්' (Laanchchhanae Saekasuum) is grammatically correct and means 'Logo Settings'. However, a more natural phrasing in Sinhala could potentially be 'ලාංඡන සැකසුම්' (Laanchchhana Saekasuum) - removing the locative case marker.",
+          "suggestion": "Consider 'ලාංඡන සැකසුම්' (Laanchchhana Saekasuum) for a slightly more natural phrasing."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -189,7 +212,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Логотип подешавања\" doesn't accurately convey \"Logo settings\". \"Подешавања\" translates to \"settings\", but \"Логотип подешавања\" is a bit clunky. A better translation would be more direct.",
+          "suggestion": "Логотип подесиоца"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Логотип подешавања\" sounds unnatural in Serbian. A more natural phrasing would use a different grammatical structure.",
+          "suggestion": "Подешавања логотипа"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -213,10 +247,22 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Cài đặt Logo\" is understandable, a more natural and common translation for 'Logo settings' would be 'Thiết lập logo'. 'Cài đặt' often implies installation, which isn't the intended meaning here.",
+          "suggestion": "Thiết lập logo"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

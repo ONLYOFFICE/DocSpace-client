@@ -25,9 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { Trans } from "react-i18next";
 import styled, { css } from "styled-components";
-import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
+
+import { Text } from "@docspace/shared/components/text";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Link } from "@docspace/shared/components/link";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { FREE_BACKUP } from "@docspace/shared/constants";
+
+import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
 const StyledBody = styled.div`
   border-radius: 12px;
@@ -54,6 +62,13 @@ const StyledBody = styled.div`
     p {
       margin-bottom: 0;
     }
+
+    .payment-benefits_feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .icons-container {
       width: 24px;
       height: 24px;
@@ -62,11 +77,6 @@ const StyledBody = styled.div`
         !props.theme.isBase &&
         css`
           svg {
-            path {
-              fill: ${({ theme }) =>
-                theme.client.settings.payment.benefitsContainer
-                  .iconsColor} !important;
-            }
             mask + path {
               fill: none !important;
               stroke: ${({ theme }) =>
@@ -80,14 +90,42 @@ const StyledBody = styled.div`
 `;
 
 const BenefitsContainer = ({ t, features }) => {
+  const renderTooltip = () => {
+    const onClickServiceUrl = () => {
+      const servicePageUrl = combineUrl("/portal-settings", "/services");
+
+      window.DocSpace.navigate(servicePageUrl);
+    };
+
+    return (
+      <HelpButton
+        className="payment-tooltip"
+        offsetRight={0}
+        iconName={HelpReactSvgUrl}
+        tooltipContent={
+          <Trans
+            t={t}
+            i18nKey="NeedMoreGoToServices"
+            ns="Payments"
+            components={{
+              1: (
+                <Link
+                  key="contact-payer-link"
+                  tag="a"
+                  color="accent"
+                  onClick={onClickServiceUrl}
+                />
+              ),
+            }}
+          />
+        }
+      />
+    );
+  };
+
   return (
     <StyledBody className="benefits-container">
-      <Text
-        fontSize="16px"
-        fontWeight="600"
-        className="payment-benefits_text"
-        noSelect
-      >
+      <Text fontSize="16px" fontWeight="600" className="payment-benefits_text">
         {t("Benefits")}
       </Text>
       {Array.from(features.values()).map((item) => {
@@ -95,10 +133,16 @@ const BenefitsContainer = ({ t, features }) => {
         return (
           <div className="payment-benefits" key={item.title || item.image}>
             <div
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: TODO fix
               dangerouslySetInnerHTML={{ __html: item.image }}
               className="icons-container"
             />
-            <Text noSelect>{item.title}</Text>
+            <div className="payment-benefits_feature">
+              <Text noSelect as="span">
+                {item.title}
+              </Text>
+              {item.id === FREE_BACKUP ? renderTooltip() : null}
+            </div>
           </div>
         );
       })}

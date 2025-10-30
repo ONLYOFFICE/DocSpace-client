@@ -1,7 +1,5 @@
 {
   "ExternalLink": "Liên kết bên ngoài",
-  "LinkName": "Tên liên kết",
-  "RoleForLink": "Vai trò của liên kết",
   "ShareEmailBody": "Bạn đã được cấp quyền truy cập vào tài liệu {{itemName}}. Hãy nhấp vào liên kết bên dưới để mở tài liệu ngay: {{shareLink}}.",
   "ShareEmailSubject": "Bạn đã được cấp quyền truy cập vào tài liệu {{itemName}}"
 }

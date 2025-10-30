@@ -112,6 +112,7 @@ class ChangePasswordDialogComponent extends React.Component {
                 noHover
                 color={currentColorScheme.main?.accent}
                 title={email}
+                dataTestId="change_password_self_email_link"
               >
                 {{ email }}
               </Link>
@@ -129,6 +130,7 @@ class ChangePasswordDialogComponent extends React.Component {
             primary
             onClick={this.onSendPasswordChangeInstructions}
             isLoading={isRequestRunning}
+            testId="change_password_send_button"
           />
           <Button
             className="cancel-button"
@@ -138,6 +140,7 @@ class ChangePasswordDialogComponent extends React.Component {
             scale
             onClick={onClose}
             isDisabled={isRequestRunning}
+            testId="change_password_cancel_button"
           />
         </ModalDialog.Footer>
       </ModalDialog>

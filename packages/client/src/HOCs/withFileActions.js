@@ -65,11 +65,13 @@ export default function withFileActions(WrappedFileItem) {
       const { t, dragging, setDragging, startUpload, createFoldersTree } =
         this.props;
 
+      const dragged = dragging;
+
       dragging && setDragging(false);
 
-      createFoldersTree(t, files, uploadToFolder)
+      createFoldersTree(t, files, uploadToFolder, dragged)
         .then((f) => {
-          if (f.length > 0) startUpload(f, null, t);
+          if (f.length > 0) startUpload(f, uploadToFolder, t);
         })
         .catch((err) => {
           toastr.error(err, null, 0, true);
@@ -77,11 +79,17 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onDrop = (items) => {
-      const { isTrashFolder, dragging, setDragging, isDisabledDropItem, item } =
-        this.props;
+      const {
+        isTrashFolder,
+        dragging,
+        setDragging,
+        isDisabledDropItem,
+        item,
+        isRecentFolder,
+      } = this.props;
       const { fileExst, isFolder, id } = item;
 
-      if (isTrashFolder || isDisabledDropItem)
+      if (isTrashFolder || isRecentFolder || isDisabledDropItem)
         return dragging && setDragging(false);
       if (!fileExst && isFolder) {
         this.onDropZoneUpload(items, id);
@@ -105,7 +113,10 @@ export default function withFileActions(WrappedFileItem) {
         canDrag,
         viewAs,
         isIndexEditingMode,
+        withContentSelection,
       } = this.props;
+
+      if (withContentSelection) return;
 
       if (isIndexEditingMode) {
         if (
@@ -133,10 +144,11 @@ export default function withFileActions(WrappedFileItem) {
         setBufferSelection(item);
 
       if (
-        !canDrag ||
-        (!draggable && !isFileName && !isActive) ||
-        notSelectable ||
-        isThirdPartyFolder
+        (!canDrag ||
+          (!draggable && !isFileName && !isActive) ||
+          notSelectable ||
+          isThirdPartyFolder) &&
+        e.button !== 1
       ) {
         return e;
       }
@@ -148,7 +160,13 @@ export default function withFileActions(WrappedFileItem) {
           : false;
       const label = e.currentTarget.getAttribute("label");
       if (mouseButton || e.currentTarget.tagName !== "DIV" || label) {
-        if (item.isPlugin) return this.onFilesClick(e);
+        const canWebEdit = item.viewAccessibility?.WebEdit;
+        const canViewedDocs = item.viewAccessibility?.WebView;
+        if (
+          (item?.isPlugin || !(canWebEdit || canViewedDocs)) &&
+          !item?.isFolder
+        )
+          return this.onFilesClick(e);
         return e;
       }
 
@@ -163,7 +181,15 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onMouseClick = (e) => {
-      const { viewAs, withCtrlSelect, withShiftSelect, item } = this.props;
+      const {
+        viewAs,
+        withCtrlSelect,
+        withShiftSelect,
+        item,
+        withContentSelection,
+      } = this.props;
+
+      if (withContentSelection) return;
 
       if (e.ctrlKey || e.metaKey) {
         withCtrlSelect(item);
@@ -208,14 +234,22 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onFilesClick = (e) => {
-      const { t, item, openFileAction, setParentId, isTrashFolder } =
-        this.props;
+      const {
+        t,
+        item,
+        openFileAction,
+        setParentId,
+        isTrashFolder,
+        isNewBadgePanelVisible,
+      } = this.props;
 
       if (
         (e && e.target?.tagName === "INPUT") ||
         !!e.target.closest(".lock-file") ||
         // !!e.target.closest(".additional-badges") ||
         e.target.closest(".tag") ||
+        e.target.closest(".mainIcons") ||
+        isNewBadgePanelVisible ||
         isTrashFolder
       )
         return;
@@ -252,17 +286,24 @@ export default function withFileActions(WrappedFileItem) {
 
     onDragOver = (e) => {
       const { setDragging } = this.props;
-      if (
-        e.dataTransfer.items.length > 0 &&
-        e.dataTransfer.dropEffect !== "none"
-      ) {
+
+      const hasFiles =
+        e.dataTransfer.types.includes("Files") ||
+        e.dataTransfer.types.includes("application/x-moz-file");
+
+      if (hasFiles && e.dataTransfer.dropEffect !== "none") {
         setDragging(true);
       }
     };
 
     onDragLeave = (e) => {
       const { setDragging } = this.props;
-      if (!e.relatedTarget || !e.dataTransfer.items.length) {
+
+      const hasFiles =
+        e.dataTransfer.types.includes("Files") ||
+        e.dataTransfer.types.includes("application/x-moz-file");
+
+      if (!e.relatedTarget || !hasFiles) {
         setDragging(false);
       }
     };
@@ -282,7 +323,7 @@ export default function withFileActions(WrappedFileItem) {
         itemIndex,
         currentDeviceType,
         isDisabledDropItem,
-        isRecentTab,
+        isRecentFolder,
         canDrag,
         isIndexUpdated,
       } = this.props;
@@ -338,6 +379,7 @@ export default function withFileActions(WrappedFileItem) {
           className={className}
           isDragging={isDragging}
           value={value}
+          documentTitle={item.title}
           displayShareButton={displayShareButton}
           isPrivacy={isPrivacy}
           isIndexUpdated={isIndexUpdated}
@@ -347,7 +389,7 @@ export default function withFileActions(WrappedFileItem) {
           onDragOver={this.onDragOver}
           onDragLeave={this.onDragLeave}
           badgeUrl={badgeUrl}
-          isRecentTab={isRecentTab}
+          isRecentFolder={isRecentFolder}
           canDrag={canDrag}
           {...this.props}
         />
@@ -367,6 +409,7 @@ export default function withFileActions(WrappedFileItem) {
         uploadDataStore,
         contextOptionsStore,
         indexingStore,
+        hotkeyStore,
       },
       { item, t },
     ) => {
@@ -379,7 +422,7 @@ export default function withFileActions(WrappedFileItem) {
         openFileAction,
         createFoldersTree,
       } = filesActionsStore;
-      const { setSharingPanelVisible } = dialogsStore;
+      const { setSharingPanelVisible, newFilesPanelFolderId } = dialogsStore;
       const { updateSelection, isIndexEditingMode } = indexingStore;
       const {
         isPrivacyFolder,
@@ -387,7 +430,8 @@ export default function withFileActions(WrappedFileItem) {
         isRoomsFolder,
         isArchiveFolder,
         isTemplatesFolder,
-        isRecentTab,
+        isRecentFolder,
+        isAIAgentsFolder,
       } = treeFoldersStore;
       const {
         dragging,
@@ -411,7 +455,7 @@ export default function withFileActions(WrappedFileItem) {
       } = filesStore;
       const { id } = selectedFolderStore;
       const { startUpload, secondaryProgressDataStore } = uploadDataStore;
-
+      const { withContentSelection } = hotkeyStore;
       const { findOperationById } = secondaryProgressDataStore;
 
       const selectedItem = selection.find(
@@ -471,8 +515,10 @@ export default function withFileActions(WrappedFileItem) {
         isRoomsFolder ||
         isArchiveFolder ||
         isTemplatesFolder ||
+        isRecentFolder ||
         settingsStore.currentDeviceType !== DeviceType.desktop ||
-        inProgress;
+        inProgress ||
+        isAIAgentsFolder;
 
       let isActive = false;
 
@@ -531,12 +577,19 @@ export default function withFileActions(WrappedFileItem) {
         setSelection,
         currentDeviceType: settingsStore.currentDeviceType,
         isDisabledDropItem,
-        isRecentTab,
+        isRecentFolder,
         isIndexUpdated,
 
         canDrag: !dragIsDisabled,
         isIndexEditingMode,
         isBlockingOperation,
+
+        withContentSelection,
+
+        isNewBadgePanelVisible:
+          newFilesPanelFolderId === item.id &&
+          item.isFolder &&
+          settingsStore.currentDeviceType === DeviceType.mobile,
       };
     },
   )(observer(WithFileActions));

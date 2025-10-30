@@ -3,7 +3,7 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2025-05-19T21:30:49.370Z",
-  "updated_at": "2025-06-30T12:20:31.323Z",
+  "updated_at": "2025-10-27T16:14:33.373Z",
   "comment": {
     "text": "This translation key is used to display a label indicating the type of an item or entity. It appears in various UI elements, such as titles, labels, and field headers, where it provides a brief description of the item's classification (e.g., \"Type\" for a data entry field).",
     "is_auto": true,
@@ -11,86 +11,98 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
-      "line_number": 171,
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
+      "line_number": 198,
       "context": "return this.t(\"Common:Owner\");\n case \"Location\":\n return this.t(\"Common:Location\");\n \n case \"Type\":\n return this.t(\"Common:Type\");\n case \"Storage Type\":\n return this.t(\"InfoPanel:StorageType\");\n \n case \"File extension\":\n return this.t(\"FileExtension\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 240,
-      "context": "title={statusLabel}\n >\n {statusLabel}\n </Text>\n \n <Text className=\"info_field\" noSelect title={t(\"Common:Type\")}>\n {t(\"Common:Type\")}\n </Text>\n {typeData}\n \n {isGuests && infoPanelSelection.createdBy?.displayName ? (",
+      "line_number": 252,
+      "context": "title={statusLabel}\n >\n {statusLabel}\n </Text>\n \n <Text className={styles.infoField} title={t(\"Common:Type\")}>\n {t(\"Common:Type\")}\n </Text>\n {typeData}\n \n {isGuests && userSelection.createdBy?.displayName ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 240,
-      "context": "title={statusLabel}\n >\n {statusLabel}\n </Text>\n \n <Text className=\"info_field\" noSelect title={t(\"Common:Type\")}>\n {t(\"Common:Type\")}\n </Text>\n {typeData}\n \n {isGuests && infoPanelSelection.createdBy?.displayName ? (",
+      "line_number": 252,
+      "context": "title={statusLabel}\n >\n {statusLabel}\n </Text>\n \n <Text className={styles.infoField} title={t(\"Common:Type\")}>\n {t(\"Common:Type\")}\n </Text>\n {typeData}\n \n {isGuests && userSelection.createdBy?.displayName ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 297,
+      "line_number": 312,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 297,
+      "line_number": 312,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 297,
+      "line_number": 312,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 297,
+      "line_number": 312,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 297,
+      "line_number": 312,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 297,
+      "line_number": 312,
+      "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
+      "line_number": 312,
+      "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
+      "line_number": 312,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: typeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Type,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 777,
+      "line_number": 994,
       "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...RoomsTypeValues.map((roomType) => {\n switch (roomType) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 777,
+      "line_number": 994,
       "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...RoomsTypeValues.map((roomType) => {\n switch (roomType) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 777,
+      "line_number": 994,
       "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...RoomsTypeValues.map((roomType) => {\n switch (roomType) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 568,
+      "line_number": 578,
       "context": "const typeItems = [\n {\n key: \"filter-type\",\n group: \"filter-type\",\n label: t(\"Common:Type\"),\n isHeader: true,\n },\n {\n id: \"filter_type-docspace-admin\",\n key: EmployeeType.Admin,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 568,
+      "line_number": 578,
       "context": "const typeItems = [\n {\n key: \"filter-type\",\n group: \"filter-type\",\n label: t(\"Common:Type\"),\n isHeader: true,\n },\n {\n id: \"filter_type-docspace-admin\",\n key: EmployeeType.Admin,",
       "module": "/packages/client"
     },
@@ -114,32 +126,38 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 432,
-      "context": "</UserInputContainer>\n )\n ) : null}\n <ToggleButton\n className=\"toggle\"\n label={t(\"Common:Type\")}\n onChange={toggleFilterType}\n isChecked={isTypeFilterSet}\n isDisabled={!!config.requestToken}\n />\n {isTypeFilterSet ? (",
+      "line_number": 445,
+      "context": "</UserInputContainer>\n )\n ) : null}\n <ToggleButton\n className=\"toggle\"\n label={t(\"Common:Type\")}\n onChange={toggleFilterType}\n isChecked={isTypeFilterSet}\n isDisabled={!!config.requestToken}\n dataTestId=\"filter_type_toggle_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 432,
-      "context": "</UserInputContainer>\n )\n ) : null}\n <ToggleButton\n className=\"toggle\"\n label={t(\"Common:Type\")}\n onChange={toggleFilterType}\n isChecked={isTypeFilterSet}\n isDisabled={!!config.requestToken}\n />\n {isTypeFilterSet ? (",
+      "line_number": 445,
+      "context": "</UserInputContainer>\n )\n ) : null}\n <ToggleButton\n className=\"toggle\"\n label={t(\"Common:Type\")}\n onChange={toggleFilterType}\n isChecked={isTypeFilterSet}\n isDisabled={!!config.requestToken}\n dataTestId=\"filter_type_toggle_button\"\n />",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 353,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/FilterPanel.tsx",
+      "line_number": 102,
       "context": "<ModalDialog.Header>{t(\"Filter\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.filterDialogContent}>\n <div className={styles.filterDialogSection}>\n <Text fontWeight={600} fontSize=\"15px\">\n {t(\"Common:Type\")}\n </Text>\n <ComboBox\n options={typeOfHistoty}\n selectedOption={selectedType}\n onSelect={onSelectType}",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
-      "line_number": 462,
-      "context": "modernView={!isMobile()}\n />\n {isBetaLanguage ? <BetaBadge place=\"bottom-end\" /> : null}\n </div>\n \n <StyledLabel as=\"div\">{t(\"Common:Type\")}</StyledLabel>\n <div className=\"user-type-container\">\n <Text fontWeight={600} truncate title={profile.displayName}>\n {getUserTypeName(\n isOwner,\n isAdmin,",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/TableView/TableHeader.tsx",
+      "line_number": 56,
+      "context": "active: true,\n minWidth: 150,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: true,\n resizable: true,\n minWidth: 120,\n },\n {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
-      "line_number": 462,
-      "context": "modernView={!isMobile()}\n />\n {isBetaLanguage ? <BetaBadge place=\"bottom-end\" /> : null}\n </div>\n \n <StyledLabel as=\"div\">{t(\"Common:Type\")}</StyledLabel>\n <div className=\"user-type-container\">\n <Text fontWeight={600} truncate title={profile.displayName}>\n {getUserTypeName(\n isOwner,\n isAdmin,",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+      "line_number": 566,
+      "context": "/>\n {isBetaLanguage ? <BetaBadge place=\"bottom-end\" /> : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Type\")}\n </Text>\n <div className={styles.userTypeContainer}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {getUserTypeName(\n isOwner,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+      "line_number": 566,
+      "context": "/>\n {isBetaLanguage ? <BetaBadge place=\"bottom-end\" /> : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Type\")}\n </Text>\n <div className={styles.userTypeContainer}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {getUserTypeName(\n isOwner,",
       "module": "/packages/client"
     }
   ],
@@ -168,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation \"Закачи\" (Zakachi) means \"attach\" or \"hang\". It is not an accurate translation of \"Type\".",
-          "suggestion": "A more appropriate translation for \"Type\" in this context could be \"Тип\" (Tip)."
+          "description": "The Bulgarian translation \"Закачи\" (Zakachi) translates to 'attach' or 'hang up,' which does not accurately convey the meaning of \"Type\" in this context. \"Type\" refers to a category or kind.",
+          "suggestion": "A more appropriate translation would be \"Тип\" or \"Вид\"."
         }
       ],
       "approved_at": null
@@ -331,6 +349,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

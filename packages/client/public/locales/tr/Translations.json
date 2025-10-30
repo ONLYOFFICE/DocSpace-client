@@ -12,8 +12,6 @@
   "FolderTitleSkyDrive": "OneDrive dizini",
   "FolderTitleWebDav": "WebDAV Dizini",
   "FolderTitleYandex": "Yandex Dizini",
-  "GuestReleaseTipLink": "Kullanıcı türleri hakkında daha fazla bilgi edinin",
-  "LinkHasExpiredAndHasBeenDisabled": "Bağlantının süresi doldu ve devre dışı bırakıldı",
   "LinkValidTime": "Bu bağlantı yalnızca {{days_count}} gün için geçerlidir.",
   "NewForm": "PDF formu",
   "OwnerChange": "Sahibi değiştir",
@@ -25,5 +23,6 @@
   "ThirdPartyInfo": "Üçüncü taraf bilgilerini değiştirin",
   "ThirdPartyTitle": "Üçüncü taraf hizmetleri",
   "TitleShowActions": "Dosya eylemlerini göster",
-  "TitleShowFolderActions": "Klasör eylemlerini göster"
+  "TitleShowFolderActions": "Klasör eylemlerini göster",
+  "TrashItemsDeleteSuccess": "{{sectionName}}'den öğeler başarıyla silindi"
 }

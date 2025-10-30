@@ -2,5 +2,6 @@
   "CancellaionNotification": "キャンセル通知を再表示しない",
   "DisplayFileExtension": "ファイル名の隣にファイル拡張子を表示する",
   "OpenSameTab": "{{organizationName}}エディタを同じタブで開く",
-  "OriginalCopy": "コピーしたファイルをオリジナルの形式にも保存する"
+  "OriginalCopy": "コピーしたファイルをオリジナルの形式にも保存する",
+  "TrashMoveConfirmation": "アイテムを {{sectionName}} に移動するときに通知を表示する"
 }

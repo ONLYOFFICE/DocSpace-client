@@ -1,0 +1,14 @@
+{
+  "AutomaticBackupDescription": "Skonfiguruj zaplanowane kopie zapasowe w celu zapewnienia ciągłej ochrony danych bez ręcznych działań.",
+  "BackupRoomDescription": "Zapisz kopię zapasową do wybranej przestrzeni lub sekcji {{sectionName}}. Użyj istniejących przestrzeni lub utwórz nową.",
+  "BackupServiceEnabled": "Usługa kopii zapasowych została pomyślnie włączona.",
+  "ConnectService": "Połącz usługę <1>tutaj</1>, aby włączyć funkcje tworzenia kopii zapasowych.",
+  "ContactToPayer": "Skontaktuj się z Płatnikiem (<1>{{email}}</1>) aby połączyć usługę kopii zapasowych.",
+  "DisableBackupConfirm": "Wyłączenie usługi Kopia Zapasowa uniemożliwi administratorom {{productName}} tworzenie kopii zapasowych. Jeśli włączono automatyczną kopię zapasową, pozostanie ona aktywna w ramach darmowego limitu, ale po jego wyczerpaniu zostanie trwale dezaktywowana. Czy chcesz kontynuować?",
+  "DisableBackupConfirmWithoutQuota": "Wyłączenie usługi Kopia zapasowa uniemożliwi administratorom {{productName}} tworzenie kopii zapasowych. Jeśli włączono automatyczne tworzenie kopii zapasowych, zostanie ono wyłączone. Czy chcesz kontynuować?",
+  "EnableBackupConfirm": "Włączenie usługi kopii zapasowych pozwoli wszystkim administratorom {{productName}} tworzyć kopie zapasowe w dowolnym momencie, o ile saldo portfela jest wystarczające. Czy na pewno chcesz kontynuować?",
+  "FreeBackupsPerMonth": "Bezpłatne kopie zapasowe: {{value}}/{{maxValue}} na bieżący miesiąc.",
+  "TemporaryDescription": "Utwórz kopię zapasową w sekcji „Kopia zapasowa”. Dostępna do pobrania w ciągu 24 godzin od utworzenia.",
+  "ThirdPartyResourceDescription": "Połącz i zapisuj kopie zapasowe w chmurze, takich jak Dropbox, Box, OneDrive lub Google Drive.",
+  "ThirdPartyStorageDescription": "Korzystaj z zewnętrznych usług do przechowywania kopii zapasowych. Idealne do łączenia platform zewnętrznych magazynów w chmurze."
+}

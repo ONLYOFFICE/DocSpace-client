@@ -24,18 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt.svg?url";
-import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt_dark.svg?url";
+import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.light.svg?url";
+import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.dark.svg?url";
+import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
 import { useEffect } from "react";
 import { observer, inject } from "mobx-react";
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { withTranslation } from "react-i18next";
+import styled from "styled-components";
+
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { TilesSkeleton } from "@docspace/shared/skeletons/tiles";
 import { Link } from "@docspace/shared/components/link";
-import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import styled from "styled-components";
+
 import SubmitToGalleryTile from "./TilesView/sub-components/SubmitToGalleryTile";
 import FileTile from "./TilesView/FileTile";
 import TileContainer from "./TilesView/sub-components/TileContainer";
@@ -140,8 +142,12 @@ const SectionBodyContent = ({
       {submitToGalleryTileIsVisible && canSubmitToFormGallery() ? (
         <SubmitToGalleryTile />
       ) : null}
-      {oformFiles.map((item) => (
-        <FileTile key={item.id} item={item} />
+      {oformFiles.map((item, index) => (
+        <FileTile
+          key={item.id}
+          item={item}
+          dataTestId={`form_gallery_tile_${index}`}
+        />
       ))}
     </TileContainer>
   );

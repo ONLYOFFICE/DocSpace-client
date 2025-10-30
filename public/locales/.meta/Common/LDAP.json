@@ -3,7 +3,7 @@
   "content": "LDAP",
   "content_en_sha1_hash": "d8343c683ae1584c96390fa627005bc1bb0719cd",
   "created_at": "2025-05-19T21:30:46.102Z",
-  "updated_at": "2025-05-26T07:57:32.409Z",
+  "updated_at": "2025-10-27T16:14:33.380Z",
   "comment": {
     "text": "This translation key is used for the label \"LDAP\" which indicates a group or connection type. It appears as a badge in various UI components, such as information panels and contact lists, to provide users with clear identification of specific types of groups.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/GroupsItemTitle.js",
-      "line_number": 92,
-      "context": "{infoPanelSelection?.isLDAP ? (\n <>\n <Badge\n id=\"ldap-badge-info-panel\"\n className=\"ldap-badge\"\n label={t(\"Common:LDAP\")}\n color={globalColors.white}\n backgroundColor={globalColors.secondPurple}\n fontSize=\"9px\"\n fontWeight={800}\n noHover",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Groups/ItemTitle.tsx",
+      "line_number": 122,
+      "context": "{groupSelection?.isLDAP ? (\n <>\n <Badge\n id=\"ldap-badge-info-panel\"\n className=\"ldap-badge\"\n label={t(\"Common:LDAP\")}\n color={globalColors.white}\n backgroundColor={globalColors.secondPurple}\n fontSize=\"9px\"\n fontWeight={800}\n noHover",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/UsersItemTitle.tsx",
-      "line_number": 173,
-      "context": "{isLDAP ? (\n <>\n <Badge\n id=\"ldap-badge-info-panel\"\n className=\"ldap-badge\"\n label={t(\"Common:LDAP\")}\n color={globalColors.white}\n backgroundColor={\n theme.isBase\n ? globalColors.secondPurple\n : globalColors.secondPurpleDark",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/ItemTitle.tsx",
+      "line_number": 189,
+      "context": "{isLDAP ? (\n <>\n <Badge\n id=\"ldap-badge-info-panel\"\n className={styles.ldapBadge}\n label={t(\"Common:LDAP\")}\n color={globalColors.white}\n backgroundColor={\n theme.isBase\n ? globalColors.secondPurple\n : globalColors.secondPurpleDark",
       "module": "/packages/client"
     },
     {
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 407,
+      "line_number": 417,
       "context": "if (usersFilter?.accountLoginType?.toString()) {\n const label =\n AccountLoginType.SSO === usersFilter.accountLoginType.toString()\n ? t(\"Common:SSO\")\n : AccountLoginType.LDAP === usersFilter.accountLoginType.toString()\n ? t(\"Common:LDAP\")\n : t(\"PeopleTranslations:StandardLogin\");\n filterValues.push({\n key: usersFilter.accountLoginType.toString(),\n label,\n group: FilterGroups.filterLoginType,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 407,
+      "line_number": 417,
       "context": "if (usersFilter?.accountLoginType?.toString()) {\n const label =\n AccountLoginType.SSO === usersFilter.accountLoginType.toString()\n ? t(\"Common:SSO\")\n : AccountLoginType.LDAP === usersFilter.accountLoginType.toString()\n ? t(\"Common:LDAP\")\n : t(\"PeopleTranslations:StandardLogin\");\n filterValues.push({\n key: usersFilter.accountLoginType.toString(),\n label,\n group: FilterGroups.filterLoginType,",
       "module": "/packages/client"
     },
@@ -47,15 +47,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
-      "line_number": 294,
-      "context": ") : null}\n {profile.isLDAP ? (\n <div className=\"badges-wrapper\">\n <Badge\n className=\"sso-badge\"\n label={t(\"Common:LDAP\")}\n color={globalColors.white}\n backgroundColor={\n theme.isBase\n ? globalColors.secondPurple\n : globalColors.secondPurpleDark",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+      "line_number": 369,
+      "context": ") : null}\n {profile!.isLDAP ? (\n <div className={styles.badgesWrapper}>\n <Badge\n className={styles.ldapBadge}\n label={t(\"Common:LDAP\")}\n color={globalColors.white}\n backgroundColor={\n isBase\n ? globalColors.secondPurple\n : globalColors.secondPurpleDark",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
-      "line_number": 294,
-      "context": ") : null}\n {profile.isLDAP ? (\n <div className=\"badges-wrapper\">\n <Badge\n className=\"sso-badge\"\n label={t(\"Common:LDAP\")}\n color={globalColors.white}\n backgroundColor={\n theme.isBase\n ? globalColors.secondPurple\n : globalColors.secondPurpleDark",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+      "line_number": 369,
+      "context": ") : null}\n {profile!.isLDAP ? (\n <div className={styles.badgesWrapper}>\n <Badge\n className={styles.ldapBadge}\n label={t(\"Common:LDAP\")}\n color={globalColors.white}\n backgroundColor={\n isBase\n ? globalColors.secondPurple\n : globalColors.secondPurpleDark",
       "module": "/packages/client"
     }
   ],

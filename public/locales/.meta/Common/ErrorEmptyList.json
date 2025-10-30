@@ -3,7 +3,7 @@
   "content": "The list of entities has been changed. Please check the contents and try again.",
   "content_en_sha1_hash": "5fcafe5e752386800be3676175e2dc663d211f5b",
   "created_at": "2025-05-19T21:30:45.073Z",
-  "updated_at": "2025-06-18T07:34:14.803Z",
+  "updated_at": "2025-10-27T16:14:33.141Z",
   "comment": {
     "text": "This translation key is used for an error message that occurs when a user attempts to perform an operation on an empty list of entities. It displays a generic error message instructing the user to review and try again. This message appears in a toast notification after clicking a button or navigating to an action, prompting the user to investigate why the list is empty.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
-      "line_number": 315,
+      "line_number": 329,
       "context": "toastr.error(e as TData);\n setIsRequestRunning(false);\n clearActiveOperations(fileIds, folderIds);\n }\n } else {\n toastr.error(t(\"Common:ErrorEmptyList\"));\n }\n } else {\n if (isRoomBackup && showMoveToPublicDialog) {\n setBackupToPublicRoomVisible(true, {\n selectedItemId,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/HotkeyStore.js",
-      "line_number": 709,
+      "line_number": 712,
       "context": "})\n .finally(() => {\n this.filesStore.setHotkeysClipboard([]);\n });\n } else {\n toastr.error(t(\"Common:ErrorEmptyList\"));\n }\n };\n \n uploadClipboardFiles = async (t, event) => {\n const { createFoldersTree } = this.filesActionsStore;",
       "module": "/packages/client"
     }

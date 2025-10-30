@@ -59,6 +59,7 @@ type GenerateDeveloperTokenDialogProps = {
   email?: string;
 
   setGenerateDeveloperTokenDialogVisible?: (value: boolean) => void;
+  setJwtToken?: () => Promise<void>;
 };
 
 const getDate = (date: Date, i18nArg: i18n) => {
@@ -69,6 +70,7 @@ const GenerateDeveloperTokenDialog = ({
   client,
   email,
   setGenerateDeveloperTokenDialogVisible,
+  setJwtToken,
 }: GenerateDeveloperTokenDialogProps) => {
   const { i18n: i18nParam, t } = useTranslation([
     "OAuth",
@@ -102,6 +104,8 @@ const GenerateDeveloperTokenDialog = ({
 
     setRequestRunning(true);
 
+    await setJwtToken?.();
+
     await api.oauth.revokeDeveloperToken(token, client!.clientId, secret);
 
     setRequestRunning(false);
@@ -124,6 +128,8 @@ const GenerateDeveloperTokenDialog = ({
     }
 
     setRequestRunning(true);
+
+    await setJwtToken?.();
 
     const { clientSecret } = await api.oauth.getClient(client.clientId);
 
@@ -158,6 +164,8 @@ const GenerateDeveloperTokenDialog = ({
 
   React.useEffect(() => {
     const fecthClient = async () => {
+      await setJwtToken?.();
+
       const { clientSecret } = await api.oauth.getClient(client!.clientId);
 
       setSecret(clientSecret);
@@ -180,13 +188,13 @@ const GenerateDeveloperTokenDialog = ({
         <StyledGenerateDevelopTokenContainer>
           {!token ? (
             <>
-              <Text style={{ marginBottom: "16px" }} noSelect>
+              <Text style={{ marginBottom: "16px" }}>
                 {t("OAuth:GenerateTokenDescription")}
               </Text>
-              <Text style={{ marginBottom: "16px" }} noSelect>
+              <Text style={{ marginBottom: "16px" }}>
                 {t("OAuth:GenerateTokenScope")}
               </Text>{" "}
-              <Text noSelect>
+              <Text>
                 <Trans t={t} i18nKey="GenerateTokenNote" ns="OAuth" />
               </Text>
             </>
@@ -205,6 +213,7 @@ const GenerateDeveloperTokenDialog = ({
                       <Link
                         href={`mailto:${email}`}
                         color={theme?.currentColorScheme?.main?.accent}
+                        dataTestId="generate_token_email_link"
                       />
                     ),
                   }}
@@ -212,7 +221,7 @@ const GenerateDeveloperTokenDialog = ({
                   {`This token can be used to access your account (<1>{{supportEmail}}</1>) via API calls. Don't share it with anyone. Make sure you copy this token now as you won't see it again.`}
                 </Trans>
               </Text>
-              <Text style={{ marginBottom: "16px" }} noSelect>
+              <Text style={{ marginBottom: "16px" }}>
                 <Trans t={t} i18nKey="GenerateTokenNote" ns="OAuth" />
               </Text>
               <InputBlock
@@ -224,8 +233,9 @@ const GenerateDeveloperTokenDialog = ({
                 onIconClick={onCopyClick}
                 type={InputType.text}
                 maxLength={10000}
+                testId="generate_token_input"
               />
-              <Text className="dates">
+              <Text dataTestId="generate_token_dates" className="dates">
                 <strong>{t("Files:ByCreation")}</strong>: {dates.created}
                 <br />
                 <strong>{t("Expires")}</strong>: {dates.expires}
@@ -246,6 +256,9 @@ const GenerateDeveloperTokenDialog = ({
           onClick={onGenerate}
           isLoading={requestRunning}
           size={ButtonSize.normal}
+          testId={
+            token ? "copy_generate_token_button" : "generate_token_button"
+          }
         />
         <Button
           label={token ? t("Revoke") : t("Common:CancelButton")}
@@ -253,6 +266,9 @@ const GenerateDeveloperTokenDialog = ({
           onClick={token ? onRevoke : onClose}
           size={ButtonSize.normal}
           isDisabled={requestRunning || !secret}
+          testId={
+            token ? "revoke_token_button" : "generate_token_cancel_button"
+          }
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -267,8 +283,11 @@ export default inject(
     oauthStore: OAuthStore;
     userStore: UserStore;
   }) => {
-    const { setGenerateDeveloperTokenDialogVisible, bufferSelection } =
-      oauthStore;
+    const {
+      setGenerateDeveloperTokenDialogVisible,
+      setJwtToken,
+      bufferSelection,
+    } = oauthStore;
 
     const { user } = userStore;
 
@@ -276,6 +295,7 @@ export default inject(
       setGenerateDeveloperTokenDialogVisible,
       client: bufferSelection,
       email: user?.email,
+      setJwtToken,
     };
   },
 )(observer(GenerateDeveloperTokenDialog));

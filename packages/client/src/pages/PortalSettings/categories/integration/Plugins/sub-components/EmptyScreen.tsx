@@ -24,21 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled from "styled-components";
-
-import { Text } from "@docspace/shared/components/text";
-import { mobile } from "@docspace/shared/utils";
-
 import EmptyScreenPluginsUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.light.svg?url";
 import EmptyScreenPluginsDarkUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.dark.svg?url";
 
-import EmptyFolderContainer from "SRC_DIR/components/EmptyContainer/EmptyContainer";
+import React from "react";
+import styled from "styled-components";
+
+import { mobile } from "@docspace/shared/utils";
+
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+
 import { PluginsEmptyScreen } from "../Plugins.types";
 
 import Dropzone from "./Dropzone";
+import UploadDescription from "./UploadDescription";
 
-const StyledEmptyScreen = styled(EmptyFolderContainer)`
+const StyledEmptyScreen = styled(EmptyScreenContainer)`
   .ec-buttons {
     width: 100%;
   }
@@ -56,7 +57,14 @@ const StyledEmptyScreen = styled(EmptyFolderContainer)`
   }
 `;
 
-const EmptyScreen = ({ t, theme, withUpload, onDrop }: PluginsEmptyScreen) => {
+const EmptyScreen = ({
+  t,
+  theme,
+  withUpload,
+  onDrop,
+  pluginsSdkUrl,
+  currentColorScheme,
+}: PluginsEmptyScreen) => {
   const imageSrc = theme.isBase
     ? EmptyScreenPluginsUrl
     : EmptyScreenPluginsDarkUrl;
@@ -65,21 +73,25 @@ const EmptyScreen = ({ t, theme, withUpload, onDrop }: PluginsEmptyScreen) => {
     <StyledEmptyScreen
       headerText={t("NoPlugins")}
       descriptionText={
-        <Text>
-          {withUpload
-            ? t("UploadDescription", { productName: t("Common:ProductName") })
-            : null}
-        </Text>
+        withUpload ? (
+          <UploadDescription
+            pluginsSdkUrl={pluginsSdkUrl}
+            t={t}
+            currentColorScheme={currentColorScheme}
+          />
+        ) : null
       }
       style={{ gridColumnGap: "39px" }}
       buttonStyle={{ marginTop: "16px" }}
       imageSrc={imageSrc}
+      imageAlt={t("NoPlugins")}
       buttons={
         withUpload ? (
           <Dropzone
             isDisabled={!withUpload}
             isLoading={false}
             onDrop={onDrop}
+            dataTestId="upload_plugin_dropzone"
           />
         ) : null
       }

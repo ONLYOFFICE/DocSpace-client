@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
@@ -33,7 +33,7 @@ import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
-import { size } from "@docspace/shared/utils";
+import { size, isMobileDevice } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
@@ -42,6 +42,8 @@ import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorag
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import TfaLoader from "../sub-components/loaders/tfa-loader";
 import { LearnMoreWrapper } from "../StyledSecurity";
+import useSecurity from "../useSecurity";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -51,27 +53,46 @@ const MainContainer = styled.div`
   }
 `;
 
+const TFA_HASH = "#tfa-section";
+const SCROLL_MARGIN_TOP =
+  window.innerWidth > size.mobile && window.innerWidth < size.desktop
+    ? "190px"
+    : "230px";
+
 const TwoFactorAuth = (props) => {
   const {
     t,
-    isInit,
+    tReady,
     setIsInit,
+    isInit,
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
     appAvailable,
     tfaSettings,
-    getTfaType,
     onSettingsSkeletonNotShown,
+
+    settingsStore,
+    tfaStore,
+    setup,
   } = props;
 
   const [type, setType] = useState("none");
   const [showReminder, setShowReminder] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const targetRef = useRef(null);
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const defaultProps = createDefaultHookSettingsProps({
+    settingsStore,
+    tfaStore,
+    setup,
+  });
+
+  const { getSecurityInitialValue } = useSecurity(defaultProps.security);
 
   const checkWidth = () => {
     window.innerWidth > size.mobile &&
@@ -94,8 +115,20 @@ const TwoFactorAuth = (props) => {
     } else {
       setType(tfaSettings);
     }
-    setIsLoading(true);
   };
+
+  useEffect(() => {
+    if (isMobileDevice()) {
+      getSecurityInitialValue();
+      setIsLoading(true);
+    }
+  }, [isMobileDevice]);
+
+  useEffect(() => {
+    if (isInit) {
+      setIsLoading(true);
+    }
+  }, [isInit]);
 
   useEffect(() => {
     if (!onSettingsSkeletonNotShown) return;
@@ -103,22 +136,50 @@ const TwoFactorAuth = (props) => {
       onSettingsSkeletonNotShown("Tfa");
   }, [currentDeviceType, isLoading]);
 
+  const scrollToTarget = () => {
+    targetRef.current.style.scrollMarginTop = SCROLL_MARGIN_TOP;
+    targetRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+    window.history.replaceState(
+      null,
+      null,
+      window.location.pathname + window.location.search,
+    );
+    setType("app");
+  };
+
+  useEffect(() => {
+    if (!isInit && !isMobileDevice()) {
+      getSecurityInitialValue();
+    }
+
+    if (window.location.hash !== TFA_HASH) return;
+    if (!targetRef?.current) {
+      // If element is not available yet, try again after a small delay
+      const timer = setTimeout(scrollToTarget, 50);
+      return () => clearTimeout(timer);
+    }
+
+    if (targetRef.current) {
+      const timer = setTimeout(scrollToTarget, 700);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
-
-    if (!isInit) getTfaType().then(() => setIsLoading(true));
-    else setIsLoading(true);
-
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    if (!isLoading || !tfaSettings) return;
+    if (!isLoading || !tfaSettings || isSaving) return;
     const currentSettings = getFromSessionStorage("currentTfaSettings");
     const defaultSettings = getFromSessionStorage("defaultTfaSettings");
 
-    if (isEqual(currentSettings, defaultSettings)) {
+    if (currentSettings === defaultSettings) {
       getSettings();
     } else {
       getSettingsFromDefault();
@@ -174,12 +235,12 @@ const TwoFactorAuth = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
+  if ((currentDeviceType === DeviceType.mobile && !isLoading) || !tReady) {
     return <TfaLoader />;
   }
 
   return (
-    <MainContainer>
+    <MainContainer id="tfa-section" ref={targetRef}>
       <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>
         <Text fontSize="13px" fontWeight="400">
           {t("TwoFactorAuthEnableDescription", {
@@ -193,6 +254,7 @@ const TwoFactorAuth = (props) => {
             target="_blank"
             isHovered
             href={tfaSettingsUrl}
+            dataTestId="tfa_component_learn_more"
           >
             {t("Common:LearnMore")}
           </Link>
@@ -206,11 +268,13 @@ const TwoFactorAuth = (props) => {
         name="group"
         orientation="vertical"
         spacing="8px"
+        dataTestId="tfa_radio_button_group"
         options={[
           {
             id: "tfa-disabled",
             label: t("Common:Disabled"),
             value: "none",
+            dataTestId: "tfa_radio_button_disabled",
           },
           // TODO: hide while 2fa by sms is not working
           /* {
@@ -224,6 +288,7 @@ const TwoFactorAuth = (props) => {
             label: t("ByApp"),
             value: "app",
             disabled: !appAvailable,
+            dataTestId: "tfa_radio_button_app",
           },
         ]}
         selected={type}
@@ -235,7 +300,7 @@ const TwoFactorAuth = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings
@@ -243,6 +308,8 @@ const TwoFactorAuth = (props) => {
         isSaving={isSaving}
         additionalClassSaveButton="two-factor-auth-save"
         additionalClassCancelButton="two-factor-auth-cancel"
+        saveButtonDataTestId="tfa_save_button"
+        cancelButtonDataTestId="tfa_cancel_button"
       />
     </MainContainer>
   );
@@ -255,24 +322,24 @@ export const TfaSection = inject(({ settingsStore, setup, tfaStore }) => {
     tfaSettings,
     smsAvailable,
     appAvailable,
-    getTfaType,
   } = tfaStore;
 
-  const { isInit, setIsInit } = setup;
+  const { setIsInit, isInit } = setup;
   const { currentColorScheme, tfaSettingsUrl, currentDeviceType } =
     settingsStore;
 
   return {
     setTfaSettings,
-
     tfaSettings,
     smsAvailable,
     appAvailable,
-    isInit,
     setIsInit,
+    isInit,
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
-    getTfaType,
+    settingsStore,
+    tfaStore,
+    setup,
   };
 })(withTranslation(["Settings", "Common"])(observer(TwoFactorAuth)));

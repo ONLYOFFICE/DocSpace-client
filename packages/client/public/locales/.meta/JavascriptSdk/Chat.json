@@ -3,7 +3,7 @@
   "content": "Chat",
   "content_en_sha1_hash": "2ced57f125910a9e8ab95deea86e4ad7be418b5a",
   "created_at": "2025-05-19T21:30:54.381Z",
-  "updated_at": "2025-05-24T09:41:45.229Z",
+  "updated_at": "2025-10-27T16:14:33.517Z",
   "comment": {
     "text": "The translation key \"Chat\" is used to translate a label that appears in a checkbox component within a UI setting page. It corresponds to a specific category of developer tools and determines whether the Chat feature is enabled.",
     "is_auto": true,

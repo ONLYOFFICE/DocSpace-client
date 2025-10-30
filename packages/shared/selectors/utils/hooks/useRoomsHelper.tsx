@@ -67,6 +67,7 @@ const useRoomsHelper = ({
   setSelectedItemType,
   subscribe,
   setSelectedItemSecurity,
+  setSelectedTreeNode,
 }: UseRoomsHelperProps) => {
   const { t } = useTranslation(["Common"]);
   const {
@@ -179,6 +180,8 @@ const useRoomsHelper = ({
 
       setSelectedItemSecurity?.(current.security);
 
+      setSelectedTreeNode?.({ ...current, path: roomsFromApi.pathParts });
+
       if (firstLoadRef.current || startIndex === 0) {
         const { security } = current;
 
@@ -260,6 +263,7 @@ const useRoomsHelper = ({
       searchArea,
       disableThirdParty,
       excludeItems,
+      setSelectedTreeNode,
     ],
   );
 

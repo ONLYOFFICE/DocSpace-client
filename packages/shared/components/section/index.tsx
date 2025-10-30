@@ -26,11 +26,12 @@
 
 "use client";
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useMemo } from "react";
 
 import { Provider } from "../../utils";
 import { DeviceType } from "../../enums";
+
+import { FloatingButton } from "../floating-button";
 
 import SectionContainer from "./sub-components/SectionContainer";
 import SubSectionHeader from "./sub-components/SectionHeader";
@@ -120,7 +121,16 @@ const Section = (props: SectionProps) => {
 
     primaryOperationsAlert,
     needErrorChecking,
+
     withTabs,
+
+    withoutFooter = false,
+    onDragOverEmpty,
+    onDragLeaveEmpty,
+    dragging,
+    clearDropPreviewLocation,
+    dropTargetPreview,
+    startDropPreview,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -204,7 +214,9 @@ const Section = (props: SectionProps) => {
   );
 
   const isShowOperationButton =
-    secondaryActiveOperations?.length || primaryOperationsArray?.length;
+    secondaryActiveOperations?.length ||
+    primaryOperationsArray?.length ||
+    startDropPreview;
 
   const isCompletedOperations = () => {
     if (
@@ -224,6 +236,9 @@ const Section = (props: SectionProps) => {
     primaryOperationsArray.length > 0 &&
     !primaryOperationsCompleted &&
     primaryOperationsArray.some((op) => op.operation === "upload");
+
+  const hideFilter = window.location.pathname.includes("chat");
+  const isInfoVisible = canDisplay && isInfoPanelVisible;
 
   return (
     isSectionAvailable && (
@@ -252,6 +267,7 @@ const Section = (props: SectionProps) => {
               ) : null}
 
               {isSectionFilterAvailable &&
+              !hideFilter &&
               currentDeviceType === DeviceType.desktop ? (
                 <SubSectionFilter className="section-header_filter">
                   {sectionFilterContent}
@@ -263,6 +279,8 @@ const Section = (props: SectionProps) => {
           {isSectionBodyAvailable ? (
             <SubSectionBody
               onDrop={onDrop}
+              onDragOverEmpty={onDragOverEmpty}
+              onDragLeaveEmpty={onDragLeaveEmpty}
               uploadFiles={uploadFiles}
               withScroll={withBodyScroll}
               autoFocus={currentDeviceType === DeviceType.desktop}
@@ -273,6 +291,7 @@ const Section = (props: SectionProps) => {
               getContextModel={getContextModel}
               isIndexEditingMode={isIndexEditingMode}
               pathname={pathname}
+              withoutFooter={withoutFooter}
             >
               {isSectionHeaderAvailable &&
               currentDeviceType === DeviceType.mobile ? (
@@ -291,6 +310,7 @@ const Section = (props: SectionProps) => {
                 <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
               ) : null}
               {isSectionFilterAvailable &&
+              !hideFilter &&
               currentDeviceType !== DeviceType.desktop ? (
                 <SubSectionFilter
                   withTabs={withTabs}
@@ -302,7 +322,9 @@ const Section = (props: SectionProps) => {
               <SubSectionBodyContent>
                 {sectionBodyContent}
               </SubSectionBodyContent>
-              <SubSectionFooter>{sectionFooterContent}</SubSectionFooter>
+              {withoutFooter ? null : (
+                <SubSectionFooter>{sectionFooterContent}</SubSectionFooter>
+              )}
             </SubSectionBody>
           ) : null}
 
@@ -312,6 +334,7 @@ const Section = (props: SectionProps) => {
               operations={secondaryActiveOperations}
               operationsCompleted={isCompletedOperations()}
               clearPanelOperationsData={clearPrimaryProgressData}
+              clearDropPreviewLocation={clearDropPreviewLocation}
               operationsAlert={
                 primaryOperationsAlert || secondaryOperationsAlert
               }
@@ -321,7 +344,9 @@ const Section = (props: SectionProps) => {
               onOpenPanel={onOpenUploadPanel}
               mainButtonVisible={mainButtonVisible}
               showCancelButton={showCancelButton}
-              isInfoPanelVisible={isInfoPanelVisible}
+              isInfoPanelVisible={isInfoVisible}
+              dropTargetFolderName={dropTargetPreview}
+              isDragging={dragging}
             />
           ) : null}
         </SectionContainer>

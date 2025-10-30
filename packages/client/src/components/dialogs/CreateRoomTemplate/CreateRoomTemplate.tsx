@@ -37,7 +37,9 @@ import { TRoom } from "@docspace/shared/api/rooms/types";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { TSelectorItem } from "@docspace/shared/components/selector";
 import { TUser } from "@docspace/shared/api/people/types";
-import TagHandler from "../CreateEditRoomDialog/handlers/TagHandler";
+import { TRoomParams, TRoomTagsParams } from "@docspace/shared/utils/rooms";
+
+import TagHandler from "../../../helpers/TagHandler";
 import SetRoomParams from "../CreateEditRoomDialog/sub-components/SetRoomParams";
 import { StyledFooter } from "./CreateRoomTemplate.styled";
 import TemplateAccessSettingsPanel from "../../panels/TemplateAccessSettingsPanel";
@@ -49,7 +51,7 @@ type CreateRoomTemplateProps = {
   onSave: (params: TRoom, open: boolean) => void;
   item: TRoom;
   fetchedTags: TRoom["tags"];
-  fetchedRoomParams: TRoom;
+  fetchedRoomParams: TRoomParams;
   isLoading: boolean;
 };
 
@@ -64,10 +66,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
     isLoading,
   } = props;
 
-  const [roomParams, setRoomParams] = useState<
-    | (TRoom & { invitations?: { id: string; access: ShareAccessRights }[] })
-    | TSelectorItem[]
-  >({
+  const [roomParams, setRoomParams] = useState<TRoomParams | TSelectorItem[]>({
     ...fetchedRoomParams,
   });
   const [inviteItems, setInviteItems] = useState([
@@ -102,10 +101,13 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
     }
 
     // Now TypeScript knows roomParams is a TRoom-like object
-    onSave({ ...roomParams, isAvailable }, openCreatedIsChecked);
+    onSave(
+      { ...roomParams, isAvailable } as unknown as TRoom,
+      openCreatedIsChecked,
+    );
   };
 
-  const setRoomTags = (newTags: TRoom["tags"]) => {
+  const setRoomTags = (newTags: TRoomTagsParams[]) => {
     setRoomParams({ ...roomParams, tags: newTags });
   };
 
@@ -146,7 +148,11 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
   };
 
   const checkIfUserInvited = (user: TUser) => {
-    return inviteItems.findIndex((x) => x.id === user.id) > -1;
+    return (
+      inviteItems.findIndex(
+        (x) => x.id === user.id && x.templateAccess !== ShareAccessRights.None,
+      ) > -1
+    );
   };
 
   const onSubmitItems = (users: TSelectorItem[]) => {
@@ -248,6 +254,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
             label={t("Files:OpenCreatedTemplate")}
             isChecked={openCreatedIsChecked}
             onChange={onChangeOpenCreated}
+            dataTestId="create_room_template_open_checkbox"
           />
 
           <div className="create-room-template_buttons">

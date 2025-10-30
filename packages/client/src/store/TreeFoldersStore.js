@@ -63,8 +63,14 @@ class TreeFoldersStore {
 
     treeFolders.forEach((folder) => {
       switch (folder.rootFolderType) {
+        case FolderType.AIAgents:
+          folder.title = i18n.t("Common:AIAgents");
+          break;
         case FolderType.USER:
-          folder.title = i18n.t("Common:MyFilesSection");
+          folder.title = i18n.t("Common:MyDocuments");
+          break;
+        case FolderType.SHARE:
+          folder.title = i18n.t("Common:SharedWithMe");
           break;
         case FolderType.Rooms:
           folder.title = i18n.t("Common:Rooms");
@@ -74,6 +80,12 @@ class TreeFoldersStore {
           break;
         case FolderType.TRASH:
           folder.title = i18n.t("Common:TrashSection");
+          break;
+        case FolderType.Favorites:
+          folder.title = i18n.t("Common:Favorites");
+          break;
+        case FolderType.Recent:
+          folder.title = i18n.t("Common:Recent");
           break;
         default:
           break;
@@ -88,16 +100,19 @@ class TreeFoldersStore {
 
   listenTreeFolders = (treeFolders) => {
     const roomParts = treeFolders
+      .filter((f) => {
+        return f.rootFolderType !== FolderType.Recent;
+      })
       .map((f) => `DIR-${f.id}`)
-      .filter((f) => !SocketHelper.socketSubscribers.has(f));
+      .filter((f) => !SocketHelper?.socketSubscribers.has(f));
 
     if (roomParts.length > 0) {
-      // SocketHelper.emit(SocketCommands.Unsubscribe, {
+      // SocketHelper?.emit(SocketCommands.Unsubscribe, {
       //   roomParts: treeFolders.map((f) => `DIR-${f.id}`),
       //   individual: true,
       // });
 
-      SocketHelper.emit(SocketCommands.Subscribe, {
+      SocketHelper?.emit(SocketCommands.Subscribe, {
         roomParts,
         individual: true,
       });
@@ -226,7 +241,7 @@ class TreeFoldersStore {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.USER);
   }
 
-  get shareFolder() {
+  get sharedWithMeFolder() {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.SHARE);
   }
 
@@ -238,6 +253,12 @@ class TreeFoldersStore {
 
   get recentFolder() {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.Recent);
+  }
+
+  get aiAgentsFolder() {
+    return this.treeFolders.find(
+      (x) => x.rootFolderType === FolderType.AIAgents,
+    );
   }
 
   /**
@@ -293,6 +314,22 @@ class TreeFoldersStore {
     return this.recycleBinFolder ? this.recycleBinFolder.id : null;
   }
 
+  get favoritesFolderId() {
+    return this.favoritesFolder ? this.favoritesFolder.id : null;
+  }
+
+  get recentFolderId() {
+    return this.recentFolder ? this.recentFolder.id : null;
+  }
+
+  get aiAgentsFolderId() {
+    return this.aiAgentsFolder ? this.aiAgentsFolder.id : null;
+  }
+
+  get sharedWithMeFolderId() {
+    return this.sharedWithMeFolder ? this.sharedWithMeFolder.id : null;
+  }
+
   get isPersonalRoom() {
     return (
       this.myFolder &&
@@ -300,10 +337,15 @@ class TreeFoldersStore {
     );
   }
 
-  get isShareFolder() {
+  get isSharedWithMeFolder() {
     return (
-      this.shareFolder && this.shareFolder.id === this.selectedFolderStore.id
+      this.sharedWithMeFolder &&
+      this.sharedWithMeFolder.id === this.selectedFolderStore.id
     );
+  }
+
+  get isSharedWithMeFolderRoot() {
+    return this.selectedFolderStore.rootFolderType === FolderType.SHARE;
   }
 
   get isFavoritesFolder() {
@@ -347,10 +389,25 @@ class TreeFoldersStore {
     );
   }
 
+  get isFlowsFolder() {
+    return window.location.pathname.includes("/flows");
+  }
+
   get isRoomsFolder() {
     return (
       this.roomsFolder && this.selectedFolderStore.id === this.roomsFolder.id
     );
+  }
+
+  get isAIAgentsFolder() {
+    return (
+      this.aiAgentsFolder &&
+      this.selectedFolderStore.id === this.aiAgentsFolder.id
+    );
+  }
+
+  get isAIAgentsFolderRoot() {
+    return FolderType.AIAgents === this.selectedFolderStore.rootFolderType;
   }
 
   get isRoom() {
@@ -387,12 +444,14 @@ class TreeFoldersStore {
     return FolderType.Archive === this.selectedFolderStore.rootFolderType;
   }
 
-  get isDocumentsFolder() {
-    return FolderType.USER === this.selectedFolderStore.rootFolderType;
+  get isVDRRoomRoot() {
+    return (
+      FolderType.VirtualDataRoom === this.selectedFolderStore.parentRoomType
+    );
   }
 
-  get isRecentTab() {
-    return this.selectedFolderStore.rootFolderType === FolderType.Recent;
+  get isDocumentsFolder() {
+    return FolderType.USER === this.selectedFolderStore.rootFolderType;
   }
 
   get isRoot() {

@@ -24,12 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-console */
-/* eslint-disable no-var */
-/* eslint-disable vars-on-top */
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
@@ -50,6 +44,7 @@ export const enum SocketEvents {
   Restore = "restore",
   Backup = "backup",
   RestoreBackup = "restore-backup",
+  StorageEncryption = "storage-encryption",
   LogoutSession = "s:logout-session",
   ModifyFolder = "s:modify-folder",
   ModifyRoom = "s:modify-room",
@@ -75,6 +70,12 @@ export const enum SocketEvents {
   RestoreProgress = "s:restore-progress",
   EncryptionProgress = "s:encryption-progress",
   ChangeMyType = "s:change-my-type",
+  ChatMessageId = "s:commit-chat-message",
+  UpdateChat = "s:update-chat",
+  UpdateTelegram = "s:update-telegram",
+  SelfRestrictionFile = "s:self-restriction-file",
+  SelfRestrictionFolder = "s:self-restriction-folder",
+  ChaneFolderAccessRights = "s:change-access-rights-folder",
 }
 
 /**
@@ -88,6 +89,7 @@ export const enum SocketCommands {
   Unsubscribe = "unsubscribe",
   RefreshFolder = "refresh-folder",
   RestoreBackup = "restore-backup",
+  StorageEncryption = "storage-encryption",
   SubscribeInSpaces = "subscribeInSpaces",
   UnsubscribeInSpaces = "unsubscribeInSpaces",
 }
@@ -159,6 +161,7 @@ export type TEmitEventsDataMap = {
   [SocketCommands.UnsubscribeInSpaces]: TSubscribeEmitData;
   [SocketCommands.RefreshFolder]: string;
   [SocketCommands.RestoreBackup]: TRestoreBackupEmitData;
+  [SocketCommands.StorageEncryption]: string;
 };
 
 /**
@@ -230,7 +233,10 @@ export type TOptSocket = {
  * Each callback can have specific parameters and a return type, which are defined for each event.
  */
 export type TListenEventCallbackMap = {
-  [SocketEvents.LogoutSession]: (loginEventId: unknown) => void;
+  [SocketEvents.LogoutSession]: (data: {
+    loginEventId: unknown;
+    redirectUrl: string | null;
+  }) => void;
   [SocketEvents.ModifyFolder]: (data?: TOptSocket) => void;
   [SocketEvents.ModifyRoom]: (data: TOptSocket) => void;
   [SocketEvents.UpdateHistory]: (data: {
@@ -280,6 +286,20 @@ export type TListenEventCallbackMap = {
     data: TUser;
     admin: string;
     hasPersonalFolder: boolean;
+  }) => void;
+  [SocketEvents.ChatMessageId]: (data: { messageId: number }) => void;
+  [SocketEvents.UpdateChat]: (data: {
+    chatId: string;
+    chatTitle: string;
+  }) => void;
+  [SocketEvents.UpdateTelegram]: (data: { username: string }) => void;
+  [SocketEvents.SelfRestrictionFile]: (data: {
+    id: number;
+    data: string;
+  }) => void;
+  [SocketEvents.SelfRestrictionFolder]: (data: {
+    id: number;
+    data: string;
   }) => void;
 };
 
@@ -358,20 +378,20 @@ const isEmitDataValid = (
  * @class
  * @example
  * // Retrieve the singleton instance
- * const socketHelper = SocketHelper.getInstance();
+ * const socketHelper = SocketHelper?.getInstance();
  *
  * // Establish a connection
- * socketHelper.connect('ws://example.com', 'publicRoomKey');
+ * SocketHelper?.connect('ws://example.com', 'publicRoomKey');
  *
  * // Emit a message
- * socketHelper.emit('message', { text: 'Hello, World!' });
+ * SocketHelper?.emit('message', { text: 'Hello, World!' });
  *
  * // Register an event listener
- * socketHelper.on('message', (data) => {
+ * SocketHelper?.on('message', (data) => {
  *   console.log('Received message:', data);
  * });
  * // Remove the event listener
- * socketHelper.on('message', (data) => {
+ * SocketHelper?.on('message', (data) => {
  *   console.log('Received message:', data);
  * });
  *
@@ -431,16 +451,23 @@ class SocketHelper {
 
     // this.instance = new SocketHelper();
     // return this.instance;
-    if (typeof globalThis !== "undefined" && globalThis.SOCKET_INSTANCE) {
+    if (
+      typeof globalThis !== "undefined" &&
+      (globalThis as unknown as { SOCKET_INSTANCE?: SocketHelper })
+        .SOCKET_INSTANCE
+    ) {
       // [WS] Returning existing global socket instance
-      return globalThis.SOCKET_INSTANCE;
+      return (globalThis as unknown as { SOCKET_INSTANCE?: SocketHelper })
+        .SOCKET_INSTANCE;
     }
 
     if (!this.instance) {
       // [WS] Creating new socket instance
       this.instance = new SocketHelper();
       if (typeof globalThis !== "undefined")
-        globalThis.SOCKET_INSTANCE = this.instance;
+        (
+          globalThis as unknown as { SOCKET_INSTANCE?: SocketHelper }
+        ).SOCKET_INSTANCE = this.instance;
     }
     // [WS] Returning existing socket instance
     return this.instance;
@@ -705,4 +732,4 @@ class SocketHelper {
   };
 }
 
-export default SocketHelper.getInstance();
+export default SocketHelper?.getInstance();

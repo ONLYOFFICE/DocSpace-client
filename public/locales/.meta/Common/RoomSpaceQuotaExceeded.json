@@ -3,7 +3,7 @@
   "content": "Room space quota exceeded ({{size}}).",
   "content_en_sha1_hash": "606136070a50ade8aee4b2dfd310061b4b615d61",
   "created_at": "2025-05-19T21:30:48.282Z",
-  "updated_at": "2025-05-26T07:57:32.829Z",
+  "updated_at": "2025-10-27T16:14:33.665Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user's room space quota exceeds the limit. It typically appears on a file upload failure dialog or as part of an error notification in the FilesActionsStore.js application, indicating that the user has reached their storage space limit.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 369,
+      "line_number": 399,
       "context": "});\n \n const size = getConvertedSize(t, roomFolder.quotaLimit);\n \n throw new Error(\n t(\"Common:RoomSpaceQuotaExceeded\", {\n size,\n }),\n );\n }\n }",
       "module": "/packages/client"
     }
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'تم تجاوز حصة مساحة الغرفة' while conveying the general meaning, is not the most natural or precise rendering of 'Room space quota exceeded'. A more accurate translation would emphasize the exceeding of the limit.",
-          "suggestion": "تجاوز الحد الأقصى لمساحة الغرفة ({{size}})"
+          "description": "The translation \"تم تجاوز حصة مساحة الغرفة\" literally translates to \"The room space quota has been exceeded.\" While technically correct, it's not the most natural phrasing in Arabic. A more natural translation would emphasize that the quota *was* exceeded, and perhaps imply current inability to add more.",
+          "suggestion": "لقد تم تجاوز حصة مساحة الغرفة"
         },
         {
           "type": "formatting",
-          "description": "The placement of the size variable within the Arabic translation is not ideal. It should follow the standard order of the sentence.",
-          "suggestion": "تجاوز الحد الأقصى لمساحة الغرفة ({{size}})"
+          "description": "The placement of the `{{size}}` variable seems awkward in the Arabic translation. It's placed at the beginning, which disrupts the flow.",
+          "suggestion": "لقد تم تجاوز حصة مساحة الغرفة ({{size}})"
         }
       ],
       "approved_at": null
@@ -47,8 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Otaq sahəsi kvota limitini keçib ({{size}})\" while generally conveying the meaning, could be improved for clarity and flow. \"Kvota limiti\" is somewhat redundant. A more natural phrasing would incorporate the concept of exceeding the limit more directly.",
-          "suggestion": "Otaq sahəsi limiti aşılıb ({{size}})."
+          "description": "The translation \"Otaq sahəsi kvota limitini keçib ({{size}})\" is not the most natural or accurate rendering of \"Room space quota exceeded ({{size}}).\" 'Kvota limitini keçib' is a bit literal and clunky. A more natural translation would be something like 'Otaq yerinin maksimum limiti aşılıb ({{size}})' or 'Otaq yerləri bitib ({{size}})'.",
+          "suggestion": "Otaq yerinin maksimum limiti aşılıb ({{size}}) or Otaq yerləri bitib ({{size}})"
         }
       ],
       "approved_at": null
@@ -56,19 +56,19 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Квотата за пространство в стаята е надвишена ({{size}})' is a literal translation but could be improved for natural Bulgarian.  A more natural phrasing might be 'Надхвърлена е квотата за пространство в стаята ({{size}})' or 'Превишена е квотата за пространство в стаята ({{size}})'.",
+          "suggestion": "Надхвърлена е квотата за пространство в стаята ({{size}})"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Překročení kvóty místa v místnosti' is a literal translation but sounds awkward in Czech. A more natural phrasing would be 'Dosažení limitu prostoru v místnosti' or 'Překročení limitu prostoru v místnosti'.",
-          "suggestion": "Dosažení limitu prostoru v místnosti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -113,13 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Room\" is incorrect. \"stanza\" refers to a single room, but \"Room space\" likely refers to multiple rooms or a collective space.",
-          "suggestion": "È stata superata la quota di spazio delle camere ({{size}})"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While grammatically correct, \"delle stanza\" is slightly awkward. 'delle camere' is more common and natural in this context.",
-          "suggestion": "È stata superata la quota di spazio delle camere ({{size}})"
+          "description": "The translation 'È stata superata la quota di spazio delle stanza ({{size}})' is not the most natural or accurate. 'stanza' is grammatically incorrect here; it should be plural and refer to 'rooms'.",
+          "suggestion": "È stata superata la quota di spazio delle stanze ({{size}})."
         }
       ],
       "approved_at": null
@@ -139,13 +134,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ເກີນ' (geen) is a common typo. It should be 'ເກີນຂື້ນ' (geen khuen) to correctly convey 'exceeded'.",
-          "suggestion": "ຄໍ້າປະລິມານພື້ນທີ່ຫ້ອງເກີນຂື້ນ ({{size}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -160,13 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Kamer ruimte quota overschreden ({{size}})\" is not the most natural or accurate translation of \"Room space quota exceeded ({{size}}).\"",
-          "suggestion": "A more natural translation would be \"De kamerruimte is het maximale bereikt ({{size}}).\" or \"De kamerruimte heeft de maximale capaciteit bereikt ({{size}}).\""
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ruimte' is technically correct, but 'kamerruimte' is often preferred to denote 'room space' specifically.",
-          "suggestion": "Consider using 'kamerruimte' instead of 'ruimte'."
+          "description": "The Dutch translation 'Kamer ruimte quota overschreden' is not the most natural or accurate translation of 'Room space quota exceeded'. A more natural phrasing would be something like 'Het kamerruimtequotum is overschreden' or 'De kamerruimte is vol'.",
+          "suggestion": "Het kamerruimtequotum is overschreden"
         }
       ],
       "approved_at": null
@@ -177,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term 'Room space quota' is better translated as 'Przestrzeń pokoju' or 'Pamięć pokoju' rather than just 'pamięci pokoju'. While 'pamięci pokoju' isn't *wrong*, it's less natural and precise.  'Przestrzeń pokoju' is more aligned with the concept of available space.",
-          "suggestion": "Przestrzeń pokoju ({{size}})"
+          "description": "The term 'pamięci' translates to 'memory' rather than 'space' in this context. 'Przestrzeń' would be a more accurate translation of 'space'.",
+          "suggestion": "Przekroczono limit przestrzeni pokoju ({{size}})"
         }
       ],
       "approved_at": null
@@ -201,13 +185,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Spațiu de stocare pentru sala a fost depășit ({{size}})\" is not the most natural Romanian phrasing. 'Room space' is better translated as 'spațiul camerei' or 'volumul camerei'. 'Stocare' implies storage, which isn't the primary meaning here; it's about available space.",
-          "suggestion": "Spațiul camerei a fost depășit ({{size}})"
+          "description": "The translation 'Spațiu de stocare pentru sala a fost depășit' is not the most natural or precise translation of 'Room space quota exceeded'. 'Spațiu de stocare' is overly literal. A more natural translation would convey the meaning of exceeding a limit.",
+          "suggestion": "Spațiul pentru sala a fost depășit."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'Spațiu de stocare pentru sala a fost depășit' contains a grammatical awkwardness. The definite article 'a' is not necessary after 'pentru'.",
-          "suggestion": "Spațiul camerei a fost depășit"
+          "description": "The phrase 'Spațiu de stocare pentru sala a fost depășit' contains grammatical awkwardness.  'Sala a' is not idiomatic.",
+          "suggestion": "Spațiul pentru sala a fost depășit."
         }
       ],
       "approved_at": null
@@ -221,13 +205,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'අවකාශ ප්‍රමාණය ඉක්මවා ගියේය ({{size}})' is a literal translation of 'Room space quota exceeded'. A more natural and commonly used phrasing in Sinhala would be 'මාර්ග ඉඩ ප්‍රමාණය ඉක්මවා ගියේය ({{size}})' or 'වාතාවරණ ඉඩ ප්‍රමාණය ඉක්මවා ගියේය ({{size}})' depending on the specific context of 'Room space'.",
-          "suggestion": "මාර්ග ඉඩ ප්‍රමාණය ඉක්මවා ගියේය ({{size}})"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -251,7 +229,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'prekoračena' might be more naturally written as 'pređena' in this context. While 'prekoračena' technically means 'exceeded', 'pređena' (meaning 'passed') often feels more appropriate when referring to a quota or limit.",
+          "suggestion": "Kvota prostora za sobu pređena ({{size}})"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

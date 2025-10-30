@@ -298,6 +298,8 @@ const Root = ({
   const organizationName = settings?.logoText || t("Common:OrganizationName");
 
   React.useEffect(() => {
+    if (user?.isVisitor) return;
+
     const getMy = async () => {
       const res = await getPersonalFolderTree();
 
@@ -312,7 +314,7 @@ const Root = ({
     if (fileInfo?.rootFolderType === FolderType.RoomTemplates) {
       setSelectedFolderId(undefined);
     }
-  }, [fileInfo?.rootFolderType]);
+  }, [fileInfo?.rootFolderType, user?.isVisitor]);
 
   return isShowDeepLink ? (
     <DeepLink
@@ -369,7 +371,6 @@ const Root = ({
           getIsDisabled={getIsDisabledSelectFolderDialog}
           filesSettings={filesSettings}
           fileSaveAsExtension={extensionSelectorFolderDialog}
-          organizationName={organizationName}
           selectedFolderId={selectedFolderId}
         />
       ) : null}
@@ -392,6 +393,7 @@ const Root = ({
           fileInfo={fileInfo}
           selfId={user?.id}
           onCancel={onCloseSharingDialog}
+          filesSettings={filesSettings}
           onOpenPanel={openShareFormDialog}
         />
       ) : null}

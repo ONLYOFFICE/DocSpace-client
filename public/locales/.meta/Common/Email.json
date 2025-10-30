@@ -3,7 +3,7 @@
   "content": "Email",
   "content_en_sha1_hash": "84add5b2952787581cb9a8851eef63d1ec75d22b",
   "created_at": "2025-05-19T21:30:44.776Z",
-  "updated_at": "2025-06-30T12:20:31.267Z",
+  "updated_at": "2025-10-27T16:14:33.305Z",
   "comment": {
     "text": "This translation key represents the label for displaying a user's email address, typically shown alongside their name in a welcome message or profile section. It appears in various UI elements, such as social authentication dialogs and contact filtering interfaces, where users' email addresses need to be displayed. The translated text should correspond to the English content \"Email\".",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
-      "line_number": 149,
+      "line_number": 164,
       "context": "className=\"welcome-text\"\n >{`${user?.firstName} ${user?.lastName}`}</Text>\n </StyledInfoRow>\n \n <StyledInfoRow>\n <Text className=\"welcome-text\">{t(\"Common:Email\")}</Text>\n <Text fontWeight=\"600\" truncate className=\"welcome-text\">\n {user?.email}\n </Text>\n </StyledInfoRow>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 769,
+      "line_number": 779,
       "context": "};\n \n const email = {\n id: \"sort-by_email\",\n key: \"email\",\n label: t(\"Common:Email\"),\n default: true,\n };\n \n const storage = {\n id: \"sort-quota\",",
       "module": "/packages/client"
     },
@@ -42,44 +42,50 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/FieldMapping.js",
-      "line_number": 98,
-      "context": "value={lastName}\n hasError={lastNameHasError}\n />\n \n <SsoFormField\n labelText={t(\"Common:Email\")}\n name=\"email\"\n placeholder={SSO_EMAIL}\n tabIndex={18}\n value={email}\n hasError={emailHasError}",
+      "line_number": 101,
+      "context": "hasError={lastNameHasError}\n dataTestId=\"last_name_field\"\n />\n \n <SsoFormField\n labelText={t(\"Common:Email\")}\n name=\"email\"\n placeholder={SSO_EMAIL}\n tabIndex={18}\n value={email}\n hasError={emailHasError}",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
-      "line_number": 372,
-      "context": "onClick={() => setChangeNameVisible(true)}\n />\n ) : null}\n </div>\n \n <StyledLabel as=\"div\">{t(\"Common:Email\")}</StyledLabel>\n <div className=\"email-container\">\n <div className=\"email-edit-container\">\n <Text\n data-tooltip-id=\"emailTooltip\"\n data-tooltip-content={t(\"EmailNotVerified\")}",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+      "line_number": 448,
+      "context": "/>\n ) : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Email\")}\n </Text>\n <div className={styles.emailContainer}>\n <div className={styles.emailEditContainer}>\n <Text\n data-tooltip-id=\"emailTooltip\"",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
-      "line_number": 372,
-      "context": "onClick={() => setChangeNameVisible(true)}\n />\n ) : null}\n </div>\n \n <StyledLabel as=\"div\">{t(\"Common:Email\")}</StyledLabel>\n <div className=\"email-container\">\n <div className=\"email-edit-container\">\n <Text\n data-tooltip-id=\"emailTooltip\"\n data-tooltip-content={t(\"EmailNotVerified\")}",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+      "line_number": 448,
+      "context": "/>\n ) : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Email\")}\n </Text>\n <div className={styles.emailContainer}>\n <div className={styles.emailEditContainer}>\n <Text\n data-tooltip-id=\"emailTooltip\"",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/index.js",
-      "line_number": 130,
-      "context": "<StyledTextContent>\n {isLoadingContent ? (\n <RectangleSkeleton height=\"22px\" width=\"57px\" />\n ) : (\n <Text fontSize=\"14px\" fontWeight={600} className=\"email-title\">\n {t(\"Common:Email\")}\n </Text>\n )}\n </StyledTextContent>\n {isLoadingContent ? (\n <NotificationsLoader count={3} />",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/Channel.tsx",
+      "line_number": 78,
+      "context": "isNotValid?: boolean,\n isNeedConfig?: boolean,\n ) => {\n switch (type) {\n case \"email\":\n return `${t(\"Common:Email\")}${isNotValid ? ` (${t(\"IsNotValid\")})` : \"\"}`;\n case \"telegram\":\n return `${t(\"Common:ProviderTelegram\")}${isNeedConfig ? ` (${t(\"NotConfigured\")})` : \"\"}`;\n default:\n return t(\"Common:Email\");\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/Channel.tsx",
+      "line_number": 78,
+      "context": "isNotValid?: boolean,\n isNeedConfig?: boolean,\n ) => {\n switch (type) {\n case \"email\":\n return `${t(\"Common:Email\")}${isNotValid ? ` (${t(\"IsNotValid\")})` : \"\"}`;\n case \"telegram\":\n return `${t(\"Common:ProviderTelegram\")}${isNeedConfig ? ` (${t(\"NotConfigured\")})` : \"\"}`;\n default:\n return t(\"Common:Email\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/EmailInputForm.tsx",
-      "line_number": 92,
+      "line_number": 93,
       "context": "id=\"login\"\n name=\"login\"\n size={InputSize.large}\n hasError={isEmailErrorShow ? !emailValid : undefined}\n value={email}\n placeholder={t(\"Common:Email\")}\n scale\n isAutoFocussed\n tabIndex={1}\n isDisabled={isLoading || !!emailFromLink}\n autoComplete=\"username\"",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 347,
+      "line_number": 349,
       "context": "name=\"wizard-email\"\n tabIndex={1}\n size={InputSize.large}\n scale\n value={email}\n placeholder={t(\"Common:Email\")}\n emailSettings={emailSettings}\n hasError={hasErrorEmail}\n onValidateInput={onEmailChangeHandler}\n isAutoFocussed\n onChange={onChangeEmail}",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 224,
-      "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerEmail\"\n className=\"field-container-width settings_unavailable\"\n labelText={t(\"Common:Email\")}\n isVertical\n >\n <TextInput\n id=\"textInputContainerEmail\"\n testId=\"email-input\"",
+      "line_number": 225,
+      "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerEmail\"\n className=\"field-container-width settings_unavailable\"\n labelText={t(\"Common:Email\")}\n isVertical\n >\n <TextInput\n id=\"textInputContainerEmail\"\n testId=\"company_info_settings_email_input\"",
       "module": "/packages/shared"
     }
   ],
@@ -111,13 +117,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'E-mail' is a common Czech equivalent for 'Email', it's a transliteration and not a true translation. A more accurate translation would be 'E-pošta'.",
-          "suggestion": "E-pošta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"E-mail\" is a common and accepted translation of \"Email\" in French, it's an Anglicism. A more native French translation would be 'courriel'.",
-          "suggestion": "courriel"
+          "description": "While 'E-mail' is a common French adaptation of 'Email', it's not the most accurate or preferred translation. 'Courriel' is the officially recommended and more accurate translation.",
+          "suggestion": "Courriel"
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'էլ. հասցե' while understandable, is a more literal and less natural rendering of 'Email'. A more common and fluent translation would be something along the lines of 'անձնական հասցե' (anznakane hasce) or 'էլեկտրոնային փոստ' (elektronayin post).",
-          "suggestion": "Consider 'անձնական հասցե' (anznakane hasce) or 'էլեկտրոնային փոստ' (elektronayin post)"
+          "description": "While 'էլ. հասցե' is a common way to represent 'email' in Armenian, it's more literally 'electronic address'. A more direct and arguably more appropriate translation would be 'էլեկտրոնային փոստ' (elektronayen post).",
+          "suggestion": "էլեկտրոնային փոստ"
         }
       ],
       "approved_at": null
@@ -207,13 +207,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'E-mail' is a common and acceptable Polish equivalent of 'Email', it's a loanword and 'Poczta e-mail' or simply 'Poczta' could be more appropriate depending on the context. 'E-mail' is understood, but it lacks full integration into the Polish language.",
-          "suggestion": "Consider 'Poczta e-mail' or 'Poczta' as alternatives, depending on the specific context and desired level of Polish language adoption."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -246,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වි-තැපෑල' (vi-thapeela) is a transliteration and doesn't accurately convey the meaning of 'Email' in Sinhala.  'Email' is commonly understood and used as is in Sinhala, or a more accurate translation would be 'විද්යුත් තැපැල්' (vidyut thapeem) which means 'electronic mail'.",
-          "suggestion": "විද්යුත් තැපැල් (vidyut thapeem) or using 'Email' as is."
+          "description": "The Sinhala translation 'වි-තැපෑල' (vi-tæpæla) while understandable, is not the most common or natural translation of 'Email'. The most common and widely accepted translation is 'ඊමේල්' (īmēla), which is a transliteration of the English word.",
+          "suggestion": "ඊමේල් (īmēla)"
         }
       ],
       "approved_at": null

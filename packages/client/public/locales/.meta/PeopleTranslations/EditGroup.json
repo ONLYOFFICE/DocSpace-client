@@ -3,7 +3,7 @@
   "content": "Edit group",
   "content_en_sha1_hash": "edb57d8eeff83c091697eab4d31079c72abcd3d1",
   "created_at": "2025-05-19T21:30:53.468Z",
-  "updated_at": "2025-06-30T12:20:31.199Z",
+  "updated_at": "2025-09-07T07:53:15.073Z",
   "comment": {
     "text": "EditGroup is used as a label in a modal dialog, appearing on a button to indicate editing of a group. It translates to \"Edit group\" and should be visible when allowing users to modify group settings.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 506,
+      "line_number": 538,
       "context": "if (!isRoomAdmin && !isCollaborator && !item?.isLDAP)\n options.push({\n id: \"edit-group\",\n key: \"edit-group\",\n className: \"group-menu_drop-down\",\n label: t(\"PeopleTranslations:EditGroup\"),\n title: t(\"PeopleTranslations:EditGroup\"),\n icon: PencilReactSvgUrl,\n onClick: () => editGroup(item),\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 506,
+      "line_number": 538,
       "context": "if (!isRoomAdmin && !isCollaborator && !item?.isLDAP)\n options.push({\n id: \"edit-group\",\n key: \"edit-group\",\n className: \"group-menu_drop-down\",\n label: t(\"PeopleTranslations:EditGroup\"),\n title: t(\"PeopleTranslations:EditGroup\"),\n icon: PencilReactSvgUrl,\n onClick: () => editGroup(item),\n });",
       "module": "/packages/client"
     }
@@ -99,13 +99,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Modifica il gruppo' is technically correct but could be improved to sound more natural in Italian for UI elements. 'Modifica gruppo' would be more concise and common.",
-          "suggestion": "Modifica gruppo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -174,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'සමූහය සංස්කරණය' while literally translating to 'group edit', doesn't convey the meaning of 'Edit group' in the context of user interface elements. A more appropriate translation would be something along the lines of 'සමූහය වෙනස් කිරීම' (group modification) or 'සමූහය සංස්කරණය කිරීම' (editing the group).",
-          "suggestion": "Consider 'සමූහය වෙනස් කිරීම' or 'සමූහය සංස්කරණය කිරීම'"
+          "description": "While \"සමූහය සංස්කරණය\" is a literal translation, it's not the most natural phrasing in Sinhala. A more common and fluent way to say 'Edit group' would be something like 'විධාන සංස්කරණය' (Vidhana Sanskaranya) or 'කොන්දේ සංස්කරණය' (Kondae Sanskaranya).",
+          "suggestion": "Consider 'විධාන සංස්කරණය' or 'කොන්දේ සංස්කරණය' for a more natural-sounding translation."
         }
       ],
       "approved_at": null
@@ -204,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Edit group\" typically refers to editing a single group. The Serbian translation \"Uredi grupe\" translates to 'Edit groups,' implying multiple groups. This creates an inconsistency.",
-          "suggestion": "Consider 'Uredi grupu' to match the singular nature of the English phrase."
+          "description": "The singular 'group' in English is translated as the plural 'grupe' in Serbian. While technically acceptable, 'Uredi grupu' would be more accurate, implying editing a single group.",
+          "suggestion": "Uredi grupu"
         }
       ],
       "approved_at": null

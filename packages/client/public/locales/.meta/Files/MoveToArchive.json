@@ -3,7 +3,7 @@
   "content": "Move to archive",
   "content_en_sha1_hash": "bc085e822ae67c9e26aba6df62730c436e6c09b2",
   "created_at": "2025-05-19T21:30:55.866Z",
-  "updated_at": "2025-06-30T12:20:31.625Z",
+  "updated_at": "2025-10-27T16:14:33.663Z",
   "comment": {
     "text": "This translation key is used to display the text \"Move to archive\" in the application's UI. It appears as a label on an action button or menu option, likely within a file management interface, and is intended to be displayed when the user has selected the \"archive\" action.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2172,
-      "context": "disabled: false,\n },\n {\n id: \"option_archive-room\",\n key: \"archive-room\",\n label: t(\"MoveToArchive\"),\n icon: RoomArchiveSvgUrl,\n onClick: (e) => this.onClickArchive(e),\n disabled: false,\n \"data-action\": \"archive\",\n action: \"archive\",",
+      "line_number": 2326,
+      "context": "isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),\n },\n {\n id: \"option_archive-room\",\n key: \"archive-room\",\n label: t(\"MoveToArchive\"),\n icon: RoomArchiveSvgUrl,\n onClick: (e) => this.onClickArchive(e),\n disabled: false,\n \"data-action\": \"archive\",\n action: \"archive\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2172,
-      "context": "disabled: false,\n },\n {\n id: \"option_archive-room\",\n key: \"archive-room\",\n label: t(\"MoveToArchive\"),\n icon: RoomArchiveSvgUrl,\n onClick: (e) => this.onClickArchive(e),\n disabled: false,\n \"data-action\": \"archive\",\n action: \"archive\",",
+      "line_number": 2326,
+      "context": "isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),\n },\n {\n id: \"option_archive-room\",\n key: \"archive-room\",\n label: t(\"MoveToArchive\"),\n icon: RoomArchiveSvgUrl,\n onClick: (e) => this.onClickArchive(e),\n disabled: false,\n \"data-action\": \"archive\",\n action: \"archive\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2277,
+      "line_number": 2343,
       "context": "case \"archive\":\n if (!this.isAvailableOption(\"archive\")) return null;\n return {\n id: \"menu-archive\",\n key: \"archive\",\n label: t(\"MoveToArchive\"),\n iconUrl: RoomArchiveSvgUrl,\n onClick: () => this.archiveRooms(\"archive\"),\n disabled: false,\n };\n case \"unarchive\":",
       "module": "/packages/client"
     }

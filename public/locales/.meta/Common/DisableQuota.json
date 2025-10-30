@@ -3,7 +3,7 @@
   "content": "Disable quota",
   "content_en_sha1_hash": "13a8e1d1f088c27730510bb9d3e85366580a74b1",
   "created_at": "2025-05-19T21:30:44.544Z",
-  "updated_at": "2025-06-30T12:20:31.157Z",
+  "updated_at": "2025-10-27T16:14:33.167Z",
   "comment": {
     "text": "This translation key is used to display the label \"Disable quota\" in various UI elements, such as a storage management dialog and a settings menu. It appears on buttons and menus that allow users to disable or customize their quota limitations. The key should be translated to provide a clear indication of this action's purpose for end-users.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/SpaceQuota/index.js",
-      "line_number": 61,
+      "line_number": 62,
       "context": "id: \"info-account-quota_no-quota\",\n key: \"no-quota\",\n label:\n item?.quotaLimit === -1\n ? t(\"Common:Unlimited\")\n : t(\"Common:DisableQuota\"),\n action: \"no-quota\",\n },\n ];\n \n if (item.isCustomQuota)",
       "module": "/packages/client"
     },
@@ -23,15 +23,21 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2317,
-      "context": "case \"disable-quota\":\n if (!this.isAvailableOption(\"disable-quota\")) return null;\n return {\n id: \"menu-disable-quota\",\n key: \"disable-quota\",\n label: t(\"Common:DisableQuota\"),\n iconUrl: DisableQuotaReactSvgUrl,\n onClick: () => this.disableRoomQuota(selection, t),\n disabled: !showStorageInfo,\n };",
+      "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
+      "line_number": 223,
+      "context": "onClick: () => this.resetUserQuota(selection as unknown as TUser[], t),\n },\n {\n id: \"menu-disable-quota\",\n key: \"disable-quota\",\n label: t(\"Common:DisableQuota\"),\n disabled: !hasUsersToDisableQuota || isGuests,\n iconUrl: DisableQuotaReactSvgUrl,\n onClick: () =>\n this.disableUserQuota(selection as unknown as TUser[], t),\n },",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
-      "line_number": 247,
-      "context": "onClick: () => this.resetUserQuota(selection as unknown as TUser[], t),\n },\n {\n id: \"menu-disable-quota\",\n key: \"disable-quota\",\n label: t(\"Common:DisableQuota\"),\n disabled: !hasUsersToDisableQuota || isGuests,\n iconUrl: DisableQuotaReactSvgUrl,\n onClick: () =>\n this.disableUserQuota(selection as unknown as TUser[], t),\n },",
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 2403,
+      "context": "case \"disable-quota\":\n if (!this.isAvailableOption(\"disable-quota\")) return null;\n return {\n id: \"menu-disable-quota\",\n key: \"disable-quota\",\n label: t(\"Common:DisableQuota\"),\n iconUrl: DisableQuotaReactSvgUrl,\n onClick: () => this.disableRoomQuota(selection, t),\n disabled: !showStorageInfo,\n };\n case \"disable-agent-quota\":",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 2403,
+      "context": "case \"disable-quota\":\n if (!this.isAvailableOption(\"disable-quota\")) return null;\n return {\n id: \"menu-disable-quota\",\n key: \"disable-quota\",\n label: t(\"Common:DisableQuota\"),\n iconUrl: DisableQuotaReactSvgUrl,\n onClick: () => this.disableRoomQuota(selection, t),\n disabled: !showStorageInfo,\n };\n case \"disable-agent-quota\":",
       "module": "/packages/client"
     },
     {

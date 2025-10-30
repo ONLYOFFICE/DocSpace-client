@@ -1,31 +1,19 @@
 {
   "key_path": "ItemsPermanentlyDeleted",
-  "content": "Items will be permanently deleted in 30 days.",
-  "content_en_sha1_hash": "498e17195ea2014f36206b2ad558d1a38e7874bf",
-  "created_at": "2025-05-19T21:30:56.716Z",
-  "updated_at": "2025-06-18T17:11:42.367Z",
+  "content": "These items will be permanently removed from the {{trashSection}}.",
+  "content_en_sha1_hash": "210f25353b01ba80b5f4ad5b6e8835425939e450",
+  "created_at": "2025-10-01T15:20:12.341Z",
+  "updated_at": "2025-10-27T16:14:33.251Z",
   "comment": {
-    "text": "This translation key is used to display a message that informs users about the permanent deletion of items after 30 days. It appears in a delete confirmation dialog and prompts users to confirm their action. Translators should provide a clear and concise message that conveys this information in the target language.",
+    "text": "This text explains that selected items will be permanently removed from the trash section. It appears within a confirmation dialog used when permanently deleting files and folders. Translators should ensure the wording accurately conveys the irreversible nature of the action.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:20.617Z"
+    "updated_at": "2025-10-01T15:20:17.766Z"
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 211,
-      "context": "</>\n )\n ) : (\n <>\n <>{t(\"DeleteItems\")} </>\n <>{t(\"ItemsPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n );\n }",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 211,
-      "context": "</>\n )\n ) : (\n <>\n <>{t(\"DeleteItems\")} </>\n <>{t(\"ItemsPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n );\n }",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 211,
-      "context": "</>\n )\n ) : (\n <>\n <>{t(\"DeleteItems\")} </>\n <>{t(\"ItemsPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n );\n }",
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 151,
+      "context": "You are about to delete the{\" \"}\n <strong>files ({{ filesCount }})</strong> and{\" \"}\n <strong>folders ({{ foldersCount }})</strong>.\n </Trans>{\" \"}\n {!isThirdParty\n ? t(\"ItemsPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"DeleteItemsSharedNote\")}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>",
       "module": "/packages/client"
     }
   ],
@@ -39,42 +27,19 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation 'سيتم حذف العنصر بشكل دائم خلال 30 يوم' translates to 'The item will be permanently deleted in 30 days.' The English content refers to 'Items', which is plural. The Arabic translation uses the singular 'العنصر'.",
-          "suggestion": "سيتم حذف العناصر بشكل دائم خلال 30 يوم."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Elementlər' translates more accurately to 'Elements' rather than 'Items' in this context. 'Items' would be 'Əşyalar' or 'Mövcud olanlar'.",
-          "suggestion": "Mövcud olanlar 30 gün ərzində həmişəlik silinəcək."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'həmişəlik' means permanently, it's slightly formal for this context. A more user-friendly option might be considered.",
-          "suggestion": "Mövcud olanlar 30 gün ərzində tamamilə silinəcək."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Items will be permanently deleted in 30 days' implies a grace period before deletion. The Bulgarian translation 'Елементите ще бъдат изтрити завинаги след 30 дни' translates to 'Items will be deleted forever after 30 days', which is too absolute and doesn't reflect the 'in 30 days' timeframe. The word 'завинаги' (forever) is too strong.",
-          "suggestion": "Елементите ще бъдат изтрити след 30 дни."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -86,13 +51,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Objekte werden innerhalb von 30 Tagen endgültig gelöscht' is a bit clunky. 'Items' refers to individual objects, but 'Objekte' is more generic. A more natural phrasing might use a word indicating a collection of items.",
-          "suggestion": "Objekte werden in 30 Tagen endgültig gelöscht."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -122,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Տարրերը ընդմիշտ կջնջվեն 30 օրվա ընթացքում:' literally translates to 'Items will be permanently deleted within 30 days'. While not entirely wrong, it's less natural than saying 'Items will be permanently deleted in 30 days'.",
-          "suggestion": "Տարրերը ընդմիշտ կջնջվեն 30 օր հետո:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -140,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'in 30 days' is translated as '30日で' (30-ni-de), which implies 'by 30 days' or 'with 30 days'. It should indicate a deadline of 30 days *from now*. A more accurate translation would be '30日後' (30-nichi go) which means '30 days later'.",
-          "suggestion": "アイテムは30日後、永久に削除されます。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -194,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Elemente' is a more formal term than typically used in this context. A more natural and user-friendly translation would use a term like 'Articole' or 'Obiecte'.",
-          "suggestion": "Articole vor fi șterse definitiv după 30 de zile."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -212,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"දවස් 30 කින් අථක සදහටම මැකෙනු ඇත.\" is not the most natural or accurate translation of \"Items will be permanently deleted in 30 days.\"  'අථක' (athaka) translates to 'immortal' or 'eternal,' which is not the intended meaning.  'මැකෙනු ඇත' is acceptable for 'will be deleted' but the phrasing is a bit formal.",
-          "suggestion": "A more natural translation would be something like \"දාහකට පසු දින දිනා ඉවත් කර දැමෙනු ඇත\" (dahakata pahu dina dina iwath kar dnemnu ath) or \"දාහකට පසු සම්පුර්ණයෙන්ම ඉවත් කර දැමෙනු ඇත\" (dahakata pahu sampurnayenama iwath kar dnemnu ath). Alternatively, a simpler version would be \"මාස 30 කින් සම්පුර්ණයෙන්ම මැකෙනු ඇත\" (masa 30 kin sampurnayenama makenu ath)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -233,33 +168,22 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ставке' (stavke) translates to 'items' but in this context, it's better to use 'предмети' (predmeti) for a more natural and accurate feel. 'Ставке' is more commonly used for menu items or line items in a list.",
-          "suggestion": "Предмети ће бити трајно обрисани за 30 дана."
-        },
-        {
-          "type": "spelling",
-          "description": "While 'оbrisani' is technically correct, 'избрисани' (izbrisani) is the more common and natural word for 'deleted' in this context.",
-          "suggestion": "Предмети ће бити трајно избрисани за 30 дана."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'obrisane' is spelled correctly, but 'permanent' might be better translated as 'ništavno' or 'konačno' to better convey the irreversible nature of the deletion. 'Obrisane' simply means 'deleted'.",
-          "suggestion": "Stavke će biti trajno ništavano/konačno obrisane za 30 dana."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -283,13 +207,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"项目\" (xiangmu) translates to 'project' or 'item' in a more technical sense.  In this context, referring to items to be deleted, a more appropriate term would be “数据” (shuju - data) or “内容” (neirong - content). Using 'project' implies a more structured or complex item than what the English 'items' suggests.",
-          "suggestion": "30 天后，数据会被永久删除。 or 30 天后，内容会被永久删除。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -40,6 +40,11 @@ const LanguageCombobox = (props: ComboboxProps) => {
     className,
     withBorder = true,
     isMobileView = false,
+    dataTestId,
+    directionY = "both",
+    fixedDirection = false,
+    isDefaultMode = true,
+    manualWidth = "42px",
   } = props;
 
   const { i18n } = useTranslation(["Common"]);
@@ -73,7 +78,9 @@ const LanguageCombobox = (props: ComboboxProps) => {
         className,
         "language-combo-box",
       )}
-      directionY="both"
+      directionY={directionY}
+      fixedDirection={fixedDirection}
+      isDefaultMode={isDefaultMode}
       options={cultureNames}
       selectedOption={currentCulture}
       onSelect={onSelect}
@@ -85,14 +92,14 @@ const LanguageCombobox = (props: ComboboxProps) => {
       dropDownMaxHeight={300}
       fillIcon={false}
       displaySelectedOption
-      manualWidth="42px"
+      manualWidth={manualWidth}
       noBorder={false}
       type="onlyIcon"
       optionStyle={{ padding: "0 8px" }}
       isMobileView={isMobileView}
       withBlur={isMobileView}
       withLabel={!!withLabel}
-      data-test-id="language-combobox"
+      dataTestId={dataTestId ?? "language-combobox"}
       role="combobox"
       aria-label="Select language"
       aria-expanded="false"

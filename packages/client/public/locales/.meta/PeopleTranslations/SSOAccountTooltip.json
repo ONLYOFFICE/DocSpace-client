@@ -3,7 +3,7 @@
   "content": "This user account is loaded from SSO. If you need to change the user name and email address, refer to the SSO server.",
   "content_en_sha1_hash": "1d49453415a6a5acd60e0631a6a68b712b362f82",
   "created_at": "2025-05-19T21:30:53.515Z",
-  "updated_at": "2025-05-26T07:57:32.411Z",
+  "updated_at": "2025-10-27T16:14:33.415Z",
   "comment": {
     "text": "This translation key displays a message explaining that the user account is loaded from Single Sign-On (SSO) and provides instructions on how to update the username and email address. It appears in tooltips next to badges indicating SSO-loaded accounts, likely on profile or information pages. The text helps users understand their account's origin and provides context for changing their details.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/UsersItemTitle.tsx",
-      "line_number": 163,
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/ItemTitle.tsx",
+      "line_number": 179,
       "context": "fontSize=\"9px\"\n fontWeight={800}\n noHover\n />\n <Tooltip anchorSelect={`div[id='sso-badge-info-panel'] div`}>\n {t(\"PeopleTranslations:SSOAccountTooltip\")}\n </Tooltip>\n </>\n ) : null}\n \n {isLDAP ? (",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
-      "line_number": 335,
-      "context": "fontSize=\"9px\"\n fontWeight={800}\n noHover\n />\n <Tooltip anchorSelect={`div[id='sso-badge-profile'] div`}>\n {t(\"PeopleTranslations:SSOAccountTooltip\")}\n </Tooltip>\n </>\n ) : null}\n \n {profile.isLDAP ? (",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+      "line_number": 409,
+      "context": "fontSize=\"9px\"\n fontWeight={800}\n noHover\n />\n <Tooltip anchorSelect={`div[id='sso-badge-profile'] div`}>\n {t(\"PeopleTranslations:SSOAccountTooltip\")}\n </Tooltip>\n </>\n ) : null}\n \n {profile!.isLDAP ? (",
       "module": "/packages/client"
     }
   ],

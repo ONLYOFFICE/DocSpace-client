@@ -24,17 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable prefer-rest-params */
-/* eslint-disable prefer-spread */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable @typescript-eslint/no-this-alias */
-/* eslint-disable no-restricted-globals */
-/* eslint-disable no-param-reassign */
 ((globalScope) => {
   const channels = [];
   const global = globalScope;
 
   function BroadcastChannel(channelParam) {
+    // biome-ignore lint/complexity/noUselessThisAlias: TODO fix
     const $this = this;
     const channel = String(channelParam);
 
@@ -65,6 +60,7 @@
       return this._name;
     },
     postMessage(message) {
+      // biome-ignore lint/complexity/noUselessThisAlias: TODO fix
       const $this = this;
       if (this._closed) {
         const e = new Error();

@@ -28,14 +28,18 @@
 
 const path = require("path");
 const pkg = require("./package.json");
+const BannerPlugin = require("webpack").BannerPlugin;
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const { getBanner } = require("@docspace/shared/utils/build").default;
+
+const version = pkg.version;
+const banner = getBanner(version);
 
 const nextConfig = {
   basePath: "/sdk",
   typescript: {
     ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
   },
   serverExternalPackages: [
     "nconf",
@@ -64,6 +68,7 @@ const nextConfig = {
     NEXT_PUBLIC_E2E_TEST: process.env.E2E_TEST,
   },
   webpack: (config) => {
+    const isProduction = config.mode === "production";
     // Add resolve configuration for shared package
     config.resolve = {
       ...config.resolve,
@@ -72,6 +77,52 @@ const nextConfig = {
         "@docspace/shared": path.resolve(__dirname, "../shared"),
       },
     };
+
+    config.devtool = isProduction ? "source-map" : false; // TODO: replace to "eval-cheap-module-source-map" if you want to debug in a browser;
+
+    if (isProduction) {
+      config.optimization = {
+        splitChunks: { chunks: "all" },
+        minimize: true,
+        minimizer: [
+          new CssMinimizerPlugin({
+            minimizerOptions: {
+              preset: [
+                "default",
+                {
+                  discardComments: {
+                    removeAll: false,
+                    remove: (comment) => {
+                      // Keep copyright comments that contain the copyright text
+                      const isCopyright =
+                        comment.includes("Copyright Ascensio System SIA") &&
+                        comment.includes("https://www.onlyoffice.com/");
+                      return !isCopyright;
+                    },
+                  },
+                },
+              ],
+            },
+          }),
+          new TerserPlugin({
+            terserOptions: {
+              format: {
+                comments: /\*\s*\(c\)\s+Copyright\s+Ascensio\s+System\s+SIA/i,
+              },
+            },
+            extractComments: false,
+            parallel: false,
+          }),
+        ],
+      };
+
+      config.plugins.push(
+        new BannerPlugin({
+          raw: true,
+          banner,
+        }),
+      );
+    }
 
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>

@@ -46,7 +46,7 @@ const HeaderItem = ({ children, className, ...rest }) => {
   );
 };
 
-const Card = ({ children, countTilesInRow, ...rest }) => {
+const Card = ({ children, ...rest }) => {
   const getItemSize = (child) => {
     const isFile = child?.props?.className?.includes("file");
     const isFolder = child?.props?.className?.includes("folder");
@@ -99,7 +99,6 @@ const InfiniteGrid = (props) => {
   const {
     children,
     hasMoreFiles,
-    filterTotal,
     fetchMoreFiles,
     filesLength,
     className,
@@ -176,11 +175,10 @@ const InfiniteGrid = (props) => {
 
           addItemToList(`last-item-of_${type}`, type, true);
         }
-
         list.push(
           <HeaderItem
             className={list.length ? "files_header" : "folder_header"}
-            key="header_item"
+            key={list.length ? "files_header" : "folder_header"}
           >
             {child}
           </HeaderItem>,
@@ -198,11 +196,16 @@ const InfiniteGrid = (props) => {
               : "isFolder";
 
         if (cards.length && cards.length === countTilesInRow) {
-          const listKey = uniqueid("list-item_");
+          const key = cards.map((card) => card.key).join("_");
+
+          const listKey = `list_${key}`;
           addItemToList(listKey, cls, true);
         }
 
-        const cardKey = uniqueid("card-item_");
+        const key = child?.props?.children?.props?.id;
+
+        const cardKey = key ? `card-item_${key}` : uniqueid("card-item_");
+
         cards.push(
           <Card countTilesInRow={countTilesInRow} key={cardKey}>
             {child}
@@ -234,8 +237,10 @@ const InfiniteGrid = (props) => {
 
     addItemToList("loaded-row", type);
   } else if (cards.length) {
+    const key = cards.map((card) => card.key).join("_");
+
     // Adds loaders until the row is full
-    const listKey = uniqueid("list-item_");
+    const listKey = `list-${key}`;
     addItemToList(listKey, type);
   }
   return (

@@ -3,7 +3,7 @@
   "content": "Enable SSL",
   "content_en_sha1_hash": "25c1e8de1becab86d3eaeb5f929e874b731db4b3",
   "created_at": "2025-05-19T21:30:53.293Z",
-  "updated_at": "2025-05-24T02:49:55.598Z",
+  "updated_at": "2025-08-11T18:11:59.230Z",
   "comment": {
     "text": "This translation key is used to display the label for a checkbox that enables or disables SSL encryption. It appears in a UI component for settings related to SMTP configurations and is translated by the \"EnableSSL\" phrase.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/SSLVerification.js",
-      "line_number": 84,
-      "context": "name=\"ssl\"\n onClick={handleOnChange}\n options={[\n {\n id: \"enable-ssl\",\n label: t(\"EnableSSL\"),\n value: \"true\",\n },\n {\n id: \"disable-ssl\",\n label: t(\"DisableSSL\"),",
+      "line_number": 85,
+      "context": "name=\"ssl\"\n onClick={handleOnChange}\n options={[\n {\n id: \"enable-ssl\",\n label: t(\"EnableSSL\"),\n value: \"true\",\n dataTestId: \"enable_ssl_radio_button\",\n },\n {\n id: \"disable-ssl\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
-      "line_number": 238,
-      "context": "<Checkbox\n className=\"smtp_settings_checkbox\"\n isDisabled={isLoading}\n name={ENABLE_SSL}\n label={t(\"EnableSSL\")}\n isChecked={settings[ENABLE_SSL]}\n onChange={onChangeCheckbox}\n />\n <ButtonContainer\n t={t}",
+      "line_number": 247,
+      "context": "<Checkbox\n className=\"smtp_settings_checkbox\"\n isDisabled={isLoading}\n name={ENABLE_SSL}\n label={t(\"EnableSSL\")}\n isChecked={settings[ENABLE_SSL]}\n onChange={onChangeCheckbox}\n dataTestId=\"enable_ssl_checkbox\"\n />\n <ButtonContainer",
       "module": "/packages/client"
     }
   ],

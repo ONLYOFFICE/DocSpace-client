@@ -1,11 +1,20 @@
 {
-  "ActionsWithFilesDescription": "Badges informieren Sie über Aktionen wie das Hochladen, Erstellen und Ändern von Dateien.",
+  "ActionsWithFilesDescription": "Abzeichen heben Dateiaktivitäten – Uploads, Bearbeitungen oder Freigaben – in den Abschnitten {{rooms}}, {{shared}} und {{documents}} hervor.",
+  "AdminSetupRequired": "Administrator-Einrichtung erforderlich",
   "Badges": "Abzeichen",
   "DailyFeed": "Täglicher {{productName}}-Feed",
   "DailyFeedDescription": "Lesen Sie Nachrichten und Ereignisse aus Ihrem {{productName}} in einer täglichen Zusammenfassung.",
-  "ManageNotifications": "Verwalten",
+  "FileActivityNotify": "Benachrichtigungen zu Dateiaktivitäten",
+  "GoToSettings": "Zu den Einstellungen",
+  "IsNotValid": "Ungültig",
+  "LdapEmailTooltip": "Dieses Benutzerkonto wird aus LDAP geladen. Die E-Mail-Adresse des Benutzers wurde nicht angegeben. Die aktuelle Adresse wurde automatisch generiert und kann nicht zum Senden von Benachrichtigungen verwendet werden.",
+  "NotConfigured": "Nicht konfiguriert",
   "Notifications": "Benachrichtigungen",
-  "RoomsActivityDescription": "Stündliche Benachrichtigungen. Bleiben Sie über alle Aktivitäten in Ihren Räumen informiert.",
+  "RoomsActivityDescription": "Erhalten Sie sofortige E-Mail-Benachrichtigungen über neue freigegebene Dateien/Ordner und Aktivitäten in Ihrem {{sectionName}}.",
+  "RoomUpdateNotify": "Geteilte Inhalte und {{sectionName}}-Aktivitäten",
+  "SettingUpNotifications": "Benachrichtigungen einrichten",
+  "SuccessConnected": "{{serviceName}} wurde erfolgreich als Benachrichtigungskanal verbunden. Sie erhalten nun Updates darüber.",
+  "SuccessDisconnected": "{{serviceName}} wurde erfolgreich als Benachrichtigungskanal getrennt. Benachrichtigungen werden dort nicht mehr gesendet.",
   "UsefulTips": "Nützliche {{productName}}-Tipps",
   "UsefulTipsDescription": "Erhalten Sie nützliche Anleitungen zu {{productName}}"
 }

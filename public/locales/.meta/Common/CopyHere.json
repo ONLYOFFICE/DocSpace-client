@@ -3,7 +3,7 @@
   "content": "Copy here",
   "content_en_sha1_hash": "92816e8a2d8cd79faa7d9b23fa0080284e21fef3",
   "created_at": "2025-05-19T21:30:43.763Z",
-  "updated_at": "2025-05-26T07:57:32.181Z",
+  "updated_at": "2025-10-27T16:14:33.147Z",
   "comment": {
     "text": "This translation key is used as a default label for a \"Copy\" button in various UI components, including files selectors and share collectors. The text is meant to encourage users to select or copy content from an interface. It appears on buttons and labels where users interact with shared documents or folders.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
-      "line_number": 288,
+      "line_number": 292,
       "context": "isPanelVisible={visible ? !conflictResolveDialogVisible : false}\n currentDeviceType={currentDeviceType}\n createDefineRoomLabel={\n createDefineRoomLabels[createDefineRoomType] ?? \"\"\n }\n submitButtonLabel={t(\"Common:CopyHere\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n cancelButtonId=\"share-collect-selector-cancel\"\n onCancel={onCancel}\n onSubmit={onSubmit}\n getIsDisabled={getIsDisabled}",
       "module": "/packages/client"
     },

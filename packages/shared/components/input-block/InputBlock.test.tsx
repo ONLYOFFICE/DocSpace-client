@@ -113,12 +113,7 @@ describe("<InputBlock />", () => {
   });
 
   it("handles different sizes correctly", () => {
-    const sizes = [
-      InputSize.base,
-      InputSize.middle,
-      InputSize.big,
-      InputSize.huge,
-    ];
+    const sizes = [InputSize.base, InputSize.middle, InputSize.large];
 
     sizes.forEach((size) => {
       const { container, unmount } = render(

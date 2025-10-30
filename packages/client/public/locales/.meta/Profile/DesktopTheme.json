@@ -3,7 +3,7 @@
   "content": "Sync with Desktop Editor settings",
   "content_en_sha1_hash": "a8a7da11fabd075e939eef96ebf7c7edd247b5f8",
   "created_at": "2025-05-19T21:30:53.348Z",
-  "updated_at": "2025-05-24T06:15:20.521Z",
+  "updated_at": "2025-08-11T18:11:59.297Z",
   "comment": {
     "text": "This translation key is used to display a label that indicates whether the interface theme is set to \"Desktop Theme\" or \"System Theme\", depending on the application's desktop client setting. It appears in settings or configuration areas of the application, providing context for users managing their interface appearance.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.js",
-      "line_number": 138,
-      "context": "const isSystemTheme = currentTheme === ThemeKeys.SystemStr;\n const systemThemeValue = getSystemTheme();\n \n const systemThemeLabel = isDesktopClient\n ? t(\"DesktopTheme\")\n : t(\"SystemTheme\");\n const systemThemeDescriptionLabel = isDesktopClient\n ? t(\"DesktopThemeDescription\")\n : t(\"SystemThemeDescription\");",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.tsx",
+      "line_number": 108,
+      "context": "const isSystemTheme = currentTheme === ThemeKeys.SystemStr;\n const systemThemeValue = getSystemTheme();\n \n const systemThemeLabel = isDesktopClient\n ? t(\"Profile:DesktopTheme\")\n : t(\"Profile:SystemTheme\");\n const systemThemeDescriptionLabel = isDesktopClient\n ? t(\"Profile:DesktopThemeDescription\")\n : t(\"Profile:SystemThemeDescription\");",
       "module": "/packages/client"
     }
   ],

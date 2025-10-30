@@ -35,11 +35,14 @@ import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withFileActions from "../../../../../HOCs/withFileActions";
 import ItemIcon from "../../../../../components/ItemIcon";
 import RoomsRowDataComponent from "./sub-components/RoomsRowData";
+import AIAgentsRowDataComponent from "./sub-components/AIAgentsRowData";
 import TrashRowDataComponent from "./sub-components/TrashRowData";
 import RecentRowDataComponent from "./sub-components/RecentRowData";
 import IndexRowDataComponent from "./sub-components/IndexRowData";
 import TemplatesRowData from "./sub-components/TemplatesRowData";
 import RowDataComponent from "./sub-components/RowData";
+import SharedWithMeRowDataComponent from "./sub-components/SharedWithMeRowData";
+import FavoritesRowDataComponent from "./sub-components/FavoritesRowData";
 import { StyledTableRow, StyledDragAndDrop } from "./StyledTable";
 
 const FilesTableRow = (props) => {
@@ -50,6 +53,7 @@ const FilesTableRow = (props) => {
     checkedProps,
     className,
     value,
+    documentTitle,
     onMouseClick,
     dragging,
     isDragging,
@@ -76,7 +80,10 @@ const FilesTableRow = (props) => {
     onDragOver,
     onDragLeave,
     badgeUrl,
-    isRecentTab,
+    isRecentFolder,
+    isFavoritesFolder,
+    isSharedWithMeFolderRoot,
+    isAIAgentsFolder,
     canDrag,
     onEditIndex,
     isIndexUpdated,
@@ -86,6 +93,10 @@ const FilesTableRow = (props) => {
     isTutorialEnabled,
     setRefMap,
     deleteRefMap,
+    setDropTargetPreview,
+    selectedFolderTitle,
+    canCreateSecurity,
+    disableDrag,
   } = props;
 
   const { acceptBackground, background } = theme.dragAndDrop;
@@ -116,9 +127,12 @@ const FilesTableRow = (props) => {
   const selectionProp = {
     className: `files-item ${className} ${value}`,
     value,
+    documentTitle,
   };
 
   const [isDragActive, setIsDragActive] = useState(false);
+
+  const isDragDisabled = dragging && !isDragging;
 
   const dragStyles = {
     style: {
@@ -128,6 +142,7 @@ const FilesTableRow = (props) => {
             ? acceptBackground
             : background
           : "none",
+      opacity: isDragDisabled ? 0.4 : 1,
     },
   };
 
@@ -146,6 +161,7 @@ const FilesTableRow = (props) => {
   const onDragLeaveEvent = (e) => {
     onDragLeave && onDragLeave(e);
 
+    setDropTargetPreview(null);
     setIsDragActive(false);
   };
 
@@ -180,6 +196,25 @@ const FilesTableRow = (props) => {
     };
   }, [deleteRefMap, setRefMap]);
 
+  useEffect(() => {
+    if (dragging) {
+      if (isDragging) {
+        if (isDragActive) setDropTargetPreview(item.title);
+      } else if (!disableDrag && canCreateSecurity) {
+        setDropTargetPreview(selectedFolderTitle);
+      } else {
+        setDropTargetPreview(null);
+      }
+    }
+  }, [
+    dragging,
+    isDragging,
+    isDragActive,
+    selectedFolderTitle,
+    setDropTargetPreview,
+    disableDrag,
+  ]);
+
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`
     : (item.id ?? "");
@@ -210,12 +245,14 @@ const FilesTableRow = (props) => {
       dragging={dragging ? isDragging : null}
       onDragOver={onDragOverEvent}
       onDragLeave={onDragLeaveEvent}
+      isDragDisabled={isDragDisabled}
     >
       <StyledTableRow
         key={item.id}
         className="table-row"
         forwardedRef={rowRef}
         contextMenuCellStyle={dragStyles.style}
+        dataTestId={`table-row-${index}`}
         isDragging={dragging}
         dragging={dragging ? isDragging : null}
         selectionProp={selectionProp}
@@ -259,14 +296,33 @@ const FilesTableRow = (props) => {
             dragStyles={dragStyles}
             {...props}
           />
+        ) : isAIAgentsFolder ? (
+          <AIAgentsRowDataComponent
+            element={element}
+            dragStyles={dragStyles}
+            {...props}
+          />
         ) : isTrashFolder ? (
           <TrashRowDataComponent
             element={element}
             dragStyles={dragStyles}
             {...props}
           />
-        ) : isRecentTab ? (
+        ) : isSharedWithMeFolderRoot ? (
+          <SharedWithMeRowDataComponent
+            element={element}
+            dragStyles={dragStyles}
+            {...props}
+          />
+        ) : isRecentFolder ? (
           <RecentRowDataComponent
+            element={element}
+            dragStyles={dragStyles}
+            selectionProp={selectionProp}
+            {...props}
+          />
+        ) : isFavoritesFolder ? (
+          <FavoritesRowDataComponent
             element={element}
             dragStyles={dragStyles}
             selectionProp={selectionProp}

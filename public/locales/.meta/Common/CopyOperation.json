@@ -3,7 +3,7 @@
   "content": "Copying",
   "content_en_sha1_hash": "43b7de9894fd26b8d14ca6988e963239baff6ad4",
   "created_at": "2025-05-19T21:30:43.791Z",
-  "updated_at": "2025-05-26T07:57:32.394Z",
+  "updated_at": "2025-10-27T16:14:33.360Z",
   "comment": {
     "text": "This translation key \"CopyOperation\" is used to display a message that indicates an operation where content will be duplicated or mimicked. It is displayed as a label on a button in UI elements, typically allowing users to initiate a copy action, such as copying files or data.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 268,
+      "line_number": 271,
       "context": "case trash:\n return i18n.t(\"Files:MovingToTrash\");\n case move:\n return i18n.t(\"Common:MoveToOperation\");\n case copy:\n return i18n.t(\"Common:CopyOperation\");\n case download:\n return i18n.t(\"Files:Downloading\");\n case duplicate:\n return i18n.t(\"Files:Duplicating\");\n case exportIndex:",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/shared/pages/manual-backup/index.tsx",
-      "line_number": 333,
-      "context": "style={{ marginInlineStart: \"8px\" }}\n />\n ) : null}\n {!isMaxProgress ? (\n <Button\n label={`${t(\"Common:CopyOperation\")} ...`}\n isDisabled\n size={buttonSize}\n style={{ marginInlineStart: \"8px\" }}\n />\n ) : null}",
+      "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
+      "line_number": 476,
+      "context": "testId=\"download_temporary_copy_button\"\n />\n ) : null}\n {!isMaxProgress ? (\n <Button\n label={`${t(\"Common:CopyOperation\")} ...`}\n isDisabled\n size={buttonSize}\n style={{ marginInlineStart: \"8px\" }}\n testId=\"copy_temporary_operation_button\"\n />",
       "module": "/packages/shared"
     }
   ],

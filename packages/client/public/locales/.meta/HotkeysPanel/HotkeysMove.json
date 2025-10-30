@@ -3,7 +3,7 @@
   "content": "Move between items",
   "content_en_sha1_hash": "dbd1ab23f2124a4ce62b46e43d9985055559b5c8",
   "created_at": "2025-05-19T21:30:55.058Z",
-  "updated_at": "2025-05-24T10:40:28.725Z",
+  "updated_at": "2025-08-12T19:46:25.980Z",
   "comment": {
     "text": "\"Used as a header for a section describing keyboard shortcuts to move between items in the application's panels.\"",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/HotkeysPanel/index.js",
       "line_number": 130,
-      "context": "t={t}\n textStyles={textStyles}\n keyTextStyles={keyTextStyles}\n CtrlKey={CtrlKey}\n />\n <Heading className=\"hotkeys_sub-header\">{t(\"HotkeysMove\")}</Heading>\n <MoveBlock\n t={t}\n textStyles={textStyles}\n keyTextStyles={keyTextStyles}\n CtrlKey={CtrlKey}",
+      "context": "textStyles={textStyles}\n keyTextStyles={keyTextStyles}\n CtrlKey={CtrlKey}\n AltKey={AltKey}\n />\n <Heading className=\"hotkeys_sub-header\">{t(\"HotkeysMove\")}</Heading>\n <MoveBlock\n t={t}\n textStyles={textStyles}\n keyTextStyles={keyTextStyles}\n CtrlKey={CtrlKey}",
       "module": "/packages/client"
     }
   ],

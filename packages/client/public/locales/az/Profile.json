@@ -1,13 +1,13 @@
 {
   "ActiveSessions": "Aktiv Sessiyalar",
   "AutoDeleteTitle": "60 gündən köhnə bütün sessiyalar avtomatik silinəcək.",
-  "ChangeEmailSuccess": "Elektron poçt uğurla dəyişdirildi",
   "ChangePasswordAfterLoggingOut": "Çıxdıqdan sonra şifrəni dəyişdirin",
   "ConnectSocialNetworks": "Sosial şəbəkələrinizi əlaqələndirin",
   "DescriptionForSecurity": "Daha çox təhlükəsizlik üçün şifrəni dəyişdirməlisiniz.",
   "DesktopTheme": "Masaüstü Redaktor tənzimləmələri ilə sinxronizasiya edin",
   "DesktopThemeDescription": "Masa üstü redaktorların cari mövzusundan asılı olaraq açıq və qaranlıq mövzular arasında avtomatik keçid edin.",
   "EditPhoto": "Şəklin redaktə olunması",
+  "EmailChangeSuccess": "Email ünvanınız uğurla dəyişdirildi.",
   "EmailNotVerified": "E-poçt təsdiqlənmədi",
   "ErrorAccountAlreadyUse": "Keçid olunan hesab artıq başqa istifadəçi tərəfindən istifadə olunur",
   "FileManagement": "Fayl idarəetməsi",
@@ -18,6 +18,7 @@
   "LogoutDescription": "Qeyd. Bundan başqa bütün aktiv bağlantılar hazırda istifadə edildiyi üçün sistemdən çıxacaq.",
   "LogoutFrom": "{{platform}} {{browser}} çıxılsın?",
   "MyProfile": "Mənim profilim",
+  "NotificationsChannels": "Xəbər kanalları",
   "ProviderSuccessfullyConnected": "Provayder müvəffəqiyyətlə qoşuldu",
   "ProviderSuccessfullyDisconnected": "Provayderin əlaqəsi müvəffəqiyyətlə kəsildi",
   "SendAgain": "Yenidən göndərin",
@@ -25,6 +26,10 @@
   "SuccessLogout": "Aktiv bağlantıdan çıxış edildi: {{platform}}, {{browser}}",
   "SystemTheme": "Sistem temasından istifadə edin",
   "SystemThemeDescription": "Sisteminiz bunu etdikdə açıq və qaranlıq temalar arasında avtomatik keçid edin.",
+  "TelegramAccount": "Telegram hesabı",
+  "TelegramAccountDescription": "TelegramBot-u hesabınızla birləşdirmək üçün gizli linkə nəzər salın və “Telegrama qoşul” düyməsinə klikləyin.",
+  "TelegramAccountDisconnect": "Telegramı əlaqədən kəsin",
+  "TelegramAccountDisconnectDescription": "Sizin @{{username}} hesabınız telegram bildirişləri üçün qoşuludur. Siz bu hesabdan ayrılığa çıxa bilərsiniz. Bu halda, siz bildirişlər almayacaqsınız.",
   "TerminateAllSessions": "Cari sessiyadan başqa bütün sessiyaları dayandırın",
   "TwoFactorDescription": "Bütün istifadəçilər üçün ikili autentifikasiya (kod generasiyası ilə) inzibatçı tərəfindən yandırıldı."
 }

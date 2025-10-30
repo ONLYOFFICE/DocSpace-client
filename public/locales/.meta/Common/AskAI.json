@@ -1,0 +1,28 @@
+{
+  "key_path": "AskAI",
+  "content": "Ask AI",
+  "content_en_sha1_hash": "8dbaeb8edb74d2923889062eac8ffeac56b9977b",
+  "created_at": "2025-10-27T16:14:10.655Z",
+  "updated_at": "2025-10-27T16:49:45.470Z",
+  "comment": {
+    "text": "This key represents the text displayed on a button or option that initiates interaction with an AI agent. It’s used to trigger the AI agent selector dialog, allowing users to choose which AI to engage with. Translators should ensure the translation accurately conveys the action of asking or consulting an AI.",
+    "is_auto": true,
+    "updated_at": "2025-10-27T16:49:45.470Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1915,
+      "context": "...muteOptions,\n separator0,\n {\n id: \"option_ask-ai\",\n key: \"ask-ai\",\n label: t(\"Common:AskAI\"),\n icon: AISvgUrl,\n onClick: () =>\n this.dialogsStore.setAiAgentSelectorDialogProps(true, item),\n disabled: false,\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

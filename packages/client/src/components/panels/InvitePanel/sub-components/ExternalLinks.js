@@ -41,7 +41,7 @@ import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUse
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 // import { globalColors } from "@docspace/shared/themes";
-import { filterPaidRoleOptions } from "SRC_DIR/helpers";
+import { filterPaidRoleOptions } from "@docspace/shared/utils/filterPaidRoleOptions";
 import api from "@docspace/shared/api";
 import AccessSelector from "../../../AccessSelector";
 import PaidQuotaLimitError from "../../../PaidQuotaLimitError";
@@ -74,6 +74,7 @@ const ExternalLinks = ({
   isUserTariffLimit,
   standalone,
   allowInvitingGuests,
+  isAIAgentsFolder,
 }) => {
   const [isLinksToggling, setIsLinksToggling] = useState(false);
 
@@ -86,7 +87,7 @@ const ExternalLinks = ({
       toastr.success(
         `${t("Common:LinkCopySuccess")}. ${t("Translations:LinkValidTime", {
           days_count: 7,
-        })}`,
+        })}`
       );
 
       copyShareLink(link);
@@ -99,7 +100,7 @@ const ExternalLinks = ({
         roomId,
         "Invite",
         0,
-        shareLinks[0].id,
+        shareLinks[0].id
       ));
     return setShareLinks([]);
   };
@@ -134,19 +135,17 @@ const ExternalLinks = ({
       link.shareLink = await getPortalInviteLink(selectedAccess);
 
       setActiveLink(link);
+      copyLink(link.shareLink);
     } else {
-      api.rooms.setInvitationLinks(
-        roomId,
-        "Invite",
-        +selectedAccess,
-        shareLinks[0].id,
-      );
-
-      link = shareLinks[0];
-      setActiveLink(shareLinks[0]);
+      api.rooms
+        .setInvitationLinks(roomId, "Invite", +selectedAccess, shareLinks[0].id)
+        .then(() => {
+          link = shareLinks[0];
+          setActiveLink(shareLinks[0]);
+          copyLink(link.shareLink);
+        })
+        .catch((err) => toastr.error(err.message));
     }
-
-    copyLink(link.shareLink);
   };
 
   const toggleLinks = async (e) => {
@@ -228,11 +227,28 @@ const ExternalLinks = ({
     true,
     isOwner,
     isAdmin,
-    standalone,
+    standalone
   );
 
   const filteredAccesses =
     roomType === -1 ? accesses : filterPaidRoleOptions(accesses);
+
+  const description =
+    roomId === -1
+      ? t("InviteViaLinkDescriptionAccounts", {
+          productName: t("Common:ProductName"),
+        })
+      : isAIAgentsFolder
+      ? allowInvitingGuests
+        ? t("InviteViaLinkDescriptionAgentGuest")
+        : t("InviteViaLinkDescriptionAgentMembers", {
+            productName: t("Common:ProductName"),
+          })
+      : allowInvitingGuests
+      ? t("InviteViaLinkDescriptionRoomGuest")
+      : t("InviteViaLinkDescriptionRoomMembers", {
+          productName: t("Common:ProductName"),
+        });
 
   return (
     <StyledExternalLink noPadding ref={inputsRef}>
@@ -270,19 +286,10 @@ const ExternalLinks = ({
           isChecked={externalLinksVisible}
           onChange={toggleLinks}
           isDisabled={isLinksToggling}
+          dataTestId="invite_panel_external_links_toggle"
         />
       </StyledSubHeader>
-      <StyledDescription noSelect>
-        {roomId === -1
-          ? t("InviteViaLinkDescriptionAccounts", {
-              productName: t("Common:ProductName"),
-            })
-          : !allowInvitingGuests
-            ? t("InviteViaLinkDescriptionRoomMembers", {
-                productName: t("Common:ProductName"),
-              })
-            : t("InviteViaLinkDescriptionRoomGuest")}
-      </StyledDescription>
+      <StyledDescription>{description}</StyledDescription>
       {externalLinksVisible ? (
         <StyledInviteInputContainer key={activeLink.id}>
           <StyledInviteInput isShowCross>
@@ -295,6 +302,7 @@ const ExternalLinks = ({
               isReadOnly
               iconName={CopyReactSvgUrl}
               onIconClick={onCopyLink}
+              dataTestId="invite_panel_external_link_input"
             />
           </StyledInviteInput>
           <AccessSelector
@@ -310,6 +318,7 @@ const ExternalLinks = ({
             selectionErrorText={<PaidQuotaLimitError />}
             filteredAccesses={filteredAccesses}
             availableAccess={availableAccess}
+            dataTestId="invite_panel_external_link_access"
           />
         </StyledInviteInputContainer>
       ) : null}
@@ -324,6 +333,7 @@ export default inject(
     peopleStore,
     currentQuotaStore,
     settingsStore,
+    treeFoldersStore,
   }) => {
     const { isOwner, isAdmin } = userStore.user;
     const { invitePanelOptions } = dialogsStore;
@@ -331,6 +341,7 @@ export default inject(
     const { getPortalInviteLink } = peopleStore.inviteLinksStore;
     const { isUserTariffLimit } = currentQuotaStore;
     const { standalone, allowInvitingGuests } = settingsStore;
+    const { isAIAgentsFolder } = treeFoldersStore;
 
     return {
       roomId,
@@ -342,6 +353,7 @@ export default inject(
       isUserTariffLimit,
       standalone,
       allowInvitingGuests,
+      isAIAgentsFolder,
     };
-  },
+  }
 )(observer(ExternalLinks));

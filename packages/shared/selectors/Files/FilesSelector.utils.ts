@@ -111,6 +111,12 @@ export const configureFilterByFilterParam = (
         .join(",");
       break;
 
+    case "PDFTypes":
+      filter.extension = "pdf";
+      break;
+
     default:
+      filter.extension = filterParam.toString();
+      break;
   }
 };

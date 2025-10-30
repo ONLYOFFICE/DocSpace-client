@@ -3,7 +3,7 @@
   "content": "Your subscription is expiring on {{date}}",
   "content_en_sha1_hash": "8188a3ae6c5b0e34b2926ddc70d79038d6e78b7f",
   "created_at": "2025-05-19T21:30:49.205Z",
-  "updated_at": "2025-05-28T09:30:02.175Z",
+  "updated_at": "2025-10-14T02:42:02.848Z",
   "comment": {
     "text": "This translation key is used to display a notification about an expiring subscription on the client's tariff bar. The date of expiration is inserted into the translated string. It appears in the tariff bar component, typically as an orange notification indicator.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"سوف ينتهي\" (sawfa yantahi) implies a future action that is less direct than 'is expiring.' A more accurate translation would convey a current state of expiration approaching. Consider using a more immediate verb like \"سيتم تجديده\" (sayutamm tijdiduhu - will be renewed) or a phrasing that emphasizes the imminent expiration.",
-          "suggestion": "اشتراكك سينتهي في {{date}}"
+          "description": "The translation 'اشتراكك سوف ينتهي في {{date}}' is a literal translation but sounds unnatural in Arabic. A more natural phrasing would be 'سوف تنتهي صلاحية اشتراكك في {{date}}' or 'سيتم انتهاء اشتراكك في {{date}}'.",
+          "suggestion": "سوف تنتهي صلاحية اشتراكك في {{date}}"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Jūsu abonementa derīguma termiņš beidzas šajā datumā: {{date}}' is overly literal and slightly awkward in Latvian. A more natural phrasing would be closer to 'Jūsu abonements beidzas {{date}}' or 'Abonements beidzas {{date}}'. The phrase 'derīguma termiņš' (expiration date) is redundant.",
-          "suggestion": "Jūsu abonements beidzas {{date}}"
+          "description": "The translation \"Jūsu abonementa derīguma termiņš beidzas šajā datumā: {{date}}\" is a bit too verbose and formal for a user-facing notification. A more natural and concise translation would improve clarity and user experience.",
+          "suggestion": "Jūsu abonements beidzas: {{date}}"
         }
       ],
       "approved_at": null
@@ -168,13 +168,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Your subscription is expiring on' is not accurately reflected in the Sinhala translation. 'ඉකුත් වේ' (ikuth ve) means 'will end' or 'will expire', but a more natural and precise translation would convey the sense of nearing expiration.",
-          "suggestion": "ඔබේ දායකත්වය {{date}} වන විට අවසන් වනුයේ"
+          "description": "The translation '{{date}} දී ඔබගේ දායකත්‍වය ඉකුත් වේ' is a literal translation and sounds awkward in Sinhala. While understandable, a more natural phrasing would be better.",
+          "suggestion": "{{date}} වන විට ඔබේ දායකත්වය අවසන් වනු ඇත"
         },
         {
-          "type": "formatting",
-          "description": "The Sinhala translation maintains the double curly braces `{{date}}` which mirrors the English format. While not strictly incorrect, it's common to omit those in Sinhala when integrating into a system/UI and assumes the system handles the variable substitution.",
-          "suggestion": "{{date}} දී ඔබගේ දායකත්‍වය අවසන් වේ"
+          "type": "incorrect_translation",
+          "description": "The word ' දී ' (di) is not the best fit for describing the expiration. ' වන විට ' (wanita) is a better alternative.",
+          "suggestion": "Use ' වන විට ' instead of ' දී '."
         }
       ],
       "approved_at": null
@@ -197,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'subscription' (English) is translated as 'претплата' (Serbian Cyrillic). While technically correct, a more natural translation might be 'претплата истече' for better flow. The original English phrasing indicates a future event, so 'istice' works, but 'isteće' is slightly more aligned.",
-          "suggestion": "Ваша претплата истече {{date}}"
+          "description": "The English phrase 'subscription' is best translated as 'pretplata' rather than 'istina' in this context. 'Istina' means 'truth'.",
+          "suggestion": "Ваша претплата истиче {{date}}"
         }
       ],
       "approved_at": null
@@ -224,10 +224,22 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Gói dịch vụ đăng ký' is a bit verbose. A simpler and more natural translation for 'subscription' would be 'đăng ký' or 'gói cước'.",
+          "suggestion": "Gói cước của bạn sẽ hết hạn vào {{date}}"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -2,5 +2,6 @@
   "CancellaionNotification": "No volver a mostrar la notificación de cancelación",
   "DisplayFileExtension": "Mostrar la extensión del archivo junto al nombre del archivo",
   "OpenSameTab": "Abra el editor {{organizationName}} en la misma pestaña",
-  "OriginalCopy": "Guardar también la copia del archivo en el formato original"
+  "OriginalCopy": "Guardar también la copia del archivo en el formato original",
+  "TrashMoveConfirmation": "Mostrar notificación al mover elementos a {{sectionName}}"
 }

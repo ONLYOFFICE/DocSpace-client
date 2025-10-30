@@ -1,6 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-// eslint-disable @typescript-eslint/no-unused-vars
 
 import { TextDecoder, TextEncoder } from "util";
 import React from "react";
@@ -70,6 +68,7 @@ jest.mock("react-i18next", () => ({
     i18n: {
       changeLanguage: () => new Promise(() => {}),
     },
+    ready: true,
   }),
   Trans: ({ t, i18nKey, values }: TransProps) => {
     return t(i18nKey, { ...values });

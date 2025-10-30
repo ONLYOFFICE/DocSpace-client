@@ -24,9 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-console */
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
+import axios, {
+  type AxiosInstance,
+  type AxiosRequestConfig,
+  type AxiosResponse,
+} from "axios";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
@@ -66,6 +68,7 @@ export type TReqOption = {
   skipUnauthorized?: boolean;
   skipLogout?: boolean;
   withRedirect?: boolean;
+  skipForbidden?: boolean;
 };
 
 class AxiosClient {
@@ -92,6 +95,12 @@ class AxiosClient {
       headers = {
         "Access-Control-Allow-Credentials": "true",
       };
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const publicRoomKey = urlParams.get("key") || urlParams.get("share");
+    if (publicRoomKey) {
+      headers = { ...headers, "Request-Token": publicRoomKey };
     }
 
     const apiBaseURL = combineUrl(origin, proxy, prefix);
@@ -121,20 +130,6 @@ class AxiosClient {
     });
 
     this.client = axios.create(apxiosConfig);
-
-    this.client.interceptors.request.use((config) => {
-      if (typeof window === "undefined") return null;
-
-      const urlParams = new URLSearchParams(window.location.search);
-      const publicRoomKey = urlParams.get("key") || urlParams.get("share");
-
-      if (publicRoomKey) {
-        config.headers = config.headers || {};
-        config.headers["Request-Token"] = publicRoomKey;
-      }
-
-      return config;
-    });
   };
 
   initSSR = (headersParam: Record<string, string>) => {
@@ -176,14 +171,19 @@ class AxiosClient {
     this.client.defaults.baseURL = path;
   };
 
-  getResponseError = (res: TRes) => {
+  getResponseError = (res: AxiosResponse | TRes) => {
     if (!res) return;
 
     if (res.data && res.data.error) {
       return res.data.error.message;
     }
 
-    if (res.isAxiosError && res.message) {
+    if (
+      "isAxiosError" in res &&
+      res.isAxiosError &&
+      "message" in res &&
+      res.message
+    ) {
       // console.error(res.message);
       return res.message;
     }
@@ -194,7 +194,7 @@ class AxiosClient {
     skipRedirect = false,
     isOAuth = false,
   ): Promise<T> | undefined => {
-    const onSuccess = (response: TRes) => {
+    const onSuccess = (response: AxiosResponse) => {
       const error = this.getResponseError(response);
 
       if (error) throw new Error(error);
@@ -206,7 +206,12 @@ class AxiosClient {
           return window.location.replace(redirectUri);
       }
 
-      if (!response || !response.data || response.isAxiosError) return null;
+      if (
+        !response ||
+        !response.data ||
+        ("isAxiosError" in response && response.isAxiosError)
+      )
+        return null;
 
       if (
         response.data &&
@@ -276,6 +281,7 @@ class AxiosClient {
             }
             break;
           case 403: {
+            if (options.skipForbidden) break;
             const { pathname } = window.location;
 
             const isArchived = pathname.indexOf("/rooms/archived") !== -1;

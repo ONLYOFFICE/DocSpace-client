@@ -3,7 +3,7 @@
   "content": "Incorrect first name",
   "content_en_sha1_hash": "cb0f8aba1a2ba9ca01a2add1595e6bb8a36ef169",
   "created_at": "2025-05-19T21:30:45.864Z",
-  "updated_at": "2025-06-30T12:20:31.172Z",
+  "updated_at": "2025-08-21T11:22:39.796Z",
   "comment": {
     "text": "This translation key \"IncorrectFirstName\" is used to display an error message when a user enters an invalid first name. In the UI, it appears as part of a dialog's validation error messages in the /packages/client/src/components/dialogs/ChangeNameDialog component.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
-      "line_number": 136,
-      "context": "className=\"field\"\n hasError={!isNameValid}\n errorMessage={\n firstName.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\")\n }\n >\n <TextInput\n className=\"first-name\"\n scale",
+      "line_number": 147,
+      "context": "placeholder: t(\"Common:FirstName\"),\n hasError: !isNameValid,\n errorMessage:\n firstName.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"),\n className: \"first-name\",\n dataTestId: \"change_name_first_name_field\",\n },\n {\n id: \"lastName\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/RegistrationForm.tsx",
-      "line_number": 178,
-      "context": "hasError={!fnameValid}\n errorMessage={\n errorText ||\n (fname.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"))\n }\n >\n <TextInput\n id=\"first-name\"\n name=\"first-name\"",
+      "line_number": 180,
+      "context": "hasError={!fnameValid}\n errorMessage={\n errorText ||\n (fname.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"))\n }\n dataTestId=\"first_name_field_container\"\n >\n <TextInput\n id=\"first-name\"",
       "module": "/packages/login"
     }
   ],
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Yanlış ad\" is a literal translation of \"Incorrect first name\", a more natural and accurate translation would be \"Sehv ad\" or \"Yanlış birinci ad\". \"Yanlış ad\" could be interpreted as 'wrong name' in general, not specifically a first name.",
+          "suggestion": "Sehv ad"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,7 +57,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Nesprávné křestní jméno' is a literal translation of 'Incorrect first name', it's slightly formal and less common in everyday language. A more natural translation would be 'Špatné jméno' or 'Chybně uvedené jméno'.",
+          "suggestion": "Špatné jméno"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -60,7 +72,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Ungültiger Vorname' is technically correct, it implies the first name is invalid in some system or process. 'Incorrect first name' often means the user typed it wrong. A more appropriate translation might be 'Falscher Vorname'.",
+          "description": "While \"Ungültiger Vorname\" is technically correct, it's quite formal and doesn't perfectly capture the tone of \"Incorrect first name.\" A more natural and common translation would be \"Falscher Vorname\".",
           "suggestion": "Falscher Vorname"
         }
       ],
@@ -108,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"名が正しくありません\" (Nama ga seishiku arimasen) translates to \"The name is not correct.\" While functionally similar to \"Incorrect first name,\" it's not a direct or ideal translation. It's more formal and doesn't specifically refer to a 'first name'.",
-          "suggestion": "名が違います (Nama ga chigaimasu) - 'The name is different' or 名前の誤りです (Namae no ayamari desu) - 'There is a mistake in the name' might be more accurate depending on the context, but \"名が間違っています (Nama ga machigatte imasu) - 'The name is wrong' is a common and generally suitable alternative."
+          "description": "The translation \"名が正しくありません\" (Nama ga seishiku arimasen) is a literal translation of \"Name is incorrect\" rather than the intended \"Incorrect first name.\" While understandable, it's not the most natural or precise way to convey the meaning in Japanese in this context.",
+          "suggestion": "Consider alternatives like \"姓が正しくありません\" (Sei ga seishiku arimasen - Incorrect last name - less appropriate but more common error) or a rephrased sentence like \"名前が間違っています\" (Nama ga machigatte imasu - The name is wrong) which would be more natural."
         }
       ],
       "approved_at": null
@@ -120,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"유효하지 않은 이름입니다\" (yu-hyo-ha-ji a-neun i-reum-im-ni-da) translates to \"Invalid name.\" While it conveys a similar meaning to \"Incorrect first name\", it's not a direct and accurate translation. \"Incorrect\" implies a mistake, while \"Invalid\" implies a non-acceptable format.",
-          "suggestion": "Consider alternatives like \"잘못된 이름입니다\" (jal-mot-dwen i-reum-im-ni-da) which translates to 'Incorrect name' or 'Wrong name'."
+          "description": "The translation '유효하지 않은 이름입니다' (yu-hyo-ha-ji a-neun i-reum-im-ni-da) translates to 'Invalid name' rather than 'Incorrect first name'. While close in meaning, it doesn't convey the original nuance. A more accurate translation focusing on 'first name' specifically would be better.",
+          "suggestion": "Consider '잘못된 이름입니다' (jal-mot-dwen i-reum-im-ni-da) which means 'Incorrect name' or a more specific translation that focuses on 'first name' if the context demands it."
         }
       ],
       "approved_at": null
@@ -129,13 +141,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ຊື່ບໍ່ຖືກຕ້ອງ' is a literal translation of 'Incorrect first name', it might be perceived as slightly formal or abrupt in some contexts. A more natural phrasing could be considered depending on the specific application.",
+          "suggestion": "Consider alternatives like 'ຊື່ຜິດ' (chue phit) which is more common and less formal for 'wrong name' or 'incorrect name'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Incorrect first name' is better translated as 'Nepareizs priekšvārds' rather than 'Nepareizs vārds'. 'Vārds' translates to 'name' in a general sense, while 'priekšvārds' specifically refers to a first name.",
+          "suggestion": "Nepareizs priekšvārds"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -180,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'මුල් නම වැරදිය' while literally translating to 'first name is wrong', isn't the most natural or accurate way to convey 'Incorrect first name' in Sinhala. A more suitable phrasing would emphasize the error itself.",
-          "suggestion": "වැරදි මුල් නම"
+          "description": "The Sinhala translation 'මුල් නම වැරදිය' is a literal translation of 'Incorrect first name'. While understandable, a more natural and idiomatic translation might be preferred depending on the context. 'මුල් නම වැරදි' translates to 'First name is wrong'. A more natural rendering might be 'සరికියාම ያልගත් නම' (Sarikiyaamal yala gat nama) - 'Incorrect name' or 'දැනුනුවලිට නම වැරදි' (Danunuwalita nama weradi) - 'The name is incorrect'.",
+          "suggestion": "Consider a more idiomatic translation like 'සరికියාම ያልගත් නම' or 'දැනුනුවලිට නම වැරදි'."
         }
       ],
       "approved_at": null
@@ -204,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Нетачно име\" while technically correct, doesn't quite capture the nuance of 'Incorrect first name'. It translates to 'Incorrect name' which is broader. A more accurate translation would consider context, but a closer match would be something like 'Нетачна имена' or 'Нетачно унесено име'.",
-          "suggestion": "Consider 'Нетачна имена' or 'Нетачно унесено име' for a more precise translation.  The best option depends on the surrounding context."
+          "description": "The translation \"Нетачно име\" while understandable, isn't the most natural or accurate translation of \"Incorrect first name\".  'Нетачно' implies inaccuracy, while a more direct translation would convey the meaning of being wrong or not matching.",
+          "suggestion": "Погрешно име"
         }
       ],
       "approved_at": null
@@ -222,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Incorrect first name' is more specific than the Turkish translation 'Yanlış ad' which simply means 'Incorrect name'. While not necessarily wrong, it lacks the specificity of 'first name'.",
-          "suggestion": "Yanlış ilk ad"
+          "description": "The translation 'Yanlış ad' is a literal translation of 'Incorrect name', but a more accurate and natural Turkish translation of 'Incorrect first name' would be 'Yanlış isim'. 'Ad' is more commonly used for surname.",
+          "suggestion": "Yanlış isim"
         }
       ],
       "approved_at": null
@@ -240,7 +264,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Tên không đúng\" is a literal translation of \"Incorrect first name\", a more natural and common Vietnamese phrasing would be \"Tên không chính xác\" or \"Tên sai\". \"Không đúng\" can sometimes carry a slightly different connotation.",
+          "description": "While \"Tên không đúng\" is technically correct, a more natural and common translation of \"Incorrect first name\" in Vietnamese would be \"Tên không chính xác\" or \"Tên sai.\"",
           "suggestion": "Tên không chính xác"
         }
       ],
@@ -252,8 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"名字不正确\" (mingzi bu zhengque) is a literal translation of 'Incorrect first name' but a more natural and commonly used phrasing in Chinese would be something like '名字错误' (mingzi cuowu) or '名字不符' (mingzi bu fu).",
-          "suggestion": "名字错误 (mingzi cuowu) or 名字不符 (mingzi bu fu)"
+          "description": "While \"名字不正确\" (Míngzi bù zhèngquè) is understandable, a more natural and precise translation of \"Incorrect first name\" would be something like \"名字错误\" (Míngzi cuòwù) or \"名不正确\" (Míng bù zhèngquè). \"名字不正确\" emphasizes that the *name* is incorrect, which isn't the direct meaning. It implies the whole name is wrong, not just the first name.",
+          "suggestion": "名字错误 (Míngzi cuòwù) or 名不正确 (Míng bù zhèngquè)"
         }
       ],
       "approved_at": null

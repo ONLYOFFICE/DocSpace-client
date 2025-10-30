@@ -24,20 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import {
-  getBackupStorage,
-  getStorageRegions,
-} from "@docspace/shared/api/settings";
-import { getBackupSchedule } from "@docspace/shared/api/portal";
-import { getSettingsThirdParty } from "@docspace/shared/api/files";
+import AutomaticBackup from "@docspace/shared/pages/backup/auto-backup";
 
-import { toastr } from "@docspace/shared/components/toast";
-import AutomaticBackup from "@docspace/shared/pages/auto-backup";
-import { useDefaultOptions } from "@docspace/shared/pages/auto-backup/hooks";
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
@@ -46,82 +38,30 @@ import type { TColorScheme } from "@docspace/shared/themes";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import type {
   ExternalAutoBackupWrapperProps,
-  InjectedAutoBackupWrapperProps,
   AutoBackupWrapperProps,
 } from "./AutoBackup.types";
 
 const AutoBackupWrapper = ({
-  getProgress,
   setConnectedThirdPartyAccount,
-  setStorageRegions,
   setBackupSchedule,
   setThirdPartyStorage,
   setDefaultOptions,
-  fetchTreeFolders,
   resetDownloadingProgress,
   setErrorInformation,
+  setIsInited,
+  isInitialLoading,
+  isEmptyContentBeforeLoader,
+  isInitialError,
+  isBackupPaid,
   ...props
 }: AutoBackupWrapperProps) => {
-  const timerIdRef = useRef<number>(null);
   const { t, ready } = useTranslation(["Settings", "Common"]);
-  const [isEmptyContentBeforeLoader, setIsEmptyContentBeforeLoader] =
-    useState(true);
-  const [isInitialLoading, setIsInitialLoading] = useState(false);
-  const [isInitialError, setIsInitialError] = useState(false);
-  const { periodsObject, weekdaysLabelArray } = useDefaultOptions(
-    t,
-    props.language,
-  );
-
-  useEffect(() => {
-    (async () => {
-      try {
-        timerIdRef.current = window.setTimeout(() => {
-          setIsInitialLoading(true);
-        }, 200);
-
-        if (Object.keys(props.rootFoldersTitles).length === 0)
-          fetchTreeFolders();
-
-        getProgress(t);
-        const [account, backupSchedule, backupStorage, newStorageRegions] =
-          await Promise.all([
-            getSettingsThirdParty(),
-            getBackupSchedule(),
-            getBackupStorage(),
-            getStorageRegions(),
-          ]);
-
-        if (account) setConnectedThirdPartyAccount(account);
-        if (backupStorage) setThirdPartyStorage(backupStorage);
-
-        setBackupSchedule(backupSchedule!);
-        setStorageRegions(newStorageRegions);
-
-        setDefaultOptions(periodsObject, weekdaysLabelArray);
-      } catch (error) {
-        setErrorInformation(error, t);
-        setIsInitialError(true);
-        toastr.error(error as Error);
-      } finally {
-        if (timerIdRef.current) {
-          clearTimeout(timerIdRef.current);
-          timerIdRef.current = null;
-        }
-        setIsEmptyContentBeforeLoader(false);
-        setIsInitialLoading(false);
-      }
-    })();
-  }, []);
 
   useUnmount(() => {
-    if (timerIdRef.current) {
-      clearTimeout(timerIdRef.current);
-      timerIdRef.current = null;
-    }
     resetDownloadingProgress();
     props.setterSelectedEnableSchedule(false);
     props.toDefault();
+    setIsInited(false);
   });
 
   useEffect(() => {
@@ -138,29 +78,26 @@ const AutoBackupWrapper = ({
       isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
       setErrorInformation={setErrorInformation}
       isInitialError={isInitialError}
+      isBackupPaid={isBackupPaid}
       {...props}
     />
   );
 };
 
-export default inject<
-  TStore,
-  ExternalAutoBackupWrapperProps,
-  InjectedAutoBackupWrapperProps
->(
+export default inject(
   ({
     backup,
     authStore,
     settingsStore,
-    currentQuotaStore,
     filesSettingsStore,
-    treeFoldersStore,
     filesSelectorInput,
     thirdPartyStore,
     dialogsStore,
-  }) => {
+    currentQuotaStore,
+    clientLoadingStore,
+  }: TStore) => {
     const language = authStore.language;
-    const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
+
     const { getIcon, filesSettings } = filesSettingsStore;
 
     const settingsFileSelector = { getIcon, filesSettings };
@@ -171,17 +108,9 @@ export default inject<
       deleteThirdParty,
     } = thirdPartyStore;
 
-    const {
-      checkEnablePortalSettings,
-      automaticBackupUrl,
-      currentColorScheme,
-    } = settingsStore;
+    const { isBackupPaid } = currentQuotaStore;
+    const { automaticBackupUrl, currentColorScheme } = settingsStore;
 
-    const isEnableAuto = checkEnablePortalSettings(
-      Boolean(isRestoreAndAutoBackupAvailable),
-    );
-
-    const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
     const {
       basePath,
       newPath,
@@ -267,7 +196,20 @@ export default inject<
       backupProgressError,
       setBackupProgressError,
       setterSelectedEnableSchedule,
+      backupPageEnable,
+
+      setIsInited,
+      setDefaultFolderId,
+
+      isEmptyContentBeforeLoader,
+      isInitialError,
+      backupProgressWarning,
+      setBackupProgressWarning,
     } = backup;
+
+    const { showPortalSettingsLoader } = clientLoadingStore;
+
+    const isEnableAuto = backupPageEnable ?? false;
 
     const defaultRegion =
       defaultFormSettings && "region" in defaultFormSettings
@@ -348,10 +290,8 @@ export default inject<
       setIsBackupProgressVisible,
       backupProgressError,
       setBackupProgressError,
-
-      // treeFoldersStore
-      rootFoldersTitles,
-      fetchTreeFolders,
+      isEmptyContentBeforeLoader,
+      isInitialError,
 
       // settingsStore
       automaticBackupUrl,
@@ -372,11 +312,20 @@ export default inject<
       setThirdPartyProviders,
       providers,
       deleteThirdParty,
+
       // dialogsStore
       connectDialogVisible,
       deleteThirdPartyDialogVisible,
       setConnectDialogVisible,
       setDeleteThirdPartyDialogVisible,
+      setIsInited,
+      setDefaultFolderId,
+      isBackupPaid,
+
+      // clientLoadingStore
+      isInitialLoading: showPortalSettingsLoader,
+      backupProgressWarning,
+      setBackupProgressWarning,
     };
   },
 )(observer(AutoBackupWrapper as React.FC<ExternalAutoBackupWrapperProps>));

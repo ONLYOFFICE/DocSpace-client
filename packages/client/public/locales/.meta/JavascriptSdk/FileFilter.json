@@ -3,7 +3,7 @@
   "content": "File Filter",
   "content_en_sha1_hash": "ea6736bc0efcc52efe621b7052f08fa65d6b97a9",
   "created_at": "2025-05-19T21:30:54.493Z",
-  "updated_at": "2025-05-24T09:21:32.373Z",
+  "updated_at": "2025-10-27T16:14:33.525Z",
   "comment": {
     "text": "The \"FileFilter\" translation key is used to display the label for a filter toggle button, allowing users to select files by author. This appears in a UI component where users can manage filters on lists of files. Translators should focus on creating a clear and concise label that accurately reflects this functionality.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 384,
+      "line_number": 394,
       "context": "clearFilter();\n }, [config.id]);\n \n return \"id\" in config ? (\n <>\n <Label className=\"label\" text={t(\"FileFilter\")} />\n <ToggleButton\n className=\"toggle\"\n label={t(\"Files:ByAuthor\")}\n onChange={toggleAuthor}\n isChecked={isUserFilterSet}",
       "module": "/packages/client"
     }

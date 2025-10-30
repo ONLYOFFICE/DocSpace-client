@@ -3,7 +3,7 @@
   "content": "Share in the room",
   "content_en_sha1_hash": "0bc4be3bcb493239585642bc4f39bfd12f5c7c05",
   "created_at": "2025-05-19T21:30:48.670Z",
-  "updated_at": "2025-06-30T12:20:31.243Z",
+  "updated_at": "2025-09-23T07:24:24.113Z",
   "comment": {
     "text": "This translation key is used to display the text \"Share in the room\" as a button label on a form panel, indicating that the action will share the current form data. It appears in the \"/packages/client/src/components/panels/ShareFormPanel/index.js\" file and may also be displayed in dialog boxes related to form management.",
     "is_auto": true,
@@ -36,13 +36,13 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 165,
+      "line_number": 195,
       "context": "},\n {\n id: \"form-room\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },\n {\n id: \"virtual-data-room\",",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 165,
+      "line_number": 195,
       "context": "},\n {\n id: \"form-room\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },\n {\n id: \"virtual-data-room\",",
       "module": "/packages/doceditor"
     }

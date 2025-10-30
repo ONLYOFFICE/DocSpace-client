@@ -154,6 +154,9 @@ const Selector = ({
 
   isSSR,
   selectedItem: selectedItemProp,
+  dataTestId,
+
+  hideBackButton,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
 
@@ -215,6 +218,8 @@ const Selector = ({
     );
 
     if (isMultiSelect) {
+      if (item.disableMultiSelect) return;
+
       if (item.isSelected) {
         setNewSelectedItems((value) => {
           const newValue = value.filter((x) => x.id !== item.id);
@@ -616,12 +621,24 @@ const Selector = ({
     });
   }, [tabsData]);
 
+  const bodyItems =
+    isSSR && renderedItems.length === 0
+      ? items.map((x) => ({ ...x, isSelected: false }))
+      : [...renderedItems];
+
+  const separator = { id: "separator", isSeparator: true };
+
+  if (bodyItems.findIndex((x) => x.isSystem) > -1) {
+    bodyItems.sort((el) => (el.isSystem ? -1 : 1));
+    bodyItems.splice(1, 0, separator as TSelectorItem);
+  }
+
   const selectorComponent = (
     <div
       id={id}
       className={classNames(styles.selector, className)}
       style={style}
-      data-testid="selector"
+      data-testid={dataTestId || "selector"}
     >
       <Providers
         emptyScreenProps={{
@@ -647,11 +664,7 @@ const Selector = ({
           withHeader={withHeader}
           withPadding={withPadding}
           footerVisible={footerVisible || !!alwaysShowFooter}
-          items={
-            isSSR && renderedItems.length === 0
-              ? items.map((x) => ({ ...x, isSelected: false }))
-              : [...renderedItems]
-          }
+          items={bodyItems}
           isMultiSelect={isMultiSelect}
           onSelect={onSelectAction}
           hasNextPage={hasNextPage}
@@ -668,6 +681,7 @@ const Selector = ({
           setInputItemVisible={setInputItemVisible}
           injectedElement={injectedElement}
           isSSR={isSSR}
+          hideBackButton={hideBackButton}
           // info
           {...infoProps}
         />

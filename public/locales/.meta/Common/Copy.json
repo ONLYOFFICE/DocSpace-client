@@ -3,7 +3,7 @@
   "content": "Copy",
   "content_en_sha1_hash": "af74f7c5362aaee985bf8cda3dd75fc80751ce51",
   "created_at": "2025-05-19T21:30:43.729Z",
-  "updated_at": "2025-06-30T12:20:31.135Z",
+  "updated_at": "2025-10-27T16:14:33.142Z",
   "comment": {
     "text": "This translation key is used to display the text \"Copy\" in various UI elements, such as buttons and labels, to provide a clear indication of the action being performed, typically copying files or data. It appears in buttons within the FilesSelector component, EmbeddingPanel, and GetCodeDialog modal dialog, helping users understand the purpose of each button's functionality.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 563,
-      "context": "className=\"send-invitation\"\n scale\n size={ButtonSize.normal}\n primary\n onClick={onCopyAndClose}\n label={t(\"Common:Copy\")}\n isLoading={isLoading}\n />\n <Button\n className=\"cancel-button\"\n scale",
+      "line_number": 575,
+      "context": "className=\"send-invitation\"\n scale\n size={ButtonSize.normal}\n primary\n onClick={onCopyAndClose}\n label={t(\"Common:Copy\")}\n isLoading={isLoading}\n testId=\"embedding_panel_copy_button\"\n />\n <Button\n className=\"cancel-button\"",
       "module": "/packages/client"
     },
     {
@@ -30,31 +30,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
-      "line_number": 241,
+      "line_number": 251,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={\n token\n ? `${t(\"Common:Copy\")} & ${t(\"Common:CloseButton\")}`\n : t(\"Webhooks:Generate\")\n }\n primary\n scale\n onClick={onGenerate}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1380,
+      "line_number": 1479,
       "context": "if (this.publicRoomStore.isPublicRoom) {\n return [\n {\n key: \"public-room_share\",\n label: t(\"Common:CopySharedLink\"),\n icon: TabletLinkReactSvgUrl,\n onClick: () => {\n copy(window.location.href);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1380,
-      "context": "if (this.publicRoomStore.isPublicRoom) {\n return [\n {\n key: \"public-room_share\",\n label: t(\"Common:CopySharedLink\"),\n icon: TabletLinkReactSvgUrl,\n onClick: () => {\n copy(window.location.href);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1380,
+      "line_number": 1479,
       "context": "if (this.publicRoomStore.isPublicRoom) {\n return [\n {\n key: \"public-room_share\",\n label: t(\"Common:CopySharedLink\"),\n icon: TabletLinkReactSvgUrl,\n onClick: () => {\n copy(window.location.href);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2211,
+      "line_number": 2277,
       "context": "};\n case \"copy\":\n if (!this.isAvailableOption(\"copy\")) return null;\n return {\n id: \"menu-copy\",\n label: t(\"Common:Copy\"),\n onClick: () => setCopyPanelVisible(true),\n iconUrl: CopyToReactSvgUrl,\n };\n \n case \"create-room\":",
       "module": "/packages/client"
     },

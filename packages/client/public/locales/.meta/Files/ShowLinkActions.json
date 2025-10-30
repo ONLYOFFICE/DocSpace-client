@@ -3,7 +3,7 @@
   "content": "Show link actions",
   "content_en_sha1_hash": "72f0997576b413c97ea3e610e93f71bc02088b32",
   "created_at": "2025-05-19T21:30:56.204Z",
-  "updated_at": "2025-06-02T10:20:51.591Z",
+  "updated_at": "2025-10-01T15:17:48.482Z",
   "comment": {
     "text": "This translation key is used for the title of a contextual menu button that displays link actions when hovered over or right-clicked on a file, typically in an archive folder. The content will be displayed as \"Show link actions\" and serves to notify users about the available actions related to links within the file.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/sub-components/LinkRow.tsx",
-      "line_number": 263,
-      "context": "/>\n ) : null}\n {!isArchiveFolder ? (\n <ContextMenuButton\n getData={getData}\n title={t(\"Files:ShowLinkActions\")}\n directionY=\"both\"\n onClick={onOpenContextMenu}\n onClose={onCloseContextMenu}\n isDisabled={isExpiredLink || isLoaded}\n />",
+      "line_number": 181,
+      "context": "<ContextMenuButton\n directionY=\"both\"\n getData={() => getData(link)}\n onClick={onOpenContextMenu}\n onClose={onCloseContextMenu}\n title={t(\"Files:ShowLinkActions\")}\n isDisabled={isExpiredLink || isLoaded}\n />\n ) : null}\n </div>\n </div>",
       "module": "/packages/shared"
     }
   ],

@@ -49,8 +49,6 @@ const myDocumentsFolderId = 2;
 class OformsStore {
   settingsStore;
 
-  infoPanelStore;
-
   userStore = null;
 
   oformFiles = null;
@@ -83,9 +81,8 @@ class OformsStore {
     "submitToGalleryTileIsHidden",
   );
 
-  constructor(settingsStore, infoPanelStore, userStore) {
+  constructor(settingsStore, userStore) {
     this.settingsStore = settingsStore;
-    this.infoPanelStore = infoPanelStore;
     this.userStore = userStore;
     makeAutoObservable(this);
   }
@@ -116,7 +113,6 @@ class OformsStore {
 
   setGallerySelected = (gallerySelected) => {
     this.gallerySelected = gallerySelected;
-    this.infoPanelStore.setInfoPanelSelection(gallerySelected);
   };
 
   setOformLocales = (oformLocales) => (this.oformLocales = oformLocales);
@@ -228,7 +224,7 @@ class OformsStore {
     return categoryType;
   };
 
-  getCategoryTitle = (category, locale = this.defaultOformLocale) => {
+  getCategoryTitle = (category, locale = this.oformsFilter.locale) => {
     if (!category) return "";
 
     const categoryType = this.getTypeOfCategory(category);

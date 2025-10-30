@@ -3,7 +3,7 @@
   "content": "No forms here yet",
   "content_en_sha1_hash": "a6627f1e84d440a9bbea0b67ad4106c93ad1666b",
   "created_at": "2025-05-19T21:30:56.508Z",
-  "updated_at": "2025-06-02T10:20:51.032Z",
+  "updated_at": "2025-10-27T16:14:33.133Z",
   "comment": {
     "text": "\"This translation key defines a default title for an empty form folder in the UI. It is used when no forms are present in the folder and appears on the Empty View component.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 248,
+      "line_number": 268,
       "context": "P.when(() => isNotAdmin || isArchiveFolderRoot),\n ],\n () => t(\"EmptyView:FormFolderDefaultUserTitle\"),\n )\n .with([FolderType.FormRoom, DefaultFolderType, P._], () =>\n t(\"EmptyView:FormFolderDefaultTitle\"),\n )\n .with([P._, DefaultFolderType, P._], () => t(\"Common:EmptyScreenFolder\"))\n .otherwise(() => \"\");\n };",
       "module": "/packages/client"
     }

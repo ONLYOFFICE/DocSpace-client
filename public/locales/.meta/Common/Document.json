@@ -3,7 +3,7 @@
   "content": "Document",
   "content_en_sha1_hash": "e214b8a29923056887b7edf6635d90dcbb2abe88",
   "created_at": "2025-05-19T21:30:44.571Z",
-  "updated_at": "2025-06-02T10:20:51.002Z",
+  "updated_at": "2025-10-27T16:14:33.103Z",
   "comment": {
     "text": "This translation key is used for the label \"Document\" on buttons and links, appearing as part of a file path in `/packages/client/src/components/Article/MainButton/index.js` and a list of options in `/packages/client/src/components/EmptyContainer/sub-components/CommonButtons.js`. The text promotes creating a new document.",
     "is_auto": true,
@@ -12,20 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 524,
+      "line_number": 591,
       "context": "const createNewDocumentDocx = {\n id: \"actions_new-document\",\n className: \"main-button_drop-down\",\n icon: ActionsDocumentsReactSvgUrl,\n label: t(\"Common:Document\"),\n onClick: onCreate,\n action: \"docx\",\n key: \"docx\",\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/CommonButtons.js",
-      "line_number": 62,
-      "context": "onClick={onCreate}\n iconName={PlusSvgUrl}\n isFill\n />\n <Link data-format=\"docx\" onClick={onCreate} {...linkStyles}>\n {t(\"Document\")},\n </Link>\n </div>\n <Link data-format=\"xlsx\" onClick={onCreate} {...linkStyles}>\n {t(\"Spreadsheet\")},\n </Link>",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 348,
-      "context": "key: \"create-form-form\",\n disabled: !security?.Create,\n model: [\n {\n key: \"create-Document\",\n label: t(\"Common:Document\"),\n icon: DocumentsReactSvgUrl,\n onClick: () => actions.onCreate(\"docx\"),\n },\n {\n key: \"create-spreadsheet\",",
       "module": "/packages/client"
     },
     {
@@ -35,15 +23,27 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/CommonButtons.js",
+      "line_number": 63,
+      "context": "onClick={onCreate}\n iconName={PlusSvgUrl}\n isFill\n />\n <Link data-format=\"docx\" onClick={onCreate} {...linkStyles}>\n {t(\"Document\")},\n </Link>\n </div>\n <Link data-format=\"xlsx\" onClick={onCreate} {...linkStyles}>\n {t(\"Spreadsheet\")},\n </Link>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 395,
+      "context": "key: \"create-form-form\",\n disabled: !security?.Create,\n model: [\n {\n key: \"create-Document\",\n label: t(\"Common:Document\"),\n icon: DocumentsReactSvgUrl,\n onClick: () => actions.onCreate(\"docx\"),\n },\n {\n key: \"create-spreadsheet\",",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/TypeCell.js",
       "line_number": 53,
-      "context": "case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Document:\n return t(\"Common:Document\");\n case FileType.OForm:\n case FileType.OFormTemplate:\n case FileType.PDF: {\n return getSinglePDFTitle(t, isPDFForm);\n }",
+      "context": "case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Document:\n return t(\"Common:Document\");\n case FileType.Diagram:\n return t(\"Common:Diagram\");\n case FileType.OForm:\n case FileType.OFormTemplate:\n case FileType.PDF: {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/getFileType.ts",
-      "line_number": 25,
-      "context": "return t(\"Common:Presentation\");\n case FileType.Document:\n case FileType.OFormTemplate:\n case FileType.OForm:\n case FileType.PDF:\n return t(\"Common:Document\");\n default:\n return t(\"Common:Folder\");\n }\n };",
+      "line_number": 30,
+      "context": "return t(\"Common:Diagram\");\n case FileType.Document:\n case FileType.OFormTemplate:\n case FileType.OForm:\n case FileType.PDF:\n return t(\"Common:Document\");\n default:\n return t(\"Common:Folder\");\n }\n };",
       "module": "/packages/shared"
     },
     {

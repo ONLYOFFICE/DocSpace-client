@@ -3,7 +3,7 @@
   "content": "kDrive",
   "content_en_sha1_hash": "f7adf7178a1ae53d9df2090f7a822a81742a651d",
   "created_at": "2025-05-26T07:15:48.995Z",
-  "updated_at": "2025-05-26T08:02:47.359Z",
+  "updated_at": "2025-10-27T16:14:33.358Z",
   "comment": {
     "text": "This translation key is used to display the type of cloud storage (\"kDrive\") in a user interface. It typically appears as part of a file selection or upload process and helps users identify where their files are being stored. Translators should consider the context in which this text will appear to ensure accurate and culturally relevant translations.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 153,
+      "line_number": 156,
       "context": "case \"SharePoint\":\n return t(\"Common:TypeTitleSharePoint\");\n case \"WebDav\":\n return t(\"Common:TypeTitleWebDav\");\n case \"kDrive\":\n return t(\"Common:TypeTitlekDrive\");\n case \"Yandex\":\n return t(\"Common:TypeTitleYandex\");\n \n default:\n return key;",
       "module": "/packages/client"
     },
@@ -205,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

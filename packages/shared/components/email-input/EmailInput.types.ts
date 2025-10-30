@@ -35,7 +35,7 @@ export type TValidate = {
 
 export type EmailInputProps = Omit<
   TextInputProps,
-  "type" | "onAnimationStart"
+  "type" | "onAnimationStart" | "testId"
 > & {
   /** Email validation specific props */
   customValidate?: (value: string) => TValidate;
@@ -44,4 +44,6 @@ export type EmailInputProps = Omit<
   onValidateInput?: (data: TValidate) => void;
   /** Animation handler */
   handleAnimationStart?: (e: React.AnimationEvent<HTMLInputElement>) => void;
+  /** Test id */
+  dataTestId?: string;
 };

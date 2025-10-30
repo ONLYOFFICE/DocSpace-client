@@ -3,7 +3,7 @@
   "content": "Operation has been successfully completed.",
   "content_en_sha1_hash": "849e11257114c8c8bbc65cf054d9b6da983bcb6d",
   "created_at": "2025-05-19T21:30:49.214Z",
-  "updated_at": "2025-06-30T12:20:31.535Z",
+  "updated_at": "2025-10-27T16:14:33.572Z",
   "comment": {
     "text": "This translation key is used to display a success message when an operation is completed successfully. It appears as a toast notification after an operation is finished, typically in response to user actions such as saving settings or completing a process.",
     "is_auto": true,
@@ -18,19 +18,19 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3322,
-      "context": "const { setIsIndexEditingMode } = this.indexingStore;\n \n try {\n const operationId = uniqueid(\"operation_\");\n await reorderIndex(id);\n toastr.success(t(\"Common:SuccessfullyCompletedOperation\"));\n setIsIndexEditingMode(false);\n this.updateCurrentFolder(true, operationId);\n } catch (e) {\n toastr.error(t(\"Files:ErrorChangeIndex\"));\n }",
+      "line_number": 3591,
+      "context": "const { setIsIndexEditingMode } = this.indexingStore;\n \n try {\n const operationId = uniqueid(\"operation_\");\n await reorderIndex(id);\n toastr.success(t(\"Common:SuccessfullyCompletedOperation\"));\n setIsIndexEditingMode(false);\n this.updateCurrentFolder(true, operationId);\n } catch (e) {\n console.error(e);\n toastr.error(t(\"Files:ErrorChangeIndex\"));",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/LdapFormStore.js",
-      "line_number": 564,
+      "line_number": 584,
       "context": "if (status.error) throw status.error;\n \n this.endProcess();\n \n this.progressStatus.status = t(\"Common:SuccessfullyCompletedOperation\");\n \n if (toDefault) {\n const response = await getCronLdap();\n this.mapCron(response?.cron);\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/LdapFormStore.js",
-      "line_number": 564,
+      "line_number": 584,
       "context": "if (status.error) throw status.error;\n \n this.endProcess();\n \n this.progressStatus.status = t(\"Common:SuccessfullyCompletedOperation\");\n \n if (toDefault) {\n const response = await getCronLdap();\n this.mapCron(response?.cron);\n }",
       "module": "/packages/client"
     }
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The German translation 'Operation erfolgreich abgeschlossen wurde' is grammatically incorrect. The verb 'wurde' (was/were) is in the passive voice but doesn't fit the sentence structure. It implies something *did* the completing.",
-          "suggestion": "Operation erfolgreich abgeschlossen."
+          "description": "The German translation 'Operation erfolgreich abgeschlossen wurde.' uses the passive voice incorrectly and sounds unnatural. The correct sentence structure would use a more active voice.",
+          "suggestion": "Operation wurde erfolgreich abgeschlossen."
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation \"Toiminto on valmis.\" translates to \"The action is ready.\" which is not a direct equivalent of \"Operation has been successfully completed.\" It lacks the sense of completion.",
-          "suggestion": "Consider a translation like \"Toiminto on suoritettu.\" (The operation has been performed) or \"Toiminto on onnistuneesti suoritettu.\" (The operation has been successfully performed)."
+          "description": "While 'Toiminto on valmis' can be interpreted as 'Operation is ready', it doesn't accurately convey the meaning of 'Operation has been successfully completed'. It lacks the emphasis on success.",
+          "suggestion": "Toiminto on suoritettu onnistuneesti."
         }
       ],
       "approved_at": null
@@ -174,7 +174,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Operațiune terminată cu succes\" is understandable, a more natural Romanian translation for \"Operation has been successfully completed\" would be \"Operațiunea a fost finalizată cu succes\" or \"Operațiunea s-a încheiat cu succes\".  \"Terminată\" implies a more abrupt or definitive ending.",
+          "description": "While 'Operațiune terminată cu succes' is understandable, a more natural and precise translation of 'Operation has been successfully completed' in Romanian would be 'Operațiunea a fost finalizată cu succes'.  'Terminată' implies an ending, whereas 'finalizată' is more aligned with completion.",
           "suggestion": "Operațiunea a fost finalizată cu succes"
         }
       ],
@@ -235,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

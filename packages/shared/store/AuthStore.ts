@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 
 import SocketHelper, { SocketEvents, TOptSocket } from "../utils/socket";
@@ -40,7 +39,9 @@ import {
   isAdmin,
   insertDataLayer,
   isPublicRoom,
+  isPublicPreview,
 } from "../utils/common";
+import { isRequestAborted } from "../utils/axios/isRequestAborted";
 import { getCookie, setCookie } from "../utils/cookie";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
@@ -147,6 +148,7 @@ class AuthStore {
             return;
           }
 
+          // biome-ignore lint/correctness/noUnusedVariables: TODO fix
           const { customQuotaFeature, ...updatableObject } = options;
 
           this.currentQuotaStore?.updateTenantCustomQuota(updatableObject);
@@ -201,11 +203,12 @@ class AuthStore {
       !!this.settingsStore?.socketUrl &&
       !isPortalDeactivated &&
       !isPortalEncryption &&
-      !isPublicRoom()
+      !isPublicRoom() &&
+      !isPublicPreview()
     ) {
       requests.push(
         this.userStore?.init(i18n, this.settingsStore.culture).then(() => {
-          if (!isPortalRestore && this.userStore?.isAuthenticated) {
+          if (!isPortalRestore) {
             this.getPaymentInfo();
           } else {
             this.isPortalInfoLoaded = true;
@@ -216,34 +219,40 @@ class AuthStore {
       this.userStore?.setIsLoaded(true);
     }
 
-    return Promise.all(requests).then(() => {
-      const user = this.userStore?.user;
+    return Promise.all(requests)
+      .then(() => {
+        const user = this.userStore?.user;
 
-      if (user?.id) {
-        insertDataLayer(user.id);
-      }
+        if (user?.id) {
+          insertDataLayer(user.id);
+        }
 
-      if (this.isAuthenticated && !skipRequest && user) {
-        if (!isPortalRestore && !isPortalDeactivated)
-          requests.push(this.settingsStore?.getAdditionalResources());
+        if (this.isAuthenticated && !skipRequest) {
+          if (!isPortalRestore && !isPortalDeactivated)
+            requests.push(this.settingsStore?.getAdditionalResources());
 
-        if (!this.settingsStore?.passwordSettings) {
-          if (!isPortalRestore && !isPortalDeactivated) {
-            requests.push(this.settingsStore?.getCompanyInfoSettings());
+          if (!this.settingsStore?.passwordSettings) {
+            if (!isPortalRestore && !isPortalDeactivated) {
+              requests.push(this.settingsStore?.getCompanyInfoSettings());
+            }
           }
         }
-      }
 
-      if (
-        user &&
-        this.settingsStore?.standalone &&
-        !this.settingsStore?.wizardToken &&
-        this.isAuthenticated &&
-        user.isAdmin
-      ) {
-        requests.push(this.settingsStore.getPortals());
-      }
-    });
+        if (
+          user &&
+          this.settingsStore?.standalone &&
+          !this.settingsStore?.wizardToken &&
+          this.isAuthenticated &&
+          user.isAdmin
+        ) {
+          requests.push(this.settingsStore.getPortals());
+        }
+      })
+      .catch((error) => {
+        if (isRequestAborted(error)) return;
+
+        return Promise.reject(error);
+      });
   };
 
   getPaymentInfo = async () => {
@@ -479,7 +488,8 @@ class AuthStore {
     return (
       this.settingsStore?.isLoaded &&
       !!this.settingsStore?.socketUrl &&
-      !isPublicRoom()
+      !isPublicRoom() &&
+      !isPublicPreview()
       //  this.userStore?.isAuthenticated
     );
   }

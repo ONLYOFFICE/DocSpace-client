@@ -58,7 +58,7 @@ export const enum EmployeeActivationStatus {
  * Enum for employee status.
  * @readonly
  */
-export const enum EmployeeStatus {
+export enum EmployeeStatus {
   Active = 1,
   Disabled = 2,
   Pending = 4, // NEW STATUS from server
@@ -67,7 +67,7 @@ export const enum EmployeeStatus {
  * Enum for employee type.
  * @readonly
  */
-export const enum EmployeeType {
+export enum EmployeeType {
   RoomAdmin = 1,
   Guest = 2,
   Admin = 3,
@@ -75,10 +75,21 @@ export const enum EmployeeType {
   Owner = "owner",
 }
 /**
+ * Enum for employee type.
+ * @readonly
+ */
+export enum EmployeeTypeString {
+  RoomAdmin = "roomAdmin",
+  Guest = "guest",
+  Admin = "admin",
+  User = "user",
+  Owner = "owner",
+}
+/**
  * Enum for user payments type.
  * @readonly
  */
-export const enum PaymentsType {
+export enum PaymentsType {
   Paid = "0",
   Free = "1",
 }
@@ -86,7 +97,7 @@ export const enum PaymentsType {
  * Enum for account login type.
  * @readonly
  */
-export const enum AccountLoginType {
+export enum AccountLoginType {
   SSO = "0",
   LDAP = "1",
   STANDART = "2",
@@ -95,7 +106,7 @@ export const enum AccountLoginType {
  * Enum for files selector filter.
  * @readonly
  */
-export const enum ApplyFilterOption {
+export enum ApplyFilterOption {
   All = "All",
   Files = "Files",
   Folder = "Folder",
@@ -126,7 +137,7 @@ export const enum FilterSubject {
  * Enum for filter type.
  * @readonly
  */
-export const enum FilterType {
+export enum FilterType {
   None = 0,
   FilesOnly = 1,
   FoldersOnly = 2,
@@ -149,6 +160,16 @@ export const enum FilterType {
   Pdf = 22,
   PDFForm = 23,
   DiagramsOnly = 25,
+}
+
+/**
+ * Enum for filter location.
+ * @readonly
+ */
+export const enum FilterLocation {
+  Rooms = 1,
+  Documents = 2,
+  Link = 3,
 }
 
 /**
@@ -195,6 +216,7 @@ export const enum RoomSearchArea {
   Active = "Active",
   Archive = "Archive",
   Templates = "Templates",
+  AIAgents = "AiAgents",
 }
 /**
  * Enum for file action.
@@ -223,7 +245,11 @@ export const enum PageType {
   bonus = "bonus",
   dataImport = "dataImport",
   storageManagement = "storageManagement",
+  flows = "flows",
   services = "services",
+  groups = "groups",
+  guests = "guests",
+  aiSettings = "aiSettings",
 }
 
 /**
@@ -256,6 +282,9 @@ export const enum FolderType {
   SubFolderInProgress = 28,
   VirtualDataRoom = 29,
   RoomTemplates = 30,
+  Knowledge = 32,
+  ResultStorage = 33,
+  AIAgents = 34,
 }
 
 export const enum ShareAccessRights {
@@ -272,6 +301,22 @@ export const enum ShareAccessRights {
   Editing = 10,
   Collaborator = 11,
 }
+
+export const enum ShareRights {
+  None = "None",
+  ReadWrite = "ReadWrite",
+  Read = "Read",
+  Restrict = "Restrict",
+  Varies = "Varies",
+  Review = "Review",
+  Comment = "Comment",
+  FillForms = "FillForms",
+  CustomFilter = "CustomFilter",
+  RoomManager = "RoomManager",
+  Editing = "Editing",
+  ContentCreator = "ContentCreator",
+}
+
 export const enum ConflictResolveType {
   Skip = 0,
   Overwrite = 1,
@@ -373,6 +418,8 @@ export const enum Events {
   CREATE_PDF_FORM_FILE = "create_pdf_form_file",
   SAVE_AS_TEMPLATE = "save_as_template",
   Share_PDF_Form = "share_pdf_form",
+  AGENT_CREATE = "create_agent",
+  AGENT_EDIT = "edit_agent",
 }
 
 /**
@@ -472,6 +519,7 @@ export const enum FilterGroups {
   filterAccount = "filter-account",
   filterOther = "filter-other",
   filterInviter = "filter-inviter",
+  filterLocation = "filter-location",
 }
 
 export const enum FilterKeys {
@@ -532,7 +580,7 @@ export const enum ErrorKeys {
 }
 
 export enum RoomsType {
-  // AIRoom = 9, //TODO: Restore when certs will be done
+  AIRoom = 9, // TODO: Restore when certs will be done
   PublicRoom = 6,
   FormRoom = 1,
   // FillingFormsRoom= 1, //TODO: Restore when certs will be done
@@ -582,6 +630,14 @@ export const enum WhiteLabelLogoType {
   LeftMenu = 6,
   AboutPage = 7,
   Notification = 8,
+  SpreadsheetEditor = 9,
+  SpreadsheetEditorEmbed = 10,
+  PresentationEditor = 11,
+  PresentationEditorEmbed = 12,
+  PdfEditor = 13,
+  PdfEditorEmbed = 14,
+  DiagramEditor = 15,
+  DiagramEditorEmbed = 16,
 }
 
 /**
@@ -612,7 +668,7 @@ export const enum EditorConfigErrorType {
  * Enum for watermarks.
  * @readonly
  */
-export const enum WatermarkAdditions {
+export enum WatermarkAdditions {
   UserName = 1,
   UserEmail = 2,
   UserIpAdress = 4,
@@ -741,7 +797,7 @@ export const enum SortByFieldName {
   Author = "Author",
   Size = "Size",
   Type = "Type",
-  Room = "Room",
+  Location = "Location",
   Tags = "Tags",
   RoomType = "roomType",
   LastOpened = "LastOpened",
@@ -813,4 +869,47 @@ export enum ProvidersType {
   SharePoint = "SharePoint",
   WebDav = "WebDav",
   Yandex = "Yandex",
+}
+
+export const enum InfoPanelEvents {
+  showInfoPanel = "SHOW_INFO_PANEL_EVENT",
+  hideInfoPanel = "HIDE_INFO_PANEL_EVENT",
+
+  setInfoPanelSelectedRoom = "SET_INFO_PANEL_SELECTED_ROOM_EVENT",
+
+  openShareTab = "OPEN_INFO_PANEL_SHARE_TAB_EVENT",
+  openMembersTab = "OPEN_INFO_PANEL_MEMBERS_TAB_EVENT",
+
+  setView = "SET_INFO_PANEL_VIEW_EVENT",
+  setFileView = "SET_INFO_PANEL_FILE_VIEW_EVENT",
+  setRoomsView = "SET_INFO_PANEL_ROOMS_VIEW_EVENT",
+
+  setInfoPanelMobileHidden = "SET_INFO_PANEL_MOBILE_HIDDEN_EVENT",
+  refreshInfoPanel = "REFRESH_INFO_PANEL_EVENT",
+}
+
+export const enum SearchArea {
+  Active,
+  Archive,
+  Any,
+  RecentByLinks,
+  Templates,
+  Knowledge,
+  ResultStorage,
+}
+
+export const enum LinkSharingEntityType {
+  RoomOrFolder = 1,
+  File = 2,
+}
+
+export const enum ShareLinkType {
+  Internal = 0,
+  External = 1,
+}
+
+export enum VectorizationStatus {
+  InProgress,
+  Completed,
+  Failed,
 }

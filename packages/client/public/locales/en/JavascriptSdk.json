@@ -116,6 +116,5 @@
   "Subtitle": "Subtitle",
   "SubtitleDescription": "Subtitle with additional comments or descriptions for the current directory.",
   "TabPlugins": "Tab Plugins",
-  "Viewer": "Viewer",
   "ViewerDescription": "Embed a viewer to allow users to open a file for viewing from the corresponding room."
 }

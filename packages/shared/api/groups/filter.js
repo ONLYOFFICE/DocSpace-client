@@ -24,10 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
+import { validateAndFixObject } from "../../utils/filterValidator";
 
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 100;
@@ -45,6 +45,11 @@ const SORT_BY = "sortby";
 const SORT_ORDER = "sortorder";
 const USER_ID = "subjectId";
 const SEARCH_BY_MANAGER = "manager";
+
+export const typeDefinition = {
+  sortBy: ["title", "membersCount", "manager"],
+  sortOrder: ["ascending", "descending"],
+};
 
 class Filter {
   static getDefault(total = DEFAULT_TOTAL) {
@@ -124,8 +129,10 @@ class Filter {
   };
 
   toApiUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const { pageCount, sortBy, sortOrder, search, userId, searchByManager } =
-      this;
+      fixedValidObject;
 
     const dtoFilter = {
       startIndex: this.getStartIndex(),
@@ -142,6 +149,8 @@ class Filter {
   };
 
   toUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       page,
       pageCount,
@@ -150,7 +159,7 @@ class Filter {
       search,
       userId,
       searchByManager,
-    } = this;
+    } = fixedValidObject;
 
     const dtoFilter = {};
 

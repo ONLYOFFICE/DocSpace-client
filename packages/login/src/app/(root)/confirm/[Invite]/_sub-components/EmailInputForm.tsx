@@ -78,10 +78,9 @@ const EmailInputForm = ({
         labelVisible={false}
         hasError={isEmailErrorShow ? !emailValid : undefined}
         errorMessage={
-          emailErrorText
-            ? t(`Common:${emailErrorText}`)
-            : t("Common:RequiredField")
+          emailErrorText ? emailErrorText : t("Common:RequiredField")
         }
+        dataTestId="email_field_container"
       >
         <EmailInput
           id="login"
@@ -113,6 +112,7 @@ const EmailInputForm = ({
         isDisabled={isLoading}
         isLoading={isLoading}
         onClick={onContinue}
+        testId="email_continue_button"
       />
     </div>
   );

@@ -3,7 +3,7 @@
   "content": "Access Service Provider metadata to add {{organizationName}} {{productName}} as a trusted Service Provider in your IdP account.",
   "content_en_sha1_hash": "098786ad0d536a8db1b1460c33f375fa8fd80406",
   "created_at": "2025-05-19T21:30:50.169Z",
-  "updated_at": "2025-05-24T03:01:02.775Z",
+  "updated_at": "2025-08-11T18:11:59.260Z",
   "comment": {
     "text": "This translation key is used for the \"Add Trusted Service Provider\" button subtitle. It provides a brief explanation of what information will be added to the IdP account when selecting an organization as a trusted service provider. The translated text appears in a dialog box related to Single Sign On (SSO) settings on mobile devices.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/MobileView.js",
-      "line_number": 65,
+      "line_number": 66,
       "context": "/>\n <MobileCategoryWrapper\n title={t(\"SpMetadata\", {\n organizationName: logoText,\n })}\n subtitle={t(\"SpMetadataDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n url=\"/portal-settings/integration/sso/metadata\"\n withPaidBadge={!isSSOAvailable}",
       "module": "/packages/client"
     }

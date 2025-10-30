@@ -3,7 +3,7 @@
   "content": "Top 5 users by storage usage:",
   "content_en_sha1_hash": "8934cd3fcb13cb31a45f771b3cbaf5c669d8b86a",
   "created_at": "2025-05-19T21:30:52.966Z",
-  "updated_at": "2025-05-24T03:50:44.411Z",
+  "updated_at": "2025-10-27T16:14:33.635Z",
   "comment": {
     "text": "\"This translation key refers to the text 'Top 5 users by storage usage', used as a label in a UI component displaying statistics about top-performing users. It appears on a button that displays a list of top users.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/UsersList.js",
-      "line_number": 86,
+      "line_number": 98,
       "context": "});\n \n return (\n <StyledStatistics>\n <Text fontWeight={600} className=\"item-statistic\">\n {t(\"Top5Users\")}\n </Text>\n {usersList}\n \n {peopleListLength > 5 ? (\n <Button",
       "module": "/packages/client"
     }
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Top 5 users' implies the 5 users who use the most storage. The Czech translation '5 nejčastějších uživatelů' translates to '5 most frequent users', which doesn't accurately convey the intended meaning of 'top' in terms of usage. 'Nejvíce' would be a better fit.",
-          "suggestion": "5 uživatelů s největším využitím úložiště:"
+          "description": "The translation \"5 nejčastějších uživatelů podle využití úložiště:\" doesn't accurately convey the meaning of \"Top 5 users by storage usage.\" 'Nejčastějších' means 'most frequent' which isn't the intended meaning. It should indicate users using the most storage.",
+          "suggestion": "5 uživatelů s největší spotřebou úložiště:"
         }
       ],
       "approved_at": null
@@ -57,13 +57,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The German word for 'storage' should be 'Speicherplatz', not 'Speichernutzung'. While 'Speichernutzung' is understandable, 'Speicherplatz' is the more common and accurate translation in this context.",
-          "suggestion": "Top 5 Benutzer nach Speicherplatz:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -72,13 +66,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'αποθ. χώρου' is an abbreviation of 'αποθηκευτικού χώρου'. While understandable, it's less formal and might be better spelled out.",
+          "description": "The term 'αποθ. χώρου' is an abbreviation and might not be clear to all users. While technically correct, a more complete spelling would improve clarity.",
           "suggestion": "αποθηκευτικού χώρου"
         },
         {
           "type": "formatting",
-          "description": "The colon (:) is correct, but consider adding a space after it for better readability in the user interface.",
-          "suggestion": "Οι κορυφαίοι 5 χρήστες με βάση τη χρήση του αποθ. χώρου: "
+          "description": "The colon at the end of the sentence could be problematic depending on the surrounding text in the UI. It's better to confirm its necessity in context.",
+          "suggestion": "Consider removing the colon if it causes layout issues."
         }
       ],
       "approved_at": null
@@ -101,8 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Cinq utilisateurs qui utilisent le plus d'espace de stockage:' is a bit literal and could be improved for naturalness. While technically correct, it’s not the most idiomatic way to express 'Top 5 users by storage usage' in French.",
-          "suggestion": "Les 5 utilisateurs consommant le plus d'espace de stockage:"
+          "description": "The translation 'Cinq utilisateurs qui utilisent le plus d'espace de stockage:' is a literal translation and doesn't quite capture the concise nature of \"Top 5 users by storage usage:\" A more natural French equivalent might be something like \"Les 5 meilleurs utilisateurs par utilisation de l'espace de stockage:\" or \"Top 5 des utilisateurs par utilisation de l'espace de stockage:\" (using the English term 'Top').",
+          "suggestion": "Les 5 meilleurs utilisateurs par utilisation de l'espace de stockage:"
         }
       ],
       "approved_at": null
@@ -122,7 +116,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ストレージ使用量上位5人のユーザー:\" is technically correct but could be more natural. A more idiomatic translation would be something like \"ストレージ使用量が多い上位5ユーザー\" or \"ストレージ使用量トップ5のユーザー\". The current phrasing, while understandable, reads a bit stiff.",
+          "suggestion": "ストレージ使用量が多い上位5ユーザー"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -136,14 +136,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The Lao word 'ນໍາໃຊ້' (nam sai) is used incorrectly. It means 'use' but in this context 'ການໃຊ້' (kan sai) or simply 'ໃຊ້' (sai) would be more appropriate.",
-          "suggestion": "Change 'ນໍາໃຊ້' to 'ໃຊ້' or 'ການໃຊ້'."
-        },
-        {
           "type": "formatting",
-          "description": "The colon at the end of the Lao translation should be consistent with the English. However, the English uses a colon, the Lao translation lacks one.",
-          "suggestion": "Add a colon at the end of the Lao translation: “5 ຜູ້​ໃຊ້​ສູງ​ສຸດ​ໂດຍ​ການ​ໃຊ້​ການ​ເກັບ​ຮັກ​ສາ​:”"
+          "description": "The Lao translation uses a colon at the end, mirroring the English. While not strictly incorrect, it's stylistically unusual in Lao and might be better without it depending on the overall text style.",
+          "suggestion": "Consider removing the colon at the end: '5 ຜູ້​ໃຊ້​ສູງ​ສຸດ​ໂດຍ​ການ​ນໍາ​ໃຊ້​ການ​ເກັບ​ຮັກ​ສາ'"
         }
       ],
       "approved_at": null
@@ -184,7 +179,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Top 5 săli după utilizarea spațiului de stocare:' uses 'săli' which translates to 'halls' or 'rooms'. The intended meaning is 'users'.",
+          "description": "The word 'sali' is incorrect in this context. It appears to be a mistranslation of 'users'. The intended meaning is 'Top 5 users'.",
           "suggestion": "Top 5 utilizatori după utilizarea spațiului de stocare:"
         }
       ],
@@ -202,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආචයන භාවිතය වැඩිම පරිශ්‍රීලකයින් 5:' doesn't accurately convey the meaning of 'Top 5 users by storage usage:'.  'ආචයන භාවිතය' seems to be a mistranslation of 'storage usage'.",
-          "suggestion": "A more accurate translation could be something like 'භාරක භාවිතය අනුව වැඩිම පරිශ්‍රීලකයින් පහ: (Bharaka vashthava navatha vadim parashreelakayin paha:)' or 'භාරක ප්‍රමාණය අනුව වැඩිම පරිශ්‍රීලකයින් පහ: (Bharaka pramaṇaya navatha vadim parashreelakayin paha:)'"
+          "description": "The translation 'ආචයන භාවිතය වැඩිම පරිශ්‍රීලකයින් 5:' does not accurately convey 'Top 5 users by storage usage:'. 'ආචයන භාවිතය' translates to 'device usage' rather than 'storage usage'. The rest of the phrase seems to be a reasonable attempt to represent 'Top 5 users'.",
+          "suggestion": "භාවිතය වැඩිම පරිශ්‍රීලකයින් 5 (Using 'භාවිතය' to refer to general usage, rather than device usage, is more appropriate in this context)"
         }
       ],
       "approved_at": null
@@ -217,13 +212,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The term 'porabljen prostor za shranjevanje' could be more concisely and commonly expressed.",
-          "suggestion": "Top 5 uporabnikov glede na porabo prostora:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -232,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'складишта' (skladishta) is a grammatical error. It should be in the genitive case, but the context requires the preposition 'по' (po) to be followed by the dative case.",
-          "suggestion": "Топ 5 корисника по потреби складишта:"
+          "description": "The word \"складишта\" should likely be \"коришћења складишта\" for better accuracy and natural flow. \"Складишта\" literally translates to 'storage(s)' and doesn't convey the sense of 'storage usage'.",
+          "suggestion": "Топ 5 корисника по коришћењу складишта:"
         }
       ],
       "approved_at": null
@@ -250,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Depolama kullanımına göre ilk 5 kullanıcı:\" is understandable, a more natural Turkish translation of 'Top 5 users by storage usage:' would be \"Depolama kullanımına göre en çok kullanan ilk 5 kullanıcı:\" or \"Depolama kullanımına göre ilk 5 en çok kullanan kullanıcı:\"",
-          "suggestion": "Depolama kullanımına göre en çok kullanan ilk 5 kullanıcı:"
+          "description": "The translation 'Depolama kullanımına göre ilk 5 kullanıcı:' is a reasonable translation, but 'ilk 5 kullanıcı' could be more naturally phrased as 'en çok depolama kullanan ilk 5 kullanıcı' for a more accurate and idiomatic rendering of 'Top 5 users'.",
+          "suggestion": "En çok depolama kullanan ilk 5 kullanıcı:"
         }
       ],
       "approved_at": null

@@ -43,13 +43,15 @@ import { Link, LinkType } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { ComboBox, TOption } from "@docspace/shared/components/combobox";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
-import { TTranslation } from "@docspace/shared/types";
+import type { TFileLink } from "@docspace/shared/api/files/types";
+import type { LinkParamsType, TTranslation } from "@docspace/shared/types";
 import { TColorScheme, TTheme } from "@docspace/shared/themes";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { getExternalLinks } from "@docspace/shared/api/files";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
@@ -86,17 +88,10 @@ type LinkParamsLinkType = {
   subjectType: number;
 };
 
-type LinkParamsType = {
-  roomId: number | string;
-  isEdit?: boolean;
-  link: LinkParamsLinkType;
-};
-
 type EmbeddingPanelProps = {
   t: TTranslation;
   theme: TTheme;
   requestToken: string;
-  roomId: number;
   visible: boolean;
   setEmbeddingPanelData: (value: {
     visible: boolean;
@@ -106,7 +101,7 @@ type EmbeddingPanelProps = {
   currentColorScheme: TColorScheme;
   linkParams: LinkParamsType;
   setLinkParams: (linkParams: LinkParamsType) => void;
-  fetchExternalLinks: (roomId: string | number) => LinkParamsLinkType[];
+  fetchExternalLinks: (id: string | number) => Promise<LinkParamsLinkType[]>;
   isAdmin: boolean;
   itemId?: string | number;
   isRoom: boolean;
@@ -132,7 +127,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     isRoom,
   } = props;
 
-  const { roomId, link } = linkParams;
+  const { link } = linkParams;
 
   const [sharedLinksOptions, setSharedLinksOptions] = useState<TOptionType[]>(
     [],
@@ -165,13 +160,14 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     init: true,
     showTitle: false,
     showFilter: false,
+    requestToken: link?.sharedTo?.requestToken,
   };
 
   const roomConfig = {
     src: window.location.origin,
     frameId: "ds-frame",
     mode: "public-room",
-    id: roomId,
+    id: linkParams.item.id,
     width: `${widthValue}${dataDimensions[0].label}`,
     height: `${heightValue}${dataDimensions[1].label}`,
     showHeader: true,
@@ -233,17 +229,17 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     });
   };
 
-  const onChangeWidthDimension = (item: TOption) => {
-    setWidthDimension(item);
+  const onChangeWidthDimension = (option: TOption) => {
+    setWidthDimension(option);
     setEmbeddingConfig((config) => {
-      return { ...config, width: `${widthValue}${item.label}` };
+      return { ...config, width: `${widthValue}${option.label}` };
     });
   };
 
-  const onChangeHeightDimension = (item: TOption) => {
-    setHeightDimension(item);
+  const onChangeHeightDimension = (option: TOption) => {
+    setHeightDimension(option);
     setEmbeddingConfig((config) => {
-      return { ...config, height: `${heightValue}${item.label}` };
+      return { ...config, height: `${heightValue}${option.label}` };
     });
   };
 
@@ -272,18 +268,17 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   const onEditLink = () => {
     setLinkParams({
       ...linkParams,
-      isEdit: true,
       link: selectedLink ?? link,
     } as LinkParamsType);
     setEditLinkPanelIsVisible(true);
   };
 
-  const onChangeSharedLink = (item: TOption) => {
-    setSelectedLink(item as TOptionType);
+  const onChangeSharedLink = (option: TOption) => {
+    setSelectedLink(option as TOptionType);
     setEmbeddingConfig((config) => {
       return {
         ...config,
-        requestToken: (item as TOptionType)?.sharedTo?.requestToken,
+        requestToken: (option as TOptionType)?.sharedTo?.requestToken,
       };
     });
   };
@@ -297,7 +292,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
       window.location.origin,
       window.ClientConfig?.proxy?.url,
       pkg.homepage,
-      "/portal-settings/developer-tools",
+      "/portal-settings/developer-tools/javascript-sdk",
     );
 
     window.open(url, "_blank");
@@ -317,10 +312,13 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   const getLinks = useCallback(async () => {
     try {
       setIsLoading(true);
-      const roomLinks = await fetchExternalLinks(roomId);
 
-      if (roomLinks && roomLinks.length) {
-        const linksOptions = roomLinks.map((l: LinkParamsLinkType) => {
+      const links = isFile
+        ? (await getExternalLinks(linkParams.item.id)).items
+        : await fetchExternalLinks(linkParams.item.id);
+
+      if (links && links.length) {
+        const linksOptions = links.map((l: LinkParamsLinkType) => {
           return {
             key: l.sharedTo?.id,
             label: l.sharedTo?.title,
@@ -338,16 +336,16 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     } finally {
       setIsLoading(false);
     }
-  }, [roomId, fetchExternalLinks]);
+  }, [linkParams.item.id, fetchExternalLinks, isFile]);
 
   useEffect(() => {
-    if (itemId) {
+    if (itemId && !link) {
       getLinks();
     }
-  }, [itemId, getLinks]);
+  }, [itemId, getLinks, link]);
 
-  const usePrevious = (value: LinkParamsLinkType | null) => {
-    const ref = useRef<LinkParamsLinkType | null>(undefined);
+  const usePrevious = (value: TFileLink | null) => {
+    const ref = useRef<TFileLink | null>(undefined);
     useEffect(() => {
       ref.current = value;
     });
@@ -405,6 +403,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
       withBodyScroll
       displayType={ModalDialogType.aside}
       withoutPadding
+      dataTestId="embedding_panel_modal"
     >
       <ModalDialog.Header>{t("Files:EmbeddingSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -423,6 +422,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                           onClick={onOpenDevTools}
                           color={currentColorScheme?.main?.accent}
                           isHovered
+                          dataTestId="embedding_panel_dev_tools_link"
                         />
                       ),
                     }}
@@ -440,6 +440,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                 size={12}
                 iconName={CrossReactSvg}
                 onClick={onCloseBar}
+                dataTestId="embedding_panel_banner_close"
               />
             </div>
           ) : null}
@@ -462,6 +463,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                   displaySelectedOption
                   directionY="bottom"
                   withLabel={false}
+                  dataTestId="embedding_panel_link_selector"
                 />
               </>
             ) : null}
@@ -518,7 +520,10 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                     isChecked={embeddingConfig.showTitle}
                     img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                     title={t("JavascriptSdk:Header")}
-                    description={t("JavascriptSdk:HeaderDescription")}
+                    description={t("JavascriptSdk:HeaderDescription", {
+                      productName: t("Common:ProductName"),
+                    })}
+                    dataTestId="show_title"
                   />
                   <CheckboxElement
                     label={t("JavascriptSdk:SearchFilterAndSort")}
@@ -526,6 +531,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                     isChecked={embeddingConfig.showFilter}
                     img={theme.isBase ? SearchUrl : SearchDarkUrl}
                     title={t("JavascriptSdk:SearchBlock")}
+                    dataTestId="show_filter"
                     description={t(
                       "JavascriptSdk:ManagerSearchBlockDescription",
                     )}
@@ -547,8 +553,14 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                 size={16}
                 iconName={CopyReactSvgUrl}
                 onClick={onCopyLink}
+                dataTestId="embedding_panel_copy_code"
               />
-              <Textarea isReadOnly value={codeBlock} heightTextArea="150px" />
+              <Textarea
+                isReadOnly
+                value={codeBlock}
+                heightTextArea="150px"
+                dataTestId="embedding_panel_code_textarea"
+              />
             </div>
           </div>
         </StyledBody>
@@ -562,6 +574,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
           onClick={onCopyAndClose}
           label={t("Common:Copy")}
           isLoading={isLoading}
+          testId="embedding_panel_copy_button"
         />
         <Button
           className="cancel-button"
@@ -570,6 +583,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
           onClick={onClose}
           label={t("Common:CancelButton")}
           isLoading={isLoading}
+          testId="embedding_panel_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

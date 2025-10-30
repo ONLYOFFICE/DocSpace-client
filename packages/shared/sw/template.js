@@ -24,9 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-restricted-globals */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-undef */
 importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/6.3.0/workbox-sw.js",
 );

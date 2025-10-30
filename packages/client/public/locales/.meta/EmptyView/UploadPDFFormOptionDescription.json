@@ -3,7 +3,7 @@
   "content": "Select a ready PDF form available in {{productName}} and upload it to the room.",
   "content_en_sha1_hash": "9d362f728a1ec68dd269f2a9f82fb1820a420640",
   "created_at": "2025-05-19T21:30:56.555Z",
-  "updated_at": "2025-05-26T07:57:32.155Z",
+  "updated_at": "2025-10-27T16:14:33.114Z",
   "comment": {
     "text": "This translation key is used to display a message when selecting a ready PDF form available in a product. It appears as part of a UI component that guides users to upload a selected PDF form to a room, likely within a document management or collaboration tool.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 196,
+      "line_number": 232,
       "context": "const uploadPDFFromDocSpace = createUploadFromDocSpace(\n t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:UploadPDFFormOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n FilterType.PDFForm,\n );",
       "module": "/packages/client"
     }

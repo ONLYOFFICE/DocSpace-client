@@ -12,8 +12,6 @@
   "FolderTitleSkyDrive": "Priečinok OneDrive",
   "FolderTitleWebDav": "Priečinok WebDAV",
   "FolderTitleYandex": "Priečinok Yandex",
-  "GuestReleaseTipLink": "Ďalšie informácie o typoch používateľov",
-  "LinkHasExpiredAndHasBeenDisabled": "Platnosť odkazu vypršala a bol deaktivovaný",
   "LinkValidTime": "Tento odkaz je platný iba {{days_count}} dní.",
   "NewForm": "Formulár PDF",
   "OwnerChange": "Zmeniť vlastníka",
@@ -25,5 +23,6 @@
   "ThirdPartyInfo": "Zmeniť informácie o tretej strane",
   "ThirdPartyTitle": "Služby tretích strán",
   "TitleShowActions": "Zobraziť akcie pre súbor",
-  "TitleShowFolderActions": "Zobraziť akcie pre priečinky"
+  "TitleShowFolderActions": "Zobraziť akcie pre priečinky",
+  "TrashItemsDeleteSuccess": "Vybraté položky boli úspešne odstránené z {{sectionName}}."
 }

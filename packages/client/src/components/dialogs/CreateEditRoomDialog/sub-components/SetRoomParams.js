@@ -44,15 +44,15 @@ import AvatarEditorDialog from "../../AvatarEditorDialog";
 
 import VirtualDataRoomBlock from "./VirtualDataRoomBlock";
 
-import TagInput from "./TagInput";
-import RoomQuota from "./RoomQuota";
-import InputParam from "./Params/InputParam";
-import ChangeRoomOwner from "./ChangeRoomOwner";
+import TagInput from "../../../TagInput";
+import RoomQuota from "../../../RoomQuota";
+import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
+import ChangeRoomOwner from "../../../ChangeRoomOwner";
 import RoomTypeDropdown from "./RoomTypeDropdown";
 import PermanentSettings from "./PermanentSettings";
 import ThirdPartyStorage from "./ThirdPartyStorage";
 import TemplateAccess from "./TemplateAccess/TemplateAccess";
-// import IsPrivateParam from "./IsPrivateParam";
+import AiRoomSettings from "./AiRoomSettings";
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -362,12 +362,15 @@ const SetRoomParams = ({
                 !selection?.logo?.large) ||
               cover?.color
         }
-        color={cover ? cover.color : selection?.logo?.color}
+        color={
+          cover ? cover.color : (selection?.logo?.color ?? selection?.color)
+        }
         size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
         radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
         withEditing
         model={isEditRoomModel}
         onChangeFile={onChangeFile}
+        dataTestId="create_edit_room_icon"
       />
     ) : (
       <RoomIcon
@@ -400,6 +403,7 @@ const SetRoomParams = ({
         }
         onChangeFile={onChangeFile}
         currentColorScheme={currentColorScheme}
+        dataTestId="create_edit_room_icon"
       />
     );
 
@@ -460,6 +464,7 @@ const SetRoomParams = ({
           }
           onKeyUp={onKeyUp}
           isAutoFocussed
+          dataTestId="create_edit_room_input"
         />
       </div>
 
@@ -471,19 +476,12 @@ const SetRoomParams = ({
         isDisabled={isDisabled}
         onFocus={() => setForceHideRoomTypeDropdown(true)}
         onBlur={() => setForceHideRoomTypeDropdown(false)}
+        dataTestId="create_edit_room_tags_input"
         tooltipLabel={
           isTemplateSelected || isTemplate ? t("Files:RoomTagsTooltip") : ""
         }
+        isMobile={isMobile}
       />
-
-      {/* //TODO: Uncomment when private rooms are done
-      {!isEdit && (
-        <IsPrivateParam
-          t={t}
-          isPrivate={roomParams.isPrivate}
-          onChangeIsPrivate={onChangeIsPrivate}
-        />
-      )} */}
 
       {isTemplate ? (
         <TemplateAccess
@@ -511,6 +509,10 @@ const SetRoomParams = ({
           isEdit={isEdit}
           setLifetimeDialogVisible={setLifetimeDialogVisible}
         />
+      ) : null}
+
+      {roomParams.type === RoomsType.AIRoom ? (
+        <AiRoomSettings roomParams={roomParams} setRoomParams={setRoomParams} />
       ) : null}
 
       {isDefaultRoomsQuotaSet && !roomParams.storageLocation.providerKey ? (
@@ -552,6 +554,7 @@ const SetRoomParams = ({
             disableImageRescaling={disableImageRescaling}
             visible={roomParams.icon.uploadedFile}
             maxImageSize={maxImageUploadSize}
+            dataTestId="create_edit_room_avatar_editor"
           />
         ) : null}
       </div>

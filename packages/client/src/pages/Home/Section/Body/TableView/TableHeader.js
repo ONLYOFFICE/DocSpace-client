@@ -28,14 +28,15 @@ import React from "react";
 import { TableHeader } from "@docspace/shared/components/table";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Events, SortByFieldName, RoomsType } from "@docspace/shared/enums";
+import { Events, SortByFieldName } from "@docspace/shared/enums";
 
 class FilesTableHeader extends React.Component {
   constructor(props) {
     super(props);
 
     const defaultColumns = this.getDefaultColumns();
-    const columns = props.getColumns(defaultColumns, props.isRecentTab);
+    const columns = props.getColumns(defaultColumns);
+
     const storageColumns = localStorage.getItem(props.tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
     const resetColumnsSize =
@@ -46,11 +47,14 @@ class FilesTableHeader extends React.Component {
       resetColumnsSize,
       columnStorageName: props.columnStorageName,
       columnInfoPanelStorageName: props.columnInfoPanelStorageName,
-      sortBy: props.isRooms ? props.roomsFilter.sortBy : props.filter.sortBy,
-      sortOrder: props.isRooms
-        ? props.roomsFilter.sortOrder
-        : props.filter.sortOrder,
-      isRecentTab: props.isRecentTab,
+      sortBy:
+        props.isRooms || props.isAIAgentsFolder
+          ? props.roomsFilter.sortBy
+          : props.filter.sortBy,
+      sortOrder:
+        props.isRooms || props.isAIAgentsFolder
+          ? props.roomsFilter.sortOrder
+          : props.filter.sortOrder,
     };
 
     const tableColumns = columns.map((c) => c.enable && c.key);
@@ -68,10 +72,13 @@ class FilesTableHeader extends React.Component {
   componentDidUpdate(prevProps) {
     const {
       isRooms,
+      isAIAgentsFolder,
       isTrashFolder,
       columnStorageName,
       columnInfoPanelStorageName,
-      isRecentTab,
+      isRecentFolder,
+      isSharedWithMeFolderRoot,
+      isFavoritesFolder,
       isArchiveFolder,
       isIndexEditingMode,
       showStorageInfo,
@@ -83,24 +90,25 @@ class FilesTableHeader extends React.Component {
       headerBorder,
     } = this.props;
 
-    const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
-    const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
+    const sortBy =
+      isRooms || isAIAgentsFolder ? roomsFilter.sortBy : filter.sortBy;
+    const sortOrder =
+      isRooms || isAIAgentsFolder ? roomsFilter.sortOrder : filter.sortOrder;
 
-    const {
-      isRecentTab: stateIsRecentTab,
-      sortBy: stateSortBy,
-      sortOrder: stateSortOrder,
-    } = this.state;
+    const { sortBy: stateSortBy, sortOrder: stateSortOrder } = this.state;
 
     if (
       isArchiveFolder !== prevProps.isArchiveFolder ||
       indexColumnSize !== prevProps.indexColumnSize ||
       isIndexEditingMode !== prevProps.isIndexEditingMode ||
       isRooms !== prevProps.isRooms ||
+      isAIAgentsFolder !== prevProps.isAIAgentsFolder ||
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
-      isRecentTab !== stateIsRecentTab ||
+      isRecentFolder !== prevProps.isRecentFolder ||
+      isSharedWithMeFolderRoot !== prevProps.isSharedWithMeFolderRoot ||
+      isFavoritesFolder !== prevProps.isFavoritesFolder ||
       showStorageInfo !== prevProps.showStorageInfo ||
       (!changeDocumentsTabs && sortBy !== stateSortBy) ||
       (!changeDocumentsTabs && sortOrder !== stateSortOrder)
@@ -162,10 +170,10 @@ class FilesTableHeader extends React.Component {
   updateTableColumns = () => {
     const {
       isRooms,
+      isAIAgentsFolder,
       getColumns,
       columnStorageName,
       columnInfoPanelStorageName,
-      isRecentTab,
       tableStorageName,
       roomsFilter,
       filter,
@@ -173,7 +181,7 @@ class FilesTableHeader extends React.Component {
 
     const defaultColumns = this.getDefaultColumns();
 
-    const columns = getColumns(defaultColumns, isRecentTab);
+    const columns = getColumns(defaultColumns);
     const storageColumns = localStorage.getItem(tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
     const resetColumnsSize =
@@ -181,8 +189,10 @@ class FilesTableHeader extends React.Component {
 
     const tableColumns = columns.map((c) => c.enable && c.key);
 
-    const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
-    const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
+    const sortBy =
+      isRooms || isAIAgentsFolder ? roomsFilter.sortBy : filter.sortBy;
+    const sortOrder =
+      isRooms || isAIAgentsFolder ? roomsFilter.sortOrder : filter.sortOrder;
 
     this.setTableColumns(tableColumns);
 
@@ -193,7 +203,6 @@ class FilesTableHeader extends React.Component {
       columnInfoPanelStorageName,
       sortBy,
       sortOrder,
-      isRecentTab,
     });
   };
 
@@ -201,15 +210,21 @@ class FilesTableHeader extends React.Component {
     const {
       isRooms,
       isTrashFolder,
-      isRecentTab,
+      isRecentFolder,
+      isFavoritesFolder,
       isTemplatesFolder,
       isIndexing,
+      isSharedWithMeFolderRoot,
+      isAIAgentsFolder,
     } = this.props;
 
+    if (isSharedWithMeFolderRoot) return this.getSharedWithMeFolderColumns();
     if (isTemplatesFolder) return this.getTemplatesColumns();
     if (isRooms) return this.getRoomsColumns();
+    if (isAIAgentsFolder) return this.getAIAgentsColumns();
     if (isTrashFolder) return this.getTrashFolderColumns();
-    if (isRecentTab) return this.getRecentTabColumns();
+    if (isRecentFolder) return this.getRecentFolderColumns();
+    if (isFavoritesFolder) return this.getFavoritesFolderColumns();
     if (isIndexing) return this.getIndexingColumns();
     return this.getFilesColumns();
   };
@@ -393,30 +408,82 @@ class FilesTableHeader extends React.Component {
     return [...columns];
   };
 
-  getRecentTabColumns = () => {
+  getSharedWithMeFolderColumns = () => {
     const {
       t,
-      isPublicRoom,
-      authorRecentColumnIsEnabled,
       nameColumnIsEnabled,
-      createdRecentColumnIsEnabled,
-      lastOpenedColumnIsEnabled,
-      modifiedRecentColumnIsEnabled,
+      authorShareWithMeColumnIsEnabled,
+      accessLevelShareWithMeColumnIsEnabled,
+      modifiedShareWithMeColumnIsEnabled,
+      sizeShareWithMeColumnIsEnabled,
+      typeShareWithMeColumnIsEnabled,
+    } = this.props;
+
+    const columns = [
+      {
+        key: "Name",
+        title: t("Common:Label"),
+        default: true,
+        resizable: true,
+        minWidth: 210,
+        enable: nameColumnIsEnabled,
+        sortBy: SortByFieldName.Name,
+        onClick: this.onFilter,
+      },
+      {
+        key: "AuthorShareWithMe",
+        title: t("ByAuthor"),
+        enable: authorShareWithMeColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "AccessLevelShareWithMe",
+        title: t("AccessLevel"),
+        enable: accessLevelShareWithMeColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "ModifiedShareWithMe",
+        title: t("ByLastModified"),
+        enable: modifiedShareWithMeColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "SizeShareWithMe",
+        title: t("Common:Size"),
+        enable: sizeShareWithMeColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Size,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "TypeShareWithMe",
+        title: t("Common:Type"),
+        enable: typeShareWithMeColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+    ];
+
+    return columns;
+  };
+
+  getRecentFolderColumns = () => {
+    const {
+      t,
+      nameColumnIsEnabled,
+      locationRecentColumnIsEnabled,
+      lastOpenedRecentColumnIsEnabled,
+      authorRecentColumnIsEnabled,
       sizeRecentColumnIsEnabled,
       typeRecentColumnIsEnabled,
     } = this.props;
-
-    const authorBlock = !isPublicRoom
-      ? {
-          key: "AuthorRecent",
-          title: t("ByAuthor"),
-          enable: authorRecentColumnIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.Author,
-          // onClick: this.onFilter,
-          onChange: this.onColumnChange,
-        }
-      : {};
 
     const columns = [
       {
@@ -425,36 +492,27 @@ class FilesTableHeader extends React.Component {
         resizable: true,
         enable: nameColumnIsEnabled,
         default: true,
-        sortBy: SortByFieldName.Name,
         minWidth: 210,
-        onClick: this.onFilter,
       },
-      { ...authorBlock },
       {
-        key: "CreatedRecent",
-        title: t("ByCreation"),
-        enable: createdRecentColumnIsEnabled,
+        key: "AuthorRecent",
+        title: t("ByAuthor"),
+        enable: authorRecentColumnIsEnabled,
         resizable: true,
-        sortBy: SortByFieldName.CreationDate,
-        // onClick: this.onFilter,
         onChange: this.onColumnChange,
       },
       {
-        key: "LastOpened",
-        title: t("DateLastOpened"),
-        enable: lastOpenedColumnIsEnabled,
+        key: "LocationRecent",
+        title: t("Common:Location"),
+        enable: locationRecentColumnIsEnabled,
         resizable: true,
-        sortBy: SortByFieldName.LastOpened,
-        onClick: this.onFilter,
         onChange: this.onColumnChange,
       },
       {
-        key: "ModifiedRecent",
-        title: t("ByLastModified"),
-        enable: modifiedRecentColumnIsEnabled,
+        key: "LastOpenedRecent",
+        title: t("LastOpened"),
+        enable: lastOpenedRecentColumnIsEnabled,
         resizable: true,
-        sortBy: SortByFieldName.ModifiedDate,
-        // onClick: this.onFilter,
         onChange: this.onColumnChange,
       },
       {
@@ -462,8 +520,6 @@ class FilesTableHeader extends React.Component {
         title: t("Common:Size"),
         enable: sizeRecentColumnIsEnabled,
         resizable: true,
-        sortBy: SortByFieldName.Size,
-        onClick: this.onFilter,
         onChange: this.onColumnChange,
       },
       {
@@ -471,8 +527,67 @@ class FilesTableHeader extends React.Component {
         title: t("Common:Type"),
         enable: typeRecentColumnIsEnabled,
         resizable: true,
-        sortBy: SortByFieldName.Type,
-        // onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+    ];
+    return [...columns];
+  };
+
+  getFavoritesFolderColumns = () => {
+    const {
+      t,
+      nameColumnIsEnabled,
+      locationFavoritesColumnIsEnabled,
+      authorFavoritesColumnIsEnabled,
+      sizeFavoritesColumnIsEnabled,
+      typeFavoritesColumnIsEnabled,
+      modifiedFavoritesColumnIsEnabled,
+    } = this.props;
+
+    const columns = [
+      {
+        key: "Name",
+        title: t("Common:Label"),
+        resizable: true,
+        enable: nameColumnIsEnabled,
+        default: true,
+        minWidth: 210,
+      },
+      {
+        key: "AuthorFavorites",
+        title: t("ByAuthor"),
+        enable: authorFavoritesColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "LocationFavorites",
+        title: t("Common:Location"),
+        enable: locationFavoritesColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "ModifiedFavorites",
+        title: t("ByLastModified"),
+        enable: modifiedFavoritesColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "SizeFavorites",
+        title: t("Common:Size"),
+        enable: sizeFavoritesColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "TypeFavorites",
+        title: t("Common:Type"),
+        enable: typeFavoritesColumnIsEnabled,
+        resizable: true,
         onChange: this.onColumnChange,
       },
     ];
@@ -483,7 +598,7 @@ class FilesTableHeader extends React.Component {
     const {
       t,
       nameColumnIsEnabled,
-      roomColumnIsEnabled,
+      locationColumnIsEnabled,
       authorTrashColumnIsEnabled,
       createdTrashColumnIsEnabled,
       erasureColumnIsEnabled,
@@ -503,11 +618,11 @@ class FilesTableHeader extends React.Component {
         onClick: this.onFilter,
       },
       {
-        key: "Room",
-        title: t("Common:Room"),
-        enable: roomColumnIsEnabled,
+        key: "Location",
+        title: t("Common:Location"),
+        enable: locationColumnIsEnabled,
         resizable: true,
-        sortBy: SortByFieldName.Room,
+        sortBy: SortByFieldName.Location,
         // onClick: this.onFilter,
         onChange: this.onColumnChange,
       },
@@ -642,6 +757,75 @@ class FilesTableHeader extends React.Component {
     return [...columns];
   };
 
+  getAIAgentsColumns = () => {
+    const {
+      t,
+      isDefaultRoomsQuotaSet,
+      showStorageInfo,
+      aiAgentColumnNameIsEnabled,
+      aiAgentColumnTagsIsEnabled,
+      aiAgentColumnOwnerIsEnabled,
+      aiAgentColumnActivityIsEnabled,
+      aiAgentColumnQuotaIsEnable,
+    } = this.props;
+
+    const columns = [
+      {
+        key: "Name",
+        title: t("Common:Label"),
+        resizable: true,
+        enable: aiAgentColumnNameIsEnabled,
+        default: true,
+        sortBy: SortByFieldName.Name,
+        minWidth: 210,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "TagsAIAgents",
+        title: t("Common:Tags"),
+        enable: aiAgentColumnTagsIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Tags,
+        withTagRef: true,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "OwnerAIAgents",
+        title: t("Common:Owner"),
+        enable: aiAgentColumnOwnerIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Author,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "ActivityAIAgents",
+        title: t("LastActivity"),
+        enable: aiAgentColumnActivityIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+    ];
+
+    showStorageInfo &&
+      columns.splice(columns.length, 0, {
+        key: "StorageAIAgents",
+        title: isDefaultRoomsQuotaSet
+          ? t("Common:StorageAndQuota")
+          : t("Common:Storage"),
+        enable: aiAgentColumnQuotaIsEnable,
+        sortBy: SortByFieldName.UsedSpace,
+        resizable: true,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      });
+
+    return [...columns];
+  };
+
   getTemplatesColumns = () => {
     const {
       t,
@@ -744,13 +928,7 @@ class FilesTableHeader extends React.Component {
   };
 
   onFilter = (sortBy) => {
-    const {
-      filter,
-      setIsLoading,
-      isPublicRoom,
-      publicRoomKey,
-      isPublicRoomType,
-    } = this.props;
+    const { filter, setIsLoading } = this.props;
     const newFilter = filter.clone();
 
     if (newFilter.sortBy !== sortBy) {
@@ -761,15 +939,6 @@ class FilesTableHeader extends React.Component {
     }
 
     setIsLoading(true);
-
-    const currentUrl = window.location.href;
-
-    if (
-      isPublicRoom ||
-      (isPublicRoomType && publicRoomKey && currentUrl.includes("key"))
-    ) {
-      newFilter.key = publicRoomKey;
-    }
 
     window.DocSpace.navigate(
       `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`,
@@ -878,11 +1047,14 @@ export default inject(
       indexColumnSize,
     } = filesStore;
     const {
-      isRecentTab,
       isArchiveFolder,
       isTrashFolder,
       isTemplatesFolder,
       isPersonalReadOnly,
+      isRecentFolder,
+      isFavoritesFolder,
+      isSharedWithMeFolderRoot,
+      isAIAgentsFolder,
     } = treeFoldersStore;
     const withContent = canShare;
     const sortingVisible = true;
@@ -899,13 +1071,12 @@ export default inject(
       createdColumnIsEnabled,
       createdTrashColumnIsEnabled,
       modifiedColumnIsEnabled,
-      roomColumnIsEnabled,
+      locationColumnIsEnabled,
       erasureColumnIsEnabled,
       sizeColumnIsEnabled,
       sizeTrashColumnIsEnabled,
       typeColumnIsEnabled,
       typeTrashColumnIsEnabled,
-      lastOpenedColumnIsEnabled,
 
       roomColumnNameIsEnabled,
       roomColumnTypeIsEnabled,
@@ -914,11 +1085,29 @@ export default inject(
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
 
+      aiAgentColumnNameIsEnabled,
+      aiAgentColumnTagsIsEnabled,
+      aiAgentColumnOwnerIsEnabled,
+      aiAgentColumnActivityIsEnabled,
+      aiAgentColumnQuotaIsEnable,
+
+      authorShareWithMeColumnIsEnabled,
+      accessLevelShareWithMeColumnIsEnabled,
+      modifiedShareWithMeColumnIsEnabled,
+      sizeShareWithMeColumnIsEnabled,
+      typeShareWithMeColumnIsEnabled,
+
+      locationRecentColumnIsEnabled,
+      lastOpenedRecentColumnIsEnabled,
       authorRecentColumnIsEnabled,
-      modifiedRecentColumnIsEnabled,
-      createdRecentColumnIsEnabled,
       sizeRecentColumnIsEnabled,
       typeRecentColumnIsEnabled,
+
+      locationFavoritesColumnIsEnabled,
+      authorFavoritesColumnIsEnabled,
+      sizeFavoritesColumnIsEnabled,
+      typeFavoritesColumnIsEnabled,
+      modifiedFavoritesColumnIsEnabled,
 
       indexVDRColumnIsEnabled,
       authorVDRColumnIsEnabled,
@@ -939,13 +1128,7 @@ export default inject(
 
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
 
-    const { changeDocumentsTabs, isIndexedFolder, roomType } =
-      selectedFolderStore;
-
-    const isPublicRoomType =
-      roomType === RoomsType.PublicRoom ||
-      roomType === RoomsType.CustomRoom ||
-      roomType === RoomsType.FormRoom;
+    const { changeDocumentsTabs, isIndexedFolder } = selectedFolderStore;
 
     return {
       setRoomsFilter,
@@ -976,13 +1159,12 @@ export default inject(
       createdColumnIsEnabled,
       createdTrashColumnIsEnabled,
       modifiedColumnIsEnabled,
-      roomColumnIsEnabled,
+      locationColumnIsEnabled,
       erasureColumnIsEnabled,
       sizeColumnIsEnabled,
       sizeTrashColumnIsEnabled,
       typeColumnIsEnabled,
       typeTrashColumnIsEnabled,
-      lastOpenedColumnIsEnabled,
 
       roomColumnNameIsEnabled,
       roomColumnTypeIsEnabled,
@@ -991,11 +1173,29 @@ export default inject(
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
 
+      aiAgentColumnNameIsEnabled,
+      aiAgentColumnTagsIsEnabled,
+      aiAgentColumnOwnerIsEnabled,
+      aiAgentColumnActivityIsEnabled,
+      aiAgentColumnQuotaIsEnable,
+
+      authorShareWithMeColumnIsEnabled,
+      accessLevelShareWithMeColumnIsEnabled,
+      modifiedShareWithMeColumnIsEnabled,
+      sizeShareWithMeColumnIsEnabled,
+      typeShareWithMeColumnIsEnabled,
+
+      locationRecentColumnIsEnabled,
+      lastOpenedRecentColumnIsEnabled,
       authorRecentColumnIsEnabled,
-      modifiedRecentColumnIsEnabled,
-      createdRecentColumnIsEnabled,
       sizeRecentColumnIsEnabled,
       typeRecentColumnIsEnabled,
+
+      locationFavoritesColumnIsEnabled,
+      authorFavoritesColumnIsEnabled,
+      sizeFavoritesColumnIsEnabled,
+      typeFavoritesColumnIsEnabled,
+      modifiedFavoritesColumnIsEnabled,
 
       indexVDRColumnIsEnabled,
       authorVDRColumnIsEnabled,
@@ -1016,10 +1216,12 @@ export default inject(
       isTemplatesFolder,
       isPublicRoom,
       publicRoomKey,
-      isPublicRoomType,
 
       isFrame,
-      isRecentTab,
+      isAIAgentsFolder,
+      isRecentFolder,
+      isSharedWithMeFolderRoot,
+      isFavoritesFolder,
       showSettings: frameConfig?.showSettings,
       isDefaultRoomsQuotaSet,
       showStorageInfo,

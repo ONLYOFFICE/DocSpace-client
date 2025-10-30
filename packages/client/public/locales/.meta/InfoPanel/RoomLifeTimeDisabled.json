@@ -3,13 +3,19 @@
   "content": "File lifetime disabled in the room",
   "content_en_sha1_hash": "b862d629a1d859346f6c691889d607a78c28427a",
   "created_at": "2025-05-19T21:30:54.936Z",
-  "updated_at": "2025-06-30T12:20:31.354Z",
+  "updated_at": "2025-10-13T13:22:35.732Z",
   "comment": {
     "text": "This translation key is used for \"File lifetime disabled in the room\", a message that typically appears when a user tries to upload or download files from a room where file sharing has been disabled. It is likely displayed on a button or form control, indicating the reason for the action being restricted.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:40:46.417Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 339,
+      "context": "}}\n />\n );\n }\n case FeedActionKeys.RoomLifeTimeDisabled:\n return t(\"InfoPanel:RoomLifeTimeDisabled\");\n case FeedActionKeys.RoomDenyDownloadEnabled:\n return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case FeedActionKeys.RoomDenyDownloadDisabled:\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case FeedActionKeys.RoomArchived:",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 288,

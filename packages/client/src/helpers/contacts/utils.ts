@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { matchPath } from "react-router";
-import type { Location } from "react-router";
+import type { Location as RouterLocation } from "react-router";
 
 import Filter from "@docspace/shared/api/people/filter";
 import GroupsFilter from "@docspace/shared/api/groups/filter";
@@ -203,7 +203,7 @@ export const getContactsCheckboxItemLabel = (
     case "disabled":
       return t("PeopleTranslations:DisabledEmployeeStatus");
     case "all":
-      return t("All");
+      return t("Common:All");
     default:
       return "";
   }
@@ -265,7 +265,9 @@ export const shareGuest = (
   });
 };
 
-export const getContactsView = (location?: Location): TContactsTab => {
+export const getContactsView = (
+  location?: Location | RouterLocation,
+): TContactsTab => {
   const { pathname } =
     location ??
     window.DocSpace?.location ??

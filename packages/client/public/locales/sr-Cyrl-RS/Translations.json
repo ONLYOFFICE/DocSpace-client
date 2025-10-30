@@ -12,8 +12,6 @@
   "FolderTitleSkyDrive": "OneDrive директоријум",
   "FolderTitleWebDav": "WebDAV директоријум",
   "FolderTitleYandex": "Yandex директоријум",
-  "GuestReleaseTipLink": "Сазнајте више о типовима корисника",
-  "LinkHasExpiredAndHasBeenDisabled": "Линк је истекао и онемогућен је",
   "LinkValidTime": "Овај линк је валидан само за {{days_count}} дана",
   "NewForm": "PDF образац",
   "OwnerChange": "Промени власника",
@@ -25,5 +23,6 @@
   "ThirdPartyInfo": "Промени инфо треће стране",
   "ThirdPartyTitle": "Услуге трећих страна",
   "TitleShowActions": "Прикажи акције датотека",
-  "TitleShowFolderActions": "Прикажи акциије фолдера"
+  "TitleShowFolderActions": "Прикажи акциије фолдера",
+  "TrashItemsDeleteSuccess": "Изабрани елементи су успешно обрисани из {{sectionName}}"
 }

@@ -25,12 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { AdditionalResources } from ".";
 import { DeviceType } from "../../../enums";
-import { renderWithTheme } from "../../../utils/render-with-theme";
 
 jest.mock("../../../hooks/useResponsiveNavigation", () => ({
   useResponsiveNavigation: jest.fn(),
@@ -54,17 +53,15 @@ describe("<AdditionalResources />", () => {
   });
 
   it("renders without error", () => {
-    renderWithTheme(<AdditionalResources {...defaultProps} />);
+    render(<AdditionalResources {...defaultProps} />);
 
-    expect(screen.getByText("AdditionalResources")).toBeInTheDocument();
+    expect(screen.getByText("Common:AdditionalResources")).toBeInTheDocument();
     expect(screen.getByText("ShowFeedbackAndSupport")).toBeInTheDocument();
     expect(screen.getByText("ShowHelpCenter")).toBeInTheDocument();
   });
 
   it("disables checkboxes when isSettingPaid is false", () => {
-    renderWithTheme(
-      <AdditionalResources {...defaultProps} isSettingPaid={false} />,
-    );
+    render(<AdditionalResources {...defaultProps} isSettingPaid={false} />);
 
     const feedbackCheckbox = screen.getByTestId("show-feedback-support");
     const helpCheckbox = screen.getByTestId("show-help-center");
@@ -74,7 +71,7 @@ describe("<AdditionalResources />", () => {
   });
 
   it("updates state when checkboxes are clicked", () => {
-    renderWithTheme(<AdditionalResources {...defaultProps} />);
+    render(<AdditionalResources {...defaultProps} />);
 
     const feedbackCheckbox = screen.getByTestId("show-feedback-support");
     fireEvent.click(feedbackCheckbox);
@@ -84,64 +81,72 @@ describe("<AdditionalResources />", () => {
 
   it("calls onSave with correct parameters", () => {
     const onSave = jest.fn();
-    renderWithTheme(<AdditionalResources {...defaultProps} onSave={onSave} />);
+    render(<AdditionalResources {...defaultProps} onSave={onSave} />);
 
     // Toggle feedback checkbox
     const feedbackCheckbox = screen.getByTestId("show-feedback-support");
     fireEvent.click(feedbackCheckbox);
 
     // Click save button
-    const saveButton = screen.getByTestId("save-button");
+    const saveButton = screen.getByTestId("additional-resources-save-button");
     fireEvent.click(saveButton);
 
     expect(onSave).toHaveBeenCalledWith(false, true);
   });
 
   it("shows reminder text when there are unsaved changes", () => {
-    renderWithTheme(<AdditionalResources {...defaultProps} />);
+    render(<AdditionalResources {...defaultProps} />);
 
     // Initially no reminder
-    expect(screen.queryByText("YouHaveUnsavedChanges")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("Common:YouHaveUnsavedChanges"),
+    ).not.toBeInTheDocument();
 
     // Toggle checkbox to create changes
     const feedbackCheckbox = screen.getByTestId("show-feedback-support");
     fireEvent.click(feedbackCheckbox);
 
-    expect(screen.getByText("YouHaveUnsavedChanges")).toBeInTheDocument();
+    expect(
+      screen.getByText("Common:YouHaveUnsavedChanges"),
+    ).toBeInTheDocument();
   });
 
   it("disables restore button when additionalResourcesIsDefault is true", () => {
-    renderWithTheme(
+    render(
       <AdditionalResources {...defaultProps} additionalResourcesIsDefault />,
     );
 
-    const restoreButton = screen.getByTestId("cancel-button");
+    const restoreButton = screen.getByTestId(
+      "additional-resources-cancel-button",
+    );
     expect(restoreButton).toBeDisabled();
   });
 
   it("shows loading state", () => {
-    renderWithTheme(<AdditionalResources {...defaultProps} isLoading />);
+    render(<AdditionalResources {...defaultProps} isLoading />);
 
-    expect(screen.getByText("YouHaveUnsavedChanges")).toBeInTheDocument();
-    expect(screen.getByTestId("cancel-button")).toBeDisabled();
+    expect(
+      screen.getByText("Common:YouHaveUnsavedChanges"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId("additional-resources-cancel-button"),
+    ).toBeDisabled();
   });
 
   it("calls onRestore when restore button is clicked", () => {
     const onRestore = jest.fn();
-    renderWithTheme(
-      <AdditionalResources {...defaultProps} onRestore={onRestore} />,
-    );
+    render(<AdditionalResources {...defaultProps} onRestore={onRestore} />);
 
-    const restoreButton = screen.getByTestId("cancel-button");
+    const restoreButton = screen.getByTestId(
+      "additional-resources-cancel-button",
+    );
     fireEvent.click(restoreButton);
 
     expect(onRestore).toHaveBeenCalled();
   });
 
   it("updates checkboxes when props change", () => {
-    const { rerender } = renderWithTheme(
-      <AdditionalResources {...defaultProps} />,
-    );
+    const { rerender } = render(<AdditionalResources {...defaultProps} />);
 
     rerender(
       <AdditionalResources

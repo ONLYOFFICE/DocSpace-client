@@ -3,7 +3,7 @@
   "content": "Guests can access the rooms they have been invited to, as well as create and edit documents if they have been assigned the appropriate roles in the room.",
   "content_en_sha1_hash": "b91549ed2598a81dcae1328a0ba18a24e2e5e876",
   "created_at": "2025-05-19T21:30:50.001Z",
-  "updated_at": "2025-06-30T12:20:31.746Z",
+  "updated_at": "2025-10-27T16:14:33.799Z",
   "comment": {
     "text": "This translation key is used to describe the role and access rights of a guest user in a collaborative workspace. It appears on a settings or permissions page, where users can view their assigned roles and corresponding access levels. Translators should provide a clear explanation of this role for guests in various languages.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1260,
-      "context": "sectionName: t(\"Common:MyFilesSection\"),\n });\n \n if (isCollaborator) return t(\"Common:RoleNewUserDescription\");\n \n return t(\"Translations:RoleGuestDescriprion\");\n };\n \n export function setLanguageForUnauthorized(culture: string) {\n setCookie(LANGUAGE, culture, {\n \"max-age\": COOKIE_EXPIRATION_YEAR,",
+      "line_number": 1324,
+      "context": "sectionName: t(\"Common:MyDocuments\"),\n });\n \n if (isCollaborator) return t(\"Common:RoleNewUserDescription\");\n \n return t(\"Translations:RoleGuestDescriprion\");\n };\n \n export function setLanguageForUnauthorized(\n culture: string,\n isReload: boolean = true,",
       "module": "/packages/shared"
     }
   ],

@@ -44,6 +44,7 @@ const FilesRowContainer = ({
   fetchMoreFiles,
   hasMoreFiles,
   isRooms,
+  isAIAgentsFolder,
   isTrashFolder,
   highlightFile,
   currentDeviceType,
@@ -52,6 +53,11 @@ const FilesRowContainer = ({
   isTutorialEnabled,
   setRefMap,
   deleteRefMap,
+  selectedFolderTitle,
+  setDropTargetPreview,
+  disableDrag,
+  canCreateSecurity,
+  withContentSelection,
 }) => {
   const { sectionWidth } = use(Context);
 
@@ -72,6 +78,7 @@ const FilesRowContainer = ({
         itemIndex={index}
         sectionWidth={sectionWidth}
         isRooms={isRooms}
+        isAIAgentsFolder={isAIAgentsFolder}
         isTrashFolder={isTrashFolder}
         changeIndex={changeIndex}
         isHighlight={
@@ -83,12 +90,17 @@ const FilesRowContainer = ({
         isTutorialEnabled={isTutorialEnabled}
         setRefMap={setRefMap}
         deleteRefMap={deleteRefMap}
+        selectedFolderTitle={selectedFolderTitle}
+        setDropTargetPreview={setDropTargetPreview}
+        disableDrag={disableDrag}
+        canCreateSecurity={canCreateSecurity}
       />
     ));
   }, [
     list,
     sectionWidth,
     isRooms,
+    isAIAgentsFolder,
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
@@ -104,6 +116,7 @@ const FilesRowContainer = ({
       hasMoreFiles={hasMoreFiles}
       draggable
       useReactWindow
+      noSelect={!withContentSelection}
       itemHeight={58}
     >
       {filesListNode}
@@ -120,6 +133,9 @@ export default inject(
     indexingStore,
     filesActionsStore,
     guidanceStore,
+    selectedFolderStore,
+    uploadDataStore,
+    hotkeyStore,
   }) => {
     const {
       viewAs,
@@ -129,24 +145,34 @@ export default inject(
       hasMoreFiles,
       roomsFilter,
       highlightFile,
+      disableDrag,
     } = filesStore;
 
+    const { title: selectedFolderTitle, security } = selectedFolderStore;
     const { setRefMap, deleteRefMap } = guidanceStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isAIAgentsFolder } =
+      treeFoldersStore;
     const { currentDeviceType } = settingsStore;
     const { isIndexEditingMode } = indexingStore;
+    const { withContentSelection } = hotkeyStore;
+
+    const { primaryProgressDataStore } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
+    const canCreateSecurity = security?.Create;
 
     return {
       viewAs,
       setViewAs,
       infoPanelVisible,
-      filterTotal: isRooms ? roomsFilter.total : filter.total,
+      filterTotal:
+        isRooms || isAIAgentsFolder ? roomsFilter.total : filter.total,
       fetchMoreFiles,
       hasMoreFiles,
       isRooms,
+      isAIAgentsFolder,
       isTrashFolder,
       highlightFile,
       currentDeviceType,
@@ -154,6 +180,11 @@ export default inject(
       changeIndex: filesActionsStore.changeIndex,
       setRefMap,
       deleteRefMap,
+      selectedFolderTitle,
+      setDropTargetPreview,
+      disableDrag,
+      canCreateSecurity,
+      withContentSelection,
     };
   },
 )(withContainer(observer(FilesRowContainer)));

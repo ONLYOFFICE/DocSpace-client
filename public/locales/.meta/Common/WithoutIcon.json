@@ -3,7 +3,7 @@
   "content": "Without icon",
   "content_en_sha1_hash": "e4be945bce935b4bef2b29cc800b01af24c69cf1",
   "created_at": "2025-05-19T21:30:49.603Z",
-  "updated_at": "2025-05-28T09:30:02.293Z",
+  "updated_at": "2025-10-13T19:04:39.685Z",
   "comment": {
     "text": "The translation key \"WithoutIcon\" is used to display the text \"Without icon\" when an icon is not available in a UI component. This text typically appears on a button or dialog related to logos, and it provides context for users about the absence of a visual element.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/sub-components/SelectIcon.tsx",
       "line_number": 35,
-      "context": "import { tablet } from \"@docspace/shared/utils\";\n import { TColorScheme } from \"@docspace/shared/themes\";\n import hexRgb from \"hex-rgb\";\n import { ILogo, SelectIconProps } from \"../RoomLogoCoverDialog.types\";\n \n interface WithoutIconProps {\n isSelected?: boolean;\n }\n \n const StyledWithoutIcon = styled.div<WithoutIconProps>`\n display: flex;",
+      "context": "import { tablet } from \"@docspace/shared/utils\";\n import { TColorScheme } from \"@docspace/shared/themes\";\n import hexRgb from \"hex-rgb\";\n import { SelectIconProps, ILogo } from \"../RoomLogoCoverDialog.types\";\n \n interface WithoutIconProps {\n isSelected?: boolean;\n }\n \n const StyledWithoutIcon = styled.div<WithoutIconProps>`\n display: flex;",
       "module": "/packages/client"
     }
   ],
@@ -186,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Simge olmadan\" is a literal translation, it sounds somewhat unnatural in Turkish. A more common and natural phrasing would be \"İkon olmadan\".",
+          "description": "While \"Simge olmadan\" is a literal translation, a more natural and common Turkish expression would be \"İkon olmadan\" or \"Simgesiz\". \"Simge olmadan\" sounds a bit formal and less conversational.",
           "suggestion": "İkon olmadan"
         }
       ],
@@ -201,13 +201,31 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Không có biểu tượng\" is a literal translation of \"Without icon\", it's not the most natural or common way to express this in Vietnamese. A more idiomatic translation would be \"Không có biểu tượng\" or \"Không có hình ảnh\".",
+          "suggestion": "Consider alternatives like \"Không có hình ảnh\"."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pa icon' is a direct transliteration of 'Without icon' and doesn't convey the intended meaning naturally in Albanian. A more appropriate translation would be something like 'Pa ikonë' or 'Pa simbol'.",
+          "suggestion": "Pa ikonë"
+        }
+      ],
       "approved_at": null
     }
   }

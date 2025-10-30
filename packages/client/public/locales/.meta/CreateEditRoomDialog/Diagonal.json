@@ -3,7 +3,7 @@
   "content": "Diagonal",
   "content_en_sha1_hash": "a5ecd286faa5677726aa083151af6be4709cf28e",
   "created_at": "2025-05-19T21:30:56.792Z",
-  "updated_at": "2025-05-24T13:52:08.401Z",
+  "updated_at": "2025-10-27T16:14:33.238Z",
   "comment": {
     "text": "This translation key is used for the label of a rotation option in an image viewer, typically appearing on a settings or options page. It displays as \"Diagonal\" and appears on a dropdown list or button related to image editing.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ViewerInfo.js",
-      "line_number": 101,
-      "context": "return getTabsInfo(additions, t, dataTabs);\n };\n \n const rotateOptions = (t) => [\n { key: -45, label: t(\"Diagonal\") },\n { key: 0, label: t(\"Horizontal\") },\n ];\n \n const getInitialRotate = (rotate, isEdit, isImage, t) => {\n const dataRotate = rotateOptions(t);",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ViewerInfo.tsx",
+      "line_number": 119,
+      "context": "};\n \n const rotateOptions = (t: TFunction) => [\n {\n key: -45,\n label: t(\"Diagonal\"),\n dataTestId: \"virtual_data_room_watermark_position_diagonal\",\n },\n {\n key: 0,\n label: t(\"Horizontal\"),",
       "module": "/packages/client"
     }
   ],

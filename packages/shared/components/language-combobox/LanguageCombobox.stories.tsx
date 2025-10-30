@@ -32,7 +32,7 @@ import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecor
 export default {
   title: "Components/LanguageCombobox",
   component: LanguageCombobox,
-  // eslint-disable-next-line @typescript-eslint/no-shadow
+
   decorators: [(Story) => <Story />, i18nextStoryDecorator],
   argTypes: {
     withBorder: {
@@ -50,8 +50,14 @@ export default {
   },
 } as Meta;
 
+const Wrapper = ({ children }: { children: React.ReactNode }) => {
+  return <div style={{ height: "280px" }}>{children}</div>;
+};
+
 const Template: StoryFn<ComboboxProps> = (args) => (
-  <LanguageCombobox {...args} />
+  <Wrapper>
+    <LanguageCombobox {...args} />
+  </Wrapper>
 );
 
 export const Default = Template.bind({});
@@ -62,12 +68,16 @@ Default.args = {
   className: "custom-class",
   withBorder: true,
   isMobileView: false,
+  directionY: "bottom",
+  fixedDirection: true,
+  isDefaultMode: false,
 };
 
 export const MobileView = Template.bind({});
 MobileView.args = {
   ...Default.args,
   isMobileView: true,
+  manualWidth: "200px",
 };
 
 export const WithoutBorder = Template.bind({});

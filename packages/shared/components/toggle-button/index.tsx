@@ -26,27 +26,41 @@
 
 import React from "react";
 import classNames from "classnames";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 
 import { Text } from "../text";
 
 import type { ToggleButtonProps, ToggleIconProps } from "./ToggleButton.types";
 import styles from "./ToggleButton.module.scss";
 
+enum ToggleControls {
+  loading = "isLoading",
+  checked = "checked",
+  unchecked = "notChecked",
+}
+
 const ToggleIcon = ({
   isChecked,
   isLoading,
   noAnimation = false,
 }: ToggleIconProps) => {
+  const controls = useAnimation();
+
   const transition = noAnimation ? { duration: 0 } : {};
+
+  React.useEffect(() => {
+    if (isLoading) {
+      controls.start(ToggleControls.loading);
+    } else if (isChecked) {
+      controls.start(ToggleControls.checked);
+    } else {
+      controls.start(ToggleControls.unchecked);
+    }
+  }, [isLoading, isChecked, controls]);
 
   return (
     <motion.svg
       data-testid="toggle-button-icon"
-      animate={[
-        isChecked ? "checked" : "notChecked",
-        isLoading ? "isLoading" : "",
-      ]}
       width="28"
       height="16"
       viewBox="0 0 28 16"
@@ -55,31 +69,24 @@ const ToggleIcon = ({
     >
       <motion.rect width="28" height="16" rx="8" />
       <motion.circle
-        fill-rule="evenodd"
-        clip-rule="evenodd"
         cy="8"
         variants={{
-          isLoading: {
-            r: [5, 6, 6],
-            transition: {
-              r: {
-                yoyo: Infinity,
-                duration: 0.6,
-                ease: "easeOut",
-              },
-            },
-          },
-          checked: {
-            cx: 20,
-            r: 6,
-            transition,
-          },
-          notChecked: {
-            cx: 8,
-            r: 6,
-            transition,
-          },
+          notChecked: { cx: 8, r: 6 },
+          checked: { cx: 20, r: 6 },
+          isLoading: { r: [5, 6, 6] },
         }}
+        initial={isChecked ? ToggleControls.checked : ToggleControls.unchecked}
+        transition={{
+          r: {
+            ...transition,
+            repeat: Infinity,
+            repeatType: "reverse",
+            duration: 0.6,
+            ease: "easeOut",
+          },
+          cx: transition,
+        }}
+        animate={controls}
       />
     </motion.svg>
   );
@@ -98,13 +105,14 @@ const ToggleButton = ({
   name,
   fontWeight,
   fontSize,
+  dataTestId,
 }: ToggleButtonProps) => {
   return (
     <div
       id={id}
       className={classNames(styles.container, className)}
       style={style}
-      data-testid="toggle-button"
+      data-testid={dataTestId ?? "toggle-button"}
     >
       <label
         id={id}

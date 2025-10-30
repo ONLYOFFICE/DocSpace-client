@@ -25,11 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import classNames from "classnames";
+
 import { TTranslation } from "@docspace/shared/types";
 import { FolderType } from "@docspace/shared/enums";
-import { StyledHistoryBlockMessage } from "../../../styles/history";
+import { FeedAction } from "@docspace/shared/api/rooms/types";
+
 import { Feed } from "./HistoryBlockContent.types";
-import { FeedAction } from "../FeedInfo";
+import styles from "../History.module.scss";
 
 type HistoryMainTextFolderInfoProps = {
   t: TTranslation;
@@ -71,6 +74,8 @@ const HistoryMainTextFolderInfo = ({
   const isSection = parentType === FolderType.USER;
   const isFolder =
     parentType === FolderType.DEFAULT ||
+    parentType === FolderType.Knowledge ||
+    parentType === FolderType.ResultStorage ||
     isSubmitted ||
     isStartedFilling ||
     isReorderFolder;
@@ -92,14 +97,14 @@ const HistoryMainTextFolderInfo = ({
   const className = isFromFolder ? "source-folder-label" : "folder-label";
 
   return (
-    <StyledHistoryBlockMessage className="message">
+    <span className={classNames("message", styles.historyBlockMessage)}>
       <span
         className={className}
         title={isFromFolder ? fromParentTitle : parentTitle}
       >
         {` ${isFromFolder ? sourceDestination : destination}`}
       </span>
-    </StyledHistoryBlockMessage>
+    </span>
   );
 };
 

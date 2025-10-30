@@ -74,7 +74,8 @@ const GroupNameParam = ({
           isAutoFocussed
           // onKeyUp={onKeyUp}
           // onKeyDown={onKeyDown}
-          maxLength={170}
+          maxLength={128}
+          testId="create_edit_group_name"
         />
       </FieldContainer>
     </Styled.GroupNameParam>

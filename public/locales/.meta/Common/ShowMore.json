@@ -3,7 +3,7 @@
   "content": "Show more",
   "content_en_sha1_hash": "25911d48e023cd10fc08d378641ee620f5e39d86",
   "created_at": "2025-05-19T21:30:48.725Z",
-  "updated_at": "2025-05-26T07:57:32.794Z",
+  "updated_at": "2025-10-27T16:14:33.635Z",
   "comment": {
     "text": "This translation key is used to display the text \"Show more\" when a list length exceeds 5 items. It appears as a button label in UI components that showcase paginated lists of rooms and users, prompting users to view more results if available.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/RoomsList.js",
-      "line_number": 101,
-      "context": "{roomsList}\n \n {roomsListLength > 5 ? (\n <Button\n {...buttonProps}\n label={t(\"Common:ShowMore\")}\n onClick={onClickRooms}\n />\n ) : null}\n </div>\n </StyledStatistics>",
+      "line_number": 112,
+      "context": "{roomsList}\n \n {roomsListLength > 5 ? (\n <Button\n {...buttonProps}\n label={t(\"Common:ShowMore\")}\n onClick={onClickRooms}\n testId=\"show_more_rooms_button\"\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/UsersList.js",
-      "line_number": 93,
-      "context": "{usersList}\n \n {peopleListLength > 5 ? (\n <Button\n {...buttonProps}\n label={t(\"Common:ShowMore\")}\n onClick={onClickUsers}\n />\n ) : null}\n </StyledStatistics>\n );",
+      "line_number": 105,
+      "context": "{usersList}\n \n {peopleListLength > 5 ? (\n <Button\n {...buttonProps}\n label={t(\"Common:ShowMore\")}\n onClick={onClickUsers}\n testId=\"show_more_users_button\"\n />\n ) : null}\n </StyledStatistics>",
       "module": "/packages/client"
     }
   ],
@@ -177,7 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Прикажи више\" is understandable, a more natural and common translation of \"Show more\" in Serbian (Cyrillic) would be \"Prikaži više\". The subtle difference in pronunciation and flow makes \"Prikaži više\" preferable.",
+          "suggestion": "Prikaži više"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -204,13 +210,19 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Chi tiết' translates to 'details' in English, not 'Show more'. While 'Chi tiết' can sometimes convey a similar concept, it is not a direct translation of 'Show more'.",
-          "suggestion": "Consider using 'Xem thêm' or 'Hiển thị thêm' for a more accurate translation of 'Show more'."
+          "description": "'Chi tiết' translates to 'details' in English, not 'Show more'. While it can convey a similar meaning in some contexts, it's not a direct or accurate translation of 'Show more'.",
+          "suggestion": "Consider 'Xem thêm' or 'Xem tất cả' for a more accurate translation of 'Show more'."
         }
       ],
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

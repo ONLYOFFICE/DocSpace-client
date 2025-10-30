@@ -3,7 +3,7 @@
   "content": "Use this template to quickly create a new room.",
   "content_en_sha1_hash": "7164e5be24cd4f164abaf5db47bf85dd7a58fd3c",
   "created_at": "2025-05-19T21:30:56.157Z",
-  "updated_at": "2025-05-26T07:57:32.412Z",
+  "updated_at": "2025-10-27T16:14:33.378Z",
   "comment": {
     "text": "This translation key is used to provide a brief description that explains the purpose of a button labeled \"Create Room\". The text will appear on a button in an info panel, prompting users to quickly create a new room.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.js",
-      "line_number": 153,
-      "context": "<Text\n fontSize=\"12px\"\n fontWeight={400}\n className=\"room-template_text\"\n >\n {t(\"Files:RoomTemplateDescription\")}\n </Text>\n \n <Button\n label={t(\"Common:CreateRoom\")}\n className=\"room-template_button\"",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.tsx",
+      "line_number": 220,
+      "context": "<Text\n fontSize=\"12px\"\n fontWeight={400}\n className={styles.roomTemplateText}\n >\n {t(\"Files:RoomTemplateDescription\")}\n </Text>\n <Button\n label={t(\"Common:CreateRoom\")}\n className={styles.roomTemplateButton}\n onClick={onCreateRoom}",
       "module": "/packages/client"
     }
   ],

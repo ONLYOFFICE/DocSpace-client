@@ -87,6 +87,7 @@ const ResetDialog = (props: ResetDialogProps) => {
           primary
           isLoading={isRequestRunning}
           onClick={onResetClick}
+          testId="reset_dialog_ok_button"
         />
         <Button
           className="cancel-button"
@@ -96,6 +97,7 @@ const ResetDialog = (props: ResetDialogProps) => {
           scale
           isDisabled={isRequestRunning}
           onClick={onClose}
+          testId="reset_dialog_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

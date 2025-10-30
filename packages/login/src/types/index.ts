@@ -91,36 +91,43 @@ export type TConfirmRouteContext = {
     confirmHeader?: string;
     key?: string;
     emplType?: string;
-    email?: string;
+    encemail?: string;
     uid?: string;
     type?: string;
     first?: string;
     roomId?: string;
     firstname?: string;
     lastname?: string;
+    redirected?: string;
   };
   roomData: {
     roomId?: string;
     title?: string;
+  };
+  confirmLinkResult: {
+    result?: ValidationResult;
+    email?: string;
   };
 };
 
 export type TConfirmLinkParams = {
   key: string;
   emplType?: string;
-  email: string;
+  encemail: string;
   uid?: string;
   type?: string;
   first?: string;
   roomId?: string;
   linkData?: string;
   culture?: string;
+  redirected?: string;
 };
 
 export type TConfirmLinkResult = {
   result: ValidationResult;
   roomId?: string;
   title?: string;
+  email?: string;
 };
 
 export type TCreateUserData = {
@@ -223,4 +230,6 @@ export type ForgotPasswordModalDialogProps = {
   isVisible: boolean;
   userEmail?: string;
   onDialogClose: () => void;
+  reCaptchaPublicKey?: string;
+  reCaptchaType?: RecaptchaType;
 };

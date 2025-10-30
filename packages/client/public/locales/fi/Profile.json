@@ -1,13 +1,13 @@
 {
   "ActiveSessions": "Aktiiviset istunnot",
   "AutoDeleteTitle": "Kaikki yli 60 päivää vanhat istunnot poistetaan automaattisesti.",
-  "ChangeEmailSuccess": "Sähköpostin vaihtaminen onnistui ",
   "ChangePasswordAfterLoggingOut": "Vaihda salasana uloskirjautumisen jälkeen",
   "ConnectSocialNetworks": "Yhdistä sosiaaliset verkostosi",
   "DescriptionForSecurity": "Vaihda salasanasi lisätäksesi turvallisuutta.",
   "DesktopTheme": "Synkronoi työpöytäeditorin asetusten kanssa",
   "DesktopThemeDescription": "Vaihda automaattisesti vaaleiden ja tummien teemojen välillä työpöytäeditorien nykyisen teeman mukaan.",
   "EditPhoto": "Muokkaa kuvaa",
+  "EmailChangeSuccess": "Sähköpostiosoitteesi on muutettu onnistuneesti.",
   "EmailNotVerified": "Sähköpostia ei ole vahvistettu",
   "ErrorAccountAlreadyUse": "Linkitetty tili on jo toisen käyttäjän käytössä",
   "FileManagement": "Tiedostojen hallinta",
@@ -18,6 +18,7 @@
   "LogoutDescription": "Huom. Kaikki aktiiviset yhteydet paitsi tämä yhteys kirjataan ulos, koska se on tällä hetkellä käytössä oleva.",
   "LogoutFrom": "Kirjaudu ulos {{platform}} {{browser}}?",
   "MyProfile": "Profiilini",
+  "NotificationsChannels": "Ilmoituskanavat",
   "ProviderSuccessfullyConnected": "Palveluntarjoajan yhdistäminen onnistui",
   "ProviderSuccessfullyDisconnected": "Yhteys palveluntarjoajaan katkaistu",
   "SendAgain": "Lähetä uudelleen",
@@ -25,6 +26,10 @@
   "SuccessLogout": "Aktiivisesta yhteydestä kirjauduttiin ulos:{{platform}}, {{browser}}",
   "SystemTheme": "Käytä järjestelmän teemaa",
   "SystemThemeDescription": "Vaihda automaattisesti vaalean ja tumman teeman välillä, kun systeemisi tekee niin.",
+  "TelegramAccount": "Telegram-tili",
+  "TelegramAccountDescription": "Yhdistääksesi TelegramBot-tilisi, seuraa salattua linkkiä ja klikkaa \"Yhdistä Telegram\" -painiketta.",
+  "TelegramAccountDisconnect": "Katkaise Telegram",
+  "TelegramAccountDisconnectDescription": "Sinun @{{username}}-tilisi on yhdistetty Telegram-ilmoituksia varten. Voit irrottaa tilin. Tässä tapauksessa et saa ilmoituksia.",
   "TerminateAllSessions": "Päätä kaikki paitsi nykyinen istunto",
   "TwoFactorDescription": "Järjestelmänvalvoja otti käyttöön kaksivaiheisen todennuksen koodia luovan sovelluksen kautta kaikille käyttäjille."
 }

@@ -26,11 +26,11 @@
 
 import React from "react";
 import { useNavigate, Link } from "react-router";
-import { useTheme } from "styled-components";
 
 import { getLogoUrl } from "../../../utils";
 import { DeviceType, WhiteLabelLogoType } from "../../../enums";
 import { ArticleHeaderLoader } from "../../../skeletons/article";
+import { useTheme } from "../../../hooks/useTheme";
 
 import { AsideHeader } from "../../aside-header";
 import BackButton from "./BackButton";
@@ -52,15 +52,27 @@ const ArticleHeader = ({
   ...rest
 }: ArticleHeaderProps) => {
   const navigate = useNavigate();
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const onLogoClick = () => {
     onLogoClickAction?.();
     navigate("/");
   };
 
-  const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
-  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
+  const burgerLogo = getLogoUrl(
+    WhiteLabelLogoType.LeftMenu,
+    !isBase,
+    false,
+    "",
+    true,
+  );
+  const logo = getLogoUrl(
+    WhiteLabelLogoType.LightSmall,
+    !isBase,
+    false,
+    "",
+    true,
+  );
 
   if (currentDeviceType === DeviceType.mobile)
     return (
@@ -74,6 +86,7 @@ const ArticleHeader = ({
             <BackButton
               showText={showText}
               currentDeviceType={currentDeviceType}
+              toggleArticleOpen={onIconClick}
             />
           ) : null
         }

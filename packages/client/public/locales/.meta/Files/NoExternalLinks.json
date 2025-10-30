@@ -3,7 +3,7 @@
   "content": "No external links",
   "content_en_sha1_hash": "ff672adde427c15e2c3387c1d27fc7212794d3f5",
   "created_at": "2025-05-19T21:30:55.908Z",
-  "updated_at": "2025-06-02T10:20:51.500Z",
+  "updated_at": "2025-10-27T16:14:33.652Z",
   "comment": {
     "text": "The translation key \"NoExternalLinks\" is used to describe a feature that disables external links in a user interface. This text appears on a button or option that prevents users from accessing external websites. Translators should provide a phrase that conveys this concept in the target language.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 962,
+      "line_number": 987,
       "context": "//         linksArray = [\n //           {\n //             id: \"no-external-links-option\",\n //             key: \"no-external-links\",\n //             label: !links.length\n //               ? t(\"Files:NoExternalLinks\")\n //               : t(\"Files:AllLinksAreDisabled\"),\n //             disableColor: true,\n //           },\n //           !isMobile && {\n //             key: \"separator0\",",
       "module": "/packages/client"
     }

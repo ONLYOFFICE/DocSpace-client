@@ -12,8 +12,6 @@
   "FolderTitleSkyDrive": "Thư mục OneDrive",
   "FolderTitleWebDav": "Thư mục WebDAV",
   "FolderTitleYandex": "Thư mục Yandex",
-  "GuestReleaseTipLink": "Tìm hiểu thêm về loại người dùng",
-  "LinkHasExpiredAndHasBeenDisabled": "Liên kết đã hết hạn và đã bị vô hiệu hóa",
   "LinkValidTime": "Liên kết này chỉ có giá trị trong {{days_count}} ngày.",
   "NewForm": "Mẫu PDF",
   "OwnerChange": "Thay đổi chủ sở hữu",
@@ -25,5 +23,6 @@
   "ThirdPartyInfo": "Thay đổi thông tin của bên thứ ba",
   "ThirdPartyTitle": "Dịch vụ của bên thứ ba",
   "TitleShowActions": "Hiển thị Hoạt động của File",
-  "TitleShowFolderActions": "Hiển thị Hoạt động Thư mục"
+  "TitleShowFolderActions": "Hiển thị Hoạt động Thư mục",
+  "TrashItemsDeleteSuccess": "Các mục đã chọn đã được xóa thành công khỏi {{sectionName}}"
 }

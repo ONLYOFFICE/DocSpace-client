@@ -240,6 +240,7 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
         ) : (
           <Text
             key={`bread-crumb-item-${item.id}`}
+            dataTestId={`selector_bread_crumb_item_${item.id}`}
             fontSize="16px"
             fontWeight={600}
             lineHeight="22px"
@@ -259,6 +260,7 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
                 id: item.id,
                 label: item.label,
                 isRoom: item.isRoom,
+                isAgent: item.isAgent,
               });
             }}
           >

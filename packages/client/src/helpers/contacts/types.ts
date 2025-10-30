@@ -24,8 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TUser } from "@docspace/shared/api/people/types";
+import { TUser, TUserGroup } from "@docspace/shared/api/people/types";
 import { EmployeeStatus, EmployeeType } from "@docspace/shared/enums";
+import { TCreatedBy } from "@docspace/shared/types";
 
 export type TContactsSelected =
   | "all"
@@ -45,6 +46,39 @@ export type TContactsTab =
 export type TContactsViewAs = "table" | "row";
 
 export type TContactsMenuItemdId = "active" | "pending" | "disabled" | "all";
+
+export type TPeopleListItem = {
+  id: string;
+  status: EmployeeStatus;
+  activationStatus: number;
+  statusType: string;
+  role: EmployeeType;
+  isOwner: boolean;
+  isAdmin: boolean;
+  isCollaborator: boolean;
+  isRoomAdmin: boolean;
+  isVisitor: boolean;
+  displayName: string;
+  avatar: string;
+  avatarMax: string | undefined;
+  hasAvatar: boolean;
+  email: string;
+  userName: string;
+  mobilePhone: string | undefined;
+  options: string[] | undefined;
+  groups: TUserGroup[] | undefined;
+  position: string | undefined;
+  firstName: string | undefined;
+  lastName: string | undefined;
+  isSSO: boolean;
+  isLDAP: boolean;
+  quotaLimit: number | undefined;
+  usedSpace: number | undefined;
+  isCustomQuota: boolean | string | undefined;
+  createdBy: TCreatedBy | undefined;
+  registrationDate: string | undefined;
+  tfaAppEnabled: boolean | undefined;
+};
 
 export type TChangeUserTypeDialogData = {
   toType: EmployeeType;

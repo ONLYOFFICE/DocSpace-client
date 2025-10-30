@@ -32,9 +32,7 @@
   "settings": {
     "window.zoomLevel": 0,
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "liveServer.settings.multiRootWorkspaceName": "✨ docspace",
-    "cSpell.words": ["docspace", "browserslist", "debuginfo", "doceditor"],
+    "editor.defaultFormatter": "biomejs.biome",
     "jest.autoRun": {},
     "jest.disabledWorkspaceFolders": [
       "🌐 root",
@@ -44,9 +42,6 @@
       "📦 @docspace/common",
       "🗂 @docspace/management"
     ],
-    "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
     "VsCodeTaskButtons.tasks": [
       {
         "label": "Server",
@@ -207,7 +202,6 @@
             "task": "Frontend | start-prod:lite",
             "tooltip": "🛠️ Start the \"frontend start production\" task"
           },
-          ,
           {
             "label": "Deploy",
             "task": "Frontend | deploy",
@@ -233,6 +227,11 @@
             "label": "Test all common tests",
             "task": "Test | Jest:common",
             "tooltip": "🛠️ Start the \"Test | Jest:common\" task"
+          },
+          {
+            "label": "Test ascii",
+            "task": "Test | Jest:ascii",
+            "tooltip": "🛠️ Start the \"Test | Jest:ascii\" task"
           },
           {
             "label": "Test translations",
@@ -276,13 +275,13 @@
           },
           {
             "label": "Lint",
-            "task": "Test | ESLint",
-            "tooltip": "🛠️ Start the \"eslint\" task"
+            "task": "Test | Biome",
+            "tooltip": "🛠️ Start the \"biome\" task"
           },
           {
             "label": "Lint:fix",
-            "task": "Test | ESLint:fix",
-            "tooltip": "🛠️ Start the \"eslint (autofix)\" task"
+            "task": "Test | Biome:fix",
+            "tooltip": "🛠️ Start the \"biome (autofix)\" task"
           },
           {
             "label": "Typescript issues (tsc)",
@@ -341,6 +340,26 @@
       "yaml",
       "yml"
     ],
-    "pnpmCatalogLens.enabled": true
+    "javascript.format.enable": true,
+    "typescript.format.enable": true,
+    "[javascript]": {
+      "editor.defaultFormatter": "biomejs.biome"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "biomejs.biome"
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "biomejs.biome"
+    },
+    "editor.codeActionsOnSave": {
+      "source.organizeImports.biome": "explicit",
+      "source.fixAll.biome": "explicit",
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
+    }
   }
 }

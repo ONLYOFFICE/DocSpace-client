@@ -3,7 +3,7 @@
   "content": "New document",
   "content_en_sha1_hash": "762b84690217181b9f127d2cfc1991e0892e844a",
   "created_at": "2025-05-19T21:30:46.732Z",
-  "updated_at": "2025-06-30T12:20:31.311Z",
+  "updated_at": "2025-10-27T16:14:33.347Z",
   "comment": {
     "text": "This translation key displays a label for new document creation options in the editor. It is used in buttons and contexts where users can create a new document, such as file formats dropdowns or dialog prompts.",
     "is_auto": true,
@@ -12,25 +12,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 75,
+      "line_number": 78,
       "context": "};\n \n export const getDefaultFileName = (format) => {\n switch (format) {\n case \"docx\":\n return i18n.t(\"Common:NewDocument\");\n case \"xlsx\":\n return i18n.t(\"Common:NewSpreadsheet\");\n case \"pptx\":\n return i18n.t(\"Common:NewPresentation\");\n case \"pdf\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2743,
+      "line_number": 3165,
       "context": "(parentRoomType === FolderType.FormRoom && isFolder);\n \n const createNewDoc = {\n id: \"personal_new-document\",\n key: \"new-document\",\n label: t(\"Common:NewDocument\"),\n onClick: () => this.onCreate(\"docx\"),\n icon: ActionsDocumentsReactSvgUrl,\n };\n \n const createNewSpreadsheet = {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
-      "line_number": 290,
+      "line_number": 297,
       "context": "? \"pptx\"\n : documentType === \"cell\"\n ? \"xlsx\"\n : \"pdf\";\n \n let fileName = t(\"Common:NewDocument\");\n \n switch (fileExt) {\n case \"xlsx\":\n fileName = t(\"Common:NewSpreadsheet\");\n break;",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/shared/selectors/Files/index.tsx",
-      "line_number": 371,
+      "line_number": 420,
       "context": "setSelectedItemType(\"files\");\n }\n \n if (checkCreating && item.id) {\n try {\n const fileInfo = await createFile(item.id, t(\"Common:NewDocument\"));\n await deleteFile(fileInfo.id, true, true);\n setIsDisabledFolder(false);\n } catch (e) {\n console.log(e);\n setIsDisabledFolder(true);",
       "module": "/packages/shared"
     }

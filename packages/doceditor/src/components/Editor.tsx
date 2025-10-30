@@ -47,7 +47,6 @@ import { EditorProps, TGoBack } from "@/types";
 import {
   onSDKRequestHistoryClose,
   onSDKRequestEditRights,
-  onSDKInfo,
   onSDKWarning,
   onSDKError,
   onSDKRequestRename,
@@ -55,6 +54,7 @@ import {
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
+import { isPDFDocument } from "@/utils";
 
 const Editor = ({
   config,
@@ -117,6 +117,7 @@ const Editor = ({
     onRequestStartFilling,
 
     onRequestRefreshFile,
+    onInfo,
   } = useEditorEvents({
     user,
     successAuth,
@@ -225,19 +226,28 @@ const Editor = ({
     }
   }
 
-  // if (newConfig.document && newConfig.document.info)
-  //  newConfig.document.info.favorite = false;
-  const url = typeof window !== "undefined" ? window.location.href : "";
+  try {
+    if (
+      newConfig.document &&
+      newConfig.document.info &&
+      !fileInfo?.requestToken
+    )
+      newConfig.document.info.favorite = !!fileInfo?.isFavorite;
 
-  if (url.indexOf("anchor") !== -1) {
-    const splitUrl = url.split("anchor=");
-    const decodeURI = decodeURIComponent(splitUrl[1]);
-    const obj = JSON.parse(decodeURI);
+    const url = typeof window !== "undefined" ? window.location.href : "";
 
-    if (newConfig.editorConfig)
-      newConfig.editorConfig.actionLink = {
-        action: obj.action,
-      };
+    if (url.indexOf("anchor") !== -1) {
+      const splitUrl = url.split("anchor=");
+      const decodeURI = decodeURIComponent(splitUrl[1]);
+      const obj = JSON.parse(decodeURI);
+
+      if (newConfig.editorConfig)
+        newConfig.editorConfig.actionLink = {
+          action: obj.action,
+        };
+    }
+  } catch (error) {
+    console.error(error);
   }
 
   newConfig.events = {
@@ -246,7 +256,7 @@ const Editor = ({
     onRequestEditRights: () =>
       onSDKRequestEditRights(t, fileInfo, newConfig.documentType),
     onAppReady: onSDKAppReady,
-    onInfo: onSDKInfo,
+    onInfo,
     onWarning: onSDKWarning,
     onError: onSDKError,
     onRequestHistoryData: onSDKRequestHistoryData,
@@ -279,8 +289,8 @@ const Editor = ({
     if (!user?.isVisitor) {
       newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
       if (
-        IS_DESKTOP_EDITOR ||
-        (typeof window !== "undefined" && !openOnNewPage)
+        !isPDFDocument(fileInfo) &&
+        (IS_DESKTOP_EDITOR || (typeof window !== "undefined" && !openOnNewPage))
       ) {
         newConfig.events.onRequestCreateNew = onSDKRequestCreateNew;
       }

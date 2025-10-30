@@ -63,12 +63,14 @@ const ModalDialogDelete = (props) => {
             onClick={onClickDelete}
             primary
             size="normal"
+            testId="portal_settings_modal_dialog_delete_button"
           />
           <Button
             className="cancel-button button-modal"
             label={t("Common:CancelButton")}
             size="normal"
             onClick={onClose}
+            testId="portal_settings_modal_dialog_cancel_button"
           />
         </StyledFooterContent>
       </ModalDialog.Footer>

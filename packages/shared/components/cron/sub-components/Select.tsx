@@ -43,6 +43,7 @@ export const Select = ({
   prefix,
   dropDownMaxHeight,
   isDisabled,
+  dataTestId,
 }: SelectProps) => {
   const { i18n } = useTranslation();
 
@@ -119,6 +120,8 @@ export const Select = ({
         dropDownMaxHeight={dropDownMaxHeight}
         isDisabled={isDisabled}
         directionY="both"
+        dataTestId={dataTestId}
+        dropDownTestId={dataTestId ? `${dataTestId}_dropdown` : undefined}
       />
     </div>
   );

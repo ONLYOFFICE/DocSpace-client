@@ -3,7 +3,7 @@
   "content": "Drop PDF forms here or upload from {{productName}} or device.",
   "content_en_sha1_hash": "97750a613b8c03b3f21e2f52d0fddbd5e0284429",
   "created_at": "2025-05-19T21:30:56.506Z",
-  "updated_at": "2025-05-26T07:57:32.163Z",
+  "updated_at": "2025-10-27T16:14:33.127Z",
   "comment": {
     "text": "This translation key is used for a default description displayed when users drop PDF forms or upload them from their device in an empty folder. It is likely to appear as a tooltip or hover text next to a button or icon that allows users to add PDF files to a folder. The description refers to the product name, which should be translated separately.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 147,
+      "line_number": 156,
       "context": "P.when(() => isNotAdmin || isArchiveFolderRoot),\n ],\n () => t(\"EmptyView:FormFolderDefaultUserDescription\"),\n )\n .with([FolderType.FormRoom, DefaultFolderType, P._], () =>\n t(\"EmptyView:FormFolderDefaultDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),",
       "module": "/packages/client"
     }

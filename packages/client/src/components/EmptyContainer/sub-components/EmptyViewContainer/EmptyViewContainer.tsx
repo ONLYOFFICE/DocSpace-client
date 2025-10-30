@@ -43,6 +43,7 @@ const EmptyViewContainer = observer((props: EmptyViewContainerProps) => {
     "Files",
     "Common",
     "Translations",
+    "AIRoom",
   ]);
 
   const options = useOptions(props, t);
@@ -77,6 +78,7 @@ const InjectedEmptyViewContainer = inject<
     publicRoomStore,
     peopleStore,
     settingsStore,
+    aiRoomStore,
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
     const { isPublicRoom } = publicRoomStore;
@@ -97,8 +99,12 @@ const InjectedEmptyViewContainer = inject<
       setView: setViewInfoPanel,
     } = infoPanelStore;
 
-    const { setSelectFileFormRoomDialogVisible, setQuotaWarningDialogVisible } =
-      dialogsStore;
+    const {
+      setSelectFileFormRoomDialogVisible,
+      setQuotaWarningDialogVisible,
+      setSelectFileAiKnowledgeDialogVisible,
+      setTemplateAccessSettingsVisible,
+    } = dialogsStore;
 
     const { security, access, rootFolderType } = selectedFolderStore;
 
@@ -126,9 +132,13 @@ const InjectedEmptyViewContainer = inject<
       onCreateAndCopySharedLink,
       setSelectFileFormRoomDialogVisible,
       setQuotaWarningDialogVisible,
+      setSelectFileAiKnowledgeDialogVisible,
+      setTemplateAccessSettingsVisible,
       isVisitor: userStore?.user?.isVisitor,
       isFrame,
       logoText,
+      isKnowledgeTab: aiRoomStore.isKnowledgeTab,
+      isResultsTab: aiRoomStore.isResultTab,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);

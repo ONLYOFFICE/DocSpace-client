@@ -24,10 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { ComponentType, ReactNode } from "react";
+import React, {
+  ComponentType,
+  ReactNode,
+  useCallback,
+  useRef,
+  useState,
+} from "react";
 import { Tooltip } from "./index";
 import type { TTooltipPlace } from "./Tooltip.types";
 import { DEFAULT_DELAY_SHOW } from "./Tooltip.constants";
+import type { TooltipRefProps } from "react-tooltip";
 
 interface WithTooltipProps {
   title?: string;
@@ -35,6 +42,74 @@ interface WithTooltipProps {
   tooltipId?: string;
   tooltipPlace?: TTooltipPlace;
   tooltipFitToContent?: boolean;
+}
+
+function useTooltipHandlers(
+  originalOnClick?: (e: React.MouseEvent) => void,
+  originalOnMouseEnter?: (e: React.MouseEvent) => void,
+  originalOnMouseLeave?: (e: React.MouseEvent) => void,
+) {
+  const [isOpen, setIsOpen] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    timeoutRef.current = setTimeout(() => {
+      setIsOpen(true);
+    }, DEFAULT_DELAY_SHOW);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setIsOpen(false);
+  }, []);
+
+  const handleMouseEnterCombined = useCallback(
+    (e: React.MouseEvent) => {
+      handleMouseEnter();
+      if (originalOnMouseEnter) {
+        originalOnMouseEnter(e);
+      }
+    },
+    [originalOnMouseEnter],
+  );
+
+  const handleMouseLeaveCombined = useCallback(
+    (e: React.MouseEvent) => {
+      handleMouseLeave();
+      if (originalOnMouseLeave) {
+        originalOnMouseLeave(e);
+      }
+    },
+    [originalOnMouseLeave],
+  );
+
+  const handleClickOrMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+      setIsOpen(false);
+      if (originalOnClick) {
+        originalOnClick(e);
+      }
+    },
+    [originalOnClick],
+  );
+
+  return {
+    isOpen,
+    handleMouseEnterCombined,
+    handleMouseLeaveCombined,
+    handleClickOrMouseDown,
+  };
 }
 
 export function withTooltip<T extends object>(
@@ -47,13 +122,33 @@ export function withTooltip<T extends object>(
       tooltipId,
       tooltipPlace = "bottom" as TTooltipPlace,
       tooltipFitToContent = false,
+      onClick: originalOnClick,
+      onMouseEnter: originalOnMouseEnter,
+      onMouseLeave: originalOnMouseLeave,
       ...restProps
-    } = props;
+    } = props as T &
+      WithTooltipProps & {
+        onClick?: (e: React.MouseEvent) => void;
+        onMouseEnter?: (e: React.MouseEvent) => void;
+        onMouseLeave?: (e: React.MouseEvent) => void;
+      };
 
     if (title || tooltipContent) {
       const uniqueId =
         tooltipId || `tooltip-${Math.random().toString(36).substring(2, 11)}`;
       const content: ReactNode = tooltipContent || title;
+      const tooltipRef = useRef<TooltipRefProps>(null);
+
+      const {
+        isOpen,
+        handleMouseEnterCombined,
+        handleMouseLeaveCombined,
+        handleClickOrMouseDown,
+      } = useTooltipHandlers(
+        originalOnClick,
+        originalOnMouseEnter,
+        originalOnMouseLeave,
+      );
 
       if (tooltipFitToContent) {
         return (
@@ -62,14 +157,21 @@ export function withTooltip<T extends object>(
               data-tooltip-id={uniqueId}
               data-tip=""
               style={{ display: "inline-block", width: "fit-content" }}
+              onMouseEnter={handleMouseEnterCombined}
+              onMouseLeave={handleMouseLeaveCombined}
+              onClick={handleClickOrMouseDown}
+              onMouseDown={handleClickOrMouseDown}
             >
               <WrappedComponent {...(restProps as T)} ref={ref} />
             </span>
             <Tooltip
+              ref={tooltipRef}
               id={uniqueId}
               place={tooltipPlace}
               getContent={() => content}
-              delayShow={DEFAULT_DELAY_SHOW}
+              isOpen={isOpen}
+              openOnClick={false}
+              imperativeModeOnly
             />
           </>
         );
@@ -82,12 +184,19 @@ export function withTooltip<T extends object>(
             ref={ref}
             data-tooltip-id={uniqueId}
             data-tip=""
+            onMouseEnter={handleMouseEnterCombined}
+            onMouseLeave={handleMouseLeaveCombined}
+            onClick={handleClickOrMouseDown}
+            onMouseDown={handleClickOrMouseDown}
           />
           <Tooltip
+            ref={tooltipRef}
             id={uniqueId}
             place={tooltipPlace}
             getContent={() => content}
-            delayShow={DEFAULT_DELAY_SHOW}
+            isOpen={isOpen}
+            openOnClick={false}
+            imperativeModeOnly
           />
         </>
       );
@@ -110,13 +219,33 @@ export function withTooltipForElement<
       tooltipId,
       tooltipPlace = "bottom" as TTooltipPlace,
       tooltipFitToContent = false,
+      onClick: originalOnClick,
+      onMouseEnter: originalOnMouseEnter,
+      onMouseLeave: originalOnMouseLeave,
       ...restProps
-    } = props;
+    } = props as React.ComponentPropsWithoutRef<T> &
+      WithTooltipProps & {
+        onClick?: (e: React.MouseEvent<Element>) => void;
+        onMouseEnter?: (e: React.MouseEvent<Element>) => void;
+        onMouseLeave?: (e: React.MouseEvent<Element>) => void;
+      };
 
     if (title || tooltipContent) {
       const uniqueId =
         tooltipId || `tooltip-${Math.random().toString(36).substring(2, 11)}`;
       const content: ReactNode = tooltipContent || title;
+      const tooltipRef = useRef<TooltipRefProps>(null);
+
+      const {
+        isOpen,
+        handleMouseEnterCombined,
+        handleMouseLeaveCombined,
+        handleClickOrMouseDown,
+      } = useTooltipHandlers(
+        originalOnClick,
+        originalOnMouseEnter,
+        originalOnMouseLeave,
+      );
 
       if (tooltipFitToContent) {
         return (
@@ -125,6 +254,10 @@ export function withTooltipForElement<
               data-tooltip-id={uniqueId}
               data-tip=""
               style={{ display: "inline-block", width: "fit-content" }}
+              onMouseEnter={handleMouseEnterCombined}
+              onMouseLeave={handleMouseLeaveCombined}
+              onClick={handleClickOrMouseDown}
+              onMouseDown={handleClickOrMouseDown}
             >
               {React.createElement<React.ComponentPropsWithoutRef<T>>(Element, {
                 ...(restProps as React.ComponentPropsWithoutRef<T>),
@@ -132,10 +265,13 @@ export function withTooltipForElement<
               })}
             </span>
             <Tooltip
+              ref={tooltipRef}
               id={uniqueId}
               place={tooltipPlace}
               getContent={() => content}
-              delayShow={DEFAULT_DELAY_SHOW}
+              isOpen={isOpen}
+              openOnClick={false}
+              imperativeModeOnly
             />
           </>
         );
@@ -148,12 +284,19 @@ export function withTooltipForElement<
             ref,
             "data-tooltip-id": uniqueId,
             "data-tip": "",
+            onMouseEnter: handleMouseEnterCombined,
+            onMouseLeave: handleMouseLeaveCombined,
+            onClick: handleClickOrMouseDown,
+            onMouseDown: handleClickOrMouseDown,
           })}
           <Tooltip
+            ref={tooltipRef}
             id={uniqueId}
             place={tooltipPlace}
             getContent={() => content}
-            delayShow={DEFAULT_DELAY_SHOW}
+            isOpen={isOpen}
+            openOnClick={false}
+            imperativeModeOnly
           />
         </>
       );

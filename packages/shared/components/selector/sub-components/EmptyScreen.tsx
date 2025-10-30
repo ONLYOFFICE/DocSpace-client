@@ -74,7 +74,8 @@ const EmptyScreen = ({
     searchEmptyScreenHeader,
     searchEmptyScreenDescription,
   } = use(EmptyScreenContext);
-  const { breadCrumbs, onSelectBreadCrumb } = React.use(BreadCrumbsContext);
+  const { withBreadCrumbs, breadCrumbs, onSelectBreadCrumb } =
+    React.use(BreadCrumbsContext);
 
   const { t } = useTranslation(["Common"]);
 
@@ -160,7 +161,7 @@ const EmptyScreen = ({
           </div>
         ) : null}
 
-        {!hideBackButton || withSearch ? (
+        {(withBreadCrumbs || createItem) && (!hideBackButton || withSearch) ? (
           <div
             className="empty-folder_container-links"
             onClick={

@@ -31,7 +31,13 @@ import Image from "next/image";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 
-export const Logo = ({ culture }: { culture?: string }) => {
+export const Logo = ({
+  culture,
+  isMobile = false,
+}: {
+  culture?: string;
+  isMobile: boolean;
+}) => {
   const lightLogoUrl = getLogoUrl(
     WhiteLabelLogoType.LoginPage,
     false,
@@ -46,6 +52,9 @@ export const Logo = ({ culture }: { culture?: string }) => {
     culture,
   );
 
+  const logoHeight = isMobile ? 24 : 44;
+  const logoWidth = isMobile ? 211 : 386;
+
   return (
     <>
       <Image
@@ -54,6 +63,8 @@ export const Logo = ({ culture }: { culture?: string }) => {
         src={lightLogoUrl}
         className="logo-wrapper logo-wrapper--light"
         alt="greeting-logo"
+        width={logoWidth}
+        height={logoHeight}
       />
 
       <Image
@@ -62,6 +73,8 @@ export const Logo = ({ culture }: { culture?: string }) => {
         src={darkLogoUrl}
         className="logo-wrapper logo-wrapper--dark"
         alt="greeting-logo"
+        width={logoWidth}
+        height={logoHeight}
       />
     </>
   );

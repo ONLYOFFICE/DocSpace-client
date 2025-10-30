@@ -102,7 +102,7 @@ const SimpleNav = ({
 }: SimpleNavProps) => {
   return (
     <StyledSimpleNav id="login-header">
-      <Logo culture={culture} />
+      <Logo culture={culture} isMobile />
       {isLanguageComboboxVisible ? (
         <LanguageComboboxWrapper
           className="modile-combobox"

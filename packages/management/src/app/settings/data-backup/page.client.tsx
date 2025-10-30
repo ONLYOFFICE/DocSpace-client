@@ -123,6 +123,8 @@ const DataBackup = ({
     backupProgressError,
     setBackupProgressError,
     setIsBackupProgressVisible,
+    backupProgressWarning,
+    setBackupProgressWarning,
   } = useBackup({
     account,
     backupScheduleResponse,
@@ -158,7 +160,6 @@ const DataBackup = ({
       isManagement
       isInitialLoading={false}
       isEmptyContentBeforeLoader={false}
-      //
       settingsFileSelector={{
         filesSettings,
       }}
@@ -214,6 +215,8 @@ const DataBackup = ({
       backupProgressError={backupProgressError}
       setBackupProgressError={setBackupProgressError}
       setIsBackupProgressVisible={setIsBackupProgressVisible}
+      backupProgressWarning={backupProgressWarning}
+      setBackupProgressWarning={setBackupProgressWarning}
     />
   );
 };

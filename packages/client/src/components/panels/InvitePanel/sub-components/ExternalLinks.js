@@ -74,6 +74,7 @@ const ExternalLinks = ({
   isUserTariffLimit,
   standalone,
   allowInvitingGuests,
+  isAIAgentsFolder,
 }) => {
   const [isLinksToggling, setIsLinksToggling] = useState(false);
 
@@ -86,7 +87,7 @@ const ExternalLinks = ({
       toastr.success(
         `${t("Common:LinkCopySuccess")}. ${t("Translations:LinkValidTime", {
           days_count: 7,
-        })}`,
+        })}`
       );
 
       copyShareLink(link);
@@ -99,7 +100,7 @@ const ExternalLinks = ({
         roomId,
         "Invite",
         0,
-        shareLinks[0].id,
+        shareLinks[0].id
       ));
     return setShareLinks([]);
   };
@@ -226,11 +227,24 @@ const ExternalLinks = ({
     true,
     isOwner,
     isAdmin,
-    standalone,
+    standalone
   );
 
   const filteredAccesses =
     roomType === -1 ? accesses : filterPaidRoleOptions(accesses);
+
+  const keyTranslation =
+    roomId === -1
+      ? "InviteViaLinkDescriptionAccounts"
+      : isAIAgentsFolder
+      ? allowInvitingGuests
+        ? "InviteViaLinkDescriptionAgentGuest"
+        : "InviteViaLinkDescriptionAgentMembers"
+      : allowInvitingGuests
+      ? "InviteViaLinkDescriptionRoomGuest"
+      : "InviteViaLinkDescriptionRoomMembers";
+
+  const description = t(keyTranslation, { productName: t("Common:ProductName") });
 
   return (
     <StyledExternalLink noPadding ref={inputsRef}>
@@ -271,17 +285,7 @@ const ExternalLinks = ({
           dataTestId="invite_panel_external_links_toggle"
         />
       </StyledSubHeader>
-      <StyledDescription>
-        {roomId === -1
-          ? t("InviteViaLinkDescriptionAccounts", {
-              productName: t("Common:ProductName"),
-            })
-          : !allowInvitingGuests
-            ? t("InviteViaLinkDescriptionRoomMembers", {
-                productName: t("Common:ProductName"),
-              })
-            : t("InviteViaLinkDescriptionRoomGuest")}
-      </StyledDescription>
+      <StyledDescription>{description}</StyledDescription>
       {externalLinksVisible ? (
         <StyledInviteInputContainer key={activeLink.id}>
           <StyledInviteInput isShowCross>
@@ -325,6 +329,7 @@ export default inject(
     peopleStore,
     currentQuotaStore,
     settingsStore,
+    treeFoldersStore,
   }) => {
     const { isOwner, isAdmin } = userStore.user;
     const { invitePanelOptions } = dialogsStore;
@@ -332,6 +337,7 @@ export default inject(
     const { getPortalInviteLink } = peopleStore.inviteLinksStore;
     const { isUserTariffLimit } = currentQuotaStore;
     const { standalone, allowInvitingGuests } = settingsStore;
+    const { isAIAgentsFolder } = treeFoldersStore;
 
     return {
       roomId,
@@ -343,6 +349,7 @@ export default inject(
       isUserTariffLimit,
       standalone,
       allowInvitingGuests,
+      isAIAgentsFolder,
     };
-  },
+  }
 )(observer(ExternalLinks));

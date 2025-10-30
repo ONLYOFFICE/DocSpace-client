@@ -34,7 +34,7 @@
     "moment": "2.30.1",
     "moment-timezone": "0.5.46",
     "nconf": "0.12.1",
-    "next": "16.0.0",
+    "next": "16.0.1",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-i18next": "14.0.1",

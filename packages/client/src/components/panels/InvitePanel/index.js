@@ -29,7 +29,11 @@ import { observer, inject } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { EmployeeType, ShareAccessRights } from "@docspace/shared/enums";
+import {
+  EmployeeType,
+  ShareAccessRights,
+  RoomsType,
+} from "@docspace/shared/enums";
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
 import { Button } from "@docspace/shared/components/button";

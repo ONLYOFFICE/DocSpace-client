@@ -1016,6 +1016,20 @@ export function setDefaultRoomQuota(enableQuota, defaultQuota) {
   return request(options);
 }
 
+export function setDefaultAIAgentQuota(enableQuota, defaultQuota) {
+  const data = {
+    enableQuota,
+    defaultQuota,
+  };
+  const options = {
+    method: "post",
+    url: "",
+    data,
+  };
+
+  return request(options);
+}
+
 export function getQuotaSettings(signal?: AbortSignal) {
   return request({
     method: "get",

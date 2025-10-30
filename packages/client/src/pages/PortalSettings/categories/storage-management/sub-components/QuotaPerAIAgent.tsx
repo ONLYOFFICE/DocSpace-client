@@ -29,34 +29,46 @@ import { inject, observer } from "mobx-react";
 
 import QuotaPerItemComponent from "./QuotaPerItem";
 
-const QuotaPerRoomComponent = (props) => {
-  const { setRoomQuota, defaultRoomsQuota, isDefaultRoomsQuotaSet } = props;
+type QuotaPerAIAgentComponentProps = {
+  setAIAgentQuota: (size: number, t: string) => void;
+  defaultAIAgentQuota: number;
+  isDefaultAIAgentQuotaSet: boolean;
+};
+
+const QuotaPerAIAgentComponent = (props: QuotaPerAIAgentComponentProps) => {
+  const { setAIAgentQuota, defaultAIAgentQuota, isDefaultAIAgentQuotaSet } =
+    props;
   const { t } = useTranslation("Settings");
 
-  const initialSizeProp = isDefaultRoomsQuotaSet
-    ? { initialSize: defaultRoomsQuota }
+  const initialSizeProp = isDefaultAIAgentQuotaSet
+    ? { initialSize: defaultAIAgentQuota }
     : {};
+
+  const setQuota = (size: number) => setAIAgentQuota(size, t);
+  const disableQuota = () => setQuota(-1);
 
   return (
     <QuotaPerItemComponent
-      formLabel={t("QuotaPerRoom")}
-      toggleLabel={t("DefineQuotaPerRoom")}
-      disableQuota={() => setRoomQuota(-1, t)}
-      saveQuota={(size) => setRoomQuota(size, t)}
+      formLabel={t("QuotaPerAIAgent")}
+      toggleLabel={t("DefineQuotaPerAIAgent")}
+      disableQuota={disableQuota}
+      saveQuota={setQuota}
       {...initialSizeProp}
-      isQuotaSet={isDefaultRoomsQuotaSet}
+      isQuotaSet={isDefaultAIAgentQuotaSet}
       tabIndex={1}
-      dataTestId="quota_room"
-      toggleDescription={t("SetDefaultRoomQuota", {
+      dataTestId="quota_ai_agent"
+      toggleDescription={t("SetDefaultAIAgentQuota", {
         productName: t("Common:ProductName"),
       })}
     />
   );
 };
 
-export const QuotaPerRoomComponentSection = inject(({ currentQuotaStore }) => {
-  const { setRoomQuota, defaultRoomsQuota, isDefaultRoomsQuotaSet } =
-    currentQuotaStore;
+export const QuotaPerAIAgentComponentSection = inject(
+  ({ currentQuotaStore }: TStore) => {
+    const { setAIAgentQuota, defaultAIAgentQuota, isDefaultAIAgentQuotaSet } =
+      currentQuotaStore;
 
-  return { setRoomQuota, defaultRoomsQuota, isDefaultRoomsQuotaSet };
-})(observer(QuotaPerRoomComponent));
+    return { setAIAgentQuota, defaultAIAgentQuota, isDefaultAIAgentQuotaSet };
+  },
+)(observer(QuotaPerAIAgentComponent));

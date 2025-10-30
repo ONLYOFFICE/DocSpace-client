@@ -34,6 +34,7 @@ import {
   AI_TOOLS,
   BACKUP_SERVICE,
   TOTAL_SIZE,
+  WEB_SEARCH,
 } from "@docspace/shared/constants";
 import { setServiceState } from "@docspace/shared/api/portal";
 
@@ -48,6 +49,7 @@ import GracePeriodModal from "./sub-components/AdditionalStorage/GracePeriodModa
 import BackupServiceDialog from "./sub-components/Backup/BackupServiceDialog";
 import ConfirmationDialog from "./sub-components/ConfirmationDialog";
 import AIServiceDialog from "./sub-components/AITools/AIServiceDialog";
+import WebSearchDialog from "./sub-components/WebSearch/WebSearchDialog";
 
 const Services = (props: InjectedProps) => {
   const {
@@ -69,6 +71,7 @@ const Services = (props: InjectedProps) => {
   const [isStorageVisible, setIsStorageVisible] = useState(false);
   const [isBackupVisible, setIsBackupVisible] = useState(false);
   const [isAIServiceVisible, setIsAIServiceVisible] = useState(false);
+  const [isWebSearchVisible, setIsWebSearchVisible] = useState(false);
 
   const [isConfirmDialogVisible, setIsConfirmDialogVisible] = useState(false);
   const [isCurrentConfirmDialogVisible, setIsCurrentConfirmDialogVisible] =
@@ -132,6 +135,12 @@ const Services = (props: InjectedProps) => {
         productName: t("Common:ProductName"),
       }),
     },
+    [WEB_SEARCH]: {
+      title: t("Common:Confirmation"),
+      body: t("Services:AItoolsConfirm", {
+        productName: t("Common:ProductName"),
+      }),
+    },
   };
 
   const getDialogContent = (actionType: string | null) => {
@@ -156,6 +165,8 @@ const Services = (props: InjectedProps) => {
     if (id === BACKUP_SERVICE) setIsBackupVisible(true);
 
     if (id === AI_TOOLS) setIsAIServiceVisible(true);
+
+    if (id === WEB_SEARCH) setIsWebSearchVisible(true);
   };
 
   const onClose = () => {
@@ -198,6 +209,12 @@ const Services = (props: InjectedProps) => {
       }
     }
 
+    if (id === WEB_SEARCH) {
+      if (isWebSearchVisible) {
+        previousDialogRef.current = true;
+      }
+    }
+
     if (!currentEnabled || id === BACKUP_SERVICE)
       setIsConfirmDialogVisible(true);
     else {
@@ -230,6 +247,10 @@ const Services = (props: InjectedProps) => {
     setIsAIServiceVisible(false);
   };
 
+  const onCloseWebSearch = () => {
+    setIsWebSearchVisible(false);
+  };
+
   const onCloseConfirmDialog = () => {
     const isDialogVisible = previousDialogRef.current;
 
@@ -239,6 +260,8 @@ const Services = (props: InjectedProps) => {
       setIsBackupVisible(true);
     if (isDialogVisible && confirmActionType === AI_TOOLS)
       setIsAIServiceVisible(true);
+    if (isDialogVisible && confirmActionType === WEB_SEARCH)
+      setIsWebSearchVisible(true);
 
     setIsConfirmDialogVisible(false);
   };
@@ -254,6 +277,15 @@ const Services = (props: InjectedProps) => {
     setIsConfirmDialogVisible(false);
     changeServiceState(confirmActionType);
 
+    const getSuccessMessage = () => {
+      if (confirmActionType === BACKUP_SERVICE) {
+        return t("Services:BackupServiceEnabled");
+      }
+      if (confirmActionType === AI_TOOLS) {
+        return t("Services:AIToolsEnabled");
+      }
+    };
+
     try {
       const result = await setServiceState(raw);
 
@@ -263,7 +295,7 @@ const Services = (props: InjectedProps) => {
         return;
       }
 
-      toastr.success(t("Services:BackupServiceEnabled"));
+      toastr.success(getSuccessMessage());
     } catch (error) {
       console.error(error);
       toastr.error(t("Common:UnexpectedError"));
@@ -319,6 +351,13 @@ const Services = (props: InjectedProps) => {
         <AIServiceDialog
           visible={isAIServiceVisible}
           onClose={onCloseAiService}
+          onToggle={onToggle}
+        />
+      ) : null}
+      {isWebSearchVisible ? (
+        <WebSearchDialog
+          visible={isWebSearchVisible}
+          onClose={onCloseWebSearch}
           onToggle={onToggle}
         />
       ) : null}

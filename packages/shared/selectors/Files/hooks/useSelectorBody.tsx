@@ -207,9 +207,15 @@ const useSelectorBody = ({
   const isEmptyFilesRootScreen = selectedItemType === "files";
   const emptyScreenHeader = isEmptyFilesRootScreen
     ? t("Common:SelectorEmptyScreenHeader")
+    : selectedItemType === "agents"
+    ? t("Common:EmptyRoomsHeaderAgent")
     : t("Common:EmptyRoomsHeader");
   const emptyScreenDescription = isEmptyFilesRootScreen
     ? ""
+    : selectedItemType === "agents"
+    ? t("Common:EmptyRoomsDescriptionTextAgent", {
+        sectionName: t("Common:AIAgents"),
+      })
     : t("Common:EmptyRoomsDescriptionText", {
         sectionName: t("Common:Rooms"),
       });

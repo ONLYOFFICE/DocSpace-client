@@ -68,6 +68,7 @@ import { setCookie, getCookie } from "../utils/cookie";
 import { combineUrl } from "../utils/combineUrl";
 import FirebaseHelper from "../utils/firebase";
 import SocketHelper from "../utils/socket";
+import { isRequestAborted } from "../utils/axios/isRequestAborted";
 import { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
 
 import {
@@ -1063,19 +1064,22 @@ class SettingsStore {
 
   init = async () => {
     this.setIsLoading(true);
-    const requests = [];
 
-    requests.push(this.getPortalSettings(), this.getAppearanceTheme());
+    try {
+      await Promise.all([this.getPortalSettings(), this.getAppearanceTheme()]);
 
-    await Promise.all(requests);
+      if (!this.isPortalDeactivate) {
+        await this.getBuildVersionInfo();
+      }
+    } catch (error) {
+      if (isRequestAborted(error)) return;
 
-    if (!this.isPortalDeactivate) {
-      await this.getBuildVersionInfo();
+      console.error(error);
+    } finally {
+      this.setIsLoading(false);
+      this.setIsLoaded(true);
+      this.setIsFirstLoaded(true);
     }
-
-    this.setIsLoading(false);
-    this.setIsLoaded(true);
-    this.setIsFirstLoaded(true);
   };
 
   setRoomsMode = (mode: boolean) => {

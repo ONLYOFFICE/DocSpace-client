@@ -205,12 +205,20 @@ const getAIAgentsAIDisabledDescription = (
 ) => {
   return match([standalone, isDocSpaceAdmin])
     .with([true, true], () =>
-      t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription"),
+      t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription", {
+        productName: t("Common:ProductName"),
+      }),
     )
     .with([false, true], () =>
-      t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminDescription"),
+      t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminDescription", {
+        productName: t("Common:ProductName"),
+      }),
     )
-    .otherwise(() => t("EmptyView:EmptyAIAgentsAIDisabledDescription"));
+    .otherwise(() =>
+      t("EmptyView:EmptyAIAgentsAIDisabledDescription", {
+        productName: t("Common:ProductName"),
+      }),
+    );
 };
 
 const getAIAgentsAIEnabledDescription = (

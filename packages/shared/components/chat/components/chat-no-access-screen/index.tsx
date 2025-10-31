@@ -69,15 +69,21 @@ export const ChatNoAccessScreen = ({
     : match([standalone, isDocSpaceAdmin])
         // standalone admin
         .with([true, true], () =>
-          t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription"),
+          t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription", {
+            productName: t("Common:ProductName"),
+          }),
         )
         // saas admin
         .with([false, true], () =>
-          t("Common:EmptyChatAIDisabledSaasAdminDescription"),
+          t("Common:EmptyChatAIDisabledSaasAdminDescription", {
+            productName: t("Common:ProductName"),
+          }),
         )
         // standalone/saas user
         .with([P._, false], () =>
-          t("Common:EmptyChatAIDisabledUserDescription"),
+          t("Common:EmptyChatAIDisabledUserDescription", {
+            productName: t("Common:ProductName"),
+          }),
         )
         .otherwise(() => "");
 

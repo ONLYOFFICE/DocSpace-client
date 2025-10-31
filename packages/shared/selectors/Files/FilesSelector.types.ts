@@ -79,6 +79,7 @@ export type UseSocketHelperProps = {
   setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   disabledItems: (string | number)[];
+  disabledFolderType?: FolderType;
   filterParam?: string;
   withCreate?: boolean;
 };
@@ -126,6 +127,7 @@ export type UseFilesHelpersProps = {
   setIsInit: (value: boolean) => void;
   searchValue?: string;
   disabledItems: (string | number)[];
+  disabledFolderType?: FolderType;
   includedItems?: (string | number)[];
   setSelectedItemSecurity: (value: TFileSecurity | TFolderSecurity) => void;
   isThirdParty: boolean;
@@ -200,6 +202,7 @@ export type FilesSelectorProps = TInfoBar &
     | { getIcon?: never; filesSettings: TFilesSettings }
   ) & {
     disabledItems: (string | number)[];
+    disabledFolderType?: FolderType;
     includedItems?: (string | number)[];
     filterParam?: string | number;
     withoutBackButton: boolean;

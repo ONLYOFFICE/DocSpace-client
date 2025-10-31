@@ -34,6 +34,7 @@ import {
   AI_TOOLS,
   BACKUP_SERVICE,
   TOTAL_SIZE,
+  WEB_SEARCH,
 } from "@docspace/shared/constants";
 import { setServiceState } from "@docspace/shared/api/portal";
 
@@ -48,6 +49,7 @@ import GracePeriodModal from "./sub-components/AdditionalStorage/GracePeriodModa
 import BackupServiceDialog from "./sub-components/Backup/BackupServiceDialog";
 import ConfirmationDialog from "./sub-components/ConfirmationDialog";
 import AIServiceDialog from "./sub-components/AITools/AIServiceDialog";
+import WebSearchDialog from "./sub-components/WebSearch/WebSearchDialog";
 
 const Services = (props: InjectedProps) => {
   const {
@@ -66,13 +68,25 @@ const Services = (props: InjectedProps) => {
     isFreeTariff,
   } = props;
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
-  const [isStorageVisible, setIsStorageVisible] = useState(false);
-  const [isBackupVisible, setIsBackupVisible] = useState(false);
-  const [isAIServiceVisible, setIsAIServiceVisible] = useState(false);
+  const [dialogVisibility, setDialogVisibility] = useState({
+    [TOTAL_SIZE]: false,
+    [BACKUP_SERVICE]: false,
+    [AI_TOOLS]: false,
+    [WEB_SEARCH]: false,
+  });
+
+  const updateDialogVisibility = (
+    dialogType: keyof typeof dialogVisibility,
+    isVisible: boolean,
+  ) => {
+    setDialogVisibility((prev) => ({
+      ...prev,
+      [dialogType]: isVisible,
+    }));
+  };
 
   const [isConfirmDialogVisible, setIsConfirmDialogVisible] = useState(false);
-  const [isCurrentConfirmDialogVisible, setIsCurrentConfirmDialogVisible] =
-    useState(false);
+  const [isCurrentConfirmState, setIsCurrentConfirmState] = useState(false);
   const [isStorageCancelattion, setIsStorageCancellation] = useState(false);
   const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
     useState(false);
@@ -91,19 +105,24 @@ const Services = (props: InjectedProps) => {
     if (!isVisibleWalletSettings || !isInitServicesPage) return;
 
     if (confirmActionType === TOTAL_SIZE) {
-      setIsStorageVisible(isVisibleWalletSettings);
+      updateDialogVisibility(TOTAL_SIZE, isVisibleWalletSettings);
     } else {
       setIsTopUpBalanceVisible(true);
     }
-  }, [isVisibleWalletSettings, confirmActionType, isInitServicesPage]);
+  }, [
+    isVisibleWalletSettings,
+    confirmActionType,
+    isInitServicesPage,
+    updateDialogVisibility,
+  ]);
 
   useEffect(() => {
     if (openDialog) {
-      setIsStorageVisible(openDialog);
+      updateDialogVisibility(TOTAL_SIZE, openDialog);
       setPreviousValue(previousStoragePlanSize);
       navigate(location.pathname, { replace: true });
     }
-  }, [openDialog]);
+  }, [openDialog, updateDialogVisibility]);
 
   useEffect(() => {
     return () => {
@@ -112,9 +131,9 @@ const Services = (props: InjectedProps) => {
   }, []);
 
   const confirmationDialogContent = {
-    backup: {
+    [BACKUP_SERVICE]: {
       title: t("Common:Confirmation"),
-      body: !isCurrentConfirmDialogVisible
+      body: !isCurrentConfirmState
         ? t("Services:EnableBackupConfirm", {
             productName: t("Common:ProductName"),
           })
@@ -131,6 +150,10 @@ const Services = (props: InjectedProps) => {
       body: t("Services:AItoolsConfirm", {
         productName: t("Common:ProductName"),
       }),
+    },
+    [WEB_SEARCH]: {
+      title: t("Common:Confirmation"),
+      body: "Temp Web Search Description Text",
     },
   };
 
@@ -151,15 +174,11 @@ const Services = (props: InjectedProps) => {
       return;
     }
 
-    if (id === TOTAL_SIZE) setIsStorageVisible(true);
-
-    if (id === BACKUP_SERVICE) setIsBackupVisible(true);
-
-    if (id === AI_TOOLS) setIsAIServiceVisible(true);
+    updateDialogVisibility(id as keyof typeof dialogVisibility, true);
   };
 
   const onClose = () => {
-    setIsStorageVisible(false);
+    updateDialogVisibility(TOTAL_SIZE, false);
   };
 
   const onCloseStorageCancell = () => {
@@ -169,14 +188,14 @@ const Services = (props: InjectedProps) => {
   const onToggle = async (id: string, currentEnabled: boolean) => {
     setConfirmActionType(id);
 
-    setIsCurrentConfirmDialogVisible(currentEnabled);
+    setIsCurrentConfirmState(currentEnabled);
 
     if (id === TOTAL_SIZE) {
       if (currentEnabled) {
         setIsStorageCancellation(true);
         return;
       }
-      setIsStorageVisible(true);
+      updateDialogVisibility(TOTAL_SIZE, true);
 
       return;
     }
@@ -186,14 +205,8 @@ const Services = (props: InjectedProps) => {
       return;
     }
 
-    if (id === BACKUP_SERVICE) {
-      if (isBackupVisible) {
-        previousDialogRef.current = true;
-      }
-    }
-
-    if (id === AI_TOOLS) {
-      if (isAIServiceVisible) {
+    if (id !== TOTAL_SIZE) {
+      if (dialogVisibility[id as keyof typeof dialogVisibility]) {
         previousDialogRef.current = true;
       }
     }
@@ -223,11 +236,15 @@ const Services = (props: InjectedProps) => {
   };
 
   const onCloseBackup = () => {
-    setIsBackupVisible(false);
+    updateDialogVisibility(BACKUP_SERVICE, false);
   };
 
   const onCloseAiService = () => {
-    setIsAIServiceVisible(false);
+    updateDialogVisibility(AI_TOOLS, false);
+  };
+
+  const onCloseWebSearch = () => {
+    updateDialogVisibility(WEB_SEARCH, false);
   };
 
   const onCloseConfirmDialog = () => {
@@ -235,10 +252,12 @@ const Services = (props: InjectedProps) => {
 
     previousDialogRef.current = false;
 
-    if (isDialogVisible && confirmActionType === BACKUP_SERVICE)
-      setIsBackupVisible(true);
-    if (isDialogVisible && confirmActionType === "ai")
-      setIsAIServiceVisible(true);
+    if (isDialogVisible && confirmActionType) {
+      updateDialogVisibility(
+        confirmActionType as keyof typeof dialogVisibility,
+        true,
+      );
+    }
 
     setIsConfirmDialogVisible(false);
   };
@@ -248,11 +267,23 @@ const Services = (props: InjectedProps) => {
 
     const raw = {
       service: confirmActionType,
-      enabled: !isCurrentConfirmDialogVisible,
+      enabled: !isCurrentConfirmState,
     };
 
     setIsConfirmDialogVisible(false);
     changeServiceState(confirmActionType);
+
+    const getSuccessMessage = () => {
+      if (confirmActionType === BACKUP_SERVICE) {
+        return t("Services:BackupServiceEnabled");
+      }
+      if (confirmActionType === AI_TOOLS) {
+        return t("Services:AIToolsEnabled");
+      }
+      if (confirmActionType === WEB_SEARCH) {
+        return t("Services:WebSearchEnabled");
+      }
+    };
 
     try {
       const result = await setServiceState(raw);
@@ -263,7 +294,7 @@ const Services = (props: InjectedProps) => {
         return;
       }
 
-      toastr.success(t("Services:BackupServiceEnabled"));
+      if (!isCurrentConfirmState) toastr.success(getSuccessMessage());
     } catch (error) {
       console.error(error);
       toastr.error(t("Common:UnexpectedError"));
@@ -289,9 +320,9 @@ const Services = (props: InjectedProps) => {
           visible={isShowStorageTariffDeactivatedModal}
         />
       ) : null}
-      {isStorageVisible ? (
+      {dialogVisibility[TOTAL_SIZE] ? (
         <StoragePlanUpgrade
-          visible={isStorageVisible}
+          visible={dialogVisibility[TOTAL_SIZE]}
           onClose={onClose}
           previousValue={previousValue}
         />
@@ -308,17 +339,24 @@ const Services = (props: InjectedProps) => {
           onClose={onCloseGracePeriodModal}
         />
       ) : null}
-      {isBackupVisible ? (
+      {dialogVisibility[BACKUP_SERVICE] ? (
         <BackupServiceDialog
-          visible={isBackupVisible}
+          visible={dialogVisibility[BACKUP_SERVICE]}
           onClose={onCloseBackup}
           onToggle={onToggle}
         />
       ) : null}
-      {isAIServiceVisible ? (
+      {dialogVisibility[AI_TOOLS] ? (
         <AIServiceDialog
-          visible={isAIServiceVisible}
+          visible={dialogVisibility[AI_TOOLS]}
           onClose={onCloseAiService}
+          onToggle={onToggle}
+        />
+      ) : null}
+      {dialogVisibility[WEB_SEARCH] ? (
+        <WebSearchDialog
+          visible={dialogVisibility[WEB_SEARCH]}
+          onClose={onCloseWebSearch}
           onToggle={onToggle}
         />
       ) : null}

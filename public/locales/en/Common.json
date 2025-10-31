@@ -618,6 +618,7 @@
   "NotFoundGroups": "No groups found",
   "NotFoundGuests": "No added guests yet",
   "NotFoundGuestsDescription": "New guests will be added here once you invite them to the room.",
+  "NotFoundGuestsDescriptionAgent": "New guests will be added here once you invite them to the agent.",
   "NotFoundGuestsFilter": "No guests found",
   "NotFoundLanguage": "Can't find your language? Contact us at <1>{{supportEmail}}</1> to take part in the translation program and get rewards.",
   "NotFoundMembers": "No members found",

@@ -78,7 +78,9 @@ const EmailInputForm = ({
         labelVisible={false}
         hasError={isEmailErrorShow ? !emailValid : undefined}
         errorMessage={
-          emailErrorText ? emailErrorText : t("Common:RequiredField")
+          emailErrorText
+            ? t(`Common:${emailErrorText}`)
+            : t("Common:RequiredField")
         }
         dataTestId="email_field_container"
       >
@@ -99,6 +101,7 @@ const EmailInputForm = ({
           onValidateInput={onValidate}
           forwardedRef={ref}
           onKeyDown={onKeyPress}
+          dataTestId="email-input-invite"
         />
       </FieldContainer>
       <Button

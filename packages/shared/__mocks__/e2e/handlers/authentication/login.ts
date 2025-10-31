@@ -67,8 +67,27 @@ export const errorLogin401 = {
   statusCode: 401,
 };
 
-export const login = (errorStatus: 401 | null = null) => {
+export const errorLogin403 = {
+  count: 1,
+  error: {
+    message: "Too many login attempts. Please try again later",
+    type: null,
+    stack: null,
+    hresult: 0,
+  },
+  links: [
+    {
+      href: url,
+      action: "POST",
+    },
+  ],
+  status: 1,
+  statusCode: 403,
+};
+
+export const login = (errorStatus: 401 | 403 | null = null) => {
   if (errorStatus === 401) return new Response(JSON.stringify(errorLogin401));
+  if (errorStatus === 403) return new Response(JSON.stringify(errorLogin403));
 
   return new Response(JSON.stringify(successLogin));
 };

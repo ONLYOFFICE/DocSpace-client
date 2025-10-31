@@ -475,12 +475,12 @@ class FilesStore {
     this.createNewFilesQueue.on("resolve", this.onResolveNewFile);
   }
 
-  get selection () {
+  get selection() {
     return this._selection;
   }
 
-  set selection (value) {
-    if(equal(value, this._selection)) return;
+  set selection(value) {
+    if (equal(value, this._selection)) return;
 
     this._selection = value;
   }
@@ -1503,7 +1503,7 @@ class FilesStore {
   };
 
   setSelection = (selection) => {
-    this.selection = selection
+    this.selection = selection;
   };
 
   getSelection = () => {

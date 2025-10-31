@@ -190,7 +190,7 @@ const getAIAgentsAIDisabledTitle = (
 ) => {
   return match([standalone, isDocSpaceAdmin])
     .with([true, true], () =>
-      t("EmptyView:EmptyAIAgentsAIDisabledStandaloneAdminTitle"),
+      t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle"),
     )
     .with([false, true], () =>
       t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminTitle"),

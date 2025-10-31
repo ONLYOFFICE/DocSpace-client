@@ -200,8 +200,10 @@ const View = ({
   });
 
   React.useEffect(() => {
-    const guestShareLinkInvalid = sessionStorage.getItem("guestShareLinkInvalid");
-    
+    const guestShareLinkInvalid = sessionStorage.getItem(
+      "guestShareLinkInvalid",
+    );
+
     if (guestShareLinkInvalid === "true") {
       toastr.error(t("Common:InvalidLink"));
       sessionStorage.removeItem("guestShareLinkInvalid");
@@ -528,7 +530,7 @@ const View = ({
               initChats={initChats}
               isAdmin={isAdmin}
               aiReady={aiConfig?.aiReady || false}
-              standalone={standalone}
+              standalone // NOTE: AI SaaS same as AI Standalone in v.4.0
             />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />

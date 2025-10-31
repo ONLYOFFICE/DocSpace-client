@@ -58,9 +58,11 @@ export const ChatNoAccessScreen = ({
     <ChatNoAccessRightsDarkIcon />
   );
 
-  const title = aiReady
+  const title = !canUseChat
     ? t("Common:AIChatNoAccessTitle")
-    : t("Common:AIFeaturesAreCurrentlyDisabled");
+    : isDocSpaceAdmin && standalone
+      ? t("Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle")
+      : t("Common:AIFeaturesAreCurrentlyDisabled");
 
   const description = !canUseChat
     ? t("Common:AIChatNoAccessDescription")

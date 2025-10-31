@@ -198,10 +198,7 @@ const MainProfile = (props: MainProfileProps) => {
     }
   };
 
-  const debouncedUpdateDropDownMaxHeight = useCallback(
-    debounce(updateDropDownMaxHeight, 50),
-    [updateDropDownMaxHeight]
-  );
+  const debouncedUpdateDropDownMaxHeight = debounce(updateDropDownMaxHeight, 50);
 
   const onChangeFileContext = (e?: unknown) => {
     onChangeFile?.(e, t);

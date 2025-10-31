@@ -83,7 +83,7 @@ const InjectedEmptyViewContainer = inject<
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
     const { isPublicRoom } = publicRoomStore;
-    const { isFrame, logoText, aiReady, standalone } = settingsStore;
+    const { isFrame, logoText, aiConfig, standalone } = settingsStore;
 
     const { myFolderId, myFolder, roomsFolder } = treeFoldersStore;
 
@@ -141,7 +141,7 @@ const InjectedEmptyViewContainer = inject<
       isKnowledgeTab: aiRoomStore.isKnowledgeTab,
       isResultsTab: aiRoomStore.isResultTab,
       isDocSpaceAdmin: authStore.isAdmin,
-      aiReady,
+      aiReady: aiConfig?.aiReady,
       standalone,
     };
   },

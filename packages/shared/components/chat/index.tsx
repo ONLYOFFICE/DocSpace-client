@@ -83,7 +83,12 @@ const Chat = observer(
               isLoading={isLoadingChat}
               getIcon={getIcon}
             />
-            {!isLoadingChat && !aiReady ? <ChatInfoBlock /> : null}
+            {!isLoadingChat && !aiReady ? (
+              <ChatInfoBlock
+                standalone={standalone}
+                isDocSpaceAdmin={isAdmin}
+              />
+            ) : null}
             <ChatInput
               attachmentFile={attachmentFile}
               clearAttachmentFile={clearAttachmentFile}

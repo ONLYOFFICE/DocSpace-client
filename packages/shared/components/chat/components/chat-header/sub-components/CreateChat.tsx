@@ -72,7 +72,9 @@ const CreateChat = ({
 
   return (
     <div
-      className={classNames(styles.createChat, styles.disabled)}
+      className={classNames(styles.createChat, {
+        [styles.disabled]: isDisabled,
+      })}
       onClick={onClickAction}
     >
       <PlusReactSvgUrl />

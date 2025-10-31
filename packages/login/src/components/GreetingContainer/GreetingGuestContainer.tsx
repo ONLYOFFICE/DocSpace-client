@@ -47,7 +47,7 @@ export const GreetingGuestContainer = ({
 
   return (
     <GreetingContainer>
-      <Logo culture={culture} />
+      <Logo culture={culture} className="guest" />
       <div className="tooltip guest">
         <Text fontSize="16px">
           <Trans

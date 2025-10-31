@@ -33,6 +33,7 @@ import {
 import { iconSize32 } from "../../utils/image-helpers";
 import { getTitleWithoutExtension } from "../../utils";
 import { TTranslation } from "../../types";
+import { FolderType } from "../../enums";
 
 import { DEFAULT_FILE_EXTS } from "./constants";
 
@@ -151,10 +152,12 @@ export const convertFoldersToItems: (
   folders: TFolder[],
   disabledItems: (number | string)[],
   filterParam?: string | number,
+  disabledFolderType?: FolderType,
 ) => TSelectorItem[] = (
   folders: TFolder[],
   disabledItems: (number | string)[],
   filterParam?: string | number,
+  disabledFolderType?: FolderType,
 ) => {
   const items = folders.map((folder: TFolder) => {
     const {
@@ -171,7 +174,9 @@ export const convertFoldersToItems: (
     const folderIconPath = getIconPathByFolderType(type);
     const icon = iconSize32.get(folderIconPath) as string;
 
-    const isDisabled = isDisableFolder(folder, disabledItems, filterParam);
+    const isDisabled =
+      isDisableFolder(folder, disabledItems, filterParam) ||
+      (disabledFolderType ? type === disabledFolderType : false);
 
     return {
       id,

@@ -30,26 +30,29 @@ import React from "react";
 import Image from "next/image";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
+import classNames from "classnames";
 
 export const Logo = ({
   culture,
+  className,
   isMobile = false,
 }: {
   culture?: string;
+  className?: string;
   isMobile?: boolean;
 }) => {
   const lightLogoUrl = getLogoUrl(
     WhiteLabelLogoType.LoginPage,
     false,
     false,
-    culture,
+    culture
   );
 
   const darkLogoUrl = getLogoUrl(
     WhiteLabelLogoType.LoginPage,
     true,
     false,
-    culture,
+    culture
   );
 
   const logoHeight = isMobile ? 24 : 44;
@@ -61,7 +64,7 @@ export const Logo = ({
         key="light-logo"
         id="logo-image-light"
         src={lightLogoUrl}
-        className="logo-wrapper logo-wrapper--light"
+        className={classNames("logo-wrapper logo-wrapper--light", className)}
         alt="greeting-logo"
         width={logoWidth}
         height={logoHeight}
@@ -71,7 +74,7 @@ export const Logo = ({
         key="dark-logo"
         id="logo-image-dark"
         src={darkLogoUrl}
-        className="logo-wrapper logo-wrapper--dark"
+        className={classNames("logo-wrapper logo-wrapper--dark", className)}
         alt="greeting-logo"
         width={logoWidth}
         height={logoHeight}

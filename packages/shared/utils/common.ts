@@ -361,15 +361,28 @@ export function clickBackdrop() {
   }
 }
 
-export function objectToGetParams(obj: object) {
-  const params = Object.entries(obj)
-    .filter(([, value]) => value !== undefined && value !== null)
-    .map(
-      ([key, value]) =>
-        `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`,
-    );
+export function objectToGetParams(obj: object, prefix = ''): string {
+  const params: string[] = [];
 
-  return params.length > 0 ? `?${params.join("&")}` : "";
+  for (const [key, value] of Object.entries(obj)) {
+    if (value == null) continue;
+
+    const paramKey = prefix ? `${prefix}[${key}]` : key;
+
+    if (Array.isArray(value)) {
+      for (const item of value) {
+        params.push(`${encodeURIComponent(paramKey)}[]=${encodeURIComponent(String(item))}`);
+      }
+    } else if (typeof value === 'object') {
+      const nested = objectToGetParams(value, paramKey);
+      if (nested) params.push(nested);
+    } else {
+      params.push(`${encodeURIComponent(paramKey)}=${encodeURIComponent(String(value))}`);
+    }
+  }
+
+  if (!params.length) return '';
+  return prefix ? params.join('&') : `?${params.join('&')}`;
 }
 
 export function toCommunityHostname(hostname: string) {

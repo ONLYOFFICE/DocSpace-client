@@ -235,7 +235,7 @@ const SimpleFilesRow = React.memo((props) => {
       isHighlight={isHighlight}
     >
       <DragAndDrop
-        data-title={item.title}
+        data-document-title={item.title}
         value={value}
         className={classNames("files-item", className, idWithFileExst)}
         onDrop={onDrop}

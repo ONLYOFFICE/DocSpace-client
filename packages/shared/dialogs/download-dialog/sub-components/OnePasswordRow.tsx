@@ -56,9 +56,9 @@ export const OnePasswordRow = ({
   const { t } = useTranslation(["Common"]);
   const inputRef = useRef(null);
 
-  const onChangePassword = (pwd: string) => {
+  const onChangePassword = useCallback((pwd: string) => {
     setPassword(pwd);
-  };
+  }, []);
 
   const updateDownloadItem = useCallback(
     (fileId: number, updates: { format?: string; password?: string }) => {

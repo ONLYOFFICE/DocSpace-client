@@ -106,7 +106,7 @@ export interface InjectedEmptyViewContainerProps
   isResultsTab?: boolean;
   isAIRoom?: boolean;
   isDocSpaceAdmin: AuthStore["isAdmin"];
-  aiReady: SettingsStore["aiReady"];
+  aiReady?: boolean;
   standalone: SettingsStore["standalone"];
 }
 

@@ -141,6 +141,10 @@ export const endpoints: TEndpoints = {
     url: `${BASE_URL}${LOGIN_PATH}`,
     dataHandler: loginHandler,
   },
+  loginError403: {
+    url: `${BASE_URL}${LOGIN_PATH}`,
+    dataHandler: loginHandler.bind(null, 403),
+  },
   loginError: {
     url: `${BASE_URL}${LOGIN_PATH}`,
     dataHandler: loginHandler.bind(null, 401),

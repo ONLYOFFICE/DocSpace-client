@@ -33,6 +33,8 @@ import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.naviga
 import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
 import CrossIconSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
+import { EMPTY_ARRAY, EMPTY_OBJECT, FUNCTION_EMPTY } from "../../../constants";
+
 import { Text } from "../../text";
 import { Checkbox } from "../../checkbox";
 import { ComboBox, TOption } from "../../combobox";
@@ -117,13 +119,13 @@ const TableGroupMenu = memo((props: TableGroupMenuProps) => {
           noBorder
           advancedOptions={checkboxOptions}
           className={classNames(styles.combobox, "not-selectable")}
-          options={[]}
-          selectedOption={{} as TOption}
+          options={EMPTY_ARRAY}
+          selectedOption={EMPTY_OBJECT as TOption}
           manualY="42px"
           manualX="-32px"
           title={t("Common:TitleSelectFile")}
           isMobileView={isMobileView}
-          onSelect={() => {}}
+          onSelect={FUNCTION_EMPTY}
           dataTestId="table_group_menu_combobox"
           withBackground={isMobileView}
         />

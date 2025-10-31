@@ -210,9 +210,7 @@ const MainProfile = (props: MainProfileProps) => {
     const scroll = !isMobile() ? document.querySelector("#sectionScroll .scroll-wrapper > .scroller") : null;
     
     window.addEventListener("resize", debouncedUpdateDropDownMaxHeight);
-    if (scroll) {
-      scroll.addEventListener("scroll", debouncedUpdateDropDownMaxHeight);
-    }
+    scroll?.addEventListener("scroll", debouncedUpdateDropDownMaxHeight);
     
     return () => {
       window.removeEventListener("resize", debouncedUpdateDropDownMaxHeight);

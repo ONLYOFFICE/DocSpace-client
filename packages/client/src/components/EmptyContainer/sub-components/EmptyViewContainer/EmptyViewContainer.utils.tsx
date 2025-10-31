@@ -233,10 +233,12 @@ export const getRootDescription = (
   isDocSpaceAdmin: boolean,
 ) => {
   return match([rootFolderType, access])
-    .with([FolderType.AIAgents, P._], () =>
-      aiReady
-        ? getAIAgentsAIEnabledDescription(t, access)
-        : getAIAgentsAIDisabledDescription(t, standalone, isDocSpaceAdmin),
+    .with(
+      [FolderType.AIAgents, P._],
+      () =>
+        aiReady
+          ? getAIAgentsAIEnabledDescription(t, access)
+          : getAIAgentsAIDisabledDescription(t, true, isDocSpaceAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0
     )
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       t("Files:RoomEmptyContainerDescription"),
@@ -359,10 +361,12 @@ export const getRootTitle = (
   isDocSpaceAdmin: boolean,
 ) => {
   return match([rootFolderType, access])
-    .with([FolderType.AIAgents, P._], () =>
-      aiReady
-        ? getAIAgentsAIEnabledTitle(t, access)
-        : getAIAgentsAIDisabledTitle(t, standalone, isDocSpaceAdmin),
+    .with(
+      [FolderType.AIAgents, P._],
+      () =>
+        aiReady
+          ? getAIAgentsAIEnabledTitle(t, access)
+          : getAIAgentsAIDisabledTitle(t, true, isDocSpaceAdmin), // NOTE: AI SaaS same as AI Standalone in v.4.0
     )
     .with(
       [

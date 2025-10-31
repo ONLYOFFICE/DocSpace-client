@@ -363,12 +363,12 @@ export const getOptions = (
     disabled: false,
   };
 
-  const goToServices = {
-    type: "button",
-    title: t("Common:GoToSettings"),
-    key: "go-to-services",
-    onClick: actions.onGoToServices,
-  } as const;
+  // const goToServices = {
+  //   type: "button",
+  //   title: t("Common:GoToSettings"),
+  //   key: "go-to-services",
+  //   onClick: actions.onGoToServices,
+  // } as const;
 
   const goToAIProviderSettings = {
     type: "button",
@@ -466,8 +466,8 @@ export const getOptions = (
           .with([true, P._, P.when(() => isAdmin(access))], () => [
             createAIAgent,
           ])
-          .with([false, true, true], () => [goToAIProviderSettings])
-          .with([false, false, true], () => [goToServices])
+          .with([false, P._, true], () => [goToAIProviderSettings]) // NOTE: AI SaaS same as AI Standalone in v.4.0
+          // .with([false, false, true], () => [goToServices])
           .otherwise(() => []),
       )
       .with([FolderType.Rooms, ShareAccessRights.None, P._], () => [

@@ -88,7 +88,7 @@
   "Payer": "Payer",
   "PayerDescription": "This user has access to payment details and is the only user who can adjust the quota and make payments. The {{productName}} owner, as well as the paying manager themselves, can reassign the paying manager role using the Stripe customer portal.",
   "PaymentMethod": "Payment method",
-  "PerAITools": "{{currency}} per million tokens",
+  "PerAITools": "{{currency}} per token",
   "PerBackup": "{{currency}} per 1 backup",
   "PerBackupWithBracket": "({{currency}} per 1 backup)",
   "PerStorage": "{{currency}} per {{amount}}/month",

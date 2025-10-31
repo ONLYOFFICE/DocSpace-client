@@ -176,7 +176,7 @@ export const convertFoldersToItems: (
 
     const isDisabled =
       isDisableFolder(folder, disabledItems, filterParam) ||
-      type === disabledFolderType;
+      (disabledFolderType ? type === disabledFolderType : false);
 
     return {
       id,

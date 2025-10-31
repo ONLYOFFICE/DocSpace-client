@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 import QuotaPerItemComponent from "./QuotaPerItem";
 
 type QuotaPerAIAgentComponentProps = {
-  setAIAgentQuota: (size: number, t: string) => void;
+  setAIAgentQuota: (size: number, t: (key: string) => string) => void;
   defaultAIAgentQuota: number;
   isDefaultAIAgentQuotaSet: boolean;
 };
@@ -44,15 +44,15 @@ const QuotaPerAIAgentComponent = (props: QuotaPerAIAgentComponentProps) => {
     ? { initialSize: defaultAIAgentQuota }
     : {};
 
-  const setQuota = (size: number) => setAIAgentQuota(size, t);
-  const disableQuota = () => setQuota(-1);
+  const saveQuota = (size: number) => setAIAgentQuota(size, t);
+  const disableQuota = () => setAIAgentQuota(-1, t);
 
   return (
     <QuotaPerItemComponent
       formLabel={t("QuotaPerAIAgent")}
       toggleLabel={t("DefineQuotaPerAIAgent")}
       disableQuota={disableQuota}
-      saveQuota={setQuota}
+      saveQuota={saveQuota}
       {...initialSizeProp}
       isQuotaSet={isDefaultAIAgentQuotaSet}
       tabIndex={1}

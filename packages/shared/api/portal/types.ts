@@ -104,7 +104,7 @@ export type TPaymentQuota = {
     enableQuota: boolean;
   };
   aiAgentQuota: {
-    quota: number;
+    defaultQuota: number;
     enableQuota: boolean;
   };
 };

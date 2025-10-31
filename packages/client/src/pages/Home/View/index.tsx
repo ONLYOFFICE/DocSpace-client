@@ -96,6 +96,7 @@ type ViewProps = UseContactsProps &
     canUseChat: AccessRightsStore["canUseChat"];
     isAdmin: AuthStore["isAdmin"];
     aiConfig: SettingsStore["aiConfig"];
+    standalone: SettingsStore["standalone"];
   };
 
 const View = ({
@@ -169,6 +170,7 @@ const View = ({
   canUseChat,
   isAdmin,
   aiConfig,
+  standalone,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation(["Files", "Common"]);
@@ -517,6 +519,7 @@ const View = ({
               initChats={initChats}
               isAdmin={isAdmin}
               aiReady={aiConfig?.aiReady || false}
+              standalone={standalone}
             />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
@@ -550,7 +553,7 @@ export const ViewComponent = inject(
     accessRightsStore,
     settingsStore,
   }: TStore) => {
-    const { aiConfig } = settingsStore;
+    const { aiConfig, standalone } = settingsStore;
 
     const { canUseChat } = accessRightsStore;
 
@@ -690,6 +693,7 @@ export const ViewComponent = inject(
       canUseChat,
       isAdmin,
       aiConfig,
+      standalone,
     };
   },
 )(observer(View));

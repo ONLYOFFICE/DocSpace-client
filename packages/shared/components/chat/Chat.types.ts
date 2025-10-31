@@ -175,4 +175,5 @@ export type ChatProps = {
   toolsSettings: ChatInputProps["toolsSettings"];
   initChats: ReturnType<typeof useInitChats>;
   isAdmin?: boolean;
+  standalone?: boolean;
 };

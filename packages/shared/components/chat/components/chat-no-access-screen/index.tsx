@@ -32,8 +32,21 @@ import ChatNoAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.chat.
 
 import { EmptyView } from "../../../empty-view";
 import { useTheme } from "../../../../hooks/useTheme";
+import { match, P } from "ts-pattern";
 
-export const ChatNoAccessScreen = () => {
+type Props = {
+  aiReady: boolean;
+  canUseChat: boolean;
+  standalone: boolean;
+  isDocSpaceAdmin: boolean;
+};
+
+export const ChatNoAccessScreen = ({
+  aiReady,
+  canUseChat,
+  isDocSpaceAdmin,
+  standalone,
+}: Props) => {
   const { t } = useTranslation("Common");
   const { isBase } = useTheme();
 
@@ -43,10 +56,31 @@ export const ChatNoAccessScreen = () => {
     <ChatNoAccessRightsDarkIcon />
   );
 
+  const title = aiReady
+    ? t("Common:AIChatNoAccessTitle")
+    : t("Common:AIFeaturesAreCurrentlyDisabled");
+
+  const description = !canUseChat
+    ? t("Common:AIChatNoAccessDescription")
+    : match([standalone, isDocSpaceAdmin])
+        // standalone admin
+        .with([true, true], () =>
+          t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription"),
+        )
+        // saas admin
+        .with([false, true], () =>
+          t("Common:EmptyChatAIDisabledSaasAdminDescription"),
+        )
+        // standalone/saas user
+        .with([P._, false], () =>
+          t("Common:EmptyChatAIDisabledUserDescription"),
+        )
+        .otherwise(() => "");
+
   return (
     <EmptyView
-      title={t("Common:AIChatNoAccessTitle")}
-      description={t("Common:AIChatNoAccessDescription")}
+      title={title}
+      description={description}
       icon={icon}
       options={null}
     />

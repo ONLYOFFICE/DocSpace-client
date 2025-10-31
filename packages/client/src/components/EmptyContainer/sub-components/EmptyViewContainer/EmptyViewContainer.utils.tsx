@@ -205,7 +205,7 @@ const getAIAgentsAIDisabledDescription = (
 ) => {
   return match([standalone, isDocSpaceAdmin])
     .with([true, true], () =>
-      t("EmptyView:EmptyAIAgentsAIDisabledStandaloneAdminDescription"),
+      t("Common:EmptyAIAgentsAIDisabledStandaloneAdminDescription"),
     )
     .with([false, true], () =>
       t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminDescription"),

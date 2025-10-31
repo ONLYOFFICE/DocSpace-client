@@ -1648,7 +1648,7 @@ class SettingsStore {
   };
 
   setAIConfig = (config: TAIConfig) => {
-    this.aiConfig = config;
+    this.aiConfig = { ...config, aiReady: false };
   };
 
   setInterfaceDirection = (direction: string) => {

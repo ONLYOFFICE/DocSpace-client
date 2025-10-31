@@ -26,6 +26,7 @@
 
 import axios from "axios";
 import { match } from "ts-pattern";
+import equal from "fast-deep-equal";
 import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
@@ -175,7 +176,7 @@ class FilesStore {
 
   folders = EMPTY_ARRAY;
 
-  selection = [];
+  _selection = [];
 
   bufferSelection = null;
 
@@ -472,6 +473,16 @@ class FilesStore {
     });
 
     this.createNewFilesQueue.on("resolve", this.onResolveNewFile);
+  }
+
+  get selection () {
+    return this._selection;
+  }
+
+  set selection (value) {
+    if(equal(value, this._selection)) return;
+
+    this._selection = value;
   }
 
   onResolveNewFile = ({ fileInfo }) => {
@@ -1492,7 +1503,7 @@ class FilesStore {
   };
 
   setSelection = (selection) => {
-    this.selection = selection.length > 0 ? selection : EMPTY_ARRAY;
+    this.selection = selection
   };
 
   getSelection = () => {

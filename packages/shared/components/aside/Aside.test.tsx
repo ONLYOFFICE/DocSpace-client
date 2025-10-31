@@ -25,19 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { Aside } from ".";
 
 describe("Aside Component", () => {
-  const mockOnClose = jest.fn();
+  const mockOnClose = vi.fn();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
-  test("renders without error when visible", () => {
+  it("renders without error when visible", () => {
     render(
       <Aside visible onClose={mockOnClose}>
         test content
@@ -48,7 +48,7 @@ describe("Aside Component", () => {
     expect(screen.getByText("test content")).toBeInTheDocument();
   });
 
-  test("renders with custom styling props", () => {
+  it("renders with custom styling props", () => {
     render(
       <Aside
         visible
@@ -66,7 +66,7 @@ describe("Aside Component", () => {
     expect(aside).toHaveStyle({ zIndex: 500 });
   });
 
-  test("renders without header when withoutHeader is true", () => {
+  it("renders without header when withoutHeader is true", () => {
     render(
       <Aside visible onClose={mockOnClose} withoutHeader>
         test content
@@ -76,7 +76,7 @@ describe("Aside Component", () => {
     expect(screen.queryByTestId("aside-header")).not.toBeInTheDocument();
   });
 
-  test("renders with scrollbar when content overflows", () => {
+  it("renders with scrollbar when content overflows", () => {
     const longContent = "a".repeat(1000);
     render(
       <Aside visible onClose={mockOnClose}>
@@ -87,7 +87,7 @@ describe("Aside Component", () => {
     expect(screen.getByTestId("scrollbar")).toBeInTheDocument();
   });
 
-  test("renders with withoutBodyScroll prop", () => {
+  it("renders with withoutBodyScroll prop", () => {
     render(
       <Aside visible onClose={mockOnClose} withoutBodyScroll>
         test content

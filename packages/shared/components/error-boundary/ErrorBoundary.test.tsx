@@ -1,13 +1,13 @@
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import ErrorBoundary from "./ErrorBoundary";
 import { DeviceType } from "../../enums";
 import type { TUser } from "../../api/people/types";
 import type { TFirebaseSettings } from "../../api/settings/types";
 
 // Mock Error520 component
-jest.mock("../errors/Error520", () => ({
+vi.mock("../errors/Error520", () => ({
   __esModule: true,
   default: ({ errorLog }: { errorLog: Error }) => (
     <div data-testid="error-520">Error: {errorLog.message}</div>
@@ -17,7 +17,7 @@ jest.mock("../errors/Error520", () => ({
 // Mock console.error to avoid test output noise
 const originalError = console.error;
 beforeAll(() => {
-  console.error = jest.fn();
+  console.error = vi.fn();
 });
 
 afterAll(() => {
@@ -67,21 +67,21 @@ class MockFirebaseHelper {
     return this.isEnabledDBValue;
   }
 
-  checkMaintenance = jest.fn();
+  checkMaintenance = vi.fn();
 
-  checkBar = jest.fn();
+  checkBar = vi.fn();
 
-  checkCampaigns = jest.fn();
+  checkCampaigns = vi.fn();
 
-  getCampaignsImages = jest.fn();
+  getCampaignsImages = vi.fn();
 
-  getCampaignsTranslations = jest.fn();
+  getCampaignsTranslations = vi.fn();
 
-  getCampaignConfig = jest.fn();
+  getCampaignConfig = vi.fn();
 
-  sendCrashReport = jest.fn();
+  sendCrashReport = vi.fn();
 
-  sendToastReport = jest.fn();
+  sendToastReport = vi.fn();
 }
 
 describe("ErrorBoundary", () => {
@@ -129,7 +129,7 @@ describe("ErrorBoundary", () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders children when there's no error", () => {
@@ -160,7 +160,7 @@ describe("ErrorBoundary", () => {
   });
 
   it("calls onError callback when error occurs", () => {
-    const onError = jest.fn();
+    const onError = vi.fn();
     const ThrowError = () => {
       throw new Error("Test error");
     };

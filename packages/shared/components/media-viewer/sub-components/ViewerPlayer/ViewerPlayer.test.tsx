@@ -25,17 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { ReactNode } from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { ViewerPlayer } from "./index";
 
 // Mock useTranslation hook
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => key,
     i18n: {
       language: "en",
-      changeLanguage: jest.fn(),
+      changeLanguage: vi.fn(),
     },
   }),
 }));
@@ -45,20 +45,20 @@ interface TextProps {
   [key: string]: React.HTMLAttributes<HTMLElement> | React.ReactNode;
 }
 // Mock external components
-jest.mock("../../../../components/text", () => ({
+vi.mock("../../../../components/text", () => ({
   Text: ({ children, ...props }: TextProps) => (
     <span {...props}>{children}</span>
   ),
 }));
 
-jest.mock("react-svg", () => ({
+vi.mock("react-svg", () => ({
   ReactSVG: ({ src }: { src: string }) => (
     <div data-testid="svg-icon" data-src={src} />
   ),
 }));
 
 // Mock child components
-jest.mock("../PlayerBigPlayButton", () => ({
+vi.mock("../PlayerBigPlayButton", () => ({
   PlayerBigPlayButton: ({
     onClick,
     visible,
@@ -76,7 +76,7 @@ jest.mock("../PlayerBigPlayButton", () => ({
   ),
 }));
 
-jest.mock("../ViewerLoader", () => ({
+vi.mock("../ViewerLoader", () => ({
   ViewerLoader: ({ isLoading }: { isLoading: boolean }) => (
     <div
       data-testid="viewer-loader"
@@ -87,7 +87,7 @@ jest.mock("../ViewerLoader", () => ({
   ),
 }));
 
-jest.mock("../PlayerPlayButton", () => ({
+vi.mock("../PlayerPlayButton", () => ({
   PlayerPlayButton: ({
     isPlaying,
     onClick,
@@ -105,7 +105,7 @@ jest.mock("../PlayerPlayButton", () => ({
   ),
 }));
 
-jest.mock("../PlayerTimeline", () => ({
+vi.mock("../PlayerTimeline", () => ({
   PlayerTimeline: function PlayerTimelineMock({
     ref,
   }: {
@@ -127,7 +127,7 @@ jest.mock("../PlayerTimeline", () => ({
   },
 }));
 
-jest.mock("../PlayerVolumeControl", () => ({
+vi.mock("../PlayerVolumeControl", () => ({
   PlayerVolumeControl: ({
     volume,
     isMuted,
@@ -152,7 +152,7 @@ jest.mock("../PlayerVolumeControl", () => ({
   ),
 }));
 
-jest.mock("../PlayerFullScreen", () => ({
+vi.mock("../PlayerFullScreen", () => ({
   PlayerFullScreen: ({
     isFullScreen,
     onClick,
@@ -166,14 +166,14 @@ jest.mock("../PlayerFullScreen", () => ({
   ),
 }));
 
-jest.mock("../MessageError", () => ({
+vi.mock("../MessageError", () => ({
   MessageError: ({ errorTitle }: { errorTitle: string }) => (
     <div data-testid="message-error">{errorTitle}</div>
   ),
 }));
 
-jest.mock("../PlayerDesktopContextMenu", () => ({
-  PlayerDesktopContextMenu: jest.fn(
+vi.mock("../PlayerDesktopContextMenu", () => ({
+  PlayerDesktopContextMenu: vi.fn(
     ({
       onDownloadClick,
       generateContextMenu,
@@ -190,7 +190,7 @@ jest.mock("../PlayerDesktopContextMenu", () => ({
 }));
 
 // Mock lodash/omit
-jest.mock("lodash/omit", () => ({
+vi.mock("lodash/omit", () => ({
   __esModule: true,
   default: (obj: Record<string, unknown>, keys: string[]) => {
     const result = { ...obj };
@@ -200,12 +200,12 @@ jest.mock("lodash/omit", () => ({
 }));
 
 // Mock @use-gesture/react
-jest.mock("@use-gesture/react", () => ({
+vi.mock("@use-gesture/react", () => ({
   useGesture: () => ({}),
 }));
 
 // Mock @react-spring/web
-jest.mock("@react-spring/web", () => ({
+vi.mock("@react-spring/web", () => ({
   useSpring: () => [
     {
       width: 0,
@@ -216,7 +216,7 @@ jest.mock("@react-spring/web", () => ({
       transform: "scale(1)",
     },
     {
-      start: jest.fn(),
+      start: vi.fn(),
     },
   ],
   animated: {
@@ -243,24 +243,25 @@ jest.mock("@react-spring/web", () => ({
 }));
 
 // Mock react-device-detect
-jest.mock("react-device-detect", () => ({
+vi.mock("react-device-detect", () => ({
   isDesktop: true,
   isIOS: false,
   isMobileOnly: false,
 }));
 
 // Mock utils
-jest.mock("../../../../utils/typeGuards", () => ({
+vi.mock("../../../../utils/typeGuards", () => ({
   includesMethod: () => true,
 }));
 
-jest.mock("../../MediaViewer.utils", () => ({
-  calculateAdjustImageUtil: jest.fn(() => ({
+// Mock MediaViewer.utils
+vi.mock("../../MediaViewer.utils", () => ({
+  calculateAdjustImageUtil: vi.fn(() => ({
     scale: 1,
     translateX: 0,
     translateY: 0,
   })),
-  formatTime: jest.fn(() => "00:00"),
+  formatTime: vi.fn(() => "00:00"),
 }));
 
 describe("ViewerPlayer", () => {
@@ -286,83 +287,83 @@ describe("ViewerPlayer", () => {
     mobileDetails: <div>Mobile Details</div>,
     isPreviewFile: false,
     isOpenContextMenu: false,
-    onMask: jest.fn(),
-    onNext: jest.fn(),
-    onPrev: jest.fn(),
-    setIsError: jest.fn(),
+    onMask: vi.fn(),
+    onNext: vi.fn(),
+    onPrev: vi.fn(),
+    setIsError: vi.fn(),
     contextModel: () => [],
-    setPanelVisible: jest.fn(),
-    setIsFullScreen: jest.fn(),
-    onDownloadClick: jest.fn(),
-    generateContextMenu: jest.fn(),
-    removeToolbarVisibleTimer: jest.fn(),
-    removePanelVisibleTimeout: jest.fn(),
-    restartToolbarVisibleTimer: jest.fn(),
+    setPanelVisible: vi.fn(),
+    setIsFullScreen: vi.fn(),
+    onDownloadClick: vi.fn(),
+    generateContextMenu: vi.fn(),
+    removeToolbarVisibleTimer: vi.fn(),
+    removePanelVisibleTimeout: vi.fn(),
+    restartToolbarVisibleTimer: vi.fn(),
   };
 
   beforeAll(() => {
     // Mock window.ResizeObserver
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
+    window.ResizeObserver = vi.fn().mockImplementation(() => ({
+      observe: vi.fn(),
+      unobserve: vi.fn(),
+      disconnect: vi.fn(),
     }));
 
     // Mock window.IntersectionObserver
-    window.IntersectionObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
+    window.IntersectionObserver = vi.fn().mockImplementation(() => ({
+      observe: vi.fn(),
+      unobserve: vi.fn(),
+      disconnect: vi.fn(),
     }));
 
     // Mock HTMLMediaElement methods and properties
     Object.defineProperty(window.HTMLMediaElement.prototype, "load", {
       configurable: true,
-      value: jest.fn(),
+      value: vi.fn(),
     });
 
     Object.defineProperty(window.HTMLMediaElement.prototype, "play", {
       configurable: true,
-      value: jest.fn().mockImplementation(() => Promise.resolve()),
+      value: vi.fn().mockImplementation(() => Promise.resolve()),
     });
 
     Object.defineProperty(window.HTMLMediaElement.prototype, "pause", {
       configurable: true,
-      value: jest.fn(),
+      value: vi.fn(),
     });
 
     Object.defineProperty(window.HTMLMediaElement.prototype, "duration", {
       configurable: true,
-      get: jest.fn().mockReturnValue(100),
+      get: vi.fn().mockReturnValue(100),
     });
 
     Object.defineProperty(window.HTMLMediaElement.prototype, "currentTime", {
       configurable: true,
-      get: jest.fn().mockReturnValue(0),
-      set: jest.fn(),
+      get: vi.fn().mockReturnValue(0),
+      set: vi.fn(),
     });
 
     Object.defineProperty(window.HTMLMediaElement.prototype, "readyState", {
       configurable: true,
-      get: jest.fn().mockReturnValue(4), // HAVE_ENOUGH_DATA
+      get: vi.fn().mockReturnValue(4), // HAVE_ENOUGH_DATA
     });
 
     // Mock localStorage
     Object.defineProperty(window, "localStorage", {
       value: {
-        getItem: jest.fn(() => null),
-        setItem: jest.fn(),
+        getItem: vi.fn(() => null),
+        setItem: vi.fn(),
       },
       writable: true,
     });
   });
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   afterAll(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it("renders video player with correct ARIA attributes", () => {

@@ -1,3 +1,4 @@
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { zendeskAPI } from "./Zendesk.utils";
 
 describe("ZendeskAPI", () => {
@@ -28,7 +29,7 @@ describe("ZendeskAPI", () => {
     });
 
     it("should call window.zE when Zendesk is initialized", () => {
-      const mockZE = jest.fn();
+      const mockZE = vi.fn();
       window.zE = mockZE;
 
       const args = ["webWidget", "show"];
@@ -55,7 +56,7 @@ describe("ZendeskAPI", () => {
     });
 
     it("should not add changes to queue when Zendesk is initialized", () => {
-      const mockZE = jest.fn();
+      const mockZE = vi.fn();
       window.zE = mockZE;
 
       const args = ["webWidget", "show"];

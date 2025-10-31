@@ -26,6 +26,7 @@
 
 import React from "react";
 import type { TFunction } from "i18next";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import {
   render,
   screen,
@@ -33,7 +34,6 @@ import {
   act,
   waitFor,
 } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import MediaViewer from "./MediaViewer";
 import { DeviceType, FileStatus, FileType, FolderType } from "../../enums";
@@ -41,17 +41,20 @@ import { MediaViewerProps } from "./MediaViewer.types";
 import { NextButton } from "./sub-components/Buttons/NextButton";
 import { PrevButton } from "./sub-components/Buttons/PrevButton";
 
-jest.mock("../../utils/common", () => {
-  const originalModule = jest.requireActual("../../utils/common");
+vi.mock("../../utils/common", async () => {
+  const originalModule =
+    await vi.importActual<typeof import("../../utils/common")>(
+      "../../utils/common",
+    );
 
   return {
     ...originalModule,
-    getFileExtension: jest.fn((filename) => filename.split(".").pop()),
+    getFileExtension: vi.fn((filename) => filename.split(".").pop()),
   };
 });
 
-jest.mock("./sub-components/ViewerWrapper", () => ({
-  ViewerWrapper: jest.fn(
+vi.mock("./sub-components/ViewerWrapper", () => ({
+  ViewerWrapper: vi.fn(
     ({ visible, currentDeviceType, playlist, playlistPos }) => {
       if (
         !visible ||
@@ -65,8 +68,8 @@ jest.mock("./sub-components/ViewerWrapper", () => ({
       return (
         <div data-testid="media-viewer" data-device-type={currentDeviceType}>
           <div data-testid="viewer">Viewer Component</div>
-          <NextButton nextClick={jest.fn()} />
-          <PrevButton prevClick={jest.fn()} />
+          <NextButton nextClick={vi.fn()} />
+          <PrevButton prevClick={vi.fn()} />
         </div>
       );
     },
@@ -190,27 +193,26 @@ const createMockProps = (overrides = {}): MediaViewerProps => ({
   autoPlay: false,
   t: ((key: string) => key) as unknown as TFunction,
   getIcon: (size: number, ext: string) => `icon-${size}-${ext}`,
-  onClose: jest.fn(),
-  onDelete: jest.fn(),
-  nextMedia: jest.fn(),
-  prevMedia: jest.fn(),
-  onDownload: jest.fn(),
-  onChangeUrl: jest.fn(),
-  setActiveFiles: jest.fn(),
-  setBufferSelection: jest.fn(),
-  onEmptyPlaylistError: jest.fn(),
+  onClose: vi.fn(),
+  onDelete: vi.fn(),
+  nextMedia: vi.fn(),
+  prevMedia: vi.fn(),
+  onDownload: vi.fn(),
+  onChangeUrl: vi.fn(),
+  setActiveFiles: vi.fn(),
+  setBufferSelection: vi.fn(),
+  onEmptyPlaylistError: vi.fn(),
   ...overrides,
 });
 
 describe("MediaViewer", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
-    jest.useFakeTimers();
+    vi.clearAllMocks();
   });
 
   afterEach(() => {
-    jest.clearAllTimers();
-    jest.useRealTimers();
+    vi.clearAllTimers();
+    vi.useRealTimers();
   });
 
   it("renders media viewer with correct initial state", () => {

@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { screen, render } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 
 import { Button } from ".";
@@ -36,21 +36,21 @@ const baseProps = {
   size: ButtonSize.extraSmall,
   isDisabled: false,
   label: "OK",
-  onClick: jest.fn(),
+  onClick: vi.fn(),
 };
 
 describe("<Button />", () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
-  test("renders without error", () => {
+  it("renders without error", () => {
     render(<Button {...baseProps} />);
     expect(screen.getByTestId("button")).toBeInTheDocument();
     expect(screen.getByText("OK")).toBeInTheDocument();
   });
 
-  test("handles click events", async () => {
+  it("handles click events", async () => {
     const user = userEvent.setup();
     render(<Button {...baseProps} aria-label="Click me" />);
 
@@ -58,7 +58,7 @@ describe("<Button />", () => {
     expect(baseProps.onClick).toHaveBeenCalledTimes(1);
   });
 
-  test("disables button when isDisabled is true", () => {
+  it("disables button when isDisabled is true", () => {
     render(<Button {...baseProps} isDisabled aria-disabled="true" />);
 
     const button = screen.getByRole("button", { name: "OK" });
@@ -67,27 +67,27 @@ describe("<Button />", () => {
     expect(button).toHaveAttribute("aria-disabled", "true");
   });
 
-  test("shows loading state", () => {
+  it("shows loading state", () => {
     render(<Button {...baseProps} isLoading aria-busy="true" />);
 
     const button = screen.getByRole("button", { name: "OK" });
-    expect(button).toHaveClass("isLoading");
+    expect(button.className).toContain("isLoading");
     expect(button).toHaveAttribute("aria-busy", "true");
   });
 
-  test("renders with custom className", () => {
+  it("renders with custom className", () => {
     render(<Button {...baseProps} className="custom-class" />);
-    expect(screen.getByTestId("button")).toHaveClass("custom-class");
+    expect(screen.getByTestId("button").className).toContain("custom-class");
   });
 
-  test("renders with custom style", () => {
+  it("renders with custom style", () => {
     render(<Button {...baseProps} style={{ backgroundColor: "red" }} />);
     expect(screen.getByTestId("button")).toHaveStyle({
       backgroundColor: "red",
     });
   });
 
-  test("renders with icon", () => {
+  it("renders with icon", () => {
     const icon = <span data-testid="test-icon">Icon</span>;
     render(<Button {...baseProps} icon={icon} />);
 
@@ -95,32 +95,32 @@ describe("<Button />", () => {
     expect(screen.getByText("OK")).toBeInTheDocument();
   });
 
-  test.each(Object.values(ButtonSize))("renders with size %s", (size) => {
+  it.each(Object.values(ButtonSize))("renders with size %s", (size) => {
     render(<Button {...baseProps} size={size} />);
     expect(screen.getByTestId("button")).toHaveAttribute("data-size", size);
   });
 
-  test("renders primary button", () => {
+  it("renders primary button", () => {
     render(<Button {...baseProps} primary />);
-    expect(screen.getByTestId("button")).toHaveClass("primary");
+    expect(screen.getByTestId("button").className).toContain("primary");
   });
 
-  test("renders with hover state", () => {
+  it("renders with hover state", () => {
     render(<Button {...baseProps} isHovered />);
-    expect(screen.getByTestId("button")).toHaveClass("isHovered");
+    expect(screen.getByTestId("button").className).toContain("isHovered");
   });
 
-  test("renders with clicked state", () => {
+  it("renders with clicked state", () => {
     render(<Button {...baseProps} isClicked />);
-    expect(screen.getByTestId("button")).toHaveClass("isClicked");
+    expect(screen.getByTestId("button").className).toContain("isClicked");
   });
 
-  test("renders with scale", () => {
+  it("renders with scale", () => {
     render(<Button {...baseProps} scale />);
-    expect(screen.getByTestId("button")).toHaveClass("scale");
+    expect(screen.getByTestId("button").className).toContain("scale");
   });
 
-  test("handles keyboard interaction", async () => {
+  it("handles keyboard interaction", async () => {
     const user = userEvent.setup();
     render(<Button {...baseProps} />);
 

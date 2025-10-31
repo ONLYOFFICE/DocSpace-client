@@ -25,21 +25,21 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { ToggleButton } from ".";
 
 describe("<ToggleButton />", () => {
   const defaultProps = {
     isChecked: false,
-    onChange: jest.fn(),
+    onChange: vi.fn(),
     label: "Toggle me",
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   test("renders without error", () => {
@@ -66,7 +66,7 @@ describe("<ToggleButton />", () => {
   });
 
   test("calls onChange when clicked", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(<ToggleButton {...defaultProps} onChange={onChange} />);
 
     const toggle = screen.getByTestId("toggle-button-input");
@@ -82,7 +82,7 @@ describe("<ToggleButton />", () => {
   });
 
   test("prevents interaction when disabled", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(<ToggleButton {...defaultProps} onChange={onChange} isDisabled />);
 
     const toggle = screen.getByTestId("toggle-button-input");

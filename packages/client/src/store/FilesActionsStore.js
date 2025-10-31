@@ -1315,14 +1315,11 @@ class FilesActionStore {
     const items = Array.isArray(id) ? id : [id];
 
     const actions = [];
-    const operationId = uniqueid("operation_");
     const withFinishedOperation = [];
     let isError = false;
 
     const updatingFolderList = (elems, isPin = false) => {
       if (elems.length === 0) return;
-
-      this.updateCurrentFolder(true, operationId);
 
       const itemCount = { count: elems.length };
 
@@ -1394,8 +1391,6 @@ class FilesActionStore {
       } else treeFolders[treeIndex].newItems = count + newCount;
     }
 
-    const operationId = uniqueid("operation_");
-
     muteRoomNotification(id, muteStatus)
       .then(() =>
         toastr.success(
@@ -1404,13 +1399,7 @@ class FilesActionStore {
             : t("RoomNotificationsEnabled"),
         ),
       )
-      .catch((e) => toastr.error(e))
-      .finally(() => {
-        Promise.all([
-          this.updateCurrentFolder(null, operationId),
-          this.treeFoldersStore.fetchTreeFolders(),
-        ]);
-      });
+      .catch((e) => toastr.error(e));
   };
 
   setArchiveAction = async (action, folders, t) => {

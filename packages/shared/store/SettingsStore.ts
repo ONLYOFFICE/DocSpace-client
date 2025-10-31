@@ -85,6 +85,7 @@ import { TData } from "../components/toast/Toast.type";
 import { version } from "../package.json";
 import { Nullable } from "../types";
 import { TApiKey } from "../api/api-keys/types";
+import { TAIConfig } from "../api/ai/types";
 
 const themes = {
   Dark,
@@ -343,7 +344,7 @@ class SettingsStore {
 
   abortControllerArr: Nullable<AbortController>[] = [];
 
-  aiReady: boolean = true;
+  aiConfig: Nullable<TAIConfig> = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -1068,7 +1069,11 @@ class SettingsStore {
     this.setIsLoading(true);
 
     try {
-      await Promise.all([this.getPortalSettings(), this.getAppearanceTheme()]);
+      await Promise.all([
+        this.getPortalSettings(),
+        this.getAppearanceTheme(),
+        this.getAIConfig(),
+      ]);
 
       if (!this.isPortalDeactivate) {
         await this.getBuildVersionInfo();
@@ -1632,6 +1637,18 @@ class SettingsStore {
     this.setSelectThemeId(res.selected);
 
     if (currentColorScheme) this.setCurrentColorScheme(currentColorScheme);
+  };
+
+  getAIConfig = async () => {
+    const res = await api.ai.getAIConfig();
+
+    if (!res) return;
+
+    this.setAIConfig(res);
+  };
+
+  setAIConfig = (config: TAIConfig) => {
+    this.aiConfig = config;
   };
 
   setInterfaceDirection = (direction: string) => {

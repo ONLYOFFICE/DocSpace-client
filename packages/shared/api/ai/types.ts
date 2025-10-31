@@ -190,6 +190,7 @@ export type TAIConfig = {
   knowledgeSearchToolName: string;
   webSearchToolName: string;
   webCrawlingToolName: string;
+  aiReady: boolean;
 };
 
 export type TAgent = TRoom;

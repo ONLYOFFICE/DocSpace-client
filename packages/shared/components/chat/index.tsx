@@ -46,6 +46,7 @@ const Chat = ({
   selectedModel,
   isLoading,
   canUseChat,
+  aiReady,
 
   getIcon,
   attachmentFile,
@@ -56,7 +57,6 @@ const Chat = ({
 
   isAdmin,
 }: ChatProps) => {
-  const isAIServiceDisabled = false; // TODO: Change to security or something else showing disabled service
   const isLoadingChat = isLoading || !roomId;
 
   if (!canUseChat && !isLoadingChat) {
@@ -78,7 +78,7 @@ const Chat = ({
             isLoading={isLoadingChat}
             getIcon={getIcon}
           />
-          {isAIServiceDisabled ? <ChatInfoBlock /> : null}
+          {!aiReady ? <ChatInfoBlock /> : null}
           <ChatInput
             attachmentFile={attachmentFile}
             clearAttachmentFile={clearAttachmentFile}

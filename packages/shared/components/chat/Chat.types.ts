@@ -167,6 +167,7 @@ export type ChatProps = {
   getIcon: ChatInputProps["getIcon"];
   isLoading?: boolean;
   canUseChat?: boolean;
+  aiReady: boolean;
 
   attachmentFile: ChatInputProps["attachmentFile"];
   clearAttachmentFile: ChatInputProps["clearAttachmentFile"];

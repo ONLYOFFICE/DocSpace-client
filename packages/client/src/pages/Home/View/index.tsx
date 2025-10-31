@@ -49,6 +49,7 @@ import type { TFolder } from "@docspace/shared/api/files/types";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
@@ -94,6 +95,7 @@ type ViewProps = UseContactsProps &
 
     canUseChat: AccessRightsStore["canUseChat"];
     isAdmin: AuthStore["isAdmin"];
+    aiConfig: SettingsStore["aiConfig"];
   };
 
 const View = ({
@@ -166,6 +168,7 @@ const View = ({
 
   canUseChat,
   isAdmin,
+  aiConfig,
 }: ViewProps) => {
   const location = useLocation();
   const { t } = useTranslation(["Files", "Common"]);
@@ -262,6 +265,7 @@ const View = ({
 
   const toolsSettings = useToolsSettings({
     roomId: roomId ?? "",
+    aiConfig,
   });
 
   const initChats = useInitChats({
@@ -512,6 +516,7 @@ const View = ({
               toolsSettings={toolsSettings}
               initChats={initChats}
               isAdmin={isAdmin}
+              aiReady={aiConfig?.aiReady || false}
             />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
@@ -543,7 +548,10 @@ export const ViewComponent = inject(
     telegramStore,
     dialogsStore,
     accessRightsStore,
+    settingsStore,
   }: TStore) => {
+    const { aiConfig } = settingsStore;
+
     const { canUseChat } = accessRightsStore;
 
     const { usersStore, groupsStore } = peopleStore;
@@ -681,6 +689,7 @@ export const ViewComponent = inject(
 
       canUseChat,
       isAdmin,
+      aiConfig,
     };
   },
 )(observer(View));

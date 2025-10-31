@@ -365,14 +365,14 @@ export const getOptions = (
 
   const goToServices = {
     type: "button",
-    title: t("Notifications:GoToSettings"),
+    title: t("Common:GoToSettings"),
     key: "go-to-services",
     onClick: actions.onGoToServices,
   } as const;
 
   const goToAIProviderSettings = {
     type: "button",
-    title: t("Notifications:GoToSettings"),
+    title: t("Common:GoToSettings"),
     key: "go-to-ai-provider-settings",
     onClick: actions.onGoToAIProviderSettings,
   } as const;

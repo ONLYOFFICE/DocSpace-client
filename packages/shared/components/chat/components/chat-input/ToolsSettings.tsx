@@ -327,7 +327,7 @@ const ToolsSettings = ({
                   fontWeight={600}
                   onClick={onGoToWebSearchPage}
                 >
-                  {t("Notifications:GoToSettings")}
+                  {t("Common:GoToSettings")}
                 </Link>
               </>
             )

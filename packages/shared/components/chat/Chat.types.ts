@@ -60,7 +60,9 @@ export type RenameChatProps = {
 };
 
 export type ChatHeaderProps = SelectModelProps &
-  Omit<SelectChatProps, "isLoadingProp">;
+  Omit<SelectChatProps, "isLoadingProp"> & {
+    aiReady: boolean;
+  };
 
 export type MessageProps = {
   message: TMessage;
@@ -132,6 +134,7 @@ export type ButtonsProps = {
 
   toolsSettings: ReturnType<typeof useToolsSettings>;
   isAdmin?: boolean;
+  aiReady: boolean;
 };
 
 export type AttachmentProps = {
@@ -154,6 +157,7 @@ export type ChatInputProps = {
 
   toolsSettings: ReturnType<typeof useToolsSettings>;
   isAdmin?: boolean;
+  aiReady: boolean;
 };
 
 export type ChatContainerProps = {

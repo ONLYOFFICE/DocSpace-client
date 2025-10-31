@@ -68,6 +68,7 @@ const Chat = observer(
           isLoading={isLoadingChat}
           getIcon={getIcon}
           roomId={roomId}
+          aiReady={aiReady}
         />
         {showEmptyScreen ? (
           <ChatNoAccessScreen
@@ -97,6 +98,7 @@ const Chat = observer(
               selectedModel={selectedModel}
               toolsSettings={toolsSettings}
               isAdmin={isAdmin}
+              aiReady={aiReady}
             />
           </>
         )}

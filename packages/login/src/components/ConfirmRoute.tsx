@@ -68,6 +68,15 @@ function ConfirmRoute(props: ConfirmRouteProps) {
     throw new Error(t("Common:AccessDenied"));
   }
 
+  const value = useMemo(
+    () => ({
+      linkData: stateData?.linkData ?? {},
+      confirmLinkResult: stateData?.confirmLinkResult ?? {},
+      roomData: stateData?.roomData ?? {},
+    }),
+    [stateData?.linkData, stateData?.roomData, stateData?.confirmLinkResult],
+  );
+
   useEffect(() => {
     if (window.location.search.includes("culture")) return;
     const lng = getCookie(LANGUAGE);
@@ -142,15 +151,6 @@ function ConfirmRoute(props: ConfirmRouteProps) {
         notFound();
     }
   }
-
-  const value = useMemo(
-    () => ({
-      linkData: stateData?.linkData ?? {},
-      confirmLinkResult: stateData?.confirmLinkResult ?? {},
-      roomData: stateData?.roomData ?? {},
-    }),
-    [stateData?.linkData, stateData?.roomData, stateData?.confirmLinkResult],
-  );
 
   return (
     <ConfirmRouteContext.Provider value={value}>

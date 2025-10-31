@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { debounce } from "lodash";
 import { ReactSVG } from "react-svg";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -197,9 +198,7 @@ const MainProfile = (props: MainProfileProps) => {
     }
   };
 
-  const checkScroll = () => {
-    updateDropDownMaxHeight();
-  };
+  const debouncedUpdateDropDownMaxHeight = debounce(updateDropDownMaxHeight, 50);
 
   const onChangeFileContext = (e?: unknown) => {
     onChangeFile?.(e, t);
@@ -207,11 +206,15 @@ const MainProfile = (props: MainProfileProps) => {
 
   useEffect(() => {
     updateDropDownMaxHeight();
-    window.addEventListener("resize", updateDropDownMaxHeight);
-    window.addEventListener("scroll", checkScroll);
+    
+    const scroll = !isMobile() ? document.querySelector("#sectionScroll .scroll-wrapper > .scroller") : null;
+    
+    window.addEventListener("resize", debouncedUpdateDropDownMaxHeight);
+    scroll?.addEventListener("scroll", debouncedUpdateDropDownMaxHeight);
+    
     return () => {
-      window.removeEventListener("resize", updateDropDownMaxHeight);
-      window.removeEventListener("scroll", checkScroll);
+      window.removeEventListener("resize", debouncedUpdateDropDownMaxHeight);
+      scroll?.removeEventListener("scroll", debouncedUpdateDropDownMaxHeight);
     };
   }, [cultureNames]);
 

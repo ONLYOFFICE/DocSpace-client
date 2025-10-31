@@ -56,7 +56,7 @@ import {
   SearchArea,
 } from "@docspace/shared/enums";
 
-import { CategoryType } from "@docspace/shared/constants";
+import { CategoryType, EMPTY_ARRAY } from "@docspace/shared/constants";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
@@ -572,7 +572,12 @@ const SectionHeaderContent = (props) => {
     moveToPublicRoom(rootFolderId);
   }, [isFrame, rootFolderId, moveToPublicRoom]);
 
+  const isSectionHeaderVisible =
+    isUsersHeaderVisible || isGroupsHeaderVisible || isHeaderVisible;
+
   const headerMenu = React.useMemo(() => {
+    if (!isSectionHeaderVisible) return EMPTY_ARRAY;
+
     if (isIndexEditingMode)
       return [
         {
@@ -601,8 +606,8 @@ const SectionHeaderContent = (props) => {
     getContactsHeaderMenu,
     onIndexReorder,
     onIndexApply,
-    // need for correct render header menu
-    selectedFolder,
+
+    isSectionHeaderVisible,
   ]);
 
   const isContactSection =
@@ -681,13 +686,6 @@ const SectionHeaderContent = (props) => {
     isIndexEditingMode,
     isHeaderVisible,
   ]);
-
-  console.debug({
-    isContactSection,
-    isIndexEditingMode,
-    isHeaderVisible,
-    headerMenu,
-  });
 
   const currentTitle = React.useMemo(() => {
     if (isProfile) return t("Profile:MyProfile");

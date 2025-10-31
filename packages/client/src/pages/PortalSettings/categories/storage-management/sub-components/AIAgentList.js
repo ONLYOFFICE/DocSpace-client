@@ -36,6 +36,7 @@ import { Button } from "@docspace/shared/components/button";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
 import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
+import { TABLE_AI_AGENTS_COLUMNS } from "SRC_DIR/helpers/constants";
 
 const AIAgentListComponent = (props) => {
   const {
@@ -45,9 +46,9 @@ const AIAgentListComponent = (props) => {
     quotaElement,
     buttonProps,
 
-    roomsListLength,
+    agentsListLength,
     roomFilterData,
-    // id,
+    id,
   } = props;
   const { t } = useTranslation("Settings");
 
@@ -60,18 +61,18 @@ const AIAgentListComponent = (props) => {
 
     const urlFilter = roomFilterData.toUrlParams();
 
-    // const roomsColumnsKey = `${TABLE_ROOMS_COLUMNS}=${id}`;
-    // const currentColumns = localStorage.getItem(roomsColumnsKey);
+    const roomsColumnsKey = `${TABLE_AI_AGENTS_COLUMNS}=${id}`;
+    const currentColumns = localStorage.getItem(roomsColumnsKey);
 
-    // if (currentColumns && !currentColumns.includes("Storage")) {
-    //   const updatedColumns = `${currentColumns},Storage`;
-    //   localStorage.setItem(roomsColumnsKey, updatedColumns);
-    // }
+    if (currentColumns && !currentColumns.includes("Storage")) {
+      const updatedColumns = `${currentColumns},Storage`;
+      localStorage.setItem(roomsColumnsKey, updatedColumns);
+    }
 
     navigate(`/ai-agents/shared/filter?${urlFilter}`);
   };
 
-  const roomsList = aIAgents.map((item, index) => {
+  const agentsList = aIAgents.map((item, index) => {
     const { id, icon, fileExst, defaultRoomIcon, isRoom, title, logo } = item;
     const color = logo?.color;
 
@@ -91,12 +92,12 @@ const AIAgentListComponent = (props) => {
           logo,
         )}
         {textElement(title)}
-        {quotaElement(item)}
+        {quotaElement(item, "agent")}
       </StyledSimpleFilesRow>
     );
   });
 
-  if (roomsListLength === 0) return null;
+  if (agentsListLength === 0) return null;
 
   return (
     <StyledStatistics>
@@ -104,9 +105,9 @@ const AIAgentListComponent = (props) => {
         <Text fontWeight={600} className="item-statistic">
           {t("Top5AIAgents")}
         </Text>
-        {roomsList}
+        {agentsList}
 
-        {roomsListLength > 5 ? (
+        {agentsListLength > 5 ? (
           <Button
             {...buttonProps}
             label={t("Common:ShowMore")}
@@ -122,11 +123,10 @@ const AIAgentListComponent = (props) => {
 export default inject(({ userStore, storageManagement }) => {
   const { user } = userStore;
   const { aIAgents, roomFilterData } = storageManagement;
-  const roomsListLength = aIAgents.length;
 
   return {
     id: user?.id,
-    roomsListLength,
+    agentsListLength: aIAgents.length,
     aIAgents,
     roomFilterData,
   };

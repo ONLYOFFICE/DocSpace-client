@@ -103,6 +103,10 @@ export type TPaymentQuota = {
     quota: number;
     enableQuota: boolean;
   };
+  aiAgentQuota: {
+    quota: number;
+    enableQuota: boolean;
+  };
 };
 
 export type TPortal = {

@@ -246,8 +246,10 @@ export default inject(
     const {
       isDefaultUsersQuotaSet,
       isDefaultRoomsQuotaSet,
+      isDefaultAIAgentQuotaSet,
       defaultUsersQuota,
       defaultRoomsQuota,
+      defaultAIAgentQuota,
     } = currentQuotaStore;
 
     const { infoPanelSelection, isVisible: infoPanelVisible } = infoPanelStore;
@@ -275,9 +277,18 @@ export default inject(
           : resetRoomQuota;
 
     const withoutLimitQuota =
-      type === "user" ? !isDefaultUsersQuotaSet : !isDefaultRoomsQuotaSet;
+      type === "user"
+        ? !isDefaultUsersQuotaSet
+        : type === "agent"
+          ? !isDefaultAIAgentQuotaSet
+          : !isDefaultRoomsQuotaSet;
 
-    const defaultSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
+    const defaultSize =
+      type === "user"
+        ? defaultUsersQuota
+        : type === "agent"
+          ? defaultAIAgentQuota
+          : defaultRoomsQuota;
 
     const needResetSelection =
       type === "user" ? needResetUserSelection : needResetFilesSelection;

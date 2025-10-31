@@ -516,9 +516,9 @@ export default function withFileActions(WrappedFileItem) {
         isArchiveFolder ||
         isTemplatesFolder ||
         isRecentFolder ||
-        settingsStore.currentDeviceType !== DeviceType.desktop ||
         inProgress ||
-        isAIAgentsFolder;
+        isAIAgentsFolder ||
+        isMobile;
 
       let isActive = false;
 

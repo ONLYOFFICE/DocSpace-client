@@ -18,6 +18,7 @@
   "InviteViaLinkDescriptionRoomMembers": "Create a universal link for {{productName}} members for self-authorization in the room.",
   "LinkCopySuccess": "Link has been copied",
   "SendInvitation": "Send invitation",
+  "UserAgentMaxAvailableRoleWarning": "Guests and Users cannot be assigned as Agent managers. Only Room and {{productName}} admins are suitable for the specified role.",
   "UserMaxAvailableRoleWarning": "Guests and Users cannot be assigned as Room managers. Only Room and {{productName}} admins are suitable for the specified role.",
   "UsersAlreadyAdded": "Some users have already been added",
   "UsersCannotBeAdded": "Disabled contacts cannot be added to a room"

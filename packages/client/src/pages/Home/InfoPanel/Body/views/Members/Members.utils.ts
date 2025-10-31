@@ -51,6 +51,15 @@ class MembersHelper {
         access: ShareAccessRights.RoomManager,
         type: "manager",
       },
+      agentAdmin: {
+        key: "agentAdmin",
+        label: this.t("Common:AgentManager"),
+        tooltip: this.t("InviteDialog:UserAgentMaxAvailableRoleWarning", {
+          productName: this.t("Common:ProductName"),
+        }),
+        access: ShareAccessRights.RoomManager,
+        type: "manager",
+      },
       collaborator: {
         key: "collaborator",
         label: this.t("Common:ContentCreator"),
@@ -145,7 +154,7 @@ class MembersHelper {
         ];
       case RoomsType.AIRoom:
         return [
-          options.roomAdmin,
+          options.agentAdmin,
           options.collaborator,
           options.viewer,
           ...deleteOption,
@@ -155,12 +164,19 @@ class MembersHelper {
     }
   };
 
-  getOptionByUserAccess = (access: ShareAccessRights) => {
+  getOptionByUserAccess = (
+    access: ShareAccessRights,
+    isAIAgentsFolder?: boolean
+  ) => {
     if (!access) return;
 
     const options = this.getOptions();
+
+    if (isAIAgentsFolder && access === ShareAccessRights.RoomManager)
+      return options.agentAdmin;
+
     const [userOption] = Object.values(options).filter(
-      (opt) => opt.access === access,
+      (opt) => opt.access === access
     );
 
     return userOption;

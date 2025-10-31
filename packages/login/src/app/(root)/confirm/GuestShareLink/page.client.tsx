@@ -26,15 +26,13 @@
 
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { toastr } from "@docspace/shared/components/toast";
 
-import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { ButtonsWrapper } from "@/components/Confirm.styled";
 import {
@@ -42,8 +40,7 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { addGuest } from "@docspace/shared/api/people";
-import Filter from "@docspace/shared/api/people/filter";
+import { useGuestShareLink } from "@/hooks/useGuestShareLink";
 
 type GuestShareLinkFormProps = {
   guestDisplayName?: string;
@@ -59,45 +56,7 @@ const GuestShareLinkForm = ({
   const { email = "" } = confirmLinkResult;
   const { t } = useTranslation(["Confirm", "Common"]);
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const onApproveInvite = async () => {
-    setIsLoading(true);
-
-    try {
-      setIsLoading(false);
-
-      await addGuest(email, confirmHeader);
-      const newFilter = Filter.getDefault();
-      newFilter.area = "guests";
-      newFilter.group = null;
-
-      window.location.replace(
-        `/accounts/guests/filter?${newFilter.toUrlParams()}`,
-      );
-    } catch (error) {
-      const knownError = error as TError;
-      let errorMessage: string;
-
-      if (typeof knownError === "object") {
-        errorMessage =
-          knownError?.response?.data?.error?.message ||
-          knownError?.statusText ||
-          knownError?.message ||
-          "";
-      } else {
-        errorMessage = knownError;
-      }
-      console.error(errorMessage);
-
-      setIsLoading(false);
-      toastr.error(errorMessage);
-    }
-  };
-
-  const onDenyInvite = () => {
-    window.location.replace("/");
-  };
+  const { onApproveInvite, onDenyInvite, isLoading } = useGuestShareLink();
 
   return (
     <FormWrapper>
@@ -124,7 +83,7 @@ const GuestShareLinkForm = ({
           label={t("Common:Approve")}
           tabIndex={2}
           isDisabled={isLoading}
-          onClick={onApproveInvite}
+          onClick={() => onApproveInvite(email, confirmHeader)}
           testId="approve_button"
         />
         <Button

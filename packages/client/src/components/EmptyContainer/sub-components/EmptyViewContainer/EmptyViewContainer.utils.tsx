@@ -177,16 +177,66 @@ export const getRoomDescription = (
   return t("EmptyView:EmptyDescription");
 };
 
+const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {
+  return isUser(access)
+    ? t("EmptyView:EmptyAIAgentsUserTitle")
+    : t("EmptyView:EmptyAIAgentsTitle");
+};
+
+const getAIAgentsAIDisabledTitle = (
+  t: TTranslation,
+  standalone: boolean,
+  isDocSpaceAdmin: boolean,
+) => {
+  return match([standalone, isDocSpaceAdmin])
+    .with([true, true], () =>
+      t("EmptyView:EmptyAIAgentsAIDisabledStandaloneAdminTitle"),
+    )
+    .with([false, true], () =>
+      t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminTitle"),
+    )
+    .otherwise(() => t("EmptyView:EmptyAIAgentsAIDisabledUserTitle"));
+};
+
+const getAIAgentsAIDisabledDescription = (
+  t: TTranslation,
+  standalone: boolean,
+  isDocSpaceAdmin: boolean,
+) => {
+  return match([standalone, isDocSpaceAdmin])
+    .with([true, true], () =>
+      t("EmptyView:EmptyAIAgentsAIDisabledStandaloneAdminDescription"),
+    )
+    .with([false, true], () =>
+      t("EmptyView:EmptyAIAgentsAIDisabledSaasAdminDescription"),
+    )
+    .otherwise(() => t("EmptyView:EmptyAIAgentsAIDisabledDescription"));
+};
+
+const getAIAgentsAIEnabledDescription = (
+  t: TTranslation,
+  access: AccessType,
+) => {
+  return isUser(access)
+    ? t("EmptyView:EmptyAIAgentsAIEnabledUserDescription")
+    : t("EmptyView:EmptyAIAgentsDescription");
+};
+
 export const getRootDescription = (
   t: TTranslation,
   access: AccessType,
   rootFolderType: Nullable<FolderType>,
   isPublicRoom: boolean,
   security: Nullable<TFolderSecurity>,
+  standalone: boolean,
+  aiReady: boolean,
+  isDocSpaceAdmin: boolean,
 ) => {
   return match([rootFolderType, access])
     .with([FolderType.AIAgents, P._], () =>
-      t("EmptyView:EmptyAIAgentsDescription"),
+      aiReady
+        ? getAIAgentsAIEnabledDescription(t, access)
+        : getAIAgentsAIDisabledDescription(t, standalone, isDocSpaceAdmin),
     )
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       t("Files:RoomEmptyContainerDescription"),
@@ -304,9 +354,16 @@ export const getRootTitle = (
   t: TTranslation,
   access: AccessType,
   rootFolderType: Nullable<FolderType>,
+  aiReady: boolean,
+  standalone: boolean,
+  isDocSpaceAdmin: boolean,
 ) => {
   return match([rootFolderType, access])
-    .with([FolderType.AIAgents, P._], () => t("EmptyView:EmptyAIAgentsTitle"))
+    .with([FolderType.AIAgents, P._], () =>
+      aiReady
+        ? getAIAgentsAIEnabledTitle(t, access)
+        : getAIAgentsAIDisabledTitle(t, standalone, isDocSpaceAdmin),
+    )
     .with(
       [
         FolderType.Rooms,

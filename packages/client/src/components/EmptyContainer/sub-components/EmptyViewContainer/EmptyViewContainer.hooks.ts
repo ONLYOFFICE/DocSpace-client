@@ -75,6 +75,9 @@ export const useEmptyView = (
     selectedFolder,
     isKnowledgeTab,
     isResultsTab,
+    isDocSpaceAdmin,
+    aiReady,
+    standalone,
   }: EmptyViewContainerProps,
 
   t: TTranslation,
@@ -102,6 +105,9 @@ export const useEmptyView = (
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
+      aiReady,
+      standalone,
+      isDocSpaceAdmin,
     );
     const title = getTitle(
       type,
@@ -116,6 +122,9 @@ export const useEmptyView = (
       isKnowledgeTab,
       isResultsTab,
       isAIRoom,
+      aiReady,
+      standalone,
+      isDocSpaceAdmin,
     );
     const icon = getIcon(
       type,
@@ -183,6 +192,7 @@ export const useOptions = (
     logoText,
     isKnowledgeTab,
     isResultsTab,
+    aiReady,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -357,6 +367,7 @@ export const useOptions = (
         isKnowledgeTab,
         isResultsTab,
         isAIRoom,
+        aiReady,
       ),
     [
       type,

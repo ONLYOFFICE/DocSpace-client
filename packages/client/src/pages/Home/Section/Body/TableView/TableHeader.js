@@ -688,7 +688,6 @@ class FilesTableHeader extends React.Component {
       roomQuotaColumnIsEnable,
       roomColumnTypeIsEnabled,
       roomColumnTagsIsEnabled,
-      isAIAgentsFolder,
     } = this.props;
 
     const columns = [

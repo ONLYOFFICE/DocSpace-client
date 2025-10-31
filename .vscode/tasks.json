@@ -633,7 +633,7 @@
     {
       "label": "Test | Test e2e docker start (login)",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report ${workspaceFolder}/playwright-report/login",
+      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9325 ${workspaceFolder}/playwright-report/login",
       "group": {
         "kind": "build",
         "isDefault": true

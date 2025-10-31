@@ -32,9 +32,11 @@ import { useTranslation } from "react-i18next";
 
 import { getCookie } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
+import AppLoader from "@docspace/shared/components/app-loader";
 
 import { ValidationResult } from "@/utils/enums";
 import { ConfirmRouteProps, TConfirmRouteContext } from "@/types";
+import { useGuestShareLink } from "@/hooks/useGuestShareLink";
 
 export const ConfirmRouteContext = createContext<TConfirmRouteContext>({
   linkData: {},
@@ -49,6 +51,8 @@ function ConfirmRoute(props: ConfirmRouteProps) {
   const [stateData, setStateData] = useState<TConfirmRouteContext | undefined>(
     undefined,
   );
+
+  const { onGuestsShareLinkInvalid } = useGuestShareLink();
 
   const { i18n, t } = useTranslation(["Common"]);
   const searchParams = useSearchParams();
@@ -70,6 +74,19 @@ function ConfirmRoute(props: ConfirmRouteProps) {
 
     if (isAuthenticated) i18n.changeLanguage(lng);
   }, [isAuthenticated, i18n]);
+
+
+  const isGuestShareLinkInvalid = confirmLinkParams.type === "GuestShareLink" && confirmLinkResult.result === ValidationResult.Invalid;
+
+  useEffect(() => {
+    if (isGuestShareLinkInvalid) {
+      onGuestsShareLinkInvalid();
+    }
+  }, [isGuestShareLinkInvalid]);
+
+  if (isGuestShareLinkInvalid) {
+    return <AppLoader />;
+  }
 
   if (!stateData) {
     switch (confirmLinkResult.result) {

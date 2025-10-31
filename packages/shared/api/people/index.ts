@@ -582,6 +582,7 @@ export async function getLinkToShareGuest(userId: string) {
 export async function addGuest(
   email: string,
   confirmKey: Nullable<string> = null,
+  skipLogout = false,
 ) {
   const options = {
     method: "post",
@@ -591,7 +592,7 @@ export async function addGuest(
 
   if (confirmKey) options.headers = { confirm: confirmKey };
 
-  const res = await request(options);
+  const res = await request({ ...options, skipLogout });
 
   return res;
 }

@@ -91,6 +91,11 @@ export type TShareSettings = {
   PrimaryExternalLink?: number;
 };
 
+type TDimensions = {
+  width: number;
+  height: number;
+};
+
 export type TFile = {
   isFile?: boolean;
   access: ShareAccessRights;
@@ -150,6 +155,7 @@ export type TFile = {
   sharedForUser?: boolean;
   external?: boolean;
   isLinkExpired?: boolean;
+  dimensions?: TDimensions;
 };
 
 export type TOpenEditRequest = {

@@ -62,6 +62,7 @@ const useFilesHelper = ({
   setIsRoot,
   searchValue,
   disabledItems,
+  disabledFolderType,
   includedItems,
   setSelectedItemSecurity,
   isThirdParty,
@@ -209,6 +210,7 @@ const useFilesHelper = ({
           folders,
           disabledItemsRef.current,
           filterParam,
+          disabledFolderType,
         );
 
         const filesList: TSelectorItem[] = convertFilesToItems(
@@ -410,6 +412,7 @@ const useFilesHelper = ({
       shareKey,
       applyFilterOption,
       includedItems,
+      disabledFolderType,
     ],
   );
 

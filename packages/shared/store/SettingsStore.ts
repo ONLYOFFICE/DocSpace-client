@@ -343,7 +343,7 @@ class SettingsStore {
 
   abortControllerArr: Nullable<AbortController>[] = [];
 
-  aiReady: boolean = false;
+  aiReady: boolean = true;
 
   constructor() {
     makeAutoObservable(this);

@@ -193,6 +193,8 @@ export const useOptions = (
     isKnowledgeTab,
     isResultsTab,
     aiReady,
+    standalone,
+    isDocSpaceAdmin,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -223,6 +225,14 @@ export const useOptions = (
       state,
     };
   }, [roomsFolder?.rootFolderType, roomsFolder?.title, userId]);
+
+  const onGoToServices = useCallback(() => {
+    return navigate("/portal-settings/services");
+  }, []);
+
+  const onGoToAIProviderSettings = useCallback(() => {
+    return navigate("/portal-settings/ai-settings/providers");
+  }, []);
 
   const onGoToPersonal = useCallback((): LinkProps => {
     const newFilter = FilesFilter.getDefault();
@@ -360,6 +370,8 @@ export const useOptions = (
           onGoToShared,
           onOpenAccessSettings,
           onCreateAIAgent,
+          onGoToServices,
+          onGoToAIProviderSettings,
         },
         logoText,
         isVisitor,
@@ -368,6 +380,8 @@ export const useOptions = (
         isResultsTab,
         isAIRoom,
         aiReady,
+        standalone,
+        isDocSpaceAdmin,
       ),
     [
       type,

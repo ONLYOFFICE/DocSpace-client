@@ -3,6 +3,19 @@ import type { To } from "react-router";
 import type { Nullable } from "../../types";
 import type { ContextMenuModel } from "../context-menu";
 
+export type EmptyViewButtonType = {
+  /** Unique identifier for the button */
+  key: React.Key;
+  /** Title text to display */
+  title: string;
+  /** Optional click handler for the button */
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  /** Optional CSS class name for styling */
+  className?: string;
+  /** type of option */
+  type: "button";
+};
+
 export type EmptyViewLinkType = {
   /** Unique identifier for the link */
   key: React.Key;
@@ -39,7 +52,11 @@ export type EmptyViewItemType = {
 };
 
 /** Array of EmptyViewItemType or EmptyViewLinkType elements */
-export type EmptyViewOptionsType = (EmptyViewItemType | EmptyViewLinkType)[];
+export type EmptyViewOptionsType = (
+  | EmptyViewItemType
+  | EmptyViewLinkType
+  | EmptyViewButtonType
+)[];
 
 export type EmptyViewItemProps = Omit<EmptyViewItemType, "key"> & {
   /** Optional ID for the item */

@@ -135,4 +135,6 @@ export type OptionActions = {
   onGoToPersonal: () => LinkProps;
   onGoToShared: () => LinkProps;
   onCreateAIAgent: VoidFunction;
+  onGoToServices: VoidFunction;
+  onGoToAIProviderSettings: VoidFunction;
 };

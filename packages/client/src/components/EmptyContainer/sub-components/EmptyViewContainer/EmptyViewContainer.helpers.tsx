@@ -223,6 +223,8 @@ export const getOptions = (
   isResultsTab?: boolean,
   isAIRoom?: boolean,
   aiReady: boolean = false,
+  standalone: boolean = false,
+  isDocSpaceAdmin: boolean = false,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -347,7 +349,7 @@ export const getOptions = (
     icon: <CreateAIAgentIcon />,
     key: "create-ai-agent",
     onClick: actions.onCreateAIAgent,
-    disabled: false,
+    disabled: !security?.Create,
   };
 
   const inviteRootRoom = {
@@ -360,6 +362,20 @@ export const getOptions = (
     onClick: () => actions.inviteRootUser(EmployeeType.User),
     disabled: false,
   };
+
+  const goToServices = {
+    type: "button",
+    title: t("Notifications:GoToSettings"),
+    key: "go-to-services",
+    onClick: actions.onGoToServices,
+  } as const;
+
+  const goToAIProviderSettings = {
+    type: "button",
+    title: t("Notifications:GoToSettings"),
+    key: "go-to-ai-provider-settings",
+    onClick: actions.onGoToAIProviderSettings,
+  } as const;
 
   const uploadFromDeviceAnyFile = isMobile
     ? createUploadFromDeviceOption(
@@ -445,9 +461,14 @@ export const getOptions = (
   if (isRootEmptyPage) {
     return match([rootFolderType, access, isVisitor])
       .returnType<EmptyViewOptionsType>()
-      .with(
-        [FolderType.AIAgents, ShareAccessRights.None, P.when(() => aiReady)],
-        () => [createAIAgent],
+      .with([FolderType.AIAgents, P._, P._], () =>
+        match([aiReady, standalone, isDocSpaceAdmin])
+          .with([true, P._, P.when(() => isAdmin(access))], () => [
+            createAIAgent,
+          ])
+          .with([false, true, true], () => [goToAIProviderSettings])
+          .with([false, false, true], () => [goToServices])
+          .otherwise(() => []),
       )
       .with([FolderType.Rooms, ShareAccessRights.None, P._], () => [
         createRoom,

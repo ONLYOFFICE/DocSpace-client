@@ -1454,7 +1454,7 @@ class FilesStore {
   };
 
   getFilesBySelected = (files, selected) => {
-    const newSelection = EMPTY_ARRAY;
+    const newSelection = [];
     files.forEach((file) => {
       const checked = this.getFilesChecked(file, selected);
 

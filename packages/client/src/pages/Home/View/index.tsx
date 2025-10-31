@@ -194,6 +194,15 @@ const View = ({
     return "files";
   });
 
+  React.useEffect(() => {
+    const guestShareLinkInvalid = sessionStorage.getItem("guestShareLinkInvalid");
+    
+    if (guestShareLinkInvalid === "true") {
+      toastr.error(t("Common:InvalidLink"));
+      sessionStorage.removeItem("guestShareLinkInvalid");
+    }
+  }, []);
+
   const [isLoading, setIsLoading] = React.useState(false);
 
   const prevCurrentViewRef = React.useRef(currentView);

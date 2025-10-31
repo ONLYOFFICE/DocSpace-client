@@ -58,7 +58,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { AI_TOOLS } from "@docspace/shared/constants";
+import { WEB_SEARCH } from "@docspace/shared/constants";
 
 import ServiceToggleSection from "../ServiceToggleSection";
 import ServiceContent from "../ServiceContent";
@@ -73,12 +73,12 @@ import ChatIcon from "PUBLIC_DIR/images/icons/32/chat.svg";
 import ToolsIcon from "PUBLIC_DIR/images/icons/32/tools.svg";
 import styles from "../../styles/BackupServiceDialog.module.scss";
 
-interface AIServiceDialogProps {
+interface BackupServiceDialogProps {
   visible: boolean;
   onClose: () => void;
   onToggle: (id: string, enabled: boolean) => void;
   isEnabled?: boolean;
-  aiToolsPrice?: number;
+  webSearchPrice?: number;
   formatWalletCurrency?: (
     item: number | null,
     fractionDigits: number,
@@ -93,78 +93,23 @@ interface ServiceOption {
   description: string;
 }
 
-const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
+const WebSearchDialog: React.FC<BackupServiceDialogProps> = ({
   visible,
   onClose,
   onToggle,
   isEnabled = false,
-  aiToolsPrice,
+  webSearchPrice,
   formatWalletCurrency,
   logoText,
 }) => {
   const { t } = useTranslation(["Services", "Common", "Payments"]);
 
   const handleToggleChange = () => {
-    onToggle(AI_TOOLS, isEnabled);
+    onToggle(WEB_SEARCH, isEnabled);
     onClose();
   };
 
-  const serviceOptions: ServiceOption[] = [
-    {
-      id: "ai-tools",
-      title: t("Common:AIAgents"),
-      description: t("AIAgentsDescription"),
-      icon: <ToolsIcon />,
-    },
-    {
-      id: "chatbot",
-      title: t("ChatBot"),
-      description: t("ChatBotDescription"),
-      icon: <ChatIcon />,
-    },
-    {
-      id: "summarization",
-      title: t("Summarization"),
-      description: t("SummarizationDescription"),
-      icon: <SummarizationIcon />,
-    },
-    {
-      id: "text-translation",
-      title: t("TextTranslation"),
-      description: t("TextTranslationDescription"),
-      icon: <TranslationIcon />,
-    },
-    {
-      id: "ocr",
-      title: t("OCR"),
-      description: t("OCRDescription"),
-      icon: <OcrIcon />,
-    },
-    {
-      id: "text-generation",
-      title: t("TextGeneration"),
-      description: t("TextGenerationDescription"),
-      icon: <GenerationIcon />,
-    },
-    {
-      id: "image-generation",
-      title: t("ImageGeneration"),
-      description: t("ImageGenerationDescription"),
-      icon: <ImageGenerationIcon />,
-    },
-    {
-      id: "error-checking",
-      title: t("ErrorChecking"),
-      description: t("ErrorCheckingDescription"),
-      icon: <ListIcon />,
-    },
-    {
-      id: "and-more",
-      title: t("AndMore"),
-      description: t("NewAIfeatures"),
-      icon: <MoreIcon />,
-    },
-  ];
+  const serviceOptions: ServiceOption[] = [];
 
   return (
     <ModalDialog
@@ -179,7 +124,7 @@ const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
           isEnabled={isEnabled}
           onToggle={handleToggleChange}
           title={t("Services:EnableAItools", {
-            currency: formatWalletCurrency!(aiToolsPrice!, 4),
+            currency: formatWalletCurrency!(webSearchPrice!, 4),
           })}
           description={t("Services:EnableAItoolsDescription", {
             organizationName: logoText,
@@ -212,14 +157,14 @@ const AIServiceDialog: React.FC<AIServiceDialogProps> = ({
 };
 
 export default inject(({ paymentStore, settingsStore }: TStore) => {
-  const { servicesQuotasFeatures, aiToolsPrice, formatWalletCurrency } =
+  const { servicesQuotasFeatures, webSearchPrice, formatWalletCurrency } =
     paymentStore;
   const { logoText } = settingsStore;
-  const feature = servicesQuotasFeatures.get(AI_TOOLS);
+  const feature = servicesQuotasFeatures.get(WEB_SEARCH);
   return {
     isEnabled: feature?.value,
-    aiToolsPrice,
+    webSearchPrice,
     formatWalletCurrency,
     logoText,
   };
-})(observer(AIServiceDialog));
+})(observer(WebSearchDialog));

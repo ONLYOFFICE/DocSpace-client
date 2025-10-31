@@ -27,30 +27,55 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
+import { getLogoUrl } from "@docspace/shared/utils/common";
 
-import { Text } from "@docspace/shared/components/text";
-import { Logo } from "../Logo";
-
-export const GreetingContainer = ({
-  greetingText,
+export const Logo = ({
   culture,
+  isMobile = false,
 }: {
-  greetingText?: string | undefined;
   culture?: string;
+  isMobile?: boolean;
 }) => {
+  const lightLogoUrl = getLogoUrl(
+    WhiteLabelLogoType.LoginPage,
+    false,
+    false,
+    culture,
+  );
+
+  const darkLogoUrl = getLogoUrl(
+    WhiteLabelLogoType.LoginPage,
+    true,
+    false,
+    culture,
+  );
+
+  const logoHeight = isMobile ? 24 : 44;
+  const logoWidth = isMobile ? 211 : 386;
+
   return (
     <>
-      <Logo culture={culture} />
-      {greetingText ? (
-        <Text
-          fontSize="23px"
-          fontWeight={700}
-          textAlign="center"
-          className="greeting-title"
-        >
-          {greetingText}
-        </Text>
-      ) : null}
+      <Image
+        key="light-logo"
+        id="logo-image-light"
+        src={lightLogoUrl}
+        className="logo-wrapper logo-wrapper--light"
+        alt="greeting-logo"
+        width={logoWidth}
+        height={logoHeight}
+      />
+
+      <Image
+        key="dark-logo"
+        id="logo-image-dark"
+        src={darkLogoUrl}
+        className="logo-wrapper logo-wrapper--dark"
+        alt="greeting-logo"
+        width={logoWidth}
+        height={logoHeight}
+      />
     </>
   );
 };

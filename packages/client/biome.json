@@ -7,7 +7,6 @@
     "includes": [
       "**",
       "!tsconfig.json",
-      "!eslint.config.js",
       "!node_modules/**",
       "!dist/**",
       "!coverage/**",

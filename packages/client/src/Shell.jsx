@@ -64,7 +64,6 @@ import useCreateFileError from "./Hooks/useCreateFileError";
 
 import ReactSmartBanner from "./components/SmartBanner";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Shell = ({ page = "home", ...rest }) => {
   const {
     isLoaded,

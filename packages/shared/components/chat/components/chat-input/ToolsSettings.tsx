@@ -76,8 +76,12 @@ const ToolsSettings = ({
   setMCPTools,
   setWebSearchEnabled,
   isAdmin,
-}: ReturnType<typeof useToolsSettings> & { isAdmin?: boolean }) => {
-  const { t } = useTranslation(["Common", "Notifications"]);
+  aiReady,
+}: ReturnType<typeof useToolsSettings> & {
+  isAdmin?: boolean;
+  aiReady: boolean;
+}) => {
+  const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
 
   const { roomId } = useChatStore();
@@ -221,7 +225,7 @@ const ToolsSettings = ({
   };
 
   const showMcpTools = (e: React.MouseEvent<HTMLElement>) => {
-    if (showManageConnections) return;
+    if (!aiReady || showManageConnections) return;
 
     setIsMcpToolsVisible(true);
     contextMenuRef.current?.show(e);
@@ -327,7 +331,7 @@ const ToolsSettings = ({
                   fontWeight={600}
                   onClick={onGoToWebSearchPage}
                 >
-                  {t("Notifications:GoToSettings")}
+                  {t("Common:GoToSettings")}
                 </Link>
               </>
             )
@@ -370,9 +374,14 @@ const ToolsSettings = ({
   return (
     <>
       <div
-        className={classNames(styles.chatInputButton, {
-          [styles.activeChatInputButton]: isMcpToolsVisible,
-        })}
+        className={classNames(
+          styles.chatInputButton,
+          styles.chatInputToolsButton,
+          {
+            [styles.activeChatInputButton]: isMcpToolsVisible,
+            [styles.disabled]: !aiReady,
+          },
+        )}
         onClick={showMcpTools}
       >
         <IconButton iconName={McpToolReactSvgUrl} size={16} isFill={false} />

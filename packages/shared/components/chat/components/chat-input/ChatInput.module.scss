@@ -109,13 +109,40 @@
 
     svg {
       cursor: pointer;
+
       path {
         fill: var(--chat-input-tools-button-color);
       }
     }
 
-    &:hover {
+    &:hover:not(.disabled) {
       background-color: var(--chat-input-tools-button-hover-background);
+    }
+
+    &.disabled {
+      svg {
+        cursor: not-allowed;
+
+        path {
+          fill: var(--chat-input-tools-button-disabled-color);
+        }
+      }
+    }
+
+    &.chatInputToolsButton {
+      &.disabled {
+        cursor: not-allowed;
+
+        p {
+          color: var(--chat-input-tools-button-disabled-color);
+        }
+
+        svg {
+          circle {
+            stroke: var(--chat-input-tools-button-disabled-color);
+          }
+        }
+      }
     }
   }
 

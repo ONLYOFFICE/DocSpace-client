@@ -34,16 +34,31 @@ import PublicRoomBar from "../../../public-room-bar";
 
 import styles from "./ChatInfoBlock.module.scss";
 
-export const ChatInfoBlock = () => {
+type Props = {
+  standalone: boolean;
+  isDocSpaceAdmin: boolean;
+};
+
+export const ChatInfoBlock = ({ standalone, isDocSpaceAdmin }: Props) => {
   const { t } = useTranslation("Common");
+
+  const bodyText = !isDocSpaceAdmin
+    ? t("Common:AIDisabledInfoBlockUserDescription", {
+        productName: t("Common:ProductName"),
+      })
+    : standalone
+      ? t("Common:AIDisabledInfoBlockAdminStandaloneDescription", {
+          productName: t("Common:ProductName"),
+        })
+      : t("Common:AIDisabledInfoBlockAdminSaasDescription", {
+          productName: t("Common:ProductName"),
+        });
 
   return (
     <PublicRoomBar
       className={styles.chatInfoBlock}
       headerText={t("Common:AIFeaturesAreCurrentlyDisabled")}
-      bodyText={t("Common:AIDisabledInfoBlockDescription", {
-        productName: t("Common:ProductName"),
-      })}
+      bodyText={bodyText}
       iconName={InfoIcon}
     />
   );

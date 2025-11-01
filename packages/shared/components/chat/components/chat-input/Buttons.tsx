@@ -49,15 +49,18 @@ const Buttons = ({
   selectedModel,
   toolsSettings,
   isAdmin,
+  aiReady,
 }: ButtonsProps) => {
   const { isRequestRunning, stopMessage } = useMessageStore();
 
-  const isDisabled = !isRequestRunning ? !value || !selectedModel : false;
+  const isSendButtonDisabled = !isRequestRunning
+    ? !value || !selectedModel
+    : false;
 
   const sendIconProps = !isRequestRunning
     ? {
         onClick: sendMessageAction,
-        isDisabled,
+        isDisabled: isSendButtonDisabled,
         iconNode: null,
       }
     : {
@@ -65,6 +68,12 @@ const Buttons = ({
         isDisabled: false,
         iconNode: <div className={styles.square} />,
       };
+
+  const onAttachmentToggleClick = () => {
+    if (!aiReady) return;
+
+    toggleFilesSelector();
+  };
 
   return (
     <div
@@ -75,23 +84,26 @@ const Buttons = ({
         <div
           className={classNames(styles.chatInputButton, {
             [styles.activeChatInputButton]: isFilesSelectorVisible,
+            [styles.disabled]: !aiReady,
           })}
-          onClick={toggleFilesSelector}
+          onClick={onAttachmentToggleClick}
         >
           <IconButton
             iconName={AttachmentReactSvgUrl}
             size={16}
             isFill={false}
+            isDisabled={!aiReady}
+            className={classNames({ [styles.disabled]: !aiReady })}
           />
         </div>
-        <ToolsSettings {...toolsSettings} isAdmin={isAdmin} />
+        <ToolsSettings {...toolsSettings} isAdmin={isAdmin} aiReady={aiReady} />
       </div>
       <IconButton
         iconName={SendReactSvgUrl}
         size={16}
         isClickable
         className={classNames(styles.chatInputButtonsSend, {
-          [styles.disabled]: isDisabled,
+          [styles.disabled]: isSendButtonDisabled,
         })}
         {...sendIconProps}
       />

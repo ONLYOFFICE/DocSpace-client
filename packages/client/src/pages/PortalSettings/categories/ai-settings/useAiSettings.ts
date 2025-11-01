@@ -53,8 +53,8 @@ const useAISettings = ({
   }, [fetchMCPServers, fetchAIProviders]);
 
   const initWebSearch = React.useCallback(async () => {
-    await fetchWebSearch?.();
-  }, [fetchWebSearch]);
+    await Promise.all([fetchWebSearch?.(), fetchAIProviders?.()]);
+  }, [fetchWebSearch, fetchAIProviders]);
 
   const getAiSettingsInitialValue = React.useCallback(async () => {
     const isProviders = window.location.pathname.includes("providers");

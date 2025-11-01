@@ -55,6 +55,7 @@ const ChatInput = ({
   selectedModel,
   toolsSettings,
   isAdmin,
+  aiReady,
 }: ChatInputProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -197,6 +198,7 @@ const ChatInput = ({
               placeholder={t("Common:AIChatInput")}
               isChatMode
               fontSize={15}
+              isDisabled={!aiReady}
             />
 
             <FilesList
@@ -214,6 +216,7 @@ const ChatInput = ({
               selectedModel={selectedModel}
               toolsSettings={toolsSettings}
               isAdmin={isAdmin}
+              aiReady={aiReady}
             />
           </>
         )}

@@ -93,6 +93,8 @@ const EditAgentEvent = ({
     fetchInfo();
   }, []);
 
+  if (!visible) return null;
+
   return (
     <EditAgentDialog
       visible={visible}

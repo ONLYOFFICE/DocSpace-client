@@ -54,6 +54,7 @@ import {
 import { TData, toastr } from "@docspace/shared/components/toast";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { PasswordInput } from "@docspace/shared/components/password-input";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -66,6 +67,7 @@ type AddEditDialogProps = {
   providerData?: TAiProvider;
   addAIProvider?: AISettingsStore["addAIProvider"];
   updateAIProvider?: AISettingsStore["updateAIProvider"];
+  getAIConfig?: SettingsStore["getAIConfig"];
 };
 
 const providerTypes: TOption[] = [
@@ -105,6 +107,7 @@ const AddUpdateDialogComponent = ({
   addAIProvider,
   updateAIProvider,
   providerData,
+  getAIConfig,
 }: AddEditDialogProps) => {
   const { t } = useTranslation(["Common", "AISettings", "OAuth", "Webhooks"]);
   const [selectedOption, setSelectedOption] = useState(
@@ -161,6 +164,7 @@ const AddUpdateDialogComponent = ({
         };
 
         await addAIProvider?.(data);
+        await getAIConfig?.();
         toastr.success(t("AISettings:ProviderAddedSuccess"));
       }
 
@@ -314,8 +318,11 @@ const AddUpdateDialogComponent = ({
   );
 };
 
-export const AddUpdateProviderDialog = inject(({ aiSettingsStore }: TStore) => {
-  const { addAIProvider, updateAIProvider } = aiSettingsStore;
+export const AddUpdateProviderDialog = inject(
+  ({ aiSettingsStore, settingsStore }: TStore) => {
+    const { addAIProvider, updateAIProvider } = aiSettingsStore;
+    const { getAIConfig } = settingsStore;
 
-  return { addAIProvider, updateAIProvider };
-})(observer(AddUpdateDialogComponent));
+    return { addAIProvider, updateAIProvider, getAIConfig };
+  },
+)(observer(AddUpdateDialogComponent));

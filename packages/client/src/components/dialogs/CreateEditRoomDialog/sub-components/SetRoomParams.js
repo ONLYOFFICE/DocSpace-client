@@ -52,7 +52,6 @@ import RoomTypeDropdown from "./RoomTypeDropdown";
 import PermanentSettings from "./PermanentSettings";
 import ThirdPartyStorage from "./ThirdPartyStorage";
 import TemplateAccess from "./TemplateAccess/TemplateAccess";
-import AiRoomSettings from "./AiRoomSettings";
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -526,10 +525,6 @@ const SetRoomParams = ({
           isEdit={isEdit}
           setLifetimeDialogVisible={setLifetimeDialogVisible}
         />
-      ) : null}
-
-      {roomParams.type === RoomsType.AIRoom ? (
-        <AiRoomSettings roomParams={roomParams} setRoomParams={setRoomParams} />
       ) : null}
 
       {isDefaultRoomsQuotaSet && !roomParams.storageLocation.providerKey ? (

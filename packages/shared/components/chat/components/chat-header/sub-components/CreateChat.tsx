@@ -26,6 +26,7 @@
 
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import PlusReactSvgUrl from "PUBLIC_DIR/images/icons/16/plus.svg";
 
@@ -38,7 +39,13 @@ import { useChatStore } from "../../../store/chatStore";
 
 import styles from "../ChatHeader.module.scss";
 
-const CreateChat = ({ isLoadingProp }: { isLoadingProp?: boolean }) => {
+const CreateChat = ({
+  isLoadingProp,
+  isDisabled,
+}: {
+  isLoadingProp?: boolean;
+  isDisabled?: boolean;
+}) => {
   const { messages, isRequestRunning, startNewChat } = useMessageStore();
   const { setCurrentChat } = useChatStore();
 
@@ -57,14 +64,19 @@ const CreateChat = ({ isLoadingProp }: { isLoadingProp?: boolean }) => {
   if (messages.length === 0) return null;
 
   const onClickAction = () => {
-    if (isRequestRunning) return;
+    if (isDisabled || isRequestRunning) return;
 
     setCurrentChat(null);
     startNewChat();
   };
 
   return (
-    <div className={styles.createChat} onClick={onClickAction}>
+    <div
+      className={classNames(styles.createChat, {
+        [styles.disabled]: isDisabled,
+      })}
+      onClick={onClickAction}
+    >
       <PlusReactSvgUrl />
       <Text fontSize="14px" lineHeight="16px" fontWeight={600}>
         {t("AINewChat")}

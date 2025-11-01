@@ -308,7 +308,6 @@ export const getServersListForRoom = async (roomId: number) => {
     return res as TServer[];
   } catch (e) {
     console.log(e);
-    toastr.error(e as string);
   }
 };
 
@@ -468,7 +467,6 @@ export const getWebSearchInRoom = async (roomId: number) => {
     return res as { webSearchEnabled: boolean };
   } catch (e) {
     console.log(e);
-    toastr.error(e as string);
   }
 };
 

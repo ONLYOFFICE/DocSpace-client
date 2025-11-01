@@ -1,6 +1,6 @@
 import React from "react";
+import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import { SectionHeaderSkeleton, SectionSubmenuSkeleton } from "./index";
 import styles from "./Sections.module.scss";

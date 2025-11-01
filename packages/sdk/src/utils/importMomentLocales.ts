@@ -32,7 +32,6 @@ function importMomentLocale(locale: string) {
   while (splittedLocale.length > 0) {
     try {
       const normalizedLocale = splittedLocale.join("-").toLowerCase();
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
       require(`moment/locale/${normalizedLocale}`);
 
       break;

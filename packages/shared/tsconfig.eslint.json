@@ -25,7 +25,7 @@
     // the "parserOptions.project" error
     ".eslintrc.cjs",
     "__mocks__",
-    "jest.config.ts",
+    "vitest.config.ts",
     ".storybook",
     "babel.config.ts",
     "index.d.ts",
@@ -33,7 +33,7 @@
     "routes",
     "polyfills",
     "api",
-    "jest",
+    "vitest",
     // include local eslint custom rules
     "eslint-rules"
   ]

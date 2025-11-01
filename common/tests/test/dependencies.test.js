@@ -354,6 +354,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       "jest-html-reporter",
       "linkifyjs",
       "@biomejs/biome",
+      "@vitest/ui",
     ];
 
     missing = missing.filter((m) => !allowedUnusedDeps.includes(m.name));

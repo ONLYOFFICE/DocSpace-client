@@ -153,6 +153,7 @@ const SetRoomParams = ({
   hideConfirmRoomLifetime,
   templateIsAvailable,
   fromTemplate,
+  infoPanelSelection,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(roomParams.previewIcon);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -160,7 +161,9 @@ const SetRoomParams = ({
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
 
-  const [previewTitle, setPreviewTitle] = useState(selection?.title || "");
+  const [previewTitle, setPreviewTitle] = useState(
+    selection?.title || infoPanelSelection?.title || ""
+  );
   const [createRoomTitle, setCreateRoomTitleTitle] = useState(roomParams.title);
 
   const [forceHideRoomTypeDropdown, setForceHideRoomTypeDropdown] =
@@ -207,7 +210,7 @@ const SetRoomParams = ({
 
     if (cover && cover.cover) {
       const currentCoverData = covers.filter(
-        (item) => item.id === cover.cover,
+        (item) => item.id === cover.cover
       )[0].data;
       return { ...cover, data: currentCoverData };
     }
@@ -228,14 +231,22 @@ const SetRoomParams = ({
       globalColors.logoColors[
         Math.floor(Math.random() * globalColors.logoColors.length)
       ].replace("#", ""),
-    [],
+    []
   );
 
-  const currentIcon = selection?.logo?.large
+  const currentIcon = selection
     ? selection?.logo?.large
-    : selection?.logo?.cover
+      ? selection?.logo?.large
+      : selection?.logo?.cover
       ? selection?.logo
-      : getInfoPanelItemIcon(selection, 96);
+      : getInfoPanelItemIcon(selection, 96)
+    : infoPanelSelection
+    ? infoPanelSelection?.logo?.large
+      ? infoPanelSelection?.logo?.large
+      : infoPanelSelection?.logo?.cover
+      ? infoPanelSelection?.logo
+      : getInfoPanelItemIcon?.(infoPanelSelection, 96)
+    : undefined;
 
   const onChangeIcon = (icon) => {
     if (!icon.uploadedFile !== disableImageRescaling)
@@ -326,17 +337,27 @@ const SetRoomParams = ({
   const model = getLogoCoverModel(t, hasImage);
 
   const isEditRoomModel = model.map((item) =>
-    item.key === "delete" ? { ...item, onClick: onDeleteAvatar } : item,
+    item.key === "delete" ? { ...item, onClick: onDeleteAvatar } : item
   );
 
   const isEmptyIcon =
     createRoomTitle || cover?.color
       ? false
       : avatarEditorDialogVisible
-        ? true
-        : previewIcon
-          ? false
-          : !createRoomTitle;
+      ? true
+      : previewIcon
+      ? false
+      : !createRoomTitle;
+
+  const showDefault =
+    cover && cover.cover
+      ? false
+      : (!previewIcon &&
+          !selection?.logo?.cover &&
+          !selection?.logo?.large &&
+          !infoPanelSelection?.logo?.cover &&
+          !infoPanelSelection?.logo?.large) ||
+        cover?.color;
 
   const element =
     isEdit || isTemplate || fromTemplate ? (
@@ -350,19 +371,15 @@ const SetRoomParams = ({
           currentCover
             ? { cover: currentCover }
             : avatarEditorDialogVisible
-              ? currentIcon
-              : previewIcon || currentIcon
+            ? currentIcon
+            : previewIcon || currentIcon
         }
-        showDefault={
-          cover && cover.cover
-            ? false
-            : (!previewIcon &&
-                !selection?.logo?.cover &&
-                !selection?.logo?.large) ||
-              cover?.color
-        }
+        showDefault={showDefault}
         color={
-          cover ? cover.color : (selection?.logo?.color ?? selection?.color)
+          cover
+            ? cover.color
+            : (selection?.logo?.color ?? selection?.color) ||
+              infoPanelSelection.logo?.color
         }
         size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
         radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
@@ -568,7 +585,7 @@ export default inject(
       avatarEditorDialogStore,
       filesSettingsStore,
     },
-    { templateItem },
+    { templateItem }
   ) => {
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
     const { folderFormValidation, maxImageUploadSize, currentColorScheme } =
@@ -603,8 +620,8 @@ export default inject(
       bufferSelection != null
         ? bufferSelection
         : infoPanelSelection?.isTemplate
-          ? infoPanelSelection
-          : templateItem;
+        ? infoPanelSelection
+        : templateItem;
 
     setCoverSelection(selection);
 
@@ -631,8 +648,9 @@ export default inject(
       setCover,
       setLifetimeDialogVisible,
       hideConfirmRoomLifetime,
+      infoPanelSelection,
     };
-  },
+  }
 )(
   observer(
     withTranslation([
@@ -640,6 +658,6 @@ export default inject(
       "Translations",
       "Common",
       "RoomLogoCover",
-    ])(withLoader(SetRoomParams)(<SetRoomParamsLoader />)),
-  ),
+    ])(withLoader(SetRoomParams)(<SetRoomParamsLoader />))
+  )
 );

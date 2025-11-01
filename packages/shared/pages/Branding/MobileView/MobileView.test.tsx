@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import "@testing-library/jest-dom";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 
 import { MobileView } from ".";
@@ -35,7 +35,7 @@ const baseProps = {
   displayAbout: true,
   displayAdditional: true,
   baseUrl: "/test-url",
-  onClickLink: jest.fn(),
+  onClickLink: vi.fn(),
 };
 
 describe("MobileView", () => {
@@ -61,7 +61,7 @@ describe("MobileView", () => {
   });
 
   it("calls onClickLink when a category is clicked", () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     render(<MobileView {...baseProps} onClickLink={onClick} />);
 
     const firstCategory = screen.getByText("BrandName");

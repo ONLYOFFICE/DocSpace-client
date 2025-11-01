@@ -1,15 +1,15 @@
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
 import { StandalonePage } from "./index";
 
 describe("StandalonePage", () => {
   const defaultProps = {
     isTrial: false,
-    setPaymentsLicense: jest.fn(),
-    acceptPaymentsLicense: jest.fn(),
+    setPaymentsLicense: vi.fn(),
+    acceptPaymentsLicense: vi.fn(),
     isLicenseCorrect: true,
     salesEmail: "sales@example.com",
     isLicenseDateExpired: false,
@@ -99,7 +99,7 @@ describe("StandalonePage", () => {
 
   it("handles license file upload", async () => {
     const user = userEvent.setup();
-    const setPaymentsLicense = jest.fn();
+    const setPaymentsLicense = vi.fn();
 
     render(
       <StandalonePage
@@ -120,7 +120,7 @@ describe("StandalonePage", () => {
 
   it("handles license activation button click", async () => {
     const user = userEvent.setup();
-    const acceptPaymentsLicense = jest.fn();
+    const acceptPaymentsLicense = vi.fn();
 
     render(
       <StandalonePage

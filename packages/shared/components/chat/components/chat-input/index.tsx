@@ -189,7 +189,9 @@ const ChatInput = ({
               onChange={handleChange}
               value={value}
               isFullHeight
-              className={styles.chatInputTextArea}
+              className={classNames(styles.chatInputTextArea, {
+                [styles.disabled]: !aiReady,
+              })}
               wrapperClassName={classNames({
                 [styles.chatInputTextAreaWrapper]: true,
                 [styles.chatInputTextAreaWrapperFiles]:

@@ -2211,6 +2211,7 @@
   --chat-input-tools-button-active-background: #{$gray-light-mid};
   --chat-input-send-button-color: #{$white};
   --chat-input-send-button-background: var(--accent-main);
+  --chat-input-placeholder-disabled-color: #{$gray-strong};
 
   --chat-message-color: #{$gray-text};
   --chat-message-user-background-color: var(--accent-main);
@@ -2241,7 +2242,7 @@
   --chat-header-button-svg-color: #{$white};
   --chat-header-button-hover-background: #{$light-dark-gray-hover};
   --chat-header-button-active-background: #{$gray-dark-mid};
-  --chat-header-button-disabled-color: #{$gray};
+  --chat-header-button-disabled-color: #{$gray-dark};
 
   --chat-file-item-border-color: #{$gray-dark-strong};
   --chat-file-item-background-color: unset;
@@ -2252,13 +2253,14 @@
   --chat-input-file-background-color: #{$black};
   --chat-input-file-exst-color: #{$gray};
   --chat-input-tools-button-color: #{$dark-gray-dark};
-  --chat-input-tools-button-disabled-color: #{$gray};
+  --chat-input-tools-button-disabled-color: #{$gray-dark-strong};
   --chat-input-tools-button-hover-color: #{$dark-gray-dark};
   --chat-input-tools-button-hover-background: #{$light-dark-gray-hover};
   --chat-input-tools-button-active-color: #{$white};
   --chat-input-tools-button-active-background: #{$gray-dark-mid};
   --chat-input-send-button-color: #{$black};
   --chat-input-send-button-background: #{$active-color-dark};
+  --chat-input-placeholder-disabled-color: #{$gray-dark-strong};
 
   --chat-message-color: #{$dark-gray-dark};
   --chat-message-user-background-color: #{$white};

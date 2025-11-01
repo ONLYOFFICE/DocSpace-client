@@ -78,7 +78,7 @@ const CreateChat = ({
       onClick={onClickAction}
     >
       <PlusReactSvgUrl />
-      <Text fontSize="14px" lineHeight="16px" fontWeight={600}>
+      <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
         {t("AINewChat")}
       </Text>
     </div>
